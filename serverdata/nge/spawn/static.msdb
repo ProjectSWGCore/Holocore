@@ -8,6 +8,7 @@ common_endor.sdb	TRUE
 common_kashyyyk_dead_forest.sdb	TRUE
 common_kashyyyk_hunting.sdb	TRUE
 common_kashyyyk_main.sdb	TRUE
+common_kashyyyk_rryatt.sdb	TRUE
 common_kashyyyk_slaver.sdb	TRUE
 common_lok.sdb	TRUE
 common_mustafar.sdb	TRUE
@@ -24,7 +25,6 @@ dungeon_kashyyyk_avatar.sdb	TRUE
 dungeon_kashyyyk_bocctyyy.sdb	FALSE
 dungeon_kashyyyk_hracca.sdb	TRUE
 dungeon_kashyyyk_myyydril.sdb	TRUE
-common_kashyyyk_rryatt.sdb	TRUE
 dungeon_meatlump.sdb	FALSE
 dungeon_mustafar_orf.sdb	FALSE
 dungeon_nova_orion.sdb	TRUE
@@ -50,6 +50,7 @@ gcw_presence_naboo_rebel.sdb	FALSE
 gcw_presence_tatooine_imperial.sdb	FALSE
 gcw_presence_tatooine_neutral.sdb	TRUE
 gcw_presence_tatooine_rebel.sdb	FALSE
+gcw_restuss_phase_1.sdb	TRUE
 instance_jedi_challenge.sdb	TRUE
 invasion_droid_army.sdb	TRUE
 invasion_echo_base.sdb	TRUE

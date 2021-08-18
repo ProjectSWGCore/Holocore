@@ -43,14 +43,14 @@ spawn_dantooine_40	DANTOOINE	dan_world	PATROL	0	-4211.8	3.0	-2384.1	0	1	a Vetera
 spawn_dantooine_41	DANTOOINE	dan_world	PATROL	0	-4273.0	3.0	-2314.7	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_500	column	idle			600
 spawn_dantooine_42	DANTOOINE	dan_world	PATROL	0	-4268.2	3.0	-2480.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_600	column	idle			600
 spawn_dantooine_43	DANTOOINE	dan_world	PATROL	0	-4137.9	3.0	-2354.9	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_700	column	idle			600
-spawn_dantooine_44	DANTOOINE	dan_world	PATROL	0	-4231.3	3.0	-2431.1	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_1300	column	idle			600
+spawn_dantooine_44	DANTOOINE	dan_world	PATROL	0	-4231.3	3.0	-2431.1	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_1300	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_dantooine_45	DANTOOINE	dan_world	AREA	0	-4275.4	3.0	-2414.0	89	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_46	DANTOOINE	dan_world	AREA	0	-4203.2	3.0	-2357.8	-135	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_47	DANTOOINE	dan_world	AREA	0	-4221.8	10.0	-2441.0	-47	1	an Imperial officer	humanoid_imperial_officer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_48	DANTOOINE	dan_world	AREA	0	-4231.6	10.0	-2439.8	-137	1	an Imperial officer	humanoid_imperial_officer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_49	DANTOOINE	dan_world	AREA	0	-4197.4	3.0	-2402.5	-92	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter	600
-spawn_dantooine_50	DANTOOINE	dan_world	PATROL	0	-4219.9	3.0	-2363.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_1000	column	idle			600
-spawn_dantooine_51	DANTOOINE	dan_world	PATROL	0	-4217.9	3.0	-2365.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_900	column	idle			600
+spawn_dantooine_50	DANTOOINE	dan_world	PATROL	0	-4219.9	3.0	-2363.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_1000	column	idle		simple_droid_stupid_death_5	600
+spawn_dantooine_51	DANTOOINE	dan_world	PATROL	0	-4217.9	3.0	-2365.1	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Imperial Outpost	1	PATROL	0	patrol_dan_900	column	idle		simple_droid_stupid_death_5	600
 spawn_dantooine_52	DANTOOINE	dan_world	AREA	0	-4221.5	3.0	-2378.4	104	1	Colonel Bek Rabor (an Imperial officer)	humanoid_imperial_col_bek_rabor	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_53	DANTOOINE	dan_world	AREA	0	-4225.4	10.0	-2442.6	-135	1	Commander Jatrian Lytus	humanoid_imperial_jatrian_lytus	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_54	DANTOOINE	dan_world	AREA	0	-4219.9	3.0	-2378.9	-83	1	Lt. Juntah Herm (an Imperial pilot)	humanoid_imperial_lt_juntah_herm	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
@@ -101,10 +101,10 @@ spawn_dantooine_98	DANTOOINE	dan_world	AREA	0	-622.3	3.0	2451.7	-51	1	a technici
 spawn_dantooine_99	DANTOOINE	dan_world	PATROL	0	-619.0	3.0	2449.0	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dan_1500	column	idle			600
 spawn_dantooine_100	DANTOOINE	dan_world	AREA	0	-636.3	3.0	2507.8	149	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
 spawn_dantooine_101	DANTOOINE	dan_world	AREA	0	-601.1	3.0	2529.3	59	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_dantooine_102	DANTOOINE	dan_world	PATROL	0	-633.30	3	2456.2	-53		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dan_3600	column	idle			600
+spawn_dantooine_102	DANTOOINE	dan_world	PATROL	0	-633.30	3	2456.2	-53		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dan_3600	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_dantooine_103	DANTOOINE	dan_world	AREA	0	-589.2	3.0	2497.9	-55	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_104	DANTOOINE	dan_world	AREA	0	-635.6	3.0	2473.0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle			600
-spawn_dantooine_105	DANTOOINE	dan_world	PATROL	0	-637.5	3.0	2484.3	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dan_1600	column	idle			600
+spawn_dantooine_104	DANTOOINE	dan_world	AREA	0	-635.6	3.0	2473.0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle		simple_droid_sarcastic_alert_2	600
+spawn_dantooine_105	DANTOOINE	dan_world	PATROL	0	-637.5	3.0	2484.3	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dan_1600	column	idle		simple_droid_stupid_death_5	600
 spawn_dantooine_106	DANTOOINE	dan_world	AREA	0	-625.6	3.0	2481.3	116	1	Fern Yarrow (an Imperial Pilot)	humanoid_imperial_fern_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_107	DANTOOINE	dan_world	AREA	0	-618.7	3.0	2539.3	-45	1	Kelvus Naria	humanoid_kelvus_naria	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_108	DANTOOINE	dan_world	AREA	0	-623.7	3.0	2482.8	-174	1	Kess Yarrow (a Rebel pilot)	humanoid_rebel_kess_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
@@ -146,7 +146,7 @@ spawn_dantooine_143	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4.2	0.1	4.0	-90	
 spawn_dantooine_144	DANTOOINE	dan_pirate_outpost_cloning	AREA	4	4.2	0.1	2.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_145	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	3.0	0.1	-2.3	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_146	DANTOOINE	dan_pirate_outpost_cloning	AREA	5	4.2	0.1	-2.4	-98	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_dantooine_147	DANTOOINE	dan_world	PATROL	0	1563.7	4.0	-6414.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2000	column	idle			600
+spawn_dantooine_147	DANTOOINE	dan_world	PATROL	0	1563.7	4.0	-6414.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2000	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_dantooine_148	DANTOOINE	dan_world	AREA	0	1542.7	4.0	-6417.0	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_dantooine_149	DANTOOINE	dan_world	AREA	0	1601.5	4.0	-6419.6	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_dantooine_150	DANTOOINE	dan_world	PATROL	0	1596.0	4.0	-6394.5	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2400	column	idle		commoner	600
@@ -167,8 +167,8 @@ spawn_dantooine_164	DANTOOINE	dan_world	AREA	0	1568.5	4.0	-6383.7	80	1	a settler
 spawn_dantooine_165	DANTOOINE	dan_world	AREA	0	1569.9	4.0	-6404.3	-57	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_166	DANTOOINE	dan_world	AREA	0	1604.1	4.0	-6424.7	-89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_167	DANTOOINE	dan_world	AREA	0	1629.2	4.0	-6414.9	-66	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
-spawn_dantooine_168	DANTOOINE	dan_world	PATROL	0	1591.9	4.0	-6400.3	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2100	column	idle			600
-spawn_dantooine_169	DANTOOINE	dan_world	PATROL	0	1588.9	4.0	-6399.2	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2200	column	idle			600
+spawn_dantooine_168	DANTOOINE	dan_world	PATROL	0	1591.9	4.0	-6400.3	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2100	column	idle		simple_droid_sarcastic_alert_2	600
+spawn_dantooine_169	DANTOOINE	dan_world	PATROL	0	1588.9	4.0	-6399.2	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dan_2200	column	idle		simple_droid_stupid_death_5	600
 spawn_dantooine_170	DANTOOINE	dan_world	AREA	0	1602.0	4.0	-6434.5	74	1	Daiv Dekven	humanoid_daiv_dekven	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_171	DANTOOINE	dan_world	AREA	0	1578.0	4.0	-6373.1	170	1	Quich Marae	humanoid_junk_quich	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_172	DANTOOINE	dan_world	AREA	0	1571.6	4.0	-6418.7	-1	1	Yras Shen-jen (a self-employed pilot)	humanoid_yras_shen_jen	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600

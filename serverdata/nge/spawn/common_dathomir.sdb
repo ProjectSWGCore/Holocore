@@ -19,8 +19,8 @@ spawn_dathomir_16	DATHOMIR	dat_aurilia_pyramid_hut4	AREA	1	-1.2	1.2	-1.5	0	1	Dag
 spawn_dathomir_17	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	-2.1	1.2	-2.7	0	1	2-1B (medical droid)	droid_21b_med	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
 spawn_dathomir_18	DATHOMIR	dat_aurilia_trinket_shop2	AREA	1	0.4	1.2	0.0	0	1	Sivarra Mecheaux	humanoid_fs_villager_medic	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
 spawn_dathomir_19	DATHOMIR	dat_aurilia_vansics_scrap	AREA	1	-0.6	1.2	-1.0	0	1	Vansic (a junk dealer)	humanoid_vansic	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
-spawn_dathomir_20	DATHOMIR	dat_world	PATROL	0	5411.0	78.5	-4180.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6200	column	idle			600
-spawn_dathomir_21	DATHOMIR	dat_world	PATROL	0	5428.9	78.5	-4135.1	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6700	column	idle			600
+spawn_dathomir_20	DATHOMIR	dat_world	PATROL	0	5411.0	78.5	-4180.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6200	column	idle		simple_droid_sarcastic_flee_4	600
+spawn_dathomir_21	DATHOMIR	dat_world	PATROL	0	5428.9	78.5	-4135.1	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Aurilia	1	PATROL	0	patrol_dat_6700	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_dathomir_22	DATHOMIR	dat_world	AREA	0	5330.6	78.5	-4054.7	-170	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_23	DATHOMIR	dat_world	AREA	0	5330.2	78.5	-4057.0	7	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_24	DATHOMIR	dat_world	AREA	0	5232.2	78.5	-4156.9	0	1	an Aurilia citizen	humanoid_fs_villager_generic	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	2	0	-	idle			600
@@ -61,7 +61,7 @@ spawn_dathomir_58	DATHOMIR	dat_world	PATROL	0	5469.6	98.2	-4142.3	0	1	an Aurilia
 spawn_dathomir_59	DATHOMIR	dat_world	PATROL	0	5358.5	98.4	-4204.4	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_6900	column	idle			600
 spawn_dathomir_60	DATHOMIR	dat_world	PATROL	0	5275.9	78.5	-4071.4	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_7000	column	idle			600
 spawn_dathomir_61	DATHOMIR	dat_world	PATROL	0	5400.2	78.5	-2050.0	0	1	an Aurilia sentinel	humanoid_fs_villager_militia	ATTACKABLE	B	150	150	City	Aurilia	1	PATROL	0	patrol_dat_7400	column	idle			600
-spawn_dathomir_62	DATHOMIR	dat_world	AREA	0	5326.6	78.5	-4091.8	-178	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	5	0	-	idle			600
+spawn_dathomir_62	DATHOMIR	dat_world	AREA	0	5326.6	78.5	-4091.8	-178	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Aurilia	1	LOITER	5	0	-	idle		simple_droid_stupid_hi_mean_4	600
 spawn_dathomir_63	DATHOMIR	dat_world	AREA	0	5378.9	98.4	-4073.0	83	1	Captain Sarguillo	humanoid_fs_villager_captain	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
 spawn_dathomir_64	DATHOMIR	dat_world	AREA	0	5205.0	78.5	-4148.6	0	1	Lieutenant Thulough (a Rebel intelligence officer)	humanoid_heroic_sd_rebel_lt_thulough_invest_intro	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
 spawn_dathomir_65	DATHOMIR	dat_world	AREA	0	5440.0	78.5	-4172.1	179	1	Maximillian (Aurilian travel consultant)	humanoid_nexus_travel_02	INVULNERABLE	N	100	100	City	Aurilia	1	IDLE	0	0	-	idle			600
@@ -113,7 +113,7 @@ spawn_dathomir_110	DATHOMIR	dat_world	AREA	0	-83.6	18.0	-1587.1	-145	1	an archeo
 spawn_dathomir_111	DATHOMIR	dat_world	AREA	0	-79.7	18.0	-1557.5	38	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dathomir_112	DATHOMIR	dat_world	AREA	0	-75.8	18.0	-1587.9	127	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dathomir_113	DATHOMIR	dat_world	AREA	0	-94.2	18.0	-1630.7	136	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation			600
-spawn_dathomir_114	DATHOMIR	dat_world	AREA	0	-103.7	18.0	-1620.5	-132	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Science Outpost	1	LOITER	5	0	-	idle			600
+spawn_dathomir_114	DATHOMIR	dat_world	AREA	0	-103.7	18.0	-1620.5	-132	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Science Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_hi_mean_4	600
 spawn_dathomir_115	DATHOMIR	dat_world	AREA	0	-120.9	18.0	-1610.9	-51	1	Kam	humanoid_smuggler_fence_kam	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_116	DATHOMIR	dat_world	AREA	0	-101.9	18.0	-1542.6	-141	1	Shaki Hamachil	humanoid_shaki_hamachil	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_117	DATHOMIR	dat_world	AREA	0	-70.5	18.0	-1639.0	37	1	Shibb Nisshil	humanoid_imperial_shibb_nisshil	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -146,13 +146,13 @@ spawn_dathomir_143	DATHOMIR	dat_world	AREA	0	592.1	6.0	3084.4	-25	1	a Nikto	huma
 spawn_dathomir_144	DATHOMIR	dat_world	AREA	0	593.2	6.0	3085.1	-41	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_145	DATHOMIR	dat_world	AREA	0	590.9	6.0	3086.9	150	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_146	DATHOMIR	dat_world	AREA	0	595.0	6.0	3046.0	25	1	an escaped Nightsister slave	humanoid_nightsister_slave_escaped	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	nervous			600
-spawn_dathomir_147	DATHOMIR	dat_world	AREA	0	593.3	6.0	3065.1	-97	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Trade Outpost	1	LOITER	5	0	-	idle			600
+spawn_dathomir_147	DATHOMIR	dat_world	AREA	0	593.3	6.0	3065.1	-97	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Trade Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_hi_mean_4	600
 spawn_dathomir_148	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	Loisya Starkos	humanoid_loisya_starkos	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_149	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	Omogg's representative	humanoid_omoggs_representative	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_150	DATHOMIR	dat_world	AREA	0	543.0	6.2	3053.0	-79	1	Russell	humanoid_smuggler_broker_russell	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_151	DATHOMIR	dat_world	AREA	0	571.0	6.0	3091.0	132	1	Singular Nak	humanoid_singular_nak	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_152	DATHOMIR	dat_world	PATROL	0	581.2	6	3105.3	0	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8700	column	idle			600
-spawn_dathomir_153	DATHOMIR	dat_world	PATROL	0	589.9	6.0	3050.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8400	column	idle			600
+spawn_dathomir_153	DATHOMIR	dat_world	PATROL	0	589.9	6.0	3050.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8400	column	idle		simple_droid_sarcastic_alert_2	600
 spawn_dathomir_154	DATHOMIR	dat_cave	AREA	2	-48.5	-47.3	-13.1	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	86	90	Dungeon	Cave	1	LOITER	5	0	-	idle			600
 spawn_dathomir_155	DATHOMIR	dat_cave	AREA	2	-53.7	-68.2	-40.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	86	90	Dungeon	Cave	1	LOITER	5	0	-	idle			600
 spawn_dathomir_156	DATHOMIR	dat_cave	AREA	2	-45.6	-47.7	-59.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	85	88	Dungeon	Cave	1	LOITER	5	0	-	idle			600

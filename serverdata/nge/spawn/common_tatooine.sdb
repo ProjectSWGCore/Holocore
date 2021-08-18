@@ -41,7 +41,7 @@ spawn_tatooine_38	TATOOINE	tat_world	AREA	0	110.2	52.0	-5431.1	39	1	Ordo	humanoi
 spawn_tatooine_39	TATOOINE	tat_world	AREA	0	-135.8	65.0	-5331.5	62	1	Sorna	humanoid_tatooine_tosche_sorna	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
 spawn_tatooine_40	TATOOINE	tat_world	PATROL	0	82.9	52.1	-5318.9	-88	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tat_18200	column	idle			600
 spawn_tatooine_41	TATOOINE	tat_world	PATROL	0	127.7	52.0	-5393.0	-145	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tat_18300	column	idle			600
-spawn_tatooine_42	TATOOINE	tat_world	PATROL	0	-166.8	65.0	-5313.4	104	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tat_18400	column	idle		droid_geek	600
+spawn_tatooine_42	TATOOINE	tat_world	PATROL	0	-166.8	65.0	-5313.4	104	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tat_18400	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_43	TATOOINE	tat_bestine_association_hall	AREA	10	4.6	1.2	-4.0	152	1	DS-23-44	humanoid_imperial_ds2344	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_44	TATOOINE	tat_bestine_association_hall	AREA	10	6.3	1.2	-7.2	-30	1	DS-538	humanoid_imperial_ds538	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_45	TATOOINE	tat_bestine_association_hall	AREA	10	-10.8	1.8	-7.3	-90	1	DS-98-08	humanoid_imperial_ds9808	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -191,7 +191,7 @@ spawn_tatooine_188	TATOOINE	tat_world	AREA	0	-1241.5	14.5	-3571.9	16	1	an Ankura
 spawn_tatooine_189	TATOOINE	tat_world	AREA	0	-1278.7	12.5	-3665.5	78	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_190	TATOOINE	tat_world	AREA	0	-1278.1	12.5	-3667.5	-21	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_191	TATOOINE	tat_world	AREA	0	-1341.6	12.0	-3705.6	128	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_192	TATOOINE	tat_world	AREA	0	-1117.9	12.0	-3699.6	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	3	0	-	idle		droid_geek	600
+spawn_tatooine_192	TATOOINE	tat_world	AREA	0	-1117.9	12.0	-3699.6	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	3	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_193	TATOOINE	tat_world	AREA	0	-1281.5	12.0	-3633.2	80	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_194	TATOOINE	tat_world	AREA	0	-1134.4	12.0	-3689.6	-147	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_195	TATOOINE	tat_world	AREA	0	-1102.9	12.0	-3646.1	54	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
@@ -224,8 +224,8 @@ spawn_tatooine_221	TATOOINE	tat_world	AREA	0	-1001.7	10.0	-3547.9	-174	1	Vi'cony
 spawn_tatooine_222	TATOOINE	tat_world	AREA	0	-1288.9	12.0	-3588.1	7	1	Wlinc Tchrr (a Hutt bookmaker)	humanoid_wlinc_tchrr	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_223	TATOOINE	tat_world	AREA	0	-1157.9	12.0	-3547.5	72	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
 spawn_tatooine_224	TATOOINE	tat_world	AREA	0	-1071.6	12.0	-3524.2	86	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
-spawn_tatooine_225	TATOOINE	tat_world	AREA	0	-1024.2	10.0	-3561.1	-107	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
-spawn_tatooine_226	TATOOINE	tat_world	AREA	0	-1026.6	10.0	-3562.9	50	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+spawn_tatooine_225	TATOOINE	tat_world	AREA	0	-1024.2	10.0	-3561.1	-107	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_226	TATOOINE	tat_world	AREA	0	-1026.6	10.0	-3562.9	50	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_227	TATOOINE	tat_world	AREA	0	-1024.2	10.0	-3557.4	-86	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
 spawn_tatooine_228	TATOOINE	tat_world	AREA	0	-1028.7	10.0	-3556.4	143	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
 spawn_tatooine_229	TATOOINE	tat_world	AREA	0	-1048.0	12.0	-3729.0	-128	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	happy			600
@@ -477,7 +477,7 @@ spawn_tatooine_474	TATOOINE	tat_world	AREA	0	2941.7	13.5	-4931.3	63	1	a Jawa Ave
 spawn_tatooine_475	TATOOINE	tat_world	AREA	0	3291.1	5.0	-4669.7	-31	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_476	TATOOINE	tat_world	AREA	0	3475.6	5.0	-4851.2	-114	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_477	TATOOINE	tat_world	AREA	0	3142.0	5.4	-4657.0	0	1	a kreetle	creature_kreetle	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
-spawn_tatooine_478	TATOOINE	tat_world	AREA	0	3358.9	5.0	-4988.8	48	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle			600
+spawn_tatooine_478	TATOOINE	tat_world	AREA	0	3358.9	5.0	-4988.8	48	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_479	TATOOINE	tat_world	AREA	0	3337.4	5.5	-4753.7	-108	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_480	TATOOINE	tat_world	AREA	0	3417.0	5.7	-5151.0	0	1	a minor worrt	creature_worrt_minor	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_481	TATOOINE	tat_world	AREA	0	3430.1	5.0	-5140.4	0	1	a minor worrt	creature_worrt_minor	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
@@ -500,12 +500,12 @@ spawn_tatooine_497	TATOOINE	tat_world	AREA	0	3350.9	5.0	-4496.4	-45	1	a patron	h
 spawn_tatooine_498	TATOOINE	tat_world	AREA	0	3310.1	5.0	-4532.7	-17	1	a patron	humanoid_patron_human_male_02	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_499	TATOOINE	tat_world	AREA	0	3507.8	4.0	-4850.4	76	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_500	TATOOINE	tat_world	AREA	0	3532.3	5.0	-4811.0	75	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_501	TATOOINE	tat_world	AREA	0	3451.2	5.0	-4776.3	36	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_502	TATOOINE	tat_world	AREA	0	3453.5	5.0	-4773.9	-5	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_503	TATOOINE	tat_world	AREA	0	3362.2	5.0	-4853.3	-38	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_504	TATOOINE	tat_world	AREA	0	3455.7	4.1	-4901.3	-49	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		droid_stupid	600
-spawn_tatooine_505	TATOOINE	tat_world	AREA	0	3452.4	4.0	-4896.9	110	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_506	TATOOINE	tat_world	AREA	0	3454.3	4.0	-4897.6	-98	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_501	TATOOINE	tat_world	AREA	0	3451.2	5.0	-4776.3	36	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_502	TATOOINE	tat_world	AREA	0	3453.5	5.0	-4773.9	-5	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+spawn_tatooine_503	TATOOINE	tat_world	AREA	0	3362.2	5.0	-4853.3	-38	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_504	TATOOINE	tat_world	AREA	0	3455.7	4.1	-4901.3	-49	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_505	TATOOINE	tat_world	AREA	0	3452.4	4.0	-4896.9	110	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+spawn_tatooine_506	TATOOINE	tat_world	AREA	0	3454.3	4.0	-4897.6	-98	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_507	TATOOINE	tat_world	AREA	0	3533.1	5.0	-4788.9	-93	1	a profession counselor	humanoid_respec_seller	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_respec_seller	600
 spawn_tatooine_508	TATOOINE	tat_world	AREA	0	3319.7	5.0	-4838.0	-92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_509	TATOOINE	tat_world	AREA	0	3722.1	4.0	-4822.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	3	LOITER	8	0	-	idle			600
@@ -610,7 +610,7 @@ spawn_tatooine_607	TATOOINE	tat_world	AREA	0	3079.8	6.9	-4370.5	0	1	a water thie
 spawn_tatooine_608	TATOOINE	tat_world	AREA	0	3092.5	0.2	-4397.4	0	1	a water thief	humanoid_water_thief	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_609	TATOOINE	tat_world	AREA	0	3094.4	8.5	-4351.8	0	1	a water thief	humanoid_water_thief	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_610	TATOOINE	tat_world	AREA	0	3118.0	1.6	-4381.0	0	1	a water thief	humanoid_water_thief	AGGRESSIVE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
-spawn_tatooine_611	TATOOINE	tat_world	AREA	0	3408.2	5.0	-4912.0	47	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_611	TATOOINE	tat_world	AREA	0	3408.2	5.0	-4912.0	47	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_612	TATOOINE	tat_world	AREA	0	3819.6	51.9	-5050.3	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	6	0	-	idle			600
 spawn_tatooine_613	TATOOINE	tat_world	AREA	0	3142.0	5.3	-4638.0	0	1	a worrt	creature_worrt	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
 spawn_tatooine_614	TATOOINE	tat_world	AREA	0	3410.6	5.0	-5132.1	0	1	a worrt	creature_worrt	ATTACKABLE	N	5	20	City	Mos Eisley	1	LOITER	5	0	-	idle			600
@@ -624,8 +624,8 @@ spawn_tatooine_621	TATOOINE	tat_world	AREA	0	3474.5	5.0	-4622.4	118	1	an artisan
 spawn_tatooine_622	TATOOINE	tat_world	AREA	0	3427.3	5.0	-4754.2	-60	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_623	TATOOINE	tat_world	AREA	0	3418.0	5.0	-4849.3	23	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_624	TATOOINE	tat_world	AREA	0	3662.3	5.0	-4857.4	118	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-spawn_tatooine_625	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4884.3	78	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle		droid_geek	600
-spawn_tatooine_626	TATOOINE	tat_world	AREA	0	3387.1	4.0	-4678.3	56	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	10	0	-	idle		droid_geek	600
+spawn_tatooine_625	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4884.3	78	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_626	TATOOINE	tat_world	AREA	0	3387.1	4.0	-4678.3	56	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	10	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_627	TATOOINE	tat_world	AREA	0	3296.9	5.0	-4687.2	-50	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_628	TATOOINE	tat_world	AREA	0	3329.6	5.6	-4755.4	99	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dance_basic			600
 spawn_tatooine_629	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4759.4	91	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dance_basic			600
@@ -657,10 +657,10 @@ spawn_tatooine_654	TATOOINE	tat_world	AREA	0	3401.0	5.0	-4978.2	128	1	an explore
 spawn_tatooine_655	TATOOINE	tat_world	AREA	0	3363.0	7.5	-4710.6	34	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_656	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4793.6	-89	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		recruiter_imperial	600
 spawn_tatooine_657	TATOOINE	tat_world	AREA	0	3418.3	5.0	-4948.7	40	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_658	TATOOINE	tat_world	AREA	0	3258.4	4.0	-4684.4	0	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		droid_stupid	600
+spawn_tatooine_658	TATOOINE	tat_world	AREA	0	3258.4	4.0	-4684.4	0	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_659	TATOOINE	tat_world	AREA	0	3631.6	5.0	-4783.4	61	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-spawn_tatooine_660	TATOOINE	tat_world	AREA	0	3318.9	5.6	-4774.1	-107	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		droid_stupid	600
-spawn_tatooine_661	TATOOINE	tat_world	AREA	0	3486.9	5.5	-4945.2	32	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	2	0	-	idle		droid_slang	600
+spawn_tatooine_660	TATOOINE	tat_world	AREA	0	3318.9	5.6	-4774.1	-107	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_661	TATOOINE	tat_world	AREA	0	3486.9	5.5	-4945.2	32	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	2	0	-	idle		simple_droid_slang_threat_15	600
 spawn_tatooine_662	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4797.3	-89	1	an Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		recruiter_rebel	600
 spawn_tatooine_663	TATOOINE	tat_world	AREA	0	3552.8	5.0	-4933.2	-134	1	an Unknown Lab Assistant	humanoid_content_lab_assistant	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dead_02			600
 spawn_tatooine_664	TATOOINE	tat_world	AREA	0	3330.0	5.0	-4607.0	169	1	Baboo	humanoid_tatooine_baboo	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -687,8 +687,8 @@ spawn_tatooine_684	TATOOINE	tat_world	AREA	0	3248.1	5.9	-5204.1	0	1	elite desert
 spawn_tatooine_685	TATOOINE	tat_world	AREA	0	3511.5	5.0	-4785.1	130	1	Entha Kandela	humanoid_newbie_scout_teacher_entha_kandela	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_686	TATOOINE	tat_world	AREA	0	3378.9	5.0	-4496.7	102	1	Errik Darksider	humanoid_herald_tatooine_errik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_687	TATOOINE	tat_world	AREA	0	3566.5	5.0	-4714.1	-140	1	Escara Frei	humanoid_medic_escara	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_688	TATOOINE	tat_world	AREA	0	3526.9	5.0	-4777.6	0	1	FX-7	droid_fx_7	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	1	0	-	idle			600
-spawn_tatooine_689	TATOOINE	tat_world	AREA	0	3462.9	4.0	-4881.5	46	1	FX-7	droid_fx_7	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	10	0	-	idle			600
+spawn_tatooine_688	TATOOINE	tat_world	AREA	0	3526.9	5.0	-4777.6	0	1	FX-7	droid_fx_7	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	1	0	-	idle		simple_droid_geek_alert_5	600
+spawn_tatooine_689	TATOOINE	tat_world	AREA	0	3462.9	4.0	-4881.5	46	1	FX-7	droid_fx_7	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	10	0	-	idle		simple_droid_geek_alert_5	600
 spawn_tatooine_690	TATOOINE	tat_world	AREA	0	3308.0	5.6	-4785.0	71	1	Gendra	humanoid_newbie_gendra	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_gendra	600
 spawn_tatooine_691	TATOOINE	tat_world	AREA	0	3437.7	5.0	-4916.7	83	1	Hunter Javeezo	humanoid_hunter_javeezo	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_692	TATOOINE	tat_world	AREA	0	3186.2	5.0	-4781.3	-172	1	Jano Bix	humanoid_tatooine_opening_jano	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -758,10 +758,10 @@ spawn_tatooine_755	TATOOINE	tat_world	PATROL	0	3163.7	5.0	-4752.1	0	1	a swoop ga
 spawn_tatooine_756	TATOOINE	tat_world	PATROL	0	3189.0	5.0	-4706.4	0	1	a swoop gang rogue	humanoid_tatooine_opening_smuggler_10	AGGRESSIVE	N	5	20	City	Mos Eisley	1	PATROL	0	patrol_tat_4400	column	idle			600
 spawn_tatooine_757	TATOOINE	tat_world	PATROL	0	3205.7	5.0	-4786.1	0	1	a swoop gang rogue	humanoid_tatooine_opening_smuggler_11	AGGRESSIVE	N	5	20	City	Mos Eisley	1	PATROL	0	patrol_tat_4500	column	idle			600
 spawn_tatooine_758	TATOOINE	tat_world	PATROL	0	3187.5	5.0	-4660.5	0	1	a swoop gang thug	humanoid_tatooine_opening_smuggler_09	AGGRESSIVE	N	5	20	City	Mos Eisley	1	PATROL	0	patrol_tat_4300	column	idle			600
-spawn_tatooine_759	TATOOINE	tat_world	PATROL	0	3540.4	5.0	-4900.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_15700	column	idle		droid_geek	600
-spawn_tatooine_760	TATOOINE	tat_world	PATROL	0	3661.7	5.0	-4799.8	119	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_16300	column	idle		droid_geek	600
-spawn_tatooine_761	TATOOINE	tat_world	PATROL	0	3351.6	5.0	-4662.3	32	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_17400	column	idle		droid_geek	600
-spawn_tatooine_762	TATOOINE	tat_world	PATROL	0	3214.1	5.0	-4868.8	77	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_17600	column	idle		droid_sarcastic	600
+spawn_tatooine_759	TATOOINE	tat_world	PATROL	0	3540.4	5.0	-4900.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_15700	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_760	TATOOINE	tat_world	PATROL	0	3661.7	5.0	-4799.8	119	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_16300	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_761	TATOOINE	tat_world	PATROL	0	3351.6	5.0	-4662.3	32	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_17400	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_762	TATOOINE	tat_world	PATROL	0	3214.1	5.0	-4868.8	77	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_17600	column	idle		simple_droid_stupid_death_5	600
 spawn_tatooine_763	TATOOINE	tat_mosentha_cloning	AREA	2	-4.6	0.1	9.5	90	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		cloning_droid	600
 spawn_tatooine_764	TATOOINE	tat_mosentha_hospital	AREA	10	26.8	7.3	0.2	-91	1	Aboo Aramflahad (Cybernetic Specialist)	humanoid_cybernetic_specialist_tatooine	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
 spawn_tatooine_765	TATOOINE	tat_mosentha_hospital	AREA	2	18.0	0.3	1.8	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
@@ -786,7 +786,7 @@ spawn_tatooine_783	TATOOINE	tat_mosentha_starport	AREA	7	56.6	-0.5	41.1	-37	1	a 
 spawn_tatooine_784	TATOOINE	tat_mosentha_starport	AREA	7	55.9	-0.5	44.6	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_785	TATOOINE	tat_mosentha_starport	AREA	7	54.4	-0.5	41.5	27	1	a male rodian thug	humanoid_male_rodian_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
 spawn_tatooine_786	TATOOINE	tat_mosentha_starport	AREA	7	41.3	0.6	38.2	110	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_consoling			600
-spawn_tatooine_787	TATOOINE	tat_mosentha_starport	AREA	9	-31.9	1.6	58.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	4	0	-	idle		droid_geek	600
+spawn_tatooine_787	TATOOINE	tat_mosentha_starport	AREA	9	-31.9	1.6	58.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	4	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_788	TATOOINE	tat_mosentha_starport	AREA	9	-28.2	1.6	65.8	-24	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_789	TATOOINE	tat_world	AREA	0	1232.2	1.5	3256.2	83	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_790	TATOOINE	tat_world	AREA	0	1561.3	7.0	3025.3	-38	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle			600
@@ -875,9 +875,9 @@ spawn_tatooine_872	TATOOINE	tat_world	AREA	0	1367.0	7.0	3428.0	-92	1	an artisan	
 spawn_tatooine_873	TATOOINE	tat_world	AREA	0	1324.9	7.0	3109.9	-109	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_874	TATOOINE	tat_world	AREA	0	1730.1	7.0	3176.3	-67	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_875	TATOOINE	tat_world	AREA	0	1248.1	4.0	3244.6	179	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_876	TATOOINE	tat_world	AREA	0	1315.5	7.0	3409.9	-91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		droid_geek	600
-spawn_tatooine_877	TATOOINE	tat_world	AREA	0	1311.4	7.0	3133.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		droid_geek	600
-spawn_tatooine_878	TATOOINE	tat_world	AREA	0	1207.8	4.0	3272.6	112	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+spawn_tatooine_876	TATOOINE	tat_world	AREA	0	1315.5	7.0	3409.9	-91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_877	TATOOINE	tat_world	AREA	0	1311.4	7.0	3133.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_878	TATOOINE	tat_world	AREA	0	1207.8	4.0	3272.6	112	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_879	TATOOINE	tat_world	AREA	0	1476.8	7.6	3265.0	-3	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	happy			600
 spawn_tatooine_880	TATOOINE	tat_world	AREA	0	1235.0	1.5	3263.1	178	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_881	TATOOINE	tat_world	AREA	0	1391.7	7.5	3164.1	-18	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -886,9 +886,9 @@ spawn_tatooine_883	TATOOINE	tat_world	AREA	0	1789.4	7.0	3022.7	-95	1	an explorer
 spawn_tatooine_884	TATOOINE	tat_world	AREA	0	1374.1	7.0	2980.6	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_885	TATOOINE	tat_world	AREA	0	1236.0	1.5	3261.2	-20	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_table			600
 spawn_tatooine_886	TATOOINE	tat_world	AREA	0	1147.4	7.0	2967.6	147	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
-spawn_tatooine_887	TATOOINE	tat_world	AREA	0	1370.1	11.0	3162.4	-128	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		droid_stupid	600
-spawn_tatooine_888	TATOOINE	tat_world	AREA	0	1426.6	7.0	3478.5	104	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		droid_stupid	600
-spawn_tatooine_889	TATOOINE	tat_world	AREA	0	1085.8	7.0	3195.2	-45	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		droid_stupid	600
+spawn_tatooine_887	TATOOINE	tat_world	AREA	0	1370.1	11.0	3162.4	-128	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_888	TATOOINE	tat_world	AREA	0	1426.6	7.0	3478.5	104	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+spawn_tatooine_889	TATOOINE	tat_world	AREA	0	1085.8	7.0	3195.2	-45	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_890	TATOOINE	tat_world	AREA	0	1351.0	11.0	3108.3	46	1	An'Kwee	droid_tatooine_entha_watto_ankwee	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
 spawn_tatooine_891	TATOOINE	tat_world	AREA	0	1328.7	7.0	3265.4	176	1	Draknus	droid_tatooine_entha_watto_draknus	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
 spawn_tatooine_892	TATOOINE	tat_world	AREA	0	1539.5	7.0	3105.4	39	1	Galuf Cardaan	humanoid_commando_reward	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
@@ -942,11 +942,11 @@ spawn_tatooine_939	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	
 spawn_tatooine_940	TATOOINE	tat_mosespa_starport	AREA	12	-55.8	2.6	41.7	145	1	Qord D'Baelor	humanoid_tatooine_wald_customer	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_941	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		chassis_dealer	600
 spawn_tatooine_942	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	a Junk Dealer	humanoid_junk_dealer_special	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
-spawn_tatooine_943	TATOOINE	tat_mosespa_watto	AREA	2	2.4	0.1	-11.6	46	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_944	TATOOINE	tat_mosespa_watto	AREA	2	4.2	0.1	-9.9	-136	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_945	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_946	TATOOINE	tat_mosespa_watto	AREA	2	6.3	-0.5	3.9	174	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
-spawn_tatooine_947	TATOOINE	tat_mosespa_watto	AREA	2	7.0	-0.5	2.5	-34	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+spawn_tatooine_943	TATOOINE	tat_mosespa_watto	AREA	2	2.4	0.1	-11.6	46	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_944	TATOOINE	tat_mosespa_watto	AREA	2	4.2	0.1	-9.9	-136	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+spawn_tatooine_945	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_946	TATOOINE	tat_mosespa_watto	AREA	2	6.3	-0.5	3.9	174	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+spawn_tatooine_947	TATOOINE	tat_mosespa_watto	AREA	2	7.0	-0.5	2.5	-34	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_948	TATOOINE	tat_mosespa_watto	AREA	2	4.5	-0.5	1.9	-100	1	Watto	humanoid_watto	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		tatooine_mos_espa_watto	600
 spawn_tatooine_949	TATOOINE	tat_world	AREA	0	-2989.8	5.0	2123.8	-151	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_950	TATOOINE	tat_world	AREA	0	-2778.4	5.0	2010.4	-80	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_accusing			600
@@ -1016,7 +1016,7 @@ spawn_tatooine_1013	TATOOINE	tat_world	AREA	0	-3222.2	11.2	1793.4	0	1	a womp rat
 spawn_tatooine_1014	TATOOINE	tat_world	AREA	0	-3242.3	9.1	2733.7	0	1	a womp rat	creature_womprat	ATTACKABLE	N	5	20	City	Mos Espa	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1015	TATOOINE	tat_world	AREA	0	-2872.4	5.0	2389.3	131	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1016	TATOOINE	tat_world	AREA	0	-3063.2	5.0	2100.7	-106	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_1017	TATOOINE	tat_world	AREA	0	-2867.6	5.0	2387.8	-25	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		droid_geek	600
+spawn_tatooine_1017	TATOOINE	tat_world	AREA	0	-2867.6	5.0	2387.8	-25	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_1018	TATOOINE	tat_world	AREA	0	-2379.5	88.5	1849.9	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1019	TATOOINE	tat_world	AREA	0	-2409.2	56.7	1845.4	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1020	TATOOINE	tat_world	AREA	0	-2418.0	22.9	1908.0	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	5	20	City	Mos Espa	1	LOITER	5	0	-	idle			600
@@ -1024,8 +1024,8 @@ spawn_tatooine_1021	TATOOINE	tat_world	AREA	0	-3033.1	5.0	2219.9	0	1	an entertai
 spawn_tatooine_1022	TATOOINE	tat_world	AREA	0	-3028.0	5.0	2248.2	158	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_tatooine_1023	TATOOINE	tat_world	AREA	0	-2994.9	7.0	1964.4	75	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1024	TATOOINE	tat_world	AREA	0	-3032.5	5.0	1962.5	72	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_1025	TATOOINE	tat_world	AREA	0	-2942.9	5.0	2179.1	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	8	0	-	idle			600
-spawn_tatooine_1026	TATOOINE	tat_world	AREA	0	-2973.2	5.0	2112.6	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	8	0	-	idle			600
+spawn_tatooine_1025	TATOOINE	tat_world	AREA	0	-2942.9	5.0	2179.1	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	8	0	-	idle		simple_droid_stupid_death_5	600
+spawn_tatooine_1026	TATOOINE	tat_world	AREA	0	-2973.2	5.0	2112.6	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	8	0	-	idle		simple_droid_stupid_death_5	600
 spawn_tatooine_1027	TATOOINE	tat_world	AREA	0	-2911.0	5.0	2126.6	156	1	Anim Kahn (a Valarian pilot)	humanoid_anim_kahn	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1028	TATOOINE	tat_world	AREA	0	-2980.0	5.0	2534.0	-57	1	Beast Trainer	humanoid_trainer_beast_master	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1029	TATOOINE	tat_world	AREA	0	-3085.5	5.0	2050.6	78	1	Caryn	humanoid_smuggler_fence_caryn	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
@@ -1051,10 +1051,10 @@ spawn_tatooine_1048	TATOOINE	tat_world	AREA	0	-2879.0	5.0	2579.7	-43	1	Tiomvo	hu
 spawn_tatooine_1049	TATOOINE	tat_world	PATROL	0	-3524.9	14.0	2049.8	0	1	a Jawa	humanoid_jawa	ATTACKABLE	N	5	20	City	Mos Espa	1	PATROL	0	patrol_tat_1600	column	idle			600
 spawn_tatooine_1050	TATOOINE	tat_world	PATROL	0	-2729.7	5.0	2243.3	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_10800	column	idle			600
 spawn_tatooine_1051	TATOOINE	tat_world	PATROL	0	-2918.4	5.0	2400.6	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_7600	column	idle			600
-spawn_tatooine_1052	TATOOINE	tat_world	PATROL	0	-2913.8	5.0	2115.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_7400	column	idle		droid_geek	600
-spawn_tatooine_1053	TATOOINE	tat_world	PATROL	0	-2922.7	5.0	2430.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_7500	column	idle		droid_geek	600
-spawn_tatooine_1054	TATOOINE	tat_world	PATROL	0	-2938.5	5.0	2197.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_10900	column	idle		droid_sarcastic	600
-spawn_tatooine_1055	TATOOINE	tat_world	PATROL	0	-2915.3	5.0	2450.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_11000	column	idle		droid_sarcastic	600
+spawn_tatooine_1052	TATOOINE	tat_world	PATROL	0	-2913.8	5.0	2115.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_7400	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_1053	TATOOINE	tat_world	PATROL	0	-2922.7	5.0	2430.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_7500	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_1054	TATOOINE	tat_world	PATROL	0	-2938.5	5.0	2197.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_10900	column	idle		simple_droid_stupid_death_5	600
+spawn_tatooine_1055	TATOOINE	tat_world	PATROL	0	-2915.3	5.0	2450.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tat_11000	column	idle		simple_droid_stupid_death_5	600
 spawn_tatooine_1056	TATOOINE	tat_world	PATROL	0	-3392.9	7.4	2477.5	0	1	Jabba's scout	humanoid_jabba_scout	ATTACKABLE	N	5	20	City	Mos Espa	1	PATROL	0	patrol_tat_1700	column	idle			600
 spawn_tatooine_1057	TATOOINE	tat_mostaike_cale_herron_house	AREA	10	2.6	-0.4	-4.4	-69	1	Cale Herron (a Slicer)	humanoid_content_cale_herron_i	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1058	TATOOINE	tat_mostaike_cloning	AREA	10	0.3	-0.4	-0.9	179	1	a 2-1B surgical droid	droid_21b_surgical_clone	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		cloning_droid	600
@@ -1270,7 +1270,7 @@ spawn_tatooine_1267	TATOOINE	tat_legacy_darklighter_cave	AREA	17	-115.4	-108.0	-
 spawn_tatooine_1268	TATOOINE	tat_legacy_darklighter_cave	AREA	17	-142.2	-121.1	-346.3	0	1	a Desert Demon leader	humanoid_desert_demon_leader	AGGRESSIVE	E	10	20	Dungeon	Darklighter Cave	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1269	TATOOINE	tat_legacy_darklighter_cave	AREA	17	-162.8	-109.8	-325.0	0	1	enraged rock beetle	creature_beetle_rock_enraged	AGGRESSIVE	N	10	20	Dungeon	Darklighter Cave	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1270	TATOOINE	tat_legacy_darklighter_cave	AREA	17	-182.8	-108.7	-338.9	0	1	R3-B57	droid_legacy_r3b57_r3	ATTACKABLE	N	10	20	Dungeon	Darklighter Cave	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1271	TATOOINE	tat_legacy_darklighter_cave	PATROL	3	-21.8	-29.8	-46.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Darklighter Cave	1	PATROL	0	patrol_tat_1800	column	idle		droid_sarcastic	600
+spawn_tatooine_1271	TATOOINE	tat_legacy_darklighter_cave	PATROL	3	-21.8	-29.8	-46.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Darklighter Cave	1	PATROL	0	patrol_tat_1800	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_tatooine_1272	TATOOINE	tat_legacy_darklighter_cave	PATROL	3	-21.8	-29.8	-46.3	54	1	a Desert Demon brawler	humanoid_desert_demon_brawler	AGGRESSIVE	N	10	20	Dungeon	Darklighter Cave	1	PATROL	0	patrol_tat_1900	column	idle			600
 spawn_tatooine_1273	TATOOINE	tat_legacy_darklighter_cave	PATROL	4	-43.5	-46.9	-107.2	-55	1	a Desert Demon	humanoid_desert_demon	AGGRESSIVE	N	10	20	Dungeon	Darklighter Cave	1	PATROL	0	patrol_tat_2000	column	idle			600
 spawn_tatooine_1274	TATOOINE	tat_legacy_darklighter_cave	AREA	5	-10.7	-48.3	-159.5	0	1	a Desert Demon bodyguard	humanoid_desert_demon_bodyguard	AGGRESSIVE	E	10	20	Dungeon	Darklighter Cave	1	LOITER	3	0	-	idle			600
@@ -1806,10 +1806,10 @@ spawn_tatooine_1803	TATOOINE	tat_world	AREA	0	-6274.0	39.3	-5915.4	0	1	Valarian'
 spawn_tatooine_1804	TATOOINE	tat_world	AREA	0	-6278.4	35.9	-5933.7	0	1	Valarian's soldier	humanoid_tatooine_valarian_soldier	AGGRESSIVE	N	10	20	Dungeon	Valarian Bunker	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1805	TATOOINE	tat_pirate_outpost	AREA	6	-3.3	0.1	-5.1	42	1	Valarian Depot Boss	humanoid_valarian_elite_shuttle	AGGRESSIVE	B	10	20	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle			900
 spawn_tatooine_1806	TATOOINE	tat_shed	AREA	5	2.9	0.1	-3.5	0	1	Rando M' Kabe (a pilot)	humanoid_legacy_head_pilot	ATTACKABLE	B	10	20	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1807	TATOOINE	tat_world	AREA	0	-1619.1	10.0	-3290.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1808	TATOOINE	tat_world	AREA	0	-1666.7	9.8	-3276.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1809	TATOOINE	tat_world	AREA	0	-1622.5	9.9	-3292.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle		droid_geek	600
-spawn_tatooine_1810	TATOOINE	tat_world	AREA	0	-1675.9	9.8	-3290.8	0	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle		droid_stupid	600
+spawn_tatooine_1807	TATOOINE	tat_world	AREA	0	-1619.1	10.0	-3290.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
+spawn_tatooine_1808	TATOOINE	tat_world	AREA	0	-1666.7	9.8	-3276.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle		simple_droid_sarcastic_flee_4	600
+spawn_tatooine_1809	TATOOINE	tat_world	AREA	0	-1622.5	9.9	-3292.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_tatooine_1810	TATOOINE	tat_world	AREA	0	-1675.9	9.8	-3290.8	0	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_1811	TATOOINE	tat_world	AREA	0	-1677.8	9.9	-3290.4	0	1	an R5 unit	droid_r5	ATTACKABLE	N	10	20	Dungeon	Valarian Depot	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1812	TATOOINE	tat_world	AREA	0	-1689.1	11.5	-3310.4	0	1	Valarian Depot Foreman	humanoid_valarian_boss_depot	AGGRESSIVE	B	10	20	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1813	TATOOINE	tat_world	AREA	0	-1693.8	11.8	-3310.7	0	1	Valarian Depot Guard	humanoid_valarian_thief_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	2	0	-	idle			600
@@ -1831,7 +1831,7 @@ spawn_tatooine_1828	TATOOINE	tat_world	AREA	0	-1660.6	7.6	-3330.0	0	1	Valarian D
 spawn_tatooine_1829	TATOOINE	tat_world	AREA	0	-1666.9	9.9	-3284.2	0	1	Valarian Depot Worker	humanoid_valarian_thug_depot	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	1	LOITER	6	0	-	idle			600
 spawn_tatooine_1830	TATOOINE	tat_world	AREA	0	-1801.7	31.5	-3295.5	0	1	Valarian Shuttle Guard	humanoid_valarian_swooper_shuttle	AGGRESSIVE	N	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
 spawn_tatooine_1831	TATOOINE	tat_world	AREA	0	-1756.8	31.5	-3328.8	0	1	Valarian Shuttle Guard	humanoid_valarian_thug_shuttle	AGGRESSIVE	E	10	20	Dungeon	Valarian Depot	2	LOITER	9	0	-	idle			600
-spawn_tatooine_1832	TATOOINE	tat_world	PATROL	0	-1757.8	31.5	-3322.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	PATROL	0	patrol_tat_3600	column	idle		droid_sarcastic	600
+spawn_tatooine_1832	TATOOINE	tat_world	PATROL	0	-1757.8	31.5	-3322.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Dungeon	Valarian Depot	1	PATROL	0	patrol_tat_3600	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_tatooine_1833	TATOOINE	tat_valarian_hackers_bunker	AREA	2	-4.0	0.3	-3.7	0	1	Valarian's hacker	humanoid_tatooine_valarian_hacker	AGGRESSIVE	N	10	20	Dungeon	Valarian Hackers Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1834	TATOOINE	tat_valarian_hackers_bunker	AREA	5	-1.7	-6.8	-8.6	-28	1	Valarian's hacker	humanoid_tatooine_valarian_hacker	AGGRESSIVE	N	10	20	Dungeon	Valarian Hackers Bunker	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1835	TATOOINE	tat_valarian_hackers_bunker	AREA	5	-7.4	-6.8	-1.7	34	1	Valarian's hacker	humanoid_tatooine_valarian_hacker	AGGRESSIVE	N	10	20	Dungeon	Valarian Hackers Bunker	1	IDLE	0	0	-	idle			600
@@ -1886,7 +1886,7 @@ spawn_tatooine_1883	TATOOINE	tat_valarian_strategic_bunker	PATROL	5	3.4	-12.0	60
 spawn_tatooine_1884	TATOOINE	tat_valarian_strategic_bunker	AREA	7	-53.4	-20.0	37.7	0	1	Valarian's command enforcer	humanoid_tatooine_valarian_enforcer	AGGRESSIVE	E	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1885	TATOOINE	tat_valarian_strategic_bunker	AREA	7	-67.4	-20.0	54.0	0	1	Valarian's command enforcer	humanoid_tatooine_valarian_enforcer	AGGRESSIVE	E	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1886	TATOOINE	tat_valarian_strategic_bunker	AREA	7	-68.5	-20.0	35.8	0	1	Valarian's command enforcer	humanoid_tatooine_valarian_enforcer	AGGRESSIVE	E	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
-spawn_tatooine_1887	TATOOINE	tat_valarian_strategic_bunker	PATROL	7	-50.3	-20.0	67.3	45	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	Dungeon	Valarian Strategic Bunker	1	PATROL	0	patrol_tat_1000	column	idle		droid_sarcastic	600
+spawn_tatooine_1887	TATOOINE	tat_valarian_strategic_bunker	PATROL	7	-50.3	-20.0	67.3	45	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	Dungeon	Valarian Strategic Bunker	1	PATROL	0	patrol_tat_1000	column	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_1888	TATOOINE	tat_valarian_strategic_bunker	AREA	8	-51.5	-20.0	13.4	0	1	Iris Tananda Sinclair	humanoid_jabbas_palace_iris_sinclair	ATTACKABLE	B	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1889	TATOOINE	tat_valarian_strategic_bunker	AREA	8	-70.6	-20.0	14.4	0	1	Valarian's executioner	humanoid_tatooine_valarian_executioner	AGGRESSIVE	E	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
 spawn_tatooine_1890	TATOOINE	tat_valarian_strategic_bunker	AREA	9	-49.3	-20.0	82.2	0	1	Fnast Drexler	humanoid_jabbas_palace_fnast_drexler	ATTACKABLE	B	10	20	Dungeon	Valarian Strategic Bunker	1	LOITER	2	0	-	idle			600
@@ -2089,14 +2089,14 @@ spawn_tatooine_2085	TATOOINE	tat_world	AREA	0	-6109.9	24.8	-3360.5	0	1	a jundlan
 spawn_tatooine_2086	TATOOINE	tat_world	AREA	0	-6112.3	27.2	-3375.0	0	1	a jundland eopie	creature_eopie_jundland	ATTACKABLE	N	10	20	POI	Great Pit of Carkoon	3	LOITER	6	0	-	idle			600
 spawn_tatooine_2087	TATOOINE	tat_jabbas_palace	AREA	1	-9.1	0.2	142.3	86	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2088	TATOOINE	tat_jabbas_palace	AREA	1	9.5	0.2	142.1	-87	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2089	TATOOINE	tat_jabbas_palace	PATROL	12	-46.6	3	60.9	-5	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_19300	column	idle		droid_sarcastic	600
+spawn_tatooine_2089	TATOOINE	tat_jabbas_palace	PATROL	12	-46.6	3	60.9	-5	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_19300	column	idle		simple_droid_stupid_hi_mean_4	600
 spawn_tatooine_2090	TATOOINE	tat_jabbas_palace	AREA	22	-6.1	2	46	-116	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2091	TATOOINE	tat_jabbas_palace	AREA	22	-5.4	2	39.4	-109	1	a criminal	humanoid_forage_criminal	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2092	TATOOINE	tat_jabbas_palace	AREA	22	-6	2	40.5	-62	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2093	TATOOINE	tat_jabbas_palace	AREA	22	-5.2	2	41.1	-124	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2094	TATOOINE	tat_jabbas_palace	AREA	22	-6.3	2	44.8	-110	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2095	TATOOINE	tat_jabbas_palace	AREA	22	-1.1	2	34.8	-60	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
-spawn_tatooine_2096	TATOOINE	tat_jabbas_palace	AREA	22	-10.5	2	53.5	-178	1	an IG assassin droid	droid_ig_assassin	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		droid_prissy	600
+spawn_tatooine_2096	TATOOINE	tat_jabbas_palace	AREA	22	-10.5	2	53.5	-178	1	an IG assassin droid	droid_ig_assassin	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_prissy_hi_mean_14	600
 spawn_tatooine_2097	TATOOINE	tat_jabbas_palace	AREA	1	6.6	0.3	128.3	-81	1	8-LOM	droid_8lom_record_keeper_jabba	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2098	TATOOINE	tat_jabbas_palace	AREA	1	7.7	0.2	130.3	-90	1	Bruce McBrain	humanoid_bruce_mcbrain	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2099	TATOOINE	tat_jabbas_palace	AREA	1	-5.4	0.2	114.3	11	1	Jawl	humanoid_clone_jawl	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_jawl	600
@@ -2108,18 +2108,18 @@ spawn_tatooine_2104	TATOOINE	tat_jabbas_palace	PATROL	1	-9.2	0.2	120.0	88	1	an a
 spawn_tatooine_2105	TATOOINE	tat_jabbas_palace	PATROL	1	4.0	0.2	122.4	0	1	Ortugg	humanoid_ortugg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_9900	column	idle			600
 spawn_tatooine_2106	TATOOINE	tat_jabbas_palace	AREA	10	-27.7	0.2	84.8	133	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2107	TATOOINE	tat_jabbas_palace	AREA	12	-43.0	3.0	64.2	91	1	Porcellus	humanoid_porcellus	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_2108	TATOOINE	tat_jabbas_palace	AREA	14	18.1	0.2	90.8	125	1	8D8 Droid	droid_8d8	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2108	TATOOINE	tat_jabbas_palace	AREA	14	18.1	0.2	90.8	125	1	8D8 Droid	droid_8d8	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
 spawn_tatooine_2109	TATOOINE	tat_jabbas_palace	AREA	14	10.7	0.2	84.2	26	1	a 3PO protocol droid	droid_protocol_3po_red	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	2	0	-	idle			600
-spawn_tatooine_2110	TATOOINE	tat_jabbas_palace	AREA	14	23.8	0.2	76.8	-64	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		droid_stupid	600
-spawn_tatooine_2111	TATOOINE	tat_jabbas_palace	AREA	14	13.4	0.2	88.7	138	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		droid_prissy	600
+spawn_tatooine_2110	TATOOINE	tat_jabbas_palace	AREA	14	23.8	0.2	76.8	-64	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_2111	TATOOINE	tat_jabbas_palace	AREA	14	13.4	0.2	88.7	138	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2112	TATOOINE	tat_jabbas_palace	AREA	14	23.9	0.2	87.9	-120	1	EV-9D9	droid_ev9d9	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2113	TATOOINE	tat_jabbas_palace	AREA	14	18.8	0.2	85.1	0	1	R2-P1	droid_r2p1_r2	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	2	0	-	idle			600
-spawn_tatooine_2114	TATOOINE	tat_jabbas_palace	PATROL	14	20.7	0.2	86.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10500	column	idle		droid_geek	600
+spawn_tatooine_2113	TATOOINE	tat_jabbas_palace	AREA	14	18.8	0.2	85.1	0	1	R2-P1	droid_r2p1_r2	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	2	0	-	idle		simple_droid_geek_alert_5	600
+spawn_tatooine_2114	TATOOINE	tat_jabbas_palace	PATROL	14	20.7	0.2	86.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10500	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_2115	TATOOINE	tat_jabbas_palace	AREA	15	-10.6	0.2	81.1	174	1	Urgott	humanoid_urgott	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_accusing			600
 spawn_tatooine_2116	TATOOINE	tat_jabbas_palace	PATROL	15	-49.7	0.2	82.5	0	1	Artogg	humanoid_artogg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10400	column	idle			600
 spawn_tatooine_2117	TATOOINE	tat_jabbas_palace	AREA	16	-51.6	3.0	38.8	-33	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2118	TATOOINE	tat_jabbas_palace	PATROL	16	-32.3	3.0	55.8	0	1	Rautog	humanoid_rautog	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tat_10300	column	idle			600
-spawn_tatooine_2119	TATOOINE	tat_jabbas_palace	AREA	19	14.4	0.2	-0.9	0	1	a Bomarr monk	droid_bomarr_monk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle			600
+spawn_tatooine_2119	TATOOINE	tat_jabbas_palace	AREA	19	14.4	0.2	-0.9	0	1	a Bomarr monk	droid_bomarr_monk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	3	0	-	idle		simple_droid_prissy_hi_mean_14	600
 spawn_tatooine_2120	TATOOINE	tat_jabbas_palace	AREA	2	-1.8	0.2	103.9	21	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2121	TATOOINE	tat_jabbas_palace	AREA	22	2.3	2.0	39.4	-86	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_2122	TATOOINE	tat_jabbas_palace	AREA	22	-1.0	3.0	24.9	72	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
@@ -2142,7 +2142,7 @@ spawn_tatooine_2138	TATOOINE	tat_jabbas_palace	AREA	22	8.1	2.0	34.2	-90	1	Beissa
 spawn_tatooine_2139	TATOOINE	tat_jabbas_palace	AREA	22	-12.1	2.0	49.4	105	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_bib_fortuna	600
 spawn_tatooine_2140	TATOOINE	tat_jabbas_palace	AREA	22	-1.0	3.0	31.0	-40	1	Boba Fett	humanoid_boba_fett	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_boba_fett	600
 spawn_tatooine_2141	TATOOINE	tat_jabbas_palace	AREA	22	-13.0	2.0	37.1	0	1	Droopy McCool	humanoid_droopy_mccool	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_music_3	9		600
-spawn_tatooine_2142	TATOOINE	tat_jabbas_palace	AREA	22	-15.1	2.0	45.8	106	1	G-5P0	droid_g5p0_protocol	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2142	TATOOINE	tat_jabbas_palace	AREA	22	-15.1	2.0	45.8	106	1	G-5P0	droid_g5p0_protocol	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
 spawn_tatooine_2143	TATOOINE	tat_jabbas_palace	AREA	22	-16.9	2.8	45.2	90	1	Jabba the Hutt	creature_jabba	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_jabba	600
 spawn_tatooine_2144	TATOOINE	tat_jabbas_palace	AREA	22	-11.0	2.0	35.9	0	1	Max Rebo	humanoid_max_rebo	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_music_2			600
 spawn_tatooine_2145	TATOOINE	tat_jabbas_palace	AREA	22	-10.0	2.0	43.0	90	1	Oola	humanoid_oola	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_oola			600
@@ -2160,7 +2160,7 @@ spawn_tatooine_2156	TATOOINE	tat_jabbas_palace	AREA	30	-10.1	0.1	77.2	0	1	a craz
 spawn_tatooine_2157	TATOOINE	tat_jabbas_palace	AREA	31	-14.7	0.1	76.9	25	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
 spawn_tatooine_2158	TATOOINE	tat_jabbas_palace	AREA	32	-10.4	0.1	88.1	-178	1	a prisoner	humanoid_kashyyyk_prisoner	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_tatooine_2159	TATOOINE	tat_jabbas_palace	AREA	33	-17.2	0.1	87.9	114	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
-spawn_tatooine_2160	TATOOINE	tat_jabbas_palace	AREA	34	37.5	0.2	-4.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	1	0	-	idle		droid_geek	600
+spawn_tatooine_2160	TATOOINE	tat_jabbas_palace	AREA	34	37.5	0.2	-4.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	1	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_2161	TATOOINE	tat_jabbas_palace	AREA	34	30.6	0.2	-1.0	96	1	Barada	humanoid_barada	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_barada	600
 spawn_tatooine_2162	TATOOINE	tat_jabbas_palace	AREA	36	-18.0	3.0	9.0	37	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2163	TATOOINE	tat_jabbas_palace	AREA	36	3.2	3.0	15.4	-90	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
@@ -2189,7 +2189,7 @@ spawn_tatooine_2185	TATOOINE	tat_world	AREA	0	-6195.6	90.0	-6390.1	101	1	a busin
 spawn_tatooine_2186	TATOOINE	tat_world	AREA	0	-6193.3	90.0	-6391.7	-42	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_2187	TATOOINE	tat_world	AREA	0	-6179.1	90.0	-6381.6	-98	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_2188	TATOOINE	tat_world	AREA	0	-6185.8	90.0	-6375.4	174	1	a smuggler cargo loader	humanoid_legacy_thug_lvl3	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2189	TATOOINE	tat_world	AREA	0	-5869.8	90.0	-6161.0	128	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		droid_geek	600
+spawn_tatooine_2189	TATOOINE	tat_world	AREA	0	-5869.8	90.0	-6161.0	128	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_2190	TATOOINE	tat_world	AREA	0	-5880.5	50.5	-5932.8	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	10	20	POI	Jabbas Palace	1	LOITER	3	0	-	idle			600
 spawn_tatooine_2191	TATOOINE	tat_world	AREA	0	-5891.4	49.5	-5967.4	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	10	20	POI	Jabbas Palace	1	LOITER	3	0	-	idle			600
 spawn_tatooine_2192	TATOOINE	tat_world	AREA	0	-5927.2	49.5	-5931.2	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	10	20	POI	Jabbas Palace	1	LOITER	3	0	-	idle			600
@@ -2209,7 +2209,7 @@ spawn_tatooine_2205	TATOOINE	tat_world	AREA	0	-6226.6	23.7	1884.5	79	1	a Jawa	hu
 spawn_tatooine_2206	TATOOINE	tat_world	AREA	0	-6204.8	23.6	1840.6	125	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2207	TATOOINE	tat_world	AREA	0	-6149.6	23.6	1852.4	-146	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2208	TATOOINE	tat_world	AREA	0	-6159.7	23.5	1875.0	-137	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
-spawn_tatooine_2209	TATOOINE	tat_world	AREA	0	-6192.7	23.6	1872.5	0	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	POI	Jawa Traders	1	LOITER	2	0	-	idle		droid_slang	600
+spawn_tatooine_2209	TATOOINE	tat_world	AREA	0	-6192.7	23.6	1872.5	0	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	POI	Jawa Traders	1	LOITER	2	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_2210	TATOOINE	tat_world	AREA	0	-6076.7	52.6	2013.9	0	1	a wild bladeback boar	creature_boar_bladeback_wild	ATTACKABLE	N	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle			600
 spawn_tatooine_2211	TATOOINE	tat_world	AREA	0	-6411.1	308.5	2155.4	0	1	a wild bladeback boar	creature_boar_bladeback_wild	ATTACKABLE	N	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle			1800
 spawn_tatooine_2212	TATOOINE	tat_world	AREA	0	-6031.3	42.3	1948.7	0	1	a wild zucca boar	creature_boar_zucca_wild	ATTACKABLE	N	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle			600
@@ -2220,14 +2220,14 @@ spawn_tatooine_2216	TATOOINE	tat_world	AREA	0	-6152.1	23.6	1810.5	0	1	C4-ZX	droi
 spawn_tatooine_2217	TATOOINE	tat_world	AREA	0	-6153.3	23.6	1918.8	168	1	Jawa Junk Dealer	humanoid_junk_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 spawn_tatooine_2218	TATOOINE	tat_world	AREA	0	-6152.0	23.6	1812.1	-166	1	Ji'Ni Sil	humanoid_tatooine_watto_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
 spawn_tatooine_2219	TATOOINE	tat_world	AREA	0	-6144.2	23.6	1872.2	-38	1	Opeute	humanoid_opeute	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_2220	TATOOINE	tat_world	AREA	0	-6158.0	23.6	1836.0	-173	1	Protocol Droid	droid_protocol_jawa_fort	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2220	TATOOINE	tat_world	AREA	0	-6158.0	23.6	1836.0	-173	1	Protocol Droid	droid_protocol_jawa_fort	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
 spawn_tatooine_2221	TATOOINE	tat_world	AREA	0	-6224.4	23.7	1885.3	-155	1	Smuggler Pilot	humanoid_smuggler_pilot	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	npc_sitting_table			600
 spawn_tatooine_2222	TATOOINE	tat_world	AREA	0	-5998.2	62.9	1806.0	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Jawa Traders	1	LOITER	2	0	-	idle			600
 spawn_tatooine_2223	TATOOINE	tat_world	PATROL	0	-6196.3	22.8	1800.1	-55	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	POI	Jawa Traders	2	PATROL	0	patrol_tat_16800	column	idle			600
 spawn_tatooine_2224	TATOOINE	tat_world	PATROL	0	-6078.2	23.8	1800.2	0	1	a Jawa Protector	humanoid_jawa_protector	INVULNERABLE	N	100	100	POI	Jawa Traders	5	PATROL	0	patrol_tat_17200	column	idle			600
 spawn_tatooine_2225	TATOOINE	tat_world	PATROL	0	-6103.2	23.6	1850.2	-100	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_16900	column	idle			600
 spawn_tatooine_2226	TATOOINE	tat_world	PATROL	0	-6204.2	23.1	1703.3	40	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_17000	column	idle			600
-spawn_tatooine_2227	TATOOINE	tat_world	PATROL	0	-6196.1	23.3	1802.1	-50	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_17100	column	idle		droid_geek	600
+spawn_tatooine_2227	TATOOINE	tat_world	PATROL	0	-6196.1	23.3	1802.1	-50	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tat_17100	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_2228	TATOOINE	tat_world	AREA	0	7358.0	14.6	4486.6	0	1	a juvenile canyon krayt dragon	creature_krayt_dragon_juvenile_canyon	AGGRESSIVE	B	80	100	POI	Krayt Graveyard	1	LOITER	50	0	-	idle			600
 spawn_tatooine_2229	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
 spawn_tatooine_2230	TATOOINE	tat_world	AREA	0	7484.3	8.1	4483.7	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	110	150	POI	Krayt Graveyard	1	LOITER	30	0	-	idle			1800
@@ -2240,4 +2240,4 @@ spawn_tatooine_2236	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coord
 spawn_tatooine_2237	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
 spawn_tatooine_2238	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
 spawn_tatooine_2239	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
-spawn_tatooine_2240	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4795.4	-90	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_2240	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4795.4	-90	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_worshipful_bye_nice_4	600

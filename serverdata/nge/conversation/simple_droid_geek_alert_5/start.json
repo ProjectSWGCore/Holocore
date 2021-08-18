@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_geek",
+		"key": "alert_5",
+		"comment": "Commencing scan of area..."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

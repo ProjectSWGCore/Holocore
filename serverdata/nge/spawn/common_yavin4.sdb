@@ -47,11 +47,11 @@ spawn_yavin4_44	YAVIN4	yav_world	PATROL	0	-6875.1	73.0	-5716.8	89	1	a settler	hu
 spawn_yavin4_45	YAVIN4	yav_world	AREA	0	-6967.2	73	-5742.9	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Labor Outpost	2	LOITER	6	0	-	idle			600
 spawn_yavin4_46	YAVIN4	yav_world	AREA	0	-6955.7	73	-5698.6	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Labor Outpost	2	LOITER	6	0	-	idle			600
 spawn_yavin4_47	YAVIN4	yav_world	AREA	0	-6918.7	73.0	-5736.8	89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_yavin4_48	YAVIN4	yav_world	PATROL	0	-6979.7	73.0	-5714.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yav_900	column	idle			600
+spawn_yavin4_48	YAVIN4	yav_world	PATROL	0	-6979.7	73.0	-5714.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yav_900	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_yavin4_49	YAVIN4	yav_world	AREA	0	-7084.1	66.0	-5819.9	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	70	90	City	Labor Outpost	1	LOITER	2	0	-	idle			600
 spawn_yavin4_50	YAVIN4	yav_world	AREA	0	-7053.1	69.9	-5831.3	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	70	90	City	Labor Outpost	1	LOITER	2	0	-	idle			600
 spawn_yavin4_51	YAVIN4	yav_world	AREA	0	-7091.3	67.0	-5877.4	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	70	90	City	Labor Outpost	1	LOITER	2	0	-	idle			600
-spawn_yavin4_52	YAVIN4	yav_world	AREA	0	-6984.5	73.0	-5752.7	18	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+spawn_yavin4_52	YAVIN4	yav_world	AREA	0	-6984.5	73.0	-5752.7	18	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_yavin4_53	YAVIN4	yav_world	AREA	0	-6912.8	73.0	-5736.7	74	1	Nore Brrea	humanoid_nore_brrea_ice_cream	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_54	YAVIN4	yav_world	AREA	0	-6900.3	73.0	-5655.1	-161	1	Soci	humanoid_yavin4_soci	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_55	YAVIN4	yav_labor_outpost_medium_house	AREA	1	10.6	0.6	3.6	-89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -90,7 +90,7 @@ spawn_yavin4_87	YAVIN4	yav_world	AREA	0	-264.8	35.0	4860.8	107	1	a commoner	huma
 spawn_yavin4_88	YAVIN4	yav_world	PATROL	0	-349.6	35.0	4853.2	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_300	column	idle			600
 spawn_yavin4_89	YAVIN4	yav_world	PATROL	0	-254.8	35.0	4872.8	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_200	column	idle			600
 spawn_yavin4_90	YAVIN4	yav_world	AREA	0	-312.0	35.0	4855.4	177	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_yavin4_91	YAVIN4	yav_world	PATROL	0	-290.8	35.0	4889.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_100	column	idle			600
+spawn_yavin4_91	YAVIN4	yav_world	PATROL	0	-290.8	35.0	4889.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yav_100	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_yavin4_92	YAVIN4	yav_world	AREA	0	-344.3	35.0	4812.2	178	1	Breac Slaus (Yavin IV Collector)	humanoid_yavin4_collector	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_yavin4_93	YAVIN4	yav_world	AREA	0	-292.2	35.0	4833.6	0	1	Osae	humanoid_yavin4_osae	INVULNERABLE	N	100	100	City	Mining Outpost	1	TURN	0	0	-	idle			600
 spawn_yavin4_94	YAVIN4	yav_world	AREA	0	-247.0	35.0	4877.0	0	1	Zelma	humanoid_smuggler_broker_zelma	INVULNERABLE	N	100	100	City	Mining Outpost	1	TURN	0	0	-	idle			600

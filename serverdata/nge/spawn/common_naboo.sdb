@@ -89,7 +89,7 @@ spawn_naboo_86	NABOO	nab_world	AREA	0	4641.5	349.8	-1302.9	-18	1	a traveller	hum
 spawn_naboo_87	NABOO	nab_world	AREA	0	5023.5	360	-1430.8	97	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	conversation			600
 spawn_naboo_88	NABOO	nab_world	AREA	0	5027.4	360	-1512.4	126	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
 spawn_naboo_89	NABOO	nab_world	PATROL	0	4699.2	330.9	-1263.5	-22	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_12000	column	idle			600
-spawn_naboo_90	NABOO	nab_world	PATROL	0	5312.8	326.0	-1592.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_6400	column	idle			600
+spawn_naboo_90	NABOO	nab_world	PATROL	0	5312.8	326.0	-1592.0	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_6400	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_naboo_91	NABOO	nab_world	AREA	0	4691.7	330.2	-1387.6	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_92	NABOO	nab_world	PATROL	0	4764.7	330.3	-1270.7	6	1	a commoner	humanoid_commoner_moncal	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_12200	column	idle			600
 spawn_naboo_93	NABOO	nab_world	PATROL	0	4984.2	360	-1434.1	92	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_11900	column	idle			600
@@ -99,9 +99,9 @@ spawn_naboo_96	NABOO	nab_world	AREA	0	4975.1	360.0	-1485.4	0	1	a Naboo security 
 spawn_naboo_97	NABOO	nab_world	AREA	0	4971.7	360.0	-1485.6	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	25	35	City	Dee'ja Peak	1	LOITER	2	0	-	idle			600
 spawn_naboo_98	NABOO	nab_world	PATROL	0	5332.8	327	-1577.6	89	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_11800	column	idle			600
 spawn_naboo_99	NABOO	nab_world	PATROL	0	5086.6	350	-1511.4	3	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_12300	column	idle			600
-spawn_naboo_100	NABOO	nab_world	PATROL	0	4976.2	360.0	-1529.4	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_4100	column	idle			600
-spawn_naboo_101	NABOO	nab_world	PATROL	0	4980.6	360.0	-1408.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_4400	column	idle			600
-spawn_naboo_102	NABOO	nab_world	AREA	0	4713.7	330.0	-1360.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	6	0	-	idle			600
+spawn_naboo_100	NABOO	nab_world	PATROL	0	4976.2	360.0	-1529.4	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_4100	column	idle		simple_droid_geek_alert_5	600
+spawn_naboo_101	NABOO	nab_world	PATROL	0	4980.6	360.0	-1408.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_nab_4400	column	idle		simple_droid_geek_alert_5	600
+spawn_naboo_102	NABOO	nab_world	AREA	0	4713.7	330.0	-1360.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	6	0	-	idle		simple_droid_stupid_death_5	600
 spawn_naboo_103	NABOO	nab_world	AREA	0	4710.0	330.0	-1432.0	-94	1	Arven Wendik	humanoid_arven_wendik	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
 spawn_naboo_104	NABOO	nab_world	AREA	0	5139.0	346.5	-1530.0	46	1	Damalia Korde	humanoid_damilia_korde	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
 spawn_naboo_105	NABOO	nab_world	AREA	0	4871.0	360.8	-1442.2	23	1	Herman Pate	humanoid_naboo_deeja_peak_herman_pate	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
@@ -146,7 +146,7 @@ spawn_naboo_143	NABOO	nab_kaadara_starport	AREA	9	-42.2	1.6	62.1	-147	1	a smuggl
 spawn_naboo_144	NABOO	nab_kaadara_starport	AREA	9	-42.5	1.6	59.9	-29	1	a Sullustan male	humanoid_patron_sullustan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_145	NABOO	nab_kaadara_starport	AREA	10	-38.8	1.6	49.3	97	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_146	NABOO	nab_kaadara_starport	AREA	14	-55.7	1	8.4	-177	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_naboo_147	NABOO	nab_kaadara_starport	PATROL	14	-56	2.7	25	-178	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11200	column	idle			600
+spawn_naboo_147	NABOO	nab_kaadara_starport	PATROL	14	-56	2.7	25	-178	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11200	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_naboo_148	NABOO	nab_kaadara_starport	AREA	4	5.7	0.6	67.2	147	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_149	NABOO	nab_kaadara_starport	AREA	4	3.4	0.6	66.1	64	1	Eopah Opi	humanoid_newbie_pilot_informer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_150	NABOO	nab_kaadara_theater	AREA	1	7.2	0.6	-3.2	178	1	a storyteller vendor	humanoid_storyteller_vendor	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
@@ -202,9 +202,9 @@ spawn_naboo_199	NABOO	nab_world	AREA	0	5296.9	-192.0	6579.9	0	1	a commoner	human
 spawn_naboo_200	NABOO	nab_world	AREA	0	5383.4	-192.0	6658.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_201	NABOO	nab_world	AREA	0	5366.1	-197.2	6441.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_202	NABOO	nab_world	PATROL	0	5290.7	-192	6682.4	5	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11100	column	idle			600
-spawn_naboo_203	NABOO	nab_world	PATROL	0	5358.9	-192	6590.4	-101	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11700	column	idle			600
-spawn_naboo_204	NABOO	nab_world	AREA	0	5184.9	-192.0	6671.2	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
-spawn_naboo_205	NABOO	nab_world	AREA	0	5184.9	-192.0	6669.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+spawn_naboo_203	NABOO	nab_world	PATROL	0	5358.9	-192	6590.4	-101	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_nab_11700	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_naboo_204	NABOO	nab_world	AREA	0	5184.9	-192.0	6671.2	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
+spawn_naboo_205	NABOO	nab_world	AREA	0	5184.9	-192.0	6669.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
 spawn_naboo_206	NABOO	nab_world	AREA	0	5196.6	-192.0	6712.7	171	1	Colonel Panaka	humanoid_legacy_panaka	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_207	NABOO	nab_world	AREA	0	5167.6	-192.0	6674.9	116	1	Dakk	humanoid_borvo_dakk	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_208	NABOO	nab_world	AREA	0	5120.6	-192.0	6788.5	-113	1	Fenton	humanoid_smuggler_fence_fenton	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
@@ -359,7 +359,7 @@ spawn_naboo_356	NABOO	nab_world	AREA	0	1444.1	13	2760.2	-174	1	an artisan	humano
 spawn_naboo_357	NABOO	nab_world	AREA	0	1250.7	13	2726.9	-41	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_358	NABOO	nab_world	AREA	0	2087.8	30	2461.5	129	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_359	NABOO	nab_world	AREA	0	1755.7	37.8	2853.1	86	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_360	NABOO	nab_world	AREA	0	1873.3	12	2420.7	138	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle			600
+spawn_naboo_360	NABOO	nab_world	AREA	0	1873.3	12	2420.7	138	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_naboo_361	NABOO	nab_world	AREA	0	1751.6	38.7	2874.5	130	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
 spawn_naboo_362	NABOO	nab_world	AREA	0	1511.8	25	2761.8	159	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
 spawn_naboo_363	NABOO	nab_world	AREA	0	1512.4	25	2775.1	5	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
@@ -483,13 +483,13 @@ spawn_naboo_480	NABOO	nab_world	AREA	0	4911.7	3.8	-4848.4	-44	1	a commoner	human
 spawn_naboo_481	NABOO	nab_world	AREA	0	4967	4.4	-4902.1	89	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_482	NABOO	nab_world	AREA	0	4862.1	3.4	-4721.9	97	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 spawn_naboo_483	NABOO	nab_world	AREA	0	4680.4	3.8	-4911.9	-93	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_naboo_484	NABOO	nab_world	AREA	0	4813.9	4.3	-4874.3	-172	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
-spawn_naboo_485	NABOO	nab_world	AREA	0	4815.2	3.8	-4957.8	79	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle			600
+spawn_naboo_484	NABOO	nab_world	AREA	0	4813.9	4.3	-4874.3	-172	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+spawn_naboo_485	NABOO	nab_world	AREA	0	4815.2	3.8	-4957.8	79	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
 spawn_naboo_486	NABOO	nab_world	AREA	0	4967.3	4.4	-4879.8	-90	1	a battle ready Rebel recruit	humanoid_rebel_recruit_battle_ready	ATTACKABLE	N	25	35	City	Moenia	1	IDLE	0	0	-	idle			600
 spawn_naboo_487	NABOO	nab_world	AREA	0	4825.6	4.2	-4566.7	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	25	35	City	Moenia	1	TURN	0	0	-	idle			600
 spawn_naboo_488	NABOO	nab_world	AREA	0	4826.2	4.2	-4568.1	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	25	35	City	Moenia	1	TURN	0	0	-	idle			600
-spawn_naboo_489	NABOO	nab_world	PATROL	0	4856.7	3.8	-4927.9	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_nab_6800	column	idle			600
-spawn_naboo_490	NABOO	nab_world	PATROL	0	4729.6	3.8	-4938.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_nab_6900	column	idle			600
+spawn_naboo_489	NABOO	nab_world	PATROL	0	4856.7	3.8	-4927.9	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_nab_6800	column	idle		simple_droid_sarcastic_flee_4	600
+spawn_naboo_490	NABOO	nab_world	PATROL	0	4729.6	3.8	-4938.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_nab_6900	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_naboo_491	NABOO	nab_world	PATROL	0	4958.2	4.1	-4965	177	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_nab_12800	column	idle			600
 spawn_naboo_492	NABOO	nab_world	AREA	0	4851.1	4.2	-4680.4	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	25	35	City	Moenia	1	LOITER	4	0	-	idle			600
 spawn_naboo_493	NABOO	nab_world	AREA	0	4861.5	4.2	-4695.2	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	25	35	City	Moenia	1	LOITER	4	0	-	idle			600
@@ -582,9 +582,9 @@ spawn_naboo_579	NABOO	nab_theed_hangar	AREA	5	-27.9	7.9	26	-4	1	a pilot	humanoid
 spawn_naboo_580	NABOO	nab_theed_hangar	AREA	5	17.3	7.9	-35	137	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_581	NABOO	nab_theed_hangar	AREA	5	-11.9	7.9	28.6	17	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_582	NABOO	nab_theed_hangar	AREA	5	20.3	7.9	-38	-53	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_583	NABOO	nab_theed_hangar	AREA	5	16.4	7.9	-36.7	109	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_583	NABOO	nab_theed_hangar	AREA	5	16.4	7.9	-36.7	109	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_naboo_584	NABOO	nab_theed_hangar	AREA	5	-10.6	7.9	32.6	24	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_585	NABOO	nab_theed_hangar	AREA	5	-11.4	7.9	30.6	3	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_585	NABOO	nab_theed_hangar	AREA	5	-11.4	7.9	30.6	3	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_naboo_586	NABOO	nab_theed_hangar	AREA	3	-20.6	0.7	-76.9	-26	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_587	NABOO	nab_theed_hangar	AREA	3	-21.1	0.8	-75.7	155	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_588	NABOO	nab_theed_hangar	AREA	4	28.5	0.8	-67.7	90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
@@ -613,7 +613,7 @@ spawn_naboo_610	NABOO	nab_theed_palace	PATROL	10	46.4	19	29.4	-173	1	an RSF Pala
 spawn_naboo_611	NABOO	nab_theed_palace	AREA	16	0.7	27	-101.4	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_612	NABOO	nab_theed_palace	AREA	16	-6	27	-113.5	151	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_613	NABOO	nab_theed_palace	AREA	16	-4.4	27	-115.9	-31	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_614	NABOO	nab_theed_palace	AREA	16	0.1	27	-138.8	179	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+spawn_naboo_614	NABOO	nab_theed_palace	AREA	16	0.1	27	-138.8	179	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
 spawn_naboo_615	NABOO	nab_theed_palace	PATROL	16	5.8	27	-151.5	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	25	35	City	Theed	1	PATROL	0	patrol_nab_8900	column	idle			600
 spawn_naboo_616	NABOO	nab_theed_palace	PATROL	22	42.8	33	-147.6	-90	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	25	35	City	Theed	1	PATROL	0	patrol_nab_9000	column	idle			600
 spawn_naboo_617	NABOO	nab_theed_palace	AREA	10	-28.0	19.0	3.1	110	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
@@ -801,7 +801,7 @@ spawn_naboo_798	NABOO	nab_world	AREA	0	-5575.7	-149.1	-67.2	141	1	a noble	humano
 spawn_naboo_799	NABOO	nab_world	AREA	0	-5431.5	6	4166.6	-3	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_800	NABOO	nab_world	AREA	0	-5573.6	-149.1	-70.1	-36	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_801	NABOO	nab_world	AREA	0	-5861	6.6	4183.9	-163	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_802	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle			600
+spawn_naboo_802	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	1	LOITER	10	0	-	idle		simple_droid_slang_flee_15	600
 spawn_naboo_803	NABOO	nab_world	AREA	0	-5488.4	-150	-4.5	176	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_804	NABOO	nab_world	AREA	0	-5861.2	6.6	4181.6	-95	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_805	NABOO	nab_world	AREA	0	-5638.6	-157.4	-37.2	-84	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -820,19 +820,19 @@ spawn_naboo_817	NABOO	nab_world	AREA	0	-5115.3	6.5	4146.6	130	1	a technician	hum
 spawn_naboo_818	NABOO	nab_world	AREA	0	-5127.9	6.5	4163.8	-141	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_819	NABOO	nab_world	AREA	0	-5638.7	-159.1	167.2	-160	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_820	NABOO	nab_world	AREA	0	-5705.7	6.5	4166	-2	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_naboo_821	NABOO	nab_world	PATROL	0	-5841	6	4119.4	-179	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_9800	column	idle			600
+spawn_naboo_821	NABOO	nab_world	PATROL	0	-5841	6	4119.4	-179	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_9800	column	idle		simple_droid_sarcastic_alert_2	600
 spawn_naboo_822	NABOO	nab_world	AREA	0	-5630.7	-159.1	185.9	172	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_823	NABOO	nab_world	AREA	0	-5573.7	-150	-32.1	-177	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_824	NABOO	nab_world	AREA	0	-5573.8	-150	-34.4	5	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_825	NABOO	nab_world	AREA	0	-5585.6	-150	-52.6	-92	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_826	NABOO	nab_world	AREA	0	-5497.7	6	4138	-169	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+spawn_naboo_826	NABOO	nab_world	AREA	0	-5497.7	6	4138	-169	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_naboo_827	NABOO	nab_world	AREA	0	-5630.4	-159.3	183.6	-12	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_828	NABOO	nab_world	AREA	0	-5628.2	-159	185	-92	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_829	NABOO	nab_world	AREA	0	-5486.8	14	4461.2	99	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_830	NABOO	nab_world	AREA	0	-5726.4	6.5	4171.1	-90	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_naboo_831	NABOO	nab_world	AREA	0	-5182.4	6	4117.3	140	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_832	NABOO	nab_world	AREA	0	-5777.3	6	4280.8	-92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_833	NABOO	nab_world	PATROL	0	-5182.9	6.6	4204	128	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_9900	column	idle			600
+spawn_naboo_831	NABOO	nab_world	AREA	0	-5182.4	6	4117.3	140	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
+spawn_naboo_832	NABOO	nab_world	AREA	0	-5777.3	6	4280.8	-92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
+spawn_naboo_833	NABOO	nab_world	PATROL	0	-5182.9	6.6	4204	128	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_9900	column	idle		simple_droid_geek_alert_5	600
 spawn_naboo_834	NABOO	nab_world	PATROL	0	-5495.9	14	4475.6	-1	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	25	35	City	Theed	1	PATROL	0	patrol_nab_9400	column	idle			600
 spawn_naboo_835	NABOO	nab_world	PATROL	0	-4921.6	6.0	4151.9	-152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_8400	column	idle			600
 spawn_naboo_836	NABOO	nab_world	AREA	0	-5023.9	6.0	4040.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
@@ -873,7 +873,7 @@ spawn_naboo_870	NABOO	nab_world	PATROL	0	1362.3	12.1	2753.0	-165	1	a traveller	h
 spawn_naboo_871	NABOO	nab_world	PATROL	0	1576.5	24.1	2842.8	23	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_11000	column	idle			600
 spawn_naboo_872	NABOO	nab_world	AREA	0	-5112.5	4.8	4597.1	159	1	Ados Jarkey	humanoid_naboo_theed_ados_jarkey	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_873	NABOO	nab_world	PATROL	0	-4899.9	6.0	4181.1	-50	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_8300	column	idle			600
-spawn_naboo_874	NABOO	nab_world	PATROL	0	1439.9	12.1	2783.9	-8	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_11100	column	idle			600
+spawn_naboo_874	NABOO	nab_world	PATROL	0	1439.9	12.1	2783.9	-8	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_nab_11100	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_naboo_875	NABOO	nab_world	AREA	0	-5033.2	6.0	4092.3	118	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	25	35	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_876	NABOO	nab_world	AREA	0	-5019.0	6.0	4012.0	39	1	Beast Trainer	humanoid_trainer_beast_master	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_877	NABOO	nab_world	AREA	0	-5832.2	6.0	4121.0	-17	1	Broma Lak	humanoid_naboo_captain_broma_lak	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -883,7 +883,7 @@ spawn_naboo_880	NABOO	nab_world	AREA	0	-5515.8	6.0	4408.1	170	1	Commander Landau
 spawn_naboo_881	NABOO	nab_world	AREA	0	-4912.6	6.0	4089.0	144	1	Galuf Cardaan	humanoid_galuf_cardaan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_882	NABOO	nab_world	AREA	0	-5480.0	6.0	4398.2	-173	1	Hanna S'kiyah	humanoid_herald_naboo_hanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_883	NABOO	nab_world	AREA	0	-5156.1	6.2	4129.9	-136	1	Hunter Javeezo	humanoid_hunter_javeezo	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_884	NABOO	nab_world	AREA	0	-4856.0	6.0	4158.0	-22	1	J1-P0 (a protocol droid)	droid_j1p0_protocol	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_884	NABOO	nab_world	AREA	0	-4856.0	6.0	4158.0	-22	1	J1-P0 (a protocol droid)	droid_j1p0_protocol	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_stupid_hi_mean_4	600
 spawn_naboo_885	NABOO	nab_world	AREA	0	-5440.4	6.0	3929.1	-14	1	Jorgellansel (a Darkwalker adjutant)	humanoid_naboo_theed_jorgellansel	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_886	NABOO	nab_world	AREA	0	-6097.7	6.0	4284.8	0	1	Kermollus Preen (a freelance thief)	humanoid_naboo_theed_kermollus_preen	AGGRESSIVE	B	25	35	City	Theed	1	LOITER	2	0	-	idle			600
 spawn_naboo_887	NABOO	nab_world	AREA	0	-4857.4	6.0	4158.8	29	1	Kulton Woodle (a retired freighter captain)	humanoid_kultin_woodle	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -2158,7 +2158,7 @@ spawn_naboo_2155	NABOO	nab_emperors_retreat	AREA	11	-14.6	0.2	-18.0	37	1	an Impe
 spawn_naboo_2156	NABOO	nab_emperors_retreat	AREA	11	-14.1	0.2	-22.4	89	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_2157	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-19.8	102	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	80	85	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2158	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-28.2	78	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	80	85	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_2159	NABOO	nab_emperors_retreat	AREA	13	-47.0	0.2	-24.1	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	LOITER	2	0	-	idle			600
+spawn_naboo_2159	NABOO	nab_emperors_retreat	AREA	13	-47.0	0.2	-24.1	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	LOITER	2	0	-	idle		simple_droid_slang_threat_15	600
 spawn_naboo_2160	NABOO	nab_emperors_retreat	AREA	13	-57.3	0.2	-24.1	88	1	Darth Vader	humanoid_imperial_darth_vader	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2161	NABOO	nab_emperors_retreat	AREA	13	-44.1	0.2	-31.4	29	1	Grand Inquisitor Ja'ce Yiaso (Imperial Pilot Trainer)	humanoid_imperial_ja_ce_yiaso	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2162	NABOO	nab_emperors_retreat	AREA	15	10.0	20.0	-27.7	130	1	a Royal Imperial Guard	humanoid_imperial_royal_guard	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
@@ -2174,12 +2174,12 @@ spawn_naboo_2171	NABOO	nab_emperors_retreat	AREA	3	3.6	0.2	-23.4	-88	1	an Imperi
 spawn_naboo_2172	NABOO	nab_emperors_retreat	AREA	3	29.1	0.2	-24.9	159	1	an Imperial courier	humanoid_itp_loam_courier	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_2173	NABOO	nab_emperors_retreat	AREA	3	-3.3	0.2	-34.2	-141	1	an Imperial operative	humanoid_itp_imperial_emperor_tech	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_2174	NABOO	nab_emperors_retreat	AREA	3	23.5	0.2	-19.3	-162	1	Lt. Velso	humanoid_imperial_lt_velso	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_2175	NABOO	nab_emperors_retreat	PATROL	4	24.7	0.2	-38.9	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	PATROL	0	patrol_nab_7500	column	idle			600
+spawn_naboo_2175	NABOO	nab_emperors_retreat	PATROL	4	24.7	0.2	-38.9	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	PATROL	0	patrol_nab_7500	column	idle		simple_droid_slang_threat_15	600
 spawn_naboo_2176	NABOO	nab_emperors_retreat	AREA	4	19.1	0.2	-42.0	33	1	Inquisitor Loam Redge	humanoid_imperial_loam_redge	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2177	NABOO	nab_emperors_retreat	AREA	4	23.1	0.2	-41.7	8	1	Inquisitor Vrke (Imperial Pilot Trainer)	humanoid_imperial_vyrke	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2178	NABOO	nab_emperors_retreat	AREA	5	4.3	0.2	-45.5	-13	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_2179	NABOO	nab_emperors_retreat	AREA	5	4.9	0.2	-41.8	-6	1	Lord Hethrir	humanoid_imperial_lord_hethrir	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_2180	NABOO	nab_emperors_retreat	PATROL	7	-8.5	0.2	-17.2	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	PATROL	0	patrol_nab_7600	column	idle			600
+spawn_naboo_2180	NABOO	nab_emperors_retreat	PATROL	7	-8.5	0.2	-17.2	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	PATROL	0	patrol_nab_7600	column	idle		simple_droid_slang_threat_15	600
 spawn_naboo_2181	NABOO	nab_world	AREA	0	2433.1	292.0	-3964.5	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	85	90	POI	Emperor's Retreat	2	LOITER	8	0	-	idle			600
 spawn_naboo_2182	NABOO	nab_world	AREA	0	2368.5	291.9	-3943.1	-171	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_2183	NABOO	nab_world	AREA	0	2450.7	292.0	-3948.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Emperor's Retreat	1	LOITER	10	0	-	idle			600

@@ -67,7 +67,7 @@ spawn_kashyyyk_main_64	KASHYYYK_MAIN	kas_world	AREA	0	-549.8	19.3	-105.2	-119		a
 spawn_kashyyyk_main_65	KASHYYYK_MAIN	kas_world	AREA	0	-540.0	17.8	-86.0	-169		a Wookiee brawler	humanoid_wookiee_brawler	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_kashyyyk_main_66	KASHYYYK_MAIN	kas_world	AREA	0	-539.3	17.9	-90.6	-40		a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
 spawn_kashyyyk_main_67	KASHYYYK_MAIN	kas_world	AREA	0	-556.6	18.8	-80.4	-110		a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
-spawn_kashyyyk_main_68	KASHYYYK_MAIN	kas_world	AREA	0	-518.2	18.5	-87.0	63		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	3	0	-	idle			600
+spawn_kashyyyk_main_68	KASHYYYK_MAIN	kas_world	AREA	0	-518.2	18.5	-87.0	63		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	3	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_kashyyyk_main_69	KASHYYYK_MAIN	kas_world	AREA	0	-487.4	18.3	-106.5	89		a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	3	0	-	idle			600
 spawn_kashyyyk_main_70	KASHYYYK_MAIN	kas_world	PATROL	0	-556.7	19.8	-72.7	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kachirho	1	PATROL	0	patrol_kas_main_1500	column	idle			600
 spawn_kashyyyk_main_71	KASHYYYK_MAIN	kas_world	PATROL	0	-473.1	29.90	-10.2	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	PATROL	0	patrol_kas_main_1400	column	idle			600
@@ -75,7 +75,7 @@ spawn_kashyyyk_main_72	KASHYYYK_MAIN	kas_world	PATROL	0	-744.1	18.6	257.4	0	1	an
 spawn_kashyyyk_main_73	KASHYYYK_MAIN	kas_world	AREA	0	-666.8	18.8	-115.5	-5		a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_kashyyyk_main_74	KASHYYYK_MAIN	kas_world	AREA	0	-646.5	19.6	-133.1	-71		a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
 spawn_kashyyyk_main_75	KASHYYYK_MAIN	kas_world	AREA	0	-649.4	19.4	-132.2	107		a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
-spawn_kashyyyk_main_76	KASHYYYK_MAIN	kas_world	AREA	0	-663.6	18.5	-132.3	-104		an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	3	0	-	idle			600
+spawn_kashyyyk_main_76	KASHYYYK_MAIN	kas_world	AREA	0	-663.6	18.5	-132.3	-104		an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	3	0	-	idle		simple_droid_geek_alert_5	600
 spawn_kashyyyk_main_77	KASHYYYK_MAIN	kas_world	AREA	0	800.9	18.8	702.2	0	1	a bull Kashyyyk bantha	creature_kashyyyk_bantha_bull	ATTACKABLE	N	40	60	Outback	Kachirho	3	LOITER	15	0	-	idle			600
 spawn_kashyyyk_main_78	KASHYYYK_MAIN	kas_world	AREA	0	789.4	19.4	609.1	0	1	a bull Kashyyyk bantha	creature_kashyyyk_bantha_bull	ATTACKABLE	N	40	60	Outback	Kachirho	3	LOITER	15	0	-	idle			600
 spawn_kashyyyk_main_79	KASHYYYK_MAIN	kas_world	AREA	0	766.9	18.7	490.4	0	1	a bull Kashyyyk bantha	creature_kashyyyk_bantha_bull	ATTACKABLE	N	40	60	Outback	Kachirho	3	LOITER	15	0	-	idle			600

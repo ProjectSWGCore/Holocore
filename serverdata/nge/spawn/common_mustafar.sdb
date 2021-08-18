@@ -13,12 +13,12 @@ spawn_mustafar_010	MUSTAFAR	mus_world	AREA	0	-2537.1	116.0	467.5	0	1	Corpse of a
 spawn_mustafar_011	MUSTAFAR	mus_world	AREA	0	-4445.8	83.3	3375.4	0	1	Lislot Bloodscar	humanoid_som_lislot_bloodscar	AGGRESSIVE	B	75	82	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_012	MUSTAFAR	mus_world	AREA	0	-3080.7	20.0	5353.8	0	1	Malfosa	creature_sherkar_malfosa	AGGRESSIVE	B	80	82	-	-	1	LOITER	50	0	-	idle			900
 spawn_mustafar_013	MUSTAFAR	mus_world	AREA	0	-5403.3	296.0	4428.9	0	1	Miner Renlo Hens	humanoid_som_miner_hens	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle			600
-spawn_mustafar_014	MUSTAFAR	mus_world	AREA	0	-3406.5	99.8	1610.0	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle			600
-spawn_mustafar_015	MUSTAFAR	mus_world	AREA	0	-3961.5	99.8	995.6	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle			600
-spawn_mustafar_016	MUSTAFAR	mus_world	AREA	0	-3820.7	99.8	1199.3	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle			600
+spawn_mustafar_014	MUSTAFAR	mus_world	AREA	0	-3406.5	99.8	1610.0	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle		simple_droid_prissy_hi_mean_14	600
+spawn_mustafar_015	MUSTAFAR	mus_world	AREA	0	-3961.5	99.8	995.6	0	1	a Mustafarian mining droid	droid_som_mining_bucket_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle		simple_droid_prissy_hi_mean_14	600
+spawn_mustafar_016	MUSTAFAR	mus_world	AREA	0	-3820.7	99.8	1199.3	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	3	LOITER	15	0	-	idle		simple_droid_prissy_hi_mean_14	600
 spawn_mustafar_017	MUSTAFAR	mus_world	AREA	0	-4351.0	89.2	3162.1	0	1	a Blackguard elite minion	humanoid_som_blackguard_elite	AGGRESSIVE	E	70	85	-	-	1	LOITER	5	0	-	idle			600
-spawn_mustafar_018	MUSTAFAR	mus_world	AREA	0	-3496.9	99.8	1441.7	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle			600
-spawn_mustafar_019	MUSTAFAR	mus_world	AREA	0	-4106.8	99.8	1170.0	0	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle			600
+spawn_mustafar_018	MUSTAFAR	mus_world	AREA	0	-3496.9	99.8	1441.7	0	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle		simple_droid_prissy_hi_mean_14	600
+spawn_mustafar_019	MUSTAFAR	mus_world	AREA	0	-4106.8	99.8	1170.0	0	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle		simple_droid_geek_alert_5	600
 spawn_mustafar_020	MUSTAFAR	mus_world	AREA	0	-3882.9	103.6	-252.4	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle			600
 spawn_mustafar_021	MUSTAFAR	mus_world	AREA	0	-3934.4	140.4	1345.2	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	4	LOITER	15	0	-	idle			600
 spawn_mustafar_022	MUSTAFAR	mus_world	AREA	0	-4041.0	144.9	1322.7	0	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	-	-	2	LOITER	15	0	-	idle			600
@@ -193,7 +193,7 @@ spawn_mustafar_190	MUSTAFAR	mus_world	AREA	0	-6042.7	80.8	27.5	0	1	a salvage ban
 spawn_mustafar_191	MUSTAFAR	mus_world	AREA	0	-4334.6	85.1	3184.5	0	1	a Blackguard minion	humanoid_som_blackguard	AGGRESSIVE	E	70	85	-	-	4	LOITER	15	0	-	idle			600
 spawn_mustafar_192	MUSTAFAR	mus_world	AREA	0	-6058.8	81.5	18.2	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	LOITER	8	0	-	idle			600
 spawn_mustafar_193	MUSTAFAR	mus_world	PATROL	0	-6018.3	82.1	-3.1	0	1	a salvage bandit thug	humanoid_som_crystal_flats_salvage_bandit_thug	AGGRESSIVE	N	70	85	-	-	1	PATROL	0	0	column	idle			600
-spawn_mustafar_194	MUSTAFAR	mus_world	PATROL	0	-440.7	58.1	2044.4	0	1	a CWW8a battle droid	droid_som_cww8a	INVULNERABLE	N	100	100	-	-	1	PATROL	0	0	column	idle			600
+spawn_mustafar_194	MUSTAFAR	mus_world	PATROL	0	-440.7	58.1	2044.4	0	1	a CWW8a battle droid	droid_som_cww8a	INVULNERABLE	N	100	100	-	-	1	PATROL	0	0	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_mustafar_195	MUSTAFAR	mus_world	AREA	0	-4635.3	41.5	3297.1	0	1	Doctor Lu	humanoid_som_doctor_lu	INVULNERABLE	N	100	100	-	-	1	TURN	0	0	-	idle			600
 spawn_mustafar_196	MUSTAFAR	mus_world	AREA	0	-456.8	60.7	3092.0	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	sad			600
 spawn_mustafar_197	MUSTAFAR	mus_world	AREA	0	-414.3	58.1	3106.2	0	1	missing	humanoid_som_dying_miner	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	idle			600
@@ -220,8 +220,8 @@ spawn_mustafar_217	MUSTAFAR	mus_mensix	AREA	11	-104.00	10.80	126.60	-121	1	a 2-1
 spawn_mustafar_218	MUSTAFAR	mus_mensix	AREA	13	-59.70	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_219	MUSTAFAR	mus_mensix	AREA	14	-107.80	10.80	32.50	0	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_220	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	humanoid_som_foreman_chivos	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
-spawn_mustafar_221	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
-spawn_mustafar_222	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
+spawn_mustafar_221	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_mustafar_222	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle		simple_droid_stupid_hi_mean_4	600
 spawn_mustafar_223	MUSTAFAR	mus_mensix	AREA	16	-166.60	10.80	39.90	91	1	A Computer Technician	humanoid_som_kenobi_computer_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_224	MUSTAFAR	mus_mensix	AREA	18	-94.50	14.90	2.80	-90	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_225	MUSTAFAR	mus_mensix	AREA	20	-16.40	19.10	-20.40	-75	1	Epo Qetora	humanoid_som_kenobi_epo_qetora	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
@@ -263,13 +263,13 @@ spawn_mustafar_260	MUSTAFAR	mus_mensix	AREA	9	-72.0	10.8	64.0	17	1	a Chiss poach
 spawn_mustafar_261	MUSTAFAR	mus_mensix	AREA	9	-89.6	10.8	39.3	-178	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_262	MUSTAFAR	mus_mensix	AREA	9	-97.4	10.8	58.2	-1	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_mustafar_263	MUSTAFAR	mus_mensix	AREA	9	-97.3	10.8	60.7	-173	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_mustafar_264	MUSTAFAR	mus_mensix	PATROL	14	-88.3	10.8	32.4	92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_900	column	idle			600
-spawn_mustafar_265	MUSTAFAR	mus_mensix	PATROL	20	-28.0	18.6	-15.2	91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1000	column	idle			600
+spawn_mustafar_264	MUSTAFAR	mus_mensix	PATROL	14	-88.3	10.8	32.4	92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_900	column	idle		simple_droid_slang_threat_15	600
+spawn_mustafar_265	MUSTAFAR	mus_mensix	PATROL	20	-28.0	18.6	-15.2	91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1000	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_mustafar_266	MUSTAFAR	mus_world	PATROL	0	-2480.4	230.1	1635.5	-2	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1100	column	idle			600
 spawn_mustafar_267	MUSTAFAR	mus_mensix	PATROL	29	-39.9	31.5	-117.8	99	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1200	column	idle			600
 spawn_mustafar_268	MUSTAFAR	mus_world	PATROL	0	-3169.7	145.1	1372.2	-100	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mus_1300	column	idle			600
 spawn_mustafar_269	MUSTAFAR	mus_world	AREA	0	-3123.0	145.3	1332.6	-9	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	2	LOITER	5	0	-	idle			600
-spawn_mustafar_270	MUSTAFAR	mus_world	AREA	0	-3010.7	140.4	1340.1	7	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle			600
+spawn_mustafar_270	MUSTAFAR	mus_world	AREA	0	-3010.7	140.4	1340.1	7	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_mustafar_271	MUSTAFAR	mus_world	AREA	0	-2891.7	150.9	1388.0	132	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_272	MUSTAFAR	mus_world	AREA	0	-2526.2	225.0	1643.1	163	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_273	MUSTAFAR	mus_world	AREA	0	-2528.0	225.0	1642.7	165	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600

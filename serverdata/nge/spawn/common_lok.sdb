@@ -96,7 +96,7 @@ spawn_lok_93	LOK	lok_nym_stronghold	AREA	6	-23.9	4.2	-37.4	7	1	Nym's Fuel Techni
 spawn_lok_94	LOK	lok_nym_stronghold	AREA	7	-28.5	2.3	1.4	-90	1	Nym's bodyguard	humanoid_nym_bodyguard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_95	LOK	lok_world	AREA	0	218.1	17.4	5136.5	35	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
 spawn_lok_96	LOK	lok_world	AREA	0	219.6	17.3	5138.6	-142	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
-spawn_lok_97	LOK	lok_world	AREA	0	414.3	11.8	5173.6	123	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	10	0	-	idle			600
+spawn_lok_97	LOK	lok_world	AREA	0	414.3	11.8	5173.6	123	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	10	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_lok_98	LOK	lok_world	AREA	0	448.8	12	4852	88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
 spawn_lok_99	LOK	lok_world	AREA	0	461.7	8.8	5505.4	-8	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_lok_100	LOK	lok_world	AREA	0	462.7	3	5445.1	51	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
@@ -106,7 +106,7 @@ spawn_lok_103	LOK	lok_world	AREA	0	467.1	13.2	4828.8	-138	1	a miner	humanoid_min
 spawn_lok_104	LOK	lok_world	AREA	0	476.4	12	5159.5	-55	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_105	LOK	lok_world	AREA	0	488.8	12	4842.4	-165	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
 spawn_lok_106	LOK	lok_world	AREA	0	540.8	11.9	5087.8	-83	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_lok_107	LOK	lok_world	AREA	0	547.9	11.8	5158.3	-14	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	10	0	-	idle			600
+spawn_lok_107	LOK	lok_world	AREA	0	547.9	11.8	5158.3	-14	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	10	0	-	idle		simple_droid_slang_flee_15	600
 spawn_lok_108	LOK	lok_world	AREA	0	610.5	11.9	5061.5	157	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
 spawn_lok_109	LOK	lok_world	AREA	0	216.1	11.9	4988.3	92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_110	LOK	lok_world	AREA	0	220.2	17.0	5153.8	45	1	Andria E'liyha	humanoid_herald_lok_andria	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
@@ -156,7 +156,7 @@ spawn_lok_153	LOK	lok_world	AREA	0	464.0	23.0	4950.0	0	1	a disgruntled townspers
 spawn_lok_154	LOK	lok_world	AREA	0	465.2	3.0	5447.0	-144	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_lok_155	LOK	lok_world	PATROL	0	465.4	7.2	5475.6	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	50	70	City	Nym's Stronghold	1	PATROL	0	patrol_lok_100	column	idle			600
 spawn_lok_156	LOK	lok_world	AREA	0	467.2	34.5	4810.3	90	1	Arena Referee	humanoid_ntp_arena_referee	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
-spawn_lok_157	LOK	lok_world	PATROL	0	469.1	8.8	5503.6	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	PATROL	0	patrol_lok_1900	column	idle			600
+spawn_lok_157	LOK	lok_world	PATROL	0	469.1	8.8	5503.6	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	PATROL	0	patrol_lok_1900	column	idle		simple_droid_slang_threat_15	600
 spawn_lok_158	LOK	lok_world	AREA	0	470.0	23.0	4952.0	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_03	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
 spawn_lok_159	LOK	lok_world	AREA	0	470.0	23.0	4946.0	0	1	a disgruntled townsperson	humanoid_ntp_d_townsperson_lead	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	2	0	-	idle			600
 spawn_lok_160	LOK	lok_world	AREA	0	470.8	12.1	5089.6	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600

@@ -148,7 +148,7 @@ spawn_talus_145	TALUS	tal_dearic_starport	AREA	12	-55.8	2.6	42.1	-135	1	a Chiss 
 spawn_talus_146	TALUS	tal_dearic_starport	AREA	13	51.9	1	20.1	-174	1	a commoner	humanoid_commoner_rodian	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_147	TALUS	tal_dearic_starport	AREA	14	-53.5	2.7	23.3	-90	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_148	TALUS	tal_dearic_starport	AREA	14	-56.4	1	8.7	40	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_149	TALUS	tal_dearic_starport	PATROL	7	44.8	0.6	46.7	0	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Dearic	1	PATROL	0	patrol_tal_8400	column	idle			600
+spawn_talus_149	TALUS	tal_dearic_starport	PATROL	7	44.8	0.6	46.7	0	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Dearic	1	PATROL	0	patrol_tal_8400	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_talus_150	TALUS	tal_dearic_theater	AREA	1	-8.3	0.6	-5	88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
 spawn_talus_151	TALUS	tal_dearic_theater	AREA	1	-5.8	0.6	-4.9	-91	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
 spawn_talus_152	TALUS	tal_dearic_theater	AREA	1	7.2	0.6	-3.2	178	1	a storyteller vendor	humanoid_storyteller_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
@@ -298,8 +298,8 @@ spawn_talus_295	TALUS	tal_world	PATROL	0	-2194.6	20.0	2343.4	100	1	an Imperial M
 spawn_talus_296	TALUS	tal_world	PATROL	0	-2184.2	20.0	2278.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	40	60	City	Imperial Outpost	1	PATROL	0	patrol_tal_2000	column	idle			600
 spawn_talus_297	TALUS	tal_world	AREA	0	-2191.7	20.0	2268.6	-91	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter	600
 spawn_talus_298	TALUS	tal_world	PATROL	0	-2192.2	20.0	2343.0	-78	1	an Imperial Sergeant Major	humanoid_imperial_sergeant_major	ATTACKABLE	E	40	60	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_299	TALUS	tal_world	AREA	0	-2209.3	20.0	2301.4	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
-spawn_talus_300	TALUS	tal_world	AREA	0	-2213.1	20.0	2301.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle			600
+spawn_talus_299	TALUS	tal_world	AREA	0	-2209.3	20.0	2301.4	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+spawn_talus_300	TALUS	tal_world	AREA	0	-2213.1	20.0	2301.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_talus_301	TALUS	tal_world	AREA	0	-2179.0	20.0	2272.6	-4	1	Captain Ceth Laike	humanoid_imperial_cpt_ceth_laike	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_302	TALUS	tal_world	AREA	0	-2333.5	6.6	2200.6	0	1	Commando Horchoba Tuain	humanoid_itp_rebel_commando_horchoba_tuain	ATTACKABLE	E	86	89	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_303	TALUS	tal_world	AREA	0	-2152.1	20.0	2304.3	71	1	Gravin Attal	humanoid_gravin_attal	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
@@ -465,7 +465,7 @@ spawn_talus_462	TALUS	tal_world	AREA	0	4464.6	2	5213.8	179	1	a commoner	humanoid
 spawn_talus_463	TALUS	tal_world	AREA	0	4507.9	2	5197	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_464	TALUS	tal_world	AREA	0	4104.3	2	5288.8	67	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_465	TALUS	tal_world	AREA	0	4237.3	0.4	5264.5	-17	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_466	TALUS	tal_world	AREA	0	4346.6	2	5069.5	-144	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_466	TALUS	tal_world	AREA	0	4346.6	2	5069.5	-144	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_talus_467	TALUS	tal_world	AREA	0	4397.8	2	5282.4	173	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_468	TALUS	tal_world	AREA	0	4442.9	2	5261.2	-159	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_469	TALUS	tal_world	AREA	0	4366	2	5099.7	-36	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
@@ -479,22 +479,22 @@ spawn_talus_476	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid
 spawn_talus_477	TALUS	tal_world	PATROL	0	4117.5	2.0	5308.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	40	60	City	Nashal	1	PATROL	0	patrol_tal_4800	column	idle			600
 spawn_talus_478	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	40	60	City	Nashal	1	PATROL	0	patrol_tal_5500	column	idle			600
 spawn_talus_479	TALUS	tal_world	PATROL	0	4142.1	2.0	5311.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	40	60	City	Nashal	1	PATROL	0	patrol_tal_6600	column	idle			600
-spawn_talus_480	TALUS	tal_world	AREA	0	4389.5	2	5281.5	-1	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+spawn_talus_480	TALUS	tal_world	AREA	0	4389.5	2	5281.5	-1	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
 spawn_talus_481	TALUS	tal_world	AREA	0	4570.0	2.0	5455.0	-104	1	a Selonian advocate	humanoid_itp_hethrir_selonian_advocate	ATTACKABLE	E	86	89	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_482	TALUS	tal_world	AREA	0	4272.2	0.6	5265.9	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	83	87	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_483	TALUS	tal_world	AREA	0	4263.4	0.5	5263.0	0	1	a Stormtrooper	humanoid_imperial_rtp_stormtrooper_elite	ATTACKABLE	E	83	87	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_484	TALUS	tal_world	AREA	0	4064.8	2	5291.6	134	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_485	TALUS	tal_world	AREA	0	4492.4	2	5134.3	-103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_486	TALUS	tal_world	AREA	0	4507.1	2	5089.7	-128	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_487	TALUS	tal_world	AREA	0	4235.1	2	5124.8	-110	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_487	TALUS	tal_world	AREA	0	4235.1	2	5124.8	-110	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_talus_488	TALUS	tal_world	AREA	0	4379.1	2.0	5283.2	-179	1	Amyva Va'new	humanoid_amyva_vanew	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_489	TALUS	tal_world	AREA	0	4174.9	2.0	5110.5	75	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	40	60	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_490	TALUS	tal_world	AREA	0	4357.4	3	5170.7	-122	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_491	TALUS	tal_world	AREA	0	4490.3	2	5133.8	77	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_492	TALUS	tal_world	AREA	0	4367.5	2	5295.4	-83	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_493	TALUS	tal_world	AREA	0	4372.5	2	5099.3	150	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
-spawn_talus_494	TALUS	tal_world	PATROL	0	4564.8	2.0	5483.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_5900	column	idle			600
-spawn_talus_495	TALUS	tal_world	AREA	0	4531.4	2	5050.7	129	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle			600
+spawn_talus_494	TALUS	tal_world	PATROL	0	4564.8	2.0	5483.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_tal_5900	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_talus_495	TALUS	tal_world	AREA	0	4531.4	2	5050.7	129	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_talus_496	TALUS	tal_world	AREA	0	4366.7	2	5317.8	-58	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_497	TALUS	tal_world	AREA	0	4446.6	2	5379	58	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_498	TALUS	tal_world	AREA	0	4520.6	2.0	5236.5	110	1	an Imperial operative	humanoid_itp_imperial_hethrir_operative	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
@@ -770,7 +770,7 @@ spawn_talus_767	TALUS	tal_genetech_syndicate	AREA	26	105.1	-20.0	114.2	0	1	a bro
 spawn_talus_768	TALUS	tal_genetech_syndicate	AREA	26	99.1	-20.0	108.0	0	1	a brood V aurek arachne	creature_arachne_brood_v_aurek	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
 spawn_talus_769	TALUS	tal_genetech_syndicate	AREA	27	61.7	-20.0	106.2	0	1	a brood V arachne	creature_arachne_brood_v	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
 spawn_talus_770	TALUS	tal_genetech_syndicate	AREA	27	71.8	-20.0	111.1	0	1	a brood V aurek arachne	creature_arachne_brood_v_aurek	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
-spawn_talus_771	TALUS	tal_genetech_syndicate	AREA	28	68.8	-20.0	124.0	0	1	6-POC	droid_rebel_restuss_load_lifter_launchers	INVULNERABLE	N	100	100	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
+spawn_talus_771	TALUS	tal_genetech_syndicate	AREA	28	68.8	-20.0	124.0	0	1	6-POC	droid_rebel_restuss_load_lifter_launchers	INVULNERABLE	N	100	100	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle		simple_droid_sarcastic_flee_4	600
 spawn_talus_772	TALUS	tal_genetech_syndicate	AREA	28	66.7	-20.0	133.2	0	1	a brood V arachne	creature_arachne_brood_v	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
 spawn_talus_773	TALUS	tal_genetech_syndicate	AREA	29	40.1	-20.0	54.9	0	1	a brood V arachne	creature_arachne_brood_v	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
 spawn_talus_774	TALUS	tal_genetech_syndicate	AREA	29	35.7	-20.0	62.3	0	1	a brood V arachne	creature_arachne_brood_v	AGGRESSIVE	N	40	60	Dungeon	Genetech Syndicate	1	TURN	0	0	-	idle			600
@@ -838,7 +838,7 @@ spawn_talus_835	TALUS	tal_hegemony_base	AREA	6	21.6	-12.0	34.8	0	1	N.S.H. person
 spawn_talus_836	TALUS	tal_hegemony_base	AREA	6	18.3	-12.0	29.4	0	1	N.S.H. personnel	humanoid_talus_coa_lag_personnel	AGGRESSIVE	N	40	60	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle			600
 spawn_talus_837	TALUS	tal_hegemony_base	AREA	6	16.7	-12.0	28.2	-90	1	N.S.H. personnel	humanoid_talus_coa_lag_personnel	AGGRESSIVE	N	40	60	Dungeon	Lamina Steel Augmented Base	1	IDLE	0	0	-	idle			600
 spawn_talus_838	TALUS	tal_hegemony_base	PATROL	6	12.5	-12.0	29.2	0	1	N.S.H. sergeant	humanoid_talus_coa_lag_enforcer_sergeant	AGGRESSIVE	E	40	60	Dungeon	Lamina Steel Augmented Base	1	PATROL	0	patrol_tal_200	column	idle			600
-spawn_talus_839	TALUS	tal_hegemony_base	AREA	9	32.6	-12.0	59.0	0	1	Broadside	droid_rebel_restuss_load_lifter_carbines	INVULNERABLE	N	100	100	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle			600
+spawn_talus_839	TALUS	tal_hegemony_base	AREA	9	32.6	-12.0	59.0	0	1	Broadside	droid_rebel_restuss_load_lifter_carbines	INVULNERABLE	N	100	100	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle		simple_droid_sarcastic_flee_4	600
 spawn_talus_840	TALUS	tal_hegemony_base	AREA	9	44.4	-12.0	57.7	0	1	N.S.H. personnel	humanoid_talus_coa_lag_personnel	AGGRESSIVE	N	40	60	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle			600
 spawn_talus_841	TALUS	tal_hegemony_base	AREA	9	57.7	-12.0	64.9	0	1	N.S.H. personnel	humanoid_talus_coa_lag_personnel	AGGRESSIVE	N	40	60	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle			600
 spawn_talus_842	TALUS	tal_hegemony_base	AREA	9	35.5	-12.0	54.0	0	1	N.S.H. technician	humanoid_talus_coa_lag_technician	AGGRESSIVE	N	40	60	Dungeon	Lamina Steel Augmented Base	1	TURN	0	0	-	idle			600
@@ -1153,8 +1153,8 @@ spawn_talus_1150	TALUS	tal_world	AREA	0	6061.1	665.5	7016.8	0	1	a brood V aurek 
 spawn_talus_1151	TALUS	tal_world	AREA	0	6035.9	658.9	6991.8	0	1	a brood V aurek arachne	creature_arachne_brood_v_aurek	AGGRESSIVE	N	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_1152	TALUS	tal_world	AREA	0	6006.5	670.1	7000.5	0	1	a brood V aurek arachne	creature_arachne_brood_v_aurek	AGGRESSIVE	N	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_1153	TALUS	tal_world	AREA	0	-1836.1	7.9	1433.4	0	1	a Chadra Fan assassin	humanoid_chadra_fan_assassin	ATTACKABLE	E	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_1154	TALUS	tal_world	AREA	0	4319.9	49.4	4708.3	-119	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_1155	TALUS	tal_world	AREA	0	4258.2	49.4	4719.6	61	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_1154	TALUS	tal_world	AREA	0	4319.9	49.4	4708.3	-119	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
+spawn_talus_1155	TALUS	tal_world	AREA	0	4258.2	49.4	4719.6	61	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
 spawn_talus_1156	TALUS	tal_world	AREA	0	4096.2	8.3	-55.5	0	1	a comm operator	humanoid_imperial_comm_operator	ATTACKABLE	N	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_1157	TALUS	tal_world	AREA	0	5173.2	32.1	-1738.6	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_1158	TALUS	tal_world	AREA	0	1638.1	7.0	5435.9	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	40	60	Outback	Talus	1	TURN	0	0	-	idle			600
@@ -1267,8 +1267,8 @@ spawn_talus_1264	TALUS	tal_world	AREA	0	-3677.0	35.0	-554.0	0	1	an Aa'kuan guard
 spawn_talus_1265	TALUS	tal_world	AREA	0	-3682.3	35.4	-543.3	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	40	60	Outback	Talus	2	LOITER	6	0	-	idle			600
 spawn_talus_1266	TALUS	tal_world	AREA	0	-4021.1	30.1	4621.3	0	1	an Aa'kuan sentinel	humanoid_aakuan_sentinel	ATTACKABLE	E	40	60	Outback	Talus	1	LOITER	4	0	-	idle			600
 spawn_talus_1267	TALUS	tal_world	AREA	0	-4915.9	4.5	-4498.3	0	1	an agriculturalist	humanoid_farmer_agriculturist	ATTACKABLE	N	40	60	Outback	Talus	1	LOITER	4	0	-	idle			600
-spawn_talus_1268	TALUS	tal_world	AREA	0	4304.7	49.4	4751.1	96	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_1269	TALUS	tal_world	AREA	0	4256.6	49.4	4759.4	18	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_1268	TALUS	tal_world	AREA	0	4304.7	49.4	4751.1	96	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_talus_1269	TALUS	tal_world	AREA	0	4256.6	49.4	4759.4	18	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_talus_1270	TALUS	tal_world	AREA	0	3214.8	8.4	1259.7	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	40	60	Outback	Talus	2	LOITER	6	0	-	idle			600
 spawn_talus_1271	TALUS	tal_world	AREA	0	-6024.1	66.6	-1186.0	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	40	60	Outback	Talus	1	LOITER	4	0	-	idle			600
 spawn_talus_1272	TALUS	tal_world	AREA	0	-5120.6	19.5	3223.0	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	40	60	Outback	Talus	1	LOITER	4	0	-	idle			600

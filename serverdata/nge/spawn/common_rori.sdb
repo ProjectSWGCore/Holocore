@@ -60,7 +60,7 @@ spawn_rori_57	RORI	ror_world	AREA	0	-5363.9	80	-2250.5	92	1	a mercenary	humanoid
 spawn_rori_58	RORI	ror_world	AREA	0	-5361	80.1	-2250.7	-86	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_59	RORI	ror_world	AREA	0	-5361.3	80.1	-2252.9	-42	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_60	RORI	ror_world	AREA	0	-5135.7	87.4	-2287.9	-33	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
-spawn_rori_61	RORI	ror_world	AREA	0	-5312.1	80.5	-2244.5	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle			600
+spawn_rori_61	RORI	ror_world	AREA	0	-5312.1	80.5	-2244.5	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_rori_62	RORI	ror_world	AREA	0	-5136.6	87.4	-2286.7	152	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_63	RORI	ror_world	AREA	0	-5112	80	-2345.1	179	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_rori_64	RORI	ror_world	AREA	0	-5115.4	80.2	-2474.6	85	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -70,9 +70,9 @@ spawn_rori_67	RORI	ror_world	AREA	0	-5279.8	80.3	-2170.6	-90	1	a slicer	humanoid
 spawn_rori_68	RORI	ror_world	AREA	0	-5158.2	80	-2484.9	115	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_69	RORI	ror_world	AREA	0	-5135.8	80.2	-2449	53	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_70	RORI	ror_world	AREA	0	-5170.2	80	-2338.4	-95	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_71	RORI	ror_world	AREA	0	-5157.4	80	-2498.8	-149	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_72	RORI	ror_world	AREA	0	-4988.7	80	-2261.7	91	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
-spawn_rori_73	RORI	ror_world	AREA	0	-5157.9	80	-2293.8	139	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle			600
+spawn_rori_71	RORI	ror_world	AREA	0	-5157.4	80	-2498.8	-149	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+spawn_rori_72	RORI	ror_world	AREA	0	-4988.7	80	-2261.7	91	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+spawn_rori_73	RORI	ror_world	AREA	0	-5157.9	80	-2293.8	139	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_rori_74	RORI	ror_world	AREA	0	-5120.6	80.0	-2443.1	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_75	RORI	ror_world	AREA	0	-5210.7	80.0	-2269.6	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_76	RORI	ror_world	AREA	0	-4968.0	80.0	-2399.0	-128	1	a courier	humanoid_itp_rebel_courier	ATTACKABLE	E	86	89	City	Narmle	1	IDLE	0	0	-	idle			600
@@ -110,13 +110,13 @@ spawn_rori_107	RORI	ror_reb_outpost_small_house	AREA	3	3.7	0.7	1.8	152	1	a commo
 spawn_rori_108	RORI	ror_reb_outpost_small_house	AREA	4	-0.5	0.7	4	91	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_109	RORI	ror_reb_outpost_small_house	AREA	3	5.7	0.7	0.9	-120	1	Booto Lubble	humanoid_booto_lubble	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_110	RORI	ror_world	AREA	0	3663	96	-6420.6	138	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_111	RORI	ror_world	AREA	0	3656.3	96	-6432.4	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+spawn_rori_111	RORI	ror_world	AREA	0	3656.3	96	-6432.4	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_rori_112	RORI	ror_world	AREA	0	3702.9	96	-6434.3	88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_113	RORI	ror_world	AREA	0	3641.8	96	-6439.5	68	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_114	RORI	ror_world	AREA	0	3701.4	96	-6437.5	-31	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
-spawn_rori_115	RORI	ror_world	AREA	0	3668.2	96	-6464.8	159	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+spawn_rori_115	RORI	ror_world	AREA	0	3668.2	96	-6464.8	159	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
 spawn_rori_116	RORI	ror_world	AREA	0	3679.9	96.0	-6420.8	179	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_117	RORI	ror_world	PATROL	0	3682.4	96.0	-6462.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	PATROL	0	patrol_ror_1100	column	idle			600
+spawn_rori_117	RORI	ror_world	PATROL	0	3682.4	96.0	-6462.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	PATROL	0	patrol_ror_1100	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_rori_118	RORI	ror_world	AREA	0	3669.4	96.0	-6486.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle			600
 spawn_rori_119	RORI	ror_world	AREA	0	3669.8	96.0	-6482.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle			600
 spawn_rori_120	RORI	ror_world	AREA	0	3670.1	96.0	-6490.9	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	40	60	City	Rebel Outpost	1	TURN	0	0	-	idle			600
@@ -126,8 +126,8 @@ spawn_rori_123	RORI	ror_world	AREA	0	3656.5	96.0	-6460.0	63	1	a Rebel Major	huma
 spawn_rori_124	RORI	ror_world	AREA	0	3684.7	96.0	-6460.8	-92	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle		rebel_recruiter	600
 spawn_rori_125	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
 spawn_rori_126	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	40	60	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
-spawn_rori_127	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
-spawn_rori_128	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
+spawn_rori_127	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle		simple_droid_slang_flee_15	600
+spawn_rori_128	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle		simple_droid_stupid_death_5	600
 spawn_rori_129	RORI	ror_world	AREA	0	3664.7	96.0	-6427.2	-133	1	Staff Sergeant Levardio	humanoid_pvp_bf_rebel_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_130	RORI	ror_restuss_cantina	AREA	4	4.9	0.1	2.6	-22		an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_rori_131	RORI	ror_restuss_cantina	AREA	4	5.4	0.1	4.6	-140		an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	npc_sitting_chair			600
