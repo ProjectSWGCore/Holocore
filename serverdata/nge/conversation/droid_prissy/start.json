@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_prissy",
+		"key": "hi_mean_14",
+		"comment": "I see we have an unwelcome visitor."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

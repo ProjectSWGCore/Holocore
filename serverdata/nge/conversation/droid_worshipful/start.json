@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_worshipful",
+		"key": "bye_nice_4",
+		"comment": "I cannot overstate how much your intelligence and kindness has impressed me!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

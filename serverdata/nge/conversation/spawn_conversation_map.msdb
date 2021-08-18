@@ -4,6 +4,12 @@ bartender.sdb	TRUE
 chassis_dealer.sdb	TRUE
 cloning_droid.sdb	TRUE
 commoner.sdb	TRUE
+droid_geek.sdb	TRUE
+droid_prissy.sdb	TRUE
+droid_sarcastic.sdb	TRUE
+droid_slang.sdb	TRUE
+droid_stupid.sdb	TRUE
+droid_worshipful.sdb	TRUE
 junk_dealer_generic.sdb	TRUE
 junk_dealer_wookiee.sdb	TRUE
 recruiter_imperial.sdb	TRUE
