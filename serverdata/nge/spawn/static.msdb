@@ -21,7 +21,9 @@ dungeon_corvette_imperial.sdb	TRUE
 dungeon_corvette_neutral.sdb	TRUE
 dungeon_corvette_rebel.sdb	TRUE
 dungeon_kashyyyk_arena.sdb	FALSE
-dungeon_kashyyyk_avatar.sdb	TRUE
+dungeon_kashyyyk_avatar_easy.sdb	TRUE
+dungeon_kashyyyk_avatar_medium.sdb	TRUE
+dungeon_kashyyyk_avatar_hard.sdb	TRUE
 dungeon_kashyyyk_bocctyyy.sdb	FALSE
 dungeon_kashyyyk_hracca.sdb	TRUE
 dungeon_kashyyyk_myyydril.sdb	TRUE

@@ -144,6 +144,8 @@ public class DeveloperService extends Service {
 		createCBT("du1_npe_dungeon_1", 1, 7.7, 9.5, 6.6);
 		createCBT("kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);
 		createCBT("kas_pob_avatar_1", 1, 103.2, 0.1, 21.7);
+		createCBT("kas_pob_avatar_2", 1, 103.2, 0.1, 21.7);
+		createCBT("kas_pob_avatar_3", 1, 103.2, 0.1, 21.7);
 
 	}
 

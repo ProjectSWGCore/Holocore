@@ -1245,7 +1245,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Dungeon - Heroic Imperial Star Destroyer (empty)");
 		listBox.addListItem("Dungeon - NPE Dungeon");
 		listBox.addListItem("Dungeon - Myyyydil Cave");
-		listBox.addListItem("Dungeon - Avatar Platform");
+		listBox.addListItem("Dungeon - Avatar Platform (Easy)");
+		listBox.addListItem("Dungeon - Avatar Platform (Medium)");
+		listBox.addListItem("Dungeon - Avatar Platform (Hard)");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Easy)");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Medium)");
 		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Hard)");
@@ -1323,14 +1325,16 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 45: handleHeroicISD(player); break;
 			case 46: handleNPEDungeon(player); break;
 			case 47: handleMyyydrilCave(player); break;
-			case 48: handleAvatarPlatform(player); break;
+			case 48: handleAvatarPlatformEasy(player); break;
+			case 49: handleAvatarPlatformMedium(player); break;
+			case 50: handleAvatarPlatformHard(player); break;
 		// Planet: Mustafar Jedi Challenge
-			case 49: handleJediChallEasy(player); break;
-			case 50: handleJediChallMedium(player); break;
-			case 51: handleJediChallHard(player); break;
+			case 51: handleJediChallEasy(player); break;
+			case 52: handleJediChallMedium(player); break;
+			case 53: handleJediChallHard(player); break;
 		// Invasion:
-			case 52: handleHoth(player); break;
-			case 53: handleMusDroidArmy(player); break;
+			case 54: handleHoth(player); break;
+			case 55: handleMusDroidArmy(player); break;
 
 		}
 	}
@@ -1492,7 +1496,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	}
 	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
 	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
-	private static void handleAvatarPlatform(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
+	private static void handleAvatarPlatformEasy(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
+	private static void handleAvatarPlatformMedium(Player player) {teleportTo(player, "kas_pob_avatar_2",  1, 103.2, 0.1, 21.7);}
+	private static void handleAvatarPlatformHard(Player player) {teleportTo(player, "kas_pob_avatar_3",  1, 103.2, 0.1, 21.7);}
 	private static void handleJediChallEasy(Player player) {teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);	}
 	private static void handleJediChallMedium(Player player) {teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);	}
 	private static void handleJediChallHard(Player player) {teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);	}
