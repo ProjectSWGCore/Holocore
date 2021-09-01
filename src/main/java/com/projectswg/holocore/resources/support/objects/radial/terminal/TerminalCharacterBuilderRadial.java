@@ -1239,20 +1239,20 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Yavin 4 - Exar Kun");
 		listBox.addListItem("Yavin 4 - Geonosian Cave");
 		listBox.addListItem("Yavin 4 - Light Enclave");
-		listBox.addListItem("Space Station - Nova Orion");
-		listBox.addListItem("Space Station - NPE Station");
-		listBox.addListItem("Dungeon - Heroic Exar Kun (empty)");
-		listBox.addListItem("Dungeon - Heroic Imperial Star Destroyer (empty)");
-		listBox.addListItem("Dungeon - NPE Dungeon");
-		listBox.addListItem("Dungeon - Myyyydil Cave");
-		listBox.addListItem("Dungeon - Avatar Platform (Easy)");
-		listBox.addListItem("Dungeon - Avatar Platform (Medium)");
-		listBox.addListItem("Dungeon - Avatar Platform (Hard)");
-		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Easy)");
-		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Medium)");
-		listBox.addListItem("Dungeon - Mustafar Jedi Challenge (Hard)");
-		listBox.addListItem("Invasion - Hoth");
-		listBox.addListItem("Invasion - Droid Army");
+		listBox.addListItem("[SPACE STATION] - Nova Orion");
+		listBox.addListItem("[SPACE STATION] - NPE Station");
+		listBox.addListItem("[INSTANCE] - Heroic Exar Kun (empty)");
+		listBox.addListItem("[INSTANCE] - Heroic Imperial Star Destroyer (empty)");
+		listBox.addListItem("[INSTANCE] - NPE Dungeon");
+		listBox.addListItem("[INSTANCE] - Myyyydil Cave");
+		listBox.addListItem("[INSTANCE] - Avatar Platform (EASY)");
+		listBox.addListItem("[INSTANCE] - Avatar Platform (MEDIUM)");
+		listBox.addListItem("[INSTANCE] - Avatar Platform (HARD)");
+		listBox.addListItem("[INSTANCE] - Mustafar Jedi Challenge (EASY)");
+		listBox.addListItem("[INSTANCE] - Mustafar Jedi Challenge (MEDIUM)");
+		listBox.addListItem("[INSTANCE] - Mustafar Jedi Challenge (HARD)");
+		listBox.addListItem("[INVASION] - Hoth");
+		listBox.addListItem("[INVASION] - Droid Army");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleTravelSelection", (event, parameters) -> handleTravelSelection(player, parameters));
 		listBox.display(player);
@@ -1318,23 +1318,23 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 40: handleYavGeoCave(player); break;
 			case 41: handleYavLightEnclave(player); break;
 		// Space Stations:
-			case 42: handleNovaOrion(player); break;
-			case 43: handleNPEStation(player); break;
+			case 42: handleSpaceStationNovaOrion(player); break;
+			case 43: handleSpaceStationNPEStation(player); break;
 		// Dungeons:
-			case 44: handleHeroicEK(player); break;
-			case 45: handleHeroicISD(player); break;
-			case 46: handleNPEDungeon(player); break;
-			case 47: handleMyyydrilCave(player); break;
-			case 48: handleAvatarPlatformEasy(player); break;
-			case 49: handleAvatarPlatformMedium(player); break;
-			case 50: handleAvatarPlatformHard(player); break;
+			case 44: handleInstanceHeroicEK(player); break;
+			case 45: handleInstanceHeroicISD(player); break;
+			case 46: handleInstanceNPEDungeon(player); break;
+			case 47: handleInstanceMyyydrilCave(player); break;
+			case 48: handleInstanceAvatarPlatformEasy(player); break;
+			case 49: handleInstanceAvatarPlatformMedium(player); break;
+			case 50: handleInstanceAvatarPlatformHard(player); break;
 		// Planet: Mustafar Jedi Challenge
-			case 51: handleJediChallEasy(player); break;
-			case 52: handleJediChallMedium(player); break;
-			case 53: handleJediChallHard(player); break;
+			case 51: handleInstanceMusJediEasy(player); break;
+			case 52: handleInstanceMusJediMedium(player); break;
+			case 53: handleInstanceMusJediHard(player); break;
 		// Invasion:
-			case 54: handleHoth(player); break;
-			case 55: handleMusDroidArmy(player); break;
+			case 54: handleInvasionHoth(player); break;
+			case 55: handleInvasionMusDroidArmy(player); break;
 
 		}
 	}
@@ -1479,31 +1479,23 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 // Space Stations:
 
-	private static void handleNovaOrion(Player player) {
-		teleportTo(player, "du1_nova_orion", 8, 79.1, 0.8, -57.5);
-	}
-	private static void handleNPEStation(Player player) {
-		teleportTo(player, "du1_npe_station_1", 8, 50.2, 0.8, -36.5);
-	}
+	private static void handleSpaceStationNovaOrion(Player player) {teleportTo(player, "du1_nova_orion", 8, 79.1, 0.8, -57.5);	}
+	private static void handleSpaceStationNPEStation(Player player) {teleportTo(player, "du1_npe_station_1", 8, 50.2, 0.8, -36.5);	}
 
 // Dungeons:
 
-	private static void handleHeroicEK(Player player) {
-		teleportTo(player, "du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);
-	}
-	private static void handleHeroicISD(Player player) {
-		teleportTo(player, "du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
-	}
-	private static void handleNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
-	private static void handleMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
-	private static void handleAvatarPlatformEasy(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
-	private static void handleAvatarPlatformMedium(Player player) {teleportTo(player, "kas_pob_avatar_2",  1, 103.2, 0.1, 21.7);}
-	private static void handleAvatarPlatformHard(Player player) {teleportTo(player, "kas_pob_avatar_3",  1, 103.2, 0.1, 21.7);}
-	private static void handleJediChallEasy(Player player) {teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);	}
-	private static void handleJediChallMedium(Player player) {teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);	}
-	private static void handleJediChallHard(Player player) {teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);	}
-	private static void handleMusDroidArmy(Player player) {teleportTo(player, 4908d, 24d, 6046d, Terrain.MUSTAFAR);}
-	private static void handleHoth(Player player) {teleportTo(player, -3717.9d, 94.1d, 5975.5d, Terrain.ADVENTURE2);}
+	private static void handleInstanceHeroicEK(Player player) {teleportTo(player, "du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);}
+	private static void handleInstanceHeroicISD(Player player) {teleportTo(player, "du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);}
+	private static void handleInstanceNPEDungeon(Player player) {teleportTo(player, "du1_npe_dungeon_1", 1, 7.1, 9.4, -171);}
+	private static void handleInstanceMyyydrilCave(Player player) {teleportTo(player, "kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);}
+	private static void handleInstanceAvatarPlatformEasy(Player player) {teleportTo(player, "kas_pob_avatar_1",  1, 103.2, 0.1, 21.7);}
+	private static void handleInstanceAvatarPlatformMedium(Player player) {teleportTo(player, "kas_pob_avatar_2",  1, 103.2, 0.1, 21.7);}
+	private static void handleInstanceAvatarPlatformHard(Player player) {teleportTo(player, "kas_pob_avatar_3",  1, 103.2, 0.1, 21.7);}
+	private static void handleInstanceMusJediEasy(Player player) {teleportTo(player, 2209.8d, 74.8d, 6410.2d, Terrain.MUSTAFAR);	}
+	private static void handleInstanceMusJediMedium(Player player) {teleportTo(player, 2195.1d, 74.8d, 4990.40d, Terrain.MUSTAFAR);	}
+	private static void handleInstanceMusJediHard(Player player) {teleportTo(player, 2190.5d, 74.8d, 3564.8d, Terrain.MUSTAFAR);	}
+	private static void handleInvasionMusDroidArmy(Player player) {teleportTo(player, 4908d, 24d, 6046d, Terrain.MUSTAFAR);}
+	private static void handleInvasionHoth(Player player) {teleportTo(player, -3717.9d, 94.1d, 5975.5d, Terrain.ADVENTURE2);}
 
 
 	private static void teleportTo(Player player, double x, double y, double z, Terrain terrain) {
