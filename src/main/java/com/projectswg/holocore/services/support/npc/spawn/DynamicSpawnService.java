@@ -73,8 +73,8 @@ public class DynamicSpawnService extends Service {
 		dynamicSpawnLoader = ServerData.INSTANCE.getDynamicSpawns();
 		noSpawnZoneLoader = ServerData.INSTANCE.getNoSpawnZones();
 		terrainLevelLoader = ServerData.INSTANCE.getTerrainLevels();
-		npcSpawnChance = PswgDatabase.INSTANCE.getConfig().getLong(this, "npcSpawnChance", 5);
-		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 20);
+		npcSpawnChance = PswgDatabase.INSTANCE.getConfig().getLong(this, "npcSpawnChance", 2);
+		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 10);
 	}
 	
 	@IntentHandler
