@@ -228,28 +228,6 @@ patrol_nab_3102	patrol_nab_3100		NABOO	nab_nikto_cavern	2	41.7	-46.5	-59.1	0
 patrol_nab_3103	patrol_nab_3100		NABOO	nab_nikto_cavern	2	44.2	-46.2	-19.3	0	
 patrol_nab_3104	patrol_nab_3100		NABOO	nab_nikto_cavern	3	87.0	-62.1	-12.4	0	
 patrol_nab_3105	patrol_nab_3100		NABOO	nab_nikto_cavern	3	83.8	-70.2	-45.2	0	
-patrol_nab_3200	patrol_nab_3200	FLIP	NABOO	nab_world	0	59.2	61.1	-635.8	0	Nikto Cavern - a Nikto Blood Cult Fanatic
-patrol_nab_3201	patrol_nab_3200		NABOO	nab_world	0	25.7	63.7	-634.2	0	
-patrol_nab_3202	patrol_nab_3200		NABOO	nab_world	0	18.8	73.5	-670.8	0	
-patrol_nab_3203	patrol_nab_3200		NABOO	nab_world	0	31.0	88.2	-702.0	0	
-patrol_nab_3204	patrol_nab_3200		NABOO	nab_world	0	77.7	95.1	-705.4	0	
-patrol_nab_3205	patrol_nab_3200		NABOO	nab_world	0	142.8	91.5	-703.3	0	
-patrol_nab_3206	patrol_nab_3200		NABOO	nab_world	0	182.2	65.0	-656.3	0	
-patrol_nab_3207	patrol_nab_3200		NABOO	nab_world	0	78.1	61.0	-624.4	0	
-patrol_nab_3208	patrol_nab_3200		NABOO	nab_world	0	60.3	61.1	-647.8	0	
-patrol_nab_3300	patrol_nab_3300	FLIP	NABOO	nab_world	0	87.8	61.0	-632.0	0	Nikto Cavern - a Nikto Blood Cult Fanatic
-patrol_nab_3301	patrol_nab_3300		NABOO	nab_world	0	127.9	62.4	-633.8	0	
-patrol_nab_3302	patrol_nab_3300		NABOO	nab_world	0	146.3	69.8	-646.5	0	
-patrol_nab_3303	patrol_nab_3300		NABOO	nab_world	0	153.7	90.3	-705.1	0	
-patrol_nab_3304	patrol_nab_3300		NABOO	nab_world	0	118.9	103.8	-741.4	0	
-patrol_nab_3305	patrol_nab_3300		NABOO	nab_world	0	47.9	99.4	-734.7	0	
-patrol_nab_3306	patrol_nab_3300		NABOO	nab_world	0	2029.6	73.4	-684.1	0	
-patrol_nab_3307	patrol_nab_3300		NABOO	nab_world	0	1999.7	65.0	-660.9	0	
-patrol_nab_3308	patrol_nab_3300		NABOO	nab_world	0	1986.9	57.0	-632.1	0	
-patrol_nab_3309	patrol_nab_3300		NABOO	nab_world	0	2.3	55.0	-604.6	0	
-patrol_nab_3310	patrol_nab_3300		NABOO	nab_world	0	50.7	57.3	-598.1	0	
-patrol_nab_3311	patrol_nab_3300		NABOO	nab_world	0	73.7	61.0	-633.1	0	
-patrol_nab_3312	patrol_nab_3300		NABOO	nab_world	0	84.2	61.0	-637.9	0	
 patrol_nab_3400	patrol_nab_3400	FLIP	NABOO	nab_drennic_bunker	2	1.1	0.3	3.6	0	Drennic Bunker - a Drennic guardian
 patrol_nab_3401	patrol_nab_3400		NABOO	nab_drennic_bunker	2	3.1	0.3	2.6	0	
 patrol_nab_3402	patrol_nab_3400		NABOO	nab_drennic_bunker	2	3.7	0.3	-3.5	0	
