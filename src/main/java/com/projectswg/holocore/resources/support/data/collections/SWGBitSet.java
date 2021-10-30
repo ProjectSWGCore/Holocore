@@ -82,10 +82,17 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		clear();
-		xor(valueOf(stream.getArray()));
+		read(stream.getArray());
 	}
-	
+
+	public void read(byte[] bytes) {
+		clear();
+
+		if (bytes != null) {
+			xor(valueOf(bytes));
+		}
+	}
+
 	public void sendDeltaMessage(SWGObject target) {
 		target.sendDelta(view, updateType, encode());
 	}

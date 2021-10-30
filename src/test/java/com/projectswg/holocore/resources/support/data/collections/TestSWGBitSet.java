@@ -29,8 +29,11 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.BitSet;
+
+import static org.junit.Assert.*;
 
 public class TestSWGBitSet extends TestRunnerNoIntents {
 	
@@ -48,7 +51,7 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 			33, 0, 0, 0,
 			(1<<4)+(1<<1), 1, 1, 0, 1
 		};
-		Assert.assertArrayEquals(expected, actual);
+		assertArrayEquals(expected, actual);
 	}
 	
 	@Test
@@ -65,12 +68,12 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 		
 		flag.decode(buffer);
 		
-		Assert.assertTrue("Flag 1 should be set", flag.get(1));
-		Assert.assertTrue("Flag 4 should be set", flag.get(4));
-		Assert.assertTrue("Flag 8 should be set", flag.get(8));
-		Assert.assertTrue("Flag 16 should be set", flag.get(16));
-		Assert.assertTrue("Flag 32 should be set", flag.get(32));
-		Assert.assertFalse("Flag 64 should be not set", flag.get(64));
+		assertTrue("Flag 1 should be set", flag.get(1));
+		assertTrue("Flag 4 should be set", flag.get(4));
+		assertTrue("Flag 8 should be set", flag.get(8));
+		assertTrue("Flag 16 should be set", flag.get(16));
+		assertTrue("Flag 32 should be set", flag.get(32));
+		assertFalse("Flag 64 should be not set", flag.get(64));
 	}
 	
 	@Test
@@ -80,7 +83,29 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 		flag.set(4);
 		flag.set(8);
 		
-		Assert.assertEquals("Two flags should fill 10 bytes", 10, flag.getLength());
+		assertEquals("Two flags should fill 10 bytes", 10, flag.getLength());
 	}
-	
+
+	@Test
+	public void testReadBytes_supportsNull() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+
+		flag.set(4);
+		flag.read((byte[]) null);
+
+		assertFalse(flag.get(4));
+	}
+
+	@Test
+	public void testReadBytes_setsFlags() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+
+		BitSet bitSet = new BitSet();
+		bitSet.set(4);
+		byte[] expected = bitSet.toByteArray();
+
+		flag.read(expected);
+
+		assertTrue(flag.get(4));
+	}
 }

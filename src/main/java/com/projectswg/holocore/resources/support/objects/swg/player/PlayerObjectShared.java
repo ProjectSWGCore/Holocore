@@ -392,8 +392,8 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		lifetimeGcwPoints = data.getLong("lifetimeGcwPoints", lifetimeGcwPoints);
 		showBackpack = data.getBoolean("showBackpack", showBackpack);
 		showHelmet = data.getBoolean("showHelmet", showHelmet);
-		collectionBadges.xor(BitSet.valueOf(data.getByteArray("collectionBadges", new byte[]{})));
-		collectionBadges2.xor(BitSet.valueOf(data.getByteArray("collectionBadges2", new byte[]{})));
+		collectionBadges.read(data.getByteArray("collectionBadges"));
+		collectionBadges2.read(data.getByteArray("collectionBadges2"));
 	}
 	
 	@Override
