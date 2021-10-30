@@ -375,6 +375,8 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		data.putLong("lifetimeGcwPoints", lifetimeGcwPoints);
 		data.putBoolean("showBackpack", showBackpack);
 		data.putBoolean("showHelmet", showHelmet);
+		data.putByteArray("collectionBadges", collectionBadges.toByteArray());
+		data.putByteArray("collectionBadges2", collectionBadges2.toByteArray());
 	}
 	
 	@Override
@@ -390,6 +392,8 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		lifetimeGcwPoints = data.getLong("lifetimeGcwPoints", lifetimeGcwPoints);
 		showBackpack = data.getBoolean("showBackpack", showBackpack);
 		showHelmet = data.getBoolean("showHelmet", showHelmet);
+		collectionBadges.xor(BitSet.valueOf(data.getByteArray("collectionBadges", new byte[]{})));
+		collectionBadges2.xor(BitSet.valueOf(data.getByteArray("collectionBadges2", new byte[]{})));
 	}
 	
 	@Override
