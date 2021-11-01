@@ -524,7 +524,6 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 	
 	@Override
 	public void readMongo(MongoData data) {
-		byte [] emptyByteArray = new byte[0];
 		draftSchematics.clear();
 		friendsList.clear();
 		ignoreList.clear();
@@ -532,9 +531,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		playerHateList.clear();
 		petAbilities.clear();
 		activePetAbilities.clear();
-		guildRank.clear();
-		citizenRank.clear();
-		
+
 		craftingLevel = data.getInteger("craftingLevel", craftingLevel);
 		craftingStage = data.getInteger("craftingStage", craftingStage);
 		nearbyCraftStation = data.getLong("nearbyCraftStation", nearbyCraftStation);
@@ -558,8 +555,8 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		petId = data.getLong("petId", petId);
 		petAbilities.addAll(data.getArray("petAbilities", String.class));
 		activePetAbilities.addAll(data.getArray("activePetAbilities", String.class));
-		guildRank.xor(BitSet.valueOf((data.getByteArray("guildRank", emptyByteArray))));
-		citizenRank.xor(BitSet.valueOf(data.getByteArray("citizenRank", emptyByteArray)));
+		guildRank.read(data.getByteArray("guildRank"));
+		citizenRank.read(data.getByteArray("citizenRank"));
 		galacticReserveDeposit = (byte) data.getInteger("galacticReserveDeposit", galacticReserveDeposit);
 		pgcRatingCount = data.getLong("pgcRatingCount", pgcRatingCount);
 		pgcRatingTotal = data.getLong("pgcRatingTotal", pgcRatingTotal);

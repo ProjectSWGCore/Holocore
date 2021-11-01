@@ -215,19 +215,16 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 	
 	@Override
 	public void readMongo(MongoData data) {
-		byte [] emptyByteArray = new byte[0];
 		experience.clear();
 		waypoints.clear();
-		completedQuests.clear();
-		activeQuests.clear();
 		quests.clear();
 		
 		experience.putAll(data.getMap("experience", String.class, Integer.class));
 		data.getArray("waypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> waypoints.put(obj.getObjectId(), obj));
 		forcePower = data.getInteger("forcePower", forcePower);
 		maxForcePower = data.getInteger("maxForcePower", maxForcePower);
-		completedQuests.xor(BitSet.valueOf(data.getByteArray("completedQuests", emptyByteArray)));
-		activeQuests.xor(BitSet.valueOf(data.getByteArray("activeQuests", emptyByteArray)));
+		completedQuests.read(data.getByteArray("completedQuests"));
+		activeQuests.read(data.getByteArray("activeQuests"));
 		activeQuest = data.getInteger("activeQuest", activeQuest);
 		quests.putAll(data.getMap("quests", CRC.class, Quest.class));
 		profWheelPosition = data.getString("profWheelPosition", profWheelPosition);
