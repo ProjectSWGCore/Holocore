@@ -1,0 +1,15 @@
+zone_spawn_id	terrain	base	size	spawn_limit	comment	dynamic_spawn_groups
+INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	TEXT
+1	CORELLIA	-8000;-8000	16000;16000	200	Global	beldonna
+2	DANTOOINE	-8000;-8000	16000;16000	200	Global	graul
+3	DATHOMIR	-8000;-8000	16000;16000	200	Global	rancor_bull
+4	ENDOR	-8000;-8000	16000;16000	200	Global	arachne
+5	LOK	-8000;-8000	16000;16000	200	Global	blood_razor
+6	NABOO	-8000;-8000	16000;16000	200	Global	borvo_mercenary
+7	RORI	-8000;-8000	16000;16000	200	Global	garyn_raiders_dragoon
+8	TALUS	-8000;-8000	16000;16000	200	Global	guf_drolg
+9	TATOOINE	-8000;-8000	8000;8000	60	SW	tusken
+10	TATOOINE	-8000;0	8000;8000	40	NW	tusken
+11	TATOOINE	0;0	8000;8000	40	NE	tusken
+12	TATOOINE	0;-8000	8000;8000	60	SE	tusken
+13	YAVIN4	-8000;-8000	16000;16000	200	Global	whisper_bird

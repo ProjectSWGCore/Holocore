@@ -2352,3 +2352,6 @@ spawn_tatooine_2349	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coord
 spawn_tatooine_2350	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
 spawn_tatooine_2351	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
 spawn_tatooine_2352	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	20	POI	Old Mos Espa Arena Track	2	LOITER	4	0	-	idle			600
+spawn_tatooine_2353	TATOOINE	tat_world	PATROL	0	3380.5	5.0	-5018.1	-54	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_20200	column	idle			600
+spawn_tatooine_2354	TATOOINE	tat_moseisley_cantina	PATROL	11	-26.6	-0.9	0.4	90	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_20300	column	idle			600
+spawn_tatooine_2355	TATOOINE	tat_moseisley_cantina	PATROL	9	-9.7	-0.9	19.6	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_20400	column	idle			600

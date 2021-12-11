@@ -201,11 +201,11 @@ class SpawnerService : Service() {
 		val patrolRoute = spawner.patrolRoute
 		if (patrolRoute != null) {
 			for (waypoint in patrolRoute) {
-				val obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff")
+				val obj = ObjectCreator.createObjectFromTemplate("object/path_waypoint/path_waypoint_patrol.iff")
 				obj.containerPermissions = AdminPermissions.getPermissions()
 				obj.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
 				
-				obj.objectName = String.format("P: %s\nG: %s\nNPC:%s\nID:%s", waypoint.patrolId, waypoint.groupId, npcId, spawn.id)
+				obj.objectName = String.format("P: %s\nG: %s\nNPC: %s\nID: %s", waypoint.patrolId, waypoint.groupId, npcId, spawn.id)
 				obj.moveToContainer(waypoint.parent, waypoint.location)
 				ObjectCreatedIntent.broadcast(obj)
 			}
