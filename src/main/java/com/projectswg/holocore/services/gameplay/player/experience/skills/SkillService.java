@@ -18,7 +18,9 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public class SkillService extends Service {
-	
+
+	private static final int SKILL_POINT_CAP = 250;
+
 	public SkillService() {
 		
 	}
@@ -97,6 +99,17 @@ public class SkillService extends Service {
 	}
 	
 	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {
+		int pointsRequired = skill.getPointsRequired();
+		int skillPointsSpent = skillPointsSpent(target);
+
+		if (skillPointsSpent(target) + pointsRequired >= SKILL_POINT_CAP) {
+			int missingPoints = pointsRequired - (SKILL_POINT_CAP - skillPointsSpent);
+
+			Log.d("%s cannot learn %s because they lack %d skill points", target, skill.getName(), missingPoints);
+			return;
+		}
+
+
 		String parentSkillName = skill.getParent();
 		
 		if (grantRequired) {
@@ -146,7 +159,15 @@ public class SkillService extends Service {
 		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
 	}
-	
+
+	private int skillPointsSpent(CreatureObject creature) {
+		return creature.getSkills().stream()
+				.map(skillName -> DataLoader.Companion.skills().getSkillByName(skillName))
+				.map(SkillInfo::getPointsRequired)
+				.mapToInt(Integer::intValue)
+				.sum();
+	}
+
 	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {
 		String[] requiredSkills = skillData.getSkillsRequired();
 		if (requiredSkills == null)
