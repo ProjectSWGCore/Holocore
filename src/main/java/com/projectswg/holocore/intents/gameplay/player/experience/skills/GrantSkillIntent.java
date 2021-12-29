@@ -63,5 +63,9 @@ public final class GrantSkillIntent extends Intent {
 		GRANT,
 		GIVEN
 	}
+
+	public static void broadcast(IntentType type, String skillName, CreatureObject target, boolean grantRequiredSkills) {
+		new GrantSkillIntent(type, skillName, target, grantRequiredSkills).broadcast();
+	}
 	
 }
