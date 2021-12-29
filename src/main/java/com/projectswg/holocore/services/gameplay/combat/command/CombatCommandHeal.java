@@ -41,6 +41,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
+import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -56,7 +57,8 @@ enum CombatCommandHeal implements CombatCommandHitType {
 	public void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments) {
 		int healAmount = combatCommand.getAddedDamage();
 		int healingPotency = source.getSkillModValue("expertise_healing_all");
-		
+		int healedDamage = 0;
+
 		if (healingPotency > 0) {
 			healAmount *= healingPotency;
 		}
@@ -68,7 +70,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			case SINGLE_TARGET: {
 				switch (combatCommand.getTargetType()) {
 					case NONE: {    // No target used, always heals self
-						doHeal(source, source, healAmount, combatCommand);
+						healedDamage += doHeal(source, source, healAmount, combatCommand);
 						break;
 					}
 					case REQUIRED: {    // Target is always used
@@ -88,12 +90,12 @@ enum CombatCommandHeal implements CombatCommandHitType {
 							CreatureObject creatureTarget = (CreatureObject) target;
 							
 							if (source.isAttackable(creatureTarget)) {
-								doHeal(source, source, healAmount, combatCommand);
+								healedDamage += doHeal(source, source, healAmount, combatCommand);
 							} else {
-								doHeal(source, creatureTarget, healAmount, combatCommand);
+								healedDamage += doHeal(source, creatureTarget, healAmount, combatCommand);
 							}
 						} else {
-							doHeal(source, source, healAmount, combatCommand);
+							healedDamage += doHeal(source, source, healAmount, combatCommand);
 						}
 						
 						break;
@@ -127,16 +129,24 @@ enum CombatCommandHeal implements CombatCommandHitType {
 						}
 
 						// Heal nearby friendly
-						doHeal(source, nearbyCreature, healAmount, combatCommand);
+						healedDamage += doHeal(source, nearbyCreature, healAmount, combatCommand);
 					}
 				}
 				
 				break;
 			}
 		}
+
+		grantMedicalXpPerHealedPointOfDamage(source, healedDamage);
 	}
-	
-	private void doHeal(CreatureObject healer, CreatureObject healed, int healAmount, CombatCommand combatCommand) {
+
+	private void grantMedicalXpPerHealedPointOfDamage(CreatureObject source, int healedDamage) {
+		if (healedDamage > 0) {
+			new ExperienceIntent(source, "medical", healedDamage).broadcast();
+		}
+	}
+
+	private int doHeal(CreatureObject healer, CreatureObject healed, int healAmount, CombatCommand combatCommand) {
 		String attribName;
 		int difference;
 		
@@ -147,7 +157,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 				
 				if (currentHealth == maxHealth) {
 					// Pointless to heal health if it's already full
-					return;
+					return 0;
 				}
 				
 				healed.modifyHealth(healAmount);
@@ -163,7 +173,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 				
 				if (currentAction == maxAction) {
 					// Pointless to heal action if it's already full
-					return;
+					return 0;
 				}
 				
 				healed.modifyAction(healAmount);
@@ -173,7 +183,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			}
 			
 			default:
-				return;
+				return 0;
 		}
 		
 		WeaponObject weapon = healer.getEquippedWeapon();
@@ -199,6 +209,8 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		
 		
 		healed.sendObservers(combatAction, flyText, effect);
+
+		return difference;
 	}
 
 	private static CombatSpam createCombatSpam(CreatureObject healer, CreatureObject healed, int difference) {
