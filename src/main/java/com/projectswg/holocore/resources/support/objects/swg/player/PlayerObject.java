@@ -437,14 +437,6 @@ public class PlayerObject extends IntangibleObject {
 		return play8.isQuestRewardReceived(questName);
 	}
 
-	public String getProfWheelPosition() {
-		return play8.getProfWheelPosition();
-	}
-
-	public void setProfWheelPosition(String profWheelPosition) {
-		play8.setProfWheelPosition(profWheelPosition);
-	}
-
 	/*
 	 * =====-----  -----=====
 	 * ===== Baseline 9 =====
@@ -619,98 +611,6 @@ public class PlayerObject extends IntangibleObject {
 		play9.addHatedPlayer(hatedPlayerId);
 	}
 
-	public int getKillMeter() {
-		return play9.getKillMeter();
-	}
-
-	public void setKillMeter(int killMeter) {
-		play9.setKillMeter(killMeter);
-	}
-
-	public int getAccountLotsOverLimit() {
-		return play9.getAccountLotsOverLimit();
-	}
-
-	public void setAccountLotsOverLimit(int accountLotsOverLimit) {
-		play9.setAccountLotsOverLimit(accountLotsOverLimit);
-	}
-
-	public long getPetId() {
-		return play9.getPetId();
-	}
-
-	public void setPetId(long petId) {
-		play9.setPetId(petId);
-	}
-
-	public List<String> getPetAbilities() {
-		return play9.getPetAbilities();
-	}
-
-	public void addPetAbility(String ability) {
-		play9.addPetAbility(ability);
-	}
-	
-	public void removePetAbility(String ability) {
-		play9.removePetAbility(ability);
-	}
-	
-	public List<String> getActivePetAbilities() {
-		return play9.getActivePetAbilities();
-	}
-
-	public void addActivePetAbility(String ability) {
-		play9.addActivePetAbility(ability);
-	}
-
-	public BitSet getGuildRank() {
-		return play9.getGuildRank();
-	}
-
-	public void setGuildRank(int guildRank) {
-		play9.setGuildRank(guildRank);
-	}
-
-	public BitSet getCitizenRank() {
-		return play9.getCitizenRank();
-	}
-
-	public void setCitizenRank(int citizenRank) {
-		play9.setCitizenRank(citizenRank);
-	}
-
-	public byte getGalacticReserveDeposit() {
-		return play9.getGalacticReserveDeposit();
-	}
-	
-	public void setGalacticReserveDeposit(byte galacticReserveDeposit) {
-		play9.setGalacticReserveDeposit(galacticReserveDeposit);
-	}
-	
-	public long getPgcRatingCount() {
-		return play9.getPgcRatingCount();
-	}
-	
-	public void setPgcRatingCount(long pgcRatingCount) {
-		play9.setPgcRatingCount(pgcRatingCount);
-	}
-	
-	public long getPgcRatingTotal() {
-		return play9.getPgcRatingTotal();
-	}
-	
-	public void setPgcRatingTotal(long pgcRatingTotal) {
-		play9.setPgcRatingTotal(pgcRatingTotal);
-	}
-	
-	public int getPgcLastRatingTime() {
-		return play9.getPgcLastRatingTime();
-	}
-
-	public void setPgcLastRatingTime(int pgcLastRatingTime) {
-		play9.setPgcLastRatingTime(pgcLastRatingTime);
-	}
-	
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 5 variables

@@ -122,8 +122,6 @@ public class TangibleObject extends SWGObject {
 
 	public void setPvpStatus(PvpStatus pvpStatus) {
 		this.pvpStatus = pvpStatus;
-		
-		sendDelta(3, 5, pvpStatus.getValue());
 	}
 	
 	@Nullable
@@ -140,9 +138,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setFaction(Faction faction) {
 		this.faction = faction;
-		
-		PvpFaction pvpFaction = faction == null ? PvpFaction.NEUTRAL : faction.getPvpFaction();
-		sendDelta(3, 4, pvpFaction.getCrc());
 	}
 	
 	public Set<PvpFlag> getPvpFlags() {
@@ -159,7 +154,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void putCustomization(String name, int value) {
 		appearanceData.put(name, value);
-		sendDelta(3, 6, appearanceData);
 	}
 	
 	public Integer getCustomization(String name) {
@@ -173,12 +167,12 @@ public class TangibleObject extends SWGObject {
 	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
 		
-		sendDelta(3, 6, appearanceData);
+		sendDelta(3, 4, appearanceData);
 	}
 	
 	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
-		sendDelta(3, 11, maxHitPoints);
+		sendDelta(3, 9, maxHitPoints);
 	}
 	
 	public void setComponents(int components) {
@@ -214,21 +208,21 @@ public class TangibleObject extends SWGObject {
 		for (OptionFlag flag : options) {
 			optionFlags |= flag.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
 
 	public void toggleOptionFlags(OptionFlag ... options) {
 		for (OptionFlag option : options) {
 			optionFlags ^= option.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
 
 	public void removeOptionFlags(OptionFlag ... options) {
 		for (OptionFlag option : options) {
 			optionFlags &= ~option.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
 
 	public boolean hasOptionFlags(OptionFlag option) {
@@ -273,7 +267,7 @@ public class TangibleObject extends SWGObject {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-		sendDelta(3, 7, counter);
+		sendDelta(3, 5, counter);
 	}
 	
 	public int getMaxCounter() {
@@ -313,25 +307,21 @@ public class TangibleObject extends SWGObject {
 	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(getPvpFaction().getCrc()); // Faction - 4
-		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
-		bb.addObject(appearanceData); // - 6
-		bb.addInt(0); // Component customization (Set, Integer) - 7
-			bb.addInt(0);
-		bb.addInt(optionFlags); // 8
-		bb.addInt(counter); // Generic Counter -- use count and incap timer - 9
-		bb.addInt(condition); // 10
-		bb.addInt(maxHitPoints); // maxHitPoints - 11
-		bb.addBoolean(visibleGmOnly); // isVisible - 12
+		bb.addObject(appearanceData); // - 4
+		bb.addInt(0); // Component customization (Set, Integer) - 5
+		bb.addInt(0); //updates
+		bb.addInt(optionFlags); // 6
+		bb.addInt(counter); // Generic Counter -- use count and incap timer - 7
+		bb.addInt(condition); // 8
+		bb.addInt(maxHitPoints); // maxHitPoints - 9
+		bb.addBoolean(visibleGmOnly); // isVisible - 10
 		
-		bb.incrementOperandCount(9);
+		bb.incrementOperandCount(7);
 	}
 
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		faction = ServerData.INSTANCE.getFactions().getFaction(PvpFaction.getFactionForCrc(buffer.getInt()).name().toLowerCase(Locale.US));
-		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData.decode(buffer);
 		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
 		optionFlags = buffer.getInt();

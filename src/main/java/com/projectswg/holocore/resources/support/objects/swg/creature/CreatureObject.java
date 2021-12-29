@@ -40,6 +40,7 @@ import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
+import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -49,6 +50,7 @@ import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -82,6 +84,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
+	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
 	private long	lastTransform			= 0;
 	private long	lastCombat				= 0;
 	private TradeSession tradeSession		= null;
@@ -94,6 +97,7 @@ public class CreatureObject extends TangibleObject {
 		super(objectId, BaselineType.CREO);
 		this.baseAttributes = new AttributesMutable(this, 1, 2);
 		initBaseAttributes();
+		initWounds();
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
@@ -824,15 +828,6 @@ public class CreatureObject extends TangibleObject {
 		sendDelta(6, 20, performing);
 	}
 
-	public boolean isShownOnRadar() {
-		return creo6.isShownOnRadar();
-	}
-
-	public void setShownOnRadar(boolean shownOnRadar) {
-		creo6.setShownOnRadar(shownOnRadar);
-		sendDelta(6, 30, shownOnRadar);
-	}
-
 	public int getHealth() {
 		return creo6.getHealth();
 	}
@@ -993,16 +988,27 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 11 variables - TANO3 (7) + BASE3 (4)
-		if (getStringId().toString().equals("@obj_n:unknown_object"))
-			return;
 		bb.addByte(posture.getId()); // 13
 		bb.addByte(factionRank); // 14
 		bb.addLong(ownerId); // 15
 		bb.addFloat((float) height); // 16
 		bb.addInt(battleFatigue); // 17
 		bb.addLong(statesBitmask); // 18
-		
-		bb.incrementOperandCount(6);
+		bb.addObject(wounds);	// 19
+
+		bb.incrementOperandCount(7);
+	}
+
+	private void initWounds() {
+		wounds.add(0, 0);	// CU only has health wounds :-)
+	}
+
+	public void setHealthWounds(int healthWounds) {
+		wounds.set(0, healthWounds);
+	}
+
+	public int getHealthWounds() {
+		return wounds.get(0);
 	}
 	
 	@Override

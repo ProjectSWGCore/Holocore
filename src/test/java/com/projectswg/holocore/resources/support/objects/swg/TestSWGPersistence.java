@@ -177,7 +177,6 @@ public class TestSWGPersistence {
 						"moodId", (int) obj.getMoodId(),
 						"costume", obj.getCostume(),
 						"visible", obj.isVisible(),
-						"shownOnRadar", obj.isShownOnRadar(),
 						"difficulty", obj.getDifficulty().name(),
 						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
 						"attributes", map(

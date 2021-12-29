@@ -71,9 +71,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	private boolean visible					= true;
 	private boolean performing				= false;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
-	private boolean shownOnRadar			= true;
-	private boolean beast					= false;
-	
+
 	private AttributesMutable	attributes;
 	private AttributesMutable	maxAttributes;
 	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
@@ -140,10 +138,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	
 	public void setMoodAnimation(String moodAnimation) {
 		this.moodAnimation = moodAnimation;
-	}
-	
-	public void setBeast(boolean beast) {
-		this.beast = beast;
 	}
 	
 	public void setEquippedWeapon(long weaponId) {
@@ -236,10 +230,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		return moodAnimation;
 	}
 	
-	public boolean isBeast() {
-		return beast;
-	}
-	
 	public long getEquippedWeapon() {
 		return equippedWeapon;
 	}
@@ -258,14 +248,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 
 	public void setPerforming(boolean performing) {
 		this.performing = performing;
-	}
-
-	public boolean isShownOnRadar() {
-		return shownOnRadar;
-	}
-
-	public void setShownOnRadar(boolean shownOnRadar) {
-		this.shownOnRadar = shownOnRadar;
 	}
 
 	public int getHealth() {
@@ -431,8 +413,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		buffs = SWGMap.getSwgMap(buffer, 6, 26, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
-		shownOnRadar = buffer.getBoolean();
-		beast = buffer.getBoolean();
 		buffer.getBoolean();
 		buffer.getLong();
 	}
@@ -448,8 +428,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		data.putInteger("moodId", moodId);
 		data.putString("costume", costume);
 		data.putBoolean("visible", visible);
-		data.putBoolean("shownOnRadar", shownOnRadar);
-		data.putBoolean("beast", beast);
 		data.putString("difficulty", difficulty.name());
 		data.putLong("equippedWeapon", equippedWeapon);
 		data.putDocument("attributes", attributes);
@@ -470,8 +448,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodId = (byte) data.getInteger("moodId", moodId);
 		costume = data.getString("costume", costume);
 		visible = data.getBoolean("visible", visible);
-		shownOnRadar = data.getBoolean("shownOnRadar", shownOnRadar);
-		beast = data.getBoolean("beast", beast);
 		difficulty = CreatureDifficulty.valueOf(data.getString("difficulty", difficulty.name()));
 		equippedWeapon = data.getLong("equippedWeapon", equippedWeapon);
 		data.getDocument("attributes", attributes);
@@ -491,8 +467,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		stream.addByte(moodId);
 		stream.addAscii(costume);
 		stream.addBoolean(visible);
-		stream.addBoolean(shownOnRadar);
-		stream.addBoolean(beast);
 		stream.addAscii(difficulty.name());
 		stream.addLong(equippedWeapon);
 
@@ -530,8 +504,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
 		if (stream.getBoolean())
 			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
@@ -549,8 +521,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
 		if (stream.getBoolean())
 			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
@@ -590,8 +560,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
 		equippedWeapon = stream.getLong();
 		readAttributes((byte) 4, maxAttributes, stream);
@@ -613,8 +581,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
 		equippedWeapon = stream.getLong();
 		maxAttributes.read(stream);
