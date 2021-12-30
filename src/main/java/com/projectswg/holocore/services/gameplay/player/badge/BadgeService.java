@@ -8,6 +8,8 @@ import com.projectswg.common.network.packets.swg.zone.BadgesResponseMessage;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.RequestBadgesIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BadgeLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.common.data.Badges;
@@ -52,20 +54,23 @@ public class BadgeService extends Service {
 		return super.initialize();
 	}
 	
+	@IntentHandler
 	private void handleBadgeGrant(GrantBadgeIntent i) {
 		CreatureObject target = i.getCreature();
-		String badgeName = i.getCollectionBadgeName();
+		String badgeKey = i.getBadgeKey();
 		
-		if (badgeMap.containsKey(badgeName)) {
+		BadgeLoader.BadgeInfo badgeFromKey = DataLoader.Companion.badges().getBadgeFromKey(badgeKey);
+		
+		if (badgeFromKey != null) {
 			
 			Badges badges = target.getPlayerObject().getBadges();
 			
-			if (!badges.hasBadge(badgeMap.get(badgeName).getBadgeIndex())) {
+			if (!badges.hasBadge(badgeMap.get(badgeKey).getBadgeIndex())) {
 				// They don't already have this badge
-				giveBadge(target.getPlayerObject(), badgeName, true);
+				giveBadge(target.getPlayerObject(), badgeKey, true);
 			}
 		} else {
-			Log.e( "%s could not receive badge %s because it does not exist", target, badgeName);
+			Log.e( "%s could not receive badge %s because it does not exist", target, badgeKey);
 		}
 	}
 	

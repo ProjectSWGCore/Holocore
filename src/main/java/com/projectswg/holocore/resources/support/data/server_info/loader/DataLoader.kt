@@ -82,6 +82,7 @@ abstract class DataLoader {
 		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
 		fun conversationLoader(): ConversationLoader = ServerData.conversationLoader
 		fun questLoader(): QuestLoader = ServerData.questLoader
+		fun badges(): BadgeLoader = ServerData.badges
 
 	}
 	
