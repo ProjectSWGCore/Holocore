@@ -267,7 +267,7 @@ public class TangibleObject extends SWGObject {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-		sendDelta(3, 5, counter);
+		sendDelta(3, 7, counter);
 	}
 	
 	public int getMaxCounter() {
