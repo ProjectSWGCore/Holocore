@@ -26,7 +26,6 @@ public class TestTuneCrystalRadial {
 		radial = new TuneCrystalRadial();
 		player = new GenericPlayer();
 		CreatureObject creatureObject = new GenericCreatureObject(1, "Some Player", true);
-		creatureObject.addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
 		player.setCreatureObject(creatureObject);
 		
 		crystal = new GenericTangibleObject(3);
