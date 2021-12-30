@@ -26,15 +26,13 @@ public class BadgeService extends Service {
 	//research categories
 	//music
 	//fix to appropriate message ex: kill_merek_activation_01
-	private final ExplorationBadgeService explorationBadgeService;
-	
+
 	private DatatableData collectionTable;
 	private Map<String, BadgeData> badgeMap;
 	
 	public BadgeService() {
 		collectionTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/badge/badge_map.iff");
 		badgeMap = new HashMap<>();
-		explorationBadgeService = new ExplorationBadgeService();
 	}
 	
 	
