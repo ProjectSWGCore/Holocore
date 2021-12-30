@@ -133,7 +133,7 @@ public class AIObject extends CreatureObject {
 	}
 	
 	private void checkAwareAttack(CreatureObject player) {
-		if (isAttackable(player) && !isPlayerIgnored(player)) {
+		if (isAttackable(player)) {
 			double distance = getLocation().flatDistanceTo(player.getLocation());
 			double maxAggroDistance;
 			if (player.isLoggedInPlayer())
@@ -252,21 +252,6 @@ public class AIObject extends CreatureObject {
 			Log.w(t);
 			queueNextLoop(1000);
 		}
-	}
-	
-	private boolean isPlayerIgnored(CreatureObject player) {
-		CreatureDifficulty difficulty = getDifficulty();
-		
-		if (difficulty == CreatureDifficulty.NORMAL) {
-			// Normal difficulty NPCs will let the player escape if the player has recently been incapacitated
-			return isPlayerRecentlyIncapacitated(player);
-		}
-		
-		return false;
-	}
-	
-	private boolean isPlayerRecentlyIncapacitated(CreatureObject player) {
-		return player.hasBuff("incapWeaken");
 	}
 	
 }

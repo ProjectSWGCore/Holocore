@@ -318,7 +318,6 @@ public class CloningService extends Service {
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
 		corpse.sendSelf(new PlayMusicMessage(0, "sound/spc_me_heal.snd", 1, false));
 		corpse.broadcast(new BuffIntent("cloning_sickness", corpse, corpse, false));
-		corpse.broadcast(new BuffIntent("incapWeaken", corpse, corpse, true));
 		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
 			corpse.broadcast(new FactionIntent(corpse, PvpStatus.ONLEAVE));
 		}
