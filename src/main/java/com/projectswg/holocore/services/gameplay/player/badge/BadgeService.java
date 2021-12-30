@@ -81,13 +81,13 @@ public class BadgeService extends Service {
 				if (playerObject != null) {
 					requester.sendPacket(new BadgesResponseMessage(target.getObjectId(), playerObject.getBadges()));
 				} else {
-					System.err.println(requester + " attempted to request badges of a NPC.");
+                    Log.e("%s attempted to request badges of NPC %s", requester, target);
 				}
 			} else {
-				System.err.println(requester + " attempted to request badges of a non-creature target.");
+                Log.e("%s attempted to request badges of a non-creature %s", requester, target);
 			}
 		} else {
-			System.err.println(requester + " attempted to request badges of a null target.");
+            Log.e("%s attempted to request badges of a null target", requester);
 		}
 	}
 	
@@ -152,7 +152,7 @@ public class BadgeService extends Service {
 					break;
 			}
 		} else {
-			System.err.println(target + " could not receive badge " + badgeName + " because it does not exist.");
+            Log.e("%s could not receive badge %s because it does not exist", target, badgeName);
 		}
 		
 	}
