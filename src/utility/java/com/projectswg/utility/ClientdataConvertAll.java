@@ -17,6 +17,8 @@ public class ClientdataConvertAll {
 		Converters.BUILDOUT_OBJECTS.load();
 
 		Converters.PROFESSION_TEMPLATES.load();
+		
+		Converters.ROLES.load();
 	}
 	
 }
