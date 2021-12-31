@@ -6,7 +6,7 @@ testConstBuff1	medpackConst			1	buffs.genericBuff	20.0	constitution	100.0		0.0		
 testConstBuff2	medpackConst			2	buffs.genericBuff	30.0	constitution	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
 testAttribBuff1	medpackHealth	medpackConst		1	buffs.genericBuff	40.0	health	100.0	constitution	100.0		0.0		0.0		0.0	-1	none		1	false
 testAttribBuff2	medpackHealth	medpackConst		2	buffs.genericBuff	60.0	health	500.0	constitution	500.0		0.0		0.0		0.0	-1	none		1	false
-testSlopeMove1	slopeMove			1	buffs.genericBuff	15.0	slope_move	25.0		0.0		0.0		0.0		0.0	-1	none		1	fals
+testSlopeMove1	slopeMove			1	buffs.genericBuff	15.0	slope_move	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
 testSlopeMove2	slopeMove			2	buffs.genericBuff	30.0	slope_move	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
 testCrafting1	crafting			1	buffs.genericBuff	120.0	general_assembly	20.0	general_experimentation	20.0		0.0		0.0		0.0	-1	none		1	false
 testCrafting2	crafting			2	buffs.genericBuff	180.0	general_assembly	40.0	general_experimentation	40.0		0.0		0.0		0.0	-1	none		1	false
