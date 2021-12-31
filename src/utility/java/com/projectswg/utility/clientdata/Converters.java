@@ -13,6 +13,7 @@ public enum Converters {
 	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
 	TERRAINS					(ConvertTerrain::new),
 	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/nge/player/role.sdb")),
+	COMMANDS					(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/nge/command/commands.sdb")),
 	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new);
 	
 	private final Supplier<Converter> converter;

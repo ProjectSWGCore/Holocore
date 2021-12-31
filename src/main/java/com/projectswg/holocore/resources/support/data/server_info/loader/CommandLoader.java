@@ -50,8 +50,8 @@ public class CommandLoader extends DataLoader {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/commands.sdb"))) {
 			while (set.next()) {
 				Command command = Command.builder()
-						.withName(set.getText("name").toLowerCase(Locale.US))
-						.withCallback(set.getText("callback"))
+						.withName(set.getText("commandName").toLowerCase(Locale.US))
+						.withCallback(set.getText("scriptHook"))
 						.withDefaultPriority(DefaultPriority.getDefaultPriority(set.getText("defaultPriority")))
 						.withDefaultTime(set.getReal("defaultTime"))
 						.withCharacterAbility(set.getText("characterAbility"))

@@ -19,6 +19,7 @@ public class ClientdataConvertAll {
 		Converters.PROFESSION_TEMPLATES.load();
 		
 		Converters.ROLES.load();
+		Converters.COMMANDS.load();
 	}
 	
 }
