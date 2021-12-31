@@ -30,6 +30,8 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
@@ -71,9 +73,12 @@ public class CombatCommandCommon {
 	
 	static CombatSpam createCombatSpam(CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
 		CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+		combatSpam.setInfo(info);
 		combatSpam.setAttacker(source.getObjectId());
 		combatSpam.setWeapon(weapon.getObjectId());
 		combatSpam.setDefender(target.getObjectId());
+		combatSpam.setDataType((byte) 0);
+		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
 
 		return combatSpam;
 	}

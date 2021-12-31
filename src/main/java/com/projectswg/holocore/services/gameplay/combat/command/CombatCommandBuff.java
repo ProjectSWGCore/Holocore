@@ -27,13 +27,8 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.combat.AttackInfo;
-import com.projectswg.common.data.combat.CombatSpamType;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
-import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
