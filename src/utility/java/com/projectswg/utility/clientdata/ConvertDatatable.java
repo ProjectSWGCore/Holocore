@@ -16,12 +16,12 @@ import java.util.Objects;
  */
 public class ConvertDatatable implements Converter {
 	
-	private final String outputSdbPath;
 	private final String inputDatatablePath;
+	private final String outputSdbPath;
 	
-	public ConvertDatatable(String outputSdbPath, String inputDatatablePath) {
-		this.outputSdbPath = outputSdbPath;
+	public ConvertDatatable(String inputDatatablePath, String outputSdbPath) {
 		this.inputDatatablePath = inputDatatablePath;
+		this.outputSdbPath = outputSdbPath;
 	}
 	
 	@Override
