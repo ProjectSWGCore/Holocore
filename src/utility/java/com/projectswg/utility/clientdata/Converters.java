@@ -12,8 +12,9 @@ public enum Converters {
 	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
 	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
 	TERRAINS					(ConvertTerrain::new),
-	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/nge/player/role.sdb")),
-	COMMANDS					(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/nge/command/commands.sdb")),
+	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/nge/player/role.sdb", false)),
+	COMMANDS					(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/nge/command/commands.sdb", false)),
+	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/nge/buff/buff.sdb", true)),
 	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new);
 	
 	private final Supplier<Converter> converter;

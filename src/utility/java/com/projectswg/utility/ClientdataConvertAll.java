@@ -20,6 +20,7 @@ public class ClientdataConvertAll {
 		
 		Converters.ROLES.load();
 		Converters.COMMANDS.load();
+		Converters.BUFFS.load();
 	}
 	
 }

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -18,10 +19,12 @@ public class ConvertDatatable implements Converter {
 	
 	private final String inputDatatablePath;
 	private final String outputSdbPath;
+	private final boolean lowercaseColumnNames;
 	
-	public ConvertDatatable(String inputDatatablePath, String outputSdbPath) {
+	public ConvertDatatable(String inputDatatablePath, String outputSdbPath, boolean lowercaseColumnNames) {
 		this.inputDatatablePath = inputDatatablePath;
 		this.outputSdbPath = outputSdbPath;
+		this.lowercaseColumnNames = lowercaseColumnNames;
 	}
 	
 	@Override
@@ -63,6 +66,10 @@ public class ConvertDatatable implements Converter {
 		
 		for (int i = 0; i < columnCount; i++) {
 			String columnName = datatable.getColumnName(i);
+			
+			if (lowercaseColumnNames) {
+				columnName = columnName.toLowerCase(Locale.ROOT);
+			}
 			
 			columnNames.add(columnName);
 		}

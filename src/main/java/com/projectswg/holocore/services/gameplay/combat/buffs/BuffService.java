@@ -102,13 +102,6 @@ public class BuffService extends Service {
 		CreatureObject receiver = bi.getReceiver();
 
 		if (bi.isRemove()) {
-			// If a player is removing a buff from themselves, check if the buff allows this
-			if (buffer.equals(receiver)) {
-				if (!buffData.isPlayerRemovable()) {
-					return;
-				}
-			}
-
 			removeBuff(receiver, buffData, false);
 		} else {
 			addBuff(receiver, buffData, buffer);
@@ -251,7 +244,7 @@ public class BuffService extends Service {
 		checkBuffEffects(buffData, receiver, 1);
 		receiver.addBuff(buff);
 
-		sendParticleEffect(buffData.getParticle(), receiver, buffData.getParticleHardpoint());
+		sendParticleEffect(buffData.getParticle(), receiver, "");
 
 		addToMonitored(receiver);
 	}
