@@ -81,7 +81,7 @@ public class ConvertBuildouts implements Converter{
 	@Override
 	public void convert() {
 		try {
-			createAreas();
+//			createAreas();
 			createObjects();
 		} catch (IOException e) {
 			e.printStackTrace();
