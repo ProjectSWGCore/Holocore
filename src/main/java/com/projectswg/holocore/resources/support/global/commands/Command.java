@@ -36,7 +36,8 @@ public class Command {
 	private final String name;
 	private final int crc;
 	
-	private final String callback;
+	private final String cppCallback;
+	private final String scriptCallback;
 	private final DefaultPriority defaultPriority;
 	private final double defaultTime;
 	private final String characterAbility;
@@ -61,7 +62,8 @@ public class Command {
 		this.crc = CRC.getCrc(name);
 		assert name.equals(name.toLowerCase(Locale.US));
 		
-		this.callback = builder.callback;
+		this.cppCallback = builder.cppCallback;
+		this.scriptCallback = builder.scriptCallback;
 		this.defaultPriority = builder.defaultPriority;
 		this.defaultTime = builder.defaultTime;
 		this.characterAbility = builder.characterAbility;
@@ -90,8 +92,12 @@ public class Command {
 		return crc;
 	}
 	
-	public String getCallback() {
-		return callback;
+	public String getCppCallback() {
+		return cppCallback;
+	}
+	
+	public String getScriptCallback() {
+		return scriptCallback;
 	}
 	
 	public DefaultPriority getDefaultPriority() {
@@ -192,7 +198,8 @@ public class Command {
 	public static class CommandBuilder {
 		
 		private String name;
-		private String callback;
+		private String cppCallback;
+		private String scriptCallback;
 		private DefaultPriority defaultPriority;
 		private double defaultTime;
 		private String characterAbility;
@@ -216,7 +223,8 @@ public class Command {
 		
 		protected CommandBuilder(Command command) {
 			this.name = command.name;
-			this.callback = command.callback;
+			this.cppCallback = command.cppCallback;
+			this.scriptCallback = command.scriptCallback;
 			this.defaultPriority = command.defaultPriority;
 			this.defaultTime = command.defaultTime;
 			this.characterAbility = command.characterAbility;
@@ -242,8 +250,13 @@ public class Command {
 			return this;
 		}
 		
-		public CommandBuilder withCallback(String callback) {
-			this.callback = callback;
+		public CommandBuilder withCppCallback(String cppCallback) {
+			this.cppCallback = cppCallback;
+			return this;
+		}
+		
+		public CommandBuilder withScriptCallback(String scriptCallback) {
+			this.scriptCallback = scriptCallback;
 			return this;
 		}
 		
