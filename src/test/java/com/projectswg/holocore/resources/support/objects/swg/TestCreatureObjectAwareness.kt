@@ -142,7 +142,7 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 	
 	private fun createBuilding(id: Long, initializeBuilding: BuildingObject.() -> Unit): BuildingObject {
 		val building = BuildingObject(id)
-		building.template = "object/building/player/shared_player_house_tatooine_small_window_style_01.iff"
+		building.template = "object/building/player/shared_player_house_tatooine_small_style_01.iff"
 		building.populateCells()
 		Assert.assertEquals(3, building.cells.size)
 		building.initializeBuilding()
