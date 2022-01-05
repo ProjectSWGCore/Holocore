@@ -60,7 +60,6 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
 	override fun onModeEnd() {
 		val obj = ai
-		obj.intendedTargetId = 0
 		obj.lookAtTargetId = 0
 	}
 	
@@ -115,7 +114,6 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val distance = obj.worldLocation.distanceTo(target.worldLocation)
 		if (distance > weapon.maxRange)
 			return
-		obj.intendedTargetId = target.objectId
 		obj.lookAtTargetId = target.objectId
 		// If we're close, angle towards target
 		val myLocation = obj.location
@@ -149,9 +147,9 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		}
 
 		return when (weapon.type) {
-			WeaponType.PISTOL -> "rangedShotPistol"
-			WeaponType.RIFLE -> "rangedShotRifle"
-			WeaponType.LIGHT_RIFLE -> "rangedShotLightRifle"
+			WeaponType.PISTOL -> "rangedShot"
+			WeaponType.RIFLE -> "rangedShot"
+			WeaponType.LIGHT_RIFLE -> "rangedShot"
 			WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
 			WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
 			WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
