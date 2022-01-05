@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
-		"file": "conversation/destroysample",
-		"key": "s_f324f7d5",
-		"comment": "I haven't seen you around here before."
+		"file": "conversation/c_tutorial_common1",
+		"key": "s_7",
+		"comment": "Sorry, I can't help you"
 	},
 	"playerResponses": [],
 	"requirements": [],

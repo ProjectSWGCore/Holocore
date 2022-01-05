@@ -1,15 +1,15 @@
 {
 	"npcMessage": {
-		"file": "conversation/npe_main_bartender",
+		"file": "conversation/ep3_trandoshan_unluto_bartender",
 		"key": "s_80",
-		"comment": "You should try the Fermented Blue Milk. It's excellent!"
+		"comment": "I ain't got time to deal with anyone who ain't drinkin'. If you change your mind I will be here."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/npe_main_bartender",
-				"key": "s_51",
-				"comment": "Thanks!"
+				"file": "conversation/ep3_trandoshan_unluto_bartender",
+				"key": "s_1423",
+				"comment": "Good, let's keep it that way."
 			}
 		}
 	],

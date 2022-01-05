@@ -1,15 +1,15 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_115",
-		"comment": "Superb!  Welcome to the Rebellion!"
+		"key": "s_334",
+		"comment": "Hello friend.  Is there something that I can do for you?  Are you interested in helping free the peoples of the galaxy?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_116",
-				"comment": "Thank you very much."
+				"key": "s_348",
+				"comment": "I would like to join you in your fight against the Empire."
 			}
 		}
 	],

@@ -1,7 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_58",
+		"key": "s_278",
 		"comment": "That's a shame.  It will take some time to push the paperwork through for approval.  Your status will change in about 5 minutes."
 	},
 	"playerResponses": [],

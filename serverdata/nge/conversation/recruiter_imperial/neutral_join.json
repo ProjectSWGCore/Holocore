@@ -1,15 +1,15 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"key": "s_116",
-		"comment": "Welcome to the Imperial Military.  I expect good things from you, recruit!"
+		"key": "s_414",
+		"comment": "Greetings, civilian.  Would you be interested in joining the military?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_117",
-				"comment": "Thank you, sir."
+				"key": "s_434",
+				"comment": "Absolutely.  It would be a great honor to serve the Empire."
 			}
 		}
 	],

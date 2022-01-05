@@ -16,23 +16,23 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_93",
-				"comment": "Special Forces"
+				"key": "s_366",
+				"comment": "Yes, I want to join Special Forces, sir!"
 			},
 			"next": "recruiter_imperial/imperial_go_special_forces"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_97",
-				"comment": "Combatant"
+				"key": "s_294",
+				"comment": "Yes, sir, I am ready to resume my duties."
 			},
 			"next": "recruiter_imperial/imperial_go_combatant"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_74",
+				"key": "s_374",
 				"comment": "I would like to use my personal leave time."
 			},
 			"next": "recruiter_imperial/imperial_go_on_leave"
@@ -40,7 +40,7 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_88",
+				"key": "s_386",
 				"comment": "I believe it is time to end my tour of duty.  I would like to resign."
 			},
 			"next": "recruiter_imperial/imperial_go_resign"

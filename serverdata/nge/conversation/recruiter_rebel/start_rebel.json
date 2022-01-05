@@ -16,23 +16,23 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_93",
-				"comment": "Special Forces"
+				"key": "s_286",
+				"comment": "Yes.  I want to hunt Imperial Special Forces.  Sign me up!"
 			},
 			"next": "recruiter_rebel/rebel_go_special_forces"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_95",
-				"comment": "Combatant"
+				"key": "s_276",
+				"comment": "Yes please.  I would like to return to combatant status and not fight the Imperial Special Forces."
 			},
 			"next": "recruiter_rebel/rebel_go_combatant"
 		},
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_86",
+				"key": "s_294",
 				"comment": "I need to go on leave for a time."
 			},
 			"next": "recruiter_rebel/rebel_go_on_leave"
@@ -40,7 +40,7 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_74",
+				"key": "s_306",
 				"comment": "This is all too much for me.  I would like to resign completely."
 			},
 			"next": "recruiter_rebel/rebel_go_resign"

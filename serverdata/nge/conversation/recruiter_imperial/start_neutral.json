@@ -8,10 +8,9 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_115",
-				"comment": "Yes. I want to be a part of the Empire!"
-			},
-			"next": "recruiter_imperial/neutral_join"
+				"key": "s_434",
+				"comment": "Absolutely.  It would be a great honor to serve the Empire."
+			}
 		}
 	],
 	"requirements": [
@@ -24,9 +23,15 @@
 	],
 	"events": [
 		{
+			"type": "faction_change",
+			"args": {
+				"faction": "imperial"
+			}
+		},
+		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "greet"
+				"animation": "yes"
 			}
 		}
 	]

@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_356",
-		"comment": "Superb!  Welcome to the Rebellion!  "
+		"key": "s_224",
+		"comment": "Let me send your paperwork through.  It should only take me about 30 seconds to get it done."
 	},
 	"playerResponses": [],
 	"requirements": [

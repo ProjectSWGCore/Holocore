@@ -1,15 +1,15 @@
 {
 	"npcMessage": {
-		"file": "conversation/npe_main_bartender",
-		"key": "s_24",
-		"comment": "How may I help you?"
+		"file": "conversation/ep3_trandoshan_unluto_bartender",
+		"key": "s_1389",
+		"comment": "Hello there outworlder. What can I getcha?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/npe_main_bartender",
-				"key": "s_57",
-				"comment": "I hear that you are the resident master drink mixer around here."
+				"file": "conversation/ep3_trandoshan_unluto_bartender",
+				"key": "s_1391",
+				"comment": "Actually, I am not really interested in a drink."
 			},
 			"next": "bartender/order"
 		}

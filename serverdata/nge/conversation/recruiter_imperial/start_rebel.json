@@ -2,7 +2,7 @@
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
 		"key": "s_306",
-		"comment": "I do not talk to terrorists and insurgents.  "
+		"comment": "I do not talk to terrorists and insurgents."
 	},
 	"playerResponses": [],
 	"requirements": [

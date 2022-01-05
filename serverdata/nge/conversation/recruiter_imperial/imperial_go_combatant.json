@@ -1,7 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"key": "s_86",
+		"key": "s_384",
 		"comment": "Your sense of duty is admirable.  Long live the Emperor!"
 	},
 	"playerResponses": [],

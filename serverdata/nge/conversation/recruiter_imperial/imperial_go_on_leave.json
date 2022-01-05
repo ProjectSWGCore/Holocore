@@ -1,7 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"key": "s_82",
+		"key": "s_380",
 		"comment": "I need to process your paperwork.  You will officially be on leave in 5 minutes."
 	},
 	"playerResponses": [],

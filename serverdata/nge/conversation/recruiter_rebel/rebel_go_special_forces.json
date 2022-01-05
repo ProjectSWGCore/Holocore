@@ -1,7 +1,7 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_rebel",
-		"key": "s_68",
+		"key": "s_288",
 		"comment": "Good for you!  I'll update your status and you will be a member of the Special Forces in 30 seconds."
 	},
 	"playerResponses": [

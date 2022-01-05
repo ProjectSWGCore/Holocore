@@ -8,7 +8,7 @@
 		{
 			"playerMessage": {
 				"file": "conversation/faction_recruiter_rebel",
-				"key": "s_114",
+				"key": "s_348",
 				"comment": "Yes. I want to be a part of the Alliance!"
 			},
 			"next": "recruiter_rebel/neutral_join"
