@@ -1,657 +1,576 @@
-weapon_id	weapons	attack_type	weapon_type	default_attack	weapon_range	weapon_damage_radius	weapon_speed	weapon_damage_type	weapon_damage_value	weapon_elemental_type	weapon_elemental_value
-TEXT	TEXT		TEXT	TEXT	INTEGER	INTEGER	REAL	TEXT	INTEGER	TEXT	INTEGER
-melee_2h_sword_avatar_wke_toothpick	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_avatar_wke_toothpick2	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick2.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_battleaxe	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_battleaxe_npe	object/weapon/melee/2h_sword/2h_sword_battleaxe_npe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_battleaxe_quest	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_blacksun_hack	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_cleaver	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_cleaver_npe	object/weapon/melee/2h_sword/2h_sword_cleaver_npe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_ep3_loot_executer	object/weapon/melee/2h_sword/ep3_loot_executer.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_ep3_loot_lifeblood	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_ep3_loot_sickle	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_ep3_loot_sickle_wod	object/weapon/melee/2h_sword/ep3_loot_sickle_wod.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_kashyyk	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_kashyyk_wod	object/weapon/melee/2h_sword/2h_sword_kashyyk_wod.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_katana	object/weapon/melee/2h_sword/2h_sword_katana.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_katana_generic	object/weapon/melee/2h_sword/2h_sword_katana_generic.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_katana_quest	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_kun_massassi	object/weapon/melee/2h_sword/2h_sword_kun_massassi.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_maul	object/weapon/melee/2h_sword/2h_sword_maul.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_maul_legendary	object/weapon/melee/2h_sword/2h_sword_maul_legendary.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_pvp_bf_01	object/weapon/melee/2h_sword/2h_sword_pvp_bf_01.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_quest_battleaxe	object/weapon/melee/2h_sword/quest_2h_sword_battleaxe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_quest_maul	object/weapon/melee/2h_sword/quest_2h_sword_maul.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_scythe	object/weapon/melee/2h_sword/2h_sword_scythe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_sith	object/weapon/melee/2h_sword/2h_sword_sith.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_sith_generic	object/weapon/melee/2h_sword/2h_sword_sith_generic.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_sith_wod	object/weapon/melee/2h_sword/2h_sword_sith_wod.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_som_massassi	object/weapon/melee/2h_sword/som_2h_sword_massassi.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_som_obsidian	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_som_obsidian_generic	object/weapon/melee/2h_sword/som_2h_sword_obsidian_generic.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_som_tulrus	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_som_tulrus_generic	object/weapon/melee/2h_sword/som_2h_sword_tulrus_generic.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_wod_scyth	object/weapon/melee/2h_sword/2h_sword_wod_scyth.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_2h_sword_wod_sword	object/weapon/melee/2h_sword/2h_sword_wod_sword.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		10	KINETIC	1250		
-melee_axe_heavy_duty	object/weapon/melee/axe/axe_heavy_duty.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		6.2	KINETIC	1250		
-melee_axe_heavy_duty_npe	object/weapon/melee/axe/axe_heavy_duty_npe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		6.2	KINETIC	1250		
-melee_axe_vibroaxe	object/weapon/melee/axe/axe_vibroaxe.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		6.2	KINETIC	1250		
-melee_baton_avatar_trando_stun_stick	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_gaderiffi	object/weapon/melee/baton/baton_gaderiffi.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_gaderiffi_elite	object/weapon/melee/baton/baton_gaderiffi_elite.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_gaderiffi_npe	object/weapon/melee/baton/baton_gaderiffi_npe.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_mandoviol_smasher	object/weapon/melee/baton/mandoviol_smasher.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_stun	object/weapon/melee/baton/baton_stun.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_stun_legendary	object/weapon/melee/baton/baton_stun_legendary.iff	MELEE	TWO_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_victor_baton_gaderiffi	object/weapon/melee/baton/victor_baton_gaderiffi.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_baton_xamtha_smasher	object/weapon/melee/baton/xamtha_smasher.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		2	KINETIC	1250		
-melee_crafted_lightsaber_mandalorian	object/weapon/melee/sword/crafted_saber/sword_lightsaber_mandalorian.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gcw_s01_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gcw_s01_gen4.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gcw_s01_gen5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gcw_s01_gen5.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen1	object/weapon/melee/sword/crafted_saber/generic_sword_lightsaber_one_handed_gen1.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen1.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen1_s02	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen1_s02.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen2.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen3.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen4.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen4_must	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen4_must.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_gen5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_pvp_bf	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_pvp_bf.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_pvp_bf_gen5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_pvp_bf_gen5.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s1_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s1_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s1_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s1_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s10	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s10_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s10_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s10_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s10_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s11	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s11_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s11_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s11_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s11_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s12	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s12_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s12_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s12_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s12_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s13	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s13_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s13_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s13_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s13_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s2_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s2_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s2_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s2_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s3_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s3_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s3_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s3_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s4_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s4_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s4_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s4_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s5_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s5_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s5_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s5_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s6	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s6_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s6_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s6_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s6_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s7	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s7_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s7_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s7_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s7_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s8	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s8_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s8_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s8_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s8_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s9	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s9_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen1	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s9_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen2	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s9_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen3	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_one_handed_s9_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen4	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s1_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s1_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s10_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s10_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s11_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s11_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s2_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s2_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s3_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s3_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s4_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s4_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s5_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s5_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s6_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s6_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s7_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s7_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s8_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s8_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_s9_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s9_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_training	object/weapon/melee/sword/crafted_saber/generic_sword_lightsaber_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_lightsaber_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_training.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_crafted_sword_ep3_wookiee	object/weapon/melee/sword/crafted_saber/ep3/sword_wookiee.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_creature_default_weapon	object/weapon/creature/creature_default_weapon.iff	MELEE	UNARMED	creatureMeleeAttack	5		2	KINETIC	1250		
-melee_knife_dagger	object/weapon/melee/knife/knife_dagger.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_dagger_static	object/weapon/melee/knife/knife_dagger_static.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_donkuwah	object/weapon/melee/knife/knife_donkuwah.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_ep3_loot_blackbane	object/weapon/melee/knife/ep3_loot_blackbane.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_ep3_naktra_crystal	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_ep3_trando_skinner	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_janta	object/weapon/melee/knife/knife_janta.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_stone	object/weapon/melee/knife/knife_stone.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_stone_noob	object/weapon/melee/knife/knife_stone_noob.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_survival	object/weapon/melee/knife/knife_survival.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_survival_decorative	object/weapon/melee/knife/knife_survival_decorative.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_survival_npe	object/weapon/melee/knife/knife_survival_npe.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_vibroblade	object/weapon/melee/knife/knife_vibroblade.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_knife_vibroblade_quest	object/weapon/melee/knife/knife_vibroblade_quest.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		3	KINETIC	1250		
-melee_lightsaber_adeen	object/weapon/melee/sword/sword_lightsaber_adeen.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_anakin	object/weapon/melee/sword/sword_lightsaber_anakin.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_andael	object/weapon/melee/sword/sword_lightsaber_andael.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_ben	object/weapon/melee/sword/sword_lightsaber_ben.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_dugald	object/weapon/melee/sword/sword_lightsaber_dugald.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_leather	object/weapon/melee/sword/sword_lightsaber_leather.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_luke	object/weapon/melee/sword/sword_lightsaber_luke.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_luke_2h_test	object/weapon/melee/sword/sword_lightsaber_luke_2h_test.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_mace	object/weapon/melee/sword/sword_lightsaber_mace.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_nebu	object/weapon/melee/sword/sword_lightsaber_nebu.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_obi	object/weapon/melee/sword/sword_lightsaber_obi.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen1.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen2.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen3.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen4.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen4_heroic	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen4_heroic.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen4_heroic_s02	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen4_heroic_s02.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_gen5	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_pvp_bf	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_pvp_bf.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_pvp_bf_gen5	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_pvp_bf_gen5.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s1_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen1.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s1_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen2.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s1_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen3.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s1_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen4.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s2_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen1.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s2_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen2.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s2_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen3.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_polearm_s2_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen4.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_quigon	object/weapon/melee/sword/sword_lightsaber_quigon.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_sleekblack	object/weapon/melee/sword/sword_lightsaber_sleekblack.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_sleeksilver	object/weapon/melee/sword/sword_lightsaber_sleeksilver.iff	MELEE	ONE_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gcw_s01_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gcw_s01_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gcw_s01_gen5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gcw_s01_gen5.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen4_must	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen4_must.iff	MELEE	TWO_HANDED_SABER	saberHit	5		2	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen5_eow	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5_eow.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_gen5_sith	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5_sith.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_pvp_bf	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_pvp_bf.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_pvp_bf_gen5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_pvp_bf_gen5.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s1_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s1_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s1_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s1_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s10	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s10_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s10_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s10_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s10_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s11	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s11_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s11_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s11_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s11_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s12	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s12_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s12_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s12_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s12_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s13	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s13_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s13_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s13_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s13_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s2_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s2_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s2_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s2_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s3_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s3_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s3_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s3_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s4_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s4_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s4_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s4_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s5_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s5_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s5_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s5_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s6	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s6_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s6_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s6_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s6_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s7	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s7_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s7_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s7_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s7_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s8	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s8_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s8_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s8_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s8_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s9	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s9_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen1.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s9_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen2.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s9_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen3.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_two_handed_s9_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen4.iff	MELEE	TWO_HANDED_SABER	saberHit	5		3	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_umakk	object/weapon/melee/sword/sword_lightsaber_umakk.iff	MELEE	TWO_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_lightsaber_vader	object/weapon/melee/sword/sword_lightsaber_vader.iff	MELEE	TWO_HANDED_SABER	saberHit	5		5	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_polearm_ep3_lance_trando	object/weapon/melee/polearm/ep3_lance_trando.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_ep3_lance_wookiee	object/weapon/melee/polearm/ep3_lance_wookiee.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_ep3_loot_pestilence	object/weapon/melee/polearm/ep3_loot_pestilence.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_ep3_loot_pestilence_wod	object/weapon/melee/polearm/ep3_loot_pestilence_wod.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_ep3_loot_poisonspike	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_ep3_loot_strike	object/weapon/melee/polearm/ep3_loot_strike.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_heroic_sd	object/weapon/melee/polearm/polearm_heroic_sd.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_avatar_wke_heartlance	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_controllerfp	object/weapon/melee/polearm/lance_controllerfp.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_controllerfp_nightsister	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_controllerfp_npe	object/weapon/melee/polearm/lance_controllerfp_npe.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_cryo	object/weapon/melee/polearm/lance_cryo.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_electric	object/weapon/melee/polearm/lance_electric_polearm.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-melee_polearm_lance_gcw_gand_shockprod	object/weapon/melee/polearm/lance_gcw_gand_shockprod.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_kaminoan	object/weapon/melee/polearm/lance_kaminoan.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_kaminoan_generic	object/weapon/melee/polearm/lance_kaminoan_generic.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_kashyyk	object/weapon/melee/polearm/lance_kashyyk.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_kashyyk_generic	object/weapon/melee/polearm/lance_kashyyk_generic.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_lightsaber_01	object/weapon/melee/polearm/lance_lightsaber_01.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_polearm_lance_lightsaber_02	object/weapon/melee/polearm/lance_lightsaber_02.iff	MELEE	POLEARM_SABER	saberHit	5		7	KINETIC	1050	ELEMENTAL_HEAT	100
-melee_polearm_lance_massassi	object/weapon/melee/polearm/lance_massassi.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_nightsister_legendary	object/weapon/melee/polearm/lance_nightsister_legendary.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_nightsister_npc_version	object/weapon/melee/polearm/lance_nightsister_npc_version.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_shock	object/weapon/melee/polearm/lance_shock.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-melee_polearm_lance_staff_janta	object/weapon/melee/polearm/lance_staff_janta.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_staff_magna_guard	object/weapon/melee/polearm/lance_staff_magna_guard.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-melee_polearm_lance_staff_metal	object/weapon/melee/polearm/lance_staff_metal.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_staff_wood_s1	object/weapon/melee/polearm/lance_staff_wood_s1.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_staff_wood_s1_npe	object/weapon/melee/polearm/lance_staff_wood_s1_npe.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_staff_wood_s2	object/weapon/melee/polearm/lance_staff_wood_s2.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_staff_wood_s2_npe	object/weapon/melee/polearm/lance_staff_wood_s2_npe.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_vibrolance	object/weapon/melee/polearm/lance_vibrolance.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_lance_wod_twin_blade	object/weapon/melee/polearm/lance_wod_twin_blade.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_som_lance_obsidian	object/weapon/melee/polearm/som_lance_obsidian.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_som_lance_obsidian_generic	object/weapon/melee/polearm/som_lance_obsidian_generic.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_som_lance_xandank	object/weapon/melee/polearm/som_lance_xandank.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_som_lance_xandank_generic	object/weapon/melee/polearm/som_lance_xandank_generic.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_vibro_axe	object/weapon/melee/polearm/polearm_vibro_axe.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_polearm_vibro_axe_npe	object/weapon/melee/polearm/polearm_vibro_axe_npe.iff	MELEE	POLEARM_MELEE	meleeHit	5		7	KINETIC	1250		
-melee_special_blacksun_razor	object/weapon/melee/special/blacksun_razor.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_blacksun_razor_generic	object/weapon/melee/special/blacksun_razor_generic.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_blasterfist	object/weapon/melee/special/blasterfist.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_blasterfist_generic	object/weapon/melee/special/blasterfist_generic.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_ep3_loot_heartstriker	object/weapon/melee/special/ep3_loot_heartstriker.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_ep3_loot_necrosis	object/weapon/melee/special/ep3_loot_necrosis.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_ep3_loot_soulstinger	object/weapon/melee/special/ep3_loot_soulstinger.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_ep3_wookiee_knuckler	object/weapon/melee/special/ep3/wookiee_knuckler.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_fan_metal	object/weapon/melee/special/fan_metal.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_massassiknuckler	object/weapon/melee/special/massassiknuckler.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_massassiknuckler_generic	object/weapon/melee/special/massassiknuckler_generic.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_punch_dagger	object/weapon/melee/special/punch_dagger.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_pvp_bf_knuckler	object/weapon/melee/special/pvp_bf_knuckler.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_vibroknuckler	object/weapon/melee/special/vibroknuckler.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_vibroknuckler_npe	object/weapon/melee/special/vibroknuckler_npe.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_vibroknuckler_static	object/weapon/melee/special/vibroknuckler_static.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_wod_war_fan	object/weapon/melee/special/wod_war_fan.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_special_wookiee_knuckler_wod	object/weapon/melee/special/wookiee_knuckler_wod.iff	MELEE	UNARMED	meleeHit	5		2.5	KINETIC	1250		
-melee_sword_01	object/weapon/melee/sword/sword_01.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_01_noob	object/weapon/melee/sword/sword_01_noob.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_01_npe	object/weapon/melee/sword/sword_01_npe.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_01_static	object/weapon/melee/sword/sword_01_static.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_02	object/weapon/melee/sword/sword_02.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_02_generic	object/weapon/melee/sword/sword_02_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_acid	object/weapon/melee/sword/sword_acid.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1050	ELEMENTAL_ACID	100
-melee_sword_avatar_wke_spiritblade	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_bestine_quest_sword	object/weapon/melee/sword/bestine_quest_sword.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_blade_ryyk	object/weapon/melee/sword/sword_blade_ryyk.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_curved_nyax	object/weapon/melee/sword/sword_curved_nyax.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_ep3_loot_eventide	object/weapon/melee/sword/ep3_loot_eventide.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_ep3_loot_ripper	object/weapon/melee/sword/ep3_loot_ripper.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_ep3_loot_ripper_wod	object/weapon/melee/sword/ep3_loot_ripper_wod.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_ep3_wookiee	object/weapon/melee/sword/ep3/sword_wookiee.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_mace_junti	object/weapon/melee/sword/sword_mace_junti.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_mace_junti_generic	object/weapon/melee/sword/sword_mace_junti_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_mandalorian	object/weapon/melee/sword/sword_mandalorian.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_marauder	object/weapon/melee/sword/sword_marauder.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_massassi	object/weapon/melee/sword/sword_massassi.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_massassi_generic	object/weapon/melee/sword/sword_massassi_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_nyax	object/weapon/melee/sword/sword_nyax.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_pvp_bf_01	object/weapon/melee/sword/sword_pvp_bf_01.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_rantok	object/weapon/melee/sword/sword_rantok.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_rantok_generic	object/weapon/melee/sword/sword_rantok_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_rebel	object/weapon/melee/sword/sword_rebel.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_rsf	object/weapon/melee/sword/sword_rsf.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_rsf_generic	object/weapon/melee/sword/sword_rsf_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_som_sword_mustafar_bandit	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_som_sword_mustafar_bandit_generic	object/weapon/melee/sword/som_sword_mustafar_bandit_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_som_sword_obsidian	object/weapon/melee/sword/som_sword_obsidian.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_som_sword_obsidian_generic	object/weapon/melee/sword/som_sword_obsidian_generic.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_wod_scyth	object/weapon/melee/sword/sword_wod_scyth.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_wod_scyth_sword	object/weapon/melee/sword/sword_wod_scyth_sword.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_sword_wookiee	object/weapon/melee/sword/sword_wookiee.iff	MELEE	ONE_HANDED_MELEE	meleeHit	5		5	KINETIC	1250		
-melee_unarmed_default	object/weapon/melee/unarmed/unarmed_default.iff	MELEE	UNARMED	meleeHit	5		2	KINETIC	1250		
-ranged_carbine_alliance_needler	object/weapon/ranged/carbine/carbine_alliance_needler.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_avatar_trando	object/weapon/ranged/carbine/carbine_avatar_trando.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_avatar_trando_e5	object/weapon/ranged/carbine/carbine_avatar_trando_e5.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_bothan_bola	object/weapon/ranged/carbine/carbine_bothan_bola.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_bothan_bola_generic	object/weapon/ranged/carbine/carbine_bothan_bola_generic.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_bounty_ee3	object/weapon/ranged/carbine/carbine_bounty_ee3.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_carbine_cdef	object/weapon/ranged/carbine/carbine_cdef.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_cdef_corsec	object/weapon/ranged/carbine/carbine_cdef_corsec.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_cdef_npe	object/weapon/ranged/carbine/carbine_cdef_npe.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_charric	object/weapon/ranged/carbine/carbine_charric.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_czerka_dart	object/weapon/ranged/carbine/carbine_czerka_dart.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dh17	object/weapon/ranged/carbine/carbine_dh17.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dh17_black	object/weapon/ranged/carbine/carbine_dh17_black.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dh17_black_npe	object/weapon/ranged/carbine/carbine_dh17_black_npe.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dh17_snubnose	object/weapon/ranged/carbine/carbine_dh17_snubnose.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dh17_snubnose_npe	object/weapon/ranged/carbine/carbine_dh17_snubnose_npe.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_dxr6	object/weapon/ranged/carbine/carbine_dxr6.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e11	object/weapon/ranged/carbine/carbine_e11.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e11_mark2	object/weapon/ranged/carbine/carbine_e11_mark2.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e11_quest	object/weapon/ranged/carbine/carbine_e11_quest.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e11_static	object/weapon/ranged/carbine/carbine_e11_static.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e11_victor_quest	object/weapon/ranged/carbine/carbine_e11_victor_quest.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e5	object/weapon/ranged/carbine/carbine_e5.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e5_generic	object/weapon/ranged/carbine/carbine_e5_generic.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_e5_legend	object/weapon/ranged/carbine/carbine_e5_legend.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ee3	object/weapon/ranged/carbine/carbine_ee3.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ee3_static	object/weapon/ranged/carbine/carbine_ee3_static.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_elite	object/weapon/ranged/carbine/carbine_elite.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_dc15	object/weapon/ranged/carbine/ep3/carbine_dc15.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_carbine_ep3_loot_corestrike	object/weapon/ranged/carbine/ep3_loot_corestrike.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_loot_firestar	object/weapon/ranged/carbine/ep3_loot_firestar.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_loot_grievance	object/weapon/ranged/carbine/ep3_loot_grievance.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_loot_mark	object/weapon/ranged/carbine/ep3_loot_mark.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_loot_retribution	object/weapon/ranged/carbine/ep3_loot_retribution.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_loot_rilctur	object/weapon/ranged/carbine/ep3_loot_rilctur.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_ep3_wookiee_bowcaster	object/weapon/ranged/carbine/ep3/carbine_wookiee_bowcaster.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_carbine_ep3_wookiee_bowcaster_generic	object/weapon/ranged/carbine/ep3/carbine_wookiee_bowcaster_generic.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_carbine_event_hairtrigger	object/weapon/ranged/carbine/event_carbine_hairtrigger.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_geo	object/weapon/ranged/carbine/carbine_geo.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_carbine_geo_generic	object/weapon/ranged/carbine/carbine_geo_generic.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_carbine_heroic_sd	object/weapon/ranged/carbine/carbine_heroic_sd.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_kun_massassi	object/weapon/ranged/carbine/carbine_kun_massassi.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	KINETIC	1050	ELEMENTAL_COLD	100
-ranged_carbine_laser	object/weapon/ranged/carbine/carbine_laser.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_laser_static	object/weapon/ranged/carbine/carbine_laser_static.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_mandalorian	object/weapon/ranged/carbine/carbine_mandalorian.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_nym_slugthrower	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_carbine_proton	object/weapon/ranged/carbine/carbine_proton.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_carbine_pvp	object/weapon/ranged/carbine/carbine_pvp.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_pvp_ngant	object/weapon/ranged/carbine/carbine_pvp_ngant.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_rotary_underslung	object/weapon/ranged/carbine/carbine_rotary_underslung.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_slug	object/weapon/ranged/carbine/carbine_slug.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_carbine_som_republic_sfor	object/weapon/ranged/carbine/som_carbine_republic_sfor.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_carbine_som_republic_sfor_generic	object/weapon/ranged/carbine/som_carbine_republic_sfor_generic.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_carbine_specops_bothan_carbine	object/weapon/ranged/carbine/carbine_specops_bothan_carbine.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_carbine_underslung	object/weapon/ranged/carbine/carbine_underslung.iff	RANGED	CARBINE	rangedShotLightRifle	50		4.5	ENERGY	1250		
-ranged_creature_spit_heavy_flame	object/weapon/ranged/creature/creature_spit_heavy_flame.iff	RANGED	PISTOL	creatureFireAttack	35	2	2	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_creature_spit_hoth_tauntaun	object/weapon/ranged/creature/creature_spit_hoth_tauntaun.iff	RANGED	PISTOL	creatureRangedAttack	35		3.5	KINETIC	1050	ELEMENTAL_COLD	100
-ranged_creature_spit_large_green	object/weapon/ranged/creature/creature_spit_large_green.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_large_red	object/weapon/ranged/creature/creature_spit_large_red.iff	RANGED	PISTOL	creatureFireAttack	35		3.5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_creature_spit_large_toxicgreen	object/weapon/ranged/creature/creature_spit_large_toxicgreen.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_large_yellow	object/weapon/ranged/creature/creature_spit_large_yellow.iff	RANGED	PISTOL	creatureSnareAttack	35		3.5	ENERGY	1250		
-ranged_creature_spit_lightning_ball	object/weapon/ranged/creature/creature_spit_lightning_ball.iff	RANGED	PISTOL	creatureRangedAttack	35	6	11	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_creature_spit_particle_beam	object/weapon/ranged/creature/creature_spit_particle_beam.iff	RANGED	PISTOL	creatureFireAttack	35	6	10.1	ENERGY	1250		
-ranged_creature_spit_small_green	object/weapon/ranged/creature/creature_spit_small_green.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_small_red	object/weapon/ranged/creature/creature_spit_small_red.iff	RANGED	PISTOL	creatureFireAttack	35		3.5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_creature_spit_small_toxicgreen	object/weapon/ranged/creature/creature_spit_small_toxicgreen.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_small_yellow	object/weapon/ranged/creature/creature_spit_small_yellow.iff	RANGED	PISTOL	creatureSnareAttack	35		3.5	ENERGY	1250		
-ranged_creature_spit_spray_green	object/weapon/ranged/creature/creature_spit_spray_green.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_spray_red	object/weapon/ranged/creature/creature_spit_spray_red.iff	RANGED	PISTOL	creatureFireAttack	35		3.5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_creature_spit_spray_toxicgreen	object/weapon/ranged/creature/creature_spit_spray_toxicgreen.iff	RANGED	PISTOL	creaturePoisonAttack	35		3.5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_creature_spit_spray_yellow	object/weapon/ranged/creature/creature_spit_spray_yellow.iff	RANGED	PISTOL	creatureSnareAttack	35		3.5	ENERGY	1250		
-ranged_droid_astromech_ranged	object/weapon/ranged/droid/droid_astromech_ranged.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_cww8	object/weapon/ranged/droid/droid_cww8.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_cww8_01	object/weapon/ranged/droid/droid_cww8_01.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_cww8_02	object/weapon/ranged/droid/droid_cww8_02.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_cww8_devistator	object/weapon/ranged/droid/droid_cww8_devistator.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_droid_droideka	object/weapon/ranged/droid/droid_droideka_ranged.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_flamethrower	object/weapon/ranged/droid/droid_flamethrower.iff	RANGED	HEAVY	fireFlameThrowerLight	35		3	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_droid_flamethrower_nomuzzle	object/weapon/ranged/droid/droid_flamethrower_nomuzzle.iff	RANGED	HEAVY	fireFlameThrowerLight	35		3	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_droid_hk77_assault_droid	object/weapon/ranged/droid/droid_hk77_assault_droid.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_hk77_boss	object/weapon/ranged/droid/droid_hk77_boss.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_hk77_elite	object/weapon/ranged/droid/droid_hk77_elite.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_probot	object/weapon/ranged/droid/droid_probot_ranged.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_rocket_launcher	object/weapon/ranged/droid/droid_rocket_launcher.iff	RANGED	HEAVY	fireRocketLauncher	64		3	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_droid_union_sentry	object/weapon/ranged/droid/droid_union_sentry.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_union_sentry_01	object/weapon/ranged/droid/droid_union_sentry_01.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_droid_union_sentry_02	object/weapon/ranged/droid/droid_union_sentry_02.iff	RANGED	RIFLE	rangedShotRifle	64		3	ENERGY	1250		
-ranged_grenade_bug_bomb	object/weapon/ranged/grenade/grenade_bug_bomb.iff	RANGED	THROWN	throwGrenadeBug	32	21	10	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_grenade_cryoban	object/weapon/ranged/grenade/grenade_cryoban.iff	RANGED	THROWN	throwGrenadeCryoban	15	15	10	KINETIC	1250		
-ranged_grenade_death_troopers_afflicted_weapon	object/weapon/ranged/grenade/death_troopers_afflicted_weapon.iff	RANGED	THROWN	throwGrenade	15	15	10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_grenade_fallback	object/weapon/ranged/grenade/grenade_fallback.iff	RANGED	THROWN	throwGrenade	64	4	10	KINETIC	1250		
-ranged_grenade_fragmentation	object/weapon/ranged/grenade/grenade_fragmentation.iff	RANGED	THROWN	throwGrenadeFragmentation	15	15	10	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_grenade_fragmentation_generic	object/weapon/ranged/grenade/grenade_fragmentation_generic.iff	RANGED	THROWN	throwGrenadeFragmentation	15	15	10	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_grenade_glop	object/weapon/ranged/grenade/grenade_glop.iff	RANGED	THROWN	throwGrenadeGlop	32	30	10	KINETIC	1250		
-ranged_grenade_imperial_detonator	object/weapon/ranged/grenade/grenade_imperial_detonator.iff	RANGED	THROWN	throwGrenadeImperialDetonator	32	30	10	KINETIC	1250		
-ranged_grenade_poison	object/weapon/ranged/grenade/grenade_poison.iff	RANGED	THROWN	throwGrenade	64	4	10	KINETIC	1250		
-ranged_grenade_proton	object/weapon/ranged/grenade/grenade_proton.iff	RANGED	THROWN	throwGrenadeProton	32	30	10	KINETIC	1250		
-ranged_grenade_snow_ball_weapon	object/weapon/ranged/grenade/snow_ball_weapon.iff	RANGED	THROWN	throwGrenade	15	15	10	KINETIC	1250		
-ranged_grenade_snow_blast_weapon	object/weapon/ranged/grenade/snow_blast_weapon.iff	RANGED	THROWN	throwGrenade	15	15	10	KINETIC	1250		
-ranged_grenade_tauntaun_corpse_weapon	object/weapon/ranged/grenade/tauntaun_corpse_weapon.iff	RANGED	THROWN	throwGrenade	15	15	10	KINETIC	1250		
-ranged_grenade_thermal_detonator	object/weapon/ranged/grenade/grenade_thermal_detonator.iff	RANGED	THROWN	throwGrenadeThermalDetonator	32	32	10	KINETIC	1250		
-ranged_heavy_acid_beam	object/weapon/ranged/heavy/heavy_acid_beam.iff	RANGED	HEAVY	fireAcidBeam	64	6	13	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_heavy_acid_beam_static	object/weapon/ranged/heavy/heavy_acid_beam_static.iff	RANGED	HEAVY	fireAcidBeam	64	6	13	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_heavy_avatar_acid_beam	object/weapon/ranged/heavy/heavy_avatar_acid_beam.iff	RANGED	HEAVY	fireAcidBeamAvatar	64	6	13	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_heavy_carbonite_rifle	object/weapon/ranged/heavy/heavy_carbonite_rifle.iff	RANGED	HEAVY	fireCrusaderHeavyRifle	64	6	13	KINETIC	1250		
-ranged_heavy_cr1_blast_cannon	object/weapon/ranged/heavy/heavy_cr1_blast_cannon.iff	RANGED	HEAVY	fireCr1BlastCannon	64	6	13	KINETIC	1050	ELEMENTAL_COLD	100
-ranged_heavy_ep3_loot_corellian	object/weapon/ranged/heavy/ep3_loot_corellian.iff	RANGED	HEAVY	fireHeavyWeapon	64	6	13	KINETIC	1250		
-ranged_heavy_ep3_loot_void	object/weapon/ranged/heavy/ep3_loot_void.iff	RANGED	HEAVY	fireHeavyWeapon	64	6	13	KINETIC	1250		
-ranged_heavy_launcher	object/weapon/ranged/heavy/launcher.iff	RANGED	HEAVY	fireRocketLauncher	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_lightning_beam	object/weapon/ranged/heavy/heavy_lightning_beam.iff	RANGED	HEAVY	fireLightningBeam	64	6	13	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_heavy_lightning_beam_static	object/weapon/ranged/heavy/heavy_lightning_beam_static.iff	RANGED	HEAVY	fireLightningBeam	64	6	13	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_heavy_mandalorian	object/weapon/ranged/heavy/heavy_mandalorian.iff	RANGED	HEAVY	fireHeavyWeapon	64	6	13	KINETIC	1250		
-ranged_heavy_particle_beam	object/weapon/ranged/heavy/heavy_particle_beam.iff	RANGED	HEAVY	fireParticleBeam	64	6	13	KINETIC	1250		
-ranged_heavy_pulse_cannon	object/weapon/ranged/heavy/heavy_pulse_cannon.iff	RANGED	HEAVY	firePulseCannon	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_pvp	object/weapon/ranged/heavy/heavy_pvp.iff	RANGED	HEAVY	firePvpHeavy	64	6	13	KINETIC	1250		
-ranged_heavy_quest_heavy_acid_beam	object/weapon/ranged/heavy/quest_heavy_acid_beam.iff	RANGED	HEAVY	fireAcidBeamHeavy	64	6	13	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_heavy_quest_heavy_patricle_beam	object/weapon/ranged/heavy/quest_heavy_patricle_beam.iff	RANGED	HEAVY	fireParticleBeam	64	6	13	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_heavy_rebel	object/weapon/ranged/heavy/heavy_rebel.iff	RANGED	HEAVY	fireHeavyWeapon	64	6	13	KINETIC	1250		
-ranged_heavy_rocket_launcher	object/weapon/ranged/heavy/heavy_rocket_launcher.iff	RANGED	HEAVY	fireRocketLauncher	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_rocket_launcher_generic	object/weapon/ranged/heavy/heavy_rocket_launcher_generic.iff	RANGED	HEAVY	fireRocketLauncherGeneric	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_som_lava_cannon	object/weapon/ranged/heavy/som_lava_cannon.iff	RANGED	HEAVY	fireLavaCannon	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_som_lava_cannon_generic	object/weapon/ranged/heavy/som_lava_cannon_generic.iff	RANGED	HEAVY	fireLavaCannonGeneric	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_som_republic_flamer	object/weapon/ranged/heavy/som_republic_flamer.iff	RANGED	HEAVY	fireRepublicFlameThrower	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_heavy_som_republic_flamer_generic	object/weapon/ranged/heavy/som_republic_flamer_generic.iff	RANGED	HEAVY	fireRepublicFlameThrowerGeneric	64	6	13	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_mine_anti_vehicle	object/weapon/mine/wp_mine_anti_vehicle.iff	RANGED	HEAVY	mine_attack_sr88	32	15	10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_mine_drx55	object/weapon/mine/wp_mine_drx55.iff	RANGED	HEAVY	mine_attack_drx55	32	8	10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_mine_xg	object/weapon/mine/wp_mine_xg.iff	RANGED	HEAVY	mine_attack_xg	32	8	10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_pistol_alliance_disruptor	object/weapon/ranged/pistol/pistol_alliance_disruptor.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_alliance_disruptor_generic	object/weapon/ranged/pistol/pistol_alliance_disruptor_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_avatar_trando_special	object/weapon/ranged/pistol/pistol_avatar_trando_special.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_cdef	object/weapon/ranged/pistol/pistol_cdef.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_cdef_corsec	object/weapon/ranged/pistol/pistol_cdef_corsec.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_cdef_noob	object/weapon/ranged/pistol/pistol_cdef_noob.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_cdef_npe	object/weapon/ranged/pistol/pistol_cdef_npe.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_d18	object/weapon/ranged/pistol/pistol_d18.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_d18_npe	object/weapon/ranged/pistol/pistol_d18_npe.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_dd6	object/weapon/ranged/pistol/pistol_dd6.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_de_10	object/weapon/ranged/pistol/pistol_de_10.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_de_10_generic	object/weapon/ranged/pistol/pistol_de_10_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_deathhammer	object/weapon/ranged/pistol/pistol_deathhammer.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_dh17	object/weapon/ranged/pistol/pistol_dh17.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_dh17_generic	object/weapon/ranged/pistol/pistol_dh17_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_dh18a_gcw	object/weapon/ranged/pistol/pistol_dh18a_gcw.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_dl44	object/weapon/ranged/pistol/pistol_dl44.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_dl44_metal	object/weapon/ranged/pistol/pistol_dl44_metal.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_dl44_metal_light	object/weapon/ranged/pistol/pistol_dl44_metal_light.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_dl44_metal_static	object/weapon/ranged/pistol/pistol_dl44_metal_static.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_dx2	object/weapon/ranged/pistol/pistol_dx2.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_ion_stunner	object/weapon/ranged/pistol/ep3/pistol_ion_stunner.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_ep3_kyd21	object/weapon/ranged/pistol/ep3/pistol_kyd21.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_ep3_loot_blackfalcon	object/weapon/ranged/pistol/ep3_loot_blackfalcon.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_blackhand	object/weapon/ranged/pistol/ep3_loot_blackhand.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_ep3_loot_calibrated	object/weapon/ranged/pistol/ep3_loot_calibrated.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_deathrain	object/weapon/ranged/pistol/ep3_loot_deathrain.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_dragoneye	object/weapon/ranged/pistol/ep3_loot_dragoneye.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_hydra	object/weapon/ranged/pistol/ep3_loot_hydra.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_liquidsilver	object/weapon/ranged/pistol/ep3_loot_liquidsilver.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_quicktrigger	object/weapon/ranged/pistol/ep3_loot_quicktrigger.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_rhiss	object/weapon/ranged/pistol/ep3_loot_rhiss.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_ep3_loot_silencer	object/weapon/ranged/pistol/ep3_loot_silencer.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_ep3_trando_suppressor	object/weapon/ranged/pistol/ep3/pistol_trando_suppressor.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_ep3_wookiee	object/weapon/ranged/pistol/ep3/pistol_wookiee.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_ep3_wookiee_bowcaster	object/weapon/ranged/pistol/ep3/pistol_wookiee_bowcaster.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_event_pistol_striker_enforcer	object/weapon/ranged/pistol/event_pistol_striker_enforcer.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_flare	object/weapon/ranged/pistol/pistol_flare.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_flechette	object/weapon/ranged/pistol/pistol_flechette.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_flechette_generic	object/weapon/ranged/pistol/pistol_flechette_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_fwg5	object/weapon/ranged/pistol/pistol_fwg5.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_fwg5_legendary	object/weapon/ranged/pistol/pistol_fwg5_legendary.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_fwg5_quest	object/weapon/ranged/pistol/pistol_fwg5_quest.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_geonosian_sonic_blaster_loot	object/weapon/ranged/pistol/pistol_geonosian_sonic_blaster_loot.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_green_bolt	object/weapon/ranged/pistol/pistol_green_bolt.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_pistol_heroic_exar	object/weapon/ranged/pistol/pistol_heroic_exar.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_heroic_sd	object/weapon/ranged/pistol/pistol_heroic_sd.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_intimidator	object/weapon/ranged/pistol/pistol_intimidator.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_intimidator_generic	object/weapon/ranged/pistol/pistol_intimidator_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_jawa	object/weapon/ranged/pistol/pistol_jawa.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_kyd21_generic	object/weapon/ranged/pistol/pistol_kyd21_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_laucher_elite	object/weapon/ranged/pistol/pistol_laucher_elite.iff	RANGED	HEAVY	firePistolLauncher	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_launcher	object/weapon/ranged/pistol/pistol_launcher.iff	RANGED	HEAVY	firePistolLauncherGeneric	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_launcher_generic	object/weapon/ranged/pistol/pistol_launcher_generic.iff	RANGED	HEAVY	firePistolLauncher	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_launcher_medium	object/weapon/ranged/pistol/pistol_launcher_medium.iff	RANGED	HEAVY	firePistolLauncherMedium	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_launcher_targeting	object/weapon/ranged/pistol/pistol_launcher_targeting.iff	RANGED	HEAVY	firePistolLauncherTargeting	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_mandalorian	object/weapon/ranged/pistol/pistol_mandalorian.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_power5	object/weapon/ranged/pistol/pistol_power5.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_pvp	object/weapon/ranged/pistol/pistol_pvp.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_quest_imperial_navy_formal	object/weapon/ranged/pistol/pistol_quest_imperial_navy_formal.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_quest_pistol_launcher	object/weapon/ranged/pistol/quest_pistol_launcher.iff	RANGED	HEAVY	firePistolLauncher	35		5	ENERGY	1050	ELEMENTAL_HEAT	100
-ranged_pistol_quest_pistol_republic_blaster	object/weapon/ranged/pistol/quest_pistol_republic_blaster.iff	RANGED	PISTOL	rangedShotPistol	35		5	KINETIC	1250		
-ranged_pistol_rebel	object/weapon/ranged/pistol/pistol_rebel.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_renegade	object/weapon/ranged/pistol/pistol_renegade.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_renegade_generic	object/weapon/ranged/pistol/pistol_renegade_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_republic_blaster	object/weapon/ranged/pistol/pistol_republic_blaster.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_republic_blaster_quest	object/weapon/ranged/pistol/pistol_republic_blaster_quest.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_scatter	object/weapon/ranged/pistol/pistol_scatter.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_scatter_generic	object/weapon/ranged/pistol/pistol_scatter_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_scatter_light	object/weapon/ranged/pistol/pistol_scatter_light.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_scout_blaster	object/weapon/ranged/pistol/pistol_scout_blaster.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_scout_blaster_ammo_test_2	object/weapon/ranged/pistol/pistol_scout_blaster_ammo_test_2.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_scout_blaster_corsec	object/weapon/ranged/pistol/pistol_scout_blaster_corsec.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_scout_blaster_npe	object/weapon/ranged/pistol/pistol_scout_blaster_npe.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_scout_blaster_static	object/weapon/ranged/pistol/pistol_scout_blaster_static.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_som_disruptor_pistol	object/weapon/ranged/pistol/som_disruptor_pistol.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_som_disruptor_pistol_generic	object/weapon/ranged/pistol/som_disruptor_pistol_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_som_ion_relic_pistol	object/weapon/ranged/pistol/som_ion_relic_pistol.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_som_ion_relic_pistol_generic	object/weapon/ranged/pistol/som_ion_relic_pistol_generic.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_pistol_srcombat	object/weapon/ranged/pistol/pistol_srcombat.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_striker	object/weapon/ranged/pistol/pistol_striker.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_striker_noob	object/weapon/ranged/pistol/pistol_striker_noob.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_striker_static	object/weapon/ranged/pistol/pistol_striker_static.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_tangle	object/weapon/ranged/pistol/pistol_tangle.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_pistol_westar_34	object/weapon/ranged/pistol/pistol_westar_34.iff	RANGED	PISTOL	rangedShotPistol	35		5	ENERGY	1250		
-ranged_rifle_a280	object/weapon/ranged/rifle/rifle_a280.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_acid_beam	object/weapon/ranged/rifle/rifle_acid_beam.iff	RANGED	RIFLE	fireAcidRifle	64		4	ENERGY	1050	ELEMENTAL_ACID	100
-ranged_rifle_adventurer	object/weapon/ranged/rifle/rifle_adventurer.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_alliance_gauss_generic	object/weapon/ranged/rifle/rifle_alliance_gauss_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_avatar_laser_trando	object/weapon/ranged/rifle/rifle_avatar_laser_trando.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_beam	object/weapon/ranged/rifle/rifle_beam.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_berserker	object/weapon/ranged/rifle/rifle_berserker.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_bounty_dc15	object/weapon/ranged/rifle/rifle_bounty_dc15.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_rifle_bowcaster	object/weapon/ranged/rifle/rifle_bowcaster.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_bowcaster_heavy	object/weapon/ranged/rifle/rifle_bowcaster_heavy.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_bowcaster_master	object/weapon/ranged/rifle/rifle_bowcaster_master.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_bowcaster_medium	object/weapon/ranged/rifle/rifle_bowcaster_medium.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_cdef	object/weapon/ranged/rifle/rifle_cdef.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_cdef_npe	object/weapon/ranged/rifle/rifle_cdef_npe.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_deathtroopers	object/weapon/ranged/rifle/rifle_deathtroopers.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_dlt20	object/weapon/ranged/rifle/rifle_dlt20.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_dlt20_npe	object/weapon/ranged/rifle/rifle_dlt20_npe.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_dlt20a	object/weapon/ranged/rifle/rifle_dlt20a.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_e11	object/weapon/ranged/rifle/rifle_e11.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_e11_generic	object/weapon/ranged/rifle/rifle_e11_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_dc15	object/weapon/ranged/rifle/ep3/rifle_dc15.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_rifle_ep3_loot_darksting	object/weapon/ranged/rifle/ep3_loot_darksting.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_loot_dawnsorrow	object/weapon/ranged/rifle/ep3_loot_dawnsorrow.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_loot_nullifier	object/weapon/ranged/rifle/ep3_loot_nullifier.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_loot_retaliation	object/weapon/ranged/rifle/ep3_loot_retaliation.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_loot_sharpshooter	object/weapon/ranged/rifle/ep3_loot_sharpshooter.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_naktra_crystal	object/weapon/ranged/rifle/ep3/rifle_naktra_crystal.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_trando_hunter	object/weapon/ranged/rifle/ep3/rifle_trando_hunter.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ep3_trando_hunter_crafted	object/weapon/ranged/rifle/ep3/rifle_trando_hunter_crafted.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_event_rifle_tusken_berserker	object/weapon/ranged/rifle/event_rifle_tusken_berserker.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_eweb	object/weapon/ranged/rifle/rifle_eweb.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ewok_crossbow	object/weapon/ranged/rifle/rifle_ewok_crossbow.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_faux_bowcaster	object/weapon/ranged/rifle/rifle_faux_bowcaster.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_flame_thrower	object/weapon/ranged/rifle/rifle_flame_thrower.iff	RANGED	HEAVY	fireRepublicFlameThrower	64		4	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_rifle_flame_thrower_light	object/weapon/ranged/rifle/rifle_flame_thrower_light.iff	RANGED	HEAVY	fireRepublicFlameThrower	64		4	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_rifle_geo_drill	object/weapon/ranged/rifle/rifle_geo_drill.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_geo_drill_generic	object/weapon/ranged/rifle/rifle_geo_drill_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_jawa_ion	object/weapon/ranged/rifle/rifle_jawa_ion.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_jinkins_j1_rifle	object/weapon/ranged/rifle/jinkins_j1_rifle.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_laser	object/weapon/ranged/rifle/rifle_laser.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_laser_light	object/weapon/ranged/rifle/rifle_laser_light.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_laser_noob	object/weapon/ranged/rifle/rifle_laser_noob.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ld1	object/weapon/ranged/rifle/rifle_ld1.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_ld1_generic	object/weapon/ranged/rifle/rifle_ld1_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_lightning	object/weapon/ranged/rifle/rifle_lightning.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_lightning_heavy	object/weapon/ranged/rifle/rifle_lightning_heavy.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_lightning_heavy_static	object/weapon/ranged/rifle/rifle_lightning_heavy_static.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_lightning_light	object/weapon/ranged/rifle/rifle_lightning_light.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_ELECTRICAL	100
-ranged_rifle_love_day_crossbow	object/weapon/ranged/rifle/rifle_love_day_crossbow.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_mandalorian	object/weapon/ranged/rifle/rifle_mandalorian.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_massassi_ink	object/weapon/ranged/rifle/rifle_massassi_ink.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_massassi_ink_generic	object/weapon/ranged/rifle/rifle_massassi_ink_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_odararissl	object/weapon/ranged/rifle/rifle_odararissl.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_proton	object/weapon/ranged/rifle/rifle_proton.iff	RANGED	RIFLE	rangedShotRifle	64		4	ENERGY	1050	ELEMENTAL_COLD	100
-ranged_rifle_pvp	object/weapon/ranged/rifle/rifle_pvp.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_quest_rifle_flame_thrower	object/weapon/ranged/rifle/quest_rifle_flame_thrower.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_quest_rifle_lightning	object/weapon/ranged/rifle/quest_rifle_lightning.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_rebel	object/weapon/ranged/rifle/rifle_rebel.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_sg82	object/weapon/ranged/rifle/rifle_sg82.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_sg82_npe	object/weapon/ranged/rifle/rifle_sg82_npe.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_som_rifle_dp23	object/weapon/ranged/rifle/som_rifle_dp23.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_som_rifle_dp23_generic	object/weapon/ranged/rifle/som_rifle_dp23_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_som_rifle_mustafar_disruptor	object/weapon/ranged/rifle/som_rifle_mustafar_disruptor.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_som_rifle_mustafar_disruptor_generic	object/weapon/ranged/rifle/som_rifle_mustafar_disruptor_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_spraystick	object/weapon/ranged/rifle/rifle_spraystick.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_t21	object/weapon/ranged/rifle/rifle_t21.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_t21_generic	object/weapon/ranged/rifle/rifle_t21_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_t21_legendary	object/weapon/ranged/rifle/rifle_t21_legendary.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_tc22_blaster	object/weapon/ranged/rifle/rifle_tc22_blaster.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_tenloss_dxr6_disruptor_loot	object/weapon/ranged/rifle/rifle_tenloss_dxr6_disruptor_loot.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_tusken	object/weapon/ranged/rifle/rifle_tusken.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_tusken_elite	object/weapon/ranged/rifle/rifle_tusken_elite.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_tusken_generic	object/weapon/ranged/rifle/rifle_tusken_generic.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_victor_tusken	object/weapon/ranged/rifle/rifle_victor_tusken.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_rifle_westar_m5	object/weapon/ranged/rifle/rifle_westar_m5.iff	RANGED	RIFLE	rangedShotRifle	64		4	KINETIC	1250		
-ranged_turret_acid	object/weapon/ranged/turret/turret_acid.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050	ELEMENTAL_ACID	100
-ranged_turret_block_large	object/weapon/ranged/turret/turret_block_large.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_turret_cold	object/weapon/ranged/turret/turret_cold.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050	ELEMENTAL_COLD	100
-ranged_turret_dish_large	object/weapon/ranged/turret/turret_block_large.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050		
-ranged_turret_electricity	object/weapon/ranged/turret/turret_electricity.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050	ELEMENTAL_ELECTRICAL	100
-ranged_turret_energy	object/weapon/ranged/turret/turret_energy.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1250		
-ranged_turret_heat	object/weapon/ranged/turret/turret_heat.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1050	ELEMENTAL_HEAT	100
-ranged_turret_kinetic	object/weapon/ranged/turret/turret_kinetic.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1250		
-ranged_turret_tower_large	object/weapon/ranged/turret/turret_block_large.iff	RANGED	RIFLE	turretShot	64		10	KINETIC	1250		
-ranged_vehicle_atst	object/weapon/ranged/vehicle/vehicle_atst_ranged.iff	RANGED	RIFLE	gcw_atst_attack_tower	64		10	ENERGY	1050	ELEMENTAL_HEAT	100
+weapon_id	weapons	weapon_type	weapon_range	weapon_damage_type
+TEXT	TEXT	TEXT	INTEGER	TEXT
+group_ranged_carbine_energy_high	object/weapon/ranged/carbine/ep3/carbine_dc15.iff;object/weapon/ranged/carbine/carbine_dxr6.iff;object/weapon/ranged/carbine/carbine_proton.iff;object/weapon/ranged/carbine/som_carbine_republic_sfor.iff	CARBINE	50	ENERGY
+group_ranged_carbine_energy_low	object/weapon/ranged/carbine/carbine_cdef.iff;object/weapon/ranged/carbine/carbine_dh17.iff;object/weapon/ranged/carbine/carbine_e11.iff;object/weapon/ranged/carbine/carbine_elite.iff	CARBINE	50	ENERGY
+group_ranged_carbine_kinetic_high	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff	CARBINE	50	KINETIC
+group_ranged_carbine_kinetic_low	object/weapon/ranged/carbine/carbine_bothan_bola.iff	CARBINE	50	KINETIC
+ranged_carbine_alliance_needler	object/weapon/ranged/carbine/carbine_alliance_needler.iff	CARBINE	50	ENERGY
+ranged_carbine_avatar_trando	object/weapon/ranged/carbine/carbine_avatar_trando.iff	CARBINE	50	ENERGY
+ranged_carbine_avatar_trando_e5	object/weapon/ranged/carbine/carbine_avatar_trando_e5.iff	CARBINE	50	ENERGY
+ranged_carbine_bothan_bola	object/weapon/ranged/carbine/carbine_bothan_bola.iff	CARBINE	50	ENERGY
+ranged_carbine_bothan_bola_generic	object/weapon/ranged/carbine/carbine_bothan_bola_generic.iff	CARBINE	50	ENERGY
+ranged_carbine_cdef	object/weapon/ranged/carbine/carbine_cdef.iff	CARBINE	50	ENERGY
+ranged_carbine_cdef_corsec	object/weapon/ranged/carbine/carbine_cdef_corsec.iff	CARBINE	50	ENERGY
+ranged_carbine_cdef_npe	object/weapon/ranged/carbine/carbine_cdef_npe.iff	CARBINE	50	ENERGY
+ranged_carbine_czerka_dart	object/weapon/ranged/carbine/carbine_czerka_dart.iff	CARBINE	50	ENERGY
+ranged_carbine_dh17	object/weapon/ranged/carbine/carbine_dh17.iff	CARBINE	50	ENERGY
+ranged_carbine_dh17_black	object/weapon/ranged/carbine/carbine_dh17_black.iff	CARBINE	50	ENERGY
+ranged_carbine_dh17_black_npe	object/weapon/ranged/carbine/carbine_dh17_black_npe.iff	CARBINE	50	ENERGY
+ranged_carbine_dh17_snubnose	object/weapon/ranged/carbine/carbine_dh17_snubnose.iff	CARBINE	50	ENERGY
+ranged_carbine_dh17_snubnose_npe	object/weapon/ranged/carbine/carbine_dh17_snubnose_npe.iff	CARBINE	50	ENERGY
+ranged_carbine_dxr6	object/weapon/ranged/carbine/carbine_dxr6.iff	CARBINE	50	ENERGY
+ranged_carbine_e11	object/weapon/ranged/carbine/carbine_e11.iff	CARBINE	50	ENERGY
+ranged_carbine_e11_mark2	object/weapon/ranged/carbine/carbine_e11_mark2.iff	CARBINE	50	ENERGY
+ranged_carbine_e11_quest	object/weapon/ranged/carbine/carbine_e11_quest.iff	CARBINE	50	ENERGY
+ranged_carbine_e11_static	object/weapon/ranged/carbine/carbine_e11_static.iff	CARBINE	50	ENERGY
+ranged_carbine_e11_victor_quest	object/weapon/ranged/carbine/carbine_e11_victor_quest.iff	CARBINE	50	ENERGY
+ranged_carbine_e5	object/weapon/ranged/carbine/carbine_e5.iff	CARBINE	50	ENERGY
+ranged_carbine_e5_generic	object/weapon/ranged/carbine/carbine_e5_generic.iff	CARBINE	50	ENERGY
+ranged_carbine_ee3	object/weapon/ranged/carbine/carbine_ee3.iff	CARBINE	50	ENERGY
+ranged_carbine_ee3_static	object/weapon/ranged/carbine/carbine_ee3_static.iff	CARBINE	50	ENERGY
+ranged_carbine_elite	object/weapon/ranged/carbine/carbine_elite.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_dc15	object/weapon/ranged/carbine/ep3/carbine_dc15.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_corestrike	object/weapon/ranged/carbine/ep3_loot_corestrike.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_firestar	object/weapon/ranged/carbine/ep3_loot_firestar.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_grievance	object/weapon/ranged/carbine/ep3_loot_grievance.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_mark	object/weapon/ranged/carbine/ep3_loot_mark.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_retribution	object/weapon/ranged/carbine/ep3_loot_retribution.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_loot_rilctur	object/weapon/ranged/carbine/ep3_loot_rilctur.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_wookiee_bowcaster	object/weapon/ranged/carbine/ep3/carbine_wookiee_bowcaster.iff	CARBINE	50	ENERGY
+ranged_carbine_ep3_wookiee_bowcaster_generic	object/weapon/ranged/carbine/ep3/carbine_wookiee_bowcaster_generic.iff	CARBINE	50	ENERGY
+ranged_carbine_event_hairtrigger	object/weapon/ranged/carbine/event_carbine_hairtrigger.iff	CARBINE	50	ENERGY
+ranged_carbine_geo	object/weapon/ranged/carbine/carbine_geo.iff	CARBINE	50	ENERGY
+ranged_carbine_geo_generic	object/weapon/ranged/carbine/carbine_geo_generic.iff	CARBINE	50	ENERGY
+ranged_carbine_laser	object/weapon/ranged/carbine/carbine_laser.iff	CARBINE	50	ENERGY
+ranged_carbine_laser_static	object/weapon/ranged/carbine/carbine_laser_static.iff	CARBINE	50	ENERGY
+ranged_carbine_nym_slugthrower	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff	CARBINE	50	KINETIC
+ranged_carbine_proton	object/weapon/ranged/carbine/carbine_proton.iff	CARBINE	50	ENERGY
+ranged_carbine_rotary_underslung	object/weapon/ranged/carbine/carbine_rotary_underslung.iff	CARBINE	50	ENERGY
+ranged_carbine_som_republic_sfor	object/weapon/ranged/carbine/som_carbine_republic_sfor.iff	CARBINE	50	ENERGY
+ranged_carbine_som_republic_sfor_generic	object/weapon/ranged/carbine/som_carbine_republic_sfor_generic.iff	CARBINE	50	ENERGY
+ranged_carbine_specops_bothan_carbine	object/weapon/ranged/carbine/carbine_specops_bothan_carbine.iff	CARBINE	50	ENERGY
+ranged_carbine_underslung	object/weapon/ranged/carbine/carbine_underslung.iff	CARBINE	50	ENERGY
+group_ranged_heavy_energy_high	object/weapon/ranged/heavy/heavy_acid_beam.iff;object/weapon/ranged/heavy/heavy_lightning_beam.iff;object/weapon/ranged/rifle/rifle_flame_thrower.iff	HEAVY	64	ENERGY
+group_ranged_heavy_energy_low	object/weapon/ranged/heavy/ep3_loot_corellian.iff	HEAVY	64	ENERGY
+group_ranged_heavy_kinetic_high	object/weapon/ranged/rifle/rifle_flame_thrower.iff;object/weapon/ranged/heavy/som_lava_cannon.iff	HEAVY	64	KINETIC
+group_ranged_heavy_kinetic_low	object/weapon/ranged/heavy/heavy_rocket_launcher.iff;object/weapon/ranged/heavy/launcher.iff	HEAVY	64	KINETIC
+ranged_heavy_acid_beam	object/weapon/ranged/heavy/heavy_acid_beam.iff	HEAVY	64	ENERGY
+ranged_heavy_acid_beam_static	object/weapon/ranged/heavy/heavy_acid_beam_static.iff	HEAVY	64	ENERGY
+ranged_heavy_avatar_acid_beam	object/weapon/ranged/heavy/heavy_avatar_acid_beam.iff	HEAVY	64	ENERGY
+ranged_heavy_ep3_loot_corellian	object/weapon/ranged/heavy/ep3_loot_corellian.iff	HEAVY	64	KINETIC
+ranged_heavy_ep3_loot_void	object/weapon/ranged/heavy/ep3_loot_void.iff	HEAVY	64	KINETIC
+ranged_heavy_launcher	object/weapon/ranged/heavy/launcher.iff	HEAVY	64	KINETIC
+ranged_heavy_lightning_beam	object/weapon/ranged/heavy/heavy_lightning_beam.iff	HEAVY	64	ENERGY
+ranged_heavy_lightning_beam_static	object/weapon/ranged/heavy/heavy_lightning_beam_static.iff	HEAVY	64	ENERGY
+ranged_heavy_particle_beam	object/weapon/ranged/heavy/heavy_particle_beam.iff	HEAVY	64	KINETIC
+ranged_heavy_rocket_launcher	object/weapon/ranged/heavy/heavy_rocket_launcher.iff	HEAVY	64	KINETIC
+ranged_heavy_rocket_launcher_generic	object/weapon/ranged/heavy/heavy_rocket_launcher_generic.iff	HEAVY	64	KINETIC
+ranged_heavy_som_lava_cannon	object/weapon/ranged/heavy/som_lava_cannon.iff	HEAVY	64	KINETIC
+ranged_heavy_som_lava_cannon_generic	object/weapon/ranged/heavy/som_lava_cannon_generic.iff	HEAVY	64	KINETIC
+ranged_heavy_som_republic_flamer	object/weapon/ranged/heavy/som_republic_flamer.iff	HEAVY	64	KINETIC
+ranged_heavy_som_republic_flamer_generic	object/weapon/ranged/heavy/som_republic_flamer_generic.iff	HEAVY	64	KINETIC
+ranged_pistol_launcher	object/weapon/ranged/pistol/pistol_launcher.iff	HEAVY	35	ENERGY
+ranged_pistol_launcher_medium	object/weapon/ranged/pistol/pistol_launcher_medium.iff	HEAVY	35	ENERGY
+ranged_rifle_flame_thrower	object/weapon/ranged/rifle/rifle_flame_thrower.iff	HEAVY	64	KINETIC
+ranged_rifle_flame_thrower_light	object/weapon/ranged/rifle/rifle_flame_thrower_light.iff	HEAVY	64	KINETIC
+group_melee_1h_energy_high	object/weapon/melee/sword/sword_acid.iff;object/weapon/melee/sword/som_sword_mustafar_bandit.iff	ONE_HANDED_MELEE	5	ENERGY
+group_melee_1h_energy_low	object/weapon/melee/knife/knife_vibroblade.iff	ONE_HANDED_MELEE	5	ENERGY
+group_melee_1h_kinetic_high	object/weapon/melee/baton/baton_stun.iff;object/weapon/melee/sword/sword_mace_junti.iff	ONE_HANDED_MELEE	5	KINETIC
+group_melee_1h_kinetic_low	object/weapon/melee/knife/knife_dagger.iff;object/weapon/melee/knife/knife_stone.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_baton_avatar_trando_stun_stick	object/weapon/melee/baton/baton_avatar_trando_stun_stick.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_baton_gaderiffi_npe	object/weapon/melee/baton/baton_gaderiffi_npe.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_baton_stun	object/weapon/melee/baton/baton_stun.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_baton_victor_baton_gaderiffi	object/weapon/melee/baton/victor_baton_gaderiffi.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_dagger	object/weapon/melee/knife/knife_dagger.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_dagger_static	object/weapon/melee/knife/knife_dagger_static.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_donkuwah	object/weapon/melee/knife/knife_donkuwah.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_ep3_loot_blackbane	object/weapon/melee/knife/ep3_loot_blackbane.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_ep3_naktra_crystal	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_ep3_trando_skinner	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_janta	object/weapon/melee/knife/knife_janta.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_stone	object/weapon/melee/knife/knife_stone.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_stone_noob	object/weapon/melee/knife/knife_stone_noob.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_survival	object/weapon/melee/knife/knife_survival.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_survival_npe	object/weapon/melee/knife/knife_survival_npe.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_vibroblade	object/weapon/melee/knife/knife_vibroblade.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_knife_vibroblade_quest	object/weapon/melee/knife/knife_vibroblade_quest.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_01	object/weapon/melee/sword/sword_01.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_01_noob	object/weapon/melee/sword/sword_01_noob.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_01_npe	object/weapon/melee/sword/sword_01_npe.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_01_static	object/weapon/melee/sword/sword_01_static.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_02	object/weapon/melee/sword/sword_02.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_02_generic	object/weapon/melee/sword/sword_02_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_acid	object/weapon/melee/sword/sword_acid.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_avatar_wke_spiritblade	object/weapon/melee/sword/sword_avatar_wke_spiritblade.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_bestine_quest_sword	object/weapon/melee/sword/bestine_quest_sword.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_blade_ryyk	object/weapon/melee/sword/sword_blade_ryyk.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_curved_nyax	object/weapon/melee/sword/sword_curved_nyax.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_ep3_loot_eventide	object/weapon/melee/sword/ep3_loot_eventide.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_ep3_loot_ripper	object/weapon/melee/sword/ep3_loot_ripper.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_ep3_wookiee	object/weapon/melee/sword/ep3/sword_wookiee.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_mace_junti	object/weapon/melee/sword/sword_mace_junti.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_mace_junti_generic	object/weapon/melee/sword/sword_mace_junti_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_marauder	object/weapon/melee/sword/sword_marauder.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_massassi	object/weapon/melee/sword/sword_massassi.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_massassi_generic	object/weapon/melee/sword/sword_massassi_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_nyax	object/weapon/melee/sword/sword_nyax.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_rantok	object/weapon/melee/sword/sword_rantok.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_rantok_generic	object/weapon/melee/sword/sword_rantok_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_rsf	object/weapon/melee/sword/sword_rsf.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_rsf_generic	object/weapon/melee/sword/sword_rsf_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_som_sword_mustafar_bandit	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_som_sword_mustafar_bandit_generic	object/weapon/melee/sword/som_sword_mustafar_bandit_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_som_sword_obsidian	object/weapon/melee/sword/som_sword_obsidian.iff	ONE_HANDED_MELEE	5	KINETIC
+melee_sword_som_sword_obsidian_generic	object/weapon/melee/sword/som_sword_obsidian_generic.iff	ONE_HANDED_MELEE	5	KINETIC
+group_melee_1h_saber_energy_high	object/weapon/melee/sword/sword_lightsaber_anakin.iff;object/weapon/melee/sword/sword_lightsaber_andael.iff;object/weapon/melee/sword/sword_lightsaber_ben.iff;object/weapon/melee/sword/sword_lightsaber_dugald.iff;object/weapon/melee/sword/sword_lightsaber_leather.iff;object/weapon/melee/sword/sword_lightsaber_luke.iff;object/weapon/melee/sword/sword_lightsaber_luke_2h_test.iff;object/weapon/melee/sword/sword_lightsaber_mace.iff;object/weapon/melee/sword/sword_lightsaber_nebu.iff;object/weapon/melee/sword/sword_lightsaber_obi.iff;object/weapon/melee/sword/sword_lightsaber_quigon.iff;object/weapon/melee/sword/sword_lightsaber_sleekblack.iff;object/weapon/melee/sword/sword_lightsaber_sleeksilver.iff	ONE_HANDED_SABER	5	ENERGY
+group_melee_1h_saber_energy_low	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen1.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen2.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen3.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen4.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen1.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen2.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen3.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen4.iff	ONE_HANDED_SABER	5	ENERGY
+group_melee_1h_saber_kinetic_high	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen1.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen2.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen3.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen4.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen1.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen2.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen3.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+group_melee_1h_saber_kinetic_low	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s1_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s10_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s11_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s2_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s3_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s4_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s5_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s6_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s7_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s8_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_s9_training.iff;object/weapon/melee/sword/crafted_saber/sword_lightsaber_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_donotuse_s1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_ranged_donotuse_s01.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_donotuse_s2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_ranged_donotuse_s02.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen1_s02	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen1_s02.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen4_must	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen4_must.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_gen5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_gen5.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s1_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s1_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s1_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s1_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s10	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s10_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s10_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s10_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s10_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s10_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s11	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s11_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s11_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s11_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s11_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s11_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s12	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s12_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s12_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s12_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s12_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s12_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s13	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s13_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s13_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s13_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s13_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s13_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s2_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s2_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s2_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s2_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s2_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s3_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s3_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s3_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s3_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s3_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s4_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s4_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s4_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s4_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s4_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s5	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s5_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s5_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s5_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s5_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s5_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s6	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s6_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s6_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s6_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s6_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s6_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s7	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s7_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s7_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s7_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s7_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s7_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s8	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s8_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s8_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s8_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s8_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s8_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s9	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s9_gen1	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen1.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s9_gen2	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen2.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s9_gen3	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen3.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_one_handed_s9_gen4	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s9_gen4.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s1_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s1_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s10_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s10_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s11_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s11_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s2_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s2_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s3_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s3_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s4_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s4_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s5_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s5_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s6_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s6_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s7_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s7_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s8_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s8_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_s9_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_s9_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_crafted_lightsaber_training	object/weapon/melee/sword/crafted_saber/sword_lightsaber_training.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_anakin	object/weapon/melee/sword/sword_lightsaber_anakin.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_andael	object/weapon/melee/sword/sword_lightsaber_andael.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_ben	object/weapon/melee/sword/sword_lightsaber_ben.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_dugald	object/weapon/melee/sword/sword_lightsaber_dugald.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_leather	object/weapon/melee/sword/sword_lightsaber_leather.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_luke	object/weapon/melee/sword/sword_lightsaber_luke.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_luke_2h_test	object/weapon/melee/sword/sword_lightsaber_luke_2h_test.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_mace	object/weapon/melee/sword/sword_lightsaber_mace.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_nebu	object/weapon/melee/sword/sword_lightsaber_nebu.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_obi	object/weapon/melee/sword/sword_lightsaber_obi.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_quigon	object/weapon/melee/sword/sword_lightsaber_quigon.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_sleekblack	object/weapon/melee/sword/sword_lightsaber_sleekblack.iff	ONE_HANDED_SABER	5	KINETIC
+melee_lightsaber_sleeksilver	object/weapon/melee/sword/sword_lightsaber_sleeksilver.iff	ONE_HANDED_SABER	5	KINETIC
+group_ranged_pistol_energy_high	object/weapon/ranged/pistol/ep3/pistol_ion_stunner.iff;object/weapon/ranged/pistol/ep3/pistol_kyd21.iff;object/weapon/ranged/pistol/pistol_geonosian_sonic_blaster_loot.iff;object/weapon/ranged/pistol/pistol_intimidator.iff	PISTOL	35	ENERGY
+group_ranged_pistol_energy_low	object/weapon/ranged/pistol/pistol_cdef.iff;object/weapon/ranged/pistol/pistol_d18.iff;object/weapon/ranged/pistol/pistol_dh17.iff	PISTOL	35	ENERGY
+group_ranged_pistol_kinetic_high	object/weapon/ranged/pistol/pistol_srcombat.iff;object/weapon/ranged/pistol/pistol_striker.iff;object/weapon/ranged/pistol/pistol_alliance_disruptor.iff	PISTOL	35	KINETIC
+group_ranged_pistol_kinetic_low	object/weapon/ranged/pistol/pistol_fwg5.iff;object/weapon/ranged/pistol/pistol_dl44.iff	PISTOL	35	KINETIC
+ranged_creature_spit_heavy_flame	object/weapon/ranged/creature/creature_spit_heavy_flame.iff	PISTOL	35	ENERGY
+ranged_creature_spit_large_green	object/weapon/ranged/creature/creature_spit_large_green.iff	PISTOL	35	ENERGY
+ranged_creature_spit_large_red	object/weapon/ranged/creature/creature_spit_large_red.iff	PISTOL	35	ENERGY
+ranged_creature_spit_large_toxicgreen	object/weapon/ranged/creature/creature_spit_large_toxicgreen.iff	PISTOL	35	ENERGY
+ranged_creature_spit_large_yellow	object/weapon/ranged/creature/creature_spit_large_yellow.iff	PISTOL	35	ENERGY
+ranged_creature_spit_lightning_ball	object/weapon/ranged/creature/creature_spit_lightning_ball.iff	PISTOL	35	ENERGY
+ranged_creature_spit_particle_beam	object/weapon/ranged/creature/creature_spit_particle_beam.iff	PISTOL	35	ENERGY
+ranged_creature_spit_small_green	object/weapon/ranged/creature/creature_spit_small_green.iff	PISTOL	35	ENERGY
+ranged_creature_spit_small_red	object/weapon/ranged/creature/creature_spit_small_red.iff	PISTOL	35	ENERGY
+ranged_creature_spit_small_toxicgreen	object/weapon/ranged/creature/creature_spit_small_toxicgreen.iff	PISTOL	35	ENERGY
+ranged_creature_spit_small_yellow	object/weapon/ranged/creature/creature_spit_small_yellow.iff	PISTOL	35	ENERGY
+ranged_creature_spit_spray_green	object/weapon/ranged/creature/creature_spit_spray_green.iff	PISTOL	35	ENERGY
+ranged_creature_spit_spray_red	object/weapon/ranged/creature/creature_spit_spray_red.iff	PISTOL	35	ENERGY
+ranged_creature_spit_spray_toxicgreen	object/weapon/ranged/creature/creature_spit_spray_toxicgreen.iff	PISTOL	35	ENERGY
+ranged_creature_spit_spray_yellow	object/weapon/ranged/creature/creature_spit_spray_yellow.iff	PISTOL	35	ENERGY
+ranged_pistol_alliance_disruptor	object/weapon/ranged/pistol/pistol_alliance_disruptor.iff	PISTOL	35	ENERGY
+ranged_pistol_alliance_disruptor_generic	object/weapon/ranged/pistol/pistol_alliance_disruptor_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_avatar_trando_special	object/weapon/ranged/pistol/pistol_avatar_trando_special.iff	PISTOL	35	KINETIC
+ranged_pistol_cdef	object/weapon/ranged/pistol/pistol_cdef.iff	PISTOL	35	ENERGY
+ranged_pistol_cdef_corsec	object/weapon/ranged/pistol/pistol_cdef_corsec.iff	PISTOL	35	ENERGY
+ranged_pistol_cdef_noob	object/weapon/ranged/pistol/pistol_cdef_noob.iff	PISTOL	35	ENERGY
+ranged_pistol_cdef_npe	object/weapon/ranged/pistol/pistol_cdef_npe.iff	PISTOL	35	ENERGY
+ranged_pistol_d18	object/weapon/ranged/pistol/pistol_d18.iff	PISTOL	35	ENERGY
+ranged_pistol_d18_npe	object/weapon/ranged/pistol/pistol_d18_npe.iff	PISTOL	35	ENERGY
+ranged_pistol_de_10	object/weapon/ranged/pistol/pistol_de_10.iff	PISTOL	35	ENERGY
+ranged_pistol_de_10_generic	object/weapon/ranged/pistol/pistol_de_10_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_deathhammer	object/weapon/ranged/pistol/pistol_deathhammer.iff	PISTOL	35	ENERGY
+ranged_pistol_dh17	object/weapon/ranged/pistol/pistol_dh17.iff	PISTOL	35	ENERGY
+ranged_pistol_dl44	object/weapon/ranged/pistol/pistol_dl44.iff	PISTOL	35	ENERGY
+ranged_pistol_dl44_metal	object/weapon/ranged/pistol/pistol_dl44_metal.iff	PISTOL	35	ENERGY
+ranged_pistol_dl44_metal_light	object/weapon/ranged/pistol/pistol_dl44_metal_light.iff	PISTOL	35	ENERGY
+ranged_pistol_dl44_metal_static	object/weapon/ranged/pistol/pistol_dl44_metal_static.iff	PISTOL	35	ENERGY
+ranged_pistol_dx2	object/weapon/ranged/pistol/pistol_dx2.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_ion_stunner	object/weapon/ranged/pistol/ep3/pistol_ion_stunner.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_kyd21	object/weapon/ranged/pistol/ep3/pistol_kyd21.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_blackfalcon	object/weapon/ranged/pistol/ep3_loot_blackfalcon.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_blackhand	object/weapon/ranged/pistol/ep3_loot_blackhand.iff	PISTOL	35	KINETIC
+ranged_pistol_ep3_loot_calibrated	object/weapon/ranged/pistol/ep3_loot_calibrated.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_deathrain	object/weapon/ranged/pistol/ep3_loot_deathrain.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_dragoneye	object/weapon/ranged/pistol/ep3_loot_dragoneye.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_hydra	object/weapon/ranged/pistol/ep3_loot_hydra.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_liquidsilver	object/weapon/ranged/pistol/ep3_loot_liquidsilver.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_quicktrigger	object/weapon/ranged/pistol/ep3_loot_quicktrigger.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_rhiss	object/weapon/ranged/pistol/ep3_loot_rhiss.iff	PISTOL	35	ENERGY
+ranged_pistol_ep3_loot_silencer	object/weapon/ranged/pistol/ep3_loot_silencer.iff	PISTOL	35	KINETIC
+ranged_pistol_ep3_trando_suppressor	object/weapon/ranged/pistol/ep3/pistol_trando_suppressor.iff	PISTOL	35	KINETIC
+ranged_pistol_ep3_wookiee	object/weapon/ranged/pistol/ep3/pistol_wookiee.iff	PISTOL	35	KINETIC
+ranged_pistol_ep3_wookiee_bowcaster	object/weapon/ranged/pistol/ep3/pistol_wookiee_bowcaster.iff	PISTOL	35	KINETIC
+ranged_pistol_event_pistol_striker_enforcer	object/weapon/ranged/pistol/event_pistol_striker_enforcer.iff	PISTOL	35	ENERGY
+ranged_pistol_flare	object/weapon/ranged/pistol/pistol_flare.iff	PISTOL	35	KINETIC
+ranged_pistol_flechette	object/weapon/ranged/pistol/pistol_flechette.iff	PISTOL	35	ENERGY
+ranged_pistol_flechette_generic	object/weapon/ranged/pistol/pistol_flechette_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_fwg5	object/weapon/ranged/pistol/pistol_fwg5.iff	PISTOL	35	ENERGY
+ranged_pistol_fwg5_quest	object/weapon/ranged/pistol/pistol_fwg5_quest.iff	PISTOL	35	ENERGY
+ranged_pistol_geonosian_sonic_blaster_loot	object/weapon/ranged/pistol/pistol_geonosian_sonic_blaster_loot.iff	PISTOL	35	ENERGY
+ranged_pistol_intimidator	object/weapon/ranged/pistol/pistol_intimidator.iff	PISTOL	35	KINETIC
+ranged_pistol_intimidator_generic	object/weapon/ranged/pistol/pistol_intimidator_generic.iff	PISTOL	35	KINETIC
+ranged_pistol_jawa	object/weapon/ranged/pistol/pistol_jawa.iff	PISTOL	35	ENERGY
+ranged_pistol_kyd21_generic	object/weapon/ranged/pistol/pistol_kyd21_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_laucher_elite	object/weapon/ranged/pistol/pistol_laucher_elite.iff	PISTOL	35	ENERGY
+ranged_pistol_power5	object/weapon/ranged/pistol/pistol_power5.iff	PISTOL	35	ENERGY
+ranged_pistol_renegade	object/weapon/ranged/pistol/pistol_renegade.iff	PISTOL	35	ENERGY
+ranged_pistol_renegade_generic	object/weapon/ranged/pistol/pistol_renegade_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_republic_blaster	object/weapon/ranged/pistol/pistol_republic_blaster.iff	PISTOL	35	ENERGY
+ranged_pistol_republic_blaster_quest	object/weapon/ranged/pistol/pistol_republic_blaster_quest.iff	PISTOL	35	ENERGY
+ranged_pistol_scatter	object/weapon/ranged/pistol/pistol_scatter.iff	PISTOL	35	ENERGY
+ranged_pistol_scatter_generic	object/weapon/ranged/pistol/pistol_scatter_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_scatter_light	object/weapon/ranged/pistol/pistol_scatter_light.iff	PISTOL	35	ENERGY
+ranged_pistol_scout_blaster	object/weapon/ranged/pistol/pistol_scout_blaster.iff	PISTOL	35	ENERGY
+ranged_pistol_scout_blaster_ammo_test_2	object/weapon/ranged/pistol/pistol_scout_blaster_ammo_test_2.iff	PISTOL	35	ENERGY
+ranged_pistol_scout_blaster_corsec	object/weapon/ranged/pistol/pistol_scout_blaster_corsec.iff	PISTOL	35	ENERGY
+ranged_pistol_scout_blaster_npe	object/weapon/ranged/pistol/pistol_scout_blaster_npe.iff	PISTOL	35	ENERGY
+ranged_pistol_scout_blaster_static	object/weapon/ranged/pistol/pistol_scout_blaster_static.iff	PISTOL	35	ENERGY
+ranged_pistol_som_disruptor_pistol	object/weapon/ranged/pistol/som_disruptor_pistol.iff	PISTOL	35	ENERGY
+ranged_pistol_som_disruptor_pistol_generic	object/weapon/ranged/pistol/som_disruptor_pistol_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_som_ion_relic_pistol	object/weapon/ranged/pistol/som_ion_relic_pistol.iff	PISTOL	35	ENERGY
+ranged_pistol_som_ion_relic_pistol_generic	object/weapon/ranged/pistol/som_ion_relic_pistol_generic.iff	PISTOL	35	ENERGY
+ranged_pistol_srcombat	object/weapon/ranged/pistol/pistol_srcombat.iff	PISTOL	35	ENERGY
+ranged_pistol_striker	object/weapon/ranged/pistol/pistol_striker.iff	PISTOL	35	ENERGY
+ranged_pistol_striker_noob	object/weapon/ranged/pistol/pistol_striker_noob.iff	PISTOL	35	ENERGY
+ranged_pistol_striker_static	object/weapon/ranged/pistol/pistol_striker_static.iff	PISTOL	35	ENERGY
+ranged_pistol_tangle	object/weapon/ranged/pistol/pistol_tangle.iff	PISTOL	35	ENERGY
+group_melee_polearm_energy_high	object/weapon/melee/polearm/lance_cryo.iff;object/weapon/melee/polearm/som_lance_obsidian.iff;object/weapon/melee/polearm/som_lance_xandank.iff;object/weapon/melee/polearm/polearm_vibro_axe.iff	POLEARM_MELEE	5	ENERGY
+group_melee_polearm_energy_low	object/weapon/melee/polearm/lance_electric_polearm.iff;object/weapon/melee/polearm/lance_shock.iff	POLEARM_MELEE	5	ENERGY
+group_melee_polearm_kinetic_high	object/weapon/melee/polearm/lance_massassi.iff;object/weapon/melee/polearm/lance_nightsister.iff	POLEARM_MELEE	5	KINETIC
+group_melee_polearm_kinetic_low	object/weapon/melee/polearm/lance_staff_wood_s1.iff;object/weapon/melee/polearm/lance_staff_wood_s2.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_ep3_lance_trando	object/weapon/melee/polearm/ep3/lance_trando.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_ep3_lance_wookiee	object/weapon/melee/polearm/ep3/lance_wookiee.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_ep3_loot_pestilence	object/weapon/melee/polearm/ep3_loot_pestilence.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_ep3_loot_poisonspike	object/weapon/melee/polearm/ep3_loot_poisonspike.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_ep3_loot_strike	object/weapon/melee/polearm/ep3_loot_strike.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_avatar_wke_heartlance	object/weapon/melee/polearm/lance_avatar_wke_heartlance.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_controllerfp	object/weapon/melee/polearm/lance_controllerfp.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_controllerfp_nightsister	object/weapon/melee/polearm/lance_controllerfp_nightsister.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_controllerfp_npe	object/weapon/melee/polearm/lance_controllerfp_npe.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_cryo	object/weapon/melee/polearm/lance_cryo.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_electric	object/weapon/melee/polearm/lance_electric_polearm.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_electric	object/weapon/melee/polearm/polearm_lance_electric_polearm.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_kaminoan	object/weapon/melee/polearm/lance_kaminoan.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_kashyyk	object/weapon/melee/polearm/lance_kashyyk.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_kashyyk_generic	object/weapon/melee/polearm/lance_kashyyk_generic.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_massassi	object/weapon/melee/polearm/lance_massassi.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_nightsister	object/weapon/melee/polearm/lance_nightsister.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_nightsister_npc_version	object/weapon/melee/polearm/lance_nightsister_npc_version.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_shock	object/weapon/melee/polearm/lance_shock.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_janta	object/weapon/melee/polearm/lance_staff_janta.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_metal	object/weapon/melee/polearm/lance_staff_metal.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_wood_s1	object/weapon/melee/polearm/lance_staff_wood_s1.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_wood_s1_npe	object/weapon/melee/polearm/lance_staff_wood_s1_npe.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_wood_s2	object/weapon/melee/polearm/lance_staff_wood_s2.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_staff_wood_s2_npe	object/weapon/melee/polearm/lance_staff_wood_s2_npe.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_lance_vibrolance	object/weapon/melee/polearm/lance_vibrolance.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_som_lance_obsidian	object/weapon/melee/polearm/som_lance_obsidian.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_som_lance_obsidian_generic	object/weapon/melee/polearm/som_lance_obsidian_generic.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_som_lance_xandank	object/weapon/melee/polearm/som_lance_xandank.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_som_lance_xandank_generic	object/weapon/melee/polearm/som_lance_xandank_generic.iff	POLEARM_MELEE	5	KINETIC
+melee_polearm_vibro_axe	object/weapon/melee/polearm/polearm_vibro_axe.iff	POLEARM_MELEE	5	KINETIC
+group_melee_polearm_saber_energy_high	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen1.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen2.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen3.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen4.iff	POLEARM_SABER	5	ENERGY
+group_melee_polearm_saber_energy_low	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen1.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen2.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen3.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen4.iff	POLEARM_SABER	5	ENERGY
+group_melee_polearm_saber_kinetic_high	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen1.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen2.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen3.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen4.iff;object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	POLEARM_SABER	5	KINETIC
+group_melee_polearm_saber_kinetic_low	object/weapon/melee/polearm/lance_lightsaber_01.iff;object/weapon/melee/polearm/lance_lightsaber_02.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen1.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen2.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen3.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen4.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_gen5	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_gen5.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s1_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen1.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s1_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen2.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s1_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen3.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s1_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s1_gen4.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s2_gen1	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen1.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s2_gen2	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen2.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s2_gen3	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen3.iff	POLEARM_SABER	5	KINETIC
+melee_lightsaber_polearm_s2_gen4	object/weapon/melee/polearm/crafted_saber/sword_lightsaber_polearm_s2_gen4.iff	POLEARM_SABER	5	KINETIC
+melee_polearm_lance_lightsaber_01	object/weapon/melee/polearm/lance_lightsaber_01.iff	POLEARM_SABER	5	KINETIC
+melee_polearm_lance_lightsaber_02	object/weapon/melee/polearm/lance_lightsaber_02.iff	POLEARM_SABER	5	KINETIC
+group_ranged_rifle_energy_high	object/weapon/ranged/rifle/rifle_acid_beam.iff;object/weapon/ranged/rifle/rifle_beam.iff;object/weapon/ranged/rifle/ep3/rifle_dc15.iff;object/weapon/ranged/rifle/rifle_jawa_ion.iff	RIFLE	64	ENERGY
+group_ranged_rifle_energy_low	object/weapon/ranged/rifle/rifle_lightning.iff;object/weapon/ranged/rifle/rifle_proton.iff	RIFLE	64	ENERGY
+group_ranged_rifle_kinetic_high	object/weapon/ranged/rifle/rifle_ld1.iff;object/weapon/ranged/rifle/rifle_massassi_ink.iff;object/weapon/ranged/rifle/som_rifle_dp23.iff;object/weapon/ranged/rifle/som_rifle_mustafar_disruptor.iff	RIFLE	64	KINETIC
+group_ranged_rifle_kinetic_low	object/weapon/ranged/rifle/rifle_cdef.iff;object/weapon/ranged/rifle/rifle_dlt20.iff;object/weapon/ranged/rifle/rifle_e11.iff;object/weapon/ranged/rifle/rifle_sg82.iff	RIFLE	64	KINETIC
+ranged_droid_astromech_ranged	object/weapon/ranged/droid/droid_astromech_ranged.iff	RIFLE	64	ENERGY
+ranged_droid_cww8	object/weapon/ranged/droid/droid_cww8.iff	RIFLE	64	ENERGY
+ranged_droid_cww8_01	object/weapon/ranged/droid/droid_cww8_01.iff	RIFLE	64	ENERGY
+ranged_droid_cww8_02	object/weapon/ranged/droid/droid_cww8_02.iff	RIFLE	64	ENERGY
+ranged_droid_cww8_devistator	object/weapon/ranged/droid/droid_cww8_devistator.iff	RIFLE	64	ENERGY
+ranged_droid_droideka	object/weapon/ranged/droid/droid_droideka_ranged.iff	RIFLE	64	ENERGY
+ranged_droid_hk77_assault_droid	object/weapon/ranged/droid/droid_hk77_assault_droid.iff	RIFLE	64	ENERGY
+ranged_droid_hk77_boss	object/weapon/ranged/droid/droid_hk77_boss.iff	RIFLE	64	ENERGY
+ranged_droid_hk77_elite	object/weapon/ranged/droid/droid_hk77_elite.iff	RIFLE	64	ENERGY
+ranged_droid_probot	object/weapon/ranged/droid/droid_probot_ranged.iff	RIFLE	64	ENERGY
+ranged_droid_union_sentry	object/weapon/ranged/droid/droid_union_sentry.iff	RIFLE	64	ENERGY
+ranged_droid_union_sentry_01	object/weapon/ranged/droid/droid_union_sentry_01.iff	RIFLE	64	ENERGY
+ranged_droid_union_sentry_02	object/weapon/ranged/droid/droid_union_sentry_02.iff	RIFLE	64	ENERGY
+ranged_rifle_acid_beam	object/weapon/ranged/rifle/rifle_acid_beam.iff	RIFLE	64	ENERGY
+ranged_rifle_adventurer	object/weapon/ranged/rifle/rifle_adventurer.iff	RIFLE	64	KINETIC
+ranged_rifle_alliance_gauss_generic	object/weapon/ranged/rifle/rifle_alliance_gauss_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_avatar_laser_trando	object/weapon/ranged/rifle/rifle_avatar_laser_trando.iff	RIFLE	64	KINETIC
+ranged_rifle_beam	object/weapon/ranged/rifle/rifle_beam.iff	RIFLE	64	ENERGY
+ranged_rifle_berserker	object/weapon/ranged/rifle/rifle_berserker.iff	RIFLE	64	KINETIC
+ranged_rifle_bowcaster	object/weapon/ranged/rifle/rifle_bowcaster.iff	RIFLE	64	KINETIC
+ranged_rifle_bowcaster_heavy	object/weapon/ranged/rifle/rifle_bowcaster_heavy.iff	RIFLE	64	KINETIC
+ranged_rifle_cdef	object/weapon/ranged/rifle/rifle_cdef.iff	RIFLE	64	KINETIC
+ranged_rifle_cdef_npe	object/weapon/ranged/rifle/rifle_cdef_npe.iff	RIFLE	64	KINETIC
+ranged_rifle_dlt20	object/weapon/ranged/rifle/rifle_dlt20.iff	RIFLE	64	KINETIC
+ranged_rifle_dlt20_npe	object/weapon/ranged/rifle/rifle_dlt20_npe.iff	RIFLE	64	KINETIC
+ranged_rifle_dlt20a	object/weapon/ranged/rifle/rifle_dlt20a.iff	RIFLE	64	KINETIC
+ranged_rifle_e11	object/weapon/ranged/rifle/rifle_e11.iff	RIFLE	64	KINETIC
+ranged_rifle_e11_generic	object/weapon/ranged/rifle/rifle_e11_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_dc15	object/weapon/ranged/rifle/ep3/rifle_dc15.iff	RIFLE	64	ENERGY
+ranged_rifle_ep3_loot_darksting	object/weapon/ranged/rifle/ep3_loot_darksting.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_loot_dawnsorrow	object/weapon/ranged/rifle/ep3_loot_dawnsorrow.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_loot_nullifier	object/weapon/ranged/rifle/ep3_loot_nullifier.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_loot_retaliation	object/weapon/ranged/rifle/ep3_loot_retaliation.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_loot_sharpshooter	object/weapon/ranged/rifle/ep3_loot_sharpshooter.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_naktra_crystal	object/weapon/ranged/rifle/ep3/rifle_naktra_crystal.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_trando_hunter	object/weapon/ranged/rifle/ep3/rifle_trando_hunter.iff	RIFLE	64	KINETIC
+ranged_rifle_ep3_trando_hunter_crafted	object/weapon/ranged/rifle/ep3/rifle_trando_hunter_crafted.iff	RIFLE	64	KINETIC
+ranged_rifle_event_rifle_tusken_berserker	object/weapon/ranged/rifle/event_rifle_tusken_berserker.iff	RIFLE	64	KINETIC
+ranged_rifle_ewok_crossbow	object/weapon/ranged/rifle/rifle_ewok_crossbow.iff	RIFLE	64	KINETIC
+ranged_rifle_faux_bowcaster	object/weapon/ranged/rifle/rifle_faux_bowcaster.iff	RIFLE	64	KINETIC
+ranged_rifle_geo_drill	object/weapon/ranged/rifle/rifle_geo_drill.iff	RIFLE	64	KINETIC
+ranged_rifle_geo_drill_generic	object/weapon/ranged/rifle/rifle_geo_drill_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_jawa_ion	object/weapon/ranged/rifle/rifle_jawa_ion.iff	RIFLE	64	ENERGY
+ranged_rifle_laser	object/weapon/ranged/rifle/rifle_laser.iff	RIFLE	64	KINETIC
+ranged_rifle_laser_light	object/weapon/ranged/rifle/rifle_laser_light.iff	RIFLE	64	KINETIC
+ranged_rifle_laser_noob	object/weapon/ranged/rifle/rifle_laser_noob.iff	RIFLE	64	KINETIC
+ranged_rifle_ld1	object/weapon/ranged/rifle/rifle_ld1.iff	RIFLE	64	KINETIC
+ranged_rifle_ld1_generic	object/weapon/ranged/rifle/rifle_ld1_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_lightning	object/weapon/ranged/rifle/rifle_lightning.iff	RIFLE	64	ENERGY
+ranged_rifle_lightning_heavy	object/weapon/ranged/rifle/rifle_lightning_heavy.iff	RIFLE	64	ENERGY
+ranged_rifle_lightning_heavy_static	object/weapon/ranged/rifle/rifle_lightning_heavy_static.iff	RIFLE	64	ENERGY
+ranged_rifle_lightning_light	object/weapon/ranged/rifle/rifle_lightning_light.iff	RIFLE	64	ENERGY
+ranged_rifle_massassi_ink	object/weapon/ranged/rifle/rifle_massassi_ink.iff	RIFLE	64	KINETIC
+ranged_rifle_massassi_ink_generic	object/weapon/ranged/rifle/rifle_massassi_ink_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_odararissl	object/weapon/ranged/rifle/rifle_odararissl.iff	RIFLE	64	KINETIC
+ranged_rifle_proton	object/weapon/ranged/rifle/rifle_proton.iff	RIFLE	64	ENERGY
+ranged_rifle_sg82	object/weapon/ranged/rifle/rifle_sg82.iff	RIFLE	64	KINETIC
+ranged_rifle_sg82_npe	object/weapon/ranged/rifle/rifle_sg82_npe.iff	RIFLE	64	KINETIC
+ranged_rifle_som_rifle_dp23	object/weapon/ranged/rifle/som_rifle_dp23.iff	RIFLE	64	KINETIC
+ranged_rifle_som_rifle_dp23_generic	object/weapon/ranged/rifle/som_rifle_dp23_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_som_rifle_mustafar_disruptor	object/weapon/ranged/rifle/som_rifle_mustafar_disruptor.iff	RIFLE	64	KINETIC
+ranged_rifle_som_rifle_mustafar_disruptor_generic	object/weapon/ranged/rifle/som_rifle_mustafar_disruptor_generic.iff	RIFLE	64	KINETIC
+ranged_rifle_spraystick	object/weapon/ranged/rifle/rifle_spraystick.iff	RIFLE	64	KINETIC
+ranged_rifle_t21	object/weapon/ranged/rifle/rifle_t21.iff	RIFLE	64	KINETIC
+ranged_rifle_tenloss_dxr6_disruptor_loot	object/weapon/ranged/rifle/rifle_tenloss_dxr6_disruptor_loot.iff	RIFLE	64	KINETIC
+ranged_rifle_tusken	object/weapon/ranged/rifle/rifle_tusken.iff	RIFLE	64	KINETIC
+ranged_rifle_victor_tusken	object/weapon/ranged/rifle/rifle_victor_tusken.iff	RIFLE	64	KINETIC
+ranged_turret_block_large	object/weapon/ranged/turret/turret_block_large.iff	RIFLE	64	KINETIC
+ranged_vehicle_atst	object/weapon/ranged/vehicle/vehicle_atst_ranged.iff	RIFLE	64	ENERGY
+ranged_grenade_bug_bomb	object/weapon/ranged/grenade/grenade_bug_bomb.iff	THROWN	32	KINETIC
+ranged_grenade_cryoban	object/weapon/ranged/grenade/grenade_cryoban.iff	THROWN	15	KINETIC
+ranged_grenade_fallback	object/weapon/ranged/grenade/grenade_fallback.iff	THROWN	64	KINETIC
+ranged_grenade_fragmentation	object/weapon/ranged/grenade/grenade_fragmentation.iff	THROWN	15	KINETIC
+ranged_grenade_fragmentation_generic	object/weapon/ranged/grenade/grenade_fragmentation_generic.iff	THROWN	15	KINETIC
+ranged_grenade_fragmentation_light	object/weapon/ranged/grenade/grenade_fragmentation_light.iff	THROWN	15	KINETIC
+ranged_grenade_glop	object/weapon/ranged/grenade/grenade_glop.iff	THROWN	32	KINETIC
+ranged_grenade_imperial_detonator	object/weapon/ranged/grenade/grenade_imperial_detonator.iff	THROWN	32	KINETIC
+ranged_grenade_poison	object/weapon/ranged/grenade/grenade_poison.iff	THROWN	64	KINETIC
+ranged_grenade_proton	object/weapon/ranged/grenade/grenade_proton.iff	THROWN	32	KINETIC
+ranged_grenade_thermal_detonator	object/weapon/ranged/grenade/grenade_thermal_detonator.iff	THROWN	32	KINETIC
+group_melee_2h_energy_high	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff;object/weapon/melee/2h_sword/2h_sword_maul.iff;object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	TWO_HANDED_MELEE	5	ENERGY
+group_melee_2h_energy_low	object/weapon/melee/axe/axe_heavy_duty.iff;object/weapon/melee/axe/axe_vibroaxe.iff	TWO_HANDED_MELEE	5	ENERGY
+group_melee_2h_kinetic_high	object/weapon/melee/2h_sword/2h_sword_sith.iff;object/weapon/melee/2h_sword/ep3_loot_executer.iff;object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	TWO_HANDED_MELEE	5	KINETIC
+group_melee_2h_kinetic_low	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff;object/weapon/melee/2h_sword/2h_sword_cleaver.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_avatar_wke_toothpick	object/weapon/melee/2h_sword/2h_sword_avatar_wke_toothpick.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_battleaxe	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_battleaxe_npe	object/weapon/melee/2h_sword/2h_sword_battleaxe_npe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_battleaxe_quest	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_blacksun_hack	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_cleaver	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_cleaver_npe	object/weapon/melee/2h_sword/2h_sword_cleaver_npe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_ep3_loot_executer	object/weapon/melee/2h_sword/ep3_loot_executer.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_ep3_loot_lifeblood	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_ep3_loot_sickle	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_kashyyk	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_katana	object/weapon/melee/2h_sword/2h_sword_katana.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_katana_generic	object/weapon/melee/2h_sword/2h_sword_katana_generic.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_katana_quest	object/weapon/melee/2h_sword/2h_sword_katana_quest.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_maul	object/weapon/melee/2h_sword/2h_sword_maul.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_scythe	object/weapon/melee/2h_sword/2h_sword_scythe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_sith	object/weapon/melee/2h_sword/2h_sword_sith.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_sith_generic	object/weapon/melee/2h_sword/2h_sword_sith_generic.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_som_obsidian	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_som_obsidian_generic	object/weapon/melee/2h_sword/som_2h_sword_obsidian_generic.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_som_tulrus	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_2h_sword_som_tulrus_generic	object/weapon/melee/2h_sword/som_2h_sword_tulrus_generic.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_axe_heavy_duty	object/weapon/melee/axe/axe_heavy_duty.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_axe_heavy_duty_npe	object/weapon/melee/axe/axe_heavy_duty_npe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_axe_vibroaxe	object/weapon/melee/axe/axe_vibroaxe.iff	TWO_HANDED_MELEE	5	KINETIC
+melee_baton_gaderiffi	object/weapon/melee/baton/baton_gaderiffi.iff	TWO_HANDED_MELEE	5	KINETIC
+group_melee_2h_saber_energy_high	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen1.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen2.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen3.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen4.iff	TWO_HANDED_SABER	5	ENERGY
+group_melee_2h_saber_energy_low	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen1.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen2.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen3.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen4.iff	TWO_HANDED_SABER	5	ENERGY
+group_melee_2h_saber_kinetic_high	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen1.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen2.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen3.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+group_melee_2h_saber_kinetic_low	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen1.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen2.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen3.iff;object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen4_must	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen4_must.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_gen5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_gen5.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s1_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s1_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s1_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s1_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s10	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s10_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s10_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s10_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s10_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s10_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s11	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s11_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s11_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s11_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s11_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s11_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s12	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s12_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s12_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s12_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s12_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s12_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s13	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s13_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s13_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s13_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s13_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s13_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s2_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s2_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s2_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s2_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s2_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s3_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s3_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s3_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s3_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s3_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s4_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s4_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s4_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s4_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s4_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s5	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s5_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s5_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s5_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s5_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s5_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s6	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s6_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s6_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s6_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s6_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s6_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s7	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s7_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s7_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s7_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s7_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s7_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s8	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s8_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s8_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s8_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s8_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s8_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s9	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s9_gen1	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen1.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s9_gen2	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen2.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s9_gen3	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen3.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_two_handed_s9_gen4	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s9_gen4.iff	TWO_HANDED_SABER	5	KINETIC
+melee_lightsaber_vader	object/weapon/melee/sword/sword_lightsaber_vader.iff	TWO_HANDED_SABER	5	KINETIC
+melee_creature_default_weapon	object/weapon/creature/creature_default_weapon.iff	UNARMED	5	KINETIC
+melee_special_blacksun_razor	object/weapon/melee/special/blacksun_razor.iff	UNARMED	5	KINETIC
+melee_special_blacksun_razor_generic	object/weapon/melee/special/blacksun_razor_generic.iff	UNARMED	5	KINETIC
+melee_special_blasterfist	object/weapon/melee/special/blasterfist.iff	UNARMED	5	KINETIC
+melee_special_blasterfist_generic	object/weapon/melee/special/blasterfist_generic.iff	UNARMED	5	KINETIC
+melee_special_ep3_loot_heartstriker	object/weapon/melee/special/ep3_loot_heartstriker.iff	UNARMED	5	KINETIC
+melee_special_ep3_loot_necrosis	object/weapon/melee/special/ep3_loot_necrosis.iff	UNARMED	5	KINETIC
+melee_special_ep3_loot_soulstinger	object/weapon/melee/special/ep3_loot_soulstinger.iff	UNARMED	5	KINETIC
+melee_special_ep3_wookiee_knuckler	object/weapon/melee/special/ep3/wookiee_knuckler.iff	UNARMED	5	KINETIC
+melee_special_massassiknuckler	object/weapon/melee/special/massassiknuckler.iff	UNARMED	5	KINETIC
+melee_special_massassiknuckler_generic	object/weapon/melee/special/massassiknuckler_generic.iff	UNARMED	5	KINETIC
+melee_special_vibroknuckler	object/weapon/melee/special/vibroknuckler.iff	UNARMED	5	KINETIC
+melee_unarmed_default	object/weapon/melee/unarmed/unarmed_default.iff	UNARMED	5	KINETIC
+melee_unarmed_default_player	object/weapon/melee/unarmed/unarmed_default_player.iff	UNARMED	5	KINETIC
+ranged_mine_anti_vehicle	object/weapon/mine/wp_mine_anti_vehicle.iff	UNARMED	32	KINETIC
+ranged_mine_drx55	object/weapon/mine/wp_mine_drx55.iff	UNARMED	32	KINETIC
+ranged_mine_xg	object/weapon/mine/wp_mine_xg.iff	UNARMED	32	KINETIC
