@@ -69,14 +69,10 @@ public class DeveloperService extends Service {
 			new Location(-6079, 132, 971, Terrain.DATHOMIR),
 			new Location(-3989, 124.7, -10, Terrain.DATHOMIR),
 			new Location(-2457, 117.9, 1530, Terrain.DATHOMIR),
-			new Location(-5786, 510, -6554, Terrain.DATHOMIR),
 			
 			// Planet: Endor
 			new Location(-1714, 31.5, -8, Terrain.ENDOR),
 			new Location(-4683, 13.3, 4326, Terrain.ENDOR),
-
-			// Planet: Hoth
-			new Location(-3717.9, 94.1, 5975.5, Terrain.ADVENTURE2),
 
 			// Planet: Kashyyyk
 			new Location(275, 48.1, 503, Terrain.KASHYYYK_HUNTING),
@@ -108,7 +104,6 @@ public class DeveloperService extends Service {
 			
 			// Planet: Rori
 			new Location(-1211, 97.8, 4552, Terrain.RORI),
-			new Location(5289, 80.0, 6142, Terrain.RORI),
 			
 			// Planet: Talus
 			new Location(4958, 449.9, -5983, Terrain.TALUS),
@@ -116,7 +111,7 @@ public class DeveloperService extends Service {
 			// Planet: Tatooine
 			new Location(-3941, 60, 6318, Terrain.TATOOINE),
 			new Location(7380, 122.8, 4298, Terrain.TATOOINE),
-			new Location(3525, 4, -4807, Terrain.TATOOINE),
+			new Location(3525, 5, -4807, Terrain.TATOOINE),
 			new Location(3684, 7.8, 2357, Terrain.TATOOINE),
 			new Location(57, 152.3, -79, Terrain.TATOOINE),
 			new Location(-5458, 11, 2601, Terrain.TATOOINE),
@@ -124,7 +119,6 @@ public class DeveloperService extends Service {
 			// Planet: Yavin 4
 			new Location(-947, 86.4, -2131, Terrain.YAVIN4),
 			new Location(4928, 103.4, 5587, Terrain.YAVIN4),
-			new Location(5107, 81.7, 301, Terrain.YAVIN4),
 			new Location(-5575, 88, 4902, Terrain.YAVIN4),
 			new Location(-6485, 84, -446, Terrain.YAVIN4),
 
@@ -134,14 +128,7 @@ public class DeveloperService extends Service {
 			spawnObject("object/tangible/terminal/shared_terminal_character_builder.iff", cbtLocation, TangibleObject.class);
 		}
 
-		// Space Stations:
-		createCBT("du1_npe_station_1", 8, 50.2, 0.8, -36.5);
-		createCBT("du1_nova_orion", 8, 79.1, 0.8, -57.5);
-
 		// Dungeons:
-		createCBT("du1_heroic_ek_1", 1, -11.8, 0.2, -119.2);
-		createCBT("du1_heroic_isd_1", 36, -0.1, 173.8, 35.8);
-		createCBT("du1_npe_dungeon_1", 1, 7.7, 9.5, 6.6);
 		createCBT("kas_pob_myyydril_1", 1, -5.2, -1.3, -5.3);
 		createCBT("kas_pob_avatar_1", 1, 103.2, 0.1, 21.7);
 		createCBT("kas_pob_avatar_2", 1, 103.2, 0.1, 21.7);
