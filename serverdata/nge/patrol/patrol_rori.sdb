@@ -1,317 +1,51 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-patrol_ror_100	patrol_ror_100	FLIP	RORI	ror_world	0	-5607.9	75.6	-5794.5	0	Imperial Encampment - a thief
-patrol_ror_101	patrol_ror_100		RORI	ror_world	0	-5596.3	75.6	-5776.4	0	
-patrol_ror_102	patrol_ror_100		RORI	ror_world	0	-5578.9	75.4	-5771.7	0	
-patrol_ror_103	patrol_ror_100		RORI	ror_world	0	-5556.3	75.4	-5792.0	0	
-patrol_ror_104	patrol_ror_100		RORI	ror_world	0	-5566.9	75.7	-5839.5	0	
-patrol_ror_200	patrol_ror_200	FLIP	RORI	ror_world	0	-5553.2	75.6	-5815.4	0	Imperial Encampment - a thief
-patrol_ror_201	patrol_ror_200		RORI	ror_world	0	-5576.6	75.5	-5797.7	0	
-patrol_ror_202	patrol_ror_200		RORI	ror_world	0	-5620.4	75.5	-5799.6	0	
-patrol_ror_203	patrol_ror_200		RORI	ror_world	0	-5616.4	75.7	-5830.6	0	
-patrol_ror_300	patrol_ror_300	FLIP	RORI	ror_world	0	-4850.2	79.8	-2266.4	0	Narmle - a thief
-patrol_ror_301	patrol_ror_300		RORI	ror_world	0	-4823.7	76.7	-2286.3	0	
-patrol_ror_302	patrol_ror_300		RORI	ror_world	0	-4840.8	78.3	-2325.4	0	
-patrol_ror_303	patrol_ror_300		RORI	ror_world	0	-4869.7	77.6	-2301.2	0	
-patrol_ror_400	patrol_ror_400	FLIP	RORI	ror_world	0	-4795.0	75.8	-2324.2	0	Narmle - a thief
-patrol_ror_401	patrol_ror_400		RORI	ror_world	0	-4803.5	76.2	-2302.1	0	
-patrol_ror_402	patrol_ror_400		RORI	ror_world	0	-4799.1	76.2	-2253.7	0	
-patrol_ror_403	patrol_ror_400		RORI	ror_world	0	-4765.7	75.3	-2239.2	0	
-patrol_ror_404	patrol_ror_400		RORI	ror_world	0	-4767.0	81.1	-2273.7	0	
-patrol_ror_500	patrol_ror_500	FLIP	RORI	ror_world	0	-5224.4	76.5	5041.2	0	Outback - a thief
-patrol_ror_501	patrol_ror_500		RORI	ror_world	0	-5211.7	75.9	5062.3	0	
-patrol_ror_502	patrol_ror_500		RORI	ror_world	0	-5212.0	76.5	5081.2	0	
-patrol_ror_503	patrol_ror_500		RORI	ror_world	0	-5240.9	76.1	5101.5	0	
-patrol_ror_504	patrol_ror_500		RORI	ror_world	0	-5248.3	76.2	5075.0	0	
-patrol_ror_600	patrol_ror_600	FLIP	RORI	ror_world	0	-5232.9	75.8	5108.5	0	Outback - a thief
-patrol_ror_601	patrol_ror_600		RORI	ror_world	0	-5210.3	76.5	5081.0	0	
-patrol_ror_602	patrol_ror_600		RORI	ror_world	0	-5187.0	76.2	5097.2	0	
-patrol_ror_603	patrol_ror_600		RORI	ror_world	0	-5176.2	75.9	5128.5	0	
-patrol_ror_700	patrol_ror_700	FLIP	RORI	ror_world	0	-1084.7	76.4	4463.7	0	POI - Hyperdrive Research Facility - a thief
-patrol_ror_701	patrol_ror_700		RORI	ror_world	0	-1095.5	75.3	4430.1	0	
-patrol_ror_702	patrol_ror_700		RORI	ror_world	0	-1089.3	76.2	4389.9	0	
-patrol_ror_703	patrol_ror_700		RORI	ror_world	0	-1124.0	78.3	4374.6	0	
-patrol_ror_704	patrol_ror_700		RORI	ror_world	0	-1123.1	78.2	4406.3	0	
-patrol_ror_705	patrol_ror_700		RORI	ror_world	0	-1127.5	81.2	4427.2	0	
-patrol_ror_800	patrol_ror_800	FLIP	RORI	ror_world	0	2850.7	105.8	-1253.3	0	Outback - a thief
-patrol_ror_801	patrol_ror_800		RORI	ror_world	0	2870.5	106.6	-1264.9	0	
-patrol_ror_802	patrol_ror_800		RORI	ror_world	0	2903.2	107.5	-1263.6	0	
-patrol_ror_803	patrol_ror_800		RORI	ror_world	0	2903.3	107.4	-1289.2	0	
-patrol_ror_804	patrol_ror_800		RORI	ror_world	0	2872.7	106.7	-1297.4	0	
-patrol_ror_805	patrol_ror_800		RORI	ror_world	0	2853.7	106.1	-1280.4	0	
-patrol_ror_900	patrol_ror_900	FLIP	RORI	ror_world	0	2899.4	107.2	-1305.3	0	Outback - a thief
-patrol_ror_901	patrol_ror_900		RORI	ror_world	0	2888.0	107.3	-1289.0	0	
-patrol_ror_902	patrol_ror_900		RORI	ror_world	0	2861.4	106.4	-1293.4	0	
-patrol_ror_903	patrol_ror_900		RORI	ror_world	0	2864.9	106.1	-1320.0	0	
-patrol_ror_1000	patrol_ror_1000	FLIP	RORI	ror_world	0	5404.4	84.0	6152.5	0	Restuss Starport - a thief
-patrol_ror_1001	patrol_ror_1000		RORI	ror_world	0	5388.7	82.0	6138.7	0	
-patrol_ror_1002	patrol_ror_1000		RORI	ror_world	0	5365.1	80.1	6113.5	0	
-patrol_ror_1003	patrol_ror_1000		RORI	ror_world	0	5395.8	80.0	6093.2	0	
-patrol_ror_1004	patrol_ror_1000		RORI	ror_world	0	5404.6	80.0	6115.3	0	
-patrol_ror_1005	patrol_ror_1000		RORI	ror_world	0	5426.1	79.7	6141.2	0	
-patrol_ror_1100	patrol_ror_1100	FLIP	RORI	ror_world	0	3682.4	96.0	-6462.8	0	Rebel Outpost - a CLL-8 binary load lifter
-patrol_ror_1101	patrol_ror_1100		RORI	ror_world	0	3669.9	96.0	-6473.9	0	
-patrol_ror_1102	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6446.5	0	
-patrol_ror_1103	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6412.0	0	
-patrol_ror_1104	patrol_ror_1100		RORI	ror_world	0	3665.3	96.0	-6409.1	0	
-patrol_ror_1105	patrol_ror_1100		RORI	ror_world	0	3665.2	96.0	-6404.3	0	
-patrol_ror_1200	patrol_ror_1200	FLIP	RORI	ror_imp_weapons_research_facility	10	35.5	-12.0	35.9	0	Weapon Research Facility - a Meatlump pronk
-patrol_ror_1201	patrol_ror_1200		RORI	ror_imp_weapons_research_facility	10	35.5	-12.0	70.8	0	
-patrol_ror_1300	patrol_ror_1300	FLIP	RORI	ror_world	0	5905.7	81.0	5642.0	0	Restuss - Stormtroopers group #1
-patrol_ror_1301	patrol_ror_1300		RORI	ror_world	0	5895.2	80.8	5641.9	0	
-patrol_ror_1302	patrol_ror_1300		RORI	ror_world	0	5841.7	82.1	5652.3	0	
-patrol_ror_1303	patrol_ror_1300		RORI	ror_world	0	5780.7	80.4	5649.1	0	
-patrol_ror_1304	patrol_ror_1300		RORI	ror_world	0	5735.1	80.7	5650.5	0	
-patrol_ror_1305	patrol_ror_1300		RORI	ror_world	0	5683.5	80.9	5661.0	0	
-patrol_ror_1306	patrol_ror_1300		RORI	ror_world	0	5638.6	81.0	5666.4	0	
-patrol_ror_1307	patrol_ror_1300		RORI	ror_world	0	5588.3	80.1	5665.6	0	
-patrol_ror_1308	patrol_ror_1300		RORI	ror_world	0	5549.8	80.0	5666.1	0	
-patrol_ror_1309	patrol_ror_1300		RORI	ror_world	0	5503.5	80.0	5666.5	0	
-patrol_ror_1310	patrol_ror_1300		RORI	ror_world	0	5453.5	80.0	5668.2	0	
-patrol_ror_1311	patrol_ror_1300		RORI	ror_world	0	5409.3	80.0	5664.1	0	
-patrol_ror_1312	patrol_ror_1300		RORI	ror_world	0	5381.1	80.0	5652.2	0	
-patrol_ror_1313	patrol_ror_1300		RORI	ror_world	0	5355.0	80.0	5632.2	0	
-patrol_ror_1314	patrol_ror_1300		RORI	ror_world	0	5330.4	80.0	5628.0	0	
-patrol_ror_1315	patrol_ror_1300		RORI	ror_world	0	5314.5	80.0	5654.5	300	
-patrol_ror_1400	patrol_ror_1400	FLIP	RORI	ror_world	0	5930.5	81.0	5625.2	0	Restuss - Stormtroopers group #2
-patrol_ror_1401	patrol_ror_1400		RORI	ror_world	0	5913.1	81.0	5612.0	0	
-patrol_ror_1402	patrol_ror_1400		RORI	ror_world	0	5871.3	80.5	5616.0	0	
-patrol_ror_1403	patrol_ror_1400		RORI	ror_world	0	5827.0	81.4	5615.9	0	
-patrol_ror_1404	patrol_ror_1400		RORI	ror_world	0	5772.1	80.3	5616.2	0	
-patrol_ror_1405	patrol_ror_1400		RORI	ror_world	0	5728.9	80.5	5607.4	0	
-patrol_ror_1406	patrol_ror_1400		RORI	ror_world	0	5672.2	80.6	5600.1	0	
-patrol_ror_1407	patrol_ror_1400		RORI	ror_world	0	5618.0	80.7	5601.1	0	
-patrol_ror_1408	patrol_ror_1400		RORI	ror_world	0	5560.2	80.0	5603.1	0	
-patrol_ror_1409	patrol_ror_1400		RORI	ror_world	0	5510.0	80.0	5606.2	0	
-patrol_ror_1410	patrol_ror_1400		RORI	ror_world	0	5503.6	80.0	5640.8	0	
-patrol_ror_1411	patrol_ror_1400		RORI	ror_world	0	5477.7	80.0	5654.1	0	
-patrol_ror_1412	patrol_ror_1400		RORI	ror_world	0	5438.7	80.0	5660.9	0	
-patrol_ror_1413	patrol_ror_1400		RORI	ror_world	0	5417.4	80.0	5662.7	0	
-patrol_ror_1414	patrol_ror_1400		RORI	ror_world	0	5382.2	80.0	5646.9	0	
-patrol_ror_1415	patrol_ror_1400		RORI	ror_world	0	5368.1	80.0	5640.1	0	
-patrol_ror_1416	patrol_ror_1400		RORI	ror_world	0	5347.1	80.0	5621.1	0	
-patrol_ror_1417	patrol_ror_1400		RORI	ror_world	0	5308.3	80.0	5645.9	300	
-patrol_ror_1500	patrol_ror_1500	FLIP	RORI	ror_world	0	5972.7	81.0	5508.9	0	Restuss - AT-ST #1
-patrol_ror_1501	patrol_ror_1500		RORI	ror_world	0	5957.5	80.8	5509.8	0	
-patrol_ror_1502	patrol_ror_1500		RORI	ror_world	0	5930.1	81.2	5536.6	0	
-patrol_ror_1503	patrol_ror_1500		RORI	ror_world	0	5911.1	80.9	5548.4	0	
-patrol_ror_1504	patrol_ror_1500		RORI	ror_world	0	5862.6	80.7	5576.7	0	
-patrol_ror_1505	patrol_ror_1500		RORI	ror_world	0	5815.8	80.2	5606.5	0	
-patrol_ror_1506	patrol_ror_1500		RORI	ror_world	0	5768.9	80.8	5635.9	0	
-patrol_ror_1507	patrol_ror_1500		RORI	ror_world	0	5725.8	80.8	5658.5	0	
-patrol_ror_1508	patrol_ror_1500		RORI	ror_world	0	5672.1	80.9	5677.5	0	
-patrol_ror_1509	patrol_ror_1500		RORI	ror_world	0	5610.0	80.4	5693.2	0	
-patrol_ror_1510	patrol_ror_1500		RORI	ror_world	0	5554.8	80.0	5704.0	0	
-patrol_ror_1511	patrol_ror_1500		RORI	ror_world	0	5529.4	80.0	5706.0	0	
-patrol_ror_1512	patrol_ror_1500		RORI	ror_world	0	5505.1	80.0	5702.9	0	
-patrol_ror_1513	patrol_ror_1500		RORI	ror_world	0	5479.5	80.0	5688.9	0	
-patrol_ror_1514	patrol_ror_1500		RORI	ror_world	0	5430.5	80.0	5681.5	0	
-patrol_ror_1515	patrol_ror_1500		RORI	ror_world	0	5381.4	80.0	5664.3	0	
-patrol_ror_1516	patrol_ror_1500		RORI	ror_world	0	5351.6	80.0	5635.0	0	
-patrol_ror_1517	patrol_ror_1500		RORI	ror_world	0	5340.7	80.0	5629.5	0	
-patrol_ror_1518	patrol_ror_1500		RORI	ror_world	0	5322.8	80.0	5641.8	0	
-patrol_ror_1519	patrol_ror_1500		RORI	ror_world	0	5317.0	80.0	5656.4	300	
-patrol_ror_1600	patrol_ror_1600	FLIP	RORI	ror_world	0	5909.1	81.0	5572.3	0	Restuss - Stormtroopers group #3
-patrol_ror_1601	patrol_ror_1600		RORI	ror_world	0	5885.8	81.0	5584.5	0	
-patrol_ror_1602	patrol_ror_1600		RORI	ror_world	0	5835.1	81.5	5582.2	0	
-patrol_ror_1603	patrol_ror_1600		RORI	ror_world	0	5776.7	80.2	5576.0	0	
-patrol_ror_1604	patrol_ror_1600		RORI	ror_world	0	5723.9	81.4	5555.1	0	
-patrol_ror_1605	patrol_ror_1600		RORI	ror_world	0	5670.1	80.7	5537.5	0	
-patrol_ror_1606	patrol_ror_1600		RORI	ror_world	0	5623.5	80.3	5525.5	0	
-patrol_ror_1607	patrol_ror_1600		RORI	ror_world	0	5567.8	80.8	5514.0	0	
-patrol_ror_1608	patrol_ror_1600		RORI	ror_world	0	5505.6	80.0	5497.1	0	
-patrol_ror_1609	patrol_ror_1600		RORI	ror_world	0	5440.8	80.0	5488.8	0	
-patrol_ror_1610	patrol_ror_1600		RORI	ror_world	0	5383.0	80.0	5503.2	0	
-patrol_ror_1611	patrol_ror_1600		RORI	ror_world	0	5346.4	80.0	5536.8	0	
-patrol_ror_1612	patrol_ror_1600		RORI	ror_world	0	5329.3	80.0	5576.6	0	
-patrol_ror_1613	patrol_ror_1600		RORI	ror_world	0	5309.6	80.0	5592.4	0	
-patrol_ror_1614	patrol_ror_1600		RORI	ror_world	0	5308.5	80.0	5628.5	0	
-patrol_ror_1615	patrol_ror_1600		RORI	ror_world	0	5316.3	80.0	5662.0	300	
-patrol_ror_1700	patrol_ror_1700	FLIP	RORI	ror_world	0	4788.3	80.0	5775.7	0	Restuss - Alliance group #1
-patrol_ror_1701	patrol_ror_1700		RORI	ror_world	0	4821.7	78.0	5777.9	0	
-patrol_ror_1702	patrol_ror_1700		RORI	ror_world	0	4866.5	76.6	5793.5	0	
-patrol_ror_1703	patrol_ror_1700		RORI	ror_world	0	4919.5	77.2	5809.9	0	
-patrol_ror_1704	patrol_ror_1700		RORI	ror_world	0	4970.0	77.5	5807.3	0	
-patrol_ror_1705	patrol_ror_1700		RORI	ror_world	0	5012.1	79.7	5806.1	0	
-patrol_ror_1706	patrol_ror_1700		RORI	ror_world	0	5044.7	81.1	5806.1	0	
-patrol_ror_1707	patrol_ror_1700		RORI	ror_world	0	5086.2	80.0	5807.1	0	
-patrol_ror_1708	patrol_ror_1700		RORI	ror_world	0	5118.7	80.0	5808.7	0	
-patrol_ror_1709	patrol_ror_1700		RORI	ror_world	0	5146.6	80.0	5804.9	0	
-patrol_ror_1710	patrol_ror_1700		RORI	ror_world	0	5175.7	80.0	5824.6	0	
-patrol_ror_1711	patrol_ror_1700		RORI	ror_world	0	5215.0	80.0	5829.5	0	
-patrol_ror_1712	patrol_ror_1700		RORI	ror_world	0	5248.5	80.0	5833.6	0	
-patrol_ror_1713	patrol_ror_1700		RORI	ror_world	0	5265.3	80.0	5833.0	0	
-patrol_ror_1714	patrol_ror_1700		RORI	ror_world	0	5280.6	80.0	5792.1	0	
-patrol_ror_1715	patrol_ror_1700		RORI	ror_world	0	5279.7	80.0	5750.5	0	
-patrol_ror_1716	patrol_ror_1700		RORI	ror_world	0	5283.6	80.0	5713.1	0	
-patrol_ror_1717	patrol_ror_1700		RORI	ror_world	0	5312.5	80.0	5663.4	300	
-patrol_ror_1800	patrol_ror_1800	FLIP	RORI	ror_world	0	4839.5	80.0	5817.6	0	Restuss - Alliance group #2
-patrol_ror_1801	patrol_ror_1800		RORI	ror_world	0	4861.7	77.0	5821.8	0	
-patrol_ror_1802	patrol_ror_1800		RORI	ror_world	0	4892.8	76.1	5810.1	0	
-patrol_ror_1803	patrol_ror_1800		RORI	ror_world	0	4922.7	77.3	5798.8	0	
-patrol_ror_1804	patrol_ror_1800		RORI	ror_world	0	4972.9	77.0	5778.6	0	
-patrol_ror_1805	patrol_ror_1800		RORI	ror_world	0	5015.4	82.8	5760.1	0	
-patrol_ror_1806	patrol_ror_1800		RORI	ror_world	0	5050.8	80.3	5749.6	0	
-patrol_ror_1807	patrol_ror_1800		RORI	ror_world	0	5086.0	80.0	5745.9	0	
-patrol_ror_1808	patrol_ror_1800		RORI	ror_world	0	5135.4	80.0	5746.3	0	
-patrol_ror_1809	patrol_ror_1800		RORI	ror_world	0	5184.6	80.0	5746.6	0	
-patrol_ror_1810	patrol_ror_1800		RORI	ror_world	0	5241.2	80.0	5746.2	0	
-patrol_ror_1811	patrol_ror_1800		RORI	ror_world	0	5274.3	80.0	5734.0	0	
-patrol_ror_1812	patrol_ror_1800		RORI	ror_world	0	5285.7	80.0	5699.0	0	
-patrol_ror_1813	patrol_ror_1800		RORI	ror_world	0	5303.4	80.0	5676.0	300	
-patrol_ror_1900	patrol_ror_1900	FLIP	RORI	ror_world	0	4786.8	80.0	5895.6	0	Restuss - Alliance group #3
-patrol_ror_1901	patrol_ror_1900		RORI	ror_world	0	4798.3	77.0	5855.9	0	
-patrol_ror_1902	patrol_ror_1900		RORI	ror_world	0	4810.5	77.1	5828.7	0	
-patrol_ror_1903	patrol_ror_1900		RORI	ror_world	0	4824.1	80.0	5805.5	0	
-patrol_ror_1904	patrol_ror_1900		RORI	ror_world	0	4836.1	76.5	5778.7	0	
-patrol_ror_1905	patrol_ror_1900		RORI	ror_world	0	4859.6	75.7	5740.6	0	
-patrol_ror_1906	patrol_ror_1900		RORI	ror_world	0	4889.9	75.4	5712.8	0	
-patrol_ror_1907	patrol_ror_1900		RORI	ror_world	0	4921.6	78.3	5676.2	0	
-patrol_ror_1908	patrol_ror_1900		RORI	ror_world	0	4953.4	86.2	5657.3	0	
-patrol_ror_1909	patrol_ror_1900		RORI	ror_world	0	4990.3	84.7	5640.2	0	
-patrol_ror_1910	patrol_ror_1900		RORI	ror_world	0	5024.6	78.6	5630.3	0	
-patrol_ror_1911	patrol_ror_1900		RORI	ror_world	0	5068.5	80.0	5627.1	0	
-patrol_ror_1912	patrol_ror_1900		RORI	ror_world	0	5124.3	80.0	5625.8	0	
-patrol_ror_1913	patrol_ror_1900		RORI	ror_world	0	5166.3	80.0	5625.7	0	
-patrol_ror_1914	patrol_ror_1900		RORI	ror_world	0	5207.1	80.0	5626.2	0	
-patrol_ror_1915	patrol_ror_1900		RORI	ror_world	0	5242.4	80.0	5633.1	0	
-patrol_ror_1916	patrol_ror_1900		RORI	ror_world	0	5259.3	80.0	5646.5	0	
-patrol_ror_1917	patrol_ror_1900		RORI	ror_world	0	5267.6	80.0	5670.1	0	
-patrol_ror_1918	patrol_ror_1900		RORI	ror_world	0	5283.7	80.0	5690.2	0	
-patrol_ror_1919	patrol_ror_1900		RORI	ror_world	0	5313.5	80.0	5664.5	300	
-patrol_ror_2000	patrol_ror_2000	FLIP	RORI	ror_world	0	5965.1	81.0	5670.5	0	Restuss - Stormtroopers group #4
-patrol_ror_2001	patrol_ror_2000		RORI	ror_world	0	5939.4	82.6	5691.1	0	
-patrol_ror_2002	patrol_ror_2000		RORI	ror_world	0	5901.1	80.9	5704.8	0	
-patrol_ror_2003	patrol_ror_2000		RORI	ror_world	0	5845.1	80.9	5714.0	0	
-patrol_ror_2004	patrol_ror_2000		RORI	ror_world	0	5795.9	80.2	5724.3	0	
-patrol_ror_2005	patrol_ror_2000		RORI	ror_world	0	5745.9	80.9	5726.7	0	
-patrol_ror_2006	patrol_ror_2000		RORI	ror_world	0	5688.1	80.5	5727.9	0	
-patrol_ror_2007	patrol_ror_2000		RORI	ror_world	0	5637.3	80.6	5727.2	0	
-patrol_ror_2008	patrol_ror_2000		RORI	ror_world	0	5585.3	80.1	5728.6	0	
-patrol_ror_2009	patrol_ror_2000		RORI	ror_world	0	5542.1	80.0	5732.6	0	
-patrol_ror_2010	patrol_ror_2000		RORI	ror_world	0	5509.1	80.0	5736.8	0	
-patrol_ror_2011	patrol_ror_2000		RORI	ror_world	0	5497.1	80.0	5739.7	0	
-patrol_ror_2012	patrol_ror_2000		RORI	ror_world	0	5476.1	80.0	5739.1	0	
-patrol_ror_2013	patrol_ror_2000		RORI	ror_world	0	5453.6	80.0	5738.5	0	
-patrol_ror_2014	patrol_ror_2000		RORI	ror_world	0	5426.7	80.0	5733.7	0	
-patrol_ror_2015	patrol_ror_2000		RORI	ror_world	0	5392.2	80.0	5722.0	0	
-patrol_ror_2016	patrol_ror_2000		RORI	ror_world	0	5371.6	80.0	5708.1	0	
-patrol_ror_2017	patrol_ror_2000		RORI	ror_world	0	5369.7	80.0	5671.6	0	
-patrol_ror_2018	patrol_ror_2000		RORI	ror_world	0	5357.1	80.0	5644.8	0	
-patrol_ror_2019	patrol_ror_2000		RORI	ror_world	0	5344.6	80.0	5630.5	0	
-patrol_ror_2020	patrol_ror_2000		RORI	ror_world	0	5326.4	80.0	5634.2	0	
-patrol_ror_2021	patrol_ror_2000		RORI	ror_world	0	5314.6	80.0	5658.8	300	
-patrol_ror_2100	patrol_ror_2100	FLIP	RORI	ror_world	0	5918.3	81.0	5514.1	0	Restuss - Stormtroopers group #5
-patrol_ror_2101	patrol_ror_2100		RORI	ror_world	0	5901.0	79.0	5495.7	0	
-patrol_ror_2102	patrol_ror_2100		RORI	ror_world	0	5883.7	80.8	5485.4	0	
-patrol_ror_2103	patrol_ror_2100		RORI	ror_world	0	5847.1	79.8	5485.4	0	
-patrol_ror_2104	patrol_ror_2100		RORI	ror_world	0	5807.6	80.8	5486.9	0	
-patrol_ror_2105	patrol_ror_2100		RORI	ror_world	0	5761.6	80.2	5488.7	0	
-patrol_ror_2106	patrol_ror_2100		RORI	ror_world	0	5704.8	80.1	5488.9	0	
-patrol_ror_2107	patrol_ror_2100		RORI	ror_world	0	5647.1	80.7	5489.0	0	
-patrol_ror_2108	patrol_ror_2100		RORI	ror_world	0	5595.9	80.7	5489.5	0	
-patrol_ror_2109	patrol_ror_2100		RORI	ror_world	0	5539.1	80.7	5488.0	0	
-patrol_ror_2110	patrol_ror_2100		RORI	ror_world	0	5489.4	80.0	5487.6	0	
-patrol_ror_2111	patrol_ror_2100		RORI	ror_world	0	5435.2	80.0	5486.3	0	
-patrol_ror_2112	patrol_ror_2100		RORI	ror_world	0	5393.5	80.0	5491.2	0	
-patrol_ror_2113	patrol_ror_2100		RORI	ror_world	0	5351.5	80.0	5499.0	0	
-patrol_ror_2114	patrol_ror_2100		RORI	ror_world	0	5339.9	80.0	5529.3	0	
-patrol_ror_2115	patrol_ror_2100		RORI	ror_world	0	5334.0	80.0	5569.5	0	
-patrol_ror_2116	patrol_ror_2100		RORI	ror_world	0	5326.6	80.0	5601.3	0	
-patrol_ror_2117	patrol_ror_2100		RORI	ror_world	0	5325.6	80.0	5631.1	0	
-patrol_ror_2118	patrol_ror_2100		RORI	ror_world	0	5315.2	80.0	5664.3	300	
-patrol_ror_2200	patrol_ror_2200	FLIP	RORI	ror_world	0	5971.1	81.0	5542.9	0	Restuss - Stormtroopers group #6
-patrol_ror_2201	patrol_ror_2200		RORI	ror_world	0	5941.7	82.3	5550.1	0	
-patrol_ror_2202	patrol_ror_2200		RORI	ror_world	0	5907.0	80.8	5555.2	0	
-patrol_ror_2203	patrol_ror_2200		RORI	ror_world	0	5861.9	80.3	5554.6	0	
-patrol_ror_2204	patrol_ror_2200		RORI	ror_world	0	5820.9	80.9	5554.7	0	
-patrol_ror_2205	patrol_ror_2200		RORI	ror_world	0	5761.5	80.9	5553.1	0	
-patrol_ror_2206	patrol_ror_2200		RORI	ror_world	0	5717.1	81.1	5551.3	0	
-patrol_ror_2207	patrol_ror_2200		RORI	ror_world	0	5671.5	80.4	5549.0	0	
-patrol_ror_2208	patrol_ror_2200		RORI	ror_world	0	5623.9	80.8	5540.2	0	
-patrol_ror_2209	patrol_ror_2200		RORI	ror_world	0	5562.8	80.4	5531.5	0	
-patrol_ror_2210	patrol_ror_2200		RORI	ror_world	0	5517.9	80.0	5536.0	0	
-patrol_ror_2211	patrol_ror_2200		RORI	ror_world	0	5496.1	80.0	5543.2	0	
-patrol_ror_2212	patrol_ror_2200		RORI	ror_world	0	5477.2	80.0	5533.6	0	
-patrol_ror_2213	patrol_ror_2200		RORI	ror_world	0	5435.4	80.0	5533.6	0	
-patrol_ror_2214	patrol_ror_2200		RORI	ror_world	0	5426.4	80.0	5545.5	0	
-patrol_ror_2215	patrol_ror_2200		RORI	ror_world	0	5416.0	80.0	5570.7	0	
-patrol_ror_2216	patrol_ror_2200		RORI	ror_world	0	5379.5	80.0	5576.9	0	
-patrol_ror_2217	patrol_ror_2200		RORI	ror_world	0	5361.5	80.0	5587.8	0	
-patrol_ror_2218	patrol_ror_2200		RORI	ror_world	0	5352.3	80.0	5605.4	0	
-patrol_ror_2219	patrol_ror_2200		RORI	ror_world	0	5329.7	80.0	5637.2	0	
-patrol_ror_2220	patrol_ror_2200		RORI	ror_world	0	5310.9	80.0	5669.2	300	
-patrol_ror_2300	patrol_ror_2300	FLIP	RORI	ror_world	0	4729.4	80.0	5805.7	0	Restuss - Alliance group #4
-patrol_ror_2301	patrol_ror_2300		RORI	ror_world	0	4758.8	80.0	5789.6	0	
-patrol_ror_2302	patrol_ror_2300		RORI	ror_world	0	4782.2	80.0	5786.4	0	
-patrol_ror_2303	patrol_ror_2300		RORI	ror_world	0	4793.2	79.7	5778.0	0	
-patrol_ror_2304	patrol_ror_2300		RORI	ror_world	0	4820.4	78.4	5772.8	0	
-patrol_ror_2305	patrol_ror_2300		RORI	ror_world	0	4871.1	76.5	5763.7	0	
-patrol_ror_2306	patrol_ror_2300		RORI	ror_world	0	4907.2	77.4	5755.1	0	
-patrol_ror_2307	patrol_ror_2300		RORI	ror_world	0	4962.8	76.5	5736.5	0	
-patrol_ror_2308	patrol_ror_2300		RORI	ror_world	0	4994.6	81.1	5721.2	0	
-patrol_ror_2309	patrol_ror_2300		RORI	ror_world	0	5035.4	79.9	5710.6	0	
-patrol_ror_2310	patrol_ror_2300		RORI	ror_world	0	5058.7	80.0	5688.1	0	
-patrol_ror_2311	patrol_ror_2300		RORI	ror_world	0	5083.7	80.0	5666.3	0	
-patrol_ror_2312	patrol_ror_2300		RORI	ror_world	0	5107.1	80.0	5654.9	0	
-patrol_ror_2313	patrol_ror_2300		RORI	ror_world	0	5116.1	80.0	5627.7	0	
-patrol_ror_2314	patrol_ror_2300		RORI	ror_world	0	5155.8	80.0	5623.9	0	
-patrol_ror_2315	patrol_ror_2300		RORI	ror_world	0	5196.9	80.0	5625.2	0	
-patrol_ror_2316	patrol_ror_2300		RORI	ror_world	0	5237.3	80.0	5626.9	0	
-patrol_ror_2317	patrol_ror_2300		RORI	ror_world	0	5238.0	80.0	5585.1	0	
-patrol_ror_2318	patrol_ror_2300		RORI	ror_world	0	5245.7	80.0	5561.6	0	
-patrol_ror_2319	patrol_ror_2300		RORI	ror_world	0	5282.6	80.0	5562.8	0	
-patrol_ror_2320	patrol_ror_2300		RORI	ror_world	0	5314.0	80.0	5563.2	0	
-patrol_ror_2321	patrol_ror_2300		RORI	ror_world	0	5336.2	80.0	5579.6	0	
-patrol_ror_2322	patrol_ror_2300		RORI	ror_world	0	5335.0	80.0	5615.1	300	
-patrol_ror_2400	patrol_ror_2400	FLIP	RORI	ror_world	0	4732.9	80.0	5863.5	0	Restuss - Alliance group #5
-patrol_ror_2401	patrol_ror_2400		RORI	ror_world	0	4759.8	77.0	5851.0	0	
-patrol_ror_2402	patrol_ror_2400		RORI	ror_world	0	4778.5	80.0	5840.5	0	
-patrol_ror_2403	patrol_ror_2400		RORI	ror_world	0	4804.2	77.0	5827.9	0	
-patrol_ror_2404	patrol_ror_2400		RORI	ror_world	0	4819.0	79.9	5820.9	0	
-patrol_ror_2405	patrol_ror_2400		RORI	ror_world	0	4835.6	80.0	5821.1	0	
-patrol_ror_2406	patrol_ror_2400		RORI	ror_world	0	4871.7	76.9	5831.6	0	
-patrol_ror_2407	patrol_ror_2400		RORI	ror_world	0	4917.2	77.6	5840.5	0	
-patrol_ror_2408	patrol_ror_2400		RORI	ror_world	0	4953.8	76.0	5842.0	0	
-patrol_ror_2409	patrol_ror_2400		RORI	ror_world	0	4982.3	77.8	5840.2	0	
-patrol_ror_2410	patrol_ror_2400		RORI	ror_world	0	5022.5	82.3	5836.9	0	
-patrol_ror_2411	patrol_ror_2400		RORI	ror_world	0	5056.7	82.5	5833.9	0	
-patrol_ror_2412	patrol_ror_2400		RORI	ror_world	0	5097.9	79.9	5830.1	0	
-patrol_ror_2413	patrol_ror_2400		RORI	ror_world	0	5144.4	80.0	5852.6	0	
-patrol_ror_2414	patrol_ror_2400		RORI	ror_world	0	5174.4	80.0	5867.9	0	
-patrol_ror_2415	patrol_ror_2400		RORI	ror_world	0	5204.3	80.0	5871.3	0	
-patrol_ror_2416	patrol_ror_2400		RORI	ror_world	0	5238.5	80.0	5870.2	0	
-patrol_ror_2417	patrol_ror_2400		RORI	ror_world	0	5261.9	80.0	5867.0	0	
-patrol_ror_2418	patrol_ror_2400		RORI	ror_world	0	5262.2	80.0	5853.1	0	
-patrol_ror_2419	patrol_ror_2400		RORI	ror_world	0	5280.5	80.0	5809.6	0	
-patrol_ror_2420	patrol_ror_2400		RORI	ror_world	0	5286.3	80.0	5761.1	0	
-patrol_ror_2421	patrol_ror_2400		RORI	ror_world	0	5288.1	80.0	5708.9	0	
-patrol_ror_2422	patrol_ror_2400		RORI	ror_world	0	5311.9	80.0	5676.0	0	
-patrol_ror_2423	patrol_ror_2400		RORI	ror_world	0	5317.6	80.0	5650.4	300	
-patrol_ror_2500	patrol_ror_2500	FLIP	RORI	ror_world	0	4714.2	80.0	5816.8	0	Restuss - Alliance group #6
-patrol_ror_2501	patrol_ror_2500		RORI	ror_world	0	4720.8	80.0	5826.2	0	
-patrol_ror_2502	patrol_ror_2500		RORI	ror_world	0	4721.7	80.0	5856.6	0	
-patrol_ror_2503	patrol_ror_2500		RORI	ror_world	0	4728.7	80.0	5862.8	0	
-patrol_ror_2504	patrol_ror_2500		RORI	ror_world	0	4752.9	77.0	5869.0	0	
-patrol_ror_2505	patrol_ror_2500		RORI	ror_world	0	4753.5	77.2	5912.8	0	
-patrol_ror_2506	patrol_ror_2500		RORI	ror_world	0	4764.6	80.1	5924.6	0	
-patrol_ror_2507	patrol_ror_2500		RORI	ror_world	0	4794.9	79.0	5926.5	0	
-patrol_ror_2508	patrol_ror_2500		RORI	ror_world	0	4835.4	79.7	5932.5	0	
-patrol_ror_2509	patrol_ror_2500		RORI	ror_world	0	4866.9	78.1	5937.0	0	
-patrol_ror_2510	patrol_ror_2500		RORI	ror_world	0	4924.7	75.3	5925.9	0	
-patrol_ror_2511	patrol_ror_2500		RORI	ror_world	0	4990.2	77.2	5905.9	0	
-patrol_ror_2512	patrol_ror_2500		RORI	ror_world	0	5018.4	82.9	5894.9	0	
-patrol_ror_2513	patrol_ror_2500		RORI	ror_world	0	5047.7	83.2	5884.1	0	
-patrol_ror_2514	patrol_ror_2500		RORI	ror_world	0	5060.0	84.5	5880.2	0	
-patrol_ror_2515	patrol_ror_2500		RORI	ror_world	0	5112.9	79.7	5862.3	0	
-patrol_ror_2516	patrol_ror_2500		RORI	ror_world	0	5147.5	80.0	5843.7	0	
-patrol_ror_2517	patrol_ror_2500		RORI	ror_world	0	5175.3	80.0	5846.4	0	
-patrol_ror_2518	patrol_ror_2500		RORI	ror_world	0	5187.3	80.0	5842.3	0	
-patrol_ror_2519	patrol_ror_2500		RORI	ror_world	0	5189.9	80.0	5804.2	0	
-patrol_ror_2520	patrol_ror_2500		RORI	ror_world	0	5204.8	80.0	5780.9	0	
-patrol_ror_2521	patrol_ror_2500		RORI	ror_world	0	5208.2	80.0	5749.9	0	
-patrol_ror_2522	patrol_ror_2500		RORI	ror_world	0	5233.9	80.0	5740.2	0	
-patrol_ror_2523	patrol_ror_2500		RORI	ror_world	0	5245.0	80.7	5723.6	0	
-patrol_ror_2524	patrol_ror_2500		RORI	ror_world	0	5250.2	80.6	5712.2	0	
-patrol_ror_2525	patrol_ror_2500		RORI	ror_world	0	5274.7	80.0	5692.4	0	
-patrol_ror_2526	patrol_ror_2500		RORI	ror_world	0	5315.7	80.0	5662.2	300	
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
+patrol_ror_100	patrol_ror_100	FLIP	RORI	ror_world	0	-5607.9	75.6	-5794.5	0
+patrol_ror_101	patrol_ror_100		RORI	ror_world	0	-5596.3	75.6	-5776.4	0
+patrol_ror_102	patrol_ror_100		RORI	ror_world	0	-5578.9	75.4	-5771.7	0
+patrol_ror_103	patrol_ror_100		RORI	ror_world	0	-5556.3	75.4	-5792.0	0
+patrol_ror_104	patrol_ror_100		RORI	ror_world	0	-5566.9	75.7	-5839.5	0
+patrol_ror_200	patrol_ror_200	FLIP	RORI	ror_world	0	-5553.2	75.6	-5815.4	0
+patrol_ror_201	patrol_ror_200		RORI	ror_world	0	-5576.6	75.5	-5797.7	0
+patrol_ror_202	patrol_ror_200		RORI	ror_world	0	-5620.4	75.5	-5799.6	0
+patrol_ror_203	patrol_ror_200		RORI	ror_world	0	-5616.4	75.7	-5830.6	0
+patrol_ror_300	patrol_ror_300	FLIP	RORI	ror_world	0	-4850.2	79.8	-2266.4	0
+patrol_ror_301	patrol_ror_300		RORI	ror_world	0	-4823.7	76.7	-2286.3	0
+patrol_ror_302	patrol_ror_300		RORI	ror_world	0	-4840.8	78.3	-2325.4	0
+patrol_ror_303	patrol_ror_300		RORI	ror_world	0	-4869.7	77.6	-2301.2	0
+patrol_ror_400	patrol_ror_400	FLIP	RORI	ror_world	0	-4795.0	75.8	-2324.2	0
+patrol_ror_401	patrol_ror_400		RORI	ror_world	0	-4803.5	76.2	-2302.1	0
+patrol_ror_402	patrol_ror_400		RORI	ror_world	0	-4799.1	76.2	-2253.7	0
+patrol_ror_403	patrol_ror_400		RORI	ror_world	0	-4765.7	75.3	-2239.2	0
+patrol_ror_404	patrol_ror_400		RORI	ror_world	0	-4767.0	81.1	-2273.7	0
+patrol_ror_500	patrol_ror_500	FLIP	RORI	ror_world	0	-5224.4	76.5	5041.2	0
+patrol_ror_501	patrol_ror_500		RORI	ror_world	0	-5211.7	75.9	5062.3	0
+patrol_ror_502	patrol_ror_500		RORI	ror_world	0	-5212.0	76.5	5081.2	0
+patrol_ror_503	patrol_ror_500		RORI	ror_world	0	-5240.9	76.1	5101.5	0
+patrol_ror_504	patrol_ror_500		RORI	ror_world	0	-5248.3	76.2	5075.0	0
+patrol_ror_600	patrol_ror_600	FLIP	RORI	ror_world	0	-5232.9	75.8	5108.5	0
+patrol_ror_601	patrol_ror_600		RORI	ror_world	0	-5210.3	76.5	5081.0	0
+patrol_ror_602	patrol_ror_600		RORI	ror_world	0	-5187.0	76.2	5097.2	0
+patrol_ror_603	patrol_ror_600		RORI	ror_world	0	-5176.2	75.9	5128.5	0
+patrol_ror_700	patrol_ror_700	FLIP	RORI	ror_world	0	-1084.7	76.4	4463.7	0
+patrol_ror_701	patrol_ror_700		RORI	ror_world	0	-1095.5	75.3	4430.1	0
+patrol_ror_702	patrol_ror_700		RORI	ror_world	0	-1089.3	76.2	4389.9	0
+patrol_ror_703	patrol_ror_700		RORI	ror_world	0	-1124.0	78.3	4374.6	0
+patrol_ror_704	patrol_ror_700		RORI	ror_world	0	-1123.1	78.2	4406.3	0
+patrol_ror_705	patrol_ror_700		RORI	ror_world	0	-1127.5	81.2	4427.2	0
+patrol_ror_800	patrol_ror_800	FLIP	RORI	ror_world	0	2850.7	105.8	-1253.3	0
+patrol_ror_801	patrol_ror_800		RORI	ror_world	0	2870.5	106.6	-1264.9	0
+patrol_ror_802	patrol_ror_800		RORI	ror_world	0	2903.2	107.5	-1263.6	0
+patrol_ror_803	patrol_ror_800		RORI	ror_world	0	2903.3	107.4	-1289.2	0
+patrol_ror_804	patrol_ror_800		RORI	ror_world	0	2872.7	106.7	-1297.4	0
+patrol_ror_805	patrol_ror_800		RORI	ror_world	0	2853.7	106.1	-1280.4	0
+patrol_ror_900	patrol_ror_900	FLIP	RORI	ror_world	0	2899.4	107.2	-1305.3	0
+patrol_ror_901	patrol_ror_900		RORI	ror_world	0	2888.0	107.3	-1289.0	0
+patrol_ror_902	patrol_ror_900		RORI	ror_world	0	2861.4	106.4	-1293.4	0
+patrol_ror_903	patrol_ror_900		RORI	ror_world	0	2864.9	106.1	-1320.0	0
+patrol_ror_1100	patrol_ror_1100	FLIP	RORI	ror_world	0	3682.4	96.0	-6462.8	0
+patrol_ror_1101	patrol_ror_1100		RORI	ror_world	0	3669.9	96.0	-6473.9	0
+patrol_ror_1102	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6446.5	0
+patrol_ror_1103	patrol_ror_1100		RORI	ror_world	0	3670.1	96.0	-6412.0	0
+patrol_ror_1104	patrol_ror_1100		RORI	ror_world	0	3665.3	96.0	-6409.1	0
+patrol_ror_1105	patrol_ror_1100		RORI	ror_world	0	3665.2	96.0	-6404.3	0

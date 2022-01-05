@@ -1,147 +1,147 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-patrol_lok_100	patrol_lok_100	FLIP	LOK	lok_world	0	429.00	5.50	5457.10	0	Nym Stronghold - Nym's guard #1
-patrol_lok_101	patrol_lok_100		LOK	lok_world	0	422.90	1.60	5428.20	0	
-patrol_lok_102	patrol_lok_100		LOK	lok_world	0	423.00	1.20	5318.90	0	
-patrol_lok_103	patrol_lok_100		LOK	lok_world	0	421.60	7.30	5272.20	0	
-patrol_lok_104	patrol_lok_100		LOK	lok_world	0	424.20	12.00	5206.50	0	
-patrol_lok_200	patrol_lok_200	FLIP	LOK	lok_world	0	421.50	5.50	5461.40	0	Nym Stronghold - Nym's guard #2
-patrol_lok_201	patrol_lok_200		LOK	lok_world	0	416.70	1.60	5427.40	0	
-patrol_lok_202	patrol_lok_200		LOK	lok_world	0	417.80	1.30	5318.70	0	
-patrol_lok_203	patrol_lok_200		LOK	lok_world	0	414.40	7.30	5271.20	0	
-patrol_lok_204	patrol_lok_200		LOK	lok_world	0	415.00	12.00	5207.30	0	
-patrol_lok_300	patrol_lok_300	LOOP	LOK	lok_world	0	483.20	8.60	5485.30	0	Nym Stronghold - Nym's guard #3
-patrol_lok_301	patrol_lok_300		LOK	lok_world	0	483.20	9.00	5509.90	0	
-patrol_lok_302	patrol_lok_300		LOK	lok_world	0	467.20	10.70	5522.00	0	
-patrol_lok_303	patrol_lok_300		LOK	lok_world	0	436.90	10.50	5521.30	0	
-patrol_lok_304	patrol_lok_300		LOK	lok_world	0	429.80	7.90	5484.20	0	
-patrol_lok_305	patrol_lok_300		LOK	lok_world	0	442.00	6.00	5464.80	0	
-patrol_lok_306	patrol_lok_300		LOK	lok_world	0	454.10	3.00	5444.20	0	
-patrol_lok_307	patrol_lok_300		LOK	lok_world	0	463.50	3.00	5440.30	0	
-patrol_lok_308	patrol_lok_300		LOK	lok_world	0	454.10	3.00	5444.20	0	
-patrol_lok_309	patrol_lok_300		LOK	lok_world	0	444.70	5.90	5462.80	0	
-patrol_lok_310	patrol_lok_300		LOK	lok_world	0	483.20	8.60	5485.30	0	
-patrol_lok_400	patrol_lok_400	LOOP	LOK	lok_world	0	-1929.32	11.98	-3359.97	0	Imperial Outpost - Nym's elite enforcer
-patrol_lok_401	patrol_lok_400		LOK	lok_world	0	-1917.30	11.95	-3404.94	0	
-patrol_lok_402	patrol_lok_400		LOK	lok_world	0	-1961.69	11.87	-3382.92	0	
-patrol_lok_403	patrol_lok_400		LOK	lok_world	0	-1975.15	11.86	-3392.57	0	
-patrol_lok_404	patrol_lok_400		LOK	lok_world	0	-2001.56	8.50	-3367.26	0	
-patrol_lok_405	patrol_lok_400		LOK	lok_world	0	-1965.62	12.05	-3338.43	0	
-patrol_lok_500	patrol_lok_500	FLIP	LOK	lok_world	0	660.91	11.68	5075.32	0	Nym's Stronghold - a kusak mauler #1
-patrol_lok_501	patrol_lok_500		LOK	lok_world	0	627.98	9.49	5177.52	0	
-patrol_lok_502	patrol_lok_500		LOK	lok_world	0	548.66	10.16	5211.53	0	
-patrol_lok_503	patrol_lok_500		LOK	lok_world	0	418.85	10.50	5232.89	0	
-patrol_lok_504	patrol_lok_500		LOK	lok_world	0	309.09	10.68	5213.76	0	
-patrol_lok_505	patrol_lok_500		LOK	lok_world	0	258.15	11.82	5156.93	0	
-patrol_lok_506	patrol_lok_500		LOK	lok_world	0	242.71	12.00	5059.81	0	
-patrol_lok_507	patrol_lok_500		LOK	lok_world	0	194.44	12.05	4987.33	0	
-patrol_lok_508	patrol_lok_500		LOK	lok_world	0	150.46	11.98	4997.86	0	
-patrol_lok_509	patrol_lok_500		LOK	lok_world	0	133.11	11.91	4922.55	0	
-patrol_lok_510	patrol_lok_500		LOK	lok_world	0	154.89	12.08	4883.35	0	
-patrol_lok_511	patrol_lok_500		LOK	lok_world	0	207.61	12.22	4852.74	0	
-patrol_lok_512	patrol_lok_500		LOK	lok_world	0	316.06	12.28	4831.58	0	
-patrol_lok_513	patrol_lok_500		LOK	lok_world	0	381.80	12.00	4768.20	0	
-patrol_lok_514	patrol_lok_500		LOK	lok_world	0	431.58	11.83	4730.45	0	
-patrol_lok_515	patrol_lok_500		LOK	lok_world	0	489.85	12.05	4724.19	0	
-patrol_lok_516	patrol_lok_500		LOK	lok_world	0	553.87	12.06	4752.31	0	
-patrol_lok_517	patrol_lok_500		LOK	lok_world	0	582.72	11.94	4809.27	0	
-patrol_lok_518	patrol_lok_500		LOK	lok_world	0	635.84	12.12	4878.61	0	
-patrol_lok_519	patrol_lok_500		LOK	lok_world	0	681.21	12.02	4924.60	0	
-patrol_lok_520	patrol_lok_500		LOK	lok_world	0	634.51	12.52	4966.69	0	
-patrol_lok_521	patrol_lok_500		LOK	lok_world	0	552.84	11.90	4954.29	0	
-patrol_lok_600	patrol_lok_600	FLIP	LOK	lok_world	0	307.64	11.98	4910.76	0	Nym's Stronghold - a kusak mauler #2
-patrol_lok_601	patrol_lok_600		LOK	lok_world	0	319.35	11.91	4878.38	0	
-patrol_lok_602	patrol_lok_600		LOK	lok_world	0	339.88	11.99	4888.79	0	
-patrol_lok_603	patrol_lok_600		LOK	lok_world	0	340.89	12.05	4940.23	0	
-patrol_lok_604	patrol_lok_600		LOK	lok_world	0	321.03	11.96	5037.24	0	
-patrol_lok_605	patrol_lok_600		LOK	lok_world	0	300.98	12.04	5080.95	0	
-patrol_lok_606	patrol_lok_600		LOK	lok_world	0	298.40	11.88	5133.39	0	
-patrol_lok_607	patrol_lok_600		LOK	lok_world	0	312.37	11.82	5161.65	0	
-patrol_lok_608	patrol_lok_600		LOK	lok_world	0	356.21	11.95	5163.80	0	
-patrol_lok_609	patrol_lok_600		LOK	lok_world	0	400.66	11.95	5175.64	0	
-patrol_lok_610	patrol_lok_600		LOK	lok_world	0	471.99	12.25	5188.26	0	
-patrol_lok_611	patrol_lok_600		LOK	lok_world	0	521.47	11.99	5185.57	0	
-patrol_lok_612	patrol_lok_600		LOK	lok_world	0	548.60	11.99	5124.75	0	
-patrol_lok_700	patrol_lok_700	FLIP	LOK	lok_world	0	557.09	12.02	5011.26	0	Nym's Stronghold - a kusak mauler #3
-patrol_lok_701	patrol_lok_700		LOK	lok_world	0	588.20	12.13	5019.22	0	
-patrol_lok_702	patrol_lok_700		LOK	lok_world	0	666.75	11.85	5063.64	0	
-patrol_lok_703	patrol_lok_700		LOK	lok_world	0	655.52	11.89	4977.39	0	
-patrol_lok_704	patrol_lok_700		LOK	lok_world	0	684.00	12.09	4909.84	0	
-patrol_lok_705	patrol_lok_700		LOK	lok_world	0	620.71	12.13	4827.96	0	
-patrol_lok_706	patrol_lok_700		LOK	lok_world	0	548.00	30.29	4817.61	0	
-patrol_lok_707	patrol_lok_700		LOK	lok_world	0	507.48	33.87	4764.23	0	
-patrol_lok_800	patrol_lok_800	FLIP	LOK	lok_world	0	372.88	11.96	4927.03	0	Nym's Stronghold - a kusak mauler #4
-patrol_lok_801	patrol_lok_800		LOK	lok_world	0	377.83	12.07	4908.28	0	
-patrol_lok_802	patrol_lok_800		LOK	lok_world	0	391.78	30.69	4855.40	0	
-patrol_lok_803	patrol_lok_800		LOK	lok_world	0	366.93	12.1	4801.92	0	
-patrol_lok_804	patrol_lok_800		LOK	lok_world	0	311.31	12.44	4862.23	0	
-patrol_lok_805	patrol_lok_800		LOK	lok_world	0	339.43	11.99	4900.92	0	
-patrol_lok_806	patrol_lok_800		LOK	lok_world	0	328.47	12.04	5041.70	0	
-patrol_lok_807	patrol_lok_800		LOK	lok_world	0	377.55	11.85	5043.91	0	
-patrol_lok_808	patrol_lok_800		LOK	lok_world	0	378.55	11.97	5123.12	0	
-patrol_lok_809	patrol_lok_800		LOK	lok_world	0	413.38	12.00	5144.87	0	
-patrol_lok_810	patrol_lok_800		LOK	lok_world	0	441.91	12.00	5139.98	0	
-patrol_lok_811	patrol_lok_800		LOK	lok_world	0	474.24	12.53	5121.42	0	
-patrol_lok_812	patrol_lok_800		LOK	lok_world	0	543.95	11.98	5122.1	0	
-patrol_lok_813	patrol_lok_800		LOK	lok_world	0	543.25	11.87	5180.35	0	
-patrol_lok_900	patrol_lok_900	FLIP	LOK	lok_world	0	2943.00	326.85	-4515.65	0	Mount Chaolt - Nym's elite enforcer #1
-patrol_lok_901	patrol_lok_900		LOK	lok_world	0	2942.88	321.57	-4490.48	0	
-patrol_lok_902	patrol_lok_900		LOK	lok_world	0	2954.51	320.22	-4481.34	0	
-patrol_lok_903	patrol_lok_900		LOK	lok_world	0	2974.58	325.57	-4489.21	0	
-patrol_lok_1000	patrol_lok_1000	FLIP	LOK	lok_world	0	2970.19	330.36	-4513.97	0	Mount Chaolt - Nym's elite enforcer #2
-patrol_lok_1001	patrol_lok_1000		LOK	lok_world	0	2979.06	329.80	-4500.16	0	
-patrol_lok_1002	patrol_lok_1000		LOK	lok_world	0	2990.17	336.47	-4518.51	0	
-patrol_lok_1003	patrol_lok_1000		LOK	lok_world	0	2989.12	340.50	-4538.22	0	
-patrol_lok_1004	patrol_lok_1000		LOK	lok_world	0	2960.10	334.73	-4543.84	0	
-patrol_lok_1100	patrol_lok_1100	FLIP	LOK	lok_world	0	2955.11	330.36	-4524.31	0	Mount Chaolt - Nym's elite enforcer #3
-patrol_lok_1101	patrol_lok_1100		LOK	lok_world	0	2943.92	333.27	-4545.15	0	
-patrol_lok_1102	patrol_lok_1100		LOK	lok_world	0	2932.20	323.53	-4530.92	0	
-patrol_lok_1103	patrol_lok_1100		LOK	lok_world	0	2918.19	312.95	-4501.42	0	
-patrol_lok_1200	patrol_lok_1200	LOOP	LOK	lok_world	0	3470.06	19.33	2120.26	0	Downed Blood Razor Transport - Nym's elite enforcer #1
-patrol_lok_1201	patrol_lok_1200		LOK	lok_world	0	3491.49	11.17	2107.80	0	
-patrol_lok_1202	patrol_lok_1200		LOK	lok_world	0	3509.68	4.64	2142.72	0	
-patrol_lok_1203	patrol_lok_1200		LOK	lok_world	0	3551.62	0.71	2119.51	0	
-patrol_lok_1204	patrol_lok_1200		LOK	lok_world	0	3569.14	0.91	2081.63	0	
-patrol_lok_1205	patrol_lok_1200		LOK	lok_world	0	3519.95	6.74	2065.19	0	
-patrol_lok_1206	patrol_lok_1200		LOK	lok_world	0	3483.40	21.21	2058.68	0	
-patrol_lok_1300	patrol_lok_1300	FLIP	LOK	lok_world	0	6035.19	18.18	5200.40	0	Outback - a criminal #1
-patrol_lok_1301	patrol_lok_1300		LOK	lok_world	0	6030.65	18.34	5192.81	0	
-patrol_lok_1302	patrol_lok_1300		LOK	lok_world	0	6034.94	17.98	5181.24	0	
-patrol_lok_1303	patrol_lok_1300		LOK	lok_world	0	6060.54	20.32	5164.96	0	
-patrol_lok_1304	patrol_lok_1300		LOK	lok_world	0	6067.72	18.56	5153.70	0	
-patrol_lok_1400	patrol_lok_1400	FLIP	LOK	lok_world	0	6035.76	11.93	5166.78	0	Outback - a criminal #2
-patrol_lok_1401	patrol_lok_1400		LOK	lok_world	0	6034.62	11.99	5140.37	0	
-patrol_lok_1402	patrol_lok_1400		LOK	lok_world	0	6016.81	11.87	5134.97	0	
-patrol_lok_1403	patrol_lok_1400		LOK	lok_world	0	6001.65	12.02	5145.02	0	
-patrol_lok_1500	patrol_lok_1500	FLIP	LOK	lok_world	0	6015.54	12.05	5201.01	0	Outback - a criminal #3
-patrol_lok_1501	patrol_lok_1500		LOK	lok_world	0	5997.82	12.01	5197.39	0	
-patrol_lok_1502	patrol_lok_1500		LOK	lok_world	0	6002.52	12.09	5176.29	0	
-patrol_lok_1503	patrol_lok_1500		LOK	lok_world	0	5992.36	11.99	5153.04	0	
-patrol_lok_1600	patrol_lok_1600	LOOP	LOK	lok_world	0	-1866.30	12.00	-3114.80	0	Imperial Outpost - Stormtrooper #1
-patrol_lok_1601	patrol_lok_1600		LOK	lok_world	0	-1835.80	12.00	-3114.40	0	
-patrol_lok_1602	patrol_lok_1600		LOK	lok_world	0	-1835.80	12.00	-3039.60	0	
-patrol_lok_1603	patrol_lok_1600		LOK	lok_world	0	-1907.30	12.00	-3039.60	0	
-patrol_lok_1604	patrol_lok_1600		LOK	lok_world	0	-1907.30	12.00	-3114.80	0	
-patrol_lok_1700	patrol_lok_1700	LOOP	LOK	lok_world	0	-1947.90	12.00	-2975.00	0	Imperial Outpost - Stormtrooper #2
-patrol_lok_1701	patrol_lok_1700		LOK	lok_world	0	-1947.90	12.00	-2987.60	0	
-patrol_lok_1702	patrol_lok_1700		LOK	lok_world	0	-1995.90	12.00	-3043.50	0	
-patrol_lok_1703	patrol_lok_1700		LOK	lok_world	0	-1911.70	12.00	-3043.50	0	
-patrol_lok_1704	patrol_lok_1700		LOK	lok_world	0	-1911.70	12.00	-3016.10	0	
-patrol_lok_1705	patrol_lok_1700		LOK	lok_world	0	-1951.40	12.00	-3016.10	0	
-patrol_lok_1800	patrol_lok_1800	LOOP	LOK	lok_world	0	-1939.90	12.00	-2949.30	0	Imperial Outpost - AT ST
-patrol_lok_1801	patrol_lok_1800		LOK	lok_world	0	-1976.30	12.00	-2949.30	0	
-patrol_lok_1802	patrol_lok_1800		LOK	lok_world	0	-2049.00	11.90	-3013.40	0	
-patrol_lok_1803	patrol_lok_1800		LOK	lok_world	0	-2043.00	11.90	-3107.30	0	
-patrol_lok_1804	patrol_lok_1800		LOK	lok_world	0	-2020.30	11.90	-3172.20	0	
-patrol_lok_1805	patrol_lok_1800		LOK	lok_world	0	-1972.90	12.10	-3214.30	0	
-patrol_lok_1806	patrol_lok_1800		LOK	lok_world	0	-1868.50	12.10	-3214.30	0	
-patrol_lok_1807	patrol_lok_1800		LOK	lok_world	0	-1790.80	11.80	-3135.80	0	
-patrol_lok_1808	patrol_lok_1800		LOK	lok_world	0	-1790.80	12.10	-3035.20	0	
-patrol_lok_1809	patrol_lok_1800		LOK	lok_world	0	-1878.30	12.00	-2949.30	0	
-patrol_lok_1900	patrol_lok_1900	FLIP	LOK	lok_world	0	469.10	8.80	5503.60	0	Nym's Stronghold - an R4 unit
-patrol_lok_1901	patrol_lok_1900		LOK	lok_world	0	453.60	8.80	5487.80	0	
-patrol_lok_1902	patrol_lok_1900		LOK	lok_world	0	417.60	1.60	5427.60	0	
-patrol_lok_1903	patrol_lok_1900		LOK	lok_world	0	417.60	1.00	5320.90	0	
-patrol_lok_1904	patrol_lok_1900		LOK	lok_world	0	421.80	12.00	5206.60	0	
-patrol_lok_1905	patrol_lok_1900		LOK	lok_world	0	436.00	12.00	5184.00	0	
-patrol_lok_1906	patrol_lok_1900		LOK	lok_world	0	503.00	12.00	5192.00	0	
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
+patrol_lok_100	patrol_lok_100	FLIP	LOK	lok_world	0	429.0	5.5	5457.1	0
+patrol_lok_101	patrol_lok_100		LOK	lok_world	0	422.9	1.6	5428.2	0
+patrol_lok_102	patrol_lok_100		LOK	lok_world	0	423.0	1.2	5318.9	0
+patrol_lok_103	patrol_lok_100		LOK	lok_world	0	421.6	7.3	5272.2	0
+patrol_lok_104	patrol_lok_100		LOK	lok_world	0	424.2	12.0	5206.5	0
+patrol_lok_200	patrol_lok_200	FLIP	LOK	lok_world	0	421.5	5.5	5461.4	0
+patrol_lok_201	patrol_lok_200		LOK	lok_world	0	416.7	1.6	5427.4	0
+patrol_lok_202	patrol_lok_200		LOK	lok_world	0	417.8	1.3	5318.7	0
+patrol_lok_203	patrol_lok_200		LOK	lok_world	0	414.4	7.3	5271.2	0
+patrol_lok_204	patrol_lok_200		LOK	lok_world	0	415.0	12.0	5207.3	0
+patrol_lok_300	patrol_lok_300	LOOP	LOK	lok_world	0	483.2	8.6	5485.3	0
+patrol_lok_301	patrol_lok_300		LOK	lok_world	0	483.2	9.0	5509.9	0
+patrol_lok_302	patrol_lok_300		LOK	lok_world	0	467.2	10.7	5522.0	0
+patrol_lok_303	patrol_lok_300		LOK	lok_world	0	436.9	10.5	5521.3	0
+patrol_lok_304	patrol_lok_300		LOK	lok_world	0	429.8	7.9	5484.2	0
+patrol_lok_305	patrol_lok_300		LOK	lok_world	0	442.0	6.0	5464.8	0
+patrol_lok_306	patrol_lok_300		LOK	lok_world	0	454.1	3.0	5444.2	0
+patrol_lok_307	patrol_lok_300		LOK	lok_world	0	463.5	3.0	5440.3	0
+patrol_lok_308	patrol_lok_300		LOK	lok_world	0	454.1	3.0	5444.2	0
+patrol_lok_309	patrol_lok_300		LOK	lok_world	0	444.7	5.9	5462.8	0
+patrol_lok_310	patrol_lok_300		LOK	lok_world	0	483.2	8.6	5485.3	0
+patrol_lok_400	patrol_lok_400	LOOP	LOK	lok_world	0	-1929.3	12.0	-3360.0	0
+patrol_lok_401	patrol_lok_400		LOK	lok_world	0	-1917.3	12.0	-3404.9	0
+patrol_lok_402	patrol_lok_400		LOK	lok_world	0	-1961.7	11.9	-3382.9	0
+patrol_lok_403	patrol_lok_400		LOK	lok_world	0	-1975.2	11.9	-3392.6	0
+patrol_lok_404	patrol_lok_400		LOK	lok_world	0	-2001.6	8.5	-3367.3	0
+patrol_lok_405	patrol_lok_400		LOK	lok_world	0	-1965.6	12.1	-3338.4	0
+patrol_lok_500	patrol_lok_500	FLIP	LOK	lok_world	0	660.9	11.7	5075.3	0
+patrol_lok_501	patrol_lok_500		LOK	lok_world	0	628.0	9.5	5177.5	0
+patrol_lok_502	patrol_lok_500		LOK	lok_world	0	548.7	10.2	5211.5	0
+patrol_lok_503	patrol_lok_500		LOK	lok_world	0	418.9	10.5	5232.9	0
+patrol_lok_504	patrol_lok_500		LOK	lok_world	0	309.1	10.7	5213.8	0
+patrol_lok_505	patrol_lok_500		LOK	lok_world	0	258.2	11.8	5156.9	0
+patrol_lok_506	patrol_lok_500		LOK	lok_world	0	242.7	12.0	5059.8	0
+patrol_lok_507	patrol_lok_500		LOK	lok_world	0	194.4	12.1	4987.3	0
+patrol_lok_508	patrol_lok_500		LOK	lok_world	0	150.5	12.0	4997.9	0
+patrol_lok_509	patrol_lok_500		LOK	lok_world	0	133.1	11.9	4922.6	0
+patrol_lok_510	patrol_lok_500		LOK	lok_world	0	154.9	12.1	4883.4	0
+patrol_lok_511	patrol_lok_500		LOK	lok_world	0	207.6	12.2	4852.7	0
+patrol_lok_512	patrol_lok_500		LOK	lok_world	0	316.1	12.3	4831.6	0
+patrol_lok_513	patrol_lok_500		LOK	lok_world	0	381.8	12.0	4768.2	0
+patrol_lok_514	patrol_lok_500		LOK	lok_world	0	431.6	11.8	4730.5	0
+patrol_lok_515	patrol_lok_500		LOK	lok_world	0	489.9	12.1	4724.2	0
+patrol_lok_516	patrol_lok_500		LOK	lok_world	0	553.9	12.1	4752.3	0
+patrol_lok_517	patrol_lok_500		LOK	lok_world	0	582.7	11.9	4809.3	0
+patrol_lok_518	patrol_lok_500		LOK	lok_world	0	635.8	12.1	4878.6	0
+patrol_lok_519	patrol_lok_500		LOK	lok_world	0	681.2	12.0	4924.6	0
+patrol_lok_520	patrol_lok_500		LOK	lok_world	0	634.5	12.5	4966.7	0
+patrol_lok_521	patrol_lok_500		LOK	lok_world	0	552.8	11.9	4954.3	0
+patrol_lok_600	patrol_lok_600	FLIP	LOK	lok_world	0	307.6	12.0	4910.8	0
+patrol_lok_601	patrol_lok_600		LOK	lok_world	0	319.4	11.9	4878.4	0
+patrol_lok_602	patrol_lok_600		LOK	lok_world	0	339.9	12.0	4888.8	0
+patrol_lok_603	patrol_lok_600		LOK	lok_world	0	340.9	12.1	4940.2	0
+patrol_lok_604	patrol_lok_600		LOK	lok_world	0	321.0	12.0	5037.2	0
+patrol_lok_605	patrol_lok_600		LOK	lok_world	0	301.0	12.0	5081.0	0
+patrol_lok_606	patrol_lok_600		LOK	lok_world	0	298.4	11.9	5133.4	0
+patrol_lok_607	patrol_lok_600		LOK	lok_world	0	312.4	11.8	5161.7	0
+patrol_lok_608	patrol_lok_600		LOK	lok_world	0	356.2	12.0	5163.8	0
+patrol_lok_609	patrol_lok_600		LOK	lok_world	0	400.7	12.0	5175.6	0
+patrol_lok_610	patrol_lok_600		LOK	lok_world	0	472.0	12.3	5188.3	0
+patrol_lok_611	patrol_lok_600		LOK	lok_world	0	521.5	12.0	5185.6	0
+patrol_lok_612	patrol_lok_600		LOK	lok_world	0	548.6	12.0	5124.8	0
+patrol_lok_700	patrol_lok_700	FLIP	LOK	lok_world	0	557.1	12.0	5011.3	0
+patrol_lok_701	patrol_lok_700		LOK	lok_world	0	588.2	12.1	5019.2	0
+patrol_lok_702	patrol_lok_700		LOK	lok_world	0	666.8	11.9	5063.6	0
+patrol_lok_703	patrol_lok_700		LOK	lok_world	0	655.5	11.9	4977.4	0
+patrol_lok_704	patrol_lok_700		LOK	lok_world	0	684.0	12.1	4909.8	0
+patrol_lok_705	patrol_lok_700		LOK	lok_world	0	620.7	12.1	4828.0	0
+patrol_lok_706	patrol_lok_700		LOK	lok_world	0	548.0	30.3	4817.6	0
+patrol_lok_707	patrol_lok_700		LOK	lok_world	0	507.5	33.9	4764.2	0
+patrol_lok_800	patrol_lok_800	FLIP	LOK	lok_world	0	372.9	12.0	4927.0	0
+patrol_lok_801	patrol_lok_800		LOK	lok_world	0	377.8	12.1	4908.3	0
+patrol_lok_802	patrol_lok_800		LOK	lok_world	0	391.8	30.7	4855.4	0
+patrol_lok_803	patrol_lok_800		LOK	lok_world	0	366.9	12.1	4801.9	0
+patrol_lok_804	patrol_lok_800		LOK	lok_world	0	311.3	12.4	4862.2	0
+patrol_lok_805	patrol_lok_800		LOK	lok_world	0	339.4	12.0	4900.9	0
+patrol_lok_806	patrol_lok_800		LOK	lok_world	0	328.5	12.0	5041.7	0
+patrol_lok_807	patrol_lok_800		LOK	lok_world	0	377.6	11.9	5043.9	0
+patrol_lok_808	patrol_lok_800		LOK	lok_world	0	378.6	12.0	5123.1	0
+patrol_lok_809	patrol_lok_800		LOK	lok_world	0	413.4	12.0	5144.9	0
+patrol_lok_810	patrol_lok_800		LOK	lok_world	0	441.9	12.0	5140.0	0
+patrol_lok_811	patrol_lok_800		LOK	lok_world	0	474.2	12.5	5121.4	0
+patrol_lok_812	patrol_lok_800		LOK	lok_world	0	544.0	12.0	5122.1	0
+patrol_lok_813	patrol_lok_800		LOK	lok_world	0	543.3	11.9	5180.4	0
+patrol_lok_900	patrol_lok_900	FLIP	LOK	lok_world	0	2943.0	326.9	-4515.7	0
+patrol_lok_901	patrol_lok_900		LOK	lok_world	0	2942.9	321.6	-4490.5	0
+patrol_lok_902	patrol_lok_900		LOK	lok_world	0	2954.5	320.2	-4481.3	0
+patrol_lok_903	patrol_lok_900		LOK	lok_world	0	2974.6	325.6	-4489.2	0
+patrol_lok_1000	patrol_lok_1000	FLIP	LOK	lok_world	0	2970.2	330.4	-4514.0	0
+patrol_lok_1001	patrol_lok_1000		LOK	lok_world	0	2979.1	329.8	-4500.2	0
+patrol_lok_1002	patrol_lok_1000		LOK	lok_world	0	2990.2	336.5	-4518.5	0
+patrol_lok_1003	patrol_lok_1000		LOK	lok_world	0	2989.1	340.5	-4538.2	0
+patrol_lok_1004	patrol_lok_1000		LOK	lok_world	0	2960.1	334.7	-4543.8	0
+patrol_lok_1100	patrol_lok_1100	FLIP	LOK	lok_world	0	2955.1	330.4	-4524.3	0
+patrol_lok_1101	patrol_lok_1100		LOK	lok_world	0	2943.9	333.3	-4545.2	0
+patrol_lok_1102	patrol_lok_1100		LOK	lok_world	0	2932.2	323.5	-4530.9	0
+patrol_lok_1103	patrol_lok_1100		LOK	lok_world	0	2918.2	313.0	-4501.4	0
+patrol_lok_1200	patrol_lok_1200	LOOP	LOK	lok_world	0	3470.1	19.3	2120.3	0
+patrol_lok_1201	patrol_lok_1200		LOK	lok_world	0	3491.5	11.2	2107.8	0
+patrol_lok_1202	patrol_lok_1200		LOK	lok_world	0	3509.7	4.6	2142.7	0
+patrol_lok_1203	patrol_lok_1200		LOK	lok_world	0	3551.6	0.7	2119.5	0
+patrol_lok_1204	patrol_lok_1200		LOK	lok_world	0	3569.1	0.9	2081.6	0
+patrol_lok_1205	patrol_lok_1200		LOK	lok_world	0	3520.0	6.7	2065.2	0
+patrol_lok_1206	patrol_lok_1200		LOK	lok_world	0	3483.4	21.2	2058.7	0
+patrol_lok_1300	patrol_lok_1300	FLIP	LOK	lok_world	0	6035.2	18.2	5200.4	0
+patrol_lok_1301	patrol_lok_1300		LOK	lok_world	0	6030.7	18.3	5192.8	0
+patrol_lok_1302	patrol_lok_1300		LOK	lok_world	0	6034.9	18.0	5181.2	0
+patrol_lok_1303	patrol_lok_1300		LOK	lok_world	0	6060.5	20.3	5165.0	0
+patrol_lok_1304	patrol_lok_1300		LOK	lok_world	0	6067.7	18.6	5153.7	0
+patrol_lok_1400	patrol_lok_1400	FLIP	LOK	lok_world	0	6035.8	11.9	5166.8	0
+patrol_lok_1401	patrol_lok_1400		LOK	lok_world	0	6034.6	12.0	5140.4	0
+patrol_lok_1402	patrol_lok_1400		LOK	lok_world	0	6016.8	11.9	5135.0	0
+patrol_lok_1403	patrol_lok_1400		LOK	lok_world	0	6001.7	12.0	5145.0	0
+patrol_lok_1500	patrol_lok_1500	FLIP	LOK	lok_world	0	6015.5	12.1	5201.0	0
+patrol_lok_1501	patrol_lok_1500		LOK	lok_world	0	5997.8	12.0	5197.4	0
+patrol_lok_1502	patrol_lok_1500		LOK	lok_world	0	6002.5	12.1	5176.3	0
+patrol_lok_1503	patrol_lok_1500		LOK	lok_world	0	5992.4	12.0	5153.0	0
+patrol_lok_1600	patrol_lok_1600	LOOP	LOK	lok_world	0	-1866.3	12.0	-3114.8	0
+patrol_lok_1601	patrol_lok_1600		LOK	lok_world	0	-1835.8	12.0	-3114.4	0
+patrol_lok_1602	patrol_lok_1600		LOK	lok_world	0	-1835.8	12.0	-3039.6	0
+patrol_lok_1603	patrol_lok_1600		LOK	lok_world	0	-1907.3	12.0	-3039.6	0
+patrol_lok_1604	patrol_lok_1600		LOK	lok_world	0	-1907.3	12.0	-3114.8	0
+patrol_lok_1700	patrol_lok_1700	LOOP	LOK	lok_world	0	-1947.9	12.0	-2975.0	0
+patrol_lok_1701	patrol_lok_1700		LOK	lok_world	0	-1947.9	12.0	-2987.6	0
+patrol_lok_1702	patrol_lok_1700		LOK	lok_world	0	-1995.9	12.0	-3043.5	0
+patrol_lok_1703	patrol_lok_1700		LOK	lok_world	0	-1911.7	12.0	-3043.5	0
+patrol_lok_1704	patrol_lok_1700		LOK	lok_world	0	-1911.7	12.0	-3016.1	0
+patrol_lok_1705	patrol_lok_1700		LOK	lok_world	0	-1951.4	12.0	-3016.1	0
+patrol_lok_1800	patrol_lok_1800	LOOP	LOK	lok_world	0	-1939.9	12.0	-2949.3	0
+patrol_lok_1801	patrol_lok_1800		LOK	lok_world	0	-1976.3	12.0	-2949.3	0
+patrol_lok_1802	patrol_lok_1800		LOK	lok_world	0	-2049.0	11.9	-3013.4	0
+patrol_lok_1803	patrol_lok_1800		LOK	lok_world	0	-2043.0	11.9	-3107.3	0
+patrol_lok_1804	patrol_lok_1800		LOK	lok_world	0	-2020.3	11.9	-3172.2	0
+patrol_lok_1805	patrol_lok_1800		LOK	lok_world	0	-1972.9	12.1	-3214.3	0
+patrol_lok_1806	patrol_lok_1800		LOK	lok_world	0	-1868.5	12.1	-3214.3	0
+patrol_lok_1807	patrol_lok_1800		LOK	lok_world	0	-1790.8	11.8	-3135.8	0
+patrol_lok_1808	patrol_lok_1800		LOK	lok_world	0	-1790.8	12.1	-3035.2	0
+patrol_lok_1809	patrol_lok_1800		LOK	lok_world	0	-1878.3	12.0	-2949.3	0
+patrol_lok_1900	patrol_lok_1900	FLIP	LOK	lok_world	0	469.1	8.8	5503.6	0
+patrol_lok_1901	patrol_lok_1900		LOK	lok_world	0	453.6	8.8	5487.8	0
+patrol_lok_1902	patrol_lok_1900		LOK	lok_world	0	417.6	1.6	5427.6	0
+patrol_lok_1903	patrol_lok_1900		LOK	lok_world	0	417.6	1.0	5320.9	0
+patrol_lok_1904	patrol_lok_1900		LOK	lok_world	0	421.8	12.0	5206.6	0
+patrol_lok_1905	patrol_lok_1900		LOK	lok_world	0	436.0	12.0	5184.0	0
+patrol_lok_1906	patrol_lok_1900		LOK	lok_world	0	503.0	12.0	5192.0	0
