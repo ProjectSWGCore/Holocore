@@ -17,7 +17,7 @@ canyon_corsair	TRUE	TRUE	FALSE	-	bloodrazor;nym	-	1
 clone_relics_claw	FALSE	FALSE	FALSE	-	-	-	1
 clone_relics_droid	FALSE	TRUE	FALSE	-	clone_relics_scientist	-	1
 clone_relics_scientist	FALSE	FALSE	FALSE	-	clone_relics_droid	hutt;imperial;rebel	1
-cobral	TRUE	TRUE	FALSE	-	restuss;police	-	1
+cobral	TRUE	TRUE	FALSE	-	police	-	1
 cor_swoop	TRUE	TRUE	FALSE	-	smashball	-	1
 corsec	TRUE	TRUE	FALSE	-	afarathu;followers_of_lord_nyax;monumenter;rogue_corsec;lost_aqualish;flail	beldonnas_league	1
 dantari_raiders	TRUE	TRUE	FALSE	-	kunga_tribe;mokk_tribe;janta_tribe	-	1
@@ -30,7 +30,7 @@ drall	TRUE	TRUE	FALSE	-	corsec;fed_dub	-	1
 droid_army	FALSE	TRUE	FALSE	-	mustafar_miners;mustafar_miner	-	1
 endor_marauder	TRUE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 espa	FALSE	FALSE	FALSE	-	-	espa_guard	1
-espa_guard	FALSE	TRUE	FALSE	-	heroic_tusken	espa	1
+espa_guard	FALSE	TRUE	FALSE	-	-	espa	1
 faction_sayormi	FALSE	TRUE	FALSE	-	-	-	1
 fed_dub	TRUE	TRUE	FALSE	-	liberation_party;binayre;lost_aqualish;drall	-	1
 flail	TRUE	TRUE	FALSE	-	hidden_daggers;corsec	-	1
@@ -38,14 +38,13 @@ followers_of_lord_nyax	TRUE	TRUE	FALSE	-	corsec;beldonnas_league	-	1
 forest_kerritamba	TRUE	TRUE	FALSE	-	forest_outcast	-	1
 forest_outcast	TRUE	TRUE	FALSE	-	forest_kerritamba	-	1
 fs_villager	TRUE	TRUE	FALSE	-	sith_shadow	-	0
-garyn	TRUE	TRUE	FALSE	-	restuss;police	-	1
+garyn	TRUE	TRUE	FALSE	-	police	-	1
 geonosian_crazed_monster	FALSE	TRUE	FALSE	-	-	geonosian_mad_bunker	1
 geonosian_crazy	FALSE	TRUE	FALSE	-	geonosian_mad_bunker;geonosian_crazed_monster	-	1
 geonosian_mad_bunker	FALSE	TRUE	FALSE	-	-	geonosian_crazed_monster	1
 gondula_tribe	TRUE	TRUE	FALSE	-	donkuwah_tribe;korga_tribe;pubam;endor_marauder	panshee_tribe	1
 gorax	FALSE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 gungan	TRUE	TRUE	FALSE	-	plasma_thief;swamp_rat;borvo;Imperial	-	1
-heroic_tusken	FALSE	TRUE	FALSE	-	espa;expa_guard	-	1
 hidden_daggers	TRUE	TRUE	FALSE	-	corsec;beldonnas_league;flail;police	rogue_corsec	1
 hsskor	FALSE	TRUE	TRUE	-	kashyyyk_resistance	-	1
 hutt	TRUE	TRUE	FALSE	-	naboo_security_force;nym;Imperial;corsec;narmle;police	jabba;borvo	1
@@ -61,7 +60,6 @@ kunga_tribe	TRUE	TRUE	FALSE	-	mokk_tribe;dantari_raiders	-	1
 liberation_party	TRUE	TRUE	FALSE	-	fed_dub;corsec	-	1
 lok_mercenaries	TRUE	TRUE	FALSE	-	bloodrazor;canyon_corsair	-	1
 lost_aqualish	TRUE	TRUE	FALSE	-	beldonnas_league;fed_dub;corsec	-	1
-meatlump	TRUE	TRUE	FALSE	-	corsec;rogue_corsec;beldonnas_league	-	1
 mokk_tribe	TRUE	TRUE	FALSE	-	janta_tribe;dantari_raiders	-	1
 monumenter	TRUE	TRUE	FALSE	-	corsec;beldonnas_league	-	1
 mtn_clan	TRUE	TRUE	FALSE	-	nightsister;police	-	1
@@ -70,7 +68,7 @@ mustafar_miner	FALSE	TRUE	FALSE	-	droid_army	-	1
 naboo	TRUE	TRUE	FALSE	-	borvo	-	1
 naboo_pirate	TRUE	TRUE	FALSE	-	naboo_security_force;police	-	1
 naboo_security_force	TRUE	TRUE	FALSE	-	borvo;naboo_pirate;plasma_thief;swamp_rat;trade_federation	-	1
-narmle	TRUE	TRUE	FALSE	-	spice_collective;kobola	restuss	1
+narmle	TRUE	TRUE	FALSE	-	spice_collective;kobola	-	1
 neutral	FALSE	FALSE	FALSE	-	-	-	1
 nightsister	TRUE	TRUE	FALSE	-	mtn_clan;Imperial	-	1
 nym	TRUE	TRUE	FALSE	-	bloodrazor;canyon_corsair;sulfur_lake_pirate	-	1
@@ -83,7 +81,6 @@ police	TRUE	TRUE	FALSE	-	borvo;naboo_pirate;plasma_thief;swamp_rat;trade_federat
 pubam	TRUE	TRUE	FALSE	-	gondula_tribe;panshee_tribe	-	1
 rebel	TRUE	TRUE	TRUE	rebel	imperial	-	1
 rebelcitizen	FALSE	FALSE	FALSE	-	-	-	1
-restuss	TRUE	TRUE	FALSE	-	garyn;cobral	narmle	1
 rogue_corsec	TRUE	TRUE	FALSE	-	corsec	hidden_daggers	1
 rorgungan	TRUE	TRUE	FALSE	-	spice_collective	-	1
 sif	TRUE	TRUE	FALSE	-	rebel;imperial	hutt	1
