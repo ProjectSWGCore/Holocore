@@ -51,8 +51,6 @@ item_color_crystal_02_27	object/tangible/component/weapon/lightsaber/lightsaber_
 item_color_crystal_02_28	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kenobi's Legacy	1	1000	0	0	0	0	0	0	-1	28	-1	-1	
 item_color_crystal_02_29	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Sunrider's Destiny	1	1000	0	0	0	0	0	0	-1	29	-1	-1	
 item_color_crystal_02_30	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kit's Ferocity	1	1000	0	0	0	0	0	0	-1	30	-1	-1	
-item_echo_base_permafrost_crystal_06_01	object/tangible/component/weapon/lightsaber/lightsaber_module_permafrost_crystal.iff	crystal	Permafrost Crystal	1	1000	0	0	2	0	0	0	-1	-1	-1	-1	Echo Base Instance Loot
-item_outbreak_undead_blackwing_crystal	object/tangible/component/weapon/lightsaber/lightsaber_module_blackwing_crystal.iff	crystal	Blackwing Crystal	1	1000	0	0	3	0	0	0	-1	-1	-1	-1	
 item_power_crystal_04_01	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	1	2	-1	31	-1	-1	Poor
 item_power_crystal_04_02	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	2	3	-1	31	-1	-1	Poor
 item_power_crystal_04_03	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	1	3	4	-1	31	-1	-1	Poor
