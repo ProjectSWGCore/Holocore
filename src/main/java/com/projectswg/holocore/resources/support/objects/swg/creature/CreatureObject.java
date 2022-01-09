@@ -78,8 +78,6 @@ public class CreatureObject extends TangibleObject {
 	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
 	private double	height					= 0;
-	private int		cashBalance				= 0;
-	private int		bankBalance				= 0;
 	private byte 	factionRank				= 0;
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
@@ -436,16 +434,6 @@ public class CreatureObject extends TangibleObject {
 		creo4.setAccelPercent((float) accelPercent);
 	}
 
-	public void setCashBalance(long cashBalance) {
-		this.cashBalance = (int) cashBalance;
-		sendDelta(1, 1, (int) cashBalance);
-	}
-
-	public void setBankBalance(long bankBalance) {
-		this.bankBalance = (int) bankBalance;
-		sendDelta(1, 0, (int) bankBalance);
-	}
-
 	/**
 	 * Removes amount from cash first, then bank after. Returns true if the
 	 * operation was successful
@@ -453,6 +441,8 @@ public class CreatureObject extends TangibleObject {
 	 * @return TRUE if successfully withdrawn, FALSE otherwise
 	 */
 	public boolean removeFromCashAndBank(long amount) {
+		int bankBalance = getBankBalance();
+		int cashBalance = getCashBalance();
 		long amountBalance = bankBalance + cashBalance;
 		if (amountBalance < amount)
 			return false;
@@ -480,6 +470,8 @@ public class CreatureObject extends TangibleObject {
 	 * @return TRUE if successfully withdrawn, FALSE otherwise
 	 */
 	public boolean removeFromBankAndCash(long amount) {
+		int bankBalance = getBankBalance();
+		int cashBalance = getCashBalance();
 		long amountBalance = bankBalance + cashBalance;
 		if (amountBalance < amount)
 			return false;
@@ -517,7 +509,7 @@ public class CreatureObject extends TangibleObject {
 	 * @param amount the amount to add
 	 */
 	public void addToCash(long amount) {
-		setCashBalance(cashBalance + amount);
+		setCashBalance(getCashBalance() + amount);
 	}
 
 	/**
@@ -525,7 +517,7 @@ public class CreatureObject extends TangibleObject {
 	 * @param amount the amount to add
 	 */
 	public void addToBank(long amount) {
-		setBankBalance(bankBalance + amount);
+		setBankBalance(getBankBalance() + amount);
 	}
 	
 	public void setMovementScale(double movementScale) {
@@ -1125,8 +1117,8 @@ public class CreatureObject extends TangibleObject {
 		stream.addAscii(race.name());
 		stream.addFloat((float) height);
 		stream.addInt(battleFatigue);
-		stream.addInt(cashBalance);
-		stream.addInt(bankBalance);
+		stream.addInt(getCashBalance());
+		stream.addInt(getBankBalance());
 		stream.addLong(ownerId);
 		stream.addLong(statesBitmask);
 		stream.addByte(factionRank);
@@ -1155,8 +1147,8 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(stream.getAscii());
 		height = stream.getFloat();
 		battleFatigue = stream.getInt();
-		cashBalance = stream.getInt();
-		bankBalance = stream.getInt();
+		setCashBalance(stream.getInt());
+		setBankBalance(stream.getInt());
 		ownerId = stream.getLong();
 		statesBitmask = stream.getLong();
 		factionRank = stream.getByte();

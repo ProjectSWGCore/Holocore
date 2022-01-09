@@ -153,7 +153,7 @@ public class CommandExecutionService extends Service {
 		registerCppCallback("admin_teleport", AdminTeleportCallback::new);
 		
 		registerScriptCallback("cmdCreateStaticItem", CmdCreateStaticItem::new);
-		registerScriptCallback("cmdMoney", CmdMoney::new);
+		registerCppCallback("console_money", CmdMoney::new);
 		registerScriptCallback("cmdSetSpeed", CmdSetSpeed::new);
 		registerScriptCallback("cmdSetExperience", CmdSetExperience::new);
 		registerScriptCallback("cmdInvulnerable", CmdInvulnerable::new);
