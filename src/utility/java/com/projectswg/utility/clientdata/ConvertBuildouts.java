@@ -51,7 +51,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ConvertBuildouts implements Converter{
 	
 	private static final String [][] AREA_COLUMNS = {
-		{"id", "terrain", "area_name", "event", "min_x", "min_z", "max_x", "max_z", "adjust_coordinates", "translate_x", "translate_z"}
+		{"id", "terrain", "area_name", "min_x", "min_z", "max_x", "max_z", "adjust_coordinates", "translate_x", "translate_z"}
 	};
 	private static final String [][] OBJECT_COLUMNS = {
 		{"id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"}
@@ -81,7 +81,7 @@ public class ConvertBuildouts implements Converter{
 	@Override
 	public void convert() {
 		try {
-			createAreas();
+//			createAreas();
 			createObjects();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -174,7 +174,7 @@ public class ConvertBuildouts implements Converter{
 		for (int i = fallbackAreas.size()-1; i >= 0; i--) {
 			GenBuildoutArea fallback = fallbackAreas.get(i);
 			String name = fallback.terrain.name().toLowerCase(Locale.US);
-			gen.writeLine(fallback.id, name, name + "_global", "", -8196, -8196, 8196, 8196, "0", 0, 0);
+			gen.writeLine(fallback.id, name, name + "_global", -8196, -8196, 8196, 8196, "0", 0, 0);
 		}
 		int percent = 0;
 		for (int i = 0; i < areas.size(); i++) {
@@ -209,7 +209,7 @@ public class ConvertBuildouts implements Converter{
 		}
 		transX -= area.area.getX1() + (area.area.getX2() - area.area.getX1()) / 2;
 		transZ -= area.area.getZ1() + (area.area.getZ2() - area.area.getZ1()) / 2;
-		gen.writeLine(area.id, terrain, substituteName, area.area.getEventRequired(), x1, z1, x2, z2, adjust?"1":"0", transX, transZ);
+		gen.writeLine(area.id, terrain, substituteName, x1, z1, x2, z2, adjust?"1":"0", transX, transZ);
 	}
 	
 	private void writeObject(SdbGenerator gen, SWGObject object) throws IOException {

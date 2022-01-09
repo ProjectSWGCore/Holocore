@@ -178,7 +178,6 @@ public class ObjectStorageService extends Service {
 			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
 			long targetId = intendedTarget.getTargetId();
 			
-			creatureObject.setIntendedTargetId(targetId);
 			creatureObject.setLookAtTargetId(targetId);
 		}
 	}

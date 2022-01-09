@@ -25,7 +25,7 @@ public class TerminalTravelRadial implements RadialHandlerInterface {
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		switch (selection) {
 			case ITEM_USE:
-				new TravelPointSelectionIntent(player.getCreatureObject(), false).broadcast();
+				new TravelPointSelectionIntent(player.getCreatureObject()).broadcast();
 				break;
 		}
 	}

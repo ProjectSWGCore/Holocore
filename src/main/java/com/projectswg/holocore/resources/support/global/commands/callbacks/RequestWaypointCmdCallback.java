@@ -50,12 +50,12 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		}
 		WaypointColor color = WaypointColor.BLUE;
 		
-		Terrain terrain = Terrain.getTerrainFromName(cmd[1]);
+		Terrain terrain = Terrain.getTerrainFromName(cmd[0]);
 		
 		Point3D position = new Point3D();
-		position.set(Double.parseDouble(cmd[2]), Double.parseDouble(cmd[3]), Double.parseDouble(cmd[4]));
+		position.set(Double.parseDouble(cmd[1]), Double.parseDouble(cmd[2]), Double.parseDouble(cmd[3]));
 		
-		String name = (cmd.length == 6 && !cmd[5].isBlank() ? cmd[5] : "@planet_n:" + terrain.getName());
+		String name = (cmd.length == 5 && !cmd[4].isBlank() ? cmd[4] : "@planet_n:" + terrain.getName());
 		
 		createWaypoint(player, terrain, position, color, name);
 	}

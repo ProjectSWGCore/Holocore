@@ -16,12 +16,14 @@ import java.util.*;
 public class CommandLoader extends DataLoader {
 	
 	private final Map<String, Command> commandNameMap;
-	private final Map<String, List<Command>> commandCallbackMap;
+	private final Map<String, List<Command>> commandCppCallbackMap;
+	private final Map<String, List<Command>> commandScriptCallbackMap;
 	private final Map<Integer, Command> commandCrcMap;
 	
 	CommandLoader() {
 		this.commandNameMap = new HashMap<>();
-		this.commandCallbackMap = new HashMap<>();
+		this.commandCppCallbackMap = new HashMap<>();
+		this.commandScriptCallbackMap = new HashMap<>();
 		this.commandCrcMap = new HashMap<>();
 	}
 	
@@ -37,21 +39,25 @@ public class CommandLoader extends DataLoader {
 		return commandNameMap.get(command.toLowerCase(Locale.US));
 	}
 	
-	public List<Command> getCommandByCallback(String callback) {
-		return commandCallbackMap.get(callback.toLowerCase(Locale.US));
+	public List<Command> getCommandsByCppCallback(String cppCallback) {
+		return commandCppCallbackMap.get(cppCallback.toLowerCase(Locale.US));
 	}
 	
+	public List<Command> getCommandsByScriptCallback(String scriptCallback) {
+		return commandScriptCallbackMap.get(scriptCallback.toLowerCase(Locale.US));
+	}
 	public Command getCommand(int crc) {
 		return commandCrcMap.get(crc);
 	}
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/commands.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/commands.msdb"))) {
 			while (set.next()) {
 				Command command = Command.builder()
-						.withName(set.getText("name").toLowerCase(Locale.US))
-						.withCallback(set.getText("callback"))
+						.withName(set.getText("commandName").toLowerCase(Locale.US))
+						.withCppCallback(set.getText("cppHook"))
+						.withScriptCallback(set.getText("scriptHook"))
 						.withDefaultPriority(DefaultPriority.getDefaultPriority(set.getText("defaultPriority")))
 						.withDefaultTime(set.getReal("defaultTime"))
 						.withCharacterAbility(set.getText("characterAbility"))
@@ -72,7 +78,8 @@ public class CommandLoader extends DataLoader {
 					continue;
 				}
 				commandNameMap.put(command.getName(), command);
-				commandCallbackMap.computeIfAbsent(command.getCallback().toLowerCase(Locale.US), c -> new ArrayList<>()).add(command);
+				commandCppCallbackMap.computeIfAbsent(command.getCppCallback().toLowerCase(Locale.US), c -> new ArrayList<>()).add(command);
+				commandScriptCallbackMap.computeIfAbsent(command.getScriptCallback().toLowerCase(Locale.US), c -> new ArrayList<>()).add(command);
 				commandCrcMap.put(command.getCrc(), command);
 			}
 		}

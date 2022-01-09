@@ -55,9 +55,9 @@ class ConvertSlotArrangement implements Converter {
 		SlotArrangementParser arrangement = SWGParser.parse(file);
 		Objects.requireNonNull(arrangement, "Failed to load clientdata");
 		
-		String iff = file.getAbsolutePath();
+		String iff = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
 		String slotArrangement = arrangement.getArrangement().stream().map(slots -> String.join(",", slots)).collect(Collectors.joining(";"));
-		sdb.writeLine(iff.substring(iff.indexOf("abstract/slot/arrangement/")+26, iff.lastIndexOf('.')), slotArrangement);
+		sdb.writeLine(iff, slotArrangement);
 	}
 	
 }

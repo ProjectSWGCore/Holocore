@@ -27,13 +27,8 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.combat.AttackInfo;
-import com.projectswg.common.data.combat.CombatSpamType;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
-import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
@@ -123,21 +118,8 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		CombatSpam spam = new CombatSpam(source.getObjectId());
 		
 		spam.setAttacker(source.getObjectId());
-		spam.setAttackerPosition(source.getLocation().getPosition());
 		spam.setDefender(target.getObjectId());
-		spam.setDefenderPosition(target.getLocation().getPosition());
-		spam.setInfo(new AttackInfo());
-		spam.setDataType((byte) 2);	// 2 means the combat log entry is a specified message
-		
-		if (source.equals(target)) {
-			OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("cbt_spam", "perform_notarget"), "TU", source.getObjectName(), "TO", new StringId("cmd_n", command.getName())));
-			spam.setSpamMessage(oobp);
-		} else {
-			OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("cbt_spam", "perform_target"), "TU", source.getObjectName(), "TO", new StringId("cmd_n", command.getName()), "TT", target.getObjectName()));
-			spam.setSpamMessage(oobp);
-		}
-		spam.setSpamType(CombatSpamType.BUFF);
-		
+
 		return spam;
 	}
 	

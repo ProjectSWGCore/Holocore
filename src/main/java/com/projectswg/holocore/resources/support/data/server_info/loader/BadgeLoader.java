@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -25,49 +25,86 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.services.gameplay.gcw;
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import com.projectswg.common.data.encodables.tangible.PvpFaction;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
-import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+import org.jetbrains.annotations.Nullable;
 
-public class TestCivilWarPvpService extends TestRunnerNoIntents {
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public final class BadgeLoader extends DataLoader {
 	
-	private final CivilWarPvpService service;
+	private final Map<String, BadgeInfo> badgeFromKey;
 	
-	public TestCivilWarPvpService() {
-		service = new CivilWarPvpService();
+	BadgeLoader() {
+		this.badgeFromKey = new HashMap<>();
 	}
 	
-	@Test
-	public void testIsFactionEligible() {
-		Assert.assertTrue(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.IMPERIAL));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.NEUTRAL));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.REBEL));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.NEUTRAL, PvpFaction.IMPERIAL));
-		Assert.assertFalse(service.isFactionEligible(PvpFaction.REBEL, PvpFaction.REBEL));
+	@Nullable
+	public BadgeLoader.BadgeInfo getBadgeFromKey(String name) {
+		return badgeFromKey.get(name);
 	}
 	
-	@Test
-	public void testMakeMultiplier() {
-		Assert.assertEquals(1, service.makeMultiplier(false, false));
-		Assert.assertEquals(2, service.makeMultiplier(true, false));
-		Assert.assertEquals(19, service.makeMultiplier(false, true));
-		Assert.assertEquals(20, service.makeMultiplier(true, true));
+	@Override
+	public void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/badges/badge_map.sdb"))) {
+			while (set.next()) {
+				BadgeInfo badgeInfo = new BadgeInfo(set);
+				badgeFromKey.put(badgeInfo.getKey(), badgeInfo);
+			}
+		}
 	}
 	
-	@Test
-	public void testBaseForDifficulty() {
-		Assert.assertEquals(5, service.baseForDifficulty(CreatureDifficulty.NORMAL));
-		Assert.assertEquals(10, service.baseForDifficulty(CreatureDifficulty.ELITE));
-		Assert.assertEquals(15, service.baseForDifficulty(CreatureDifficulty.BOSS));
+	public static class BadgeInfo {
+		
+		private final int index;
+		private final String key;
+		private final String music;
+		private final int category;	// TODO enum?
+		private final int show;	// TODO enum?
+		private final String type;	// TODO enum?
+		private final boolean title;
+		
+		public BadgeInfo(SdbResultSet set) {
+			index = (int) set.getInt("INDEX");
+			key = set.getText("KEY");
+			music = set.getText("MUSIC");
+			category = (int) set.getInt("CATEGORY");
+			show = (int) set.getInt("SHOW");
+			type = set.getText("TYPE");
+			title = set.getBoolean("IS_TITLE");
+		}
+		
+		public int getIndex() {
+			return index;
+		}
+		
+		public String getKey() {
+			return key;
+		}
+		
+		public String getMusic() {
+			return music;
+		}
+		
+		public int getCategory() {
+			return category;
+		}
+		
+		public int getShow() {
+			return show;
+		}
+		
+		public String getType() {
+			return type;
+		}
+		
+		public boolean isTitle() {
+			return title;
+		}
 	}
-	
-	@Test
-	public void testPointsGranted() {
-		Assert.assertEquals(200, service.pointsGranted(10, (byte) 20));
-	}
-	
 }

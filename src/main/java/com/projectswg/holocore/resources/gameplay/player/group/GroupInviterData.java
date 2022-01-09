@@ -35,17 +35,15 @@ public class GroupInviterData implements Encodable {
 	
 	private long id;
 	private Player sender;
-	private String name;
 	private long counter;
 	
 	public GroupInviterData() {
-		this(0, null, null, 0);
+		this(0, null, 0);
 	}
 	
-	public GroupInviterData(long id, Player sender, String name, long counter) {
+	public GroupInviterData(long id, Player sender, long counter) {
 		this.id = id;
 		this.sender = sender;
-		this.name = name;
 		this.counter = counter;
 	}
 	
@@ -53,7 +51,6 @@ public class GroupInviterData implements Encodable {
 	public byte[] encode() {
 		NetBuffer data = NetBuffer.allocate(getLength());
 		data.addLong(id);
-		data.addAscii(name);
 		data.addLong(counter);
 		return data.array();
 	}
@@ -61,13 +58,12 @@ public class GroupInviterData implements Encodable {
 	@Override
 	public void decode(NetBuffer data) {
 		id = data.getLong();
-		name = data.getAscii();
 		counter = data.getLong();
 	}
 	
 	@Override
 	public int getLength() {
-		return name.length() + 18;
+		return 16;
 	}
 	
 	public long getId() {
@@ -76,14 +72,6 @@ public class GroupInviterData implements Encodable {
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public long getCounter() {

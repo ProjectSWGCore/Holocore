@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.gameplay.player.experience.skills;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
@@ -10,10 +11,16 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLo
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 public class SkillService extends Service {
-	
+
+	private static final int SKILL_POINT_CAP = 250;
+
 	public SkillService() {
 		
 	}
@@ -50,8 +57,59 @@ public class SkillService extends Service {
 		
 		sti.getRequester().setTitle(title);
 	}
+
+	@IntentHandler
+	private void handleSurrenderSkillIntent(SurrenderSkillIntent ssi) {
+		CreatureObject target = ssi.getTarget();
+		String surrenderedSkill = ssi.getSurrenderedSkill();
+
+		if (!target.hasSkill(surrenderedSkill)) {
+			// They don't even have this skill. Do nothing.
+
+			Log.w("%s could not surrender skill %s because they do not have it", target, surrenderedSkill);
+
+			return;
+		}
+
+		Optional<String[]> dependentSkills = target.getSkills().stream()
+				.map(skill -> DataLoader.Companion.skills().getSkillByName(skill))
+				.map(SkillInfo::getSkillsRequired)
+				.filter(requiredSkills -> {
+					for (String requiredSkill : requiredSkills) {
+						if (requiredSkill.equals(surrenderedSkill)) {
+							return true;
+						}
+					}
+
+					return false;
+				})
+				.findAny();
+
+		if (dependentSkills.isPresent()) {
+			Log.d("%s could not surrender skill %s because these skills depend on it: ",
+					target, Arrays.toString(dependentSkills.get()));
+			return;
+		}
+
+		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(surrenderedSkill);
+
+		target.removeSkill(surrenderedSkill);
+		target.removeCommands(skillInfo.getCommands());
+		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
+	}
 	
 	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {
+		int pointsRequired = skill.getPointsRequired();
+		int skillPointsSpent = skillPointsSpent(target);
+
+		if (skillPointsSpent(target) + pointsRequired >= SKILL_POINT_CAP) {
+			int missingPoints = pointsRequired - (SKILL_POINT_CAP - skillPointsSpent);
+
+			Log.d("%s cannot learn %s because they lack %d skill points", target, skill.getName(), missingPoints);
+			return;
+		}
+
+
 		String parentSkillName = skill.getParent();
 		
 		if (grantRequired) {
@@ -101,7 +159,15 @@ public class SkillService extends Service {
 		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
 	}
-	
+
+	private int skillPointsSpent(CreatureObject creature) {
+		return creature.getSkills().stream()
+				.map(skillName -> DataLoader.Companion.skills().getSkillByName(skillName))
+				.map(SkillInfo::getPointsRequired)
+				.mapToInt(Integer::intValue)
+				.sum();
+	}
+
 	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {
 		String[] requiredSkills = skillData.getSkillsRequired();
 		if (requiredSkills == null)

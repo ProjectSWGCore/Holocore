@@ -32,23 +32,16 @@ import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.info.RelationalServerData;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.player.experience.LevelChangedIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.adjust.*;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.function.Function;
 
@@ -63,9 +56,7 @@ public class SkillModService extends Service {
 	
 	private final RelationalServerData playerLevelDatabase;
 	private final RelationalServerData racialStatsDatabase;
-	private final PreparedStatement getPlayerLevelStatement;
-	private final PreparedStatement getRacialStatsStatement;
-	
+
 	private final Map<String, Function<SkillModAdjust, Collection<SkillModAdjust>>> skillModAdjusters;
 	
 	public SkillModService() {
@@ -73,14 +64,14 @@ public class SkillModService extends Service {
 		playerLevelDatabase = RelationalServerFactory.getServerData("nge/player/player_levels.db", "player_levels");
 		if (playerLevelDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load player_levels.sdb file for SkillTemplateService");
-		
-		getPlayerLevelStatement = playerLevelDatabase.prepareStatement(GET_PLAYER_LEVELS_SQL);	
+
+		PreparedStatement getPlayerLevelStatement = playerLevelDatabase.prepareStatement(GET_PLAYER_LEVELS_SQL);
 		
 		racialStatsDatabase = RelationalServerFactory.getServerData("nge/player/racial_stats.db", "racial_stats");
 		if (racialStatsDatabase == null)
 			throw new ProjectSWG.CoreException("Unable to load racial_stats.sdb file for SkillTemplateService");
-		
-		getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);
+
+		PreparedStatement getRacialStatsStatement = racialStatsDatabase.prepareStatement(GET_RACIAL_STATS_SQL);
 		
 		skillModAdjusters = new HashMap<>();
 		skillModAdjusters.put("agility", new AgilityAdjustFunction());
@@ -132,31 +123,6 @@ public class SkillModService extends Service {
 			}
 		}
 	}
-	
-	@IntentHandler
-	private void handleCreatedCharacterIntent(CreatedCharacterIntent cci){
-		CreatureObject creature = cci.getCreatureObject();
-		PlayerObject playerObject = creature.getPlayerObject();
-		Profession profession = playerObject.getProfession();
-		String race = getRaceColumnAbbr(creature.getRace());
-		int newLevel = creature.getLevel();
-
-		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race);
-		grantBaseCombatChances(creature);
-	}
-	
-	@IntentHandler
-	private void handleLevelChangedIntent(LevelChangedIntent lci){
-		CreatureObject creature = lci.getCreatureObject();
-		PlayerObject playerObject = creature.getPlayerObject();
-		Profession profession = playerObject.getProfession();
-		String race = getRaceColumnAbbr(creature.getRace());
-		int newLevel = lci.getNewLevel();
-
-		updateLevelHAMValues(creature, newLevel, profession);
-		updateLevelSkillModValues(creature, newLevel, profession, race);
-	}
 
 	@IntentHandler
 	private void handleSkillModIntent(SkillModIntent smi) {
@@ -190,22 +156,6 @@ public class SkillModService extends Service {
 		}
 	}
 	
-	private void updateLevelHAMValues(CreatureObject creature, int level, Profession profession) {
-		int newHealth = getLevelSkillModValue(level, profession.getName() + "_health", "") - creature.getBaseHealth();
-		int newAction = getLevelSkillModValue(level, profession.getName() + "_action", "") - creature.getBaseAction();
-		
-		creature.setMaxHealth(creature.getMaxHealth() + newHealth);
-		creature.setHealth(creature.getMaxHealth());
-		creature.setBaseHealth(getLevelSkillModValue(level, profession.getName() + "_health", ""));
-		
-		creature.setMaxAction(creature.getMaxAction() + newAction);
-		creature.setAction(creature.getMaxAction());	
-		creature.setBaseAction(getLevelSkillModValue(level, profession.getName() + "_action", ""));	
-		
-		sendSystemMessage(creature.getOwner(), "level_up_stat_gain_6", "DI", newHealth);
-		sendSystemMessage(creature.getOwner(), "level_up_stat_gain_7", "DI", newAction);
-	}
-	
 	private void updateSkillModHamValues(CreatureObject creature, String skillModName, int modifer) {
 		int newHealth = 0;
 		int newAction = 0;
@@ -236,82 +186,7 @@ public class SkillModService extends Service {
 			}
 		}
 	}
-	
-	private void updateLevelSkillModValues(CreatureObject creature, int level, Profession profession, String race){
-		if (level < 1 || level > 90){
-			return;
-		}		
-		
-		for(SkillModTypes type : SkillModTypes.values()){
-			String raceModName = type.isRaceModDefined() ? race + type.getRace() : "";
-			int skillModValue = getLevelSkillModValue(level, profession.getName() + type.getProfession(),  raceModName);
-			
-			if (skillModValue <= 0){
-				continue;
-			}
-			
-			String skillModName = type.toString().toLowerCase(Locale.US);
-			int oldSkillModValue = creature.getSkillModValue(skillModName);
-			
-			if (skillModValue > oldSkillModValue){
-				adjustSkillmod(creature, skillModName, -creature.getSkillModValue(skillModName), 0);
-				adjustSkillmod(creature, skillModName, skillModValue, 0);
 
-				if (type == SkillModTypes.CONSTITUTION || type == SkillModTypes.STAMINA)
-					updateSkillModHamValues(creature, skillModName,skillModValue - oldSkillModValue);
-					
-				if (type.isLevelUpMessageDefined())
-					sendSystemMessage(creature.getOwner(), type.getLevelUpMessage(), "DI", skillModValue - oldSkillModValue);
-			}				
-		}
-	}
-	
-	private void grantBaseCombatChances(CreatureObject creatureObject) {
-		creatureObject.adjustSkillmod("display_only_block", 500, 0);	// 500 / 100 = 5%
-		creatureObject.adjustSkillmod("display_only_dodge", 500, 0);
-		creatureObject.adjustSkillmod("display_only_evasion", 500, 0);
-		creatureObject.adjustSkillmod("display_only_parry", 500, 0);
-		creatureObject.adjustSkillmod("display_only_critical", 500, 0);
-		creatureObject.adjustSkillmod("display_only_strikethrough", 500, 0);
-		creatureObject.adjustSkillmod("expertise_devastation_bonus", 20, 0);	// 20 / 10 = 2%
-	}
-	
-	private int getLevelSkillModValue(int level, String professionModName, String raceModName){
-		int skillModValue = 0;
-		
-		if(!professionModName.isEmpty()){
-			synchronized (getPlayerLevelStatement) {
-				try {
-					getPlayerLevelStatement.setString(1, String.valueOf(level));
-				
-					try (ResultSet set = getPlayerLevelStatement.executeQuery()) {
-						if (set.next())
-							skillModValue += set.getInt(professionModName);
-					}
-				} catch (SQLException e) {
-					Log.e(e);
-				}
-			}
-		}
-		
-		if(!raceModName.isEmpty()){
-			synchronized (getRacialStatsStatement) {
-				try {
-					getRacialStatsStatement.setString(1, String.valueOf(level));
-				
-					try (ResultSet set = getRacialStatsStatement.executeQuery()) {
-						if (set.next())
-							skillModValue += set.getInt(raceModName);
-					}
-				} catch (SQLException e) {
-					Log.e(e);
-				}
-			}
-		}
-		
-		return skillModValue;
-	}	
-	
 	private String getRaceColumnAbbr(Race race){
 
 		switch (race) {

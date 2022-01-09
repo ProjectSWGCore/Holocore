@@ -91,24 +91,17 @@ public class BuffService extends Service {
 	private void handleBuffIntent(BuffIntent bi) {
 		String buffName = bi.getBuffName();
 		BuffInfo buffData = bi.getBuffData();
-		
+
 		if (buffData == null) {
 			buffData = getBuff(buffName);
 		}
-		
+
 		Objects.requireNonNull(buffData, "No known buff: " + buffName);
 		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
 		CreatureObject buffer = bi.getBuffer();
 		CreatureObject receiver = bi.getReceiver();
-		
+
 		if (bi.isRemove()) {
-			// If a player is removing a buff from themselves, check if the buff allows this
-			if (buffer.equals(receiver)) {
-				if (!buffData.isPlayerRemovable()) {
-					return;
-				}
-			}
-			
 			removeBuff(receiver, buffData, false);
 		} else {
 			addBuff(receiver, buffData, buffer);
@@ -139,20 +132,15 @@ public class BuffService extends Service {
 	
 	private void handleDisappear(CreatureObject creature) {
 		removeFromMonitored(creature);
-		removeAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffPersistent(buff)));
+		removeAllBuffs(creature, creature.getBuffEntries(buff -> true));
 	}
 	
 	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 		
-		if (cki.getKiller().isPlayer()) {
-			// PvP death - decay durations of certain buffs
-			corpse.getBuffEntries(buff -> isBuffDecayable(corpse, buff)).forEach(buff -> decayDuration(corpse, buff));
-		} else {
-			// PvE death - remove certain buffs
-			removeAllBuffs(corpse, corpse.getBuffEntries(this::isBuffRemovedOnDeath));
-		}
+		// All buffs are removed upon death
+		removeAllBuffs(corpse, corpse.getBuffEntries(buff -> true));
 	}
 	
 	private void addToMonitored(CreatureObject creature) {
@@ -179,18 +167,6 @@ public class BuffService extends Service {
 	
 	private boolean isBuffExpired(CreatureObject creature, Buff buff) {
 		return buff.getDuration() >= 0 && calculatePlayTime(creature) >= buff.getEndTime();
-	}
-	
-	private boolean isBuffDecayable(CreatureObject creature, Buff buff) {
-		return !isBuffExpired(creature, buff) && getBuff(buff).isDecayOnPvpDeath();
-	}
-	
-	private boolean isBuffPersistent(Buff buff) {
-		return getBuff(buff).isPersistent();
-	}
-	
-	private boolean isBuffRemovedOnDeath(Buff buff) {
-		return getBuff(buff).isRemoveOnDeath();
 	}
 	
 	private boolean isBuffInfinite(BuffInfo buffData) {
@@ -223,9 +199,6 @@ public class BuffService extends Service {
 			if (buff.getCrc() == buffData.getCrc()) {
 				if (isBuffInfinite(buffData)) {
 					removeBuff(receiver, buffData, true);
-				} else {
-					// TODO skillmods influencing stack increment
-					checkStackCount(receiver, buff, applyTime, 1);
 				}
 			} else {
 				BuffInfo oldBuff = getBuff(buff);
@@ -245,45 +218,14 @@ public class BuffService extends Service {
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
 		
 		Buff buff = optionalEntry.get();
-		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			checkStackCount(creature, buff, calculatePlayTime(creature), buffData.getMaxStackCount());
-		} else {
-			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
-			Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
-			
-			checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
-			checkCallback(buffData, creature);
-		}
+		Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
+		Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
+
+		checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
+		checkCallback(buffData, creature);
 		
 		if (!isCreatureBuffed(creature)) {
 			removeFromMonitored(creature);
-		}
-	}
-	
-	private void checkStackCount(CreatureObject receiver, Buff buff, int applyTime, int stackMod) {
-		BuffInfo buffData = getBuff(buff);
-		
-		Objects.requireNonNull(buffData, "No known buff: " + buff.getCrc());
-		// If it's the same buff, we need to check for stacks
-		int maxStackCount = buffData.getMaxStackCount();
-		
-		if (maxStackCount < 2) {
-			removeBuff(receiver, buffData, true);
-			applyBuff(receiver, receiver, buffData, applyTime);
-			return;
-		}
-		
-		if (stackMod + buff.getStackCount() > maxStackCount) {
-			stackMod = maxStackCount;
-		}
-		
-		CRC crc = new CRC(buff.getCrc());
-		receiver.adjustBuffStackCount(crc, stackMod);
-		checkBuffEffects(buffData, receiver, stackMod);
-		
-		// If the stack count was incremented, also renew the duration
-		if (stackMod > 0) {
-			receiver.setBuffDuration(crc, applyTime, (int) buffData.getDuration());
 		}
 	}
 	
@@ -298,13 +240,12 @@ public class BuffService extends Service {
 			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
 		}
 		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, (float) buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
-		
+
 		checkBuffEffects(buffData, receiver, 1);
 		receiver.addBuff(buff);
-		
-		sendParticleEffect(buffData.getParticle(), receiver, buffData.getParticleHardpoint());
-		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardpoint());
-		
+
+		sendParticleEffect(buffData.getParticle(), receiver, "");
+
 		addToMonitored(receiver);
 	}
 	

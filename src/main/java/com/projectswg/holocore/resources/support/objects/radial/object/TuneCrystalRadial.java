@@ -32,7 +32,6 @@ import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 
 import java.util.Collection;
 
@@ -44,7 +43,7 @@ public class TuneCrystalRadial extends SWGObjectRadial {
 	@Override
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
 		if (isOptionVisible(player, target)) {
-			options.add(RadialOption.create(RadialItem.SERVER_MENU19, "@jedi_spam:tune_crystal"));
+			options.add(RadialOption.create(RadialItem.BIO_LINK, "@jedi_spam:tune_crystal"));
 		}
 	}
 	
@@ -56,9 +55,9 @@ public class TuneCrystalRadial extends SWGObjectRadial {
 	}
 	
 	private final boolean isOptionVisible(Player player, SWGObject crystal) {
-		Profession profession = player.getPlayerObject().getProfession();
-		
-		return !isTuned(crystal) && GameObjectType.GOT_COMPONENT_SABER_CRYSTAL == crystal.getGameObjectType() && profession == Profession.FORCE_SENSITIVE;
+		boolean jediInitiate = player.getCreatureObject().hasSkill("force_title_jedi_rank_01");
+
+		return !isTuned(crystal) && GameObjectType.GOT_COMPONENT_SABER_CRYSTAL == crystal.getGameObjectType() && jediInitiate;
 	}
 	
 	private final boolean isTuned(SWGObject crystal) {

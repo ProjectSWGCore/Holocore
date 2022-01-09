@@ -87,7 +87,7 @@ public class TravelService extends Service {
 	private void handleTravelPointSelectionIntent(TravelPointSelectionIntent tpsi) {
 		CreatureObject traveler = tpsi.getCreature();
 		
-		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName(), tpsi.isInstant()));
+		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName()));
 	}
 	
 	@IntentHandler
@@ -193,7 +193,6 @@ public class TravelService extends Service {
 			
 			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
 			shuttle.setPosture(Posture.UPRIGHT);
-			shuttle.setShownOnRadar(false);
 		} else if (object.getTemplate().equals(SpecificObject.SO_TICKET_COLLETOR.getTemplate())) {
 			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
 			

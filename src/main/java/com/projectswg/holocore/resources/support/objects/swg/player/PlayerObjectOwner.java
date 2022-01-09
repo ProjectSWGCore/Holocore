@@ -60,8 +60,7 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 	/** PLAY8-05 */ private final	SWGBitSet					activeQuests		= new SWGBitSet(8,5);
 	/** PLAY8-06 */ private			int 						activeQuest			= 0;
 	/** PLAY8-07 */ private final	SWGMap<CRC, Quest>		quests				= new SWGMap<>(8, 7);
-	/** PLAY8-08 */ private			String 						profWheelPosition	= "";
-	
+
 	public PlayerObjectOwner(PlayerObject obj) {
 		this.obj = obj;
 	}
@@ -177,15 +176,6 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		return Collections.unmodifiableMap(quests);
 	}
 	
-	public String getProfWheelPosition() {
-		return profWheelPosition;
-	}
-	
-	public void setProfWheelPosition(String profWheelPosition) {
-		this.profWheelPosition = profWheelPosition;
-		sendDelta(8, profWheelPosition, StringType.ASCII);
-	}
-	
 	public void createBaseline8(BaselineBuilder bb) {
 		bb.addObject(experience); // 0
 		bb.addObject(waypoints); // 1
@@ -195,9 +185,8 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		bb.addObject(activeQuests); // 5
 		bb.addInt(activeQuest); // 6
 		bb.addObject(quests); // 7
-		bb.addAscii(profWheelPosition); // 8
-		
-		bb.incrementOperandCount(9);
+
+		bb.incrementOperandCount(8);
 	}
 	
 	@Override
@@ -210,7 +199,6 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		data.putByteArray("activeQuests", activeQuests.toByteArray());
 		data.putInteger("activeQuest", activeQuest);
 		data.putMap("quests", quests);
-		data.putString("profWheelPosition", profWheelPosition);
 	}
 	
 	@Override
@@ -227,13 +215,11 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		activeQuests.read(data.getByteArray("activeQuests"));
 		activeQuest = data.getInteger("activeQuest", activeQuest);
 		quests.putAll(data.getMap("quests", CRC.class, Quest.class));
-		profWheelPosition = data.getString("profWheelPosition", profWheelPosition);
 	}
 	
 	@Override
 	public void save(NetBufferStream stream) {
 		stream.addByte(0);
-		stream.addAscii(profWheelPosition);
 		stream.addInt(0);
 		stream.addInt(activeQuest);
 		synchronized (experience) {
@@ -253,7 +239,6 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 	@Override
 	public void read(NetBufferStream stream) {
 		stream.getByte();
-		profWheelPosition = stream.getAscii();
 		stream.getInt();
 		activeQuest = stream.getInt();
 		stream.getList((i) -> experience.put(stream.getAscii(), stream.getInt()));

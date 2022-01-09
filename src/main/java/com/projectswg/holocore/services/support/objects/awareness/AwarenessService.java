@@ -30,7 +30,6 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatOnConnectAvatar;
-import com.projectswg.common.network.packets.swg.zone.chat.VoiceChatStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatServerStatus;
 import com.projectswg.common.network.packets.swg.zone.insertion.CmdStartScene;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
@@ -142,7 +141,7 @@ public class AwarenessService extends Service {
 			Location newWorldLocation = newLocation;
 			if (newParent != null)
 				newWorldLocation = Location.builder(newWorldLocation).translateLocation(newParent.getWorldLocation()).build();
-			obj.sendSelf(new DataTransform(obj.getObjectId(), 0, obj.getNextUpdateCount(), newWorldLocation, 0));
+			obj.sendSelf(new DataTransform(obj.getObjectId(), obj.getNextUpdateCount(), newWorldLocation, 0));
 		}
 		awareness.updateObject(obj);
 		sendObjectUpdates(obj, oti.getOldParent(), oti.getNewParent(), oldLocation, newLocation, 0);
@@ -205,7 +204,6 @@ public class AwarenessService extends Service {
 		if (firstZone) {
 			player.sendPacket(new HeartBeat());
 			player.sendPacket(new ChatServerStatus(true));
-			player.sendPacket(new VoiceChatStatus());
 			player.sendPacket(new ParametersMessage());
 			player.sendPacket(new ChatOnConnectAvatar());
 			firstZoneIntent = new PlayerEventIntent(player, PlayerEvent.PE_FIRST_ZONE);

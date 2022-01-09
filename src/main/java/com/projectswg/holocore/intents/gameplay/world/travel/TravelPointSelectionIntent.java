@@ -32,19 +32,13 @@ import me.joshlarson.jlcommon.control.Intent;
 public class TravelPointSelectionIntent extends Intent {
 	
 	private CreatureObject creature;
-	private boolean instant;
-	
-	public TravelPointSelectionIntent(CreatureObject creature, boolean instant) {
+
+	public TravelPointSelectionIntent(CreatureObject creature) {
 		this.creature = creature;
-		this.instant = instant;
 	}
 	
 	public CreatureObject getCreature() {
 		return creature;
 	}
-	
-	public boolean isInstant() {
-		return instant;
-	}
-	
+
 }

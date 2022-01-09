@@ -29,40 +29,39 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public final class PlayerRoleLoader extends DataLoader {
 	
-	private final Map<Integer, RoleInfo> rolesByIndex;
-	private final Map<String, RoleInfo> rolesBySkill;
+	private final Map<Integer, Collection<RoleInfo>> rolesByIndex;
+	private final Map<String, Collection<RoleInfo>> rolesBySkill;
 	
 	PlayerRoleLoader() {
 		this.rolesByIndex = new HashMap<>();
 		this.rolesBySkill = new HashMap<>();
 	}
 	
-	@Nullable
-	public RoleInfo getRoleByIndex(int index) {
-		return rolesByIndex.get(index);
+	@NotNull
+	public Collection<RoleInfo> getRolesByIndex(int index) {
+		return rolesByIndex.getOrDefault(index, Collections.emptyList());
 	}
 	
-	@Nullable
-	public RoleInfo getRoleBySkill(String skill) {
-		return rolesBySkill.get(skill);
+	@NotNull
+	public Collection<RoleInfo> getRolesBySkill(String skill) {
+		return rolesBySkill.getOrDefault(skill, Collections.emptyList());
 	}
 	
 	@Override
-	public final void load() throws IOException {
+	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/role.sdb"))) {
 			while (set.next()) {
 				RoleInfo role = new RoleInfo(set);
-				rolesByIndex.put(role.getIndex(), role);
-				rolesBySkill.put(role.getQualifyingSkill(), role);
+				rolesByIndex.computeIfAbsent(role.getIndex(), index -> new HashSet<>()).add(role);
+				rolesBySkill.computeIfAbsent(role.getQualifyingSkill(), index -> new HashSet<>()).add(role);
 			}
 		}
 	}
@@ -74,9 +73,9 @@ public final class PlayerRoleLoader extends DataLoader {
 		private final String qualifyingSkill;
 		
 		public RoleInfo(SdbResultSet set) {
-			this.index = (int) set.getInt("index");
-			this.roleIcon = set.getText("role_icon");
-			this.qualifyingSkill = set.getText("qualifying_skill");
+			this.index = (int) set.getInt("INDEX");
+			this.roleIcon = set.getText("ROLE_ICON");
+			this.qualifyingSkill = set.getText("QUALIFYING_SKILL");
 		}
 		
 		public int getIndex() {

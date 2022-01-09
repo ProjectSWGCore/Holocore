@@ -4,8 +4,6 @@ import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.Profession;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
@@ -28,7 +26,6 @@ public class TestTuneCrystalRadial {
 		radial = new TuneCrystalRadial();
 		player = new GenericPlayer();
 		CreatureObject creatureObject = new GenericCreatureObject(1, "Some Player", true);
-		creatureObject.getPlayerObject().setProfession(Profession.FORCE_SENSITIVE);	// Only Jedi can tune crystals
 		player.setCreatureObject(creatureObject);
 		
 		crystal = new GenericTangibleObject(3);
@@ -38,6 +35,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testNotCrystal() {
+		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		crystal.setGameObjectType(GameObjectType.GOT_CLOTHING_JACKET);	// Let's change the object type to something different
 		
@@ -48,6 +46,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testCrystalUntuned() {
+		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		radial.getOptions(options, player, crystal);
 		
@@ -59,6 +58,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testCrystalAlreadyTuned() {
+		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		
 		// Let's tune the crystal
@@ -71,9 +71,9 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testNotJedi() {
+		player.getCreatureObject().addSkill("swg_dev");	// Something that's not Jedi - doesn't really matter what
 		List<RadialOption> options = new ArrayList<>();
-		player.getPlayerObject().setProfession(Profession.MEDIC);	// Something that's not Jedi - doesn't really matter what
-		
+
 		radial.getOptions(options, player, crystal);
 		
 		assertTrue("Only Jedi should be able to tune crystals", options.isEmpty());

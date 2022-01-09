@@ -1,6 +1,6 @@
 file	enabled
 TEXT	BOOLEAN
-buildout_atmosphere.sdb	TRUE
+buildout_atmosphere.sdb	FALSE
 buildout_camps.sdb	TRUE
 buildout_cloning.sdb	TRUE
 buildout_common.sdb	TRUE

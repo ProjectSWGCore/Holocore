@@ -76,7 +76,7 @@ public class CharacterCreationService extends Service {
 		creationRestriction.setCreationsPerPeriod(PswgDatabase.INSTANCE.getConfig().getInt(this, "galaxyMaxCharactersPerPeriod", 2));
 		return super.start();
 	}
-	
+
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		Player player = gpi.getPlayer();
@@ -189,7 +189,7 @@ public class CharacterCreationService extends Service {
 		StandardLog.onPlayerError(this, player, "failed to create character '%s' with server error [%s] from %s", create.getName(), actualReason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
-	
+
 	private int getCharacterCount(String username) {
 		return PswgDatabase.INSTANCE.getObjects().getCharacterCount(username);
 	}
@@ -225,10 +225,10 @@ public class CharacterCreationService extends Service {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
-		CharacterCreation creation = new CharacterCreation(player, create);
+		CharacterCreation creation = new CharacterCreation(player, create, create.getBiography());
 		return creation.createCharacter(player.getAccessLevel(), info);
 	}
-	
+
 	private boolean lockName(String name, Player player) {
 		String firstName = name.split(" ", 2)[0].toLowerCase(Locale.ENGLISH);
 		if (isLocked(player, firstName))

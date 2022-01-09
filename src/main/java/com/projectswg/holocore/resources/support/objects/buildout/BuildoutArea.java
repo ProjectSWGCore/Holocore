@@ -35,7 +35,6 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	private int id;
 	private String name;
 	private Terrain terrain;
-	private String event;
 	private double x1;
 	private double z1;
 	private double x2;
@@ -59,10 +58,6 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	
 	public Terrain getTerrain() {
 		return terrain;
-	}
-	
-	public String getEvent() {
-		return event;
 	}
 	
 	public double getX1() {
@@ -177,11 +172,6 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 		
 		public BuildoutAreaBuilder setTerrain(Terrain terrain) {
 			area.terrain = terrain;
-			return this;
-		}
-		
-		public BuildoutAreaBuilder setEvent(String event) {
-			area.event = event;
 			return this;
 		}
 		

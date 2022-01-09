@@ -32,11 +32,11 @@ import me.joshlarson.jlcommon.control.Intent;
 public class GrantBadgeIntent extends Intent {
 	
 	private CreatureObject creature;
-	private String collectionBadgeName;
+	private String badgeKey;
 	
-	public GrantBadgeIntent(CreatureObject creature, String collectionBadgeName) {
+	public GrantBadgeIntent(CreatureObject creature, String badgeKey) {
 		this.creature = creature;
-		this.collectionBadgeName = collectionBadgeName;
+		this.badgeKey = badgeKey;
 		
 	}
 	
@@ -44,7 +44,7 @@ public class GrantBadgeIntent extends Intent {
 		return creature;
 	}
 	
-	public String getCollectionBadgeName() {
-		return collectionBadgeName;
+	public String getBadgeKey() {
+		return badgeKey;
 	}
 }

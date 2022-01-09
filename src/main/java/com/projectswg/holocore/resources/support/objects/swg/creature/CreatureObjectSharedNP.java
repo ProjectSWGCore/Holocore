@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.objects.swg.creature;
 
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.data.HologramColour;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBuffer;
@@ -52,10 +51,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 class CreatureObjectSharedNP implements Persistable, MongoPersistable {
-	
+
 	private final CreatureObject obj;
 	
-	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, "", 0);
+	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, 0);
 	private transient long groupId			= 0;
 	
 	private short	level					= 1;
@@ -65,7 +64,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	private long equippedWeapon		= 0;
 	private int		guildId					= 0;
 	private long 	lookAtTargetId			= 0;
-	private long 	intendedTargetId		= 0;
 	private byte	moodId					= 0;
 	private int 	performanceCounter		= 0;
 	private int 	performanceId			= 0;
@@ -73,21 +71,17 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	private boolean visible					= true;
 	private boolean performing				= false;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
-	private HologramColour hologramColour	= HologramColour.DEFAULT;
-	private boolean shownOnRadar			= true;
-	private boolean beast					= false;
-	
+
 	private AttributesMutable	attributes;
 	private AttributesMutable	maxAttributes;
-	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 23, Equipment::new);
-	private SWGList<Equipment>	appearanceList 	= SWGList.Companion.createEncodableList(6, 33, Equipment::new);
-	
+	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
+
 	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
 	
 	public CreatureObjectSharedNP(CreatureObject obj) {
 		this.obj = obj;
-		this.attributes = new AttributesMutable(obj, 6, 21);
-		this.maxAttributes = new AttributesMutable(obj, 6, 22);
+		this.attributes = new AttributesMutable(obj, 6, 14);
+		this.maxAttributes = new AttributesMutable(obj, 6, 15);
 		initCurrentAttributes();
 		initMaxAttributes();
 	}
@@ -122,42 +116,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		return null;
 	}
 	
-	public void addAppearanceItem(SWGObject obj, SWGObject target) {
-		synchronized (appearanceList) {
-			appearanceList.add(new Equipment(obj));
-			appearanceList.sendDeltaMessage(target);
-		}
-	}
-	
-	public void removeAppearanceItem(SWGObject obj, SWGObject target) {
-		Equipment e = getEquipment(obj);
-		if (e == null)
-			return;
-		synchronized (appearanceList) {
-			appearanceList.remove(e);
-			appearanceList.sendDeltaMessage(target);
-		}
-	}
-	
-	public Equipment getAppearance(SWGObject obj) {
-		synchronized (appearanceList) {
-			for (Equipment equipment : appearanceList) {
-				if (equipment.getObjectId() == obj.getObjectId()) {
-					return equipment;
-				}
-			}
-		}
-		return null;
-	}
-	
 	public SWGList<Equipment> getEquipmentList() {
 		return equipmentList;
 	}
-	
-	public SWGList<Equipment> getAppearanceList() {
-		return appearanceList;
-	}
-	
+
 	public void setGuildId(int guildId) {
 		this.guildId = guildId;
 	}
@@ -178,10 +140,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		this.moodAnimation = moodAnimation;
 	}
 	
-	public void setBeast(boolean beast) {
-		this.beast = beast;
-	}
-	
 	public void setEquippedWeapon(long weaponId) {
 		this.equippedWeapon = weaponId;
 	}
@@ -193,11 +151,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public void setLookAtTargetId(long lookAtTargetId) {
 		this.lookAtTargetId = lookAtTargetId;
 	}
-	
-	public void setIntendedTargetId(long intendedTargetId) {
-		this.intendedTargetId = intendedTargetId;
-	}
-	
+
 	public void setPerformanceCounter(int performanceCounter) {
 		this.performanceCounter = performanceCounter;
 	}
@@ -230,8 +184,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		this.costume = costume;
 	}
 	
-	public void updateGroupInviteData(Player sender, long groupId, String name) {
-		inviterData.setName(name);
+	public void updateGroupInviteData(Player sender, long groupId) {
 		inviterData.setSender(sender);
 		inviterData.setId(groupId);
 		inviterData.incrementCounter();
@@ -260,11 +213,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public long getLookAtTargetId() {
 		return lookAtTargetId;
 	}
-	
-	public long getIntendedTargetId() {
-		return intendedTargetId;
-	}
-	
+
 	public int getPerformanceCounter() {
 		return performanceCounter;
 	}
@@ -279,10 +228,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	
 	public String getMoodAnimation() {
 		return moodAnimation;
-	}
-	
-	public boolean isBeast() {
-		return beast;
 	}
 	
 	public long getEquippedWeapon() {
@@ -303,22 +248,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 
 	public void setPerforming(boolean performing) {
 		this.performing = performing;
-	}
-	
-	public HologramColour getHologramColor() {
-		return hologramColour;
-	}
-	
-	public void setHologramColour(HologramColour hologramColour) {
-		this.hologramColour = hologramColour;
-	}
-
-	public boolean isShownOnRadar() {
-		return shownOnRadar;
-	}
-
-	public void setShownOnRadar(boolean shownOnRadar) {
-		this.shownOnRadar = shownOnRadar;
 	}
 
 	public int getHealth() {
@@ -352,7 +281,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public void modifyHealth(int mod) {
 		attributes.modifyHealth(mod, maxAttributes.getHealth());
 	}
-	
+
 	public void setMaxHealth(int maxHealth) {
 		maxAttributes.setHealth(maxHealth);
 	}
@@ -368,11 +297,11 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public void setMaxAction(int maxAction) {
 		maxAttributes.setAction(maxAction);
 	}
-	
+
 	public void setMind(int mind) {
 		attributes.setMind(mind);
 	}
-	
+
 	public void modifyMind(int mod) {
 		attributes.modifyMind(mod, maxAttributes.getMind());
 	}
@@ -398,7 +327,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 				target.sendObservers(new BuffRemoveUpdate(target.getObjectId(), buffCrc.getCrc()));
 				buffs.sendDeltaMessage(target);
 			}
-			
+
 			return removedBuff;
 		}
 	}
@@ -407,10 +336,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		synchronized (buffs) {
 			return new ArrayList<>(buffs.values()).stream().filter(predicate);
 		}
-	}
-	
-	public void adjustBuffStackCount(CRC buffCrc, int adjustment, SWGObject target) {
-		safeModifyBuff(buffCrc, target, buff -> buff.adjustStackCount(adjustment));
 	}
 	
 	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
@@ -452,7 +377,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		bb.addObject(inviterData); // 14
 		bb.addInt(guildId); // 15
 		bb.addLong(lookAtTargetId); // 16
-		bb.addLong(intendedTargetId); // 17
 		bb.addByte(moodId); // 18
 		bb.addInt(performanceCounter); // 19
 		bb.addInt(performanceId); // 20
@@ -464,14 +388,8 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		bb.addObject(buffs); // 26
 		bb.addBoolean(performing); // 27
 		bb.addByte(difficulty.getDifficulty()); // 28
-		bb.addInt((hologramColour == null) ? -1 : hologramColour.getValue()); // Hologram Color -- 29
-		bb.addBoolean(shownOnRadar); // 30
-		bb.addBoolean(beast); // 31
-		bb.addByte(0); // forceShowHam? -- 32
-		bb.addObject(appearanceList); // 33
-		bb.addLong(0); // decoy? -- 34
 		
-		bb.incrementOperandCount(27);
+		bb.incrementOperandCount(21);
 	}
 	
 	public void parseBaseline6(NetBuffer buffer) {
@@ -484,7 +402,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		inviterData = buffer.getEncodable(GroupInviterData.class);
 		guildId = buffer.getInt();
 		lookAtTargetId = buffer.getLong();
-		intendedTargetId = buffer.getLong();
 		moodId = buffer.getByte();
 		performanceCounter = buffer.getInt();
 		performanceId = buffer.getInt();
@@ -496,14 +413,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		buffs = SWGMap.getSwgMap(buffer, 6, 26, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
-		hologramColour = HologramColour.getForValue(buffer.getInt());
-		shownOnRadar = buffer.getBoolean();
-		beast = buffer.getBoolean();
 		buffer.getBoolean();
-		appearanceList = SWGList.getSwgList(buffer, 6, 33, Equipment.class);
 		buffer.getLong();
 	}
-	
+
 	@Override
 	public void saveMongo(MongoData data) {
 		data.putInteger("level", level);
@@ -512,38 +425,30 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		data.putString("moodAnimation", moodAnimation);
 		data.putInteger("guildId", guildId);
 		data.putLong("lookAtTargetId", lookAtTargetId);
-		data.putLong("intendedTargetId", intendedTargetId);
 		data.putInteger("moodId", moodId);
 		data.putString("costume", costume);
 		data.putBoolean("visible", visible);
-		data.putBoolean("shownOnRadar", shownOnRadar);
-		data.putBoolean("beast", beast);
 		data.putString("difficulty", difficulty.name());
-		data.putString("hologramColor", hologramColour.name());
 		data.putLong("equippedWeapon", equippedWeapon);
 		data.putDocument("attributes", attributes);
 		data.putDocument("maxAttributes", maxAttributes);
 		data.putMap("buffs", buffs);
 	}
-	
+
 	@Override
 	public void readMongo(MongoData data) {
 		buffs.clear();
-		
+
 		level = (short) data.getInteger("level", level);
 		levelHealthGranted = data.getInteger("levelHealthGranted", levelHealthGranted);
 		animation = data.getString("animation", animation);
 		moodAnimation = data.getString("moodAnimation", moodAnimation);
 		guildId = data.getInteger("guildId", guildId);
 		lookAtTargetId = data.getLong("lookAtTargetId", lookAtTargetId);
-		intendedTargetId = data.getLong("intendedTargetId", intendedTargetId);
 		moodId = (byte) data.getInteger("moodId", moodId);
 		costume = data.getString("costume", costume);
 		visible = data.getBoolean("visible", visible);
-		shownOnRadar = data.getBoolean("shownOnRadar", shownOnRadar);
-		beast = data.getBoolean("beast", beast);
 		difficulty = CreatureDifficulty.valueOf(data.getString("difficulty", difficulty.name()));
-		hologramColour = HologramColour.valueOf(data.getString("hologramColor", hologramColour.name()));
 		equippedWeapon = data.getLong("equippedWeapon", equippedWeapon);
 		data.getDocument("attributes", attributes);
 		data.getDocument("maxAttributes", maxAttributes);
@@ -559,16 +464,12 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		stream.addAscii(moodAnimation);
 		stream.addInt(guildId);
 		stream.addLong(lookAtTargetId);
-		stream.addLong(intendedTargetId);
 		stream.addByte(moodId);
 		stream.addAscii(costume);
 		stream.addBoolean(visible);
-		stream.addBoolean(shownOnRadar);
-		stream.addBoolean(beast);
 		stream.addAscii(difficulty.name());
-		stream.addAscii(hologramColour.name());
 		stream.addLong(equippedWeapon);
-		
+
 		maxAttributes.save(stream);
 		synchronized (buffs) {
 			stream.addMap(buffs, (e) -> e.getValue().save(stream));
@@ -600,14 +501,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodAnimation = stream.getAscii();
 		guildId = stream.getInt();
 		lookAtTargetId = stream.getLong();
-		intendedTargetId = stream.getLong();
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		hologramColour = HologramColour.valueOf(stream.getAscii());
 		if (stream.getBoolean())
 			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
 		readAttributes((byte) 0, attributes, stream);
@@ -621,14 +518,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodAnimation = stream.getAscii();
 		guildId = stream.getInt();
 		lookAtTargetId = stream.getLong();
-		intendedTargetId = stream.getLong();
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		hologramColour = HologramColour.valueOf(stream.getAscii());
 		if (stream.getBoolean())
 			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
 		readAttributes((byte) 1, maxAttributes, stream);
@@ -664,24 +557,20 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodAnimation = stream.getAscii();
 		guildId = stream.getInt();
 		lookAtTargetId = stream.getLong();
-		intendedTargetId = stream.getLong();
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		hologramColour = HologramColour.valueOf(stream.getAscii());
 		equippedWeapon = stream.getLong();
 		readAttributes((byte) 4, maxAttributes, stream);
 		stream.getList((i) -> {
 			Buff buff = new Buff();
-			
+
 			buff.read(stream);
 			buffs.put(new CRC(buff.getCrc()), buff);
 		});
 	}
-	
+
 	private void readVersion5(NetBufferStream stream) {
 		level = stream.getShort();
 		levelHealthGranted = stream.getInt();
@@ -689,24 +578,20 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		moodAnimation = stream.getAscii();
 		guildId = stream.getInt();
 		lookAtTargetId = stream.getLong();
-		intendedTargetId = stream.getLong();
 		moodId = stream.getByte();
 		costume = stream.getAscii();
 		visible = stream.getBoolean();
-		shownOnRadar = stream.getBoolean();
-		beast = stream.getBoolean();
 		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		hologramColour = HologramColour.valueOf(stream.getAscii());
 		equippedWeapon = stream.getLong();
 		maxAttributes.read(stream);
 		stream.getList((i) -> {
 			Buff buff = new Buff();
-			
+
 			buff.read(stream);
 			buffs.put(new CRC(buff.getCrc()), buff);
 		});
 	}
-	
+
 	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
 		if (ver <= 4) {
 			int [] array = new int[6];
@@ -720,7 +605,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		} else {
 			attributes.read(stream);
 		}
-		
+
 	}
-	
+
 }

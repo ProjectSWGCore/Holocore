@@ -77,12 +77,12 @@ holocore/
 ## MongoDB ##
 User information is read from a MongoDB database that can be run on any machine on your network. Default is the machine that Holocore is running on.
 
-1. Create database: `use nge`
+1. Create database: `use cu`
 2. Create a user for Holocore: `db.createUser({user: "holocore", pwd: "pass", roles: []})`
 3. Create your game user: `db.users.insert({username: "user", password: "pass", accessLevel: "dev", banned: false, characters: []})`
 
 Enabling the Character Builder Terminals:
-1. Switch to the nge database: `use nge`
+1. Switch to the relevant database: `use cu`
 2. Enable the character builder: `db.config.insertOne({ "package": "support.data.dev", "characterBuilder": true })`
 
 ## Running Holocore ##

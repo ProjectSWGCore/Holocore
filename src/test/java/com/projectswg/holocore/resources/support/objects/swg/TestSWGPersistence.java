@@ -165,8 +165,7 @@ public class TestSWGPersistence {
 						"waterModPercent", obj.getWaterModPercent(),
 						"runSpeed", obj.getRunSpeed(),
 						"walkSpeed", obj.getWalkSpeed(),
-						"turnScale", obj.getTurnScale(),
-						"totalLevelXp", obj.getTotalLevelXp()
+						"turnScale", obj.getTurnScale()
 				),
 				"base6", map(
 						"level", (int) obj.getLevel(),
@@ -175,14 +174,10 @@ public class TestSWGPersistence {
 						"moodAnimation", obj.getMoodAnimation(),
 						"guildId", obj.getGuildId(),
 						"lookAtTargetId", obj.getLookAtTargetId(),
-						"intendedTargetId", obj.getIntendedTargetId(),
 						"moodId", (int) obj.getMoodId(),
 						"costume", obj.getCostume(),
 						"visible", obj.isVisible(),
-						"shownOnRadar", obj.isShownOnRadar(),
-						"beast", obj.isBeast(),
 						"difficulty", obj.getDifficulty().name(),
-						"hologramColor", obj.getHologramColor().name(),
 						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
 						"attributes", map(
 								"health", obj.getHealth(),

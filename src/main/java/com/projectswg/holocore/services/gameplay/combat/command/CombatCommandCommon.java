@@ -30,6 +30,8 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
@@ -66,33 +68,18 @@ public class CombatCommandCommon {
 		combatAction.setClientEffectId((byte) 0);
 		combatAction.setCommandCrc(command.getCrc());
 		combatAction.setTrail(trail);
-		combatAction.setUseLocation(false);
 		return combatAction;
 	}
 	
 	static CombatSpam createCombatSpam(CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
 		CombatSpam combatSpam = new CombatSpam(source.getObjectId());
-		combatSpam.setAttacker(source.getObjectId());
-		combatSpam.setAttackerPosition(source.getLocation().getPosition());
-		combatSpam.setWeapon(weapon.getObjectId());
-		combatSpam.setWeaponName(weapon.getStringId());
-		combatSpam.setDefender(target.getObjectId());
-		combatSpam.setDefenderPosition(target.getLocation().getPosition());
 		combatSpam.setInfo(info);
+		combatSpam.setAttacker(source.getObjectId());
+		combatSpam.setWeapon(weapon.getObjectId());
+		combatSpam.setDefender(target.getObjectId());
+		combatSpam.setDataType((byte) 0);
 		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
-		
-		if (info.isSuccess()) {
-			if (info.isBlockResult()) {
-				combatSpam.setSpamType(CombatSpamType.BLOCK);
-			} else if (info.isEvadeResult()) {
-				combatSpam.setSpamType(CombatSpamType.EVADE);
-			} else {
-				combatSpam.setSpamType(CombatSpamType.HIT);
-			}
-		} else {
-			combatSpam.setSpamType(CombatSpamType.MISS);
-		}
-		
+
 		return combatSpam;
 	}
 	

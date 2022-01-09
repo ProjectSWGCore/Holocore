@@ -44,7 +44,7 @@ class ConvertObjectData implements Converter {
 			System.err.println("Failed to load object: " + file);
 			return;
 		}
-		line[0] = file.getAbsolutePath().replace(CLIENTDATA.getAbsolutePath()+'/', "");
+		line[0] = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
 		for (int i = 0; i < ATTRIBUTES.length; i++) {
 			ObjectDataAttribute attr = ATTRIBUTES[i];
 			line[i+1] = initializeDataType(attr, objectData.getAttribute(attr));

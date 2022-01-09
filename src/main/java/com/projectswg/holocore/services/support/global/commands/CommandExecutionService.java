@@ -38,7 +38,6 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdCoupDeGrace;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdDuel;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdEndDuel;
-import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdPVP;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.conversation.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.flags.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.generic.*;
@@ -78,11 +77,22 @@ public class CommandExecutionService extends Service {
 		callbackSupplier.get().execute(eci.getSource().getOwner(), eci.getTarget(), eci.getArguments());
 	}
 	
-	private void registerCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
-		List<Command> commands = DataLoader.Companion.commands().getCommandByCallback(callbackName);
+	private void registerCppCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
+		List<Command> commands = DataLoader.Companion.commands().getCommandsByCppCallback(callbackName);
 //		assert commands != null;
 		if (commands == null) {
-			Log.e("Invalid command registration: %s", callbackName);
+			Log.e("Invalid CPP command registration: %s", callbackName);
+			return;
+		}
+		for (Command command : commands)
+			callbacks.put(command, callback);
+	}
+	
+	private void registerScriptCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
+		List<Command> commands = DataLoader.Companion.commands().getCommandsByScriptCallback(callbackName);
+//		assert commands != null;
+		if (commands == null) {
+			Log.e("Invalid Script command registration: %s", callbackName);
 			return;
 		}
 		for (Command command : commands)
@@ -90,29 +100,24 @@ public class CommandExecutionService extends Service {
 	}
 	
 	private void registerCallbacks() {
-		registerCallback("waypoint", WaypointCmdCallback::new);
-		registerCallback("requestWaypointAtPosition", RequestWaypointCmdCallback::new);
-		registerCallback("getAttributesBatch", AttributesCmdCallback::new);
-		registerCallback("socialInternal", SocialInternalCmdCallback::new);
-		registerCallback("sit", SitOnObjectCmdCallback::new);
-		registerCallback("stand", StandCmdCallback::new);
-		registerCallback("teleport", AdminTeleportCallback::new);
-		registerCallback("prone", ProneCmdCallback::new);
-		registerCallback("kneel", KneelCmdCallback::new);
-		registerCallback("jumpServer", JumpCmdCallback::new);
-		registerCallback("serverDestroyObject", ServerDestroyObjectCmdCallback::new);
-		registerCallback("findFriend", FindFriendCallback::new);
-
-		registerCallback("startDance", StartDanceCallback::new);
-		registerCallback("requestBiography", RequestBiographyCmdCallback::new);
-		registerCallback("flourish", FlourishCmdCallback::new);
-		registerCallback("changeDance", ChangeDanceCallback::new);
-		registerCallback("transferItemMisc", TransferItemCallback::new);
-		registerCallback("transferItemArmor", TransferItemCallback::new);
-		registerCallback("transferItemWeapon", TransferItemCallback::new);
-		registerCallback("logout", LogoutCmdCallback::new);
-		registerCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
-		registerCallback("removeBuff", CmdRemoveBuff::new);
+		registerScriptCallback("cmdWaypoint", WaypointCmdCallback::new);
+		registerCppCallback("requestWaypointAtPosition", RequestWaypointCmdCallback::new);
+		registerCppCallback("getAttributesBatch", AttributesCmdCallback::new);
+		registerCppCallback("socialInternal", SocialInternalCmdCallback::new);
+		registerScriptCallback("sit", SitOnObjectCmdCallback::new);
+		registerScriptCallback("stand", StandCmdCallback::new);
+		registerScriptCallback("prone", ProneCmdCallback::new);
+		registerScriptCallback("kneel", KneelCmdCallback::new);
+		registerCppCallback("serverDestroyObject", ServerDestroyObjectCmdCallback::new);
+		registerCppCallback("findFriend", FindFriendCallback::new);
+		
+		registerCppCallback("requestBiography", RequestBiographyCmdCallback::new);
+		registerCppCallback("requestBadges", RequestBadgesCallback::new);
+		registerCppCallback("transferItemMisc", TransferItemCallback::new);
+		registerCppCallback("transferItemArmor", TransferItemCallback::new);
+		registerCppCallback("transferItemWeapon", TransferItemCallback::new);
+		registerScriptCallback("cmdStartLogout", LogoutCmdCallback::new);
+		registerCppCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
 		
 		addAdminScripts();
 		addChatScripts();
@@ -124,109 +129,114 @@ public class CommandExecutionService extends Service {
 		addSurveyScripts();
 		addConversationScripts();
 		addQuestScripts();
+		addEntertainerScripts();
+	}
+	
+	private void addEntertainerScripts() {
+		registerScriptCallback("cmdStartDance", StartDanceCallback::new);
+		registerScriptCallback("cmdChangeDance", ChangeDanceCallback::new);
+		registerScriptCallback("cmdStopDance", CmdStopDance::new);
+		registerScriptCallback("cmdFlourish", FlourishCmdCallback::new);
+		registerScriptCallback("cmdWatch", CmdWatch::new);
+		registerScriptCallback("cmdStopWatching", CmdStopWatching::new);
 	}
 	
 	private void addAdminScripts() {
-		registerCallback("dumpZoneInformation", CmdDumpZoneInformation::new);
-		registerCallback("goto", CmdGoto::new);
-		registerCallback("console_npc", CmdNpc::new);
-		registerCallback("createNPC", CmdCreateNpc::new);
-		registerCallback("qatool", CmdQaTool::new);
-		registerCallback("revertPlayerAppearance", CmdRevertPlayerAppearance::new);
-		registerCallback("setGodMode", CmdSetGodMode::new);
-		registerCallback("setPlayerAppearance", CmdSetPlayerAppearance::new);
-		registerCallback("console_server", CmdServer::new);
+		registerScriptCallback("dumpZoneInformation", CmdDumpZoneInformation::new);
+		registerScriptCallback("cmdGoto", CmdGoto::new);
+		registerCppCallback("console_npc", CmdNpc::new);
+		registerScriptCallback("createNPC", CmdCreateNpc::new);
+		registerScriptCallback("cmdQaTool", CmdQaTool::new);
+		registerCppCallback("admin_setGodMode", CmdSetGodMode::new);
+		registerCppCallback("setPlayerAppearance", CmdSetPlayerAppearance::new);
+		registerCppCallback("console_server", CmdServer::new);
+		registerCppCallback("admin_teleport", AdminTeleportCallback::new);
 		
-		registerCallback("createStaticItem", CmdCreateStaticItem::new);
-		registerCallback("credits", CmdMoney::new);
-		registerCallback("setSpeed", CmdSetSpeed::new);
-		registerCallback("setExperience", CmdSetExperience::new);
-		registerCallback("invulnerable", CmdInvulnerable::new);
+		registerScriptCallback("cmdCreateStaticItem", CmdCreateStaticItem::new);
+		registerScriptCallback("cmdMoney", CmdMoney::new);
+		registerScriptCallback("cmdSetSpeed", CmdSetSpeed::new);
+		registerScriptCallback("cmdSetExperience", CmdSetExperience::new);
+		registerScriptCallback("cmdInvulnerable", CmdInvulnerable::new);
+		registerScriptCallback("cmdGrantSkill", CmdGrantSkill::new);
 	}
 	
 	private void addChatScripts() {
-		registerCallback("broadcast", CmdBroadcast::new);
-		registerCallback("broadcastArea", CmdBroadcastArea::new);
-		registerCallback("broadcastGalaxy", CmdBroadcastGalaxy::new);
-		registerCallback("broadcastPlanet", CmdBroadcastPlanet::new);
-		registerCallback("planetChat", CmdPlanetChat::new);
-		registerCallback("spatialChatInternal", CmdSpatialChatInternal::new);
-		registerCallback("setSpokenLanguage", CmdSetSpokenLanguage::new);
+		registerScriptCallback("cmdBroadcast", CmdBroadcast::new);
+		registerScriptCallback("cmdBroadcastArea", CmdBroadcastArea::new);
+		registerScriptCallback("cmdBroadcastGalaxy", CmdBroadcastGalaxy::new);
+		registerScriptCallback("cmdBroadcastPlanet", CmdBroadcastPlanet::new);
+		registerCppCallback("planetChat", CmdPlanetChat::new);
+		registerCppCallback("spatialChatInternal", CmdSpatialChatInternal::new);
+		registerCppCallback("setSpokenLanguage", CmdSetSpokenLanguage::new);
 		addChatFriendScripts();
 	}
 	
 	private void addChatFriendScripts() {
-		registerCallback("addFriend", CmdAddFriend::new);
-		registerCallback("addIgnore", CmdAddIgnore::new);
-		registerCallback("getFriendList", CmdGetFriendList::new);
-		registerCallback("removeFriend", CmdRemoveFriend::new);
-		registerCallback("removeIgnore", CmdRemoveIgnore::new);
+		registerCppCallback("addFriend", CmdAddFriend::new);
+		registerCppCallback("addIgnore", CmdAddIgnore::new);
+		registerCppCallback("getFriendList", CmdGetFriendList::new);
+		registerCppCallback("removeFriend", CmdRemoveFriend::new);
+		registerCppCallback("removeIgnore", CmdRemoveIgnore::new);
 	}
 	
 	private void addCombatScripts() {
-		registerCallback("coupDeGrace", CmdCoupDeGrace::new);
-		registerCallback("duel", CmdDuel::new);
-		registerCallback("endDuel", CmdEndDuel::new);
-		registerCallback("pvp", CmdPVP::new);
+		registerScriptCallback("cmdCoupDeGrace", CmdCoupDeGrace::new);
+		registerCppCallback("duel", CmdDuel::new);
+		registerCppCallback("endDuel", CmdEndDuel::new);
 	}
 	
 	private void addLootScripts() {
-		registerCallback("loot", CmdLoot::new);
+		registerScriptCallback("cmdLoot", CmdLoot::new);
 	}
 	
 	private void addFlagScripts() {
-		registerCallback("toggleAwayFromKeyBoard", CmdToggleAwayFromKeyboard::new);
-		registerCallback("toggleDisplayingFactionRank", CmdToggleDisplayingFactionRank::new);
-		registerCallback("toggleHelper", CmdToggleHelper::new);
-		registerCallback("toggleLookingForGroup", CmdToggleLookingForGroup::new);
-		registerCallback("toggleLookingForWork", CmdToggleLookingForWork::new);
-		registerCallback("toggleOutOfCharacter", CmdToggleOutOfCharacter::new);
-		registerCallback("toggleRolePlay", CmdToggleRolePlay::new); //
+		registerCppCallback("toggleAwayFromKeyBoard", CmdToggleAwayFromKeyboard::new);
+		registerCppCallback("toggleDisplayingFactionRank", CmdToggleDisplayingFactionRank::new);
+		registerCppCallback("toggleHelper", CmdToggleHelper::new);
+		registerCppCallback("toggleLookingForGroup", CmdToggleLookingForGroup::new);
+		registerCppCallback("toggleRolePlay", CmdToggleRolePlay::new);
 	}
 	
 	private void addGenericScripts() {
-		registerCallback("grantSkill", CmdGrantSkill::new);
-		registerCallback("stopDance", CmdStopDance::new);
-		registerCallback("stopwatching", CmdStopWatching::new);
-		registerCallback("watch", CmdWatch::new);
-		registerCallback("openContainer", CmdOpenContainer::new);
-		registerCallback("closeContainer", CmdCloseContainer::new);
-		registerCallback("purchaseTicket", CmdPurchaseTicket::new);
-		registerCallback("setBiography", CmdSetBiography::new);
-		registerCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::new);
-		registerCallback("setMoodInternal", CmdSetMoodInternal::new);
-		registerCallback("setWaypointActiveStatus", CmdSetWaypointActiveStatus::new);
-		registerCallback("setWaypointName", CmdSetWaypointName::new);
+		registerCppCallback("surrenderSkill", CmdSurrenderSkill::new);
+		registerCppCallback("openContainer", CmdOpenContainer::new);
+		registerCppCallback("closeContainer", CmdCloseContainer::new);
+		registerCppCallback("purchaseTicket", CmdPurchaseTicket::new);
+		registerCppCallback("setBiography", CmdSetBiography::new);
+		registerCppCallback("setCurrentSkillTitle", CmdSetCurrentSkillTitle::new);
+		registerCppCallback("setMoodInternal", CmdSetMoodInternal::new);
+		registerCppCallback("setWaypointActiveStatus", CmdSetWaypointActiveStatus::new);
+		registerCppCallback("setWaypointName", CmdSetWaypointName::new);
 	}
 	
 	private void addGroupScripts() {
-		registerCallback("groupChat", CmdGroupChat::new);
-		registerCallback("groupDecline", CmdGroupDecline::new);
-		registerCallback("groupDisband", CmdGroupDisband::new);
-		registerCallback("groupInvite", CmdGroupInvite::new);
-		registerCallback("groupJoin", CmdGroupJoin::new);
-		registerCallback("dismissGroupMember", CmdGroupKick::new);
-		registerCallback("leaveGroup", CmdGroupLeave::new);
-		registerCallback("groupLootSet", CmdGroupLootSet::new);
-		registerCallback("groupMakeLeader", CmdGroupMakeLeader::new);
-		registerCallback("groupMakeMasterLooter", CmdGroupMakeMasterLooter::new);
-		registerCallback("groupUninvite", CmdGroupUninvite::new);
+		registerCppCallback("groupChat", CmdGroupChat::new);
+		registerCppCallback("groupDecline", CmdGroupDecline::new);
+		registerCppCallback("groupDisband", CmdGroupDisband::new);
+		registerCppCallback("groupInvite", CmdGroupInvite::new);
+		registerCppCallback("groupJoin", CmdGroupJoin::new);
+		registerScriptCallback("cmdDismissGroupMember", CmdGroupKick::new);
+		registerScriptCallback("cmdLeaveGroup", CmdGroupLeave::new);
+		registerScriptCallback("cmdGroupLootSet", CmdGroupLootSet::new);
+		registerCppCallback("groupMakeLeader", CmdGroupMakeLeader::new);
+		registerCppCallback("groupMakeMasterLooter", CmdGroupMakeMasterLooter::new);
+		registerCppCallback("groupUninvite", CmdGroupUninvite::new);
 	}
 	
 	private void addSurveyScripts() {
-		registerCallback("requestCoreSample", CmdRequestCoreSample::new);
-		registerCallback("requestSurvey", CmdRequestSurvey::new);
+		registerCppCallback("requestCoreSample", CmdRequestCoreSample::new);
+		registerCppCallback("requestSurvey", CmdRequestSurvey::new);
 	}
 	
 	private void addConversationScripts() {
-		registerCallback("npcconversationstart", NpcConversationStartCmdCallback::new);
-		registerCallback("npcconversationselect", NpcConversationSelectCmdCallback::new);
-		registerCallback("npcconversationstop", NpcConversationStopCmdCallback::new);
+		registerCppCallback("npcConversationStart", NpcConversationStartCmdCallback::new);
+		registerCppCallback("npcConversationSelect", NpcConversationSelectCmdCallback::new);
+		registerCppCallback("npcConversationStop", NpcConversationStopCmdCallback::new);
 	}
 	
 	private void addQuestScripts() {
-		registerCallback("abandonquest", CmdAbandonQuest::new);
-		registerCallback("completequest", CmdCompleteQuest::new);
+		registerCppCallback("abandonQuest", CmdAbandonQuest::new);
+		registerScriptCallback("cmdCompleteQuest", CmdCompleteQuest::new);
 	}
 	
 }

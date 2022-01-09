@@ -10,4 +10,4 @@ EXPOSE 44463/tcp
 
 # Sets up execution
 WORKDIR /holocore
-ENTRYPOINT ["/holocore/bin/java", "-m", "holocore/com.projectswg.holocore.ProjectSWG", "--database", "mongodb://mongo", "--dbName", "nge"]
+ENTRYPOINT ["/holocore/bin/java", "-m", "holocore/com.projectswg.holocore.ProjectSWG", "--database", "mongodb://mongo", "--dbName", "cu"]

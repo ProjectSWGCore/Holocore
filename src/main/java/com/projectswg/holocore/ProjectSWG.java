@@ -196,7 +196,7 @@ public class ProjectSWG {
 	
 	private static void setupDatabase(CommandLine arguments) {
 		String dbStr = arguments.getOptionValue("database", "mongodb://localhost");
-		String db = arguments.getOptionValue("dbName", "nge");
+		String db = arguments.getOptionValue("dbName", "cu");
 		
 		PswgDatabase.INSTANCE.initialize(dbStr, db);
 	}

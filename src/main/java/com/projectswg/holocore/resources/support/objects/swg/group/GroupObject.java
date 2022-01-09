@@ -54,7 +54,6 @@ public class GroupObject extends SWGObject {
 	
 	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
 	private final Map<Long, GroupMember>memberMap			= new ConcurrentHashMap<>();
-	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
 
 	private CreatureObject	leader		= null;
 	private LootRule		lootRule	= LootRule.FREE_FOR_ALL;
@@ -77,13 +76,8 @@ public class GroupObject extends SWGObject {
 		bb.addInt(0); // formationNameCrc // 6
 		bb.addLong(lootMaster); // 7
 		bb.addInt(lootRule.getId()); // 8
-		bb.addObject(pickupPointTimer); // 9
-		bb.addAscii(""); // PickupPoint planetName // 10
-		bb.addFloat(0); // x
-		bb.addFloat(0); // y
-		bb.addFloat(0); // z
 		
-		bb.incrementOperandCount(9);
+		bb.incrementOperandCount(7);
 	}
 	
 	public void formGroup(CreatureObject leader, CreatureObject member) {
@@ -247,37 +241,6 @@ public class GroupObject extends SWGObject {
 			creature.setAware(AwarenessType.GROUP, List.of());
 		}
 		groupMembers.sendDeltaMessage(this);
-	}
-	
-	private static class PickupPointTimer implements Encodable {
-		
-		private int start;
-		private int end;
-		
-		public PickupPointTimer() {
-			start = 0;
-			end = 0;
-		}
-		
-		@Override
-		public byte[] encode() {
-			NetBuffer data = NetBuffer.allocate(8);
-			data.addInt(start);
-			data.addInt(end);
-			return data.array();
-		}
-		
-		@Override
-		public void decode(NetBuffer data) {
-			start = data.getInt();
-			end = data.getInt();
-		}
-		
-		@Override
-		public int getLength() {
-			return 8;
-		}
-		
 	}
 	
 	private static class GroupMember implements Encodable {

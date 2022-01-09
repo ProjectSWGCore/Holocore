@@ -139,15 +139,8 @@ public class TransferItemCallback implements ICmdCallback {
 				if (!checkSpeciesRestriction(actor, target))
 					return;
 
-				// If the character doesn't have the right profession, reject it
-				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
-					String profession = actor.getPlayerObject().getProfession().getName();
-					if (!target.getAttribute("class_required").contains(profession)) {
-						new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
-						player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-						return;
-					}
-				}
+				// If the character doesn't have the right skill, reject it
+				// TODO check if they have the skill
 			}
 
 			// Only empty containers can be Appearance Equipped
