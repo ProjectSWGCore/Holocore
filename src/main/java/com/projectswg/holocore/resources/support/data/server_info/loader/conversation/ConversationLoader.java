@@ -200,6 +200,7 @@ public class ConversationLoader extends DataLoader {
 		eventParserMap.put("show_sellable_items", new ShowSellableItemsEventParser());
 		eventParserMap.put("grant_quest", new GrantQuestEventParser());
 		eventParserMap.put("advance_quest", new AdvanceQuestEventParser());
+		eventParserMap.put("show_available_skills", new ShowAvailableSkillsEventParser());
 	}
 	
 	private void loadSpawnToConversations() throws IOException {

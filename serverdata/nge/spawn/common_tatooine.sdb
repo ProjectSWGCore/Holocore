@@ -443,7 +443,7 @@ spawn_tatooine_440	TATOOINE	tat_moseisley_theater	AREA	1	0.2	0.6	-3.6	0	1	a patr
 spawn_tatooine_441	TATOOINE	tat_moseisley_theater	AREA	1	7.0	0.6	-4.0	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_442	TATOOINE	tat_moseisley_theater	AREA	8	21.9	2.1	64.5	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	3	0	-	idle			600
 spawn_tatooine_443	TATOOINE	tat_moseisley_university	PATROL	9	-9.2	1.1	-13	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tat_20000	column	idle		commoner	600
-spawn_tatooine_444	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4786.2	-89	1	a Brawler trainer	humanoid_trainer_brawler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_444	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4786.2	-89	1	a Brawler trainer	humanoid_trainer_brawler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_brawler	600
 spawn_tatooine_445	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4788.2	-89	1	an Entertainer trainer	humanoid_trainer_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_446	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4790.2	-89	1	a Marksman trainer	humanoid_trainer_marksman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_447	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4792.2	-89	1	a Medic trainer	humanoid_trainer_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
