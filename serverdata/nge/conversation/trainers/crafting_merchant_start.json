@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_merchant",
+		"comment": "Time is money, friend.  I'll gladly instruct you in the ways of the Merchant, but you'll have to pay your dues up front."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/crafting_merchant_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

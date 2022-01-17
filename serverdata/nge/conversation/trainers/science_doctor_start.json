@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "skill_teacher",
-		"key": "trainer_brawler",
-		"comment": "Hullo!  I teach brawlin' in these parts.  What can I helps you wif?"
+		"key": "trainer_doctor",
+		"comment": "Seven years of your life and you'll be fully qualified.  I'm here to help you get started.  What shall we discuss first?"
 	},
 	"playerResponses": [
 		{
@@ -11,7 +11,7 @@
 				"key": "opt1_1",
 				"comment": "I'm interested in learning a skill."
 			},
-			"next": "trainers/brawler_skills"
+			"next": "trainers/science_doctor_skills"
 		}
 	],
 	"requirements": [],

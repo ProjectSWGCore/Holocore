@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_imagedesigner",
+		"comment": "Don't let them laugh at you.  They always give the image designers funny looks, but when they want their hair done, who else are they going to call?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/social_imagedesigner_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

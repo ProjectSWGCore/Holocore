@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_scout",
+		"comment": "If it's scouting you'd like to know about, I'm the one you're looking for.  What can I help you with?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/outdoors_scout_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

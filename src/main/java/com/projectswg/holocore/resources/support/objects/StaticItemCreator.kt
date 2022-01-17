@@ -104,7 +104,6 @@ object StaticItemCreator {
 		
 		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
-		applySetBonus(obj, info.wornItemBuff)
 		applyItemValue(info.value, obj)
 	}
 	
@@ -128,7 +127,6 @@ object StaticItemCreator {
 		if (raceRestriction.isNotEmpty())
 			obj.addAttribute("species_restrictions.species_name", raceRestriction)
 
-		applySetBonus(obj, info.wornItemBuff)
 		applyItemValue(info.value, obj);
 	}
 	
@@ -275,21 +273,6 @@ object StaticItemCreator {
 		}
 	}
 
-	private fun applySetBonus(obj: TangibleObject, wornItemBuff: Int) {
-		val itemBonusSetsById = DataLoader.ItemBonusSets().getItemBonusSetsById(wornItemBuff) ?: return
-
-		obj.setServerAttribute(ServerAttribute.SET_BONUS_ID, wornItemBuff)
-
-		for (itemBonusSet in itemBonusSetsById) {
-			val count = itemBonusSet.count
-			val buffName = itemBonusSet.buffName
-			val attrName = "@set_bonus:piece_bonus_count_$count"
-			val attrVal = "@set_bonus:$buffName"
-
-			obj.addAttribute(attrName, attrVal)
-		}
-	}
-	
 	private fun buildRaceRestrictionString(info: StaticItemLoader.WearableItemInfo): String {
 		var races = ""
 		

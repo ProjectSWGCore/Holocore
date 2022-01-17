@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_medic",
+		"comment": "If you can stand the sight of blood I can teach you to put it back in the body.  Ready to learn?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/science_medic_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

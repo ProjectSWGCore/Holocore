@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_unarmed",
+		"comment": "Teras Kasi is a way of life.  It is a philosophy for living.  What more would you like to know?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_unarmed_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

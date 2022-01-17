@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "msg2_1",
+		"comment": "You may learn the following skills right now..."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_available_skills",
+			"args": {
+				"profession": "crafting_weaponsmith"
+			}
+		}
+	]
+}

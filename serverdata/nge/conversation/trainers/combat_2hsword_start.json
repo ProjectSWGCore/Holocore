@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_2hsword",
+		"comment": "Sit down, shut up, and listen!  If you pay attention you'll be fighting with a two-handed sword even better than me!  Well, not really, but at least you won't look like a fool when you use it."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_2hsword_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

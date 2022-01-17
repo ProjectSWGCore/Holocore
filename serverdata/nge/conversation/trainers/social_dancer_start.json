@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_dancer",
+		"comment": "I teach elegance, beauty, grace, and how to get dates in clubs.  Well, actually, you're on your own with the last one, but I can teach you to dance."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/social_dancer_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -79,138 +79,199 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleArmor(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of armor to receive.");
 
-		listBox.addListItem("R.I.S. Armor");
-		listBox.addListItem("Mandalorian Armor");
-		listBox.addListItem("Bone Armor");
+		listBox.addListItem("Composite Armor");
 		listBox.addListItem("Chitin Armor");
 		listBox.addListItem("Padded Armor");
+		listBox.addListItem("Bone Armor");
+		listBox.addListItem("Mandalorian Armor");
+		listBox.addListItem("Tantel Armor");
 		listBox.addListItem("Ubese Armor");
-		listBox.addListItem("Ithorian Defender Armor");
-		listBox.addListItem("Wookiee Black Mountain Armor");
+		listBox.addListItem("R.I.S. Armor");
+		listBox.addListItem("Ithorian Armor Sets");
+		listBox.addListItem("Wookiee Armor Sets");
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleArmorSelection", (event, parameters) -> handleArmorSelection(player, parameters));
 		listBox.display(player);
 	}
 
 	private static void handleArmorSelection(Player player, Map<String, String> parameters) {
 		switch (SuiListBox.getSelectedRow(parameters)) {
-			case 0: handleRisArmor(player); break;
-			case 1: handleMandoArmor(player); break;
-			case 2: handleBoneArmor(player); break;
-			case 3: handleChitinArmor(player); break;
-			case 4: handlePaddedArmor(player); break;
-			case 5: handleUbeseArmor(player); break;
-			case 6: handleIthoriandefenderArmor(player); break;
-			case 7: handleWookieeblackmtnArmor(player); break;
+			case 0: handleCompositeArmor(player); break;
+			case 1: handleChitinArmor(player); break;
+			case 2: handlePaddedArmor(player); break;
+			case 3: handleBoneArmor(player); break;
+			case 4: handleMandalorianArmor(player); break;
+			case 5: handleTantelArmor(player); break;
+			case 6: handleUbeseArmor(player); break;
+			case 7: handleRISArmor(player); break;
+			case 8: handleIthorianArmorSets(player); break;
+			case 9: handleWookieeArmorSets(player); break;
 		}
 	}
 
-	private static void handleRisArmor(Player player) {
+	private static void handleCompositeArmor(Player player) {
 		spawnItems(player,
-				"armor_ris_bicep_l",
-				"armor_ris_bicep_r",
-				"armor_ris_boots",
-				"armor_ris_bracer_l",
-				"armor_ris_bracer_r",
-				"armor_ris_chest_plate",
-				"armor_ris_gloves",
-				"armor_ris_helmet",
-				"armor_ris_leggings"
-		);
-	}
-
-	private static void handleMandoArmor(Player player) {
-		spawnItems(player,
-				"armor_mandalorian_bicep_l",
-				"armor_mandalorian_bicep_r",
-				"armor_mandalorian_bracer_l",
-				"armor_mandalorian_bracer_r",
-				"armor_mandalorian_chest_plate",
-				"armor_mandalorian_gloves",
-				"armor_mandalorian_helmet",
-				"armor_mandalorian_leggings",
-				"armor_mandalorian_shoes"
-		);
-	}
-
-	private static void handleBoneArmor(Player player) {
-		spawnItems(player,
-				"armor_bone_bicep_l_02_01",
-				"armor_bone_bicep_r_02_01",
-				"armor_bone_boots_02_01",
-				"armor_bone_bracer_l_02_01",
-				"armor_bone_bracer_r_02_01",
-				"armor_bone_chest_02_01",
-				"armor_bone_gloves_02_01",
-				"armor_bone_helmet_02_01",
-				"armor_bone_leggings_02_01"
+				"armor_composite_lvl1_bicep_l",
+				"armor_composite_lvl1_bicep_r",
+				"armor_composite_lvl1_boots",
+				"armor_composite_lvl1_bracer_l",
+				"armor_composite_lvl1_bracer_r",
+				"armor_composite_lvl1_chest",
+				"armor_composite_lvl1_gloves",
+				"armor_composite_lvl1_helmet",
+				"armor_composite_lvl1_leggings"
 		);
 	}
 
 	private static void handleChitinArmor(Player player) {
 		spawnItems(player,
-				"armor_assault_sta_lvl80_bicep_l_02_01",
-				"armor_assault_sta_lvl80_bicep_r_02_01",
-				"armor_assault_sta_lvl80_boots_02_01",
-				"armor_assault_sta_lvl80_bracer_l_02_01",
-				"armor_assault_sta_lvl80_bracer_r_02_01",
-				"armor_assault_sta_lvl80_chest_02_01",
-				"armor_assault_sta_lvl80_gloves_02_01",
-				"armor_assault_sta_lvl80_helmet_02_01",
-				"armor_assault_sta_lvl80_leggings_02_01"
+				"armor_chitin_lvl1_bicep_l",
+				"armor_chitin_lvl1_bicep_r",
+				"armor_chitin_lvl1_boots",
+				"armor_chitin_lvl1_bracer_l",
+				"armor_chitin_lvl1_bracer_r",
+				"armor_chitin_lvl1_chest",
+				"armor_chitin_lvl1_gloves",
+				"armor_chitin_lvl1_helmet",
+				"armor_chitin_lvl1_leggings"
 		);
 	}
 
 	private static void handlePaddedArmor(Player player) {
 		spawnItems(player,
-				"armor_tow_battle_bicep_l_03_01",
-				"armor_tow_battle_bicep_r_03_01",
-				"armor_tow_battle_boots_03_01",
-				"armor_tow_battle_bracer_l_03_01",
-				"armor_tow_battle_bracer_r_03_01",
-				"armor_tow_battle_chest_03_01",
-				"armor_tow_battle_gloves_03_01",
-				"armor_tow_battle_helmet_03_01",
-				"armor_tow_battle_leggings_03_01"
+				"armor_padded_lvl1_bicep_l",
+				"armor_padded_lvl1_bicep_r",
+				"armor_padded_lvl1_boots",
+				"armor_padded_lvl1_bracer_l",
+				"armor_padded_lvl1_bracer_r",
+				"armor_padded_lvl1_chest",
+				"armor_padded_lvl1_gloves",
+				"armor_padded_lvl1_helmet",
+				"armor_padded_lvl1_leggings"
+		);
+	}
+
+	private static void handleBoneArmor(Player player) {
+		spawnItems(player,
+				"armor_bone_lvl1_bicep_l",
+				"armor_bone_lvl1_bicep_r",
+				"armor_bone_lvl1_boots",
+				"armor_bone_lvl1_bracer_l",
+				"armor_bone_lvl1_bracer_r",
+				"armor_bone_lvl1_chest",
+				"armor_bone_lvl1_gloves",
+				"armor_bone_lvl1_helmet",
+				"armor_bone_lvl1_leggings"
+		);
+	}
+
+	private static void handleMandalorianArmor(Player player) {
+		spawnItems(player,
+				"armor_mandalorian_lvl1_bicep_l",
+				"armor_mandalorian_lvl1_bicep_r",
+				"armor_mandalorian_lvl1_bracer_l",
+				"armor_mandalorian_lvl1_bracer_r",
+				"armor_mandalorian_lvl1_chest_plate",
+				"armor_mandalorian_lvl1_gloves",
+				"armor_mandalorian_lvl1_helmet",
+				"armor_mandalorian_lvl1_leggings",
+				"armor_mandalorian_lvl1_shoes"
+		);
+	}
+
+	private static void handleTantelArmor(Player player) {
+		spawnItems(player,
+				"armor_tantel_lvl1_bicep_l",
+				"armor_tantel_lvl1_bicep_r",
+				"armor_tantel_lvl1_boots",
+				"armor_tantel_lvl1_bracer_l",
+				"armor_tantel_lvl1_bracer_r",
+				"armor_tantel_lvl1_chest",
+				"armor_tantel_lvl1_gloves",
+				"armor_tantel_lvl1_helmet",
+				"armor_tantel_lvl1_leggings"
 		);
 	}
 
 	private static void handleUbeseArmor(Player player) {
 		spawnItems(player,
-				"armor_recon_sta_lvl80_boots_02_01",
-				"armor_recon_sta_lvl80_bracer_l_02_01",
-				"armor_recon_sta_lvl80_bracer_r_02_01",
-				"armor_recon_sta_lvl80_chest_02_01",
-				"armor_recon_sta_lvl80_gloves_02_01",
-				"armor_recon_sta_lvl80_helmet_02_01",
-				"armor_recon_sta_lvl80_leggings_02_01"
+				"armor_ubese_lvl1_boots",
+				"armor_ubese_lvl1_bracer_l",
+				"armor_ubese_lvl1_bracer_r",
+				"armor_ubese_lvl1_chest",
+				"armor_ubese_lvl1_gloves",
+				"armor_ubese_lvl1_helmet",
+				"armor_ubese_lvl1_leggings"
 		);
 	}
 
-	private static void handleIthoriandefenderArmor(Player player) {
+	private static void handleRISArmor(Player player) {
 		spawnItems(player,
-				"armor_ithorian_defender_bicep_camo_l_04_01",
-				"armor_ithorian_defender_bicep_camo_r_04_01",
-				"armor_ithorian_defender_boots_camo_04_01",
-				"armor_ithorian_defender_bracer_camo_l_04_01",
-				"armor_ithorian_defender_bracer_camo_r_04_01",
-				"armor_ithorian_defender_chest_plate_camo_04_01",
-				"armor_ithorian_defender_gloves_camo_04_01",
-				"armor_ithorian_defender_helmet_camo_04_01",
-				"armor_ithorian_defender_leggings_camo_04_01"
+				"armor_ris_lvl1_bicep_l",
+				"armor_ris_lvl1_bicep_r",
+				"armor_ris_lvl1_boots",
+				"armor_ris_lvl1_bracer_l",
+				"armor_ris_lvl1_bracer_r",
+				"armor_ris_lvl1_chest_plate",
+				"armor_ris_lvl1_gloves",
+				"armor_ris_lvl1_helmet",
+				"armor_ris_lvl1_leggings"
 		);
 	}
 
-	private static void handleWookieeblackmtnArmor(Player player) {
+	private static void handleIthorianArmorSets(Player player) {
 		spawnItems(player,
-				"armor_kashyyykian_black_mtn_bicep_camo_l_04_01",
-				"armor_kashyyykian_black_mtn_bicep_camo_r_04_01",
-				"armor_kashyyykian_black_mtn_bracer_camo_l_04_01",
-				"armor_kashyyykian_black_mtn_bracer_camo_r_04_01",
-				"armor_kashyyykian_black_mtn_chest_plate_camo_04_01",
-				"armor_kashyyykian_black_mtn_leggings_camo_04_01"
+				"armor_ithorian_recon_lvl1_bicep_l",
+				"armor_ithorian_recon_lvl1_bicep_r",
+				"armor_ithorian_recon_lvl1_boots",
+				"armor_ithorian_recon_lvl1_bracer_l",
+				"armor_ithorian_recon_lvl1_bracer_r",
+				"armor_ithorian_recon_lvl1_chest",
+				"armor_ithorian_recon_lvl1_gloves",
+				"armor_ithorian_recon_lvl1_helmet",
+				"armor_ithorian_recon_lvl1_leggings",
+				"armor_ithorian_battle_lvl1_bicep_l",
+				"armor_ithorian_battle_lvl1_bicep_r",
+				"armor_ithorian_battle_lvl1_boots",
+				"armor_ithorian_battle_lvl1_bracer_l",
+				"armor_ithorian_battle_lvl1_bracer_r",
+				"armor_ithorian_battle_lvl1_chest",
+				"armor_ithorian_battle_lvl1_leggings",
+				"armor_ithorian_battle_lvl1_gloves",
+				"armor_ithorian_battle_lvl1_helmet",
+				"armor_ithorian_assault_lvl1_bicep_l",
+				"armor_ithorian_assault_lvl1_bicep_r",
+				"armor_ithorian_assault_lvl1_boots",
+				"armor_ithorian_assault_lvl1_bracer_l",
+				"armor_ithorian_assault_lvl1_bracer_r",
+				"armor_ithorian_assault_lvl1_chest",
+				"armor_ithorian_assault_lvl1_gloves",
+				"armor_ithorian_assault_lvl1_helmet",
+				"armor_ithorian_assault_lvl1_leggings"
 		);
 	}
 
+	private static void handleWookieeArmorSets(Player player) {
+		spawnItems(player,
+				"armor_wookiee_recon_lvl1_bicep_l",
+				"armor_wookiee_recon_lvl1_bicep_r",
+				"armor_wookiee_recon_lvl1_bracer_l",
+				"armor_wookiee_recon_lvl1_bracer_r",
+				"armor_wookiee_recon_lvl1_chest",
+				"armor_wookiee_recon_lvl1_leggings",
+				"armor_wookiee_battle_lvl1_bicep_l",
+				"armor_wookiee_battle_lvl1_bicep_r",
+				"armor_wookiee_battle_lvl1_bracer_l",
+				"armor_wookiee_battle_lvl1_bracer_r",
+				"armor_wookiee_battle_lvl1_chest",
+				"armor_wookiee_battle_lvl1_leggings",
+				"armor_wookiee_assault_lvl1_bicep_l",
+				"armor_wookiee_assault_lvl1_bicep_r",
+				"armor_wookiee_assault_lvl1_bracer_l",
+				"armor_wookiee_assault_lvl1_bracer_r",
+				"armor_wookiee_assault_lvl1_chest",
+				"armor_wookiee_assault_lvl1_leggings"
+		);
+	}
 
 	private static void handleWeapons(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a weapon category to receive a weapon of that type.");

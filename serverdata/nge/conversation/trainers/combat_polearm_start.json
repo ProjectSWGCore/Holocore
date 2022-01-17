@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_polearm",
+		"comment": "I teach polearm fighting.  Would you like to learn?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_polearm_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

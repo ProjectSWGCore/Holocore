@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_bioengineer",
+		"comment": "Dustin crops ain't like flying through hyperspace, boy.  It's a lot more work."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/outdoors_bio_engineer_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

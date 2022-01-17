@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_chef",
+		"comment": "Mynock souffle.  Grilled bantha.  Broiled rancor toes.  All of these and more, I will teach you to cook."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/crafting_chef_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}
