@@ -883,10 +883,10 @@ spawn_tatooine_880	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.0	0.0	-4.5	0	1	an 
 spawn_tatooine_881	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	Imperial Pilot	humanoid_imperial_pilot_empretreat	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
 spawn_tatooine_882	TATOOINE	tat_mosespa_starport	AREA	12	-55.8	2.6	41.7	145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 spawn_tatooine_883	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		chassis_dealer	600
-spawn_tatooine_884	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
+spawn_tatooine_884	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	a Junk Dealer	humanoid_junk_dealer	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 spawn_tatooine_885	TATOOINE	tat_mosespa_watto	AREA	2	2.4	0.1	-11.6	46	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_886	TATOOINE	tat_mosespa_watto	AREA	2	4.2	0.1	-9.9	-136	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
-spawn_tatooine_887	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+spawn_tatooine_887	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_888	TATOOINE	tat_mosespa_watto	AREA	2	6.3	-0.5	3.9	174	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
 spawn_tatooine_889	TATOOINE	tat_mosespa_watto	AREA	2	7.0	-0.5	2.5	-34	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_890	TATOOINE	tat_world	AREA	0	-2989.8	5.0	2123.8	-151	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600

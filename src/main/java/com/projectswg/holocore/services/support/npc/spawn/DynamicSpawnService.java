@@ -61,7 +61,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class DynamicSpawnService extends Service {
 	
 	private static final int MAX_SPAWN_DISTANCE_TO_PLAYER = 150;    // Spawner is created up to this amount of meters away from the player
-	private static final SpawnerType SPAWNER_TYPE = SpawnerType.DYNAMIC_REGION_CONTROLLER;	// Important that this type is only used by dynamic spawns
+	private static final SpawnerType SPAWNER_TYPE = SpawnerType.WAYPOINT_AUTO_SPAWN;	// Important that this type is only used by dynamic spawns
 	
 	private final DynamicSpawnLoader dynamicSpawnLoader;
 	private final NoSpawnZoneLoader noSpawnZoneLoader;
@@ -202,7 +202,7 @@ public class DynamicSpawnService extends Service {
 			return;
 		}
 		
-		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder().withNpcId(npcId).withDifficulty(difficulty).withSpawnerType(SpawnerType.DYNAMIC_REGION_CONTROLLER)
+		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder().withNpcId(npcId).withDifficulty(difficulty).withSpawnerType(SpawnerType.WAYPOINT_AUTO_SPAWN)
 				.withMinLevel(minLevel).withMaxLevel(maxLevel).withSpawnerFlag(spawnerFlag).withBehavior(AIBehavior.LOITER).withLocation(location)
 				.build();
 		

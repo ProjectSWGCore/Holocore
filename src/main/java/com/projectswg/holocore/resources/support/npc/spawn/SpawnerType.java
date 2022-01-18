@@ -41,32 +41,15 @@ public enum SpawnerType {
 	WAYPOINT_CITY("object/path_waypoint/shared_path_waypoint_city.iff"),
 	WAYPOINT_DROID("object/path_waypoint/shared_path_waypoint_droid.iff"),
 	WAYPOINT_PATROL("object/path_waypoint/shared_path_waypoint_patrol.iff"),
-	DYNAMIC_REGION_CONTROLLER("object/building/shared_invisible_dynamic_region_controller.iff"),
-	HOLIDAY_CONTROLLER("object/building/shared_invisible_holiday_controller.iff"),
-	EVENT_CONTROLLER("object/building/shared_local_event_controller.iff"),
-	BUILDOUT("object/tangible/buildout/shared_buildout_placeholder.iff"),
-	BUILDOUT_RING("object/tangible/buildout/shared_buildout_placeholder_ring.iff"),
 	POI_BASE("object/tangible/poi/base/shared_poi_base.iff"),
 	INVISIBLE_OBJECT("object/tangible/theme_park/shared_invisible_object.iff"),
-	GCW_CLONING("object/tangible/spawning/event/shared_gcw_cloning_sickness_droid_spawner.iff"),
 	GCW_CITY("object/tangible/gcw/shared_gcw_city_spawner.iff"),
 	MISSION_EASY("object/tangible/mission/shared_mission_informant_spawner_easy.iff"),
 	MISSION_MEDIUM("object/tangible/mission/shared_mission_informant_spawner_medium.iff"),
 	MISSION_HARD("object/tangible/mission/shared_mission_informant_spawner_hard.iff"),
-	ROHAK("object/tangible/quest/township/shared_rohak_figurine_spawner.iff"),
 	CITY_SIGN("object/tangible/spawning/shared_city_sign_spawner.iff"),
 	FS_NPC("object/tangible/spawning/shared_fs_village_npc_spawner.iff"),
-	REMOTE("object/tangible/spawning/shared_remote_theater_spawner.iff"),
-	GCW_IMPERIAL("object/tangible/spawning/event/shared_gcw_imperial_guard_spawner.iff"),
-	GCW_REBEL("object/tangible/spawning/event/shared_gcw_rebel_guard_spawner.iff"),
-	NYM_WEED("object/tangible/spawning/event/shared_nym_themepark_weed_spawner.iff"),
-	OUT_ALHA("object/tangible/spawning/event/shared_outbreak_alpha_survivor_spawner.iff"),
-	OUT_BETA("object/tangible/spawning/event/shared_outbreak_beta_survivor_spawner.iff"),
-	OUT_DELTA("object/tangible/spawning/event/shared_outbreak_delta_survivor_spawner.iff"),
-	OUT_SCIENTIST("object/tangible/spawning/event/shared_outbreak_dungeon_scientist_spawner.iff"),
-	OUT_GAMMA("object/tangible/spawning/event/shared_outbreak_gamma_survivor_spawner.iff"),
-	OUT_HIDDEN("object/tangible/spawning/event/shared_outbreak_hidden_content_spawner.iff"),
-	WOD_HERB("object/tangible/spawning/event/shared_wod_themepark_herb_spawner.iff");
+	REMOTE("object/tangible/spawning/shared_remote_theater_spawner.iff");
 	
 	private static final SpawnerType [] VALUES = values();
 	
