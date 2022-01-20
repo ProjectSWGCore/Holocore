@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
-		"file": "conversation/jabba",
-		"key": "s_44",
-		"comment": "Don't bother me with your petty problems, or I'll let the Rancor deal with you, personally."
+		"file": "conversation/ep3_clone_relics_clone_trooper_jabba",
+		"key": "s_137",
+		"comment": "< Jabba chuckles >"
 	},
 	"playerResponses": [],
 	"requirements": [],

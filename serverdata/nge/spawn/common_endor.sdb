@@ -9,7 +9,7 @@ spawn_endor_6	ENDOR	end_research_outpost_cantina	AREA	3	-5.4	0.6	-7.9	0	1	a busi
 spawn_endor_7	ENDOR	end_research_outpost_cantina	AREA	3	-1.2	0.6	-5.8	75	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_8	ENDOR	end_research_outpost_cantina	AREA	3	0.6	0.6	-5.6	-99	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_9	ENDOR	end_research_outpost_cantina	AREA	3	-0.4	0.6	-7.9	-29	1	Admiral Kilnstrider (Storm Squadron Pilot Trainer)	humanoid_imperial_kilnstrider	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
-spawn_endor_10	ENDOR	end_research_outpost_cantina	PATROL	4	7.7	0.6	-2.5	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1400	column	idle			600
+spawn_endor_10	ENDOR	end_research_outpost_cantina	PATROL	4	7.7	0.6	-2.5	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_700	column	idle			600
 spawn_endor_11	ENDOR	end_research_outpost_cantina	AREA	4	9.8	0.6	-4.6	88	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_12	ENDOR	end_research_outpost_cloning	AREA	5	4.0	0.1	-1.9	180	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_endor_13	ENDOR	end_research_outpost_cloning	AREA	5	4.0	0.1	-5.6	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -25,7 +25,7 @@ spawn_endor_22	ENDOR	end_research_outpost_shed1	AREA	4	4.2	0.1	0.8	-175	1	a scie
 spawn_endor_23	ENDOR	end_research_outpost_shed1	AREA	6	-4.0	0.1	-4.2	141	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_endor_24	ENDOR	end_research_outpost_shed2	AREA	4	5.2	0.1	-0.3	-51	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_endor_25	ENDOR	end_research_outpost_shed2	AREA	4	2.6	0.1	-0.2	36	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_endor_26	ENDOR	end_research_outpost_shed2	PATROL	5	3.6	0.1	-3.7	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1500	column	idle			600
+spawn_endor_26	ENDOR	end_research_outpost_shed2	PATROL	5	3.6	0.1	-3.7	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_800	column	idle			600
 spawn_endor_27	ENDOR	end_world	AREA	0	3212.7	24.5	-3452.3	163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_endor_28	ENDOR	end_world	AREA	0	3245.1	24.0	-3492.3	56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_endor_29	ENDOR	end_world	AREA	0	3216.9	24.0	-3467.9	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	3	LOITER	10	0	-	idle		commoner	600
@@ -42,15 +42,15 @@ spawn_endor_39	ENDOR	end_world	AREA	0	3265.1	24.0	-3501.5	41	1	a nomad	humanoid_
 spawn_endor_40	ENDOR	end_world	AREA	0	3227.0	24.0	-3477.6	155	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_41	ENDOR	end_world	AREA	0	3236.0	24.0	-3501.1	177	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_endor_42	ENDOR	end_world	AREA	0	3196.2	24.0	-3508.1	179	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
-spawn_endor_43	ENDOR	end_world	PATROL	0	3172.7	24.0	-3494.0	90	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1200	column	idle			600
+spawn_endor_43	ENDOR	end_world	PATROL	0	3172.7	24.0	-3494.0	90	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_500	column	idle			600
 spawn_endor_44	ENDOR	end_world	AREA	0	3213.0	24.0	-3487.0	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle			600
-spawn_endor_45	ENDOR	end_world	PATROL	0	3260.0	24.0	-3466.7	-82	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1100	column	idle			600
+spawn_endor_45	ENDOR	end_world	PATROL	0	3260.0	24.0	-3466.7	-82	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_400	column	idle			600
 spawn_endor_46	ENDOR	end_world	AREA	0	3228.2	24.0	-3478.4	-98	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_47	ENDOR	end_world	AREA	0	3169.3	24.0	-3497.3	149	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_48	ENDOR	end_world	AREA	0	3252.6	24.0	-3495.8	-180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_endor_49	ENDOR	end_world	AREA	0	3334.0	25.7	-3521.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	TURN	0	0	-	idle			600
 spawn_endor_50	ENDOR	end_world	AREA	0	3266.8	24.0	-3486.8	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle			600
-spawn_endor_51	ENDOR	end_world	PATROL	0	3175.8	24.0	-3504.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_end_1300	column	idle		simple_droid_geek_bye_nice_13	600
+spawn_endor_51	ENDOR	end_world	PATROL	0	3175.8	24.0	-3504.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_600	column	idle		simple_droid_geek_bye_nice_13	600
 spawn_endor_52	ENDOR	end_world	AREA	0	3188.8	24.0	-3466.1	0	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	10	0	-	idle		simple_droid_stupid_death_5	600
 spawn_endor_53	ENDOR	end_world	AREA	0	3278.5	24.0	-3498.4	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_54	ENDOR	end_world	AREA	0	3191.4	24.0	-3450.6	-153	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
@@ -64,11 +64,11 @@ spawn_endor_61	ENDOR	end_smuggler_outpost_cloning	AREA	6	-5.3	0.1	-0.8	133	1	a m
 spawn_endor_62	ENDOR	end_smuggler_outpost_cloning	AREA	6	-2.6	0.1	-0.9	-136	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_endor_63	ENDOR	end_smuggler_outpost_med_center	AREA	4	3.6	0.1	2.8	-158	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_64	ENDOR	end_smuggler_outpost_med_center	AREA	4	2.9	0.1	1.2	11	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
-spawn_endor_65	ENDOR	end_smuggler_outpost_med_center	PATROL	5	4.5	0.1	-3.7	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_end_1700	column	idle			600
+spawn_endor_65	ENDOR	end_smuggler_outpost_med_center	PATROL	5	4.5	0.1	-3.7	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_endor_1000	column	idle			600
 spawn_endor_66	ENDOR	end_smuggler_outpost_med_center	AREA	6	-4.1	0.1	-3.2	-69	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_67	ENDOR	end_smuggler_outpost_med_center	AREA	6	-5.0	0.1	-5.3	46	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_endor_68	ENDOR	end_smuggler_outpost_starport	AREA	1	-4.7	0.1	-17.5	91	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_endor_69	ENDOR	end_world	PATROL	0	-860.5	87.2	1504.0	0	1	a CLL-8 binary load lifter	droid_binary_load_lifter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_end_1600	column	idle		simple_droid_sarcastic_flee_4	600
+spawn_endor_69	ENDOR	end_world	PATROL	0	-860.5	87.2	1504.0	0	1	a CLL-8 binary load lifter	droid_binary_load_lifter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_endor_900	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_endor_70	ENDOR	end_world	AREA	0	-915.1	80.2	1605.7	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_endor_71	ENDOR	end_world	AREA	0	-899.5	78.0	1565.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_endor_72	ENDOR	end_world	AREA	0	-875.2	76.0	1632.0	112	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
@@ -82,8 +82,8 @@ spawn_endor_79	ENDOR	end_world	AREA	0	-874.2	80.0	1565.6	-78	1	a scoundrel	human
 spawn_endor_80	ENDOR	end_world	AREA	0	-872.6	76.0	1632.4	-130	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_81	ENDOR	end_world	AREA	0	-878.8	76.0	1627.9	138	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_82	ENDOR	end_world	AREA	0	-867.7	76.0	1624.2	-142	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_ground			600
-spawn_endor_83	ENDOR	end_world	PATROL	0	-922.7	76.0	1565.4	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	70	75	City	Smuggler Outpost	1	PATROL	0	patrol_end_900	column	idle			600
-spawn_endor_84	ENDOR	end_world	PATROL	0	-924.2	76.0	1567.2	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	70	75	City	Smuggler Outpost	1	PATROL	0	patrol_end_1000	column	idle			600
+spawn_endor_83	ENDOR	end_world	PATROL	0	-922.7	76.0	1565.4	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	70	75	City	Smuggler Outpost	1	PATROL	0	patrol_endor_200	column	idle			600
+spawn_endor_84	ENDOR	end_world	PATROL	0	-924.2	76.0	1567.2	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	70	75	City	Smuggler Outpost	1	PATROL	0	patrol_endor_300	column	idle			600
 spawn_endor_85	ENDOR	end_world	AREA	0	-905.8	78.0	1560.8	140	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_endor_86	ENDOR	end_world	AREA	0	-968.6	73.0	1558.2	-1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_87	ENDOR	end_world	AREA	0	-876.5	76.0	1617.7	16	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	5	0	-	idle			600
@@ -351,7 +351,7 @@ spawn_endor_348	ENDOR	end_world	AREA	0	6092.9	263.0	-2485.5	0	1	a Dulok outcast 
 spawn_endor_349	ENDOR	end_world	AREA	0	6068.6	263.0	-2448.4	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
 spawn_endor_350	ENDOR	end_world	AREA	0	6054.4	262.0	-2508.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
 spawn_endor_351	ENDOR	end_world	AREA	0	6039.2	262.0	-2455.3	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_352	ENDOR	end_world	PATROL	0	6085.8	264.2	-2462.2	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	PATROL	0	patrol_end_800	column	idle			600
+spawn_endor_352	ENDOR	end_world	PATROL	0	6085.8	264.2	-2462.2	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	PATROL	0	patrol_endor_100	column	idle			600
 spawn_endor_353	ENDOR	end_world	AREA	0	6107.2	265.0	-2451.6	0	1	the Dulok outcast leader	humanoid_dulok_outcast_leader	AGGRESSIVE	B	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
 spawn_endor_354	ENDOR	end_world	AREA	0	4599.8	10.0	-2399.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
 spawn_endor_355	ENDOR	end_world	AREA	0	4607.6	30.3	-2413.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600

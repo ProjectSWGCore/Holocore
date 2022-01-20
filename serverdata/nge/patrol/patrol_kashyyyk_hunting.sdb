@@ -1,31 +1,31 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
-patrol_kas_hunting_100	patrol_kas_hunting_100	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-400.2	54.2	807.4	0
-patrol_kas_hunting_101	patrol_kas_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-411.0	54.0	822.7	0
-patrol_kas_hunting_102	patrol_kas_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-422.2	39.1	783.5	0
-patrol_kas_hunting_103	patrol_kas_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-461.7	21.1	713.0	0
-patrol_kas_hunting_200	patrol_kas_hunting_200	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	214.6	32.3	511.5	0
-patrol_kas_hunting_201	patrol_kas_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	222.7	32.0	503.4	0
-patrol_kas_hunting_202	patrol_kas_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	205.3	26.2	464.7	0
-patrol_kas_hunting_203	patrol_kas_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	166.3	24.8	450.5	0
-patrol_kas_hunting_204	patrol_kas_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	124.8	31.3	459.8	0
-patrol_kas_hunting_300	patrol_kas_hunting_300	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-64.8	4.6	-27.3	0
-patrol_kas_hunting_301	patrol_kas_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	-35.7	5.3	-45.0	0
-patrol_kas_hunting_302	patrol_kas_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	11.6	5.0	-48.4	0
-patrol_kas_hunting_303	patrol_kas_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	97.2	4.0	-24.4	0
-patrol_kas_hunting_400	patrol_kas_hunting_400	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	86.0	34.0	-193.6	0
-patrol_kas_hunting_401	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	120.0	30.7	-193.7	0
-patrol_kas_hunting_402	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	27.8	-202.9	0
-patrol_kas_hunting_403	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	161.7	24.2	-239.9	0
-patrol_kas_hunting_404	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	21.8	-261.5	0
-patrol_kas_hunting_405	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	115.8	19.1	-270.2	0
-patrol_kas_hunting_406	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	89.8	18.0	-266.4	0
-patrol_kas_hunting_407	patrol_kas_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	45.5	18.5	-242.4	0
-patrol_kas_hunting_500	patrol_kas_hunting_500	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	268.2	46.6	489.2	0
-patrol_kas_hunting_501	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	253.2	43.5	467.6	0
-patrol_kas_hunting_502	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	245.7	42.0	469.6	0
-patrol_kas_hunting_503	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	246.3	40.3	486.6	0
-patrol_kas_hunting_504	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	250.1	36.8	514.1	0
-patrol_kas_hunting_505	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	268.1	40.0	528.4	0
-patrol_kas_hunting_506	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	298.9	43.1	547.5	0
-patrol_kas_hunting_507	patrol_kas_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	318.1	43.6	544.6	0
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_kashyyyk_hunting_100	patrol_kashyyyk_hunting_100	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-400.2	54.2	807.4	0	Hunting - a recovering Arcona
+patrol_kashyyyk_hunting_101	patrol_kashyyyk_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-411.0	54.0	822.7	0	-
+patrol_kashyyyk_hunting_102	patrol_kashyyyk_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-422.2	39.1	783.5	0	-
+patrol_kashyyyk_hunting_103	patrol_kashyyyk_hunting_100		KASHYYYK_HUNTING	kas_hunting_world	0	-461.7	21.1	713.0	0	-
+patrol_kashyyyk_hunting_200	patrol_kashyyyk_hunting_200	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	214.6	32.3	511.5	0	Hunting - a Rodian hunter (Ehartt's clan)
+patrol_kashyyyk_hunting_201	patrol_kashyyyk_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	222.7	32.0	503.4	0	-
+patrol_kashyyyk_hunting_202	patrol_kashyyyk_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	205.3	26.2	464.7	0	-
+patrol_kashyyyk_hunting_203	patrol_kashyyyk_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	166.3	24.8	450.5	0	-
+patrol_kashyyyk_hunting_204	patrol_kashyyyk_hunting_200		KASHYYYK_HUNTING	kas_hunting_world	0	124.8	31.3	459.8	0	-
+patrol_kashyyyk_hunting_300	patrol_kashyyyk_hunting_300	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	-64.8	4.6	-27.3	0	Hunting - a Rodian hunter (Sordaan's clan)
+patrol_kashyyyk_hunting_301	patrol_kashyyyk_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	-35.7	5.3	-45.0	0	-
+patrol_kashyyyk_hunting_302	patrol_kashyyyk_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	11.6	5.0	-48.4	0	-
+patrol_kashyyyk_hunting_303	patrol_kashyyyk_hunting_300		KASHYYYK_HUNTING	kas_hunting_world	0	97.2	4.0	-24.4	0	-
+patrol_kashyyyk_hunting_400	patrol_kashyyyk_hunting_400	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	86.0	34.0	-193.6	0	Hunting - a Rodian hunter (Sordaan's clan)
+patrol_kashyyyk_hunting_401	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	120.0	30.7	-193.7	0	-
+patrol_kashyyyk_hunting_402	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	27.8	-202.9	0	-
+patrol_kashyyyk_hunting_403	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	161.7	24.2	-239.9	0	-
+patrol_kashyyyk_hunting_404	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	146.2	21.8	-261.5	0	-
+patrol_kashyyyk_hunting_405	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	115.8	19.1	-270.2	0	-
+patrol_kashyyyk_hunting_406	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	89.8	18.0	-266.4	0	-
+patrol_kashyyyk_hunting_407	patrol_kashyyyk_hunting_400		KASHYYYK_HUNTING	kas_hunting_world	0	45.5	18.5	-242.4	0	-
+patrol_kashyyyk_hunting_500	patrol_kashyyyk_hunting_500	FLIP	KASHYYYK_HUNTING	kas_hunting_world	0	268.2	46.6	489.2	0	Hunting - a Rodian hunter (Ziven's clan)
+patrol_kashyyyk_hunting_501	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	253.2	43.5	467.6	0	-
+patrol_kashyyyk_hunting_502	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	245.7	42.0	469.6	0	-
+patrol_kashyyyk_hunting_503	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	246.3	40.3	486.6	0	-
+patrol_kashyyyk_hunting_504	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	250.1	36.8	514.1	0	-
+patrol_kashyyyk_hunting_505	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	268.1	40.0	528.4	0	-
+patrol_kashyyyk_hunting_506	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	298.9	43.1	547.5	0	-
+patrol_kashyyyk_hunting_507	patrol_kashyyyk_hunting_500		KASHYYYK_HUNTING	kas_hunting_world	0	318.1	43.6	544.6	0	-

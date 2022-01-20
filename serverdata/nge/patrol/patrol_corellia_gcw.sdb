@@ -1,0 +1,116 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_corellia_gcw_100	patrol_corellia_gcw_100	LOOP	CORELLIA	cor_world	0	6730.1	315.0	-5574.8	0	Bela Vistal - a victory class dark trooper
+patrol_corellia_gcw_101	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0	-
+patrol_corellia_gcw_102	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6781.6	315.0	-5498.0	0	-
+patrol_corellia_gcw_103	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0	-
+patrol_corellia_gcw_104	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6730.1	315.0	-5574.8	0	-
+patrol_corellia_gcw_105	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6738.0	315.0	-5598.3	0	-
+patrol_corellia_gcw_106	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6770.4	315.0	-5621.1	0	-
+patrol_corellia_gcw_107	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6818.9	315.0	-5614.7	0	-
+patrol_corellia_gcw_108	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6770.4	315.0	-5621.1	0	-
+patrol_corellia_gcw_109	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6738.0	315.0	-5598.3	0	-
+patrol_corellia_gcw_110	patrol_corellia_gcw_100		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0	-
+patrol_corellia_gcw_200	patrol_corellia_gcw_200	FLIP	CORELLIA	cor_world	0	6752.0	315.0	-5696.0	0	Bela Vistal - a glory class dark trooper
+patrol_corellia_gcw_201	patrol_corellia_gcw_200		CORELLIA	cor_world	0	6745.4	315.0	-5684.5	0	-
+patrol_corellia_gcw_202	patrol_corellia_gcw_200		CORELLIA	cor_world	0	6745.0	315.0	-5626.2	0	-
+patrol_corellia_gcw_300	patrol_corellia_gcw_300	FLIP	CORELLIA	cor_world	0	6761.7	315.0	-5724.1	0	Bela Vistal - an exogen class dark trooper
+patrol_corellia_gcw_301	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6771.9	315.0	-5731.7	0	-
+patrol_corellia_gcw_302	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6824.0	315.0	5731.9	0	-
+patrol_corellia_gcw_303	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6824.0	315.0	-5808.3	0	-
+patrol_corellia_gcw_400	patrol_corellia_gcw_400	FLIP	CORELLIA	cor_world	0	6769.5	315.0	-5777.9	0	Bela Vistal - a victory class dark trooper
+patrol_corellia_gcw_401	patrol_corellia_gcw_400		CORELLIA	cor_world	0	6761.3	315.0	-5779.1	0	-
+patrol_corellia_gcw_402	patrol_corellia_gcw_400		CORELLIA	cor_world	0	6769.5	315.0	-5777.9	0	-
+patrol_corellia_gcw_403	patrol_corellia_gcw_400		CORELLIA	cor_world	0	6818.4	315.0	-5777.9	0	-
+patrol_corellia_gcw_500	patrol_corellia_gcw_500	LOOP	CORELLIA	cor_world	0	6716.1	315.0	-5814.9	0	Bela Vistal - a Dark Novatrooper
+patrol_corellia_gcw_501	patrol_corellia_gcw_500		CORELLIA	cor_world	0	6713.9	327.1	-5863.0	0	-
+patrol_corellia_gcw_502	patrol_corellia_gcw_500		CORELLIA	cor_world	0	6716.1	315.0	-5814.9	0	-
+patrol_corellia_gcw_503	patrol_corellia_gcw_500		CORELLIA	cor_world	0	6818.1	315.0	-5814.9	0	-
+patrol_corellia_gcw_600	patrol_corellia_gcw_600	LOOP	CORELLIA	cor_world	0	6647.0	330.0	-5874.0	0	Bela Vistal - a Dark Novatrooper
+patrol_corellia_gcw_601	patrol_corellia_gcw_600		CORELLIA	cor_world	0	6647.0	330.0	-5905.0	0	-
+patrol_corellia_gcw_602	patrol_corellia_gcw_600		CORELLIA	cor_world	0	6689.9	330.0	-5906.0	0	-
+patrol_corellia_gcw_603	patrol_corellia_gcw_600		CORELLIA	cor_world	0	6647.0	330.0	-5905.0	0	-
+patrol_corellia_gcw_700	patrol_corellia_gcw_700	LOOP	CORELLIA	cor_world	0	1.8	28.0	-4439.0	0	Coronet - a CorSec agent
+patrol_corellia_gcw_701	patrol_corellia_gcw_700		CORELLIA	cor_world	0	1.8	28.0	-4412.0	0	-
+patrol_corellia_gcw_702	patrol_corellia_gcw_700		CORELLIA	cor_world	0	84.6	28.0	-4412.0	0	-
+patrol_corellia_gcw_703	patrol_corellia_gcw_700		CORELLIA	cor_world	0	1.8	28.0	-4412.0	0	-
+patrol_corellia_gcw_704	patrol_corellia_gcw_700		CORELLIA	cor_world	0	1.8	28.0	-4464.1	0	-
+patrol_corellia_gcw_705	patrol_corellia_gcw_700		CORELLIA	cor_world	0	89.7	28.0	-4464.1	0	-
+patrol_corellia_gcw_706	patrol_corellia_gcw_700		CORELLIA	cor_world	0	1.8	28.0	-4464.1	0	-
+patrol_corellia_gcw_800	patrol_corellia_gcw_800	LOOP	CORELLIA	cor_world	0	-197.9	28.0	-4441.9	0	Coronet - a CorSec agent
+patrol_corellia_gcw_801	patrol_corellia_gcw_800		CORELLIA	cor_world	0	-221.7	28.0	-4441.9	0	-
+patrol_corellia_gcw_802	patrol_corellia_gcw_800		CORELLIA	cor_world	0	-221.7	28.0	-4417.8	0	-
+patrol_corellia_gcw_803	patrol_corellia_gcw_800		CORELLIA	cor_world	0	-197.9	28.0	-4417.8	0	-
+patrol_corellia_gcw_900	patrol_corellia_gcw_900	LOOP	CORELLIA	cor_world	0	-210.0	28.2	-4534.5	0	Coronet - a CorSec Captain
+patrol_corellia_gcw_901	patrol_corellia_gcw_900		CORELLIA	cor_world	0	-210.0	29.2	-4509.7	0	-
+patrol_corellia_gcw_902	patrol_corellia_gcw_900		CORELLIA	cor_world	0	-210.0	28.0	-4477.7	0	-
+patrol_corellia_gcw_903	patrol_corellia_gcw_900		CORELLIA	cor_world	0	-210.0	29.2	-4509.7	0	-
+patrol_corellia_gcw_1000	patrol_corellia_gcw_1000	LOOP	CORELLIA	cor_world	0	-205.9	28.0	-4286.0	0	Coronet - a CorSec agent
+patrol_corellia_gcw_1001	patrol_corellia_gcw_1000		CORELLIA	cor_world	0	-233.9	28.0	-4286.0	0	-
+patrol_corellia_gcw_1002	patrol_corellia_gcw_1000		CORELLIA	cor_world	0	-233.9	28.0	-4234.2	0	-
+patrol_corellia_gcw_1003	patrol_corellia_gcw_1000		CORELLIA	cor_world	0	-184.9	28.0	-4234.2	0	-
+patrol_corellia_gcw_1004	patrol_corellia_gcw_1000		CORELLIA	cor_world	0	-184.9	28.0	-4286.0	0	-
+patrol_corellia_gcw_1100	patrol_corellia_gcw_1100	LOOP	CORELLIA	cor_world	0	-94.9	28.0	-4649.5	0	Coronet - A Super Battle Droid
+patrol_corellia_gcw_1101	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	-50.5	28.0	-4656.4	0	-
+patrol_corellia_gcw_1102	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	37.8	28.0	-4689.4	0	-
+patrol_corellia_gcw_1103	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	34.1	28.0	-4794.3	0	-
+patrol_corellia_gcw_1104	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	1.9	28.0	-4805.9	0	-
+patrol_corellia_gcw_1105	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	-101.9	28.0	-4809.8	0	-
+patrol_corellia_gcw_1106	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	-137.7	28.0	-4790.0	0	-
+patrol_corellia_gcw_1107	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	-144.0	28.0	-4717.7	0	-
+patrol_corellia_gcw_1108	patrol_corellia_gcw_1100		CORELLIA	cor_world	0	-150.3	28.0	-4724.2	0	-
+patrol_corellia_gcw_1200	patrol_corellia_gcw_1200	LOOP	CORELLIA	cor_world	0	3187.8	290.0	4965.4	0	Doaba Guerfal - a CorSec investigator
+patrol_corellia_gcw_1201	patrol_corellia_gcw_1200		CORELLIA	cor_world	0	3143.9	290.0	4979.9	0	-
+patrol_corellia_gcw_1202	patrol_corellia_gcw_1200		CORELLIA	cor_world	0	3183.5	290.0	4980.5	0	-
+patrol_corellia_gcw_1203	patrol_corellia_gcw_1200		CORELLIA	cor_world	0	3184.1	294.8	5059.5	0	-
+patrol_corellia_gcw_1204	patrol_corellia_gcw_1200		CORELLIA	cor_world	0	3182.0	290.0	4974.9	0	-
+patrol_corellia_gcw_1300	patrol_corellia_gcw_1300	LOOP	CORELLIA	cor_world	0	3258.3	300.0	5387.0	0	Doaba Guerfal - a CorSec Commissioner
+patrol_corellia_gcw_1301	patrol_corellia_gcw_1300		CORELLIA	cor_world	0	3210.9	300.0	5433.3	0	-
+patrol_corellia_gcw_1302	patrol_corellia_gcw_1300		CORELLIA	cor_world	0	3163.4	300.0	5385.8	0	-
+patrol_corellia_gcw_1303	patrol_corellia_gcw_1300		CORELLIA	cor_world	0	3208.2	300.0	5338.1	0	-
+patrol_corellia_gcw_1400	patrol_corellia_gcw_1400	FLIP	CORELLIA	cor_world	0	-3470.9	85.4	3193.9	0	Kor Vella - A Super Battle Droid
+patrol_corellia_gcw_1401	patrol_corellia_gcw_1400		CORELLIA	cor_world	0	-3443.8	86.0	3150.8	0	-
+patrol_corellia_gcw_1402	patrol_corellia_gcw_1400		CORELLIA	cor_world	0	-3409.4	86.0	3123.8	0	-
+patrol_corellia_gcw_1403	patrol_corellia_gcw_1400		CORELLIA	cor_world	0	-3364.4	86.0	3150.8	0	-
+patrol_corellia_gcw_1404	patrol_corellia_gcw_1400		CORELLIA	cor_world	0	-3276.3	86.0	3112.9	0	-
+patrol_corellia_gcw_1500	patrol_corellia_gcw_1500	LOOP	CORELLIA	cor_world	0	-3321.7	86.0	3302.1	0	Kor Vella - A Super Battle Droid
+patrol_corellia_gcw_1501	patrol_corellia_gcw_1500		CORELLIA	cor_world	0	-3323.1	86.0	3248.7	0	-
+patrol_corellia_gcw_1502	patrol_corellia_gcw_1500		CORELLIA	cor_world	0	-3337.3	86.0	3214.0	0	-
+patrol_corellia_gcw_1503	patrol_corellia_gcw_1500		CORELLIA	cor_world	0	-3360.6	86.0	3214.6	0	-
+patrol_corellia_gcw_1504	patrol_corellia_gcw_1500		CORELLIA	cor_world	0	-3365.8	86.0	3295.5	0	-
+patrol_corellia_gcw_1600	patrol_corellia_gcw_1600	LOOP	CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0	Kor Vella - a CorSec Lieutenant
+patrol_corellia_gcw_1601	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3600.1	86.0	3179.3	0	-
+patrol_corellia_gcw_1602	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0	-
+patrol_corellia_gcw_1603	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3601.8	86.0	3150.8	0	-
+patrol_corellia_gcw_1604	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0	-
+patrol_corellia_gcw_1605	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3578.2	86.0	3136.4	0	-
+patrol_corellia_gcw_1606	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0	-
+patrol_corellia_gcw_1607	patrol_corellia_gcw_1600		CORELLIA	cor_world	0	-3573.0	86.0	3166.0	0	-
+patrol_corellia_gcw_1700	patrol_corellia_gcw_1700	LOOP	CORELLIA	cor_world	0	-3667.5	88.5	3078.5	0	Kor Vella - a CorSec Lieutenant
+patrol_corellia_gcw_1701	patrol_corellia_gcw_1700		CORELLIA	cor_world	0	-3688.2	88.5	3090.1	0	-
+patrol_corellia_gcw_1800	patrol_corellia_gcw_1800	FLIP	CORELLIA	cor_world	0	-3384.9	86.0	2970.3	0	Kor Vella - A Super Battle Droid
+patrol_corellia_gcw_1801	patrol_corellia_gcw_1800		CORELLIA	cor_world	0	-3359.6	85.9	2940.2	0	-
+patrol_corellia_gcw_1802	patrol_corellia_gcw_1800		CORELLIA	cor_world	0	-3384.9	86.0	2970.3	0	-
+patrol_corellia_gcw_1803	patrol_corellia_gcw_1800		CORELLIA	cor_world	0	-3395.7	86.0	3005.8	0	-
+patrol_corellia_gcw_1804	patrol_corellia_gcw_1800		CORELLIA	cor_world	0	-3418.8	86.0	3036.7	0	-
+patrol_corellia_gcw_1805	patrol_corellia_gcw_1800		CORELLIA	cor_world	0	-3434.3	86.0	3132.0	0	-
+patrol_corellia_gcw_1900	patrol_corellia_gcw_1900	LOOP	CORELLIA	cor_world	0	-5218.5	21.0	-2513.2	0	Tyrena - a CorSec agent
+patrol_corellia_gcw_1901	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5196.0	21.0	-2515.2	0	-
+patrol_corellia_gcw_1902	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5149.3	21.0	-2468.1	0	-
+patrol_corellia_gcw_1903	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5151.0	21.0	-2452.5	0	-
+patrol_corellia_gcw_1904	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5179.2	21.0	-2435.7	0	-
+patrol_corellia_gcw_1905	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5200.4	21.0	-2457.6	0	-
+patrol_corellia_gcw_1906	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5200.2	21.0	-2472.1	0	-
+patrol_corellia_gcw_1907	patrol_corellia_gcw_1900		CORELLIA	cor_world	0	-5192.3	21.0	-2482.7	0	-
+patrol_corellia_gcw_2000	patrol_corellia_gcw_2000	LOOP	CORELLIA	cor_world	0	-5039.0	21.0	-2361.6	0	Tyrena - A Super Battle Droid
+patrol_corellia_gcw_2001	patrol_corellia_gcw_2000		CORELLIA	cor_world	0	-5043.7	21.0	-2324.0	0	-
+patrol_corellia_gcw_2002	patrol_corellia_gcw_2000		CORELLIA	cor_world	0	-5038.0	21.0	-2300.0	0	-
+patrol_corellia_gcw_2003	patrol_corellia_gcw_2000		CORELLIA	cor_world	0	-5048.9	21.0	-2290.2	0	-
+patrol_corellia_gcw_2004	patrol_corellia_gcw_2000		CORELLIA	cor_world	0	-5102.0	21.0	-2342.3	0	-
+patrol_corellia_gcw_2005	patrol_corellia_gcw_2000		CORELLIA	cor_world	0	-5061.6	21.0	-2381.4	0	-
+patrol_corellia_gcw_2100	patrol_corellia_gcw_2100	LOOP	CORELLIA	cor_world	0	-5482.2	21.0	-2665.9	0	Tyrena - A Super Battle Droid
+patrol_corellia_gcw_2101	patrol_corellia_gcw_2100		CORELLIA	cor_world	0	-5482.2	21.0	-2701.8	0	-
+patrol_corellia_gcw_2102	patrol_corellia_gcw_2100		CORELLIA	cor_world	0	-5412.3	21.0	-2701.8	0	-
+patrol_corellia_gcw_2103	patrol_corellia_gcw_2100		CORELLIA	cor_world	0	-5412.3	21.0	-2649.8	0	-
+patrol_corellia_gcw_2104	patrol_corellia_gcw_2100		CORELLIA	cor_world	0	-5449.9	21.0	-2649.8	0	-
+patrol_corellia_gcw_2105	patrol_corellia_gcw_2100		CORELLIA	cor_world	0	-5462.2	21.0	-2666.2	0	-

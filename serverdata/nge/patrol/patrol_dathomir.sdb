@@ -1,274 +1,274 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
-patrol_dat_4600	patrol_dat_4600	FLIP	DATHOMIR	dat_world	0	-6343.4	120.0	972.6	0
-patrol_dat_4601	patrol_dat_4600		DATHOMIR	dat_world	0	-6370.2	120.0	973.7	0
-patrol_dat_4602	patrol_dat_4600		DATHOMIR	dat_world	0	-6410.4	120.0	973.5	0
-patrol_dat_4603	patrol_dat_4600		DATHOMIR	dat_world	0	-6414.2	120.0	954.4	0
-patrol_dat_4604	patrol_dat_4600		DATHOMIR	dat_world	0	-6416.7	120.0	932.4	0
-patrol_dat_4605	patrol_dat_4600		DATHOMIR	dat_world	0	-6407.9	120.0	909.1	0
-patrol_dat_4606	patrol_dat_4600		DATHOMIR	dat_world	0	-6400.2	120.0	900.5	0
-patrol_dat_4700	patrol_dat_4700	FLIP	DATHOMIR	dat_world	0	-6472.4	120.0	975.1	0
-patrol_dat_4701	patrol_dat_4700		DATHOMIR	dat_world	0	-6463.5	120.0	966.4	0
-patrol_dat_4702	patrol_dat_4700		DATHOMIR	dat_world	0	-6467.0	120.0	952.3	0
-patrol_dat_4703	patrol_dat_4700		DATHOMIR	dat_world	0	-6453.2	119.8	934.4	0
-patrol_dat_4704	patrol_dat_4700		DATHOMIR	dat_world	0	-6450.0	119.1	925.5	0
-patrol_dat_4705	patrol_dat_4700		DATHOMIR	dat_world	0	-6455.5	112.8	907.7	0
-patrol_dat_4800	patrol_dat_4800	FLIP	DATHOMIR	dat_world	0	-6355.2	120.0	838.2	0
-patrol_dat_4801	patrol_dat_4800		DATHOMIR	dat_world	0	-6356.7	120.0	866.2	0
-patrol_dat_4802	patrol_dat_4800		DATHOMIR	dat_world	0	-6366.3	120.0	881.7	0
-patrol_dat_4803	patrol_dat_4800		DATHOMIR	dat_world	0	-6393.1	120.0	884.4	0
-patrol_dat_4804	patrol_dat_4800		DATHOMIR	dat_world	0	-6391.5	120.0	864.8	0
-patrol_dat_4900	patrol_dat_4900	FLIP	DATHOMIR	dat_world	0	-6356.5	128.0	780.4	0
-patrol_dat_4901	patrol_dat_4900		DATHOMIR	dat_world	0	-6335.0	128.0	781.5	0
-patrol_dat_4902	patrol_dat_4900		DATHOMIR	dat_world	0	-6319.7	128.0	780.3	0
-patrol_dat_4903	patrol_dat_4900		DATHOMIR	dat_world	0	-6319.4	128.0	757.8	0
-patrol_dat_4904	patrol_dat_4900		DATHOMIR	dat_world	0	-6319.5	128.0	727.2	0
-patrol_dat_4905	patrol_dat_4900		DATHOMIR	dat_world	0	-6339.4	128.0	727.0	0
-patrol_dat_4906	patrol_dat_4900		DATHOMIR	dat_world	0	-6362.8	128.0	726.9	0
-patrol_dat_4907	patrol_dat_4900		DATHOMIR	dat_world	0	-6363.1	128.0	746.5	0
-patrol_dat_4908	patrol_dat_4900		DATHOMIR	dat_world	0	-6364.0	128.0	777.9	0
-patrol_dat_5000	patrol_dat_5000	FLIP	DATHOMIR	dat_world	0	-6399.3	120.0	900.0	0
-patrol_dat_5001	patrol_dat_5000		DATHOMIR	dat_world	0	-6375.4	120.0	899.5	0
-patrol_dat_5002	patrol_dat_5000		DATHOMIR	dat_world	0	-6338.5	120.0	900.2	0
-patrol_dat_5003	patrol_dat_5000		DATHOMIR	dat_world	0	-6332.1	120.0	912.6	0
-patrol_dat_5004	patrol_dat_5000		DATHOMIR	dat_world	0	-6331.7	120.0	941.3	0
-patrol_dat_5005	patrol_dat_5000		DATHOMIR	dat_world	0	-6336.0	120.0	964.5	0
-patrol_dat_5100	patrol_dat_5100	FLIP	DATHOMIR	dat_world	0	-6342.3	128.0	766.8	0
-patrol_dat_5101	patrol_dat_5100		DATHOMIR	dat_world	0	-6343.1	128.0	778.7	0
-patrol_dat_5102	patrol_dat_5100		DATHOMIR	dat_world	0	-6348.3	128.0	788.0	0
-patrol_dat_5103	patrol_dat_5100		DATHOMIR	dat_world	0	-6348.8	128.0	797.2	0
-patrol_dat_5104	patrol_dat_5100		DATHOMIR	dat_world	0	-6363.6	128.0	793.8	0
-patrol_dat_5105	patrol_dat_5100		DATHOMIR	dat_world	0	-6378.3	128.0	791.5	0
-patrol_dat_5106	patrol_dat_5100		DATHOMIR	dat_world	0	-6395.4	128.0	794.2	0
-patrol_dat_5107	patrol_dat_5100		DATHOMIR	dat_world	0	-6412.8	128.0	798.4	0
-patrol_dat_5108	patrol_dat_5100		DATHOMIR	dat_world	0	-6430.6	128.0	788.3	0
-patrol_dat_5200	patrol_dat_5200	FLIP	DATHOMIR	dat_world	0	-6200.8	120.0	982.1	0
-patrol_dat_5201	patrol_dat_5200		DATHOMIR	dat_world	0	-6218.8	120.0	995.8	0
-patrol_dat_5202	patrol_dat_5200		DATHOMIR	dat_world	0	-6235.5	120.0	1007.4	0
-patrol_dat_5203	patrol_dat_5200		DATHOMIR	dat_world	0	-6267.2	120.0	989.8	0
-patrol_dat_5204	patrol_dat_5200		DATHOMIR	dat_world	0	-6294.6	120.0	969.8	0
-patrol_dat_5205	patrol_dat_5200		DATHOMIR	dat_world	0	-6308.8	120.0	930.2	0
-patrol_dat_5206	patrol_dat_5200		DATHOMIR	dat_world	0	-6277.0	120.0	936.3	0
-patrol_dat_5207	patrol_dat_5200		DATHOMIR	dat_world	0	-6249.2	120.0	942.6	0
-patrol_dat_5208	patrol_dat_5200		DATHOMIR	dat_world	0	-6233.4	120.0	969.9	0
-patrol_dat_5209	patrol_dat_5200		DATHOMIR	dat_world	0	-6215.6	120.0	976.2	0
-patrol_dat_5300	patrol_dat_5300	FLIP	DATHOMIR	dat_world	0	-3943.0	125.1	-253.3	0
-patrol_dat_5301	patrol_dat_5300		DATHOMIR	dat_world	0	-3955.8	123.0	-267.5	0
-patrol_dat_5302	patrol_dat_5300		DATHOMIR	dat_world	0	-3970.9	123.8	-283.9	0
-patrol_dat_5303	patrol_dat_5300		DATHOMIR	dat_world	0	-3988.0	126.7	-296.6	0
-patrol_dat_5304	patrol_dat_5300		DATHOMIR	dat_world	0	-3995.8	127.1	-297.9	0
-patrol_dat_5305	patrol_dat_5300		DATHOMIR	dat_world	0	-4017.5	125.3	-295.8	0
-patrol_dat_5400	patrol_dat_5400	FLIP	DATHOMIR	dat_world	0	-3972.4	131.0	-204.6	0
-patrol_dat_5401	patrol_dat_5400		DATHOMIR	dat_world	0	-3957.7	131.6	-190.7	0
-patrol_dat_5402	patrol_dat_5400		DATHOMIR	dat_world	0	-3953.9	131.5	-175.8	0
-patrol_dat_5403	patrol_dat_5400		DATHOMIR	dat_world	0	-3957.7	131.3	-158.7	0
-patrol_dat_5404	patrol_dat_5400		DATHOMIR	dat_world	0	-3971.4	132.9	-150.4	0
-patrol_dat_5405	patrol_dat_5400		DATHOMIR	dat_world	0	-3988.8	133.9	-150.1	0
-patrol_dat_5406	patrol_dat_5400		DATHOMIR	dat_world	0	-3999.0	131.9	-165.8	0
-patrol_dat_5407	patrol_dat_5400		DATHOMIR	dat_world	0	-3999.0	131.3	-185.5	0
-patrol_dat_5408	patrol_dat_5400		DATHOMIR	dat_world	0	-3988.1	131.5	-195.1	0
-patrol_dat_5500	patrol_dat_5500	FLIP	DATHOMIR	dat_world	0	-4016.1	119.9	-243.4	0
-patrol_dat_5501	patrol_dat_5500		DATHOMIR	dat_world	0	-3994.2	120.8	-247.2	0
-patrol_dat_5502	patrol_dat_5500		DATHOMIR	dat_world	0	-3981.2	121.2	-262.5	0
-patrol_dat_5503	patrol_dat_5500		DATHOMIR	dat_world	0	-3982.5	122.7	-281.4	0
-patrol_dat_5504	patrol_dat_5500		DATHOMIR	dat_world	0	-3997.6	123.2	-292.0	0
-patrol_dat_5505	patrol_dat_5500		DATHOMIR	dat_world	0	-4016.7	121.7	-290.0	0
-patrol_dat_5506	patrol_dat_5500		DATHOMIR	dat_world	0	-4030.4	121.1	-277.8	0
-patrol_dat_5507	patrol_dat_5500		DATHOMIR	dat_world	0	-4033.0	119.9	-260.6	0
-patrol_dat_5508	patrol_dat_5500		DATHOMIR	dat_world	0	-4024.6	119.7	-248.7	0
-patrol_dat_5600	patrol_dat_5600	FLIP	DATHOMIR	dat_world	0	-3969.6	122.3	-270.2	0
-patrol_dat_5601	patrol_dat_5600		DATHOMIR	dat_world	0	-3954.5	124.6	-249.0	0
-patrol_dat_5602	patrol_dat_5600		DATHOMIR	dat_world	0	-3952.2	128.1	-231.5	0
-patrol_dat_5603	patrol_dat_5600		DATHOMIR	dat_world	0	-3952.7	131.1	-214.2	0
-patrol_dat_5604	patrol_dat_5600		DATHOMIR	dat_world	0	-3963.7	131.7	-202.0	0
-patrol_dat_5605	patrol_dat_5600		DATHOMIR	dat_world	0	-3971.9	131.4	-202.4	0
-patrol_dat_5700	patrol_dat_5700	FLIP	DATHOMIR	dat_world	0	-3931.6	131.3	-210.2	0
-patrol_dat_5701	patrol_dat_5700		DATHOMIR	dat_world	0	-3938.4	130.1	-187.9	0
-patrol_dat_5702	patrol_dat_5700		DATHOMIR	dat_world	0	-3953.5	130.3	-157.7	0
-patrol_dat_5800	patrol_dat_5800	FLIP	DATHOMIR	dat_world	0	-104.3	18.0	-1633.7	0
-patrol_dat_5801	patrol_dat_5800		DATHOMIR	dat_world	0	-91.3	18.0	-1621.5	0
-patrol_dat_5802	patrol_dat_5800		DATHOMIR	dat_world	0	-78.4	18.0	-1628.6	0
-patrol_dat_5803	patrol_dat_5800		DATHOMIR	dat_world	0	-61.9	18.0	-1608.6	0
-patrol_dat_5804	patrol_dat_5800		DATHOMIR	dat_world	0	-43.9	18.0	-1598.5	0
-patrol_dat_5900	patrol_dat_5900	FLIP	DATHOMIR	dat_world	0	-34.5	18.0	-1584.6	0
-patrol_dat_5901	patrol_dat_5900		DATHOMIR	dat_world	0	-66.3	18.0	-1559.6	0
-patrol_dat_5902	patrol_dat_5900		DATHOMIR	dat_world	0	-83.7	18.0	-1546.2	0
-patrol_dat_5903	patrol_dat_5900		DATHOMIR	dat_world	0	-99.2	18.0	-1566.9	0
-patrol_dat_6000	patrol_dat_6000	FLIP	DATHOMIR	dat_world	0	-117.0	18.0	-1622.2	0
-patrol_dat_6001	patrol_dat_6000		DATHOMIR	dat_world	0	-100.4	18.0	-1596.8	0
-patrol_dat_6002	patrol_dat_6000		DATHOMIR	dat_world	0	-98.2	18.0	-1581.4	0
-patrol_dat_6003	patrol_dat_6000		DATHOMIR	dat_world	0	-81.3	18.0	-1595.7	0
-patrol_dat_6004	patrol_dat_6000		DATHOMIR	dat_world	0	-67.6	18.0	-1607.0	0
-patrol_dat_6100	patrol_dat_6100	FLIP	DATHOMIR	dat_world	0	-1096.3	115.4	6320.8	0
-patrol_dat_6101	patrol_dat_6100		DATHOMIR	dat_world	0	-1129.9	108.7	6317.7	0
-patrol_dat_6102	patrol_dat_6100		DATHOMIR	dat_world	0	-1169.6	116.6	6299.9	0
-patrol_dat_6103	patrol_dat_6100		DATHOMIR	dat_world	0	-1131.6	119.0	6278.6	0
-patrol_dat_6104	patrol_dat_6100		DATHOMIR	dat_world	0	-1097.6	122.9	6284.9	0
-patrol_dat_7500	patrol_dat_7500	FLIP	DATHOMIR	dat_world	0	5681.9	125.0	1846.5	0
-patrol_dat_7501	patrol_dat_7500		DATHOMIR	dat_world	0	5696.2	125.0	1826.6	0
-patrol_dat_7502	patrol_dat_7500		DATHOMIR	dat_world	0	5708.8	126.2	1809.4	0
-patrol_dat_7503	patrol_dat_7500		DATHOMIR	dat_world	0	5692.7	129.8	1808.4	0
-patrol_dat_7504	patrol_dat_7500		DATHOMIR	dat_world	0	5677.4	133.4	1827.8	0
-patrol_dat_7600	patrol_dat_7600	FLIP	DATHOMIR	dat_world	0	5754.7	125.0	1860.2	0
-patrol_dat_7601	patrol_dat_7600		DATHOMIR	dat_world	0	5745.1	125.0	1837.4	0
-patrol_dat_7602	patrol_dat_7600		DATHOMIR	dat_world	0	5711.3	125.0	1835.2	0
-patrol_dat_7603	patrol_dat_7600		DATHOMIR	dat_world	0	5694.6	125.0	1857.2	0
-patrol_dat_7604	patrol_dat_7600		DATHOMIR	dat_world	0	5711.0	125.0	1879.0	0
-patrol_dat_8400	patrol_dat_8400	LOOP	DATHOMIR	dat_world	0	589.9	6.0	3050.7	0
-patrol_dat_8401	patrol_dat_8400		DATHOMIR	dat_world	0	589.9	6.0	3050.7	0
-patrol_dat_8402	patrol_dat_8400		DATHOMIR	dat_world	0	606.7	6.0	3050.3	0
-patrol_dat_8403	patrol_dat_8400		DATHOMIR	dat_world	0	618.0	6.0	3056.5	0
-patrol_dat_8404	patrol_dat_8400		DATHOMIR	dat_world	0	621.3	6.0	3084.1	0
-patrol_dat_8405	patrol_dat_8400		DATHOMIR	dat_world	0	617.9	6.0	3095.4	0
-patrol_dat_8406	patrol_dat_8400		DATHOMIR	dat_world	0	609.8	6.0	3088.3	0
-patrol_dat_8407	patrol_dat_8400		DATHOMIR	dat_world	0	593.2	6.0	3092.8	0
-patrol_dat_8408	patrol_dat_8400		DATHOMIR	dat_world	0	575.3	6.0	3099.0	0
-patrol_dat_8409	patrol_dat_8400		DATHOMIR	dat_world	0	557	6.7	3094.8	0
-patrol_dat_8410	patrol_dat_8400		DATHOMIR	dat_world	0	538.6	8.6	3091.8	0
-patrol_dat_8411	patrol_dat_8400		DATHOMIR	dat_world	0	537.7	8.6	3082.1	0
-patrol_dat_8412	patrol_dat_8400		DATHOMIR	dat_world	0	550.3	6.3	3076	0
-patrol_dat_8413	patrol_dat_8400		DATHOMIR	dat_world	0	574.1	6	3069.9	0
-patrol_dat_8414	patrol_dat_8400		DATHOMIR	dat_world	0	584.5	6	3059.6	0
-patrol_dat_8500	patrol_dat_8500	FLIP	DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0
-patrol_dat_8501	patrol_dat_8500		DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0
-patrol_dat_8502	patrol_dat_8500		DATHOMIR	dat_trade_outpost_starport	1	-12.8	0.1	-17.4	0
-patrol_dat_8503	patrol_dat_8500		DATHOMIR	dat_world	0	615.3	6	3093.7	0
-patrol_dat_8504	patrol_dat_8500		DATHOMIR	dat_world	0	613.6	6	3083.1	0
-patrol_dat_8505	patrol_dat_8500		DATHOMIR	dat_world	0	610.7	6	3065.1	0
-patrol_dat_8506	patrol_dat_8500		DATHOMIR	dat_world	0	607.9	6	3046.4	0
-patrol_dat_8507	patrol_dat_8500		DATHOMIR	dat_world	0	610.8	6.8	3043.4	0
-patrol_dat_8508	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	1	7.6	0.6	5.4	0
-patrol_dat_8509	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	1	2.3	0.6	3.2	0
-patrol_dat_8510	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	2	-5.3	0.6	3.6	0
-patrol_dat_8511	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	-7.1	0.6	-1.4	0
-patrol_dat_8512	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	-2.1	0.6	-3.6	0
-patrol_dat_8513	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	3	2	0.6	-4.6	0
-patrol_dat_8514	patrol_dat_8500		DATHOMIR	dat_trade_outpost_cantina	4	5.9	0.6	-4.6	0
-patrol_dat_8600	patrol_dat_8600	FLIP	DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0
-patrol_dat_8601	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0
-patrol_dat_8602	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	3	1.2	0.1	-3.2	0
-patrol_dat_8603	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	3	-1.4	0.1	1.5	0
-patrol_dat_8604	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	2	-4.3	0.1	1.8	0
-patrol_dat_8605	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	2	-4.6	0.1	3.4	0
-patrol_dat_8606	patrol_dat_8600		DATHOMIR	dat_trade_outpost_cloning	1	0.5	0.1	4.7	0
-patrol_dat_8607	patrol_dat_8600		DATHOMIR	dat_world	0	618.3	6	3054.2	0
-patrol_dat_8608	patrol_dat_8600		DATHOMIR	dat_world	0	608.7	6	3054.3	0
-patrol_dat_8609	patrol_dat_8600		DATHOMIR	dat_world	0	596.6	6	3057.5	0
-patrol_dat_8610	patrol_dat_8600		DATHOMIR	dat_world	0	573.4	6	3073.7	0
-patrol_dat_8611	patrol_dat_8600		DATHOMIR	dat_world	0	545.1	7.6	3085.3	0
-patrol_dat_8612	patrol_dat_8600		DATHOMIR	dat_world	0	524.4	12	3082	0
-patrol_dat_8613	patrol_dat_8600		DATHOMIR	dat_world	0	510.6	13.1	3074.5	0
-patrol_dat_8614	patrol_dat_8600		DATHOMIR	dat_world	0	490.8	13.2	3062.5	0
-patrol_dat_8615	patrol_dat_8600		DATHOMIR	dat_world	0	468.3	17.4	3032.6	0
-patrol_dat_8616	patrol_dat_8600		DATHOMIR	dat_world	0	449.7	23.7	3002.7	0
-patrol_dat_8617	patrol_dat_8600		DATHOMIR	dat_world	0	431.1	27.2	2970.1	0
-patrol_dat_8618	patrol_dat_8600		DATHOMIR	dat_world	0	420	27.9	2950	0
-patrol_dat_8700	patrol_dat_8700	FLIP	DATHOMIR	dat_world	0	581.2	6	3105.3	0
-patrol_dat_8701	patrol_dat_8700		DATHOMIR	dat_world	0	581.2	6	3105.3	0
-patrol_dat_8702	patrol_dat_8700		DATHOMIR	dat_world	0	581.3	6	3093.6	0
-patrol_dat_8703	patrol_dat_8700		DATHOMIR	dat_world	0	592.1	6	3091.5	0
-patrol_dat_8704	patrol_dat_8700		DATHOMIR	dat_world	0	610.5	6	3090	0
-patrol_dat_8705	patrol_dat_8700		DATHOMIR	dat_world	0	620.3	6	3088.9	0
-patrol_dat_8706	patrol_dat_8700		DATHOMIR	dat_world	0	633.9	6	3084.6	0
-patrol_dat_8707	patrol_dat_8700		DATHOMIR	dat_world	0	638	6	3067.4	0
-patrol_dat_8708	patrol_dat_8700		DATHOMIR	dat_world	0	638.2	6	3051.2	0
-patrol_dat_8709	patrol_dat_8700		DATHOMIR	dat_world	0	634.7	6	3040.4	0
-patrol_dat_8710	patrol_dat_8700		DATHOMIR	dat_world	0	623.1	6	3035.1	0
-patrol_dat_8711	patrol_dat_8700		DATHOMIR	dat_world	0	619.3	6	3043.4	0
-patrol_dat_8712	patrol_dat_8700		DATHOMIR	dat_world	0	613.4	6	3050.8	0
-patrol_dat_8713	patrol_dat_8700		DATHOMIR	dat_world	0	597.9	6	3052.9	0
-patrol_dat_8714	patrol_dat_8700		DATHOMIR	dat_world	0	587.2	6	3056.4	0
-patrol_dat_8715	patrol_dat_8700		DATHOMIR	dat_world	0	575	6	3060.5	0
-patrol_dat_8716	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	1	-0.3	0.1	3.9	0
-patrol_dat_8717	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	2	-5.3	0.1	3.2	0
-patrol_dat_8718	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	2	-4.1	0.1	1.3	0
-patrol_dat_8719	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	3	-0.5	0.1	1.1	0
-patrol_dat_8720	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	3	-0.6	0.1	-3.4	0
-patrol_dat_8721	patrol_dat_8700		DATHOMIR	dat_trade_outpost_shed1	6	-3.2	0.1	-4.1	0
-patrol_dat_8800	patrol_dat_8800	FLIP	DATHOMIR	dat_world	0	-6521.8	130.1	793.6	0
-patrol_dat_8801	patrol_dat_8800		DATHOMIR	dat_world	0	-6504.7	130.3	778.9	0
-patrol_dat_8802	patrol_dat_8800		DATHOMIR	dat_world	0	-6469.7	130.3	759.4	0
-patrol_dat_8803	patrol_dat_8800		DATHOMIR	dat_world	0	-6420.7	130	762.2	0
-patrol_dat_8804	patrol_dat_8800		DATHOMIR	dat_world	0	-6381.5	130	752.3	0
-patrol_dat_8805	patrol_dat_8800		DATHOMIR	dat_world	0	-6374.9	132.7	718.1	0
-patrol_dat_8806	patrol_dat_8800		DATHOMIR	dat_world	0	-6345.8	133.5	707.6	0
-patrol_dat_8807	patrol_dat_8800		DATHOMIR	dat_world	0	-6318.4	132.4	707.8	0
-patrol_dat_8808	patrol_dat_8800		DATHOMIR	dat_world	0	-6288	130.1	720.8	0
-patrol_dat_8809	patrol_dat_8800		DATHOMIR	dat_world	0	-6286.2	130	767.4	0
-patrol_dat_8900	patrol_dat_8900	FLIP	DATHOMIR	dat_world	0	-6279.9	130.1	784.2	0
-patrol_dat_8901	patrol_dat_8900		DATHOMIR	dat_world	0	-6256.7	130	825.9	0
-patrol_dat_8902	patrol_dat_8900		DATHOMIR	dat_world	0	-6248.5	130	855.9	0
-patrol_dat_8903	patrol_dat_8900		DATHOMIR	dat_world	0	-6225.4	130	878.1	0
-patrol_dat_8904	patrol_dat_8900		DATHOMIR	dat_world	0	-6197.8	130	885.6	0
-patrol_dat_8905	patrol_dat_8900		DATHOMIR	dat_world	0	-6175.3	130.1	906.2	0
-patrol_dat_8906	patrol_dat_8900		DATHOMIR	dat_world	0	-6145.6	130.1	942.1	0
-patrol_dat_8907	patrol_dat_8900		DATHOMIR	dat_world	0	-6129.3	130.4	950	0
-patrol_dat_9000	patrol_dat_9000	FLIP	DATHOMIR	dat_world	0	-6109.3	130.9	964.9	0
-patrol_dat_9001	patrol_dat_9000		DATHOMIR	dat_world	0	-6129.7	127.1	978.3	0
-patrol_dat_9002	patrol_dat_9000		DATHOMIR	dat_world	0	-6145.5	127.7	990	0
-patrol_dat_9003	patrol_dat_9000		DATHOMIR	dat_world	0	-6164.3	127.2	1011	0
-patrol_dat_9004	patrol_dat_9000		DATHOMIR	dat_world	0	-6173.8	128.2	1023.3	0
-patrol_dat_9005	patrol_dat_9000		DATHOMIR	dat_world	0	-6202.3	129.7	1038.9	0
-patrol_dat_9006	patrol_dat_9000		DATHOMIR	dat_world	0	-6238.4	130	1047	0
-patrol_dat_9007	patrol_dat_9000		DATHOMIR	dat_world	0	-6263.2	130	1065.5	0
-patrol_dat_9008	patrol_dat_9000		DATHOMIR	dat_world	0	-6295.2	130	1075.9	0
-patrol_dat_9009	patrol_dat_9000		DATHOMIR	dat_world	0	-6323.3	130	1076.4	0
-patrol_dat_9010	patrol_dat_9000		DATHOMIR	dat_world	0	-6357.8	130	1092.2	0
-patrol_dat_9011	patrol_dat_9000		DATHOMIR	dat_world	0	-6396.1	130	1091	0
-patrol_dat_9012	patrol_dat_9000		DATHOMIR	dat_world	0	-6434.2	130	1094.5	0
-patrol_dat_9100	patrol_dat_9100	FLIP	DATHOMIR	dat_world	0	-6450.5	130	1098.5	0
-patrol_dat_9101	patrol_dat_9100		DATHOMIR	dat_world	0	-6480.8	130	1099	0
-patrol_dat_9102	patrol_dat_9100		DATHOMIR	dat_world	0	-6509.9	130	1079.1	0
-patrol_dat_9103	patrol_dat_9100		DATHOMIR	dat_world	0	-6520.7	130	1051.9	0
-patrol_dat_9104	patrol_dat_9100		DATHOMIR	dat_world	0	-6529.5	130	1028.4	0
-patrol_dat_9105	patrol_dat_9100		DATHOMIR	dat_world	0	-6553	130	1005.3	0
-patrol_dat_9106	patrol_dat_9100		DATHOMIR	dat_world	0	-6566.5	130	976.8	0
-patrol_dat_9107	patrol_dat_9100		DATHOMIR	dat_world	0	-6560.4	130	942.9	0
-patrol_dat_9108	patrol_dat_9100		DATHOMIR	dat_world	0	-6534.1	130	913.3	0
-patrol_dat_9109	patrol_dat_9100		DATHOMIR	dat_world	0	-6521.8	130	881.3	0
-patrol_dat_9110	patrol_dat_9100		DATHOMIR	dat_world	0	-6511.8	130	855.9	0
-patrol_dat_9111	patrol_dat_9100		DATHOMIR	dat_world	0	-6521.6	130	826.1	0
-patrol_dat_9112	patrol_dat_9100		DATHOMIR	dat_world	0	-6523.8	130	806.8	0
-patrol_dat_9200	patrol_dat_9200	FLIP	DATHOMIR	dat_world	0	-6164.6	128	974.9	0
-patrol_dat_9201	patrol_dat_9200		DATHOMIR	dat_world	0	-6171.1	128	994	0
-patrol_dat_9202	patrol_dat_9200		DATHOMIR	dat_world	0	-6185	128	1012.5	0
-patrol_dat_9203	patrol_dat_9200		DATHOMIR	dat_world	0	-6200.7	128	1023	0
-patrol_dat_9204	patrol_dat_9200		DATHOMIR	dat_world	0	-6224.9	128	1028.7	0
-patrol_dat_9205	patrol_dat_9200		DATHOMIR	dat_world	0	-6249.9	128	1029	0
-patrol_dat_9206	patrol_dat_9200		DATHOMIR	dat_world	0	-6259.8	128	1033.1	0
-patrol_dat_9207	patrol_dat_9200		DATHOMIR	dat_world	0	-6279.2	128	1056.1	0
-patrol_dat_9208	patrol_dat_9200		DATHOMIR	dat_world	0	-6303.8	128	1061.7	0
-patrol_dat_9209	patrol_dat_9200		DATHOMIR	dat_world	0	-6330.2	128	1060.2	0
-patrol_dat_9210	patrol_dat_9200		DATHOMIR	dat_world	0	-6359.2	128	1073.4	0
-patrol_dat_9211	patrol_dat_9200		DATHOMIR	dat_world	0	-6395.1	128	1073	0
-patrol_dat_9212	patrol_dat_9200		DATHOMIR	dat_world	0	-6416.1	128	1067.1	0
-patrol_dat_9213	patrol_dat_9200		DATHOMIR	dat_world	0	-6436.1	128	1076.3	0
-patrol_dat_9214	patrol_dat_9200		DATHOMIR	dat_world	0	-6454.6	128	1082.5	0
-patrol_dat_9215	patrol_dat_9200		DATHOMIR	dat_world	0	-6470.3	128	1084.2	0
-patrol_dat_9216	patrol_dat_9200		DATHOMIR	dat_world	0	-6488.1	128	1076.9	0
-patrol_dat_9217	patrol_dat_9200		DATHOMIR	dat_world	0	-6499.1	128	1062.2	0
-patrol_dat_9218	patrol_dat_9200		DATHOMIR	dat_world	0	-6504.1	128	1045.7	0
-patrol_dat_9219	patrol_dat_9200		DATHOMIR	dat_world	0	-6506.4	128	1019.1	0
-patrol_dat_9220	patrol_dat_9200		DATHOMIR	dat_world	0	-6530.4	128	1003	0
-patrol_dat_9221	patrol_dat_9200		DATHOMIR	dat_world	0	-6541.4	128	985.2	0
-patrol_dat_9222	patrol_dat_9200		DATHOMIR	dat_world	0	-6546.7	128	968.7	0
-patrol_dat_9223	patrol_dat_9200		DATHOMIR	dat_world	0	-6539.9	128	949.5	0
-patrol_dat_9224	patrol_dat_9200		DATHOMIR	dat_world	0	-6506.4	128	919.4	0
-patrol_dat_9225	patrol_dat_9200		DATHOMIR	dat_world	0	-6501.3	128	884.7	0
-patrol_dat_9226	patrol_dat_9200		DATHOMIR	dat_world	0	-6485.2	128	859.5	0
-patrol_dat_9227	patrol_dat_9200		DATHOMIR	dat_world	0	-6500.4	128	831.6	0
-patrol_dat_9228	patrol_dat_9200		DATHOMIR	dat_world	0	-6502.1	128	804.4	0
-patrol_dat_9229	patrol_dat_9200		DATHOMIR	dat_world	0	-6487.1	128	784.1	0
-patrol_dat_9230	patrol_dat_9200		DATHOMIR	dat_world	0	-6464.1	128	774.5	0
-patrol_dat_9231	patrol_dat_9200		DATHOMIR	dat_world	0	-6445.2	128	778.5	0
-patrol_dat_9300	patrol_dat_9300	FLIP	DATHOMIR	dat_world	0	-6164.8	128	971.7	0
-patrol_dat_9301	patrol_dat_9300		DATHOMIR	dat_world	0	-6166.4	128	956.2	0
-patrol_dat_9302	patrol_dat_9300		DATHOMIR	dat_world	0	-6179.5	128	923.8	0
-patrol_dat_9303	patrol_dat_9300		DATHOMIR	dat_world	0	-6197.2	128	910.5	0
-patrol_dat_9304	patrol_dat_9300		DATHOMIR	dat_world	0	-6229.2	128	900.4	0
-patrol_dat_9305	patrol_dat_9300		DATHOMIR	dat_world	0	-6246.6	128	891.5	0
-patrol_dat_9306	patrol_dat_9300		DATHOMIR	dat_world	0	-6269	128	867.7	0
-patrol_dat_9307	patrol_dat_9300		DATHOMIR	dat_world	0	-6273.8	128	835.4	0
-patrol_dat_9308	patrol_dat_9300		DATHOMIR	dat_world	0	-6287.5	128	814.6	0
-patrol_dat_9309	patrol_dat_9300		DATHOMIR	dat_world	0	-6303.7	128	801.3	0
-patrol_dat_9310	patrol_dat_9300		DATHOMIR	dat_world	0	-6336.5	128	799.2	0
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_dathomir_100	patrol_dathomir_100	FLIP	DATHOMIR	dat_world	0	-6343.4	120.0	972.6	0	POI - Imperial Prison - a Novatrooper Cadet
+patrol_dathomir_101	patrol_dathomir_100		DATHOMIR	dat_world	0	-6370.2	120.0	973.7	0	-
+patrol_dathomir_102	patrol_dathomir_100		DATHOMIR	dat_world	0	-6410.4	120.0	973.5	0	-
+patrol_dathomir_103	patrol_dathomir_100		DATHOMIR	dat_world	0	-6414.2	120.0	954.4	0	-
+patrol_dathomir_104	patrol_dathomir_100		DATHOMIR	dat_world	0	-6416.7	120.0	932.4	0	-
+patrol_dathomir_105	patrol_dathomir_100		DATHOMIR	dat_world	0	-6407.9	120.0	909.1	0	-
+patrol_dathomir_106	patrol_dathomir_100		DATHOMIR	dat_world	0	-6400.2	120.0	900.5	0	-
+patrol_dathomir_200	patrol_dathomir_200	FLIP	DATHOMIR	dat_world	0	-6472.4	120.0	975.1	0	POI - Imperial Prison - a Novatrooper Captain
+patrol_dathomir_201	patrol_dathomir_200		DATHOMIR	dat_world	0	-6463.5	120.0	966.4	0	-
+patrol_dathomir_202	patrol_dathomir_200		DATHOMIR	dat_world	0	-6467.0	120.0	952.3	0	-
+patrol_dathomir_203	patrol_dathomir_200		DATHOMIR	dat_world	0	-6453.2	119.8	934.4	0	-
+patrol_dathomir_204	patrol_dathomir_200		DATHOMIR	dat_world	0	-6450.0	119.1	925.5	0	-
+patrol_dathomir_205	patrol_dathomir_200		DATHOMIR	dat_world	0	-6455.5	112.8	907.7	0	-
+patrol_dathomir_300	patrol_dathomir_300	FLIP	DATHOMIR	dat_world	0	-6355.2	120.0	838.2	0	POI - Imperial Prison - a Novatrooper Commander
+patrol_dathomir_301	patrol_dathomir_300		DATHOMIR	dat_world	0	-6356.7	120.0	866.2	0	-
+patrol_dathomir_302	patrol_dathomir_300		DATHOMIR	dat_world	0	-6366.3	120.0	881.7	0	-
+patrol_dathomir_303	patrol_dathomir_300		DATHOMIR	dat_world	0	-6393.1	120.0	884.4	0	-
+patrol_dathomir_304	patrol_dathomir_300		DATHOMIR	dat_world	0	-6391.5	120.0	864.8	0	-
+patrol_dathomir_400	patrol_dathomir_400	FLIP	DATHOMIR	dat_world	0	-6356.5	128.0	780.4	0	POI - Imperial Prison - an Elite Novatrooper
+patrol_dathomir_401	patrol_dathomir_400		DATHOMIR	dat_world	0	-6335.0	128.0	781.5	0	-
+patrol_dathomir_402	patrol_dathomir_400		DATHOMIR	dat_world	0	-6319.7	128.0	780.3	0	-
+patrol_dathomir_403	patrol_dathomir_400		DATHOMIR	dat_world	0	-6319.4	128.0	757.8	0	-
+patrol_dathomir_404	patrol_dathomir_400		DATHOMIR	dat_world	0	-6319.5	128.0	727.2	0	-
+patrol_dathomir_405	patrol_dathomir_400		DATHOMIR	dat_world	0	-6339.4	128.0	727.0	0	-
+patrol_dathomir_406	patrol_dathomir_400		DATHOMIR	dat_world	0	-6362.8	128.0	726.9	0	-
+patrol_dathomir_407	patrol_dathomir_400		DATHOMIR	dat_world	0	-6363.1	128.0	746.5	0	-
+patrol_dathomir_408	patrol_dathomir_400		DATHOMIR	dat_world	0	-6364.0	128.0	777.9	0	-
+patrol_dathomir_500	patrol_dathomir_500	FLIP	DATHOMIR	dat_world	0	-6399.3	120.0	900.0	0	POI - Imperial Prison - an Elite Novatrooper Commander
+patrol_dathomir_501	patrol_dathomir_500		DATHOMIR	dat_world	0	-6375.4	120.0	899.5	0	-
+patrol_dathomir_502	patrol_dathomir_500		DATHOMIR	dat_world	0	-6338.5	120.0	900.2	0	-
+patrol_dathomir_503	patrol_dathomir_500		DATHOMIR	dat_world	0	-6332.1	120.0	912.6	0	-
+patrol_dathomir_504	patrol_dathomir_500		DATHOMIR	dat_world	0	-6331.7	120.0	941.3	0	-
+patrol_dathomir_505	patrol_dathomir_500		DATHOMIR	dat_world	0	-6336.0	120.0	964.5	0	-
+patrol_dathomir_600	patrol_dathomir_600	FLIP	DATHOMIR	dat_world	0	-6342.3	128.0	766.8	0	POI - Imperial Prison - a Novatrooper Medic
+patrol_dathomir_601	patrol_dathomir_600		DATHOMIR	dat_world	0	-6343.1	128.0	778.7	0	-
+patrol_dathomir_602	patrol_dathomir_600		DATHOMIR	dat_world	0	-6348.3	128.0	788.0	0	-
+patrol_dathomir_603	patrol_dathomir_600		DATHOMIR	dat_world	0	-6348.8	128.0	797.2	0	-
+patrol_dathomir_604	patrol_dathomir_600		DATHOMIR	dat_world	0	-6363.6	128.0	793.8	0	-
+patrol_dathomir_605	patrol_dathomir_600		DATHOMIR	dat_world	0	-6378.3	128.0	791.5	0	-
+patrol_dathomir_606	patrol_dathomir_600		DATHOMIR	dat_world	0	-6395.4	128.0	794.2	0	-
+patrol_dathomir_607	patrol_dathomir_600		DATHOMIR	dat_world	0	-6412.8	128.0	798.4	0	-
+patrol_dathomir_608	patrol_dathomir_600		DATHOMIR	dat_world	0	-6430.6	128.0	788.3	0	-
+patrol_dathomir_700	patrol_dathomir_700	FLIP	DATHOMIR	dat_world	0	-6200.8	120.0	982.1	0	POI - Imperial Prison - a Novatrooper Squad Leader
+patrol_dathomir_701	patrol_dathomir_700		DATHOMIR	dat_world	0	-6218.8	120.0	995.8	0	-
+patrol_dathomir_702	patrol_dathomir_700		DATHOMIR	dat_world	0	-6235.5	120.0	1007.4	0	-
+patrol_dathomir_703	patrol_dathomir_700		DATHOMIR	dat_world	0	-6267.2	120.0	989.8	0	-
+patrol_dathomir_704	patrol_dathomir_700		DATHOMIR	dat_world	0	-6294.6	120.0	969.8	0	-
+patrol_dathomir_705	patrol_dathomir_700		DATHOMIR	dat_world	0	-6308.8	120.0	930.2	0	-
+patrol_dathomir_706	patrol_dathomir_700		DATHOMIR	dat_world	0	-6277.0	120.0	936.3	0	-
+patrol_dathomir_707	patrol_dathomir_700		DATHOMIR	dat_world	0	-6249.2	120.0	942.6	0	-
+patrol_dathomir_708	patrol_dathomir_700		DATHOMIR	dat_world	0	-6233.4	120.0	969.9	0	-
+patrol_dathomir_709	patrol_dathomir_700		DATHOMIR	dat_world	0	-6215.6	120.0	976.2	0	-
+patrol_dathomir_800	patrol_dathomir_800	FLIP	DATHOMIR	dat_world	0	-3943.0	125.1	-253.3	0	Nightsister Stronghold - a Nightsister initiate
+patrol_dathomir_801	patrol_dathomir_800		DATHOMIR	dat_world	0	-3955.8	123.0	-267.5	0	-
+patrol_dathomir_802	patrol_dathomir_800		DATHOMIR	dat_world	0	-3970.9	123.8	-283.9	0	-
+patrol_dathomir_803	patrol_dathomir_800		DATHOMIR	dat_world	0	-3988.0	126.7	-296.6	0	-
+patrol_dathomir_804	patrol_dathomir_800		DATHOMIR	dat_world	0	-3995.8	127.1	-297.9	0	-
+patrol_dathomir_805	patrol_dathomir_800		DATHOMIR	dat_world	0	-4017.5	125.3	-295.8	0	-
+patrol_dathomir_900	patrol_dathomir_900	FLIP	DATHOMIR	dat_world	0	-3972.4	131.0	-204.6	0	Nightsister Stronghold - a Nightsister outcast
+patrol_dathomir_901	patrol_dathomir_900		DATHOMIR	dat_world	0	-3957.7	131.6	-190.7	0	-
+patrol_dathomir_902	patrol_dathomir_900		DATHOMIR	dat_world	0	-3953.9	131.5	-175.8	0	-
+patrol_dathomir_903	patrol_dathomir_900		DATHOMIR	dat_world	0	-3957.7	131.3	-158.7	0	-
+patrol_dathomir_904	patrol_dathomir_900		DATHOMIR	dat_world	0	-3971.4	132.9	-150.4	0	-
+patrol_dathomir_905	patrol_dathomir_900		DATHOMIR	dat_world	0	-3988.8	133.9	-150.1	0	-
+patrol_dathomir_906	patrol_dathomir_900		DATHOMIR	dat_world	0	-3999.0	131.9	-165.8	0	-
+patrol_dathomir_907	patrol_dathomir_900		DATHOMIR	dat_world	0	-3999.0	131.3	-185.5	0	-
+patrol_dathomir_908	patrol_dathomir_900		DATHOMIR	dat_world	0	-3988.1	131.5	-195.1	0	-
+patrol_dathomir_1000	patrol_dathomir_1000	FLIP	DATHOMIR	dat_world	0	-4016.1	119.9	-243.4	0	Nightsister Stronghold - a Nightsister protector
+patrol_dathomir_1001	patrol_dathomir_1000		DATHOMIR	dat_world	0	-3994.2	120.8	-247.2	0	-
+patrol_dathomir_1002	patrol_dathomir_1000		DATHOMIR	dat_world	0	-3981.2	121.2	-262.5	0	-
+patrol_dathomir_1003	patrol_dathomir_1000		DATHOMIR	dat_world	0	-3982.5	122.7	-281.4	0	-
+patrol_dathomir_1004	patrol_dathomir_1000		DATHOMIR	dat_world	0	-3997.6	123.2	-292.0	0	-
+patrol_dathomir_1005	patrol_dathomir_1000		DATHOMIR	dat_world	0	-4016.7	121.7	-290.0	0	-
+patrol_dathomir_1006	patrol_dathomir_1000		DATHOMIR	dat_world	0	-4030.4	121.1	-277.8	0	-
+patrol_dathomir_1007	patrol_dathomir_1000		DATHOMIR	dat_world	0	-4033.0	119.9	-260.6	0	-
+patrol_dathomir_1008	patrol_dathomir_1000		DATHOMIR	dat_world	0	-4024.6	119.7	-248.7	0	-
+patrol_dathomir_1100	patrol_dathomir_1100	FLIP	DATHOMIR	dat_world	0	-3969.6	122.3	-270.2	0	Nightsister Stronghold - a Nightsister sentinel
+patrol_dathomir_1101	patrol_dathomir_1100		DATHOMIR	dat_world	0	-3954.5	124.6	-249.0	0	-
+patrol_dathomir_1102	patrol_dathomir_1100		DATHOMIR	dat_world	0	-3952.2	128.1	-231.5	0	-
+patrol_dathomir_1103	patrol_dathomir_1100		DATHOMIR	dat_world	0	-3952.7	131.1	-214.2	0	-
+patrol_dathomir_1104	patrol_dathomir_1100		DATHOMIR	dat_world	0	-3963.7	131.7	-202.0	0	-
+patrol_dathomir_1105	patrol_dathomir_1100		DATHOMIR	dat_world	0	-3971.9	131.4	-202.4	0	-
+patrol_dathomir_1200	patrol_dathomir_1200	FLIP	DATHOMIR	dat_world	0	-3931.6	131.3	-210.2	0	Nightsister Stronghold - a Nightsister sentinel
+patrol_dathomir_1201	patrol_dathomir_1200		DATHOMIR	dat_world	0	-3938.4	130.1	-187.9	0	-
+patrol_dathomir_1202	patrol_dathomir_1200		DATHOMIR	dat_world	0	-3953.5	130.3	-157.7	0	-
+patrol_dathomir_1300	patrol_dathomir_1300	FLIP	DATHOMIR	dat_world	0	-104.3	18.0	-1633.7	0	Science Outpost - a mercenary #1
+patrol_dathomir_1301	patrol_dathomir_1300		DATHOMIR	dat_world	0	-91.3	18.0	-1621.5	0	-
+patrol_dathomir_1302	patrol_dathomir_1300		DATHOMIR	dat_world	0	-78.4	18.0	-1628.6	0	-
+patrol_dathomir_1303	patrol_dathomir_1300		DATHOMIR	dat_world	0	-61.9	18.0	-1608.6	0	-
+patrol_dathomir_1304	patrol_dathomir_1300		DATHOMIR	dat_world	0	-43.9	18.0	-1598.5	0	-
+patrol_dathomir_1400	patrol_dathomir_1400	FLIP	DATHOMIR	dat_world	0	-34.5	18.0	-1584.6	0	Science Outpost - a mercenary #2
+patrol_dathomir_1401	patrol_dathomir_1400		DATHOMIR	dat_world	0	-66.3	18.0	-1559.6	0	-
+patrol_dathomir_1402	patrol_dathomir_1400		DATHOMIR	dat_world	0	-83.7	18.0	-1546.2	0	-
+patrol_dathomir_1403	patrol_dathomir_1400		DATHOMIR	dat_world	0	-99.2	18.0	-1566.9	0	-
+patrol_dathomir_1500	patrol_dathomir_1500	FLIP	DATHOMIR	dat_world	0	-117.0	18.0	-1622.2	0	Science Outpost - a mercenary #3
+patrol_dathomir_1501	patrol_dathomir_1500		DATHOMIR	dat_world	0	-100.4	18.0	-1596.8	0	-
+patrol_dathomir_1502	patrol_dathomir_1500		DATHOMIR	dat_world	0	-98.2	18.0	-1581.4	0	-
+patrol_dathomir_1503	patrol_dathomir_1500		DATHOMIR	dat_world	0	-81.3	18.0	-1595.7	0	-
+patrol_dathomir_1504	patrol_dathomir_1500		DATHOMIR	dat_world	0	-67.6	18.0	-1607.0	0	-
+patrol_dathomir_1600	patrol_dathomir_1600	FLIP	DATHOMIR	dat_world	0	-1096.3	115.4	6320.8	0	Outback - Cut throat
+patrol_dathomir_1601	patrol_dathomir_1600		DATHOMIR	dat_world	0	-1129.9	108.7	6317.7	0	-
+patrol_dathomir_1602	patrol_dathomir_1600		DATHOMIR	dat_world	0	-1169.6	116.6	6299.9	0	-
+patrol_dathomir_1603	patrol_dathomir_1600		DATHOMIR	dat_world	0	-1131.6	119.0	6278.6	0	-
+patrol_dathomir_1604	patrol_dathomir_1600		DATHOMIR	dat_world	0	-1097.6	122.9	6284.9	0	-
+patrol_dathomir_1700	patrol_dathomir_1700	FLIP	DATHOMIR	dat_world	0	5681.9	125.0	1846.5	0	Downed ship - Pirate #1
+patrol_dathomir_1701	patrol_dathomir_1700		DATHOMIR	dat_world	0	5696.2	125.0	1826.6	0	-
+patrol_dathomir_1702	patrol_dathomir_1700		DATHOMIR	dat_world	0	5708.8	126.2	1809.4	0	-
+patrol_dathomir_1703	patrol_dathomir_1700		DATHOMIR	dat_world	0	5692.7	129.8	1808.4	0	-
+patrol_dathomir_1704	patrol_dathomir_1700		DATHOMIR	dat_world	0	5677.4	133.4	1827.8	0	-
+patrol_dathomir_1800	patrol_dathomir_1800	FLIP	DATHOMIR	dat_world	0	5754.7	125.0	1860.2	0	Downed ship - Pirate #2
+patrol_dathomir_1801	patrol_dathomir_1800		DATHOMIR	dat_world	0	5745.1	125.0	1837.4	0	-
+patrol_dathomir_1802	patrol_dathomir_1800		DATHOMIR	dat_world	0	5711.3	125.0	1835.2	0	-
+patrol_dathomir_1803	patrol_dathomir_1800		DATHOMIR	dat_world	0	5694.6	125.0	1857.2	0	-
+patrol_dathomir_1804	patrol_dathomir_1800		DATHOMIR	dat_world	0	5711.0	125.0	1879.0	0	-
+patrol_dathomir_1900	patrol_dathomir_1900	LOOP	DATHOMIR	dat_world	0	589.9	6.0	3050.7	0	Trade Outpost - an EG-6 power droid
+patrol_dathomir_1901	patrol_dathomir_1900		DATHOMIR	dat_world	0	589.9	6.0	3050.7	0	-
+patrol_dathomir_1902	patrol_dathomir_1900		DATHOMIR	dat_world	0	606.7	6.0	3050.3	0	-
+patrol_dathomir_1903	patrol_dathomir_1900		DATHOMIR	dat_world	0	618.0	6.0	3056.5	0	-
+patrol_dathomir_1904	patrol_dathomir_1900		DATHOMIR	dat_world	0	621.3	6.0	3084.1	0	-
+patrol_dathomir_1905	patrol_dathomir_1900		DATHOMIR	dat_world	0	617.9	6.0	3095.4	0	-
+patrol_dathomir_1906	patrol_dathomir_1900		DATHOMIR	dat_world	0	609.8	6.0	3088.3	0	-
+patrol_dathomir_1907	patrol_dathomir_1900		DATHOMIR	dat_world	0	593.2	6.0	3092.8	0	-
+patrol_dathomir_1908	patrol_dathomir_1900		DATHOMIR	dat_world	0	575.3	6.0	3099.0	0	-
+patrol_dathomir_1909	patrol_dathomir_1900		DATHOMIR	dat_world	0	557	6.7	3094.8	0	-
+patrol_dathomir_1910	patrol_dathomir_1900		DATHOMIR	dat_world	0	538.6	8.6	3091.8	0	-
+patrol_dathomir_1911	patrol_dathomir_1900		DATHOMIR	dat_world	0	537.7	8.6	3082.1	0	-
+patrol_dathomir_1912	patrol_dathomir_1900		DATHOMIR	dat_world	0	550.3	6.3	3076	0	-
+patrol_dathomir_1913	patrol_dathomir_1900		DATHOMIR	dat_world	0	574.1	6	3069.9	0	-
+patrol_dathomir_1914	patrol_dathomir_1900		DATHOMIR	dat_world	0	584.5	6	3059.6	0	-
+patrol_dathomir_2000	patrol_dathomir_2000	FLIP	DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0	Trade Outpost - an explorer
+patrol_dathomir_2001	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_starport	1	-5	0.1	-17.6	0	-
+patrol_dathomir_2002	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_starport	1	-12.8	0.1	-17.4	0	-
+patrol_dathomir_2003	patrol_dathomir_2000		DATHOMIR	dat_world	0	615.3	6	3093.7	0	-
+patrol_dathomir_2004	patrol_dathomir_2000		DATHOMIR	dat_world	0	613.6	6	3083.1	0	-
+patrol_dathomir_2005	patrol_dathomir_2000		DATHOMIR	dat_world	0	610.7	6	3065.1	0	-
+patrol_dathomir_2006	patrol_dathomir_2000		DATHOMIR	dat_world	0	607.9	6	3046.4	0	-
+patrol_dathomir_2007	patrol_dathomir_2000		DATHOMIR	dat_world	0	610.8	6.8	3043.4	0	-
+patrol_dathomir_2008	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	1	7.6	0.6	5.4	0	-
+patrol_dathomir_2009	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	1	2.3	0.6	3.2	0	-
+patrol_dathomir_2010	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	2	-5.3	0.6	3.6	0	-
+patrol_dathomir_2011	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	3	-7.1	0.6	-1.4	0	-
+patrol_dathomir_2012	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	3	-2.1	0.6	-3.6	0	-
+patrol_dathomir_2013	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	3	2	0.6	-4.6	0	-
+patrol_dathomir_2014	patrol_dathomir_2000		DATHOMIR	dat_trade_outpost_cantina	4	5.9	0.6	-4.6	0	-
+patrol_dathomir_2100	patrol_dathomir_2100	FLIP	DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0	Trade Outpost - a medic
+patrol_dathomir_2101	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	5	4.4	0.1	-3.6	0	-
+patrol_dathomir_2102	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	3	1.2	0.1	-3.2	0	-
+patrol_dathomir_2103	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	3	-1.4	0.1	1.5	0	-
+patrol_dathomir_2104	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	2	-4.3	0.1	1.8	0	-
+patrol_dathomir_2105	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	2	-4.6	0.1	3.4	0	-
+patrol_dathomir_2106	patrol_dathomir_2100		DATHOMIR	dat_trade_outpost_cloning	1	0.5	0.1	4.7	0	-
+patrol_dathomir_2107	patrol_dathomir_2100		DATHOMIR	dat_world	0	618.3	6	3054.2	0	-
+patrol_dathomir_2108	patrol_dathomir_2100		DATHOMIR	dat_world	0	608.7	6	3054.3	0	-
+patrol_dathomir_2109	patrol_dathomir_2100		DATHOMIR	dat_world	0	596.6	6	3057.5	0	-
+patrol_dathomir_2110	patrol_dathomir_2100		DATHOMIR	dat_world	0	573.4	6	3073.7	0	-
+patrol_dathomir_2111	patrol_dathomir_2100		DATHOMIR	dat_world	0	545.1	7.6	3085.3	0	-
+patrol_dathomir_2112	patrol_dathomir_2100		DATHOMIR	dat_world	0	524.4	12	3082	0	-
+patrol_dathomir_2113	patrol_dathomir_2100		DATHOMIR	dat_world	0	510.6	13.1	3074.5	0	-
+patrol_dathomir_2114	patrol_dathomir_2100		DATHOMIR	dat_world	0	490.8	13.2	3062.5	0	-
+patrol_dathomir_2115	patrol_dathomir_2100		DATHOMIR	dat_world	0	468.3	17.4	3032.6	0	-
+patrol_dathomir_2116	patrol_dathomir_2100		DATHOMIR	dat_world	0	449.7	23.7	3002.7	0	-
+patrol_dathomir_2117	patrol_dathomir_2100		DATHOMIR	dat_world	0	431.1	27.2	2970.1	0	-
+patrol_dathomir_2118	patrol_dathomir_2100		DATHOMIR	dat_world	0	420	27.9	2950	0	-
+patrol_dathomir_2200	patrol_dathomir_2200	FLIP	DATHOMIR	dat_world	0	581.2	6	3105.3	0	Trade Outpost - a Chiss poacher smuggler
+patrol_dathomir_2201	patrol_dathomir_2200		DATHOMIR	dat_world	0	581.2	6	3105.3	0	-
+patrol_dathomir_2202	patrol_dathomir_2200		DATHOMIR	dat_world	0	581.3	6	3093.6	0	-
+patrol_dathomir_2203	patrol_dathomir_2200		DATHOMIR	dat_world	0	592.1	6	3091.5	0	-
+patrol_dathomir_2204	patrol_dathomir_2200		DATHOMIR	dat_world	0	610.5	6	3090	0	-
+patrol_dathomir_2205	patrol_dathomir_2200		DATHOMIR	dat_world	0	620.3	6	3088.9	0	-
+patrol_dathomir_2206	patrol_dathomir_2200		DATHOMIR	dat_world	0	633.9	6	3084.6	0	-
+patrol_dathomir_2207	patrol_dathomir_2200		DATHOMIR	dat_world	0	638	6	3067.4	0	-
+patrol_dathomir_2208	patrol_dathomir_2200		DATHOMIR	dat_world	0	638.2	6	3051.2	0	-
+patrol_dathomir_2209	patrol_dathomir_2200		DATHOMIR	dat_world	0	634.7	6	3040.4	0	-
+patrol_dathomir_2210	patrol_dathomir_2200		DATHOMIR	dat_world	0	623.1	6	3035.1	0	-
+patrol_dathomir_2211	patrol_dathomir_2200		DATHOMIR	dat_world	0	619.3	6	3043.4	0	-
+patrol_dathomir_2212	patrol_dathomir_2200		DATHOMIR	dat_world	0	613.4	6	3050.8	0	-
+patrol_dathomir_2213	patrol_dathomir_2200		DATHOMIR	dat_world	0	597.9	6	3052.9	0	-
+patrol_dathomir_2214	patrol_dathomir_2200		DATHOMIR	dat_world	0	587.2	6	3056.4	0	-
+patrol_dathomir_2215	patrol_dathomir_2200		DATHOMIR	dat_world	0	575	6	3060.5	0	-
+patrol_dathomir_2216	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	1	-0.3	0.1	3.9	0	-
+patrol_dathomir_2217	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	2	-5.3	0.1	3.2	0	-
+patrol_dathomir_2218	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	2	-4.1	0.1	1.3	0	-
+patrol_dathomir_2219	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	3	-0.5	0.1	1.1	0	-
+patrol_dathomir_2220	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	3	-0.6	0.1	-3.4	0	-
+patrol_dathomir_2221	patrol_dathomir_2200		DATHOMIR	dat_trade_outpost_shed1	6	-3.2	0.1	-4.1	0	-
+patrol_dathomir_2300	patrol_dathomir_2300	FLIP	DATHOMIR	dat_world	0	-6521.8	130.1	793.6	0	POI - Imperial Prison - an AT-ST
+patrol_dathomir_2301	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6504.7	130.3	778.9	0	-
+patrol_dathomir_2302	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6469.7	130.3	759.4	0	-
+patrol_dathomir_2303	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6420.7	130	762.2	0	-
+patrol_dathomir_2304	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6381.5	130	752.3	0	-
+patrol_dathomir_2305	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6374.9	132.7	718.1	0	-
+patrol_dathomir_2306	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6345.8	133.5	707.6	0	-
+patrol_dathomir_2307	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6318.4	132.4	707.8	0	-
+patrol_dathomir_2308	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6288	130.1	720.8	0	-
+patrol_dathomir_2309	patrol_dathomir_2300		DATHOMIR	dat_world	0	-6286.2	130	767.4	0	-
+patrol_dathomir_2400	patrol_dathomir_2400	FLIP	DATHOMIR	dat_world	0	-6279.9	130.1	784.2	0	POI - Imperial Prison - an AT-ST
+patrol_dathomir_2401	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6256.7	130	825.9	0	-
+patrol_dathomir_2402	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6248.5	130	855.9	0	-
+patrol_dathomir_2403	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6225.4	130	878.1	0	-
+patrol_dathomir_2404	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6197.8	130	885.6	0	-
+patrol_dathomir_2405	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6175.3	130.1	906.2	0	-
+patrol_dathomir_2406	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6145.6	130.1	942.1	0	-
+patrol_dathomir_2407	patrol_dathomir_2400		DATHOMIR	dat_world	0	-6129.3	130.4	950	0	-
+patrol_dathomir_2500	patrol_dathomir_2500	FLIP	DATHOMIR	dat_world	0	-6109.3	130.9	964.9	0	POI - Imperial Prison - an AT-ST
+patrol_dathomir_2501	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6129.7	127.1	978.3	0	-
+patrol_dathomir_2502	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6145.5	127.7	990	0	-
+patrol_dathomir_2503	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6164.3	127.2	1011	0	-
+patrol_dathomir_2504	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6173.8	128.2	1023.3	0	-
+patrol_dathomir_2505	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6202.3	129.7	1038.9	0	-
+patrol_dathomir_2506	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6238.4	130	1047	0	-
+patrol_dathomir_2507	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6263.2	130	1065.5	0	-
+patrol_dathomir_2508	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6295.2	130	1075.9	0	-
+patrol_dathomir_2509	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6323.3	130	1076.4	0	-
+patrol_dathomir_2510	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6357.8	130	1092.2	0	-
+patrol_dathomir_2511	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6396.1	130	1091	0	-
+patrol_dathomir_2512	patrol_dathomir_2500		DATHOMIR	dat_world	0	-6434.2	130	1094.5	0	-
+patrol_dathomir_2600	patrol_dathomir_2600	FLIP	DATHOMIR	dat_world	0	-6450.5	130	1098.5	0	POI - Imperial Prison - an AT-ST
+patrol_dathomir_2601	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6480.8	130	1099	0	-
+patrol_dathomir_2602	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6509.9	130	1079.1	0	-
+patrol_dathomir_2603	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6520.7	130	1051.9	0	-
+patrol_dathomir_2604	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6529.5	130	1028.4	0	-
+patrol_dathomir_2605	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6553	130	1005.3	0	-
+patrol_dathomir_2606	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6566.5	130	976.8	0	-
+patrol_dathomir_2607	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6560.4	130	942.9	0	-
+patrol_dathomir_2608	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6534.1	130	913.3	0	-
+patrol_dathomir_2609	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6521.8	130	881.3	0	-
+patrol_dathomir_2610	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6511.8	130	855.9	0	-
+patrol_dathomir_2611	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6521.6	130	826.1	0	-
+patrol_dathomir_2612	patrol_dathomir_2600		DATHOMIR	dat_world	0	-6523.8	130	806.8	0	-
+patrol_dathomir_2700	patrol_dathomir_2700	FLIP	DATHOMIR	dat_world	0	-6164.6	128	974.9	0	Imperial Prison - an Elite Novatrooper
+patrol_dathomir_2701	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6171.1	128	994	0	-
+patrol_dathomir_2702	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6185	128	1012.5	0	-
+patrol_dathomir_2703	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6200.7	128	1023	0	-
+patrol_dathomir_2704	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6224.9	128	1028.7	0	-
+patrol_dathomir_2705	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6249.9	128	1029	0	-
+patrol_dathomir_2706	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6259.8	128	1033.1	0	-
+patrol_dathomir_2707	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6279.2	128	1056.1	0	-
+patrol_dathomir_2708	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6303.8	128	1061.7	0	-
+patrol_dathomir_2709	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6330.2	128	1060.2	0	-
+patrol_dathomir_2710	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6359.2	128	1073.4	0	-
+patrol_dathomir_2711	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6395.1	128	1073	0	-
+patrol_dathomir_2712	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6416.1	128	1067.1	0	-
+patrol_dathomir_2713	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6436.1	128	1076.3	0	-
+patrol_dathomir_2714	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6454.6	128	1082.5	0	-
+patrol_dathomir_2715	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6470.3	128	1084.2	0	-
+patrol_dathomir_2716	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6488.1	128	1076.9	0	-
+patrol_dathomir_2717	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6499.1	128	1062.2	0	-
+patrol_dathomir_2718	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6504.1	128	1045.7	0	-
+patrol_dathomir_2719	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6506.4	128	1019.1	0	-
+patrol_dathomir_2720	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6530.4	128	1003	0	-
+patrol_dathomir_2721	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6541.4	128	985.2	0	-
+patrol_dathomir_2722	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6546.7	128	968.7	0	-
+patrol_dathomir_2723	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6539.9	128	949.5	0	-
+patrol_dathomir_2724	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6506.4	128	919.4	0	-
+patrol_dathomir_2725	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6501.3	128	884.7	0	-
+patrol_dathomir_2726	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6485.2	128	859.5	0	-
+patrol_dathomir_2727	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6500.4	128	831.6	0	-
+patrol_dathomir_2728	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6502.1	128	804.4	0	-
+patrol_dathomir_2729	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6487.1	128	784.1	0	-
+patrol_dathomir_2730	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6464.1	128	774.5	0	-
+patrol_dathomir_2731	patrol_dathomir_2700		DATHOMIR	dat_world	0	-6445.2	128	778.5	0	-
+patrol_dathomir_2800	patrol_dathomir_2800	FLIP	DATHOMIR	dat_world	0	-6164.8	128	971.7	0	Imperial Prison - an Elite Novatrooper
+patrol_dathomir_2801	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6166.4	128	956.2	0	-
+patrol_dathomir_2802	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6179.5	128	923.8	0	-
+patrol_dathomir_2803	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6197.2	128	910.5	0	-
+patrol_dathomir_2804	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6229.2	128	900.4	0	-
+patrol_dathomir_2805	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6246.6	128	891.5	0	-
+patrol_dathomir_2806	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6269	128	867.7	0	-
+patrol_dathomir_2807	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6273.8	128	835.4	0	-
+patrol_dathomir_2808	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6287.5	128	814.6	0	-
+patrol_dathomir_2809	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6303.7	128	801.3	0	-
+patrol_dathomir_2810	patrol_dathomir_2800		DATHOMIR	dat_world	0	-6336.5	128	799.2	0	-

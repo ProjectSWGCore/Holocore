@@ -1,50 +1,50 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
-patrol_kas_rryatt_100	patrol_kas_rryatt_100	LOOP	KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1324.9	120.0	997.1	0
-patrol_kas_rryatt_101	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1324.8	120.0	997.0	0
-patrol_kas_rryatt_102	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1341.1	120.0	1011.4	0
-patrol_kas_rryatt_103	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1359.5	120.0	1028.4	0
-patrol_kas_rryatt_104	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1342.1	120.0	1010.6	0
-patrol_kas_rryatt_105	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1325.3	120.0	994.5	0
-patrol_kas_rryatt_106	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1300.6	120.0	975.2	0
-patrol_kas_rryatt_107	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1278.4	120.0	965.5	0
-patrol_kas_rryatt_108	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1257.0	120.0	966.8	0
-patrol_kas_rryatt_109	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1224.6	120.0	969.5	0
-patrol_kas_rryatt_110	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1224.8	120.0	971.0	0
-patrol_kas_rryatt_111	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1257.5	120.0	966.5	0
-patrol_kas_rryatt_112	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1279.3	120.0	966.3	0
-patrol_kas_rryatt_113	patrol_kas_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1300.7	120.0	976.3	0
-patrol_kas_rryatt_200	patrol_kas_rryatt_200	LOOP	KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1360.5	120.0	1032.9	0
-patrol_kas_rryatt_201	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1344.3	121.2	1055.9	0
-patrol_kas_rryatt_202	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1352.4	121.2	1044.3	0
-patrol_kas_rryatt_203	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1366.4	120.0	1034.0	0
-patrol_kas_rryatt_204	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1378.4	121.2	1041.2	0
-patrol_kas_rryatt_205	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1391.4	124.7	1058.0	0
-patrol_kas_rryatt_206	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1403.9	127.1	1072.6	0
-patrol_kas_rryatt_207	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1414.7	129.3	1085.1	0
-patrol_kas_rryatt_208	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1420.2	130.6	1103.3	0
-patrol_kas_rryatt_209	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1425.5	130.6	1126.6	0
-patrol_kas_rryatt_210	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1445.1	131.7	1139.5	0
-patrol_kas_rryatt_211	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1463.4	134.2	1151.7	0
-patrol_kas_rryatt_212	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1481.3	141.2	1165.7	0
-patrol_kas_rryatt_213	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1492.7	142.4	1169.5	0
-patrol_kas_rryatt_214	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1480.4	141.3	1164.0	0
-patrol_kas_rryatt_215	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1459.4	134.3	1151.7	0
-patrol_kas_rryatt_216	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1445.6	132.1	1143.2	0
-patrol_kas_rryatt_217	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1428.7	131.1	1132.7	0
-patrol_kas_rryatt_218	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1407.2	130.6	1122.6	0
-patrol_kas_rryatt_219	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1390.3	131.8	1116.7	0
-patrol_kas_rryatt_220	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1368.2	131.8	1112.6	0
-patrol_kas_rryatt_221	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1351.8	134.8	1115.0	0
-patrol_kas_rryatt_222	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1336.8	136.6	1120.3	0
-patrol_kas_rryatt_223	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1321.4	137.5	1122.4	0
-patrol_kas_rryatt_224	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1304.8	137.6	1120.9	0
-patrol_kas_rryatt_225	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1286.9	136.4	1114.4	0
-patrol_kas_rryatt_226	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1272.3	134.1	1101.3	0
-patrol_kas_rryatt_227	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1263.6	129.7	1085.0	0
-patrol_kas_rryatt_228	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1266.3	127.0	1067.4	0
-patrol_kas_rryatt_229	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1277.5	123.2	1043.9	0
-patrol_kas_rryatt_230	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1285.3	122.4	1035.4	0
-patrol_kas_rryatt_231	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1294.2	123.2	1042.2	0
-patrol_kas_rryatt_232	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1310.3	120.1	1049.8	0
-patrol_kas_rryatt_233	patrol_kas_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1328.1	120.0	1055.5	0
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_kashyyyk_rryatt_100	patrol_kashyyyk_rryatt_100	LOOP	KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1324.9	120.0	997.1	0	Rryatt Trail 1 - a Rodian hunter (Ziven's clan)
+patrol_kashyyyk_rryatt_101	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1324.8	120.0	997.0	0	-
+patrol_kashyyyk_rryatt_102	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1341.1	120.0	1011.4	0	-
+patrol_kashyyyk_rryatt_103	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1359.5	120.0	1028.4	0	-
+patrol_kashyyyk_rryatt_104	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1342.1	120.0	1010.6	0	-
+patrol_kashyyyk_rryatt_105	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1325.3	120.0	994.5	0	-
+patrol_kashyyyk_rryatt_106	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1300.6	120.0	975.2	0	-
+patrol_kashyyyk_rryatt_107	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1278.4	120.0	965.5	0	-
+patrol_kashyyyk_rryatt_108	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1257.0	120.0	966.8	0	-
+patrol_kashyyyk_rryatt_109	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1224.6	120.0	969.5	0	-
+patrol_kashyyyk_rryatt_110	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1224.8	120.0	971.0	0	-
+patrol_kashyyyk_rryatt_111	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1257.5	120.0	966.5	0	-
+patrol_kashyyyk_rryatt_112	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1279.3	120.0	966.3	0	-
+patrol_kashyyyk_rryatt_113	patrol_kashyyyk_rryatt_100		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1300.7	120.0	976.3	0	-
+patrol_kashyyyk_rryatt_200	patrol_kashyyyk_rryatt_200	LOOP	KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1360.5	120.0	1032.9	0	Rryatt Trail 1 - a Rodian hunter (Ziven's clan)
+patrol_kashyyyk_rryatt_201	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1344.3	121.2	1055.9	0	-
+patrol_kashyyyk_rryatt_202	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1352.4	121.2	1044.3	0	-
+patrol_kashyyyk_rryatt_203	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1366.4	120.0	1034.0	0	-
+patrol_kashyyyk_rryatt_204	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1378.4	121.2	1041.2	0	-
+patrol_kashyyyk_rryatt_205	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1391.4	124.7	1058.0	0	-
+patrol_kashyyyk_rryatt_206	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1403.9	127.1	1072.6	0	-
+patrol_kashyyyk_rryatt_207	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1414.7	129.3	1085.1	0	-
+patrol_kashyyyk_rryatt_208	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1420.2	130.6	1103.3	0	-
+patrol_kashyyyk_rryatt_209	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1425.5	130.6	1126.6	0	-
+patrol_kashyyyk_rryatt_210	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1445.1	131.7	1139.5	0	-
+patrol_kashyyyk_rryatt_211	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1463.4	134.2	1151.7	0	-
+patrol_kashyyyk_rryatt_212	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1481.3	141.2	1165.7	0	-
+patrol_kashyyyk_rryatt_213	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1492.7	142.4	1169.5	0	-
+patrol_kashyyyk_rryatt_214	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1480.4	141.3	1164.0	0	-
+patrol_kashyyyk_rryatt_215	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1459.4	134.3	1151.7	0	-
+patrol_kashyyyk_rryatt_216	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1445.6	132.1	1143.2	0	-
+patrol_kashyyyk_rryatt_217	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1428.7	131.1	1132.7	0	-
+patrol_kashyyyk_rryatt_218	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1407.2	130.6	1122.6	0	-
+patrol_kashyyyk_rryatt_219	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1390.3	131.8	1116.7	0	-
+patrol_kashyyyk_rryatt_220	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1368.2	131.8	1112.6	0	-
+patrol_kashyyyk_rryatt_221	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1351.8	134.8	1115.0	0	-
+patrol_kashyyyk_rryatt_222	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1336.8	136.6	1120.3	0	-
+patrol_kashyyyk_rryatt_223	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1321.4	137.5	1122.4	0	-
+patrol_kashyyyk_rryatt_224	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1304.8	137.6	1120.9	0	-
+patrol_kashyyyk_rryatt_225	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1286.9	136.4	1114.4	0	-
+patrol_kashyyyk_rryatt_226	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1272.3	134.1	1101.3	0	-
+patrol_kashyyyk_rryatt_227	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1263.6	129.7	1085.0	0	-
+patrol_kashyyyk_rryatt_228	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1266.3	127.0	1067.4	0	-
+patrol_kashyyyk_rryatt_229	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1277.5	123.2	1043.9	0	-
+patrol_kashyyyk_rryatt_230	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1285.3	122.4	1035.4	0	-
+patrol_kashyyyk_rryatt_231	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1294.2	123.2	1042.2	0	-
+patrol_kashyyyk_rryatt_232	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1310.3	120.1	1049.8	0	-
+patrol_kashyyyk_rryatt_233	patrol_kashyyyk_rryatt_200		KASHYYYK_RRYATT_TRAIL	kas_ryatt_trail_world	0	1328.1	120.0	1055.5	0	-

@@ -1,1059 +1,941 @@
-patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause
-TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL
-patrol_cor_5500	patrol_cor_5500	FLIP	CORELLIA	cor_world	0	-6521.5	405.0	5908.5	0
-patrol_cor_5501	patrol_cor_5500		CORELLIA	cor_world	0	-6523.8	405.0	5914.0	0
-patrol_cor_5502	patrol_cor_5500		CORELLIA	cor_world	0	-6530.8	405.0	5916.5	0
-patrol_cor_5503	patrol_cor_5500		CORELLIA	cor_world	0	-6537.4	405.0	5913.1	0
-patrol_cor_5600	patrol_cor_5600	FLIP	CORELLIA	cor_world	0	-6571.8	405.0	5946.6	0
-patrol_cor_5601	patrol_cor_5600		CORELLIA	cor_world	0	-6577.3	405.2	5934.9	0
-patrol_cor_5602	patrol_cor_5600		CORELLIA	cor_world	0	-6578.4	406.4	5930.8	0
-patrol_cor_5603	patrol_cor_5600		CORELLIA	cor_world	0	-6572.6	406.2	5923.5	0
-patrol_cor_5700	patrol_cor_5700	FLIP	CORELLIA	cor_world	0	-5530.1	23.4	-6190.8	0
-patrol_cor_5701	patrol_cor_5700		CORELLIA	cor_world	0	-5555.2	23.4	-6185.0	0
-patrol_cor_5702	patrol_cor_5700		CORELLIA	cor_world	0	-5557.4	23.4	-6213.3	0
-patrol_cor_5703	patrol_cor_5700		CORELLIA	cor_world	0	-5544.5	23.4	-6207.7	0
-patrol_cor_6300	patrol_cor_6300	FLIP	CORELLIA	cor_world	0	-5453.7	21.0	-2789.1	0
-patrol_cor_6301	patrol_cor_6300		CORELLIA	cor_world	0	-5436.5	21.0	-2763.4	0
-patrol_cor_6302	patrol_cor_6300		CORELLIA	cor_world	0	-5411.0	21.0	-2764.3	0
-patrol_cor_6303	patrol_cor_6300		CORELLIA	cor_world	0	-5416.7	21.0	-2773.0	0
-patrol_cor_6304	patrol_cor_6300		CORELLIA	cor_world	0	-5441.4	21.0	-2759.2	0
-patrol_cor_6305	patrol_cor_6300		CORELLIA	cor_world	0	-5439.8	21.0	-2777.0	0
-patrol_cor_7300	patrol_cor_7300	FLIP	CORELLIA	cor_world	0	-3318.9	86.0	3228.6	0
-patrol_cor_7301	patrol_cor_7300		CORELLIA	cor_world	0	-3296.8	86.0	3226.1	0
-patrol_cor_7302	patrol_cor_7300		CORELLIA	cor_world	0	-3294.6	86.0	3265.2	0
-patrol_cor_7303	patrol_cor_7300		CORELLIA	cor_world	0	-3324.2	86.0	3266.4	0
-patrol_cor_8300	patrol_cor_8300	LOOP	CORELLIA	cor_world	0	-3292.9	86.0	3265.5	0
-patrol_cor_8301	patrol_cor_8300		CORELLIA	cor_world	0	-3292.9	86.0	3292.2	0
-patrol_cor_8302	patrol_cor_8300		CORELLIA	cor_world	0	-3319.2	86.0	3292.2	0
-patrol_cor_8303	patrol_cor_8300		CORELLIA	cor_world	0	-3319.2	86.0	3265.5	0
-patrol_cor_8400	patrol_cor_8400	FLIP	CORELLIA	cor_world	0	-477.5	28.0	-4465.4	0
-patrol_cor_8401	patrol_cor_8400		CORELLIA	cor_world	0	-524.2	28.0	-4464.6	0
-patrol_cor_8402	patrol_cor_8400		CORELLIA	cor_world	0	-524.1	28.0	-4500.9	0
-patrol_cor_8403	patrol_cor_8400		CORELLIA	cor_world	0	-525.3	28.0	-4463.1	0
-patrol_cor_8404	patrol_cor_8400		CORELLIA	cor_world	0	-545.4	28.0	-4464.6	0
-patrol_cor_8500	patrol_cor_8500	LOOP	CORELLIA	cor_world	0	-526.2	28.0	-4558.7	0
-patrol_cor_8501	patrol_cor_8500		CORELLIA	cor_world	0	-524.1	28.0	-4534.6	0
-patrol_cor_8502	patrol_cor_8500		CORELLIA	cor_world	0	-471.0	28.0	-4534.0	0
-patrol_cor_8503	patrol_cor_8500		CORELLIA	cor_world	0	-470.1	28.0	-4557.8	0
-patrol_cor_8504	patrol_cor_8500		CORELLIA	cor_world	0	-503.9	28.0	-4556.6	0
-patrol_cor_8600	patrol_cor_8600	FLIP	CORELLIA	cor_world	0	3808.6	380.0	-4023.6	0
-patrol_cor_8601	patrol_cor_8600		CORELLIA	cor_world	0	3794.7	380.0	-4030.1	0
-patrol_cor_8602	patrol_cor_8600		CORELLIA	cor_world	0	3788.5	380.0	-4037.8	0
-patrol_cor_8603	patrol_cor_8600		CORELLIA	cor_world	0	3791.3	380.0	-4047.6	0
-patrol_cor_8604	patrol_cor_8600		CORELLIA	cor_world	0	3805.0	380.0	-4050.0	0
-patrol_cor_8605	patrol_cor_8600		CORELLIA	cor_world	0	3816.3	380.0	-4047.2	0
-patrol_cor_8800	patrol_cor_8800	FLIP	CORELLIA	cor_world	0	3757.9	380.0	-4051.0	0
-patrol_cor_8801	patrol_cor_8800		CORELLIA	cor_world	0	3764.6	380.0	-4045.1	0
-patrol_cor_8802	patrol_cor_8800		CORELLIA	cor_world	0	3772.1	380.0	-4026.5	0
-patrol_cor_8803	patrol_cor_8800		CORELLIA	cor_world	0	3773.3	380.0	-4011.8	0
-patrol_cor_8900	patrol_cor_8900	FLIP	CORELLIA	cor_world	0	3103.3	300.0	5141.6	0
-patrol_cor_8901	patrol_cor_8900		CORELLIA	cor_world	0	3098.9	300.0	5167.7	0
-patrol_cor_8902	patrol_cor_8900		CORELLIA	cor_world	0	3125.4	300.0	5168.6	0
-patrol_cor_8903	patrol_cor_8900		CORELLIA	cor_world	0	3120.5	300.0	5138.5	0
-patrol_cor_9000	patrol_cor_9000	FLIP	CORELLIA	cor_world	0	3048.3	300.0	5196.8	0
-patrol_cor_9001	patrol_cor_9000		CORELLIA	cor_world	0	3050.7	299.9	5171.2	0
-patrol_cor_9002	patrol_cor_9000		CORELLIA	cor_world	0	3062.1	300.0	5168.9	0
-patrol_cor_9003	patrol_cor_9000		CORELLIA	cor_world	0	3065.4	298.2	5130.7	0
-patrol_cor_9004	patrol_cor_9000		CORELLIA	cor_world	0	3103.7	300.0	5131.8	0
-patrol_cor_9005	patrol_cor_9000		CORELLIA	cor_world	0	3104.7	300.0	5169.2	0
-patrol_cor_9006	patrol_cor_9000		CORELLIA	cor_world	0	3052.7	300.0	5172.0	0
-patrol_cor_10000	patrol_cor_10000	FLIP	CORELLIA	cor_world	0	-146.2	28.0	-4739.0	0
-patrol_cor_10001	patrol_cor_10000		CORELLIA	cor_world	0	-159.7	28.0	-4790.4	0
-patrol_cor_10002	patrol_cor_10000		CORELLIA	cor_world	0	-127.4	28.0	-4795.1	0
-patrol_cor_10003	patrol_cor_10000		CORELLIA	cor_world	0	-85.9	28.0	-4817.1	0
-patrol_cor_10004	patrol_cor_10000		CORELLIA	cor_world	0	28.2	28.0	-4805.4	0
-patrol_cor_10005	patrol_cor_10000		CORELLIA	cor_world	0	30.5	28.0	-4765.9	0
-patrol_cor_10100	patrol_cor_10100	LOOP	CORELLIA	cor_world	0	-9.9	28.0	-4640.0	0
-patrol_cor_10101	patrol_cor_10100		CORELLIA	cor_world	0	-27.0	28.0	-4535.4	0
-patrol_cor_10102	patrol_cor_10100		CORELLIA	cor_world	0	-147.6	28.0	-4534.8	0
-patrol_cor_10103	patrol_cor_10100		CORELLIA	cor_world	0	-150.9	28.0	-4711.5	0
-patrol_cor_10104	patrol_cor_10100		CORELLIA	cor_world	0	-94.9	28.0	-4649.5	0
-patrol_cor_10105	patrol_cor_10100		CORELLIA	cor_world	0	-94.5	28.0	-4570.5	0
-patrol_cor_10106	patrol_cor_10100		CORELLIA	cor_world	0	-73.0	28.0	-4580.7	0
-patrol_cor_10107	patrol_cor_10100		CORELLIA	cor_world	0	-66.3	28.5	-4572.6	0
-patrol_cor_10108	patrol_cor_10100		CORELLIA	cor_world	0	-28.1	28.5	-4610.5	0
-patrol_cor_10109	patrol_cor_10100		CORELLIA	cor_world	0	-39.3	28.5	-4616.7	0
-patrol_cor_10200	patrol_cor_10200	LOOP	CORELLIA	cor_world	0	-198.0	28.0	-4363.1	0
-patrol_cor_10201	patrol_cor_10200		CORELLIA	cor_world	0	-210.2	28.0	-4346.0	0
-patrol_cor_10202	patrol_cor_10200		CORELLIA	cor_world	0	-222.6	28.0	-4373.4	0
-patrol_cor_10203	patrol_cor_10200		CORELLIA	cor_world	0	-222.3	28.0	-4412.9	0
-patrol_cor_10204	patrol_cor_10200		CORELLIA	cor_world	0	-245.8	28.0	-4414.8	0
-patrol_cor_10205	patrol_cor_10200		CORELLIA	cor_world	0	-246.8	28.0	-4461.1	0
-patrol_cor_10206	patrol_cor_10200		CORELLIA	cor_world	0	-187.4	28.0	-4454.5	0
-patrol_cor_10207	patrol_cor_10200		CORELLIA	cor_world	0	-182.2	28.0	-4416.6	0
-patrol_cor_10208	patrol_cor_10200		CORELLIA	cor_world	0	-203.6	28.0	-4409.7	0
-patrol_cor_10300	patrol_cor_10300	FLIP	CORELLIA	cor_world	0	-132.4	28.0	-4357.2	0
-patrol_cor_10301	patrol_cor_10300		CORELLIA	cor_world	0	-126.8	28.0	-4405.6	0
-patrol_cor_10302	patrol_cor_10300		CORELLIA	cor_world	0	-5.3	28.0	-4408.8	0
-patrol_cor_10303	patrol_cor_10300		CORELLIA	cor_world	0	-4.6	28.0	-4370.0	0
-patrol_cor_10304	patrol_cor_10300		CORELLIA	cor_world	0	50.2	28.0	-4371.0	0
-patrol_cor_10400	patrol_cor_10400	LOOP	CORELLIA	cor_world	0	1.6	28.0	-4463.7	0
-patrol_cor_10401	patrol_cor_10400		CORELLIA	cor_world	0	59.7	28.0	-4464.9	0
-patrol_cor_10402	patrol_cor_10400		CORELLIA	cor_world	0	61.1	28.0	-4519.7	0
-patrol_cor_10403	patrol_cor_10400		CORELLIA	cor_world	0	86.6	28.0	-4519.7	0
-patrol_cor_10404	patrol_cor_10400		CORELLIA	cor_world	0	86.6	28.0	-4498.7	0
-patrol_cor_10405	patrol_cor_10400		CORELLIA	cor_world	0	117.7	28.0	-4498.6	0
-patrol_cor_10406	patrol_cor_10400		CORELLIA	cor_world	0	105.3	28.0	-4410.0	0
-patrol_cor_10407	patrol_cor_10400		CORELLIA	cor_world	0	2.3	28.0	-4410.0	0
-patrol_cor_10500	patrol_cor_10500	LOOP	CORELLIA	cor_world	0	-243.9	28.0	-4336.6	0
-patrol_cor_10501	patrol_cor_10500		CORELLIA	cor_world	0	-302.5	28.0	-4375.3	0
-patrol_cor_10502	patrol_cor_10500		CORELLIA	cor_world	0	-303.5	28.0	-4606.3	0
-patrol_cor_10503	patrol_cor_10500		CORELLIA	cor_world	0	-357.1	28.0	-4600.2	0
-patrol_cor_10504	patrol_cor_10500		CORELLIA	cor_world	0	-357.1	28.0	-4547.3	0
-patrol_cor_10505	patrol_cor_10500		CORELLIA	cor_world	0	-303.0	28.0	-4546.0	0
-patrol_cor_10506	patrol_cor_10500		CORELLIA	cor_world	0	-303.1	28.0	-4336.5	0
-patrol_cor_10600	patrol_cor_10600	FLIP	CORELLIA	cor_world	0	-505.9	28.0	-4534.7	0
-patrol_cor_10601	patrol_cor_10600		CORELLIA	cor_world	0	-477.8	28.0	-4533.3	0
-patrol_cor_10602	patrol_cor_10600		CORELLIA	cor_world	0	-477.3	28.0	-4477.6	0
-patrol_cor_10603	patrol_cor_10600		CORELLIA	cor_world	0	-448.2	28.0	-4477.3	0
-patrol_cor_10604	patrol_cor_10600		CORELLIA	cor_world	0	-443.3	28.0	-4430.7	0
-patrol_cor_10700	patrol_cor_10700	LOOP	CORELLIA	cor_world	0	-503.4	28.0	-4670.1	0
-patrol_cor_10701	patrol_cor_10700		CORELLIA	cor_world	0	-503.4	28.0	-4640.1	0
-patrol_cor_10702	patrol_cor_10700		CORELLIA	cor_world	0	-432.1	28.0	-4640.3	0
-patrol_cor_10703	patrol_cor_10700		CORELLIA	cor_world	0	-431.8	28.0	-4736.5	0
-patrol_cor_10704	patrol_cor_10700		CORELLIA	cor_world	0	-450.0	28.0	-4750.8	0
-patrol_cor_10705	patrol_cor_10700		CORELLIA	cor_world	0	-486.7	28.0	-4707.4	0
-patrol_cor_10706	patrol_cor_10700		CORELLIA	cor_world	0	-504.0	28.0	-4707.0	0
-patrol_cor_10800	patrol_cor_10800	FLIP	CORELLIA	cor_world	0	-3370.0	86.0	-3295.0	0
-patrol_cor_10801	patrol_cor_10800		CORELLIA	cor_world	0	-3397.0	85.6	3303.0	0
-patrol_cor_10802	patrol_cor_10800		CORELLIA	cor_world	0	-3417.0	78.3	3318.0	0
-patrol_cor_10803	patrol_cor_10800		CORELLIA	cor_world	0	-3452.0	78.0	3350.0	0
-patrol_cor_10804	patrol_cor_10800		CORELLIA	cor_world	0	-3426.0	77.2	3493.0	0
-patrol_cor_10900	patrol_cor_10900	LOOP	CORELLIA	cor_world	0	-3684.9	86.0	3102.2	0
-patrol_cor_10901	patrol_cor_10900		CORELLIA	cor_world	0	-3691.5	86.2	3134.8	0
-patrol_cor_10902	patrol_cor_10900		CORELLIA	cor_world	0	-3723.3	86.1	3184.6	0
-patrol_cor_10903	patrol_cor_10900		CORELLIA	cor_world	0	-3771.3	86.0	3210.6	0
-patrol_cor_10904	patrol_cor_10900		CORELLIA	cor_world	0	-3765.8	86.6	3239.0	0
-patrol_cor_10905	patrol_cor_10900		CORELLIA	cor_world	0	-3726.3	86.1	3182.1	0
-patrol_cor_10906	patrol_cor_10900		CORELLIA	cor_world	0	-3694.8	86.2	3133.4	0
-patrol_cor_11000	patrol_cor_11000	FLIP	CORELLIA	cor_world	0	-3103.2	31.0	2800.8	0
-patrol_cor_11001	patrol_cor_11000		CORELLIA	cor_world	0	-3141.2	31.0	2791.2	0
-patrol_cor_11002	patrol_cor_11000		CORELLIA	cor_world	0	-3163.7	31.0	2797.1	0
-patrol_cor_11003	patrol_cor_11000		CORELLIA	cor_world	0	-3175.0	31.0	2797.0	0
-patrol_cor_11100	patrol_cor_11100	FLIP	CORELLIA	cor_world	0	-3181.0	31.0	2778.0	0
-patrol_cor_11101	patrol_cor_11100		CORELLIA	cor_world	0	-3227.2	30.6	2807.1	0
-patrol_cor_11102	patrol_cor_11100		CORELLIA	cor_world	0	-3257.9	47.3	2837.7	0
-patrol_cor_11103	patrol_cor_11100		CORELLIA	cor_world	0	-3301.8	68.4	2882.6	0
-patrol_cor_11104	patrol_cor_11100		CORELLIA	cor_world	0	-3340.9	72.7	2922.4	0
-patrol_cor_11105	patrol_cor_11100		CORELLIA	cor_world	0	-3357.7	85.8	2938.5	0
-patrol_cor_11106	patrol_cor_11100		CORELLIA	cor_world	0	-3383.1	86.0	2964.0	0
-patrol_cor_11107	patrol_cor_11100		CORELLIA	cor_world	0	-3394.5	86.0	3010.3	0
-patrol_cor_11200	patrol_cor_11200	LOOP	CORELLIA	cor_world	0	-5439.0	21.0	-2721.0	0
-patrol_cor_11201	patrol_cor_11200		CORELLIA	cor_world	0	-5439.0	21.0	-2682.0	0
-patrol_cor_11202	patrol_cor_11200		CORELLIA	cor_world	0	-5472.0	21.0	-2662.0	0
-patrol_cor_11203	patrol_cor_11200		CORELLIA	cor_world	0	-5485.0	21.0	-2662.0	0
-patrol_cor_11204	patrol_cor_11200		CORELLIA	cor_world	0	-5485.0	21.0	-2706.0	0
-patrol_cor_11205	patrol_cor_11200		CORELLIA	cor_world	0	-5439.0	21.0	-2706.0	0
-patrol_cor_11300	patrol_cor_11300	LOOP	CORELLIA	cor_world	0	-5272.6	4.0	-6414.0	0
-patrol_cor_11301	patrol_cor_11300		CORELLIA	cor_world	0	-5313.0	4.0	-6414.0	0
-patrol_cor_11302	patrol_cor_11300		CORELLIA	cor_world	0	-5313.0	4.0	-6439.0	0
-patrol_cor_11303	patrol_cor_11300		CORELLIA	cor_world	0	-5272.6	4.0	-6439.0	0
-patrol_cor_11400	patrol_cor_11400	FLIP	CORELLIA	cor_world	0	-5157.0	4.2	-6426.0	0
-patrol_cor_11401	patrol_cor_11400		CORELLIA	cor_world	0	-5157.0	4.1	-6394.0	0
-patrol_cor_11402	patrol_cor_11400		CORELLIA	cor_world	0	-5176.0	4.0	-6379.0	0
-patrol_cor_11403	patrol_cor_11400		CORELLIA	cor_world	0	-5270.0	4.0	-6379.0	0
-patrol_cor_12600	patrol_cor_12600	FLIP	CORELLIA	cor_hidden_reb_base	2	19.0	1.0	8.1	0
-patrol_cor_12601	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	2	-7.4	1.0	-5.9	0
-patrol_cor_12602	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	9	-19.4	1.0	-1.1	0
-patrol_cor_12603	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	9	-17.6	1.0	2.0	0
-patrol_cor_12604	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	9	-12.8	3.4	1.9	0
-patrol_cor_12605	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	9	-11.0	3.4	0.3	0
-patrol_cor_12606	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	9	-11.0	7.0	-7.5	0
-patrol_cor_12607	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	10	-11.0	7.0	-14.1	0
-patrol_cor_12608	patrol_cor_12600		CORELLIA	cor_hidden_reb_base	10	2.2	7.0	-15.6	0
-patrol_cor_12700	patrol_cor_12700	LOOP	CORELLIA	cor_hidden_reb_base	2	-2.9	1.0	0.0	0
-patrol_cor_12701	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	2	11.7	1.0	9.3	0
-patrol_cor_12702	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	11.4	1.0	20.4	0
-patrol_cor_12703	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	6.7	1.0	20.3	0
-patrol_cor_12704	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	5.4	1.0	15.9	0
-patrol_cor_12705	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	-4.9	1.0	15.9	0
-patrol_cor_12706	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	-9.0	1.0	21.1	0
-patrol_cor_12707	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	1	11.8	1.0	18.5	0
-patrol_cor_12708	patrol_cor_12700		CORELLIA	cor_hidden_reb_base	2	-11.5	1.0	8.5	0
-patrol_cor_12800	patrol_cor_12800	LOOP	CORELLIA	cor_hidden_reb_base	2	-14.8	1.0	-12.0	0
-patrol_cor_12801	patrol_cor_12800		CORELLIA	cor_hidden_reb_base	2	17.0	1.0	-12.0	0
-patrol_cor_12900	patrol_cor_12900	LOOP	CORELLIA	cor_hidden_reb_base	2	6.4	1.0	2.5	0
-patrol_cor_12901	patrol_cor_12900		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	-7.7	0
-patrol_cor_12902	patrol_cor_12900		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	-7.7	0
-patrol_cor_12903	patrol_cor_12900		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	8.1	0
-patrol_cor_12904	patrol_cor_12900		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	8.1	0
-patrol_cor_13000	patrol_cor_13000	LOOP	CORELLIA	cor_world	0	-6471.0	398.0	5958.0	0
-patrol_cor_13001	patrol_cor_13000		CORELLIA	cor_world	0	-6471.0	398.0	5979.0	0
-patrol_cor_13002	patrol_cor_13000		CORELLIA	cor_world	0	-6488.0	398.0	6029.0	0
-patrol_cor_13003	patrol_cor_13000		CORELLIA	cor_world	0	-6535.0	398.0	6024.0	0
-patrol_cor_13004	patrol_cor_13000		CORELLIA	cor_world	0	-6546.0	398.0	5979.0	0
-patrol_cor_13005	patrol_cor_13000		CORELLIA	cor_world	0	-6495.0	398.0	5941.0	0
-patrol_cor_13100	patrol_cor_13100	FLIP	CORELLIA	cor_world	0	-6475.4	398.0	5959.0	0
-patrol_cor_13101	patrol_cor_13100		CORELLIA	cor_world	0	-6495.0	398.0	5944.0	0
-patrol_cor_13102	patrol_cor_13100		CORELLIA	cor_world	0	-6518.0	398.0	5966.0	0
-patrol_cor_13103	patrol_cor_13100		CORELLIA	cor_world	0	-6521.0	398.0	5960.0	0
-patrol_cor_13104	patrol_cor_13100		CORELLIA	cor_world	0	-6546.0	398.0	5987.0	0
-patrol_cor_13105	patrol_cor_13100		CORELLIA	cor_world	0	-6518.0	398.0	6043.0	0
-patrol_cor_13200	patrol_cor_13200	LOOP	CORELLIA	cor_world	0	4585.5	25.0	-5754.0	0
-patrol_cor_13201	patrol_cor_13200		CORELLIA	cor_world	0	4617.7	25.4	-5707.4	0
-patrol_cor_13202	patrol_cor_13200		CORELLIA	cor_world	0	4701.8	25.0	-5710.5	0
-patrol_cor_13203	patrol_cor_13200		CORELLIA	cor_world	0	4739.8	25.0	-5744.0	0
-patrol_cor_13204	patrol_cor_13200		CORELLIA	cor_world	0	4736.7	25.0	-5717.0	0
-patrol_cor_13205	patrol_cor_13200		CORELLIA	cor_world	0	4710.3	25.0	-5852.6	0
-patrol_cor_13206	patrol_cor_13200		CORELLIA	cor_world	0	4628.6	25.0	-5863.3	0
-patrol_cor_13207	patrol_cor_13200		CORELLIA	cor_world	0	4592.9	25.0	-5827.5	0
-patrol_cor_13300	patrol_cor_13300	LOOP	CORELLIA	cor_world	0	6730.1	315.0	-5574.8	0
-patrol_cor_13301	patrol_cor_13300		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0
-patrol_cor_13302	patrol_cor_13300		CORELLIA	cor_world	0	6781.6	315.0	-5498.0	0
-patrol_cor_13303	patrol_cor_13300		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0
-patrol_cor_13304	patrol_cor_13300		CORELLIA	cor_world	0	6730.1	315.0	-5574.8	0
-patrol_cor_13305	patrol_cor_13300		CORELLIA	cor_world	0	6738.0	315.0	-5598.3	0
-patrol_cor_13306	patrol_cor_13300		CORELLIA	cor_world	0	6770.4	315.0	-5621.1	0
-patrol_cor_13307	patrol_cor_13300		CORELLIA	cor_world	0	6818.9	315.0	-5614.7	0
-patrol_cor_13308	patrol_cor_13300		CORELLIA	cor_world	0	6770.4	315.0	-5621.1	0
-patrol_cor_13309	patrol_cor_13300		CORELLIA	cor_world	0	6738.0	315.0	-5598.3	0
-patrol_cor_13310	patrol_cor_13300		CORELLIA	cor_world	0	6737.4	315.0	-5543.6	0
-patrol_cor_13400	patrol_cor_13400	FLIP	CORELLIA	cor_world	0	6752.0	315.0	-5696.0	0
-patrol_cor_13401	patrol_cor_13400		CORELLIA	cor_world	0	6745.4	315.0	-5684.5	0
-patrol_cor_13402	patrol_cor_13400		CORELLIA	cor_world	0	6745.0	315.0	-5626.2	0
-patrol_cor_13500	patrol_cor_13500	FLIP	CORELLIA	cor_world	0	6761.7	315.0	-5724.1	0
-patrol_cor_13501	patrol_cor_13500		CORELLIA	cor_world	0	6771.9	315.0	-5731.7	0
-patrol_cor_13502	patrol_cor_13500		CORELLIA	cor_world	0	6824.0	315.0	5731.9	0
-patrol_cor_13503	patrol_cor_13500		CORELLIA	cor_world	0	6824.0	315.0	-5808.3	0
-patrol_cor_13600	patrol_cor_13600	FLIP	CORELLIA	cor_world	0	6769.5	315.0	-5777.9	0
-patrol_cor_13601	patrol_cor_13600		CORELLIA	cor_world	0	6761.3	315.0	-5779.1	0
-patrol_cor_13602	patrol_cor_13600		CORELLIA	cor_world	0	6769.5	315.0	-5777.9	0
-patrol_cor_13603	patrol_cor_13600		CORELLIA	cor_world	0	6818.4	315.0	-5777.9	0
-patrol_cor_13700	patrol_cor_13700	LOOP	CORELLIA	cor_world	0	6716.1	315.0	-5814.9	0
-patrol_cor_13701	patrol_cor_13700		CORELLIA	cor_world	0	6713.9	327.1	-5863.0	0
-patrol_cor_13702	patrol_cor_13700		CORELLIA	cor_world	0	6716.1	315.0	-5814.9	0
-patrol_cor_13703	patrol_cor_13700		CORELLIA	cor_world	0	6818.1	315.0	-5814.9	0
-patrol_cor_13800	patrol_cor_13800	LOOP	CORELLIA	cor_world	0	6647.0	330.0	-5874.0	0
-patrol_cor_13801	patrol_cor_13800		CORELLIA	cor_world	0	6647.0	330.0	-5905.0	0
-patrol_cor_13802	patrol_cor_13800		CORELLIA	cor_world	0	6689.9	330.0	-5906.0	0
-patrol_cor_13803	patrol_cor_13800		CORELLIA	cor_world	0	6647.0	330.0	-5905.0	0
-patrol_cor_13900	patrol_cor_13900	LOOP	CORELLIA	cor_world	0	1.8	28.0	-4439.0	0
-patrol_cor_13901	patrol_cor_13900		CORELLIA	cor_world	0	1.8	28.0	-4412.0	0
-patrol_cor_13902	patrol_cor_13900		CORELLIA	cor_world	0	84.6	28.0	-4412.0	0
-patrol_cor_13903	patrol_cor_13900		CORELLIA	cor_world	0	1.8	28.0	-4412.0	0
-patrol_cor_13904	patrol_cor_13900		CORELLIA	cor_world	0	1.8	28.0	-4464.1	0
-patrol_cor_13905	patrol_cor_13900		CORELLIA	cor_world	0	89.7	28.0	-4464.1	0
-patrol_cor_13906	patrol_cor_13900		CORELLIA	cor_world	0	1.8	28.0	-4464.1	0
-patrol_cor_14000	patrol_cor_14000	LOOP	CORELLIA	cor_world	0	-197.9	28.0	-4441.9	0
-patrol_cor_14001	patrol_cor_14000		CORELLIA	cor_world	0	-221.7	28.0	-4441.9	0
-patrol_cor_14002	patrol_cor_14000		CORELLIA	cor_world	0	-221.7	28.0	-4417.8	0
-patrol_cor_14003	patrol_cor_14000		CORELLIA	cor_world	0	-197.9	28.0	-4417.8	0
-patrol_cor_14100	patrol_cor_14100	LOOP	CORELLIA	cor_world	0	-210.0	28.2	-4534.5	0
-patrol_cor_14101	patrol_cor_14100		CORELLIA	cor_world	0	-210.0	29.2	-4509.7	0
-patrol_cor_14102	patrol_cor_14100		CORELLIA	cor_world	0	-210.0	28.0	-4477.7	0
-patrol_cor_14103	patrol_cor_14100		CORELLIA	cor_world	0	-210.0	29.2	-4509.7	0
-patrol_cor_14200	patrol_cor_14200	LOOP	CORELLIA	cor_world	0	-205.9	28.0	-4286.0	0
-patrol_cor_14201	patrol_cor_14200		CORELLIA	cor_world	0	-233.9	28.0	-4286.0	0
-patrol_cor_14202	patrol_cor_14200		CORELLIA	cor_world	0	-233.9	28.0	-4234.2	0
-patrol_cor_14203	patrol_cor_14200		CORELLIA	cor_world	0	-184.9	28.0	-4234.2	0
-patrol_cor_14204	patrol_cor_14200		CORELLIA	cor_world	0	-184.9	28.0	-4286.0	0
-patrol_cor_14300	patrol_cor_14300	LOOP	CORELLIA	cor_world	0	-94.9	28.0	-4649.5	0
-patrol_cor_14301	patrol_cor_14300		CORELLIA	cor_world	0	-50.5	28.0	-4656.4	0
-patrol_cor_14302	patrol_cor_14300		CORELLIA	cor_world	0	37.8	28.0	-4689.4	0
-patrol_cor_14303	patrol_cor_14300		CORELLIA	cor_world	0	34.1	28.0	-4794.3	0
-patrol_cor_14304	patrol_cor_14300		CORELLIA	cor_world	0	1.9	28.0	-4805.9	0
-patrol_cor_14305	patrol_cor_14300		CORELLIA	cor_world	0	-101.9	28.0	-4809.8	0
-patrol_cor_14306	patrol_cor_14300		CORELLIA	cor_world	0	-137.7	28.0	-4790.0	0
-patrol_cor_14307	patrol_cor_14300		CORELLIA	cor_world	0	-144.0	28.0	-4717.7	0
-patrol_cor_14308	patrol_cor_14300		CORELLIA	cor_world	0	-150.3	28.0	-4724.2	0
-patrol_cor_14400	patrol_cor_14400	LOOP	CORELLIA	cor_world	0	3187.8	290.0	4965.4	0
-patrol_cor_14401	patrol_cor_14400		CORELLIA	cor_world	0	3143.9	290.0	4979.9	0
-patrol_cor_14402	patrol_cor_14400		CORELLIA	cor_world	0	3183.5	290.0	4980.5	0
-patrol_cor_14403	patrol_cor_14400		CORELLIA	cor_world	0	3184.1	294.8	5059.5	0
-patrol_cor_14404	patrol_cor_14400		CORELLIA	cor_world	0	3182.0	290.0	4974.9	0
-patrol_cor_14500	patrol_cor_14500	LOOP	CORELLIA	cor_world	0	3258.3	300.0	5387.0	0
-patrol_cor_14501	patrol_cor_14500		CORELLIA	cor_world	0	3210.9	300.0	5433.3	0
-patrol_cor_14502	patrol_cor_14500		CORELLIA	cor_world	0	3163.4	300.0	5385.8	0
-patrol_cor_14503	patrol_cor_14500		CORELLIA	cor_world	0	3208.2	300.0	5338.1	0
-patrol_cor_14600	patrol_cor_14600	FLIP	CORELLIA	cor_world	0	-3470.9	85.4	3193.9	0
-patrol_cor_14601	patrol_cor_14600		CORELLIA	cor_world	0	-3443.8	86.0	3150.8	0
-patrol_cor_14602	patrol_cor_14600		CORELLIA	cor_world	0	-3409.4	86.0	3123.8	0
-patrol_cor_14603	patrol_cor_14600		CORELLIA	cor_world	0	-3364.4	86.0	3150.8	0
-patrol_cor_14604	patrol_cor_14600		CORELLIA	cor_world	0	-3276.3	86.0	3112.9	0
-patrol_cor_14700	patrol_cor_14700	LOOP	CORELLIA	cor_world	0	-3321.7	86.0	3302.1	0
-patrol_cor_14701	patrol_cor_14700		CORELLIA	cor_world	0	-3323.1	86.0	3248.7	0
-patrol_cor_14702	patrol_cor_14700		CORELLIA	cor_world	0	-3337.3	86.0	3214.0	0
-patrol_cor_14703	patrol_cor_14700		CORELLIA	cor_world	0	-3360.6	86.0	3214.6	0
-patrol_cor_14704	patrol_cor_14700		CORELLIA	cor_world	0	-3365.8	86.0	3295.5	0
-patrol_cor_14800	patrol_cor_14800	LOOP	CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0
-patrol_cor_14801	patrol_cor_14800		CORELLIA	cor_world	0	-3600.1	86.0	3179.3	0
-patrol_cor_14802	patrol_cor_14800		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0
-patrol_cor_14803	patrol_cor_14800		CORELLIA	cor_world	0	-3601.8	86.0	3150.8	0
-patrol_cor_14804	patrol_cor_14800		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0
-patrol_cor_14805	patrol_cor_14800		CORELLIA	cor_world	0	-3578.2	86.0	3136.4	0
-patrol_cor_14806	patrol_cor_14800		CORELLIA	cor_world	0	-3589.1	86.0	3157.7	0
-patrol_cor_14807	patrol_cor_14800		CORELLIA	cor_world	0	-3573.0	86.0	3166.0	0
-patrol_cor_14900	patrol_cor_14900	LOOP	CORELLIA	cor_world	0	-3667.5	88.5	3078.5	0
-patrol_cor_14901	patrol_cor_14900		CORELLIA	cor_world	0	-3688.2	88.5	3090.1	0
-patrol_cor_15000	patrol_cor_15000	FLIP	CORELLIA	cor_world	0	-3384.9	86.0	2970.3	0
-patrol_cor_15001	patrol_cor_15000		CORELLIA	cor_world	0	-3359.6	85.9	2940.2	0
-patrol_cor_15002	patrol_cor_15000		CORELLIA	cor_world	0	-3384.9	86.0	2970.3	0
-patrol_cor_15003	patrol_cor_15000		CORELLIA	cor_world	0	-3395.7	86.0	3005.8	0
-patrol_cor_15004	patrol_cor_15000		CORELLIA	cor_world	0	-3418.8	86.0	3036.7	0
-patrol_cor_15005	patrol_cor_15000		CORELLIA	cor_world	0	-3434.3	86.0	3132.0	0
-patrol_cor_15100	patrol_cor_15100	LOOP	CORELLIA	cor_world	0	-5218.5	21.0	-2513.2	0
-patrol_cor_15101	patrol_cor_15100		CORELLIA	cor_world	0	-5196.0	21.0	-2515.2	0
-patrol_cor_15102	patrol_cor_15100		CORELLIA	cor_world	0	-5149.3	21.0	-2468.1	0
-patrol_cor_15103	patrol_cor_15100		CORELLIA	cor_world	0	-5151.0	21.0	-2452.5	0
-patrol_cor_15104	patrol_cor_15100		CORELLIA	cor_world	0	-5179.2	21.0	-2435.7	0
-patrol_cor_15105	patrol_cor_15100		CORELLIA	cor_world	0	-5200.4	21.0	-2457.6	0
-patrol_cor_15106	patrol_cor_15100		CORELLIA	cor_world	0	-5200.2	21.0	-2472.1	0
-patrol_cor_15107	patrol_cor_15100		CORELLIA	cor_world	0	-5192.3	21.0	-2482.7	0
-patrol_cor_15200	patrol_cor_15200	LOOP	CORELLIA	cor_world	0	-5039.0	21.0	-2361.6	0
-patrol_cor_15201	patrol_cor_15200		CORELLIA	cor_world	0	-5043.7	21.0	-2324.0	0
-patrol_cor_15202	patrol_cor_15200		CORELLIA	cor_world	0	-5038.0	21.0	-2300.0	0
-patrol_cor_15203	patrol_cor_15200		CORELLIA	cor_world	0	-5048.9	21.0	-2290.2	0
-patrol_cor_15204	patrol_cor_15200		CORELLIA	cor_world	0	-5102.0	21.0	-2342.3	0
-patrol_cor_15205	patrol_cor_15200		CORELLIA	cor_world	0	-5061.6	21.0	-2381.4	0
-patrol_cor_15300	patrol_cor_15300	LOOP	CORELLIA	cor_world	0	-5482.2	21.0	-2665.9	0
-patrol_cor_15301	patrol_cor_15300		CORELLIA	cor_world	0	-5482.2	21.0	-2701.8	0
-patrol_cor_15302	patrol_cor_15300		CORELLIA	cor_world	0	-5412.3	21.0	-2701.8	0
-patrol_cor_15303	patrol_cor_15300		CORELLIA	cor_world	0	-5412.3	21.0	-2649.8	0
-patrol_cor_15304	patrol_cor_15300		CORELLIA	cor_world	0	-5449.9	21.0	-2649.8	0
-patrol_cor_15305	patrol_cor_15300		CORELLIA	cor_world	0	-5462.2	21.0	-2666.2	0
-patrol_cor_15400	patrol_cor_15400	FLIP	CORELLIA	cor_world	0	-50.1	28.0	-4718.3	0
-patrol_cor_15401	patrol_cor_15400		CORELLIA	cor_world	0	-53.8	28.0	-4684.5	0
-patrol_cor_15402	patrol_cor_15400		CORELLIA	cor_coronet_starport	16	52.3	1.0	12.0	0
-patrol_cor_15403	patrol_cor_15400		CORELLIA	cor_coronet_starport	16	56.6	1.0	15.5	0
-patrol_cor_15404	patrol_cor_15400		CORELLIA	cor_coronet_starport	13	53.4	1.0	24.2	0
-patrol_cor_15405	patrol_cor_15400		CORELLIA	cor_coronet_starport	7	50.8	-0.5	30.8	0
-patrol_cor_15406	patrol_cor_15400		CORELLIA	cor_coronet_starport	7	47.2	-0.5	38.9	0
-patrol_cor_15407	patrol_cor_15400		CORELLIA	cor_coronet_starport	7	44.7	0.6	41.9	0
-patrol_cor_15408	patrol_cor_15400		CORELLIA	cor_coronet_starport	6	37.5	0.6	50.0	0
-patrol_cor_15409	patrol_cor_15400		CORELLIA	cor_coronet_starport	5	29.7	0.6	60.8	0
-patrol_cor_15410	patrol_cor_15400		CORELLIA	cor_coronet_starport	5	22.1	0.6	61.9	0
-patrol_cor_15411	patrol_cor_15400		CORELLIA	cor_coronet_starport	4	13.4	0.6	62.4	0
-patrol_cor_15412	patrol_cor_15400		CORELLIA	cor_coronet_starport	3	13.5	0.6	77.9	0
-patrol_cor_15413	patrol_cor_15400		CORELLIA	cor_coronet_starport	1	9.5	0.6	79.2	0
-patrol_cor_15414	patrol_cor_15400		CORELLIA	cor_coronet_starport	1	1.1	0.6	76.4	0
-patrol_cor_15415	patrol_cor_15400		CORELLIA	cor_world	0	-136.6	28.0	-4722.0	0
-patrol_cor_15416	patrol_cor_15400		CORELLIA	cor_world	0	-166.1	28.0	-4720.3	0
-patrol_cor_15417	patrol_cor_15400		CORELLIA	cor_world	0	-198.2	28.0	-4716.8	0
-patrol_cor_15418	patrol_cor_15400		CORELLIA	cor_world	0	-205.3	28.0	-4695.3	0
-patrol_cor_15419	patrol_cor_15400		CORELLIA	cor_world	0	-230.8	28.0	-4681.4	0
-patrol_cor_15420	patrol_cor_15400		CORELLIA	cor_world	0	-255.7	28.0	-4668.0	0
-patrol_cor_15421	patrol_cor_15400		CORELLIA	cor_world	0	-261.5	28.0	-4660.3	0
-patrol_cor_15422	patrol_cor_15400		CORELLIA	cor_world	0	-262.0	28.0	-4617.1	0
-patrol_cor_15423	patrol_cor_15400		CORELLIA	cor_world	0	-279.2	28.0	-4608.8	0
-patrol_cor_15424	patrol_cor_15400		CORELLIA	cor_world	0	-319.0	28.0	-4600.4	0
-patrol_cor_15425	patrol_cor_15400		CORELLIA	cor_world	0	-349.1	28.0	-4593.6	0
-patrol_cor_15426	patrol_cor_15400		CORELLIA	cor_world	0	-357.6	28.0	-4578.4	0
-patrol_cor_15427	patrol_cor_15400		CORELLIA	cor_world	0	-355.1	28.0	-4551.8	0
-patrol_cor_15428	patrol_cor_15400		CORELLIA	cor_world	0	-347.2	28.0	-4543.0	0
-patrol_cor_15429	patrol_cor_15400		CORELLIA	cor_coronet_cantina	1	46.4	0.1	-2.9	0
-patrol_cor_15430	patrol_cor_15400		CORELLIA	cor_coronet_cantina	1	36.8	0.1	-4.9	0
-patrol_cor_15431	patrol_cor_15400		CORELLIA	cor_coronet_cantina	2	34.1	0.1	-4.4	0
-patrol_cor_15432	patrol_cor_15400		CORELLIA	cor_coronet_cantina	2	29.1	0.1	0.0	0
-patrol_cor_15433	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	25.0	-0.9	0.2	0
-patrol_cor_15434	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	14.2	-0.9	2.7	0
-patrol_cor_15435	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	4.1	-0.9	6.7	0
-patrol_cor_15436	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	-4.1	-0.9	6.8	0
-patrol_cor_15437	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	-14.8	-0.9	13.8	0
-patrol_cor_15438	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-18.1	-0.9	15.5	0
-patrol_cor_15439	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-23.5	-0.9	22.2	0
-patrol_cor_15440	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-25.6	-0.5	15.5	0
-patrol_cor_15441	patrol_cor_15400		CORELLIA	cor_coronet_cantina	13	-27.5	-0.5	9.4	0
-patrol_cor_15442	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-25.1	-0.5	15.6	0
-patrol_cor_15443	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-22.0	-0.9	21.0	0
-patrol_cor_15444	patrol_cor_15400		CORELLIA	cor_coronet_cantina	12	-17.0	-0.9	14.9	0
-patrol_cor_15445	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	-10.9	-0.9	12.4	0
-patrol_cor_15446	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	1.1	-0.9	6.9	0
-patrol_cor_15447	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	11.2	-0.9	5.0	0
-patrol_cor_15448	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	11.0	-0.9	-4.2	0
-patrol_cor_15449	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	-1.6	-0.9	-7.2	0
-patrol_cor_15450	patrol_cor_15400		CORELLIA	cor_coronet_cantina	3	-12.4	-0.9	-10.9	0
-patrol_cor_15451	patrol_cor_15400		CORELLIA	cor_coronet_cantina	14	-26.9	-0.9	-12.9	0
-patrol_cor_15452	patrol_cor_15400		CORELLIA	cor_coronet_cantina	14	-32.7	0.1	-15.6	0
-patrol_cor_15453	patrol_cor_15400		CORELLIA	cor_coronet_cantina	15	-38.5	0.1	-22.8	0
-patrol_cor_15454	patrol_cor_15400		CORELLIA	cor_coronet_cantina	15	-44.2	0.1	-19.9	0
-patrol_cor_15455	patrol_cor_15400		CORELLIA	cor_world	0	-357.0	28.0	-4442.4	0
-patrol_cor_15456	patrol_cor_15400		CORELLIA	cor_world	0	-338.6	28.0	-4402.5	0
-patrol_cor_15457	patrol_cor_15400		CORELLIA	cor_world	0	-294.8	28.0	-4370.6	0
-patrol_cor_15458	patrol_cor_15400		CORELLIA	cor_world	0	-247.3	28.0	-4352.5	0
-patrol_cor_15459	patrol_cor_15400		CORELLIA	cor_world	0	-203.1	28.0	-4354.0	0
-patrol_cor_15460	patrol_cor_15400		CORELLIA	cor_world	0	-143.7	28.0	-4358.3	0
-patrol_cor_15461	patrol_cor_15400		CORELLIA	cor_world	0	-91.1	28.0	-4392.7	0
-patrol_cor_15462	patrol_cor_15400		CORELLIA	cor_world	0	-74.3	28.2	-4418.3	0
-patrol_cor_15463	patrol_cor_15400		CORELLIA	cor_coronet_hospital	5	-18.3	0.3	-14.6	0
-patrol_cor_15464	patrol_cor_15400		CORELLIA	cor_coronet_hospital	5	-30.3	0.3	-12.9	0
-patrol_cor_15465	patrol_cor_15400		CORELLIA	cor_coronet_hospital	6	-29.5	0.3	-9.0	0
-patrol_cor_15466	patrol_cor_15400		CORELLIA	cor_coronet_hospital	6	-19.6	0.3	-8.0	0
-patrol_cor_15467	patrol_cor_15400		CORELLIA	cor_coronet_hospital	6	-18.8	0.3	-10.4	0
-patrol_cor_15468	patrol_cor_15400		CORELLIA	cor_coronet_hospital	6	-13.0	0.3	-4.9	0
-patrol_cor_15469	patrol_cor_15400		CORELLIA	cor_coronet_hospital	6	-10.4	0.3	0.4	0
-patrol_cor_15470	patrol_cor_15400		CORELLIA	cor_coronet_hospital	7	-4.3	0.3	12.3	0
-patrol_cor_15471	patrol_cor_15400		CORELLIA	cor_coronet_hospital	7	-6.6	0.3	13.7	0
-patrol_cor_15472	patrol_cor_15400		CORELLIA	cor_coronet_hospital	7	-16.1	0.3	15.1	0
-patrol_cor_15473	patrol_cor_15400		CORELLIA	cor_world	0	-73.6	28.2	-4462.0	0
-patrol_cor_15474	patrol_cor_15400		CORELLIA	cor_world	0	-73.3	28.0	-4473.2	0
-patrol_cor_15475	patrol_cor_15400		CORELLIA	cor_world	0	-44.9	28.0	-4483.7	0
-patrol_cor_15476	patrol_cor_15400		CORELLIA	cor_world	0	-38.2	28.0	-4505.1	0
-patrol_cor_15477	patrol_cor_15400		CORELLIA	cor_world	0	-34.2	28.0	-4565.6	0
-patrol_cor_15478	patrol_cor_15400		CORELLIA	cor_world	0	-34.5	28.5	-4585.4	0
-patrol_cor_15479	patrol_cor_15400		CORELLIA	cor_world	0	-29.2	28.5	-4588.5	0
-patrol_cor_15480	patrol_cor_15400		CORELLIA	cor_world	0	-33.8	28.5	-4592.5	0
-patrol_cor_15481	patrol_cor_15400		CORELLIA	cor_world	0	-50.5	28.5	-4599.3	0
-patrol_cor_15482	patrol_cor_15400		CORELLIA	cor_world	0	-34.9	28.5	-4599.4	0
-patrol_cor_15483	patrol_cor_15400		CORELLIA	cor_world	0	-52.2	28.5	-4612.7	0
-patrol_cor_15484	patrol_cor_15400		CORELLIA	cor_world	0	-66.8	28.5	-4624.8	0
-patrol_cor_15485	patrol_cor_15400		CORELLIA	cor_world	0	-73.4	28.5	-4618.4	0
-patrol_cor_15486	patrol_cor_15400		CORELLIA	cor_world	0	-81.3	28.5	-4625.5	0
-patrol_cor_15487	patrol_cor_15400		CORELLIA	cor_world	0	-108.6	28.0	-4667.9	0
-patrol_cor_15488	patrol_cor_15400		CORELLIA	cor_world	0	-137.1	28.0	-4706.2	0
-patrol_cor_15489	patrol_cor_15400		CORELLIA	cor_world	0	-134.3	28.0	-4721.7	0
-patrol_cor_15490	patrol_cor_15400		CORELLIA	cor_coronet_starport	1	-3.0	0.6	76.9	0
-patrol_cor_15491	patrol_cor_15400		CORELLIA	cor_coronet_starport	1	-6.3	0.6	77.1	0
-patrol_cor_15492	patrol_cor_15400		CORELLIA	cor_coronet_starport	2	-13.6	0.6	79.0	0
-patrol_cor_15493	patrol_cor_15400		CORELLIA	cor_coronet_starport	4	-14.0	0.6	68.5	0
-patrol_cor_15494	patrol_cor_15400		CORELLIA	cor_coronet_starport	4	-11.8	0.6	53.4	0
-patrol_cor_15495	patrol_cor_15400		CORELLIA	cor_coronet_starport	8	-17.2	0.6	60.3	0
-patrol_cor_15496	patrol_cor_15400		CORELLIA	cor_coronet_starport	9	-22.8	1.6	60.4	0
-patrol_cor_15497	patrol_cor_15400		CORELLIA	cor_coronet_starport	9	-31.9	1.6	58.4	0
-patrol_cor_15498	patrol_cor_15400		CORELLIA	cor_coronet_starport	9	-36.6	1.6	53.8	0
-patrol_cor_15499	patrol_cor_15400		CORELLIA	cor_coronet_starport	10	-41.5	1.6	49.2	0
-patrol_cor_15500	patrol_cor_15400		CORELLIA	cor_coronet_starport	12	-48.3	2.6	42.5	0
-patrol_cor_15501	patrol_cor_15400		CORELLIA	cor_coronet_starport	12	-54.0	2.6	32.9	0
-patrol_cor_15502	patrol_cor_15400		CORELLIA	cor_coronet_starport	14	-56.1	2.6	21.9	0
-patrol_cor_15503	patrol_cor_15400		CORELLIA	cor_coronet_starport	14	-53.6	1.0	11.0	0
-patrol_cor_15504	patrol_cor_15400		CORELLIA	cor_coronet_starport	15	-45.3	1.0	6.7	0
-patrol_cor_15505	patrol_cor_15400		CORELLIA	cor_world	0	-59.0	28.0	-4776.9	0
-patrol_cor_15506	patrol_cor_15400		CORELLIA	cor_world	0	-40.5	28.0	-4756.3	0
-patrol_cor_15507	patrol_cor_15400		CORELLIA	cor_world	0	-28.0	28.0	-4741.5	0
-patrol_cor_15508	patrol_cor_15400		CORELLIA	cor_world	0	-26.4	28.0	-4728.8	0
-patrol_cor_15509	patrol_cor_15400		CORELLIA	cor_world	0	-34.3	28.0	-4723.8	0
-patrol_cor_15510	patrol_cor_15400		CORELLIA	cor_world	0	-39.5	28.0	-4725.7	0
-patrol_cor_15500	patrol_cor_15500	FLIP	CORELLIA	cor_world	0	-45.0	28.0	-4721.5	0
-patrol_cor_15501	patrol_cor_15500		CORELLIA	cor_world	0	-52.1	28.0	-4684.2	0
-patrol_cor_15502	patrol_cor_15500		CORELLIA	cor_coronet_starport	16	53.3	1.0	9.5	0
-patrol_cor_15503	patrol_cor_15500		CORELLIA	cor_coronet_starport	16	57.5	1.0	15.4	0
-patrol_cor_15504	patrol_cor_15500		CORELLIA	cor_coronet_starport	13	54.3	1.0	24.0	0
-patrol_cor_15505	patrol_cor_15500		CORELLIA	cor_coronet_starport	7	51.7	-0.5	30.1	0
-patrol_cor_15506	patrol_cor_15500		CORELLIA	cor_coronet_starport	7	47.7	-0.5	39.1	0
-patrol_cor_15507	patrol_cor_15500		CORELLIA	cor_coronet_starport	7	45.8	0.6	42.1	0
-patrol_cor_15508	patrol_cor_15500		CORELLIA	cor_coronet_starport	7	40.0	0.6	46.4	0
-patrol_cor_15509	patrol_cor_15500		CORELLIA	cor_coronet_starport	6	33.4	0.6	57.6	0
-patrol_cor_15510	patrol_cor_15500		CORELLIA	cor_coronet_starport	5	29.4	0.6	62.3	0
-patrol_cor_15511	patrol_cor_15500		CORELLIA	cor_coronet_starport	5	21.6	0.6	60.9	0
-patrol_cor_15512	patrol_cor_15500		CORELLIA	cor_coronet_starport	4	14.6	0.6	62.1	0
-patrol_cor_15513	patrol_cor_15500		CORELLIA	cor_coronet_starport	3	14.7	0.6	77.1	0
-patrol_cor_15514	patrol_cor_15500		CORELLIA	cor_coronet_starport	1	10.6	0.6	80.3	0
-patrol_cor_15515	patrol_cor_15500		CORELLIA	cor_coronet_starport	1	6.8	0.6	79.3	0
-patrol_cor_15516	patrol_cor_15500		CORELLIA	cor_coronet_starport	1	2.6	0.6	76.5	0
-patrol_cor_15517	patrol_cor_15500		CORELLIA	cor_world	0	-135.2	28.0	-4725.0	0
-patrol_cor_15518	patrol_cor_15500		CORELLIA	cor_world	0	-141.4	28.0	-4729.7	0
-patrol_cor_15519	patrol_cor_15500		CORELLIA	cor_world	0	-148.8	28.0	-4762.9	0
-patrol_cor_15520	patrol_cor_15500		CORELLIA	cor_world	0	-151.0	28.0	-4796.2	0
-patrol_cor_15521	patrol_cor_15500		CORELLIA	cor_world	0	-151.3	28.0	-4805.8	0
-patrol_cor_15523	patrol_cor_15500		CORELLIA	cor_world	0	-153.0	28.0	-4806.0	0
-patrol_cor_15524	patrol_cor_15500		CORELLIA	cor_world	0	-162.7	28.0	-4800.8	0
-patrol_cor_15525	patrol_cor_15500		CORELLIA	cor_world	0	-220.1	28.0	-4794.9	0
-patrol_cor_15526	patrol_cor_15500		CORELLIA	cor_world	0	-237.4	28.0	-4799.7	0
-patrol_cor_15527	patrol_cor_15500		CORELLIA	cor_world	0	-249.3	28.0	-4810.7	0
-patrol_cor_15528	patrol_cor_15500		CORELLIA	cor_world	0	-279.5	28.0	-4809.8	0
-patrol_cor_15529	patrol_cor_15500		CORELLIA	cor_world	0	-300.6	28.0	-4785.0	0
-patrol_cor_15530	patrol_cor_15500		CORELLIA	cor_world	0	-326.1	28.0	-4767.6	0
-patrol_cor_15531	patrol_cor_15500		CORELLIA	cor_world	0	-365.0	28.0	-4750.4	0
-patrol_cor_15532	patrol_cor_15500		CORELLIA	cor_world	0	-364.4	28.0	-4713.1	0
-patrol_cor_15533	patrol_cor_15500		CORELLIA	cor_world	0	-363.3	28.0	-4699.6	0
-patrol_cor_15534	patrol_cor_15500		CORELLIA	cor_world	0	-366.2	28.3	-4699.1	0
-patrol_cor_15535	patrol_cor_15500		CORELLIA	cor_coronet_salon	1	-0.2	0.6	-0.6	0
-patrol_cor_15536	patrol_cor_15500		CORELLIA	cor_coronet_salon	1	-0.7	0.6	-3.9	0
-patrol_cor_15537	patrol_cor_15500		CORELLIA	cor_coronet_salon	1	1.5	0.6	-4.4	0
-patrol_cor_15538	patrol_cor_15500		CORELLIA	cor_coronet_salon	1	-0.3	0.6	-2.6	0
-patrol_cor_15539	patrol_cor_15500		CORELLIA	cor_world	0	-366.4	28.0	-4703.0	0
-patrol_cor_15540	patrol_cor_15500		CORELLIA	cor_world	0	-349.1	28.0	-4708.5	0
-patrol_cor_15541	patrol_cor_15500		CORELLIA	cor_world	0	-346.0	28.0	-4692.6	0
-patrol_cor_15542	patrol_cor_15500		CORELLIA	cor_world	0	-327.8	28.0	-4677.7	0
-patrol_cor_15543	patrol_cor_15500		CORELLIA	cor_world	0	-303.9	28.0	-4680.2	0
-patrol_cor_15544	patrol_cor_15500		CORELLIA	cor_world	0	-307.5	28.0	-4658.5	0
-patrol_cor_15545	patrol_cor_15500		CORELLIA	cor_world	0	-308.0	28.0	-4642.3	0
-patrol_cor_15546	patrol_cor_15500		CORELLIA	cor_world	0	-317.8	28.0	-4638.1	0
-patrol_cor_15547	patrol_cor_15500		CORELLIA	cor_world	0	-320.3	28.6	-4636.1	0
-patrol_cor_15548	patrol_cor_15500		CORELLIA	cor_world	0	-337.1	28.6	-4635.9	0
-patrol_cor_15549	patrol_cor_15500		CORELLIA	cor_world	0	-341.8	28.0	-4641.6	0
-patrol_cor_15550	patrol_cor_15500		CORELLIA	cor_world	0	-337.8	28.0	-4641.7	0
-patrol_cor_15551	patrol_cor_15500		CORELLIA	cor_world	0	-338.7	28.0	-4643.9	0
-patrol_cor_15552	patrol_cor_15500		CORELLIA	cor_world	0	-324.4	28.0	-4642.4	0
-patrol_cor_15553	patrol_cor_15500		CORELLIA	cor_world	0	-310.8	28.0	-4638.0	0
-patrol_cor_15554	patrol_cor_15500		CORELLIA	cor_world	0	-308.3	28.0	-4621.1	0
-patrol_cor_15555	patrol_cor_15500		CORELLIA	cor_world	0	-296.7	28.0	-4615.7	0
-patrol_cor_15556	patrol_cor_15500		CORELLIA	cor_world	0	-269.6	28.0	-4613.3	0
-patrol_cor_15557	patrol_cor_15500		CORELLIA	cor_world	0	-260.5	28.0	-4599.5	0
-patrol_cor_15558	patrol_cor_15500		CORELLIA	cor_world	0	-254.3	28.0	-4547.1	0
-patrol_cor_15559	patrol_cor_15500		CORELLIA	cor_world	0	-243.5	28.0	-4519.2	0
-patrol_cor_15560	patrol_cor_15500		CORELLIA	cor_world	0	-232.2	28.0	-4503.6	0
-patrol_cor_15561	patrol_cor_15500		CORELLIA	cor_world	0	-221.2	28.0	-4493.8	0
-patrol_cor_15562	patrol_cor_15500		CORELLIA	cor_world	0	-210.1	28.0	-4502.9	0
-patrol_cor_15563	patrol_cor_15500		CORELLIA	cor_world	0	-209.8	29.2	-4509.4	0
-patrol_cor_15564	patrol_cor_15500		CORELLIA	cor_world	0	-209.9	28.2	-4514.9	0
-patrol_cor_15565	patrol_cor_15500		CORELLIA	cor_world	0	-210.2	28.2	-4534.6	0
-patrol_cor_15566	patrol_cor_15500		CORELLIA	cor_coronet_capitol	1	-0.2	0.8	31.2	0
-patrol_cor_15567	patrol_cor_15500		CORELLIA	cor_coronet_capitol	1	-10.3	0.8	29.6	0
-patrol_cor_15568	patrol_cor_15500		CORELLIA	cor_coronet_capitol	2	-10.4	3.2	23.4	0
-patrol_cor_15569	patrol_cor_15500		CORELLIA	cor_coronet_capitol	2	-3.4	3.2	21.4	0
-patrol_cor_15570	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-1.3	3.2	18.2	0
-patrol_cor_15571	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-2.7	1.3	12.2	0
-patrol_cor_15572	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-10.3	1.3	10.8	0
-patrol_cor_15573	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-23.4	1.3	0.7	0
-patrol_cor_15574	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-14.1	1.3	3.1	0
-patrol_cor_15575	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	-5.8	1.3	12.5	0
-patrol_cor_15576	patrol_cor_15500		CORELLIA	cor_coronet_capitol	3	0.9	3.2	18.4	0
-patrol_cor_15577	patrol_cor_15500		CORELLIA	cor_coronet_capitol	2	5.6	3.1	22.1	0
-patrol_cor_15578	patrol_cor_15500		CORELLIA	cor_coronet_capitol	2	10.7	3.1	23.9	0
-patrol_cor_15579	patrol_cor_15500		CORELLIA	cor_coronet_capitol	1	10.0	0.8	30.3	0
-patrol_cor_15580	patrol_cor_15500		CORELLIA	cor_coronet_capitol	1	3.4	0.3	33.0	0
-patrol_cor_15581	patrol_cor_15500		CORELLIA	cor_world	0	-206.4	28.2	-4533.0	0
-patrol_cor_15582	patrol_cor_15500		CORELLIA	cor_world	0	-205.7	28.2	-4512.6	0
-patrol_cor_15583	patrol_cor_15500		CORELLIA	cor_world	0	-205.7	29.2	-4509.5	0
-patrol_cor_15584	patrol_cor_15500		CORELLIA	cor_world	0	-202.6	28.0	-4503.2	0
-patrol_cor_15585	patrol_cor_15500		CORELLIA	cor_world	0	-200.5	28.0	-4473.7	0
-patrol_cor_15586	patrol_cor_15500		CORELLIA	cor_world	0	-199.9	28.0	-4423.2	0
-patrol_cor_15587	patrol_cor_15500		CORELLIA	cor_world	0	-197.3	28.0	-4393.5	0
-patrol_cor_15588	patrol_cor_15500		CORELLIA	cor_world	0	-185.8	30.5	-4391.3	0
-patrol_cor_15589	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	1	-0.3	2.5	14.9	0
-patrol_cor_15590	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	1	-9.9	2.5	14.0	0
-patrol_cor_15591	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	1	-13.1	2.5	11.9	0
-patrol_cor_15592	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	3	-10.4	2.5	9.3	0
-patrol_cor_15593	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	4	-4.8	2.5	8.0	0
-patrol_cor_15594	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	4	0.1	1.1	-0.6	0
-patrol_cor_15595	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	4	6.3	1.1	-4.5	0
-patrol_cor_15596	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	4	11.5	1.1	-5.1	0
-patrol_cor_15597	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	7	11.3	1.1	-11.0	0
-patrol_cor_15598	patrol_cor_15500		CORELLIA	cor_coronet_commerce_gh	7	13.0	1.1	-13.2	0
-patrol_cor_15600	patrol_cor_15600	FLIP	CORELLIA	cor_coronet_combat_gh	5	10.0	1.1	0.4	0
-patrol_cor_15601	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	5	12.3	1.1	-1.4	0
-patrol_cor_15602	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	4	11.4	1.1	-5.3	0
-patrol_cor_15603	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	4	-1.0	1.1	-2.8	0
-patrol_cor_15604	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	4	-1.2	2.5	5.7	0
-patrol_cor_15605	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	3	-8.0	2.5	9.1	0
-patrol_cor_15606	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	3	-13.1	2.5	10.6	0
-patrol_cor_15607	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	1	-10.5	2.5	14.6	0
-patrol_cor_15608	patrol_cor_15600		CORELLIA	cor_coronet_combat_gh	1	-0.3	2.5	15.0	0
-patrol_cor_15609	patrol_cor_15600		CORELLIA	cor_world	0	-235.0	30.5	-4389.7	0
-patrol_cor_15610	patrol_cor_15600		CORELLIA	cor_world	0	-224.1	28.0	-4396.6	0
-patrol_cor_15611	patrol_cor_15600		CORELLIA	cor_world	0	-223.4	28.0	-4432.7	0
-patrol_cor_15612	patrol_cor_15600		CORELLIA	cor_world	0	-221.0	28.0	-4457.6	0
-patrol_cor_15613	patrol_cor_15600		CORELLIA	cor_world	0	-215.9	28.0	-4486.3	0
-patrol_cor_15614	patrol_cor_15600		CORELLIA	cor_world	0	-177.7	28.0	-4500.0	0
-patrol_cor_15615	patrol_cor_15600		CORELLIA	cor_world	0	-198.5	28.0	-4485.7	0
-patrol_cor_15616	patrol_cor_15600		CORELLIA	cor_world	0	-198.3	28.0	-4458.1	0
-patrol_cor_15617	patrol_cor_15600		CORELLIA	cor_world	0	-173.2	28.0	-4437.5	0
-patrol_cor_15618	patrol_cor_15600		CORELLIA	cor_world	0	-191.2	28.0	-4435.7	0
-patrol_cor_15619	patrol_cor_15600		CORELLIA	cor_world	0	-195.3	28.0	-4403.9	0
-patrol_cor_15620	patrol_cor_15600		CORELLIA	cor_world	0	-198.9	28.0	-4372.0	0
-patrol_cor_15621	patrol_cor_15600		CORELLIA	cor_world	0	-194.9	28.0	-4345.2	0
-patrol_cor_15622	patrol_cor_15600		CORELLIA	cor_world	0	-212.9	28.0	-4346.7	0
-patrol_cor_15623	patrol_cor_15600		CORELLIA	cor_world	0	-215.2	28.0	-4342.6	0
-patrol_cor_15624	patrol_cor_15600		CORELLIA	cor_world	0	-221.8	28.0	-4350.1	0
-patrol_cor_15625	patrol_cor_15600		CORELLIA	cor_world	0	-254.8	28.0	-4349.4	0
-patrol_cor_15626	patrol_cor_15600		CORELLIA	cor_world	0	-287.4	28.0	-4336.5	0
-patrol_cor_15627	patrol_cor_15600		CORELLIA	cor_world	0	-324.5	28	-4316.3	0
-patrol_cor_15628	patrol_cor_15600		CORELLIA	cor_world	0	-342.4	28	-4301.9	0
-patrol_cor_15629	patrol_cor_15600		CORELLIA	cor_world	0	-344.7	28	-4271.3	0
-patrol_cor_15630	patrol_cor_15600		CORELLIA	cor_world	0	-339	28.3	-4267.8	0
-patrol_cor_15700	patrol_cor_15700	FLIP	CORELLIA	cor_world	0	-347.2	28	-4214.5	0
-patrol_cor_15701	patrol_cor_15700		CORELLIA	cor_world	0	-355.1	28	-4218.8	0
-patrol_cor_15702	patrol_cor_15700		CORELLIA	cor_world	0	-441.4	28	-4211.7	0
-patrol_cor_15703	patrol_cor_15700		CORELLIA	cor_world	0	-496	28	-4263.7	0
-patrol_cor_15704	patrol_cor_15700		CORELLIA	cor_world	0	-544.7	28	-4291.1	0
-patrol_cor_15705	patrol_cor_15700		CORELLIA	cor_world	0	-548.5	28.5	-4287.6	0
-patrol_cor_15706	patrol_cor_15700		CORELLIA	cor_world	0	-543.1	28	-4316.6	0
-patrol_cor_15707	patrol_cor_15700		CORELLIA	cor_world	0	-499.3	28	-4365.6	0
-patrol_cor_15708	patrol_cor_15700		CORELLIA	cor_world	0	-461.3	28	-4406.9	0
-patrol_cor_15709	patrol_cor_15700		CORELLIA	cor_world	0	-457.3	28	-4418.2	0
-patrol_cor_15710	patrol_cor_15700		CORELLIA	cor_world	0	-460.1	28.2	-4421.1	0
-patrol_cor_15711	patrol_cor_15700		CORELLIA	cor_world	0	-435.3	28	-4424.5	0
-patrol_cor_15712	patrol_cor_15700		CORELLIA	cor_world	0	-407.7	28	-4404.3	0
-patrol_cor_15713	patrol_cor_15700		CORELLIA	cor_world	0	-398.6	28.5	-4407.7	0
-patrol_cor_15714	patrol_cor_15700		CORELLIA	cor_world	0	-401.5	28	-4399.5	0
-patrol_cor_15715	patrol_cor_15700		CORELLIA	cor_world	0	-371.4	28	-4369.7	0
-patrol_cor_15716	patrol_cor_15700		CORELLIA	cor_world	0	-346.6	28	-4348.7	0
-patrol_cor_15717	patrol_cor_15700		CORELLIA	cor_world	0	-329.8	28	-4334.4	0
-patrol_cor_15718	patrol_cor_15700		CORELLIA	cor_world	0	-296.8	28	-4305.5	0
-patrol_cor_15719	patrol_cor_15700		CORELLIA	cor_world	0	-266.3	28	-4298.7	0
-patrol_cor_15720	patrol_cor_15700		CORELLIA	cor_world	0	-232.4	28	-4290.3	0
-patrol_cor_15721	patrol_cor_15700		CORELLIA	cor_world	0	-209.9	28	-4273.8	0
-patrol_cor_15722	patrol_cor_15700		CORELLIA	cor_world	0	-201.5	28	-4281.2	0
-patrol_cor_15723	patrol_cor_15700		CORELLIA	cor_world	0	-147	28	-4287.5	0
-patrol_cor_15724	patrol_cor_15700		CORELLIA	cor_world	0	-145	28	-4278.5	0
-patrol_cor_15725	patrol_cor_15700		CORELLIA	cor_world	0	-136.5	28	-4290	0
-patrol_cor_15726	patrol_cor_15700		CORELLIA	cor_world	0	-87.7	28	-4293.1	0
-patrol_cor_15727	patrol_cor_15700		CORELLIA	cor_world	0	-62.1	28	-4305.2	0
-patrol_cor_15728	patrol_cor_15700		CORELLIA	cor_world	0	-47.8	28	-4297.8	0
-patrol_cor_15729	patrol_cor_15700		CORELLIA	cor_world	0	-53.7	28	-4308.2	0
-patrol_cor_15730	patrol_cor_15700		CORELLIA	cor_world	0	-72.5	28	-4341.4	0
-patrol_cor_15731	patrol_cor_15700		CORELLIA	cor_world	0	-78.7	28	-4348.7	0
-patrol_cor_15732	patrol_cor_15700		CORELLIA	cor_world	0	-59.4	28	-4345.9	0
-patrol_cor_15733	patrol_cor_15700		CORELLIA	cor_world	0	-47.5	28	-4364.6	0
-patrol_cor_15734	patrol_cor_15700		CORELLIA	cor_world	0	-45.3	28	-4403.8	0
-patrol_cor_15735	patrol_cor_15700		CORELLIA	cor_world	0	-33.1	28	-4414.1	0
-patrol_cor_15736	patrol_cor_15700		CORELLIA	cor_world	0	-0.6	28	-4433.8	0
-patrol_cor_15737	patrol_cor_15700		CORELLIA	cor_world	0	15	30.5	-4438	0
-patrol_cor_15738	patrol_cor_15700		CORELLIA	cor_coronet_university	1	0.8	2.5	14.8	0
-patrol_cor_15739	patrol_cor_15700		CORELLIA	cor_coronet_university	1	11.5	2.5	13.6	0
-patrol_cor_15740	patrol_cor_15700		CORELLIA	cor_coronet_university	2	12	2.5	9.7	0
-patrol_cor_15741	patrol_cor_15700		CORELLIA	cor_coronet_university	4	5.6	2.5	8	0
-patrol_cor_15742	patrol_cor_15700		CORELLIA	cor_coronet_university	4	0.1	2.5	4.7	0
-patrol_cor_15743	patrol_cor_15700		CORELLIA	cor_coronet_university	4	-5.7	1.1	-3.6	0
-patrol_cor_15744	patrol_cor_15700		CORELLIA	cor_coronet_university	4	-11	1.1	-5.4	0
-patrol_cor_15745	patrol_cor_15700		CORELLIA	cor_coronet_university	9	-10.6	1.1	-12.1	0
-patrol_cor_15800	patrol_cor_15800	LOOP	CORELLIA	cor_world	0	-26.2	28	-4446	0
-patrol_cor_15801	patrol_cor_15800		CORELLIA	cor_world	0	-29.4	28	-4462.1	0
-patrol_cor_15802	patrol_cor_15800		CORELLIA	cor_world	0	-41.3	28	-4477.3	0
-patrol_cor_15803	patrol_cor_15800		CORELLIA	cor_world	0	-77.9	28	-4477.3	0
-patrol_cor_15804	patrol_cor_15800		CORELLIA	cor_world	0	-115.2	28	-4477.1	0
-patrol_cor_15805	patrol_cor_15800		CORELLIA	cor_world	0	-138.4	28	-4464.1	0
-patrol_cor_15806	patrol_cor_15800		CORELLIA	cor_world	0	-163.5	28	-4466.2	0
-patrol_cor_15807	patrol_cor_15800		CORELLIA	cor_world	0	-175.3	28	-4483.5	0
-patrol_cor_15808	patrol_cor_15800		CORELLIA	cor_world	0	-202.5	28	-4493.6	0
-patrol_cor_15809	patrol_cor_15800		CORELLIA	cor_world	0	-229.2	28	-4496.6	0
-patrol_cor_15810	patrol_cor_15800		CORELLIA	cor_world	0	-236	28	-4507.8	0
-patrol_cor_15811	patrol_cor_15800		CORELLIA	cor_world	0	-248.9	28	-4534.6	0
-patrol_cor_15812	patrol_cor_15800		CORELLIA	cor_world	0	-254.4	28	-4565.1	0
-patrol_cor_15813	patrol_cor_15800		CORELLIA	cor_world	0	-256.1	28	-4601.3	0
-patrol_cor_15814	patrol_cor_15800		CORELLIA	cor_world	0	-247.5	28	-4618.1	0
-patrol_cor_15815	patrol_cor_15800		CORELLIA	cor_world	0	-207.2	28	-4622.3	0
-patrol_cor_15816	patrol_cor_15800		CORELLIA	cor_world	0	-167.9	28	-4625.3	0
-patrol_cor_15817	patrol_cor_15800		CORELLIA	cor_world	0	-155.1	28	-4643.6	0
-patrol_cor_15818	patrol_cor_15800		CORELLIA	cor_world	0	-153.5	28	-4683.4	0
-patrol_cor_15819	patrol_cor_15800		CORELLIA	cor_world	0	-148.1	28	-4729	0
-patrol_cor_15820	patrol_cor_15800		CORELLIA	cor_world	0	-140.4	28	-4770.6	0
-patrol_cor_15821	patrol_cor_15800		CORELLIA	cor_world	0	-130.3	28	-4793.9	0
-patrol_cor_15822	patrol_cor_15800		CORELLIA	cor_world	0	-100.4	28	-4810.3	0
-patrol_cor_15823	patrol_cor_15800		CORELLIA	cor_world	0	-52	28	-4813.4	0
-patrol_cor_15824	patrol_cor_15800		CORELLIA	cor_world	0	-0.5	28	-4811.4	0
-patrol_cor_15825	patrol_cor_15800		CORELLIA	cor_world	0	39.4	28	-4786.4	0
-patrol_cor_15826	patrol_cor_15800		CORELLIA	cor_world	0	50.9	28	-4726.2	0
-patrol_cor_15827	patrol_cor_15800		CORELLIA	cor_world	0	52.6	28	-4678.1	0
-patrol_cor_15828	patrol_cor_15800		CORELLIA	cor_world	0	67.1	28	-4638.2	0
-patrol_cor_15829	patrol_cor_15800		CORELLIA	cor_world	0	42.7	28	-4611.1	0
-patrol_cor_15830	patrol_cor_15800		CORELLIA	cor_world	0	24.3	28	-4590.4	0
-patrol_cor_15831	patrol_cor_15800		CORELLIA	cor_world	0	52.8	28	-4561.1	0
-patrol_cor_15832	patrol_cor_15800		CORELLIA	cor_world	0	27.4	28	-4529.3	0
-patrol_cor_15833	patrol_cor_15800		CORELLIA	cor_world	0	25.6	28	-4486.2	0
-patrol_cor_15834	patrol_cor_15800		CORELLIA	cor_world	0	6.5	28	-4461.2	0
-patrol_cor_15835	patrol_cor_15800		CORELLIA	cor_world	0	1.3	28	-4453.2	0
-patrol_cor_15836	patrol_cor_15800		CORELLIA	cor_world	0	-4.5	28	-4409	0
-patrol_cor_15837	patrol_cor_15800		CORELLIA	cor_world	0	-5.1	28	-4374.5	0
-patrol_cor_15838	patrol_cor_15800		CORELLIA	cor_world	0	-1.9	28	-4330.2	0
-patrol_cor_15839	patrol_cor_15800		CORELLIA	cor_world	0	-3.3	28	-4283.7	0
-patrol_cor_15840	patrol_cor_15800		CORELLIA	cor_world	0	-47.6	28	-4250.9	0
-patrol_cor_15841	patrol_cor_15800		CORELLIA	cor_world	0	-110.6	28	-4231.7	0
-patrol_cor_15842	patrol_cor_15800		CORELLIA	cor_world	0	-169.2	28	-4232.8	0
-patrol_cor_15843	patrol_cor_15800		CORELLIA	cor_world	0	-234.7	28	-4232.6	0
-patrol_cor_15844	patrol_cor_15800		CORELLIA	cor_world	0	-264.7	28	-4226.8	0
-patrol_cor_15845	patrol_cor_15800		CORELLIA	cor_world	0	-297.5	28	-4227.2	0
-patrol_cor_15846	patrol_cor_15800		CORELLIA	cor_world	0	-306.6	28	-4261.2	0
-patrol_cor_15847	patrol_cor_15800		CORELLIA	cor_world	0	-306.7	28	-4293.9	0
-patrol_cor_15848	patrol_cor_15800		CORELLIA	cor_world	0	-303.8	28	-4334.6	0
-patrol_cor_15849	patrol_cor_15800		CORELLIA	cor_world	0	-269.6	28	-4355.2	0
-patrol_cor_15850	patrol_cor_15800		CORELLIA	cor_world	0	-232.7	28	-4365	0
-patrol_cor_15851	patrol_cor_15800		CORELLIA	cor_world	0	-216.8	28	-4384	0
-patrol_cor_15852	patrol_cor_15800		CORELLIA	cor_world	0	-213.7	28	-4407.2	0
-patrol_cor_15853	patrol_cor_15800		CORELLIA	cor_world	0	-200.2	28	-4430.9	0
-patrol_cor_15854	patrol_cor_15800		CORELLIA	cor_world	0	-178.8	28	-4456	0
-patrol_cor_15855	patrol_cor_15800		CORELLIA	cor_world	0	-164.1	28	-4468.7	0
-patrol_cor_15856	patrol_cor_15800		CORELLIA	cor_world	0	-143.4	28	-4462.2	0
-patrol_cor_15857	patrol_cor_15800		CORELLIA	cor_world	0	-135.3	28	-4431.9	0
-patrol_cor_15858	patrol_cor_15800		CORELLIA	cor_world	0	-126.7	28	-4402.7	0
-patrol_cor_15859	patrol_cor_15800		CORELLIA	cor_world	0	-85.5	28	-4403.4	0
-patrol_cor_15860	patrol_cor_15800		CORELLIA	cor_world	0	-39	28	-4409.1	0
-patrol_cor_15861	patrol_cor_15800		CORELLIA	cor_world	0	-6.9	28	-4424.2	0
-patrol_cor_15862	patrol_cor_15800		CORELLIA	cor_world	0	-7.3	28	-4447.9	0
-patrol_cor_15863	patrol_cor_15800		CORELLIA	cor_world	0	-18.9	28	-4448.6	0
-patrol_cor_15900	patrol_cor_15900	LOOP	CORELLIA	cor_world	0	-58.6	28	-4849.7	0
-patrol_cor_15901	patrol_cor_15900		CORELLIA	cor_world	0	-58.8	28	-4856.4	0
-patrol_cor_15902	patrol_cor_15900		CORELLIA	cor_world	0	-74	28	-4867	0
-patrol_cor_15903	patrol_cor_15900		CORELLIA	cor_world	0	-125.3	28	-4865.4	0
-patrol_cor_15904	patrol_cor_15900		CORELLIA	cor_world	0	-175.2	28	-4852.9	0
-patrol_cor_15905	patrol_cor_15900		CORELLIA	cor_world	0	-238.5	28	-4838.1	0
-patrol_cor_15906	patrol_cor_15900		CORELLIA	cor_world	0	-292.8	28	-4812.1	0
-patrol_cor_15907	patrol_cor_15900		CORELLIA	cor_world	0	-349.8	28	-4797.1	0
-patrol_cor_15908	patrol_cor_15900		CORELLIA	cor_world	0	-405.5	28	-4785.6	0
-patrol_cor_15909	patrol_cor_15900		CORELLIA	cor_world	0	-438	28	-4756.1	0
-patrol_cor_15910	patrol_cor_15900		CORELLIA	cor_world	0	-477.8	28	-4718.5	0
-patrol_cor_15911	patrol_cor_15900		CORELLIA	cor_world	0	-504.1	28	-4701.3	0
-patrol_cor_15912	patrol_cor_15900		CORELLIA	cor_world	0	-502.9	28	-4668.2	0
-patrol_cor_15913	patrol_cor_15900		CORELLIA	cor_world	0	-503.5	28	-4643	0
-patrol_cor_15914	patrol_cor_15900		CORELLIA	cor_world	0	-462.7	28	-4640.1	0
-patrol_cor_15915	patrol_cor_15900		CORELLIA	cor_world	0	-422.1	28	-4636.2	0
-patrol_cor_15916	patrol_cor_15900		CORELLIA	cor_world	0	-414.2	28	-4603.6	0
-patrol_cor_15917	patrol_cor_15900		CORELLIA	cor_world	0	-400.3	28	-4580.7	0
-patrol_cor_15918	patrol_cor_15900		CORELLIA	cor_world	0	-397.5	28	-4531.2	0
-patrol_cor_15919	patrol_cor_15900		CORELLIA	cor_world	0	-385.8	28	-4469.1	0
-patrol_cor_15920	patrol_cor_15900		CORELLIA	cor_world	0	-363.2	28	-4429.7	0
-patrol_cor_15921	patrol_cor_15900		CORELLIA	cor_world	0	-340.7	28	-4396.8	0
-patrol_cor_15922	patrol_cor_15900		CORELLIA	cor_world	0	-300.1	28	-4365.4	0
-patrol_cor_15923	patrol_cor_15900		CORELLIA	cor_world	0	-267	28	-4345.7	0
-patrol_cor_15924	patrol_cor_15900		CORELLIA	cor_world	0	-237.7	28	-4328.6	0
-patrol_cor_15925	patrol_cor_15900		CORELLIA	cor_world	0	-236.5	28	-4292.1	0
-patrol_cor_15926	patrol_cor_15900		CORELLIA	cor_world	0	-232	28	-4241.9	0
-patrol_cor_15927	patrol_cor_15900		CORELLIA	cor_world	0	-195.6	28	-4231.6	0
-patrol_cor_15928	patrol_cor_15900		CORELLIA	cor_world	0	-166.9	28	-4219.8	0
-patrol_cor_15929	patrol_cor_15900		CORELLIA	cor_world	0	-168	28	-4163.6	0
-patrol_cor_15930	patrol_cor_15900		CORELLIA	cor_world	0	-173.5	28	-4111.5	0
-patrol_cor_15931	patrol_cor_15900		CORELLIA	cor_world	0	-188.8	28	-4063	0
-patrol_cor_15932	patrol_cor_15900		CORELLIA	cor_world	0	-182.8	28.4	-4052.2	0
-patrol_cor_15933	patrol_cor_15900		CORELLIA	cor_world	0	-145.4	28	-4085.7	0
-patrol_cor_15934	patrol_cor_15900		CORELLIA	cor_world	0	-135.5	28	-4129.9	0
-patrol_cor_15935	patrol_cor_15900		CORELLIA	cor_world	0	-103.4	28	-4171.1	0
-patrol_cor_15936	patrol_cor_15900		CORELLIA	cor_world	0	-52.7	28	-4181	0
-patrol_cor_15937	patrol_cor_15900		CORELLIA	cor_world	0	-13.3	28	-4201.4	0
-patrol_cor_15938	patrol_cor_15900		CORELLIA	cor_world	0	26.5	28	-4210.5	0
-patrol_cor_15939	patrol_cor_15900		CORELLIA	cor_world	0	66.3	28	-4241.6	0
-patrol_cor_15940	patrol_cor_15900		CORELLIA	cor_world	0	67.9	28	-4288.9	0
-patrol_cor_15941	patrol_cor_15900		CORELLIA	cor_world	0	71	28	-4346.9	0
-patrol_cor_15942	patrol_cor_15900		CORELLIA	cor_world	0	98.5	28	-4381.8	0
-patrol_cor_15943	patrol_cor_15900		CORELLIA	cor_world	0	110	28	-4431.5	0
-patrol_cor_15944	patrol_cor_15900		CORELLIA	cor_world	0	137.9	28	-4471.5	0
-patrol_cor_15945	patrol_cor_15900		CORELLIA	cor_world	0	158.6	28	-4526.2	0
-patrol_cor_15946	patrol_cor_15900		CORELLIA	cor_world	0	182.6	28	-4588.6	0
-patrol_cor_15947	patrol_cor_15900		CORELLIA	cor_world	0	204.5	28	-4631.9	0
-patrol_cor_15948	patrol_cor_15900		CORELLIA	cor_world	0	196.3	28	-4680.3	0
-patrol_cor_15949	patrol_cor_15900		CORELLIA	cor_world	0	166.6	28	-4712.6	0
-patrol_cor_15950	patrol_cor_15900		CORELLIA	cor_world	0	123.1	28	-4760.6	0
-patrol_cor_15951	patrol_cor_15900		CORELLIA	cor_world	0	83.8	28	-4813.3	0
-patrol_cor_15952	patrol_cor_15900		CORELLIA	cor_world	0	53.4	28	-4844.4	0
-patrol_cor_15953	patrol_cor_15900		CORELLIA	cor_world	0	15.8	28	-4859.5	0
-patrol_cor_15954	patrol_cor_15900		CORELLIA	cor_world	0	-38.4	28	-4862.7	0
-patrol_cor_15955	patrol_cor_15900		CORELLIA	cor_world	0	-58.3	28	-4855.5	0
-patrol_cor_16000	patrol_cor_16000	FLIP	CORELLIA	cor_world	0	6806.5	315.2	-5625.3	0
-patrol_cor_16001	patrol_cor_16000		CORELLIA	cor_world	0	6806.8	315	-5618.9	0
-patrol_cor_16002	patrol_cor_16000		CORELLIA	cor_world	0	6784.4	315	-5619.3	0
-patrol_cor_16003	patrol_cor_16000		CORELLIA	cor_world	0	6752.4	314.9	-5615.2	0
-patrol_cor_16004	patrol_cor_16000		CORELLIA	cor_world	0	6733.1	315	-5592.3	0
-patrol_cor_16005	patrol_cor_16000		CORELLIA	cor_world	0	6711.6	315	-5593.9	0
-patrol_cor_16006	patrol_cor_16000		CORELLIA	cor_world	0	6708.1	315.4	-5596.9	0
-patrol_cor_16007	patrol_cor_16000		CORELLIA	cor_world	0	6708	316.9	-5602	0
-patrol_cor_16008	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	1	3.2	2.2	16	0
-patrol_cor_16009	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	1	7	2.2	14.5	0
-patrol_cor_16010	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	2	8.6	2.3	10.3	0
-patrol_cor_16011	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	2	3.5	2.3	7.2	0
-patrol_cor_16012	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	10	1.9	1.2	0.2	0
-patrol_cor_16013	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	10	1.5	1.2	-3.5	0
-patrol_cor_16014	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	10	-2.4	2.3	5.4	0
-patrol_cor_16015	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	2	-5.3	2.3	8.8	0
-patrol_cor_16016	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	2	-8.1	2.3	10.1	0
-patrol_cor_16017	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	1	-7.6	2.2	14.9	0
-patrol_cor_16018	patrol_cor_16000		CORELLIA	cor_bela_asso_hall	1	-0.5	2.2	17	0
-patrol_cor_16019	patrol_cor_16000		CORELLIA	cor_world	0	6706	315	-5595.6	0
-patrol_cor_16020	patrol_cor_16000		CORELLIA	cor_world	0	6700.7	315	-5581.8	0
-patrol_cor_16021	patrol_cor_16000		CORELLIA	cor_world	0	6702.1	315	-5560.2	0
-patrol_cor_16022	patrol_cor_16000		CORELLIA	cor_world	0	6705.6	317.3	-5549.7	0
-patrol_cor_16023	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	1	0.1	2.5	15.5	0
-patrol_cor_16024	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	1	2.2	2.5	14.2	0
-patrol_cor_16025	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	1	12.9	2.5	13	0
-patrol_cor_16026	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	2	12	2.5	9.2	0
-patrol_cor_16027	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	4.3	2.5	8.1	0
-patrol_cor_16028	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	1	2.5	4.9	0
-patrol_cor_16029	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	0.3	1.1	0.1	0
-patrol_cor_16030	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-6.5	1.1	-4.4	0
-patrol_cor_16031	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-11.1	1.1	-5.1	0
-patrol_cor_16032	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	9	-11.2	1.1	-10.5	0
-patrol_cor_16033	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	9	-13.4	1.1	-10.8	0
-patrol_cor_16034	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-10.8	1.1	-6.4	0
-patrol_cor_16035	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-9.3	1.1	-4.7	0
-patrol_cor_16036	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-3.1	1.1	-2.2	0
-patrol_cor_16037	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-1.7	2.5	5.2	0
-patrol_cor_16038	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	4	-5.6	2.5	8.6	0
-patrol_cor_16039	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	3	-12.2	2.5	10	0
-patrol_cor_16040	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	1	-11.4	2.5	14.1	0
-patrol_cor_16041	patrol_cor_16000		CORELLIA	cor_bela_comm_gh	1	-1.6	2.5	14.6	0
-patrol_cor_16042	patrol_cor_16000		CORELLIA	cor_world	0	6705.7	317.3	-5544.1	0
-patrol_cor_16043	patrol_cor_16000		CORELLIA	cor_world	0	6708.1	317.3	-5550.2	0
-patrol_cor_16044	patrol_cor_16000		CORELLIA	cor_world	0	6714.9	315	-5558.5	0
-patrol_cor_16045	patrol_cor_16000		CORELLIA	cor_world	0	6726.4	315	-5562.4	0
-patrol_cor_16046	patrol_cor_16000		CORELLIA	cor_world	0	6736.9	315	-5541.8	0
-patrol_cor_16047	patrol_cor_16000		CORELLIA	cor_world	0	6757.1	315	-5515.9	0
-patrol_cor_16048	patrol_cor_16000		CORELLIA	cor_world	0	6796.1	315	-5487.2	0
-patrol_cor_16049	patrol_cor_16000		CORELLIA	cor_world	0	6809.6	330.2	-5478.3	0
-patrol_cor_16050	patrol_cor_16000		CORELLIA	cor_world	0	6823.1	330.2	-5469.4	0
-patrol_cor_16051	patrol_cor_16000		CORELLIA	cor_world	0	6842.2	330	-5463.4	0
-patrol_cor_16052	patrol_cor_16000		CORELLIA	cor_world	0	6849.8	332.5	-5450.4	0
-patrol_cor_16053	patrol_cor_16000		CORELLIA	cor_world	0	6853.1	332.5	-5441.7	0
-patrol_cor_16054	patrol_cor_16000		CORELLIA	cor_bela_university	1	2.2	2.5	14	0
-patrol_cor_16055	patrol_cor_16000		CORELLIA	cor_bela_university	1	11.9	2.5	13.2	0
-patrol_cor_16056	patrol_cor_16000		CORELLIA	cor_bela_university	2	11.6	2.5	9.3	0
-patrol_cor_16057	patrol_cor_16000		CORELLIA	cor_bela_university	4	3.9	2.5	7.9	0
-patrol_cor_16058	patrol_cor_16000		CORELLIA	cor_bela_university	4	-0.3	1.1	-0.4	0
-patrol_cor_16059	patrol_cor_16000		CORELLIA	cor_bela_university	8	-0.4	1.1	-8.9	0
-patrol_cor_16060	patrol_cor_16000		CORELLIA	cor_bela_university	4	0.7	1.1	-0.1	0
-patrol_cor_16061	patrol_cor_16000		CORELLIA	cor_bela_university	4	-1.2	2.5	5.5	0
-patrol_cor_16062	patrol_cor_16000		CORELLIA	cor_bela_university	4	-5.9	2.5	8.9	0
-patrol_cor_16063	patrol_cor_16000		CORELLIA	cor_bela_university	3	-13.3	2.5	10.2	0
-patrol_cor_16064	patrol_cor_16000		CORELLIA	cor_bela_university	1	-10.9	2.5	13.5	0
-patrol_cor_16065	patrol_cor_16000		CORELLIA	cor_bela_university	1	-1.3	2.5	15	0
-patrol_cor_16066	patrol_cor_16000		CORELLIA	cor_world	0	6853.1	332.5	-5444.8	0
-patrol_cor_16067	patrol_cor_16000		CORELLIA	cor_world	0	6853.5	332.5	-5452	0
-patrol_cor_16068	patrol_cor_16000		CORELLIA	cor_world	0	6855.7	330	-5471.3	0
-patrol_cor_16069	patrol_cor_16000		CORELLIA	cor_world	0	6861.3	330.1	-5486.5	0
-patrol_cor_16070	patrol_cor_16000		CORELLIA	cor_world	0	6881.5	330.1	-5520.8	0
-patrol_cor_16071	patrol_cor_16000		CORELLIA	cor_world	0	6892.6	330.2	-5540.2	0
-patrol_cor_16072	patrol_cor_16000		CORELLIA	cor_world	0	6912.9	330	-5559.8	0
-patrol_cor_16073	patrol_cor_16000		CORELLIA	cor_world	0	6921.6	330	-5567.1	0
-patrol_cor_16074	patrol_cor_16000		CORELLIA	cor_world	0	6911.1	331	-5572.2	0
-patrol_cor_16075	patrol_cor_16000		CORELLIA	cor_world	0	6909	331	-5582	0
-patrol_cor_16076	patrol_cor_16000		CORELLIA	cor_bela_hotel	2	0.1	1	22.4	0
-patrol_cor_16077	patrol_cor_16000		CORELLIA	cor_bela_hotel	2	6	1	20.2	0
-patrol_cor_16078	patrol_cor_16000		CORELLIA	cor_bela_hotel	3	5.6	1	15.5	0
-patrol_cor_16079	patrol_cor_16000		CORELLIA	cor_bela_hotel	3	0.7	1	14.3	0
-patrol_cor_16080	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	0.4	1	8	0
-patrol_cor_16081	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	6.6	1	1.9	0
-patrol_cor_16082	patrol_cor_16000		CORELLIA	cor_bela_hotel	5	14.6	1.3	-1.8	0
-patrol_cor_16083	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	8.2	1	-1.7	0
-patrol_cor_16084	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	0.2	1	-4.9	0
-patrol_cor_16085	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	-6.1	1	-3	0
-patrol_cor_16086	patrol_cor_16000		CORELLIA	cor_bela_hotel	6	-16.3	1	-2	0
-patrol_cor_16087	patrol_cor_16000		CORELLIA	cor_bela_hotel	6	-22	1.6	3.1	0
-patrol_cor_16088	patrol_cor_16000		CORELLIA	cor_bela_hotel	6	-21.9	1.6	7.3	0
-patrol_cor_16089	patrol_cor_16000		CORELLIA	cor_bela_hotel	6	-20.3	1.6	6	0
-patrol_cor_16090	patrol_cor_16000		CORELLIA	cor_bela_hotel	4	-1.2	1	8	0
-patrol_cor_16091	patrol_cor_16000		CORELLIA	cor_bela_hotel	3	-1.3	1	14.4	0
-patrol_cor_16092	patrol_cor_16000		CORELLIA	cor_bela_hotel	3	-6.1	1	17.8	0
-patrol_cor_16093	patrol_cor_16000		CORELLIA	cor_bela_hotel	2	-4.8	1	22.4	0
-patrol_cor_16094	patrol_cor_16000		CORELLIA	cor_bela_hotel	2	0.1	1	26.2	0
-patrol_cor_16095	patrol_cor_16000		CORELLIA	cor_world	0	6906.7	330.6	-5580.5	0
-patrol_cor_16096	patrol_cor_16000		CORELLIA	cor_world	0	6890.4	330	-5585.8	0
-patrol_cor_16097	patrol_cor_16000		CORELLIA	cor_world	0	6870.7	330.2	-5596.4	0
-patrol_cor_16098	patrol_cor_16000		CORELLIA	cor_world	0	6855	315	-5605.4	0
-patrol_cor_16099	patrol_cor_16000		CORELLIA	cor_world	0	6843.8	315	-5595.8	0
-patrol_cor_16100	patrol_cor_16000		CORELLIA	cor_world	0	6832.8	315	-5594.8	0
-patrol_cor_16101	patrol_cor_16000		CORELLIA	cor_world	0	6814.5	315	-5615.4	0
-patrol_cor_16100	patrol_cor_16100	FLIP	CORELLIA	cor_world	0	6757.7	315.2	-5655	0
-patrol_cor_16101	patrol_cor_16100		CORELLIA	cor_world	0	6749.4	315	-5656	0
-patrol_cor_16102	patrol_cor_16100		CORELLIA	cor_world	0	6744.4	315	-5670.4	0
-patrol_cor_16103	patrol_cor_16100		CORELLIA	cor_world	0	6741.6	315	-5687.7	0
-patrol_cor_16104	patrol_cor_16100		CORELLIA	cor_world	0	6749.9	315	-5708.5	0
-patrol_cor_16105	patrol_cor_16100		CORELLIA	cor_world	0	6776.6	315	-5731.5	0
-patrol_cor_16106	patrol_cor_16100		CORELLIA	cor_world	0	6817.4	315	-5733.9	0
-patrol_cor_16107	patrol_cor_16100		CORELLIA	cor_world	0	6831.3	315	-5747.8	0
-patrol_cor_16108	patrol_cor_16100		CORELLIA	cor_world	0	6829.8	315	-5774.6	0
-patrol_cor_16109	patrol_cor_16100		CORELLIA	cor_world	0	6795.3	315	-5776	0
-patrol_cor_16110	patrol_cor_16100		CORELLIA	cor_world	0	6758.8	315	-5777.5	0
-patrol_cor_16111	patrol_cor_16100		CORELLIA	cor_world	0	6755.3	315	-5779.1	0
-patrol_cor_16112	patrol_cor_16100		CORELLIA	cor_world	0	6761.2	315	-5780.5	0
-patrol_cor_16113	patrol_cor_16100		CORELLIA	cor_world	0	6802.6	315	-5781.9	0
-patrol_cor_16114	patrol_cor_16100		CORELLIA	cor_world	0	6821.3	315	-5787.1	0
-patrol_cor_16115	patrol_cor_16100		CORELLIA	cor_world	0	6822.1	315	-5808.6	0
-patrol_cor_16116	patrol_cor_16100		CORELLIA	cor_world	0	6796.4	315	-5808.4	0
-patrol_cor_16117	patrol_cor_16100		CORELLIA	cor_world	0	6767.4	315	-5810	0
-patrol_cor_16118	patrol_cor_16100		CORELLIA	cor_world	0	6746.1	315	-5813.3	0
-patrol_cor_16119	patrol_cor_16100		CORELLIA	cor_world	0	6727.3	315	-5817.3	0
-patrol_cor_16120	patrol_cor_16100		CORELLIA	cor_world	0	6715.9	317	-5838.3	0
-patrol_cor_16121	patrol_cor_16100		CORELLIA	cor_world	0	6713.9	326.8	-5861.6	0
-patrol_cor_16122	patrol_cor_16100		CORELLIA	cor_world	0	6713.3	329.9	-5883.2	0
-patrol_cor_16123	patrol_cor_16100		CORELLIA	cor_world	0	6702.8	330	-5900.9	0
-patrol_cor_16124	patrol_cor_16100		CORELLIA	cor_world	0	6689.7	330	-5905.5	0
-patrol_cor_16125	patrol_cor_16100		CORELLIA	cor_world	0	6667	330	-5906.3	0
-patrol_cor_16126	patrol_cor_16100		CORELLIA	cor_world	0	6645.2	330	-5908	0
-patrol_cor_16127	patrol_cor_16100		CORELLIA	cor_world	0	6639.8	330.6	-5912.1	0
-patrol_cor_16128	patrol_cor_16100		CORELLIA	cor_world	0	6641.4	330	-5912.1	0
-patrol_cor_16129	patrol_cor_16100		CORELLIA	cor_world	0	6640.5	330	-5929.8	0
-patrol_cor_16130	patrol_cor_16100		CORELLIA	cor_world	0	6642.3	330	-5937	0
-patrol_cor_16131	patrol_cor_16100		CORELLIA	cor_world	0	6646.5	330	-5939.4	0
-patrol_cor_16132	patrol_cor_16100		CORELLIA	cor_world	0	6651.5	330	-5942.6	0
-patrol_cor_16133	patrol_cor_16100		CORELLIA	cor_world	0	6650.1	330	-5943.2	0
-patrol_cor_16200	patrol_cor_16200	FLIP	CORELLIA	cor_world	0	3308.8	308	5532.7	0
-patrol_cor_16201	patrol_cor_16200		CORELLIA	cor_world	0	3315.7	308	5528.8	0
-patrol_cor_16202	patrol_cor_16200		CORELLIA	cor_world	0	3322.8	308	5522.4	0
-patrol_cor_16203	patrol_cor_16200		CORELLIA	cor_world	0	3305	308	5487.7	0
-patrol_cor_16204	patrol_cor_16200		CORELLIA	cor_world	0	3298.3	316.1	5481.1	0
-patrol_cor_16205	patrol_cor_16200		CORELLIA	cor_world	0	3286.6	316.1	5469.4	0
-patrol_cor_16206	patrol_cor_16200		CORELLIA	cor_world	0	3273.8	300	5456.8	0
-patrol_cor_16207	patrol_cor_16200		CORELLIA	cor_world	0	3232.8	300	5432.4	0
-patrol_cor_16208	patrol_cor_16200		CORELLIA	cor_world	0	3205.1	300.2	5412.8	0
-patrol_cor_16209	patrol_cor_16200		CORELLIA	cor_world	0	3198.4	300.2	5411.7	0
-patrol_cor_16210	patrol_cor_16200		CORELLIA	cor_world	0	3199.6	300.2	5404.5	0
-patrol_cor_16211	patrol_cor_16200		CORELLIA	cor_world	0	3195.2	300.2	5401.6	0
-patrol_cor_16212	patrol_cor_16200		CORELLIA	cor_world	0	3201.6	300.2	5386.2	0
-patrol_cor_16213	patrol_cor_16200		CORELLIA	cor_world	0	3205.8	300.2	5383.2	0
-patrol_cor_16214	patrol_cor_16200		CORELLIA	cor_world	0	3220.4	300.2	5362.9	0
-patrol_cor_16215	patrol_cor_16200		CORELLIA	cor_world	0	3218.1	300.2	5360.3	0
-patrol_cor_16216	patrol_cor_16200		CORELLIA	cor_world	0	3211.4	300.2	5359.5	0
-patrol_cor_16217	patrol_cor_16200		CORELLIA	cor_world	0	3200.5	300	5343.9	0
-patrol_cor_16218	patrol_cor_16200		CORELLIA	cor_world	0	3177.1	300	5302.6	0
-patrol_cor_16219	patrol_cor_16200		CORELLIA	cor_world	0	3156.8	300	5265.3	0
-patrol_cor_16220	patrol_cor_16200		CORELLIA	cor_world	0	3139.1	300	5229.1	0
-patrol_cor_16221	patrol_cor_16200		CORELLIA	cor_world	0	3139.9	300	5223.4	0
-patrol_cor_16222	patrol_cor_16200		CORELLIA	cor_world	0	3146.7	300	5227.4	0
-patrol_cor_16223	patrol_cor_16200		CORELLIA	cor_world	0	3166.8	300	5237.8	0
-patrol_cor_16224	patrol_cor_16200		CORELLIA	cor_world	0	3175.1	302.5	5239.4	0
-patrol_cor_16225	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	1	0.7	2.5	14.4	0
-patrol_cor_16226	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	1	11.9	2.5	12.8	0
-patrol_cor_16227	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	2	11.2	2.5	9.1	0
-patrol_cor_16228	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	4.1	2.5	8.1	0
-patrol_cor_16229	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	1	2.5	4.4	0
-patrol_cor_16230	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-5.4	1.1	-3.6	0
-patrol_cor_16231	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-11.2	1.1	-4.9	0
-patrol_cor_16232	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	9	-11.3	1.1	-13.5	0
-patrol_cor_16233	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-10.4	1.1	-5.1	0
-patrol_cor_16234	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-1.3	1.1	-3.9	0
-patrol_cor_16235	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-1	2.5	5	0
-patrol_cor_16236	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	4	-5.7	2.5	9	0
-patrol_cor_16237	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	3	-12.4	2.5	9.9	0
-patrol_cor_16238	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	1	-11.5	2.5	13.7	0
-patrol_cor_16239	patrol_cor_16200		CORELLIA	cor_doaba_combat_gh	1	-0.4	2.5	15.1	0
-patrol_cor_16240	patrol_cor_16200		CORELLIA	cor_world	0	3176.9	302.5	5235.6	0
-patrol_cor_16241	patrol_cor_16200		CORELLIA	cor_world	0	3170.3	300	5229.3	0
-patrol_cor_16242	patrol_cor_16200		CORELLIA	cor_world	0	3137.1	300	5190.5	0
-patrol_cor_16243	patrol_cor_16200		CORELLIA	cor_world	0	3137.4	300	5170.5	0
-patrol_cor_16244	patrol_cor_16200		CORELLIA	cor_world	0	3146.9	300	5157.3	0
-patrol_cor_16245	patrol_cor_16200		CORELLIA	cor_world	0	3142.6	300	5152.1	0
-patrol_cor_16246	patrol_cor_16200		CORELLIA	cor_world	0	3146.2	300	5157.1	0
-patrol_cor_16247	patrol_cor_16200		CORELLIA	cor_world	0	3141.6	300	5161.8	0
-patrol_cor_16248	patrol_cor_16200		CORELLIA	cor_world	0	3115.3	300	5162.4	0
-patrol_cor_16249	patrol_cor_16200		CORELLIA	cor_world	0	3098.4	300	5150.2	0
-patrol_cor_16250	patrol_cor_16200		CORELLIA	cor_world	0	3115.7	300	5137.3	0
-patrol_cor_16251	patrol_cor_16200		CORELLIA	cor_world	0	3149.2	300	5135.5	0
-patrol_cor_16252	patrol_cor_16200		CORELLIA	cor_world	0	3174.5	300	5128.7	0
-patrol_cor_16253	patrol_cor_16200		CORELLIA	cor_world	0	3176.2	302.5	5100.7	0
-patrol_cor_16254	patrol_cor_16200		CORELLIA	cor_world	0	3174.3	295	5074.2	0
-patrol_cor_16255	patrol_cor_16200		CORELLIA	cor_world	0	3179.2	294.7	5057.4	0
-patrol_cor_16256	patrol_cor_16200		CORELLIA	cor_world	0	3187.5	290	5028.7	0
-patrol_cor_16257	patrol_cor_16200		CORELLIA	cor_world	0	3183.6	290	4995.9	0
-patrol_cor_16258	patrol_cor_16200		CORELLIA	cor_world	0	3174.4	290	4983	0
-patrol_cor_16259	patrol_cor_16200		CORELLIA	cor_world	0	3141.2	290	4980.2	0
-patrol_cor_16260	patrol_cor_16200		CORELLIA	cor_world	0	3135.2	289.1	4985.4	0
-patrol_cor_16261	patrol_cor_16200		CORELLIA	cor_world	0	3110.1	284.3	4997.2	0
-patrol_cor_16262	patrol_cor_16200		CORELLIA	cor_world	0	3094.9	280	4997.4	0
-patrol_cor_16263	patrol_cor_16200		CORELLIA	cor_world	0	3083.5	280	5000.6	0
-patrol_cor_16264	patrol_cor_16200		CORELLIA	cor_world	0	3080.4	280.6	5002.5	0
-patrol_cor_16265	patrol_cor_16200		CORELLIA	cor_world	0	3081.3	280.3	4991.3	0
-patrol_cor_16266	patrol_cor_16200		CORELLIA	cor_world	0	3080.3	280.6	4985.8	0
-patrol_cor_16300	patrol_cor_16300	FLIP	CORELLIA	cor_world	0	3093.5	280.2	5013.5	0
-patrol_cor_16301	patrol_cor_16300		CORELLIA	cor_world	0	3094.6	280	5005.1	0
-patrol_cor_16302	patrol_cor_16300		CORELLIA	cor_world	0	3100.8	281.2	4997.2	0
-patrol_cor_16303	patrol_cor_16300		CORELLIA	cor_world	0	3111.7	284.3	4995	0
-patrol_cor_16304	patrol_cor_16300		CORELLIA	cor_world	0	3137.6	289.9	4981.2	0
-patrol_cor_16305	patrol_cor_16300		CORELLIA	cor_world	0	3159.6	290	4982.1	0
-patrol_cor_16306	patrol_cor_16300		CORELLIA	cor_world	0	3190	290	4980.9	0
-patrol_cor_16307	patrol_cor_16300		CORELLIA	cor_world	0	3201	290	5001.4	0
-patrol_cor_16308	patrol_cor_16300		CORELLIA	cor_world	0	3188.4	290	5036.6	0
-patrol_cor_16309	patrol_cor_16300		CORELLIA	cor_world	0	3183.5	294.4	5055.7	0
-patrol_cor_16310	patrol_cor_16300		CORELLIA	cor_world	0	3178.7	295	5068.3	0
-patrol_cor_16311	patrol_cor_16300		CORELLIA	cor_world	0	3178.6	295.2	5081.8	0
-patrol_cor_16312	patrol_cor_16300		CORELLIA	cor_world	0	3178.1	302.7	5102.4	0
-patrol_cor_16313	patrol_cor_16300		CORELLIA	cor_world	0	3176.8	300	5130	0
-patrol_cor_16314	patrol_cor_16300		CORELLIA	cor_world	0	3172.3	300	5161.2	0
-patrol_cor_16315	patrol_cor_16300		CORELLIA	cor_world	0	3140.5	300	5168.7	0
-patrol_cor_16316	patrol_cor_16300		CORELLIA	cor_world	0	3139.8	300	5189.2	0
-patrol_cor_16317	patrol_cor_16300		CORELLIA	cor_world	0	3126.2	300	5214.4	0
-patrol_cor_16318	patrol_cor_16300		CORELLIA	cor_world	0	3127.1	300	5234.7	0
-patrol_cor_16319	patrol_cor_16300		CORELLIA	cor_world	0	3148.8	300	5248.6	0
-patrol_cor_16320	patrol_cor_16300		CORELLIA	cor_world	0	3158.4	300	5263.4	0
-patrol_cor_16321	patrol_cor_16300		CORELLIA	cor_world	0	3180.1	300	5301.9	0
-patrol_cor_16322	patrol_cor_16300		CORELLIA	cor_world	0	3190.4	300	5333.2	0
-patrol_cor_16323	patrol_cor_16300		CORELLIA	cor_world	0	3176.9	300	5359.7	0
-patrol_cor_16324	patrol_cor_16300		CORELLIA	cor_world	0	3172.7	300.2	5385.6	0
-patrol_cor_16325	patrol_cor_16300		CORELLIA	cor_world	0	3175.1	300	5401.6	0
-patrol_cor_16326	patrol_cor_16300		CORELLIA	cor_world	0	3203.5	300	5427.1	0
-patrol_cor_16327	patrol_cor_16300		CORELLIA	cor_world	0	3227.7	300	5430.3	0
-patrol_cor_16328	patrol_cor_16300		CORELLIA	cor_world	0	3268.3	300	5443.7	0
-patrol_cor_16329	patrol_cor_16300		CORELLIA	cor_world	0	3282	300	5450.1	0
-patrol_cor_16330	patrol_cor_16300		CORELLIA	cor_world	0	3293.9	316.1	5462.3	0
-patrol_cor_16331	patrol_cor_16300		CORELLIA	cor_world	0	3305.4	316.1	5473.5	0
-patrol_cor_16332	patrol_cor_16300		CORELLIA	cor_world	0	3312.4	308	5480.5	0
-patrol_cor_16333	patrol_cor_16300		CORELLIA	cor_world	0	3331.5	308	5487.8	0
-patrol_cor_16334	patrol_cor_16300		CORELLIA	cor_world	0	3346.2	308	5480.2	0
-patrol_cor_16335	patrol_cor_16300		CORELLIA	cor_world	0	3373.2	308.6	5470.9	0
-patrol_cor_16336	patrol_cor_16300		CORELLIA	cor_world	0	3388.9	308.6	5461.4	0
-patrol_cor_16337	patrol_cor_16300		CORELLIA	cor_world	0	3395.6	308.6	5473.3	0
-patrol_cor_16338	patrol_cor_16300		CORELLIA	cor_world	0	3394.9	308.6	5486	0
-patrol_cor_16339	patrol_cor_16300		CORELLIA	cor_world	0	3386.4	308.6	5490.4	0
-patrol_cor_16340	patrol_cor_16300		CORELLIA	cor_world	0	3380.2	308	5504.6	0
-patrol_cor_16341	patrol_cor_16300		CORELLIA	cor_world	0	3364.1	308	5515.4	0
-patrol_cor_16342	patrol_cor_16300		CORELLIA	cor_world	0	3344.9	308	5523.1	0
-patrol_cor_16343	patrol_cor_16300		CORELLIA	cor_world	0	3338.9	308	5528.4	0
-patrol_cor_16344	patrol_cor_16300		CORELLIA	cor_world	0	3339.8	308.6	5536.9	0
-patrol_cor_16345	patrol_cor_16300		CORELLIA	cor_doaba_starport	1	4.5	0.6	76	0
-patrol_cor_16346	patrol_cor_16300		CORELLIA	cor_doaba_starport	3	12.4	0.6	79.2	0
-patrol_cor_16347	patrol_cor_16300		CORELLIA	cor_doaba_starport	3	13.9	0.6	73.2	0
-patrol_cor_16348	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	12.4	0.6	59.6	0
-patrol_cor_16349	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	10.7	0.6	53.2	0
-patrol_cor_16350	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	16.8	0.6	60.3	0
-patrol_cor_16351	patrol_cor_16300		CORELLIA	cor_doaba_starport	5	28.9	0.6	61.5	0
-patrol_cor_16352	patrol_cor_16300		CORELLIA	cor_doaba_starport	6	35.5	0.6	52.6	0
-patrol_cor_16353	patrol_cor_16300		CORELLIA	cor_doaba_starport	7	41.8	0.6	43.1	0
-patrol_cor_16354	patrol_cor_16300		CORELLIA	cor_doaba_starport	7	48.7	-0.5	34.3	0
-patrol_cor_16355	patrol_cor_16300		CORELLIA	cor_doaba_starport	13	52.8	1	23.7	0
-patrol_cor_16356	patrol_cor_16300		CORELLIA	cor_doaba_starport	16	57	1	11.4	0
-patrol_cor_16357	patrol_cor_16300		CORELLIA	cor_world	0	3333.5	308	5620.1	0
-patrol_cor_16358	patrol_cor_16300		CORELLIA	cor_world	0	3355.2	308	5617.6	0
-patrol_cor_16359	patrol_cor_16300		CORELLIA	cor_world	0	3371.9	308	5618.6	0
-patrol_cor_16360	patrol_cor_16300		CORELLIA	cor_world	0	3360.8	308	5602.9	0
-patrol_cor_16361	patrol_cor_16300		CORELLIA	cor_world	0	3328.6	308	5618.3	0
-patrol_cor_16362	patrol_cor_16300		CORELLIA	cor_doaba_starport	16	53.3	1	12.9	0
-patrol_cor_16363	patrol_cor_16300		CORELLIA	cor_doaba_starport	16	55.9	1	17.2	0
-patrol_cor_16364	patrol_cor_16300		CORELLIA	cor_doaba_starport	13	53.4	1	24.7	0
-patrol_cor_16365	patrol_cor_16300		CORELLIA	cor_doaba_starport	7	49.2	-0.5	36.1	0
-patrol_cor_16366	patrol_cor_16300		CORELLIA	cor_doaba_starport	7	44.9	0.6	42.5	0
-patrol_cor_16367	patrol_cor_16300		CORELLIA	cor_doaba_starport	7	39.6	0.6	47.1	0
-patrol_cor_16368	patrol_cor_16300		CORELLIA	cor_doaba_starport	6	35.4	0.6	55.3	0
-patrol_cor_16369	patrol_cor_16300		CORELLIA	cor_doaba_starport	5	29	0.6	63	0
-patrol_cor_16370	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	17.5	0.6	62.1	0
-patrol_cor_16371	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	0.5	0.6	60.2	0
-patrol_cor_16372	patrol_cor_16300		CORELLIA	cor_doaba_starport	8	-17.3	0.6	60.7	0
-patrol_cor_16373	patrol_cor_16300		CORELLIA	cor_doaba_starport	9	-23.7	1.6	60.8	0
-patrol_cor_16374	patrol_cor_16300		CORELLIA	cor_doaba_starport	9	-33.4	1.6	58	0
-patrol_cor_16375	patrol_cor_16300		CORELLIA	cor_doaba_starport	9	-33.5	1.6	52.5	0
-patrol_cor_16376	patrol_cor_16300		CORELLIA	cor_doaba_starport	9	-29.2	1.6	58.3	0
-patrol_cor_16377	patrol_cor_16300		CORELLIA	cor_doaba_starport	9	-22.9	1.6	59.9	0
-patrol_cor_16378	patrol_cor_16300		CORELLIA	cor_doaba_starport	4	-15.9	0.6	62.3	0
-patrol_cor_16379	patrol_cor_16300		CORELLIA	cor_doaba_starport	2	-13.5	0.6	78.9	0
-patrol_cor_16380	patrol_cor_16300		CORELLIA	cor_doaba_starport	1	-6.9	0.6	77.8	0
-patrol_cor_16381	patrol_cor_16300		CORELLIA	cor_doaba_starport	1	-0.2	0.6	77.5	0
-patrol_cor_16382	patrol_cor_16300		CORELLIA	cor_world	0	3333.5	308	5528.4	0
-patrol_cor_16383	patrol_cor_16300		CORELLIA	cor_world	0	3318.4	308	5516.9	0
-patrol_cor_16384	patrol_cor_16300		CORELLIA	cor_world	0	3301.1	308	5506.6	0
-patrol_cor_16385	patrol_cor_16300		CORELLIA	cor_world	0	3307.2	308	5505.2	0
-patrol_cor_16386	patrol_cor_16300		CORELLIA	cor_world	0	3303.8	308	5489	0
-patrol_cor_16387	patrol_cor_16300		CORELLIA	cor_world	0	3297.3	316.1	5481.8	0
-patrol_cor_16388	patrol_cor_16300		CORELLIA	cor_world	0	3285.5	316.1	5470.4	0
-patrol_cor_16389	patrol_cor_16300		CORELLIA	cor_world	0	3272.9	300	5457.8	0
-patrol_cor_16390	patrol_cor_16300		CORELLIA	cor_world	0	3255.1	300	5448.3	0
-patrol_cor_16391	patrol_cor_16300		CORELLIA	cor_world	0	3250.7	300	5454.6	0
-patrol_cor_16392	patrol_cor_16300		CORELLIA	cor_world	0	3254.9	300.7	5456.8	0
-patrol_cor_16400	patrol_cor_16400	FLIP	CORELLIA	cor_doaba_hospital	2	0.1	0.2	5.6	0
-patrol_cor_16401	patrol_cor_16400		CORELLIA	cor_doaba_hospital	2	-2.1	0.2	1.8	0
-patrol_cor_16402	patrol_cor_16400		CORELLIA	cor_doaba_hospital	2	-10.1	0.2	-3.5	0
-patrol_cor_16403	patrol_cor_16400		CORELLIA	cor_doaba_hospital	3	-12.7	0.2	-12.7	0
-patrol_cor_16404	patrol_cor_16400		CORELLIA	cor_doaba_hospital	3	-5.2	0.2	-14	0
-patrol_cor_16405	patrol_cor_16400		CORELLIA	cor_doaba_hospital	3	0.1	0.2	-14.4	0
-patrol_cor_16406	patrol_cor_16400		CORELLIA	cor_world	0	3291.3	300	5393.8	0
-patrol_cor_16407	patrol_cor_16400		CORELLIA	cor_world	0	3301.9	300	5381.6	0
-patrol_cor_16408	patrol_cor_16400		CORELLIA	cor_world	0	3306.6	302.2	5376.8	0
-patrol_cor_16409	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	1	-6.6	2.2	15.3	0
-patrol_cor_16410	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	2	-8.4	2.3	10.4	0
-patrol_cor_16411	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	-1.9	2.3	6.7	0
-patrol_cor_16412	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	-4.7	1.2	-0.3	0
-patrol_cor_16413	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	-10.2	1.8	-11	0
-patrol_cor_16414	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	11	-10.9	1.7	-15.8	0
-patrol_cor_16415	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	11	-10.1	1.7	-17.4	0
-patrol_cor_16416	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	11	-6.5	1.7	-16.5	0
-patrol_cor_16417	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	11	10.1	1.7	-16.8	0
-patrol_cor_16418	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	10.6	1.7	-11.3	0
-patrol_cor_16419	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	8.2	1.6	-6.2	0
-patrol_cor_16420	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	10	1.4	2.3	4.6	0
-patrol_cor_16421	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	2	4.7	2.3	8.3	0
-patrol_cor_16422	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	1	8.5	2.2	11.8	0
-patrol_cor_16423	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	1	3.9	2.2	15.7	0
-patrol_cor_16424	patrol_cor_16400		CORELLIA	cor_doaba_asso_hall	1	1.3	2.2	16.9	0
-patrol_cor_16425	patrol_cor_16400		CORELLIA	cor_world	0	3303.1	300	5382.4	0
-patrol_cor_16426	patrol_cor_16400		CORELLIA	cor_world	0	3280.6	300	5379	0
-patrol_cor_16427	patrol_cor_16400		CORELLIA	cor_doaba_cantina	15	-47.7	0.1	-16.7	0
-patrol_cor_16428	patrol_cor_16400		CORELLIA	cor_doaba_cantina	15	-41	0.1	-22	0
-patrol_cor_16429	patrol_cor_16400		CORELLIA	cor_doaba_cantina	14	-33.5	0.1	-20.2	0
-patrol_cor_16430	patrol_cor_16400		CORELLIA	cor_doaba_cantina	14	-31	0.1	-12.5	0
-patrol_cor_16431	patrol_cor_16400		CORELLIA	cor_doaba_cantina	14	-21.8	-0.9	-12.9	0
-patrol_cor_16432	patrol_cor_16400		CORELLIA	cor_doaba_cantina	3	-10.7	-0.9	-11.4	0
-patrol_cor_16433	patrol_cor_16400		CORELLIA	cor_doaba_cantina	3	-0.4	-0.9	-6.8	0
-patrol_cor_16434	patrol_cor_16400		CORELLIA	cor_doaba_cantina	3	12.7	-0.9	-6.9	0
-patrol_cor_16435	patrol_cor_16400		CORELLIA	cor_doaba_cantina	3	20.7	-0.9	-6.1	0
-patrol_cor_16436	patrol_cor_16400		CORELLIA	cor_doaba_cantina	3	25.1	-0.9	-1.3	0
-patrol_cor_16437	patrol_cor_16400		CORELLIA	cor_doaba_cantina	2	29.7	0.1	0.1	0
-patrol_cor_16438	patrol_cor_16400		CORELLIA	cor_doaba_cantina	2	34.4	0.1	-5.6	0
-patrol_cor_16439	patrol_cor_16400		CORELLIA	cor_doaba_cantina	1	40.4	0.1	-3.8	0
-patrol_cor_16440	patrol_cor_16400		CORELLIA	cor_doaba_cantina	1	46.6	0.1	-3.4	0
-patrol_cor_16441	patrol_cor_16400		CORELLIA	cor_world	0	3202.6	300	5292.3	0
-patrol_cor_16442	patrol_cor_16400		CORELLIA	cor_world	0	3164.1	300	5290.6	0
-patrol_cor_16443	patrol_cor_16400		CORELLIA	cor_world	0	3135.9	300	5291.4	0
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_corellia_100	patrol_corellia_100	FLIP	CORELLIA	cor_world	0	-6521.5	405.0	5908.5	0	POI Hidden Rebel Base - a Rebel guard
+patrol_corellia_101	patrol_corellia_100		CORELLIA	cor_world	0	-6523.8	405.0	5914.0	0	-
+patrol_corellia_102	patrol_corellia_100		CORELLIA	cor_world	0	-6530.8	405.0	5916.5	0	-
+patrol_corellia_103	patrol_corellia_100		CORELLIA	cor_world	0	-6537.4	405.0	5913.1	0	-
+patrol_corellia_200	patrol_corellia_200	FLIP	CORELLIA	cor_world	0	-6571.8	405.0	5946.6	0	POI Hidden Rebel Base - a Rebel guard
+patrol_corellia_201	patrol_corellia_200		CORELLIA	cor_world	0	-6577.3	405.2	5934.9	0	-
+patrol_corellia_202	patrol_corellia_200		CORELLIA	cor_world	0	-6578.4	406.4	5930.8	0	-
+patrol_corellia_203	patrol_corellia_200		CORELLIA	cor_world	0	-6572.6	406.2	5923.5	0	-
+patrol_corellia_300	patrol_corellia_300	FLIP	CORELLIA	cor_world	0	-5530.1	23.4	-6190.8	0	Vreni Island - an Ithorian musician
+patrol_corellia_301	patrol_corellia_300		CORELLIA	cor_world	0	-5555.2	23.4	-6185.0	0	-
+patrol_corellia_302	patrol_corellia_300		CORELLIA	cor_world	0	-5557.4	23.4	-6213.3	0	-
+patrol_corellia_303	patrol_corellia_300		CORELLIA	cor_world	0	-5544.5	23.4	-6207.7	0	-
+patrol_corellia_400	patrol_corellia_400	FLIP	CORELLIA	cor_world	0	-5453.7	21.0	-2789.1	0	Tyrena - a smuggler
+patrol_corellia_401	patrol_corellia_400		CORELLIA	cor_world	0	-5436.5	21.0	-2763.4	0	-
+patrol_corellia_402	patrol_corellia_400		CORELLIA	cor_world	0	-5411.0	21.0	-2764.3	0	-
+patrol_corellia_403	patrol_corellia_400		CORELLIA	cor_world	0	-5416.7	21.0	-2773.0	0	-
+patrol_corellia_404	patrol_corellia_400		CORELLIA	cor_world	0	-5441.4	21.0	-2759.2	0	-
+patrol_corellia_405	patrol_corellia_400		CORELLIA	cor_world	0	-5439.8	21.0	-2777.0	0	-
+patrol_corellia_500	patrol_corellia_500	LOOP	CORELLIA	cor_world	0	-3292.9	86.0	3265.5	0	Kor Vella - a settler
+patrol_corellia_501	patrol_corellia_500		CORELLIA	cor_world	0	-3292.9	86.0	3292.2	0	-
+patrol_corellia_502	patrol_corellia_500		CORELLIA	cor_world	0	-3319.2	86.0	3292.2	0	-
+patrol_corellia_503	patrol_corellia_500		CORELLIA	cor_world	0	-3319.2	86.0	3265.5	0	-
+patrol_corellia_600	patrol_corellia_600	FLIP	CORELLIA	cor_world	0	-477.5	28.0	-4465.4	0	Coronet - a mercenary
+patrol_corellia_601	patrol_corellia_600		CORELLIA	cor_world	0	-524.2	28.0	-4464.6	0	-
+patrol_corellia_602	patrol_corellia_600		CORELLIA	cor_world	0	-524.1	28.0	-4500.9	0	-
+patrol_corellia_603	patrol_corellia_600		CORELLIA	cor_world	0	-525.3	28.0	-4463.1	0	-
+patrol_corellia_604	patrol_corellia_600		CORELLIA	cor_world	0	-545.4	28.0	-4464.6	0	-
+patrol_corellia_700	patrol_corellia_700	LOOP	CORELLIA	cor_world	0	-526.2	28.0	-4558.7	0	Coronet - a philosopher
+patrol_corellia_701	patrol_corellia_700		CORELLIA	cor_world	0	-524.1	28.0	-4534.6	0	-
+patrol_corellia_702	patrol_corellia_700		CORELLIA	cor_world	0	-471.0	28.0	-4534.0	0	-
+patrol_corellia_703	patrol_corellia_700		CORELLIA	cor_world	0	-470.1	28.0	-4557.8	0	-
+patrol_corellia_704	patrol_corellia_700		CORELLIA	cor_world	0	-503.9	28.0	-4556.6	0	-
+patrol_corellia_800	patrol_corellia_800	FLIP	CORELLIA	cor_world	0	3808.6	380.0	-4023.6	0	Outback - a stranded Imperial pilot
+patrol_corellia_801	patrol_corellia_800		CORELLIA	cor_world	0	3794.7	380.0	-4030.1	0	-
+patrol_corellia_802	patrol_corellia_800		CORELLIA	cor_world	0	3788.5	380.0	-4037.8	0	-
+patrol_corellia_803	patrol_corellia_800		CORELLIA	cor_world	0	3791.3	380.0	-4047.6	0	-
+patrol_corellia_804	patrol_corellia_800		CORELLIA	cor_world	0	3805.0	380.0	-4050.0	0	-
+patrol_corellia_805	patrol_corellia_800		CORELLIA	cor_world	0	3816.3	380.0	-4047.2	0	-
+patrol_corellia_900	patrol_corellia_900	FLIP	CORELLIA	cor_world	0	3757.9	380.0	-4051.0	0	Outback - a miner
+patrol_corellia_901	patrol_corellia_900		CORELLIA	cor_world	0	3764.6	380.0	-4045.1	0	-
+patrol_corellia_902	patrol_corellia_900		CORELLIA	cor_world	0	3772.1	380.0	-4026.5	0	-
+patrol_corellia_903	patrol_corellia_900		CORELLIA	cor_world	0	3773.3	380.0	-4011.8	0	-
+patrol_corellia_1000	patrol_corellia_1000	FLIP	CORELLIA	cor_world	0	3103.3	300.0	5141.6	0	Doaba Guerfel - a commoner
+patrol_corellia_1001	patrol_corellia_1000		CORELLIA	cor_world	0	3098.9	300.0	5167.7	0	-
+patrol_corellia_1002	patrol_corellia_1000		CORELLIA	cor_world	0	3125.4	300.0	5168.6	0	-
+patrol_corellia_1003	patrol_corellia_1000		CORELLIA	cor_world	0	3120.5	300.0	5138.5	0	-
+patrol_corellia_1100	patrol_corellia_1100	FLIP	CORELLIA	cor_world	0	3048.3	300.0	5196.8	0	Doaba Guerfel - a commoner
+patrol_corellia_1101	patrol_corellia_1100		CORELLIA	cor_world	0	3050.7	299.9	5171.2	0	-
+patrol_corellia_1102	patrol_corellia_1100		CORELLIA	cor_world	0	3062.1	300.0	5168.9	0	-
+patrol_corellia_1103	patrol_corellia_1100		CORELLIA	cor_world	0	3065.4	298.2	5130.7	0	-
+patrol_corellia_1104	patrol_corellia_1100		CORELLIA	cor_world	0	3103.7	300.0	5131.8	0	-
+patrol_corellia_1105	patrol_corellia_1100		CORELLIA	cor_world	0	3104.7	300.0	5169.2	0	-
+patrol_corellia_1106	patrol_corellia_1100		CORELLIA	cor_world	0	3052.7	300.0	5172.0	0	-
+patrol_corellia_1200	patrol_corellia_1200	FLIP	CORELLIA	cor_world	0	-146.2	28.0	-4739.0	0	Coronet - a CLL-8 binary load lifter
+patrol_corellia_1201	patrol_corellia_1200		CORELLIA	cor_world	0	-159.7	28.0	-4790.4	0	-
+patrol_corellia_1202	patrol_corellia_1200		CORELLIA	cor_world	0	-127.4	28.0	-4795.1	0	-
+patrol_corellia_1203	patrol_corellia_1200		CORELLIA	cor_world	0	-85.9	28.0	-4817.1	0	-
+patrol_corellia_1204	patrol_corellia_1200		CORELLIA	cor_world	0	28.2	28.0	-4805.4	0	-
+patrol_corellia_1205	patrol_corellia_1200		CORELLIA	cor_world	0	30.5	28.0	-4765.9	0	-
+patrol_corellia_1300	patrol_corellia_1300	LOOP	CORELLIA	cor_world	0	-9.9	28.0	-4640.0	0	Coronet - a commoner
+patrol_corellia_1301	patrol_corellia_1300		CORELLIA	cor_world	0	-27.0	28.0	-4535.4	0	-
+patrol_corellia_1302	patrol_corellia_1300		CORELLIA	cor_world	0	-147.6	28.0	-4534.8	0	-
+patrol_corellia_1303	patrol_corellia_1300		CORELLIA	cor_world	0	-150.9	28.0	-4711.5	0	-
+patrol_corellia_1304	patrol_corellia_1300		CORELLIA	cor_world	0	-94.9	28.0	-4649.5	0	-
+patrol_corellia_1305	patrol_corellia_1300		CORELLIA	cor_world	0	-94.5	28.0	-4570.5	0	-
+patrol_corellia_1306	patrol_corellia_1300		CORELLIA	cor_world	0	-73.0	28.0	-4580.7	0	-
+patrol_corellia_1307	patrol_corellia_1300		CORELLIA	cor_world	0	-66.3	28.5	-4572.6	0	-
+patrol_corellia_1308	patrol_corellia_1300		CORELLIA	cor_world	0	-28.1	28.5	-4610.5	0	-
+patrol_corellia_1309	patrol_corellia_1300		CORELLIA	cor_world	0	-39.3	28.5	-4616.7	0	-
+patrol_corellia_1400	patrol_corellia_1400	LOOP	CORELLIA	cor_world	0	-198.0	28.0	-4363.1	0	Coronet - a commoner
+patrol_corellia_1401	patrol_corellia_1400		CORELLIA	cor_world	0	-210.2	28.0	-4346.0	0	-
+patrol_corellia_1402	patrol_corellia_1400		CORELLIA	cor_world	0	-222.6	28.0	-4373.4	0	-
+patrol_corellia_1403	patrol_corellia_1400		CORELLIA	cor_world	0	-222.3	28.0	-4412.9	0	-
+patrol_corellia_1404	patrol_corellia_1400		CORELLIA	cor_world	0	-245.8	28.0	-4414.8	0	-
+patrol_corellia_1405	patrol_corellia_1400		CORELLIA	cor_world	0	-246.8	28.0	-4461.1	0	-
+patrol_corellia_1406	patrol_corellia_1400		CORELLIA	cor_world	0	-187.4	28.0	-4454.5	0	-
+patrol_corellia_1407	patrol_corellia_1400		CORELLIA	cor_world	0	-182.2	28.0	-4416.6	0	-
+patrol_corellia_1408	patrol_corellia_1400		CORELLIA	cor_world	0	-203.6	28.0	-4409.7	0	-
+patrol_corellia_1500	patrol_corellia_1500	FLIP	CORELLIA	cor_world	0	-132.4	28.0	-4357.2	0	Coronet - a commoner
+patrol_corellia_1501	patrol_corellia_1500		CORELLIA	cor_world	0	-126.8	28.0	-4405.6	0	-
+patrol_corellia_1502	patrol_corellia_1500		CORELLIA	cor_world	0	-5.3	28.0	-4408.8	0	-
+patrol_corellia_1503	patrol_corellia_1500		CORELLIA	cor_world	0	-4.6	28.0	-4370.0	0	-
+patrol_corellia_1504	patrol_corellia_1500		CORELLIA	cor_world	0	50.2	28.0	-4371.0	0	-
+patrol_corellia_1600	patrol_corellia_1600	LOOP	CORELLIA	cor_world	0	1.6	28.0	-4463.7	0	Coronet - a commoner
+patrol_corellia_1601	patrol_corellia_1600		CORELLIA	cor_world	0	59.7	28.0	-4464.9	0	-
+patrol_corellia_1602	patrol_corellia_1600		CORELLIA	cor_world	0	61.1	28.0	-4519.7	0	-
+patrol_corellia_1603	patrol_corellia_1600		CORELLIA	cor_world	0	86.6	28.0	-4519.7	0	-
+patrol_corellia_1604	patrol_corellia_1600		CORELLIA	cor_world	0	86.6	28.0	-4498.7	0	-
+patrol_corellia_1605	patrol_corellia_1600		CORELLIA	cor_world	0	117.7	28.0	-4498.6	0	-
+patrol_corellia_1606	patrol_corellia_1600		CORELLIA	cor_world	0	105.3	28.0	-4410.0	0	-
+patrol_corellia_1607	patrol_corellia_1600		CORELLIA	cor_world	0	2.3	28.0	-4410.0	0	-
+patrol_corellia_1700	patrol_corellia_1700	LOOP	CORELLIA	cor_world	0	-243.9	28.0	-4336.6	0	Coronet - a commoner
+patrol_corellia_1701	patrol_corellia_1700		CORELLIA	cor_world	0	-302.5	28.0	-4375.3	0	-
+patrol_corellia_1702	patrol_corellia_1700		CORELLIA	cor_world	0	-303.5	28.0	-4606.3	0	-
+patrol_corellia_1703	patrol_corellia_1700		CORELLIA	cor_world	0	-357.1	28.0	-4600.2	0	-
+patrol_corellia_1704	patrol_corellia_1700		CORELLIA	cor_world	0	-357.1	28.0	-4547.3	0	-
+patrol_corellia_1705	patrol_corellia_1700		CORELLIA	cor_world	0	-303.0	28.0	-4546.0	0	-
+patrol_corellia_1706	patrol_corellia_1700		CORELLIA	cor_world	0	-303.1	28.0	-4336.5	0	-
+patrol_corellia_1800	patrol_corellia_1800	FLIP	CORELLIA	cor_world	0	-505.9	28.0	-4534.7	0	Coronet - a medic
+patrol_corellia_1801	patrol_corellia_1800		CORELLIA	cor_world	0	-477.8	28.0	-4533.3	0	-
+patrol_corellia_1802	patrol_corellia_1800		CORELLIA	cor_world	0	-477.3	28.0	-4477.6	0	-
+patrol_corellia_1803	patrol_corellia_1800		CORELLIA	cor_world	0	-448.2	28.0	-4477.3	0	-
+patrol_corellia_1804	patrol_corellia_1800		CORELLIA	cor_world	0	-443.3	28.0	-4430.7	0	-
+patrol_corellia_1900	patrol_corellia_1900	LOOP	CORELLIA	cor_world	0	-503.4	28.0	-4670.1	0	Coronet - a commoner
+patrol_corellia_1901	patrol_corellia_1900		CORELLIA	cor_world	0	-503.4	28.0	-4640.1	0	-
+patrol_corellia_1902	patrol_corellia_1900		CORELLIA	cor_world	0	-432.1	28.0	-4640.3	0	-
+patrol_corellia_1903	patrol_corellia_1900		CORELLIA	cor_world	0	-431.8	28.0	-4736.5	0	-
+patrol_corellia_1904	patrol_corellia_1900		CORELLIA	cor_world	0	-450.0	28.0	-4750.8	0	-
+patrol_corellia_1905	patrol_corellia_1900		CORELLIA	cor_world	0	-486.7	28.0	-4707.4	0	-
+patrol_corellia_1906	patrol_corellia_1900		CORELLIA	cor_world	0	-504.0	28.0	-4707.0	0	-
+patrol_corellia_2000	patrol_corellia_2000	FLIP	CORELLIA	cor_world	0	-3370.0	86.0	-3295.0	0	Kor Vella - a CLL-8 binary load lifter
+patrol_corellia_2001	patrol_corellia_2000		CORELLIA	cor_world	0	-3397.0	85.6	3303.0	0	-
+patrol_corellia_2002	patrol_corellia_2000		CORELLIA	cor_world	0	-3417.0	78.3	3318.0	0	-
+patrol_corellia_2003	patrol_corellia_2000		CORELLIA	cor_world	0	-3452.0	78.0	3350.0	0	-
+patrol_corellia_2004	patrol_corellia_2000		CORELLIA	cor_world	0	-3426.0	77.2	3493.0	0	-
+patrol_corellia_2100	patrol_corellia_2100	LOOP	CORELLIA	cor_world	0	-3684.9	86.0	3102.2	0	Kor Vella - an R3 unit
+patrol_corellia_2101	patrol_corellia_2100		CORELLIA	cor_world	0	-3691.5	86.2	3134.8	0	-
+patrol_corellia_2102	patrol_corellia_2100		CORELLIA	cor_world	0	-3723.3	86.1	3184.6	0	-
+patrol_corellia_2103	patrol_corellia_2100		CORELLIA	cor_world	0	-3771.3	86.0	3210.6	0	-
+patrol_corellia_2104	patrol_corellia_2100		CORELLIA	cor_world	0	-3765.8	86.6	3239.0	0	-
+patrol_corellia_2105	patrol_corellia_2100		CORELLIA	cor_world	0	-3726.3	86.1	3182.1	0	-
+patrol_corellia_2106	patrol_corellia_2100		CORELLIA	cor_world	0	-3694.8	86.2	3133.4	0	-
+patrol_corellia_2200	patrol_corellia_2200	FLIP	CORELLIA	cor_world	0	-3103.2	31.0	2800.8	0	Kor Vella - an R4 unit
+patrol_corellia_2201	patrol_corellia_2200		CORELLIA	cor_world	0	-3141.2	31.0	2791.2	0	-
+patrol_corellia_2202	patrol_corellia_2200		CORELLIA	cor_world	0	-3163.7	31.0	2797.1	0	-
+patrol_corellia_2203	patrol_corellia_2200		CORELLIA	cor_world	0	-3175.0	31.0	2797.0	0	-
+patrol_corellia_2300	patrol_corellia_2300	FLIP	CORELLIA	cor_world	0	-3181.0	31.0	2778.0	0	Kor Vella - an R4 unit
+patrol_corellia_2301	patrol_corellia_2300		CORELLIA	cor_world	0	-3227.2	30.6	2807.1	0	-
+patrol_corellia_2302	patrol_corellia_2300		CORELLIA	cor_world	0	-3257.9	47.3	2837.7	0	-
+patrol_corellia_2303	patrol_corellia_2300		CORELLIA	cor_world	0	-3301.8	68.4	2882.6	0	-
+patrol_corellia_2304	patrol_corellia_2300		CORELLIA	cor_world	0	-3340.9	72.7	2922.4	0	-
+patrol_corellia_2305	patrol_corellia_2300		CORELLIA	cor_world	0	-3357.7	85.8	2938.5	0	-
+patrol_corellia_2306	patrol_corellia_2300		CORELLIA	cor_world	0	-3383.1	86.0	2964.0	0	-
+patrol_corellia_2307	patrol_corellia_2300		CORELLIA	cor_world	0	-3394.5	86.0	3010.3	0	-
+patrol_corellia_2400	patrol_corellia_2400	LOOP	CORELLIA	cor_world	0	-5439.0	21.0	-2721.0	0	Tyrena - an EG-6 power droid
+patrol_corellia_2401	patrol_corellia_2400		CORELLIA	cor_world	0	-5439.0	21.0	-2682.0	0	-
+patrol_corellia_2402	patrol_corellia_2400		CORELLIA	cor_world	0	-5472.0	21.0	-2662.0	0	-
+patrol_corellia_2403	patrol_corellia_2400		CORELLIA	cor_world	0	-5485.0	21.0	-2662.0	0	-
+patrol_corellia_2404	patrol_corellia_2400		CORELLIA	cor_world	0	-5485.0	21.0	-2706.0	0	-
+patrol_corellia_2405	patrol_corellia_2400		CORELLIA	cor_world	0	-5439.0	21.0	-2706.0	0	-
+patrol_corellia_2500	patrol_corellia_2500	LOOP	CORELLIA	cor_world	0	-5272.6	4.0	-6414.0	0	Vreni Island - a WED Treadwell droid
+patrol_corellia_2501	patrol_corellia_2500		CORELLIA	cor_world	0	-5313.0	4.0	-6414.0	0	-
+patrol_corellia_2502	patrol_corellia_2500		CORELLIA	cor_world	0	-5313.0	4.0	-6439.0	0	-
+patrol_corellia_2503	patrol_corellia_2500		CORELLIA	cor_world	0	-5272.6	4.0	-6439.0	0	-
+patrol_corellia_2600	patrol_corellia_2600	FLIP	CORELLIA	cor_world	0	-5157.0	4.2	-6426.0	0	Vreni Island - an R4 unit
+patrol_corellia_2601	patrol_corellia_2600		CORELLIA	cor_world	0	-5157.0	4.1	-6394.0	0	-
+patrol_corellia_2602	patrol_corellia_2600		CORELLIA	cor_world	0	-5176.0	4.0	-6379.0	0	-
+patrol_corellia_2603	patrol_corellia_2600		CORELLIA	cor_world	0	-5270.0	4.0	-6379.0	0	-
+patrol_corellia_2700	patrol_corellia_2700	FLIP	CORELLIA	cor_hidden_reb_base	2	19.0	1.0	8.1	0	Hidden Rebel Base - an MSE-6 "Mouse" droid
+patrol_corellia_2701	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	2	-7.4	1.0	-5.9	0	-
+patrol_corellia_2702	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	9	-19.4	1.0	-1.1	0	-
+patrol_corellia_2703	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	9	-17.6	1.0	2.0	0	-
+patrol_corellia_2704	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	9	-12.8	3.4	1.9	0	-
+patrol_corellia_2705	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	9	-11.0	3.4	0.3	0	-
+patrol_corellia_2706	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	9	-11.0	7.0	-7.5	0	-
+patrol_corellia_2707	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	10	-11.0	7.0	-14.1	0	-
+patrol_corellia_2708	patrol_corellia_2700		CORELLIA	cor_hidden_reb_base	10	2.2	7.0	-15.6	0	-
+patrol_corellia_2800	patrol_corellia_2800	LOOP	CORELLIA	cor_hidden_reb_base	2	-2.9	1.0	0.0	0	Hidden Rebel Base - an MSE-6 "Mouse" droid
+patrol_corellia_2801	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	2	11.7	1.0	9.3	0	-
+patrol_corellia_2802	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	11.4	1.0	20.4	0	-
+patrol_corellia_2803	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	6.7	1.0	20.3	0	-
+patrol_corellia_2804	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	5.4	1.0	15.9	0	-
+patrol_corellia_2805	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	-4.9	1.0	15.9	0	-
+patrol_corellia_2806	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	-9.0	1.0	21.1	0	-
+patrol_corellia_2807	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	1	11.8	1.0	18.5	0	-
+patrol_corellia_2808	patrol_corellia_2800		CORELLIA	cor_hidden_reb_base	2	-11.5	1.0	8.5	0	-
+patrol_corellia_2900	patrol_corellia_2900	LOOP	CORELLIA	cor_hidden_reb_base	2	-14.8	1.0	-12.0	0	Hidden Rebel Base- a Rebel trooper
+patrol_corellia_2901	patrol_corellia_2900		CORELLIA	cor_hidden_reb_base	2	17.0	1.0	-12.0	0	-
+patrol_corellia_3000	patrol_corellia_3000	LOOP	CORELLIA	cor_hidden_reb_base	2	6.4	1.0	2.5	0	Hidden Rebel Base- a Rebel trooper
+patrol_corellia_3001	patrol_corellia_3000		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	-7.7	0	-
+patrol_corellia_3002	patrol_corellia_3000		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	-7.7	0	-
+patrol_corellia_3003	patrol_corellia_3000		CORELLIA	cor_hidden_reb_base	2	-6.0	1.0	8.1	0	-
+patrol_corellia_3004	patrol_corellia_3000		CORELLIA	cor_hidden_reb_base	2	6.4	1.0	8.1	0	-
+patrol_corellia_3100	patrol_corellia_3100	LOOP	CORELLIA	cor_world	0	-6471.0	398.0	5958.0	0	Hidden Rebel Base - a CLL-8 binary load lifter
+patrol_corellia_3101	patrol_corellia_3100		CORELLIA	cor_world	0	-6471.0	398.0	5979.0	0	-
+patrol_corellia_3102	patrol_corellia_3100		CORELLIA	cor_world	0	-6488.0	398.0	6029.0	0	-
+patrol_corellia_3103	patrol_corellia_3100		CORELLIA	cor_world	0	-6535.0	398.0	6024.0	0	-
+patrol_corellia_3104	patrol_corellia_3100		CORELLIA	cor_world	0	-6546.0	398.0	5979.0	0	-
+patrol_corellia_3105	patrol_corellia_3100		CORELLIA	cor_world	0	-6495.0	398.0	5941.0	0	-
+patrol_corellia_3200	patrol_corellia_3200	FLIP	CORELLIA	cor_world	0	-6475.4	398.0	5959.0	0	Hidden Rebel Base - an EG-6 power droid
+patrol_corellia_3201	patrol_corellia_3200		CORELLIA	cor_world	0	-6495.0	398.0	5944.0	0	-
+patrol_corellia_3202	patrol_corellia_3200		CORELLIA	cor_world	0	-6518.0	398.0	5966.0	0	-
+patrol_corellia_3203	patrol_corellia_3200		CORELLIA	cor_world	0	-6521.0	398.0	5960.0	0	-
+patrol_corellia_3204	patrol_corellia_3200		CORELLIA	cor_world	0	-6546.0	398.0	5987.0	0	-
+patrol_corellia_3205	patrol_corellia_3200		CORELLIA	cor_world	0	-6518.0	398.0	6043.0	0	-
+patrol_corellia_3300	patrol_corellia_3300	LOOP	CORELLIA	cor_world	0	4585.5	25.0	-5754.0	0	Stronghold - AT AT
+patrol_corellia_3301	patrol_corellia_3300		CORELLIA	cor_world	0	4617.7	25.4	-5707.4	0	-
+patrol_corellia_3302	patrol_corellia_3300		CORELLIA	cor_world	0	4701.8	25.0	-5710.5	0	-
+patrol_corellia_3303	patrol_corellia_3300		CORELLIA	cor_world	0	4739.8	25.0	-5744.0	0	-
+patrol_corellia_3304	patrol_corellia_3300		CORELLIA	cor_world	0	4736.7	25.0	-5717.0	0	-
+patrol_corellia_3305	patrol_corellia_3300		CORELLIA	cor_world	0	4710.3	25.0	-5852.6	0	-
+patrol_corellia_3306	patrol_corellia_3300		CORELLIA	cor_world	0	4628.6	25.0	-5863.3	0	-
+patrol_corellia_3307	patrol_corellia_3300		CORELLIA	cor_world	0	4592.9	25.0	-5827.5	0	-
+patrol_corellia_3400	patrol_corellia_3400	FLIP	CORELLIA	cor_world	0	-50.1	28.0	-4718.3	0	Coronet - a businessman
+patrol_corellia_3401	patrol_corellia_3400		CORELLIA	cor_world	0	-53.8	28.0	-4684.5	0	-
+patrol_corellia_3402	patrol_corellia_3400		CORELLIA	cor_coronet_starport	16	52.3	1.0	12.0	0	-
+patrol_corellia_3403	patrol_corellia_3400		CORELLIA	cor_coronet_starport	16	56.6	1.0	15.5	0	-
+patrol_corellia_3404	patrol_corellia_3400		CORELLIA	cor_coronet_starport	13	53.4	1.0	24.2	0	-
+patrol_corellia_3405	patrol_corellia_3400		CORELLIA	cor_coronet_starport	7	50.8	-0.5	30.8	0	-
+patrol_corellia_3406	patrol_corellia_3400		CORELLIA	cor_coronet_starport	7	47.2	-0.5	38.9	0	-
+patrol_corellia_3407	patrol_corellia_3400		CORELLIA	cor_coronet_starport	7	44.7	0.6	41.9	0	-
+patrol_corellia_3408	patrol_corellia_3400		CORELLIA	cor_coronet_starport	6	37.5	0.6	50.0	0	-
+patrol_corellia_3409	patrol_corellia_3400		CORELLIA	cor_coronet_starport	5	29.7	0.6	60.8	0	-
+patrol_corellia_3410	patrol_corellia_3400		CORELLIA	cor_coronet_starport	5	22.1	0.6	61.9	0	-
+patrol_corellia_3411	patrol_corellia_3400		CORELLIA	cor_coronet_starport	4	13.4	0.6	62.4	0	-
+patrol_corellia_3412	patrol_corellia_3400		CORELLIA	cor_coronet_starport	3	13.5	0.6	77.9	0	-
+patrol_corellia_3413	patrol_corellia_3400		CORELLIA	cor_coronet_starport	1	9.5	0.6	79.2	0	-
+patrol_corellia_3414	patrol_corellia_3400		CORELLIA	cor_coronet_starport	1	1.1	0.6	76.4	0	-
+patrol_corellia_3415	patrol_corellia_3400		CORELLIA	cor_world	0	-136.6	28.0	-4722.0	0	-
+patrol_corellia_3416	patrol_corellia_3400		CORELLIA	cor_world	0	-166.1	28.0	-4720.3	0	-
+patrol_corellia_3417	patrol_corellia_3400		CORELLIA	cor_world	0	-198.2	28.0	-4716.8	0	-
+patrol_corellia_3418	patrol_corellia_3400		CORELLIA	cor_world	0	-205.3	28.0	-4695.3	0	-
+patrol_corellia_3419	patrol_corellia_3400		CORELLIA	cor_world	0	-230.8	28.0	-4681.4	0	-
+patrol_corellia_3420	patrol_corellia_3400		CORELLIA	cor_world	0	-255.7	28.0	-4668.0	0	-
+patrol_corellia_3421	patrol_corellia_3400		CORELLIA	cor_world	0	-261.5	28.0	-4660.3	0	-
+patrol_corellia_3422	patrol_corellia_3400		CORELLIA	cor_world	0	-262.0	28.0	-4617.1	0	-
+patrol_corellia_3423	patrol_corellia_3400		CORELLIA	cor_world	0	-279.2	28.0	-4608.8	0	-
+patrol_corellia_3424	patrol_corellia_3400		CORELLIA	cor_world	0	-319.0	28.0	-4600.4	0	-
+patrol_corellia_3425	patrol_corellia_3400		CORELLIA	cor_world	0	-349.1	28.0	-4593.6	0	-
+patrol_corellia_3426	patrol_corellia_3400		CORELLIA	cor_world	0	-357.6	28.0	-4578.4	0	-
+patrol_corellia_3427	patrol_corellia_3400		CORELLIA	cor_world	0	-355.1	28.0	-4551.8	0	-
+patrol_corellia_3428	patrol_corellia_3400		CORELLIA	cor_world	0	-347.2	28.0	-4543.0	0	-
+patrol_corellia_3429	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	1	46.4	0.1	-2.9	0	-
+patrol_corellia_3430	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	1	36.8	0.1	-4.9	0	-
+patrol_corellia_3431	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	2	34.1	0.1	-4.4	0	-
+patrol_corellia_3432	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	2	29.1	0.1	0.0	0	-
+patrol_corellia_3433	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	25.0	-0.9	0.2	0	-
+patrol_corellia_3434	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	14.2	-0.9	2.7	0	-
+patrol_corellia_3435	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	4.1	-0.9	6.7	0	-
+patrol_corellia_3436	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	-4.1	-0.9	6.8	0	-
+patrol_corellia_3437	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	-14.8	-0.9	13.8	0	-
+patrol_corellia_3438	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-18.1	-0.9	15.5	0	-
+patrol_corellia_3439	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-23.5	-0.9	22.2	0	-
+patrol_corellia_3440	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-25.6	-0.5	15.5	0	-
+patrol_corellia_3441	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	13	-27.5	-0.5	9.4	0	-
+patrol_corellia_3442	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-25.1	-0.5	15.6	0	-
+patrol_corellia_3443	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-22.0	-0.9	21.0	0	-
+patrol_corellia_3444	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	12	-17.0	-0.9	14.9	0	-
+patrol_corellia_3445	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	-10.9	-0.9	12.4	0	-
+patrol_corellia_3446	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	1.1	-0.9	6.9	0	-
+patrol_corellia_3447	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	11.2	-0.9	5.0	0	-
+patrol_corellia_3448	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	11.0	-0.9	-4.2	0	-
+patrol_corellia_3449	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	-1.6	-0.9	-7.2	0	-
+patrol_corellia_3450	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	3	-12.4	-0.9	-10.9	0	-
+patrol_corellia_3451	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	14	-26.9	-0.9	-12.9	0	-
+patrol_corellia_3452	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	14	-32.7	0.1	-15.6	0	-
+patrol_corellia_3453	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	15	-38.5	0.1	-22.8	0	-
+patrol_corellia_3454	patrol_corellia_3400		CORELLIA	cor_coronet_cantina	15	-44.2	0.1	-19.9	0	-
+patrol_corellia_3455	patrol_corellia_3400		CORELLIA	cor_world	0	-357.0	28.0	-4442.4	0	-
+patrol_corellia_3456	patrol_corellia_3400		CORELLIA	cor_world	0	-338.6	28.0	-4402.5	0	-
+patrol_corellia_3457	patrol_corellia_3400		CORELLIA	cor_world	0	-294.8	28.0	-4370.6	0	-
+patrol_corellia_3458	patrol_corellia_3400		CORELLIA	cor_world	0	-247.3	28.0	-4352.5	0	-
+patrol_corellia_3459	patrol_corellia_3400		CORELLIA	cor_world	0	-203.1	28.0	-4354.0	0	-
+patrol_corellia_3460	patrol_corellia_3400		CORELLIA	cor_world	0	-143.7	28.0	-4358.3	0	-
+patrol_corellia_3461	patrol_corellia_3400		CORELLIA	cor_world	0	-91.1	28.0	-4392.7	0	-
+patrol_corellia_3462	patrol_corellia_3400		CORELLIA	cor_world	0	-74.3	28.2	-4418.3	0	-
+patrol_corellia_3463	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	5	-18.3	0.3	-14.6	0	-
+patrol_corellia_3464	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	5	-30.3	0.3	-12.9	0	-
+patrol_corellia_3465	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	6	-29.5	0.3	-9.0	0	-
+patrol_corellia_3466	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	6	-19.6	0.3	-8.0	0	-
+patrol_corellia_3467	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	6	-18.8	0.3	-10.4	0	-
+patrol_corellia_3468	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	6	-13.0	0.3	-4.9	0	-
+patrol_corellia_3469	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	6	-10.4	0.3	0.4	0	-
+patrol_corellia_3470	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	7	-4.3	0.3	12.3	0	-
+patrol_corellia_3471	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	7	-6.6	0.3	13.7	0	-
+patrol_corellia_3472	patrol_corellia_3400		CORELLIA	cor_coronet_hospital	7	-16.1	0.3	15.1	0	-
+patrol_corellia_3473	patrol_corellia_3400		CORELLIA	cor_world	0	-73.6	28.2	-4462.0	0	-
+patrol_corellia_3474	patrol_corellia_3400		CORELLIA	cor_world	0	-73.3	28.0	-4473.2	0	-
+patrol_corellia_3475	patrol_corellia_3400		CORELLIA	cor_world	0	-44.9	28.0	-4483.7	0	-
+patrol_corellia_3476	patrol_corellia_3400		CORELLIA	cor_world	0	-38.2	28.0	-4505.1	0	-
+patrol_corellia_3477	patrol_corellia_3400		CORELLIA	cor_world	0	-34.2	28.0	-4565.6	0	-
+patrol_corellia_3478	patrol_corellia_3400		CORELLIA	cor_world	0	-34.5	28.5	-4585.4	0	-
+patrol_corellia_3479	patrol_corellia_3400		CORELLIA	cor_world	0	-29.2	28.5	-4588.5	0	-
+patrol_corellia_3480	patrol_corellia_3400		CORELLIA	cor_world	0	-33.8	28.5	-4592.5	0	-
+patrol_corellia_3481	patrol_corellia_3400		CORELLIA	cor_world	0	-50.5	28.5	-4599.3	0	-
+patrol_corellia_3482	patrol_corellia_3400		CORELLIA	cor_world	0	-34.9	28.5	-4599.4	0	-
+patrol_corellia_3483	patrol_corellia_3400		CORELLIA	cor_world	0	-52.2	28.5	-4612.7	0	-
+patrol_corellia_3484	patrol_corellia_3400		CORELLIA	cor_world	0	-66.8	28.5	-4624.8	0	-
+patrol_corellia_3485	patrol_corellia_3400		CORELLIA	cor_world	0	-73.4	28.5	-4618.4	0	-
+patrol_corellia_3486	patrol_corellia_3400		CORELLIA	cor_world	0	-81.3	28.5	-4625.5	0	-
+patrol_corellia_3487	patrol_corellia_3400		CORELLIA	cor_world	0	-108.6	28.0	-4667.9	0	-
+patrol_corellia_3488	patrol_corellia_3400		CORELLIA	cor_world	0	-137.1	28.0	-4706.2	0	-
+patrol_corellia_3489	patrol_corellia_3400		CORELLIA	cor_world	0	-134.3	28.0	-4721.7	0	-
+patrol_corellia_3490	patrol_corellia_3400		CORELLIA	cor_coronet_starport	1	-3.0	0.6	76.9	0	-
+patrol_corellia_3491	patrol_corellia_3400		CORELLIA	cor_coronet_starport	1	-6.3	0.6	77.1	0	-
+patrol_corellia_3492	patrol_corellia_3400		CORELLIA	cor_coronet_starport	2	-13.6	0.6	79.0	0	-
+patrol_corellia_3493	patrol_corellia_3400		CORELLIA	cor_coronet_starport	4	-14.0	0.6	68.5	0	-
+patrol_corellia_3494	patrol_corellia_3400		CORELLIA	cor_coronet_starport	4	-11.8	0.6	53.4	0	-
+patrol_corellia_3495	patrol_corellia_3400		CORELLIA	cor_coronet_starport	8	-17.2	0.6	60.3	0	-
+patrol_corellia_3496	patrol_corellia_3400		CORELLIA	cor_coronet_starport	9	-22.8	1.6	60.4	0	-
+patrol_corellia_3497	patrol_corellia_3400		CORELLIA	cor_coronet_starport	9	-31.9	1.6	58.4	0	-
+patrol_corellia_3498	patrol_corellia_3400		CORELLIA	cor_coronet_starport	9	-36.6	1.6	53.8	0	-
+patrol_corellia_3499	patrol_corellia_3400		CORELLIA	cor_coronet_starport	10	-41.5	1.6	49.2	0	-
+patrol_corellia_3500	patrol_corellia_3400		CORELLIA	cor_coronet_starport	12	-48.3	2.6	42.5	0	-
+patrol_corellia_3501	patrol_corellia_3400		CORELLIA	cor_coronet_starport	12	-54.0	2.6	32.9	0	-
+patrol_corellia_3502	patrol_corellia_3400		CORELLIA	cor_coronet_starport	14	-56.1	2.6	21.9	0	-
+patrol_corellia_3503	patrol_corellia_3400		CORELLIA	cor_coronet_starport	14	-53.6	1.0	11.0	0	-
+patrol_corellia_3504	patrol_corellia_3400		CORELLIA	cor_coronet_starport	15	-45.3	1.0	6.7	0	-
+patrol_corellia_3505	patrol_corellia_3400		CORELLIA	cor_world	0	-59.0	28.0	-4776.9	0	-
+patrol_corellia_3506	patrol_corellia_3400		CORELLIA	cor_world	0	-40.5	28.0	-4756.3	0	-
+patrol_corellia_3507	patrol_corellia_3400		CORELLIA	cor_world	0	-28.0	28.0	-4741.5	0	-
+patrol_corellia_3508	patrol_corellia_3400		CORELLIA	cor_world	0	-26.4	28.0	-4728.8	0	-
+patrol_corellia_3509	patrol_corellia_3400		CORELLIA	cor_world	0	-34.3	28.0	-4723.8	0	-
+patrol_corellia_3510	patrol_corellia_3400		CORELLIA	cor_world	0	-39.5	28.0	-4725.7	0	-
+patrol_corellia_3600	patrol_corellia_3600	FLIP	CORELLIA	cor_world	0	-45.0	28.0	-4721.5	0	Coronet - a philosopher
+patrol_corellia_3601	patrol_corellia_3600		CORELLIA	cor_world	0	-52.1	28.0	-4684.2	0	-
+patrol_corellia_3602	patrol_corellia_3600		CORELLIA	cor_coronet_starport	16	53.3	1.0	9.5	0	-
+patrol_corellia_3603	patrol_corellia_3600		CORELLIA	cor_coronet_starport	16	57.5	1.0	15.4	0	-
+patrol_corellia_3604	patrol_corellia_3600		CORELLIA	cor_coronet_starport	13	54.3	1.0	24.0	0	-
+patrol_corellia_3605	patrol_corellia_3600		CORELLIA	cor_coronet_starport	7	51.7	-0.5	30.1	0	-
+patrol_corellia_3606	patrol_corellia_3600		CORELLIA	cor_coronet_starport	7	47.7	-0.5	39.1	0	-
+patrol_corellia_3607	patrol_corellia_3600		CORELLIA	cor_coronet_starport	7	45.8	0.6	42.1	0	-
+patrol_corellia_3608	patrol_corellia_3600		CORELLIA	cor_coronet_starport	7	40.0	0.6	46.4	0	-
+patrol_corellia_3609	patrol_corellia_3600		CORELLIA	cor_coronet_starport	6	33.4	0.6	57.6	0	-
+patrol_corellia_3610	patrol_corellia_3600		CORELLIA	cor_coronet_starport	5	29.4	0.6	62.3	0	-
+patrol_corellia_3611	patrol_corellia_3600		CORELLIA	cor_coronet_starport	5	21.6	0.6	60.9	0	-
+patrol_corellia_3612	patrol_corellia_3600		CORELLIA	cor_coronet_starport	4	14.6	0.6	62.1	0	-
+patrol_corellia_3613	patrol_corellia_3600		CORELLIA	cor_coronet_starport	3	14.7	0.6	77.1	0	-
+patrol_corellia_3614	patrol_corellia_3600		CORELLIA	cor_coronet_starport	1	10.6	0.6	80.3	0	-
+patrol_corellia_3615	patrol_corellia_3600		CORELLIA	cor_coronet_starport	1	6.8	0.6	79.3	0	-
+patrol_corellia_3616	patrol_corellia_3600		CORELLIA	cor_coronet_starport	1	2.6	0.6	76.5	0	-
+patrol_corellia_3617	patrol_corellia_3600		CORELLIA	cor_world	0	-135.2	28.0	-4725.0	0	-
+patrol_corellia_3618	patrol_corellia_3600		CORELLIA	cor_world	0	-141.4	28.0	-4729.7	0	-
+patrol_corellia_3619	patrol_corellia_3600		CORELLIA	cor_world	0	-148.8	28.0	-4762.9	0	-
+patrol_corellia_3620	patrol_corellia_3600		CORELLIA	cor_world	0	-151.0	28.0	-4796.2	0	-
+patrol_corellia_3621	patrol_corellia_3600		CORELLIA	cor_world	0	-151.3	28.0	-4805.8	0	-
+patrol_corellia_3623	patrol_corellia_3600		CORELLIA	cor_world	0	-153.0	28.0	-4806.0	0	-
+patrol_corellia_3624	patrol_corellia_3600		CORELLIA	cor_world	0	-162.7	28.0	-4800.8	0	-
+patrol_corellia_3625	patrol_corellia_3600		CORELLIA	cor_world	0	-220.1	28.0	-4794.9	0	-
+patrol_corellia_3626	patrol_corellia_3600		CORELLIA	cor_world	0	-237.4	28.0	-4799.7	0	-
+patrol_corellia_3627	patrol_corellia_3600		CORELLIA	cor_world	0	-249.3	28.0	-4810.7	0	-
+patrol_corellia_3628	patrol_corellia_3600		CORELLIA	cor_world	0	-279.5	28.0	-4809.8	0	-
+patrol_corellia_3629	patrol_corellia_3600		CORELLIA	cor_world	0	-300.6	28.0	-4785.0	0	-
+patrol_corellia_3630	patrol_corellia_3600		CORELLIA	cor_world	0	-326.1	28.0	-4767.6	0	-
+patrol_corellia_3631	patrol_corellia_3600		CORELLIA	cor_world	0	-365.0	28.0	-4750.4	0	-
+patrol_corellia_3632	patrol_corellia_3600		CORELLIA	cor_world	0	-364.4	28.0	-4713.1	0	-
+patrol_corellia_3633	patrol_corellia_3600		CORELLIA	cor_world	0	-363.3	28.0	-4699.6	0	-
+patrol_corellia_3634	patrol_corellia_3600		CORELLIA	cor_world	0	-366.2	28.3	-4699.1	0	-
+patrol_corellia_3635	patrol_corellia_3600		CORELLIA	cor_coronet_salon	1	-0.2	0.6	-0.6	0	-
+patrol_corellia_3636	patrol_corellia_3600		CORELLIA	cor_coronet_salon	1	-0.7	0.6	-3.9	0	-
+patrol_corellia_3637	patrol_corellia_3600		CORELLIA	cor_coronet_salon	1	1.5	0.6	-4.4	0	-
+patrol_corellia_3638	patrol_corellia_3600		CORELLIA	cor_coronet_salon	1	-0.3	0.6	-2.6	0	-
+patrol_corellia_3639	patrol_corellia_3600		CORELLIA	cor_world	0	-366.4	28.0	-4703.0	0	-
+patrol_corellia_3640	patrol_corellia_3600		CORELLIA	cor_world	0	-349.1	28.0	-4708.5	0	-
+patrol_corellia_3641	patrol_corellia_3600		CORELLIA	cor_world	0	-346.0	28.0	-4692.6	0	-
+patrol_corellia_3642	patrol_corellia_3600		CORELLIA	cor_world	0	-327.8	28.0	-4677.7	0	-
+patrol_corellia_3643	patrol_corellia_3600		CORELLIA	cor_world	0	-303.9	28.0	-4680.2	0	-
+patrol_corellia_3644	patrol_corellia_3600		CORELLIA	cor_world	0	-307.5	28.0	-4658.5	0	-
+patrol_corellia_3645	patrol_corellia_3600		CORELLIA	cor_world	0	-308.0	28.0	-4642.3	0	-
+patrol_corellia_3646	patrol_corellia_3600		CORELLIA	cor_world	0	-317.8	28.0	-4638.1	0	-
+patrol_corellia_3647	patrol_corellia_3600		CORELLIA	cor_world	0	-320.3	28.6	-4636.1	0	-
+patrol_corellia_3648	patrol_corellia_3600		CORELLIA	cor_world	0	-337.1	28.6	-4635.9	0	-
+patrol_corellia_3649	patrol_corellia_3600		CORELLIA	cor_world	0	-341.8	28.0	-4641.6	0	-
+patrol_corellia_3650	patrol_corellia_3600		CORELLIA	cor_world	0	-337.8	28.0	-4641.7	0	-
+patrol_corellia_3651	patrol_corellia_3600		CORELLIA	cor_world	0	-338.7	28.0	-4643.9	0	-
+patrol_corellia_3652	patrol_corellia_3600		CORELLIA	cor_world	0	-324.4	28.0	-4642.4	0	-
+patrol_corellia_3653	patrol_corellia_3600		CORELLIA	cor_world	0	-310.8	28.0	-4638.0	0	-
+patrol_corellia_3654	patrol_corellia_3600		CORELLIA	cor_world	0	-308.3	28.0	-4621.1	0	-
+patrol_corellia_3655	patrol_corellia_3600		CORELLIA	cor_world	0	-296.7	28.0	-4615.7	0	-
+patrol_corellia_3656	patrol_corellia_3600		CORELLIA	cor_world	0	-269.6	28.0	-4613.3	0	-
+patrol_corellia_3657	patrol_corellia_3600		CORELLIA	cor_world	0	-260.5	28.0	-4599.5	0	-
+patrol_corellia_3658	patrol_corellia_3600		CORELLIA	cor_world	0	-254.3	28.0	-4547.1	0	-
+patrol_corellia_3659	patrol_corellia_3600		CORELLIA	cor_world	0	-243.5	28.0	-4519.2	0	-
+patrol_corellia_3660	patrol_corellia_3600		CORELLIA	cor_world	0	-232.2	28.0	-4503.6	0	-
+patrol_corellia_3661	patrol_corellia_3600		CORELLIA	cor_world	0	-221.2	28.0	-4493.8	0	-
+patrol_corellia_3662	patrol_corellia_3600		CORELLIA	cor_world	0	-210.1	28.0	-4502.9	0	-
+patrol_corellia_3663	patrol_corellia_3600		CORELLIA	cor_world	0	-209.8	29.2	-4509.4	0	-
+patrol_corellia_3664	patrol_corellia_3600		CORELLIA	cor_world	0	-209.9	28.2	-4514.9	0	-
+patrol_corellia_3665	patrol_corellia_3600		CORELLIA	cor_world	0	-210.2	28.2	-4534.6	0	-
+patrol_corellia_3666	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	1	-0.2	0.8	31.2	0	-
+patrol_corellia_3667	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	1	-10.3	0.8	29.6	0	-
+patrol_corellia_3668	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	2	-10.4	3.2	23.4	0	-
+patrol_corellia_3669	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	2	-3.4	3.2	21.4	0	-
+patrol_corellia_3670	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-1.3	3.2	18.2	0	-
+patrol_corellia_3671	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-2.7	1.3	12.2	0	-
+patrol_corellia_3672	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-10.3	1.3	10.8	0	-
+patrol_corellia_3673	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-23.4	1.3	0.7	0	-
+patrol_corellia_3674	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-14.1	1.3	3.1	0	-
+patrol_corellia_3675	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	-5.8	1.3	12.5	0	-
+patrol_corellia_3676	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	3	0.9	3.2	18.4	0	-
+patrol_corellia_3677	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	2	5.6	3.1	22.1	0	-
+patrol_corellia_3678	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	2	10.7	3.1	23.9	0	-
+patrol_corellia_3679	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	1	10.0	0.8	30.3	0	-
+patrol_corellia_3680	patrol_corellia_3600		CORELLIA	cor_coronet_capitol	1	3.4	0.3	33.0	0	-
+patrol_corellia_3681	patrol_corellia_3600		CORELLIA	cor_world	0	-206.4	28.2	-4533.0	0	-
+patrol_corellia_3682	patrol_corellia_3600		CORELLIA	cor_world	0	-205.7	28.2	-4512.6	0	-
+patrol_corellia_3683	patrol_corellia_3600		CORELLIA	cor_world	0	-205.7	29.2	-4509.5	0	-
+patrol_corellia_3684	patrol_corellia_3600		CORELLIA	cor_world	0	-202.6	28.0	-4503.2	0	-
+patrol_corellia_3685	patrol_corellia_3600		CORELLIA	cor_world	0	-200.5	28.0	-4473.7	0	-
+patrol_corellia_3686	patrol_corellia_3600		CORELLIA	cor_world	0	-199.9	28.0	-4423.2	0	-
+patrol_corellia_3687	patrol_corellia_3600		CORELLIA	cor_world	0	-197.3	28.0	-4393.5	0	-
+patrol_corellia_3688	patrol_corellia_3600		CORELLIA	cor_world	0	-185.8	30.5	-4391.3	0	-
+patrol_corellia_3689	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	1	-0.3	2.5	14.9	0	-
+patrol_corellia_3690	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	1	-9.9	2.5	14.0	0	-
+patrol_corellia_3691	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	1	-13.1	2.5	11.9	0	-
+patrol_corellia_3692	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	3	-10.4	2.5	9.3	0	-
+patrol_corellia_3693	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	4	-4.8	2.5	8.0	0	-
+patrol_corellia_3694	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	4	0.1	1.1	-0.6	0	-
+patrol_corellia_3695	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	4	6.3	1.1	-4.5	0	-
+patrol_corellia_3696	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	4	11.5	1.1	-5.1	0	-
+patrol_corellia_3697	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	7	11.3	1.1	-11.0	0	-
+patrol_corellia_3698	patrol_corellia_3600		CORELLIA	cor_coronet_commerce_gh	7	13.0	1.1	-13.2	0	-
+patrol_corellia_3700	patrol_corellia_3700	FLIP	CORELLIA	cor_coronet_combat_gh	5	10.0	1.1	0.4	0	Coronet - a scientist
+patrol_corellia_3701	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	5	12.3	1.1	-1.4	0	-
+patrol_corellia_3702	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	4	11.4	1.1	-5.3	0	-
+patrol_corellia_3703	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	4	-1.0	1.1	-2.8	0	-
+patrol_corellia_3704	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	4	-1.2	2.5	5.7	0	-
+patrol_corellia_3705	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	3	-8.0	2.5	9.1	0	-
+patrol_corellia_3706	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	3	-13.1	2.5	10.6	0	-
+patrol_corellia_3707	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	1	-10.5	2.5	14.6	0	-
+patrol_corellia_3708	patrol_corellia_3700		CORELLIA	cor_coronet_combat_gh	1	-0.3	2.5	15.0	0	-
+patrol_corellia_3709	patrol_corellia_3700		CORELLIA	cor_world	0	-235.0	30.5	-4389.7	0	-
+patrol_corellia_3710	patrol_corellia_3700		CORELLIA	cor_world	0	-224.1	28.0	-4396.6	0	-
+patrol_corellia_3711	patrol_corellia_3700		CORELLIA	cor_world	0	-223.4	28.0	-4432.7	0	-
+patrol_corellia_3712	patrol_corellia_3700		CORELLIA	cor_world	0	-221.0	28.0	-4457.6	0	-
+patrol_corellia_3713	patrol_corellia_3700		CORELLIA	cor_world	0	-215.9	28.0	-4486.3	0	-
+patrol_corellia_3714	patrol_corellia_3700		CORELLIA	cor_world	0	-177.7	28.0	-4500.0	0	-
+patrol_corellia_3715	patrol_corellia_3700		CORELLIA	cor_world	0	-198.5	28.0	-4485.7	0	-
+patrol_corellia_3716	patrol_corellia_3700		CORELLIA	cor_world	0	-198.3	28.0	-4458.1	0	-
+patrol_corellia_3717	patrol_corellia_3700		CORELLIA	cor_world	0	-173.2	28.0	-4437.5	0	-
+patrol_corellia_3718	patrol_corellia_3700		CORELLIA	cor_world	0	-191.2	28.0	-4435.7	0	-
+patrol_corellia_3719	patrol_corellia_3700		CORELLIA	cor_world	0	-195.3	28.0	-4403.9	0	-
+patrol_corellia_3720	patrol_corellia_3700		CORELLIA	cor_world	0	-198.9	28.0	-4372.0	0	-
+patrol_corellia_3721	patrol_corellia_3700		CORELLIA	cor_world	0	-194.9	28.0	-4345.2	0	-
+patrol_corellia_3722	patrol_corellia_3700		CORELLIA	cor_world	0	-212.9	28.0	-4346.7	0	-
+patrol_corellia_3723	patrol_corellia_3700		CORELLIA	cor_world	0	-215.2	28.0	-4342.6	0	-
+patrol_corellia_3724	patrol_corellia_3700		CORELLIA	cor_world	0	-221.8	28.0	-4350.1	0	-
+patrol_corellia_3725	patrol_corellia_3700		CORELLIA	cor_world	0	-254.8	28.0	-4349.4	0	-
+patrol_corellia_3726	patrol_corellia_3700		CORELLIA	cor_world	0	-287.4	28.0	-4336.5	0	-
+patrol_corellia_3727	patrol_corellia_3700		CORELLIA	cor_world	0	-324.5	28	-4316.3	0	-
+patrol_corellia_3728	patrol_corellia_3700		CORELLIA	cor_world	0	-342.4	28	-4301.9	0	-
+patrol_corellia_3729	patrol_corellia_3700		CORELLIA	cor_world	0	-344.7	28	-4271.3	0	-
+patrol_corellia_3730	patrol_corellia_3700		CORELLIA	cor_world	0	-339	28.3	-4267.8	0	-
+patrol_corellia_3800	patrol_corellia_3800	FLIP	CORELLIA	cor_world	0	-347.2	28	-4214.5	0	Coronet - an EG-6 power droid
+patrol_corellia_3801	patrol_corellia_3800		CORELLIA	cor_world	0	-355.1	28	-4218.8	0	-
+patrol_corellia_3802	patrol_corellia_3800		CORELLIA	cor_world	0	-441.4	28	-4211.7	0	-
+patrol_corellia_3803	patrol_corellia_3800		CORELLIA	cor_world	0	-496	28	-4263.7	0	-
+patrol_corellia_3804	patrol_corellia_3800		CORELLIA	cor_world	0	-544.7	28	-4291.1	0	-
+patrol_corellia_3805	patrol_corellia_3800		CORELLIA	cor_world	0	-548.5	28.5	-4287.6	0	-
+patrol_corellia_3806	patrol_corellia_3800		CORELLIA	cor_world	0	-543.1	28	-4316.6	0	-
+patrol_corellia_3807	patrol_corellia_3800		CORELLIA	cor_world	0	-499.3	28	-4365.6	0	-
+patrol_corellia_3808	patrol_corellia_3800		CORELLIA	cor_world	0	-461.3	28	-4406.9	0	-
+patrol_corellia_3809	patrol_corellia_3800		CORELLIA	cor_world	0	-457.3	28	-4418.2	0	-
+patrol_corellia_3810	patrol_corellia_3800		CORELLIA	cor_world	0	-460.1	28.2	-4421.1	0	-
+patrol_corellia_3811	patrol_corellia_3800		CORELLIA	cor_world	0	-435.3	28	-4424.5	0	-
+patrol_corellia_3812	patrol_corellia_3800		CORELLIA	cor_world	0	-407.7	28	-4404.3	0	-
+patrol_corellia_3813	patrol_corellia_3800		CORELLIA	cor_world	0	-398.6	28.5	-4407.7	0	-
+patrol_corellia_3814	patrol_corellia_3800		CORELLIA	cor_world	0	-401.5	28	-4399.5	0	-
+patrol_corellia_3815	patrol_corellia_3800		CORELLIA	cor_world	0	-371.4	28	-4369.7	0	-
+patrol_corellia_3816	patrol_corellia_3800		CORELLIA	cor_world	0	-346.6	28	-4348.7	0	-
+patrol_corellia_3817	patrol_corellia_3800		CORELLIA	cor_world	0	-329.8	28	-4334.4	0	-
+patrol_corellia_3818	patrol_corellia_3800		CORELLIA	cor_world	0	-296.8	28	-4305.5	0	-
+patrol_corellia_3819	patrol_corellia_3800		CORELLIA	cor_world	0	-266.3	28	-4298.7	0	-
+patrol_corellia_3820	patrol_corellia_3800		CORELLIA	cor_world	0	-232.4	28	-4290.3	0	-
+patrol_corellia_3821	patrol_corellia_3800		CORELLIA	cor_world	0	-209.9	28	-4273.8	0	-
+patrol_corellia_3822	patrol_corellia_3800		CORELLIA	cor_world	0	-201.5	28	-4281.2	0	-
+patrol_corellia_3823	patrol_corellia_3800		CORELLIA	cor_world	0	-147	28	-4287.5	0	-
+patrol_corellia_3824	patrol_corellia_3800		CORELLIA	cor_world	0	-145	28	-4278.5	0	-
+patrol_corellia_3825	patrol_corellia_3800		CORELLIA	cor_world	0	-136.5	28	-4290	0	-
+patrol_corellia_3826	patrol_corellia_3800		CORELLIA	cor_world	0	-87.7	28	-4293.1	0	-
+patrol_corellia_3827	patrol_corellia_3800		CORELLIA	cor_world	0	-62.1	28	-4305.2	0	-
+patrol_corellia_3828	patrol_corellia_3800		CORELLIA	cor_world	0	-47.8	28	-4297.8	0	-
+patrol_corellia_3829	patrol_corellia_3800		CORELLIA	cor_world	0	-53.7	28	-4308.2	0	-
+patrol_corellia_3830	patrol_corellia_3800		CORELLIA	cor_world	0	-72.5	28	-4341.4	0	-
+patrol_corellia_3831	patrol_corellia_3800		CORELLIA	cor_world	0	-78.7	28	-4348.7	0	-
+patrol_corellia_3832	patrol_corellia_3800		CORELLIA	cor_world	0	-59.4	28	-4345.9	0	-
+patrol_corellia_3833	patrol_corellia_3800		CORELLIA	cor_world	0	-47.5	28	-4364.6	0	-
+patrol_corellia_3834	patrol_corellia_3800		CORELLIA	cor_world	0	-45.3	28	-4403.8	0	-
+patrol_corellia_3835	patrol_corellia_3800		CORELLIA	cor_world	0	-33.1	28	-4414.1	0	-
+patrol_corellia_3836	patrol_corellia_3800		CORELLIA	cor_world	0	-0.6	28	-4433.8	0	-
+patrol_corellia_3837	patrol_corellia_3800		CORELLIA	cor_world	0	15	30.5	-4438	0	-
+patrol_corellia_3838	patrol_corellia_3800		CORELLIA	cor_coronet_university	1	0.8	2.5	14.8	0	-
+patrol_corellia_3839	patrol_corellia_3800		CORELLIA	cor_coronet_university	1	11.5	2.5	13.6	0	-
+patrol_corellia_3840	patrol_corellia_3800		CORELLIA	cor_coronet_university	2	12	2.5	9.7	0	-
+patrol_corellia_3841	patrol_corellia_3800		CORELLIA	cor_coronet_university	4	5.6	2.5	8	0	-
+patrol_corellia_3842	patrol_corellia_3800		CORELLIA	cor_coronet_university	4	0.1	2.5	4.7	0	-
+patrol_corellia_3843	patrol_corellia_3800		CORELLIA	cor_coronet_university	4	-5.7	1.1	-3.6	0	-
+patrol_corellia_3844	patrol_corellia_3800		CORELLIA	cor_coronet_university	4	-11	1.1	-5.4	0	-
+patrol_corellia_3845	patrol_corellia_3800		CORELLIA	cor_coronet_university	9	-10.6	1.1	-12.1	0	-
+patrol_corellia_3900	patrol_corellia_3900	LOOP	CORELLIA	cor_world	0	-26.2	28	-4446	0	Coronet - an agriculturalist
+patrol_corellia_3901	patrol_corellia_3900		CORELLIA	cor_world	0	-29.4	28	-4462.1	0	-
+patrol_corellia_3902	patrol_corellia_3900		CORELLIA	cor_world	0	-41.3	28	-4477.3	0	-
+patrol_corellia_3903	patrol_corellia_3900		CORELLIA	cor_world	0	-77.9	28	-4477.3	0	-
+patrol_corellia_3904	patrol_corellia_3900		CORELLIA	cor_world	0	-115.2	28	-4477.1	0	-
+patrol_corellia_3905	patrol_corellia_3900		CORELLIA	cor_world	0	-138.4	28	-4464.1	0	-
+patrol_corellia_3906	patrol_corellia_3900		CORELLIA	cor_world	0	-163.5	28	-4466.2	0	-
+patrol_corellia_3907	patrol_corellia_3900		CORELLIA	cor_world	0	-175.3	28	-4483.5	0	-
+patrol_corellia_3908	patrol_corellia_3900		CORELLIA	cor_world	0	-202.5	28	-4493.6	0	-
+patrol_corellia_3909	patrol_corellia_3900		CORELLIA	cor_world	0	-229.2	28	-4496.6	0	-
+patrol_corellia_3910	patrol_corellia_3900		CORELLIA	cor_world	0	-236	28	-4507.8	0	-
+patrol_corellia_3911	patrol_corellia_3900		CORELLIA	cor_world	0	-248.9	28	-4534.6	0	-
+patrol_corellia_3912	patrol_corellia_3900		CORELLIA	cor_world	0	-254.4	28	-4565.1	0	-
+patrol_corellia_3913	patrol_corellia_3900		CORELLIA	cor_world	0	-256.1	28	-4601.3	0	-
+patrol_corellia_3914	patrol_corellia_3900		CORELLIA	cor_world	0	-247.5	28	-4618.1	0	-
+patrol_corellia_3915	patrol_corellia_3900		CORELLIA	cor_world	0	-207.2	28	-4622.3	0	-
+patrol_corellia_3916	patrol_corellia_3900		CORELLIA	cor_world	0	-167.9	28	-4625.3	0	-
+patrol_corellia_3917	patrol_corellia_3900		CORELLIA	cor_world	0	-155.1	28	-4643.6	0	-
+patrol_corellia_3918	patrol_corellia_3900		CORELLIA	cor_world	0	-153.5	28	-4683.4	0	-
+patrol_corellia_3919	patrol_corellia_3900		CORELLIA	cor_world	0	-148.1	28	-4729	0	-
+patrol_corellia_3920	patrol_corellia_3900		CORELLIA	cor_world	0	-140.4	28	-4770.6	0	-
+patrol_corellia_3921	patrol_corellia_3900		CORELLIA	cor_world	0	-130.3	28	-4793.9	0	-
+patrol_corellia_3922	patrol_corellia_3900		CORELLIA	cor_world	0	-100.4	28	-4810.3	0	-
+patrol_corellia_3923	patrol_corellia_3900		CORELLIA	cor_world	0	-52	28	-4813.4	0	-
+patrol_corellia_3924	patrol_corellia_3900		CORELLIA	cor_world	0	-0.5	28	-4811.4	0	-
+patrol_corellia_3925	patrol_corellia_3900		CORELLIA	cor_world	0	39.4	28	-4786.4	0	-
+patrol_corellia_3926	patrol_corellia_3900		CORELLIA	cor_world	0	50.9	28	-4726.2	0	-
+patrol_corellia_3927	patrol_corellia_3900		CORELLIA	cor_world	0	52.6	28	-4678.1	0	-
+patrol_corellia_3928	patrol_corellia_3900		CORELLIA	cor_world	0	67.1	28	-4638.2	0	-
+patrol_corellia_3929	patrol_corellia_3900		CORELLIA	cor_world	0	42.7	28	-4611.1	0	-
+patrol_corellia_3930	patrol_corellia_3900		CORELLIA	cor_world	0	24.3	28	-4590.4	0	-
+patrol_corellia_3931	patrol_corellia_3900		CORELLIA	cor_world	0	52.8	28	-4561.1	0	-
+patrol_corellia_3932	patrol_corellia_3900		CORELLIA	cor_world	0	27.4	28	-4529.3	0	-
+patrol_corellia_3933	patrol_corellia_3900		CORELLIA	cor_world	0	25.6	28	-4486.2	0	-
+patrol_corellia_3934	patrol_corellia_3900		CORELLIA	cor_world	0	6.5	28	-4461.2	0	-
+patrol_corellia_3935	patrol_corellia_3900		CORELLIA	cor_world	0	1.3	28	-4453.2	0	-
+patrol_corellia_3936	patrol_corellia_3900		CORELLIA	cor_world	0	-4.5	28	-4409	0	-
+patrol_corellia_3937	patrol_corellia_3900		CORELLIA	cor_world	0	-5.1	28	-4374.5	0	-
+patrol_corellia_3938	patrol_corellia_3900		CORELLIA	cor_world	0	-1.9	28	-4330.2	0	-
+patrol_corellia_3939	patrol_corellia_3900		CORELLIA	cor_world	0	-3.3	28	-4283.7	0	-
+patrol_corellia_3940	patrol_corellia_3900		CORELLIA	cor_world	0	-47.6	28	-4250.9	0	-
+patrol_corellia_3941	patrol_corellia_3900		CORELLIA	cor_world	0	-110.6	28	-4231.7	0	-
+patrol_corellia_3942	patrol_corellia_3900		CORELLIA	cor_world	0	-169.2	28	-4232.8	0	-
+patrol_corellia_3943	patrol_corellia_3900		CORELLIA	cor_world	0	-234.7	28	-4232.6	0	-
+patrol_corellia_3944	patrol_corellia_3900		CORELLIA	cor_world	0	-264.7	28	-4226.8	0	-
+patrol_corellia_3945	patrol_corellia_3900		CORELLIA	cor_world	0	-297.5	28	-4227.2	0	-
+patrol_corellia_3946	patrol_corellia_3900		CORELLIA	cor_world	0	-306.6	28	-4261.2	0	-
+patrol_corellia_3947	patrol_corellia_3900		CORELLIA	cor_world	0	-306.7	28	-4293.9	0	-
+patrol_corellia_3948	patrol_corellia_3900		CORELLIA	cor_world	0	-303.8	28	-4334.6	0	-
+patrol_corellia_3949	patrol_corellia_3900		CORELLIA	cor_world	0	-269.6	28	-4355.2	0	-
+patrol_corellia_3950	patrol_corellia_3900		CORELLIA	cor_world	0	-232.7	28	-4365	0	-
+patrol_corellia_3951	patrol_corellia_3900		CORELLIA	cor_world	0	-216.8	28	-4384	0	-
+patrol_corellia_3952	patrol_corellia_3900		CORELLIA	cor_world	0	-213.7	28	-4407.2	0	-
+patrol_corellia_3953	patrol_corellia_3900		CORELLIA	cor_world	0	-200.2	28	-4430.9	0	-
+patrol_corellia_3954	patrol_corellia_3900		CORELLIA	cor_world	0	-178.8	28	-4456	0	-
+patrol_corellia_3955	patrol_corellia_3900		CORELLIA	cor_world	0	-164.1	28	-4468.7	0	-
+patrol_corellia_3956	patrol_corellia_3900		CORELLIA	cor_world	0	-143.4	28	-4462.2	0	-
+patrol_corellia_3957	patrol_corellia_3900		CORELLIA	cor_world	0	-135.3	28	-4431.9	0	-
+patrol_corellia_3958	patrol_corellia_3900		CORELLIA	cor_world	0	-126.7	28	-4402.7	0	-
+patrol_corellia_3959	patrol_corellia_3900		CORELLIA	cor_world	0	-85.5	28	-4403.4	0	-
+patrol_corellia_3960	patrol_corellia_3900		CORELLIA	cor_world	0	-39	28	-4409.1	0	-
+patrol_corellia_3961	patrol_corellia_3900		CORELLIA	cor_world	0	-6.9	28	-4424.2	0	-
+patrol_corellia_3962	patrol_corellia_3900		CORELLIA	cor_world	0	-7.3	28	-4447.9	0	-
+patrol_corellia_3963	patrol_corellia_3900		CORELLIA	cor_world	0	-18.9	28	-4448.6	0	-
+patrol_corellia_4000	patrol_corellia_4000	LOOP	CORELLIA	cor_world	0	-58.6	28	-4849.7	0	Coronet - an artisan
+patrol_corellia_4001	patrol_corellia_4000		CORELLIA	cor_world	0	-58.8	28	-4856.4	0	-
+patrol_corellia_4002	patrol_corellia_4000		CORELLIA	cor_world	0	-74	28	-4867	0	-
+patrol_corellia_4003	patrol_corellia_4000		CORELLIA	cor_world	0	-125.3	28	-4865.4	0	-
+patrol_corellia_4004	patrol_corellia_4000		CORELLIA	cor_world	0	-175.2	28	-4852.9	0	-
+patrol_corellia_4005	patrol_corellia_4000		CORELLIA	cor_world	0	-238.5	28	-4838.1	0	-
+patrol_corellia_4006	patrol_corellia_4000		CORELLIA	cor_world	0	-292.8	28	-4812.1	0	-
+patrol_corellia_4007	patrol_corellia_4000		CORELLIA	cor_world	0	-349.8	28	-4797.1	0	-
+patrol_corellia_4008	patrol_corellia_4000		CORELLIA	cor_world	0	-405.5	28	-4785.6	0	-
+patrol_corellia_4009	patrol_corellia_4000		CORELLIA	cor_world	0	-438	28	-4756.1	0	-
+patrol_corellia_4010	patrol_corellia_4000		CORELLIA	cor_world	0	-477.8	28	-4718.5	0	-
+patrol_corellia_4011	patrol_corellia_4000		CORELLIA	cor_world	0	-504.1	28	-4701.3	0	-
+patrol_corellia_4012	patrol_corellia_4000		CORELLIA	cor_world	0	-502.9	28	-4668.2	0	-
+patrol_corellia_4013	patrol_corellia_4000		CORELLIA	cor_world	0	-503.5	28	-4643	0	-
+patrol_corellia_4014	patrol_corellia_4000		CORELLIA	cor_world	0	-462.7	28	-4640.1	0	-
+patrol_corellia_4015	patrol_corellia_4000		CORELLIA	cor_world	0	-422.1	28	-4636.2	0	-
+patrol_corellia_4016	patrol_corellia_4000		CORELLIA	cor_world	0	-414.2	28	-4603.6	0	-
+patrol_corellia_4017	patrol_corellia_4000		CORELLIA	cor_world	0	-400.3	28	-4580.7	0	-
+patrol_corellia_4018	patrol_corellia_4000		CORELLIA	cor_world	0	-397.5	28	-4531.2	0	-
+patrol_corellia_4019	patrol_corellia_4000		CORELLIA	cor_world	0	-385.8	28	-4469.1	0	-
+patrol_corellia_4020	patrol_corellia_4000		CORELLIA	cor_world	0	-363.2	28	-4429.7	0	-
+patrol_corellia_4021	patrol_corellia_4000		CORELLIA	cor_world	0	-340.7	28	-4396.8	0	-
+patrol_corellia_4022	patrol_corellia_4000		CORELLIA	cor_world	0	-300.1	28	-4365.4	0	-
+patrol_corellia_4023	patrol_corellia_4000		CORELLIA	cor_world	0	-267	28	-4345.7	0	-
+patrol_corellia_4024	patrol_corellia_4000		CORELLIA	cor_world	0	-237.7	28	-4328.6	0	-
+patrol_corellia_4025	patrol_corellia_4000		CORELLIA	cor_world	0	-236.5	28	-4292.1	0	-
+patrol_corellia_4026	patrol_corellia_4000		CORELLIA	cor_world	0	-232	28	-4241.9	0	-
+patrol_corellia_4027	patrol_corellia_4000		CORELLIA	cor_world	0	-195.6	28	-4231.6	0	-
+patrol_corellia_4028	patrol_corellia_4000		CORELLIA	cor_world	0	-166.9	28	-4219.8	0	-
+patrol_corellia_4029	patrol_corellia_4000		CORELLIA	cor_world	0	-168	28	-4163.6	0	-
+patrol_corellia_4030	patrol_corellia_4000		CORELLIA	cor_world	0	-173.5	28	-4111.5	0	-
+patrol_corellia_4031	patrol_corellia_4000		CORELLIA	cor_world	0	-188.8	28	-4063	0	-
+patrol_corellia_4032	patrol_corellia_4000		CORELLIA	cor_world	0	-182.8	28.4	-4052.2	0	-
+patrol_corellia_4033	patrol_corellia_4000		CORELLIA	cor_world	0	-145.4	28	-4085.7	0	-
+patrol_corellia_4034	patrol_corellia_4000		CORELLIA	cor_world	0	-135.5	28	-4129.9	0	-
+patrol_corellia_4035	patrol_corellia_4000		CORELLIA	cor_world	0	-103.4	28	-4171.1	0	-
+patrol_corellia_4036	patrol_corellia_4000		CORELLIA	cor_world	0	-52.7	28	-4181	0	-
+patrol_corellia_4037	patrol_corellia_4000		CORELLIA	cor_world	0	-13.3	28	-4201.4	0	-
+patrol_corellia_4038	patrol_corellia_4000		CORELLIA	cor_world	0	26.5	28	-4210.5	0	-
+patrol_corellia_4039	patrol_corellia_4000		CORELLIA	cor_world	0	66.3	28	-4241.6	0	-
+patrol_corellia_4040	patrol_corellia_4000		CORELLIA	cor_world	0	67.9	28	-4288.9	0	-
+patrol_corellia_4041	patrol_corellia_4000		CORELLIA	cor_world	0	71	28	-4346.9	0	-
+patrol_corellia_4042	patrol_corellia_4000		CORELLIA	cor_world	0	98.5	28	-4381.8	0	-
+patrol_corellia_4043	patrol_corellia_4000		CORELLIA	cor_world	0	110	28	-4431.5	0	-
+patrol_corellia_4044	patrol_corellia_4000		CORELLIA	cor_world	0	137.9	28	-4471.5	0	-
+patrol_corellia_4045	patrol_corellia_4000		CORELLIA	cor_world	0	158.6	28	-4526.2	0	-
+patrol_corellia_4046	patrol_corellia_4000		CORELLIA	cor_world	0	182.6	28	-4588.6	0	-
+patrol_corellia_4047	patrol_corellia_4000		CORELLIA	cor_world	0	204.5	28	-4631.9	0	-
+patrol_corellia_4048	patrol_corellia_4000		CORELLIA	cor_world	0	196.3	28	-4680.3	0	-
+patrol_corellia_4049	patrol_corellia_4000		CORELLIA	cor_world	0	166.6	28	-4712.6	0	-
+patrol_corellia_4050	patrol_corellia_4000		CORELLIA	cor_world	0	123.1	28	-4760.6	0	-
+patrol_corellia_4051	patrol_corellia_4000		CORELLIA	cor_world	0	83.8	28	-4813.3	0	-
+patrol_corellia_4052	patrol_corellia_4000		CORELLIA	cor_world	0	53.4	28	-4844.4	0	-
+patrol_corellia_4053	patrol_corellia_4000		CORELLIA	cor_world	0	15.8	28	-4859.5	0	-
+patrol_corellia_4054	patrol_corellia_4000		CORELLIA	cor_world	0	-38.4	28	-4862.7	0	-
+patrol_corellia_4055	patrol_corellia_4000		CORELLIA	cor_world	0	-58.3	28	-4855.5	0	-
+patrol_corellia_4100	patrol_corellia_4100	FLIP	CORELLIA	cor_world	0	6806.5	315.2	-5625.3	0	Bela Vistal - an industrial spy
+patrol_corellia_4101	patrol_corellia_4100		CORELLIA	cor_world	0	6806.8	315	-5618.9	0	-
+patrol_corellia_4102	patrol_corellia_4100		CORELLIA	cor_world	0	6784.4	315	-5619.3	0	-
+patrol_corellia_4103	patrol_corellia_4100		CORELLIA	cor_world	0	6752.4	314.9	-5615.2	0	-
+patrol_corellia_4104	patrol_corellia_4100		CORELLIA	cor_world	0	6733.1	315	-5592.3	0	-
+patrol_corellia_4105	patrol_corellia_4100		CORELLIA	cor_world	0	6711.6	315	-5593.9	0	-
+patrol_corellia_4106	patrol_corellia_4100		CORELLIA	cor_world	0	6708.1	315.4	-5596.9	0	-
+patrol_corellia_4107	patrol_corellia_4100		CORELLIA	cor_world	0	6708	316.9	-5602	0	-
+patrol_corellia_4108	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	1	3.2	2.2	16	0	-
+patrol_corellia_4109	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	1	7	2.2	14.5	0	-
+patrol_corellia_4110	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	2	8.6	2.3	10.3	0	-
+patrol_corellia_4111	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	2	3.5	2.3	7.2	0	-
+patrol_corellia_4112	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	10	1.9	1.2	0.2	0	-
+patrol_corellia_4113	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	10	1.5	1.2	-3.5	0	-
+patrol_corellia_4114	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	10	-2.4	2.3	5.4	0	-
+patrol_corellia_4115	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	2	-5.3	2.3	8.8	0	-
+patrol_corellia_4116	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	2	-8.1	2.3	10.1	0	-
+patrol_corellia_4117	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	1	-7.6	2.2	14.9	0	-
+patrol_corellia_4118	patrol_corellia_4100		CORELLIA	cor_bela_asso_hall	1	-0.5	2.2	17	0	-
+patrol_corellia_4119	patrol_corellia_4100		CORELLIA	cor_world	0	6706	315	-5595.6	0	-
+patrol_corellia_4120	patrol_corellia_4100		CORELLIA	cor_world	0	6700.7	315	-5581.8	0	-
+patrol_corellia_4121	patrol_corellia_4100		CORELLIA	cor_world	0	6702.1	315	-5560.2	0	-
+patrol_corellia_4122	patrol_corellia_4100		CORELLIA	cor_world	0	6705.6	317.3	-5549.7	0	-
+patrol_corellia_4123	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	1	0.1	2.5	15.5	0	-
+patrol_corellia_4124	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	1	2.2	2.5	14.2	0	-
+patrol_corellia_4125	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	1	12.9	2.5	13	0	-
+patrol_corellia_4126	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	2	12	2.5	9.2	0	-
+patrol_corellia_4127	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	4.3	2.5	8.1	0	-
+patrol_corellia_4128	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	1	2.5	4.9	0	-
+patrol_corellia_4129	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	0.3	1.1	0.1	0	-
+patrol_corellia_4130	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-6.5	1.1	-4.4	0	-
+patrol_corellia_4131	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-11.1	1.1	-5.1	0	-
+patrol_corellia_4132	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	9	-11.2	1.1	-10.5	0	-
+patrol_corellia_4133	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	9	-13.4	1.1	-10.8	0	-
+patrol_corellia_4134	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-10.8	1.1	-6.4	0	-
+patrol_corellia_4135	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-9.3	1.1	-4.7	0	-
+patrol_corellia_4136	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-3.1	1.1	-2.2	0	-
+patrol_corellia_4137	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-1.7	2.5	5.2	0	-
+patrol_corellia_4138	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	4	-5.6	2.5	8.6	0	-
+patrol_corellia_4139	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	3	-12.2	2.5	10	0	-
+patrol_corellia_4140	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	1	-11.4	2.5	14.1	0	-
+patrol_corellia_4141	patrol_corellia_4100		CORELLIA	cor_bela_comm_gh	1	-1.6	2.5	14.6	0	-
+patrol_corellia_4142	patrol_corellia_4100		CORELLIA	cor_world	0	6705.7	317.3	-5544.1	0	-
+patrol_corellia_4143	patrol_corellia_4100		CORELLIA	cor_world	0	6708.1	317.3	-5550.2	0	-
+patrol_corellia_4144	patrol_corellia_4100		CORELLIA	cor_world	0	6714.9	315	-5558.5	0	-
+patrol_corellia_4145	patrol_corellia_4100		CORELLIA	cor_world	0	6726.4	315	-5562.4	0	-
+patrol_corellia_4146	patrol_corellia_4100		CORELLIA	cor_world	0	6736.9	315	-5541.8	0	-
+patrol_corellia_4147	patrol_corellia_4100		CORELLIA	cor_world	0	6757.1	315	-5515.9	0	-
+patrol_corellia_4148	patrol_corellia_4100		CORELLIA	cor_world	0	6796.1	315	-5487.2	0	-
+patrol_corellia_4149	patrol_corellia_4100		CORELLIA	cor_world	0	6809.6	330.2	-5478.3	0	-
+patrol_corellia_4150	patrol_corellia_4100		CORELLIA	cor_world	0	6823.1	330.2	-5469.4	0	-
+patrol_corellia_4151	patrol_corellia_4100		CORELLIA	cor_world	0	6842.2	330	-5463.4	0	-
+patrol_corellia_4152	patrol_corellia_4100		CORELLIA	cor_world	0	6849.8	332.5	-5450.4	0	-
+patrol_corellia_4153	patrol_corellia_4100		CORELLIA	cor_world	0	6853.1	332.5	-5441.7	0	-
+patrol_corellia_4154	patrol_corellia_4100		CORELLIA	cor_bela_university	1	2.2	2.5	14	0	-
+patrol_corellia_4155	patrol_corellia_4100		CORELLIA	cor_bela_university	1	11.9	2.5	13.2	0	-
+patrol_corellia_4156	patrol_corellia_4100		CORELLIA	cor_bela_university	2	11.6	2.5	9.3	0	-
+patrol_corellia_4157	patrol_corellia_4100		CORELLIA	cor_bela_university	4	3.9	2.5	7.9	0	-
+patrol_corellia_4158	patrol_corellia_4100		CORELLIA	cor_bela_university	4	-0.3	1.1	-0.4	0	-
+patrol_corellia_4159	patrol_corellia_4100		CORELLIA	cor_bela_university	8	-0.4	1.1	-8.9	0	-
+patrol_corellia_4160	patrol_corellia_4100		CORELLIA	cor_bela_university	4	0.7	1.1	-0.1	0	-
+patrol_corellia_443	patrol_corellia_4100		CORELLIA	cor_bela_university	4	-1.2	2.5	5.5	0	-
+patrol_corellia_4162	patrol_corellia_4100		CORELLIA	cor_bela_university	4	-5.9	2.5	8.9	0	-
+patrol_corellia_4163	patrol_corellia_4100		CORELLIA	cor_bela_university	3	-13.3	2.5	10.2	0	-
+patrol_corellia_4164	patrol_corellia_4100		CORELLIA	cor_bela_university	1	-10.9	2.5	13.5	0	-
+patrol_corellia_4165	patrol_corellia_4100		CORELLIA	cor_bela_university	1	-1.3	2.5	15	0	-
+patrol_corellia_4166	patrol_corellia_4100		CORELLIA	cor_world	0	6853.1	332.5	-5444.8	0	-
+patrol_corellia_4167	patrol_corellia_4100		CORELLIA	cor_world	0	6853.5	332.5	-5452	0	-
+patrol_corellia_4168	patrol_corellia_4100		CORELLIA	cor_world	0	6855.7	330	-5471.3	0	-
+patrol_corellia_4169	patrol_corellia_4100		CORELLIA	cor_world	0	6861.3	330.1	-5486.5	0	-
+patrol_corellia_4170	patrol_corellia_4100		CORELLIA	cor_world	0	6881.5	330.1	-5520.8	0	-
+patrol_corellia_4171	patrol_corellia_4100		CORELLIA	cor_world	0	6892.6	330.2	-5540.2	0	-
+patrol_corellia_4172	patrol_corellia_4100		CORELLIA	cor_world	0	6912.9	330	-5559.8	0	-
+patrol_corellia_4173	patrol_corellia_4100		CORELLIA	cor_world	0	6921.6	330	-5567.1	0	-
+patrol_corellia_4174	patrol_corellia_4100		CORELLIA	cor_world	0	6911.1	331	-5572.2	0	-
+patrol_corellia_4175	patrol_corellia_4100		CORELLIA	cor_world	0	6909	331	-5582	0	-
+patrol_corellia_4176	patrol_corellia_4100		CORELLIA	cor_bela_hotel	2	0.1	1	22.4	0	-
+patrol_corellia_4177	patrol_corellia_4100		CORELLIA	cor_bela_hotel	2	6	1	20.2	0	-
+patrol_corellia_4178	patrol_corellia_4100		CORELLIA	cor_bela_hotel	3	5.6	1	15.5	0	-
+patrol_corellia_4179	patrol_corellia_4100		CORELLIA	cor_bela_hotel	3	0.7	1	14.3	0	-
+patrol_corellia_4180	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	0.4	1	8	0	-
+patrol_corellia_4181	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	6.6	1	1.9	0	-
+patrol_corellia_4182	patrol_corellia_4100		CORELLIA	cor_bela_hotel	5	14.6	1.3	-1.8	0	-
+patrol_corellia_4183	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	8.2	1	-1.7	0	-
+patrol_corellia_4184	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	0.2	1	-4.9	0	-
+patrol_corellia_4185	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	-6.1	1	-3	0	-
+patrol_corellia_4186	patrol_corellia_4100		CORELLIA	cor_bela_hotel	6	-16.3	1	-2	0	-
+patrol_corellia_4187	patrol_corellia_4100		CORELLIA	cor_bela_hotel	6	-22	1.6	3.1	0	-
+patrol_corellia_4188	patrol_corellia_4100		CORELLIA	cor_bela_hotel	6	-21.9	1.6	7.3	0	-
+patrol_corellia_4189	patrol_corellia_4100		CORELLIA	cor_bela_hotel	6	-20.3	1.6	6	0	-
+patrol_corellia_4190	patrol_corellia_4100		CORELLIA	cor_bela_hotel	4	-1.2	1	8	0	-
+patrol_corellia_4191	patrol_corellia_4100		CORELLIA	cor_bela_hotel	3	-1.3	1	14.4	0	-
+patrol_corellia_4192	patrol_corellia_4100		CORELLIA	cor_bela_hotel	3	-6.1	1	17.8	0	-
+patrol_corellia_4193	patrol_corellia_4100		CORELLIA	cor_bela_hotel	2	-4.8	1	22.4	0	-
+patrol_corellia_4194	patrol_corellia_4100		CORELLIA	cor_bela_hotel	2	0.1	1	26.2	0	-
+patrol_corellia_4195	patrol_corellia_4100		CORELLIA	cor_world	0	6906.7	330.6	-5580.5	0	-
+patrol_corellia_4196	patrol_corellia_4100		CORELLIA	cor_world	0	6890.4	330	-5585.8	0	-
+patrol_corellia_4197	patrol_corellia_4100		CORELLIA	cor_world	0	6870.7	330.2	-5596.4	0	-
+patrol_corellia_4198	patrol_corellia_4100		CORELLIA	cor_world	0	6855	315	-5605.4	0	-
+patrol_corellia_4199	patrol_corellia_4100		CORELLIA	cor_world	0	6843.8	315	-5595.8	0	-
+patrol_corellia_4200	patrol_corellia_4100		CORELLIA	cor_world	0	6832.8	315	-5594.8	0	-
+patrol_corellia_4201	patrol_corellia_4100		CORELLIA	cor_world	0	6814.5	315	-5615.4	0	-
+patrol_corellia_4300	patrol_corellia_4300	FLIP	CORELLIA	cor_world	0	6757.7	315.2	-5655	0	Bela Vistal - a government informant
+patrol_corellia_4301	patrol_corellia_4300		CORELLIA	cor_world	0	6749.4	315	-5656	0	-
+patrol_corellia_4302	patrol_corellia_4300		CORELLIA	cor_world	0	6744.4	315	-5670.4	0	-
+patrol_corellia_4303	patrol_corellia_4300		CORELLIA	cor_world	0	6741.6	315	-5687.7	0	-
+patrol_corellia_4304	patrol_corellia_4300		CORELLIA	cor_world	0	6749.9	315	-5708.5	0	-
+patrol_corellia_4305	patrol_corellia_4300		CORELLIA	cor_world	0	6776.6	315	-5731.5	0	-
+patrol_corellia_4306	patrol_corellia_4300		CORELLIA	cor_world	0	6817.4	315	-5733.9	0	-
+patrol_corellia_4307	patrol_corellia_4300		CORELLIA	cor_world	0	6831.3	315	-5747.8	0	-
+patrol_corellia_4308	patrol_corellia_4300		CORELLIA	cor_world	0	6829.8	315	-5774.6	0	-
+patrol_corellia_4309	patrol_corellia_4300		CORELLIA	cor_world	0	6795.3	315	-5776	0	-
+patrol_corellia_4310	patrol_corellia_4300		CORELLIA	cor_world	0	6758.8	315	-5777.5	0	-
+patrol_corellia_4311	patrol_corellia_4300		CORELLIA	cor_world	0	6755.3	315	-5779.1	0	-
+patrol_corellia_4312	patrol_corellia_4300		CORELLIA	cor_world	0	6761.2	315	-5780.5	0	-
+patrol_corellia_4313	patrol_corellia_4300		CORELLIA	cor_world	0	6802.6	315	-5781.9	0	-
+patrol_corellia_4314	patrol_corellia_4300		CORELLIA	cor_world	0	6821.3	315	-5787.1	0	-
+patrol_corellia_4315	patrol_corellia_4300		CORELLIA	cor_world	0	6822.1	315	-5808.6	0	-
+patrol_corellia_4316	patrol_corellia_4300		CORELLIA	cor_world	0	6796.4	315	-5808.4	0	-
+patrol_corellia_4317	patrol_corellia_4300		CORELLIA	cor_world	0	6767.4	315	-5810	0	-
+patrol_corellia_4318	patrol_corellia_4300		CORELLIA	cor_world	0	6746.1	315	-5813.3	0	-
+patrol_corellia_4319	patrol_corellia_4300		CORELLIA	cor_world	0	6727.3	315	-5817.3	0	-
+patrol_corellia_4320	patrol_corellia_4300		CORELLIA	cor_world	0	6715.9	317	-5838.3	0	-
+patrol_corellia_4321	patrol_corellia_4300		CORELLIA	cor_world	0	6713.9	326.8	-5861.6	0	-
+patrol_corellia_4322	patrol_corellia_4300		CORELLIA	cor_world	0	6713.3	329.9	-5883.2	0	-
+patrol_corellia_4323	patrol_corellia_4300		CORELLIA	cor_world	0	6702.8	330	-5900.9	0	-
+patrol_corellia_4324	patrol_corellia_4300		CORELLIA	cor_world	0	6689.7	330	-5905.5	0	-
+patrol_corellia_4325	patrol_corellia_4300		CORELLIA	cor_world	0	6667	330	-5906.3	0	-
+patrol_corellia_4326	patrol_corellia_4300		CORELLIA	cor_world	0	6645.2	330	-5908	0	-
+patrol_corellia_4327	patrol_corellia_4300		CORELLIA	cor_world	0	6639.8	330.6	-5912.1	0	-
+patrol_corellia_4328	patrol_corellia_4300		CORELLIA	cor_world	0	6641.4	330	-5912.1	0	-
+patrol_corellia_4329	patrol_corellia_4300		CORELLIA	cor_world	0	6640.5	330	-5929.8	0	-
+patrol_corellia_4330	patrol_corellia_4300		CORELLIA	cor_world	0	6642.3	330	-5937	0	-
+patrol_corellia_4331	patrol_corellia_4300		CORELLIA	cor_world	0	6646.5	330	-5939.4	0	-
+patrol_corellia_4332	patrol_corellia_4300		CORELLIA	cor_world	0	6651.5	330	-5942.6	0	-
+patrol_corellia_4333	patrol_corellia_4300		CORELLIA	cor_world	0	6650.1	330	-5943.2	0	-
+patrol_corellia_4400	patrol_corellia_4400	FLIP	CORELLIA	cor_world	0	3308.8	308	5532.7	0	Doaba Guerfel - a Chiss poacher smuggler
+patrol_corellia_4401	patrol_corellia_4400		CORELLIA	cor_world	0	3315.7	308	5528.8	0	-
+patrol_corellia_4402	patrol_corellia_4400		CORELLIA	cor_world	0	3322.8	308	5522.4	0	-
+patrol_corellia_4403	patrol_corellia_4400		CORELLIA	cor_world	0	3305	308	5487.7	0	-
+patrol_corellia_4404	patrol_corellia_4400		CORELLIA	cor_world	0	3298.3	316.1	5481.1	0	-
+patrol_corellia_4405	patrol_corellia_4400		CORELLIA	cor_world	0	3286.6	316.1	5469.4	0	-
+patrol_corellia_4406	patrol_corellia_4400		CORELLIA	cor_world	0	3273.8	300	5456.8	0	-
+patrol_corellia_4407	patrol_corellia_4400		CORELLIA	cor_world	0	3232.8	300	5432.4	0	-
+patrol_corellia_4408	patrol_corellia_4400		CORELLIA	cor_world	0	3205.1	300.2	5412.8	0	-
+patrol_corellia_4409	patrol_corellia_4400		CORELLIA	cor_world	0	3198.4	300.2	5411.7	0	-
+patrol_corellia_4410	patrol_corellia_4400		CORELLIA	cor_world	0	3199.6	300.2	5404.5	0	-
+patrol_corellia_4411	patrol_corellia_4400		CORELLIA	cor_world	0	3195.2	300.2	5401.6	0	-
+patrol_corellia_4412	patrol_corellia_4400		CORELLIA	cor_world	0	3201.6	300.2	5386.2	0	-
+patrol_corellia_4413	patrol_corellia_4400		CORELLIA	cor_world	0	3205.8	300.2	5383.2	0	-
+patrol_corellia_4414	patrol_corellia_4400		CORELLIA	cor_world	0	3220.4	300.2	5362.9	0	-
+patrol_corellia_4415	patrol_corellia_4400		CORELLIA	cor_world	0	3218.1	300.2	5360.3	0	-
+patrol_corellia_4416	patrol_corellia_4400		CORELLIA	cor_world	0	3211.4	300.2	5359.5	0	-
+patrol_corellia_4417	patrol_corellia_4400		CORELLIA	cor_world	0	3200.5	300	5343.9	0	-
+patrol_corellia_4418	patrol_corellia_4400		CORELLIA	cor_world	0	3177.1	300	5302.6	0	-
+patrol_corellia_4419	patrol_corellia_4400		CORELLIA	cor_world	0	3156.8	300	5265.3	0	-
+patrol_corellia_4420	patrol_corellia_4400		CORELLIA	cor_world	0	3139.1	300	5229.1	0	-
+patrol_corellia_4421	patrol_corellia_4400		CORELLIA	cor_world	0	3139.9	300	5223.4	0	-
+patrol_corellia_4422	patrol_corellia_4400		CORELLIA	cor_world	0	3146.7	300	5227.4	0	-
+patrol_corellia_4423	patrol_corellia_4400		CORELLIA	cor_world	0	3166.8	300	5237.8	0	-
+patrol_corellia_4424	patrol_corellia_4400		CORELLIA	cor_world	0	3175.1	302.5	5239.4	0	-
+patrol_corellia_4425	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	1	0.7	2.5	14.4	0	-
+patrol_corellia_4426	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	1	11.9	2.5	12.8	0	-
+patrol_corellia_4427	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	2	11.2	2.5	9.1	0	-
+patrol_corellia_4428	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	4.1	2.5	8.1	0	-
+patrol_corellia_4429	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	1	2.5	4.4	0	-
+patrol_corellia_4430	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-5.4	1.1	-3.6	0	-
+patrol_corellia_4431	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-11.2	1.1	-4.9	0	-
+patrol_corellia_4432	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	9	-11.3	1.1	-13.5	0	-
+patrol_corellia_4433	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-10.4	1.1	-5.1	0	-
+patrol_corellia_4434	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-1.3	1.1	-3.9	0	-
+patrol_corellia_4435	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-1	2.5	5	0	-
+patrol_corellia_4436	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	4	-5.7	2.5	9	0	-
+patrol_corellia_4437	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	3	-12.4	2.5	9.9	0	-
+patrol_corellia_4438	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	1	-11.5	2.5	13.7	0	-
+patrol_corellia_4439	patrol_corellia_4400		CORELLIA	cor_doaba_combat_gh	1	-0.4	2.5	15.1	0	-
+patrol_corellia_4440	patrol_corellia_4400		CORELLIA	cor_world	0	3176.9	302.5	5235.6	0	-
+patrol_corellia_4441	patrol_corellia_4400		CORELLIA	cor_world	0	3170.3	300	5229.3	0	-
+patrol_corellia_4442	patrol_corellia_4400		CORELLIA	cor_world	0	3137.1	300	5190.5	0	-
+patrol_corellia_4443	patrol_corellia_4400		CORELLIA	cor_world	0	3137.4	300	5170.5	0	-
+patrol_corellia_4444	patrol_corellia_4400		CORELLIA	cor_world	0	3146.9	300	5157.3	0	-
+patrol_corellia_4445	patrol_corellia_4400		CORELLIA	cor_world	0	3142.6	300	5152.1	0	-
+patrol_corellia_4446	patrol_corellia_4400		CORELLIA	cor_world	0	3146.2	300	5157.1	0	-
+patrol_corellia_4447	patrol_corellia_4400		CORELLIA	cor_world	0	3141.6	300	543.8	0	-
+patrol_corellia_4448	patrol_corellia_4400		CORELLIA	cor_world	0	3115.3	300	5162.4	0	-
+patrol_corellia_4449	patrol_corellia_4400		CORELLIA	cor_world	0	3098.4	300	5150.2	0	-
+patrol_corellia_4450	patrol_corellia_4400		CORELLIA	cor_world	0	3115.7	300	5137.3	0	-
+patrol_corellia_4451	patrol_corellia_4400		CORELLIA	cor_world	0	3149.2	300	5135.5	0	-
+patrol_corellia_4452	patrol_corellia_4400		CORELLIA	cor_world	0	3174.5	300	5128.7	0	-
+patrol_corellia_4453	patrol_corellia_4400		CORELLIA	cor_world	0	3176.2	302.5	5100.7	0	-
+patrol_corellia_4454	patrol_corellia_4400		CORELLIA	cor_world	0	3174.3	295	5074.2	0	-
+patrol_corellia_4455	patrol_corellia_4400		CORELLIA	cor_world	0	3179.2	294.7	5057.4	0	-
+patrol_corellia_4456	patrol_corellia_4400		CORELLIA	cor_world	0	3187.5	290	5028.7	0	-
+patrol_corellia_4457	patrol_corellia_4400		CORELLIA	cor_world	0	3183.6	290	4995.9	0	-
+patrol_corellia_4458	patrol_corellia_4400		CORELLIA	cor_world	0	3174.4	290	4983	0	-
+patrol_corellia_4459	patrol_corellia_4400		CORELLIA	cor_world	0	3141.2	290	4980.2	0	-
+patrol_corellia_4460	patrol_corellia_4400		CORELLIA	cor_world	0	3135.2	289.1	4985.4	0	-
+patrol_corellia_4461	patrol_corellia_4400		CORELLIA	cor_world	0	3110.1	284.3	4997.2	0	-
+patrol_corellia_4462	patrol_corellia_4400		CORELLIA	cor_world	0	3094.9	280	4997.4	0	-
+patrol_corellia_4463	patrol_corellia_4400		CORELLIA	cor_world	0	3083.5	280	5000.6	0	-
+patrol_corellia_4464	patrol_corellia_4400		CORELLIA	cor_world	0	3080.4	280.6	5002.5	0	-
+patrol_corellia_4465	patrol_corellia_4400		CORELLIA	cor_world	0	3081.3	280.3	4991.3	0	-
+patrol_corellia_4466	patrol_corellia_4400		CORELLIA	cor_world	0	3080.3	280.6	4985.8	0	-
+patrol_corellia_4500	patrol_corellia_4500	FLIP	CORELLIA	cor_world	0	3093.5	280.2	5013.5	0	Doaba Guerfel - a mercenary
+patrol_corellia_4501	patrol_corellia_4500		CORELLIA	cor_world	0	3094.6	280	5005.1	0	-
+patrol_corellia_4502	patrol_corellia_4500		CORELLIA	cor_world	0	3100.8	281.2	4997.2	0	-
+patrol_corellia_4503	patrol_corellia_4500		CORELLIA	cor_world	0	3111.7	284.3	4995	0	-
+patrol_corellia_4504	patrol_corellia_4500		CORELLIA	cor_world	0	3137.6	289.9	4981.2	0	-
+patrol_corellia_4505	patrol_corellia_4500		CORELLIA	cor_world	0	3159.6	290	4982.1	0	-
+patrol_corellia_4506	patrol_corellia_4500		CORELLIA	cor_world	0	3190	290	4980.9	0	-
+patrol_corellia_4507	patrol_corellia_4500		CORELLIA	cor_world	0	3201	290	5001.4	0	-
+patrol_corellia_4508	patrol_corellia_4500		CORELLIA	cor_world	0	3188.4	290	5036.6	0	-
+patrol_corellia_4509	patrol_corellia_4500		CORELLIA	cor_world	0	3183.5	294.4	5055.7	0	-
+patrol_corellia_4510	patrol_corellia_4500		CORELLIA	cor_world	0	3178.7	295	5068.3	0	-
+patrol_corellia_4511	patrol_corellia_4500		CORELLIA	cor_world	0	3178.6	295.2	5081.8	0	-
+patrol_corellia_4512	patrol_corellia_4500		CORELLIA	cor_world	0	3178.1	302.7	5102.4	0	-
+patrol_corellia_4513	patrol_corellia_4500		CORELLIA	cor_world	0	3176.8	300	5130	0	-
+patrol_corellia_4514	patrol_corellia_4500		CORELLIA	cor_world	0	3172.3	300	543.2	0	-
+patrol_corellia_4515	patrol_corellia_4500		CORELLIA	cor_world	0	3140.5	300	5168.7	0	-
+patrol_corellia_4516	patrol_corellia_4500		CORELLIA	cor_world	0	3139.8	300	5189.2	0	-
+patrol_corellia_4517	patrol_corellia_4500		CORELLIA	cor_world	0	3126.2	300	5214.4	0	-
+patrol_corellia_4518	patrol_corellia_4500		CORELLIA	cor_world	0	3127.1	300	5234.7	0	-
+patrol_corellia_4519	patrol_corellia_4500		CORELLIA	cor_world	0	3148.8	300	5248.6	0	-
+patrol_corellia_4520	patrol_corellia_4500		CORELLIA	cor_world	0	3158.4	300	5263.4	0	-
+patrol_corellia_4521	patrol_corellia_4500		CORELLIA	cor_world	0	3180.1	300	5301.9	0	-
+patrol_corellia_4522	patrol_corellia_4500		CORELLIA	cor_world	0	3190.4	300	5333.2	0	-
+patrol_corellia_4523	patrol_corellia_4500		CORELLIA	cor_world	0	3176.9	300	5359.7	0	-
+patrol_corellia_4524	patrol_corellia_4500		CORELLIA	cor_world	0	3172.7	300.2	5385.6	0	-
+patrol_corellia_4525	patrol_corellia_4500		CORELLIA	cor_world	0	3175.1	300	5401.6	0	-
+patrol_corellia_4526	patrol_corellia_4500		CORELLIA	cor_world	0	3203.5	300	5427.1	0	-
+patrol_corellia_4527	patrol_corellia_4500		CORELLIA	cor_world	0	3227.7	300	5430.3	0	-
+patrol_corellia_4528	patrol_corellia_4500		CORELLIA	cor_world	0	3268.3	300	5443.7	0	-
+patrol_corellia_4529	patrol_corellia_4500		CORELLIA	cor_world	0	3282	300	5450.1	0	-
+patrol_corellia_4530	patrol_corellia_4500		CORELLIA	cor_world	0	3293.9	316.1	5462.3	0	-
+patrol_corellia_4531	patrol_corellia_4500		CORELLIA	cor_world	0	3305.4	316.1	5473.5	0	-
+patrol_corellia_4532	patrol_corellia_4500		CORELLIA	cor_world	0	3312.4	308	5480.5	0	-
+patrol_corellia_4533	patrol_corellia_4500		CORELLIA	cor_world	0	3331.5	308	5487.8	0	-
+patrol_corellia_4534	patrol_corellia_4500		CORELLIA	cor_world	0	3346.2	308	5480.2	0	-
+patrol_corellia_4535	patrol_corellia_4500		CORELLIA	cor_world	0	3373.2	308.6	5470.9	0	-
+patrol_corellia_4536	patrol_corellia_4500		CORELLIA	cor_world	0	3388.9	308.6	5461.4	0	-
+patrol_corellia_4537	patrol_corellia_4500		CORELLIA	cor_world	0	3395.6	308.6	5473.3	0	-
+patrol_corellia_4538	patrol_corellia_4500		CORELLIA	cor_world	0	3394.9	308.6	5486	0	-
+patrol_corellia_4539	patrol_corellia_4500		CORELLIA	cor_world	0	3386.4	308.6	5490.4	0	-
+patrol_corellia_4540	patrol_corellia_4500		CORELLIA	cor_world	0	3380.2	308	5504.6	0	-
+patrol_corellia_4541	patrol_corellia_4500		CORELLIA	cor_world	0	3364.1	308	5515.4	0	-
+patrol_corellia_4542	patrol_corellia_4500		CORELLIA	cor_world	0	3344.9	308	5523.1	0	-
+patrol_corellia_4543	patrol_corellia_4500		CORELLIA	cor_world	0	3338.9	308	5528.4	0	-
+patrol_corellia_4544	patrol_corellia_4500		CORELLIA	cor_world	0	3339.8	308.6	5536.9	0	-
+patrol_corellia_4545	patrol_corellia_4500		CORELLIA	cor_doaba_starport	1	4.5	0.6	76	0	-
+patrol_corellia_4546	patrol_corellia_4500		CORELLIA	cor_doaba_starport	3	12.4	0.6	79.2	0	-
+patrol_corellia_4547	patrol_corellia_4500		CORELLIA	cor_doaba_starport	3	13.9	0.6	73.2	0	-
+patrol_corellia_4548	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	12.4	0.6	59.6	0	-
+patrol_corellia_4549	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	10.7	0.6	53.2	0	-
+patrol_corellia_4550	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	16.8	0.6	60.3	0	-
+patrol_corellia_4551	patrol_corellia_4500		CORELLIA	cor_doaba_starport	5	28.9	0.6	61.5	0	-
+patrol_corellia_4552	patrol_corellia_4500		CORELLIA	cor_doaba_starport	6	35.5	0.6	52.6	0	-
+patrol_corellia_4553	patrol_corellia_4500		CORELLIA	cor_doaba_starport	7	41.8	0.6	43.1	0	-
+patrol_corellia_4554	patrol_corellia_4500		CORELLIA	cor_doaba_starport	7	48.7	-0.5	34.3	0	-
+patrol_corellia_4555	patrol_corellia_4500		CORELLIA	cor_doaba_starport	13	52.8	1	23.7	0	-
+patrol_corellia_4556	patrol_corellia_4500		CORELLIA	cor_doaba_starport	16	57	1	11.4	0	-
+patrol_corellia_4557	patrol_corellia_4500		CORELLIA	cor_world	0	3333.5	308	5620.1	0	-
+patrol_corellia_4558	patrol_corellia_4500		CORELLIA	cor_world	0	3355.2	308	5617.6	0	-
+patrol_corellia_4559	patrol_corellia_4500		CORELLIA	cor_world	0	3371.9	308	5618.6	0	-
+patrol_corellia_4560	patrol_corellia_4500		CORELLIA	cor_world	0	3360.8	308	5602.9	0	-
+patrol_corellia_4561	patrol_corellia_4500		CORELLIA	cor_world	0	3328.6	308	5618.3	0	-
+patrol_corellia_4562	patrol_corellia_4500		CORELLIA	cor_doaba_starport	16	53.3	1	12.9	0	-
+patrol_corellia_4563	patrol_corellia_4500		CORELLIA	cor_doaba_starport	16	55.9	1	17.2	0	-
+patrol_corellia_4564	patrol_corellia_4500		CORELLIA	cor_doaba_starport	13	53.4	1	24.7	0	-
+patrol_corellia_4565	patrol_corellia_4500		CORELLIA	cor_doaba_starport	7	49.2	-0.5	36.1	0	-
+patrol_corellia_4566	patrol_corellia_4500		CORELLIA	cor_doaba_starport	7	44.9	0.6	42.5	0	-
+patrol_corellia_4567	patrol_corellia_4500		CORELLIA	cor_doaba_starport	7	39.6	0.6	47.1	0	-
+patrol_corellia_4568	patrol_corellia_4500		CORELLIA	cor_doaba_starport	6	35.4	0.6	55.3	0	-
+patrol_corellia_4569	patrol_corellia_4500		CORELLIA	cor_doaba_starport	5	29	0.6	63	0	-
+patrol_corellia_4570	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	17.5	0.6	62.1	0	-
+patrol_corellia_4571	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	0.5	0.6	60.2	0	-
+patrol_corellia_4572	patrol_corellia_4500		CORELLIA	cor_doaba_starport	8	-17.3	0.6	60.7	0	-
+patrol_corellia_4573	patrol_corellia_4500		CORELLIA	cor_doaba_starport	9	-23.7	1.6	60.8	0	-
+patrol_corellia_4574	patrol_corellia_4500		CORELLIA	cor_doaba_starport	9	-33.4	1.6	58	0	-
+patrol_corellia_4575	patrol_corellia_4500		CORELLIA	cor_doaba_starport	9	-33.5	1.6	52.5	0	-
+patrol_corellia_4576	patrol_corellia_4500		CORELLIA	cor_doaba_starport	9	-29.2	1.6	58.3	0	-
+patrol_corellia_4577	patrol_corellia_4500		CORELLIA	cor_doaba_starport	9	-22.9	1.6	59.9	0	-
+patrol_corellia_4578	patrol_corellia_4500		CORELLIA	cor_doaba_starport	4	-15.9	0.6	62.3	0	-
+patrol_corellia_4579	patrol_corellia_4500		CORELLIA	cor_doaba_starport	2	-13.5	0.6	78.9	0	-
+patrol_corellia_4580	patrol_corellia_4500		CORELLIA	cor_doaba_starport	1	-6.9	0.6	77.8	0	-
+patrol_corellia_4581	patrol_corellia_4500		CORELLIA	cor_doaba_starport	1	-0.2	0.6	77.5	0	-
+patrol_corellia_4582	patrol_corellia_4500		CORELLIA	cor_world	0	3333.5	308	5528.4	0	-
+patrol_corellia_4583	patrol_corellia_4500		CORELLIA	cor_world	0	3318.4	308	5516.9	0	-
+patrol_corellia_4584	patrol_corellia_4500		CORELLIA	cor_world	0	3301.1	308	5506.6	0	-
+patrol_corellia_4585	patrol_corellia_4500		CORELLIA	cor_world	0	3307.2	308	5505.2	0	-
+patrol_corellia_4586	patrol_corellia_4500		CORELLIA	cor_world	0	3303.8	308	5489	0	-
+patrol_corellia_4587	patrol_corellia_4500		CORELLIA	cor_world	0	3297.3	316.1	5481.8	0	-
+patrol_corellia_4588	patrol_corellia_4500		CORELLIA	cor_world	0	3285.5	316.1	5470.4	0	-
+patrol_corellia_4589	patrol_corellia_4500		CORELLIA	cor_world	0	3272.9	300	5457.8	0	-
+patrol_corellia_4590	patrol_corellia_4500		CORELLIA	cor_world	0	3255.1	300	5448.3	0	-
+patrol_corellia_4591	patrol_corellia_4500		CORELLIA	cor_world	0	3250.7	300	5454.6	0	-
+patrol_corellia_4592	patrol_corellia_4500		CORELLIA	cor_world	0	3254.9	300.7	5456.8	0	-
+patrol_corellia_4600	patrol_corellia_4600	FLIP	CORELLIA	cor_doaba_hospital	2	0.1	0.2	5.6	0	Doaba Guerfel - a medic
+patrol_corellia_4601	patrol_corellia_4600		CORELLIA	cor_doaba_hospital	2	-2.1	0.2	1.8	0	-
+patrol_corellia_4602	patrol_corellia_4600		CORELLIA	cor_doaba_hospital	2	-10.1	0.2	-3.5	0	-
+patrol_corellia_4603	patrol_corellia_4600		CORELLIA	cor_doaba_hospital	3	-12.7	0.2	-12.7	0	-
+patrol_corellia_4604	patrol_corellia_4600		CORELLIA	cor_doaba_hospital	3	-5.2	0.2	-14	0	-
+patrol_corellia_4605	patrol_corellia_4600		CORELLIA	cor_doaba_hospital	3	0.1	0.2	-14.4	0	-
+patrol_corellia_4606	patrol_corellia_4600		CORELLIA	cor_world	0	3291.3	300	5393.8	0	-
+patrol_corellia_4607	patrol_corellia_4600		CORELLIA	cor_world	0	3301.9	300	5381.6	0	-
+patrol_corellia_4608	patrol_corellia_4600		CORELLIA	cor_world	0	3306.6	302.2	5376.8	0	-
+patrol_corellia_4609	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	1	-6.6	2.2	15.3	0	-
+patrol_corellia_4610	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	2	-8.4	2.3	10.4	0	-
+patrol_corellia_4611	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	-1.9	2.3	6.7	0	-
+patrol_corellia_4612	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	-4.7	1.2	-0.3	0	-
+patrol_corellia_4613	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	-10.2	1.8	-11	0	-
+patrol_corellia_4614	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	11	-10.9	1.7	-15.8	0	-
+patrol_corellia_4615	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	11	-10.1	1.7	-17.4	0	-
+patrol_corellia_4616	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	11	-6.5	1.7	-16.5	0	-
+patrol_corellia_4617	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	11	10.1	1.7	-16.8	0	-
+patrol_corellia_4618	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	10.6	1.7	-11.3	0	-
+patrol_corellia_4619	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	8.2	1.6	-6.2	0	-
+patrol_corellia_4620	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	10	1.4	2.3	4.6	0	-
+patrol_corellia_4621	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	2	4.7	2.3	8.3	0	-
+patrol_corellia_4622	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	1	8.5	2.2	11.8	0	-
+patrol_corellia_4623	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	1	3.9	2.2	15.7	0	-
+patrol_corellia_4624	patrol_corellia_4600		CORELLIA	cor_doaba_asso_hall	1	1.3	2.2	16.9	0	-
+patrol_corellia_4625	patrol_corellia_4600		CORELLIA	cor_world	0	3303.1	300	5382.4	0	-
+patrol_corellia_4626	patrol_corellia_4600		CORELLIA	cor_world	0	3280.6	300	5379	0	-
+patrol_corellia_4627	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	15	-47.7	0.1	-16.7	0	-
+patrol_corellia_4628	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	15	-41	0.1	-22	0	-
+patrol_corellia_4629	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	14	-33.5	0.1	-20.2	0	-
+patrol_corellia_4630	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	14	-31	0.1	-12.5	0	-
+patrol_corellia_4631	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	14	-21.8	-0.9	-12.9	0	-
+patrol_corellia_4632	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	3	-10.7	-0.9	-11.4	0	-
+patrol_corellia_4633	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	3	-0.4	-0.9	-6.8	0	-
+patrol_corellia_4634	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	3	12.7	-0.9	-6.9	0	-
+patrol_corellia_4635	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	3	20.7	-0.9	-6.1	0	-
+patrol_corellia_4636	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	3	25.1	-0.9	-1.3	0	-
+patrol_corellia_4637	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	2	29.7	0.1	0.1	0	-
+patrol_corellia_4638	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	2	34.4	0.1	-5.6	0	-
+patrol_corellia_4639	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	1	40.4	0.1	-3.8	0	-
+patrol_corellia_4640	patrol_corellia_4600		CORELLIA	cor_doaba_cantina	1	46.6	0.1	-3.4	0	-
+patrol_corellia_4641	patrol_corellia_4600		CORELLIA	cor_world	0	3202.6	300	5292.3	0	-
+patrol_corellia_4642	patrol_corellia_4600		CORELLIA	cor_world	0	3164.1	300	5290.6	0	-
+patrol_corellia_4643	patrol_corellia_4600		CORELLIA	cor_world	0	3135.9	300	5291.4	0	-

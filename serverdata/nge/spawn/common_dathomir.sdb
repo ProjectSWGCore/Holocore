@@ -27,9 +27,9 @@ spawn_dathomir_24	DATHOMIR	dat_world	AREA	0	-86.5	18.0	-1575.8	7	1	a commoner	hu
 spawn_dathomir_25	DATHOMIR	dat_world	AREA	0	-98.4	18.0	-1565.5	47	1	a frontiersman	humanoid_frontiersman	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_26	DATHOMIR	dat_world	AREA	0	-109.8	18.0	-1592.8	50	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_27	DATHOMIR	dat_world	AREA	0	-111.2	18.0	-1591.3	91	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	idle			600
-spawn_dathomir_28	DATHOMIR	dat_world	PATROL	0	-104.3	18.0	-1633.7	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_5800	column	idle			600
-spawn_dathomir_29	DATHOMIR	dat_world	PATROL	0	-34.5	18.0	-1584.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_5900	column	idle			600
-spawn_dathomir_30	DATHOMIR	dat_world	PATROL	0	-117.0	18.0	-1622.2	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dat_6000	column	idle			600
+spawn_dathomir_28	DATHOMIR	dat_world	PATROL	0	-104.3	18.0	-1633.7	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dathomir_1300	column	idle			600
+spawn_dathomir_29	DATHOMIR	dat_world	PATROL	0	-34.5	18.0	-1584.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dathomir_1400	column	idle			600
+spawn_dathomir_30	DATHOMIR	dat_world	PATROL	0	-117.0	18.0	-1622.2	0	1	a mercenary	humanoid_smuggler_patrol_thief_10	ATTACKABLE	N	60	70	City	Science Outpost	1	PATROL	0	patrol_dathomir_1500	column	idle			600
 spawn_dathomir_31	DATHOMIR	dat_world	AREA	0	-45.6	18.0	-1584.9	99	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_32	DATHOMIR	dat_world	AREA	0	-75.0	18.0	-1598.3	-30	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dathomir_33	DATHOMIR	dat_world	AREA	0	-76.2	18.0	-1598.7	9	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Science Outpost	1	IDLE	0	0	-	conversation			600
@@ -52,7 +52,7 @@ spawn_dathomir_49	DATHOMIR	dat_trade_outpost_cantina	AREA	1	-0.1	0.6	0.9	35	1	Ni
 spawn_dathomir_50	DATHOMIR	dat_trade_outpost_cantina	AREA	1	2.4	0.6	6.1	146	1	Wallaw Loowobbli	humanoid_wallaw_loowobbli	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dathomir_51	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-0.9	0.6	-1.4	-88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dathomir_52	DATHOMIR	dat_trade_outpost_cantina	AREA	3	-3.7	0.6	-1.3	84	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_dathomir_53	DATHOMIR	dat_trade_outpost_cloning	PATROL	5	4.4	0.1	-3.6	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8600	column	idle			600
+spawn_dathomir_53	DATHOMIR	dat_trade_outpost_cloning	PATROL	5	4.4	0.1	-3.6	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dathomir_2100	column	idle			600
 spawn_dathomir_54	DATHOMIR	dat_trade_outpost_shed1	AREA	4	4.9	0.1	0.6	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dathomir_55	DATHOMIR	dat_trade_outpost_shed1	AREA	5	5.2	0.1	-3.6	-105	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dathomir_56	DATHOMIR	dat_trade_outpost_shed1	AREA	5	2.6	0.1	-3.6	90	1	an archeologist	humanoid_quest_archeologist	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	conversation			600
@@ -61,7 +61,7 @@ spawn_dathomir_58	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-3.7	0.1	-5.6	0	1	a mo
 spawn_dathomir_59	DATHOMIR	dat_trade_outpost_shed1	AREA	6	-5.3	0.1	-4.3	118	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dathomir_60	DATHOMIR	dat_trade_outpost_shed2	AREA	4	4.2	0.1	1.3	-94	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_61	DATHOMIR	dat_trade_outpost_shed2	AREA	6	-4.1	0.1	-3.9	90	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_dathomir_62	DATHOMIR	dat_trade_outpost_starport	PATROL	1	-5	0.1	-17.6	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8500	column	idle			600
+spawn_dathomir_62	DATHOMIR	dat_trade_outpost_starport	PATROL	1	-5	0.1	-17.6	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dathomir_2000	column	idle			600
 spawn_dathomir_63	DATHOMIR	dat_world	AREA	0	509.0	13.2	3076.0	-29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_dathomir_64	DATHOMIR	dat_world	AREA	0	579.7	6.0	3105.8	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dathomir_65	DATHOMIR	dat_world	AREA	0	581.7	6.0	3050.6	-136	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -82,8 +82,8 @@ spawn_dathomir_79	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	a commoner	h
 spawn_dathomir_80	DATHOMIR	dat_world	AREA	0	631.0	6.0	3091.0	-110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_81	DATHOMIR	dat_world	AREA	0	543.0	6.2	3053.0	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
 spawn_dathomir_82	DATHOMIR	dat_world	AREA	0	571.0	6.0	3091.0	132	1	Singular Nak	humanoid_singular_nak	INVULNERABLE	N	100	100	City	Trade Outpost	1	IDLE	0	0	-	idle			600
-spawn_dathomir_83	DATHOMIR	dat_world	PATROL	0	581.2	6	3105.3	0	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8700	column	idle			600
-spawn_dathomir_84	DATHOMIR	dat_world	PATROL	0	589.9	6.0	3050.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dat_8400	column	idle		simple_droid_sarcastic_alert_2	600
+spawn_dathomir_83	DATHOMIR	dat_world	PATROL	0	581.2	6	3105.3	0	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dathomir_2200	column	idle			600
+spawn_dathomir_84	DATHOMIR	dat_world	PATROL	0	589.9	6.0	3050.7	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Trade Outpost	1	PATROL	0	patrol_dathomir_1900	column	idle		simple_droid_sarcastic_alert_2	600
 spawn_dathomir_85	DATHOMIR	dat_cave	AREA	2	-48.5	-47.3	-13.1	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	86	90	Dungeon	Cave	1	LOITER	5	0	-	idle			600
 spawn_dathomir_86	DATHOMIR	dat_cave	AREA	2	-53.7	-68.2	-40.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	86	90	Dungeon	Cave	1	LOITER	5	0	-	idle			600
 spawn_dathomir_87	DATHOMIR	dat_cave	AREA	2	-45.6	-47.7	-59.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	85	88	Dungeon	Cave	1	LOITER	5	0	-	idle			600
@@ -277,8 +277,8 @@ spawn_dathomir_274	DATHOMIR	dat_world	AREA	0	5693.5	127.8	1797.7	0	1	a pirate	hu
 spawn_dathomir_275	DATHOMIR	dat_world	AREA	0	5727.3	121.7	1791.5	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle			600
 spawn_dathomir_276	DATHOMIR	dat_world	AREA	0	5729.8	125.0	1854.7	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle			600
 spawn_dathomir_277	DATHOMIR	dat_world	AREA	0	5751.5	124.7	1826.3	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	IDLE	2	0	-	idle			600
-spawn_dathomir_278	DATHOMIR	dat_world	PATROL	0	5681.9	125.0	1846.5	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dat_7500	column	idle			600
-spawn_dathomir_279	DATHOMIR	dat_world	PATROL	0	5754.7	125.0	1860.2	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dat_7600	column	idle			600
+spawn_dathomir_278	DATHOMIR	dat_world	PATROL	0	5681.9	125.0	1846.5	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dathomir_1700	column	idle			600
+spawn_dathomir_279	DATHOMIR	dat_world	PATROL	0	5754.7	125.0	1860.2	0	1	a pirate	humanoid_smuggler_patrol_thief_12	ATTACKABLE	N	60	70	Outback	Downed Ship	1	PATROL	0	patrol_dathomir_1800	column	idle			600
 spawn_dathomir_280	DATHOMIR	dat_world	AREA	0	5649.2	122.0	1866.2	0	1	a purbole	creature_purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle			600
 spawn_dathomir_281	DATHOMIR	dat_world	AREA	0	5706.7	122.0	1945.2	0	1	a purbole	creature_purbole	AGGRESSIVE	N	60	65	Outback	Downed Ship	3	LOITER	10	0	-	idle			600
 spawn_dathomir_282	DATHOMIR	dat_world	AREA	0	5702.9	122.0	1938.3	0	1	a purbole elder	creature_purbole_elder	AGGRESSIVE	B	60	65	Outback	Downed Ship	1	LOITER	2	0	-	idle			600
@@ -293,16 +293,16 @@ spawn_dathomir_290	DATHOMIR	dat_imp_prison_police_station	AREA	4	-19.5	1.0	16.6	
 spawn_dathomir_291	DATHOMIR	dat_imp_prison_police_station	AREA	5	3.4	0.1	-3.6	-90	1	Dolac Legasi	humanoid_dolac_legasi	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_292	DATHOMIR	dat_imp_prison_police_station	AREA	6	11.6	1.0	-21.2	68	1	Xarot Korlin	humanoid_imperial_xarot_korlin	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dathomir_293	DATHOMIR	dat_imp_prison_police_station	AREA	10	2.8	7.0	0.2	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
-spawn_dathomir_294	DATHOMIR	dat_world	PATROL	0	-6343.4	120.0	972.6	0	1	a Novatrooper Cadet	humanoid_imperial_stormtrooper_novatrooper_cadet	AGGRESSIVE	E	75	85	POI	Imperial Prison	4	PATROL	0	patrol_dat_4600	column	idle			600
-spawn_dathomir_295	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper Captain	humanoid_imperial_stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4700	column	idle			600
-spawn_dathomir_296	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4800	column	idle			600
-spawn_dathomir_297	DATHOMIR	dat_world	PATROL	0	-6342.3	128.0	766.8	0	1	a Novatrooper Medic	humanoid_imperial_stormtrooper_novatrooper_medic	AGGRESSIVE	E	75	85	POI	Imperial Prison	2	PATROL	0	patrol_dat_5100	column	idle			600
-spawn_dathomir_298	DATHOMIR	dat_world	PATROL	0	-6200.8	120.0	982.1	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5200	column	idle			600
-spawn_dathomir_299	DATHOMIR	dat_world	PATROL	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9000	column	idle			600
-spawn_dathomir_300	DATHOMIR	dat_world	PATROL	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8900	column	idle			600
-spawn_dathomir_301	DATHOMIR	dat_world	PATROL	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_8800	column	idle			600
-spawn_dathomir_302	DATHOMIR	dat_world	PATROL	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dat_9100	column	idle			600
-spawn_dathomir_303	DATHOMIR	dat_world	PATROL	0	-6356.5	128.0	780.4	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_4900	column	idle			600
+spawn_dathomir_294	DATHOMIR	dat_world	PATROL	0	-6343.4	120.0	972.6	0	1	a Novatrooper Cadet	humanoid_imperial_stormtrooper_novatrooper_cadet	AGGRESSIVE	E	75	85	POI	Imperial Prison	4	PATROL	0	patrol_dathomir_100	column	idle			600
+spawn_dathomir_295	DATHOMIR	dat_world	PATROL	0	-6472.4	120.0	975.1	0	1	a Novatrooper Captain	humanoid_imperial_stormtrooper_novatrooper_captain	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_200	column	idle			600
+spawn_dathomir_296	DATHOMIR	dat_world	PATROL	0	-6355.2	120.0	838.2	0	1	a Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_300	column	idle			600
+spawn_dathomir_297	DATHOMIR	dat_world	PATROL	0	-6342.3	128.0	766.8	0	1	a Novatrooper Medic	humanoid_imperial_stormtrooper_novatrooper_medic	AGGRESSIVE	E	75	85	POI	Imperial Prison	2	PATROL	0	patrol_dathomir_600	column	idle			600
+spawn_dathomir_298	DATHOMIR	dat_world	PATROL	0	-6200.8	120.0	982.1	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_700	column	idle			600
+spawn_dathomir_299	DATHOMIR	dat_world	PATROL	0	-6109.8	131.0	964.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2500	column	idle			600
+spawn_dathomir_300	DATHOMIR	dat_world	PATROL	0	-6280.0	130.1	784.1	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2400	column	idle			600
+spawn_dathomir_301	DATHOMIR	dat_world	PATROL	0	-6521.7	130.1	793.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2300	column	idle			600
+spawn_dathomir_302	DATHOMIR	dat_world	PATROL	0	-6450.3	130.0	1098.4	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	90	100	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2600	column	idle			600
+spawn_dathomir_303	DATHOMIR	dat_world	PATROL	0	-6356.5	128.0	780.4	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_400	column	idle			600
 spawn_dathomir_304	DATHOMIR	dat_world	AREA	0	-6146.6	128.0	969.9	44	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_305	DATHOMIR	dat_world	AREA	0	-6146.5	128.0	976.4	134	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_306	DATHOMIR	dat_world	AREA	0	-6202.5	128.0	1006.8	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	TURN	0	0	-	idle			600
@@ -313,9 +313,9 @@ spawn_dathomir_310	DATHOMIR	dat_world	AREA	0	-6389.8	120.0	860.3	0	1	an Elite No
 spawn_dathomir_311	DATHOMIR	dat_world	AREA	0	-6322.5	120.0	870.7	49	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_312	DATHOMIR	dat_world	AREA	0	-6346.5	128.0	805.6	171	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_313	DATHOMIR	dat_world	AREA	0	-6353.8	128.0	804.0	151	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
-spawn_dathomir_314	DATHOMIR	dat_world	PATROL	0	-6164.6	128	974.9	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_9200	column	idle			600
-spawn_dathomir_315	DATHOMIR	dat_world	PATROL	0	-6164.8	128	971.7	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_9300	column	idle			600
-spawn_dathomir_316	DATHOMIR	dat_world	PATROL	0	-6399.3	120.0	900.0	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dat_5000	column	idle			600
+spawn_dathomir_314	DATHOMIR	dat_world	PATROL	0	-6164.6	128	974.9	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2700	column	idle			600
+spawn_dathomir_315	DATHOMIR	dat_world	PATROL	0	-6164.8	128	971.7	0	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_2800	column	idle			600
+spawn_dathomir_316	DATHOMIR	dat_world	PATROL	0	-6399.3	120.0	900.0	0	1	an Elite Novatrooper Commander	humanoid_imperial_stormtrooper_novatrooper_elite_commander	AGGRESSIVE	E	75	85	POI	Imperial Prison	1	PATROL	0	patrol_dathomir_500	column	idle			600
 spawn_dathomir_317	DATHOMIR	dat_world	AREA	0	-6390.7	120.0	934.0	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_318	DATHOMIR	dat_world	AREA	0	-6346.0	128.0	743.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Prison	1	IDLE	0	0	-	idle			600
 spawn_dathomir_319	DATHOMIR	dat_ns_stronghold	AREA	5	12.6	0.8	-30.5	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle			600
@@ -330,13 +330,13 @@ spawn_dathomir_327	DATHOMIR	dat_ns_stronghold	AREA	12	-19.6	7.2	-28.5	0	1	a diax
 spawn_dathomir_328	DATHOMIR	dat_ns_stronghold	AREA	12	-21.0	7.2	-20.8	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle			600
 spawn_dathomir_329	DATHOMIR	dat_ns_stronghold	AREA	12	-12.9	7.2	-12.5	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	2	0	-	idle			600
 spawn_dathomir_330	DATHOMIR	dat_ns_stronghold	AREA	12	-12.4	7.2	-36.3	0	1	Fath H'ray	humanoid_fath_hray	ATTACKABLE	B	80	85	POI	Nightsister Stronghold	1	TURN	2	0	-	idle			600
-spawn_dathomir_331	DATHOMIR	dat_world	PATROL	0	-3943.0	125.1	-253.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5300	column	idle			600
-spawn_dathomir_332	DATHOMIR	dat_world	PATROL	0	-3972.4	131.0	-204.6	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	80	85	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5400	column	idle			600
+spawn_dathomir_331	DATHOMIR	dat_world	PATROL	0	-3943.0	125.1	-253.3	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dathomir_800	column	idle			600
+spawn_dathomir_332	DATHOMIR	dat_world	PATROL	0	-3972.4	131.0	-204.6	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	80	85	POI	Nightsister Stronghold	1	PATROL	0	patrol_dathomir_900	column	idle			600
 spawn_dathomir_333	DATHOMIR	dat_world	AREA	0	-4002.7	119.0	-62.5	-169	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle			600
-spawn_dathomir_334	DATHOMIR	dat_world	PATROL	0	-4016.1	119.9	-243.4	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5500	column	idle			600
+spawn_dathomir_334	DATHOMIR	dat_world	PATROL	0	-4016.1	119.9	-243.4	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dathomir_1000	column	idle			600
 spawn_dathomir_335	DATHOMIR	dat_world	AREA	0	-4157.7	121.0	-82.3	157	1	a Nightsister rancor tamer	humanoid_nightsister_rancor_tamer	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	TURN	0	0	-	idle			600
-spawn_dathomir_336	DATHOMIR	dat_world	PATROL	0	-3969.6	122.3	-270.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5600	column	idle			600
-spawn_dathomir_337	DATHOMIR	dat_world	PATROL	0	-3931.6	131.3	-210.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dat_5700	column	idle			600
+spawn_dathomir_336	DATHOMIR	dat_world	PATROL	0	-3969.6	122.3	-270.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dathomir_1100	column	idle			600
+spawn_dathomir_337	DATHOMIR	dat_world	PATROL	0	-3931.6	131.3	-210.2	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	85	90	POI	Nightsister Stronghold	1	PATROL	0	patrol_dathomir_1200	column	idle			600
 spawn_dathomir_338	DATHOMIR	dat_world	AREA	0	-3930.6	130.1	-227.4	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	IDLE	0	0	-	idle			600
 spawn_dathomir_339	DATHOMIR	dat_world	AREA	0	-4085.0	133.8	-209.5	43	1	Spell Weaver Leandra	humanoid_herald_dathomir_leandra	INVULNERABLE	N	100	100	POI	Nightsister Stronghold	1	TURN	0	0	-	idle			600
 spawn_dathomir_340	DATHOMIR	dat_ns_cave	AREA	1	-1.2	-5.8	6.1	0	1	a Spiderclan sentry	humanoid_spider_nightsister_sentry	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle			600
@@ -380,7 +380,7 @@ spawn_dathomir_377	DATHOMIR	dat_world	AREA	0	-1225.7	115.1	6275.0	0	1	a cavern s
 spawn_dathomir_378	DATHOMIR	dat_world	AREA	0	-1224.6	106.6	6218.4	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle			600
 spawn_dathomir_379	DATHOMIR	dat_world	AREA	0	-1182.9	122.1	6280.1	0	1	a cavern spider broodling	creature_spider_cavern_broodling	ATTACKABLE	N	75	80	POI	Nightspider Cult Cave	3	LOITER	6	0	-	idle			600
 spawn_dathomir_380	DATHOMIR	dat_world	AREA	0	-1154.2	140.3	6211.3	0	1	a cavern spider hunter	creature_spider_cavern_hunter	AGGRESSIVE	E	75	80	POI	Nightspider Cult Cave	2	LOITER	4	0	-	idle			600
-spawn_dathomir_381	DATHOMIR	dat_world	PATROL	0	-1096.3	115.4	6320.8	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	PATROL	0	patrol_dat_6100	column	idle			600
+spawn_dathomir_381	DATHOMIR	dat_world	PATROL	0	-1096.3	115.4	6320.8	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	PATROL	0	patrol_dathomir_1600	column	idle			600
 spawn_dathomir_382	DATHOMIR	dat_world	AREA	0	-1106.9	125.6	6268.6	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle			600
 spawn_dathomir_383	DATHOMIR	dat_world	AREA	0	-1113.8	107.7	6343.9	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle			600
 spawn_dathomir_384	DATHOMIR	dat_world	AREA	0	-1149.1	107.6	6332.4	0	1	a cut-throat	humanoid_smuggler_patrol_thief_11	ATTACKABLE	N	60	70	POI	Nightspider Cult Cave	1	LOITER	2	0	-	idle			600
