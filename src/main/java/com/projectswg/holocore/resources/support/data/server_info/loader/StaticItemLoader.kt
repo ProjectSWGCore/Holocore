@@ -113,7 +113,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
+		val requiredSkill: String		= set.getText("required_skill")
 		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
@@ -247,6 +247,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val elementalDamage: Int = set.getInt("elemental_damage").toInt()
 		val attackSpeed: Double = set.getReal("attack_speed")
 		val specialAttackCost: Int = set.getInt("special_attack_cost").toInt()
+		val accuracyBonus: Int = set.getInt("accuracy_bonus").toInt()
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")
@@ -254,7 +255,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
-		val requiredProfession: String = set.getText("required_profession")
+		val requiredSkill: String = set.getText("required_skill")
 		val isRaceWookie: Boolean = set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean = set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean = set.getInt("race_rodian") != 0L
@@ -266,6 +267,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isSockets: Boolean = set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int> = Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
 		val value: Int = set.getInt("value").toInt()
+		val woundChance: Int = set.getInt("wound_chance").toInt()
 		
 		init {
 			when (set.getText("weapon_type")) {
@@ -306,7 +308,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
+		val requiredSkill: String		= set.getText("required_skill")
 		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
