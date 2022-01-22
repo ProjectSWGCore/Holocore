@@ -113,7 +113,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
+		val requiredSkill: String		= set.getText("required_skill")
 		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
@@ -254,7 +254,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
-		val requiredProfession: String = set.getText("required_profession")
+		val requiredSkill: String = set.getText("required_skill")
 		val isRaceWookie: Boolean = set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean = set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean = set.getInt("race_rodian") != 0L
@@ -306,7 +306,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
+		val requiredSkill: String		= set.getText("required_skill")
 		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
 		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
 		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
