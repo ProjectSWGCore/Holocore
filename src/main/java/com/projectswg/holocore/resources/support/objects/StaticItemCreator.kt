@@ -153,6 +153,7 @@ object StaticItemCreator {
 			obj.addAttribute("proc_name", "@ui_buff:${info.procEffect}")
 		
 		obj.addAttribute("cat_wpn_other.wpn_range", String.format("%d-%dm", info.minRange, info.maxRange))
+		obj.addAttribute("cat_wpn_other.attackcost", info.specialAttackCost.toString())
 
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
