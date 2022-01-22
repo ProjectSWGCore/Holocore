@@ -153,8 +153,8 @@ public class CharacterCreation {
 		creatureObj.setObjectName(create.getName());
 		creatureObj.setPvpFlags(PvpFlag.PLAYER);
 		creatureObj.setVolume(0x000F4240);
-		creatureObj.setBankBalance(1000);
-		creatureObj.setCashBalance(100);
+		creatureObj.setBankBalance(100000);
+		creatureObj.setCashBalance(1000);
 
 		// New characters are Novices in all basic professions in the Combat Upgrade
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();

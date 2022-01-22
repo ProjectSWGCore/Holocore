@@ -297,9 +297,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 	private static void handleLightsaber(Player player) {
 		spawnItems(player,
-				"test_polearm_saber",
-				"test_1h_saber",
-				"test_2h_saber",
+				"test_low_polearm_saber",
+				"test_low_1h_saber",
+				"test_low_2h_saber",
+				"test_medium_polearm_saber",
+				"test_medium_1h_saber",
+				"test_medium_2h_saber",
+				"test_high_polearm_saber",
+				"test_high_1h_saber",
+				"test_high_2h_saber",
 				"item_color_crystal_02_16",	// Bane's Heart
 				"item_color_crystal_02_19",	// B'nar's Sacrifice
 				"item_color_crystal_02_20",	// Windu's Guile
@@ -315,20 +321,35 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 	private static void handleMelee(Player player) {
 		spawnItems(player,
-				"test_polearm",
-				"test_unarmed",
-				"test_1h",
-				"test_2h"
+				"test_low_polearm",
+				"test_low_unarmed",
+				"test_low_1h",
+				"test_low_2h",
+				"test_medium_polearm",
+				"test_medium_unarmed",
+				"test_medium_1h",
+				"test_medium_2h",
+				"test_high_polearm",
+				"test_high_unarmed",
+				"test_high_1h",
+				"test_high_2h"
 		);
 	}
 
 	private static void handleRanged(Player player) {
 		spawnItems(player,
-				"test_pistol",
-				"test_carbine",
-				"test_rifle",
-				"test_heavy",
-				"test_grenade"
+				"test_low_pistol",
+				"test_low_carbine",
+				"test_low_rifle",
+				"test_low_heavy",
+				"test_medium_pistol",
+				"test_medium_carbine",
+				"test_medium_rifle",
+				"test_medium_heavy",
+				"test_high_pistol",
+				"test_high_carbine",
+				"test_high_rifle",
+				"test_high_heavy"
 		);
 	}
 

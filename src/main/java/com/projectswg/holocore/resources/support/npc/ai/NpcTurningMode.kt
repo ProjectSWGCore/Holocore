@@ -63,7 +63,7 @@ class NpcTurningMode(obj: AIObject) : NpcMode(obj) {
 		val theta = random.nextDouble() * 360
 		
 		moveTo(mainParent, Location.builder(mainLocation).setHeading(theta).build())
-		queueNextLoop((30 + random.nextInt(10)).toLong())
+		queueNextLoop((30 + random.nextInt(3)).toLong())
 	}
 	
 }

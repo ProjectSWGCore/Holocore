@@ -141,10 +141,10 @@ class LootGenerationService : Service() {
 			val requesterGroupObject = (ObjectLookup.getObjectById(requesterGroup) as GroupObject?)!!
 			
 			for (creature in requesterGroupObject.groupMemberObjects) {
-				creature.sendSelf(PlayClientEffectObjectTransformMessage(corpse.objectId, "appearance/pt_loot_disc.prt", effectLocation, "lootMe"))
+				creature.sendSelf(PlayClientEffectObjectTransformMessage(corpse.objectId, "appearance/pt_find_path_end.prt", effectLocation, "lootMe"))
 			}
 		} else {
-			requester.sendSelf(PlayClientEffectObjectTransformMessage(corpse.objectId, "appearance/pt_loot_disc.prt", effectLocation, "lootMe"))
+			requester.sendSelf(PlayClientEffectObjectTransformMessage(corpse.objectId, "appearance/pt_find_path_end.prt", effectLocation, "lootMe"))
 		}
 		LootGeneratedIntent.broadcast(corpse)
 	}

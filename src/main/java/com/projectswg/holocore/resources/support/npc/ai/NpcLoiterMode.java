@@ -81,7 +81,7 @@ public class NpcLoiterMode extends NpcMode {
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		
 		moveTo(getAI().getParent(), l.build());
-		queueNextLoop(30 + random.nextInt(10));
+		queueNextLoop(30 + random.nextInt(3));
 	}
 	
 }
