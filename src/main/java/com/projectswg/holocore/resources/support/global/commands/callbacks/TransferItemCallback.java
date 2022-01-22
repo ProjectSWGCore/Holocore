@@ -140,7 +140,14 @@ public class TransferItemCallback implements ICmdCallback {
 					return;
 
 				// If the character doesn't have the right skill, reject it
-				// TODO check if they have the skill
+				String reqSkillStr = target.getAttribute("loot_schematic_skill_required");
+				String reqSkill = reqSkillStr.split(":")[1];
+				boolean someSkillIsRequired = !"none".equals(reqSkill);
+				if (someSkillIsRequired && !actor.hasSkill(reqSkill)) {
+					new SystemMessageIntent(player, "@base_player:not_correct_skill").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+					return;
+				}
 			}
 
 			// Only empty containers can be Appearance Equipped
