@@ -164,6 +164,8 @@ object StaticItemCreator {
 		
 		obj.addAttribute("cat_wpn_other.wpn_range", String.format("%d-%dm", info.minRange, info.maxRange))
 		obj.addAttribute("cat_wpn_other.attackcost", info.specialAttackCost.toString())
+		val woundChance = info.woundChance / 100.0
+		obj.addAttribute("cat_wpn_other.woundchance", "${String.format("%.1f", woundChance)}%")
 
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
