@@ -624,7 +624,7 @@ bo_common_621	TATOOINE	tat_world	0	object/static/vehicle/static_speeder_bike.iff
 bo_common_622	TATOOINE	tat_world	0	object/static/vehicle/static_speeder_bike.iff	3820.6	17.8	2376.3	0	0	0	0	128	TRUE	Mos Taike
 bo_common_623	TATOOINE	tat_world	0	object/static/vehicle/static_swoop_bike.iff	3852.3	27.5	2321.0	146	0	0	0	128	TRUE	Mos Taike
 bo_common_624	TATOOINE	tat_world	0	object/static/vehicle/e3/landspeeder.iff	3910.4	33.0	2354.4	-39	0	0	0	128	TRUE	Mos Taike
-bo_common_625	TATOOINE	tat_world	0	object/static/structure/general/droid_probedroid_powerdown.iff	3454.3	4.3	-4899.6	-141	0	0	0	128	TRUE	-
+bo_common_625	TATOOINE	tat_world	0	object/static/structure/general/droid_probedroid_powerdown.iff	3454.3	5.0	-4899.6	-141	0	0	0	128	TRUE	-
 bo_common_626	TATOOINE	tat_world	0	object/static/particle/pt_poi_electricity_2x2.iff	3453.7	4.6	-4900.0	-146	0	0	0	128	TRUE	-
 bo_common_627	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/placable_loot_crate_tech_armoire.iff	-53.2	-18.0	-36.6	0	0	0	0	128	TRUE	Container
 bo_common_628	YAVIN4	yav_geonosian_cave	5	object/tangible/container/loot/placable_loot_crate_tech_armoire.iff	-44.5	-18.0	-43.0	-90	0	0	0	128	TRUE	Container
