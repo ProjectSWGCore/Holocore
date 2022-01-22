@@ -247,6 +247,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val elementalDamage: Int = set.getInt("elemental_damage").toInt()
 		val attackSpeed: Double = set.getReal("attack_speed")
 		val specialAttackCost: Int = set.getInt("special_attack_cost").toInt()
+		val accuracyBonus: Int = set.getInt("accuracy_bonus").toInt()
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")

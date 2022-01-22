@@ -155,6 +155,7 @@ object StaticItemCreator {
 			obj.addAttribute("cat_wpn_damage.wpn_elemental_value", info.elementalDamage.toString())
 		}
 		
+		obj.addAttribute("cat_wpn_other.wpn_accuracy", info.accuracyBonus.toString())
 		obj.addAttribute("cat_wpn_damage.weapon_dps", info.actualDps.toString())
 		
 		if (info.procEffect.isNotEmpty())
