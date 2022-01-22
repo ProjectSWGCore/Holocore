@@ -74,7 +74,6 @@ public final class VehicleLoader extends DataLoader {
 		private final String objectReference;
 		private final String pcdTemplate;
 		private final String objectTemplate;
-		private final String garageDisplayTemplate;
 		private final int decayRate;
 		private final double repairRate;
 		private final boolean canRepairDisabled;
@@ -101,7 +100,6 @@ public final class VehicleLoader extends DataLoader {
 			this.objectReference = set.getText("object_reference");
 			this.pcdTemplate = set.getText("pcd_template");
 			this.objectTemplate = set.getText("object_template");
-			this.garageDisplayTemplate = set.getText("garage_display_template");
 			this.decayRate = (int) set.getInt("decay_rate");
 			this.repairRate = set.getReal("repair_rate");
 			this.canRepairDisabled = set.getBoolean("can_repair_disabled");
@@ -135,10 +133,6 @@ public final class VehicleLoader extends DataLoader {
 		
 		public String getObjectTemplate() {
 			return objectTemplate;
-		}
-		
-		public String getGarageDisplayTemplate() {
-			return garageDisplayTemplate;
 		}
 		
 		public int getDecayRate() {
