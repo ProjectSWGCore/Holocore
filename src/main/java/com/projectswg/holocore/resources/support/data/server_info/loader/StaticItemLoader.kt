@@ -267,6 +267,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isSockets: Boolean = set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int> = Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
 		val value: Int = set.getInt("value").toInt()
+		val woundChance: Int = set.getInt("wound_chance").toInt()
 		
 		init {
 			when (set.getText("weapon_type")) {
