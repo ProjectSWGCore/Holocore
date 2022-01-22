@@ -73,7 +73,7 @@ object StaticItemCreator {
 		
 		if (info.requiredProfession.isNotEmpty())
 			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
+		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
 		val kineticMax: Int
 		val energyMax: Int
@@ -113,7 +113,7 @@ object StaticItemCreator {
 		
 		if (info.requiredProfession.isNotEmpty())
 			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
+		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
 		if (info.requiredFaction.isNotEmpty())
 			obj.addAttribute("faction_restriction", "@pvp_factions:" + info.requiredFaction)
@@ -136,7 +136,7 @@ object StaticItemCreator {
 		
 		if (info.requiredProfession.isNotEmpty())
 			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
+		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
 		obj.addAttribute("cat_wpn_damage.wpn_category", "@obj_attr_n:wpn_category_" + info.weaponType.num)
 		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())

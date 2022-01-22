@@ -127,7 +127,7 @@ public class TransferItemCallback implements ICmdCallback {
 				}
 
 				// Check the players level, if they're too low of a level, don't allow them to wear it
-				String reqLevelStr = target.getAttribute("required_combat_level");
+				String reqLevelStr = target.getAttribute("healing_combat_level_required");
 
 				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
 					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
