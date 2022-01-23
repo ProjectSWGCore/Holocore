@@ -140,7 +140,7 @@ public class TransferItemCallback implements ICmdCallback {
 					return;
 
 				// If the character doesn't have the right skill, reject it
-				String reqSkillStr = target.getAttribute("loot_schematic_skill_required");
+				String reqSkillStr = target.getAttribute("skillmodmin");
 				String reqSkill = reqSkillStr.split(":")[1];
 				boolean someSkillIsRequired = !"none".equals(reqSkill);
 				if (someSkillIsRequired && !actor.hasSkill(reqSkill)) {
