@@ -42,9 +42,6 @@ abstract class DataLoader {
 		 */
 		fun buffs(): BuffLoader = ServerData.buffs
 		fun collections(): CollectionLoader = ServerData.collections
-		fun expertise(): ExpertiseLoader = ServerData.expertise
-		fun expertiseTrees(): ExpertiseTreeLoader = ServerData.expertiseTrees
-		fun expertiseAbilities(): ExpertiseAbilityLoader = ServerData.expertiseAbilities
 		fun skills(): SkillLoader = ServerData.skills
 		fun skillTemplates(): SkillTemplateLoader = ServerData.skillTemplates
 		fun staticItems(): StaticItemLoader = ServerData.staticItems

@@ -47,13 +47,10 @@ object ServerData {
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
 	
 	/*
-	 * Skill / Expertise / Collection
+	 * Skill / Collection
 	 */
 	val skills				by SoftDataLoaderDelegate(::SkillLoader)
 	val skillTemplates		by SoftDataLoaderDelegate(::SkillTemplateLoader)
-	val expertise			by SoftDataLoaderDelegate(::ExpertiseLoader)
-	val expertiseTrees		by SoftDataLoaderDelegate(::ExpertiseTreeLoader)
-	val expertiseAbilities	by SoftDataLoaderDelegate(::ExpertiseAbilityLoader)
 	val collections			by SoftDataLoaderDelegate(::CollectionLoader)
 	
 	/*
