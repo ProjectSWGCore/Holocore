@@ -113,6 +113,8 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WearableItemInfo?) {
 		if (info == null)
 			return
+		
+		applySkillMods(obj, info.skillMods)
 
 		if (info.requiredSkill.isNotEmpty()) {
 			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
@@ -124,8 +126,6 @@ object StaticItemCreator {
 		if (info.requiredFaction.isNotEmpty())
 			obj.addAttribute("faction_restriction", "@pvp_factions:" + info.requiredFaction)
 		
-		// Apply the mods!
-		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
 		
 		// Add the race restrictions only if there are any
