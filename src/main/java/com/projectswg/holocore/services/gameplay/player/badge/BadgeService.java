@@ -2,9 +2,8 @@ package com.projectswg.holocore.services.gameplay.player.badge;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.swg.zone.BadgesResponseMessage;
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.RequestBadgesIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
@@ -19,54 +18,25 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class BadgeService extends Service {
 	
 	//TODO
 	//research categories
 	//music
 	//fix to appropriate message ex: kill_merek_activation_01
-
-	private DatatableData collectionTable;
-	private Map<String, BadgeData> badgeMap;
-	
-	public BadgeService() {
-		collectionTable = (DatatableData) ClientFactory.getInfoFromFile("datatables/badge/badge_map.iff");
-		badgeMap = new HashMap<>();
-	}
-	
-	
-	@Override
-	public boolean initialize() {
-		for (int row = 0; row < collectionTable.getRowCount(); row++) {
-			int badgeIndex = (int) collectionTable.getCell(row, 0);	// Index
-			String badgeName = (String) collectionTable.getCell(row, 1);	// Badge name
-			int category = (int) collectionTable.getCell(row, 3);	// Category
-			String type = (String) collectionTable.getCell(row, 5);	// Type
-			
-			boolean explorationBadge = category == 2 && !type.equals("accumulation");
-			
-			badgeMap.put(badgeName, new BadgeData(badgeIndex, explorationBadge));
-		}
-		
-		return super.initialize();
-	}
 	
 	@IntentHandler
 	private void handleBadgeGrant(GrantBadgeIntent i) {
 		CreatureObject target = i.getCreature();
 		String badgeKey = i.getBadgeKey();
-		
 		BadgeLoader.BadgeInfo badgeFromKey = DataLoader.Companion.badges().getBadgeFromKey(badgeKey);
 		
 		if (badgeFromKey != null) {
-			
 			Badges badges = target.getPlayerObject().getBadges();
+			int badgeIndex = badgeFromKey.getIndex();
+			boolean receiverDoesNotHaveThisBadge = !badges.hasBadge(badgeIndex);
 			
-			if (!badges.hasBadge(badgeMap.get(badgeKey).getBadgeIndex())) {
-				// They don't already have this badge
+			if (receiverDoesNotHaveThisBadge) {
 				giveBadge(target.getPlayerObject(), badgeKey, true);
 			}
 		} else {
@@ -97,18 +67,17 @@ public class BadgeService extends Service {
 	}
 	
 	private void giveBadge(PlayerObject target, String badgeName, boolean playMusic) {
-		Badges badges = target.getBadges();
+		BadgeLoader.BadgeInfo badgeFromKey = DataLoader.Companion.badges().getBadgeFromKey(badgeName);
 		
-		BadgeData badgeData = badgeMap.get(badgeName);
-		
-		if (badgeData != null) {
-			boolean explorationBadge = badgeData.isExplorationBadge();
-			badges.set(badgeData.getBadgeIndex(), explorationBadge, true);
+		if (badgeFromKey != null) {
+			boolean explorationBadge = badgeFromKey.getCategory() == 2 && !"accumulation".equals(badgeFromKey.getType());
+			Badges badges = target.getBadges();
+			badges.set(badgeFromKey.getIndex(), explorationBadge, true);
 
 			SystemMessageIntent.broadcastPersonal(target.getOwner(), new ProsePackage(new StringId("badge_n", "prose_grant"), "TO", "@badge_n:" + badgeName));
 			
 			if (playMusic) {
-				// TODO play music...
+				playMusicForBadgeReceiver(target, badgeFromKey);
 			}
 			
 			// Check exploration badge accumulation badges
@@ -162,23 +131,9 @@ public class BadgeService extends Service {
 		
 	}
 	
-	private class BadgeData {
-		
-		private final int badgeIndex;
-		private final boolean explorationBadge;
-		
-		public BadgeData(int badgeIndex, boolean explorationBadge) {
-			this.badgeIndex = badgeIndex;
-			this.explorationBadge = explorationBadge;
-		}
-		
-		public int getBadgeIndex() {
-			return badgeIndex;
-		}
-		
-		public boolean isExplorationBadge() {
-			return explorationBadge;
-		}
+	private void playMusicForBadgeReceiver(PlayerObject target, BadgeLoader.BadgeInfo badgeFromKey) {
+		String music = badgeFromKey.getMusic();
+		target.getOwner().sendPacket(new PlayMusicMessage(0, music, 1, false));
 	}
 	
 }
