@@ -72,9 +72,9 @@ object StaticItemCreator {
 			return
 
 		if (info.requiredSkill.isNotEmpty()) {
-			obj.addAttribute("loot_schematic_skill_required", "@skl_n:" + info.requiredSkill)
+			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("loot_schematic_skill_required", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
 		}
 		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
@@ -115,9 +115,9 @@ object StaticItemCreator {
 			return
 
 		if (info.requiredSkill.isNotEmpty()) {
-			obj.addAttribute("loot_schematic_skill_required", "@skl_n:" + info.requiredSkill)
+			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("loot_schematic_skill_required", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
 		}
 		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
@@ -139,13 +139,13 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {
 		if (info == null)
 			return
+		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
 		if (info.requiredSkill.isNotEmpty()) {
-			obj.addAttribute("loot_schematic_skill_required", "@skl_n:" + info.requiredSkill)
+			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("loot_schematic_skill_required", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
 		}
-		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
 		obj.addAttribute("cat_wpn_damage.wpn_category", "@obj_attr_n:wpn_category_" + info.weaponType.num)
 		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())
@@ -155,7 +155,9 @@ object StaticItemCreator {
 			obj.addAttribute("cat_wpn_damage.wpn_elemental_value", info.elementalDamage.toString())
 		}
 		
-		obj.addAttribute("cat_wpn_other.wpn_accuracy", info.accuracyBonus.toString())
+		obj.addAttribute("cat_wpn_damage.wpn_accuracy", info.accuracyBonus.toString())
+		val woundChance = info.woundChance / 100.0
+		obj.addAttribute("cat_wpn_damage.woundchance", String.format(Locale.US, "%.1f%", woundChance))
 		obj.addAttribute("cat_wpn_damage.weapon_dps", info.actualDps.toString())
 		
 		if (info.procEffect.isNotEmpty())
@@ -164,8 +166,6 @@ object StaticItemCreator {
 		
 		obj.addAttribute("cat_wpn_other.wpn_range", String.format("%d-%dm", info.minRange, info.maxRange))
 		obj.addAttribute("cat_wpn_other.attackcost", info.specialAttackCost.toString())
-		val woundChance = info.woundChance / 100.0
-		obj.addAttribute("cat_wpn_other.woundchance", String.format(Locale.US, "%.1f%", woundChance))
 
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
