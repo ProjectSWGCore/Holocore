@@ -147,7 +147,6 @@ object StaticItemCreator {
 			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
 		}
 		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
-		obj.addAttribute("cat_wpn_damage.wpn_category", "@obj_attr_n:wpn_category_" + info.weaponType.num)
 		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())
 		obj.addAttribute("cat_wpn_damage.damage", "${info.minDamage}-${info.maxDamage}")
 		if (info.elementalType != null) {    // Not all weapons have elemental damage.
