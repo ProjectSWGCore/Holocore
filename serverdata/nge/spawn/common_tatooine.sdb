@@ -46,7 +46,7 @@ spawn_tatooine_43	TATOOINE	tat_bestine_cantina	AREA	1	40.1	0.1	2.2	82	1	an artis
 spawn_tatooine_44	TATOOINE	tat_bestine_cantina	AREA	1	42.0	0.1	2.2	-91	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_45	TATOOINE	tat_bestine_cantina	AREA	2	32.2	0.1	-7.8	17	1	Okehi Papev	humanoid_victor_questn_cantina	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1		600
 spawn_tatooine_46	TATOOINE	tat_bestine_cantina	AREA	3	0.6	-0.9	11.9	-91	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_47	TATOOINE	tat_bestine_cantina	AREA	3	14.2	-0.9	-4.8	49	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_tatooine_47	TATOOINE	tat_bestine_cantina	AREA	3	14.2	-0.9	-4.8	49	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
 spawn_tatooine_48	TATOOINE	tat_bestine_cantina	AREA	3	16.5	-0.9	-3.1	-128	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_table			600
 spawn_tatooine_49	TATOOINE	tat_bestine_cantina	AREA	3	-0.7	-0.9	10.2	-10	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_50	TATOOINE	tat_bestine_cantina	AREA	3	-2.2	-0.9	11.9	97	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -81,9 +81,9 @@ spawn_tatooine_78	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.6	1.1	5.9	93	1	a b
 spawn_tatooine_79	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.7	1.1	3.4	90	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_80	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.6	1.1	1.2	88	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_81	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.7	1.1	0.9	-82	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_82	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.6	1.1	3.3	-87	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_tatooine_82	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.6	1.1	3.3	-87	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
 spawn_tatooine_83	TATOOINE	tat_bestine_commerce_gh	AREA	8	0.8	1.1	-9.6	86	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
-spawn_tatooine_84	TATOOINE	tat_bestine_commerce_gh	AREA	9	-7.0	1.1	-8.0	-132	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_tatooine_84	TATOOINE	tat_bestine_commerce_gh	AREA	9	-7.0	1.1	-8.0	-132	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_table_eating			600
 spawn_tatooine_85	TATOOINE	tat_bestine_commerce_gh	AREA	9	-8.9	1.1	-9.7	45	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_86	TATOOINE	tat_bestine_commerce_gh	AREA	9	-13.1	1.1	-13.0	0	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_87	TATOOINE	tat_bestine_commerce_gh	AREA	9	-13.0	1.1	-10.5	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
@@ -141,7 +141,7 @@ spawn_tatooine_138	TATOOINE	tat_bestine_university	AREA	7	8.4	1.1	-15.0	0	1	a co
 spawn_tatooine_139	TATOOINE	tat_bestine_university	AREA	7	9.8	1.1	-12.2	-132	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_140	TATOOINE	tat_bestine_university	AREA	4	-1.3	2.5	8.9	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_141	TATOOINE	tat_bestine_university	AREA	4	-0.1	2.5	6.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_142	TATOOINE	tat_bestine_university	AREA	4	1.2	2.5	8.9	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_tatooine_142	TATOOINE	tat_bestine_university	AREA	4	1.2	2.5	8.9	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
 spawn_tatooine_143	TATOOINE	tat_bestine_university	AREA	4	-6.2	1.1	-2.7	40	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_144	TATOOINE	tat_bestine_university	AREA	6	-14.9	1.1	-0.4	88	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_145	TATOOINE	tat_bestine_university	AREA	6	-12.8	1.1	-0.5	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
@@ -393,11 +393,11 @@ spawn_tatooine_390	TATOOINE	tat_moseisley_lucky_despot	AREA	11	-3.6	0.0	-8.9	177
 spawn_tatooine_391	TATOOINE	tat_moseisley_lucky_despot	AREA	15	-2.4	0.0	10.3	144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_392	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-13.2	7.0	4.9	-140	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_393	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-4.8	7.0	-3.6	92	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_394	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-17.0	8.0	2.1	79	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	dance_1	9		600
+spawn_tatooine_394	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-17.0	8.0	2.1	79	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_2	9		600
 spawn_tatooine_395	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-7.9	7.0	-9.4	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_396	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-13.8	7.0	-4.0	19	1	Kavas Urdano	humanoid_kavas_urdano	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_397	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-17.2	8.0	-2.2	66	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	dance_1			600
-spawn_tatooine_398	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-15.5	8.0	0.2	82	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	dance_2	17		600
+spawn_tatooine_397	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-17.2	8.0	-2.2	66	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_3			600
+spawn_tatooine_398	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-15.5	8.0	0.2	82	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_oola	17		600
 spawn_tatooine_399	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-4.0	7.0	-8.7	0	1	Otwi Opawl	humanoid_brawler_quest_otwi_opawl	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_400	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-1.6	7.0	7.4	-159	1	Sneg the Hand	humanoid_junk_sneg	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_401	TATOOINE	tat_moseisley_lucky_despot	PATROL	2	-4.0	7.0	0.5	-91	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_4500	column	idle			600
@@ -642,9 +642,9 @@ spawn_tatooine_639	TATOOINE	tat_world	AREA	0	3662.3	5.0	-4857.4	118	1	an artisan
 spawn_tatooine_640	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4884.3	78	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_641	TATOOINE	tat_world	AREA	0	3387.1	5.0	-4678.3	56	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	10	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_tatooine_642	TATOOINE	tat_world	AREA	0	3296.9	5.0	-4687.2	-50	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_643	TATOOINE	tat_world	AREA	0	3329.6	5.6	-4755.4	99	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dance_basic			600
-spawn_tatooine_644	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4759.4	91	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_dance_basic			600
-spawn_tatooine_645	TATOOINE	tat_world	AREA	0	3335.0	5.6	-4760.7	-56	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
+spawn_tatooine_643	TATOOINE	tat_world	AREA	0	3329.6	5.6	-4755.4	99	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_2			600
+spawn_tatooine_644	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4759.4	91	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_2			600
+spawn_tatooine_645	TATOOINE	tat_world	AREA	0	3335.0	5.6	-4760.7	-56	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_646	TATOOINE	tat_world	AREA	0	3707.3	5.0	-4861.2	166	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_647	TATOOINE	tat_world	AREA	0	3361.0	5.0	-4679.2	136	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_648	TATOOINE	tat_world	AREA	0	3547.4	5.0	-4677.7	34	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_ground			600
@@ -662,7 +662,7 @@ spawn_tatooine_659	TATOOINE	tat_world	AREA	0	3533.4	5.0	-4797.3	-89	1	an Rebel r
 spawn_tatooine_660	TATOOINE	tat_world	AREA	0	3330.0	5.0	-4607.0	169	1	Baboo	humanoid_tatooine_baboo	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_661	TATOOINE	tat_world	AREA	0	3457.0	5.0	-4861.0	-103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_662	TATOOINE	tat_world	AREA	0	3562.7	5.0	-4938.8	127	1	Bib Fortuna	humanoid_bib_fortuna	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_bib_fortuna	600
-spawn_tatooine_663	TATOOINE	tat_world	AREA	0	3366.1	5.0	-4639.3	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_663	TATOOINE	tat_world	AREA	0	3366.1	5.0	-4639.3	-177	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_664	TATOOINE	tat_world	AREA	0	3261.2	5.0	-4857.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	1	0	-	idle			600
 spawn_tatooine_665	TATOOINE	tat_world	AREA	0	3521.6	5.0	-4683.3	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_666	TATOOINE	tat_world	AREA	0	3378.9	5.0	-4496.7	102	1	Errik Darksider	humanoid_herald_tatooine_errik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -689,7 +689,7 @@ spawn_tatooine_686	TATOOINE	tat_world	AREA	0	3550.6	5.0	-4933.9	68	1	a commoner	
 spawn_tatooine_687	TATOOINE	tat_world	AREA	0	3483.9	5.0	-4786.9	125	1	Navari Trik (Painting Distribution Specialist)	humanoid_navari_trik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_688	TATOOINE	tat_world	AREA	0	3506.0	5.0	-4795.0	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_689	TATOOINE	tat_world	AREA	0	3450.0	5.0	-5077.0	-11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_690	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4757.3	97	1	Oola	humanoid_oola	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_oola			600
+spawn_tatooine_690	TATOOINE	tat_world	AREA	0	3329.4	5.6	-4757.3	97	1	Greeata	humanoid_entertainer_greeata	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_oola			600
 spawn_tatooine_691	TATOOINE	tat_world	AREA	0	3526.5	5.0	-4619.7	53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_692	TATOOINE	tat_world	AREA	0	3619.5	5.0	-4711.3	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_693	TATOOINE	tat_world	AREA	0	3312.0	5.0	-4655.0	-150	1	Vanvi Hotne	humanoid_vanvi_hotne	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600

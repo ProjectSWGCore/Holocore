@@ -1283,7 +1283,7 @@ spawn_corellia_1284	CORELLIA	cor_world	AREA	0	4658.0	25.0	-5762.0	0	1	a Novatroo
 spawn_corellia_1285	CORELLIA	cor_world	AREA	0	4670.0	25.0	-5808.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	80	85	POI	Stronghold	1	LOITER	5	0	-	idle			600
 spawn_corellia_1286	CORELLIA	cor_world	AREA	0	4680.9	25.0	-5820.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	35	40	POI	Stronghold	3	LOITER	9	0	-	idle			600
 spawn_corellia_1287	CORELLIA	cor_world	AREA	0	4693.0	25.0	-5762.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	35	40	POI	Stronghold	1	LOITER	9	0	-	idle			600
-spawn_corellia_1288	CORELLIA	cor_world	PATROL	0	4582.0	25.0	-5771.9	0	1	an AT-AT	vehicle_imperial_atst	AGGRESSIVE	B	150	150	POI	Stronghold	1	PATROL	0	patrol_corellia_3300	column	idle			600
+spawn_corellia_1288	CORELLIA	cor_world	PATROL	0	4582.0	25.0	-5771.9	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	95	100	POI	Stronghold	1	PATROL	0	patrol_corellia_3300	column	idle			600
 spawn_corellia_1289	CORELLIA	cor_world	AREA	0	4636.9	25.0	-5778.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	35	40	POI	Stronghold	2	LOITER	6	0	-	idle			600
 spawn_corellia_1290	CORELLIA	cor_world	AREA	0	4627.2	25.0	-5796.5	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	35	40	POI	Stronghold	1	LOITER	2	0	-	idle			600
 spawn_corellia_1291	CORELLIA	cor_world	AREA	0	4625.9	25.0	-5770.8	0	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	35	40	POI	Stronghold	1	LOITER	2	0	-	idle			600
