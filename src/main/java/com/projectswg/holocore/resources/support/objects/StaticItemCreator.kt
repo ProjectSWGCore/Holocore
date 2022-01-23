@@ -157,7 +157,7 @@ object StaticItemCreator {
 		
 		obj.addAttribute("cat_wpn_damage.wpn_accuracy", info.accuracyBonus.toString())
 		val woundChance = info.woundChance / 100.0
-		obj.addAttribute("cat_wpn_damage.woundchance", String.format(Locale.US, "%.1f%", woundChance))
+		obj.addAttribute("cat_wpn_damage.woundchance", String.format(Locale.US, "%.1f%%", woundChance))
 		obj.addAttribute("cat_wpn_damage.weapon_dps", info.actualDps.toString())
 		
 		if (info.procEffect.isNotEmpty())
