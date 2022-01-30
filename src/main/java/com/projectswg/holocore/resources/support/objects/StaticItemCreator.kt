@@ -54,7 +54,6 @@ object StaticItemCreator {
 		applyAttributes(obj, info.armorInfo)
 		applyAttributes(obj, info.wearableInfo)
 		applyAttributes(obj, info.weaponInfo)
-		applyAttributes(obj, info.collectionInfo)
 		applyAttributes(obj, info.consumableInfo)
 		applyAttributes(obj, info.costumeInfo)
 		applyAttributes(obj, info.crystalInfo)
@@ -177,15 +176,6 @@ object StaticItemCreator {
 		weapon.maxDamage = info.maxDamage
 
 		applyItemValue(info.value, obj);
-	}
-	
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CollectionItemInfo?) {
-		if (info == null)
-			return
-		
-		obj.addAttribute("collection_name", info.slotName)
-		
-		applyColors(obj, info.color)
 	}
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ConsumableItemInfo?) {

@@ -72,7 +72,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val hitPoints: Int = set.getInt("hit_points").toInt()
 		
 		val armorInfo: ArmorItemInfo?
-		val collectionInfo: CollectionItemInfo?
 		val consumableInfo: ConsumableItemInfo?
 		val costumeInfo: CostumeItemInfo?
 		val crystalInfo: CrystalItemInfo?
@@ -90,7 +89,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			val type = set.getText("type")
 			
 			this.armorInfo = if ("armor" == type) ArmorItemInfo(set, colorArray) else null
-			this.collectionInfo = if ("collection" == type) CollectionItemInfo(set, colorArray) else null
 			this.consumableInfo = if ("consumable" == type) ConsumableItemInfo(set) else null
 			this.costumeInfo = if ("costume" == type) CostumeItemInfo(set) else null
 			this.crystalInfo = if ("crystal" == type) CrystalItemInfo(set, colorArray) else null
@@ -143,14 +141,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			BATTLE,
 			RECON
 		}
-	}
-	
-	class CollectionItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
-		val slotName: String = set.getText("collection_slot_name")
-		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
-			get() = field.clone()
-		
 	}
 	
 	class ConsumableItemInfo(set: SdbResultSet) {

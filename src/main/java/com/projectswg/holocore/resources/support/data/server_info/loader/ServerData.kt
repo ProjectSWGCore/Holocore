@@ -51,7 +51,6 @@ object ServerData {
 	 */
 	val skills				by SoftDataLoaderDelegate(::SkillLoader)
 	val skillTemplates		by SoftDataLoaderDelegate(::SkillTemplateLoader)
-	val collections			by SoftDataLoaderDelegate(::CollectionLoader)
 	
 	/*
 	 * Player

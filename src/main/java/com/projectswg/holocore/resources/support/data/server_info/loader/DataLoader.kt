@@ -41,7 +41,6 @@ abstract class DataLoader {
 		 * It's preferable if we stop creating these functions
 		 */
 		fun buffs(): BuffLoader = ServerData.buffs
-		fun collections(): CollectionLoader = ServerData.collections
 		fun skills(): SkillLoader = ServerData.skills
 		fun skillTemplates(): SkillTemplateLoader = ServerData.skillTemplates
 		fun staticItems(): StaticItemLoader = ServerData.staticItems
