@@ -141,12 +141,15 @@ public class TransferItemCallback implements ICmdCallback {
 
 				// If the character doesn't have the right skill, reject it
 				String reqSkillStr = target.getAttribute("skillmodmin");
-				String reqSkill = reqSkillStr.split(":")[1];
-				boolean someSkillIsRequired = !"none".equals(reqSkill);
-				if (someSkillIsRequired && !actor.hasSkill(reqSkill)) {
-					new SystemMessageIntent(player, "@base_player:not_correct_skill").broadcast();
-					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-					return;
+				boolean itemHasSkillRequiredAttribute = reqSkillStr != null;
+				if (itemHasSkillRequiredAttribute) {
+					String reqSkill = reqSkillStr.split(":")[1];
+					boolean specificSkillIsRequired = !"none".equals(reqSkill);
+					if (specificSkillIsRequired && !actor.hasSkill(reqSkill)) {
+						new SystemMessageIntent(player, "@base_player:not_correct_skill").broadcast();
+						player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+						return;
+					}
 				}
 			}
 
