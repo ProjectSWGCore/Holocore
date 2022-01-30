@@ -1,7 +1,0 @@
-file	enabled
-TEXT	BOOLEAN
-npc_creature.sdb	TRUE
-npc_droid.sdb	TRUE
-npc_humanoid_1.sdb	TRUE
-npc_humanoid_2.sdb	TRUE
-npc_vehicle.sdb	TRUE
