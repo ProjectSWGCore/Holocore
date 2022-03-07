@@ -1,0 +1,82 @@
+level	xp_required	xp_type	xp_multiplier	health_granted	tier	comments
+INT	INT	TEXT	INT	INT	TEXT	TEXT
+1	500	combat_meleespecialize_unarmed	1	0		
+2	1000	combat_meleespecialize_onehand	1	50		
+3	6000	combat_meleespecialize_twohand	1	75		
+4	18000	combat_meleespecialize_polearm	1	100		
+5	21000	combat_rangedspecialize_rifle	1	125		
+6	60000	combat_rangedspecialize_pistol	1	150		
+7	91000	combat_rangedspecialize_carbine	1	175		4000
+8	120000	combat_rangedspecialize_heavy	1	200		
+9	140000	bountyhunter	35	225		
+10	182650	jedi_general	1	250		4004
+11	213900	crafting_medicine_general	1	275		
+12	245150	combat_general	3	300		
+13	276400	medical	1	325		
+14	307650	creaturehandler	1	350	tier 7	first novice elite
+15	395150	trapping	1	375		
+16	482650	scout	2	390		marksman +.1line elite
+17	607650			405		
+18	732650			420		marksman +.2line elite
+19	849316			435		
+20	965982			450		
+21	1082650			465		marksman +.3line elite
+22	1307650			480		
+23	1532650			495	tier 8	marksman +1 line elite
+24	1620150			510		
+25	1707650			525		marksman +1.1line elite
+26	1832650			540		
+27	1957650			555		marksman +1.2line elite
+28	2074316			570		
+29	2190982			585		
+30	2307650			600		marksman +1.3line elite
+31	2532650			615		
+32	2757650			630	tier 9	marksman +2 line elite
+33	2845150			645		
+34	2932650			660		marksman +2.1line elite
+35	3057650			675		
+36	3182650			690		marksman +2.2line elite
+37	3299316			705		
+38	3415982			720		
+39	3532650			735		marksman +2.3line elite
+40	3757650			750		
+41	3982650			765	tier 10	marksman +3 line elite
+42	4070150			780		
+43	4157650			795		marksman +2.1line elite
+44	4282650			810		
+45	4407650			825		marksman +2.2line elite
+46	4524316			840		
+47	4640982			855		
+48	4757650			870		marksman +2.3line elite
+49	4982650			885		
+50	5102650			900	tier 11	marksman +4 line elite
+51	5352650			915		
+52	5602650			930		
+53	5852650			945		
+54	6102650			960	tier 12	one elite mastery
+55	6227650			1000		
+56	6390850			1040		
+57	6679050			1080		
+58	6967250			1120		
+59	7255450			1160		
+60	7543650			1200	tier 13	marksman +mastery +1line 2nd elite
+61	7788650			1240		
+62	8033650			1280		
+63	8278650			1320		
+64	8523650			1360		
+65	8768650			1400	tier 14	marksman +mastery +2line 2nd elite
+66	9013650			1440		
+67	9258650			1480		
+68	9503650			1520		
+69	9748650			1560		
+70	9993650			1600	tier 15	marksman +mastery +3line 2nd elite
+71	10242650			1640		
+72	10491650			1680		
+73	10740650			1720		
+74	10989650			1760		
+75	11238650			1800	tier 16	marksman +mastery +4line 2nd elite
+76	11438650			1840		
+77	11638650			1880		
+78	11838650			1920		
+79	12038650			1960		
+80	12238650			2000	tier 17	second elite mastery

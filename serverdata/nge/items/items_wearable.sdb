@@ -1145,7 +1145,6 @@ item_clothing_wookiee_shirt_01_01	object/tangible/wearables/wookiee/wke_shirt_s0
 item_clothing_wookiee_shirt_01_02	object/tangible/wearables/wookiee/wke_shirt_s02.iff	wearable	Weighted Wookiee Pullover	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_wookiee_shirt_01_03	object/tangible/wearables/wookiee/wke_shirt_s03.iff	wearable	Wookiee Battle Padding	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_wookiee_shirt_01_04	object/tangible/wearables/wookiee/wke_shirt_s04.iff	wearable	Crested Battle Padding	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_wookiee_shirt_01_05	object/tangible/wearables/wookiee/wke_shirt_s05.iff	wearable	Wookiee Under Armor Shirt	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_wookiee_shoulder_pad_01_01	object/tangible/wearables/wookiee/wke_shoulder_pad_s01.iff	wearable	Heavy Shoulder Pad	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_wookiee_shoulder_pad_01_02	object/tangible/wearables/wookiee/wke_shoulder_pad_s02.iff	wearable	Wookiee Shoulder Pad	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_wookiee_skirt_01_01	object/tangible/wearables/wookiee/wke_skirt_s01.iff	wearable	Decorative Waist Wrap	1	1000		0					0		1		none	1	0	0	0	0	0	0	0	0	0		-1	-1	-1	-1	100	0	-

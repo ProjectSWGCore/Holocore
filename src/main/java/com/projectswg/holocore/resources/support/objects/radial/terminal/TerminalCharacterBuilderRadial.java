@@ -838,7 +838,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_clothing_wookiee_shirt_01_02",
 				"item_clothing_wookiee_shirt_01_03",
 				"item_clothing_wookiee_shirt_01_04",
-				"item_clothing_wookiee_shirt_01_05",
 				"item_clothing_wookiee_shoulder_pad_01_01",
 				"item_clothing_wookiee_shoulder_pad_01_02",
 				"item_clothing_wookiee_skirt_01_01",
