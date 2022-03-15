@@ -309,39 +309,42 @@ public class FactionFlagService extends Service {
 	private static String getBeginMessage(PvpStatus oldStatus, PvpStatus newStatus) {
 		String message = "@faction_recruiter:";
 		
-		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
-			message += "on_leave_to_covert";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
+		if(newStatus == PvpStatus.COMBATANT) {
+			if (oldStatus == PvpStatus.ONLEAVE)
+				message += "on_leave_to_covert";
+			else // Must have been special forces
+				message += "overt_to_covert"
+		} else if(newStatus == PvpStatus.SPECIALFORCES) { // Must have been combatant
 			message += "covert_to_overt";
-		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
-			message += "overt_to_covert";
-		
+		}
 		return message;
 	}
 	
 	private static String getCompletionMessage(PvpStatus oldStatus, PvpStatus newStatus) {
 		String message = "@faction_recruiter:";
 		
-		if((oldStatus == PvpStatus.ONLEAVE || oldStatus == PvpStatus.SPECIALFORCES) && newStatus == PvpStatus.COMBATANT)
+		if (oldStatus == PvpStatus.COMBATANT) {
+			if (newStatus == PvpStatus.ONLEAVE)
+				message += "on_leave_complete";
+			else // Must be going special forces
+				message += "overt_complete";
+		} else { // Must be going combatant
 			message += "covert_complete";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
-			message += "overt_complete";
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.ONLEAVE )
-			message += "on_leave_complete";
-			
+		}
 		return message;
 	}
 	
 	private static long getDelay(PvpStatus oldStatus, PvpStatus newStatus) {
 		long delay = 0;
 		
-		if(oldStatus == PvpStatus.ONLEAVE && newStatus == PvpStatus.COMBATANT)
-			delay = 1;
-		else if(oldStatus == PvpStatus.COMBATANT && newStatus == PvpStatus.SPECIALFORCES)
+		if (newStatus == PvpStatus.COMBATANT) {
+			if (oldStatus == PvpStatus.ONLEAVE)
+				delay = 1;
+			else // Must have been special forces
+				delay = 300
+		} else if (newStatus == PvpStatus.SPECIALFORCES) { // Must have been combatant
 			delay = 30;
-		else if(oldStatus == PvpStatus.SPECIALFORCES && newStatus == PvpStatus.COMBATANT)
-			delay = 300;
-		
+		}
 		return delay;
 	}
 	
