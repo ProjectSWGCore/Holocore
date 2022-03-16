@@ -313,8 +313,8 @@ public class FactionFlagService extends Service {
 			if (oldStatus == PvpStatus.ONLEAVE)
 				message += "on_leave_to_covert";
 			else // Must have been special forces
-				message += "overt_to_covert"
-		} else if(newStatus == PvpStatus.SPECIALFORCES) { // Must have been combatant
+				message += "overt_to_covert";
+		} else { // Must be going special forces
 			message += "covert_to_overt";
 		}
 		return message;
