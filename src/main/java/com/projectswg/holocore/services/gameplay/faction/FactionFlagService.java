@@ -341,7 +341,7 @@ public class FactionFlagService extends Service {
 			if (oldStatus == PvpStatus.ONLEAVE)
 				delay = 1;
 			else // Must have been special forces
-				delay = 300
+				delay = 300;
 		} else if (newStatus == PvpStatus.SPECIALFORCES) { // Must have been combatant
 			delay = 30;
 		}
