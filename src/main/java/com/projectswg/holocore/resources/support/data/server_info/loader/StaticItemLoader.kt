@@ -54,7 +54,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	
 	@Throws(IOException::class)
 	override fun load() {
-		SdbLoader.load(File("serverdata/nge/items/master_item.msdb")).use { set ->
+		SdbLoader.load(File("serverdata/items/master_item.msdb")).use { set ->
 			val colorArray = set.getIntegerArrayParser("index_color_(\\d+)", Integer.MAX_VALUE)
 			while (set.next()) {
 				val slot = StaticItemInfo(set, colorArray)

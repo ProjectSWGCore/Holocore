@@ -1,0 +1,13 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1	the_informant_0					0	0	0
+1	quest.task.ground.wait_for_signal	2	the_informant_1					0	0	0
+2	quest.task.ground.retrieve_item	3	the_informant_2					0	0	0
+3	quest.task.ground.show_message_box	4	the_informant_3					0	0	0
+4	quest.task.ground.destroy_multi	5	the_informant_4					5	0	0
+5	quest.task.ground.reward	6	the_informant_6					1	0	0
+6	quest.task.ground.show_message_box	7	the_informant_5					0	0	0
+7	quest.task.ground.retrieve_item	8	the_informant_7					0	0	0
+8	quest.task.ground.show_message_box	9	the_informant_7b					0	0	0
+9	quest.task.ground.wait_for_signal	10	the_informant_8					0	0	0
+10	quest.task.ground.wait_for_signal		the_informant_9					0	0	0

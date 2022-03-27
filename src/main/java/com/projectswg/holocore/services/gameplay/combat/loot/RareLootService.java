@@ -68,7 +68,7 @@ public class RareLootService extends Service {
 	public boolean initialize() {
 		String what = "Rare Loot System items";
 		long start = StandardLog.onStartLoad(what);
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/loot/rls_items.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/loot/rls_items.sdb"))) {
 			while (set.next()) {
 				String rarity = set.getText("rarity");
 				String staticItemId = set.getText("static_item_id");

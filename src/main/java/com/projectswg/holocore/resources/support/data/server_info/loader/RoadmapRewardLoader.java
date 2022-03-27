@@ -52,7 +52,7 @@ public final class RoadmapRewardLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/roadmap/item_rewards.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/roadmap/item_rewards.sdb"))) {
 			while (set.next()) {
 				RoadmapRewardInfo rewardInfo = new RoadmapRewardInfo(set);
 				rewardsBySkillName.put(rewardInfo.getSkillName(), rewardInfo);

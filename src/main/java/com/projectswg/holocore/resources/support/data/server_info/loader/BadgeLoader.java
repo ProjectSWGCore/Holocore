@@ -51,7 +51,7 @@ public final class BadgeLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/badges/badge_map.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/badges/badge_map.sdb"))) {
 			while (set.next()) {
 				BadgeInfo badgeInfo = new BadgeInfo(set);
 				badgeFromKey.put(badgeInfo.getKey(), badgeInfo);

@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;4						0	0	0
-1	quest.task.ground.wait_for_signal	2	active_shield_generator					0	0	0
-2	quest.task.ground.wait_for_signal	3	p1_fall_back_rebel					0	0	0
-3	quest.task.ground.clear_quest							0	0	0
-4	quest.task.ground.destroy_multi_and_loot	5	rebel_atat_destroy2			agrilat_plumed_rasp		0	0	0
-5	quest.task.ground.destroy_multi_and_loot		rebel_atat_destroy1			agrilat_plumed_rasp		0	0	0

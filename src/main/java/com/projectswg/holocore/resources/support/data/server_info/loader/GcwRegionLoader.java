@@ -79,7 +79,7 @@ public class GcwRegionLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/gcw/regions_gcw.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/gcw/regions_gcw.sdb"))) {
 			while (set.next()) {
 				GcwRegionInfo regionInfo = new GcwRegionInfo(set);
 				

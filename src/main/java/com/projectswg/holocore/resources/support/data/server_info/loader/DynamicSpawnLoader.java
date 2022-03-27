@@ -60,7 +60,7 @@ public final class DynamicSpawnLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/dynamic/dynamic_spawns.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/dynamic/dynamic_spawns.sdb"))) {
 			while (set.next()) {
 				String planetsCellValue = set.getText("planets");
 				String[] planets = planetsCellValue.split(";");
@@ -85,6 +85,11 @@ public final class DynamicSpawnLoader extends DataLoader {
 		private String npcNormal2;
 		private String npcNormal3;
 		private String npcNormal4;
+		private String npcNormal5;
+		private String npcNormal6;
+		private String npcNormal7;
+		private String npcNormal8;
+		private String npcNormal9;
 		private final NpcStaticSpawnLoader.SpawnerFlag spawnerFlag;
 		
 		public DynamicSpawnInfo(SdbLoader.SdbResultSet set) {
@@ -95,6 +100,11 @@ public final class DynamicSpawnLoader extends DataLoader {
 			this.npcNormal2 = set.getText("npc_normal_2");
 			this.npcNormal3 = set.getText("npc_normal_3");
 			this.npcNormal4 = set.getText("npc_normal_4");
+			this.npcNormal4 = set.getText("npc_normal_5");
+			this.npcNormal4 = set.getText("npc_normal_6");
+			this.npcNormal4 = set.getText("npc_normal_7");
+			this.npcNormal4 = set.getText("npc_normal_8");
+			this.npcNormal4 = set.getText("npc_normal_9");
 			this.spawnerFlag = readSpawnerFlag(dynamicId, set);
 		}
 

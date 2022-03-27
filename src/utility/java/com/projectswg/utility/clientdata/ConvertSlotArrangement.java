@@ -42,7 +42,7 @@ class ConvertSlotArrangement implements Converter {
 	public void convert() {
 		System.out.println("Converting slot arrangements...");
 		
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/abstract/slot_arrangements.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/abstract/slot_arrangements.sdb"))) {
 			sdb.writeColumnNames("iff", "slots");
 			Converter.traverseFiles(this, new File("clientdata/abstract/slot/arrangement"), sdb, f -> f.getName().endsWith(".iff"));
 		} catch (IOException e) {

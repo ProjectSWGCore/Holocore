@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	yavin_fallenStar_e11_killgraverobbers					1	0	0
+1	quest.task.ground.destroy_multi_and_loot	2	yavin_fallenStar_e10_killSmugglers			imperial_major		0	0	0
+2	quest.task.ground.wait_for_signal	3	yavin_fallenStar_e12_warnOpca					0	0	0
+3	quest.task.ground.reward	4	yavin_fallenStart_e13_opcaReward					1	0	0
+4	quest.task.ground.wait_for_signal	5	yavin_fallenStar_e14_interceptships					0	0	0
+5	quest.task.ground.wait_for_signal	6;10	yavin_fallenStar_e18_talkwOsae					0	0	0
+6	quest.task.ground.wait_for_signal	7	yavin_fallenStar_e21_rebelReward					0	0	0
+7	quest.task.ground.reward	8	yavin_fallenStar_e25					1	0	0
+8	quest.task.ground.comm_player	9	yavin_fallenStar_e25_dodannaMessage	@quest/ground/yavin_fallenstar_pt_2:task08_comm_message_text	dressed_jan_dodonna.iff			0	0	0
+9	quest.task.ground.complete_quest							0	0	0
+10	quest.task.ground.wait_for_signal	11	yavin_fallenStar_e20_imperialReward					0	0	0
+11	quest.task.ground.reward	12	yavin_fallenStar_e22					1	0	0
+12	quest.task.ground.comm_player	13	yavin_fallenStar_e23_Brynemessage	@quest/ground/yavin_fallenstar_pt_2:task12_comm_message_text	dressed_lian_byrne.iff			0	0	0
+13	quest.task.ground.complete_quest							0	0	0

@@ -54,7 +54,7 @@ public class QuestLoader extends DataLoader {
 		
 		List<QuestTaskInfo> questTaskInfos = new ArrayList<>();
 		
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/quests/questtask/" + questName + ".sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questtask/" + questName + ".sdb"))) {
 			while (set.next()) {
 				int index = (int) set.getInt("index");
 				String type = set.getText("type");
@@ -106,7 +106,7 @@ public class QuestLoader extends DataLoader {
 	}
 	
 	private void loadQuestListInfos() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/quests/questlist/questlist.msdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questlist/questlist.msdb"))) {
 			while (set.next()) {
 				String questName = set.getText("quest_name");
 				

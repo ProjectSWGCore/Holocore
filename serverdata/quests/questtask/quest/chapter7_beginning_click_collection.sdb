@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;2;3;4;5;6;7;8;10;11;12;13;14	publishClickCollectionNothinTask					0	0	0
+1	quest.task.ground.wait_for_tasks		publishClickCollectionFirstTaskSet					0	0	0
+2	quest.task.ground.wait_for_signal		publishClickCollectionCollectedTransducer					0	0	0
+3	quest.task.ground.wait_for_signal		publishClickCollectionCollectedTools					0	0	0
+4	quest.task.ground.wait_for_signal		publishClickCollectionCollectedHousing					0	0	0
+5	quest.task.ground.wait_for_signal		publishClickCollectionCollectedPowerPack					0	0	0
+6	quest.task.ground.wait_for_signal		publishClickCollectionCollectedSequencer					0	0	0
+7	quest.task.ground.wait_for_signal		publishClickCollectionCollectedTransmitter					0	0	0
+8	quest.task.ground.wait_for_tasks	9	publishClickCollectionFinalWaitForTask					0	0	0
+9	quest.task.ground.wait_for_signal		publishClickCollectionReturnToCollectionNPC					0	0	0
+10	quest.task.ground.wait_for_signal		publishClickCollectionCollectedChip					0	0	0
+11	quest.task.ground.wait_for_signal		publishClickCollectionCollectedModule					0	0	0
+12	quest.task.ground.wait_for_signal		publishClickCollectionCollectedBoost					0	0	0
+13	quest.task.ground.wait_for_signal		publishClickCollectionCollectedFrequency					0	0	0
+14	quest.task.ground.wait_for_tasks		publishClickCollectionSecondTaskSet					0	0	0

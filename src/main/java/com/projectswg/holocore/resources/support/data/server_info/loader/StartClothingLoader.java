@@ -53,7 +53,7 @@ public final class StartClothingLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/start_clothing.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/start_clothing.sdb"))) {
 			List<String> columns = set.getColumns();
 			while (set.next()) {
 				Race race = Race.getRace(set.getText("race"));

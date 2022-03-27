@@ -28,7 +28,7 @@ class ConvertBuildingCells implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting building cells...");
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/objects/building_cells.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/building_cells.sdb"))) {
 			sdb.writeColumnNames("building", "index", "name", "neighbors");
 			Converter.traverseFiles(this, BUILDINGS, sdb, file -> file.getName().endsWith(".iff"));
 		} catch (IOException e) {

@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.destroy_multi_and_loot	2	mustafar_maneater_one					0	0	0
-2	quest.task.ground.comm_player	3	mustafar_maneater_two	@quest/ground/som_maneater:task02_comm_message_text	object/mobile/som/must_foreman_chivos.iff			0	0	0
-3	quest.task.ground.go_to_location	4	mustafar_maneater_three					0	0	0
-4	quest.task.ground.encounter	5	mustafar_maneater_four					1	0	0
-5	quest.task.ground.wait_for_signal	6	mustafar_maneater_five					0	0	0
-6	quest.task.ground.reward							1	0	0

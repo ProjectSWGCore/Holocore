@@ -1,0 +1,13 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.retrieve_item	1	skaak_tipping_1					0	0	0
+1	quest.task.ground.comm_player	2	skaak_tipping_2	@quest/ground/naboo_kadaraa_tipping_the_balance_1:task01_comm_message_text	object/mobile/panaka.iff			0	0	0
+2	quest.task.ground.wait_for_signal	3	skaak_tipping_3					0	0	0
+3	quest.task.ground.destroy_multi	4	skaak_tipping_4					11	0	0
+4	quest.task.ground.show_message_box	5	skaak_tipping_5					0	0	0
+5	quest.task.ground.reward	6	skaak_tipping_6					1	0	0
+6	quest.task.ground.retrieve_item	7	skaak_tipping_7					0	0	0
+7	quest.task.ground.comm_player	8	skaak_tipping_8	@quest/ground/naboo_kadaraa_tipping_the_balance_1:task07_comm_message_text	object/mobile/dressed_criminal_thug_zabrak_male_01.iff			0	0	0
+8	quest.task.ground.destroy_multi_and_loot	9	skaak_tipping_9					0	0	0
+9	quest.task.ground.wait_for_signal	10	skaak_tipping_10					0	0	0
+10	quest.task.ground.complete_quest		skaak_tipping_10b					0	0	0

@@ -1,6 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.timer	1	legacy_naboo_final_01					0	10	12
-1	quest.task.ground.comm_player	2	legacy_naboo_final_02	@quest/ground/legacy_naboo_back_to_rebel:task01_comm_message_text	object/mobile/naboo_wilson_tchorshel.iff			0	0	0
-2	quest.task.ground.wait_for_signal	3	legacy_naboo_final_03					0	0	0
-3	quest.task.ground.complete_quest		legacy_naboo_final_04					0	0	0

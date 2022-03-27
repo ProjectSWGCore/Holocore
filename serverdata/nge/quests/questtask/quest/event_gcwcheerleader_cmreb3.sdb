@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi	1	kill5STSquadleaders			crackdown_stormtrooper_squad_leader_hard		5	0	0
-1	quest.task.ground.destroy_multi	2	killESandtroopers			crackdown_elite_sand_trooper_hard		10	0	0
-2	quest.task.ground.destroy_multi	3	kill3Corporals			crackdown_imperial_corporal_hard		3	0	0
-3	quest.task.ground.destroy_multi	4	kill2Sergeants			crackdown_imperial_sergeant_hard		2	0	0
-4	quest.task.ground.destroy_multi	5	killMasterSergeant			crackdown_imperial_master_sergeant_hard		1	0	0
-5	quest.task.ground.reward	6	reward					0	0	0
-6	quest.task.ground.reward		reward2					1	0	0

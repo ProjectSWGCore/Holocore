@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	diktat_search_1					0	0	0
-1	quest.task.ground.retrieve_item	2	diktat_search_2					0	0	0
-2	quest.task.ground.retrieve_item	3	diktat_search_3					0	0	0
-3	quest.task.ground.show_message_box	4	diktat_search_4					0	0	0
-4	quest.task.ground.wait_for_signal	5	diktat_search_5					0	0	0
-5	quest.task.ground.wait_for_signal		diktat_search_6					0	0	0

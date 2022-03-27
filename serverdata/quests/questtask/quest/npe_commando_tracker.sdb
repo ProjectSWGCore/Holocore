@@ -1,0 +1,10 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1	loche					0	0	0
+1	quest.task.ground.timer	2						0	3	5
+2	quest.task.ground.comm_player	3		@quest/ground/npe_commando_tracker:task02_comm_message_text	object/mobile/dressed_npe_commando.iff		quest/npe_pointer_brawler	0	0	0
+3	quest.task.ground.wait_for_signal	4	rydel					0	0	0
+4	quest.task.ground.timer	5						0	3	5
+5	quest.task.ground.comm_player	6	done_brawler	@quest/ground/npe_commando_tracker:task05_comm_message_text	object/mobile/dressed_npe_commando.iff		quest/npe_pointer_commando_template	0	0	0
+6	quest.task.ground.wait_for_signal	7	done					0	0	0
+7	quest.task.ground.clear_quest							0	0	0

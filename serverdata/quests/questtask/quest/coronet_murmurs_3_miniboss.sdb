@@ -1,0 +1,10 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi_and_loot	1	boss1			murmur_executive_1		0	0	0
+1	quest.task.ground.retrieve_item	2	bosscomp1					0	0	0
+2	quest.task.ground.destroy_multi_and_loot	3	boss2			murmur_executive_2		0	0	0
+3	quest.task.ground.retrieve_item	4	bosscomp2					0	0	0
+4	quest.task.ground.destroy_multi_and_loot	5	boss3			murmur_executive_3		0	0	0
+5	quest.task.ground.retrieve_item	6	bosscomp3					0	0	0
+6	quest.task.ground.comm_player	7		@quest/ground/coronet_murmurs_3_miniboss:task06_comm_message_text	object/mobile/dressed_murmur_questgiver.iff			0	0	0
+7	quest.task.ground.complete_quest						quest/coronet_murmurs_4_lab	0	0	0

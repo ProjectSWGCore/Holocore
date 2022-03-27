@@ -1,5 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi	1	tat_eisley_facingevil_e1			tatooine_opening_brok		1	0	0
-1	quest.task.ground.comm_player	2	tat_eisley_facingevil_e1a	@quest/ground/tatooine_eisley_faceevil:task01_comm_message_text	object/mobile/jabba_the_hutt.iff			0	0	0
-2	quest.task.ground.complete_quest		tat_eisley_facingevil_e3				legacy_button_start	0	0	0

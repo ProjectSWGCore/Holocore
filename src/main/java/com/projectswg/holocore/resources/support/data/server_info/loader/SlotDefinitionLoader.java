@@ -48,7 +48,7 @@ public final class SlotDefinitionLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/abstract/slot_definitions.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/abstract/slot_definitions.sdb"))) {
 			while (set.next()) {
 				SlotDefinition def = new SlotDefinition(set);
 				slotDefinitions.put(def.getName(), def);

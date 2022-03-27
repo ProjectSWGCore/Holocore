@@ -94,7 +94,7 @@ public class CityService extends Service {
 	
 	private void loadCities() {
 		cities.clear();
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/map/cities.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/map/cities.sdb"))) {
 			while (set.next()) {
 				Terrain t = Terrain.getTerrainFromName(set.getText("terrain"));
 				List<City> list = cities.computeIfAbsent(t, k -> new ArrayList<>());

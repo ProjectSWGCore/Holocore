@@ -62,7 +62,7 @@ public final class NpcPatrolRouteLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/patrol/patrol_id.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/patrol/patrol_id.msdb"))) {
 			patrolRouteMap.putAll(set.stream(PatrolRouteWaypoint::new).collect(Collectors.groupingBy(PatrolRouteWaypoint::getGroupId)));
 		}
 	}

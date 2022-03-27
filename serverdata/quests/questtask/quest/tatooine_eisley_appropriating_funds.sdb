@@ -1,0 +1,5 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.timer	1	tat_eisley_app_funds_e1					0	10	14
+1	quest.task.ground.comm_player	2	tat_eisley_app_funds_e2	@quest/ground/tatooine_eisley_appropriating_funds:task01_comm_message_text	object/mobile/dressed_noble_old_human_female_02.iff			0	0	0
+2	quest.task.ground.complete_quest		tat_eisley_app_funds_e3					0	0	0

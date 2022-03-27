@@ -58,7 +58,7 @@ public final class VehicleLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/vehicles/vehicles.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/vehicles/vehicles.sdb"))) {
 			while (set.next()) {
 				VehicleInfo vehicle = new VehicleInfo(set);
 				assert !vehicleTemplates.containsKey(vehicle.getObjectTemplate()) : "vehicle template already exists in map";

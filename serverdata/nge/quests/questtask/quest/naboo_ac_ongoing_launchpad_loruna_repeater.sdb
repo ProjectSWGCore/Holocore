@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;5;6						0	0	0
-1	quest.task.ground.timer	2;4	ac_ongoing_loruna_cooldown_timer					0	30	60
-2	quest.task.ground.wait_for_signal	3	ac_ongoing_loruna_ready_for_quest					0	0	0
-3	quest.task.ground.wait_for_signal		ac_ongoing_loruna_has_quest					0	0	0
-4	quest.task.ground.comm_player		ac_ongoing_loruna_repeater_comm	@quest/ground/naboo_ac_ongoing_launchpad_loruna_repeater:task04_comm_message_text	object/mobile/loruna_scathe.iff			0	0	0
-5	quest.task.ground.wait_for_signal		ac_ongoing_loruna_cooldown_waiting_cooldown					0	0	0
-6	quest.task.ground.wait_for_signal		ac_ongoing_loruna_cooldown_clear_quest					0	0	0

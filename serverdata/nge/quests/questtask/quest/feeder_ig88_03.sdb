@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.destroy_multi_and_loot	2	feeder_loot_ig88_01					0	0	0
-2	quest.task.ground.comm_player	3	redder_comm_ig88_01	@quest/ground/feeder_ig88_03:task02_comm_message_text	object/mobile/ig88_feeder_quest_01.iff			0	0	0
-3	quest.task.ground.retrieve_item	4	feeder_retrieve_ig88_01					0	0	0
-4	quest.task.ground.retrieve_item	5	feeder_retrieve_ig88_02					0	0	0
-5	quest.task.ground.wait_for_signal	6	feeder_signal_ig88_02					0	0	0
-6	quest.task.ground.complete_quest							0	0	0

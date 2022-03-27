@@ -1,0 +1,9 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;2	meatlumpsAct1_begin					0	0	0
+1	quest.task.ground.show_message_box							0	0	0
+2	quest.task.ground.wait_for_signal	3;5	meatlumpsAct1_timesEditor					0	0	0
+3	quest.task.ground.wait_for_signal	4	meatlumpsAct1_vaniKorr					0	0	0
+4	quest.task.ground.complete_quest						corellia_coronet_meatlump_act1_part2	0	0	0
+5	quest.task.ground.wait_for_signal	6	meatlumpsAct1_refused					0	0	0
+6	quest.task.ground.wait_for_signal		meatlumpsAct1_refusedDatapads					0	0	0

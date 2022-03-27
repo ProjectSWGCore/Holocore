@@ -1,0 +1,9 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;5;6						0	0	0
+1	quest.task.ground.destroy_multi_and_loot	2	newbie_scout_e60					0	0	0
+2	quest.task.ground.comm_player	3	newbie_scout_e62	@quest/ground/newbie_scout_pt6:task02_comm_message_text	object/mobile/dressed_mayor_mikdanyell_guhrantt.iff			0	0	0
+3	quest.task.ground.wait_for_signal	4	newbie_scout_e63					0	0	0
+4	quest.task.ground.complete_quest		newbie_scout_e64					0	0	0
+5	quest.task.ground.wait_for_signal		location1					0	0	0
+6	quest.task.ground.wait_for_signal		location2					0	0	0

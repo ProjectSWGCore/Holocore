@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;4;5	deeja_peak_beacon_favor_01					0	0	0
-1	quest.task.ground.wait_for_tasks	2	deeja_peak_beacon_favor_03b					0	0	0
-2	quest.task.ground.destroy_multi_and_loot	3	deeja_peak_beacon_favor_04			naboo_mountaintop_janelle		0	0	0
-3	quest.task.ground.wait_for_signal		deeja_peak_beacon_favor_05					0	0	0
-4	quest.task.ground.destroy_multi		deeja_peak_beacon_favor_03			naboo_mountaintop_spice_runner		11	0	0
-5	quest.task.ground.destroy_multi		deeja_peak_beacon_favor_02			naboo_mountaintop_smuggler		12	0	0

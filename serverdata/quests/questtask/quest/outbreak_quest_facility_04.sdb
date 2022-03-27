@@ -1,0 +1,11 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.comm_player	1	griffaxJinComm	@quest/ground/outbreak_quest_facility_04:task00_comm_message_text	object/mobile/scientist_griffax_jin.iff			0	0	0
+1	quest.task.ground.wait_for_signal	2	traceCall					0	0	0
+2	quest.task.ground.wait_for_signal	3	findJin					0	0	0
+3	quest.task.ground.destroy_multi_and_loot	4	defeatJin			outbreak_scientist_griffax_jin_afflicted		0	0	0
+4	quest.task.ground.timer	5	timerTask					0	5	5
+5	quest.task.ground.comm_player	6	scientistCom	@quest/ground/outbreak_quest_facility_04:task05_comm_message_text	object/mobile/dressed_twi_female_scientist_01.iff			0	0	0
+6	quest.task.ground.wait_for_signal	7	unlockSeal					0	0	0
+7	quest.task.ground.comm_player	8	nomiComm	@quest/ground/outbreak_quest_facility_04:task07_comm_message_text	object/mobile/dressed_twi_female_scientist_01.iff			0	0	0
+8	quest.task.ground.wait_for_signal		speakNomi					0	0	0

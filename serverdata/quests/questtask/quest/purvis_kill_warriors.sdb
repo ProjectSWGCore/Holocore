@@ -1,0 +1,9 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.comm_player	1;5	kill_tusken_raider_warriors	@quest/ground/purvis_kill_warriors:task00_comm_message_text	object/mobile/dressed_purvis_arrison.iff			0	0	0
+1	quest.task.ground.destroy_multi	2	newbie_ranged_kill_zealots_3			tusken_raider_warrior		5	0	0
+2	quest.task.ground.comm_player	3	newbie_ranged_e5	@quest/ground/purvis_kill_warriors:task02_comm_message_text	object/mobile/dressed_mayor_mikdanyell_guhrantt.iff			0	0	0
+3	quest.task.ground.wait_for_signal	4	newbie_ranged_e7					0	0	0
+4	quest.task.ground.complete_quest		newbie_ranged_e8					0	0	0
+5	quest.task.ground.timer	6						0	20	25
+6	quest.task.ground.comm_player			@quest/ground/purvis_kill_warriors:task06_comm_message_text	object/mobile/bib_fortuna.iff			0	0	0

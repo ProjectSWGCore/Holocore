@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;4;5	coa_rebel_view_end					0	0	0
-1	quest.task.ground.wait_for_tasks	2	coa_rebel_end_wft					0	0	0
-2	quest.task.ground.wait_for_signal	3	talus_dearic_coa_rebel_gratitude_wfs					0	0	0
-3	quest.task.ground.complete_quest		coa_rebel_reward_qcm					0	0	0
-4	quest.task.ground.wait_for_signal		talus_dearic_coa_report_to_trezya_wfs					0	0	0
-5	quest.task.ground.wait_for_signal		talus_dearic_coa_med_supplies_delivered_wfs					0	0	0

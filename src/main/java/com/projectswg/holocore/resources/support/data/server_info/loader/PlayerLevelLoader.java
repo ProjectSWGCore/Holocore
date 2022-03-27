@@ -60,7 +60,7 @@ public final class PlayerLevelLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/player_level.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/player_level.sdb"))) {
 			levels.putAll(set.stream(PlayerLevelInfo::new).collect(toMap(PlayerLevelInfo::getLevel, Function.identity())));
 			maxLevel = levels.keySet().stream().mapToInt(i -> i).max().orElse(0);
 		}

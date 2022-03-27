@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1	investigate					0	0	0
+1	quest.task.ground.comm_player	2	cb_1_sinis_comm_1	@quest/ground/corellia_cb_1:task01_comm_message_text	object/mobile/cb_sinis_questgiver.iff			0	0	0
+2	quest.task.ground.destroy_multi_and_loot	3	scavengers			deflarian_scavenger		0	0	0
+3	quest.task.ground.comm_player	4	cb_1_sinis_comm_2	@quest/ground/corellia_cb_1:task03_comm_message_text	object/mobile/cb_sinis_questgiver.iff			0	0	0
+4	quest.task.ground.wait_for_signal	5	cb_yorick					0	0	0
+5	quest.task.ground.comm_player	6	cb_1_sinis_comm_3	@quest/ground/corellia_cb_1:task05_comm_message_text	object/mobile/cb_sinis_questgiver.iff			0	0	0
+6	quest.task.ground.destroy_multi_and_loot	7	cb_1_kill_guards			deflarian_guard		0	0	0
+7	quest.task.ground.retrieve_item	8	cb_1_comm_terminal					0	0	0
+8	quest.task.ground.comm_player	9	cb_1_sinis_comm_4	@quest/ground/corellia_cb_1:task08_comm_message_text	object/mobile/cb_sinis_questgiver.iff			0	0	0
+9	quest.task.ground.go_to_location	10;12;13;14	cb_1_deflarian_camp_2					0	0	0
+10	quest.task.ground.wait_for_tasks	11	cb_1_final					0	0	0
+11	quest.task.ground.wait_for_signal		finish					0	0	0
+12	quest.task.ground.destroy_multi		cb_1_kill_lieutenant			deflarian_lieutenant		1	0	0
+13	quest.task.ground.destroy_multi		cb_1_kill_enforcers			deflarian_enforcer		8	0	0
+14	quest.task.ground.retrieve_item		cb_1_medical_recovery					0	0	0

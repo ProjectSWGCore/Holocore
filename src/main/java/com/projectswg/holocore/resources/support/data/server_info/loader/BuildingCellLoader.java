@@ -56,7 +56,7 @@ public final class BuildingCellLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/objects/building_cells.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/objects/building_cells.sdb"))) {
 			buildingMap.putAll(set.stream(CellInfo::new).collect(groupingBy(CellInfo::getBuilding)));
 		}
 	}

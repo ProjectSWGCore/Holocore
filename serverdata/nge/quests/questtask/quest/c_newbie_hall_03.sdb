@@ -1,7 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	enterRoom9					0	0	0
-1	quest.task.ground.show_message_box	2	getQuest					0	0	0
-2	quest.task.ground.wait_for_signal	3;4	explainFight					0	0	0
-3	quest.task.ground.destroy_multi		killPirate			desert_thug_newbie	c_newbie_hall_jedi	1	0	0
-4	quest.task.ground.wait_for_signal		enterRoom10					0	0	0

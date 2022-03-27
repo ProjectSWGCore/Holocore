@@ -1,0 +1,11 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1;6;7;8	legacy_together_e1					0	0	0
+1	quest.task.ground.reward	2	legacy_together_e4					1	0	0
+2	quest.task.ground.wait_for_signal	3	legacy_together_e5					0	0	0
+3	quest.task.ground.give_item	4	legacy_together_e6					0	0	0
+4	quest.task.ground.wait_for_signal	5	legacy_together_e7					0	0	0
+5	quest.task.ground.complete_quest		legacy_together_e9					0	0	0
+6	quest.task.ground.reward		legacy_together_e3					1	0	0
+7	quest.task.ground.reward		legacy_together_e2					1	0	0
+8	quest.task.ground.reward		legacy_together_e101					1	0	0

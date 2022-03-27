@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;3;5						0	0	0
-1	quest.task.ground.wait_for_tasks	2						0	0	0
-2	quest.task.ground.wait_for_signal		naboo_24_gungan_power_grab_02b_return					0	0	0
-3	quest.task.ground.retrieve_item	4	naboo_24_gungan_power_grab_02b_sapper					0	0	0
-4	quest.task.ground.spawn		naboo_24_gungan_power_grab_02b_fambaa_attack					0	0	0
-5	quest.task.ground.destroy_multi		naboo_24_gungan_power_grab_02b_kaadu_attitude			nesting_kaadu		7	0	0

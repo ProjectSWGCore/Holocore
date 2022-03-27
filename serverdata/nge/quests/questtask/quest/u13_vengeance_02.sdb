@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.retrieve_item	1	u13_vengeance_02_01					0	0	0
-1	quest.task.ground.destroy_multi	2;4;5	u13_vengeance_02_02			u13_jurgen_nath		1	0	0
-2	quest.task.ground.wait_for_tasks	3	u13_vengeance_02_03					0	0	0
-3	quest.task.ground.wait_for_signal		u13_vengeance_02_04					0	0	0
-4	quest.task.ground.destroy_multi		u13_vengeance_02_03b			u13_vladlun_henchman		19	0	0
-5	quest.task.ground.destroy_multi		u13_vengeance_02_03a			u13_vladlun_travan		1	0	0

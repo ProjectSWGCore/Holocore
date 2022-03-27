@@ -60,7 +60,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class DynamicSpawnService extends Service {
 	
-	private static final int MAX_SPAWN_DISTANCE_TO_PLAYER = 150;    // Spawner is created up to this amount of meters away from the player
+	private static final int MAX_SPAWN_DISTANCE_TO_PLAYER = 350;    // Spawner is created up to this amount of meters away from the player
 	private static final SpawnerType SPAWNER_TYPE = SpawnerType.WAYPOINT_AUTO_SPAWN;	// Important that this type is only used by dynamic spawns
 	
 	private final DynamicSpawnLoader dynamicSpawnLoader;
@@ -74,7 +74,7 @@ public class DynamicSpawnService extends Service {
 		noSpawnZoneLoader = ServerData.INSTANCE.getNoSpawnZones();
 		terrainLevelLoader = ServerData.INSTANCE.getTerrainLevels();
 		npcSpawnChance = PswgDatabase.INSTANCE.getConfig().getLong(this, "npcSpawnChance", 2);
-		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 10);
+		maxObservedNpcs = PswgDatabase.INSTANCE.getConfig().getLong(this, "maxObservedNpcs", 7);
 	}
 	
 	@IntentHandler

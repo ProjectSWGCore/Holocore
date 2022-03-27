@@ -1,0 +1,12 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	theed_meanwhile_chase_01			naboo_muskeg_radical		11	0	0
+1	quest.task.ground.destroy_multi	2	theed_meanwhile_chase_02			naboo_muskeg_fanatic		9	0	0
+2	quest.task.ground.destroy_multi	3	theed_meanwhile_chase_03			naboo_muskeg_zealot		11	0	0
+3	quest.task.ground.destroy_multi	4	theed_meanwhile_chase_04			naboo_muskeg_dubbin_sharr		1	0	0
+4	quest.task.ground.show_message_box	5	theed_meanwhile_chase_05					0	0	0
+5	quest.task.ground.destroy_multi	6	theed_meanwhile_chase_06					8	0	0
+6	quest.task.ground.show_message_box	7	theed_meanwhile_chase_07					0	0	0
+7	quest.task.ground.destroy_multi	8	theed_meanwhile_chase_08					7	0	0
+8	quest.task.ground.show_message_box	9	theed_meanwhile_chase_08b					0	0	0
+9	quest.task.ground.wait_for_signal		theed_meanwhile_chase_09					0	0	0

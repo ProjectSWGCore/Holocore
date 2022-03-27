@@ -52,7 +52,7 @@ public class CommandLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/commands.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/commands.msdb"))) {
 			while (set.next()) {
 				Command command = Command.builder()
 						.withName(set.getText("commandName").toLowerCase(Locale.US))
@@ -83,7 +83,7 @@ public class CommandLoader extends DataLoader {
 				commandCrcMap.put(command.getCrc(), command);
 			}
 		}
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/command/combat_commands.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/combat_commands.sdb"))) {
 			while (set.next()) {
 				/*
 				 * actionName             profession             Working                comment                commandType         validTarget                hitType  healAttrib  setCombatTarget

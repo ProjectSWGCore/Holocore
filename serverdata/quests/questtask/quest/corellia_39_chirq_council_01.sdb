@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1;12;13;14	chirq_council_01_01					0	0	0
+1	quest.task.ground.wait_for_tasks	2	chirq_council_01_02					0	0	0
+2	quest.task.ground.comm_player	3	chirq_council_01_03a	@quest/ground/corellia_39_chirq_council_01:task02_comm_message_text	object/mobile/dressed_robber_human_female_01.iff			0	0	0
+3	quest.task.ground.go_to_location	4	chirq_council_01_03					0	0	0
+4	quest.task.ground.destroy_multi	5	chirq_council_01_04			corellia_drall_patriot_tactician		11	0	0
+5	quest.task.ground.comm_player	6	chirq_council_01_05a	@quest/ground/corellia_39_chirq_council_01:task05_comm_message_text	object/mobile/dressed_robber_human_female_01.iff			0	0	0
+6	quest.task.ground.wait_for_signal	7;10;11	chirq_council_01_05					0	0	0
+7	quest.task.ground.wait_for_tasks	8	chirq_council_01_06					0	0	0
+8	quest.task.ground.comm_player	9	chirq_council_01_07	@quest/ground/corellia_39_chirq_council_01:task08_comm_message_text	object/mobile/dressed_villain_trandoshan_male_01.iff			0	0	0
+9	quest.task.ground.wait_for_signal		chirq_council_01_08					0	0	0
+10	quest.task.ground.destroy_multi		chirq_council_01_06b			corellia_corsec_rogue_xyrias_undea		1	0	0
+11	quest.task.ground.destroy_multi		chirq_council_01_06a			corellia_corsec_rogue_miscreant		9	0	0
+12	quest.task.ground.destroy_multi		chirq_council_01_02c			corellia_ragtag_lilea_norith		1	0	0
+13	quest.task.ground.destroy_multi		chirq_council_01_02b			corellia_ragtag_ventil_tamplin		1	0	0
+14	quest.task.ground.destroy_multi		chirq_council_01_02a			corellia_ragtag_cudgel		7	0	0

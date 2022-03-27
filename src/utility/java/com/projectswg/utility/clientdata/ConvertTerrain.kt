@@ -42,7 +42,7 @@ internal class ConvertTerrain : Converter {
 		println("Converting terrains...")
 		Log.addWrapper(ConsoleLogWrapper())
 		try {
-			SdbGenerator(File("serverdata/nge/terrain/terrains.sdb")).use { sdb ->
+			SdbGenerator(File("serverdata/terrain/terrains.sdb")).use { sdb ->
 				sdb.writeColumnNames("slotName", "global", "modifiable", "observeWithParent", "exposeToWorld")
 				convertFile(sdb, File("clientdata/terrain/tatooine.trn"))
 			}

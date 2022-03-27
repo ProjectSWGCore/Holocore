@@ -1,6 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.timer	1	corellia_38_pointer_01					0	6	9
-1	quest.task.ground.comm_player	2	corellia_38_pointer_02	@quest/ground/corellia_38_pointer:task01_comm_message_text	object/mobile/dressed_corsec_officer_human_male_01.iff			0	0	0
-2	quest.task.ground.wait_for_signal	3	corellia_38_pointer_03					0	0	0
-3	quest.task.ground.clear_quest		corellia_38_pointer_04					0	0	0

@@ -1,0 +1,7 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1	findCaleHerron					0	0	0
+1	quest.task.ground.timer	2	invisTimer					0	5	5
+2	quest.task.ground.comm_player	3	bibCommCheckin	@quest/ground/quest_04_meet_cale_herron:task02_comm_message_text	object/mobile/bib_fortuna.iff			0	0	0
+3	quest.task.ground.wait_for_signal	4	speakCaleCompleteQuest					0	0	0
+4	quest.task.ground.complete_quest		giveQuest				quest/quest_05_frame_valarians	0	0	0

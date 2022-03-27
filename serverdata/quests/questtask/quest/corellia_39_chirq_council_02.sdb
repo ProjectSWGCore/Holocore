@@ -1,0 +1,14 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1;9;10;11	chirq_council_02_01			corellia_chirq_trins_evnar		1	0	0
+1	quest.task.ground.wait_for_tasks	2	chirq_council_02_02					0	0	0
+2	quest.task.ground.wait_for_signal	3;6;7;8	chirq_council_02_03					0	0	0
+3	quest.task.ground.wait_for_tasks	4	chirq_council_02_04					0	0	0
+4	quest.task.ground.destroy_multi	5	chirq_council_02_05			corellia_chirq_jade_mcdonagh		1	0	0
+5	quest.task.ground.complete_quest		chirq_council_02_05b				quest/corellia_39_chirq_council_02b	0	0	0
+6	quest.task.ground.destroy_multi		chirq_council_02_04c			corellia_chirq_seyda_shae		1	0	0
+7	quest.task.ground.destroy_multi		chirq_council_02_04b			corellia_chirq_genovin_jasha		1	0	0
+8	quest.task.ground.retrieve_item		chirq_council_02_04a					0	0	0
+9	quest.task.ground.retrieve_item		chirq_council_02_02c					0	0	0
+10	quest.task.ground.retrieve_item		chirq_council_02_02b					0	0	0
+11	quest.task.ground.retrieve_item		chirq_council_02_02a					0	0	0

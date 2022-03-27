@@ -61,7 +61,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/static.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
 			spawns.addAll(set.parallelStream(StaticSpawnInfo::new).collect(Collectors.toList()));
 		}
 	}

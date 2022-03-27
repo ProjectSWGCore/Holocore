@@ -54,7 +54,7 @@ class NpcCombatProfileLoader : DataLoader() {
 	
 	@Throws(IOException::class)
 	public override fun load() {
-		SdbLoader.load(File("serverdata/nge/spawn/static.msdb")).use { set -> profiles.putAll(set.stream { CombatProfile(it) }.collect(groupingBy { it.id })) }
+		SdbLoader.load(File("serverdata/spawn/static.msdb")).use { set -> profiles.putAll(set.stream { CombatProfile(it) }.collect(groupingBy { it.id })) }
 	}
 	
 	private class CombatProfile(set: SdbResultSet) {

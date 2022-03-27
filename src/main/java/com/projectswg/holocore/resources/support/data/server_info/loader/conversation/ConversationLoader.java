@@ -63,7 +63,7 @@ public class ConversationLoader extends DataLoader {
 	@Nullable
 	public Conversation getConversation(String conversationFile) {
 		try {
-			InputStream inputStream = new FileInputStream("serverdata/nge/conversation/" + conversationFile + ".json");
+			InputStream inputStream = new FileInputStream("serverdata/conversation/" + conversationFile + ".json");
 			JSONObject jsonObject = JSON.readObject(inputStream);
 			
 			return readConversation(conversationFile, jsonObject);
@@ -204,7 +204,7 @@ public class ConversationLoader extends DataLoader {
 	}
 	
 	private void loadSpawnToConversations() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/conversation/spawn_conversation_map.msdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/conversation/spawn_conversation_map.msdb"))) {
 			while (set.next()) {
 				String conversationId = set.getText("conversation_id");
 				String conversationFile = set.getText("conversation_file");
