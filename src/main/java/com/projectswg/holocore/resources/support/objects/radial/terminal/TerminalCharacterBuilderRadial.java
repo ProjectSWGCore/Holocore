@@ -1,6 +1,5 @@
 package com.projectswg.holocore.resources.support.objects.radial.terminal;
 
-import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
@@ -17,7 +16,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 
@@ -48,6 +46,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Wearables");
 				listBox.addListItem("ITEMS - Tools");
 				listBox.addListItem("ITEMS - Vehicles");
+				listBox.addListItem("Credits");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -66,6 +65,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 3: handleWearables(player); break;
 			case 4: handleTools(player); break;
 			case 5: handleVehicles(player); break;
+			case 6: handleCredits(player); break;
 		}
 	}
 
@@ -74,6 +74,13 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		SWGObject inventory = creature.getSlottedObject("inventory");
 
 		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items).broadcast();
+	}
+
+	private static void handleCredits(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		int oneMillion = 1_000_000;
+		creatureObject.setCashBalance(oneMillion);
+		creatureObject.setBankBalance(oneMillion);
 	}
 
 	private static void handleArmor(Player player) {
