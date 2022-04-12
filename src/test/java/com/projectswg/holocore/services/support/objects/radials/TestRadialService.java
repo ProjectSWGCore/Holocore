@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.services.support.objects.radials;
 
-import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMenuRequest;
@@ -35,7 +34,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectMe
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
@@ -78,28 +76,6 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		Assert.assertEquals(2, response.getOptions().size());
 		Assert.assertEquals(RadialItem.ITEM_USE, response.getOptions().get(0).getType());
 		Assert.assertEquals(RadialItem.ITEM_DESTROY, response.getOptions().get(1).getType());
-	}
-	
-	@Test
-	public void testReplaceLootRadial() {
-		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
-		AIObject dead = new AIObject(getUniqueId());
-		registerObject(creature, dead);
-		dead.setPosture(Posture.DEAD);
-		
-		sendRequest(creature, dead, RadialItem.LOOT, RadialItem.EXAMINE);
-		
-		ObjectMenuResponse response = creature.getOwner().getNextPacket(ObjectMenuResponse.class);
-		Assert.assertNotNull(response);
-		Assert.assertEquals(creature.getObjectId(), response.getRequestorId());
-		Assert.assertEquals(dead.getObjectId(), response.getTargetId());
-		
-		Assert.assertEquals(2, response.getOptions().size());
-		Assert.assertEquals(RadialItem.LOOT, response.getOptions().get(0).getType());
-		Assert.assertEquals(RadialItem.EXAMINE, response.getOptions().get(1).getType());
-		
-		Assert.assertEquals(1, response.getOptions().get(0).getChildren().size());
-		Assert.assertEquals(RadialItem.LOOT_ALL, response.getOptions().get(0).getChildren().get(0).getType());
 	}
 	
 	private void sendRequest(CreatureObject source, SWGObject target, RadialItem ... items) {
