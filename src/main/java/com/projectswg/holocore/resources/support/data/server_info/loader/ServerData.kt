@@ -45,7 +45,7 @@ object ServerData {
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
 	val specialLines		by SoftDataLoaderDelegate(::SpecialLineLoader)
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
-	
+
 	/*
 	 * Skill / Collection
 	 */
@@ -62,6 +62,7 @@ object ServerData {
 	val roadmapRewards		by SoftDataLoaderDelegate(::RoadmapRewardLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
 	val itemBonusSet		by SoftDataLoaderDelegate(::ItemBonusSetLoader)
+	val combatXpMultipliers	by SoftDataLoaderDelegate(::CombatXpMultiplierLoader)
 
 	/*
 	 * NPC Info

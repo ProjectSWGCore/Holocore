@@ -29,83 +29,56 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.toMap;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public final class PlayerLevelLoader extends DataLoader {
 	
-	private final Map<Integer, PlayerLevelInfo> levels;
-	private int maxLevel;
+	private final Collection<PlayerLevelInfo> levels;
 	
 	PlayerLevelLoader() {
-		this.levels = new HashMap<>();
-		this.maxLevel = 0;
+		this.levels = new LinkedList<>();
 	}
 	
-	public int getMaxLevel() {
-		return maxLevel;
-	}
-	
-	@Nullable
-	public PlayerLevelInfo getFromLevel(int level) {
-		return levels.get(level);
+	public Collection<PlayerLevelInfo> getPlayerLevelInfos() {
+		return levels;
 	}
 	
 	@Override
-	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/player_level.sdb"))) {
-			levels.putAll(set.stream(PlayerLevelInfo::new).collect(toMap(PlayerLevelInfo::getLevel, Function.identity())));
-			maxLevel = levels.keySet().stream().mapToInt(i -> i).max().orElse(0);
+	public void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/experience/player_level.sdb"))) {
+			while (set.next()) {
+				PlayerLevelInfo playerLevelInfo = new PlayerLevelInfo(set);
+				levels.add(playerLevelInfo);
+			}
 		}
 	}
 	
 	public static class PlayerLevelInfo {
 		
 		private final int level;
-		private final int xpRequired;
-		private final String xpType;
-		private final int xpMultiplier;
-		private final int healthGranted;
-		private final int expertisePoints;
+		private final int requiredCombatXp;
+		private final int healthAdded;
 		
 		public PlayerLevelInfo(SdbResultSet set) {
 			this.level = (int) set.getInt("level");
-			this.xpRequired = (int) set.getInt("xp_required");
-			this.xpType = set.getText("xp_type");
-			this.xpMultiplier = (int) set.getInt("xp_multiplier");
-			this.healthGranted = (int) set.getInt("health_granted");
-			this.expertisePoints = (int) set.getInt("expertise_points");
+			this.requiredCombatXp = (int) set.getInt("required_combat_xp");
+			this.healthAdded = (int) set.getInt("level_health_added");
 		}
 		
 		public int getLevel() {
 			return level;
 		}
 		
-		public int getXpRequired() {
-			return xpRequired;
+		public int getRequiredCombatXp() {
+			return requiredCombatXp;
 		}
 		
-		public String getXpType() {
-			return xpType;
-		}
-		
-		public int getXpMultiplier() {
-			return xpMultiplier;
-		}
-		
-		public int getHealthGranted() {
-			return healthGranted;
-		}
-		
-		public int getExpertisePoints() {
-			return expertisePoints;
+		public int getHealthAdded() {
+			return healthAdded;
 		}
 		
 	}

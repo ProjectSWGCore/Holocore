@@ -44,7 +44,8 @@ abstract class DataLoader {
 		fun skills(): SkillLoader = ServerData.skills
 		fun skillTemplates(): SkillTemplateLoader = ServerData.skillTemplates
 		fun staticItems(): StaticItemLoader = ServerData.staticItems
-		fun ItemBonusSets(): ItemBonusSetLoader = ServerData.itemBonusSet
+		fun itemBonusSets(): ItemBonusSetLoader = ServerData.itemBonusSet
+		fun combatXpMultipliers(): CombatXpMultiplierLoader = ServerData.combatXpMultipliers
 		fun playerLevels(): PlayerLevelLoader = ServerData.playerLevels
 		fun playerRoles(): PlayerRoleLoader = ServerData.playerRoles
 		fun playerStartClothing(): StartClothingLoader = ServerData.playerStartClothing
