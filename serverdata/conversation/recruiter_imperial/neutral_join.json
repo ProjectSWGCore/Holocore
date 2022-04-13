@@ -1,26 +1,11 @@
 {
 	"npcMessage": {
 		"file": "conversation/faction_recruiter_imperial",
-		"key": "s_414",
-		"comment": "Greetings, civilian.  Would you be interested in joining the military?"
+		"key": "s_318",
+		"comment": "Congratulations and good luck with your new duties.  Make us proud!"
 	},
-	"playerResponses": [
-		{
-			"playerMessage": {
-				"file": "conversation/faction_recruiter_imperial",
-				"key": "s_434",
-				"comment": "Absolutely.  It would be a great honor to serve the Empire."
-			}
-		}
-	],
-	"requirements": [
-		{
-			"type": "faction_name",
-			"args": {
-				"faction": "neutral"
-			}
-		}
-	],
+	"playerResponses": [],
+	"requirements": [],
 	"events": [
 		{
 			"type": "faction_change",
@@ -31,7 +16,13 @@
 		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "yes"
+				"animation": "salute1"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "salute1"
 			}
 		}
 	]

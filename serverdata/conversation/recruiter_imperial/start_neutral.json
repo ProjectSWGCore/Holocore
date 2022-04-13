@@ -10,7 +10,8 @@
 				"file": "conversation/faction_recruiter_imperial",
 				"key": "s_434",
 				"comment": "Absolutely.  It would be a great honor to serve the Empire."
-			}
+			},
+			"next": "recruiter_imperial/neutral_join"
 		}
 	],
 	"requirements": [
@@ -23,15 +24,9 @@
 	],
 	"events": [
 		{
-			"type": "faction_change",
-			"args": {
-				"faction": "imperial"
-			}
-		},
-		{
 			"type": "npc_animation",
 			"args": {
-				"animation": "yes"
+				"animation": "greet"
 			}
 		}
 	]
