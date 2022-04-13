@@ -17,13 +17,13 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-public class ExperienceLevelService extends Service {
+public class ExperiencePointService extends Service {
 	
 	private static final String COMBAT_XP_TYPE = "combat_general";
 	
 	private final double xpMultiplier;
 	
-	public ExperienceLevelService() {
+	public ExperiencePointService() {
 		xpMultiplier = PswgDatabase.INSTANCE.getConfig().getDouble(this, "xpMultiplier", 1);
 	}
 	
