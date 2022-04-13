@@ -128,6 +128,9 @@ public class CombatDeathblowService extends Service {
 			new SystemMessageIntent(incapacitatedOwner, new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
 		}
 		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
+		
+		long now = System.currentTimeMillis();
+		incapacitated.setLastIncapTime(now);
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {

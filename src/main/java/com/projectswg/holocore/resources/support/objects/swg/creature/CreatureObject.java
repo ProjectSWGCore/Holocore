@@ -89,7 +89,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
 	private AttributesMutable baseAttributes;
-
+	private long lastIncapTime;
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -201,6 +201,14 @@ public class CreatureObject extends TangibleObject {
 			assert !removed.contains(this);
 		}
 		getAwareness().setAware(AwarenessType.SELF, children);
+	}
+	
+	public long getLastIncapTime() {
+		return lastIncapTime;
+	}
+	
+	public void setLastIncapTime(long lastIncapTime) {
+		this.lastIncapTime = lastIncapTime;
 	}
 	
 	private void getAllChildren(Collection<SWGObject> children, SWGObject child) {
