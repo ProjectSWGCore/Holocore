@@ -9,20 +9,25 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.services.gameplay.player.experience.*;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 public class SkillService extends Service {
 
 	private static final int SKILL_POINT_CAP = 250;
+	private final CombatXpCalculator combatXpCalculator;
+	private final CombatLevelCalculator combatLevelCalculator;
+	private final HealthAddedCalculator healthAddedCalculator;
 
 	public SkillService() {
-		
+		combatXpCalculator = new CombatXpCalculator(new SdbCombatXpMultiplierRepository());
+		combatLevelCalculator = new CombatLevelCalculator(new SdbCombatLevelRepository());
+		healthAddedCalculator = new HealthAddedCalculator();
 	}
 	
 	@IntentHandler
@@ -37,7 +42,56 @@ public class SkillService extends Service {
 		if (skill == null)
 			return;
 		
+		CombatLevel oldCombatLevel = getCombatLevel(target);
 		grantSkill(target, skill, gsi.isGrantRequiredSkills());
+		CombatLevel newCombatLevel = getCombatLevel(target);
+		
+		boolean levelChanged = !oldCombatLevel.equals(newCombatLevel);
+		
+		if (levelChanged) {
+			changeLevel(target, oldCombatLevel, newCombatLevel);
+		}
+	}
+	
+	private void adjustHealth(CreatureObject target, CombatLevel oldCombatLevel, CombatLevel newCombatLevel) {
+		int healthChange = healthAddedCalculator.calculate(oldCombatLevel, newCombatLevel);
+		target.setLevelHealthGranted(newCombatLevel.getHealthAdded());
+		target.setMaxHealth(target.getMaxHealth() + healthChange);
+		target.setHealth(target.getMaxHealth());
+	}
+	
+	private CombatLevel getCombatLevel(CreatureObject target) {
+		Collection<Experience> experienceCollection = getExperienceFromTrainedSkills(target);
+		int oldCombatLevelXpFromTrainedSkills = combatXpCalculator.calculate(experienceCollection);
+		return combatLevelCalculator.calculate(oldCombatLevelXpFromTrainedSkills);
+	}
+	
+	@NotNull
+	private Collection<Experience> getExperienceFromTrainedSkills(CreatureObject target) {
+		Set<String> trainedSkills = target.getSkills();
+		Collection<Experience> experienceCollection = new ArrayList<>();
+		for (String trainedSkill : trainedSkills) {
+			Experience experience = convertTrainedSkillToExperience(trainedSkill);
+			
+			if (experience != null) {
+				experienceCollection.add(experience);
+			}
+		}
+		
+		return experienceCollection;
+	}
+	
+	private Experience convertTrainedSkillToExperience(String trainedSkill) {
+		SkillInfo trainedSkillInfo = DataLoader.Companion.skills().getSkillByName(trainedSkill);
+		
+		if (trainedSkillInfo != null) {
+			String xpType = trainedSkillInfo.getXpType();
+			int xpCost = trainedSkillInfo.getXpCost();
+			
+			return new Experience(xpType, xpCost);
+		}
+		
+		return null;
 	}
 	
 	@IntentHandler
@@ -92,10 +146,25 @@ public class SkillService extends Service {
 		}
 
 		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(surrenderedSkill);
-
+		
+		CombatLevel oldCombatLevel = getCombatLevel(target);
+		
 		target.removeSkill(surrenderedSkill);
 		target.removeCommands(skillInfo.getCommands());
 		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
+		
+		CombatLevel newCombatLevel = getCombatLevel(target);
+		
+		boolean levelChanged = !oldCombatLevel.equals(newCombatLevel);
+		
+		if (levelChanged) {
+			changeLevel(target, oldCombatLevel, newCombatLevel);
+		}
+	}
+	
+	private void changeLevel(CreatureObject target, CombatLevel oldCombatLevel, CombatLevel newCombatLevel) {
+		target.setLevel(newCombatLevel.getLevel());
+		adjustHealth(target, oldCombatLevel, newCombatLevel);
 	}
 	
 	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,33 +24,56 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.player.experience;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
+package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-public final class LevelChangedIntent extends Intent {
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+public final class CombatXpMultiplierLoader extends DataLoader {
 	
-	private final CreatureObject creatureObject;
-	private final short previousLevel;
-	private final short newLevel;
+	private final Map<String, CombatXpMultiplierInfo> multipliers;
 	
-	public LevelChangedIntent(CreatureObject creatureObject, short previousLevel, short newLevel) {
-		this.creatureObject = creatureObject;
-		this.previousLevel = previousLevel;
-		this.newLevel = newLevel;
+	CombatXpMultiplierLoader() {
+		this.multipliers = new HashMap<>();
 	}
 	
-	public CreatureObject getCreatureObject() {
-		return creatureObject;
+	public CombatXpMultiplierInfo getCombatXpMultiplier(String xpType) {
+		return multipliers.get(xpType);
 	}
 	
-	public short getPreviousLevel() {
-		return previousLevel;
+	@Override
+	public void load() throws IOException {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/experience/combat_xp_multipliers.sdb"))) {
+			while (set.next()) {
+				CombatXpMultiplierInfo combatXpMultiplierInfo = new CombatXpMultiplierInfo(set);
+				multipliers.put(combatXpMultiplierInfo.getXpType(), combatXpMultiplierInfo);
+			}
+		}
 	}
 	
-	public short getNewLevel() {
-		return newLevel;
+	public static class CombatXpMultiplierInfo {
+		
+		private final String xpType;
+		private final int multiplier;
+		
+		public CombatXpMultiplierInfo(SdbResultSet set) {
+			this.xpType = set.getText("xp_type");
+			this.multiplier = (int) set.getInt("multiplier");
+		}
+		
+		public String getXpType() {
+			return xpType;
+		}
+		
+		public int getMultiplier() {
+			return multiplier;
+		}
+		
 	}
-	
 }
