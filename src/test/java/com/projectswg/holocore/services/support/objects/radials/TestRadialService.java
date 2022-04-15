@@ -87,7 +87,7 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		registerObject(creature, dead);
 		dead.setPosture(Posture.DEAD);
 		
-		sendRequest(creature, dead, RadialItem.LOOT, RadialItem.EXAMINE);
+		sendRequest(creature, dead, RadialItem.LOOT_ALL, RadialItem.EXAMINE);
 		
 		ObjectMenuResponse response = creature.getOwner().getNextPacket(ObjectMenuResponse.class);
 		Assert.assertNotNull(response);
@@ -95,11 +95,11 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		Assert.assertEquals(dead.getObjectId(), response.getTargetId());
 		
 		Assert.assertEquals(2, response.getOptions().size());
-		Assert.assertEquals(RadialItem.LOOT, response.getOptions().get(0).getType());
+		Assert.assertEquals(RadialItem.LOOT_ALL, response.getOptions().get(0).getType());
 		Assert.assertEquals(RadialItem.EXAMINE, response.getOptions().get(1).getType());
 		
 		Assert.assertEquals(1, response.getOptions().get(0).getChildren().size());
-		Assert.assertEquals(RadialItem.LOOT_ALL, response.getOptions().get(0).getChildren().get(0).getType());
+		Assert.assertEquals(RadialItem.LOOT, response.getOptions().get(0).getChildren().get(0).getType());
 	}
 	
 	private void sendRequest(CreatureObject source, SWGObject target, RadialItem ... items) {

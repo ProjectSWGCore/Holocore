@@ -27,7 +27,7 @@ public class AIObjectRadial implements RadialHandlerInterface {
 			return;
 		}
 		
-		options.add(RadialOption.create(RadialItem.LOOT, RadialOption.create(RadialItem.LOOT_ALL)));
+		options.add(RadialOption.create(RadialItem.LOOT_ALL, RadialOption.create(RadialItem.LOOT)));
 	}
 	
 	@Override
