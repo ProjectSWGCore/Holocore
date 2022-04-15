@@ -83,11 +83,11 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
 	private long	lastTransform			= 0;
 	private long	lastCombat				= 0;
+	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
 	private AttributesMutable baseAttributes;
-	private long lastIncapTime;
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
