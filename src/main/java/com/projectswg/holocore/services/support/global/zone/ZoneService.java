@@ -7,9 +7,7 @@ import com.projectswg.common.network.packets.swg.login.ClientIdMsg;
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage;
 import com.projectswg.common.network.packets.swg.login.ConnectionServerLagResponse;
 import com.projectswg.common.network.packets.swg.zone.*;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -41,7 +39,6 @@ public class ZoneService extends Service {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 				player.getPlayerObject().initStartPlayTime();
-				sendVersion(player);
 				sendMessageOfTheDay(player);
 				break;
 			case PE_ZONE_IN_SERVER:
@@ -68,10 +65,6 @@ public class ZoneService extends Service {
 	
 	private void handleLagRequest(Player player) {
 		player.sendPacket(new ConnectionServerLagResponse());
-	}
-	
-	private void sendVersion(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, "This server runs Holocore " + ProjectSWG.VERSION));
 	}
 	
 	private void sendMessageOfTheDay(Player player) {
