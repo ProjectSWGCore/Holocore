@@ -66,6 +66,7 @@ public class ContainerObjectRadial extends SWGObjectRadial {
 			SuiInputBox sui = new SuiInputBox(SuiButtons.OK_CANCEL, "@sui:set_name_title", "@sui:set_name_prompt");
 			sui.addOkButtonCallback("rename_ok", (event, parameters) -> handleRename(parameters, target));
 			sui.setPropertyText("txtInput", target.getObjectName());    // Insert the current name into the text fieldsui.display(player);
+			sui.display(player);
 		}
 	}
 	
