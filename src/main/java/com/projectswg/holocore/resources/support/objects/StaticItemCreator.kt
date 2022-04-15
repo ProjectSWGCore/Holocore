@@ -73,7 +73,7 @@ object StaticItemCreator {
 		if (info.requiredSkill.isNotEmpty()) {
 			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@cmd_n:none")
 		}
 		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
@@ -118,7 +118,7 @@ object StaticItemCreator {
 		if (info.requiredSkill.isNotEmpty()) {
 			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@cmd_n:none")
 		}
 		obj.addAttribute("healing_combat_level_required", info.requiredLevel.toString())
 		
@@ -143,7 +143,7 @@ object StaticItemCreator {
 		if (info.requiredSkill.isNotEmpty()) {
 			obj.addAttribute("skillmodmin", "@skl_n:" + info.requiredSkill)
 		} else {
-			obj.addAttribute("skillmodmin", "@obj_attr_n:none")
+			obj.addAttribute("skillmodmin", "@cmd_n:none")
 		}
 		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
 		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())
