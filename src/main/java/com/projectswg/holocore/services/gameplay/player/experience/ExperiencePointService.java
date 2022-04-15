@@ -4,22 +4,22 @@ import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.CombatXpMultiplierLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
+import java.util.Objects;
+
 public class ExperiencePointService extends Service {
-	
-	private static final String COMBAT_XP_TYPE = "combat_general";
 	
 	private final double xpMultiplier;
 	
@@ -33,44 +33,44 @@ public class ExperiencePointService extends Service {
 		PlayerObject playerObject = creatureObject.getPlayerObject();
 		
 		if (playerObject != null) {
-			int experienceGained = ei.getExperienceGained();
 			String xpType = ei.getXpType();
+			int experienceGained = ei.getExperienceGained();
+			SWGObject flytextTarget = ei.getFlytextTarget();
+			boolean xpMultiplied = ei.isXpMultiplied();
 			
-			CombatXpMultiplierLoader combatXpMultiplierLoader = DataLoader.Companion.combatXpMultipliers();
-			CombatXpMultiplierLoader.CombatXpMultiplierInfo combatXpMultiplierInfo = combatXpMultiplierLoader.getCombatXpMultiplier(xpType);
-			boolean xpTypeAlsoGrantsCombatXp = combatXpMultiplierInfo != null;
-			
-			if (xpTypeAlsoGrantsCombatXp) {
-				int combatXpMultiplier = combatXpMultiplierInfo.getMultiplier();
-				awardCombatXp(creatureObject, playerObject, experienceGained, combatXpMultiplier);
-			}
-			
-			awardExperience(creatureObject, playerObject, ei.getXpType(), ei.getExperienceGained());
+			awardExperience(creatureObject, flytextTarget, playerObject, xpType, experienceGained, xpMultiplied);
 		}
 	}
 	
-	private void awardCombatXp(CreatureObject creatureObject, PlayerObject playerObject, int experienceGained, int combatXpMultiplier) {
-		int combatXpGained = experienceGained * combatXpMultiplier;
+	private void awardExperience(CreatureObject creatureObject, SWGObject flytextTarget, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
+		incrementExperience(creatureObject, playerObject, xpType, xpGained, xpMultiplied);
 		
-		awardExperience(creatureObject, playerObject, COMBAT_XP_TYPE, combatXpGained);
+		if (!Objects.equals("combat_general", xpType)) {
+			showFlytext(creatureObject, flytextTarget, xpGained);
+			showSystemMessage(creatureObject, xpType);
+		}
 	}
 	
-	private void awardExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained) {
+	private void showSystemMessage(CreatureObject creatureObject, String xpType) {
+		// TODO display different messages with inspiration bonus and/or group bonus
+		StringId xpTypeDisplayName = new StringId("exp_n", xpType);
+		ProsePackage message = new ProsePackage(new StringId("base_player", "prose_grant_xp"), "TO", xpTypeDisplayName);
+		SystemMessageIntent.broadcastPersonal(creatureObject.getOwner(), message, ChatSystemMessage.SystemChatType.CHAT_BOX);
+	}
+	
+	private void incrementExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
 		int currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal = currentXp + (int) (xpGained * xpMultiplier);
+		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
 		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
-		
-		// Show flytext above the creature that received XP, but only to them
-		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained)), Scale.MEDIUM, new RGB(255, 0, 255)));
-		
-		// TODO CU: flytext is displayed over the killed creature
-		// TODO CU: is the displayed number the gained Combat XP with all bonuses applied?
-		
-		// TODO only display in console. Isn't displayed for Combat XP.
-		// TODO display different messages with inspiration bonus and/or group bonus
-		SystemMessageIntent.broadcastPersonal(creatureObject.getOwner(), new ProsePackage(new StringId("base_player", "prose_grant_xp"), "TO", new StringId("exp_n", xpType)));
+	}
+	
+	private void showFlytext(CreatureObject creatureObject, SWGObject flytextTarget, int xpGained) {
+		OutOfBandPackage message = new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained));
+		RGB magenta = new RGB(255, 0, 255);
+		ShowFlyText packet = new ShowFlyText(flytextTarget.getObjectId(), message, Scale.MEDIUM, magenta);
+		creatureObject.sendSelf(packet);
 	}
 	
 }

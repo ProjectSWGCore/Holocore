@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.player.experience;
 
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 
@@ -34,17 +35,19 @@ public final class ExperienceIntent extends Intent {
 	private final CreatureObject creatureObject;
 	private final String xpType;
 	private final int experienceGained;
-	private final boolean multiply;
+	private final boolean xpMultiplied;
+	private final SWGObject flytextTarget;
 	
 	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained) {
-		this(creatureObject, xpType, experienceGained, false);
+		this(creatureObject, creatureObject, xpType, experienceGained, false);
 	}
 	
-	public ExperienceIntent(CreatureObject creatureObject, String xpType, int experienceGained, boolean multiply) {
+	public ExperienceIntent(CreatureObject creatureObject, SWGObject flytextTarget, String xpType, int experienceGained, boolean xpMultiplied) {
 		this.creatureObject = creatureObject;
+		this.flytextTarget = flytextTarget;
 		this.xpType = xpType;
 		this.experienceGained = experienceGained;
-		this.multiply = multiply;
+		this.xpMultiplied = xpMultiplied;
 	}
 	
 	public CreatureObject getCreatureObject() {
@@ -59,8 +62,11 @@ public final class ExperienceIntent extends Intent {
 		return experienceGained;
 	}
 	
-	public boolean isMultiply() {
-		return multiply;
+	public boolean isXpMultiplied() {
+		return xpMultiplied;
 	}
 	
+	public SWGObject getFlytextTarget() {
+		return flytextTarget;
+	}
 }

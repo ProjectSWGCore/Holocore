@@ -102,48 +102,94 @@ public class CombatExperienceService extends Service {
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
 		CreatureObject corpse = i.getCorpse();
 		
-		// You don't gain XP by PvP'ing
-		if(corpse.isPlayer()) {
-			return;
-		}
-		
-		CreatureObject killer = i.getKiller();
-		GroupObject group = groupObjects.get(killer.getGroupId());
-
-		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
-		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
-
-		if (experienceGained <= 0) {
-			return;
-		}
-		
-		if (group == null) {
-			grantXp(killer, corpse, experienceGained);
-		} else {
-			group.getGroupMemberObjects().stream()
-					.filter(groupMember -> isMemberNearby(corpse, groupMember))	// Only nearby members gain XP
-					.filter(groupMember -> corpse.getDamageMap().containsKey(groupMember))	// Only members who have dealt damage gain XP
-					.forEach(eligibleMember -> grantXp(eligibleMember, corpse, experienceGained));
+		if(corpseIsNpc(corpse)) {
+			CreatureObject killer = i.getKiller();
+			GroupObject group = getGroupThatKillerIsIn(killer);
+			
+			short killerLevel = getKillerLevel(killer, group);
+			int experienceGained = calculateXpGain(killer, corpse, killerLevel);
+			
+			if (experienceGained <= 0) {
+				return;
+			}
+			
+			boolean killerIsGrouped = group != null;
+			
+			if (killerIsGrouped) {
+				grantXpToGroup(corpse, group, experienceGained);
+			} else {
+				grantXpToKiller(killer, corpse, experienceGained);
+			}
 		}
 	}
-
-	private void grantXp(CreatureObject receiver, CreatureObject corpse, int experienceGained) {
-		WeaponType weaponType =receiver.getEquippedWeapon().getType();
+	
+	private GroupObject getGroupThatKillerIsIn(CreatureObject killer) {
+		return groupObjects.get(killer.getGroupId());
+	}
+	
+	private void grantXpToGroup(CreatureObject corpse, GroupObject group, int experienceGained) {
+		group.getGroupMemberObjects().stream()
+				.filter(groupMember -> isMemberNearby(corpse, groupMember))
+				.filter(groupMember -> didMemberParticipateInCombat(corpse, groupMember))
+				.forEach(eligibleMember -> grantXpToKiller(eligibleMember, corpse, experienceGained));
+	}
+	
+	private boolean didMemberParticipateInCombat(CreatureObject corpse, CreatureObject groupMember) {
+		return corpse.getDamageMap().containsKey(groupMember);
+	}
+	
+	private short getKillerLevel(CreatureObject killer, GroupObject group) {
+		if (group != null) {
+			return group.getLevel();
+		} else {
+			return killer.getLevel();
+		}
+	}
+	
+	private boolean corpseIsNpc(CreatureObject corpse) {
+		return !corpse.isPlayer();
+	}
+	
+	private void grantXpToKiller(CreatureObject killer, CreatureObject corpse, int experienceGained) {
+		boolean xpMultiply = experienceGained > 1;
+		grantWeaponTypeXp(killer, corpse, experienceGained, xpMultiply);
+		
+		if (scoutKilledCreature(killer, corpse)) {
+			grantTrappingXp(killer, experienceGained);
+		}
+		
+		grantCombatXp(killer, corpse, experienceGained, xpMultiply);
+	}
+	
+	private void grantTrappingXp(CreatureObject receiver, int experienceGained) {
+		new ExperienceIntent(receiver, "trapping", (int) Math.ceil(experienceGained / 10f)).broadcast();
+	}
+	
+	private boolean scoutKilledCreature(CreatureObject killer, CreatureObject corpse) {
+		return isKillerScout(killer) && isCorpseCreature(corpse);
+	}
+	
+	private boolean isCorpseCreature(CreatureObject corpse) {
+		return corpse.getGameObjectType() == GameObjectType.GOT_CREATURE;
+	}
+	
+	private boolean isKillerScout(CreatureObject killer) {
+		return killer.hasSkill("outdoors_scout_novice");
+	}
+	
+	private void grantCombatXp(CreatureObject receiver, CreatureObject corpse, int experienceGained, boolean xpMultiply) {
+		new ExperienceIntent(receiver, corpse, "combat_general", (int) Math.ceil(experienceGained / 10f), xpMultiply).broadcast();
+	}
+	
+	private void grantWeaponTypeXp(CreatureObject receiver, CreatureObject corpse, int experienceGained, boolean xpMultiply) {
+		WeaponType weaponType = receiver.getEquippedWeapon().getType();
 		String xpType = xpTypeForWeaponType(weaponType);
-
+		
 		if (xpType == null) {
 			Log.w("%s did not receive %d xp because the used weapon %s had unrecognized type", receiver, experienceGained, weaponType);
-			return;
 		}
-
-		// Scouts gain trapping XP by killing creatures
-		if (receiver.hasSkill("outdoors_scout_novice") && corpse.getGameObjectType() == GameObjectType.GOT_CREATURE) {
-			new ExperienceIntent(receiver, "trapping", (int) Math.ceil(experienceGained / 10f)).broadcast();
-		}
-
-		boolean xpMultiply = experienceGained > 1;
-
-		new ExperienceIntent(receiver, xpType, experienceGained, xpMultiply).broadcast();
+		
+		new ExperienceIntent(receiver, corpse, xpType, experienceGained, xpMultiply).broadcast();
 	}
 	
 	private String xpTypeForWeaponType(WeaponType weaponType) {
@@ -166,9 +212,7 @@ public class CombatExperienceService extends Service {
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
 		short corpseLevel = corpse.getLevel();
 		
-		if(killerLevel >= 90){
-			return 0;
-		} else if (killerLevel - corpseLevel >= 10) {
+		if (killerLevel - corpseLevel >= 10) {
 			return 1;
 		} else {
 			XpData xpForLevel = this.xpData.get(corpseLevel);
