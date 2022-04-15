@@ -147,13 +147,11 @@ public class CommandQueueService extends Service {
 						startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter());
 					}
 					startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter());
-				} else {
-					sendQueueRemove(command, error);
 				}
 				ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
-			} else {
-				sendQueueRemove(command, error);
 			}
+			
+			sendQueueRemove(command, error);
 		}
 		
 		private void sendQueueRemove(EnqueuedCommand command, ErrorCode error) {
