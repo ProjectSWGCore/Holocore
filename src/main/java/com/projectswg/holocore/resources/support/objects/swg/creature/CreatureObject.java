@@ -930,8 +930,8 @@ public class CreatureObject extends TangibleObject {
 	
 	private void initBaseAttributes() {
 		baseAttributes.setHealth(1000);
-		baseAttributes.setAction(300);
-		baseAttributes.setMind(300);
+		baseAttributes.setAction(100);
+		baseAttributes.setMind(100);
 	}
 	
 	public Collection<SWGObject> getItemsByTemplate(String slotName, String template) {
