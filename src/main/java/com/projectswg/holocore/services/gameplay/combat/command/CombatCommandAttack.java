@@ -107,11 +107,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		Set<SWGObject> objectsToCheck = source.getObjectsAware();
 		
-		// TODO line of sight checks between the attacker and each target
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
 				.map(CreatureObject.class::cast)
-				.filter(candidate -> !candidate.equals(source))	// Make sure the attacker can't damage themselves
 				.filter(source::isAttackable)
 				.filter(candidate -> canPerform(source, candidate, command) == CombatStatus.SUCCESS)
 				.filter(candidate -> sourceWorldLocation.distanceTo(candidate.getLocation()) <= coneLength)
@@ -176,11 +174,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		// TODO block
 		// TODO evasion if no block
 		
-		// TODO line of sight checks between the explosive and each target
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
 				.map(CreatureObject.class::cast)
-				.filter(target -> !target.equals(source))	// Make sure the attacker can't damage themselves
 				.filter(source::isAttackable)
 				.filter(target -> canPerform(source, target, command) == CombatStatus.SUCCESS)
 				.filter(creature -> origin.getLocation().distanceTo(creature.getLocation()) <= aoeRange)
