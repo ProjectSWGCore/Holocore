@@ -45,15 +45,6 @@ sourceSets {
 		}
 	}
 	create("utility")
-	create("integration") {
-		dependencies {
-			implementation(project(":pswgcommon"))
-			implementation(project(":client-holocore"))
-			implementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
-			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="junit", name="junit", version="4.12")
-		}
-	}
 }
 
 val utilityImplementation by configurations.getting {
@@ -61,8 +52,11 @@ val utilityImplementation by configurations.getting {
 }
 
 dependencies {
-	utilityImplementation(project(":"))	// Root project, which would be holocore itself
-	utilityImplementation(project(":pswgcommon"))
+	val holocoreProject = project(":")
+    val pswgcommonProject = project(":pswgcommon")
+
+    utilityImplementation(holocoreProject)
+    utilityImplementation(pswgcommonProject)
 	utilityImplementation(group="org.jetbrains.kotlin", name="kotlin-stdlib", version="1.3.50")
 	utilityImplementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
 	utilityImplementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
