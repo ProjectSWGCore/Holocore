@@ -357,14 +357,14 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	
 	private void initMaxAttributes() {
 		maxAttributes.setHealth(1000);
-		maxAttributes.setAction(300);
-		maxAttributes.setMind(300);
+		maxAttributes.setAction(100);
+		maxAttributes.setMind(100);
 	}
 	
 	private void initCurrentAttributes() {
 		attributes.setHealth(1000);
-		attributes.setAction(300);
-		attributes.setMind(300);
+		attributes.setAction(100);
+		attributes.setMind(100);
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
