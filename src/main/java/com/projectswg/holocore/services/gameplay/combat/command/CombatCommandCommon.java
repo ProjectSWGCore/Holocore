@@ -84,6 +84,10 @@ public class CombatCommandCommon {
 	}
 	
 	static CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
+		if (source.equals(target)) {
+			return CombatStatus.INVALID_TARGET;
+		}
+		
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
 		
