@@ -58,8 +58,6 @@ import java.util.List;
 
 public class ProjectSWG {
 	
-	public static final String VERSION = "FEB19";
-	
 	private static final Galaxy GALAXY = new Galaxy();
 	
 	public static void main(String [] args) {
@@ -102,8 +100,6 @@ public class ProjectSWG {
 		else
 			Log.addWrapper(new ConsoleLogWrapper());
 		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
-		
-		Log.i("Holocore version: %s", VERSION);
 		
 		if (ProjectSWG.class.getResourceAsStream("/marker.txt") == null) {
 			Log.a("Failed to read Holocore resources - aborting");
