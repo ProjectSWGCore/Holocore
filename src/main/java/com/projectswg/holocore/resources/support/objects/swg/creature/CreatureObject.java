@@ -48,9 +48,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -85,11 +83,11 @@ public class CreatureObject extends TangibleObject {
 	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
 	private long	lastTransform			= 0;
 	private long	lastCombat				= 0;
+	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
 	private AttributesMutable baseAttributes;
-
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
@@ -201,6 +199,14 @@ public class CreatureObject extends TangibleObject {
 			assert !removed.contains(this);
 		}
 		getAwareness().setAware(AwarenessType.SELF, children);
+	}
+	
+	public long getLastIncapTime() {
+		return lastIncapTime;
+	}
+	
+	public void setLastIncapTime(long lastIncapTime) {
+		this.lastIncapTime = lastIncapTime;
 	}
 	
 	private void getAllChildren(Collection<SWGObject> children, SWGObject child) {

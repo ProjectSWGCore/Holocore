@@ -32,7 +32,6 @@ import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -55,6 +54,7 @@ public class AIObject extends CreatureObject {
 	private final List<WeaponObject> defaultWeapon;
 	private final List<WeaponObject> thrownWeapon;
 	private final SWGObject hiddenInventory;
+	private final IncapSafetyTimer incapSafetyTimer;
 	
 	private NpcMode defaultMode;
 	private NpcMode activeMode;
@@ -76,6 +76,7 @@ public class AIObject extends CreatureObject {
 		this.defaultMode = null;
 		this.activeMode = null;
 		this.creatureId = null;
+		incapSafetyTimer = new IncapSafetyTimer(45_000);
 	}
 	
 	@Override
@@ -133,7 +134,9 @@ public class AIObject extends CreatureObject {
 	}
 	
 	private void checkAwareAttack(CreatureObject player) {
-		if (isAttackable(player)) {
+		boolean incapSafetyTimerExpired = incapSafetyTimer.isExpired(System.currentTimeMillis(), player.getLastIncapTime());
+		
+		if (isAttackable(player) && incapSafetyTimerExpired) {
 			double distance = getLocation().flatDistanceTo(player.getLocation());
 			double maxAggroDistance;
 			if (player.isLoggedInPlayer())
