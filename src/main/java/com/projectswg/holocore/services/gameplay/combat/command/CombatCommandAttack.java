@@ -107,7 +107,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		Set<SWGObject> objectsToCheck = source.getObjectsAware();
 		
-		// TODO line of sight checks between the attacker and each target
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
 				.map(CreatureObject.class::cast)
@@ -175,7 +174,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		// TODO block
 		// TODO evasion if no block
 		
-		// TODO line of sight checks between the explosive and each target
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
 				.map(CreatureObject.class::cast)
