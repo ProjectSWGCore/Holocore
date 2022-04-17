@@ -44,11 +44,6 @@ sourceSets {
 			implementation(group="org.mockito", name="mockito-core", version="3.8.0")
 		}
 	}
-	create("display") {
-		dependencies {
-			implementation(project(":pswgcommon"))
-		}
-	}
 	create("utility")
 	create("integration") {
 		dependencies {
