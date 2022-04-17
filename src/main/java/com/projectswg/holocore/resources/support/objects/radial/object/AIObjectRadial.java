@@ -21,7 +21,13 @@ public class AIObjectRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+		AIObject ai = (AIObject) target;
 		
+		if (ai.getPosture() != Posture.DEAD) {
+			return;
+		}
+		
+		options.add(RadialOption.create(RadialItem.LOOT_ALL, RadialOption.create(RadialItem.LOOT)));
 	}
 	
 	@Override
