@@ -36,7 +36,7 @@ public class TerrainUtils {
 	
 	public static TerrainEngine getEngine(Terrain terrain) {
 		TerrainEngineFactory factory = new TerrainEngineFactory();
-		File trnFile = new File("clientdata/" + terrain.getFile());
+		File trnFile = new File("serverdata/" + terrain.getFile());
 		
 		return factory.create(trnFile);
 	}
