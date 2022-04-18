@@ -161,7 +161,7 @@ public class TestSWGPersistence {
 						"movementPercent", obj.getMovementPercent(),
 						"movementScale", obj.getMovementScale(),
 						"slopeModPercent", obj.getSlopeModPercent(),
-						"slopeModAngle", obj.getSlopeModPercent(),
+						"slopeModAngle", obj.getSlopeModAngle(),
 						"waterModPercent", obj.getWaterModPercent(),
 						"runSpeed", obj.getRunSpeed(),
 						"walkSpeed", obj.getWalkSpeed(),
