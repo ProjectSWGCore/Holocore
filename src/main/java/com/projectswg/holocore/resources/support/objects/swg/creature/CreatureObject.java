@@ -425,11 +425,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void resetMovement() {
-		setWalkSpeed(1.549);
-		setRunSpeed(7.3);
-		setAccelScale(1);
-		setTurnScale(1);
-		setMovementScale(1);
+		creo4.resetMovement();
 	}
 
 	public double getAccelPercent() {
