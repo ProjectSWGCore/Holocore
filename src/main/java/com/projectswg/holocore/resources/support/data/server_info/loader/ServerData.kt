@@ -43,7 +43,6 @@ object ServerData {
 	 * Combat
 	 */
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
-	val specialLines		by SoftDataLoaderDelegate(::SpecialLineLoader)
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
 
 	/*

@@ -27,24 +27,14 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command
 
-import com.projectswg.common.data.RGB
 import com.projectswg.common.data.combat.CombatStatus
 import com.projectswg.common.data.combat.HitType
-import com.projectswg.common.data.encodables.oob.StringId
-import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
-import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader.SpecialLineInfo
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import me.joshlarson.jlcommon.log.Log
-
-import java.util.EnumMap
-import java.util.concurrent.ThreadLocalRandom
-
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus
+import java.util.*
 
 class CombatCommandService : Service() {
 	
@@ -80,38 +70,11 @@ class CombatCommandService : Service() {
 		val command = eci.command as CombatCommand
 		
 		val source = eci.source
-		val specialLine = DataLoader.specialLines().getSpecialLine(command.specialLine)
-		var actionCost = command.actionCost * command.attackRolls
-		
-		// TODO future: reduce actionCost with general ACR, weapon ACR and ability ACR
-		
-		if (specialLine != null && source.getSkillModValue(specialLine.freeshotModName) > ThreadLocalRandom.current().nextInt(0, 100)) {
-			source.sendSelf(ShowFlyText(source.objectId, StringId("spam", "freeshot"), ShowFlyText.Scale.MEDIUM, RGB(255, 255, 255), ShowFlyText.Flag.IS_FREESHOT))
-		} else {
-			if (specialLine != null)
-				actionCost = reduceActionCost(source, actionCost, specialLine.actionCostModName)
-			if (actionCost > source.action)
-				return
-			
-			source.modifyAction(-command.actionCost.toInt())
-		}
+
+		source.modifyAction((-command.actionCost).toInt())
 		
 		val hitType = hitTypeMap[command.hitType]
 		hitType?.handle(source, eci.target, command, eci.arguments) ?: handleStatus(source, CombatStatus.UNKNOWN)
 	}
-	
-	/**
-	 * Calculates a new action cost based on the given action cost and a skill mod name.
-	 * @param source to read the skillmod value from
-	 * @param actionCost that has been calculated so far
-	 * @param skillModName name of the skillmod to read from `source`
-	 * @return new action cost that has been increased or reduced, depending on whether the skillmod value is
-	 * positive or negative
-	 */
-	private fun reduceActionCost(source: CreatureObject, actionCost: Double, skillModName: String): Double {
-		val actionCostModValue = source.getSkillModValue(skillModName)
-		
-		return actionCost + actionCost * actionCostModValue / 100
-	}
-	
+
 }

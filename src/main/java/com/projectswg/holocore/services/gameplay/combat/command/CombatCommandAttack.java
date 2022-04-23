@@ -31,7 +31,6 @@ import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
@@ -41,12 +40,10 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.*;
@@ -145,22 +142,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			CreatureObject creatureTarget = (CreatureObject) target;
 
 			targets.add(creatureTarget);
-			
-			// Let the defender roll single target defences against the attack of the attacker
-			if (isAttackParried(source, creatureTarget, weapon)) {
-				info.setParry(true);
-				info.setSuccess(false);
-			} else if (isAttackDodged(source, creatureTarget)) {
-				// The defender dodged the attack from the target
-				info.setDodge(true);
-				info.setSuccess(false);	// This means that the attack did no damage to the target at all
-				long targetObjectId = target.getObjectId();
-				
-				// Play dodge animation on the creature that's dodging for everyone that can see the creature
-				target.sendObservers(new Animation(targetObjectId, "dodge"));
-			} else if (isAttackGlanced(source, creatureTarget)) {
-				info.setGlancing(true);
-			}
 		}
 		
 		doCombat(source, targets, weapon, info, command);
@@ -170,9 +151,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		double aoeRange = command.getConeLength();
 		SWGObject originParent = origin.getParent();
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
-		
-		// TODO block
-		// TODO evasion if no block
 		
 		Set<CreatureObject> targets = objectsToCheck.stream()
 				.filter(CreatureObject.class::isInstance)
@@ -193,26 +171,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		source.updateLastCombatTime();
 		
 		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
-		boolean devastating = isAttackDevastating(source, command);
 		double weaponDamageBoost = 1.0;	// Damage increase of the weapon
 		double addedDamageBoost = 1.0;	// Damage increase of the command
 		
-		if (devastating) {
-			// Show Devastation flytext above the source for every target
-			ShowFlyText devastationFlyText = new ShowFlyText(source.getObjectId(), new StringId("combat_effects", "devastation"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255));
-			
-			source.sendSelf(devastationFlyText);
-			
-			for (CreatureObject target : targets) {
-				target.sendSelf(devastationFlyText);
-			}
-			
-			weaponDamageBoost += 0.5;	// 50% damage boost from devastation
-		}
-		
-		// Apply special line damage boost
-		addedDamageBoost += CombatCommandCommon.getAddedDamageBoost(source, command);
-
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
 			
@@ -342,67 +303,5 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return mitigation / 100;
 		
 	}
-	
-	private static boolean isAttackParried(CreatureObject source, CreatureObject target, WeaponObject attackerWeapon) {
-		WeaponObject defenderWeapon = target.getEquippedWeapon();
-		WeaponType defenderWeaponType = defenderWeapon.getType();
-		WeaponType attackerWeaponType = attackerWeapon.getType();
-		
-		// If the defender is wielding a lightsaber, parry can always be rolled, regardless of what the attacker is wielding
-		// If both attacker and defender are wielding melee weapons, parry can be rolled
-		if (defenderWeaponType.isLightsaber() || (defenderWeaponType.isMelee() && attackerWeaponType.isMelee())) {
-			double parryChance = (target.getSkillModValue("display_only_parry") - source.getSkillModValue("display_only_parry_reduction")) / 100d;
-			double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
-			
-			return roll <= parryChance;	// If parry chance is 25%, then the roll should be between 0 and 25 (both inclusive)
-		} else {
-			return false;
-		}
-	}
-	
-	private static boolean isAttackDodged(CreatureObject source, CreatureObject target) {
-		double dodgeChance = (target.getSkillModValue("display_only_dodge") - source.getSkillModValue("display_only_opp_dodge_reduction")) / 100d;
-		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
-		
-		return roll <= dodgeChance;	// If dodge chance is 25%, then the roll should be between 0 and 25 (both inclusive)
-	}
-	
-	private static boolean isAttackGlanced(CreatureObject source, CreatureObject target) {
-		double glanceChance = target.getSkillModValue("display_only_glancing_blow") / 100d;
-		WeaponObject sourceEquippedWeapon = source.getEquippedWeapon();
-		WeaponType weaponType = sourceEquippedWeapon.getType();
-		
-		if (weaponType.isMelee()) {
-			glanceChance += target.getSkillModValue("expertise_glancing_blow_melee");
-		}
-		
-		if (weaponType.isRanged()) {
-			glanceChance += target.getSkillModValue("expertise_glancing_blow_ranged");
-		}
-		
-		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
-		
-		return roll <= glanceChance;	// If glance chance is 25%, then the roll should be between 0 and 25 (both inclusive)
-	}
-	
-	private static boolean isAttackDevastating(CreatureObject source, CombatCommand command) {
-		if (command.getPercentAddFromWeapon() == 0) {
-			// If this ability doesn't use weapon damage it does not qualify for a devastation roll
-			return false;
-		}
-		
-		WeaponObject weapon = source.getEquippedWeapon();
-		WeaponType type = weapon.getType();
-		
-		if (!WeaponType.HEAVY_WEAPON.equals(type) && !WeaponType.DIRECTIONAL_TARGET_WEAPON.equals(type)) {
-			// If the weapon type isn't a heavy weapon and isn't a flamethrower, then the weapon cannot roll a devastation
-			return false;
-		}
-		
-		double devastationChance = source.getSkillModValue("expertise_devastation_bonus") / 10d;
-		double roll = ThreadLocalRandom.current().nextDouble(100);	// Generate number between 0 and 100
-		
-		return roll <= devastationChance;	// If devastation chance is 20%, then the roll should be between 0 and 20 (both inclusive)
-	}
-	
+
 }
