@@ -99,16 +99,6 @@ tasks.create<JavaExec>("runDebug") {
 	main = "com.projectswg.holocore.ProjectSWG"
 }
 
-tasks.create<ShadowJar>("CreateConvertLoginJar") {
-	archiveBaseName.set("ConvertLogin")
-	archiveClassifier.set(null as String?)
-	archiveVersion.set(null as String?)
-	manifest.attributes["Main-Class"] = "com.projectswg.utility.ConvertLogin"
-	from(sourceSets.getByName("utility").output)
-	configurations = listOf(project.configurations.getByName("utilityRuntime"))
-	exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
-}
-
 tasks.create<ShadowJar>("CreatePacketCaptureProcessor") {
 	archiveBaseName.set("PacketCaptureProcessor")
 	archiveClassifier.set(null as String?)
