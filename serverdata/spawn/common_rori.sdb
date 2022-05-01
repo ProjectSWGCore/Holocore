@@ -38,9 +38,9 @@ spawn_rori_35	RORI	ror_narmle_starport	AREA	9	-30.5	1.6	52.5	-107	1	an artisan	h
 spawn_rori_36	RORI	ror_narmle_starport	AREA	10	-40.4	1.6	47.7	165	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_rori_37	RORI	ror_narmle_starport	AREA	4	5.7	0.6	67.2	147	1	Chassis Dealer	humanoid_chassis_dealer_ii	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
 spawn_rori_38	RORI	ror_world	AREA	0	-5362.3	80	-2074.7	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
-spawn_rori_39	RORI	ror_world	AREA	0	-5462.9	80	-2088.8	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_39	RORI	ror_world	AREA	0	-5462.9	80	-2088.8	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_40	RORI	ror_world	AREA	0	-5467.9	80	-2130.5	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
-spawn_rori_41	RORI	ror_world	AREA	0	-5280.8	80.1	-2249.9	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_41	RORI	ror_world	AREA	0	-5280.8	80.1	-2249.9	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_42	RORI	ror_world	AREA	0	-5216.8	80	-2253.4	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_43	RORI	ror_world	AREA	0	-5161.3	80	-2249.7	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_44	RORI	ror_world	AREA	0	-5103.2	80	-2338	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
@@ -48,10 +48,10 @@ spawn_rori_45	RORI	ror_world	AREA	0	-5093.1	80	-2402.6	-100	1	a commoner	humanoi
 spawn_rori_46	RORI	ror_world	AREA	0	-5135.1	80	-2403.7	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_47	RORI	ror_world	AREA	0	-5132.9	80.2	-2446.6	-127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_48	RORI	ror_world	AREA	0	-5158.5	80	-2486.1	80	1	a commoner	humanoid_commoner_ishitib	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
-spawn_rori_49	RORI	ror_world	AREA	0	-4985.8	80	-2351.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		commoner	600
+spawn_rori_49	RORI	ror_world	AREA	0	-4985.8	80	-2351.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_50	RORI	ror_world	AREA	0	-5005.6	80.6	-2366.9	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_51	RORI	ror_world	AREA	0	-5245.2	81.3	-2164.7	44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_rori_52	RORI	ror_world	AREA	0	-5244.3	80.4	-2187.5	140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	3	LOITER	10	0	-	idle		commoner	600
+spawn_rori_52	RORI	ror_world	AREA	0	-5244.3	80.4	-2187.5	140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_53	RORI	ror_world	AREA	0	-5274.1	80.7	-2191.9	-137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		commoner	600
 spawn_rori_54	RORI	ror_world	AREA	0	-5276.8	81	-2270.7	-89	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_55	RORI	ror_world	AREA	0	-5279.6	81	-2270.7	93	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
@@ -60,7 +60,7 @@ spawn_rori_57	RORI	ror_world	AREA	0	-5363.9	80	-2250.5	92	1	a mercenary	humanoid
 spawn_rori_58	RORI	ror_world	AREA	0	-5361	80.1	-2250.7	-86	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_59	RORI	ror_world	AREA	0	-5361.3	80.1	-2252.9	-42	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_60	RORI	ror_world	AREA	0	-5135.7	87.4	-2287.9	-33	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
-spawn_rori_61	RORI	ror_world	AREA	0	-5312.1	80.5	-2244.5	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Narmle	2	LOITER	10	0	-	idle		simple_droid_sarcastic_alert_2	600
+spawn_rori_61	RORI	ror_world	AREA	0	-5312.1	80.5	-2244.5	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Narmle	1	LOITER	5	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_rori_62	RORI	ror_world	AREA	0	-5136.6	87.4	-2286.7	152	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	conversation			600
 spawn_rori_63	RORI	ror_world	AREA	0	-5112	80	-2345.1	179	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_rori_64	RORI	ror_world	AREA	0	-5115.4	80.2	-2474.6	85	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -76,10 +76,10 @@ spawn_rori_73	RORI	ror_world	AREA	0	-5157.9	80	-2293.8	139	1	an R4 unit	droid_r4
 spawn_rori_74	RORI	ror_world	AREA	0	-5120.6	80.0	-2443.1	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_75	RORI	ror_world	AREA	0	-5210.7	80.0	-2269.6	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle		commoner	600
 spawn_rori_76	RORI	ror_world	AREA	0	-5249.2	80.0	-2274.8	-159	1	a Rebel Sergeant Major	humanoid_rebel_sergeant_major	ATTACKABLE	E	45	55	City	Narmle	1	IDLE	0	0	-	idle			600
-spawn_rori_77	RORI	ror_world	AREA	0	-4784.1	77.0	-2257.3	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	2	0	-	idle			600
+spawn_rori_77	RORI	ror_world	AREA	0	-4784.1	77.0	-2257.3	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	5	0	-	idle			600
 spawn_rori_78	RORI	ror_world	PATROL	0	-4795.0	75.8	-2324.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	PATROL	0	patrol_rori_400	column	idle			600
-spawn_rori_79	RORI	ror_world	AREA	0	-4819.0	77.8	-2241.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	2	0	-	idle			600
-spawn_rori_80	RORI	ror_world	AREA	0	-4831.4	80.0	-2304.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	2	0	-	idle			600
+spawn_rori_79	RORI	ror_world	AREA	0	-4819.0	77.8	-2241.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	5	0	-	idle			600
+spawn_rori_80	RORI	ror_world	AREA	0	-4831.4	80.0	-2304.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	LOITER	5	0	-	idle			600
 spawn_rori_81	RORI	ror_world	PATROL	0	-4850.2	79.8	-2266.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	City	Narmle	1	PATROL	0	patrol_rori_300	column	idle			600
 spawn_rori_82	RORI	ror_world	AREA	0	-4812.0	76.2	-2270.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
 spawn_rori_83	RORI	ror_world	AREA	0	-5257.0	80.0	-2255.1	-90	1	an Imperial coordinator	humanoid_coa2_imperial_coordinator	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
@@ -118,13 +118,13 @@ spawn_rori_115	RORI	ror_world	AREA	0	3669.4	96.0	-6486.7	0	1	a Rebel commando	hu
 spawn_rori_116	RORI	ror_world	AREA	0	3669.8	96.0	-6482.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	45	55	City	Rebel Outpost	1	TURN	0	0	-	idle			600
 spawn_rori_117	RORI	ror_world	AREA	0	3670.1	96.0	-6490.9	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	45	55	City	Rebel Outpost	1	TURN	0	0	-	idle			600
 spawn_rori_118	RORI	ror_world	AREA	0	3656.5	96.0	-6461.2	71	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	45	55	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
-spawn_rori_119	RORI	ror_world	AREA	0	3660.3	96.0	-6485.9	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	45	55	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
+spawn_rori_119	RORI	ror_world	AREA	0	3660.3	96.0	-6485.9	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	45	55	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
 spawn_rori_120	RORI	ror_world	AREA	0	3656.5	96.0	-6460.0	63	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	E	45	55	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_121	RORI	ror_world	AREA	0	3684.7	96.0	-6460.8	-92	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle		rebel_recruiter	600
-spawn_rori_122	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	45	55	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
-spawn_rori_123	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	45	55	City	Rebel Outpost	1	LOITER	1	0	-	idle			600
-spawn_rori_124	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle		simple_droid_slang_flee_15	600
-spawn_rori_125	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	1	0	-	idle		simple_droid_stupid_death_5	600
+spawn_rori_122	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	45	55	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+spawn_rori_123	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	45	55	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+spawn_rori_124	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+spawn_rori_125	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_rori_126	RORI	ror_world	AREA	0	3664.7	96.0	-6427.2	-133	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	45	55	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
 spawn_rori_127	RORI	ror_world	AREA	0	952.5	119.0	7279.8	0	1	a Black Sun Enforcer	humanoid_blksun_enforcer	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_128	RORI	ror_world	AREA	0	987.7	118.7	7307.5	0	1	a Black Sun Enforcer	humanoid_blksun_enforcer	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
@@ -158,23 +158,23 @@ spawn_rori_155	RORI	ror_world	AREA	0	-5818.5	75.5	5829.0	0	1	a Rorigungan common
 spawn_rori_156	RORI	ror_world	AREA	0	2507.5	81.6	7316.5	0	1	a Rorigungan commoner	humanoid_rorgungan_commoner	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_157	RORI	ror_world	AREA	0	6116.6	75.9	-508.7	0	1	a Rorigungan commoner	humanoid_rorgungan_commoner	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_158	RORI	ror_world	AREA	0	6687.1	76.0	6878.5	90	1	a Rorigungan commoner	humanoid_rorgungan_commoner	ATTACKABLE	N	45	55	Outback	Rori	1	IDLE	0	0	-	idle			900
-spawn_rori_159	RORI	ror_world	AREA	0	-6906.0	189.9	-3143.5	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_160	RORI	ror_world	AREA	0	-6939.8	206.4	-3116.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_161	RORI	ror_world	AREA	0	-6949.4	197.6	-3097.2	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_162	RORI	ror_world	AREA	0	-6949.7	221.6	-3124.3	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_163	RORI	ror_world	AREA	0	-6951.5	181.3	-3164.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_164	RORI	ror_world	AREA	0	-6954.2	227.5	-3136.5	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_165	RORI	ror_world	AREA	0	-6962.8	216.0	-3144.6	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_166	RORI	ror_world	AREA	0	-6965.1	219.9	-3120.6	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_167	RORI	ror_world	AREA	0	-6981.7	180.3	-3152.2	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_168	RORI	ror_world	AREA	0	-6983.7	180.0	-3127.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_169	RORI	ror_world	AREA	0	-6925.1	181.4	-3156.7	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_170	RORI	ror_world	AREA	0	-6945.8	225.0	-3141.9	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_171	RORI	ror_world	AREA	0	-6946.5	199.7	-3109.4	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_172	RORI	ror_world	AREA	0	-6957.7	224.4	-3119.9	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_159	RORI	ror_world	AREA	0	-6906.0	189.9	-3143.5	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_160	RORI	ror_world	AREA	0	-6939.8	206.4	-3116.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_161	RORI	ror_world	AREA	0	-6949.4	197.6	-3097.2	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_162	RORI	ror_world	AREA	0	-6949.7	221.6	-3124.3	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_163	RORI	ror_world	AREA	0	-6951.5	181.3	-3164.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_164	RORI	ror_world	AREA	0	-6954.2	227.5	-3136.5	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_165	RORI	ror_world	AREA	0	-6962.8	216.0	-3144.6	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_166	RORI	ror_world	AREA	0	-6965.1	219.9	-3120.6	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_167	RORI	ror_world	AREA	0	-6981.7	180.3	-3152.2	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_168	RORI	ror_world	AREA	0	-6983.7	180.0	-3127.1	0	1	a Rorigungan Guard	humanoid_rorgungan_guard	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_169	RORI	ror_world	AREA	0	-6925.1	181.4	-3156.7	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_170	RORI	ror_world	AREA	0	-6945.8	225.0	-3141.9	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_171	RORI	ror_world	AREA	0	-6946.5	199.7	-3109.4	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_172	RORI	ror_world	AREA	0	-6957.7	224.4	-3119.9	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_173	RORI	ror_world	AREA	0	-6960.5	231.8	-3133.7	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
-spawn_rori_174	RORI	ror_world	AREA	0	-6971.9	180.0	-3101.6	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_175	RORI	ror_world	AREA	0	-6972.2	180.9	-3162.3	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_174	RORI	ror_world	AREA	0	-6971.9	180.0	-3101.6	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_175	RORI	ror_world	AREA	0	-6972.2	180.9	-3162.3	0	1	a Rorigungan Lieutenant	humanoid_rorgungan_lieutenant	AGGRESSIVE	E	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_176	RORI	ror_world	AREA	0	3575.9	81.5	371.6	0	1	a Rorigungan scout	humanoid_rorgungan_scout	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_177	RORI	ror_world	AREA	0	3376.1	90.0	5860.8	90	1	a Rorigungan warchief	humanoid_rorgungan_warchief	ATTACKABLE	E	45	55	Outback	Rori	1	IDLE	0	0	-	idle			900
 spawn_rori_178	RORI	ror_world	AREA	0	-1470.2	76.4	1673.8	0	1	a Rorigungan warrior	humanoid_rorgungan_warrior	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
@@ -187,34 +187,34 @@ spawn_rori_184	RORI	ror_world	AREA	0	3382.4	90.0	5868.9	0	1	a Rorigungan warrior
 spawn_rori_185	RORI	ror_world	AREA	0	3475.4	80.3	-2142.1	0	1	a screaming kai tok	creature_kai_tok_screaming	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_186	RORI	ror_world	AREA	0	5512.5	76.9	1004.8	0	1	a Spice Collective elite guard	humanoid_spice_collective_eliteguard	ATTACKABLE	E	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_187	RORI	ror_world	AREA	0	5515.7	76.9	1015.5	0	1	a Spice Collective miner	humanoid_spice_collective_miner	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
-spawn_rori_188	RORI	ror_world	AREA	0	-5183.0	77.7	5091.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_189	RORI	ror_world	AREA	0	-5186.1	77.3	5038.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_190	RORI	ror_world	AREA	0	-5217.1	75.8	5102.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_188	RORI	ror_world	AREA	0	-5183.0	77.7	5091.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_189	RORI	ror_world	AREA	0	-5186.1	77.3	5038.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_190	RORI	ror_world	AREA	0	-5217.1	75.8	5102.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_191	RORI	ror_world	PATROL	0	-5224.4	76.5	5041.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	PATROL	0	patrol_rori_500	column	idle			600
 spawn_rori_192	RORI	ror_world	PATROL	0	-5232.9	75.8	5108.5	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	PATROL	0	patrol_rori_600	column	idle			600
 spawn_rori_193	RORI	ror_world	PATROL	0	2850.7	105.8	-1253.3	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	PATROL	0	patrol_rori_800	column	idle			600
-spawn_rori_194	RORI	ror_world	AREA	0	2884.0	106.9	-1305.7	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
-spawn_rori_195	RORI	ror_world	AREA	0	2892.5	106.9	-1240.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_194	RORI	ror_world	AREA	0	2884.0	106.9	-1305.7	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_195	RORI	ror_world	AREA	0	2892.5	106.9	-1240.9	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_196	RORI	ror_world	PATROL	0	2899.4	107.2	-1305.3	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	PATROL	0	patrol_rori_900	column	idle			600
-spawn_rori_197	RORI	ror_world	AREA	0	2922.9	107.8	-1266.5	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_197	RORI	ror_world	AREA	0	2922.9	107.8	-1266.5	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_198	RORI	ror_world	AREA	0	-5392.8	76.0	5057.3	0	1	a thug	humanoid_thug_human_male	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_199	RORI	ror_world	AREA	0	5923.9	76.2	-2603.7	0	1	a wood mite	creature_mite_wood	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_200	RORI	ror_world	AREA	0	5937.0	75.9	-2600.6	90	1	a wood mite matriarch	creature_mite_wood_matriarch	ATTACKABLE	N	45	55	Outback	Rori	1	IDLE	0	0	-	idle			900
 spawn_rori_201	RORI	ror_world	AREA	0	6538.1	108.0	-4751.0	90	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	E	45	55	Outback	Rori	1	IDLE	0	0	-	idle			900
 spawn_rori_202	RORI	ror_world	AREA	0	6533.5	108.0	-4763.1	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
-spawn_rori_203	RORI	ror_world	AREA	0	304.1	81.3	-977.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_203	RORI	ror_world	AREA	0	304.1	81.3	-977.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_204	RORI	ror_world	AREA	0	-6959.3	231.9	-3127.3	-5	1	Captain Pir'pwn	humanoid_captain_pirpwn	AGGRESSIVE	B	45	55	Outback	Rori	1	IDLE	0	0	-	idle			600
 spawn_rori_205	RORI	ror_world	AREA	0	-1700.0	76.0	6127.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_206	RORI	ror_world	AREA	0	-2894.0	78.0	2575.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_207	RORI	ror_world	AREA	0	-4506.0	77.0	1081.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
-spawn_rori_208	RORI	ror_world	AREA	0	-759.9	81.2	-4115.5	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	4	0	-	idle			900
+spawn_rori_208	RORI	ror_world	AREA	0	-759.9	81.2	-4115.5	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_209	RORI	ror_world	AREA	0	-763.8	81.1	-4111.5	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_210	RORI	ror_world	AREA	0	-766.0	80.0	-4104.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
-spawn_rori_211	RORI	ror_world	AREA	0	-768.9	81.2	-4106.6	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	2	LOITER	6	0	-	idle			900
+spawn_rori_211	RORI	ror_world	AREA	0	-768.9	81.2	-4106.6	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_212	RORI	ror_world	AREA	0	-985.0	0.0	-303.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	2	TURN	8	0	-	idle			600
 spawn_rori_213	RORI	ror_world	AREA	0	1098.0	78.0	3830.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_214	RORI	ror_world	AREA	0	3809.0	83.0	-4427.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
-spawn_rori_215	RORI	ror_world	AREA	0	6792.2	76.3	2985.7	0	1	Enraged Miner	humanoid_miner_enraged	ATTACKABLE	N	45	55	Outback	Rori	2	LOITER	12	0	-	idle			900
+spawn_rori_215	RORI	ror_world	AREA	0	6792.2	76.3	2985.7	0	1	Enraged Miner	humanoid_miner_enraged	ATTACKABLE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_216	RORI	ror_world	AREA	0	956.0	76.0	4058.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_217	RORI	ror_world	AREA	0	960.0	78.0	6539.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
 spawn_rori_218	RORI	ror_world	AREA	0	981.0	112.0	7566.0	0	1	Enraged Miner	humanoid_miner_enraged	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			600
@@ -224,17 +224,17 @@ spawn_rori_221	RORI	ror_world	AREA	0	975.0	75.0	6923.0	0	1	Garyn's marauder	huma
 spawn_rori_222	RORI	ror_world	AREA	0	-6731.0	81.0	1082.0	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_223	RORI	ror_world	AREA	0	1158.0	90.0	691.0	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_224	RORI	ror_world	AREA	0	3012.0	81.0	-3653.0	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
-spawn_rori_225	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	45	55	Outback	Rori	2	LOITER	6	0	-	idle			600
-spawn_rori_226	RORI	ror_world	AREA	0	6792.7	76.0	3022.6	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	45	55	Outback	Rori	2	LOITER	6	0	-	idle			900
-spawn_rori_227	RORI	ror_world	AREA	0	-2145.0	76.0	635.0	0	1	Garyn's raider	humanoid_garyn_raider	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			900
+spawn_rori_225	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
+spawn_rori_226	RORI	ror_world	AREA	0	6792.7	76.0	3022.6	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
+spawn_rori_227	RORI	ror_world	AREA	0	-2145.0	76.0	635.0	0	1	Garyn's raider	humanoid_garyn_raider	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_228	RORI	ror_world	AREA	0	-448.0	77.0	3242.0	0	1	Garyn's raider	humanoid_garyn_raider	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
-spawn_rori_229	RORI	ror_world	AREA	0	-795.4	80.3	-4130.6	0	1	Garyn's raider	humanoid_garyn_raider	AGGRESSIVE	N	45	55	Outback	Rori	3	LOITER	8	0	-	idle			900
-spawn_rori_230	RORI	ror_world	AREA	0	-2637.0	81.0	-3211.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			900
-spawn_rori_231	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			600
+spawn_rori_229	RORI	ror_world	AREA	0	-795.4	80.3	-4130.6	0	1	Garyn's raider	humanoid_garyn_raider	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
+spawn_rori_230	RORI	ror_world	AREA	0	-2637.0	81.0	-3211.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
+spawn_rori_231	RORI	ror_world	AREA	0	-2643.0	81.0	-3208.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			600
 spawn_rori_232	RORI	ror_world	AREA	0	-2729.0	79.0	4495.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_233	RORI	ror_world	AREA	0	6762.0	81.0	3051.0	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
-spawn_rori_234	RORI	ror_world	AREA	0	6812.4	76.0	3007.8	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	2	LOITER	9	0	-	idle			900
-spawn_rori_235	RORI	ror_world	AREA	0	-773.0	81.5	-4122.9	0	1	Garyn's vigo	humanoid_garyn_vigo	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	2	0	-	idle			900
+spawn_rori_234	RORI	ror_world	AREA	0	6812.4	76.0	3007.8	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
+spawn_rori_235	RORI	ror_world	AREA	0	-773.0	81.5	-4122.9	0	1	Garyn's vigo	humanoid_garyn_vigo	AGGRESSIVE	N	45	55	Outback	Rori	1	LOITER	5	0	-	idle			900
 spawn_rori_236	RORI	ror_world	AREA	0	1004.0	77.0	5381.0	0	1	Garyn's vigo	humanoid_garyn_vigo	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_237	RORI	ror_world	AREA	0	5568.0	75.0	2445.0	0	1	Garyn's vigo	humanoid_garyn_vigo	AGGRESSIVE	N	45	55	Outback	Rori	1	TURN	0	0	-	idle			900
 spawn_rori_238	RORI	ror_world	AREA	0	-5197.0	77.0	5067.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Rori	1	TURN	0	0	-	idle			600
@@ -343,12 +343,12 @@ spawn_rori_340	RORI	ror_hyperdrive_research_facility	AREA	8	-75.6	-20.0	9.0	0	1	
 spawn_rori_341	RORI	ror_hyperdrive_research_facility	AREA	8	-61.0	-20.0	7.8	0	1	an Imperial Major General	humanoid_imperial_major_general	ATTACKABLE	E	45	55	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle			600
 spawn_rori_342	RORI	ror_hyperdrive_research_facility	AREA	9	-66.6	-20.0	77.1	0	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	E	45	55	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle			600
 spawn_rori_343	RORI	ror_hyperdrive_research_facility	AREA	9	-56.8	-20.0	76.4	0	1	an Imperial Colonel	humanoid_imperial_colonel	ATTACKABLE	E	45	55	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle			600
-spawn_rori_344	RORI	ror_world	AREA	0	-1137.9	77.2	4537.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle			600
-spawn_rori_345	RORI	ror_world	AREA	0	-1081.7	78.0	4396.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle			600
+spawn_rori_344	RORI	ror_world	AREA	0	-1137.9	77.2	4537.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	5	0	-	idle			600
+spawn_rori_345	RORI	ror_world	AREA	0	-1081.7	78.0	4396.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	5	0	-	idle			600
 spawn_rori_346	RORI	ror_world	PATROL	0	-1084.7	76.4	4463.7	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	PATROL	0	patrol_rori_700	column	idle			600
-spawn_rori_347	RORI	ror_world	AREA	0	-1112.1	77.3	4453.1	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle			600
-spawn_rori_348	RORI	ror_world	AREA	0	-1137.0	79.3	4412.6	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle			600
-spawn_rori_349	RORI	ror_world	AREA	0	-1119.9	77.6	4543.2	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Hyperdrive Research Facility	1	LOITER	2	0	-	idle			600
+spawn_rori_347	RORI	ror_world	AREA	0	-1112.1	77.3	4453.1	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	5	0	-	idle			600
+spawn_rori_348	RORI	ror_world	AREA	0	-1137.0	79.3	4412.6	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Hyperdrive Research Facility	1	LOITER	5	0	-	idle			600
+spawn_rori_349	RORI	ror_world	AREA	0	-1119.9	77.6	4543.2	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Hyperdrive Research Facility	1	LOITER	5	0	-	idle			600
 spawn_rori_350	RORI	ror_world	AREA	0	-1110.0	75.9	4418.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hyperdrive Research Facility	1	TURN	0	0	-	idle			600
 spawn_rori_351	RORI	ror_imp_encampment_barracks1	AREA	4	4.3	0.1	2.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
 spawn_rori_352	RORI	ror_imp_encampment_barracks1	AREA	5	3.0	0.1	-3.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
@@ -373,13 +373,13 @@ spawn_rori_370	RORI	ror_world	AREA	0	-5594.6	76.0	-5696.6	0	1	a Stormtrooper Med
 spawn_rori_371	RORI	ror_world	AREA	0	-5531.8	76.0	-5695.2	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
 spawn_rori_372	RORI	ror_world	AREA	0	-5595.6	76.0	-5630.7	0	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
 spawn_rori_373	RORI	ror_world	PATROL	0	-5553.2	75.6	-5815.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	PATROL	0	patrol_rori_200	column	idle			600
-spawn_rori_374	RORI	ror_world	AREA	0	-5576.3	75.6	-5755.6	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	2	0	-	idle			600
-spawn_rori_375	RORI	ror_world	AREA	0	-5590.6	75.6	-5809.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	2	0	-	idle			600
-spawn_rori_376	RORI	ror_world	AREA	0	-5601.6	75.6	-5773.1	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	2	0	-	idle			600
+spawn_rori_374	RORI	ror_world	AREA	0	-5576.3	75.6	-5755.6	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	5	0	-	idle			600
+spawn_rori_375	RORI	ror_world	AREA	0	-5590.6	75.6	-5809.2	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	5	0	-	idle			600
+spawn_rori_376	RORI	ror_world	AREA	0	-5601.6	75.6	-5773.1	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	LOITER	5	0	-	idle			600
 spawn_rori_377	RORI	ror_world	PATROL	0	-5607.8	75.6	-5794.4	0	1	a thief	humanoid_smuggler_patrol_thief_7	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	PATROL	0	patrol_rori_100	column	idle			600
 spawn_rori_378	RORI	ror_world	AREA	0	-5565.4	76.0	-5632.6	0	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	45	55	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
-spawn_rori_379	RORI	ror_world	AREA	0	-5530.2	76.0	-5662.9	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Imperial Encampment	1	LOITER	4	0	-	idle			900
-spawn_rori_380	RORI	ror_world	AREA	0	-5600.1	76.0	-5661.3	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Imperial Encampment	1	LOITER	4	0	-	idle			900
+spawn_rori_379	RORI	ror_world	AREA	0	-5530.2	76.0	-5662.9	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Imperial Encampment	1	LOITER	5	0	-	idle			900
+spawn_rori_380	RORI	ror_world	AREA	0	-5600.1	76.0	-5661.3	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	45	55	POI	Imperial Encampment	1	LOITER	5	0	-	idle			900
 spawn_rori_381	RORI	ror_world	AREA	0	-5577.0	75.5	-5787.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Encampment	1	TURN	0	0	-	idle			600
 spawn_rori_382	RORI	ror_kobola_cave	AREA	1	2.2	-14.3	-8.6	-1	1	a Kobola guard	humanoid_kobola_guard	ATTACKABLE	N	45	55	POI	Kobola Bunker	1	IDLE	0	0	-	idle			600
 spawn_rori_383	RORI	ror_kobola_cave	AREA	1	-18.4	-3.5	-4.0	-1	1	a Kobola miner	humanoid_kobola_miner	ATTACKABLE	N	45	55	POI	Kobola Bunker	1	IDLE	0	0	-	idle			600
@@ -419,12 +419,12 @@ spawn_rori_416	RORI	ror_world	AREA	0	765.9	82.7	-2086.3	0	1	a poacher	humanoid_p
 spawn_rori_417	RORI	ror_world	AREA	0	770.1	82.3	-2084.4	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
 spawn_rori_418	RORI	ror_world	AREA	0	772.2	84.1	-2068.5	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
 spawn_rori_419	RORI	ror_world	AREA	0	781.5	82.6	-2073.7	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
-spawn_rori_420	RORI	ror_world	AREA	0	714.6	93.6	-2063.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	6	0	-	idle			120
-spawn_rori_421	RORI	ror_world	AREA	0	722.2	91.2	-2076.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	2	LOITER	6	0	-	idle			120
-spawn_rori_422	RORI	ror_world	AREA	0	735.8	89.2	-2074.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	3	LOITER	9	0	-	idle			120
-spawn_rori_423	RORI	ror_world	AREA	0	781.8	81.4	-2048.4	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	2	LOITER	9	0	-	idle			120
-spawn_rori_424	RORI	ror_world	AREA	0	785.7	81.1	-2059.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	3	LOITER	12	0	-	idle			120
-spawn_rori_425	RORI	ror_world	AREA	0	790.6	78.9	-2036.8	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	2	LOITER	8	0	-	idle			120
+spawn_rori_420	RORI	ror_world	AREA	0	714.6	93.6	-2063.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+spawn_rori_421	RORI	ror_world	AREA	0	722.2	91.2	-2076.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+spawn_rori_422	RORI	ror_world	AREA	0	735.8	89.2	-2074.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+spawn_rori_423	RORI	ror_world	AREA	0	781.8	81.4	-2048.4	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+spawn_rori_424	RORI	ror_world	AREA	0	785.7	81.1	-2059.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+spawn_rori_425	RORI	ror_world	AREA	0	790.6	78.9	-2036.8	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	45	55	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
 spawn_rori_426	RORI	ror_world	AREA	0	773.6	81.9	-2085.0	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Poacher vs. Creature Battle	1	IDLE	0	0	-	idle			600
 spawn_rori_427	RORI	ror_torton_cave	AREA	1	1.3	-3.2	-3.3	-1	1	a juvenile pygmy torton	creature_torton_pygmy_juvenile	AGGRESSIVE	N	45	55	POI	Pygmy Torton Cave	1	IDLE	0	0	-	idle			600
 spawn_rori_428	RORI	ror_torton_cave	AREA	10	-30.3	-71.7	-141.2	-28	1	a mature pygmy torton	creature_torton_pygmy_mature	AGGRESSIVE	N	45	55	POI	Pygmy Torton Cave	1	IDLE	0	0	-	idle			600

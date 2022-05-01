@@ -14,7 +14,7 @@ val javaMajorVersion = "13"
 val kotlinTargetVersion = "12"
 
 application {
-	mainClassName = "holocore/com.projectswg.holocore.ProjectSWG"
+	mainClassName = "com.projectswg.holocore.ProjectSWG"
 }
 
 repositories {

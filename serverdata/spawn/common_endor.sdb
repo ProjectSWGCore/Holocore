@@ -28,15 +28,15 @@ spawn_endor_25	ENDOR	end_research_outpost_shed2	AREA	4	2.6	0.1	-0.2	36	1	an arti
 spawn_endor_26	ENDOR	end_research_outpost_shed2	PATROL	5	3.6	0.1	-3.7	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_800	column	idle			600
 spawn_endor_27	ENDOR	end_world	AREA	0	3212.7	24.5	-3452.3	163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle		commoner	600
 spawn_endor_28	ENDOR	end_world	AREA	0	3245.1	24.0	-3492.3	56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle		commoner	600
-spawn_endor_29	ENDOR	end_world	AREA	0	3216.9	24.0	-3467.9	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	3	LOITER	10	0	-	idle		commoner	600
-spawn_endor_30	ENDOR	end_world	AREA	0	3245.6	24.0	-3464.6	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	4	LOITER	10	0	-	idle		commoner	600
-spawn_endor_31	ENDOR	end_world	AREA	0	3258.5	24.0	-3484.9	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	2	LOITER	5	0	-	idle		commoner	600
+spawn_endor_29	ENDOR	end_world	AREA	0	3216.9	24.0	-3467.9	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_endor_30	ENDOR	end_world	AREA	0	3245.6	24.0	-3464.6	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle		commoner	600
+spawn_endor_31	ENDOR	end_world	AREA	0	3258.5	24.0	-3484.9	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle		commoner	600
 spawn_endor_32	ENDOR	end_world	AREA	0	3249.0	24.0	-3450.0	178	1	a frontiersman	humanoid_frontiersman	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_33	ENDOR	end_world	AREA	0	3196.2	24.0	-3509.8	2	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_34	ENDOR	end_world	AREA	0	3190.8	24.0	-3451.6	27	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
-spawn_endor_35	ENDOR	end_world	AREA	0	3346.5	25.7	-3501.8	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle			600
-spawn_endor_36	ENDOR	end_world	AREA	0	3327.8	25.0	-3543.8	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle			600
-spawn_endor_37	ENDOR	end_world	AREA	0	3309.6	24.4	-3518.2	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	2	0	-	idle			600
+spawn_endor_35	ENDOR	end_world	AREA	0	3346.5	25.7	-3501.8	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	5	0	-	idle			600
+spawn_endor_36	ENDOR	end_world	AREA	0	3327.8	25.0	-3543.8	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	5	0	-	idle			600
+spawn_endor_37	ENDOR	end_world	AREA	0	3309.6	24.4	-3518.2	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	City	Research Outpost	1	LOITER	5	0	-	idle			600
 spawn_endor_38	ENDOR	end_world	AREA	0	3226.9	24.0	-3479.6	24	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_39	ENDOR	end_world	AREA	0	3265.1	24.0	-3501.5	41	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_40	ENDOR	end_world	AREA	0	3227.0	24.0	-3477.6	155	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
@@ -51,7 +51,7 @@ spawn_endor_48	ENDOR	end_world	AREA	0	3252.6	24.0	-3495.8	-180	1	a traveller	hum
 spawn_endor_49	ENDOR	end_world	AREA	0	3334.0	25.7	-3521.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	TURN	0	0	-	idle			600
 spawn_endor_50	ENDOR	end_world	AREA	0	3266.8	24.0	-3486.8	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle			600
 spawn_endor_51	ENDOR	end_world	PATROL	0	3175.8	24.0	-3504.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Research Outpost	1	PATROL	0	patrol_endor_600	column	idle		simple_droid_geek_bye_nice_13	600
-spawn_endor_52	ENDOR	end_world	AREA	0	3188.8	24.0	-3466.1	0	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	10	0	-	idle		simple_droid_stupid_death_5	600
+spawn_endor_52	ENDOR	end_world	AREA	0	3188.8	24.0	-3466.1	0	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Research Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_endor_53	ENDOR	end_world	AREA	0	3278.5	24.0	-3498.4	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_54	ENDOR	end_world	AREA	0	3191.4	24.0	-3450.6	-153	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Research Outpost	1	IDLE	0	0	-	conversation			600
 spawn_endor_55	ENDOR	end_smuggler_outpost_cantina	AREA	3	0.7	0.7	-0.9	-6	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
@@ -87,7 +87,7 @@ spawn_endor_84	ENDOR	end_world	PATROL	0	-924.2	76.0	1567.2	0	1	a Smuggler	humano
 spawn_endor_85	ENDOR	end_world	AREA	0	-905.8	78.0	1560.8	140	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_endor_86	ENDOR	end_world	AREA	0	-968.6	73.0	1558.2	-1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_87	ENDOR	end_world	AREA	0	-876.5	76.0	1617.7	16	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	5	0	-	idle			600
-spawn_endor_88	ENDOR	end_world	AREA	0	-886.9	76.0	1589.8	39	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	2	0	-	idle		simple_droid_stupid_death_5	600
+spawn_endor_88	ENDOR	end_world	AREA	0	-886.9	76.0	1589.8	39	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_endor_89	ENDOR	end_world	AREA	0	-986.7	73.0	1575.3	-135	1	Eyd Tommsin	humanoid_eyd_tommsin	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_90	ENDOR	end_world	AREA	0	-841.4	79.9	1613.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
 spawn_endor_91	ENDOR	end_world	AREA	0	-835.0	80.1	1606.0	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
@@ -321,38 +321,38 @@ spawn_endor_318	ENDOR	end_dwb	AREA	9	-102.6	-22.0	-41.3	40	1	an R3 unit	droid_r3
 spawn_endor_319	ENDOR	end_dwb	AREA	9	-90.3	-20.0	-32.3	-106	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	TURN	0	0	-	idle			600
 spawn_endor_320	ENDOR	end_dwb	AREA	9	-110.1	-20.0	-54.2	0	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	TURN	0	0	-	idle			600
 spawn_endor_321	ENDOR	end_dwb	AREA	9	-95.6	-20.0	-29.3	177	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	86	90	Dungeon	DWB	1	TURN	0	0	-	idle			600
-spawn_endor_322	ENDOR	end_world	AREA	0	-235.9	208.2	3534.8	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_323	ENDOR	end_world	AREA	0	-226.1	208.5	3543.1	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_324	ENDOR	end_world	AREA	0	-2888.5	21.6	-4640.5	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_325	ENDOR	end_world	AREA	0	-2869.7	16.7	-4621.7	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_326	ENDOR	end_world	AREA	0	-2864.3	17.7	-4638.6	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_327	ENDOR	end_world	AREA	0	-222.3	208.0	3517.3	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_328	ENDOR	end_world	AREA	0	-212.1	207.7	3522.8	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	4	0	-	idle			600
+spawn_endor_322	ENDOR	end_world	AREA	0	-235.9	208.2	3534.8	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_323	ENDOR	end_world	AREA	0	-226.1	208.5	3543.1	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_324	ENDOR	end_world	AREA	0	-2888.5	21.6	-4640.5	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_325	ENDOR	end_world	AREA	0	-2869.7	16.7	-4621.7	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_326	ENDOR	end_world	AREA	0	-2864.3	17.7	-4638.6	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_327	ENDOR	end_world	AREA	0	-222.3	208.0	3517.3	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_328	ENDOR	end_world	AREA	0	-212.1	207.7	3522.8	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	70	75	Outback	Endor	1	LOITER	5	0	-	idle			600
 spawn_endor_329	ENDOR	end_world	AREA	0	-2872.4	19.4	-4634.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	B	75	85	Outback	Endor	1	TURN	0	0	-	idle			600
-spawn_endor_330	ENDOR	end_world	AREA	0	-208.4	207.0	3511.3	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	B	75	85	Outback	Endor	1	LOITER	4	0	-	idle			600
-spawn_endor_331	ENDOR	end_world	AREA	0	-235.7	208.5	3521.4	0	1	Captured old man	humanoid_captured_old_man	INVULNERABLE	N	100	100	Outback	Endor	1	LOITER	4	0	-	idle			600
+spawn_endor_330	ENDOR	end_world	AREA	0	-208.4	207.0	3511.3	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	B	75	85	Outback	Endor	1	LOITER	5	0	-	idle			600
+spawn_endor_331	ENDOR	end_world	AREA	0	-235.7	208.5	3521.4	0	1	Captured old man	humanoid_captured_old_man	INVULNERABLE	N	100	100	Outback	Endor	1	LOITER	5	0	-	idle			600
 spawn_endor_332	ENDOR	end_world	AREA	0	667.0	207.8	4972.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	TURN	0	0	-	idle			600
 spawn_endor_333	ENDOR	end_world	AREA	0	6018.0	212.2	6146.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	TURN	0	0	-	idle			600
 spawn_endor_334	ENDOR	end_world	AREA	0	6401.7	220.2	-254.8	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	IDLE	0	0	-	idle			600
-spawn_endor_335	ENDOR	end_world	AREA	0	-1198.8	25.0	2981.3	0	1	a Donkuwah battlelord	humanoid_donkuwah_battlelord	AGGRESSIVE	E	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_336	ENDOR	end_world	AREA	0	-1156.9	17.0	2953.3	0	1	a Donkuwah chieftain	humanoid_donkuwah_chieftain	AGGRESSIVE	B	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_337	ENDOR	end_world	AREA	0	-1239.4	18.0	2984.6	0	1	a Donkuwah cub	humanoid_donkuwah_cub	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_338	ENDOR	end_world	AREA	0	-1271.3	12.0	2970.4	0	1	a Donkuwah laborer	humanoid_donkuwah_laborer	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_339	ENDOR	end_world	AREA	0	-1228.4	12.0	2936.0	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_340	ENDOR	end_world	AREA	0	-1215.1	12.0	2932.1	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_341	ENDOR	end_world	AREA	0	-1174.5	12.0	2942.8	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_342	ENDOR	end_world	AREA	0	-1253.6	12.0	2973.1	0	1	a Donkuwah shaman	humanoid_donkuwah_shaman	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_343	ENDOR	end_world	AREA	0	-1207.4	9.0	2966.0	0	1	a Donkuwah spiritmaster	humanoid_donkuwah_spiritmaster	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_344	ENDOR	end_world	AREA	0	-1220.4	9.0	2968.4	0	1	a Donkuwah tribesman	humanoid_donkuwah_tribesman	AGGRESSIVE	E	70	85	POI	Dulok Village #1	1	LOITER	4	0	-	idle			600
-spawn_endor_345	ENDOR	end_world	AREA	0	6092.3	263.0	-2511.0	0	1	a Dulok outcast	humanoid_dulok_outcast	AGGRESSIVE	N	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_346	ENDOR	end_world	AREA	0	6097.3	265.0	-2461.9	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_347	ENDOR	end_world	AREA	0	6094.2	265.0	-2454.8	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_348	ENDOR	end_world	AREA	0	6092.9	263.0	-2485.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_349	ENDOR	end_world	AREA	0	6068.6	263.0	-2448.4	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_350	ENDOR	end_world	AREA	0	6054.4	262.0	-2508.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
-spawn_endor_351	ENDOR	end_world	AREA	0	6039.2	262.0	-2455.3	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
+spawn_endor_335	ENDOR	end_world	AREA	0	-1198.8	25.0	2981.3	0	1	a Donkuwah battlelord	humanoid_donkuwah_battlelord	AGGRESSIVE	E	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_336	ENDOR	end_world	AREA	0	-1156.9	17.0	2953.3	0	1	a Donkuwah chieftain	humanoid_donkuwah_chieftain	AGGRESSIVE	B	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_337	ENDOR	end_world	AREA	0	-1239.4	18.0	2984.6	0	1	a Donkuwah cub	humanoid_donkuwah_cub	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_338	ENDOR	end_world	AREA	0	-1271.3	12.0	2970.4	0	1	a Donkuwah laborer	humanoid_donkuwah_laborer	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_339	ENDOR	end_world	AREA	0	-1228.4	12.0	2936.0	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_340	ENDOR	end_world	AREA	0	-1215.1	12.0	2932.1	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_341	ENDOR	end_world	AREA	0	-1174.5	12.0	2942.8	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_342	ENDOR	end_world	AREA	0	-1253.6	12.0	2973.1	0	1	a Donkuwah shaman	humanoid_donkuwah_shaman	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_343	ENDOR	end_world	AREA	0	-1207.4	9.0	2966.0	0	1	a Donkuwah spiritmaster	humanoid_donkuwah_spiritmaster	AGGRESSIVE	N	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_344	ENDOR	end_world	AREA	0	-1220.4	9.0	2968.4	0	1	a Donkuwah tribesman	humanoid_donkuwah_tribesman	AGGRESSIVE	E	70	85	POI	Dulok Village #1	1	LOITER	5	0	-	idle			600
+spawn_endor_345	ENDOR	end_world	AREA	0	6092.3	263.0	-2511.0	0	1	a Dulok outcast	humanoid_dulok_outcast	AGGRESSIVE	N	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_346	ENDOR	end_world	AREA	0	6097.3	265.0	-2461.9	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_347	ENDOR	end_world	AREA	0	6094.2	265.0	-2454.8	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_348	ENDOR	end_world	AREA	0	6092.9	263.0	-2485.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_349	ENDOR	end_world	AREA	0	6068.6	263.0	-2448.4	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_350	ENDOR	end_world	AREA	0	6054.4	262.0	-2508.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
+spawn_endor_351	ENDOR	end_world	AREA	0	6039.2	262.0	-2455.3	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
 spawn_endor_352	ENDOR	end_world	PATROL	0	6085.8	264.2	-2462.2	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	70	85	POI	Dulok Village #2	1	PATROL	0	patrol_endor_100	column	idle			600
-spawn_endor_353	ENDOR	end_world	AREA	0	6107.2	265.0	-2451.6	0	1	the Dulok outcast leader	humanoid_dulok_outcast_leader	AGGRESSIVE	B	70	85	POI	Dulok Village #2	1	LOITER	1	0	-	idle			600
+spawn_endor_353	ENDOR	end_world	AREA	0	6107.2	265.0	-2451.6	0	1	the Dulok outcast leader	humanoid_dulok_outcast_leader	AGGRESSIVE	B	70	85	POI	Dulok Village #2	1	LOITER	5	0	-	idle			600
 spawn_endor_354	ENDOR	end_world	AREA	0	4599.8	10.0	-2399.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
 spawn_endor_355	ENDOR	end_world	AREA	0	4607.6	30.3	-2413.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
 spawn_endor_356	ENDOR	end_world	AREA	0	4544.2	30.0	-2387.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	70	80	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
@@ -488,13 +488,13 @@ spawn_endor_485	ENDOR	end_world	AREA	0	-4716.7	82.0	-2272.7	6	1	a feral Marauder
 spawn_endor_486	ENDOR	end_world	AREA	0	-4626.3	95.0	-2245.4	0	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	E	70	85	POI	Marauder's Stronghold	1	TURN	0	0	-	idle			600
 spawn_endor_487	ENDOR	end_world	AREA	0	-4701.2	82.0	-2285.2	-107	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	E	70	85	POI	Marauder's Stronghold	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_endor_488	ENDOR	end_world	AREA	0	-4704.2	82.0	-2287.2	53	1	a grassland blood Marauder	humanoid_marauder_grassland_blood	AGGRESSIVE	E	70	85	POI	Marauder's Stronghold	1	IDLE	0	0	-	conversation			600
-spawn_endor_489	ENDOR	end_world	AREA	0	-4576.7	99.0	-2256.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	4	0	-	idle			600
-spawn_endor_490	ENDOR	end_world	AREA	0	-4688.8	82.0	-2280.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	4	0	-	idle			600
-spawn_endor_491	ENDOR	end_world	AREA	0	-4721.6	82.0	-2262.8	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	4	0	-	idle			600
-spawn_endor_492	ENDOR	end_world	AREA	0	-4657.0	82.0	-2295.2	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	4	0	-	idle			600
-spawn_endor_493	ENDOR	end_world	AREA	0	-4669.7	98.0	-2173.3	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle			600
-spawn_endor_494	ENDOR	end_world	AREA	0	-4654.4	94.9	-2140.4	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle			600
-spawn_endor_495	ENDOR	end_world	AREA	0	-4612.0	73.7	-2184.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	10	0	-	idle			600
+spawn_endor_489	ENDOR	end_world	AREA	0	-4576.7	99.0	-2256.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_490	ENDOR	end_world	AREA	0	-4688.8	82.0	-2280.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_491	ENDOR	end_world	AREA	0	-4721.6	82.0	-2262.8	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_492	ENDOR	end_world	AREA	0	-4657.0	82.0	-2295.2	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_493	ENDOR	end_world	AREA	0	-4669.7	98.0	-2173.3	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_494	ENDOR	end_world	AREA	0	-4654.4	94.9	-2140.4	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+spawn_endor_495	ENDOR	end_world	AREA	0	-4612.0	73.7	-2184.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
 spawn_endor_496	ENDOR	end_world	AREA	0	-4564.0	99.0	-2297.3	1	1	Charal	humanoid_charal	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_endor_497	ENDOR	end_world	AREA	0	-4581.6	99.1	-2243.2	-176	1	Fightmaster Jorak	humanoid_fightmaster_jorak	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
 spawn_endor_498	ENDOR	end_world	AREA	0	-4570.5	99.0	-2273.0	-84	1	King Terak	humanoid_king_terak	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
@@ -509,7 +509,7 @@ spawn_endor_506	ENDOR	end_marauder_orphans_cave	AREA	5	92.1	-46.6	-110.5	0	1	a M
 spawn_endor_507	ENDOR	end_marauder_orphans_cave	AREA	8	130.8	-66.2	-119.1	0	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
 spawn_endor_508	ENDOR	end_marauder_orphans_cave	AREA	8	131.1	-66.3	-97.0	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
 spawn_endor_509	ENDOR	end_marauder_orphans_cave	AREA	9	181.0	-66.1	-97.1	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	70	85	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
-spawn_endor_510	ENDOR	end_world	AREA	0	-6859.6	17.7	607.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle			600
-spawn_endor_511	ENDOR	end_world	AREA	0	-6899.2	11.9	649.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle			600
-spawn_endor_512	ENDOR	end_world	AREA	0	-6865.2	13.0	658.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	10	0	-	idle			600
+spawn_endor_510	ENDOR	end_world	AREA	0	-6859.6	17.7	607.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
+spawn_endor_511	ENDOR	end_world	AREA	0	-6899.2	11.9	649.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
+spawn_endor_512	ENDOR	end_world	AREA	0	-6865.2	13.0	658.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	70	80	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
 spawn_endor_513	ENDOR	end_world	AREA	0	-6878.0	15.2	618.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
