@@ -1,4 +1,4 @@
-![Banner](https://imgur.com/V14kDE5.png)
+![Banner](https://i.imgur.com/vIaNzCm.png)
 
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg?longCache=true&style=flat)
 ![Discord](https://img.shields.io/discord/373548910225915905.svg)
