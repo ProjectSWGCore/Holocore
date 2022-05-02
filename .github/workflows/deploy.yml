@@ -32,12 +32,12 @@ jobs:
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
         RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
-        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:quality_assurance"
-        docker push "$IMAGE_NAME:quality_assurance"
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:cu_quality_assurance"
+        docker push "$IMAGE_NAME:cu_quality_assurance"
     - name: Docker Push to Master
       if: github.event.release.prerelease == false
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
         RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
-        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:latest"
-        docker push "$IMAGE_NAME:latest"
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:cu_latest"
+        docker push "$IMAGE_NAME:cu_latest"
