@@ -71,7 +71,6 @@ abstract class DataLoader {
 		fun zoneInsertions(): TerrainZoneInsertionLoader = ServerData.zoneInsertions
 		fun travelCosts(): TravelCostLoader = ServerData.travelCosts
 		fun vehicles(): VehicleLoader = ServerData.vehicles
-		fun specialLines(): SpecialLineLoader = ServerData.specialLines
 		fun staticPvpZones(): StaticPvpZoneLoader = ServerData.staticPvpZones
 		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
 		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels

@@ -51,25 +51,30 @@ import java.util.concurrent.locks.ReentrantLock;
 @SuppressWarnings("ClassWithTooManyFields") // Required by SWG
 class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 	
+	private static final float DEFAULT_RUNSPEED = 5.376f;
+	private static final float DEFAULT_WALKSPEED = 1.00625f;
+	private static final int DEFAULT_ACCELSCALE = 1;
+	private static final int DEFAULT_TURNSCALE = 1;
+	private static final int DEFAULT_MOVEMENTSCALE = 1;
 	private final CreatureObject obj;
 	private final Lock skillModLock = new ReentrantLock();
 	
 	/** CREO4-00 */ private float								accelPercent			= 1;
-	/** CREO4-01 */ private float								accelScale				= 1;
+	/** CREO4-01 */ private float								accelScale				= DEFAULT_ACCELSCALE;
 	/** CREO4-02 */ private AttributesMutable					bonusAttributes;
 	/** CREO4-03 */ private SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3, StringType.ASCII);
 	/** CREO4-04 */ private	float								movementPercent			= 1;
-	/** CREO4-05 */ private float								movementScale			= 1;
+	/** CREO4-05 */ private float								movementScale			= DEFAULT_MOVEMENTSCALE;
 	/** CREO4-06 */ private long								performanceListenTarget	= 0;
-	/** CREO4-07 */ private float								runSpeed				= 7.3f;
+	/** CREO4-07 */ private float								runSpeed				= DEFAULT_RUNSPEED;
 	/** CREO4-08 */ private float								slopeModAngle			= 1;
-	/** CREO4-09 */ private float								slopeModPercent			= 1;
-	/** CREO4-10 */ private float								turnScale				= 1;
-	/** CREO4-11 */ private float								walkSpeed				= 1.549f;
+	/** CREO4-09 */ private float								slopeModPercent			= 0;
+	/** CREO4-10 */ private float								turnScale				= DEFAULT_TURNSCALE;
+	/** CREO4-11 */ private float								walkSpeed				= DEFAULT_WALKSPEED;
 	/** CREO4-12 */ private float								waterModPercent			= 0.75f;
 	/** CREO4-13 */ private SWGSet<GroupMissionCriticalObject>	missionCriticalObjects	= new SWGSet<>(4, 13);
 	/** CREO4-14 */ private SWGMap<String, Integer>				commands				= new SWGMap<>(4, 14, StringType.ASCII);
-
+	
 	public CreatureObjectClientServerNP(@NotNull CreatureObject obj) {
 		this.obj = obj;
 		this.bonusAttributes = new AttributesMutable(obj, 4, 2);
@@ -403,4 +408,11 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		obj.sendDelta(4, update, o);
 	}
 	
+	public void resetMovement() {
+		setWalkSpeed(DEFAULT_WALKSPEED);
+		setRunSpeed(DEFAULT_RUNSPEED);
+		setAccelScale(DEFAULT_ACCELSCALE);
+		setTurnScale(DEFAULT_TURNSCALE);
+		setMovementScale(DEFAULT_MOVEMENTSCALE);
+	}
 }

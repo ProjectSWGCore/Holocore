@@ -48,8 +48,8 @@ class LootTableLoader : DataLoader() {
 	@Throws(IOException::class)
 	override fun load() {
 		SdbLoader.load(File("serverdata/loot/loot_table.sdb")).use { set ->
-			val itemGroups = set.getTextArrayParser("items_group_([0-1]+)", null)
-			val chanceGroups = set.getIntegerArrayParser("chance_group_([0-1]+)", Integer.MAX_VALUE)
+			val itemGroups = set.getTextArrayParser("items_group_([0]+)", null)
+			val chanceGroups = set.getIntegerArrayParser("chance_group_([0]+)", Integer.MAX_VALUE)
 			
 			lootTables = set
 					.stream { LootTableItem(it, itemGroups, chanceGroups) }

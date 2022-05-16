@@ -29,24 +29,21 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
-import com.projectswg.common.data.combat.*;
-import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
-import com.projectswg.common.data.encodables.oob.ProsePackage;
+import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SpecialLineLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -84,6 +81,10 @@ public class CombatCommandCommon {
 	}
 	
 	static CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
+		if (source.equals(target)) {
+			return CombatStatus.INVALID_TARGET;
+		}
+		
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
 		
@@ -177,16 +178,6 @@ public class CombatCommandCommon {
 	
 	static void showFlyText(TangibleObject obj, String text, Scale scale, RGB c, ShowFlyText.Flag... flags) {
 		obj.sendSelf(new ShowFlyText(obj.getObjectId(), text, scale, c, flags));
-	}
-	
-	static double getAddedDamageBoost(CreatureObject source, CombatCommand command) {
-		SpecialLineLoader.SpecialLineInfo specialLine = ServerData.INSTANCE.getSpecialLines().getSpecialLine(command.getSpecialLine());
-		if (specialLine != null) {
-			String damageModName = specialLine.getAddedDamageModName();
-			return source.getSkillModValue(damageModName) / 100d;
-		}
-		
-		return 0;
 	}
 	
 }

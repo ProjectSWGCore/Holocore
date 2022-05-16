@@ -1,0 +1,21 @@
+equipment_id	comment	hand_l	hand_r
+INTEGER PRIMARY KEY	TEXT	TEXT	TEXT
+1	Drinking glass		object/tangible/item/con_drinking_glass_01.iff
+2	Bandfill		object/tangible/instrument/bandfill.iff
+3	Fanfar		object/tangible/instrument/fanfar.iff
+4	Fizz		object/tangible/instrument/fizz.iff
+5	Flanged Jessoon		object/tangible/instrument/flange_jessoon.iff
+6	Flute Droopy		object/tangible/instrument/flute_droopy.iff
+7	Organ Figrin Dan		object/tangible/instrument/instrument_organ_figrin_dan.iff
+8	Organ Max Rebo		object/tangible/instrument/instrument_organ_max_rebo.iff
+9	Kloo Horn		object/tangible/instrument/kloo_horn.iff
+10	Mandoviol		object/tangible/instrument/mandoviol.iff
+11	Slitherhorn		object/tangible/instrument/slitherhorn.iff
+12	Traz		object/tangible/instrument/traz.iff
+13	Valahorn		object/tangible/instrument/valahorn.iff
+14	Xantha		object/tangible/instrument/xantha.iff
+15	Ewok Flowers		object/tangible/dance_prop/prop_ewok_flowers.iff
+16	Glowsticks	object/tangible/dance_prop/prop_glowstick_l.iff	object/tangible/dance_prop/prop_glowstick_r.iff
+17	Prop Sparkler	object/tangible/dance_prop/prop_sparkler_l.iff	object/tangible/dance_prop/prop_sparkler_r.iff
+18	Prop Torch	object/tangible/dance_prop/prop_torch_l.iff	object/tangible/dance_prop/prop_torch_r.iff
+19	Fishing Pole		object/tangible/fishing/fishing_pole.iff

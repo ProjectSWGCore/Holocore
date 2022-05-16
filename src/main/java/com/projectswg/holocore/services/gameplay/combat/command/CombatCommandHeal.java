@@ -63,9 +63,6 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			healAmount *= healingPotency;
 		}
 		
-		// Apply special line heal boost
-		healAmount += CombatCommandCommon.getAddedDamageBoost(source, combatCommand);
-		
 		switch (combatCommand.getAttackType()) {
 			case SINGLE_TARGET: {
 				switch (combatCommand.getTargetType()) {
