@@ -5,14 +5,11 @@ plugins {
 	kotlin("jvm") version "1.6.10"
 }
 
-// Note: define javaVersion, javaMajorVersion, javaHomeLinux, javaHomeMac, and javaHomeWindows
+// Note: define javaVersion, javaMajorVersion, and kotlinTargetJdk
 //       inside your gradle.properties file
 val javaVersion: String by project
 val javaMajorVersion: String by project
 val kotlinTargetJdk: String by project
-val javaHomeLinux: String by project
-val javaHomeMac: String by project
-val javaHomeWindows: String by project
 
 subprojects {
 	ext {
@@ -38,13 +35,12 @@ sourceSets {
 			implementation(project(":pswgcommon"))
 			implementation(kotlin("stdlib"))
 			
-			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-			
 			implementation(group="org.xerial", name="sqlite-jdbc", version="3.30.1")
 			implementation(group="org.mariadb.jdbc", name="mariadb-java-client", version="2.5.4")
 			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
 			implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 			implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
+			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.4")
 			implementation(group="com.github.madsboddum", name="swgterrain", version="1.1.3")
 		}
 	}

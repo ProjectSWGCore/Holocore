@@ -36,6 +36,9 @@ import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDa
 import com.projectswg.holocore.services.gameplay.GameplayManager;
 import com.projectswg.holocore.services.support.SupportManager;
 import com.projectswg.holocore.utilities.ScheduledUtilities;
+import me.joshlarson.jlcommon.argparse.Argument;
+import me.joshlarson.jlcommon.argparse.ArgumentParser;
+import me.joshlarson.jlcommon.argparse.ArgumentParserException;
 import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.IntentManager.IntentSpeedStatistics;
@@ -47,7 +50,6 @@ import me.joshlarson.jlcommon.log.log_wrapper.AnsiColorLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
 import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
-import org.apache.commons.cli.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +57,7 @@ import java.time.OffsetTime;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class ProjectSWG {
 	
@@ -78,24 +81,24 @@ public class ProjectSWG {
 	}
 	
 	static int run(String [] args) {
-		CommandLine arguments;
+		ArgumentParser parser = createArgumentOptions();
+		Map<String, Object> arguments;
 		try {
-			arguments = new DefaultParser().parse(createArgumentOptions(), args, true);
-		} catch (Throwable t) {
-			//noinspection UseOfSystemOutOrSystemErr
-			System.err.println("Failed to parse arguments. Reason: " + t.getClass().getName() + ": " + t.getMessage());
-			new HelpFormatter().printHelp("java -jar Holocore.jar", createArgumentOptions());
+			arguments = parser.parse(args);
+		} catch (ArgumentParserException e) {
+			System.err.println("Failed to parse arguments. Reason: " + e.getClass().getName() + ": " + e.getMessage());
+			printHelp(parser);
 			return -1;
 		}
-		if (arguments.hasOption("help")) {
-			new HelpFormatter().printHelp("java -jar Holocore.jar", createArgumentOptions());
+		if (arguments.containsKey("help")) {
+			printHelp(parser);
 			return 0;
 		}
 		
 		File logDirectory = new File("log");
 		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
 			Log.w("Failed to make log directory!");
-		if (arguments.hasOption("print-colors"))
+		if (arguments.containsKey("print-colors"))
 			Log.addWrapper(new AnsiColorLogWrapper());
 		else
 			Log.addWrapper(new ConsoleLogWrapper());
@@ -168,7 +171,7 @@ public class ProjectSWG {
 		new ServerStatusIntent(status).broadcast();
 	}
 	
-	private static void setupGalaxy(CommandLine arguments) {
+	private static void setupGalaxy(Map<String, Object> arguments) {
 		GALAXY.setId(1);
 		GALAXY.setName(PswgDatabase.INSTANCE.getConfig().getString(ProjectSWG.class, "galaxyName", "Holocore"));
 		GALAXY.setAddress("");
@@ -182,7 +185,7 @@ public class ProjectSWG {
 		GALAXY.setOnlineFreeTrialLimit(PswgDatabase.INSTANCE.getConfig().getInt(ProjectSWG.class, "galaxyMaxOnline", 3000));
 		GALAXY.setRecommended(true);
 		try {
-			GALAXY.setAdminServerPort(Integer.parseInt(arguments.getOptionValue("admin-port", "-1")));
+			GALAXY.setAdminServerPort(Integer.parseInt((String) arguments.getOrDefault("admin-port", "-1")));
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("admin server port must be an integer", e);
 		}
@@ -190,21 +193,35 @@ public class ProjectSWG {
 		ChatAvatar.setGalaxy(GALAXY.getName());
 	}
 	
-	private static void setupDatabase(CommandLine arguments) {
-		String dbStr = arguments.getOptionValue("database", "mongodb://localhost");
-		String db = arguments.getOptionValue("dbName", "cu");
+	private static void setupDatabase(Map<String, Object> arguments) {
+		String dbStr = (String) arguments.getOrDefault("database", "mongodb://localhost");
+		String db = (String) arguments.getOrDefault("dbName", "cu");
 		
 		PswgDatabase.INSTANCE.initialize(dbStr, db);
 	}
 	
-	private static Options createArgumentOptions() {
-		Options options = new Options();
-		options.addOption(Option.builder("h").longOpt("help").desc("print this message").build());
-		options.addOption(Option.builder("C").longOpt("print-colors").desc("print colors to signify various log levels").build());
-		options.addOption(Option.builder("a").longOpt("admin-port").argName("port").hasArg(true).desc("sets the admin server port").build());
-		options.addOption(Option.builder("c").longOpt("database").argName("str").hasArg(true).desc("sets the connection string for mongodb (default: mongodb://localhost)").build());
-		options.addOption(Option.builder("d").longOpt("dbName").argName("db").hasArg(true).desc("sets the mongodb database (default: nge)").build());
-		return options;
+	private static ArgumentParser createArgumentOptions() {
+		ArgumentParser parser = new ArgumentParser();
+		parser.addArgument(Argument.builder("help").shortName('h').longName("help").isOptional(true).description("print this message").build());
+		parser.addArgument(Argument.builder("print-colors").shortName('C').longName("print-colors").isOptional(true).description("print colors to signify various log levels").build());
+		parser.addArgument(Argument.builder("database").shortName('c').longName("database").argCount('1').isOptional(true).description("sets the connection string for mongodb (default: mongodb://localhost)").build());
+		parser.addArgument(Argument.builder("database-name").shortName('d').longName("dbName").argCount('1').isOptional(true).description("sets the mongodb database (default: cu)").build());
+		
+		return parser;
+	}
+	
+	private static void printHelp(ArgumentParser parser) {
+		int maxLengthName = 0;
+		int maxLengthLongName = 0;
+		for (Argument arg : parser.getArguments()) {
+			maxLengthName = Math.max(maxLengthName, arg.getName().length());
+			maxLengthLongName = Math.max(maxLengthLongName, arg.getLongName().length());
+		}
+		System.out.println("Help:");
+		for (Argument arg : parser.getArguments()) {
+			System.out.printf("%-"+maxLengthName+"s -%c%-"+(maxLengthLongName)+"s  %s%n", arg.getName(), arg.getShortName(), "", arg.getDescription());
+			System.out.printf("%-"+maxLengthName+"s --%s%n", "", arg.getLongName());
+		}
 	}
 	
 	public static class CoreException extends RuntimeException {
