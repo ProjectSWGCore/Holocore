@@ -33,7 +33,7 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import kotlinx.coroutines.*
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.Intent
 import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.control.IntentHandler
@@ -43,11 +43,16 @@ import java.util.*
 
 class StaticItemService : Service() {
 	
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val delayedCallbackHandler = ScheduledThreadPool(1, "static-item-service")
+	
+	override fun start(): Boolean {
+		delayedCallbackHandler.start()
+		return true
+	}
 	
 	override fun stop(): Boolean {
-		scope.coroutineContext.cancel()
-		return true
+		delayedCallbackHandler.stop()
+		return delayedCallbackHandler.awaitTermination(1000)
 	}
 	
 	@IntentHandler
@@ -83,8 +88,7 @@ class StaticItemService : Service() {
 	
 	@IntentHandler
 	private fun handleCompletedStaticItemCreatedCallbacks(csicc: CompletedStaticItemCreatedCallbacks) {
-		scope.launch {
-			delay(60)
+		delayedCallbackHandler.execute(60000) {
 			csicc.objectHandler(csicc.objects)
 		}
 	}

@@ -3,7 +3,6 @@ package com.projectswg.holocore.services.gameplay.combat.loot
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage
-import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent
@@ -22,7 +21,7 @@ import com.projectswg.holocore.services.gameplay.combat.loot.generation.ItemLoot
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.NPCLootTable
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.RareItemLootGenerator
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
-import kotlinx.coroutines.*
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
@@ -34,7 +33,7 @@ class LootGenerationService : Service() {
 	private val creditGenerator = CreditLootGenerator()
 	private val itemGenerator = ItemLootGenerator()
 	private val rareItemLootGenerator = RareItemLootGenerator()
-	private val scope = CoroutineScope(Dispatchers.Default)
+	private val lootGenerationThread = ScheduledThreadPool(1, "loot-generation-service")
 	
 	override fun initialize(): Boolean {
 		loadNPCLoot()
@@ -42,9 +41,14 @@ class LootGenerationService : Service() {
 		return true
 	}
 	
-	override fun stop(): Boolean {
-		scope.coroutineContext.cancel()
+	override fun start(): Boolean {
+		lootGenerationThread.start()
 		return true
+	}
+	
+	override fun stop(): Boolean {
+		lootGenerationThread.stop()
+		return lootGenerationThread.awaitTermination(1000)
 	}
 	
 	@IntentHandler
@@ -81,8 +85,7 @@ class LootGenerationService : Service() {
 			obj.moveToContainer(lootInventory)
 			ObjectCreatedIntent.broadcast(obj)
 			
-			scope.launch {
-				delay(60)
+			lootGenerationThread.execute(60000) {
 				when (obj.template) {
 					RareLootService.RARE_CHEST,
 					RareLootService.LEGENDARY_CHEST,
