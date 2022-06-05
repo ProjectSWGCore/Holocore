@@ -2,15 +2,13 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.6.10"
+	kotlin("jvm") version "1.6.21"
 	id("org.beryx.jlink") version "2.25.0"
 }
 
-// Note: define javaVersion, javaMajorVersion, and kotlinTargetJdk
-//       inside your gradle.properties file
-val javaVersion: String by project
-val javaMajorVersion: String by project
-val kotlinTargetJdk: String by project
+val javaVersion = "17"
+val javaMajorVersion = "17"
+val kotlinTargetJdk = "17"
 
 subprojects {
 	ext {
