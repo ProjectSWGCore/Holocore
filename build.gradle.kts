@@ -19,7 +19,7 @@ subprojects {
 }
 
 application {
-	mainClassName = "com.projectswg.holocore.ProjectSWG"
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
 }
 
 repositories {
@@ -93,5 +93,5 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 tasks.create<JavaExec>("runDebug") {
 	enableAssertions = true
 	classpath = sourceSets.main.get().runtimeClasspath
-	main = "com.projectswg.holocore.ProjectSWG"
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
 }
