@@ -32,6 +32,7 @@ import com.projectswg.common.data.swgfile.DataFactory;
 import com.projectswg.common.data.swgfile.SWGFile;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.data.swgfile.visitors.DatatableData.ColumnType;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
@@ -49,6 +50,7 @@ import java.util.List;
 
 /**
  * Created by Waverunner on 6/9/2015
+ * @deprecated use {@link SdbLoader} instead.
  */
 public final class ServerFactory extends DataFactory {
 	
