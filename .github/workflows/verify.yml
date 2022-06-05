@@ -6,6 +6,7 @@ on:
     branches: 
     - master
     - quality_assurance
+    - cu_quality_assurance
 
 jobs:
   test:
