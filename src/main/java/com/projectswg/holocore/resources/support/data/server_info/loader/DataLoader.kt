@@ -79,6 +79,7 @@ abstract class DataLoader {
 		fun conversationLoader(): ConversationLoader = ServerData.conversationLoader
 		fun questLoader(): QuestLoader = ServerData.questLoader
 		fun badges(): BadgeLoader = ServerData.badges
+		fun mappingTemplates(): MappingTemplateLoader = ServerData.mappingTemplates
 
 	}
 	
