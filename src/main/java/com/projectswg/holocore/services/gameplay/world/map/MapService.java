@@ -1,7 +1,6 @@
 package com.projectswg.holocore.services.gameplay.world.map;
 
 import com.projectswg.common.data.encodables.map.MapLocation;
-import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsMessage;
@@ -11,6 +10,7 @@ import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.map.MappingTemplate;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.MappingTemplateLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PlanetMapCategoryLoader.PlanetMapCategoryInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -18,7 +18,6 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,8 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MapService extends Service {
 	
-	private final Map<String, MappingTemplate> mappingTemplates;
-
 	private final Map<String, List<MapLocation>> staticMapLocations; // ex: NPC cities and buildings
 	private final Map<String, List<MapLocation>> dynamicMapLocations; // ex: camps, faction presences (grids)
 	private final Map<String, List<MapLocation>> persistentMapLocations; // ex: Player structures, vendors
@@ -40,14 +37,9 @@ public class MapService extends Service {
 	private final AtomicInteger persistMapVersion = new AtomicInteger(1);
 	
 	public MapService() {
-		mappingTemplates = new HashMap<>();
-
 		staticMapLocations = new ConcurrentHashMap<>();
 		dynamicMapLocations = new ConcurrentHashMap<>();
 		persistentMapLocations = new ConcurrentHashMap<>();
-		// Needs to be done here as ObjectManager is initialized before MapService otherwise there won't be any map locations
-		// for objects loaded from the databases, snapshots, buildouts.
-		loadMappingTemplates();
 	}
 
 	@Override
@@ -85,21 +77,6 @@ public class MapService extends Service {
 
 		player.sendPacket(responseMessage);
 	}
-	
-	private void loadMappingTemplates() {
-		DatatableData table = ServerFactory.getDatatable("map/map_locations.iff");
-		for (int row = 0; row < table.getRowCount(); row++) {
-			MappingTemplate template = new MappingTemplate();
-			template.setTemplate(ClientFactory.formatToSharedFile(table.getCell(row, 0).toString()));
-			template.setName(table.getCell(row, 1).toString());
-			template.setCategory(table.getCell(row, 2).toString());
-			template.setSubcategory(table.getCell(row, 3).toString());
-			template.setType((Integer) table.getCell(row, 4));
-			template.setFlag((Integer) table.getCell(row, 5));
-
-			mappingTemplates.put(template.getTemplate(), template);
-		}
-	}
 
 	private void loadStaticCityPoints() {
 		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
@@ -122,10 +99,13 @@ public class MapService extends Service {
 	}
 
 	private void addMapLocation(SWGObject object, MapType type) {
-		if (!mappingTemplates.containsKey(object.getTemplate()))
+		MappingTemplateLoader mappingTemplateLoader = DataLoader.Companion.mappingTemplates();
+		MappingTemplate mappingTemplate = mappingTemplateLoader.getMappingTemplate(object.getTemplate());
+		
+		if (mappingTemplate == null) {
 			return;
+		}
 
-		MappingTemplate mappingTemplate = mappingTemplates.get(object.getTemplate());
 		PlanetMapCategoryInfo category = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getCategory());
 		PlanetMapCategoryInfo subcategory = DataLoader.Companion.planetMapCategories().getCategoryByName(mappingTemplate.getSubcategory());
 
