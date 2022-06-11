@@ -97,6 +97,7 @@ object ServerData {
 	val conversationLoader	by SoftDataLoaderDelegate(::ConversationLoader)
 	val questLoader			by SoftDataLoaderDelegate(::QuestLoader)
 	val badges  			by SoftDataLoaderDelegate(::BadgeLoader)
+	val mappingTemplates	by SoftDataLoaderDelegate(::MappingTemplateLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)
