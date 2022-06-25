@@ -29,7 +29,9 @@ package com.projectswg.holocore.resources.support.global.commands;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.TargetType;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class Command {
 	
@@ -56,6 +58,7 @@ public class Command {
 	private final String cooldownGroup2;
 	private final double cooldownTime2;
 	private final boolean autoAddToToolbar;
+	private final Set<Locomotion> disallowedLocomotions;
 	
 	protected Command(CommandBuilder builder) {
 		this.name = builder.name;
@@ -82,6 +85,7 @@ public class Command {
 		this.cooldownGroup2 = builder.cooldownGroup2;
 		this.cooldownTime2 = builder.cooldownTime2;
 		this.autoAddToToolbar = builder.autoAddToToolbar;
+		this.disallowedLocomotions = builder.disallowedLocomotions;
 	}
 	
 	public String getName() {
@@ -176,6 +180,10 @@ public class Command {
 		return autoAddToToolbar;
 	}
 	
+	public Set<Locomotion> getDisallowedLocomotions() {
+		return disallowedLocomotions;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ':' + crc;
@@ -218,6 +226,7 @@ public class Command {
 		private String cooldownGroup2;
 		private double cooldownTime2;
 		private boolean autoAddToToolbar;
+		private Set<Locomotion> disallowedLocomotions = new HashSet<>();
 		
 		protected CommandBuilder() {}
 		
@@ -243,6 +252,7 @@ public class Command {
 			this.cooldownGroup2 = command.cooldownGroup2;
 			this.cooldownTime2 = command.cooldownTime2;
 			this.autoAddToToolbar = command.autoAddToToolbar;
+			this.disallowedLocomotions = command.disallowedLocomotions;
 		}
 		
 		public CommandBuilder withName(String name) {
@@ -347,6 +357,11 @@ public class Command {
 		
 		public CommandBuilder withAutoAddToToolbar(boolean autoAddToToolbar) {
 			this.autoAddToToolbar = autoAddToToolbar;
+			return this;
+		}
+		
+		public CommandBuilder withDisallowedLocomotion(Locomotion locomotion) {
+			this.disallowedLocomotions.add(locomotion);
 			return this;
 		}
 		
