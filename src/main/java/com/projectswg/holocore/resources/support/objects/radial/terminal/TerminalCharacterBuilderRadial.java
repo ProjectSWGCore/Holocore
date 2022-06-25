@@ -5,6 +5,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.sui.SuiEvent;
+import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -47,6 +48,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Tools");
 				listBox.addListItem("ITEMS - Vehicles");
 				listBox.addListItem("Credits");
+				listBox.addListItem("Knockdown");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -66,7 +68,14 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 4: handleTools(player); break;
 			case 5: handleVehicles(player); break;
 			case 6: handleCredits(player); break;
+			case 7: handleKnockdown(player); break;
 		}
+	}
+
+	private static void handleKnockdown(Player player) {
+		CreatureObject victim = player.getCreatureObject();
+		
+		KnockdownIntent.broadcast(victim);
 	}
 
 	private static void spawnItems(Player player, String ... items) {

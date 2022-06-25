@@ -18,10 +18,12 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
+import kotlin.jvm.functions.Function1;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -134,7 +136,8 @@ public class CommandQueueService extends Service {
 			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "executed command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
-			ErrorCode error = checkCommand(command);
+			CheckCommandResult checkCommandResult = checkCommand(command);
+			ErrorCode error = checkCommandResult.getErrorCode();
 			if (error == ErrorCode.SUCCESS) {
 				if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
 					if (!activeCooldownGroups.add(rootCommand.getCooldownGroup()))
@@ -151,11 +154,13 @@ public class CommandQueueService extends Service {
 				ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
 			}
 			
-			sendQueueRemove(command, error);
+			sendQueueRemove(command, checkCommandResult);
 		}
 		
-		private void sendQueueRemove(EnqueuedCommand command, ErrorCode error) {
-			command.getSource().sendSelf(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), error, 0));
+		private void sendQueueRemove(EnqueuedCommand command, CheckCommandResult checkCommandResult) {
+			ErrorCode error = checkCommandResult.getErrorCode();
+			int action = checkCommandResult.getAction();
+			command.getSource().sendSelf(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), error, action));
 		}
 		
 		private boolean isValidCooldownGroup(String group) {
@@ -174,15 +179,37 @@ public class CommandQueueService extends Service {
 			executor.execute((long) (cooldownTime * 1000), () -> activeCooldownGroups.remove(group));
 		}
 		
-		private ErrorCode checkCommand(EnqueuedCommand command) {
+		private CheckCommandResult checkCommand(EnqueuedCommand command) {
 			Command rootCommand = command.getCommand();
+			CreatureObject source = command.getSource();
+			Set<Locomotion> disallowedLocomotions = rootCommand.getDisallowedLocomotions();
+			Set<Locomotion> sourceLocomotions = new HashSet<>();
+			
+			@NotNull Locomotion[] locomotions = Locomotion.values();
+			
+			for (Locomotion locomotion : locomotions) {
+				Function1<CreatureObject, Boolean> check = locomotion.getCheck();
+				
+				Boolean result = check.invoke(source);
+				
+				if (Boolean.TRUE.equals(result)) {
+					sourceLocomotions.add(locomotion);
+				}
+			}
+			
+			for (Locomotion disallowedLocomotion : disallowedLocomotions) {
+				if (sourceLocomotions.contains(disallowedLocomotion)) {
+					return new CheckCommandResult(ErrorCode.LOCOMOTION, disallowedLocomotion.getLocomotionTableId());
+				}
+			}
+			
 			if (rootCommand instanceof CombatCommand) {
 				CombatCommand combatCommand = (CombatCommand) rootCommand;
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
 					switch (combatCommand.getTargetType()) {
 						case NONE:
-							target = command.getSource();
+							target = source;
 							break;
 						case REQUIRED:
 							target  = command.getTarget();
@@ -190,9 +217,9 @@ public class CommandQueueService extends Service {
 						case OPTIONAL:
 						case ALL:
 							if (command.getTarget() == null) {
-								target = command.getSource();
+								target = source;
 							} else if (command.getTarget() instanceof CreatureObject) {
-								target = command.getSource().isAttackable((CreatureObject) command.getTarget()) ? command.getSource() : command.getTarget();
+								target = source.isAttackable((CreatureObject) command.getTarget()) ? source : command.getTarget();
 							} else {
 								target = null;
 							}
@@ -202,10 +229,10 @@ public class CommandQueueService extends Service {
 							break;
 					}
 					if (target instanceof CreatureObject && ((CreatureObject) target).getHealth() == ((CreatureObject) target).getMaxHealth())
-						return ErrorCode.CANCELLED;
+						return new CheckCommandResult(ErrorCode.CANCELLED, 0);
 				}
 			}
-			return ErrorCode.SUCCESS;
+			return new CheckCommandResult(ErrorCode.SUCCESS, 0);
 		}
 		
 	}

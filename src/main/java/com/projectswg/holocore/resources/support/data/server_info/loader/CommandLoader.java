@@ -6,8 +6,10 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbR
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.commands.DefaultPriority;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +56,7 @@ public class CommandLoader extends DataLoader {
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/commands.msdb"))) {
 			while (set.next()) {
-				Command command = Command.builder()
+				Command.CommandBuilder commandBuilder = Command.builder()
 						.withName(set.getText("commandName").toLowerCase(Locale.US))
 						.withCppCallback(set.getText("cppHook"))
 						.withScriptCallback(set.getText("scriptHook"))
@@ -66,8 +68,17 @@ public class CommandLoader extends DataLoader {
 						.withCooldownGroup2(set.getText("cooldownGroup2"))
 						.withCooldownTime(set.getReal("cooldownTime"))
 						.withCooldownTime2(set.getReal("cooldownTime2"))
-						.withTargetType(TargetType.getTargetType(set.getText("targetType")))
-						.withAddToCombatQueue(set.getBoolean("addToCombatQueue"))
+						.withTargetType(TargetType.getTargetType(set.getText("targetType")));
+				
+				@NotNull Locomotion[] locomotions = Locomotion.values();
+				
+				for (Locomotion locomotion : locomotions) {
+					if (!set.getBoolean(locomotion.getCommandSdbColumnName())) {
+						commandBuilder.withDisallowedLocomotion(locomotion);
+					}
+				}
+				
+				Command command = commandBuilder
 						.build();
 				if (commandNameMap.containsKey(command.getName())) {
 					Log.w("Duplicate command name [ignoring]: %s", command.getName());
