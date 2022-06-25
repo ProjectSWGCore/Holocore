@@ -40,6 +40,7 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -171,7 +172,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		source.updateLastCombatTime();
 		
 		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
-		double weaponDamageBoost = 1.0;	// Damage increase of the weapon
+		double weaponDamageMod = calculateWeaponDamageMod(source, weapon);
 		double addedDamageBoost = 1.0;	// Damage increase of the command
 		
 		for (CreatureObject target : targets) {
@@ -189,10 +190,10 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
 			
 			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
-			int weaponDamage = calculateWeaponDamage(source, weapon, command);
+			int weaponDamage = calculateBaseWeaponDamage(weapon, command);
 			int addedDamage = command.getAddedDamage();
 			
-			weaponDamage *= weaponDamageBoost;
+			weaponDamage += weaponDamageMod;
 			addedDamage *= addedDamageBoost;
 			
 			int rawDamage = weaponDamage + addedDamage;
@@ -229,6 +230,16 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		}
 		
 		source.sendObservers(action);
+	}
+	
+	private static int calculateWeaponDamageMod(CreatureObject source, WeaponObject weapon) {
+		WeaponType type = weapon.getType();
+		
+		if (type == WeaponType.UNARMED) {
+			return source.getSkillModValue("unarmed_damage");
+		} else {
+			return 0;
+		}
 	}
 	
 	private static void armorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
