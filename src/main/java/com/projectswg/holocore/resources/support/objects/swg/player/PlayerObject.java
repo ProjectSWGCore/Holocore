@@ -651,6 +651,7 @@ public class PlayerObject extends IntangibleObject {
 		data.putString("biography", biography);
 		data.putString("account", account);
 		data.putMap("mail", mails);
+		badges.saveMongo(data.getDocument("badges"));
 	}
 
 	@Override
@@ -665,6 +666,7 @@ public class PlayerObject extends IntangibleObject {
 		biography = data.getString("biography", biography);
 		account = data.getString("account", "");
 		mails.putAll(data.getMap("mail", Integer.class, Mail.class));
+		badges.readMongo(data.getDocument("badges"));
 	}
 	
 	@Override
