@@ -22,6 +22,8 @@ import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import kotlin.jvm.functions.Function1;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -60,8 +62,7 @@ public class CommandQueueService extends Service {
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
-		if (p instanceof CommandQueueEnqueue) {
-			CommandQueueEnqueue request = (CommandQueueEnqueue) p;
+		if (p instanceof CommandQueueEnqueue request) {
 			Command command = DataLoader.Companion.commands().getCommand(request.getCommandCrc());
 			if (command == null) {
 				if (request.getCommandCrc() != 0)
@@ -168,15 +169,53 @@ public class CommandQueueService extends Service {
 		}
 		
 		private void startCooldownGroup(CreatureObject creature, Command command, String group, double cooldownTime, int counter) {
+			float moddedWeaponAttackSpeedWithCap = getModdedWeaponAttackSpeedWithCap(creature);
+			
 			CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 			commandTimer.setCooldownGroupCrc(CRC.getCrc(group));
-			commandTimer.setCooldownMax((float) cooldownTime);
+			commandTimer.setGlobalCooldownTime(moddedWeaponAttackSpeedWithCap);
+			commandTimer.setCooldownGroupTime((float) cooldownTime);
 			commandTimer.setCommandNameCrc(command.getCrc());
 			commandTimer.setSequenceId(counter);
 			commandTimer.addFlag(CommandTimer.CommandTimerFlag.COOLDOWN);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.COOLDOWN2);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.EXECUTE);
 			creature.sendSelf(commandTimer);
 			
-			executor.execute((long) (cooldownTime * 1000), () -> activeCooldownGroups.remove(group));
+			executor.execute((long) ((cooldownTime + moddedWeaponAttackSpeedWithCap) * 1000), () -> activeCooldownGroups.remove(group));
+		}
+		
+		private float getModdedWeaponAttackSpeedWithCap(CreatureObject creature) {
+			WeaponObject equippedWeapon = creature.getEquippedWeapon();
+			WeaponType equippedWeaponType = equippedWeapon.getType();
+			int speedMod = getSpeedModBasedOnEquippedWeaponType(creature, equippedWeaponType);
+			
+			float weaponAttackSpeed = equippedWeapon.getAttackSpeed();
+			float moddedWeaponAttackSpeed = weaponAttackSpeed * (1 - speedMod / 100f);	// Reduce weapon attack speed by %
+			float attackSpeedCap = 1f;
+			return Math.max(attackSpeedCap, moddedWeaponAttackSpeed);
+		}
+		
+		private int getSpeedModBasedOnEquippedWeaponType(CreatureObject creature, WeaponType equippedWeaponType) {
+			int speedMod = creature.getSkillModValue(equippedWeaponType.getSpeedSkillMod());
+			
+			if (equippedWeaponType.isMelee()) {
+				speedMod += getGeneralMeleeSpeed(creature);
+			}
+			
+			if (equippedWeaponType.isRanged()) {
+				speedMod += getGeneralRangedSpeed(creature);
+			}
+			
+			return speedMod;
+		}
+		
+		private int getGeneralRangedSpeed(CreatureObject creature) {
+			return creature.getSkillModValue("ranged_speed");
+		}
+		
+		private int getGeneralMeleeSpeed(CreatureObject creature) {
+			return creature.getSkillModValue("melee_speed");
 		}
 		
 		private CheckCommandResult checkCommand(EnqueuedCommand command) {
@@ -203,8 +242,7 @@ public class CommandQueueService extends Service {
 				}
 			}
 			
-			if (rootCommand instanceof CombatCommand) {
-				CombatCommand combatCommand = (CombatCommand) rootCommand;
+			if (rootCommand instanceof CombatCommand combatCommand) {
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
 					switch (combatCommand.getTargetType()) {
