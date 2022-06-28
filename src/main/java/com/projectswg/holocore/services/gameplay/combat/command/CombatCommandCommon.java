@@ -142,7 +142,7 @@ public class CombatCommandCommon {
 		return CombatStatus.SUCCESS;
 	}
 	
-	static int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
+	static int calculateBaseWeaponDamage(WeaponObject weapon, CombatCommand command) {
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = ThreadLocalRandom.current().nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
