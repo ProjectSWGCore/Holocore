@@ -170,18 +170,24 @@ public class CharacterCreation {
 		for (String language : languages) {
 			new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, language, creatureObj, true).broadcast();
 		}
-
-		WeaponObject defWeapon = (WeaponObject) createInventoryObject(creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
-		defWeapon.setMaxRange(5);
-		defWeapon.setType(WeaponType.UNARMED);
-		defWeapon.setAttackSpeed(1);
-		defWeapon.setMinDamage(50);
-		defWeapon.setMaxDamage(100);
-		creatureObj.setEquippedWeapon(defWeapon);
+		
+		WeaponObject defaultWeapon = createDefaultWeapon(creatureObj);
+		creatureObj.setEquippedWeapon(defaultWeapon);
 		createDefaultObject(creatureObj, "object/tangible/inventory/shared_character_inventory.iff");
 		createInventoryObject(creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
+	}
+	
+	@NotNull
+	private WeaponObject createDefaultWeapon(CreatureObject creatureObj) {
+		WeaponObject defWeapon = (WeaponObject) createInventoryObject(creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
+		defWeapon.setMaxRange(5);
+		defWeapon.setType(WeaponType.UNARMED);
+		defWeapon.setAttackSpeed(4);
+		defWeapon.setMinDamage(10);
+		defWeapon.setMaxDamage(20);
+		return defWeapon;
 	}
 	
 	private void setPlayerObjectValues(PlayerObject playerObj, Race race) {
