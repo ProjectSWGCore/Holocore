@@ -27,32 +27,40 @@
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
 public enum WeaponType {
-	RIFLE						(0),
-	CARBINE						(1),
-	PISTOL						(2),
-	HEAVY						(3),
-	ONE_HANDED_MELEE			(4),
-	TWO_HANDED_MELEE			(5),
-	UNARMED						(6),
-	POLEARM_MELEE				(7),
-	THROWN						(8),
-	ONE_HANDED_SABER			(9),
-	TWO_HANDED_SABER			(10),
-	POLEARM_SABER				(11),
-	HEAVY_WEAPON				(12),
-	DIRECTIONAL_TARGET_WEAPON	(13),
-	LIGHT_RIFLE					(14);
+	RIFLE						(0, "rifle_speed"),
+	CARBINE						(1, "carbine_speed"),
+	PISTOL						(2, "pistol_speed"),
+	HEAVY						(3, "heavyweapon_speed"),
+	ONE_HANDED_MELEE			(4, "onehandmelee_speed"),
+	TWO_HANDED_MELEE			(5, "twohandmelee_speed"),
+	UNARMED						(6, "unarmed_speed"),
+	POLEARM_MELEE				(7, "polearm_speed"),
+	THROWN						(8, "thrown_speed"),
+	ONE_HANDED_SABER			(9, "onehandlightsaber_speed"),
+	TWO_HANDED_SABER			(10, "twohandlightsaber_speed"),
+	POLEARM_SABER				(11, "polearmlightsaber_speed"),
+	
+	// TODO these are NGE weapon types we should remove later
+	HEAVY_WEAPON				(12, "unavailable"),
+	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable"),
+	LIGHT_RIFLE					(14, "unavailable");
 	
 	private static final WeaponType [] VALUES = values();
 	
-	private int num;
+	private final int num;
+	private final String speedSkillMod;
 	
-	WeaponType(int num) {
+	WeaponType(int num, String speedSkillMod) {
 		this.num = num;
+		this.speedSkillMod = speedSkillMod;
 	}
 	
 	public int getNum() {
 		return num;
+	}
+	
+	public String getSpeedSkillMod() {
+		return speedSkillMod;
 	}
 	
 	public static WeaponType getWeaponType(int num) {
