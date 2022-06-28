@@ -25,7 +25,6 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import kotlin.jvm.functions.Function1;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -227,11 +226,9 @@ public class CommandQueueService extends Service {
 			@NotNull Locomotion[] locomotions = Locomotion.values();
 			
 			for (Locomotion locomotion : locomotions) {
-				Function1<CreatureObject, Boolean> check = locomotion.getCheck();
+				boolean active = locomotion.isActive(source);
 				
-				Boolean result = check.invoke(source);
-				
-				if (Boolean.TRUE.equals(result)) {
+				if (active) {
 					sourceLocomotions.add(locomotion);
 				}
 			}
