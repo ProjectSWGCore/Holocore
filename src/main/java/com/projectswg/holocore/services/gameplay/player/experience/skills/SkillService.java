@@ -9,6 +9,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.gameplay.player.experience.*;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -109,7 +110,14 @@ public class SkillService extends Service {
 			return;
 		}
 		
-		sti.getRequester().setTitle(title);
+		PlayerObject requester = sti.getRequester();
+		
+		CreatureObject creatureObject = Objects.requireNonNull(requester.getOwner()).getCreatureObject();
+		Set<String> skills = creatureObject.getSkills();
+		
+		if (skills.contains(title)) {
+			requester.setTitle(title);
+		}
 	}
 
 	@IntentHandler
