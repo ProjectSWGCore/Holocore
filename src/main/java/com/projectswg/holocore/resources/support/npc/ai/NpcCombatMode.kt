@@ -71,6 +71,10 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	override fun act() {
+		if (ai.posture == Posture.DEAD) {
+			return	// Don't waste CPU cycles if the NPC is dead
+		}
+		
 		if (isRooted) {
 			queueNextLoop(500)
 			return
