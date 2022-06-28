@@ -1,9 +1,11 @@
 package com.projectswg.holocore.resources.support.npc.ai
 
+import com.projectswg.common.data.RGB
+import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Point3D
-import com.projectswg.common.data.objects.GameObjectType
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
@@ -54,10 +56,15 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	override fun onModeStart() {
+		showExclamationMarkAboveNpc()
 		StopNpcMovementIntent.broadcast(ai)
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
 	}
 	
+	private fun showExclamationMarkAboveNpc() {
+		ai.sendObservers(ShowFlyText(ai.objectId, StringId("npc_reaction/flytext", "threaten"), ShowFlyText.Scale.SMALL, RGB(204, 0, 0)))
+	}
+
 	override fun onModeEnd() {
 		val obj = ai
 		obj.lookAtTargetId = 0
