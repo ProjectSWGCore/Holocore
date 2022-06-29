@@ -158,7 +158,7 @@ public class RareLootService extends Service {
 			}
 			
 			// Show items in loot box window
-			new StaticItemService.LootBoxHandler(actor).success(createdObjects);
+			new StaticItemService.SystemMessageHandler(actor).success(createdObjects);
 		}
 		
 		@Override

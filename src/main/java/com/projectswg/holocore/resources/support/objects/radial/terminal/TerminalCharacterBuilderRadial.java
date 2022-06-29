@@ -82,7 +82,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.SystemMessageHandler(creature), items).broadcast();
 	}
 
 	private static void handleCredits(Player player) {
@@ -524,7 +524,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 	private static void handleGoggle(Player player) {
 		spawnItems(player,
-				"item_clothing_goggles_anniversary_01_01",
 				"item_clothing_goggles_goggles_01_01",
 				"item_clothing_goggles_goggles_01_02",
 				"item_clothing_goggles_goggles_01_03",
