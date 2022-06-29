@@ -178,6 +178,7 @@ object StaticItemCreator {
 		weapon.elementalType = info.elementalType
 		weapon.minDamage = info.minDamage
 		weapon.maxDamage = info.maxDamage
+		weapon.accuracy = info.accuracyBonus
 
 		applyItemValue(info.value, obj);
 	}

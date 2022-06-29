@@ -189,6 +189,7 @@ public class WeaponObject extends TangibleObject {
 		data.putFloat("attackSpeed", attackSpeed);
 		data.putFloat("maxRange", maxRange);
 		data.putString("weaponType", type.name());
+		data.putInteger("accuracy", accuracy);
 	}
 	
 	@Override
@@ -203,6 +204,7 @@ public class WeaponObject extends TangibleObject {
 		attackSpeed = data.getFloat("attackSpeed", attackSpeed);
 		maxRange = data.getFloat("maxRange", maxRange);
 		type = WeaponType.valueOf(data.getString("weaponType", type.name()));
+		accuracy = data.getInteger("accuracy", 0);
 	}
 	
 	@Override
