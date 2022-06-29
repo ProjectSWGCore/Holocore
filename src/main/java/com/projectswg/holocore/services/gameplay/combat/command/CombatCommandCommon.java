@@ -68,8 +68,8 @@ public class CombatCommandCommon {
 		return combatAction;
 	}
 	
-	static CombatSpam createCombatSpam(CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
-		CombatSpam combatSpam = new CombatSpam(source.getObjectId());
+	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
+		CombatSpam combatSpam = new CombatSpam(receiver.getObjectId());
 		combatSpam.setInfo(info);
 		combatSpam.setAttacker(source.getObjectId());
 		combatSpam.setWeapon(weapon.getObjectId());

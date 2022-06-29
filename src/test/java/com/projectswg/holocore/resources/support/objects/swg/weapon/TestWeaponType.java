@@ -45,7 +45,7 @@ public class TestWeaponType {
 		boolean expectMelee = input.isExpectMelee();
 		WeaponType type = input.getType();
 		
-		assertEquals("Type should be melee", expectMelee, type.isMelee());
+		assertEquals(expectMelee, type.isMelee());
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class TestWeaponType {
 		boolean expectLightsaber = input.isExpectLightSaber();
 		WeaponType type = input.getType();
 		
-		assertEquals("Type should be lightsaber", expectLightsaber, type.isLightsaber());
+		assertEquals(expectLightsaber, type.isLightsaber());
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class TestWeaponType {
 		boolean expectRanged = input.isExpectRanged();
 		WeaponType type = input.getType();
 		
-		assertEquals("Type should be ranged", expectRanged, type.isRanged());
+		assertEquals(expectRanged, type.isRanged());
 	}
 	
 	private static class Input {

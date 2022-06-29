@@ -196,25 +196,15 @@ public class CommandQueueService extends Service {
 		}
 		
 		private int getSpeedModBasedOnEquippedWeaponType(CreatureObject creature, WeaponType equippedWeaponType) {
-			int speedMod = creature.getSkillModValue(equippedWeaponType.getSpeedSkillMod());
+			int speedMod = 0;
 			
-			if (equippedWeaponType.isMelee()) {
-				speedMod += getGeneralMeleeSpeed(creature);
-			}
+			Collection<String> speedSkillMods = equippedWeaponType.getSpeedSkillMods();
 			
-			if (equippedWeaponType.isRanged()) {
-				speedMod += getGeneralRangedSpeed(creature);
+			for (String speedSkillMod : speedSkillMods) {
+				speedMod += creature.getSkillModValue(speedSkillMod);
 			}
 			
 			return speedMod;
-		}
-		
-		private int getGeneralRangedSpeed(CreatureObject creature) {
-			return creature.getSkillModValue("ranged_speed");
-		}
-		
-		private int getGeneralMeleeSpeed(CreatureObject creature) {
-			return creature.getSkillModValue("melee_speed");
 		}
 		
 		private CheckCommandResult checkCommand(EnqueuedCommand command) {
