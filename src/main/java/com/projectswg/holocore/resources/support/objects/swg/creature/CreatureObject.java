@@ -81,7 +81,6 @@ public class CreatureObject extends TangibleObject {
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
-	private long	lastTransform			= 0;
 	private long	lastCombat				= 0;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
@@ -373,10 +372,6 @@ public class CreatureObject extends TangibleObject {
 		return creo6.getDifficulty();
 	}
 	
-	public double getTimeSinceLastTransform() {
-		return (System.nanoTime()-lastTransform)/1E6;
-	}
-	
 	public double getTimeSinceLastCombat() {
 		return (System.nanoTime() - lastCombat) / 1E6;
 	}
@@ -639,10 +634,6 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		creo6.setDifficulty(difficulty);
 		sendDelta(6, 21, difficulty.getDifficulty());
-	}
-	
-	public void updateLastTransformTime() {
-		lastTransform = System.nanoTime();
 	}
 	
 	public void updateLastCombatTime() {

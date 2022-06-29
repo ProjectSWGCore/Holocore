@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.control.IntentChain;
@@ -78,6 +79,13 @@ public class NPCCreator {
 		object.setCreatureId(spawner.getNpcId());
 		object.setWalkSpeed(spawner.getMovementSpeed());
 		object.setHeight(getScale(spawner));
+		
+		int def = detailNpcStat.getDef();
+		int toHit = detailNpcStat.getToHit();
+		for (WeaponClass weaponClass : WeaponClass.values()) {
+			object.adjustSkillmod(weaponClass.getDefenseSkillMod(), def, 0);
+			object.adjustSkillmod(weaponClass.getAccuracySkillMod(), toHit, 0);
+		}
 		
 		int hue = spawner.getHue();
 		if (hue != 0) {

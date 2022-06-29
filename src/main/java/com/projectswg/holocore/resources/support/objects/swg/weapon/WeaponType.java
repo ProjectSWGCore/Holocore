@@ -26,41 +26,83 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+
 public enum WeaponType {
-	RIFLE						(0, "rifle_speed"),
-	CARBINE						(1, "carbine_speed"),
-	PISTOL						(2, "pistol_speed"),
-	HEAVY						(3, "heavyweapon_speed"),
-	ONE_HANDED_MELEE			(4, "onehandmelee_speed"),
-	TWO_HANDED_MELEE			(5, "twohandmelee_speed"),
-	UNARMED						(6, "unarmed_speed"),
-	POLEARM_MELEE				(7, "polearm_speed"),
-	THROWN						(8, "thrown_speed"),
-	ONE_HANDED_SABER			(9, "onehandlightsaber_speed"),
-	TWO_HANDED_SABER			(10, "twohandlightsaber_speed"),
-	POLEARM_SABER				(11, "polearmlightsaber_speed"),
+	RIFLE						(0, "rifle_speed", WeaponClass.RANGED, "rifle_defense", "rifle_accuracy"),
+	CARBINE						(1, "carbine_speed", WeaponClass.RANGED, "carbine_defense", "carbine_accuracy"),
+	PISTOL						(2, "pistol_speed", WeaponClass.RANGED, "pistol_defense", "pistol_accuracy"),
+	HEAVY						(3, "heavyweapon_speed", WeaponClass.RANGED, "heavyweapon_defense", "heavyweapon_accuracy"),
+	ONE_HANDED_MELEE			(4, "onehandmelee_speed", WeaponClass.MELEE, "onehandmelee_defense", "onehandmelee_accuracy"),
+	TWO_HANDED_MELEE			(5, "twohandmelee_speed", WeaponClass.MELEE, "twohandmelee_defense", "twohandmelee_accuracy"),
+	UNARMED						(6, "unarmed_speed", WeaponClass.MELEE, "unarmed_defense", "unarmed_accuracy"),
+	POLEARM_MELEE				(7, "polearm_speed", WeaponClass.MELEE, "polearm_defense", "polearm_accuracy"),
+	THROWN						(8, "thrown_speed", WeaponClass.RANGED, null, "thrown_accuracy"),
+	ONE_HANDED_SABER			(9, "onehandlightsaber_speed", WeaponClass.MELEE, null, "onehandlightsaber_accuracy"),
+	TWO_HANDED_SABER			(10, "twohandlightsaber_speed", WeaponClass.MELEE, null, "twohandlightsaber_accuracy"),
+	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy"),
 	
 	// TODO these are NGE weapon types we should remove later
-	HEAVY_WEAPON				(12, "unavailable"),
-	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable"),
-	LIGHT_RIFLE					(14, "unavailable");
+	HEAVY_WEAPON				(12, "unavailable", WeaponClass.RANGED, null, null),
+	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable", WeaponClass.RANGED, null, null),
+	LIGHT_RIFLE					(14, "unavailable", WeaponClass.RANGED, null, null);
 	
 	private static final WeaponType [] VALUES = values();
 	
 	private final int num;
 	private final String speedSkillMod;
+	private final WeaponClass weaponClass;
+	private final String defenseSkillMod;
+	private final String accuracySkillMod;
 	
-	WeaponType(int num, String speedSkillMod) {
+	WeaponType(int num, String speedSkillMod, WeaponClass weaponClass, String defenseSkillMod, String accuracySkillMod) {
 		this.num = num;
 		this.speedSkillMod = speedSkillMod;
+		this.weaponClass = weaponClass;
+		this.defenseSkillMod = defenseSkillMod;
+		this.accuracySkillMod = accuracySkillMod;
 	}
 	
 	public int getNum() {
 		return num;
 	}
 	
-	public String getSpeedSkillMod() {
-		return speedSkillMod;
+	/**
+	 *
+	 * @return e.g. Unarmed Speed and Melee Speed
+	 */
+	public Collection<String> getSpeedSkillMods() {
+		return Arrays.asList(speedSkillMod, weaponClass.getSpeedSkillMod());
+	}
+	
+	/**
+	 *
+	 * @return e.g. Unarmed Defense and Melee Defense
+	 */
+	public Collection<String> getDefenseSkillMods() {
+		Collection<String> defenseSkillMods = new HashSet<>();
+		
+		if (defenseSkillMod != null) {
+			defenseSkillMods.add(defenseSkillMod);
+		}
+		
+		defenseSkillMods.add(weaponClass.getDefenseSkillMod());
+		
+		return defenseSkillMods;
+	}
+	
+	public Collection<String> getAccuracySkillMods() {
+		Collection<String> accuracySkillMods = new HashSet<>();
+		
+		if (accuracySkillMod != null) {
+			accuracySkillMods.add(accuracySkillMod);
+		}
+		
+		accuracySkillMods.add(weaponClass.getAccuracySkillMod());
+		
+		return accuracySkillMods;
 	}
 	
 	public static WeaponType getWeaponType(int num) {
@@ -75,13 +117,7 @@ public enum WeaponType {
 	 * @return {@code true} if this weapon type is in the melee category and {@code false} otherwise.
 	 */
 	public boolean isMelee() {
-		switch (this) {
-			case ONE_HANDED_MELEE:
-			case TWO_HANDED_MELEE:
-			case UNARMED:
-			case POLEARM_MELEE: return true;
-			default: return isLightsaber();	// If all else fails, resort to checking if this is a lightsaber
-		}
+		return weaponClass == WeaponClass.MELEE;
 	}
 	
 	/**
@@ -89,12 +125,10 @@ public enum WeaponType {
 	 * @return {@code true} if this weapon type is in the lightsaber category and {@code false} otherwise.
 	 */
 	public boolean isLightsaber() {
-		switch (this) {
-			case ONE_HANDED_SABER:
-			case TWO_HANDED_SABER:
-			case POLEARM_SABER: return true;
-			default: return false;
-		}
+		return switch (this) {
+			case ONE_HANDED_SABER, TWO_HANDED_SABER, POLEARM_SABER -> true;
+			default -> false;
+		};
 	}
 	
 	/**
@@ -102,15 +136,6 @@ public enum WeaponType {
 	 * @return {@code true} if this weapon type is in the ranged category and {@code false} otherwise.
 	 */
 	public boolean isRanged() {
-		switch (this) {
-			case RIFLE:
-			case CARBINE:
-			case PISTOL:
-			case HEAVY:
-			case HEAVY_WEAPON:
-			case DIRECTIONAL_TARGET_WEAPON:
-			case LIGHT_RIFLE: return true;
-			default: return false;
-		}
+		return weaponClass == WeaponClass.RANGED;
 	}
 }
