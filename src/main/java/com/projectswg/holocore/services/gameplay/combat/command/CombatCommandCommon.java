@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.CombatSpamType;
 import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.oob.StringId;
@@ -68,7 +69,7 @@ public class CombatCommandCommon {
 		return combatAction;
 	}
 	
-	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
+	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command, CombatSpamType combatSpamType) {
 		CombatSpam combatSpam = new CombatSpam(receiver.getObjectId());
 		combatSpam.setInfo(info);
 		combatSpam.setAttacker(source.getObjectId());
@@ -76,6 +77,7 @@ public class CombatCommandCommon {
 		combatSpam.setDefender(target.getObjectId());
 		combatSpam.setDataType((byte) 0);
 		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
+		combatSpam.setSpamType(combatSpamType);
 
 		return combatSpam;
 	}

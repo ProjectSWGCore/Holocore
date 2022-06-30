@@ -37,67 +37,45 @@ public class Buff implements Encodable, Persistable, MongoPersistable {
 	
 	private int crc;
 	private int endTime;
-	private float value;
-	private int duration;
-	private long bufferId;
-	private int stackCount;
 	
 	public Buff() {
-		this(0, 0, 0, 0, 0, 0);
+		this(0, 0);
 	}
 	
-	public Buff(int crc, int endTime, float value, int duration, long buffer, int stackCount) {
+	public Buff(int crc, int endTime) {
 		this.crc = crc;
 		this.endTime = endTime;
-		this.value = value;
-		this.duration = duration;
-		this.bufferId = buffer;
-		this.stackCount = stackCount;
 	}
 	
 	@Override
 	public void decode(NetBuffer data) {
+		data.getInt();
 		endTime = data.getInt();
-		value = data.getFloat();
-		duration = data.getInt();
-		bufferId = data.getLong();
-		stackCount = data.getInt();
 	}
 	
 	@Override
 	public byte[] encode() {
-		NetBuffer data = NetBuffer.allocate(24);
+		NetBuffer data = NetBuffer.allocate(getLength());
+		data.addInt(0);
 		data.addInt(endTime);
-		data.addFloat(value);
-		data.addInt(duration);
-		data.addLong(bufferId);
-		data.addInt(stackCount);
 		return data.array();
 	}
 	
 	@Override
 	public int getLength() {
-		return 24;
+		return 8;
 	}
 	
 	@Override
 	public void saveMongo(MongoData data) {
 		data.putInteger("crc", crc);
 		data.putInteger("endTime", endTime);
-		data.putFloat("value", value);
-		data.putInteger("duration", duration);
-		data.putLong("bufferId", bufferId);
-		data.putInteger("stackCount", stackCount);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
 		crc = data.getInteger("crc", 0);
 		endTime = data.getInteger("endTime", 0);
-		value = data.getFloat("value", 0);
-		duration = data.getInteger("duration", 0);
-		bufferId = data.getLong("bufferId", 0);
-		stackCount = data.getInteger("stackCount", 0);
 	}
 	
 	@Override
@@ -105,29 +83,15 @@ public class Buff implements Encodable, Persistable, MongoPersistable {
 		stream.addByte(1);
 		stream.addInt(crc);
 		stream.addInt(endTime);
-		stream.addFloat(value);
-		stream.addInt(duration);
-		stream.addLong(bufferId);
-		stream.addInt(stackCount);
 	}
 	
 	public void readOld(NetBufferStream stream) {
-		endTime = stream.getInt();
-		value = stream.getFloat();
-		duration = stream.getInt();
-		bufferId = stream.getLong();
-		stackCount = stream.getInt();
+		
 	}
 	
 	@Override
 	public void read(NetBufferStream stream) {
-		stream.getByte(); // version
-		crc = stream.getInt();
-		endTime = stream.getInt();
-		value = stream.getFloat();
-		duration = stream.getInt();
-		bufferId = stream.getLong();
-		stackCount = stream.getInt();
+		
 	}
 	
 	public int getCrc() {
@@ -146,49 +110,9 @@ public class Buff implements Encodable, Persistable, MongoPersistable {
 		this.endTime = endTime;
 	}
 	
-	public float getValue() {
-		return value;
-	}
-	
-	public void setValue(float value) {
-		this.value = value;
-	}
-	
-	public int getDuration() {
-		return duration;
-	}
-	
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
-	
-	public long getBuffer() {
-		return bufferId;
-	}
-	
-	public void setBuffer(long buffer) {
-		this.bufferId = buffer;
-	}
-	
-	public int getStackCount() {
-		return stackCount;
-	}
-	
-	public void setStackCount(int stackCount) {
-		this.stackCount = stackCount;
-	}
-	
-	public void adjustStackCount(int adjust) {
-		this.stackCount += adjust;
-	}
-	
-	public int getStartTime() {
-		return endTime - duration;
-	}
-	
 	@Override
 	public String toString() {
-		return String.format("Buff[End=%d Value=%f Duration=%d Buffer=%d StackCount=%d]", endTime, value, duration, bufferId, stackCount);
+		return String.format("Buff[End=%d]", endTime);
 	}
 	
 	@Override

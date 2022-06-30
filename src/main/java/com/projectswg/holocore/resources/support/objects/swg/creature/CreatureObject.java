@@ -819,10 +819,6 @@ public class CreatureObject extends TangibleObject {
 		return creo6.getBuffEntries(predicate);
 	}
 	
-	public void setBuffDuration(CRC buffCrc, int playTime, int duration) {
-		creo6.setBuffDuration(buffCrc, playTime, duration, this);
-	}
-	
 	public boolean isVisible() {
 		return creo6.isVisible();
 	}
@@ -1032,7 +1028,7 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
+		super.createBaseline6(target, bb); // 2 variables - TANO6 (0) + BASE6 (2)
 		creo6.createBaseline6(target, bb);
 	}
 	
