@@ -39,7 +39,6 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -603,12 +602,12 @@ public class PlayerObject extends IntangibleObject {
 		play9.addGroupWaypoint(waypoint);
 	}
 
-	public Set<Long> getPlayerHateList() {
-		return play9.getPlayerHateList();
+	public int getJediState() {
+		return play9.getJediState();
 	}
 
-	public void addHatedPlayer(long hatedPlayerId) {
-		play9.addHatedPlayer(hatedPlayerId);
+	public void setJediState(int jediState) {
+		play9.setJediState(jediState);
 	}
 
 	@Override

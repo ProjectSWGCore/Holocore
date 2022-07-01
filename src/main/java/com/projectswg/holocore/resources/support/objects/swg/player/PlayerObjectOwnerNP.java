@@ -33,10 +33,8 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.persistable.Persistable;
-import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
-import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 
@@ -68,7 +66,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 	/** PLAY9-14 */ private			int					meds						= 0;
 	/** PLAY9-15 */ private			int					maxMeds						= 100;
 	/** PLAY9-16 */ private final	SWGMap<Long, WaypointObject> groupWaypoints		= new SWGMap<>(9, 16);
-	/** PLAY9-17 */ private final	SWGSet<Long>		playerHateList				= new SWGSet<>(9, 17);
+	/** PLAY9-17 */ private int jediState = 0;
 
 	public PlayerObjectOwnerNP(PlayerObject obj) {
 		this.obj = obj;
@@ -275,13 +273,13 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		groupWaypoints.sendDeltaMessage(obj);
 	}
 	
-	public Set<Long> getPlayerHateList() {
-		return Collections.unmodifiableSet(playerHateList);
+	public int getJediState() {
+		return jediState;
 	}
 	
-	public void addHatedPlayer(long hatedPlayerId) {
-		if (playerHateList.add(hatedPlayerId))
-			playerHateList.sendDeltaMessage(obj);
+	public void setJediState(int jediState) {
+		this.jediState = jediState;
+		sendDelta(17, jediState);
 	}
 	
 	public void createBaseline9(BaselineBuilder bb) {
@@ -302,8 +300,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		bb.addInt(meds); // 14
 		bb.addInt(maxMeds); // 15
 		bb.addObject(groupWaypoints); // 16
-		bb.addObject(playerHateList); // 17
-		bb.addInt(0); // Jedi state bitmask -- 18
+		bb.addInt(jediState); // 17
 		
 		bb.incrementOperandCount(19);
 	}
@@ -313,7 +310,6 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		friendsList.clear();
 		ignoreList.clear();
 		groupWaypoints.clear();
-		playerHateList.clear();
 
 		craftingLevel = buffer.getInt();
 		craftingStage = buffer.getInt();
@@ -332,7 +328,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		meds = buffer.getInt();
 		maxMeds = buffer.getInt();
 		SWGMap.getSwgMap(buffer, 9, 16, Long.class, WaypointPackage.class).values().forEach(p -> groupWaypoints.put(p.getObjectId(), new WaypointObject(p)));
-		playerHateList.addAll(SWGSet.getSwgSet(buffer, 9, 17, Long.class));
+		jediState = buffer.getInt();
 		buffer.getByte(); // unknown
 		buffer.getInt(); // unknown
 	}
@@ -356,7 +352,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		data.putInteger("meds", meds);
 		data.putInteger("maxMeds", maxMeds);
 		data.putArray("groupWaypoints", groupWaypoints.values().stream().map(WaypointObject::getOOB).collect(Collectors.toList()));
-		data.putArray("playerHateList", playerHateList);
+		data.putInteger("jediState", jediState);
 	}
 	
 	@Override
@@ -365,7 +361,6 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		friendsList.clear();
 		ignoreList.clear();
 		groupWaypoints.clear();
-		playerHateList.clear();
 
 		craftingLevel = data.getInteger("craftingLevel", craftingLevel);
 		craftingStage = data.getInteger("craftingStage", craftingStage);
@@ -384,7 +379,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		meds = data.getInteger("meds", meds);
 		maxMeds = data.getInteger("maxMeds", maxMeds);
 		data.getArray("groupWaypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> groupWaypoints.put(obj.getObjectId(), obj));
-		playerHateList.addAll(data.getArray("playerHateList", Long.class));
+		jediState = data.getInteger("jediState", 0);
 	}
 	
 	@Override
