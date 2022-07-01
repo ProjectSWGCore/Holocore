@@ -59,6 +59,7 @@ public class Command {
 	private final double cooldownTime2;
 	private final boolean autoAddToToolbar;
 	private final Set<Locomotion> disallowedLocomotions;
+	private final Set<State> disallowedStates;
 	
 	protected Command(CommandBuilder builder) {
 		this.name = builder.name;
@@ -86,6 +87,7 @@ public class Command {
 		this.cooldownTime2 = builder.cooldownTime2;
 		this.autoAddToToolbar = builder.autoAddToToolbar;
 		this.disallowedLocomotions = builder.disallowedLocomotions;
+		this.disallowedStates = builder.disallowedStates;
 	}
 	
 	public String getName() {
@@ -184,6 +186,10 @@ public class Command {
 		return disallowedLocomotions;
 	}
 	
+	public Set<State> getDisallowedStates() {
+		return disallowedStates;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ':' + crc;
@@ -227,6 +233,7 @@ public class Command {
 		private double cooldownTime2;
 		private boolean autoAddToToolbar;
 		private Set<Locomotion> disallowedLocomotions = new HashSet<>();
+		private Set<State> disallowedStates = new HashSet<>();
 		
 		protected CommandBuilder() {}
 		
@@ -253,6 +260,7 @@ public class Command {
 			this.cooldownTime2 = command.cooldownTime2;
 			this.autoAddToToolbar = command.autoAddToToolbar;
 			this.disallowedLocomotions = command.disallowedLocomotions;
+			this.disallowedStates = command.disallowedStates;
 		}
 		
 		public CommandBuilder withName(String name) {
@@ -362,6 +370,11 @@ public class Command {
 		
 		public CommandBuilder withDisallowedLocomotion(Locomotion locomotion) {
 			this.disallowedLocomotions.add(locomotion);
+			return this;
+		}
+		
+		public CommandBuilder withDisallowedState(State state) {
+			this.disallowedStates.add(state);
 			return this;
 		}
 		

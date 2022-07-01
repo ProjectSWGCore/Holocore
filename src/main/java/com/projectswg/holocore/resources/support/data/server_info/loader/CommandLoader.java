@@ -77,6 +77,14 @@ public class CommandLoader extends DataLoader {
 					}
 				}
 				
+				State[] states = State.values();
+				
+				for (State state : states) {
+					if (!set.getBoolean(state.getCommandSdbColumnName())) {
+						commandBuilder.withDisallowedState(state);
+					}
+				}
+				
 				Command command = commandBuilder
 						.build();
 				if (commandNameMap.containsKey(command.getName())) {
