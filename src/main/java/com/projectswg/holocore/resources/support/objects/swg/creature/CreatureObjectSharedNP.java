@@ -31,8 +31,6 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.object_controller.BuffAddUpdate;
-import com.projectswg.common.network.packets.swg.zone.object_controller.BuffRemoveUpdate;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
@@ -45,8 +43,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -76,7 +72,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	private AttributesMutable	maxAttributes;
 	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
 
-	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
+	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 19);
 	
 	public CreatureObjectSharedNP(CreatureObject obj) {
 		this.obj = obj;
@@ -315,7 +311,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 			CRC crc = new CRC(buff.getCrc());
 			assert !buffs.containsKey(crc) : "Cannot add a buff twice!";
 			buffs.put(crc, buff);
-			target.sendObservers(new BuffAddUpdate(target.getObjectId(), crc.getCrc(), buff.getDuration()));
 			buffs.sendDeltaMessage(target);
 		}
 	}
@@ -324,7 +319,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		synchronized (buffs) {
 			Buff removedBuff = buffs.remove(buffCrc);
 			if (removedBuff != null) {
-				target.sendObservers(new BuffRemoveUpdate(target.getObjectId(), buffCrc.getCrc()));
 				buffs.sendDeltaMessage(target);
 			}
 
@@ -335,23 +329,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
 		synchronized (buffs) {
 			return new ArrayList<>(buffs.values()).stream().filter(predicate);
-		}
-	}
-	
-	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
-		safeModifyBuff(buffCrc, target, buff -> {
-			buff.setEndTime(playTime + duration);
-			buff.setDuration(duration);
-		});
-	}
-	
-	private void safeModifyBuff(CRC buffCrc, SWGObject target, Consumer<Buff> operation) {
-		synchronized (buffs) {
-			Buff buff = buffs.get(buffCrc);
-			Objects.requireNonNull(buff, "Buff cannot be null");
-			operation.accept(buff);
-			buffs.update(buffCrc);
-			buffs.sendDeltaMessage(target);
 		}
 	}
 	
@@ -368,28 +345,28 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addShort(level); // 8
-		bb.addInt(levelHealthGranted); // 9
-		bb.addAscii(animation); // 10
-		bb.addAscii(moodAnimation); // 11
-		bb.addLong(equippedWeapon); // 12
-		bb.addLong(groupId); // 13
-		bb.addObject(inviterData); // 14
-		bb.addInt(guildId); // 15
-		bb.addLong(lookAtTargetId); // 16
-		bb.addByte(moodId); // 18
-		bb.addInt(performanceCounter); // 19
-		bb.addInt(performanceId); // 20
-		bb.addObject(attributes); // 21
-		bb.addObject(maxAttributes); // 22
-		bb.addObject(equipmentList); // 23
-		bb.addAscii(costume); // 24
-		bb.addBoolean(visible); // 25
-		bb.addObject(buffs); // 26
-		bb.addBoolean(performing); // 27
-		bb.addByte(difficulty.getDifficulty()); // 28
+		bb.addShort(level); // 2
+		bb.addInt(levelHealthGranted); // 3
+		bb.addAscii(animation); // 4
+		bb.addAscii(moodAnimation); // 5
+		bb.addLong(equippedWeapon); // 6
+		bb.addLong(groupId); // 7
+		bb.addObject(inviterData); // 8
+		bb.addInt(guildId); // 9
+		bb.addLong(lookAtTargetId); // 10
+		bb.addByte(moodId); // 11
+		bb.addInt(performanceCounter); // 12
+		bb.addInt(performanceId); // 13
+		bb.addObject(attributes); // 14
+		bb.addObject(maxAttributes); // 15
+		bb.addObject(equipmentList); // 16
+		bb.addAscii(costume); // 17
+		bb.addBoolean(visible); // 18
+		bb.addObject(buffs); // 19
+		bb.addBoolean(performing); // 20
+		bb.addByte(difficulty.getDifficulty()); // 21
 		
-		bb.incrementOperandCount(21);
+		bb.incrementOperandCount(19);
 	}
 	
 	public void parseBaseline6(NetBuffer buffer) {
@@ -407,10 +384,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		performanceId = buffer.getInt();
 		attributes.decode(buffer);
 		maxAttributes.decode(buffer);
-		equipmentList = SWGList.getSwgList(buffer, 6, 23, Equipment.class);
+		equipmentList = SWGList.getSwgList(buffer, 6, 16, Equipment.class);
 		costume = buffer.getAscii();
 		visible = buffer.getBoolean();
-		buffs = SWGMap.getSwgMap(buffer, 6, 26, CRC.class, Buff.class);
+		buffs = SWGMap.getSwgMap(buffer, 6, 19, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
 		buffer.getBoolean();

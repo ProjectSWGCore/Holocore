@@ -136,6 +136,26 @@ public class CommandQueueService extends Service {
 			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "executed command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
+			
+			double warmupTime = rootCommand.getWarmupTime();
+			
+			if (warmupTime > 0) {
+				CommandTimer warmupTimer = new CommandTimer(command.getSource().getObjectId());
+				warmupTimer.addFlag(CommandTimer.CommandTimerFlag.WARMUP);
+				warmupTimer.setCommandNameCrc(rootCommand.getCrc());
+				warmupTimer.setCooldownGroupCrc(0);
+				warmupTimer.setWarmupTime((float) warmupTime);
+				
+				command.getSource().sendSelf(warmupTimer);
+				
+				executor.execute((long) (warmupTime * 1000), () -> executeCommandNow(command));
+			} else {
+				executeCommandNow(command);
+			}
+		}
+		
+		private void executeCommandNow(EnqueuedCommand command) {
+			Command rootCommand = command.getCommand();
 			CheckCommandResult checkCommandResult = checkCommand(command);
 			ErrorCode error = checkCommandResult.getErrorCode();
 			if (error == ErrorCode.SUCCESS) {

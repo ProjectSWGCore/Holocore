@@ -65,6 +65,8 @@ public class CommandLoader extends DataLoader {
 						.withCooldownGroup2(set.getText("cooldownGroup2"))
 						.withCooldownTime(set.getReal("cooldownTime"))
 						.withCooldownTime2(set.getReal("cooldownTime2"))
+						.withWarmupTime(set.getReal("warmupTime"))
+						.withExecuteTime(set.getReal("executeTime"))
 						.withTargetType(TargetType.getTargetType(set.getText("targetType")));
 				
 				@NotNull Locomotion[] locomotions = Locomotion.values();

@@ -215,6 +215,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		
 		spam.setAttacker(healer.getObjectId());
 		spam.setDefender(healed.getObjectId());
+		spam.setSpamType(CombatSpamType.MEDICAL);
 
 		return spam;
 	}

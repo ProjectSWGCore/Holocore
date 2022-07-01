@@ -166,7 +166,7 @@ public class BuffService extends Service {
 	}
 	
 	private boolean isBuffExpired(CreatureObject creature, Buff buff) {
-		return buff.getDuration() >= 0 && calculatePlayTime(creature) >= buff.getEndTime();
+		return calculatePlayTime(creature) >= buff.getEndTime();
 	}
 	
 	private boolean isBuffInfinite(BuffInfo buffData) {
@@ -175,12 +175,6 @@ public class BuffService extends Service {
 	
 	private boolean isCreatureBuffed(CreatureObject creature) {
 		return creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))).count() > 0;
-	}
-	
-	private void decayDuration(CreatureObject creature, Buff buff) {
-		int newDuration = (int) (buff.getDuration() * 0.10);	// Duration decays with 10%
-		
-		creature.setBuffDuration(new CRC(buff.getCrc()), buff.getStartTime(), newDuration);
 	}
 	
 	private void removeAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
@@ -221,7 +215,7 @@ public class BuffService extends Service {
 		Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
 		Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
 
-		checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
+		checkBuffEffects(buffData, creature, false);
 		checkCallback(buffData, creature);
 		
 		if (!isCreatureBuffed(creature)) {
@@ -230,8 +224,6 @@ public class BuffService extends Service {
 	}
 	
 	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData, int applyTime) {
-		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
-		int stackCount = 1;
 		int buffDuration = (int) buffData.getDuration();
 		
 		{
@@ -239,9 +231,9 @@ public class BuffService extends Service {
 			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();
 			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
 		}
-		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, (float) buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
+		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration);
 
-		checkBuffEffects(buffData, receiver, 1);
+		checkBuffEffects(buffData, receiver, true);
 		receiver.addBuff(buff);
 
 		sendParticleEffect(buffData.getParticle(), receiver, "");
@@ -267,21 +259,21 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, int valueFactor) {
+	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, boolean add) {
 		/*
 		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
 		 *      removal
 		 */
 		for (int i = 0; i < 5; i++)
-			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
+			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), add);
 	}
 	
-	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
+	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, boolean add) {
 		if (effectName != null &&  !effectName.isEmpty()) {
 			if (DataLoader.Companion.commands().isCommand(effectName) && effectValue == 1.0) {
 				// This effect is an ability
-				if (valueFactor > 0) {
+				if (add) {
 					// Buff is being added. Grant the ability.
 					creature.addCommand(effectName);
 				} else {
@@ -290,7 +282,11 @@ public class BuffService extends Service {
 				}
 			} else {
 				// This effect is a skill mod
-				new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+				if (add) {
+					new SkillModIntent(effectName, 0, (int) effectValue, creature).broadcast();
+				} else {
+					new SkillModIntent(effectName, 0, (int) -effectValue, creature).broadcast();
+				}
 			}
 		}
 	}

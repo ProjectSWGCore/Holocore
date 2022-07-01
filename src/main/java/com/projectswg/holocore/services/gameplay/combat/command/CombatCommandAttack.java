@@ -191,7 +191,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 				source.sendSelf(missFlyText);
 				
 				for (CreatureObject observerCreature : target.getObserverCreatures()) {
-					observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command));
+					observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command, CombatSpamType.MISS));
 				}
 				
 				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
@@ -235,7 +235,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			info.setFinalDamage(finalDamage);
 			
 			for (CreatureObject observerCreature : target.getObserverCreatures()) {
-				observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command));
+				observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command, CombatSpamType.HIT));
 			}
 			
 			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
@@ -332,14 +332,17 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	}
 	
 	private static int calculateDefMod(CreatureObject target) {
-		int DefMod = 0;
+		int defMod = 0;
 		WeaponObject targetWeapon = target.getEquippedWeapon();
 		WeaponType targetWeaponType = targetWeapon.getType();
 		Collection<String> defenseSkillMods = targetWeaponType.getDefenseSkillMods();
 		for (String defenseSkillMod : defenseSkillMods) {
-			DefMod += target.getSkillModValue(defenseSkillMod);
+			defMod += target.getSkillModValue(defenseSkillMod);
 		}
-		return DefMod;
+		
+		defMod += target.getSkillModValue("private_defense_bonus");
+		
+		return defMod;
 	}
 	
 	private static int calculateWeaponDamageMod(CreatureObject source, WeaponObject weapon) {

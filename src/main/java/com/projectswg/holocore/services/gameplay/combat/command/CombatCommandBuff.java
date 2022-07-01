@@ -32,7 +32,6 @@ import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
-import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -71,8 +70,6 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		if (!buffNameTarget.isEmpty()) {
 			combatAction.addDefender(new Defender(target.getObjectId(), effectiveTarget.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		}
-		
-		source.sendObservers(combatAction, createCombatSpamPerform(source, effectiveTarget, combatCommand));
 	}
 	
 	private boolean isApplyToSelf(CreatureObject source, CreatureObject target) {
@@ -112,15 +109,6 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		}
 		
 		return false;
-	}
-	
-	static CombatSpam createCombatSpamPerform(CreatureObject source, CreatureObject target, CombatCommand command) {
-		CombatSpam spam = new CombatSpam(source.getObjectId());
-		
-		spam.setAttacker(source.getObjectId());
-		spam.setDefender(target.getObjectId());
-
-		return spam;
 	}
 	
 }
