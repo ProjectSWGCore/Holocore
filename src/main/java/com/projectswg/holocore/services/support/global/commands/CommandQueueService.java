@@ -19,6 +19,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
+import com.projectswg.holocore.resources.support.global.commands.State;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -226,6 +227,25 @@ public class CommandQueueService extends Service {
 			for (Locomotion disallowedLocomotion : disallowedLocomotions) {
 				if (sourceLocomotions.contains(disallowedLocomotion)) {
 					return new CheckCommandResult(ErrorCode.LOCOMOTION, disallowedLocomotion.getLocomotionTableId());
+				}
+			}
+			
+			Set<State> disallowedStates = rootCommand.getDisallowedStates();
+			Set<State> sourceStates = new HashSet<>();
+			
+			@NotNull State[] states = State.values();
+			
+			for (State state : states) {
+				boolean active = state.isActive(source);
+				
+				if (active) {
+					sourceStates.add(state);
+				}
+			}
+			
+			for (State disallowedState : disallowedStates) {
+				if (sourceStates.contains(disallowedState)) {
+					return new CheckCommandResult(ErrorCode.STATE_PROHIBITED, disallowedState.getStateTableId());
 				}
 			}
 			
