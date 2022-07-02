@@ -6,7 +6,6 @@ import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.object.*;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeedRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeviceRadial;
@@ -104,8 +103,6 @@ public enum RadialHandler {
 	}
 	
 	private void initializeMiscRadials() {
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
 		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
 		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
 		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());

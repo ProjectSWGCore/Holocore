@@ -319,7 +319,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	companion object {
 		
 		private fun parseSkillMods(modsString: String): Map<String, Int> {
-			val mods = HashMap<String, Int>()    // skillmods/statmods
+			val mods = HashMap<String, Int>()    // skillmods
 			
 			if (modsString.isNotEmpty()) {
 				val modStrings = modsString.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // The mods strings are comma-separated
@@ -327,10 +327,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 				for (modString in modStrings) {
 					val splitValues = modString.split("=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // Name and value are separated by "="
 					val modName = splitValues[0]
-					
-					// Common statmods end with "_modified"
-					// If not, it's a skillmod
-					val category = if (modName.endsWith("_modified")) "cat_stat_mod_bonus" else "cat_skill_mod_bonus"
+					val category = "cat_skill_mod_bonus"
 					
 					mods["$category.@stat_n:$modName"] = Integer.parseInt(splitValues[1])
 				}
