@@ -222,6 +222,8 @@ public class PlayerMountService extends Service {
 		vehicleControlDevice.moveToContainer(creator.getDatapad());
 		ObjectCreatedIntent.broadcast(vehicleControlDevice);
 		
+		SystemMessageIntent.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
+		
 		callMount(creator, vehicleControlDevice);	// Once generated, the vehicle is called
 	}
 	
@@ -255,6 +257,7 @@ public class PlayerMountService extends Service {
 		if (mounts.size() > getMountLimit()) {
 			mounts.remove(mountRecord);
 			StandardLog.onPlayerTrace(this, player, "hit mount limit of %d", getMountLimit());
+			SystemMessageIntent.broadcastPersonal(player.getOwner(), "@pet/pet_menu:at_max");
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
