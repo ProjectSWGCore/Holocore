@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.objects.radial.object;
 
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiColorPicker;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -57,16 +58,9 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		switch (selection) {
-			case SERVER_MENU2: {
-				showColorPicker(player, target, "/private/index_color_1");
-				break;
-			}
-			case SERVER_MENU3: {
-				showColorPicker(player, target, "/private/index_color_2");
-				break;
-			}
-			default:
-				break;
+			case SERVER_MENU1 -> SystemMessageIntent.broadcastPersonal(player, "@error_message:goggle_submenu");
+			case SERVER_MENU2 -> showColorPicker(player, target, "/private/index_color_1");
+			case SERVER_MENU3 -> showColorPicker(player, target, "/private/index_color_2");
 		}
 	}
 	
@@ -74,9 +68,7 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 		SuiColorPicker colorPicker = new SuiColorPicker(target.getObjectId(), customizationVariable);
 		
 		colorPicker.addOkButtonCallback("ok", ((event, parameters) -> {
-			if (target instanceof TangibleObject) {
-				TangibleObject tangibleTarget = (TangibleObject) target;
-				
+			if (target instanceof TangibleObject tangibleTarget) {
 				int selectedIndex = SuiColorPicker.getSelectedIndex(parameters);
 				tangibleTarget.putCustomization(customizationVariable, selectedIndex);
 			}
