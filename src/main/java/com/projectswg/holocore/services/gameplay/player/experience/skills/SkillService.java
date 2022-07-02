@@ -1,10 +1,12 @@
 package com.projectswg.holocore.services.gameplay.player.experience.skills;
 
+import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BadgeLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
@@ -51,6 +53,12 @@ public class SkillService extends Service {
 		
 		if (levelChanged) {
 			changeLevel(target, oldCombatLevel, newCombatLevel);
+		}
+		
+		BadgeLoader.BadgeInfo badgeFromKey = DataLoader.Companion.badges().getBadgeFromKey(skillName);
+		
+		if (badgeFromKey != null) {
+			GrantBadgeIntent.broadcast(target, skillName);
 		}
 	}
 	

@@ -57,7 +57,7 @@ public class ExplorationBadgeService extends Service {
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti){
 		String badgeKey = checkExplorationRegions(pti.getPlayer());
 		if (badgeKey != null){
-			new GrantBadgeIntent(pti.getPlayer(), badgeKey).broadcast();
+			GrantBadgeIntent.broadcast(pti.getPlayer(), badgeKey);
 		}
 	}
 	
