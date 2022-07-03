@@ -12,28 +12,16 @@ data class LightsaberPowerCrystalQuality(val id: String, val attributeName: Stri
 		val flawless = LightsaberPowerCrystalQuality("flawless", "@jedi_spam:crystal_quality_6")
 
 		fun getById(id: String?): LightsaberPowerCrystalQuality? {
-			if (id == poor.id) {
-				return poor
+			return when (id) {
+				poor.id -> poor
+				fair.id -> fair
+				good.id -> good
+				quality.id -> quality
+				select.id -> select
+				premium.id -> premium
+				flawless.id -> flawless
+				else -> null
 			}
-			if (id == fair.id) {
-				return fair
-			}
-			if (id == good.id) {
-				return good
-			}
-			if (id == quality.id) {
-				return quality
-			}
-			if (id == select.id) {
-				return select
-			}
-			if (id == premium.id) {
-				return premium
-			}
-			if (id == flawless.id) {
-				return flawless
-			}
-			return null
 		}
 	}
 }
