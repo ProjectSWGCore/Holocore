@@ -175,7 +175,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		CombatAction action = createCombatAction(source, sourceWeapon, TrailLocation.WEAPON, command);
 		double weaponDamageMod = calculateWeaponDamageMod(source, sourceWeapon);
-		double addedDamageBoost = 1.0;	// Damage increase of the command
 		
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
@@ -208,7 +207,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			int addedDamage = command.getAddedDamage();
 			
 			weaponDamage += weaponDamageMod;
-			addedDamage *= addedDamageBoost;
 			
 			int rawDamage = weaponDamage + addedDamage;
 			

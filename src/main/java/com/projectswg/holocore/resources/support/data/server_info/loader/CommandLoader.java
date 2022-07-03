@@ -158,6 +158,7 @@ public class CommandLoader extends DataLoader {
 						.withSpecialLine(set.getText("specialLine"))
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))
+						.withMindCost(set.getReal("mindCost"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
 						.withBuffNameSelf(set.getText("buffNameSelf"))
 						.withDamageType(DamageType.valueOf(set.getText("damageType")))
