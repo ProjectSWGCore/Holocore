@@ -57,7 +57,7 @@ public class WeaponObject extends TangibleObject {
 	
 	private float woundChance;
 	private String procEffect;
-	private int specialAttackCost;
+	private int specialAttackCost = 100;
 	private String requiredSkill;
 	
 	public WeaponObject(long objectId) {
