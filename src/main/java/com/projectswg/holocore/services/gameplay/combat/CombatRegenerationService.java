@@ -2,6 +2,7 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -73,6 +74,10 @@ public class CombatRegenerationService extends Service {
 		if (!creature.isInCombat())
 			modification *= 2;
 		
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
+		
 		creature.modifyAction(modification);
 	}
 	
@@ -84,6 +89,10 @@ public class CombatRegenerationService extends Service {
 		
 		if (!creature.isInCombat())
 			modification *= 2;
+		
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
 		
 		creature.modifyMind(modification);
 	}
@@ -100,6 +109,10 @@ public class CombatRegenerationService extends Service {
 		}
 		
 		int modification = creature.getMaxHealth() / 40;
+		
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
 		
 		creature.modifyHealth(modification);
 	}
