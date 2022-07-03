@@ -35,7 +35,9 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
+import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -183,9 +185,8 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			EnterCombatIntent.broadcast(target, source);
 			
 			double toHit = calculateToHit(source, sourceWeapon, target);
-			int diceRoll = randomNumberBetween0And100();
 			
-			if (diceRoll > toHit) {
+			if (randomNumberBetween0And100() > toHit) {
 				info.setSuccess(false);
 				
 				ShowFlyText missFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "miss"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255));
@@ -198,6 +199,16 @@ enum CombatCommandAttack implements CombatCommandHitType {
 				
 				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 				continue;	// This target negated the attack completely - move on to the next target
+			}
+			
+			double knockdownChance = command.getKnockdownChance();
+			if (knockdownChance > 0) {
+				if (randomNumberBetween0And100() < knockdownChance) {
+					KnockdownIntent.broadcast(target);
+				} else {
+					String yourAttackFailedToKnockDownYourOpponent = "@cbt_spam:knockdown_fail";
+					SystemMessageIntent.broadcastPersonal(source.getOwner(), yourAttackFailedToKnockDownYourOpponent);
+				}
 			}
 			
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
@@ -216,10 +227,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			// The armor of the target will mitigate some of the damage
 			armorMitigate(info, damageType, target, command);
-			
-			if (info.isGlancing()) {
-				handleGlancingBlow(info, target);
-			}
 			
 			// End rolls
 			int targetHealth = target.getHealth();
@@ -368,20 +375,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		info.setBlockedDamage(armorAbsorbed);	// Describes how many points of damage the armor absorbed
 		
 		info.setFinalDamage(currentDamage);
-	}
-	
-	private static void handleGlancingBlow(AttackInfo info, SWGObject target) {
-		int finalDamage = info.getFinalDamage();
-		
-		// Glancing blows cause only 40% damage to be applied
-		finalDamage *= 0.4;
-		
-		info.setFinalDamage(finalDamage);
-		
-		// Show Glancing flytext above the object that rolled a glancing blow
-		ShowFlyText glancingFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "glancing_blow"), ShowFlyText.Scale.MEDIUM, new RGB(0, 160, 0));
-		
-		target.sendSelf(glancingFlyText);
 	}
 	
 	private static int getArmor(DamageType damageType, CreatureObject creature) {
