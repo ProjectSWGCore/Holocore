@@ -40,11 +40,14 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -358,7 +361,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	private static void armorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
 		// Armor mitigation
 		int armor = getArmor(damageType, target);
-		float armorReduction = getArmorReduction(target, damageType, command);
+		float armorReduction = getArmorReduction(armor, command);
 		int currentDamage = info.getFinalDamage();
 		int armorAbsorbed = (int) (currentDamage * armorReduction);
 		currentDamage -= armorAbsorbed;
@@ -384,15 +387,46 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	}
 	
 	private static int getArmor(DamageType damageType, CreatureObject creature) {
-		switch (damageType) {
-			case KINETIC:				return creature.getSkillModValue("kinetic");
-			case ENERGY:				return creature.getSkillModValue("energy");
-			case ELEMENTAL_HEAT:		return creature.getSkillModValue("heat");
-			case ELEMENTAL_COLD:		return creature.getSkillModValue("cold");
-			case ELEMENTAL_ACID:		return creature.getSkillModValue("acid");
-			case ELEMENTAL_ELECTRICAL:	return creature.getSkillModValue("electricity");
-			default:					return 0;
+		int armProtection = 7;
+		Map<String, Integer> protectionMap = Map.of(
+				"chest2", 35,
+				"pants1", 20,
+				"hat", 14,
+				"bracer_upper_l", armProtection,
+				"bracer_upper_r", armProtection,
+				"bicep_l", armProtection,
+				"bicep_r", armProtection,
+				"utility_belt", 3
+		);
+		
+		double armor = 0;
+		
+		for (Map.Entry<String, Integer> entry : protectionMap.entrySet()) {
+			String slot = entry.getKey();
+			TangibleObject slottedObject = (TangibleObject) creature.getSlottedObject(slot);
+			
+			if (slottedObject != null) {
+				Protection protection = slottedObject.getProtection();
+				
+				if (protection != null) {
+					int protectionFromArmorPiece = switch (damageType) {
+						case KINETIC -> protection.getKinetic();
+						case ENERGY -> protection.getEnergy();
+						case ELEMENTAL_HEAT -> protection.getHeat();
+						case ELEMENTAL_COLD -> protection.getCold();
+						case ELEMENTAL_ACID -> protection.getAcid();
+						case ELEMENTAL_ELECTRICAL -> protection.getElectricity();
+						default -> 0;
+					};
+					
+					Integer value = entry.getValue();
+					
+					armor += protectionFromArmorPiece * (value / 100d);
+				}
+			}
 		}
+		
+		return (int) armor;
 	}
 	
 	/**
@@ -405,16 +439,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return command.getPercentAddFromWeapon() > 0 ? weapon.getDamageType() : command.getElementalType();
 	}
 	
-	/**
-	 *
-	 * @param target to read armor values from
-	 * @param damageType to get an armor value for
-	 * @param command that has been executed by an enemy of {@code target}
-	 * @return a number between 0.0 and 1.0
-	 */
-	private static float getArmorReduction(CreatureObject target, DamageType damageType, CombatCommand command) {
-		int baseArmor = getArmor(damageType, target);
-
+	private static float getArmorReduction(int baseArmor, CombatCommand command) {
 		double commandBypassArmor = command.getBypassArmor();
 		
 		if(commandBypassArmor > 0) {

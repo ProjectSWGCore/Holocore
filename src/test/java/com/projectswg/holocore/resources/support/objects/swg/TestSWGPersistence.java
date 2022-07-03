@@ -127,7 +127,6 @@ public class TestSWGPersistence {
 						)
 				),
 				"permissions", map("type", obj.getContainerPermissions().getType().name()),
-				"attributes", List.of(),
 				"serverAttributes", List.of()
 		);
 		test(obj, expected);
@@ -140,7 +139,7 @@ public class TestSWGPersistence {
 				"appearance", Map.ofEntries(obj.getCustomization().entrySet().stream().map(e -> Map.entry(e.getKey(), e.getValue())).toArray(Entry[]::new)),
 				"maxHitPoints", obj.getMaxHitPoints(),
 				"components", obj.getComponents(),
-				"condition", obj.getCondition(),
+				"conditionDamage", obj.getConditionDamage(),
 				"pvpFlags", obj.getPvpFlags().stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b),
 				"pvpStatus", obj.getPvpStatus().name(),
 				"faction", obj.getFaction() == null ? "neutral" : obj.getFaction().getName(),

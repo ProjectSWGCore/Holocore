@@ -14,7 +14,6 @@ import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
-import com.projectswg.holocore.services.gameplay.combat.loot.RareLootService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -103,9 +102,6 @@ public enum RadialHandler {
 	}
 	
 	private void initializeMiscRadials() {
-		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
 		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
 		registerHandler("object/tangible/spawning/shared_spawn_egg.iff", new SpawnerRadial());
 	}

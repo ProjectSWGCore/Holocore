@@ -299,35 +299,10 @@ public class SampleLoopSession {
 		return resourceObject;
 	}
 	
-	private void assignStats(TangibleObject obj) {
+	private void assignStats(ResourceContainerObject obj) {
 		GalacticResourceStats stats = resource.getStats();
+		obj.setStats(stats);
 		obj.setServerAttribute(ServerAttribute.GALACTIC_RESOURCE_ID, resource.getId());
-		if (stats.getColdResistance() != 0)
-			transferStat(obj, "res_cold_resist", stats.getColdResistance());
-		if (stats.getConductivity() != 0)
-			transferStat(obj, "res_conductivity", stats.getConductivity());
-		if (stats.getDecayResistance() != 0)
-			transferStat(obj, "res_decay_resist", stats.getDecayResistance());
-		if (stats.getEntangleResistance() != 0)
-			transferStat(obj, "entangle_resistance", stats.getEntangleResistance());
-		if (stats.getFlavor() != 0)
-			transferStat(obj, "res_flavor", stats.getFlavor());
-		if (stats.getHeatResistance() != 0)
-			transferStat(obj, "res_heat_resist", stats.getHeatResistance());
-		if (stats.getMalleability() != 0)
-			transferStat(obj, "res_malleability", stats.getMalleability());
-		if (stats.getOverallQuality() != 0)
-			transferStat(obj, "res_quality", stats.getOverallQuality());
-		if (stats.getPotentialEnergy() != 0)
-			transferStat(obj, "res_potential_energy", stats.getPotentialEnergy());
-		if (stats.getShockResistance() != 0)
-			transferStat(obj, "res_shock_resistance", stats.getShockResistance());
-		if (stats.getUnitToughness() != 0)
-			transferStat(obj, "res_toughness", stats.getUnitToughness());
-	}
-	
-	private void transferStat(TangibleObject obj, String name, int attr) {
-		obj.addAttribute("@obj_attr_n:" + name, String.valueOf(attr));
 	}
 	
 	private void sendSampleEffects() {

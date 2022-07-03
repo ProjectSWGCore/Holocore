@@ -3,6 +3,7 @@ package com.projectswg.holocore.resources.support.objects.radial.object;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
@@ -30,12 +31,11 @@ public class TestTuneCrystalRadial {
 		
 		crystal = new GenericTangibleObject(3);
 		crystal.setGameObjectType(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL);
-		crystal.addAttribute("@obj_attr_n:crystal_owner", "\\#D1F56F UNTUNED \\#FFFFFF ");
 	}
 	
 	@Test
 	public void testNotCrystal() {
-		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		crystal.setGameObjectType(GameObjectType.GOT_CLOTHING_JACKET);	// Let's change the object type to something different
 		
@@ -46,7 +46,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testCrystalUntuned() {
-		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		radial.getOptions(options, player, crystal);
 		
@@ -58,11 +58,11 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void testCrystalAlreadyTuned() {
-		player.getCreatureObject().addSkill("force_title_jedi_rank_01");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		
 		// Let's tune the crystal
-		crystal.addAttribute("@obj_attr_n:crystal_owner", "Some Player");
+		crystal.setServerAttribute(ServerAttribute.LINK_OBJECT_ID, 12345678);
 		
 		radial.getOptions(options, player, crystal);
 		
