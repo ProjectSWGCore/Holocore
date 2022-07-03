@@ -159,6 +159,7 @@ public class CommandLoader extends DataLoader {
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))
 						.withMindCost(set.getReal("mindCost"))
+						.withKnockdownChance(set.getReal("knockdownChance"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
 						.withBuffNameSelf(set.getText("buffNameSelf"))
 						.withDamageType(DamageType.valueOf(set.getText("damageType")))
