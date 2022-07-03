@@ -6,28 +6,26 @@ volume	volume	volume	volume	volume	volume	volume	volume	volume
 hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points	hit_points
 armor_level	lifespan	dna_template	grant_GCW_faction	index_color_0	required_level	schematic_id	min_damage	required_faction
 armor_category	buff_name	dna_quality	grant_GCW_value	index_color_1	index_color_0	schematic_type	max_damage	required_level
-protection	hide_buff_identity		grant_vehicle	index_color_2	index_color_1	schematic_use	weapon_category	required_profession
-required_faction	cool_down_group		grant_mount	index_color_3	index_color_2	schematic_skill_needed	weapon_type	race_wookiee
-required_level	reuse_time		grant_greeter	value	index_color_3	required_level	damage_type	race_ithorian
-required_profession	healing_power		grant_holopet	isUnique	value	required_profession	elemental_type	race_rodian
-race_wookiee	client_effect		grant_familiar		isUnique	index_color_0	elemental_damage	race_trandoshan
-race_ithorian	client_animation		required_level		charges	index_color_1	attack_speed	race_rest
-race_rodian	required_level		required_profession			index_color_2	special_attack_cost	no_trade
-race_trandoshan	required_profession		no_trade			index_color_3	min_range_distance	bio_link
-race_rest	no_trade		skill_mods			value	max_range_distance	worn_item_buff
-no_trade	bio_link		index_color_0			isUnique	proc_effect	sockets
-bio_link	index_color_0		index_color_1				target_dps	skill_mods
-sockets	index_color_1		index_color_2				actual_dps	index_color_0
-skill_mods	index_color_2		index_color_3				required_faction	index_color_1
-index_color_0	index_color_3		isUnique				required_level	index_color_2
-index_color_1	isUnique		charges				required_profession	index_color_3
-index_color_2	charges						race_wookiee	value
-index_color_3	value						race_ithorian
-value							race_rodian
-							race_trandoshan
-							race_rest
-							no_trade
-							bio_link
-							sockets
-							skill_mods
-							value
+protection	hide_buff_identity		grant_vehicle	index_color_2	index_color_1	schematic_use	weapon_category	race_wookiee
+required_faction	cool_down_group		grant_mount	index_color_3	index_color_2	schematic_skill_needed	weapon_type	race_ithorian
+required_level	reuse_time		grant_greeter	value	index_color_3	required_level	damage_type	race_rodian
+race_wookiee	healing_power		grant_holopet	isUnique	value	index_color_0	elemental_type	race_trandoshan
+race_ithorian	client_effect		grant_familiar		isUnique	index_color_1	elemental_damage	race_rest
+race_rodian	client_animation		required_level		charges	index_color_2	attack_speed	no_trade
+race_trandoshan	required_level		no_trade			index_color_3	special_attack_cost	bio_link
+race_rest	no_trade		skill_mods			value	min_range_distance	sockets
+no_trade	bio_link		index_color_0			isUnique	max_range_distance	skill_mods
+bio_link	index_color_0		index_color_1				proc_effect	index_color_0
+sockets	index_color_1		index_color_2				actual_dps	index_color_1
+skill_mods	index_color_2		index_color_3				required_faction	index_color_2
+index_color_0	index_color_3		isUnique				required_level	index_color_3
+index_color_1	isUnique		charges				race_wookiee	value
+index_color_2	charges						race_ithorian	
+index_color_3	value						race_rodian	
+value							race_trandoshan	
+							race_rest	
+							no_trade	
+							bio_link	
+							sockets	
+							skill_mods	
+							value	

@@ -119,7 +119,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
-		val wornItemBuff: Int			= set.getInt("worn_item_buff").toInt()
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
@@ -154,7 +153,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val clientEffect: String		= set.getText("client_effect")
 		val clientAnimation: String		= set.getText("client_animation")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
 		val noTrade: Boolean			= set.getInt("no_trade") != 0L
 		val bioLink: Boolean			= set.getInt("bio_link") != 0L
 		val charges: Int				= set.getInt("charges").toInt()
@@ -241,7 +239,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")
-		val targetDps: Int = set.getInt("target_dps").toInt()
 		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
