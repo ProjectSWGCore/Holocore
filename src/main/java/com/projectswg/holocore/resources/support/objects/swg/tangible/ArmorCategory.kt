@@ -8,16 +8,12 @@ data class ArmorCategory(val id: String, val attributeName: String, val required
 		val reconnaissance = ArmorCategory("reconnaissance", "@obj_attr_n:armor_reconnaissance", "recon_move_mitigate_1");
 		
 		fun getById(id: String?): ArmorCategory? {
-			if (id == assault.id) {
-				return assault
+			return when (id) {
+				assault.id -> assault
+				battle.id -> battle
+				reconnaissance.id -> reconnaissance
+				else -> null
 			}
-			if (id == battle.id) {
-				return battle
-			}
-			if (id == reconnaissance.id) {
-				return reconnaissance
-			}
-			return null
 		}
 	}
 }
