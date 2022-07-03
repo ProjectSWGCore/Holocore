@@ -30,6 +30,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import org.junit.Assert;
@@ -126,7 +127,7 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		helper.grantTicket(imperialBase, coronet, creature);
 		Assert.assertEquals(imperialBase, helper.getNearestTravelPoint(creature));
 		Assert.assertEquals(1, creature.getSlottedObject("inventory").getContainedObjects().size());
-		List<SWGObject> tickets = helper.getTickets(creature);
+		List<TangibleObject> tickets = helper.getTickets(creature);
 		Assert.assertEquals(1, tickets.size());
 		
 	}

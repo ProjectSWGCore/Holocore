@@ -40,6 +40,7 @@ import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
@@ -63,7 +64,6 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
@@ -83,7 +83,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private final InstanceLocation 					location		= new InstanceLocation();
 	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
 	private final Map <String, SWGObject>			slots			= new ConcurrentHashMap<>();
-	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
 	private final ObjectAware						awareness		= new ObjectAware();
 	private final Set<CreatureObject>				observers		= ConcurrentHashMap.newKeySet();
@@ -115,6 +114,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
 	private boolean		persisted		= false;
+	private boolean 	noTrade			= false;
 	
 	public SWGObject() {
 		this(0, null);
@@ -422,23 +422,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return headingToTarget > headingToPortalRight;
 	}
 	
-	/**
-	 * Adds an attribute with the given value to this object. If the attribute exists, the old value is replaced with the new.
-	 * @param attribute attribute name
-	 * @param value new value for the attribute
-	 */
-	public void addAttribute(String attribute, String value) {
-		if (attribute == null || value == null) {
-			return;
-		}
-
-		attributes.put(attribute, value);
-	}
-	
-	public String removeAttribute(String attribute) {
-		return attributes.remove(attribute);
-	}
-
 	/**
 	 * Gets the object that occupies the specified slot
 	 * @param slotName
@@ -922,19 +905,25 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public List<List<String>> getArrangement() {
 		return Collections.unmodifiableList(arrangement);
 	}
-
-	public String getAttribute(String attribute) {
-		return attributes.get(attribute);
-	}
-
-	public boolean hasAttribute(String attribute) {
-		return attributes.containsKey(attribute);
+	
+	public boolean isNoTrade() {
+		return noTrade;
 	}
 	
-	public Map<String, String> getAttributes() {
-		return Collections.unmodifiableMap(attributes);
+	public void setNoTrade(boolean noTrade) {
+		this.noTrade = noTrade;
 	}
-
+	
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = new AttributeList();
+		
+		if (noTrade) {
+			attributeList.putNumber("no_trade", 1);
+		}
+		
+		return attributeList;
+	}
+	
 	public int getContainerType() {
 		return containerType;
 	}
@@ -1297,9 +1286,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		data.putString("template", template);
 		data.putDocument("location", location);
 		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
-		data.putMap("attributes", attributes);
 		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, Function.identity());
 		data.putBoolean("persisted", persisted);
+		data.putBoolean("noTrade", noTrade);
 	}
 	
 	@Override
@@ -1323,9 +1312,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		location.readMongo(data.getDocument("location"));
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));
-		attributes.putAll(data.getMap("attributes", String.class, String.class));
 		data.getMap("serverAttributes", String.class, Object.class).forEach((key, val) -> serverAttributes.put(ServerAttribute.getFromKey(key), val));
 		persisted = data.getBoolean("persisted", false);
+		noTrade = data.getBoolean("noTrade", false);
 	}
 	
 	@Override
@@ -1350,12 +1339,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stringId.save(stream);
 		detailStringId.save(stream);
 		stream.addFloat(complexity);
-		synchronized (attributes) {
-			stream.addMap(attributes, (e) -> {
-				stream.addAscii(e.getKey());
-				stream.addAscii(e.getValue());
-			});
-		}
 		stream.addMap(serverAttributes, e -> {
 			stream.addAscii(e.getKey().getKey());
 			stream.addAscii(e.getKey().store(e.getValue()));
@@ -1423,7 +1406,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stringId.read(stream);
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> {
 			ServerAttribute attr = ServerAttribute.getFromKey(stream.getAscii());
 			serverAttributes.put(attr, attr.retrieve(stream.getAscii()));
@@ -1448,7 +1430,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stringId.read(stream);
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1469,7 +1450,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stringId.read(stream);
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1490,7 +1470,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stringId.read(stream);
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1512,7 +1491,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1537,7 +1515,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1562,7 +1539,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1580,7 +1556,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1597,7 +1572,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		detailStringId.read(stream);
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1612,7 +1586,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		objectName = stream.getUnicode();
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	
@@ -1629,7 +1602,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		stream.getInt();
 		complexity = stream.getFloat();
 		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
 		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
 	}
 	

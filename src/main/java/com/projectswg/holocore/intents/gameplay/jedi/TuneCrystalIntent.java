@@ -26,16 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.jedi;
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
 public class TuneCrystalIntent extends Intent {
 	private final CreatureObject tuner;
-	private final SWGObject crystal;
+	private final TangibleObject crystal;
 	
-	private TuneCrystalIntent(@NotNull CreatureObject tuner, @NotNull SWGObject crystal) {
+	private TuneCrystalIntent(@NotNull CreatureObject tuner, @NotNull TangibleObject crystal) {
 		this.tuner = tuner;
 		this.crystal = crystal;
 	}
@@ -44,11 +44,11 @@ public class TuneCrystalIntent extends Intent {
 		return tuner;
 	}
 	
-	public @NotNull SWGObject getCrystal() {
+	public @NotNull TangibleObject getCrystal() {
 		return crystal;
 	}
 	
-	public static void broadcast(@NotNull CreatureObject tuner, @NotNull SWGObject crystal) {
+	public static void broadcast(@NotNull CreatureObject tuner, @NotNull TangibleObject crystal) {
 		new TuneCrystalIntent(tuner, crystal).broadcast();
 	}
 }

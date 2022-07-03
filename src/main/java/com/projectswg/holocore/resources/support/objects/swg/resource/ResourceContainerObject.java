@@ -30,14 +30,18 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceStats;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 public class ResourceContainerObject extends TangibleObject {
 	
 	private final ResourceContainerObjectShared		base3	= new ResourceContainerObjectShared(this);
 	private final ResourceContainerObjectSharedNP	base6	= new ResourceContainerObjectSharedNP(this);
+	private GalacticResourceStats stats;
 	
 	public ResourceContainerObject(long objectId) {
 		super(objectId, BaselineType.RCNO);
@@ -107,6 +111,14 @@ public class ResourceContainerObject extends TangibleObject {
 		base6.setResourceNameId(resourceNameId);
 	}
 	
+	public GalacticResourceStats getStats() {
+		return stats;
+	}
+	
+	public void setStats(GalacticResourceStats stats) {
+		this.stats = stats;
+	}
+	
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
@@ -134,6 +146,7 @@ public class ResourceContainerObject extends TangibleObject {
 		super.saveMongo(data);
 		base3.saveMongo(data.getDocument("base3"));
 		base6.saveMongo(data.getDocument("base6"));
+		stats.saveMongo(data.getDocument("stats"));
 	}
 	
 	@Override
@@ -141,6 +154,25 @@ public class ResourceContainerObject extends TangibleObject {
 		super.readMongo(data);
 		base3.readMongo(data.getDocument("base3"));
 		base6.readMongo(data.getDocument("base6"));
+		stats.readMongo(data.getDocument("stats"));
 	}
 	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = super.getAttributeList(viewer);
+		
+		attributeList.putNumber("@obj_attr_n:res_cold_resist", stats.getColdResistance());
+		attributeList.putNumber("@obj_attr_n:res_conductivity", stats.getConductivity());
+		attributeList.putNumber("@obj_attr_n:res_decay_resist", stats.getDecayResistance());
+		attributeList.putNumber("@obj_attr_n:entangle_resistance", stats.getEntangleResistance());
+		attributeList.putNumber("@obj_attr_n:res_flavor", stats.getFlavor());
+		attributeList.putNumber("@obj_attr_n:res_heat_resist", stats.getHeatResistance());
+		attributeList.putNumber("@obj_attr_n:res_malleability", stats.getMalleability());
+		attributeList.putNumber("@obj_attr_n:res_quality", stats.getOverallQuality());
+		attributeList.putNumber("@obj_attr_n:res_potential_energy", stats.getPotentialEnergy());
+		attributeList.putNumber("@obj_attr_n:res_shock_resistance", stats.getShockResistance());
+		attributeList.putNumber("@obj_attr_n:res_toughness", stats.getUnitToughness());
+		
+		return attributeList;
+	}
 }

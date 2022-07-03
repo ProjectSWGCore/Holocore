@@ -23,8 +23,6 @@ import com.projectswg.holocore.resources.support.global.commands.State;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -189,7 +187,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		private void startCooldownGroup(CreatureObject creature, Command command, String group, double cooldownTime, int counter) {
-			float moddedWeaponAttackSpeedWithCap = getModdedWeaponAttackSpeedWithCap(creature);
+			float moddedWeaponAttackSpeedWithCap = creature.getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(creature);
 			
 			CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 			commandTimer.setCooldownGroupCrc(CRC.getCrc(group));
@@ -203,29 +201,6 @@ public class CommandQueueService extends Service {
 			creature.sendSelf(commandTimer);
 			
 			executor.execute((long) ((cooldownTime + moddedWeaponAttackSpeedWithCap) * 1000), () -> activeCooldownGroups.remove(group));
-		}
-		
-		private float getModdedWeaponAttackSpeedWithCap(CreatureObject creature) {
-			WeaponObject equippedWeapon = creature.getEquippedWeapon();
-			WeaponType equippedWeaponType = equippedWeapon.getType();
-			int speedMod = getSpeedModBasedOnEquippedWeaponType(creature, equippedWeaponType);
-			
-			float weaponAttackSpeed = equippedWeapon.getAttackSpeed();
-			float moddedWeaponAttackSpeed = weaponAttackSpeed * (1 - speedMod / 100f);	// Reduce weapon attack speed by %
-			float attackSpeedCap = 1f;
-			return Math.max(attackSpeedCap, moddedWeaponAttackSpeed);
-		}
-		
-		private int getSpeedModBasedOnEquippedWeaponType(CreatureObject creature, WeaponType equippedWeaponType) {
-			int speedMod = 0;
-			
-			Collection<String> speedSkillMods = equippedWeaponType.getSpeedSkillMods();
-			
-			for (String speedSkillMod : speedSkillMods) {
-				speedMod += creature.getSkillModValue(speedSkillMod);
-			}
-			
-			return speedMod;
 		}
 		
 		private CheckCommandResult checkCommand(EnqueuedCommand command) {

@@ -38,6 +38,7 @@ import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
@@ -53,6 +54,7 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -480,11 +482,13 @@ public class CreatureObject extends TangibleObject {
 		}
 		return true;
 	}
-
+	
+	@Override
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
 		creo4.adjustSkillmod(skillModName, base, modifier);
 	}
 
+	@Override
 	public int getSkillModValue(@NotNull String skillModName) {
 		return creo4.getSkillModValue(skillModName);
 	}
@@ -1242,4 +1246,27 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = new AttributeList();
+		
+		if (ownerId > 0) {
+			applyOwnerAttribute(attributeList);
+		}
+		
+		return attributeList;
+	}
+	
+	private void applyOwnerAttribute(AttributeList attributeList) {
+		String displayedOwner;
+		SWGObject objectById = ObjectStorageService.ObjectLookup.getObjectById(ownerId);
+		
+		if (objectById != null ) {
+			displayedOwner = objectById.getObjectName();
+		} else {
+			displayedOwner = "Unknown";
+		}
+		
+		attributeList.putText("@obj_attr_n:owner", displayedOwner);
+	}
 }

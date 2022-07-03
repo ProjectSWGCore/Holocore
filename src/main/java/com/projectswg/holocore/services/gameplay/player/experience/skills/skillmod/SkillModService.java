@@ -29,6 +29,7 @@ package com.projectswg.holocore.services.gameplay.player.experience.skills.skill
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -47,19 +48,20 @@ public class SkillModService extends Service {
 		
 		CreatureObject creature = cti.getObject().getOwner().getCreatureObject();
 	
-		for (Map.Entry<String, String> attributes : cti.getObject().getAttributes().entrySet()){
-			if(attributes.getKey().startsWith("cat_skill_mod_bonus")){
-				String[] splitModName = attributes.getKey().split(":",2);
-				String modName = splitModName[1];
-				int modValue = Integer.parseInt(attributes.getValue());
-
+		if (cti.getObj() instanceof TangibleObject tangibleObject) {
+			Map<String, Integer> skillMods = tangibleObject.getSkillMods();
+			
+			for (Map.Entry<String, Integer> entry : skillMods.entrySet()) {
+				String modName = entry.getKey();
+				int modValue = entry.getValue();
+				
 				if(cti.getContainer().getObjectId() == creature.getObjectId()){
 					adjustSkillmod(creature, modName, 0, modValue);
 				}else if(cti.getOldContainer() != null){
 					if(cti.getOldContainer().getObjectId() == creature.getObjectId()){
 						adjustSkillmod(creature, modName, 0, -modValue);
 					}
-				}				
+				}
 			}
 		}
 	}

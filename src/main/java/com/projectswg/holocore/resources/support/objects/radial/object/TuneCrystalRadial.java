@@ -32,13 +32,12 @@ import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.Collection;
 
 public class TuneCrystalRadial extends SWGObjectRadial {
-	
-	private static final String CRYSTAL_OWNER = "@obj_attr_n:crystal_owner";
-	private static final String UNTUNED = "\\#D1F56F UNTUNED \\#FFFFFF ";
 	
 	@Override
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
@@ -50,21 +49,17 @@ public class TuneCrystalRadial extends SWGObjectRadial {
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		if (isOptionVisible(player, target)) {
-			TuneCrystalIntent.broadcast(player.getCreatureObject(), target);	// Shows the confirmation window
+			TuneCrystalIntent.broadcast(player.getCreatureObject(), (TangibleObject) target);	// Shows the confirmation window
 		}
 	}
 	
-	private final boolean isOptionVisible(Player player, SWGObject crystal) {
-		boolean jediInitiate = player.getCreatureObject().hasSkill("force_title_jedi_rank_01");
+	private boolean isOptionVisible(Player player, SWGObject crystal) {
+		boolean jediInitiate = player.getCreatureObject().hasSkill("jedi");
 
 		return !isTuned(crystal) && GameObjectType.GOT_COMPONENT_SABER_CRYSTAL == crystal.getGameObjectType() && jediInitiate;
 	}
 	
-	private final boolean isTuned(SWGObject crystal) {
-		if (!crystal.hasAttribute(CRYSTAL_OWNER)) {
-			return false;
-		}
-		
-		return !UNTUNED.equals(crystal.getAttribute(CRYSTAL_OWNER));
+	private boolean isTuned(SWGObject crystal) {
+		return crystal.getServerAttribute(ServerAttribute.LINK_OBJECT_ID) != null;
 	}
 }

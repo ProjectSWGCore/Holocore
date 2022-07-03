@@ -31,9 +31,14 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+
+import java.util.Collection;
+import java.util.Locale;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -49,6 +54,11 @@ public class WeaponObject extends TangibleObject {
 	private int			elementalValue	= 0;
 	// WEAO06
 	private WeaponType type = WeaponType.UNARMED;
+	
+	private float woundChance;
+	private String procEffect;
+	private int specialAttackCost;
+	private String requiredSkill;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
@@ -135,6 +145,112 @@ public class WeaponObject extends TangibleObject {
 		this.maxDamage = maxDamage;
 	}
 	
+	public float getWoundChance() {
+		return woundChance;
+	}
+	
+	public void setWoundChance(float woundChance) {
+		this.woundChance = woundChance;
+	}
+	
+	public String getProcEffect() {
+		return procEffect;
+	}
+	
+	public void setProcEffect(String procEffect) {
+		this.procEffect = procEffect;
+	}
+	
+	public int getSpecialAttackCost() {
+		return specialAttackCost;
+	}
+	
+	public void setSpecialAttackCost(int specialAttackCost) {
+		this.specialAttackCost = specialAttackCost;
+	}
+	
+	public String getRequiredSkill() {
+		return requiredSkill;
+	}
+	
+	public void setRequiredSkill(String requiredSkill) {
+		if (!requiredSkill.isBlank()) {
+			this.requiredSkill = requiredSkill;
+		}
+	}
+	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = super.getAttributeList(viewer);
+		if (requiredSkill != null) {
+			attributeList.putText("skillmodmin", "@skl_n:" + requiredSkill);
+		} else {
+			attributeList.putText("skillmodmin", "@cmd_n:none");
+		}
+		
+		String displayDamageType = "@obj_attr_n:armor_eff_" + damageType.name().toLowerCase(Locale.US);
+		attributeList.putText("cat_wpn_damage.wpn_damage_type", displayDamageType);
+		attributeList.putNumber("cat_wpn_damage.wpn_attack_speed", attackSpeed);
+		float moddedWeaponAttackSpeedWithCap = getModdedWeaponAttackSpeedWithCap(viewer);
+		attributeList.putNumber("cat_wpn_damage.wpn_real_speed", moddedWeaponAttackSpeedWithCap);
+		attributeList.putText("cat_wpn_damage.damage", minDamage + "-" + maxDamage);
+		if (elementalType != null) {
+			attributeList.putText("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:armor_eff_elemental_" + elementalType.name().toLowerCase(Locale.US));
+			attributeList.putNumber("cat_wpn_damage.wpn_elemental_value", elementalValue);
+		}
+		attributeList.putNumber("cat_wpn_damage.wpn_accuracy", accuracy);
+		attributeList.putNumber("cat_wpn_damage.woundchance", woundChance, "%");
+		attributeList.putNumber("cat_wpn_damage.wpn_base_dps", getDamagePerSecond(getAttackSpeed()), " / sec");
+		attributeList.putNumber("cat_wpn_damage.wpn_real_dps", getModifiedDamagePerSecond(moddedWeaponAttackSpeedWithCap, viewer), " / sec");
+		if (procEffect != null && !procEffect.isEmpty()) {
+			attributeList.putText("proc_name", "@ui_buff:" + procEffect);
+		}
+		attributeList.putText("cat_wpn_other.wpn_range", String.format("%d-%dm", (int) minRange, (int) maxRange));
+		attributeList.putNumber("cat_wpn_other.attackcost", specialAttackCost);
+		
+		return attributeList;
+	}
+	
+	public float getModdedWeaponAttackSpeedWithCap(CreatureObject creature) {
+		WeaponType equippedWeaponType = getType();
+		int speedMod = getSpeedModBasedOnEquippedWeaponType(creature, equippedWeaponType);
+		
+		float weaponAttackSpeed = getAttackSpeed();
+		float moddedWeaponAttackSpeed = weaponAttackSpeed * (1 - speedMod / 100f);	// Reduce weapon attack speed by %
+		float attackSpeedCap = 1f;
+		return Math.max(attackSpeedCap, moddedWeaponAttackSpeed);
+	}
+	
+	private int getSpeedModBasedOnEquippedWeaponType(CreatureObject creature, WeaponType equippedWeaponType) {
+		int speedMod = 0;
+		
+		Collection<String> speedSkillMods = equippedWeaponType.getSpeedSkillMods();
+		
+		for (String speedSkillMod : speedSkillMods) {
+			speedMod += creature.getSkillModValue(speedSkillMod);
+		}
+		
+		return speedMod;
+	}
+	
+	public float getDamagePerSecond(float attackSpeed) {
+		if (getElementalType() != null) {
+			return (((getMaxDamage() + getElementalValue()  + getMinDamage() + getElementalValue()) / 2f + getElementalValue()) * (1 / attackSpeed));
+		} else {
+			return (((getMaxDamage() + getMinDamage()) / 2f ) * (1 / attackSpeed));
+		}
+	}
+	
+	public float getModifiedDamagePerSecond(float moddedWeaponAttackSpeedWithCap, CreatureObject viewer) {
+		float weaponDps = getDamagePerSecond(moddedWeaponAttackSpeedWithCap);
+		
+		if (getType() == WeaponType.UNARMED) {
+			weaponDps += viewer.getSkillModValue("unarmed_damage");
+		}
+		
+		return weaponDps;
+	}
+	
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
@@ -190,6 +306,10 @@ public class WeaponObject extends TangibleObject {
 		data.putFloat("maxRange", maxRange);
 		data.putString("weaponType", type.name());
 		data.putInteger("accuracy", accuracy);
+		data.putFloat("woundChance", woundChance);
+		data.putString("procEffect", procEffect);
+		data.putInteger("specialAttackCost", specialAttackCost);
+		data.putString("requiredSkill", requiredSkill);
 	}
 	
 	@Override
@@ -205,6 +325,10 @@ public class WeaponObject extends TangibleObject {
 		maxRange = data.getFloat("maxRange", maxRange);
 		type = WeaponType.valueOf(data.getString("weaponType", type.name()));
 		accuracy = data.getInteger("accuracy", 0);
+		woundChance = data.getFloat("woundChance", 0);
+		procEffect = data.getString("procEffect");
+		specialAttackCost = data.getInteger("specialAttackCost", 100);
+		requiredSkill = data.getString("requiredSkill");
 	}
 	
 	@Override

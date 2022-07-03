@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.DamageType
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbIntegerColumnArraySet
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet
+import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.io.File
 import java.io.IOException
@@ -107,7 +108,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	class ArmorItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
 		val armorLevel: String = set.getText("armor_level")
-		val armorType: ArmorType
+		val armorCategory: ArmorCategory
 		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
@@ -128,17 +129,11 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		init {
 			when (set.getText("armor_category")) {
-				"assault" -> this.armorType = ArmorType.ASSAULT
-				"battle" -> this.armorType = ArmorType.BATTLE
-				"recon" -> this.armorType = ArmorType.RECON
+				"assault" -> this.armorCategory = ArmorCategory.assault
+				"battle" -> this.armorCategory = ArmorCategory.battle
+				"recon" -> this.armorCategory = ArmorCategory.reconnaissance
 				else -> throw IllegalArgumentException("Unsupported armor category: " + set.getText("armor_category"))
 			}
-		}
-		
-		enum class ArmorType {
-			ASSAULT,
-			BATTLE,
-			RECON
 		}
 	}
 	
@@ -239,7 +234,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")
-		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
 		val requiredSkill: String = set.getText("required_skill")
@@ -324,9 +318,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 				for (modString in modStrings) {
 					val splitValues = modString.split("=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // Name and value are separated by "="
 					val modName = splitValues[0]
-					val category = "cat_skill_mod_bonus"
 					
-					mods["$category.@stat_n:$modName"] = Integer.parseInt(splitValues[1])
+					mods[modName] = Integer.parseInt(splitValues[1])
 				}
 			}
 			return mods

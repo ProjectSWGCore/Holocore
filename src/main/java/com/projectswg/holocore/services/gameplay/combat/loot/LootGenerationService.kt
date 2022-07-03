@@ -1,9 +1,7 @@
 package com.projectswg.holocore.services.gameplay.combat.loot
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectTransformMessage
-import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootGeneratedIntent
@@ -19,7 +17,6 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.CreditLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.ItemLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.NPCLootTable
-import com.projectswg.holocore.services.gameplay.combat.loot.generation.RareItemLootGenerator
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
@@ -32,7 +29,6 @@ class LootGenerationService : Service() {
 	private val npcLoot: MutableMap<String, NPCLoot> = HashMap()    // K: npc_id, V: possible loot
 	private val creditGenerator = CreditLootGenerator()
 	private val itemGenerator = ItemLootGenerator()
-	private val rareItemLootGenerator = RareItemLootGenerator()
 	private val lootGenerationThread = ScheduledThreadPool(1, "loot-generation-service")
 	
 	override fun initialize(): Boolean {
@@ -73,8 +69,7 @@ class LootGenerationService : Service() {
 			creditGenerator.generate(corpse, loot)
 		if (PswgDatabase.config.getBoolean(this, "itemLoot", true))
 			itemGenerator.generate(corpse, killer, loot, lootRecord.npcTables)
-		rareItemLootGenerator.generate(corpse = corpse, killer = killer, loot = loot)
-		
+
 		if (loot.isEmpty()) {
 			CorpseLootedIntent(corpse).broadcast()
 			return
@@ -84,14 +79,6 @@ class LootGenerationService : Service() {
 		loot.forEach { obj ->
 			obj.moveToContainer(lootInventory)
 			ObjectCreatedIntent.broadcast(obj)
-			
-			lootGenerationThread.execute(60000) {
-				when (obj.template) {
-					RareLootService.RARE_CHEST,
-					RareLootService.LEGENDARY_CHEST,
-					RareLootService.EXCEPTIONAL_CHEST -> sendRareLootPackets(obj, corpse, killer)
-				}
-			}
 		}
 		lootInventory.moveToContainer(corpse, corpse.location)
 		ObjectCreatedIntent.broadcast(lootInventory)
@@ -151,14 +138,7 @@ class LootGenerationService : Service() {
 		}
 		LootGeneratedIntent.broadcast(corpse)
 	}
-	
-	private fun sendRareLootPackets(chest: SWGObject, corpse: CreatureObject, killer: CreatureObject) {
-		val effect = PlayClientEffectObjectMessage("appearance/pt_rare_chest.prt", "", corpse.objectId, "")
-		val box = ShowLootBox(killer.objectId, longArrayOf(chest.objectId))
 
-		killer.owner?.sendPacket(effect, box)
-	}
-	
 	private class NPCLoot(val isDropCredits: Boolean, val npcTables: MutableList<NPCLootTable> = ArrayList())
 	
 }

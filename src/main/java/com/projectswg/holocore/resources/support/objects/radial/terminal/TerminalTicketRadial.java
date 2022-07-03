@@ -6,6 +6,7 @@ import com.projectswg.holocore.intents.gameplay.world.travel.TicketUseIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
 import java.util.Collection;
 
@@ -25,7 +26,7 @@ public class TerminalTicketRadial implements RadialHandlerInterface {
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		switch (selection) {
 			case ITEM_USE:
-				new TicketUseIntent(player, target).broadcast();
+				new TicketUseIntent(player, (TangibleObject) target).broadcast();
 				break;
 			default:
 				break;

@@ -26,12 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeListMessage;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 public class AttributesCmdCallback implements ICmdCallback {
@@ -45,8 +46,11 @@ public class AttributesCmdCallback implements ICmdCallback {
 			int clientRevision = Integer.parseInt(cmd[i+1]);
 			
 			SWGObject obj = ObjectLookup.getObjectById(objectId);
-			if (obj != null)
-				player.sendPacket(new AttributeListMessage(obj.getObjectId(), obj.getAttributes(), clientRevision));
+			if (obj != null) {
+				CreatureObject viewer = player.getCreatureObject();
+				AttributeList attributeList = obj.getAttributeList(viewer);
+				player.sendPacket(new AttributeListMessage(obj.getObjectId(), attributeList, clientRevision));
+			}
 		}
 	}
 	
