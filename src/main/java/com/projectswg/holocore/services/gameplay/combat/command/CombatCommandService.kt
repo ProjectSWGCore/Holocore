@@ -71,7 +71,10 @@ class CombatCommandService : Service() {
 		
 		val source = eci.source
 
-		source.modifyAction((-command.actionCost).toInt())
+		val equippedWeapon = source.equippedWeapon
+		val specialAttackCost = equippedWeapon.specialAttackCost
+		source.modifyAction((-command.actionCost * specialAttackCost / 100).toInt())
+		source.modifyMind((-command.mindCost * specialAttackCost / 100).toInt())
 		
 		val hitType = hitTypeMap[command.hitType]
 		hitType?.handle(source, eci.target, command, eci.arguments) ?: handleStatus(source, CombatStatus.UNKNOWN)
