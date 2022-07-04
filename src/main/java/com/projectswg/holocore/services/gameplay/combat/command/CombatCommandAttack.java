@@ -417,6 +417,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			}
 		}
 		
+		int privateArmorBreak = creature.getSkillModValue("private_armor_break");
+		
+		if (privateArmorBreak > 0) {
+			double armorBreakPercent = privateArmorBreak / 10d;
+			armor *= (1 - armorBreakPercent / 100d);
+		}
+		
 		return (int) armor;
 	}
 	
