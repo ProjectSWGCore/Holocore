@@ -1,14 +1,13 @@
 package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackType;
 import com.projectswg.common.data.combat.HitType;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
+import com.projectswg.common.network.packets.swg.zone.object_controller.*;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue.ErrorCode;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
-import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
@@ -16,6 +15,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ValidWeapon;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
@@ -23,6 +23,8 @@ import com.projectswg.holocore.resources.support.global.commands.State;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -244,6 +246,15 @@ public class CommandQueueService extends Service {
 				}
 			}
 			
+			ValidWeapon validWeapon = rootCommand.getValidWeapon();
+			WeaponObject equippedWeapon = source.getEquippedWeapon();
+			WeaponType equippedWeaponType = equippedWeapon.getType();
+			
+			if (!validWeapon.isValid(equippedWeaponType)) {
+				showInvalidWeaponFlyText(source);
+				return new CheckCommandResult(ErrorCode.CANCELLED, 0);
+			}
+			
 			if (rootCommand instanceof CombatCommand combatCommand) {
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
@@ -273,6 +284,10 @@ public class CommandQueueService extends Service {
 				}
 			}
 			return new CheckCommandResult(ErrorCode.SUCCESS, 0);
+		}
+		
+		private void showInvalidWeaponFlyText(CreatureObject source) {
+			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255)));
 		}
 		
 	}

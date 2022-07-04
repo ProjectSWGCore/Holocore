@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.TargetType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ValidWeapon;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -49,7 +50,7 @@ public class Command {
 	private final double maxRange;
 	private final int godLevel;
 	private final boolean addToCombatQueue;
-	private final int validWeapon;
+	private final ValidWeapon validWeapon;
 	private final int invalidWeapon;
 	private final String cooldownGroup;
 	private final double warmupTime;
@@ -146,7 +147,7 @@ public class Command {
 		return addToCombatQueue;
 	}
 	
-	public int getValidWeapon() {
+	public ValidWeapon getValidWeapon() {
 		return validWeapon;
 	}
 	
@@ -223,7 +224,7 @@ public class Command {
 		private double maxRange;
 		private int godLevel;
 		private boolean addToCombatQueue;
-		private int validWeapon;
+		private ValidWeapon validWeapon;
 		private int invalidWeapon;
 		private String cooldownGroup;
 		private double warmupTime;
@@ -323,7 +324,7 @@ public class Command {
 			return this;
 		}
 		
-		public CommandBuilder withValidWeapon(int validWeapon) {
+		public CommandBuilder withValidWeapon(ValidWeapon validWeapon) {
 			this.validWeapon = validWeapon;
 			return this;
 		}
