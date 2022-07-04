@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -58,6 +59,7 @@ import java.util.*;
 public class TangibleObject extends SWGObject {
 	
 	private CustomizationString	appearanceData	= new CustomizationString();
+	private final SWGSet<CRC> visibleComponents = new SWGSet<>(3, 5);
 	private int				maxHitPoints	= 1000;
 	private int				components		= 0;
 	private boolean			inCombat		= false;
@@ -529,8 +531,7 @@ public class TangibleObject extends SWGObject {
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addObject(appearanceData); // - 4
-		bb.addInt(0); // Component customization (Set, Integer) - 5
-		bb.addInt(0); //updates
+		bb.addObject(visibleComponents);	// 5
 		bb.addInt(optionFlags); // 6
 		bb.addInt(counter); // Generic Counter -- use count and incap timer - 7
 		bb.addInt(conditionDamage); // 8
@@ -544,7 +545,7 @@ public class TangibleObject extends SWGObject {
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		appearanceData.decode(buffer);
-		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
+		visibleComponents.decode(buffer);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
 		conditionDamage = buffer.getInt();
@@ -634,6 +635,7 @@ public class TangibleObject extends SWGObject {
 		if (ticketInformation != null) {
 			data.putDocument("ticketInformation", ticketInformation);
 		}
+		data.putArray("visibleComponents", new ArrayList<>(visibleComponents));
 	}
 
 	@Override
@@ -670,5 +672,20 @@ public class TangibleObject extends SWGObject {
 			ticketInformation = new TicketInformation();
 			ticketInformation.readMongo(ticketInformationDocument);
 		}
+		visibleComponents.addAll(data.getArray("visibleComponents", CRC.class));
+	}
+	
+	/**
+	 * Used for weapons to optionally display barrels, stocks and scopes.
+	 * Not all weapons support all three types.
+	 * 
+	 * It's possible it's used for more than just weapons since the variable
+	 * lives on TangibleObject and not WeaponObject.
+	 * 
+	 * @param crc for an extra component to display on the object. Could be the CRC for "scope_sm_6", for instance.
+	 */
+	public void addVisibleComponent(CRC crc) {
+		visibleComponents.add(crc);
+		visibleComponents.sendDeltaMessage(this);	// Despite sending a delta it appears a client relog is necessary before they appear - at least for weapons
 	}
 }
