@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.support.objects.swg.weapon;
 import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -329,40 +328,6 @@ public class WeaponObject extends TangibleObject {
 		procEffect = data.getString("procEffect");
 		specialAttackCost = data.getInteger("specialAttackCost", 100);
 		requiredSkill = data.getString("requiredSkill");
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		stream.addInt(minDamage);
-		stream.addInt(maxDamage);
-		stream.addAscii(damageType.name());
-		stream.addAscii(elementalType != null ? elementalType.name() : "");
-		stream.addInt(elementalValue);
-		stream.addFloat(attackSpeed);
-		stream.addFloat(maxRange);
-		stream.addAscii(type.name());
-	}
-
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		minDamage = stream.getInt();
-		maxDamage = stream.getInt();
-		damageType = DamageType.valueOf(stream.getAscii());
-		String elementalTypeName = stream.getAscii();
-
-		// A weapon doesn't necessarily have an elemental type
-		if (!elementalTypeName.isEmpty()) {
-			elementalType = DamageType.valueOf(elementalTypeName);
-		}
-
-		elementalValue = stream.getInt();
-		attackSpeed = stream.getFloat();
-		maxRange = stream.getFloat();
-		type = WeaponType.valueOf(stream.getAscii());
 	}
 	
 }

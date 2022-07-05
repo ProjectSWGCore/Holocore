@@ -103,22 +103,4 @@ public class InstallationObject extends TangibleObject {
 		return hash;
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		stream.addBoolean(activated);
-		stream.addFloat((float) power);
-		stream.addFloat((float) powerRate);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		activated = stream.getBoolean();
-		power = stream.getFloat();
-		powerRate = stream.getFloat();
-	}
-	
 }

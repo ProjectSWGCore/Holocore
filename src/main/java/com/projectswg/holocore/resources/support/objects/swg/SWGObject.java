@@ -37,26 +37,21 @@ import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.data.location.InstanceType;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SlotDefinitionLoader.SlotDefinition;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.network.BaselineObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAware;
-import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissions;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.permissions.DefaultPermissions;
@@ -77,7 +72,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable, MongoPersistable {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, MongoPersistable {
 	
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
@@ -1315,306 +1310,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		data.getMap("serverAttributes", String.class, Object.class).forEach((key, val) -> serverAttributes.put(ServerAttribute.getFromKey(key), val));
 		persisted = data.getBoolean("persisted", false);
 		noTrade = data.getBoolean("noTrade", false);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(10);
-		location.save(stream);
-		boolean hasParent = parent != null;
-		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
-		stream.addBoolean(hasParent);
-		if (hasParent) {
-			SWGObject written = parent;
-			if (hasGrandparent)
-				written = parent.getParent();
-			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(written.getObjectId(), written.getTemplate()), stream);
-			stream.addBoolean(hasGrandparent);
-			if (hasGrandparent)
-				stream.addInt(((CellObject) parent).getNumber());
-		}
-		ContainerPermissions.save(stream, permissions);
-		stream.addBoolean(generated);
-		stream.addUnicode(objectName);
-		stringId.save(stream);
-		detailStringId.save(stream);
-		stream.addFloat(complexity);
-		stream.addMap(serverAttributes, e -> {
-			stream.addAscii(e.getKey().getKey());
-			stream.addAscii(e.getKey().store(e.getValue()));
-		});
-		Set<SWGObject> contained = new HashSet<>(containedObjects);
-		contained.addAll(slots.values());
-		contained.remove(null);
-		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		switch(stream.getByte()) {
-			default:
-			case 10:
-				readVersion10(stream);
-				break;
-			case 9:
-				readVersion9(stream);
-				break;
-			case 8:
-				readVersion8(stream);
-				break;
-			case 7:
-				readVersion7(stream);
-				break;
-			case 6:
-				readVersion6(stream);
-				break;
-			case 5:
-				readVersion5(stream);
-				break;
-			case 4:
-				readVersion4(stream);
-				break;
-			case 3:
-				readVersion3(stream);
-				break;
-			case 2:
-				readVersion2(stream);
-				break;
-			case 1:
-				readVersion1(stream);
-				break;
-			case 0:
-				readVersion0(stream);
-				break;
-		}
-	}
-	
-	private void readVersion10(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = ContainerPermissions.create(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> {
-			ServerAttribute attr = ServerAttribute.getFromKey(stream.getAscii());
-			serverAttributes.put(attr, attr.retrieve(stream.getAscii()));
-		});
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion9(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = ContainerPermissions.create(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion8(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion7(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion6(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion5(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		areaId = stream.getInt();
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion4(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		new Location().read(stream); // ignored now
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion3(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		new Location().read(stream); // ignored now
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion2(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		// Ignore the saved volume - this is now set automagically in addObject() and removeObject()
-		stream.getInt();
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private ContainerPermissions readOldPermissions(NetBufferStream stream) {
-		switch (stream.getAscii()) {
-			case "DEFAULT":
-			case "INVENTORY":
-			case "LOOT":
-			default:
-				return DefaultPermissions.getPermissions();
-			case "ADMIN":
-				return AdminPermissions.getPermissions();
-		}
 	}
 	
 }

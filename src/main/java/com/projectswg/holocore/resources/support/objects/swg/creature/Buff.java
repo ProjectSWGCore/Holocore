@@ -30,10 +30,8 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 
-public class Buff implements Encodable, Persistable, MongoPersistable {
+public class Buff implements Encodable, MongoPersistable {
 	
 	private int crc;
 	private int endTime;
@@ -76,22 +74,6 @@ public class Buff implements Encodable, Persistable, MongoPersistable {
 	public void readMongo(MongoData data) {
 		crc = data.getInteger("crc", 0);
 		endTime = data.getInteger("endTime", 0);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(1);
-		stream.addInt(crc);
-		stream.addInt(endTime);
-	}
-	
-	public void readOld(NetBufferStream stream) {
-		
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		
 	}
 	
 	public int getCrc() {

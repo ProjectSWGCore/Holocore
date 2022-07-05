@@ -28,14 +28,12 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 import java.util.Arrays;
 import java.util.BitSet;
 
-public class SWGFlag extends BitSet implements Encodable, Persistable {
+public class SWGFlag extends BitSet implements Encodable {
 	
 	private static final long serialVersionUID = 2L;
 	
@@ -81,17 +79,6 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 		return 4 + (int) Math.ceil(super.size()/32.0);
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addArray(toByteArray());
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		clear();
-		xor(valueOf(stream.getArray()));
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof SWGFlag))

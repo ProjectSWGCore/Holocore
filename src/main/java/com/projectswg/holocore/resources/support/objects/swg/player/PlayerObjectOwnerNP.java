@@ -31,8 +31,6 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -45,7 +43,7 @@ import java.util.stream.Collectors;
  * PLAY 9
  */
 @SuppressWarnings("ClassWithTooManyFields") // no choice due to SWG protocol
-class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
+class PlayerObjectOwnerNP implements MongoPersistable {
 	
 	private final PlayerObject obj;
 	
@@ -380,22 +378,6 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		maxMeds = data.getInteger("maxMeds", maxMeds);
 		data.getArray("groupWaypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> groupWaypoints.put(obj.getObjectId(), obj));
 		jediState = data.getInteger("jediState", 0);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(1);
-		stream.addInt(languageId);
-		stream.addList(friendsList, stream::addAscii);
-		stream.addList(ignoreList, stream::addAscii);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		languageId = stream.getInt();
-		stream.getList((i) -> friendsList.add(stream.getAscii()));
-		stream.getList((i) -> ignoreList.add(stream.getAscii()));
 	}
 	
 	private void sendDelta(int update, Object o) {
