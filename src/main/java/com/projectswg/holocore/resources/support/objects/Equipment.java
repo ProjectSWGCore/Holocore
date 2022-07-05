@@ -31,14 +31,13 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.log.Log;
 
-public class Equipment implements Encodable, Persistable {
+public class Equipment implements Encodable {
 	
 	private TangibleObject 	weapon;
 	private byte[]			customizationString;
@@ -99,29 +98,6 @@ public class Equipment implements Encodable, Persistable {
 		return 15 + weaponLength + customizationString.length + template.getLength();
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addLong(objectId);
-		stream.addInt(arrangementId);
-		stream.addInt(template.getCrc());
-		stream.addArray(customizationString);
-		stream.addBoolean(weapon != null);
-		if (weapon != null)
-			SWGObjectFactory.save(weapon, stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		objectId = stream.getLong();
-		arrangementId = stream.getInt();
-		template = new CRC(stream.getInt());
-		customizationString = stream.getArray();
-		if (stream.getBoolean())
-			weapon = (TangibleObject) SWGObjectFactory.create(stream);
-	}
-
 	public byte [] getCustomizationString() {return customizationString;}
 	public void setCustomizationString(byte [] customizationString) { this.customizationString = customizationString; }
 

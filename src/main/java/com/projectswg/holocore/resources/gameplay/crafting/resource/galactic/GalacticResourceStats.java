@@ -28,13 +28,11 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 
 import java.util.Random;
 
-public class GalacticResourceStats implements Persistable, MongoPersistable {
+public class GalacticResourceStats implements MongoPersistable {
 	
 	private int coldResistance;
 	private int conductivity;
@@ -75,38 +73,6 @@ public class GalacticResourceStats implements Persistable, MongoPersistable {
 		this.potentialEnergy	= resource.isAttrPotentialEnergy() ? generateRandomNumber(random) : 0;
 		this.shockResistance	= resource.isAttrShockResistance() ? generateRandomNumber(random) : 0;
 		this.unitToughness		= resource.isAttrUnitToughness() ? generateRandomNumber(random) : 0;
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		this.coldResistance		= stream.getShort();
-		this.conductivity		= stream.getShort();
-		this.decayResistance	= stream.getShort();
-		this.entangleResistance	= stream.getShort();
-		this.flavor				= stream.getShort();
-		this.heatResistance		= stream.getShort();
-		this.malleability		= stream.getShort();
-		this.overallQuality		= stream.getShort();
-		this.potentialEnergy	= stream.getShort();
-		this.shockResistance	= stream.getShort();
-		this.unitToughness		= stream.getShort();
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addShort(coldResistance);
-		stream.addShort(conductivity);
-		stream.addShort(decayResistance);
-		stream.addShort(entangleResistance);
-		stream.addShort(flavor);
-		stream.addShort(heatResistance);
-		stream.addShort(malleability);
-		stream.addShort(overallQuality);
-		stream.addShort(potentialEnergy);
-		stream.addShort(shockResistance);
-		stream.addShort(unitToughness);
 	}
 	
 	@Override

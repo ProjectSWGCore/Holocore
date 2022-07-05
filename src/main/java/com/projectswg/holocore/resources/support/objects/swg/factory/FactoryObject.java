@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.factory;
 
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
@@ -34,18 +33,6 @@ public class FactoryObject extends TangibleObject {
 	
 	public FactoryObject(long objectId) {
 		super(objectId, BaselineType.FCYT);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
 	}
 	
 }

@@ -34,7 +34,6 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
@@ -43,7 +42,6 @@ import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
@@ -1098,124 +1096,6 @@ public class CreatureObject extends TangibleObject {
 		factionRank = (byte) data.getInteger("factionRank", factionRank);
 		skills.addAll(data.getArray("skills", String.class));
 		data.getDocument("baseAttributes", baseAttributes);
-	}
-
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(3);
-		creo4.save(stream);
-		creo6.save(stream);
-		stream.addAscii(posture.name());
-		stream.addAscii(race.name());
-		stream.addFloat((float) height);
-		stream.addInt(battleFatigue);
-		stream.addInt(getCashBalance());
-		stream.addInt(getBankBalance());
-		stream.addLong(ownerId);
-		stream.addLong(statesBitmask);
-		stream.addByte(factionRank);
-		synchronized (skills) {
-			stream.addList(skills, stream::addAscii);
-		}
-		baseAttributes.save(stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		switch(stream.getByte()) {
-			case 0: readVersion0(stream); break;
-			case 1: readVersion1(stream); break;
-			case 2: readVersion2(stream); break;
-			case 3: readVersion3(stream); break;
-		}
-		
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		if (stream.getBoolean()) {
-			SWGObject defaultWeapon = SWGObjectFactory.create(stream);
-			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
-		}
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 0, baseAttributes, stream);
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		stream.getLong();
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 1, baseAttributes, stream);
-	}
-
-	private void readVersion2(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 2, baseAttributes, stream);
-	}
-
-	private void readVersion3(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		baseAttributes.read(stream);
-	}
-
-	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
-		if (ver <= 2) {
-			int [] array = new int[6];
-			stream.getList((i) -> array[i] = stream.getInt());
-			attributes.setHealth(array[0]);
-			attributes.setHealthRegen(array[1]);
-			attributes.setAction(array[2]);
-			attributes.setActionRegen(array[3]);
-			attributes.setMind(array[4]);
-			attributes.setMindRegen(array[5]);
-		} else {
-			attributes.read(stream);
-		}
-
 	}
 
 	private static class Container {

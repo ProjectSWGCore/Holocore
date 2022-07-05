@@ -31,7 +31,6 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.player.Mail;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
@@ -668,27 +667,4 @@ public class PlayerObject extends IntangibleObject {
 		badges.readMongo(data.getDocument("badges"));
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		play3.save(stream);
-		play6.save(stream);
-		play8.save(stream);
-		play9.save(stream);
-		stream.addInt(0);
-		stream.addUnicode(biography);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		play3.read(stream);
-		play6.read(stream);
-		play8.read(stream);
-		play9.read(stream);
-		stream.getInt();
-		biography = stream.getUnicode();
-	}
 }

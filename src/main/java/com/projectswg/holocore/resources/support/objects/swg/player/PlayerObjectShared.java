@@ -29,24 +29,17 @@ package com.projectswg.holocore.resources.support.objects.swg.player;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.encoding.StringType;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
-import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGFlag;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.utilities.MathUtils;
 
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
 
 /**
  * PLAY 3
  */
 @SuppressWarnings("ClassWithTooManyFields") // force to by SWG protocol
-class PlayerObjectShared implements Persistable, MongoPersistable {
+class PlayerObjectShared implements MongoPersistable {
 
 	private final PlayerObject obj;
 
@@ -205,28 +198,6 @@ class PlayerObjectShared implements Persistable, MongoPersistable {
 		professionIcon = data.getInteger("professionIcon", professionIcon);
 	}
 
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		flagsList.save(stream);
-		profileFlags.save(stream);
-		stream.addAscii(title);
-		stream.addInt(bornDate);
-		stream.addInt(playTime);
-		stream.addInt(professionIcon);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		flagsList.read(stream);
-		profileFlags.read(stream);
-		title = stream.getAscii();
-		bornDate = stream.getInt();
-		playTime = stream.getInt();
-		professionIcon = stream.getInt();
-	}
-	
 	private void sendDelta(int update, Object o) {
 		obj.sendDelta(3, update, o);
 	}

@@ -36,13 +36,11 @@ import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
 import org.jetbrains.annotations.NotNull;
 
-public class WaypointObject extends IntangibleObject implements Encodable, Persistable, MongoPersistable {
+public class WaypointObject extends IntangibleObject implements Encodable, MongoPersistable {
 	
 	private WaypointPackage waypoint;
 	
@@ -170,20 +168,6 @@ public class WaypointObject extends IntangibleObject implements Encodable, Persi
 	@Override
 	public void readMongo(MongoData data) {
 		waypoint.readMongo(data);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		waypoint.save(stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		waypoint.read(stream);
 	}
 	
 	@Override

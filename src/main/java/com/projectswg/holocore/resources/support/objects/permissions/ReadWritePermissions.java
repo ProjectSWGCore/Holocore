@@ -28,7 +28,6 @@
 package com.projectswg.holocore.resources.support.objects.permissions;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -58,13 +57,6 @@ public final class ReadWritePermissions implements ContainerPermissions {
 		this.locked = true;
 	}
 	
-	private ReadWritePermissions(NetBufferStream stream) {
-		this.allowed = new HashSet<>();
-		this.locked = false;
-		read(stream);
-		this.locked = true;
-	}
-	
 	private ReadWritePermissions(MongoData data) {
 		this.allowed = new HashSet<>();
 		this.locked = false;
@@ -91,24 +83,6 @@ public final class ReadWritePermissions implements ContainerPermissions {
 	@Override
 	public boolean canMove(@NotNull CreatureObject requester, @NotNull SWGObject container) {
 		return allowed.contains(requester.getObjectId());
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addInt(allowed.size());
-		for (long id : allowed)
-			stream.addLong(id);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		if (locked)
-			throw new IllegalStateException("Permissions is already locked");
-		stream.getByte();
-		int count = stream.getInt();
-		for (int i = 0; i < count; i++)
-			allowed.add(stream.getLong());
 	}
 	
 	@Override
@@ -144,10 +118,6 @@ public final class ReadWritePermissions implements ContainerPermissions {
 		if (allowed.length <= 0)
 			return PERMISSIONS;
 		return new ReadWritePermissions(Set.of(allowed));
-	}
-	
-	public static ReadWritePermissions from(NetBufferStream stream) {
-		return new ReadWritePermissions(stream);
 	}
 	
 	public static ReadWritePermissions from(MongoData data) {

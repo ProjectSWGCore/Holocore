@@ -29,8 +29,6 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 
 import java.time.Instant;
@@ -38,7 +36,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GalacticResourceSpawn implements Persistable, MongoPersistable {
+public class GalacticResourceSpawn implements MongoPersistable {
 	
 	private static final int	MAP_SIZE						= 16384;
 	private static final int	MUST_MAP_SIZE					= 8000;
@@ -200,40 +198,6 @@ public class GalacticResourceSpawn implements Persistable, MongoPersistable {
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		// Resource
-		this.resourceId = stream.getLong();
-		this.minConcentration = stream.getInt();
-		this.maxConcentration = stream.getInt();
-		// Location
-		this.terrain = Terrain.valueOf(stream.getAscii());
-		this.x = stream.getInt();
-		this.z = stream.getInt();
-		this.radius = stream.getInt();
-		// Time
-		this.startTime = Instant.ofEpochMilli(stream.getLong());
-		this.endTime = Instant.ofEpochMilli(stream.getLong());
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		// Resource
-		stream.addLong(resourceId);
-		stream.addInt(minConcentration);
-		stream.addInt(maxConcentration);
-		// Location
-		stream.addAscii(terrain.name());
-		stream.addInt(x);
-		stream.addInt(z);
-		stream.addInt(radius);
-		// Time
-		stream.addLong(startTime.toEpochMilli());
-		stream.addLong(endTime.toEpochMilli());
-	}
-	
-	@Override
 	public void readMongo(MongoData data) {
 		{
 			MongoData resource = data.getDocument("resource");
@@ -309,16 +273,6 @@ public class GalacticResourceSpawn implements Persistable, MongoPersistable {
 	@Override
 	public int hashCode() {
 		return Long.hashCode(resourceId) * 7 + x * 23 + z * 89;
-	}
-	
-	public static GalacticResourceSpawn create(NetBufferStream stream) {
-		GalacticResourceSpawn spawn = new GalacticResourceSpawn();
-		spawn.read(stream);
-		return spawn;
-	}
-	
-	public static void save(NetBufferStream stream, GalacticResourceSpawn spawn) {
-		spawn.save(stream);
 	}
 	
 }

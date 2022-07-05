@@ -36,7 +36,6 @@ import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
@@ -561,45 +560,6 @@ public class TangibleObject extends SWGObject {
 		buffer.getInt();
 		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
 		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(2);
-		appearanceData.save(stream);
-		stream.addInt(maxHitPoints);
-		stream.addInt(components);
-		stream.addInt(conditionDamage);
-		stream.addInt(pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
-		stream.addAscii(pvpStatus.name());
-		Faction faction = this.faction;
-		stream.addAscii(faction == null ? "neutral" : faction.getName());
-		stream.addBoolean(visibleGmOnly);
-		stream.addArray(objectEffects);
-		stream.addInt(optionFlags);
-		stream.addInt(counter);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		byte version = stream.getByte();
-		appearanceData.read(stream);
-		maxHitPoints = stream.getInt();
-		components = stream.getInt();
-		if (version == 0)
-			stream.getBoolean();
-		conditionDamage = stream.getInt();
-		pvpFlags = PvpFlag.getFlags(stream.getInt());
-		pvpStatus = PvpStatus.valueOf(stream.getAscii());
-		faction = ServerData.INSTANCE.getFactions().getFaction(stream.getAscii().toLowerCase(Locale.US));
-		visibleGmOnly = stream.getBoolean();
-		objectEffects = stream.getArray();
-		optionFlags = stream.getInt();
-		if (version == 2) {
-			counter = stream.getInt();
-		}
 	}
 
 	@Override
