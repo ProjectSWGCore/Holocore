@@ -118,6 +118,7 @@ public class CommandExecutionService extends Service {
 		registerCppCallback("transferItemWeapon", TransferItemCallback::new);
 		registerScriptCallback("cmdStartLogout", LogoutCmdCallback::new);
 		registerCppCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
+		registerScriptCallback("knockdownRecovery", KnockdownRecoveryCmdCallback::new);
 		
 		addAdminScripts();
 		addChatScripts();
