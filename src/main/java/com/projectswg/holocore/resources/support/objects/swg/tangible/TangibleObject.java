@@ -438,7 +438,7 @@ public class TangibleObject extends SWGObject {
 			displayLightsaberCrystalAttributes(attributeList);
 		}
 		
-		if (requiredCombatLevel > 0) {
+		if (requiredCombatLevel > 1) {
 			attributeList.putNumber("healing_combat_level_required", requiredCombatLevel);
 		}
 		
