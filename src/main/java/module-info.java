@@ -10,10 +10,12 @@ open module holocore {
 	requires me.joshlarson.jlcommon;
 	requires me.joshlarson.jlcommon.network;
 	requires me.joshlarson.jlcommon.argparse;
+	requires me.joshlarson.websocket;
 	
 	requires com.projectswg.common;
 	requires fast.json;
 	requires kotlin.stdlib;
+	requires kotlin.reflect;
 	
 	requires swgterrain;
 }
