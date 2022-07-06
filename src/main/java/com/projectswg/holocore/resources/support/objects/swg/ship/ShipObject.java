@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.ship;
 
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 
@@ -34,18 +33,6 @@ public class ShipObject extends TangibleObject {
 	
 	public ShipObject(long objectId) {
 		super(objectId, BaselineType.SHIP);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
 	}
 	
 }

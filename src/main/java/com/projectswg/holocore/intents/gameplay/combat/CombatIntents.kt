@@ -84,3 +84,9 @@ data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: Cr
 		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = RequestCreatureDeathIntent(killer, corpse).broadcast()
 	}
 }
+
+data class KnockdownIntent(val victim: CreatureObject): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(victim: CreatureObject) = KnockdownIntent(victim).broadcast()
+	}
+}

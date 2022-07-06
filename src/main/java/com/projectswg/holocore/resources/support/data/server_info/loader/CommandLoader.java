@@ -3,11 +3,10 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
-import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
-import com.projectswg.holocore.resources.support.global.commands.Command;
-import com.projectswg.holocore.resources.support.global.commands.DefaultPriority;
+import com.projectswg.holocore.resources.support.global.commands.*;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +53,7 @@ public class CommandLoader extends DataLoader {
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/commands.msdb"))) {
 			while (set.next()) {
-				Command command = Command.builder()
+				Command.CommandBuilder commandBuilder = Command.builder()
 						.withName(set.getText("commandName").toLowerCase(Locale.US))
 						.withCppCallback(set.getText("cppHook"))
 						.withScriptCallback(set.getText("scriptHook"))
@@ -66,8 +65,28 @@ public class CommandLoader extends DataLoader {
 						.withCooldownGroup2(set.getText("cooldownGroup2"))
 						.withCooldownTime(set.getReal("cooldownTime"))
 						.withCooldownTime2(set.getReal("cooldownTime2"))
+						.withWarmupTime(set.getReal("warmupTime"))
+						.withExecuteTime(set.getReal("executeTime"))
 						.withTargetType(TargetType.getTargetType(set.getText("targetType")))
-						.withAddToCombatQueue(set.getBoolean("addToCombatQueue"))
+						.withValidWeapon(ValidWeapon.Companion.getByNum((int) set.getInt("validWeapon")));
+				
+				@NotNull Locomotion[] locomotions = Locomotion.values();
+				
+				for (Locomotion locomotion : locomotions) {
+					if (!set.getBoolean(locomotion.getCommandSdbColumnName())) {
+						commandBuilder.withDisallowedLocomotion(locomotion);
+					}
+				}
+				
+				State[] states = State.values();
+				
+				for (State state : states) {
+					if (!set.getBoolean(state.getCommandSdbColumnName())) {
+						commandBuilder.withDisallowedState(state);
+					}
+				}
+				
+				Command command = commandBuilder
 						.build();
 				if (commandNameMap.containsKey(command.getName())) {
 					Log.w("Duplicate command name [ignoring]: %s", command.getName());
@@ -140,6 +159,8 @@ public class CommandLoader extends DataLoader {
 						.withSpecialLine(set.getText("specialLine"))
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))
+						.withMindCost(set.getReal("mindCost"))
+						.withKnockdownChance(set.getReal("knockdownChance"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
 						.withBuffNameSelf(set.getText("buffNameSelf"))
 						.withDamageType(DamageType.valueOf(set.getText("damageType")))

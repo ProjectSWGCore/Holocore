@@ -1,14 +1,13 @@
 package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackType;
 import com.projectswg.common.data.combat.HitType;
+import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue;
+import com.projectswg.common.network.packets.swg.zone.object_controller.*;
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue.ErrorCode;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue;
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer;
-import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
@@ -16,11 +15,16 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ValidWeapon;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
+import com.projectswg.holocore.resources.support.global.commands.State;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -58,8 +62,7 @@ public class CommandQueueService extends Service {
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
-		if (p instanceof CommandQueueEnqueue) {
-			CommandQueueEnqueue request = (CommandQueueEnqueue) p;
+		if (p instanceof CommandQueueEnqueue request) {
 			Command command = DataLoader.Companion.commands().getCommand(request.getCommandCrc());
 			if (command == null) {
 				if (request.getCommandCrc() != 0)
@@ -134,7 +137,28 @@ public class CommandQueueService extends Service {
 			StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "executed command %s", command.getCommand().getName());
 			
 			Command rootCommand = command.getCommand();
-			ErrorCode error = checkCommand(command);
+			
+			double warmupTime = rootCommand.getWarmupTime();
+			
+			if (warmupTime > 0) {
+				CommandTimer warmupTimer = new CommandTimer(command.getSource().getObjectId());
+				warmupTimer.addFlag(CommandTimer.CommandTimerFlag.WARMUP);
+				warmupTimer.setCommandNameCrc(rootCommand.getCrc());
+				warmupTimer.setCooldownGroupCrc(0);
+				warmupTimer.setWarmupTime((float) warmupTime);
+				
+				command.getSource().sendSelf(warmupTimer);
+				
+				executor.execute((long) (warmupTime * 1000), () -> executeCommandNow(command));
+			} else {
+				executeCommandNow(command);
+			}
+		}
+		
+		private void executeCommandNow(EnqueuedCommand command) {
+			Command rootCommand = command.getCommand();
+			CheckCommandResult checkCommandResult = checkCommand(command);
+			ErrorCode error = checkCommandResult.getErrorCode();
 			if (error == ErrorCode.SUCCESS) {
 				if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
 					if (!activeCooldownGroups.add(rootCommand.getCooldownGroup()))
@@ -151,11 +175,13 @@ public class CommandQueueService extends Service {
 				ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
 			}
 			
-			sendQueueRemove(command, error);
+			sendQueueRemove(command, checkCommandResult);
 		}
 		
-		private void sendQueueRemove(EnqueuedCommand command, ErrorCode error) {
-			command.getSource().sendSelf(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), error, 0));
+		private void sendQueueRemove(EnqueuedCommand command, CheckCommandResult checkCommandResult) {
+			ErrorCode error = checkCommandResult.getErrorCode();
+			int action = checkCommandResult.getAction();
+			command.getSource().sendSelf(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), error, action));
 		}
 		
 		private boolean isValidCooldownGroup(String group) {
@@ -163,26 +189,78 @@ public class CommandQueueService extends Service {
 		}
 		
 		private void startCooldownGroup(CreatureObject creature, Command command, String group, double cooldownTime, int counter) {
+			float moddedWeaponAttackSpeedWithCap = creature.getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(creature);
+			
 			CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 			commandTimer.setCooldownGroupCrc(CRC.getCrc(group));
-			commandTimer.setCooldownMax((float) cooldownTime);
+			commandTimer.setGlobalCooldownTime(moddedWeaponAttackSpeedWithCap);
+			commandTimer.setCooldownGroupTime((float) cooldownTime);
 			commandTimer.setCommandNameCrc(command.getCrc());
 			commandTimer.setSequenceId(counter);
 			commandTimer.addFlag(CommandTimer.CommandTimerFlag.COOLDOWN);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.COOLDOWN2);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.EXECUTE);
 			creature.sendSelf(commandTimer);
 			
-			executor.execute((long) (cooldownTime * 1000), () -> activeCooldownGroups.remove(group));
+			executor.execute((long) ((cooldownTime + moddedWeaponAttackSpeedWithCap) * 1000), () -> activeCooldownGroups.remove(group));
 		}
 		
-		private ErrorCode checkCommand(EnqueuedCommand command) {
+		private CheckCommandResult checkCommand(EnqueuedCommand command) {
 			Command rootCommand = command.getCommand();
-			if (rootCommand instanceof CombatCommand) {
-				CombatCommand combatCommand = (CombatCommand) rootCommand;
+			CreatureObject source = command.getSource();
+			Set<Locomotion> disallowedLocomotions = rootCommand.getDisallowedLocomotions();
+			Set<Locomotion> sourceLocomotions = new HashSet<>();
+			
+			@NotNull Locomotion[] locomotions = Locomotion.values();
+			
+			for (Locomotion locomotion : locomotions) {
+				boolean active = locomotion.isActive(source);
+				
+				if (active) {
+					sourceLocomotions.add(locomotion);
+				}
+			}
+			
+			for (Locomotion disallowedLocomotion : disallowedLocomotions) {
+				if (sourceLocomotions.contains(disallowedLocomotion)) {
+					return new CheckCommandResult(ErrorCode.LOCOMOTION, disallowedLocomotion.getLocomotionTableId());
+				}
+			}
+			
+			Set<State> disallowedStates = rootCommand.getDisallowedStates();
+			Set<State> sourceStates = new HashSet<>();
+			
+			@NotNull State[] states = State.values();
+			
+			for (State state : states) {
+				boolean active = state.isActive(source);
+				
+				if (active) {
+					sourceStates.add(state);
+				}
+			}
+			
+			for (State disallowedState : disallowedStates) {
+				if (sourceStates.contains(disallowedState)) {
+					return new CheckCommandResult(ErrorCode.STATE_PROHIBITED, disallowedState.getStateTableId());
+				}
+			}
+			
+			ValidWeapon validWeapon = rootCommand.getValidWeapon();
+			WeaponObject equippedWeapon = source.getEquippedWeapon();
+			WeaponType equippedWeaponType = equippedWeapon.getType();
+			
+			if (!validWeapon.isValid(equippedWeaponType)) {
+				showInvalidWeaponFlyText(source);
+				return new CheckCommandResult(ErrorCode.CANCELLED, 0);
+			}
+			
+			if (rootCommand instanceof CombatCommand combatCommand) {
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
 					switch (combatCommand.getTargetType()) {
 						case NONE:
-							target = command.getSource();
+							target = source;
 							break;
 						case REQUIRED:
 							target  = command.getTarget();
@@ -190,9 +268,9 @@ public class CommandQueueService extends Service {
 						case OPTIONAL:
 						case ALL:
 							if (command.getTarget() == null) {
-								target = command.getSource();
+								target = source;
 							} else if (command.getTarget() instanceof CreatureObject) {
-								target = command.getSource().isAttackable((CreatureObject) command.getTarget()) ? command.getSource() : command.getTarget();
+								target = source.isAttackable((CreatureObject) command.getTarget()) ? source : command.getTarget();
 							} else {
 								target = null;
 							}
@@ -202,10 +280,14 @@ public class CommandQueueService extends Service {
 							break;
 					}
 					if (target instanceof CreatureObject && ((CreatureObject) target).getHealth() == ((CreatureObject) target).getMaxHealth())
-						return ErrorCode.CANCELLED;
+						return new CheckCommandResult(ErrorCode.CANCELLED, 0);
 				}
 			}
-			return ErrorCode.SUCCESS;
+			return new CheckCommandResult(ErrorCode.SUCCESS, 0);
+		}
+		
+		private void showInvalidWeaponFlyText(CreatureObject source) {
+			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255)));
 		}
 		
 	}

@@ -2,6 +2,7 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -61,18 +62,39 @@ public class CombatRegenerationService extends Service {
 	private void regenerate(CreatureObject creature) {
 		regenerationHealthTick(creature);
 		regenerationActionTick(creature);
+		regenerationMindTick(creature);
 	}
 	
 	private void regenerationActionTick(CreatureObject creature) {
 		if (creature.getAction() >= creature.getMaxAction())
 			return;
 		
-		int modification = creature.getMaxAction() / 10;
+		int modification = creature.getMaxAction() / 40;
 		
 		if (!creature.isInCombat())
-			modification *= 4;
+			modification *= 2;
+		
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
 		
 		creature.modifyAction(modification);
+	}
+	
+	private void regenerationMindTick(CreatureObject creature) {
+		if (creature.getMind() >= creature.getMaxMind())
+			return;
+		
+		int modification = creature.getMaxMind() / 40;
+		
+		if (!creature.isInCombat())
+			modification *= 2;
+		
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
+		
+		creature.modifyMind(modification);
 	}
 	
 	private void regenerationHealthTick(CreatureObject creature) {
@@ -86,10 +108,11 @@ public class CombatRegenerationService extends Service {
 				break;
 		}
 		
-		int modification = creature.getMaxHealth() / 10;
+		int modification = creature.getMaxHealth() / 40;
 		
-		if (!creature.isInCombat())
-			modification *= 4;
+		if (Locomotion.SITTING.isActive(creature)) {
+			modification *= 2;
+		}
 		
 		creature.modifyHealth(modification);
 	}

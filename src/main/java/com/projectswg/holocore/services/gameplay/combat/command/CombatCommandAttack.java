@@ -35,15 +35,23 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
+import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.*;
@@ -60,29 +68,27 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		if (!handleStatus(source, canPerform(source, target, command)))
 			return;
 		
-		WeaponObject weapon = source.getEquippedWeapon();
-		
 		for (int i = 0; i < command.getAttackRolls(); i++) {
 			AttackInfo info = new AttackInfo();
 			
 			switch (command.getAttackType()) {
 				case SINGLE_TARGET:
-					doCombatSingle(source, target, info, weapon, command);
+					doCombatSingle(source, target, info, command);
 					break;
 				case AREA:
-					doCombatArea(source, source, info, weapon, command, false);
+					doCombatArea(source, source, info, command, false);
 					break;
 				case TARGET_AREA:
 					if (target != null) {
 						// Same as AREA, but the target is the destination for the AoE and  can take damage
-						doCombatArea(source, delayEgg != null ? delayEgg : target, info, weapon, command, true);
+						doCombatArea(source, delayEgg != null ? delayEgg : target, info, command, true);
 					} else {
 						// TODO AoE based on Location instead of delay egg (free-targeting with heavy weapons)
 					}
 					break;
 				case CONE:
 					if (target != null) {
-						doCombatCone(source, target, info, weapon, command);
+						doCombatCone(source, target, info, command);
 					} else {
 						// TODO CoE based on Location (free-targeting with flamethrowers)
 					}
@@ -93,7 +99,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		}
 	}
 	
-	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, CombatCommand command) {
 		double coneLength = command.getConeLength();
 		double coneWidth = command.getConeWidth();
 		
@@ -117,11 +123,11 @@ enum CombatCommandAttack implements CombatCommandHitType {
 				})
 				.collect(Collectors.toSet());
 		
-		doCombat(source, targets, weapon, info, command);
+		doCombat(source, targets, info, command);
 	}
 
-	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
-		doCombatCone(source, target.getWorldLocation(), info, weapon, command);
+	private void doCombatCone(CreatureObject source, SWGObject target, AttackInfo info, CombatCommand command) {
+		doCombatCone(source, target.getWorldLocation(), info, command);
 	}
 
 	boolean isInConeAngle(Location attackerLocation, Location targetLocation, double coneWidth, double directionX, double directionZ) {
@@ -135,19 +141,17 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return !(Math.abs(degrees) > coneWidth);
 	}
 	
-	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, WeaponObject weapon, CombatCommand command) {
+	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, CombatCommand command) {
 		Set<CreatureObject> targets = new HashSet<>();
 		
-		if (target instanceof CreatureObject) {
-			CreatureObject creatureTarget = (CreatureObject) target;
-
+		if (target instanceof CreatureObject creatureTarget) {
 			targets.add(creatureTarget);
 		}
 		
-		doCombat(source, targets, weapon, info, command);
+		doCombat(source, targets, info, command);
 	}
 	
-	private static void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, WeaponObject weapon, CombatCommand command, boolean includeOrigin) {
+	private static void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, CombatCommand command, boolean includeOrigin) {
 		double aoeRange = command.getConeLength();
 		SWGObject originParent = origin.getParent();
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
@@ -164,15 +168,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		if (includeOrigin && origin instanceof CreatureObject)
 			targets.add((CreatureObject) origin);
 		
-		doCombat(source, targets, weapon, info, command);
+		doCombat(source, targets, info, command);
 	}
 	
-	private static void doCombat(CreatureObject source, Set<CreatureObject> targets, WeaponObject weapon, AttackInfo info, CombatCommand command) {
+	private static void doCombat(CreatureObject source, Set<CreatureObject> targets, AttackInfo info, CombatCommand command) {
 		source.updateLastCombatTime();
+		WeaponObject sourceWeapon = source.getEquippedWeapon();
 		
-		CombatAction action = createCombatAction(source, weapon, TrailLocation.WEAPON, command);
-		double weaponDamageBoost = 1.0;	// Damage increase of the weapon
-		double addedDamageBoost = 1.0;	// Damage increase of the command
+		CombatAction action = createCombatAction(source, sourceWeapon, TrailLocation.WEAPON, command);
+		double weaponDamageMod = calculateWeaponDamageMod(source, sourceWeapon);
 		
 		for (CreatureObject target : targets) {
 			target.updateLastCombatTime();
@@ -180,20 +184,40 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			EnterCombatIntent.broadcast(source, target);
 			EnterCombatIntent.broadcast(target, source);
 			
-			if (!info.isSuccess()) {    // Single target negate, like dodge or parry!
-				target.sendObservers(createCombatSpam(source, target, weapon, info, command));
+			double toHit = calculateToHit(source, sourceWeapon, target);
+			
+			if (randomNumberBetween0And100() > toHit) {
+				info.setSuccess(false);
+				
+				ShowFlyText missFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "miss"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255));
+				target.sendSelf(missFlyText);
+				source.sendSelf(missFlyText);
+				
+				for (CreatureObject observerCreature : target.getObserverCreatures()) {
+					observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command, CombatSpamType.MISS));
+				}
+				
 				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 				continue;	// This target negated the attack completely - move on to the next target
 			}
 			
+			double knockdownChance = command.getKnockdownChance();
+			if (knockdownChance > 0) {
+				if (randomNumberBetween0And100() < knockdownChance) {
+					KnockdownIntent.broadcast(target);
+				} else {
+					String yourAttackFailedToKnockDownYourOpponent = "@cbt_spam:knockdown_fail";
+					SystemMessageIntent.broadcastPersonal(source.getOwner(), yourAttackFailedToKnockDownYourOpponent);
+				}
+			}
+			
 			addBuff(source, target, command.getBuffNameTarget());    // Add target buff
 			
-			DamageType damageType = getDamageType(command, weapon);	// Will be based on the equipped weapon or the combat command
-			int weaponDamage = calculateWeaponDamage(source, weapon, command);
+			DamageType damageType = getDamageType(command, sourceWeapon);	// Will be based on the equipped weapon or the combat command
+			int weaponDamage = calculateBaseWeaponDamage(sourceWeapon, command);
 			int addedDamage = command.getAddedDamage();
 			
-			weaponDamage *= weaponDamageBoost;
-			addedDamage *= addedDamageBoost;
+			weaponDamage += weaponDamageMod;
 			
 			int rawDamage = weaponDamage + addedDamage;
 			
@@ -203,10 +227,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			// The armor of the target will mitigate some of the damage
 			armorMitigate(info, damageType, target, command);
-			
-			if (info.isGlancing()) {
-				handleGlancingBlow(info, target);
-			}
 			
 			// End rolls
 			int targetHealth = target.getHealth();
@@ -222,7 +242,10 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			info.setFinalDamage(finalDamage);
 			
-			target.sendObservers(createCombatSpam(source, target, weapon, info, command));
+			for (CreatureObject observerCreature : target.getObserverCreatures()) {
+				observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, command, CombatSpamType.HIT));
+			}
+			
 			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
 			
 			target.handleDamage(source, finalDamage);
@@ -231,10 +254,119 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		source.sendObservers(action);
 	}
 	
+	private static double calculateToHit(CreatureObject source, WeaponObject sourceWeapon, CreatureObject target) {
+		int accMod = calculateAccMod(source, sourceWeapon);
+		int defMod = calculateDefMod(target);
+		int defPosMod = calculateDefPosMod(sourceWeapon, target);
+		int aimShot = 0;	// TODO The sum of your General Ranged Aiming, and weapon-specific Aiming mods. Only applies if you use Aim prior to your attack.
+		int covMod = 0;	// TODO Defense Modifier for the take cover ability
+		int atkPosMod = calculateAtkPosMod(source);
+		int atkStateMod = 0; // TODO Attackers modifiers for being blind or intimidated. Example of Attacker modifier would be -50 signifying that the attacker suffers a penalty to accuracy. Intimidate and Blind state penalties are unknown factors but it is estimated to be -50 penalty to the hit chance.
+		int defStateMod = 0;	// TODO Defenders modifiers for being stunned, or intimidated . Example of Defender Modifier would be +50 signifying the defender being easier to hit. Stunned and intimidate factors are unknown but it is estimated that they lower primary (melee and ranged) defenses by -50
+		
+		return 66 + ( accMod - defMod - defPosMod + aimShot - covMod ) / (2d + ( atkPosMod + atkStateMod + defStateMod ) );
+	}
+	
+	private static int calculateAtkPosMod(CreatureObject source) {
+		if (Locomotion.RUNNING.isActive(source)) {
+			return -50;
+		}
+		
+		if (Locomotion.STANDING.isActive(source)) {
+			return 0;
+		}
+		
+		if (Locomotion.KNEELING.isActive(source)) {
+			return 16;
+		}
+		
+		if (Locomotion.PRONE.isActive(source)) {
+			return 50;
+		}
+		
+		return 0;
+	}
+	
+	private static int calculateDefPosMod(WeaponObject sourceWeapon, CreatureObject target) {
+		if (Locomotion.RUNNING.isActive(target)) {
+			return -25;
+		}
+		
+		if (Locomotion.STANDING.isActive(target)) {
+			return 0;
+		}
+		
+		if (Locomotion.KNEELING.isActive(target)) {
+			WeaponType sourceWeaponType = sourceWeapon.getType();
+			
+			if (sourceWeaponType.isRanged()) {
+				return -16;
+			}
+			
+			if (sourceWeaponType.isMelee()) {
+				return 16;
+			}
+		}
+		
+		if (Locomotion.PRONE.isActive(target)) {
+			WeaponType sourceWeaponType = sourceWeapon.getType();
+			
+			if (sourceWeaponType.isRanged()) {
+				return -25;
+			}
+			
+			if (sourceWeaponType.isMelee()) {
+				return 25;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private static int randomNumberBetween0And100() {
+		return ThreadLocalRandom.current().nextInt(0, 101);
+	}
+	
+	private static int calculateAccMod(CreatureObject source, WeaponObject sourceWeapon) {
+		WeaponType sourceWeaponType = sourceWeapon.getType();
+		Collection<String> accuracySkillMods = sourceWeaponType.getAccuracySkillMods();
+		int accMod = sourceWeapon.getAccuracy();
+		
+		for (String accuracySkillMod : accuracySkillMods) {
+			accMod += source.getSkillModValue(accuracySkillMod);
+		}
+		
+		return accMod;
+	}
+	
+	private static int calculateDefMod(CreatureObject target) {
+		int defMod = 0;
+		WeaponObject targetWeapon = target.getEquippedWeapon();
+		WeaponType targetWeaponType = targetWeapon.getType();
+		Collection<String> defenseSkillMods = targetWeaponType.getDefenseSkillMods();
+		for (String defenseSkillMod : defenseSkillMods) {
+			defMod += target.getSkillModValue(defenseSkillMod);
+		}
+		
+		defMod += target.getSkillModValue("private_defense_bonus");
+		
+		return defMod;
+	}
+	
+	private static int calculateWeaponDamageMod(CreatureObject source, WeaponObject weapon) {
+		WeaponType type = weapon.getType();
+		
+		if (type == WeaponType.UNARMED) {
+			return source.getSkillModValue("unarmed_damage");
+		} else {
+			return 0;
+		}
+	}
+	
 	private static void armorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
 		// Armor mitigation
 		int armor = getArmor(damageType, target);
-		float armorReduction = getArmorReduction(target, damageType, command);
+		float armorReduction = getArmorReduction(armor, command);
 		int currentDamage = info.getFinalDamage();
 		int armorAbsorbed = (int) (currentDamage * armorReduction);
 		currentDamage -= armorAbsorbed;
@@ -245,30 +377,54 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		info.setFinalDamage(currentDamage);
 	}
 	
-	private static void handleGlancingBlow(AttackInfo info, SWGObject target) {
-		int finalDamage = info.getFinalDamage();
-		
-		// Glancing blows cause only 40% damage to be applied
-		finalDamage *= 0.4;
-		
-		info.setFinalDamage(finalDamage);
-		
-		// Show Glancing flytext above the object that rolled a glancing blow
-		ShowFlyText glancingFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "glancing_blow"), ShowFlyText.Scale.MEDIUM, new RGB(0, 160, 0));
-		
-		target.sendSelf(glancingFlyText);
-	}
-	
 	private static int getArmor(DamageType damageType, CreatureObject creature) {
-		switch (damageType) {
-			case KINETIC:				return creature.getSkillModValue("kinetic");
-			case ENERGY:				return creature.getSkillModValue("energy");
-			case ELEMENTAL_HEAT:		return creature.getSkillModValue("heat");
-			case ELEMENTAL_COLD:		return creature.getSkillModValue("cold");
-			case ELEMENTAL_ACID:		return creature.getSkillModValue("acid");
-			case ELEMENTAL_ELECTRICAL:	return creature.getSkillModValue("electricity");
-			default:					return 0;
+		int armProtection = 7;
+		Map<String, Integer> protectionMap = Map.of(
+				"chest2", 35,
+				"pants1", 20,
+				"hat", 14,
+				"bracer_upper_l", armProtection,
+				"bracer_upper_r", armProtection,
+				"bicep_l", armProtection,
+				"bicep_r", armProtection,
+				"utility_belt", 3
+		);
+		
+		double armor = 0;
+		
+		for (Map.Entry<String, Integer> entry : protectionMap.entrySet()) {
+			String slot = entry.getKey();
+			TangibleObject slottedObject = (TangibleObject) creature.getSlottedObject(slot);
+			
+			if (slottedObject != null) {
+				Protection protection = slottedObject.getProtection();
+				
+				if (protection != null) {
+					int protectionFromArmorPiece = switch (damageType) {
+						case KINETIC -> protection.getKinetic();
+						case ENERGY -> protection.getEnergy();
+						case ELEMENTAL_HEAT -> protection.getHeat();
+						case ELEMENTAL_COLD -> protection.getCold();
+						case ELEMENTAL_ACID -> protection.getAcid();
+						case ELEMENTAL_ELECTRICAL -> protection.getElectricity();
+						default -> 0;
+					};
+					
+					Integer value = entry.getValue();
+					
+					armor += protectionFromArmorPiece * (value / 100d);
+				}
+			}
 		}
+		
+		int privateArmorBreak = creature.getSkillModValue("private_armor_break");
+		
+		if (privateArmorBreak > 0) {
+			double armorBreakPercent = privateArmorBreak / 10d;
+			armor *= (1 - armorBreakPercent / 100d);
+		}
+		
+		return (int) armor;
 	}
 	
 	/**
@@ -281,16 +437,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return command.getPercentAddFromWeapon() > 0 ? weapon.getDamageType() : command.getElementalType();
 	}
 	
-	/**
-	 *
-	 * @param target to read armor values from
-	 * @param damageType to get an armor value for
-	 * @param command that has been executed by an enemy of {@code target}
-	 * @return a number between 0.0 and 1.0
-	 */
-	private static float getArmorReduction(CreatureObject target, DamageType damageType, CombatCommand command) {
-		int baseArmor = getArmor(damageType, target);
-
+	private static float getArmorReduction(int baseArmor, CombatCommand command) {
 		double commandBypassArmor = command.getBypassArmor();
 		
 		if(commandBypassArmor > 0) {

@@ -29,15 +29,13 @@ package com.projectswg.holocore.resources.support.objects.swg.player;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.encoding.StringType;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 
 /**
  * PLAY 6
  */
 @SuppressWarnings("ClassWithTooManyFields") // forced to by SWG protocol
-class PlayerObjectSharedNP implements Persistable, MongoPersistable {
+class PlayerObjectSharedNP implements MongoPersistable {
 	
 	private final PlayerObject obj;
 	
@@ -106,22 +104,6 @@ class PlayerObjectSharedNP implements Persistable, MongoPersistable {
 	public void readMongo(MongoData data) {
 		adminTag = (byte) data.getInteger("adminTag", adminTag);
 		defaultAttackOverride = data.getString("defaultAttackOverride", defaultAttackOverride);
-	}
-
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addInt(adminTag);
-		stream.addAscii(home);
-		stream.addBoolean(citizen);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		adminTag = stream.getByte();
-		home = stream.getAscii();
-		citizen = stream.getBoolean();
 	}
 
 	private void sendDelta(int update, Object o) {

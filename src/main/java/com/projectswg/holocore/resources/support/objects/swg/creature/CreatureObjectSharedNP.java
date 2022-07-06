@@ -30,14 +30,9 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.network.packets.swg.zone.object_controller.BuffAddUpdate;
-import com.projectswg.common.network.packets.swg.zone.object_controller.BuffRemoveUpdate;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.Equipment;
@@ -45,12 +40,10 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-class CreatureObjectSharedNP implements Persistable, MongoPersistable {
+class CreatureObjectSharedNP implements MongoPersistable {
 
 	private final CreatureObject obj;
 	
@@ -76,7 +69,7 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	private AttributesMutable	maxAttributes;
 	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
 
-	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 26);
+	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 19);
 	
 	public CreatureObjectSharedNP(CreatureObject obj) {
 		this.obj = obj;
@@ -315,7 +308,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 			CRC crc = new CRC(buff.getCrc());
 			assert !buffs.containsKey(crc) : "Cannot add a buff twice!";
 			buffs.put(crc, buff);
-			target.sendObservers(new BuffAddUpdate(target.getObjectId(), crc.getCrc(), buff.getDuration()));
 			buffs.sendDeltaMessage(target);
 		}
 	}
@@ -324,7 +316,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		synchronized (buffs) {
 			Buff removedBuff = buffs.remove(buffCrc);
 			if (removedBuff != null) {
-				target.sendObservers(new BuffRemoveUpdate(target.getObjectId(), buffCrc.getCrc()));
 				buffs.sendDeltaMessage(target);
 			}
 
@@ -335,23 +326,6 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
 		synchronized (buffs) {
 			return new ArrayList<>(buffs.values()).stream().filter(predicate);
-		}
-	}
-	
-	public void setBuffDuration(CRC buffCrc, int playTime, int duration, SWGObject target) {
-		safeModifyBuff(buffCrc, target, buff -> {
-			buff.setEndTime(playTime + duration);
-			buff.setDuration(duration);
-		});
-	}
-	
-	private void safeModifyBuff(CRC buffCrc, SWGObject target, Consumer<Buff> operation) {
-		synchronized (buffs) {
-			Buff buff = buffs.get(buffCrc);
-			Objects.requireNonNull(buff, "Buff cannot be null");
-			operation.accept(buff);
-			buffs.update(buffCrc);
-			buffs.sendDeltaMessage(target);
 		}
 	}
 	
@@ -368,28 +342,28 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 	}
 	
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		bb.addShort(level); // 8
-		bb.addInt(levelHealthGranted); // 9
-		bb.addAscii(animation); // 10
-		bb.addAscii(moodAnimation); // 11
-		bb.addLong(equippedWeapon); // 12
-		bb.addLong(groupId); // 13
-		bb.addObject(inviterData); // 14
-		bb.addInt(guildId); // 15
-		bb.addLong(lookAtTargetId); // 16
-		bb.addByte(moodId); // 18
-		bb.addInt(performanceCounter); // 19
-		bb.addInt(performanceId); // 20
-		bb.addObject(attributes); // 21
-		bb.addObject(maxAttributes); // 22
-		bb.addObject(equipmentList); // 23
-		bb.addAscii(costume); // 24
-		bb.addBoolean(visible); // 25
-		bb.addObject(buffs); // 26
-		bb.addBoolean(performing); // 27
-		bb.addByte(difficulty.getDifficulty()); // 28
+		bb.addShort(level); // 2
+		bb.addInt(levelHealthGranted); // 3
+		bb.addAscii(animation); // 4
+		bb.addAscii(moodAnimation); // 5
+		bb.addLong(equippedWeapon); // 6
+		bb.addLong(groupId); // 7
+		bb.addObject(inviterData); // 8
+		bb.addInt(guildId); // 9
+		bb.addLong(lookAtTargetId); // 10
+		bb.addByte(moodId); // 11
+		bb.addInt(performanceCounter); // 12
+		bb.addInt(performanceId); // 13
+		bb.addObject(attributes); // 14
+		bb.addObject(maxAttributes); // 15
+		bb.addObject(equipmentList); // 16
+		bb.addAscii(costume); // 17
+		bb.addBoolean(visible); // 18
+		bb.addObject(buffs); // 19
+		bb.addBoolean(performing); // 20
+		bb.addByte(difficulty.getDifficulty()); // 21
 		
-		bb.incrementOperandCount(21);
+		bb.incrementOperandCount(19);
 	}
 	
 	public void parseBaseline6(NetBuffer buffer) {
@@ -407,10 +381,10 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		performanceId = buffer.getInt();
 		attributes.decode(buffer);
 		maxAttributes.decode(buffer);
-		equipmentList = SWGList.getSwgList(buffer, 6, 23, Equipment.class);
+		equipmentList = SWGList.getSwgList(buffer, 6, 16, Equipment.class);
 		costume = buffer.getAscii();
 		visible = buffer.getBoolean();
-		buffs = SWGMap.getSwgMap(buffer, 6, 26, CRC.class, Buff.class);
+		buffs = SWGMap.getSwgMap(buffer, 6, 19, CRC.class, Buff.class);
 		performing = buffer.getBoolean();
 		difficulty = CreatureDifficulty.getForDifficulty(buffer.getByte());
 		buffer.getBoolean();
@@ -455,157 +429,4 @@ class CreatureObjectSharedNP implements Persistable, MongoPersistable {
 		buffs.putAll(data.getMap("buffs", CRC.class, Buff.class));
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(5);
-		stream.addShort(level);
-		stream.addInt(levelHealthGranted);
-		stream.addAscii(animation);
-		stream.addAscii(moodAnimation);
-		stream.addInt(guildId);
-		stream.addLong(lookAtTargetId);
-		stream.addByte(moodId);
-		stream.addAscii(costume);
-		stream.addBoolean(visible);
-		stream.addAscii(difficulty.name());
-		stream.addLong(equippedWeapon);
-
-		maxAttributes.save(stream);
-		synchronized (buffs) {
-			stream.addMap(buffs, (e) -> e.getValue().save(stream));
-		}
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		switch(stream.getByte()) {
-			case 0: readVersion0(stream); break;
-			case 1: readVersion1(stream); break;
-			case 2: readVersion2(stream); break;
-			case 3: readVersion3(stream); break;
-			case 4: readVersion4(stream); break;
-			case 5: readVersion5(stream); break;
-		}
-		attributes.setHealth(maxAttributes.getHealth());
-		attributes.setHealthRegen(maxAttributes.getHealthRegen());
-		attributes.setAction(maxAttributes.getAction());
-		attributes.setActionRegen(maxAttributes.getActionRegen());
-		attributes.setMind(maxAttributes.getMind());
-		attributes.setMindRegen(maxAttributes.getMindRegen());
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		level = stream.getShort();
-		levelHealthGranted = stream.getInt();
-		animation = stream.getAscii();
-		moodAnimation = stream.getAscii();
-		guildId = stream.getInt();
-		lookAtTargetId = stream.getLong();
-		moodId = stream.getByte();
-		costume = stream.getAscii();
-		visible = stream.getBoolean();
-		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		if (stream.getBoolean())
-			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
-		readAttributes((byte) 0, attributes, stream);
-		readAttributes((byte) 0, maxAttributes, stream);
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		level = stream.getShort();
-		levelHealthGranted = stream.getInt();
-		animation = stream.getAscii();
-		moodAnimation = stream.getAscii();
-		guildId = stream.getInt();
-		lookAtTargetId = stream.getLong();
-		moodId = stream.getByte();
-		costume = stream.getAscii();
-		visible = stream.getBoolean();
-		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		if (stream.getBoolean())
-			equippedWeapon = SWGObjectFactory.create(stream).getObjectId();
-		readAttributes((byte) 1, maxAttributes, stream);
-	}
-	
-	private void readVersion2(NetBufferStream stream) {
-		readVersion1(stream);
-		stream.getList((i) -> {
-			CRC crc = new CRC();
-			Buff buff = new Buff();
-			
-			crc.read(stream);
-			buff.readOld(stream); // old buff persistence did not have version byte
-			buff.setCrc(crc.getCrc());
-			buffs.put(crc, buff);
-		});
-	}
-	
-	private void readVersion3(NetBufferStream stream) {
-		readVersion1(stream);
-		stream.getList((i) -> {
-			Buff buff = new Buff();
-			
-			buff.read(stream);
-			buffs.put(new CRC(buff.getCrc()), buff);
-		});
-	}
-	
-	private void readVersion4(NetBufferStream stream) {
-		level = stream.getShort();
-		levelHealthGranted = stream.getInt();
-		animation = stream.getAscii();
-		moodAnimation = stream.getAscii();
-		guildId = stream.getInt();
-		lookAtTargetId = stream.getLong();
-		moodId = stream.getByte();
-		costume = stream.getAscii();
-		visible = stream.getBoolean();
-		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		equippedWeapon = stream.getLong();
-		readAttributes((byte) 4, maxAttributes, stream);
-		stream.getList((i) -> {
-			Buff buff = new Buff();
-
-			buff.read(stream);
-			buffs.put(new CRC(buff.getCrc()), buff);
-		});
-	}
-
-	private void readVersion5(NetBufferStream stream) {
-		level = stream.getShort();
-		levelHealthGranted = stream.getInt();
-		animation = stream.getAscii();
-		moodAnimation = stream.getAscii();
-		guildId = stream.getInt();
-		lookAtTargetId = stream.getLong();
-		moodId = stream.getByte();
-		costume = stream.getAscii();
-		visible = stream.getBoolean();
-		difficulty = CreatureDifficulty.valueOf(stream.getAscii());
-		equippedWeapon = stream.getLong();
-		maxAttributes.read(stream);
-		stream.getList((i) -> {
-			Buff buff = new Buff();
-
-			buff.read(stream);
-			buffs.put(new CRC(buff.getCrc()), buff);
-		});
-	}
-
-	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
-		if (ver <= 4) {
-			int [] array = new int[6];
-			stream.getList((i) -> array[i] = stream.getInt());
-			attributes.setHealth(array[0]);
-			attributes.setHealthRegen(array[1]);
-			attributes.setAction(array[2]);
-			attributes.setActionRegen(array[3]);
-			attributes.setMind(array[4]);
-			attributes.setMindRegen(array[5]);
-		} else {
-			attributes.read(stream);
-		}
-
-	}
-
 }

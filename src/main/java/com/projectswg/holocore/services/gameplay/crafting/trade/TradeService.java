@@ -187,7 +187,7 @@ public class TradeService extends Service {
 		
 		SWGObject tradeObject = ObjectLookup.getObjectById(SWGPacket.getObjectId());
 		
-		if (tradeObject == null || tradeObject.hasAttribute("no_trade") || tradeObject.getSuperParent() != creature) {
+		if (tradeObject == null || tradeObject.isNoTrade() || tradeObject.getSuperParent() != creature) {
 			Log.w("Invalid object to trade: %s for creature: %s", tradeObject, creature);
 			tradeSession.abortTrade();
 			return;

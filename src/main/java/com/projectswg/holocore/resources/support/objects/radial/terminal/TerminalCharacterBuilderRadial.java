@@ -5,6 +5,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.sui.SuiEvent;
+import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -47,6 +48,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Tools");
 				listBox.addListItem("ITEMS - Vehicles");
 				listBox.addListItem("Credits");
+				listBox.addListItem("Knockdown");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -66,14 +68,21 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 4: handleTools(player); break;
 			case 5: handleVehicles(player); break;
 			case 6: handleCredits(player); break;
+			case 7: handleKnockdown(player); break;
 		}
+	}
+
+	private static void handleKnockdown(Player player) {
+		CreatureObject victim = player.getCreatureObject();
+		
+		KnockdownIntent.broadcast(victim);
 	}
 
 	private static void spawnItems(Player player, String ... items) {
 		CreatureObject creature = player.getCreatureObject();
 		SWGObject inventory = creature.getSlottedObject("inventory");
 
-		new CreateStaticItemIntent(creature, inventory, new StaticItemService.LootBoxHandler(creature), items).broadcast();
+		new CreateStaticItemIntent(creature, inventory, new StaticItemService.SystemMessageHandler(creature), items).broadcast();
 	}
 
 	private static void handleCredits(Player player) {
@@ -283,9 +292,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleWeapons(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a weapon category to receive a weapon of that type.");
 
-		listBox.addListItem("Lightsaber");
-		listBox.addListItem("Melee");
-		listBox.addListItem("Ranged");
+		listBox.addListItem("LOW - Lightsaber");
+		listBox.addListItem("LOW - Melee");
+		listBox.addListItem("LOW - Ranged");
+		listBox.addListItem("MEDIUM - Lightsaber");
+		listBox.addListItem("MEDIUM - Melee");
+		listBox.addListItem("MEDIUM - Ranged");
+		listBox.addListItem("HIGH - Lightsaber");
+		listBox.addListItem("HIGH - Melee");
+		listBox.addListItem("HIGH - Ranged");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleWeaponSelection", (event, parameters) -> handleWeaponSelection(player, parameters));
 		listBox.display(player);
@@ -295,71 +310,96 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		int selection = SuiListBox.getSelectedRow(parameters);
 
 		switch (selection) {
-			case 0: handleLightsaber(player); break;
-			case 1: handleMelee(player); break;
-			case 2: handleRanged(player); break;
+			case 0: handleLowLightsaber(player); break;
+			case 1: handleLowMelee(player); break;
+			case 2: handleLowRanged(player); break;
+			case 3: handleMediumLightsaber(player); break;
+			case 4: handleMediumMelee(player); break;
+			case 5: handleMediumRanged(player); break;
+			case 6: handleHighLightsaber(player); break;
+			case 7: handleHighMelee(player); break;
+			case 8: handleHighRanged(player); break;
 
 		}
 	}
 
-	private static void handleLightsaber(Player player) {
+	private static void handleLowLightsaber(Player player) {
 		spawnItems(player,
-				"test_low_polearm_saber",
-				"test_low_1h_saber",
-				"test_low_2h_saber",
-				"test_medium_polearm_saber",
-				"test_medium_1h_saber",
-				"test_medium_2h_saber",
-				"test_high_polearm_saber",
-				"test_high_1h_saber",
-				"test_high_2h_saber",
-				"item_color_crystal_02_16",	// Bane's Heart
-				"item_color_crystal_02_19",	// B'nar's Sacrifice
-				"item_color_crystal_02_20",	// Windu's Guile
-				"item_color_crystal_02_28",	// Kenobi's Legacy
-				"item_color_crystal_02_29",	// Sunrider's Destiny
-				"item_power_crystal_04_01",	// Power crystal
-				"item_power_crystal_04_04",	// Power crystal
-				"item_power_crystal_04_07",	// Power crystal
-				"item_power_crystal_04_09",	// Power crystal
-				"item_power_crystal_04_20"	// Power crystal
+				"weapon_test_low_polearm_saber",
+				"weapon_test_low_1h_saber",
+				"weapon_test_low_2h_saber"
 		);
 	}
 
-	private static void handleMelee(Player player) {
+	private static void handleMediumLightsaber(Player player) {
 		spawnItems(player,
-				"test_low_polearm",
-				"test_low_unarmed",
-				"test_low_1h",
-				"test_low_2h",
-				"test_medium_polearm",
-				"test_medium_unarmed",
-				"test_medium_1h",
-				"test_medium_2h",
-				"test_high_polearm",
-				"test_high_unarmed",
-				"test_high_1h",
-				"test_high_2h"
+				"weapon_test_medium_polearm_saber",
+				"weapon_test_medium_1h_saber",
+				"weapon_test_medium_2h_saber"
 		);
 	}
 
-	private static void handleRanged(Player player) {
+	private static void handleHighLightsaber(Player player) {
 		spawnItems(player,
-				"test_low_pistol",
-				"test_low_carbine",
-				"test_low_rifle",
-				"test_low_heavy",
-				"test_medium_pistol",
-				"test_medium_carbine",
-				"test_medium_rifle",
-				"test_medium_heavy",
-				"test_high_pistol",
-				"test_high_carbine",
-				"test_high_rifle",
-				"test_high_heavy"
+				"weapon_test_high_polearm_saber",
+				"weapon_test_high_1h_saber",
+				"weapon_test_high_2h_saber"
 		);
 	}
 
+	private static void handleLowMelee(Player player) {
+		spawnItems(player,
+				"weapon_test_low_polearm",
+				"weapon_test_low_unarmed",
+				"weapon_test_low_1h",
+				"weapon_test_low_2h"
+		);
+	}
+
+	private static void handleMediumMelee(Player player) {
+		spawnItems(player,
+				"weapon_test_medium_polearm",
+				"weapon_test_medium_unarmed",
+				"weapon_test_medium_1h",
+				"weapon_test_medium_2h"
+		);
+	}
+
+	private static void handleHighMelee(Player player) {
+		spawnItems(player,
+				"weapon_test_high_polearm",
+				"weapon_test_high_unarmed",
+				"weapon_test_high_1h",
+				"weapon_test_high_2h"
+		);
+	}
+
+	private static void handleLowRanged(Player player) {
+		spawnItems(player,
+				"weapon_test_low_pistol",
+				"weapon_test_low_carbine",
+				"weapon_test_low_rifle",
+				"weapon_test_low_heavy"
+		);
+	}
+
+	private static void handleMediumRanged(Player player) {
+		spawnItems(player,
+				"weapon_test_medium_pistol",
+				"weapon_test_medium_carbine",
+				"weapon_test_medium_rifle",
+				"weapon_test_medium_heavy"
+		);
+	}
+
+	private static void handleHighRanged(Player player) {
+		spawnItems(player,
+				"weapon_test_high_pistol",
+				"weapon_test_high_carbine",
+				"weapon_test_high_rifle",
+				"weapon_test_high_heavy"
+		);
+	}
 
 	private static void handleWearables(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a wearable category to receive a weapon of that type.");
@@ -515,7 +555,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 	private static void handleGoggle(Player player) {
 		spawnItems(player,
-				"item_clothing_goggles_anniversary_01_01",
 				"item_clothing_goggles_goggles_01_01",
 				"item_clothing_goggles_goggles_01_02",
 				"item_clothing_goggles_goggles_01_03",

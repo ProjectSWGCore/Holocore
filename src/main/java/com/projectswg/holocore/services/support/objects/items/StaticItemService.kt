@@ -26,34 +26,18 @@
  */
 package com.projectswg.holocore.services.support.objects.items
 
-import com.projectswg.common.network.packets.swg.zone.object_controller.ShowLootBox
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
-import me.joshlarson.jlcommon.control.Intent
-import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
 import java.util.*
 
 class StaticItemService : Service() {
-	
-	private val delayedCallbackHandler = ScheduledThreadPool(1, "static-item-service")
-	
-	override fun start(): Boolean {
-		delayedCallbackHandler.start()
-		return true
-	}
-	
-	override fun stop(): Boolean {
-		delayedCallbackHandler.stop()
-		return delayedCallbackHandler.awaitTermination(1000)
-	}
 	
 	@IntentHandler
 	private fun handleCreateStaticItemIntent(csii: CreateStaticItemIntent) {
@@ -67,14 +51,13 @@ class StaticItemService : Service() {
 			return
 		}
 		
-		val intentChain = IntentChain()
 		val objects = ArrayList<SWGObject>()
 		for (itemName in itemNames) {
 			val obj = StaticItemCreator.createItem(itemName)
 			if (obj != null) {
 				objects.add(obj)
 				obj.moveToContainer(container)
-				intentChain.broadcastAfter(ObjectCreatedIntent(obj))
+				ObjectCreatedIntent.broadcast(obj)
 			} else {
 				Log.d("%s could not be spawned because the item name is unknown", itemName)
 				val requesterOwner = csii.requester.owner
@@ -82,17 +65,10 @@ class StaticItemService : Service() {
 					SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName))
 			}
 		}
-		
-		intentChain.broadcastAfter(CompletedStaticItemCreatedCallbacks(objects, objectCreationHandler::success))
+
+		objectCreationHandler.success(objects);
 	}
-	
-	@IntentHandler
-	private fun handleCompletedStaticItemCreatedCallbacks(csicc: CompletedStaticItemCreatedCallbacks) {
-		delayedCallbackHandler.execute(60000) {
-			csicc.objectHandler(csicc.objects)
-		}
-	}
-	
+
 	interface ObjectCreationHandler {
 		val isIgnoreVolume: Boolean
 		fun success(createdObjects: List<SWGObject>)
@@ -102,7 +78,7 @@ class StaticItemService : Service() {
 		}
 	}
 	
-	class LootBoxHandler(private val receiver: CreatureObject) : ObjectCreationHandler {
+	class SystemMessageHandler(private val receiver: CreatureObject) : ObjectCreationHandler {
 		
 		override val isIgnoreVolume: Boolean
 			get() = true
@@ -113,11 +89,16 @@ class StaticItemService : Service() {
 			for (i in objectIds.indices) {
 				objectIds[i] = createdObjects[i].objectId
 			}
-			
-			receiver.sendSelf(ShowLootBox(receiver.objectId, objectIds))
+
+			for (createdObject in createdObjects) {
+				val owner = receiver.owner
+
+				if (owner != null) {
+					SystemMessageIntent.broadcastPersonal(owner, "${createdObject.stringId} has been placed in your inventory.")
+				}
+			}
 		}
 		
 	}
 	
-	private data class CompletedStaticItemCreatedCallbacks(val objects: List<SWGObject>, val objectHandler: (createdObjects: List<SWGObject>) -> Unit): Intent()
 }

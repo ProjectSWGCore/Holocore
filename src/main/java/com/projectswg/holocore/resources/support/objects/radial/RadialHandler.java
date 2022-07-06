@@ -6,7 +6,6 @@ import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.object.*;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeedRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeviceRadial;
@@ -15,8 +14,6 @@ import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
-import com.projectswg.holocore.services.gameplay.combat.loot.RareLootService;
-import com.projectswg.holocore.services.gameplay.combat.buffs.PowerupService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -38,7 +35,6 @@ public enum RadialHandler {
 		initializePetRadials();
 		initializeMiscRadials();
 		initializeContainerRadials();
-		initializePowerupRadials();
 		initializeSpecialEditionGoggleRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
@@ -106,11 +102,6 @@ public enum RadialHandler {
 	}
 	
 	private void initializeMiscRadials() {
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
-		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
 		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
 		registerHandler("object/tangible/spawning/shared_spawn_egg.iff", new SpawnerRadial());
 	}
@@ -119,12 +110,6 @@ public enum RadialHandler {
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER, new ContainerObjectRadial());
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER_PUBLIC, new ContainerObjectRadial());
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER_WEARABLE, new ContainerObjectRadial());
-	}
-	
-	private void initializePowerupRadials() {
-		registerHandler(PowerupService.BREASTPLATE, new PowerupRadial());
-		registerHandler(PowerupService.SHIRT, new PowerupRadial());
-		registerHandler(PowerupService.WEAPON, new PowerupRadial());
 	}
 	
 	private void initializeSpecialEditionGoggleRadials() {

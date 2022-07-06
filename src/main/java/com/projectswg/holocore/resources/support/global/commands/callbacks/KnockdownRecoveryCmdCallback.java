@@ -24,34 +24,37 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat.buffs;
+package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
+import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.commands.Locomotion;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
-public class PowerupIntent extends Intent {
-	
-	private final CreatureObject actor;
-	private final TangibleObject powerupObject;
-	
-	private PowerupIntent(CreatureObject actor, TangibleObject powerupObject) {
-		this.actor = actor;
-		this.powerupObject = powerupObject;
+public class KnockdownRecoveryCmdCallback implements ICmdCallback{
+
+	@Override
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		
+		if (Locomotion.KNOCKED_DOWN.isActive(creatureObject)) {
+			standUp(creatureObject);
+		} else {
+			showWrongPostureFlyText(creatureObject);
+		}
 	}
 	
-	@NotNull
-	public CreatureObject getActor() {
-		return actor;
+	private void showWrongPostureFlyText(CreatureObject creatureObject) {
+		creatureObject.sendSelf(new ShowFlyText(creatureObject.getObjectId(), new StringId("combat_effects", "wrong_posture_fly"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255)));
 	}
 	
-	@NotNull
-	public TangibleObject getPowerupObject() {
-		return powerupObject;
-	}
-	
-	public static void broadcast(@NotNull CreatureObject actor, @NotNull TangibleObject powerupObject) {
-		new PowerupIntent(actor, powerupObject).broadcast();
+	private void standUp(CreatureObject creatureObject) {
+		creatureObject.setPosture(Posture.UPRIGHT);
 	}
 }

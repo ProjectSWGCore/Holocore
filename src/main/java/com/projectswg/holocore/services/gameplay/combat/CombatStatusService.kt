@@ -59,7 +59,9 @@ class CombatStatusService : Service() {
 	@IntentHandler
 	private fun handleExitCombatIntent(eci: ExitCombatIntent) {
 		val source = eci.source
-		val defenders = source.defenders.stream().map { ObjectLookup.getObjectById(it) }.map { CreatureObject::class.java.cast(it) }.collect(Collectors.toList())
+		val defenders = source.defenders.stream()
+				.filter { it != null }
+				.map { ObjectLookup.getObjectById(it) }.map { CreatureObject::class.java.cast(it) }.collect(Collectors.toList())
 		source.clearDefenders()
 		for (defender in defenders) {
 			defender.removeDefender(source)

@@ -31,11 +31,8 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.encoding.StringType;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 
@@ -48,7 +45,7 @@ import java.util.stream.Collectors;
 /**
  * PLAY 8
  */
-class PlayerObjectOwner implements Persistable, MongoPersistable {
+class PlayerObjectOwner implements MongoPersistable {
 	
 	private final PlayerObject obj;
 	
@@ -215,34 +212,6 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		activeQuests.read(data.getByteArray("activeQuests"));
 		activeQuest = data.getInteger("activeQuest", activeQuest);
 		quests.putAll(data.getMap("quests", CRC.class, Quest.class));
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addInt(0);
-		stream.addInt(activeQuest);
-		synchronized (experience) {
-			stream.addMap(experience, (e) -> {
-				stream.addAscii(e.getKey());
-				stream.addInt(e.getValue());
-			});
-		}
-		synchronized (waypoints) {
-			stream.addMap(waypoints, (e) -> {
-				stream.addLong(e.getKey());
-				SWGObjectFactory.save(e.getValue(), stream);
-			});
-		}
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		stream.getInt();
-		activeQuest = stream.getInt();
-		stream.getList((i) -> experience.put(stream.getAscii(), stream.getInt()));
-		stream.getList((i) -> waypoints.put(stream.getLong(), (WaypointObject) SWGObjectFactory.create(stream)));
 	}
 	
 	public void addQuest(String questName) {

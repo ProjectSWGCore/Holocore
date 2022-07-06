@@ -32,12 +32,10 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import org.jetbrains.annotations.NotNull;
 
-public class InstanceLocation implements Persistable, MongoPersistable {
+public class InstanceLocation implements MongoPersistable {
 	
 	private Location location;
 	private InstanceType instanceType;
@@ -47,18 +45,6 @@ public class InstanceLocation implements Persistable, MongoPersistable {
 		this.location = new Location(0, 0, 0, Terrain.GONE);
 		this.instanceType = InstanceType.NONE;
 		this.instanceNumber = 0;
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		location.save(stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		location.read(stream);
 	}
 	
 	@Override

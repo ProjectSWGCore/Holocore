@@ -27,17 +27,10 @@
 package com.projectswg.holocore.resources.support.data.persistable;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 public class SWGObjectFactory {
-	
-	public static void save(SWGObject obj, NetBufferStream stream) {
-		stream.addLong(obj.getObjectId());
-		stream.addAscii(obj.getTemplate());
-		obj.save(stream);
-	}
 	
 	public static MongoData save(SWGObject obj) {
 		return save(obj, new MongoData());
@@ -50,14 +43,6 @@ public class SWGObjectFactory {
 		assert data.containsKey("parentCell") : "serialized MongoData does not contain the parent cell number";
 		assert data.containsKey("template") : "serialized MongoData does not contain the template";
 		return data;
-	}
-	
-	public static SWGObject create(NetBufferStream stream) {
-		long objectId = stream.getLong();
-		String template = stream.getAscii();
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.read(stream);
-		return obj;
 	}
 	
 	public static SWGObject create(MongoData data) {

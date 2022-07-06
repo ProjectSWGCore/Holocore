@@ -26,7 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
+import com.projectswg.common.data.RGB;
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
@@ -41,6 +45,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +67,7 @@ public class AIObject extends CreatureObject {
 	private ScheduledThreadPool executor;
 	private ScheduledFuture<?> previousScheduled;
 	private String creatureId;
+	private Instant questionMarkBlockedUntil;
 	
 	public AIObject(long objectId) {
 		super(objectId);
@@ -77,6 +83,7 @@ public class AIObject extends CreatureObject {
 		this.activeMode = null;
 		this.creatureId = null;
 		incapSafetyTimer = new IncapSafetyTimer(45_000);
+		questionMarkBlockedUntil = Instant.now();
 	}
 	
 	@Override
@@ -130,7 +137,40 @@ public class AIObject extends CreatureObject {
 			return;
 		playersNearby.add(player);
 		
+		boolean npcIsInCombat = isInCombat();
+		
+		Instant now = Instant.now();
+		
+		boolean questionMarkTimerExpired = now.isAfter(questionMarkBlockedUntil);
+		
+		if (!npcIsInCombat) {
+			boolean npcIsAggressiveTowardsPlayer = isAttackable(player);
+			
+			if (npcIsAggressiveTowardsPlayer) {
+				boolean playerIsInLineOfSight = isLineOfSight(player);
+				
+				if (playerIsInLineOfSight) {
+					Location playerWorldLocation = player.getWorldLocation();
+					Location aiWorldLocation = this.getWorldLocation();
+					double questionMarkRange = 64;
+					double distanceBetweenNpcAndPlayer = aiWorldLocation.distanceTo(playerWorldLocation);
+					boolean playerIsInRange = distanceBetweenNpcAndPlayer <= questionMarkRange;
+					
+					if (playerIsInRange) {
+						if (questionMarkTimerExpired) {
+							showQuestionMarkAboveNpc();
+							questionMarkBlockedUntil = Instant.now().plusSeconds(60);
+						}
+					}
+				}
+			}
+		}
+		
 		checkAwareAttack(player);
+	}
+	
+	private void showQuestionMarkAboveNpc() {
+		this.sendObservers(new ShowFlyText(this.getObjectId(), new StringId("npc_reaction/flytext", "alert"), ShowFlyText.Scale.SMALL, new RGB(204, 0, 0)));
 	}
 	
 	private void checkAwareAttack(CreatureObject player) {

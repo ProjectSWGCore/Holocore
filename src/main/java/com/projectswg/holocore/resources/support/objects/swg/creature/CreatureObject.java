@@ -34,15 +34,14 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
@@ -53,6 +52,7 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -81,7 +81,6 @@ public class CreatureObject extends TangibleObject {
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
 	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
-	private long	lastTransform			= 0;
 	private long	lastCombat				= 0;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
@@ -373,10 +372,6 @@ public class CreatureObject extends TangibleObject {
 		return creo6.getDifficulty();
 	}
 	
-	public double getTimeSinceLastTransform() {
-		return (System.nanoTime()-lastTransform)/1E6;
-	}
-	
 	public double getTimeSinceLastCombat() {
 		return (System.nanoTime() - lastCombat) / 1E6;
 	}
@@ -485,11 +480,13 @@ public class CreatureObject extends TangibleObject {
 		}
 		return true;
 	}
-
+	
+	@Override
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
 		creo4.adjustSkillmod(skillModName, base, modifier);
 	}
 
+	@Override
 	public int getSkillModValue(@NotNull String skillModName) {
 		return creo4.getSkillModValue(skillModName);
 	}
@@ -639,10 +636,6 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		creo6.setDifficulty(difficulty);
 		sendDelta(6, 21, difficulty.getDifficulty());
-	}
-	
-	public void updateLastTransformTime() {
-		lastTransform = System.nanoTime();
 	}
 	
 	public void updateLastCombatTime() {
@@ -826,10 +819,6 @@ public class CreatureObject extends TangibleObject {
 	
 	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
 		return creo6.getBuffEntries(predicate);
-	}
-	
-	public void setBuffDuration(CRC buffCrc, int playTime, int duration) {
-		creo6.setBuffDuration(buffCrc, playTime, duration, this);
 	}
 	
 	public boolean isVisible() {
@@ -1041,7 +1030,7 @@ public class CreatureObject extends TangibleObject {
 	
 	@Override
 	public void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb); // 8 variables - TANO6 (6) + BASE6 (2)
+		super.createBaseline6(target, bb); // 2 variables - TANO6 (0) + BASE6 (2)
 		creo6.createBaseline6(target, bb);
 	}
 	
@@ -1109,124 +1098,6 @@ public class CreatureObject extends TangibleObject {
 		data.getDocument("baseAttributes", baseAttributes);
 	}
 
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(3);
-		creo4.save(stream);
-		creo6.save(stream);
-		stream.addAscii(posture.name());
-		stream.addAscii(race.name());
-		stream.addFloat((float) height);
-		stream.addInt(battleFatigue);
-		stream.addInt(getCashBalance());
-		stream.addInt(getBankBalance());
-		stream.addLong(ownerId);
-		stream.addLong(statesBitmask);
-		stream.addByte(factionRank);
-		synchronized (skills) {
-			stream.addList(skills, stream::addAscii);
-		}
-		baseAttributes.save(stream);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		switch(stream.getByte()) {
-			case 0: readVersion0(stream); break;
-			case 1: readVersion1(stream); break;
-			case 2: readVersion2(stream); break;
-			case 3: readVersion3(stream); break;
-		}
-		
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		if (stream.getBoolean()) {
-			SWGObject defaultWeapon = SWGObjectFactory.create(stream);
-			defaultWeapon.moveToContainer(this);	// The weapon will be moved into the default_weapon slot
-		}
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 0, baseAttributes, stream);
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		stream.getLong();
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 1, baseAttributes, stream);
-	}
-
-	private void readVersion2(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		readAttributes((byte) 2, baseAttributes, stream);
-	}
-
-	private void readVersion3(NetBufferStream stream) {
-		creo4.read(stream);
-		creo6.read(stream);
-		posture = Posture.valueOf(stream.getAscii());
-		race = Race.valueOf(stream.getAscii());
-		height = stream.getFloat();
-		battleFatigue = stream.getInt();
-		setCashBalance(stream.getInt());
-		setBankBalance(stream.getInt());
-		ownerId = stream.getLong();
-		statesBitmask = stream.getLong();
-		factionRank = stream.getByte();
-		stream.getList((i) -> skills.add(stream.getAscii()));
-		baseAttributes.read(stream);
-	}
-
-	private static void readAttributes(byte ver, AttributesMutable attributes, NetBufferStream stream) {
-		if (ver <= 2) {
-			int [] array = new int[6];
-			stream.getList((i) -> array[i] = stream.getInt());
-			attributes.setHealth(array[0]);
-			attributes.setHealthRegen(array[1]);
-			attributes.setAction(array[2]);
-			attributes.setActionRegen(array[3]);
-			attributes.setMind(array[4]);
-			attributes.setMindRegen(array[5]);
-		} else {
-			attributes.read(stream);
-		}
-
-	}
-
 	private static class Container {
 
 		private final SWGObject container;
@@ -1255,4 +1126,27 @@ public class CreatureObject extends TangibleObject {
 		}
 	}
 	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = new AttributeList();
+		
+		if (ownerId > 0) {
+			applyOwnerAttribute(attributeList);
+		}
+		
+		return attributeList;
+	}
+	
+	private void applyOwnerAttribute(AttributeList attributeList) {
+		String displayedOwner;
+		SWGObject objectById = ObjectStorageService.ObjectLookup.getObjectById(ownerId);
+		
+		if (objectById != null ) {
+			displayedOwner = objectById.getObjectName();
+		} else {
+			displayedOwner = "Unknown";
+		}
+		
+		attributeList.putText("@obj_attr_n:owner", displayedOwner);
+	}
 }

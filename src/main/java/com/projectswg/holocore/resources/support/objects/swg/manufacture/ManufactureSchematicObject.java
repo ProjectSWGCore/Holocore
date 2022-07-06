@@ -29,14 +29,11 @@ package com.projectswg.holocore.resources.support.objects.swg.manufacture;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
-
-import java.util.Map.Entry;
 
 public class ManufactureSchematicObject extends IntangibleObject {
 	
@@ -143,44 +140,6 @@ public class ManufactureSchematicObject extends IntangibleObject {
 		draftSchematicTemplate = CRC.getString(buffer.getInt());
 		crafting = buffer.getBoolean();
 		schematicChangedSignal = buffer.getByte();
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		stream.addInt(itemsPerContainer);
-		stream.addFloat(manufactureTime);
-		stream.addArray(appearanceData);
-		stream.addArray(customAppearance);
-		stream.addAscii(draftSchematicTemplate);
-		stream.addBoolean(crafting);
-		stream.addByte(schematicChangedSignal);
-		synchronized (attributes) {
-			stream.addInt(attributes.size());
-			for (Entry<StringId, Float> e : attributes.entrySet()) {
-				e.getKey().save(stream);
-				stream.addFloat(e.getValue());
-			}
-		}
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		itemsPerContainer = stream.getInt();
-		manufactureTime = stream.getFloat();
-		appearanceData = stream.getArray();
-		customAppearance = stream.getArray();
-		draftSchematicTemplate = stream.getAscii();
-		crafting = stream.getBoolean();
-		schematicChangedSignal = stream.getByte();
-		for (int i = 0; i < stream.getInt(); i++) {
-			StringId id = new StringId();
-			id.read(stream);
-			attributes.put(id, stream.getFloat());
-		}
 	}
 	
 }

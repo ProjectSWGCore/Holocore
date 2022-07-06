@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.DamageType
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbIntegerColumnArraySet
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet
+import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.io.File
 import java.io.IOException
@@ -107,7 +108,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	class ArmorItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
 		val armorLevel: String = set.getText("armor_level")
-		val armorType: ArmorType
+		val armorCategory: ArmorCategory
 		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
@@ -119,7 +120,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
-		val wornItemBuff: Int			= set.getInt("worn_item_buff").toInt()
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
@@ -129,17 +129,11 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		init {
 			when (set.getText("armor_category")) {
-				"assault" -> this.armorType = ArmorType.ASSAULT
-				"battle" -> this.armorType = ArmorType.BATTLE
-				"recon" -> this.armorType = ArmorType.RECON
+				"assault" -> this.armorCategory = ArmorCategory.assault
+				"battle" -> this.armorCategory = ArmorCategory.battle
+				"recon" -> this.armorCategory = ArmorCategory.reconnaissance
 				else -> throw IllegalArgumentException("Unsupported armor category: " + set.getText("armor_category"))
 			}
-		}
-		
-		enum class ArmorType {
-			ASSAULT,
-			BATTLE,
-			RECON
 		}
 	}
 	
@@ -154,7 +148,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val clientEffect: String		= set.getText("client_effect")
 		val clientAnimation: String		= set.getText("client_animation")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
 		val noTrade: Boolean			= set.getInt("no_trade") != 0L
 		val bioLink: Boolean			= set.getInt("bio_link") != 0L
 		val charges: Int				= set.getInt("charges").toInt()
@@ -241,8 +234,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")
-		val targetDps: Int = set.getInt("target_dps").toInt()
-		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
 		val requiredSkill: String = set.getText("required_skill")
@@ -319,7 +310,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	companion object {
 		
 		private fun parseSkillMods(modsString: String): Map<String, Int> {
-			val mods = HashMap<String, Int>()    // skillmods/statmods
+			val mods = HashMap<String, Int>()    // skillmods
 			
 			if (modsString.isNotEmpty()) {
 				val modStrings = modsString.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // The mods strings are comma-separated
@@ -328,11 +319,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 					val splitValues = modString.split("=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // Name and value are separated by "="
 					val modName = splitValues[0]
 					
-					// Common statmods end with "_modified"
-					// If not, it's a skillmod
-					val category = if (modName.endsWith("_modified")) "cat_stat_mod_bonus" else "cat_skill_mod_bonus"
-					
-					mods["$category.@stat_n:$modName"] = Integer.parseInt(splitValues[1])
+					mods[modName] = Integer.parseInt(splitValues[1])
 				}
 			}
 			return mods

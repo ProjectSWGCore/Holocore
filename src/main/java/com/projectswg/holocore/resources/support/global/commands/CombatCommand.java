@@ -43,6 +43,8 @@ public class CombatCommand extends Command {
 	private final AttackType attackType;
 	private final double healthCost;
 	private final double actionCost;
+	private final double mindCost;
+	private final double knockdownChance;
 	private final DamageType damageType;
 	private final DamageType elementalType;
 	private final boolean ignoreDistance;
@@ -74,6 +76,8 @@ public class CombatCommand extends Command {
 		this.attackType = builder.attackType;
 		this.healthCost = builder.healthCost;
 		this.actionCost = builder.actionCost;
+		this.mindCost = builder.mindCost;
+		this.knockdownChance = builder.knockdownChance;
 		this.damageType = builder.damageType;
 		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
@@ -140,6 +144,14 @@ public class CombatCommand extends Command {
 	
 	public double getActionCost() {
 		return actionCost;
+	}
+	
+	public double getMindCost() {
+		return mindCost;
+	}
+	
+	public double getKnockdownChance() {
+		return knockdownChance;
 	}
 	
 	public DamageType getDamageType() {
@@ -244,6 +256,8 @@ public class CombatCommand extends Command {
 		private AttackType attackType;
 		private double healthCost;
 		private double actionCost;
+		private double mindCost;
+		private double knockdownChance;
 		private DamageType damageType;
 		private DamageType elementalType;
 		private boolean ignoreDistance;
@@ -307,6 +321,16 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withActionCost(double actionCost) {
 			this.actionCost = actionCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withMindCost(double mindCost) {
+			this.mindCost = mindCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withKnockdownChance(double knockdownChance) {
+			this.knockdownChance = knockdownChance;
 			return this;
 		}
 		

@@ -33,7 +33,7 @@ class TraineeImpl implements Trainee {
 	@Override
 	public void addSkill(Skill skill) {
 		String skillKey = skill.getKey();
-		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, skillKey, getCreatureObject(), false);
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, skillKey, getCreatureObject(), true);
 		
 		StringId youSuccessfullyTrain = new StringId("skill_teacher", "prose_skill_learned");
 		StringId skillName = new StringId("skl_n", skillKey);

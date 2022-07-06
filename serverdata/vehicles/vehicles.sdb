@@ -1,15 +1,16 @@
 object_reference	pcd_template	object_template	decay_rate	repair_rate	can_repair_disabled	min_speed	speed	strafe	turn_rate	turn_rate_max	accel_min	accel_max	decel	damping_roll	damping_pitch	damping_height	glide	banking_angle	hover_height	auto_level	player_buff	vehicle_buff	buff_client_effect
 TEXT	TEXT	TEXT	INTEGER	REAL	BOOLEAN	REAL	REAL	BOOLEAN	INTEGER	INTEGER	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	TEXT	TEXT	TEXT
-ab1	object/intangible/vehicle/landspeeder_ab1_pcd.iff	object/mobile/vehicle/landspeeder_ab1.iff	15	4	FALSE	0	17.9	1	154	77	2.9	8.9	7	2	3	4	2.5	45	0.5	0.25				
-av21	object/intangible/vehicle/landspeeder_av21_pcd.iff	object/mobile/vehicle/landspeeder_av21.iff	15	4	FALSE	0	21.9	1	154	77	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25				
-barc_speeder	object/intangible/vehicle/barc_speeder_pcd.iff	object/mobile/vehicle/barc_speeder.iff	15	4	FALSE	0	22.1	1	190	95	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25				
-desert_skiff	object/intangible/vehicle/landspeeder_desert_skiff_pcd.iff	object/mobile/vehicle/landspeeder_desert_skiff.iff	15	4	FALSE	0	22	1	154	77	2.9	7.9	7	2	3	4	2.5	30	0.5	0.25				
-flash	object/intangible/vehicle/speederbike_flash_pcd.iff	object/mobile/vehicle/speederbike_flash.iff	15	4	FALSE	0	19.9	1	170	85	2.9	9.9	7	2	3	4	2.5	30	0.5	0.25				
-lava_skiff	object/intangible/vehicle/landspeeder_lava_skiff_pcd.iff	object/mobile/vehicle/landspeeder_lava_skiff.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-swoop	object/intangible/vehicle/speederbike_swoop_pcd.iff	object/mobile/vehicle/speederbike_swoop.iff	50	4	FALSE	0	21.9	1	205	103	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25				
-tantive4	object/intangible/vehicle/landspeeder_tantive4_pcd.iff	object/mobile/vehicle/landspeeder_tantive4.iff	20	7	TRUE	0	15	1	150	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-usv5	object/intangible/vehicle/landspeeder_usv5_pcd.iff	object/mobile/vehicle/landspeeder_usv5.iff	15	4	TRUE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-v35	object/intangible/vehicle/landspeeder_v35_pcd.iff	object/mobile/vehicle/landspeeder_v35.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-x31	object/intangible/vehicle/landspeeder_x31_pcd.iff	object/mobile/vehicle/landspeeder_x31.iff	15	4	FALSE	0	16	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-x34	object/intangible/vehicle/landspeeder_x34_pcd.iff	object/mobile/vehicle/landspeeder_x34.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25				
-xp38	object/intangible/vehicle/landspeeder_xp38_pcd.iff	object/mobile/vehicle/landspeeder_xp38.iff	15	4	FALSE	0	17.9	1	154	77	2.9	8.9	7	2	3	4	2.5	45	0.5	0.25				
+ab1	object/intangible/vehicle/landspeeder_ab1_pcd.iff	object/mobile/vehicle/landspeeder_ab1.iff	15	4	FALSE	0	17.9	1	154	77	2.9	8.9	7	2	3	4	2.5	45	0.5	0.25			
+av21	object/intangible/vehicle/landspeeder_av21_pcd.iff	object/mobile/vehicle/landspeeder_av21.iff	15	4	FALSE	0	21.9	1	154	77	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25			
+barc_speeder	object/intangible/vehicle/barc_speeder_pcd.iff	object/mobile/vehicle/barc_speeder.iff	15	4	FALSE	0	22.1	1	190	95	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25			
+desert_skiff	object/intangible/vehicle/landspeeder_desert_skiff_pcd.iff	object/mobile/vehicle/landspeeder_desert_skiff.iff	15	4	FALSE	0	22	1	154	77	2.9	7.9	7	2	3	4	2.5	30	0.5	0.25			
+flash	object/intangible/vehicle/speederbike_flash_pcd.iff	object/mobile/vehicle/speederbike_flash.iff	15	4	FALSE	0	19.9	1	170	85	2.9	9.9	7	2	3	4	2.5	30	0.5	0.25			
+jetpack	object/intangible/vehicle/jetpack_pcd.iff	object/mobile/vehicle/jetpack.iff	20	4	FALSE	0	21.9	1	205	103	2.9	9.9	7	2	3	4	2.5	45	4.0	0.25			
+lava_skiff	object/intangible/vehicle/landspeeder_lava_skiff_pcd.iff	object/mobile/vehicle/landspeeder_lava_skiff.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+swoop	object/intangible/vehicle/speederbike_swoop_pcd.iff	object/mobile/vehicle/speederbike_swoop.iff	50	4	FALSE	0	21.9	1	205	103	2.9	9.9	7	2	3	4	2.5	45	0.5	0.25			
+tantive4	object/intangible/vehicle/landspeeder_tantive4_pcd.iff	object/mobile/vehicle/landspeeder_tantive4.iff	20	7	TRUE	0	15	1	150	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+usv5	object/intangible/vehicle/landspeeder_usv5_pcd.iff	object/mobile/vehicle/landspeeder_usv5.iff	15	4	TRUE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+v35	object/intangible/vehicle/landspeeder_v35_pcd.iff	object/mobile/vehicle/landspeeder_v35.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+x31	object/intangible/vehicle/landspeeder_x31_pcd.iff	object/mobile/vehicle/landspeeder_x31.iff	15	4	FALSE	0	16	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+x34	object/intangible/vehicle/landspeeder_x34_pcd.iff	object/mobile/vehicle/landspeeder_x34.iff	15	4	FALSE	0	17.9	1	154	77	2.9	7.9	7	2	3	4	2.5	45	0.5	0.25			
+xp38	object/intangible/vehicle/landspeeder_xp38_pcd.iff	object/mobile/vehicle/landspeeder_xp38.iff	15	4	FALSE	0	17.9	1	154	77	2.9	8.9	7	2	3	4	2.5	45	0.5	0.25			

@@ -28,8 +28,11 @@ package com.projectswg.holocore.resources.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.TargetType;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ValidWeapon;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class Command {
 	
@@ -47,7 +50,7 @@ public class Command {
 	private final double maxRange;
 	private final int godLevel;
 	private final boolean addToCombatQueue;
-	private final int validWeapon;
+	private final ValidWeapon validWeapon;
 	private final int invalidWeapon;
 	private final String cooldownGroup;
 	private final double warmupTime;
@@ -56,6 +59,8 @@ public class Command {
 	private final String cooldownGroup2;
 	private final double cooldownTime2;
 	private final boolean autoAddToToolbar;
+	private final Set<Locomotion> disallowedLocomotions;
+	private final Set<State> disallowedStates;
 	
 	protected Command(CommandBuilder builder) {
 		this.name = builder.name;
@@ -82,6 +87,8 @@ public class Command {
 		this.cooldownGroup2 = builder.cooldownGroup2;
 		this.cooldownTime2 = builder.cooldownTime2;
 		this.autoAddToToolbar = builder.autoAddToToolbar;
+		this.disallowedLocomotions = builder.disallowedLocomotions;
+		this.disallowedStates = builder.disallowedStates;
 	}
 	
 	public String getName() {
@@ -140,7 +147,7 @@ public class Command {
 		return addToCombatQueue;
 	}
 	
-	public int getValidWeapon() {
+	public ValidWeapon getValidWeapon() {
 		return validWeapon;
 	}
 	
@@ -176,6 +183,14 @@ public class Command {
 		return autoAddToToolbar;
 	}
 	
+	public Set<Locomotion> getDisallowedLocomotions() {
+		return disallowedLocomotions;
+	}
+	
+	public Set<State> getDisallowedStates() {
+		return disallowedStates;
+	}
+	
 	@Override
 	public String toString() {
 		return name + ':' + crc;
@@ -209,7 +224,7 @@ public class Command {
 		private double maxRange;
 		private int godLevel;
 		private boolean addToCombatQueue;
-		private int validWeapon;
+		private ValidWeapon validWeapon;
 		private int invalidWeapon;
 		private String cooldownGroup;
 		private double warmupTime;
@@ -218,6 +233,8 @@ public class Command {
 		private String cooldownGroup2;
 		private double cooldownTime2;
 		private boolean autoAddToToolbar;
+		private Set<Locomotion> disallowedLocomotions = new HashSet<>();
+		private Set<State> disallowedStates = new HashSet<>();
 		
 		protected CommandBuilder() {}
 		
@@ -243,6 +260,8 @@ public class Command {
 			this.cooldownGroup2 = command.cooldownGroup2;
 			this.cooldownTime2 = command.cooldownTime2;
 			this.autoAddToToolbar = command.autoAddToToolbar;
+			this.disallowedLocomotions = command.disallowedLocomotions;
+			this.disallowedStates = command.disallowedStates;
 		}
 		
 		public CommandBuilder withName(String name) {
@@ -305,7 +324,7 @@ public class Command {
 			return this;
 		}
 		
-		public CommandBuilder withValidWeapon(int validWeapon) {
+		public CommandBuilder withValidWeapon(ValidWeapon validWeapon) {
 			this.validWeapon = validWeapon;
 			return this;
 		}
@@ -347,6 +366,16 @@ public class Command {
 		
 		public CommandBuilder withAutoAddToToolbar(boolean autoAddToToolbar) {
 			this.autoAddToToolbar = autoAddToToolbar;
+			return this;
+		}
+		
+		public CommandBuilder withDisallowedLocomotion(Locomotion locomotion) {
+			this.disallowedLocomotions.add(locomotion);
+			return this;
+		}
+		
+		public CommandBuilder withDisallowedState(State state) {
+			this.disallowedStates.add(state);
 			return this;
 		}
 		

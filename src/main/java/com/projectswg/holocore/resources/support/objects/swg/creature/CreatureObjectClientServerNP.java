@@ -31,12 +31,9 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.tangible.SkillMod;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,7 +46,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * CREO 4
  */
 @SuppressWarnings("ClassWithTooManyFields") // Required by SWG
-class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
+class CreatureObjectClientServerNP implements MongoPersistable {
 	
 	private static final float DEFAULT_RUNSPEED = 5.376f;
 	private static final float DEFAULT_WALKSPEED = 1.00625f;
@@ -342,66 +339,6 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		turnScale = data.getFloat("turnScale", turnScale);
 		commands.putAll(data.getMap("commands", String.class, Integer.class));
 		missionCriticalObjects.addAll(data.getArray("missionCriticalObjects", GroupMissionCriticalObject.class));
-	}
-
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(1);
-		stream.addFloat(accelPercent);
-		stream.addFloat(accelScale);
-		stream.addFloat(movementPercent);
-		stream.addFloat(movementScale);
-		stream.addFloat(runSpeed);
-		stream.addFloat(slopeModAngle);
-		stream.addFloat(slopeModPercent);
-		stream.addFloat(turnScale);
-		stream.addFloat(walkSpeed);
-		stream.addFloat(waterModPercent);
-		bonusAttributes.save(stream);
-		stream.addMap(skillMods, (e) -> {
-			stream.addAscii(e.getKey());
-			e.getValue().save(stream);
-		});
-		stream.addMap(commands, (e) -> {
-			stream.addAscii(e.getKey());
-			stream.addInt(e.getValue());
-		});
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		byte ver = stream.getByte();
-		accelPercent = stream.getFloat();
-		accelScale = stream.getFloat();
-		movementPercent = stream.getFloat();
-		movementScale = stream.getFloat();
-		runSpeed = stream.getFloat();
-		slopeModAngle = stream.getFloat();
-		slopeModPercent = stream.getFloat();
-		turnScale = stream.getFloat();
-		walkSpeed = stream.getFloat();
-		waterModPercent = stream.getFloat();
-		if (ver == 0) {
-			int [] array = new int[6];
-			stream.getList((i) -> array[i] = stream.getInt());
-			bonusAttributes.setHealth(array[0]);
-			bonusAttributes.setHealthRegen(array[1]);
-			bonusAttributes.setAction(array[2]);
-			bonusAttributes.setActionRegen(array[3]);
-			bonusAttributes.setMind(array[4]);
-			bonusAttributes.setMindRegen(array[5]);
-		} else {
-			bonusAttributes.read(stream);
-		}
-		stream.getList((i) -> {
-			SkillMod mod = new SkillMod();
-			String key = stream.getAscii();
-			mod.read(stream);
-			skillMods.put(key, mod);
-		});
-		if (ver == 0)
-			stream.getList(i -> stream.getAscii());
-		stream.getList((i) -> commands.put(stream.getAscii(), stream.getInt()));
 	}
 
 	private void sendDelta(int update, Object o) {

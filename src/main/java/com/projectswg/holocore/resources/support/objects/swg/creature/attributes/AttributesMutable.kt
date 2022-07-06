@@ -31,8 +31,6 @@ import com.projectswg.common.data.encodables.mongo.MongoData
 import com.projectswg.common.data.encodables.mongo.MongoPersistable
 import com.projectswg.common.encoding.Encodable
 import com.projectswg.common.network.NetBuffer
-import com.projectswg.common.network.NetBufferStream
-import com.projectswg.common.persistable.Persistable
 import com.projectswg.holocore.resources.support.data.collections.SWGList
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import java.util.concurrent.locks.Lock
@@ -40,7 +38,7 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 import kotlin.reflect.KProperty
 
-class AttributesMutable(obj: SWGObject, type: Int, update: Int) : Attributes, Encodable, Persistable, MongoPersistable {
+class AttributesMutable(obj: SWGObject, type: Int, update: Int) : Attributes, Encodable, MongoPersistable {
 	
 	private val ham: SWGList<Int> = SWGList.createIntList(type, update)
 	private val lock = ReentrantLock()
@@ -113,27 +111,7 @@ class AttributesMutable(obj: SWGObject, type: Int, update: Int) : Attributes, En
 		data.putInteger("mind", mind)
 		data.putInteger("mindRegen", mindRegen)
 	}
-	
-	override fun read(stream: NetBufferStream) {
-		stream.byte
-		health = stream.int
-		healthRegen = stream.int
-		action = stream.int
-		actionRegen = stream.int
-		mind = stream.int
-		mindRegen = stream.int
-	}
-	
-	override fun save(stream: NetBufferStream) {
-		stream.addByte(0)
-		stream.addInt(health)
-		stream.addInt(healthRegen)
-		stream.addInt(action)
-		stream.addInt(actionRegen)
-		stream.addInt(mind)
-		stream.addInt(mindRegen)
-	}
-	
+
 	override fun encode(): ByteArray {
 		return ham.encode()
 	}

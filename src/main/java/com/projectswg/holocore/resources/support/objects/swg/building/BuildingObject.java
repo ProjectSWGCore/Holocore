@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.building;
 
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.CellInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.PortalInfo;
@@ -89,18 +88,6 @@ public class BuildingObject extends TangibleObject {
 			cell.setTerrain(getTerrain());
 			addObject(cell, cellInfos);
 		}
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
 	}
 	
 	private void addObject(CellObject cell, List<CellInfo> cellInfos) {
