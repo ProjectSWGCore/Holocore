@@ -35,6 +35,7 @@ import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.SocketAddress
 import java.nio.ByteBuffer
+import java.nio.channels.CancelledKeyException
 import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
 import java.nio.channels.ServerSocketChannel
@@ -217,43 +218,47 @@ private class TCPServerImpl<T: TCPServerChannel>(address: InetSocketAddress, wor
 			for (key in selector.selectedKeys()) {
 				key ?: continue
 				
-				if (!key.isValid) {
-					handleInvalidKey(key, closedSessions)
-					continue
-				}
-				if (key.isAcceptable) {
-					do {
-						val accepted = channel.accept()
-						if (accepted != null) {
-							accepted.configureBlocking(false)
-							acceptedChannels.add(accepted)
-						}
-					} while (accepted != null)
-				}
-				if (key.isReadable) {
-					@Suppress("UNCHECKED_CAST")
-					val handle = key.attachment() as TCPServerConnectionHandle<T>
-					
-					if (handle.lock.tryLock()) {
-						try {
-							if ((key.channel() as SocketChannel).read(handle.session.getChannelBuffer()) == -1) {
-								handleInvalidKey(key, closedSessions)
-								continue
+				try {
+					if (!key.isValid) {
+						handleInvalidKey(key, closedSessions)
+						continue
+					}
+					if (key.isAcceptable) {
+						do {
+							val accepted = channel.accept()
+							if (accepted != null) {
+								accepted.configureBlocking(false)
+								acceptedChannels.add(accepted)
 							}
-							readReadySessions.add(handle)
-							handle.key.interestOps(0)
-						} catch (t: Throwable) {
-							handleInvalidKey(key, closedSessions)
-							readReadySessions.remove(handle)
-							continue
-						} finally {
-							handle.lock.unlock()
+						} while (accepted != null)
+					}
+					if (key.isReadable) {
+						@Suppress("UNCHECKED_CAST")
+						val handle = key.attachment() as TCPServerConnectionHandle<T>
+						
+						if (handle.lock.tryLock()) {
+							try {
+								if ((key.channel() as SocketChannel).read(handle.session.getChannelBuffer()) == -1) {
+									handleInvalidKey(key, closedSessions)
+									continue
+								}
+								readReadySessions.add(handle)
+								handle.key.interestOps(0)
+							} catch (t: Throwable) {
+								handleInvalidKey(key, closedSessions)
+								readReadySessions.remove(handle)
+								continue
+							} finally {
+								handle.lock.unlock()
+							}
 						}
 					}
-				}
-				if (key.isWritable) {
-					@Suppress("UNCHECKED_CAST")
-					writeReadySessions.add(key.attachment() as TCPServerConnectionHandle<T>)
+					if (key.isWritable) {
+						@Suppress("UNCHECKED_CAST")
+						writeReadySessions.add(key.attachment() as TCPServerConnectionHandle<T>)
+					}
+				} catch (e: CancelledKeyException) {
+					handleInvalidKey(key, closedSessions)
 				}
 			}
 		}
