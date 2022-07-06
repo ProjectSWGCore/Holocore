@@ -42,6 +42,7 @@ import com.projectswg.common.network.packets.swg.zone.ServerNowEpochTime;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent;
 import com.projectswg.holocore.intents.support.global.login.LoginEventIntent.LoginEvent;
+import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
@@ -61,6 +62,7 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -82,9 +84,8 @@ public class LoginService extends Service {
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject obj = oci.getObject();
-		if (!(obj instanceof PlayerObject))
+		if (!(obj instanceof PlayerObject player))
 			return;
-		PlayerObject player = (PlayerObject) obj;
 		CreatureObject creature = (CreatureObject) player.getParent();
 		if (creature == null)
 			return;
@@ -107,8 +108,8 @@ public class LoginService extends Service {
 		SWGPacket p = gpi.getPacket();
 		if (p instanceof HoloLoginRequestPacket) {
 			handleLogin(gpi.getPlayer(), (HoloLoginRequestPacket) p);
-		} else if (p instanceof LoginClientId) {
-			handleLogin(gpi.getPlayer(), (LoginClientId) p);
+		} else if (p instanceof LoginClientId id) {
+			handleLogin(gpi.getPlayer(), id.getUsername(), id.getPassword(), id.getVersion(), id.getSocketAddress());
 		} else if (p instanceof DeleteCharacterRequest) {
 			handleCharDeletion(gpi.getPlayer(), (DeleteCharacterRequest) p);
 		} else if (p instanceof LagRequest) {
@@ -116,6 +117,11 @@ public class LoginService extends Service {
 			if (player.getPlayerServer() == PlayerServer.LOGIN)
 				handleLagRequest(player);
 		}
+	}
+	
+	@IntentHandler
+	private void handleRequestLoginIntent(RequestLoginIntent rli) {
+		handleLogin(rli.getPlayer(), rli.getUsername(), rli.getPassword(), rli.getClientVersion(), rli.getSocketAddress());
 	}
 	
 	private String getServerString() {
@@ -183,7 +189,7 @@ public class LoginService extends Service {
 		}
 	}
 	
-	private void handleLogin(Player player, LoginClientId id) {
+	private void handleLogin(Player player, String username, String password, String clientVersion, SocketAddress socketAddress) {
 		if (player.getPlayerState() == PlayerState.LOGGED_IN) { // Client occasionally sends multiple login requests
 			sendLoginSuccessPacket(player);
 			return;
@@ -193,37 +199,37 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		final boolean doClientCheck = PswgDatabase.INSTANCE.getConfig().getBoolean(this, "loginVersionChecks", true);
-		if (!id.getVersion().equals(REQUIRED_VERSION) && doClientCheck) {
-			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect version: %s] from %s", id.getVersion(), id.getSocketAddress());
-			onLoginClientVersionError(player, id);
+		if (!clientVersion.equals(REQUIRED_VERSION) && doClientCheck) {
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect version: %s] from %s", clientVersion, socketAddress);
+			onLoginClientVersionError(player, clientVersion);
 			return;
 		}
 		
-		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(id.getUsername());
-		player.setUsername(id.getUsername());
+		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(username);
+		player.setUsername(username);
 		if (user == null) {
-			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", id.getSocketAddress());
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", socketAddress);
 			onInvalidUserPass(player);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect username", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		} else if (user.isBanned()) {
-			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", id.getSocketAddress());
+			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", socketAddress);
 			onLoginBanned(player);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Sorry, you're banned!", false));
-		} else if (isUserValid(user, id.getPassword())) {
-			StandardLog.onPlayerEvent(this, player, "logged in from %s", id.getSocketAddress());
+		} else if (isUserValid(user, password)) {
+			StandardLog.onPlayerEvent(this, player, "logged in from %s", socketAddress);
 			onSuccessfulLogin(user, player);
 			sendLoginSuccessPacket(player);
 		} else {
-			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password] from %s", id.getSocketAddress());
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password] from %s", socketAddress);
 			onInvalidUserPass(player);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect password", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		}
 	}
 	
-	private void onLoginClientVersionError(Player player, LoginClientId id) {
-		player.sendPacket(new ErrorMessage("Login Failed!", "Invalid Client Version Code: " + id.getVersion(), false));
+	private void onLoginClientVersionError(Player player, String clientVersion) {
+		player.sendPacket(new ErrorMessage("Login Failed!", "Invalid Client Version Code: " + clientVersion, false));
 		player.setPlayerState(PlayerState.DISCONNECTED);
 		new LoginEventIntent(player.getNetworkId(), LoginEvent.LOGIN_FAIL_INVALID_VERSION_CODE).broadcast();
 	}
