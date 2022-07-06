@@ -59,10 +59,17 @@ public class BuffService extends Service {
 	
 	private final BasicScheduledThread timerCheckThread;
 	private final Set<CreatureObject> monitored;
+	private final Map<String, BuffCallback> callbackMap;
 	
 	public BuffService() {
 		timerCheckThread = new BasicScheduledThread("buff-timer-check", this::checkBuffTimers);
 		monitored = new HashSet<>();
+		callbackMap = new HashMap<>();
+		registerCallbacks();
+	}
+	
+	private void registerCallbacks() {
+		callbackMap.put("removeBurstRun", new RemoveBurstRunBuffCallback());
 	}
 	
 	@Override
@@ -254,8 +261,9 @@ public class BuffService extends Service {
 			return;
 		}
 		
-		if (DataLoader.Companion.buffs().containsBuff(callback)) {
-			addBuff(creature, getBuff(callback), creature);
+		if (callbackMap.containsKey(callback)) {
+			BuffCallback buffCallback = callbackMap.get(callback);
+			buffCallback.execute(creature);
 		}
 	}
 	

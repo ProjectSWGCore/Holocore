@@ -73,6 +73,7 @@ class CombatCommandService : Service() {
 
 		val equippedWeapon = source.equippedWeapon
 		val specialAttackCost = equippedWeapon.specialAttackCost
+		source.modifyHealth((-command.healthCost).toInt())
 		source.modifyAction((-command.actionCost * specialAttackCost / 100).toInt())
 		source.modifyMind((-command.mindCost * specialAttackCost / 100).toInt())
 		
