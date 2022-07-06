@@ -36,6 +36,7 @@ import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController
+import com.projectswg.holocore.ProjectSWG
 import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent
 import com.projectswg.holocore.intents.support.global.network.ConnectionOpenedIntent
@@ -103,6 +104,15 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 		if (request.path == "/health-check") {
 			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to "0"), ByteArray(0)))
 			StandardLog.onPlayerTrace(this, player, "requested health check")
+			return
+		}
+		
+		if (request.path == "/stats") {
+			val galaxy = ProjectSWG.getGalaxy()
+			val stats = "{\"name\": \"${galaxy.name}\", \"status\": \"${galaxy.status.name}\"}".encodeToByteArray()
+			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to stats.size.toString()), stats))
+			StandardLog.onPlayerTrace(this, player, "requested server stats")
+			return
 		}
 	}
 	
