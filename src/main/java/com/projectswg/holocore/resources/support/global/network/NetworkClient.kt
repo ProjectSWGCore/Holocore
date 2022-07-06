@@ -118,6 +118,11 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	
 	override fun onUpgrade(obj: WebSocketHandler, request: HttpRequest) {
 		upgraded.set(true)
+		
+		val remoteInetSocketAddress = remoteAddress as InetSocketAddress
+		val forwardedForString = request.getHeaderValue("X-Forwarded-For") ?: remoteInetSocketAddress.hostString
+		player.setRemoteAddress(InetSocketAddress(forwardedForString, remoteInetSocketAddress.port))
+		
 		val urlParameters = request.urlParameters
 		val username = getUrlParameter(urlParameters, "username", true) ?: return
 		val password = getUrlParameter(urlParameters, "password", true) ?: return

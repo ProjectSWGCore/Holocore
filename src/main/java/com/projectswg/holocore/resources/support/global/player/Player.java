@@ -46,8 +46,8 @@ public class Player implements Comparable<Player> {
 	private final long networkId;
 	private final IntentChain intentChain;
 	private final AtomicReference<CreatureObject> creatureObject;
+	private final AtomicReference<InetSocketAddress> address;
 	private final Consumer<SWGPacket> packetSender;
-	private final InetSocketAddress address;
 	
 	private String			accountId			= "";
 	private String			username			= "";
@@ -58,10 +58,14 @@ public class Player implements Comparable<Player> {
 	
 	public Player(long networkId, InetSocketAddress address, Consumer<SWGPacket> packetSender) {
 		this.networkId = networkId;
-		this.address = address;
+		this.address = new AtomicReference<>(address);
 		this.intentChain = new IntentChain();
 		this.creatureObject = new AtomicReference<>(null);
 		this.packetSender = packetSender;
+	}
+	
+	public void setRemoteAddress(InetSocketAddress address) {
+		this.address.set(address);
 	}
 	
 	public void setPlayerState(PlayerState state) {
@@ -103,7 +107,7 @@ public class Player implements Comparable<Player> {
 	}
 	
 	public InetSocketAddress getAddress() {
-		return address;
+		return address.get();
 	}
 	
 	public PlayerState getPlayerState() {
