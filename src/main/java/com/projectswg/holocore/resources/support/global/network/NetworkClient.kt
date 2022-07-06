@@ -47,6 +47,7 @@ import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.log.Log
 import me.joshlarson.websocket.common.WebSocketHandler
 import me.joshlarson.websocket.common.parser.http.HttpRequest
+import me.joshlarson.websocket.common.parser.http.HttpResponse
 import me.joshlarson.websocket.common.parser.websocket.WebSocketCloseReason
 import me.joshlarson.websocket.common.parser.websocket.WebsocketFrame
 import me.joshlarson.websocket.common.parser.websocket.WebsocketFrameType
@@ -67,6 +68,7 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	private val inboundBuffer = ByteBuffer.allocate(INBOUND_BUFFER_SIZE)
 	private val intentChain   = IntentChain()
 	private val connected     = AtomicBoolean(true)
+	private val upgraded      = AtomicBoolean(false)
 	private val status        = AtomicReference(SessionStatus.DISCONNECTED)
 	private val wsProtocol    = WebSocketServerProtocol(this, { data -> write(ByteBuffer.wrap(data)) }, closeChannel)
 	private val writeLock     = ReentrantLock()
@@ -83,7 +85,8 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	fun close(reason: ConnectionStoppedReason = ConnectionStoppedReason.OTHER_SIDE_TERMINATED) {
 		if (connected.getAndSet(false)) {
 			serverDisconnectReason = reason
-			wsProtocol.sendClose(WebSocketCloseReason.NORMAL.statusCode.toInt(), reason.name)
+			if (upgraded.get())
+				wsProtocol.sendClose(WebSocketCloseReason.NORMAL.statusCode.toInt(), reason.name)
 		}
 	}
 	
@@ -96,7 +99,15 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 		inboundBuffer.position(0)
 	}
 	
+	override fun onHttpRequest(obj: WebSocketHandler, request: HttpRequest) {
+		if (request.path == "/health-check") {
+			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to "0"), ByteArray(0)))
+			StandardLog.onPlayerTrace(this, player, "requested health check")
+		}
+	}
+	
 	override fun onUpgrade(obj: WebSocketHandler, request: HttpRequest) {
+		upgraded.set(true)
 		val urlParameters = request.urlParameters
 		val username = getUrlParameter(urlParameters, "username", true) ?: return
 		val password = getUrlParameter(urlParameters, "password", true) ?: return
@@ -133,7 +144,7 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	}
 	
 	override fun onOpened() {
-		StandardLog.onPlayerTrace(this, player, "connecting")
+		StandardLog.onPlayerTrace(this, player, "connected [TCP]")
 		status.set(SessionStatus.CONNECTING)
 		intentChain.broadcastAfter(ConnectionOpenedIntent(player))
 	}

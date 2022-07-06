@@ -40,7 +40,7 @@ sourceSets {
 			implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 			implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
 			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.5")
-			implementation(group="me.joshlarson", name="websocket", version="0.9.3")
+			implementation(group="me.joshlarson", name="websocket", version="0.9.4")
 			implementation(group="com.github.madsboddum", name="swgterrain", version="1.1.3")
 		}
 	}
