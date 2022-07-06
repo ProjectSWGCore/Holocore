@@ -2,7 +2,7 @@ package com.projectswg.holocore.services.support.objects;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget;
+import com.projectswg.common.network.packets.swg.zone.object_controller.LookAtTarget;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
@@ -173,10 +173,9 @@ public class ObjectStorageService extends Service {
 	@IntentHandler
 	private void processGalacticPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
-		if (packet instanceof IntendedTarget) {
-			IntendedTarget intendedTarget = (IntendedTarget) packet;
+		if (packet instanceof LookAtTarget lookAtTarget) {
 			CreatureObject creatureObject = gpi.getPlayer().getCreatureObject();
-			long targetId = intendedTarget.getTargetId();
+			long targetId = lookAtTarget.getTargetId();
 			
 			creatureObject.setLookAtTargetId(targetId);
 		}

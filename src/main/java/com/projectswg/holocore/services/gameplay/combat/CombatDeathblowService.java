@@ -4,7 +4,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.gameplay.combat.*;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -21,7 +20,7 @@ import java.util.concurrent.Future;
 
 public class CombatDeathblowService extends Service {
 	
-	private static final byte INCAP_TIMER = 10;    // Amount of seconds to be incapacitated
+	private static final byte INCAP_TIMER = 20;    // Amount of seconds to be incapacitated
 	
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final ScheduledThreadPool executor;
@@ -68,7 +67,7 @@ public class CombatDeathblowService extends Service {
 		Future<?> incapacitationTimer = incapacitatedCreatures.remove(corpse);
 		
 		if (incapacitationTimer != null) {
-			if (incapacitationTimer.cancel(false)) {    // If the task is running, let them get back up
+			if (incapacitationTimer.cancel(true)) {    // Interrupt the incap timer and kill the creature immediately
 				killCreature(killer, corpse);
 			}
 		} else {
