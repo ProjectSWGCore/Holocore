@@ -68,7 +68,6 @@ class CombatStatusService : Service() {
 			if (!defender.hasDefenders())
 				ExitCombatIntent.broadcast(defender)
 		}
-		endDuels(source)
 		if (source.hasDefenders())
 			return
 		
@@ -79,12 +78,9 @@ class CombatStatusService : Service() {
 	@IntentHandler
 	private fun handleDuelPlayerIntent(dpi: DuelPlayerIntent) {
 		when (dpi.eventType) {
-			DuelPlayerIntent.DuelEventType.BEGINDUEL -> {
+			DuelPlayerIntent.DuelEventType.ACCEPT -> {
 				val duel = if (dpi.sender.objectId < dpi.reciever.objectId) DuelInstance(dpi.sender, dpi.reciever) else DuelInstance(dpi.reciever, dpi.sender)
-				if (duels.add(duel)) {
-					EnterCombatIntent.broadcast(duel.playerA, duel.playerB)
-					EnterCombatIntent.broadcast(duel.playerB, duel.playerA)
-				}
+				duels.add(duel)
 			}
 			DuelPlayerIntent.DuelEventType.END -> {
 				duels.remove(if (dpi.sender.objectId < dpi.reciever.objectId) DuelInstance(dpi.sender, dpi.reciever) else DuelInstance(dpi.reciever, dpi.sender))
@@ -100,15 +96,7 @@ class CombatStatusService : Service() {
 		}
 		return false
 	}
-	
-	private fun endDuels(player: CreatureObject) {
-		for (duel in duels) {
-			if (duel.playerA == player || duel.playerB == player) {
-				DuelPlayerIntent(duel.playerA, duel.playerB, DuelPlayerIntent.DuelEventType.END).broadcast()
-			}
-		}
-	}
-	
+
 	data class DuelInstance(val playerA: CreatureObject, val playerB: CreatureObject) {
 		
 		val isDueling: Boolean

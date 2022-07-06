@@ -6,7 +6,6 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.UpdatePvpStatusMessage;
-import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.RegisterPvpZoneIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.UnregisterPvpZoneIntent;
@@ -88,36 +87,10 @@ public class FactionFlagService extends Service {
 			return;
 		
 		switch (fi.getUpdateType()) {
-			case FACTIONUPDATE:
-				handleTypeChange(fi);
-				break;
-			case SWITCHUPDATE:
-				handleSwitchChange(fi);
-				break;
-			case STATUSUPDATE:
-				handleStatusChange(fi);
-				break;
-			case FLAGUPDATE:
-				handleFlagChange(target);
-				break;
-		}
-	}
-	
-	@IntentHandler
-	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
-		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
-			return;
-		}
-		
-		switch (dpi.getEventType()) {
-			case BEGINDUEL:
-				handleBeginDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case END:
-				handleEndDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			default:
-				break;
+			case FACTIONUPDATE -> handleTypeChange(fi);
+			case SWITCHUPDATE -> handleSwitchChange(fi);
+			case STATUSUPDATE -> handleStatusChange(fi);
+			case FLAGUPDATE -> handleFlagChange(target);
 		}
 	}
 	
@@ -267,16 +240,6 @@ public class FactionFlagService extends Service {
 				observerOwner.sendPacket(createPvpStatusMessage(tangibleAware, target));
 		}
 	}
-	
-	private void handleBeginDuel(CreatureObject accepter, CreatureObject target) {
-		accepter.sendSelf(createPvpStatusMessage(accepter, target));
-		target.sendSelf(createPvpStatusMessage(target, accepter));
-	}
-	
-	private void handleEndDuel(CreatureObject accepter, CreatureObject target) {
-		accepter.sendSelf(createPvpStatusMessage(accepter, target));
-		target.sendSelf(createPvpStatusMessage(target, accepter));
-	}	
 	
 	private boolean isInPvpZone(Location location) {
 		return pvpZones.values().stream()
