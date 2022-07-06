@@ -1397,7 +1397,7 @@ spawn_tatooine_1394	TATOOINE	tat_jabbas_palace	AREA	22	-11.0	2.0	35.9	0	1	Max Re
 spawn_tatooine_1395	TATOOINE	tat_jabbas_palace	AREA	22	-10.0	2.0	43.0	90	1	Oola	humanoid_oola	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_oola			600
 spawn_tatooine_1396	TATOOINE	tat_jabbas_palace	AREA	22	-16.1	2.8	42.3	90	1	Salacious Crumb	creature_salacious_crumb	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1397	TATOOINE	tat_jabbas_palace	AREA	22	-9.0	2.0	37.0	0	1	Sy Snootles	humanoid_sy_snootles	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	themepark_sy_snootles			600
-spawn_tatooine_1398	TATOOINE	tat_jabbas_palace	AREA	22	6.0	2.0	30.4	170	1	Torgau	humanoid_torgau	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle			600
+spawn_tatooine_1398	TATOOINE	tat_jabbas_palace	AREA	22	6.0	2.0	30.4	170	1	Torgau	humanoid_torgau	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	TURN	0	0	-	idle			600
 spawn_tatooine_1399	TATOOINE	tat_jabbas_palace	AREA	22	7.5	2.0	24.6	-45	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
 spawn_tatooine_1400	TATOOINE	tat_jabbas_palace	AREA	22	5.4	2.0	24.7	43	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
 spawn_tatooine_1401	TATOOINE	tat_jabbas_palace	AREA	22	7.5	2.0	26.6	-135	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
