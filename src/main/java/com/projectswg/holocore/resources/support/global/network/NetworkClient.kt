@@ -107,6 +107,7 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 		if (protocolVersion == NetworkProtocol.VERSION) {
 			onConnected()
 		} else {
+			StandardLog.onPlayerError(this, player, "disconnected for invalid protocol version. Expected: ${NetworkProtocol.VERSION}")
 			close(ConnectionStoppedReason.INVALID_PROTOCOL)
 			return
 		}
@@ -203,13 +204,6 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	
 	private fun processPacket(p: SWGPacket) {
 		when (p) {
-			is HoloSetProtocolVersion -> {
-				if (p.protocol == NetworkProtocol.VERSION) {
-					onConnected()
-				} else {
-					close(ConnectionStoppedReason.INVALID_PROTOCOL)
-				}
-			}
 			is HoloConnectionStopped -> {
 				clientDisconnectReason = p.reason
 				close(ConnectionStoppedReason.OTHER_SIDE_TERMINATED)
