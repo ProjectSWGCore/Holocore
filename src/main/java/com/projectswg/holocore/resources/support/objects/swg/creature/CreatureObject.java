@@ -416,7 +416,7 @@ public class CreatureObject extends TangibleObject {
 		setRunSpeed(vehicle.getRunSpeed());
 		setAccelScale(vehicle.getAccelScale());
 		setTurnScale(vehicle.getTurnScale());
-		setMovementScale(vehicle.getMovementScale());
+		setMovementScale(MovementModifierIdentifier.BASE, vehicle.getMovementScale(), true);
 	}
 
 	public void resetMovement() {
@@ -495,6 +495,10 @@ public class CreatureObject extends TangibleObject {
 		return creo4.getMovementPercent();
 	}
 
+	/**
+	 * Use this for snares and roots. Do not use it for something like /setSpeed or Burst Run.
+	 * @param movementPercent 1 for full speed, 0.5 for half etc
+	 */
 	public void setMovementPercent(double movementPercent) {
 		creo4.setMovementPercent((float) movementPercent);
 	}
@@ -519,8 +523,19 @@ public class CreatureObject extends TangibleObject {
 		setBankBalance(getBankBalance() + amount);
 	}
 	
-	public void setMovementScale(double movementScale) {
-		creo4.setMovementScale((float) movementScale);
+	/**
+	 * Increases the base movement speed of the creature. Will be overridden by movementPercent.
+	 * This should NOT be used for snares and roots! Use {@link CreatureObject#setMovementPercent(double)} for this.
+	 * @param movementModifierIdentifier an identifier that lets us know where the movement modifier comes from
+	 * @param movementScale 1 for normal speed, 2 for double, 3 for triple etc
+	 * @param fromMount if the source is a mount
+	 */
+	public void setMovementScale(MovementModifierIdentifier movementModifierIdentifier, float movementScale, boolean fromMount) {
+		creo4.setMovementScale(movementModifierIdentifier, movementScale, fromMount);
+	}
+	
+	public void removeMovementScale(MovementModifierIdentifier movementModifierIdentifier) {
+		creo4.removeMovementScale(movementModifierIdentifier);
 	}
 
 	public long getPerformanceListenTarget() {

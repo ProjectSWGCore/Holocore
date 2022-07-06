@@ -55,6 +55,7 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 	private static final int DEFAULT_MOVEMENTSCALE = 1;
 	private final CreatureObject obj;
 	private final Lock skillModLock = new ReentrantLock();
+	private final MovementModifierContainer movementModifierContainer = new MovementModifierContainer();
 	
 	/** CREO4-00 */ private float								accelPercent			= 1;
 	/** CREO4-01 */ private float								accelScale				= DEFAULT_ACCELSCALE;
@@ -126,6 +127,8 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 	}
 
 	public void setMovementPercent(float movementPercent) {
+		assert(movementPercent >= 0 && movementPercent <= 1);	// movementPercent should only be used for snares and roots
+		
 		this.movementPercent = movementPercent;
 		sendDelta(4, movementPercent);
 	}
@@ -134,9 +137,19 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		return movementScale;
 	}
 
-	public void setMovementScale(float movementScale) {
-		this.movementScale = movementScale;
-		sendDelta(5, movementScale);
+	public void setMovementScale(MovementModifierIdentifier movementModifierIdentifier, float movementScale, boolean fromMount) {
+		assert(movementScale >= 1);	// Should only be used for speed boosts
+		float fastestMovementModifier = movementModifierContainer.putModifier(movementModifierIdentifier, movementScale, fromMount);
+		
+		this.movementScale = fastestMovementModifier;
+		sendDelta(5, fastestMovementModifier);
+	}
+	
+	public void removeMovementScale(MovementModifierIdentifier movementModifierIdentifier) {
+		float fastestMovementModifier = movementModifierContainer.removeModifier(movementModifierIdentifier);
+		
+		this.movementScale = fastestMovementModifier;
+		sendDelta(5, fastestMovementModifier);
 	}
 
 	public long getPerformanceListenTarget() {
@@ -316,6 +329,7 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		data.putDouble("waterModPercent", waterModPercent);
 		data.putMap("commands", commands);
 		data.putArray("missionCriticalObjects", missionCriticalObjects);
+		data.putDocument("movementModifiers", movementModifierContainer);
 	}
 
 	@Override
@@ -339,6 +353,7 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		turnScale = data.getFloat("turnScale", turnScale);
 		commands.putAll(data.getMap("commands", String.class, Integer.class));
 		missionCriticalObjects.addAll(data.getArray("missionCriticalObjects", GroupMissionCriticalObject.class));
+		movementModifierContainer.readMongo(data.getDocument("movementModifiers"));
 	}
 
 	private void sendDelta(int update, Object o) {
@@ -350,6 +365,6 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		setRunSpeed(DEFAULT_RUNSPEED);
 		setAccelScale(DEFAULT_ACCELSCALE);
 		setTurnScale(DEFAULT_TURNSCALE);
-		setMovementScale(DEFAULT_MOVEMENTSCALE);
+		setMovementScale(MovementModifierIdentifier.BASE, DEFAULT_MOVEMENTSCALE, false);
 	}
 }
