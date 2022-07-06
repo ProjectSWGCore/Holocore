@@ -47,6 +47,7 @@ import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.log.Log
 import me.joshlarson.websocket.common.WebSocketHandler
 import me.joshlarson.websocket.common.parser.http.HttpRequest
+import me.joshlarson.websocket.common.parser.http.HttpResponse
 import me.joshlarson.websocket.common.parser.websocket.WebSocketCloseReason
 import me.joshlarson.websocket.common.parser.websocket.WebsocketFrame
 import me.joshlarson.websocket.common.parser.websocket.WebsocketFrameType
@@ -94,6 +95,11 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	override fun onRead() {
 		wsProtocol.onRead(inboundBuffer.array(), 0, inboundBuffer.position())
 		inboundBuffer.position(0)
+	}
+	
+	override fun onHttpRequest(obj: WebSocketHandler, request: HttpRequest) {
+		if (request.path == "/health-check")
+			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to "0"), ByteArray(0)))
 	}
 	
 	override fun onUpgrade(obj: WebSocketHandler, request: HttpRequest) {
