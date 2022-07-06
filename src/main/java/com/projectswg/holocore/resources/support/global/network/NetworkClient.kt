@@ -35,7 +35,6 @@ import com.projectswg.common.network.packets.swg.admin.AdminPacket
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason
-import com.projectswg.common.network.packets.swg.holo.HoloSetProtocolVersion
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController
 import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent
 import com.projectswg.holocore.intents.support.global.network.ConnectionClosedIntent
