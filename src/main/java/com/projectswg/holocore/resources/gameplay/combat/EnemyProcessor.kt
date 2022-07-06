@@ -42,12 +42,12 @@ object EnemyProcessor {
 			return false
 		if (source !is CreatureObject || target !is CreatureObject)
 			return isValidTangible(source) && isValidTangible(target) && isFactionAttackable(source, target)
-		
-		if (!isValidPosture(source) || !isValidPosture(target))
-			return false // If neither of us have a valid posture, nobody can attack
+
 		if (isAttackAllowedAnyways(source, target))
 			return true
-		
+		if (!isValidPosture(source) || !isValidPosture(target))
+			return false // If neither of us have a valid posture, nobody can attack
+
 		// NPC-based checks
 		if (source is AIObject) {
 			if (target is AIObject)

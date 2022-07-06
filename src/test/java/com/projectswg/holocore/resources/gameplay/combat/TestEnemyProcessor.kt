@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.gameplay.combat
 
+import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
@@ -78,7 +79,18 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 		player2.addPlayerToSentDuels(player1)
 		testAttackable(player1, player2, neutral, neutral, playerAttackable = true, npcAttackable = true)
 	}
-	
+
+	@Test
+	fun `incapacitated player can be deathblown when dueling`() {
+		val player1 = GenericCreatureObject(1)
+		val player2 = GenericCreatureObject(2)
+		player1.addPlayerToSentDuels(player2)
+		player2.addPlayerToSentDuels(player1)
+		player2.posture = Posture.INCAPACITATED
+
+		testAttackable(player1, player2, neutral, neutral, playerAttackable = true, npcAttackable = true)
+	}
+
 	@Test
 	fun testPvE() {
 		val player = GenericCreatureObject(1)
