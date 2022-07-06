@@ -79,18 +79,14 @@ public enum WeaponType {
 	
 	/**
 	 *
-	 * @return e.g. Unarmed Defense and Melee Defense
+	 * @return e.g. Unarmed Defense
 	 */
-	public Collection<String> getDefenseSkillMods() {
-		Collection<String> defenseSkillMods = new HashSet<>();
-		
-		if (defenseSkillMod != null) {
-			defenseSkillMods.add(defenseSkillMod);
-		}
-		
-		defenseSkillMods.add(weaponClass.getDefenseSkillMod());
-		
-		return defenseSkillMods;
+	public String getDefenseSkillMod() {
+		return defenseSkillMod;
+	}
+	
+	public WeaponClass getWeaponClass() {
+		return weaponClass;
 	}
 	
 	public Collection<String> getAccuracySkillMods() {

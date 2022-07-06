@@ -44,6 +44,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 
@@ -256,7 +257,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	
 	private static double calculateToHit(CreatureObject source, WeaponObject sourceWeapon, CreatureObject target) {
 		int accMod = calculateAccMod(source, sourceWeapon);
-		int defMod = calculateDefMod(target);
+		int defMod = calculateDefMod(source, target);
 		int defPosMod = calculateDefPosMod(sourceWeapon, target);
 		int aimShot = 0;	// TODO The sum of your General Ranged Aiming, and weapon-specific Aiming mods. Only applies if you use Aim prior to your attack.
 		int covMod = 0;	// TODO Defense Modifier for the take cover ability
@@ -339,18 +340,29 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return accMod;
 	}
 	
-	private static int calculateDefMod(CreatureObject target) {
+	private static int calculateDefMod(CreatureObject source, CreatureObject target) {
 		int defMod = 0;
-		WeaponObject targetWeapon = target.getEquippedWeapon();
-		WeaponType targetWeaponType = targetWeapon.getType();
-		Collection<String> defenseSkillMods = targetWeaponType.getDefenseSkillMods();
-		for (String defenseSkillMod : defenseSkillMods) {
-			defMod += target.getSkillModValue(defenseSkillMod);
-		}
 		
+		defMod += calculateDefModWhenWieldingWeaponType(target);
+		defMod += calculateDefModAgainstWeaponClass(source, target);
 		defMod += target.getSkillModValue("private_defense_bonus");
 		
 		return defMod;
+	}
+	
+	private static int calculateDefModAgainstWeaponClass(CreatureObject source, CreatureObject target) {
+		WeaponObject sourceWeapon = source.getEquippedWeapon();
+		WeaponType sourceWeaponType = sourceWeapon.getType();
+		WeaponClass sourceWeaponClass = sourceWeaponType.getWeaponClass();
+		
+		return target.getSkillModValue(sourceWeaponClass.getDefenseSkillMod());
+	}
+	
+	private static int calculateDefModWhenWieldingWeaponType(CreatureObject target) {
+		WeaponObject targetWeapon = target.getEquippedWeapon();
+		WeaponType targetWeaponType = targetWeapon.getType();
+		
+		return target.getSkillModValue(targetWeaponType.getDefenseSkillMod());
 	}
 	
 	private static int calculateWeaponDamageMod(CreatureObject source, WeaponObject weapon) {
