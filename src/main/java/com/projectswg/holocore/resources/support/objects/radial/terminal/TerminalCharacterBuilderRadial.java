@@ -45,7 +45,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Armor");
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
-				listBox.addListItem("ITEMS - Tools");
 				listBox.addListItem("ITEMS - Vehicles");
 				listBox.addListItem("Credits");
 				listBox.addListItem("Knockdown");
@@ -65,10 +64,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 1: handleArmor(player); break;
 			case 2: handleWeapons(player); break;
 			case 3: handleWearables(player); break;
-			case 4: handleTools(player); break;
-			case 5: handleVehicles(player); break;
-			case 6: handleCredits(player); break;
-			case 7: handleKnockdown(player); break;
+			case 4: handleVehicles(player); break;
+			case 5: handleCredits(player); break;
+			case 6: handleKnockdown(player); break;
 		}
 	}
 
@@ -292,13 +290,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleWeapons(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a weapon category to receive a weapon of that type.");
 
-		listBox.addListItem("LOW - Lightsaber");
 		listBox.addListItem("LOW - Melee");
 		listBox.addListItem("LOW - Ranged");
-		listBox.addListItem("MEDIUM - Lightsaber");
 		listBox.addListItem("MEDIUM - Melee");
 		listBox.addListItem("MEDIUM - Ranged");
-		listBox.addListItem("HIGH - Lightsaber");
 		listBox.addListItem("HIGH - Melee");
 		listBox.addListItem("HIGH - Ranged");
 
@@ -310,42 +305,16 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		int selection = SuiListBox.getSelectedRow(parameters);
 
 		switch (selection) {
-			case 0: handleLowLightsaber(player); break;
-			case 1: handleLowMelee(player); break;
-			case 2: handleLowRanged(player); break;
-			case 3: handleMediumLightsaber(player); break;
-			case 4: handleMediumMelee(player); break;
-			case 5: handleMediumRanged(player); break;
-			case 6: handleHighLightsaber(player); break;
-			case 7: handleHighMelee(player); break;
-			case 8: handleHighRanged(player); break;
+			case 0: handleLowMelee(player); break;
+			case 1: handleLowRanged(player); break;
+			case 2: handleMediumMelee(player); break;
+			case 3: handleMediumRanged(player); break;
+			case 4: handleHighMelee(player); break;
+			case 5: handleHighRanged(player); break;
 
 		}
 	}
 
-	private static void handleLowLightsaber(Player player) {
-		spawnItems(player,
-				"weapon_test_low_polearm_saber",
-				"weapon_test_low_1h_saber",
-				"weapon_test_low_2h_saber"
-		);
-	}
-
-	private static void handleMediumLightsaber(Player player) {
-		spawnItems(player,
-				"weapon_test_medium_polearm_saber",
-				"weapon_test_medium_1h_saber",
-				"weapon_test_medium_2h_saber"
-		);
-	}
-
-	private static void handleHighLightsaber(Player player) {
-		spawnItems(player,
-				"weapon_test_high_polearm_saber",
-				"weapon_test_high_1h_saber",
-				"weapon_test_high_2h_saber"
-		);
-	}
 
 	private static void handleLowMelee(Player player) {
 		spawnItems(player,
@@ -422,7 +391,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Skirts");
 		listBox.addListItem("Vest");
 		listBox.addListItem("Ithorian equipment");
-		listBox.addListItem("Jedi equipment");
 		listBox.addListItem("Nightsister equipment");
 		listBox.addListItem("Tusken Raider equipment");
 		listBox.addListItem("Wookie equipment");
@@ -453,10 +421,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 15: handleSkirt(player); break;
 			case 16: handleVest(player); break;
 			case 17: handleIthorianEquipment(player); break;
-			case 18: handleJediRobes(player); break;
-			case 19: handleNightsisterEquipment(player); break;
-			case 20: handleTuskenEquipment(player); break;
-			case 21: handleWookieeEquipment(player); break;
+			case 18: handleNightsisterEquipment(player); break;
+			case 19: handleTuskenEquipment(player); break;
+			case 20: handleWookieeEquipment(player); break;
 		}
 	}
 
@@ -807,37 +774,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		);
 	}
 
-	private static void handleJediRobes(Player player) {
-		spawnItems(player,
-				"item_jedi_robe_dark_03_01",
-				"item_jedi_robe_light_03_01",
-				"item_jedi_robe_04_01",
-				"item_jedi_robe_04_02",
-				"item_jedi_robe_dark_03_02",
-				"item_jedi_robe_light_03_02",
-				"item_jedi_robe_04_03",
-				"item_jedi_robe_04_04",
-				"item_jedi_robe_dark_03_03",
-				"item_jedi_robe_dark_04_01",
-				"item_jedi_robe_light_03_03",
-				"item_jedi_robe_light_04_01",
-				"item_jedi_robe_dark_04_02",
-				"item_jedi_robe_dark_04_03",
-				"item_jedi_robe_light_04_02",
-				"item_jedi_robe_light_04_03",
-				"item_jedi_robe_06_01",
-				"item_jedi_robe_06_02",
-				"item_jedi_robe_06_03",
-				"item_jedi_robe_06_04",
-				"item_jedi_robe_06_05",
-				"item_jedi_robe_06_06",
-				"item_jedi_robe_dark_04_04",
-				"item_jedi_robe_light_04_04",
-				"item_jedi_robe_dark_04_05",
-				"item_jedi_robe_light_04_05"
-		);
-	}
-
 	private static void handleNightsisterEquipment(Player player) {
 		spawnItems(player,
 				"item_clothing_boots_nightsister_01_01",
@@ -890,36 +826,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_clothing_wookiee_skirt_01_02",
 				"item_clothing_wookiee_skirt_01_03",
 				"item_clothing_wookiee_skirt_01_04"
-		);
-	}
-
-
-	private static void handleTools(Player player) {
-		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select the tools you want to receive.");
-
-		listBox.addListItem("Survey Tools");
-
-		listBox.addCallback(SuiEvent.OK_PRESSED, "handleToolsSelection", (event, parameters) -> handleToolsSelection(player, parameters));
-		listBox.display(player);
-	}
-
-	private static void handleToolsSelection(Player player, Map<String, String> parameters) {
-		int selection = SuiListBox.getSelectedRow(parameters);
-
-		switch (selection) {
-			case 0: handleSurveyTools(player); break;
-		}
-	}
-
-	private static void handleSurveyTools(Player player) {
-		spawnItems(player,
-				"survey_tool_gas",
-				"survey_tool_liquid",
-				"survey_tool_lumber",
-				"survey_tool_mineral",
-				"survey_tool_moisture",
-				"survey_tool_solar",
-				"survey_tool_wind"
 		);
 	}
 
