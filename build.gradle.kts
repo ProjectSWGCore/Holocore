@@ -39,7 +39,7 @@ sourceSets {
 			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
 			implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 			implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
-			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.5")
+			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
 			implementation(group="me.joshlarson", name="websocket", version="0.9.4")
 			implementation(group="com.github.madsboddum", name="swgterrain", version="1.1.3")
 		}

@@ -149,6 +149,8 @@ object StaticItemCreator {
 			obj.addSpeciesRestriction(Race.SULLUSTAN_MALE)
 			obj.addSpeciesRestriction(Race.TWILEK_FEMALE)
 			obj.addSpeciesRestriction(Race.TWILEK_MALE)
+			obj.addSpeciesRestriction(Race.ZABRAK_FEMALE)
+			obj.addSpeciesRestriction(Race.ZABRAK_MALE)
 		}
 	}
 
