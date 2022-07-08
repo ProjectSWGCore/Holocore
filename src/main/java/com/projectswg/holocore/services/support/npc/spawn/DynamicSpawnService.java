@@ -202,8 +202,15 @@ public class DynamicSpawnService extends Service {
 			return;
 		}
 		
-		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder().withNpcId(npcId).withDifficulty(difficulty).withSpawnerType(SpawnerType.WAYPOINT_AUTO_SPAWN)
-				.withMinLevel(minLevel).withMaxLevel(maxLevel).withSpawnerFlag(spawnerFlag).withBehavior(AIBehavior.LOITER).withLocation(location)
+		SimpleSpawnInfo simpleSpawnInfo = SimpleSpawnInfo.builder()
+				.withNpcId(npcId)
+				.withDifficulty(difficulty)
+				.withSpawnerType(SpawnerType.WAYPOINT_AUTO_SPAWN)
+				.withMinLevel(minLevel)
+				.withMaxLevel(maxLevel)
+				.withSpawnerFlag(spawnerFlag)
+				.withBehavior(AIBehavior.LOITER)
+				.withLocation(location)
 				.build();
 		
 		CreateSpawnIntent.broadcast(simpleSpawnInfo);

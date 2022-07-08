@@ -62,7 +62,13 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	 * `maxRespawnDelay`
 	 */
 	val respawnDelay: Int
-		get() = ThreadLocalRandom.current().nextInt(maxSpawnTime - minSpawnTime + 1) + minSpawnTime
+		get() {
+			return if (maxSpawnTime > 0) {
+				ThreadLocalRandom.current().nextInt(maxSpawnTime - minSpawnTime + 1) + minSpawnTime
+			} else {
+				0;
+			}
+		}
 	
 	/**
 	 * @return a random IFF template
