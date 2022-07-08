@@ -23,7 +23,6 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class GroupService(private val groups: MutableMap<Long, GroupObject> = ConcurrentHashMap()) : Service() {
@@ -95,17 +94,17 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 	private fun handleMemberDisappeared(player: Player) {
 		val creature = player.creatureObject
-		Objects.requireNonNull(creature)
+		creature ?: return
 		if (creature.groupId == 0L) return  // Ignore anyone without a group
 		removePlayerFromGroup(creature)
 	}
 
 	private fun handleGroupDisband(player: Player) {
 		val creo = player.creatureObject
-		Objects.requireNonNull(creo)
+		creo ?: return
 		val group = getGroup(creo.groupId)
-		Objects.requireNonNull(group)
-		if (group!!.leaderId != creo.objectId) {
+		group ?: return
+		if (group.leaderId != creo.objectId) {
 			sendSystemMessage(player, "must_be_leader")
 			return
 		}
@@ -118,7 +117,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 	private fun handleGroupInvite(player: Player, target: CreatureObject?) {
 		val creature = player.creatureObject
-		Objects.requireNonNull(creature)
+		creature ?: return
 
 		if (target == null || !target.isPlayer || creature == target) {
 			sendSystemMessage(player, "invite_no_target_self")
@@ -131,14 +130,14 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		val groupId = creature.groupId
 		if (groupId != 0L) {
 			val group = getGroup(groupId)
-			Objects.requireNonNull(group)
+			group ?: return
 			if (!handleInviteToExistingGroup(player, target, group)) return
 		}
 		sendInvite(player, target, groupId)
 	}
 
-	private fun handleInviteToExistingGroup(inviter: Player, target: CreatureObject, group: GroupObject?): Boolean {
-		if (group!!.leaderId != inviter.creatureObject.objectId) {
+	private fun handleInviteToExistingGroup(inviter: Player, target: CreatureObject, group: GroupObject): Boolean {
+		if (group.leaderId != inviter.creatureObject.objectId) {
 			sendSystemMessage(inviter, "must_be_leader")
 			return false
 		}
@@ -164,8 +163,8 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 			return
 		}
 		val targetOwner = target.owner
-		Objects.requireNonNull(targetOwner)
-		val targetName = targetOwner!!.characterName
+		targetOwner ?: return
+		val targetName = targetOwner.characterName
 		if (target.inviterData == null) {
 			sendSystemMessage(player, "uninvite_not_invited", "TT", targetName)
 			return
@@ -200,18 +199,21 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	private fun handleGroupDecline(invitee: Player) {
 		val creature = invitee.creatureObject
 		val invitation = creature.inviterData
-		sendSystemMessage(invitee, "decline_self", "TT", invitation.sender!!.characterName)
-		sendSystemMessage(invitation.sender, "decline_leader", "TT", invitee.characterName)
+		val invitationSender = invitation.sender
+		invitationSender ?: return
+		sendSystemMessage(invitee, "decline_self", "TT", invitationSender.characterName)
+		sendSystemMessage(invitationSender, "decline_leader", "TT", invitee.characterName)
 		clearInviteData(creature)
 	}
 
 	private fun handleMakeLeader(currentLeader: Player, newLeader: CreatureObject?) {
+		newLeader ?: return
 		val currentLeaderCreature = currentLeader.creatureObject
-		Objects.requireNonNull(currentLeaderCreature)
-		assert(newLeader!!.groupId != 0L) { "new leader is not a part of a group" }
+		currentLeaderCreature ?: return
+		assert(newLeader.groupId != 0L) { "new leader is not a part of a group" }
 		val group = getGroup(newLeader.groupId)
-		Objects.requireNonNull(group)
-		if (group!!.leaderId != currentLeaderCreature.objectId) {
+		group ?: return
+		if (group.leaderId != currentLeaderCreature.objectId) {
 			sendSystemMessage(currentLeader, "must_be_leader")
 			return
 		}
@@ -223,36 +225,36 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	}
 
 	private fun handleMakeMasterLooter(player: Player, target: CreatureObject?) {
+		target ?: return
 		val creature = player.creatureObject
 		if (creature.groupId == 0L) {
 			sendSystemMessage(player, "group_only")
 			return
 		}
-		if (target!!.owner == null) {
-			return
-		}
+		val targetOwner = target.owner
+		targetOwner ?: return
 		val group = getGroup(creature.groupId)
-		Objects.requireNonNull(group)
-		group!!.lootMaster = target.objectId
+		group ?: return
+		group.lootMaster = target.objectId
 		sendGroupSystemMessage(group, "new_master_looter", "TU", target.objectName)
 	}
 
 	private fun handleKick(leader: Player, kickedCreature: CreatureObject?) {
-		Objects.requireNonNull(kickedCreature)
+		kickedCreature ?: return
 		val leaderCreature = leader.creatureObject
-		Objects.requireNonNull(leaderCreature)
+		leaderCreature ?: return
 		val groupId = leaderCreature.groupId
 		if (groupId == 0L) { // Requester is not in a group
 			sendSystemMessage(leader, "group_only")
 			return
 		}
-		if (kickedCreature!!.groupId != groupId) { // Requester and Kicked are not in same group
+		if (kickedCreature.groupId != groupId) { // Requester and Kicked are not in same group
 			sendSystemMessage(leader, "must_be_leader")
 			return
 		}
 		val group = getGroup(groupId)
-		Objects.requireNonNull(group)
-		if (group!!.leaderId != leaderCreature.objectId) { // Requester is not leader of group
+		group ?: return
+		if (group.leaderId != leaderCreature.objectId) { // Requester is not leader of group
 			sendSystemMessage(leader, "must_be_leader")
 			return
 		}
@@ -261,7 +263,6 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 	private fun createGroup(leader: Player, member: Player) {
 		val group = ObjectCreator.createObjectFromTemplate("object/group/shared_group_object.iff") as GroupObject
-		Objects.requireNonNull(group)
 		groups[group.objectId] = group
 		group.formGroup(leader.creatureObject, member.creatureObject)
 		ObjectCreatedIntent(group).broadcast()
@@ -270,20 +271,20 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		onJoinGroup(member.creatureObject, group)
 	}
 
-	private fun destroyGroup(group: GroupObject?, player: Player) {
-		ChatRoomUpdateIntent(group!!.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), null, UpdateType.DESTROY).broadcast()
+	private fun destroyGroup(group: GroupObject, player: Player) {
+		ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), null, UpdateType.DESTROY).broadcast()
 		sendGroupSystemMessage(group, "disbanded")
 		group.disbandGroup()
 		DestroyObjectIntent(group).broadcast()
-		Objects.requireNonNull(groups.remove(group.objectId))
+		groups.remove(group.objectId)
 	}
 
 	private fun joinGroup(inviter: CreatureObject, creature: CreatureObject, groupId: Long) {
 		val player = creature.owner
-		Objects.requireNonNull(player)
+		player ?: return
 		val group = getGroup(groupId)
-		Objects.requireNonNull(group)
-		if (group!!.leaderId != inviter.objectId) {
+		group ?: return
+		if (group.leaderId != inviter.objectId) {
 			sendSystemMessage(player, "join_inviter_not_leader", "TT", inviter.objectName)
 			return
 		}
@@ -295,21 +296,20 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		onJoinGroup(creature, group)
 	}
 
-	private fun onJoinGroup(creature: CreatureObject, group: GroupObject?) {
+	private fun onJoinGroup(creature: CreatureObject, group: GroupObject) {
 		val player = creature.owner
-		Objects.requireNonNull(player)
 		sendSystemMessage(player, "joined_self")
 		updateChatRoom(player, group, UpdateType.JOIN)
 	}
 
 	private fun removePlayerFromGroup(creature: CreatureObject?) {
-		Objects.requireNonNull(creature)
-		assert(creature!!.groupId != 0L) { "creature is not within a group" }
+		creature ?: return
+		assert(creature.groupId != 0L) { "creature is not within a group" }
 		val group = getGroup(creature.groupId)
-		Objects.requireNonNull(group)
+		group ?: return
 
 		// Check size of the group, if it only has two members, destroy the group
-		if (group!!.groupMembers.size <= 2) {
+		if (group.groupMembers.size <= 2) {
 			destroyGroup(group, group.leaderPlayer)
 			return
 		}
@@ -325,8 +325,8 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		}
 	}
 
-	private fun updateChatRoom(player: Player?, group: GroupObject?, updateType: UpdateType) {
-		ChatRoomUpdateIntent(player, group!!.chatRoomPath, updateType).broadcast()
+	private fun updateChatRoom(player: Player?, group: GroupObject, updateType: UpdateType) {
+		ChatRoomUpdateIntent(player, group.chatRoomPath, updateType).broadcast()
 	}
 
 	private fun clearInviteData(creature: CreatureObject) {
@@ -339,18 +339,9 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		invitee.updateGroupInviteData(groupLeader, groupId)
 	}
 
-	private fun sendGroupSystemMessage(group: GroupObject?, id: String) {
-		val members = group!!.groupMemberObjects
+	private fun sendGroupSystemMessage(group: GroupObject, id: String, vararg objects: Any) {
+		val members = group.groupMemberObjects
 		for (member in members) {
-			Objects.requireNonNull(member.owner)
-			sendSystemMessage(member.owner, id)
-		}
-	}
-
-	private fun sendGroupSystemMessage(group: GroupObject?, id: String, vararg objects: Any) {
-		val members = group!!.groupMemberObjects
-		for (member in members) {
-			Objects.requireNonNull(member.owner)
 			sendSystemMessage(member.owner, id, *objects)
 		}
 	}
@@ -360,10 +351,12 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	}
 
 	private fun sendSystemMessage(target: Player?, id: String) {
-		SystemMessageIntent(target!!, ProsePackage("group", id)).broadcast()
+		target ?: return
+		SystemMessageIntent(target, ProsePackage("group", id)).broadcast()
 	}
 
 	private fun sendSystemMessage(target: Player?, id: String, vararg objects: Any) {
-		SystemMessageIntent.broadcastPersonal(target!!, ProsePackage(StringId("@group:$id"), *objects))
+		target ?: return
+		SystemMessageIntent.broadcastPersonal(target, ProsePackage(StringId("@group:$id"), *objects))
 	}
 }
