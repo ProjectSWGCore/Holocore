@@ -97,6 +97,10 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 	}
 
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
+		if (base == 0 && modifier == 0) {
+			return;
+		}
+		
 		skillModLock.lock();
 		try {
 			SkillMod skillMod = skillMods.get(skillModName);
