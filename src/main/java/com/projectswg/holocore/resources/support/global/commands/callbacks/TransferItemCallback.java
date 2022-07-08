@@ -138,7 +138,7 @@ public class TransferItemCallback implements ICmdCallback {
 					}
 					
 					// Make sure the player can wear it based on their species
-					if (!checkSpeciesRestriction(actor, tangibleTarget)) {
+					if (!isSpeciesAllowedToWearItem(actor, tangibleTarget)) {
 						sendNotEquippable(player);
 						return;
 					}
@@ -191,7 +191,11 @@ public class TransferItemCallback implements ICmdCallback {
 		player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 	}
 
-	private static boolean checkSpeciesRestriction(CreatureObject actor, TangibleObject tangibleTarget) {
+	private static boolean isSpeciesAllowedToWearItem(CreatureObject actor, TangibleObject tangibleTarget) {
+		if (tangibleTarget instanceof WeaponObject) {
+			return true;
+		}
+		
 		Race race = actor.getRace();
 		String template = tangibleTarget.getTemplate();
 		DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
