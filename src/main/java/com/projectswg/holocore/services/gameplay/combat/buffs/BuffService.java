@@ -37,9 +37,10 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
@@ -57,13 +58,11 @@ public class BuffService extends Service {
 	 *      Perform same check upon zoning in. Skillmod1 effect name is "group"
 	 */
 	
-	private final BasicScheduledThread timerCheckThread;
-	private final Set<CreatureObject> monitored;
+	private final ScheduledThreadPool timerCheckThread;
 	private final Map<String, BuffCallback> callbackMap;
 	
 	public BuffService() {
-		timerCheckThread = new BasicScheduledThread("buff-timer-check", this::checkBuffTimers);
-		monitored = new HashSet<>();
+		timerCheckThread = new ScheduledThreadPool(1, "buff-timer-check");
 		callbackMap = new HashMap<>();
 		registerCallbacks();
 	}
@@ -74,7 +73,7 @@ public class BuffService extends Service {
 	
 	@Override
 	public boolean start() {
-		timerCheckThread.startWithFixedRate(1000, 1000);
+		timerCheckThread.start();
 		return super.start();
 	}
 	
@@ -82,16 +81,6 @@ public class BuffService extends Service {
 	public boolean stop() {
 		timerCheckThread.stop();
 		return super.stop();
-	}
-	
-	private void checkBuffTimers() {
-		List<CreatureObject> creatures;
-		synchronized (monitored) {
-			creatures = new ArrayList<>(monitored);
-		}
-		for (CreatureObject creature : creatures) {
-			removeAllBuffs(creature, creature.getBuffEntries(buff -> isBuffExpired(creature, buff)));
-		}
 	}
 	
 	@IntentHandler
@@ -109,37 +98,10 @@ public class BuffService extends Service {
 		CreatureObject receiver = bi.getReceiver();
 
 		if (bi.isRemove()) {
-			removeBuff(receiver, buffData, false);
+			removeBuff(receiver, buffData);
 		} else {
 			addBuff(receiver, buffData, buffer);
 		}
-	}
-	
-	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		CreatureObject creature = pei.getPlayer().getCreatureObject();
-		
-		switch (pei.getEvent()) {
-			case PE_FIRST_ZONE:
-				handleFirstZone(creature);
-				break;
-			case PE_DISAPPEAR:
-				handleDisappear(creature);
-				break;
-			default:
-				break;
-		}
-	}
-	
-	private void handleFirstZone(CreatureObject creature) {
-		if (isCreatureBuffed(creature)) {
-			addToMonitored(creature);
-		}
-	}
-	
-	private void handleDisappear(CreatureObject creature) {
-		removeFromMonitored(creature);
-		removeAllBuffs(creature, creature.getBuffEntries(buff -> true));
 	}
 	
 	@IntentHandler
@@ -150,16 +112,20 @@ public class BuffService extends Service {
 		removeAllBuffs(corpse, corpse.getBuffEntries(buff -> true));
 	}
 	
-	private void addToMonitored(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.add(creature);
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		PlayerEvent event = intent.getEvent();
+		
+		if (event == PlayerEvent.PE_ZONE_IN_SERVER) {
+			removeExpiredBuffs(intent);
 		}
 	}
 	
-	private void removeFromMonitored(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.remove(creature);
-		}
+	private void removeExpiredBuffs(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		CreatureObject creatureObject = player.getCreatureObject();
+		Stream<Buff> expiredBuffs = creatureObject.getBuffEntries(buff -> isBuffExpired(creatureObject, buff));
+		expiredBuffs.forEach(expiredBuff -> removeBuff(creatureObject, getBuff(expiredBuff)));
 	}
 	
 	private int calculatePlayTime(CreatureObject creature) {
@@ -180,12 +146,8 @@ public class BuffService extends Service {
 		return buffData.getDuration() < 0;
 	}
 	
-	private boolean isCreatureBuffed(CreatureObject creature) {
-		return creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))).count() > 0;
-	}
-	
 	private void removeAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
-		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff), true));
+		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff)));
 	}
 	
 	private void addBuff(CreatureObject receiver, @NotNull BuffInfo buffData, CreatureObject buffer) {
@@ -199,12 +161,12 @@ public class BuffService extends Service {
 			
 			if (buff.getCrc() == buffData.getCrc()) {
 				if (isBuffInfinite(buffData)) {
-					removeBuff(receiver, buffData, true);
+					removeBuff(receiver, buffData);
 				}
 			} else {
 				BuffInfo oldBuff = getBuff(buff);
 				if (buffData.getPriority() >= oldBuff.getPriority()) {
-					removeBuff(receiver, oldBuff, true);
+					removeBuff(receiver, oldBuff);
 					applyBuff(receiver, buffer, buffData, applyTime);
 				}
 			}
@@ -213,7 +175,7 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData, boolean expired) {
+	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData) {
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
 		if (!optionalEntry.isPresent())
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
@@ -224,10 +186,6 @@ public class BuffService extends Service {
 
 		checkBuffEffects(buffData, creature, false);
 		checkCallback(buffData, creature);
-		
-		if (!isCreatureBuffed(creature)) {
-			removeFromMonitored(creature);
-		}
 	}
 	
 	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData, int applyTime) {
@@ -245,7 +203,7 @@ public class BuffService extends Service {
 
 		sendParticleEffect(buffData.getParticle(), receiver, "");
 
-		addToMonitored(receiver);
+		timerCheckThread.execute(buffDuration * 1000L, () -> removeBuff(receiver, buffData));
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
