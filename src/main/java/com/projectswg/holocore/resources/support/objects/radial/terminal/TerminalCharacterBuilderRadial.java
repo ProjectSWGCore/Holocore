@@ -290,12 +290,12 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleWeapons(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a weapon category to receive a weapon of that type.");
 
-		listBox.addListItem("LOW - Melee");
-		listBox.addListItem("LOW - Ranged");
-		listBox.addListItem("MEDIUM - Melee");
-		listBox.addListItem("MEDIUM - Ranged");
-		listBox.addListItem("HIGH - Melee");
-		listBox.addListItem("HIGH - Ranged");
+		listBox.addListItem("CL  1 - Melee/Ranged");
+		listBox.addListItem("CL 10 - Melee/Ranged");
+		listBox.addListItem("CL 20 - Melee/Ranged");
+		listBox.addListItem("CL 30 - Melee/Ranged");
+		listBox.addListItem("CL 40 - Melee/Ranged");
+		listBox.addListItem("CL 50 - Melee/Ranged");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleWeaponSelection", (event, parameters) -> handleWeaponSelection(player, parameters));
 		listBox.display(player);
@@ -305,68 +305,92 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		int selection = SuiListBox.getSelectedRow(parameters);
 
 		switch (selection) {
-			case 0: handleLowMelee(player); break;
-			case 1: handleLowRanged(player); break;
-			case 2: handleMediumMelee(player); break;
-			case 3: handleMediumRanged(player); break;
-			case 4: handleHighMelee(player); break;
-			case 5: handleHighRanged(player); break;
+			case 0: handlecl1(player); break;
+			case 1: handlecl10(player); break;
+			case 2: handlecl20(player); break;
+			case 3: handlecl30(player); break;
+			case 4: handlecl40(player); break;
+			case 5: handlecl50(player); break;
 
 		}
 	}
 
 
-	private static void handleLowMelee(Player player) {
+	private static void handlecl1(Player player) {
 		spawnItems(player,
-				"weapon_test_low_polearm",
-				"weapon_test_low_unarmed",
-				"weapon_test_low_1h",
-				"weapon_test_low_2h"
+				"weapon_cl1_1h",
+				"weapon_cl1_2h",
+				"weapon_cl1_carbine",
+				"weapon_cl1_heavy",
+				"weapon_cl1_pistol",
+				"weapon_cl1_polearm",
+				"weapon_cl1_rifle",
+				"weapon_cl1_unarmed"
 		);
 	}
 
-	private static void handleMediumMelee(Player player) {
+	private static void handlecl10(Player player) {
 		spawnItems(player,
-				"weapon_test_medium_polearm",
-				"weapon_test_medium_unarmed",
-				"weapon_test_medium_1h",
-				"weapon_test_medium_2h"
+				"weapon_cl10_1h",
+				"weapon_cl10_2h",
+				"weapon_cl10_carbine",
+				"weapon_cl10_heavy",
+				"weapon_cl10_pistol",
+				"weapon_cl10_polearm",
+				"weapon_cl10_rifle",
+				"weapon_cl10_unarmed"
 		);
 	}
 
-	private static void handleHighMelee(Player player) {
+	private static void handlecl20(Player player) {
 		spawnItems(player,
-				"weapon_test_high_polearm",
-				"weapon_test_high_unarmed",
-				"weapon_test_high_1h",
-				"weapon_test_high_2h"
+				"weapon_cl20_1h",
+				"weapon_cl20_2h",
+				"weapon_cl20_carbine",
+				"weapon_cl20_heavy",
+				"weapon_cl20_pistol",
+				"weapon_cl20_polearm",
+				"weapon_cl20_rifle",
+				"weapon_cl20_unarmed"
 		);
 	}
 
-	private static void handleLowRanged(Player player) {
+	private static void handlecl30(Player player) {
 		spawnItems(player,
-				"weapon_test_low_pistol",
-				"weapon_test_low_carbine",
-				"weapon_test_low_rifle",
-				"weapon_test_low_heavy"
+				"weapon_cl30_1h",
+				"weapon_cl30_2h",
+				"weapon_cl30_carbine",
+				"weapon_cl30_heavy",
+				"weapon_cl30_pistol",
+				"weapon_cl30_polearm",
+				"weapon_cl30_rifle",
+				"weapon_cl30_unarmed"
 		);
 	}
 
-	private static void handleMediumRanged(Player player) {
+	private static void handlecl40(Player player) {
 		spawnItems(player,
-				"weapon_test_medium_pistol",
-				"weapon_test_medium_carbine",
-				"weapon_test_medium_rifle",
-				"weapon_test_medium_heavy"
+				"weapon_cl40_1h",
+				"weapon_cl40_2h",
+				"weapon_cl40_carbine",
+				"weapon_cl40_heavy",
+				"weapon_cl40_pistol",
+				"weapon_cl40_polearm",
+				"weapon_cl40_rifle",
+				"weapon_cl40_unarmed"
 		);
 	}
 
-	private static void handleHighRanged(Player player) {
+	private static void handlecl50(Player player) {
 		spawnItems(player,
-				"weapon_test_high_pistol",
-				"weapon_test_high_carbine",
-				"weapon_test_high_rifle",
-				"weapon_test_high_heavy"
+				"weapon_cl50_1h",
+				"weapon_cl50_2h",
+				"weapon_cl50_carbine",
+				"weapon_cl50_heavy",
+				"weapon_cl50_pistol",
+				"weapon_cl50_polearm",
+				"weapon_cl50_rifle",
+				"weapon_cl50_unarmed"
 		);
 	}
 
