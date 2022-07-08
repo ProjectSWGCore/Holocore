@@ -4,15 +4,15 @@ import com.projectswg.common.encoding.Encodable
 import com.projectswg.common.network.NetBuffer
 import com.projectswg.holocore.resources.support.global.player.Player
 
-class GroupInviterData(var id: Long, var sender: Player?, private var counter: Long) : Encodable {
+class GroupInviterData(var senderId: Long, var sender: Player?, private var counter: Long, var groupId: Long) : Encodable {
 	override fun decode(data: NetBuffer?) {
-		id = data!!.long
+		senderId = data!!.long
 		counter = data.long
 	}
 
 	override fun encode(): ByteArray {
 		val data = NetBuffer.allocate(length)
-		data.addLong(id)
+		data.addLong(senderId)
 		data.addLong(counter)
 		return data.array()
 	}

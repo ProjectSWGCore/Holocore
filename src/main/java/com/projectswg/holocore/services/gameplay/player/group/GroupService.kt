@@ -146,8 +146,8 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 			sendSystemMessage(inviter, "full")
 			return false
 		}
-		if (target.inviterData.id != 0L) {
-			if (target.inviterData.id != inviter.creatureObject.groupId) {
+		if (target.inviterData.groupId != 0L) {
+			if (target.inviterData.groupId != inviter.creatureObject.groupId) {
 				sendSystemMessage(inviter, "considering_other_group", "TT", target.objectId)
 			} else {
 				sendSystemMessage(inviter, "considering_your_group", "TT", target.objectId)
@@ -183,15 +183,14 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 				sendSystemMessage(player, "must_be_invited")
 				return
 			}
-			var groupId = creature.inviterData.id
-			if (groupId == -1L) {
-				groupId = sender.creatureObject.groupId
-				if (groupId == 0L) groupId = -1 // Client wants -1 for default
-			}
-			if (groupId == -1L) { // Group doesn't exist yet
-				createGroup(sender, player)
-			} else { // Group already exists
+
+			val groupId = creature.inviterData.groupId
+			val groupAlreadyExists = groups.containsKey(groupId)
+
+			if (groupAlreadyExists) {
 				joinGroup(sender.creatureObject, creature, groupId)
+			} else {
+				createGroup(sender, player)
 			}
 		} finally {
 			clearInviteData(creature)
@@ -337,12 +336,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	private fun sendInvite(groupLeader: Player, invitee: CreatureObject, groupId: Long) {
 		sendSystemMessage(invitee.owner, "invite_target", "TT", groupLeader.characterName)
 		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.objectName)
-
-		if (groupId == 0L) {
-			invitee.updateGroupInviteData(groupLeader, -1) // Client wants -1 for default
-		} else {
-			invitee.updateGroupInviteData(groupLeader, groupId)
-		}
+		invitee.updateGroupInviteData(groupLeader, groupId)
 	}
 
 	private fun sendGroupSystemMessage(group: GroupObject?, id: String) {
