@@ -24,6 +24,7 @@ public class ClientdataConvertAll {
 		Converters.COMMANDS_SPACE.load();
 		Converters.BUFFS.load();
 		Converters.SKILLS.load();
+		Converters.APPEARANCE_TABLE.load();
 	}
 	
 }

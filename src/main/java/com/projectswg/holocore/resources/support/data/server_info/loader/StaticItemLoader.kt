@@ -113,11 +113,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
 		val requiredSkill: String		= set.getText("required_skill")
-		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean	= set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
@@ -237,11 +232,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
 		val requiredSkill: String = set.getText("required_skill")
-		val isRaceWookie: Boolean = set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean = set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean = set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean = set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean = set.getInt("race_rest") != 0L
 		val isNoTrade: Boolean = set.getInt("no_trade") != 0L
 		val isBioLink: Boolean = set.getInt("bio_link") != 0L
 		val isDeconstruct: Boolean = set.getInt("deconstruct") != 0L
@@ -290,11 +280,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
 		val requiredSkill: String		= set.getText("required_skill")
-		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean	= set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
 		val wornItemBuff: Int			= set.getInt("worn_item_buff").toInt()

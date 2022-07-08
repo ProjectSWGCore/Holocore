@@ -43,9 +43,14 @@ public class SdbGenerator implements Closeable, AutoCloseable {
 	public SdbGenerator(File file) throws FileNotFoundException {
 		if (file == null)
 			throw new NullPointerException("File cannot be null!");
+		ensureFolderStructureExists(file);
 		this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), ASCII));
 	}
-
+	
+	private void ensureFolderStructureExists(File file) {
+		file.getParentFile().mkdirs();
+	}
+	
 	public SdbGenerator(BufferedWriter writer) {
 		this.writer = writer;
 	}

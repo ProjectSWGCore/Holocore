@@ -80,6 +80,7 @@ abstract class DataLoader {
 		fun questLoader(): QuestLoader = ServerData.questLoader
 		fun badges(): BadgeLoader = ServerData.badges
 		fun mappingTemplates(): MappingTemplateLoader = ServerData.mappingTemplates
+		fun speciesRestrictions(): SpeciesRestrictionLoader = ServerData.speciesRestrictions
 
 	}
 	
