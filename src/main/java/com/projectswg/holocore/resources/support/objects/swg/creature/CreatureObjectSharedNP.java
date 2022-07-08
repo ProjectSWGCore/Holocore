@@ -47,7 +47,7 @@ class CreatureObjectSharedNP implements MongoPersistable {
 
 	private final CreatureObject obj;
 	
-	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, 0);
+	private transient GroupInviterData inviterData	= new GroupInviterData(-1, null, 0);
 	private transient long groupId			= 0;
 	
 	private short	level					= 1;
