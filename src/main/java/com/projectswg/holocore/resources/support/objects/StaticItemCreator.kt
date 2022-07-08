@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.resources.support.objects
 
-import com.projectswg.common.data.encodables.tangible.Race
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
@@ -117,41 +116,7 @@ object StaticItemCreator {
 		obj.requiredCombatLevel = info.requiredLevel
 		obj.requiredFaction = ServerData.factions.getFaction(info.requiredFaction)
 		applyColors(obj, info.color)
-		applySpeciesRestrictions(info, obj)
 		applyItemValue(info.value, obj);
-	}
-
-	private fun applySpeciesRestrictions(info: StaticItemLoader.WearableItemInfo, obj: TangibleObject) {
-		if (info.isRaceWookie) {
-			obj.addSpeciesRestriction(Race.WOOKIEE_FEMALE)
-			obj.addSpeciesRestriction(Race.WOOKIEE_MALE)
-		}
-		if (info.isRaceIthorian) {
-			obj.addSpeciesRestriction(Race.ITHORIAN_FEMALE)
-			obj.addSpeciesRestriction(Race.ITHORIAN_MALE)
-		}
-		if (info.isRaceRodian) {
-			obj.addSpeciesRestriction(Race.RODIAN_FEMALE)
-			obj.addSpeciesRestriction(Race.RODIAN_MALE)
-		}
-		if (info.isRaceTrandoshan) {
-			obj.addSpeciesRestriction(Race.TRANDOSHAN_FEMALE)
-			obj.addSpeciesRestriction(Race.TRANDOSHAN_MALE)
-		}
-		if (info.isRaceRest) {
-			obj.addSpeciesRestriction(Race.MONCAL_FEMALE)
-			obj.addSpeciesRestriction(Race.MONCAL_MALE)
-			obj.addSpeciesRestriction(Race.HUMAN_FEMALE)
-			obj.addSpeciesRestriction(Race.HUMAN_MALE)
-			obj.addSpeciesRestriction(Race.BOTHAN_FEMALE)
-			obj.addSpeciesRestriction(Race.BOTHAN_MALE)
-			obj.addSpeciesRestriction(Race.SULLUSTAN_FEMALE)
-			obj.addSpeciesRestriction(Race.SULLUSTAN_MALE)
-			obj.addSpeciesRestriction(Race.TWILEK_FEMALE)
-			obj.addSpeciesRestriction(Race.TWILEK_MALE)
-			obj.addSpeciesRestriction(Race.ZABRAK_FEMALE)
-			obj.addSpeciesRestriction(Race.ZABRAK_MALE)
-		}
 	}
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {

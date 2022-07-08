@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -41,8 +42,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Set;
 
 /**
  * This callback is used for all three kinds of transfer commands. The commands
@@ -193,13 +192,11 @@ public class TransferItemCallback implements ICmdCallback {
 	}
 
 	private static boolean checkSpeciesRestriction(CreatureObject actor, TangibleObject tangibleTarget) {
-		Set<Race> speciesRestrictions = tangibleTarget.getSpeciesRestrictions();
-		if (speciesRestrictions.isEmpty()) {
-			return true;
-		}
-		
 		Race race = actor.getRace();
-		return speciesRestrictions.contains(race);
+		String template = tangibleTarget.getTemplate();
+		DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
+		
+		return DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {

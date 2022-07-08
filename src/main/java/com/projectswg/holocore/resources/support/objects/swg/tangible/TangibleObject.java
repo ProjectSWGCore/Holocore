@@ -42,6 +42,7 @@ import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent.FactionIntentType;
 import com.projectswg.holocore.resources.gameplay.combat.EnemyProcessor;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -84,7 +85,6 @@ public class TangibleObject extends SWGObject {
 	private TicketInformation ticketInformation;
 	
 	private Map<String, Integer> skillMods = new LinkedHashMap<>();
-	private final Set<Race> speciesRestrictions = new LinkedHashSet<>();
 	
 	public TangibleObject(long objectId) {
 		this(objectId, BaselineType.TANO);
@@ -371,14 +371,6 @@ public class TangibleObject extends SWGObject {
 		this.protection = protection;
 	}
 	
-	public Set<Race> getSpeciesRestrictions() {
-		return speciesRestrictions;
-	}
-	
-	public void addSpeciesRestriction(Race race) {
-		speciesRestrictions.add(race);
-	}
-	
 	public LightsaberPowerCrystalQuality getLightsaberPowerCrystalQuality() {
 		return lightsaberPowerCrystalQuality;
 	}
@@ -459,8 +451,9 @@ public class TangibleObject extends SWGObject {
 			attributeList.putNumber("cat_armor_special_protection.elemental_electricity", protection.getElectricity());
 		}
 		
-		if (!speciesRestrictions.isEmpty()) {
-			String raceRestriction = buildRaceRestrictionString();
+		Set<Race> speciesRestrictions = buildSpeciesRestrictions();
+		if (!speciesRestrictions.isEmpty() && isOnlyWearableBySome(speciesRestrictions)) {
+			String raceRestriction = buildRaceRestrictionString(speciesRestrictions);
 			attributeList.putText("species_restrictions.species_name", raceRestriction);
 		}
 		
@@ -469,6 +462,25 @@ public class TangibleObject extends SWGObject {
 		}
 		
 		return attributeList;
+	}
+	
+	private boolean isOnlyWearableBySome(Set<Race> speciesRestrictions) {
+		return speciesRestrictions.size() != Race.values().length;
+	}
+	
+	@NotNull
+	private Set<Race> buildSpeciesRestrictions() {
+		Set<Race> speciesRestrictions = new HashSet<>();
+		
+		for (Race race : Race.values()) {
+			boolean allowedToWear = DataLoader.Companion.speciesRestrictions().isAllowedToWear(getTemplate(), race);
+			
+			if (allowedToWear) {
+				speciesRestrictions.add(race);
+			}
+		}
+		
+		return speciesRestrictions;
 	}
 	
 	private void applyTicketAttributes(AttributeList attributeList) {
@@ -510,7 +522,7 @@ public class TangibleObject extends SWGObject {
 		}
 	}
 	
-	private String buildRaceRestrictionString() {
+	private String buildRaceRestrictionString(Set<Race> speciesRestrictions) {
 		StringBuilder displayString = new StringBuilder();
 		Set<String> speciesStrings = new LinkedHashSet<>();
 		
@@ -585,8 +597,6 @@ public class TangibleObject extends SWGObject {
 		if (protection != null) {
 			data.putDocument("protection", protection);
 		}
-		List<Integer> speciesRestrictionCRCs = speciesRestrictions.stream().map(Race::getCrc).toList();
-		data.putArray("speciesRestrictionCRCs", speciesRestrictionCRCs);
 		if (lightsaberPowerCrystalQuality != null) {
 			data.putString("lightsaberPowerCrystalQuality", lightsaberPowerCrystalQuality.getId());
 		}
@@ -619,10 +629,6 @@ public class TangibleObject extends SWGObject {
 			MongoData protectionMongoData = data.getDocument("protection");
 			protection = new Protection(0, 0, 0, 0, 0, 0);
 			protection.readMongo(protectionMongoData);
-		}
-		List<Integer> speciesRestrictionCRCs = data.getArray("speciesRestrictionCRCs", Integer.class);
-		for (Integer speciesRestrictionCRC : speciesRestrictionCRCs) {
-			addSpeciesRestriction(Race.getRace(speciesRestrictionCRC));
 		}
 		lightsaberPowerCrystalQuality = LightsaberPowerCrystalQuality.Companion.getById(data.getString("lightsaberPowerCrystalQuality"));
 		lightsaberPowerCrystalMinDmg = data.getInteger("lightsaberPowerCrystalMinDmg", 0);

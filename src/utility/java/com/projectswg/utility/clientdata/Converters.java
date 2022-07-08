@@ -18,7 +18,8 @@ public enum Converters {
 	COMMANDS_SPACE				(() -> new ConvertDatatable("datatables/command/command_table_space.iff", "serverdata/command/commands_space.sdb", false)),
 	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/buff/buff.sdb", true)),
 	SKILLS						(() -> new ConvertDatatable("datatables/skill/skills.iff", "serverdata/skill/skills.sdb", true)),
-	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new);
+	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new),
+	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true));
 	
 	private final Supplier<Converter> converter;
 	

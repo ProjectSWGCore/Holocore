@@ -1,0 +1,1077 @@
+object template name	male human	female human	male rodian	female rodian	male moncal	female moncal	male wookiee	female wookiee	male twi'lek	female twi'lek	male trandoshan	female trandoshan	male zabrak	female zabrak	male bothan	female bothan	male ithorian	female ithorian	male sullustan	female sullustan
+
+shared_aakuan_belt	appearance/belt_s05_m.sat	appearance/belt_s05_f.sat					appearance/belt_s05_wke_m.sat	appearance/belt_s05_wke_f.sat									x	x		
+shared_aakuan_ring	appearance/ring_s01_m.apt	appearance/ring_s01_f.apt																		
+shared_aakuan_robe	appearance/robe_s05_h0_m.sat	appearance/robe_s05_h0_f.sat					x	x									x	x		
+shared_aakuan_shirt	appearance/shirt_s03_m.sat	appearance/shirt_s03_f.sat					x	x									x	x		
+shared_anakin_helmet	appearance/hat_s04_m.sat	appearance/hat_s04_f.sat	appearance/hat_s04_rod_m.sat	appearance/hat_s04_rod_f.sat	appearance/hat_s04_mon_m.sat	appearance/hat_s04_mon_f.sat	x	x	x	x	appearance/hat_s04_trn_m.sat	appearance/hat_s04_trn_f.sat			appearance/hat_s04_bth_m.sat	appearance/hat_s04_bth_f.sat	x	x	x	x
+shared_apron_porcellus	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_apron_s01	appearance/apron_s01_m.sat	appearance/apron_s01_f.sat					x	x									x	x		
+shared_apron_s01_quest	appearance/apron_s01_m.sat	appearance/apron_s01_f.sat					appearance/apron_chef_jacket_s01_wke_m.sat	appearance/apron_chef_jacket_s01_wke_f.sat									appearance/apron_chef_jacket_s01_ith_m.sat	appearance/apron_chef_jacket_s01_ith_f.sat		
+shared_apron_chef_s01	appearance/apron_chef_jacket_s01_m.sat	appearance/apron_chef_jacket_s01_f.sat					appearance/apron_chef_jacket_s01_wke_m.sat	appearance/apron_chef_jacket_s01_wke_f.sat									x	x		
+shared_armor_bone_s01_bicep_l	appearance/armor_bone_s01_bicep_l_m.sat	appearance/armor_bone_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_bone_s01_bicep_r	appearance/armor_bone_s01_bicep_r_m.sat	appearance/armor_bone_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_bone_s01_boots	appearance/armor_bone_s01_boots_m.sat	appearance/armor_bone_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_bone_s01_bracer_l	appearance/armor_bone_s01_bracer_l_m.sat	appearance/armor_bone_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_bone_s01_bracer_r	appearance/armor_bone_s01_bracer_r_m.sat	appearance/armor_bone_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_bone_s01_chest_plate	appearance/armor_bone_s01_chest_plate_m.sat	appearance/armor_bone_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_bone_s01_gloves	appearance/armor_bone_s01_gloves_m.sat	appearance/armor_bone_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_bone_s01_helmet	appearance/armor_bone_s01_helmet_m.sat	appearance/armor_bone_s01_helmet_f.sat	appearance/armor_bone_s01_helmet_rod_m.sat	appearance/armor_bone_s01_helmet_rod_f.sat	appearance/armor_bone_s01_helmet_mon_m.sat	appearance/armor_bone_s01_helmet_mon_f.sat	x	x	appearance/armor_bone_s01_helmet_twk_m.sat	appearance/armor_bone_s01_helmet_twk_f.sat	appearance/armor_bone_s01_helmet_trn_m.sat	appearance/armor_bone_s01_helmet_trn_f.sat			appearance/armor_bone_s01_helmet_bth_m.sat	appearance/armor_bone_s01_helmet_bth_f.sat	x	x	appearance/armor_bone_s01_helmet_sul_m.sat	appearance/armor_bone_s01_helmet_sul_f.sat
+shared_armor_bone_s01_leggings	appearance/armor_bone_s01_leggings_m.sat	appearance/armor_bone_s01_leggings_f.sat					x	x									x	x		
+shared_armor_bone_s02_bicep_l	appearance/armor_bone_s02_bicep_l_m.sat	appearance/armor_bone_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_bone_s02_bicep_r	appearance/armor_bone_s02_bicep_r_m.sat	appearance/armor_bone_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_bone_s02_boots	appearance/armor_bone_s02_boots_m.sat	appearance/armor_bone_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_bone_s02_bracer_l	appearance/armor_bone_s02_bracer_l_m.sat	appearance/armor_bone_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_bone_s02_bracer_r	appearance/armor_bone_s02_bracer_r_m.sat	appearance/armor_bone_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_bone_s02_chest_plate	appearance/armor_bone_s02_chest_plate_m.sat	appearance/armor_bone_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_bone_s02_helmet	appearance/armor_bone_s02_helmet_m.sat	appearance/armor_bone_s02_helmet_f.sat					x	x									x	x		
+shared_armor_bone_s02_leggings	appearance/armor_bone_s02_leggings_m.sat	appearance/armor_bone_s02_leggings_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_belt	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	x	x	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat	x	x	appearance/armor_bounty_hunter_belt_m.sat	appearance/armor_bounty_hunter_belt_f.sat
+shared_armor_bounty_hunter_crafted_bicep_l	appearance/armor_bounty_hunter_bicep_l_m.sat	appearance/armor_bounty_hunter_bicep_l_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_bicep_r	appearance/armor_bounty_hunter_bicep_r_m.sat	appearance/armor_bounty_hunter_bicep_r_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_bracer_l	appearance/armor_bounty_hunter_bracer_l_m.sat	appearance/armor_bounty_hunter_bracer_l_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_bracer_r	appearance/armor_bounty_hunter_bracer_r_m.sat	appearance/armor_bounty_hunter_bracer_r_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_chest_plate	appearance/armor_bounty_hunter_chest_plate_m.sat	appearance/armor_bounty_hunter_chest_plate_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_gloves	appearance/armor_bounty_hunter_gloves_m.sat	appearance/armor_bounty_hunter_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_bounty_hunter_crafted_helmet	appearance/armor_bounty_hunter_helmet_m.sat	appearance/armor_bounty_hunter_helmet_f.sat			appearance/armor_bounty_hunter_helmet_mon_m.sat	appearance/armor_bounty_hunter_helmet_mon_f.sat	x	x	appearance/armor_bounty_hunter_helmet_twk_m.sat	appearance/armor_bounty_hunter_helmet_twk_f.sat					appearance/armor_bounty_hunter_helmet_bth_m.sat	appearance/armor_bounty_hunter_helmet_bth_f.sat	x	x	appearance/armor_bounty_hunter_helmet_sul_m.sat	appearance/armor_bounty_hunter_helmet_sul_f.sat
+shared_armor_bounty_hunter_crafted_leggings	appearance/armor_bounty_hunter_leggings_m.sat	appearance/armor_bounty_hunter_leggings_f.sat					x	x									x	x		
+shared_armor_bounty_hunter_crafted_boots	appearance/armor_bounty_hunter_boots_m.sat	appearance/armor_bounty_hunter_boots_f.sat					x	x			x	x					x	x		
+shared_armor_charal	appearance/armor_charal_m.sat	appearance/armor_charal_f.sat					x	x									x	x		
+shared_armor_chitin_s01_bicep_l	appearance/armor_chitin_s01_bicep_l_m.sat	appearance/armor_chitin_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_chitin_s01_bicep_r	appearance/armor_chitin_s01_bicep_r_m.sat	appearance/armor_chitin_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_chitin_s01_boots	appearance/armor_chitin_s01_boots_m.sat	appearance/armor_chitin_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_chitin_s01_bracer_l	appearance/armor_chitin_s01_bracer_l_m.sat	appearance/armor_chitin_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_chitin_s01_bracer_r	appearance/armor_chitin_s01_bracer_r_m.sat	appearance/armor_chitin_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_chitin_s01_chest_plate	appearance/armor_chitin_s01_chest_plate_m.sat	appearance/armor_chitin_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_chitin_s01_gloves	appearance/armor_chitin_s01_gloves_m.sat	appearance/armor_chitin_s01_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_chitin_s01_helmet	appearance/armor_chitin_s01_helmet_m.sat	appearance/armor_chitin_s01_helmet_f.sat	appearance/armor_chitin_s01_helmet_rod_m.sat	appearance/armor_chitin_s01_helmet_rod_f.sat	appearance/armor_chitin_s01_helmet_mon_m.sat	appearance/armor_chitin_s01_helmet_mon_f.sat	x	x	appearance/armor_chitin_s01_helmet_twk_m.sat	appearance/armor_chitin_s01_helmet_twk_f.sat	appearance/armor_chitin_s01_helmet_trn_m.sat	appearance/armor_chitin_s01_helmet_trn_f.sat			appearance/armor_chitin_s01_helmet_bth_m.sat	appearance/armor_chitin_s01_helmet_bth_f.sat	x	x	appearance/armor_chitin_s01_helmet_sul_m.sat	appearance/armor_chitin_s01_helmet_sul_f.sat
+shared_armor_chitin_s01_leggings	appearance/armor_chitin_s01_leggings_m.sat	appearance/armor_chitin_s01_leggings_f.sat					x	x									x	x		
+shared_armor_chitin_s02_bicep_l	appearance/armor_chitin_s02_bicep_l_m.sat	appearance/armor_chitin_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_chitin_s02_bicep_r	appearance/armor_chitin_s02_bicep_r_m.sat	appearance/armor_chitin_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_chitin_s02_boots	appearance/armor_chitin_s02_boots_m.sat	appearance/armor_chitin_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_chitin_s02_bracer_l	appearance/armor_chitin_s02_bracer_l_m.sat	appearance/armor_chitin_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_chitin_s02_bracer_r	appearance/armor_chitin_s02_bracer_r_m.sat	appearance/armor_chitin_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_chitin_s02_chest_plate	appearance/armor_chitin_s02_chest_plate_m.sat	appearance/armor_chitin_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_chitin_s02_helmet	appearance/armor_chitin_s02_helmet_m.sat	appearance/armor_chitin_s02_helmet_f.sat					x	x									x	x		
+shared_armor_chitin_s02_leggings	appearance/armor_chitin_s02_leggings_m.sat	appearance/armor_chitin_s02_leggings_f.sat					x	x									x	x		
+shared_armor_composite_bicep_l	appearance/armor_composite_s01_bicep_l_m.sat	appearance/armor_composite_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_composite_bicep_r	appearance/armor_composite_s01_bicep_r_m.sat	appearance/armor_composite_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_composite_boots	appearance/armor_composite_s01_boots_m.sat	appearance/armor_composite_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_composite_bracer_l	appearance/armor_composite_s01_bracer_l_m.sat	appearance/armor_composite_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_composite_bracer_r	appearance/armor_composite_s01_bracer_r_m.sat	appearance/armor_composite_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_composite_chest_plate	appearance/armor_composite_s01_chest_plate_m.sat	appearance/armor_composite_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_composite_gloves	appearance/armor_composite_s01_gloves_m.sat	appearance/armor_composite_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_composite_helmet	appearance/armor_composite_s01_helmet_m.sat	appearance/armor_composite_helmet_f.sat	appearance/armor_composite_s01_helmet_rod_m.sat	appearance/armor_composite_s01_helmet_rod_f.sat	appearance/armor_composite_s01_helmet_mon_m.sat	appearance/armor_composite_s01_helmet_mon_f.sat	x	x	appearance/armor_composite_s01_helmet_twk_m.sat	appearance/armor_composite_s01_helmet_twk_f.sat	appearance/armor_composite_s01_helmet_trn_m.sat	appearance/armor_composite_s01_helmet_trn_f.sat			appearance/armor_composite_s01_helmet_bth_m.sat	appearance/armor_composite_s01_helmet_bth_f.sat	x	x	appearance/armor_composite_s01_helmet_sul_m.sat	appearance/armor_composite_s01_helmet_sul_f.sat
+shared_armor_composite_leggings	appearance/armor_composite_s01_leggings_m.sat	appearance/armor_composite_s01_leggings_f.sat					x	x									x	x		
+shared_armor_coruscant_gloves	appearance/armor_coruscant_gloves_m.sat	appearance/armor_coruscant_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_coruscant_helmet	appearance/armor_coruscant_helmet_m.sat	appearance/armor_coruscant_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_composite_s01_leggings	appearance/armor_composite_s01_leggings_m.sat	appearance/armor_composite_s01_leggings_f.sat					x	x									x	x		
+shared_armor_coruscant_pants	appearance/armor_coruscant_pants_m.sat	appearance/armor_coruscant_pants_f.sat					x	x									x	x		
+shared_armor_coruscant_robe	appearance/armor_coruscant_robe_m.sat	appearance/armor_coruscant_robe_f.sat					x	x									x	x		
+shared_armor_imperial_guard_belt	appearance/armor_imperial_guard_belt_m.sat	appearance/armor_imperial_guard_belt_f.sat					x	x									x	x		
+shared_armor_imperial_guard_boots	appearance/armor_imperial_guard_boots_m.sat	appearance/armor_imperial_guard_boots_f.sat					x	x			x	x					x	x		
+shared_armor_imperial_guard_bracer_l	appearance/armor_imperial_guard_bracer_l_m.sat	appearance/armor_imperial_guard_bracer_l_f.sat					x	x									x	x		
+shared_armor_imperial_guard_bracer_r	appearance/armor_imperial_guard_bracer_r_m.sat	appearance/armor_imperial_guard_bracer_r_f.sat					x	x									x	x		
+shared_armor_imperial_guard_dress	appearance/armor_imperial_guard_dress_m.sat	appearance/armor_imperial_guard_dress_f.sat					x	x									x	x		
+shared_armor_imperial_guard_gloves	appearance/armor_imperial_guard_gloves_m.sat	appearance/armor_imperial_guard_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_imperial_guard_helmet	appearance/armor_imperial_guard_helmet_m.sat	appearance/armor_imperial_guard_helmet_f.sat					x	x									x	x	x	x
+shared_armor_mandalorian_arm_l	appearance/armor_mandalorian_arm_l_m.sat	appearance/armor_mandalorian_arm_l_f.sat					x	x									x	x		
+shared_armor_mandalorian_arm_r	appearance/armor_mandalorian_arm_r_m.sat	appearance/armor_mandalorian_arm_r_f.sat					x	x									x	x		
+shared_armor_mandalorian_belt	appearance/armor_mandalorian_belt_m.sat	appearance/armor_mandalorian_belt_f.sat					x	x									x	x		
+shared_armor_mandalorian_bicep_l	appearance/armor_mandalorian_bicep_l_m.sat	appearance/armor_mandalorian_bicep_l_f.sat					x	x									x	x		
+shared_armor_mandalorian_bicep_r	appearance/armor_mandalorian_bicep_r_m.sat	appearance/armor_mandalorian_bicep_r_f.sat					x	x									x	x		
+shared_armor_mandalorian_bracer_l	appearance/armor_mandalorian_bracer_l_m.sat	appearance/armor_mandalorian_bracer_l_f.sat					x	x									x	x		
+shared_armor_mandalorian_bracer_r	appearance/armor_mandalorian_bracer_r_m.sat	appearance/armor_mandalorian_bracer_r_f.sat					x	x									x	x		
+shared_armor_mandalorian_chest_plate	appearance/armor_mandalorian_chest_plate_m.sat	appearance/armor_mandalorian_chest_plate_f.sat					x	x									x	x		
+shared_armor_mandalorian_gloves	appearance/armor_mandalorian_gloves_m.sat	appearance/armor_mandalorian_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_mandalorian_helmet	appearance/armor_mandalorian_helmet_m.sat	appearance/armor_mandalorian_helmet_f.sat			appearance/armor_mandalorian_helmet_mon_m.sat	appearance/armor_mandalorian_helmet_mon_f.sat	x	x	appearance/armor_mandalorian_helmet_twk_m.sat	appearance/armor_mandalorian_helmet_twk_f.sat					appearance/armor_mandalorian_helmet_bth_m.sat	appearance/armor_mandalorian_helmet_bth_f.sat	x	x	appearance/armor_mandalorian_helmet_sul_m.sat	appearance/armor_mandalorian_helmet_sul_f.sat
+shared_armor_mandalorian_jetpack	appearance/armor_mandalorian_jetpack_m.sat	appearance/armor_mandalorian_jetpack_f.sat					x	x									x	x		
+shared_armor_mandalorian_leggings	appearance/armor_mandalorian_leggings_m.sat	appearance/armor_mandalorian_leggings_f.sat					x	x									x	x		
+shared_armor_mandalorian_shoes	appearance/armor_mandalorian_shoes_m.sat	appearance/armor_mandalorian_shoes_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s01_belt	appearance/armor_marauder_s01_belt_m.sat	appearance/armor_marauder_s01_belt_f.sat					x	x									x	x		
+shared_armor_marauder_s01_bicep_l	appearance/armor_marauder_s01_bicep_l_m.sat	appearance/armor_marauder_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_marauder_s01_bicep_r	appearance/armor_marauder_s01_bicep_r_m.sat	appearance/armor_marauder_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_marauder_s01_boots	appearance/armor_marauder_s01_boots_m.sat	appearance/armor_marauder_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s01_bracer_l	appearance/armor_marauder_s01_bracer_l_m.sat	appearance/armor_marauder_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s01_bracer_r	appearance/armor_marauder_s01_bracer_r_m.sat	appearance/armor_marauder_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s01_chest_plate	appearance/armor_marauder_s01_chest_plate_m.sat	appearance/armor_marauder_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s01_gloves	appearance/armor_marauder_s01_gloves_m.sat	appearance/armor_marauder_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s01_helmet	appearance/armor_marauder_s01_helmet_m.sat	appearance/armor_marauder_s01_helmet_f.sat	appearance/armor_marauder_s01_helmet_rod_m.sat	appearance/armor_marauder_s01_helmet_rod_f.sat	appearance/armor_marauder_s01_helmet_mon_m.sat	appearance/armor_marauder_s01_helmet_mon_f.sat	x	x	appearance/armor_marauder_s01_helmet_twk_m.sat	appearance/armor_marauder_s01_helmet_twk_f.sat	appearance/armor_marauder_s01_helmet_trn_m.sat	appearance/armor_marauder_s01_helmet_trn_f.sat			appearance/armor_marauder_s01_helmet_bth_m.sat	appearance/armor_marauder_s01_helmet_bth_f.sat	x	x	appearance/armor_marauder_s01_helmet_sul_m.sat	appearance/armor_marauder_s01_helmet_sul_f.sat
+shared_armor_marauder_s01_leggings	appearance/armor_marauder_s01_leggings_m.sat	appearance/armor_marauder_s01_leggings_f.sat					x	x									x	x		
+shared_armor_marauder_s02_bicep_l	appearance/armor_marauder_s02_bicep_l_m.sat	appearance/armor_marauder_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_marauder_s02_bicep_r	appearance/armor_marauder_s02_bicep_r_m.sat	appearance/armor_marauder_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_marauder_s02_boots	appearance/armor_marauder_s02_boots_m.sat	appearance/armor_marauder_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s02_bracer_l	appearance/armor_marauder_s02_bracer_l_m.sat	appearance/armor_marauder_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s02_bracer_r	appearance/armor_marauder_s02_bracer_r_m.sat	appearance/armor_marauder_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s02_chest_plate	appearance/armor_marauder_s02_chest_plate_m.sat	appearance/armor_marauder_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s02_chest_plate_quest	appearance/armor_marauder_s02_chest_plate_m.sat	appearance/armor_marauder_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s02_gloves	appearance/armor_marauder_s02_gloves_m.sat	appearance/armor_marauder_s02_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s02_helmet	appearance/armor_marauder_s02_helmet_m.sat	appearance/armor_marauder_s02_helmet_f.sat	appearance/armor_marauder_s02_helmet_rod_m.sat	appearance/armor_marauder_s02_helmet_rod_f.sat	appearance/armor_marauder_s02_helmet_mon_m.sat	appearance/armor_marauder_s02_helmet_mon_f.sat	x	x	appearance/armor_marauder_s02_helmet_twk_m.sat	appearance/armor_marauder_s02_helmet_twk_f.sat	appearance/armor_marauder_s02_helmet_trn_m.sat	appearance/armor_marauder_s02_helmet_trn_f.sat			appearance/armor_marauder_s02_helmet_bth_m.sat	appearance/armor_marauder_s02_helmet_bth_f.sat	x	x	appearance/armor_marauder_s02_helmet_sul_m.sat	appearance/armor_marauder_s02_helmet_sul_f.sat
+shared_armor_marauder_s02_leggings	appearance/armor_marauder_s02_leggings_m.sat	appearance/armor_marauder_s02_leggings_f.sat					x	x									x	x		
+shared_armor_marauder_s03_bandolier_double	appearance/armor_marauder_s03_bandolier_double_m.sat	appearance/armor_marauder_s03_bandolier_double_f.sat					x	x									x	x		
+shared_armor_marauder_s03_bicep_l	appearance/armor_marauder_s03_bicep_l_m.sat	appearance/armor_marauder_s03_bicep_l_f.sat					x	x									x	x		
+shared_armor_marauder_s03_bicep_r	appearance/armor_marauder_s03_bicep_r_m.sat	appearance/armor_marauder_s03_bicep_r_f.sat					x	x									x	x		
+shared_armor_marauder_s03_boots	appearance/armor_marauder_s03_boots_m.sat	appearance/armor_marauder_s03_boots_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s03_bracer_l	appearance/armor_marauder_s03_bracer_l_m.sat	appearance/armor_marauder_s03_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s03_bracer_r	appearance/armor_marauder_s03_bracer_r_m.sat	appearance/armor_marauder_s03_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s03_cape	appearance/armor_marauder_s03_cape_m.sat	appearance/armor_marauder_s03_cape_f.sat					x	x									x	x		
+shared_armor_marauder_s03_chest_plate	appearance/armor_marauder_s03_chest_plate_m.sat	appearance/armor_marauder_s03_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s03_gloves	appearance/armor_marauder_s03_gloves_m.sat	appearance/armor_marauder_s03_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_marauder_s03_helmet	appearance/armor_marauder_s03_helmet_m.sat	appearance/armor_marauder_s03_helmet_f.sat	appearance/armor_marauder_s03_helmet_rod_m.sat	appearance/armor_marauder_s03_helmet_rod_f.sat	appearance/armor_marauder_s03_helmet_mon_m.sat	appearance/armor_marauder_s03_helmet_mon_f.sat	x	x	appearance/armor_marauder_s03_helmet_twk_m.sat	appearance/armor_marauder_s03_helmet_twk_f.sat	appearance/armor_marauder_s03_helmet_trn_m.sat	appearance/armor_marauder_s03_helmet_trn_f.sat			appearance/armor_marauder_s03_helmet_bth_m.sat	appearance/armor_marauder_s03_helmet_bth_f.sat	x	x	appearance/armor_marauder_s03_helmet_sul_m.sat	appearance/armor_marauder_s03_helmet_sul_f.sat
+shared_armor_marauder_s03_leggings	appearance/armor_marauder_s03_leggings_m.sat	appearance/armor_marauder_s03_leggings_f.sat					x	x									x	x		
+shared_armor_marauder_s04_bicep_l	appearance/armor_marauder_s04_bicep_l_m.sat	appearance/armor_marauder_s04_bicep_l_f.sat					x	x									x	x		
+shared_armor_marauder_s04_bicep_r	appearance/armor_marauder_s04_bicep_r_m.sat	appearance/armor_marauder_s04_bicep_r_f.sat					x	x									x	x		
+shared_armor_marauder_s04_boots	appearance/armor_marauder_s04_boots_m.sat	appearance/armor_marauder_s04_boots_f.sat					x	x			x	x					x	x		
+shared_armor_marauder_s04_bracer_l	appearance/armor_marauder_s04_bracer_l_m.sat	appearance/armor_marauder_s04_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s04_bracer_r	appearance/armor_marauder_s04_bracer_r_m.sat	appearance/armor_marauder_s04_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s04_chest_plate	appearance/armor_marauder_s04_chest_plate_m.sat	appearance/armor_marauder_s04_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s04_helmet	appearance/armor_marauder_s04_helmet_m.sat	appearance/armor_marauder_s04_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_marauder_s04_leggings	appearance/armor_marauder_s04_leggings_m.sat	appearance/armor_marauder_s04_leggings_f.sat					x	x									x	x		
+shared_armor_marauder_s05_bracer_l	appearance/armor_marauder_s05_bracer_l_m.sat	appearance/armor_marauder_s05_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s05_bracer_r	appearance/armor_marauder_s05_bracer_r_m.sat	appearance/armor_marauder_s05_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s05_chest_plate	appearance/armor_marauder_s05_chest_plate_m.sat	appearance/armor_marauder_s05_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s05_helmet	appearance/armor_marauder_s05_helmet_m.sat	appearance/armor_marauder_s05_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_marauder_s06_bicep_l	appearance/armor_marauder_s06_bicep_l_m.sat	appearance/armor_marauder_s06_bicep_l_f.sat					x	x									x	x		
+shared_armor_marauder_s06_bicep_r	appearance/armor_marauder_s06_bicep_r_m.sat	appearance/armor_marauder_s06_bicep_r_f.sat					x	x									x	x		
+shared_armor_marauder_s06_bracer_l	appearance/armor_marauder_s06_bracer_l_m.sat	appearance/armor_marauder_s06_bracer_l_f.sat					x	x									x	x		
+shared_armor_marauder_s06_bracer_r	appearance/armor_marauder_s06_bracer_r_m.sat	appearance/armor_marauder_s06_bracer_r_f.sat					x	x									x	x		
+shared_armor_marauder_s06_chest_plate	appearance/armor_marauder_s06_chest_plate_m.sat	appearance/armor_marauder_s06_chest_plate_f.sat					x	x									x	x		
+shared_armor_marauder_s06_helmet	appearance/armor_marauder_s06_helmet_m.sat	appearance/armor_marauder_s06_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_marauder_s06_leggings	appearance/armor_marauder_s06_leggings_m.sat	appearance/armor_marauder_s06_leggings_f.sat					x	x									x	x		
+shared_armor_marine_backpack	appearance/armor_marine_backpack_m.sat	appearance/armor_marine_backpack_f.sat					x	x									x	x		
+shared_armor_marine_bicep_l	appearance/armor_marine_bicep_l_m.sat	appearance/armor_marine_bicep_l_f.sat					x	x									x	x		
+shared_armor_marine_bicep_r	appearance/armor_marine_bicep_r_m.sat	appearance/armor_marine_bicep_r_f.sat					x	x									x	x		
+shared_armor_marine_bracer_l	appearance/armor_marine_bracer_l_m.sat	appearance/armor_marine_bracer_l_f.sat					x	x									x	x		
+shared_armor_marine_bracer_r	appearance/armor_marine_bracer_r_m.sat	appearance/armor_marine_bracer_r_f.sat					x	x									x	x		
+shared_armor_marine_boots	appearance/armor_marine_boots_m.sat	appearance/armor_marine_boots_f.sat					x	x			x	x					x	x		
+shared_armor_marine_chest_plate	appearance/armor_marine_chest_plate_m.sat	appearance/armor_marine_chest_plate_f.sat					x	x									x	x		
+shared_armor_marine_chest_plate_rebel	appearance/armor_marine_chest_plate_rebel_m.sat	appearance/armor_marine_chest_plate_rebel_f.sat					x	x									x	x		
+shared_armor_marine_helmet	appearance/armor_marine_helmet_m.sat	appearance/armor_marine_helmet_f.sat	appearance/armor_marine_s01_helmet_rod_m.sat	appearance/armor_marine_s01_helmet_rod_f.sat	appearance/armor_marine_s01_helmet_mon_m.sat	appearance/armor_marine_s01_helmet_mon_f.sat	x	x	appearance/armor_marine_s01_helmet_twk_m.sat	appearance/armor_marine_s01_helmet_twk_f.sat	appearance/armor_marine_s01_helmet_trn_m.sat	appearance/armor_marine_s01_helmet_trn_f.sat			appearance/armor_marine_s01_helmet_bth_m.sat	appearance/armor_marine_s01_helmet_bth_f.sat	x	x	appearance/armor_marine_s01_helmet_sul_m.sat	appearance/armor_marine_s01_helmet_sul_f.sat
+shared_armor_marine_gloves	appearance/armor_marine_s01_gloves_m.sat	appearance/armor_marine_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_marine_leggings	appearance/armor_marine_leggings_m.sat	appearance/armor_marine_leggings_f.sat					x	x									x	x		
+shared_armor_metal_s01_bicep_l	appearance/armor_metal_s01_bicep_l_m.sat	appearance/armor_metal_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_metal_s01_bicep_r	appearance/armor_metal_s01_bicep_r_m.sat	appearance/armor_metal_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_metal_s01_boots	appearance/armor_metal_s01_boots_m.sat	appearance/armor_metal_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_metal_s01_bracer_l	appearance/armor_metal_s01_bracer_l_m.sat	appearance/armor_metal_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_metal_s01_bracer_r	appearance/armor_metal_s01_bracer_r_m.sat	appearance/armor_metal_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_metal_s01_chest_plate	appearance/armor_metal_s01_chest_plate_m.sat	appearance/armor_metal_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_metal_s01_helmet	appearance/armor_metal_s01_helmet_m.sat	appearance/armor_metal_s01_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_metal_s01_pants	appearance/armor_metal_s01_pants_m.sat	appearance/armor_metal_s01_pants_f.sat					x	x									x	x		
+shared_armor_metal_s02_bicep_l	appearance/armor_metal_s02_bicep_l_m.sat	appearance/armor_metal_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_metal_s02_bicep_r	appearance/armor_metal_s02_bicep_r_m.sat	appearance/armor_metal_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_metal_s02_boots	appearance/armor_metal_s02_boots_m.sat	appearance/armor_metal_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_metal_s02_bracer_l	appearance/armor_metal_s02_bracer_l_m.sat	appearance/armor_metal_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_metal_s02_bracer_r	appearance/armor_metal_s02_bracer_r_m.sat	appearance/armor_metal_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_metal_s02_chest_plate	appearance/armor_metal_s02_chest_plate_m.sat	appearance/armor_metal_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_metal_s02_helmet	appearance/armor_metal_s02_helmet_m.sat	appearance/armor_metal_s02_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_metal_s02_pants	appearance/armor_metal_s02_pants_m.sat	appearance/armor_metal_s02_pants_f.sat					x	x									x	x		
+shared_armor_naboo_guard_bicep_l	appearance/armor_naboo_guard_bicep_l_m.sat	appearance/armor_naboo_guard_bicep_l_f.sat					x	x									x	x		
+shared_armor_naboo_guard_bicep_r	appearance/armor_naboo_guard_bicep_r_m.sat	appearance/armor_naboo_guard_bicep_r_f.sat					x	x									x	x		
+shared_armor_naboo_guard_boots	appearance/armor_naboo_guard_boots_m.sat	appearance/armor_naboo_guard_boots_f.sat					x	x			x	x					x	x		
+shared_armor_naboo_guard_bracer_l	appearance/armor_naboo_guard_bracer_l_m.sat	appearance/armor_naboo_guard_bracer_l_f.sat					x	x									x	x		
+shared_armor_naboo_guard_bracer_r	appearance/armor_naboo_guard_bracer_r_m.sat	appearance/armor_naboo_guard_bracer_r_f.sat					x	x									x	x		
+shared_armor_naboo_guard_chest	appearance/armor_naboo_guard_chest_m.sat	appearance/armor_naboo_guard_chest_f.sat					x	x									x	x		
+shared_armor_naboo_guard_chest_plate	appearance/armor_naboo_guard_chest_plate_m.sat	appearance/armor_naboo_guard_chest_plate_f.sat					x	x									x	x		
+shared_armor_naboo_guard_leggings	appearance/armor_naboo_guard_leggings_m.sat	appearance/armor_naboo_guard_leggings_f.sat					x	x									x	x		
+shared_armor_nightsister_shoulderpads_s01	appearance/armor_nightsister_shoulderpads_s01_m.sat	appearance/armor_nightsister_shoulderpads_s01_f.sat					x	x									x	x		
+shared_armor_nightsister_shoulderpads_s02	appearance/armor_nightsister_shoulderpads_s02_m.sat	appearance/armor_nightsister_shoulderpads_s02_f.sat					x	x									x	x		
+shared_armor_padded_s01_belt	appearance/armor_padded_s01_belt_m.sat	appearance/armor_padded_s01_belt_f.sat					x	x									x	x		
+shared_armor_padded_s01_bicep_l	appearance/armor_padded_s01_bicep_l_m.sat	appearance/armor_padded_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_padded_s01_bicep_r	appearance/armor_padded_s01_bicep_r_m.sat	appearance/armor_padded_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_padded_s01_boots	appearance/armor_padded_s01_boots_m.sat	appearance/armor_padded_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_padded_s01_bracer_l	appearance/armor_padded_s01_bracer_l_m.sat	appearance/armor_padded_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_padded_s01_bracer_r	appearance/armor_padded_s01_bracer_r_m.sat	appearance/armor_padded_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_padded_s01_chest_plate	appearance/armor_padded_s01_chest_plate_m.sat	appearance/armor_padded_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_padded_s01_gloves	appearance/armor_padded_s01_gloves_m.sat	appearance/armor_padded_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_padded_s01_helmet	appearance/armor_padded_s01_helmet_m.sat	appearance/armor_padded_s01_helmet_f.sat	appearance/armor_padded_s01_helmet_rod_m.sat	appearance/armor_padded_s01_helmet_rod_f.sat	appearance/armor_padded_s01_helmet_mon_m.sat	appearance/armor_padded_s01_helmet_mon_f.sat	x	x	appearance/armor_padded_s01_helmet_twk_m.sat	appearance/armor_padded_s01_helmet_twk_f.sat	appearance/armor_padded_s01_helmet_trn_m.sat	appearance/armor_padded_s01_helmet_trn_f.sat			appearance/armor_padded_s01_helmet_bth_m.sat	appearance/armor_padded_s01_helmet_bth_f.sat	x	x	appearance/armor_padded_s01_helmet_sul_m.sat	appearance/armor_padded_s01_helmet_sul_f.sat
+shared_armor_padded_s01_leggings	appearance/armor_padded_s01_leggings_m.sat	appearance/armor_padded_s01_leggings_f.sat					x	x									x	x		
+shared_armor_padded_s02_bicep_l	appearance/armor_padded_s02_bicep_l_m.sat	appearance/armor_padded_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_padded_s02_bicep_r	appearance/armor_padded_s02_bicep_r_m.sat	appearance/armor_padded_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_padded_s02_boots	appearance/armor_padded_s02_boots_m.sat	appearance/armor_padded_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_padded_s02_bracer_l	appearance/armor_padded_s02_bracer_l_m.sat	appearance/armor_padded_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_padded_s02_bracer_r	appearance/armor_padded_s02_bracer_r_m.sat	appearance/armor_padded_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_padded_s02_chest_plate	appearance/armor_padded_s02_chest_plate_m.sat	appearance/armor_padded_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_padded_s02_helmet	appearance/armor_padded_s02_helmet_m.sat	appearance/armor_padded_s02_helmet_f.sat					x	x									x	x		
+shared_armor_padded_s02_pants	appearance/armor_padded_s02_pants_m.sat	appearance/armor_padded_s02_pants_f.sat					x	x									x	x		
+shared_armor_rebel_assault_bicep_l	appearance/armor_rebel_s03_bicep_l_m.sat	appearance/armor_rebel_s03_bicep_l_f.sat					x	x									x	x		
+shared_armor_rebel_assault_bicep_r	appearance/armor_rebel_s03_bicep_r_m.sat	appearance/armor_rebel_s03_bicep_r_f.sat					x	x									x	x		
+shared_armor_rebel_assault_boots	appearance/armor_rebel_s03_boots_m.sat	appearance/armor_rebel_s03_boots_f.sat					x	x			x	x					x	x		
+shared_armor_rebel_assault_bracer_l	appearance/armor_rebel_s03_bracer_l_m.sat	appearance/armor_rebel_s03_bracer_l_f.sat					x	x									x	x		
+shared_armor_rebel_assault_bracer_r	appearance/armor_rebel_s03_bracer_r_m.sat	appearance/armor_rebel_s03_bracer_r_f.sat					x	x									x	x		
+shared_armor_rebel_assault_chest_plate	appearance/armor_rebel_s03_chest_plate_m.sat	appearance/armor_rebel_s03_chest_plate_f.sat					x	x									x	x		
+shared_armor_rebel_assault_gloves	appearance/armor_rebel_s03_gloves_m.sat	appearance/armor_rebel_s03_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_rebel_assault_helmet	appearance/armor_rebel_s03_helmet_m.sat	appearance/armor_rebel_s03_helmet_f.sat	appearance/armor_rebel_s03_helmet_rod_m.sat	appearance/armor_rebel_s03_helmet_rod_f.sat	appearance/armor_rebel_s03_helmet_mon_m.sat	appearance/armor_rebel_s03_helmet_mon_f.sat	x	x	appearance/armor_rebel_s03_helmet_twk_m.sat	appearance/armor_rebel_s03_helmet_twk_f.sat	appearance/armor_rebel_s03_helmet_trn_m.sat	appearance/armor_rebel_s03_helmet_trn_f.sat			appearance/armor_rebel_s03_helmet_bth_m.sat	appearance/armor_rebel_s03_helmet_bth_f.sat	x	x	appearance/armor_rebel_s03_helmet_sul_m.sat	appearance/armor_rebel_s03_helmet_sul_f.sat
+shared_armor_rebel_assault_leggings	appearance/armor_rebel_s03_leggings_m.sat	appearance/armor_rebel_s03_leggings_f.sat					x	x									x	x		
+shared_armor_rebel_assault_belt	appearance/armor_rebel_s03_utility_belt_m.sat	appearance/armor_rebel_s03_utility_belt_f.sat					x	x									x	x		
+shared_armor_rebel_battle_bicep_l	appearance/armor_rebel_s02_bicep_l_m.sat	appearance/armor_rebel_s02_bicep_l_f.sat					x	x									x	x		
+shared_armor_rebel_battle_bicep_r	appearance/armor_rebel_s02_bicep_r_m.sat	appearance/armor_rebel_s02_bicep_r_f.sat					x	x									x	x		
+shared_armor_rebel_battle_boots	appearance/armor_rebel_s02_boots_m.sat	appearance/armor_rebel_s02_boots_f.sat					x	x			x	x					x	x		
+shared_armor_rebel_battle_bracer_l	appearance/armor_rebel_s02_bracer_l_m.sat	appearance/armor_rebel_s02_bracer_l_f.sat					x	x									x	x		
+shared_armor_rebel_battle_bracer_r	appearance/armor_rebel_s02_bracer_r_m.sat	appearance/armor_rebel_s02_bracer_r_f.sat					x	x									x	x		
+shared_armor_rebel_battle_chest_plate	appearance/armor_rebel_s02_chest_plate_m.sat	appearance/armor_rebel_s02_chest_plate_f.sat					x	x									x	x		
+shared_armor_rebel_battle_gloves	appearance/armor_rebel_s02_gloves_m.sat	appearance/armor_rebel_s02_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_rebel_battle_helmet	appearance/armor_rebel_s02_helmet_m.sat	appearance/armor_rebel_s02_helmet_f.sat	appearance/armor_rebel_s02_helmet_rod_m.sat	appearance/armor_rebel_s02_helmet_rod_f.sat	appearance/armor_rebel_s02_helmet_mon_m.sat	appearance/armor_rebel_s02_helmet_mon_f.sat	x	x	appearance/armor_rebel_s02_helmet_twk_m.sat	appearance/armor_rebel_s02_helmet_twk_f.sat	appearance/armor_rebel_s01_helmet_trn_m.sat	appearance/armor_rebel_s02_helmet_trn_f.sat			appearance/armor_rebel_s02_helmet_bth_m.sat	appearance/armor_rebel_s02_helmet_bth_f.sat	x	x	appearance/armor_rebel_s02_helmet_sul_m.sat	appearance/armor_rebel_s02_helmet_sul_f.sat
+shared_armor_rebel_battle_leggings	appearance/armor_rebel_s02_leggings_m.sat	appearance/armor_rebel_s02_leggings_f.sat					x	x									x	x		
+shared_armor_rebel_battle_belt	appearance/armor_rebel_s02_utility_belt_m.sat	appearance/armor_rebel_s02_utility_belt_f.sat					x	x									x	x		
+shared_armor_ris_helmet	appearance/armor_ris_s01_helmet_m.sat	appearance/armor_ris_s01_helmet_f.sat			appearance/armor_ris_s01_helmet_mon_m.sat	appearance/armor_ris_s01_helmet_mon_f.sat	x	x	appearance/armor_ris_s01_helmet_twk_m.sat	appearance/armor_ris_s01_helmet_twk_f.sat	appearance/armor_ris_s01_helmet_trn_m.sat	appearance/armor_ris_s01_helmet_trn_f.sat			appearance/armor_ris_s01_helmet_bth_m.sat	appearance/armor_ris_s01_helmet_bth_f.sat	x	x	appearance/armor_ris_s01_helmet_sul_m.sat	appearance/armor_ris_s01_helmet_sul_f.sat
+shared_armor_ris_chest_plate	appearance/armor_ris_s01_chest_plate_m.sat	appearance/armor_ris_s01_chest_plate_f.sat					x	x									x	x		
+shared_armor_ris_bicep_l	appearance/armor_ris_s01_bicep_l_m.sat	appearance/armor_ris_s01_bicep_l_f.sat					x	x									x	x		
+shared_armor_ris_bicep_r	appearance/armor_ris_s01_bicep_r_m.sat	appearance/armor_ris_s01_bicep_r_f.sat					x	x									x	x		
+shared_armor_ris_bracer_l	appearance/armor_ris_s01_bracer_l_m.sat	appearance/armor_ris_s01_bracer_l_f.sat					x	x									x	x		
+shared_armor_ris_bracer_r	appearance/armor_ris_s01_bracer_r_m.sat	appearance/armor_ris_s01_bracer_r_f.sat					x	x									x	x		
+shared_armor_ris_leggings	appearance/armor_ris_s01_leggings_m.sat	appearance/armor_ris_s01_leggings_f.sat					x	x									x	x		
+shared_armor_ris_boots	appearance/armor_ris_s01_boots_m.sat	appearance/armor_ris_s01_boots_f.sat					x	x			x	x					x	x		
+shared_armor_ris_gloves	appearance/armor_ris_s01_gloves_m.sat	appearance/armor_ris_s01_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_s01	appearance/armor_s01_m.sat	appearance/armor_s01_f.sat					x	x									x	x		
+shared_armor_assault_trooper_belt	appearance/armor_shocktrooper_belt_m.sat	appearance/armor_shocktrooper_belt_f.sat			x	x	x	x									x	x		
+shared_armor_assault_trooper_bicep_l	appearance/armor_shocktrooper_bicep_l_m.sat	appearance/armor_shocktrooper_bicep_l_f.sat					x	x									x	x		
+shared_armor_assault_trooper_bicep_r	appearance/armor_shocktrooper_bicep_r_m.sat	appearance/armor_shocktrooper_bicep_r_f.sat					x	x									x	x		
+shared_armor_assault_trooper_boots	appearance/armor_shocktrooper_boots_m.sat	appearance/armor_shocktrooper_boots_f.sat					x	x			x	x					x	x		
+shared_armor_assault_trooper_bracer_l	appearance/armor_shocktrooper_bracer_l_m.sat	appearance/armor_shocktrooper_bracer_l_f.sat					x	x									x	x		
+shared_armor_assault_trooper_bracer_r	appearance/armor_shocktrooper_bracer_r_m.sat	appearance/armor_shocktrooper_bracer_r_f.sat					x	x									x	x		
+shared_armor_assault_trooper_chest_plate	appearance/armor_shocktrooper_chest_plate_m.sat	appearance/armor_shocktrooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_assault_trooper_gloves	appearance/armor_shocktrooper_gloves_m.sat	appearance/armor_shocktrooper_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_assault_trooper_helmet	appearance/armor_shocktrooper_helmet_m.sat	appearance/armor_shocktrooper_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_assault_trooper_leggings	appearance/armor_shocktrooper_leggings_m.sat	appearance/armor_shocktrooper_leggings_f.sat					x	x									x	x		
+shared_armor_scout_trooper_belt	appearance/armor_scout_trooper_belt_m.sat	appearance/armor_scout_trooper_belt_f.sat			x	x	x	x									x	x		
+shared_armor_scout_trooper_bicep_l	appearance/armor_scout_trooper_bicep_l_m.sat	appearance/armor_scout_trooper_bicep_l_f.sat					x	x									x	x		
+shared_armor_scout_trooper_bicep_r	appearance/armor_scout_trooper_bicep_r_m.sat	appearance/armor_scout_trooper_bicep_r_f.sat					x	x									x	x		
+shared_armor_scout_trooper_boots	appearance/armor_scout_trooper_boots_m.sat	appearance/armor_scout_trooper_boots_f.sat					x	x			x	x					x	x		
+shared_armor_scout_trooper_bracer_l	appearance/armor_scout_trooper_bracer_l_m.sat	appearance/armor_scout_trooper_bracer_l_f.sat					x	x									x	x		
+shared_armor_scout_trooper_bracer_r	appearance/armor_scout_trooper_bracer_r_m.sat	appearance/armor_scout_trooper_bracer_r_f.sat					x	x									x	x		
+shared_armor_scout_trooper_chest_plate	appearance/armor_scout_trooper_chest_plate_m.sat	appearance/armor_scout_trooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_scout_trooper_gloves	appearance/armor_scout_trooper_gloves_m.sat	appearance/armor_scout_trooper_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_scout_trooper_helmet	appearance/armor_scout_trooper_helmet_m.sat	appearance/armor_scout_trooper_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_scout_trooper_leggings	appearance/armor_scout_trooper_leggings_m.sat	appearance/armor_scout_trooper_leggings_f.sat					x	x									x	x		
+shared_armor_shug_ninx_chest_plate	appearance/armor_shug_ninx_chest_plate_m.sat	appearance/armor_shug_ninx_chest_plate_f.sat					x	x									x	x		
+shared_armor_shug_ninx_pants	appearance/armor_shug_ninx_pants_m.sat	appearance/armor_shug_ninx_pants_f.sat					x	x									x	x		
+shared_armor_shug_ninx_shoes	appearance/armor_shug_ninx_shoes_m.sat	appearance/armor_shug_ninx_shoes_f.sat					x	x									x	x		
+shared_armor_snowtrooper_backpack	appearance/armor_snowtrooper_backpack_m.sat	appearance/armor_snowtrooper_backpack_f.sat					x	x									x	x		
+shared_armor_snowtrooper_bicep_l	appearance/armor_snowtrooper_bicep_l_m.sat	appearance/armor_snowtrooper_bicep_l_f.sat					x	x									x	x		
+shared_armor_snowtrooper_bicep_r	appearance/armor_snowtrooper_bicep_r_m.sat	appearance/armor_snowtrooper_bicep_r_f.sat					x	x									x	x		
+shared_armor_snowtrooper_boots	appearance/armor_snowtrooper_boots_m.sat	appearance/armor_snowtrooper_boots_f.sat					x	x			x	x					x	x		
+shared_armor_snowtrooper_bracer_l	appearance/armor_snowtrooper_bracer_l_m.sat	appearance/armor_snowtrooper_bracer_l_f.sat					x	x									x	x		
+shared_armor_snowtrooper_bracer_r	appearance/armor_snowtrooper_bracer_r_m.sat	appearance/armor_snowtrooper_bracer_r_f.sat					x	x									x	x		
+shared_armor_snowtrooper_chest	appearance/armor_snowtrooper_chest_m.sat	appearance/armor_snowtrooper_chest_f.sat					x	x									x	x		
+shared_armor_snowtrooper_chest_plate	appearance/armor_snowtrooper_chest_plate_m.sat	appearance/armor_snowtrooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_snowtrooper_helmet	appearance/armor_snowtrooper_helmet_m.sat	appearance/armor_snowtrooper_helmet_f.sat					x	x									x	x	x	x
+shared_armor_snowtrooper_jacket	appearance/armor_snowtrooper_jacket_m.sat	appearance/armor_snowtrooper_jacket_f.sat					x	x									x	x		
+shared_armor_stormtrooper_bicep_l	appearance/armor_stormtrooper_bicep_l_m.sat	appearance/armor_stormtrooper_bicep_l_f.sat					x	x									x	x		
+shared_armor_stormtrooper_bicep_r	appearance/armor_stormtrooper_bicep_r_m.sat	appearance/armor_stormtrooper_bicep_r_f.sat					x	x									x	x		
+shared_armor_stormtrooper_boots	appearance/armor_stormtrooper_boots_m.sat	appearance/armor_stormtrooper_boots_f.sat					x	x			x	x					x	x		
+shared_armor_stormtrooper_bracer_l	appearance/armor_stormtrooper_bracer_l_m.sat	appearance/armor_stormtrooper_bracer_l_f.sat					x	x									x	x		
+shared_armor_stormtrooper_bracer_r	appearance/armor_stormtrooper_bracer_r_m.sat	appearance/armor_stormtrooper_bracer_r_f.sat					x	x									x	x		
+shared_armor_stormtrooper_chest_plate	appearance/armor_stormtrooper_chest_plate_m.sat	appearance/armor_stormtrooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_stormtrooper_chest_plate_quest	appearance/armor_stormtrooper_chest_plate_m.sat	appearance/armor_stormtrooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_stormtrooper_gloves	appearance/armor_stormtrooper_gloves_m.sat	appearance/armor_stormtrooper_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_stormtrooper_helmet	appearance/armor_stormtrooper_helmet_m.sat	appearance/armor_stormtrooper_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_stormtrooper_helmet_quest	appearance/armor_stormtrooper_helmet_m.sat	appearance/armor_stormtrooper_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_stormtrooper_leggings	appearance/armor_stormtrooper_leggings_m.sat	appearance/armor_stormtrooper_leggings_f.sat					x	x									x	x		
+shared_armor_stormtrooper_leggings_quest	appearance/armor_stormtrooper_leggings_m.sat	appearance/armor_stormtrooper_leggings_f.sat					x	x									x	x		
+shared_armor_stormtrooper_utility_belt	appearance/armor_stormtrooper_utility_belt_m.sat	appearance/armor_stormtrooper_utility_belt_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_belt	appearance/armor_swamp_trooper_belt_m.sat	appearance/armor_swamp_trooper_belt_f.sat			x	x	x	x									x	x		
+shared_armor_swamp_trooper_bicep_l	appearance/armor_swamp_trooper_bicep_l_m.sat	appearance/armor_swamp_trooper_bicep_l_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_bicep_r	appearance/armor_swamp_trooper_bicep_r_m.sat	appearance/armor_swamp_trooper_bicep_r_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_boots	appearance/armor_swamp_trooper_boots_m.sat	appearance/armor_swamp_trooper_boots_f.sat					x	x			x	x					x	x		
+shared_armor_swamp_trooper_bracer_l	appearance/armor_swamp_trooper_bracer_l_m.sat	appearance/armor_swamp_trooper_bracer_l_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_bracer_r	appearance/armor_swamp_trooper_bracer_r_m.sat	appearance/armor_swamp_trooper_bracer_r_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_chest_plate	appearance/armor_swamp_trooper_chest_plate_m.sat	appearance/armor_swamp_trooper_chest_plate_f.sat					x	x									x	x		
+shared_armor_swamp_trooper_gloves	appearance/armor_swamp_trooper_gloves_m.sat	appearance/armor_swamp_trooper_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_swamp_trooper_helmet	appearance/armor_swamp_trooper_helmet_m.sat	appearance/armor_swamp_trooper_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_swamp_trooper_leggings	appearance/armor_swamp_trooper_leggings_m.sat	appearance/armor_swamp_trooper_leggings_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x		
+shared_armor_taloron_bicep_l	appearance/armor_taloron_bicep_l_m.sat	appearance/armor_taloron_bicep_l_f.sat					x	x									x	x		
+shared_armor_taloron_bicep_r	appearance/armor_taloron_bicep_r_m.sat	appearance/armor_taloron_bicep_r_f.sat					x	x									x	x		
+shared_armor_taloron_boots	appearance/armor_taloron_boots_m.sat	appearance/armor_taloron_boots_f.sat					x	x			x	x					x	x		
+shared_armor_taloron_bracer_l	appearance/armor_taloron_bracer_l_m.sat	appearance/armor_taloron_bracer_l_f.sat					x	x									x	x		
+shared_armor_taloron_bracer_r	appearance/armor_taloron_bracer_r_m.sat	appearance/armor_taloron_bracer_r_f.sat					x	x									x	x		
+shared_armor_taloron_chest_plate	appearance/armor_taloron_chest_plate_m.sat	appearance/armor_taloron_chest_plate_f.sat					x	x									x	x		
+shared_armor_taloron_helmet	appearance/armor_taloron_helmet_m.sat	appearance/armor_taloron_helmet_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_armor_taloron_leggings	appearance/armor_taloron_leggings_m.sat	appearance/armor_taloron_leggings_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_boots	appearance/armor_tantel_skreej_boots_m.sat	appearance/armor_tantel_skreej_boots_f.sat					x	x			x	x					x	x		
+shared_armor_tantel_skreej_boots_quest	appearance/armor_tantel_skreej_boots_m.sat	appearance/armor_tantel_skreej_boots_f.sat					x	x			x	x					x	x		
+shared_armor_tantel_skreej_bicep_r	appearance/armor_tantel_skreej_bicep_r_m.sat	appearance/armor_tantel_skreej_bicep_r_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_bracer_l	appearance/armor_tantel_skreej_bracer_l_m.sat	appearance/armor_tantel_skreej_bracer_l_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_bracer_r	appearance/armor_tantel_skreej_bracer_r_m.sat	appearance/armor_tantel_skreej_bracer_r_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_bicep_l	appearance/armor_tantel_skreej_bicep_l_m.sat	appearance/armor_tantel_skreej_bicep_l_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_chest_plate	appearance/armor_tantel_skreej_chest_plate_m.sat	appearance/armor_tantel_skreej_chest_plate_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_chest_plate_quest	appearance/armor_tantel_skreej_chest_plate_m.sat	appearance/armor_tantel_skreej_chest_plate_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_helmet	appearance/armor_tantel_skreej_helmet_m.sat	appearance/armor_tantel_skreej_helmet_f.sat	appearance/armor_tantel_skreej_helmet_rod_m.sat	appearance/armor_tantel_skreej_helmet_rod_f.sat	appearance/armor_tantel_skreej_helmet_mon_m.sat	appearance/armor_tantel_skreej_helmet_mon_f.sat	x	x	appearance/armor_tantel_skreej_helmet_twk_m.sat	appearance/armor_tantel_skreej_helmet_twk_f.sat	appearance/armor_tantel_skreej_helmet_trn_m.sat	appearance/armor_tantel_skreej_helmet_trn_f.sat			appearance/armor_tantel_skreej_helmet_bth_m.sat	appearance/armor_tantel_skreej_helmet_bth_f.sat	x	x	appearance/armor_tantel_skreej_helmet_sul_m.sat	appearance/armor_tantel_skreej_helmet_sul_f.sat
+shared_armor_tantel_skreej_helmet_quest	appearance/armor_tantel_skreej_helmet_m.sat	appearance/armor_tantel_skreej_helmet_f.sat	appearance/armor_tantel_skreej_helmet_rod_m.sat	appearance/armor_tantel_skreej_helmet_rod_f.sat	appearance/armor_tantel_skreej_helmet_mon_m.sat	appearance/armor_tantel_skreej_helmet_mon_f.sat	x	x	appearance/armor_tantel_skreej_helmet_twk_m.sat	appearance/armor_tantel_skreej_helmet_twk_f.sat	appearance/armor_tantel_skreej_helmet_trn_m.sat	appearance/armor_tantel_skreej_helmet_trn_f.sat			appearance/armor_tantel_skreej_helmet_bth_m.sat	appearance/armor_tantel_skreej_helmet_bth_f.sat	x	x	appearance/armor_tantel_skreej_helmet_sul_m.sat	appearance/armor_tantel_skreej_helmet_sul_f.sat
+shared_armor_tantel_skreej_gloves	appearance/armor_tantel_skreej_gloves_m.sat	appearance/armor_tantel_skreej_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_tantel_skreej_pants	appearance/armor_tantel_skreej_pants_m.sat	appearance/armor_tantel_skreej_pants_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_leggings	appearance/armor_tantel_skreej_leggings_m.sat	appearance/armor_tantel_skreej_leggings_f.sat					x	x									x	x		
+shared_armor_tantel_skreej_shirt	appearance/armor_tantel_skreej_shirt_m.sat	appearance/armor_tantel_skreej_shirt_f.sat					x	x									x	x		
+shared_armor_tenel_ka_boots	appearance/armor_tenel_ka_boots_m.sat	appearance/armor_tenel_ka_boots_f.sat					x	x			x	x					x	x		
+shared_armor_tenel_ka_chest_plate	appearance/armor_tenel_ka_chest_plate_m.sat	appearance/armor_tenel_ka_chest_plate_f.sat					x	x									x	x		
+shared_armor_tenel_ka_gloves	appearance/armor_tenel_ka_gloves_m.sat	appearance/armor_tenel_ka_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_tenel_ka_pants	appearance/armor_tenel_ka_pants_m.sat	appearance/armor_tenel_ka_pants_f.sat					x	x									x	x		
+shared_armor_ubese_bandolier	appearance/armor_ubese_bandolier_m.sat	appearance/armor_ubese_bandolier_f.sat					x	x									x	x		
+shared_armor_ubese_boots	appearance/armor_ubese_boots_m.sat	appearance/armor_ubese_boots_f.sat					x	x			x	x					x	x		
+shared_armor_ubese_bracer_l	appearance/armor_ubese_bracer_l_m.sat	appearance/armor_ubese_bracer_l_f.sat					x	x									x	x		
+shared_armor_ubese_bracer_r	appearance/armor_ubese_bracer_r_m.sat	appearance/armor_ubese_bracer_r_f.sat					x	x									x	x		
+shared_armor_ubese_cape	appearance/armor_ubese_cape_m.sat	appearance/armor_ubese_cape_f.sat					x	x									x	x		
+shared_armor_ubese_chest_plate	appearance/armor_ubese_chest_plate_m.sat	appearance/armor_ubese_chest_plate_f.sat					x	x									x	x		
+shared_armor_ubese_gloves	appearance/armor_ubese_gloves_m.sat	appearance/armor_ubese_gloves_f.sat					x	x			x	x					x	x		
+shared_armor_ubese_helmet	appearance/armor_ubese_helmet_m.sat	appearance/armor_ubese_helmet_f.sat	appearance/armor_ubese_helmet_rod_m.sat	appearance/armor_ubese_helmet_rod_f.sat	appearance/armor_ubese_helmet_mon_m.sat	appearance/armor_ubese_helmet_mon_f.sat	x	x	appearance/armor_ubese_helmet_twk_m.sat	appearance/armor_ubese_helmet_twk_f.sat	appearance/armor_ubese_helmet_trn_m.sat	appearance/armor_ubese_helmet_trn_f.sat			appearance/armor_ubese_helmet_bth_m.sat	appearance/armor_ubese_helmet_bth_f.sat	x	x	appearance/armor_ubese_helmet_sul_m.sat	appearance/armor_ubese_helmet_sul_f.sat
+shared_armor_ubese_helmet_quest	appearance/armor_ubese_helmet_m.sat	appearance/armor_ubese_helmet_f.sat	appearance/armor_ubese_helmet_rod_m.sat	appearance/armor_ubese_helmet_rod_f.sat	appearance/armor_ubese_helmet_mon_m.sat	appearance/armor_ubese_helmet_mon_f.sat	x	x	appearance/armor_ubese_helmet_twk_m.sat	appearance/armor_ubese_helmet_twk_f.sat	appearance/armor_ubese_helmet_trn_m.sat	appearance/armor_ubese_helmet_trn_f.sat			appearance/armor_ubese_helmet_bth_m.sat	appearance/armor_ubese_helmet_bth_f.sat	x	x	appearance/armor_ubese_helmet_sul_m.sat	appearance/armor_ubese_helmet_sul_f.sat
+shared_armor_ubese_jacket	appearance/armor_ubese_jacket_m.sat	appearance/armor_ubese_jacket_f.sat					x	x									x	x		
+shared_armor_ubese_jacket_quest	appearance/armor_ubese_jacket_m.sat	appearance/armor_ubese_jacket_f.sat					x	x									x	x		
+shared_armor_ubese_pants	appearance/armor_ubese_pants_m.sat	appearance/armor_ubese_pants_f.sat					x	x									x	x		
+shared_armor_ubese_pants_quest	appearance/armor_ubese_pants_m.sat	appearance/armor_ubese_pants_f.sat					x	x									x	x		
+shared_armor_ubese_shirt	appearance/armor_ubese_shirt_m.sat	appearance/armor_ubese_shirt_f.sat					x	x									x	x		
+shared_armor_weequay_chest_plate	appearance/armor_weequay_chest_plate_m.sat	appearance/armor_weequay_chest_plate_f.sat					x	x									x	x		
+shared_armor_zam_wesell_belt	appearance/armor_zam_wesell_belt_m.sat	appearance/armor_zam_wesell_belt_f.sat					x	x									x	x		
+shared_armor_zam_wesell_boots	appearance/armor_zam_wesell_boots_m.sat	appearance/armor_zam_wesell_boots_f.sat					x	x			x	x					x	x		
+shared_armor_zam_wesell_chest_plate	appearance/armor_zam_wesell_chest_plate_m.sat	appearance/armor_zam_wesell_chest_plate_f.sat					x	x									x	x		
+shared_armor_zam_wesell_chest_plate_quest	appearance/armor_zam_wesell_chest_plate_m.sat	appearance/armor_zam_wesell_chest_plate_f.sat					x	x									x	x		
+shared_armor_zam_wesell_gloves	appearance/armor_zam_wesell_gloves_m.sat	appearance/armor_zam_wesell_gloves_f.sat			x	x	x	x			x	x					x	x		
+shared_armor_zam_wesell_helmet	appearance/armor_zam_wesell_helmet_m.sat	appearance/armor_zam_wesell_helmet_f.sat	appearance/armor_zam_wesell_s01_helmet_rod_m.sat	appearance/armor_zam_wesell_s01_helmet_rod_f.sat	appearance/armor_zam_wesell_s01_helmet_mon_m.sat	appearance/armor_zam_wesell_s01_helmet_mon_f.sat	x	x	appearance/armor_zam_wesell_s01_helmet_twk_m.sat	appearance/armor_zam_wesell_s01_helmet_twk_f.sat	appearance/armor_zam_wesell_s01_helmet_trn_m.sat	appearance/armor_zam_wesell_s01_helmet_trn_f.sat			appearance/armor_zam_wesell_s01_helmet_bth_m.sat	appearance/armor_zam_wesell_s01_helmet_bth_f.sat	x	x	appearance/armor_zam_wesell_helmet_sul_m.sat	appearance/armor_zam_wesell_helmet_sul_f.sat
+shared_armor_zam_wesell_helmet_quest	appearance/armor_zam_wesell_helmet_m.sat	appearance/armor_zam_wesell_helmet_f.sat	appearance/armor_zam_wesell_s01_helmet_rod_m.sat	appearance/armor_zam_wesell_s01_helmet_rod_f.sat	appearance/armor_zam_wesell_s01_helmet_mon_m.sat	appearance/armor_zam_wesell_s01_helmet_mon_f.sat	x	x	appearance/armor_zam_wesell_s01_helmet_twk_m.sat	appearance/armor_zam_wesell_s01_helmet_twk_f.sat	appearance/armor_zam_wesell_s01_helmet_trn_m.sat	appearance/armor_zam_wesell_s01_helmet_trn_f.sat			appearance/armor_zam_wesell_s01_helmet_bth_m.sat	appearance/armor_zam_wesell_s01_helmet_bth_f.sat	x	x	appearance/armor_zam_wesell_helmet_sul_m.sat	appearance/armor_zam_wesell_helmet_sul_f.sat
+shared_armor_zam_wesell_pants	appearance/armor_zam_wesell_pants_m.sat	appearance/armor_zam_wesell_pants_f.sat					x	x									x	x		
+shared_armor_zam_wesell_pants_quest	appearance/armor_zam_wesell_pants_m.sat	appearance/armor_zam_wesell_pants_f.sat					x	x									x	x		
+shared_backpack_s01	appearance/backpack_s01_m.sat	appearance/backpack_s01_f.sat															appearance/ith_backpack_s01_m.sat	appearance/backpack_s01_f.sat		
+shared_backpack_s02	appearance/backpack_s02_m.sat	appearance/backpack_s02_f.sat															x	x		
+shared_backpack_s03	appearance/backpack_s03_m.sat	appearance/backpack_s03_f.sat															appearance/ith_backpack_s03_m.sat	appearance/ith_backpack_s03_f.sat		
+shared_backpack_s03_quest	appearance/backpack_s03_m.sat	appearance/backpack_s03_f.sat															appearance/ith_backpack_s03_m.sat	appearance/ith_backpack_s03_f.sat		
+shared_backpack_s04	appearance/backpack_s04_m.sat	appearance/backpack_s04_f.sat															x	x		
+shared_backpack_s05	appearance/backpack_s05_m.sat	appearance/backpack_s05_f.sat															appearance/ith_backpack_s05_m.sat	appearance/ith_backpack_s05_f.sat		
+shared_backpack_s06	appearance/backpack_s06_m.sat	appearance/backpack_s06_f.sat															x	x		
+shared_backpack_s06_quest	appearance/backpack_s06_m.sat	appearance/backpack_s06_f.sat															x	x		
+shared_ep3_chiss_poacher_player_backpack	appearance/backpack_chiss_fog_m.sat	appearance/backpack_chiss_fog_f.sat															appearance/ith_backpack_chiss_fog_m.sat	appearance/ith_backpack_chiss_fog_f.sat		
+shared_ep3_chiss_poacher_backpack	appearance/backpack_chiss_fog_m.sat	appearance/backpack_chiss_fog_f.sat															appearance/ith_backpack_chiss_fog_m.sat	appearance/ith_backpack_chiss_fog_f.sat		
+shared_backpack_s07	appearance/backpack_s07_m.sat	appearance/backpack_s07_f.sat															x	x		
+shared_bandolier_chewbacca	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	
+shared_bandolier_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	
+shared_bandolier_s02	appearance/bandolier_s02_m.sat	appearance/bandolier_s02_f.sat					appearance/bandolier_s02_wke_m.sat	appearance/bandolier_s02_wke_f.sat									appearance/ith_bandolier_s02_m.sat	appearance/ith_bandolier_s02_f.sat		
+shared_bandolier_s02_quest	appearance/bandolier_s02_m.sat	appearance/bandolier_s02_f.sat					appearance/bandolier_s02_wke_m.sat	appearance/bandolier_s02_wke_f.sat									appearance/ith_bandolier_s02_m.sat	appearance/ith_bandolier_s02_f.sat		
+shared_bandolier_s03	appearance/bandolier_s03_m.sat	appearance/bandolier_s03_f.sat					appearance/bandolier_s03_wke_m.sat	appearance/bandolier_s03_wke_f.sat									appearance/ith_bandolier_s03_m.sat	appearance/ith_bandolier_s03_f.sat		
+shared_bandolier_s04	appearance/bandolier_s04_m.sat	appearance/bandolier_s04_f.sat					appearance/bandolier_s04_wke_m.sat	appearance/bandolier_s04_wke_f.sat									appearance/ith_bandolier_s04_m.sat	appearance/ith_bandolier_s04_f.sat		
+shared_bandolier_s04_quest	appearance/bandolier_s04_m.sat	appearance/bandolier_s04_f.sat					appearance/bandolier_s04_wke_m.sat	appearance/bandolier_s04_wke_f.sat									appearance/ith_bandolier_s04_m.sat	appearance/ith_bandolier_s04_f.sat		
+shared_bandolier_s05	appearance/bandolier_s05_m.sat	appearance/bandolier_s05_f.sat					appearance/bandolier_s05_wke_m.sat	appearance/bandolier_s05_wke_f.sat									appearance/ith_bandolier_s05_m.sat	appearance/ith_bandolier_s05_f.sat		
+shared_bandolier_s06	appearance/bandolier_s06_m.sat	appearance/bandolier_s06_f.sat					appearance/bandolier_s06_wke_m.sat	appearance/bandolier_s06_wke_f.sat									appearance/ith_bandolier_s06_m.sat	appearance/ith_bandolier_s06_f.sat		
+shared_bandolier_s07	appearance/bandolier_s07_m.sat	appearance/bandolier_s07_f.sat					appearance/bandolier_s07_wke_m.sat	appearance/bandolier_s07_wke_f.sat									appearance/ith_bandolier_s07_m.sat	appearance/ith_bandolier_s07_f.sat		
+shared_bandolier_s08	appearance/bandolier_s08_m.sat	appearance/bandolier_s08_f.sat					appearance/bandolier_s08_wke_m.sat	appearance/bandolier_s08_wke_f.sat									appearance/ith_bandolier_s08_m.sat	appearance/ith_bandolier_s08_f.sat		
+shared_bandolier_s09	x	x	x	x	x	x	appearance/bandolier_s09_wke_m.sat	appearance/bandolier_s09_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_bandolier_tusken_raider_s01	appearance/bandolier_tusken_raider_s01_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_bandolier_tusken_raider_s02	appearance/bandolier_tusken_raider_s02_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_bandolier_tusken_raider_s03	appearance/bandolier_tusken_raider_s03_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_belt_s01	appearance/belt_s01_m.sat	appearance/belt_s01_f.sat					appearance/belt_s01_wke_m.sat	appearance/belt_s01_wke_f.sat									appearance/ith_belt_s01_m.sat	appearance/ith_belt_s01_f.sat		
+shared_belt_s02	appearance/belt_s02_m.sat	appearance/belt_s02_f.sat					appearance/belt_s02_wke_m.sat	appearance/belt_s02_wke_f.sat									appearance/ith_belt_s02_m.sat	appearance/ith_belt_s02_f.sat		
+shared_belt_s03	appearance/belt_s03_m.sat	appearance/belt_s03_f.sat					appearance/belt_s03_wke_m.sat	appearance/belt_s03_wke_f.sat									appearance/ith_belt_s03_m.sat	appearance/ith_belt_s03_f.sat		
+shared_belt_s04	appearance/belt_s04_m.sat	appearance/belt_s04_f.sat					appearance/belt_s04_wke_m.sat	appearance/belt_s04_wke_f.sat									appearance/ith_belt_s04_m.sat	appearance/ith_belt_s04_f.sat		
+shared_belt_s05	appearance/belt_s05_m.sat	appearance/belt_s05_f.sat					appearance/belt_s05_wke_m.sat	appearance/belt_s05_wke_f.sat									appearance/ith_belt_s05_m.sat	appearance/ith_belt_s05_f.sat		
+shared_belt_s05_quest	appearance/belt_s05_m.sat	appearance/belt_s05_f.sat					appearance/belt_s05_wke_m.sat	appearance/belt_s05_wke_f.sat									appearance/ith_belt_s05_m.sat	appearance/ith_belt_s05_f.sat		
+shared_belt_s07	appearance/belt_s07_m.sat	appearance/belt_s07_f.sat					appearance/belt_s07_wke_m.sat	appearance/belt_s07_wke_f.sat									appearance/ith_belt_s07_m.sat	appearance/ith_belt_s07_f.sat		
+shared_belt_s09	appearance/belt_s09_m.sat	appearance/belt_s09_f.sat					appearance/belt_s09_wke_m.sat	appearance/belt_s09_wke_f.sat									appearance/ith_belt_s09_m.sat	appearance/ith_belt_s09_f.sat		
+shared_belt_s11	appearance/belt_s11_m.sat	appearance/belt_s11_f.sat					appearance/belt_s11_wke_m.sat	appearance/belt_s11_wke_f.sat									appearance/ith_belt_s11_m.sat	appearance/ith_belt_s11_f.sat		
+shared_belt_s12	appearance/belt_s12_m.sat	appearance/belt_s12_f.sat					appearance/belt_s12_wke_m.sat	appearance/belt_s12_wke_f.sat									appearance/ith_belt_s12_m.sat	appearance/ith_belt_s12_f.sat		
+shared_belt_s13	appearance/belt_s13_m.sat	appearance/belt_s13_f.sat					appearance/belt_s13_wke_m.sat	appearance/belt_s13_wke_f.sat									appearance/ith_belt_s13_m.sat	appearance/ith_belt_s13_f.sat		
+shared_belt_s14	appearance/belt_s14_m.sat	appearance/belt_s14_f.sat					appearance/belt_s14_wke_m.sat	appearance/belt_s14_wke_f.sat									appearance/ith_belt_s14_m.sat	appearance/ith_belt_s14_f.sat		
+shared_belt_s15	appearance/belt_s15_m.sat	appearance/belt_s15_f.sat					appearance/belt_s15_wke_m.sat	appearance/belt_s15_wke_f.sat									appearance/ith_belt_s15_m.sat	appearance/ith_belt_s15_f.sat		
+shared_belt_s16	appearance/belt_s16_m.sat	appearance/belt_s16_f.sat					appearance/belt_s16_wke_m.sat	appearance/belt_s16_wke_f.sat									appearance/ith_belt_s16_m.sat	appearance/ith_belt_s16_f.sat		
+shared_belt_s17	appearance/belt_s17_m.sat	appearance/belt_s17_f.sat					appearance/belt_s17_wke_m.sat	appearance/belt_s17_wke_f.sat									appearance/ith_belt_s17_m.sat	appearance/ith_belt_s17_f.sat		
+shared_belt_s18	appearance/belt_s18_m.sat	appearance/belt_s18_f.sat					appearance/belt_s18_wke_m.sat	appearance/belt_s18_wke_f.sat									x	x		
+shared_belt_s19	appearance/belt_s19_m.sat	appearance/belt_s19_f.sat					appearance/belt_s19_wke_m.sat	appearance/belt_s19_wke_f.sat									x	x		
+shared_belt_s20	appearance/belt_s20_m.sat	appearance/belt_s20_f.sat					appearance/belt_s20_wke_m.sat	appearance/belt_s20_wke_f.sat									x	x		
+shared_belt_utility_ammo	appearance/belt_utility_ammo_m.sat	appearance/belt_utility_ammo_f.sat					appearance/belt_utility_ammo_wke_m.sat	appearance/belt_utility_ammo_wke_f.sat									x	x		
+shared_belt_utility_jedi	appearance/belt_utility_jedi_m.sat	appearance/belt_utility_jedi_f.sat					appearance/belt_utility_jedi_wke_m.sat	appearance/belt_utility_jedi_wke_f.sat									x	x		
+shared_bestine_quest_badge	appearance/necklace_s08_m.sat	appearance/necklace_s08_f.sat					x	x									x	x		
+shared_bicep_s01	appearance/bicep_s01_m.sat	appearance/bicep_s01_f.sat					x	x									x	x		
+shared_bicep_s02	appearance/bicep_s02_m.sat	appearance/bicep_s02_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bikini_leggings_s01	appearance/bikini_s01_leggings_m.sat	appearance/bikini_s01_leggings_f.sat					x	x									x	x		
+shared_bikini_s01	x	appearance/bikini_s01_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bikini_s02	x	appearance/bikini_s02_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bikini_s03	x	appearance/bikini_s03_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bikini_s04	x	appearance/bikini_s04_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bodysuit_atat	appearance/bodysuit_atat_m.sat	appearance/bodysuit_atat_f.sat					x	x									x	x		
+shared_bodysuit_atat_quest	appearance/bodysuit_atat_m.sat	appearance/bodysuit_atat_f.sat					x	x									x	x		
+shared_bodysuit_bwing	appearance/bodysuit_bwing_m.sat	appearance/bodysuit_bwing_f.sat					x	x									x	x		
+shared_bodysuit_bwing_quest	appearance/bodysuit_bwing_m.sat	appearance/bodysuit_bwing_f.sat					x	x									x	x		
+shared_bodysuit_s01	appearance/bodysuit_s01_m.sat	appearance/bodysuit_s01_f.sat					x	x									x	x		
+shared_bodysuit_s02	appearance/bodysuit_s02_m.sat	appearance/bodysuit_s02_f.sat					x	x									x	x		
+shared_bodysuit_s03	appearance/bodysuit_s03_m.sat	appearance/bodysuit_s03_f.sat					x	x									x	x		
+shared_bodysuit_s04	appearance/bodysuit_s04_m.sat	appearance/bodysuit_s04_f.sat					x	x									x	x		
+shared_bodysuit_s05	x	appearance/bodysuit_s05_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bodysuit_s06	x	appearance/bodysuit_s06_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bodysuit_s07	x	appearance/bodysuit_s07_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bodysuit_s08	appearance/bodysuit_s08_m.sat	appearance/bodysuit_s08_f.sat					x	x									x	x		
+shared_bodysuit_s09	appearance/bodysuit_s09_m.sat	appearance/bodysuit_s09_f.sat					x	x									x	x		
+shared_bodysuit_s10	appearance/bodysuit_s10_m.sat	appearance/bodysuit_s10_f.sat					x	x									x	x		
+shared_bodysuit_s11	appearance/bodysuit_s11_m.sat	appearance/bodysuit_s11_f.sat					x	x									x	x		
+shared_bodysuit_s12	appearance/bodysuit_s12_m.sat	appearance/bodysuit_s12_f.sat					x	x									x	x		
+shared_bodysuit_s13	appearance/bodysuit_s13_m.sat	appearance/bodysuit_s13_f.sat					x	x									x	x		
+shared_bodysuit_s14	appearance/bodysuit_s14_m.sat	appearance/bodysuit_s14_f.sat					x	x									x	x		
+shared_bodysuit_s15	appearance/bodysuit_s15_m.sat	appearance/bodysuit_s15_f.sat					x	x			x	x					x	x		
+shared_bodysuit_s16	appearance/bodysuit_s16_m.sat	appearance/bodysuit_s16_f.sat					x	x									x	x		
+shared_bodysuit_tie_fighter	appearance/bodysuit_tie_fighter_m.sat	appearance/bodysuit_tie_fighter_f.sat					x	x									x	x		
+shared_bodysuit_tie_fighter_quest	appearance/bodysuit_tie_fighter_m.sat	appearance/bodysuit_tie_fighter_f.sat					x	x									x	x		
+shared_bodysuit_sarlacc_coverall	appearance/bodysuit_s13_m.sat	appearance/bodysuit_s13_f.sat					x	x									x	x		
+shared_boots_corsec	appearance/boots_s12_m.sat	appearance/boots_s12_f.sat					x	x			x	x					x	x		
+shared_boots_s02	appearance/boots_s02_m.sat	appearance/boots_s02_f.sat					x	x			x	x					x	x		
+shared_boots_s03	appearance/boots_s03_m.sat	appearance/boots_s03_f.sat					x	x			x	x					x	x		
+shared_boots_s04	appearance/boots_s04_m.sat	appearance/boots_s04_f.sat					x	x			x	x					x	x		
+shared_boots_s05	appearance/boots_s05_m.sat	appearance/boots_s05_f.sat					x	x			x	x					x	x		
+shared_boots_s06	appearance/boots_s06_m.sat	appearance/boots_s06_f.sat					x	x			x	x					x	x		
+shared_boots_s08	appearance/boots_s08_m.sat	appearance/boots_s08_f.sat					x	x			x	x					x	x		
+shared_boots_s10	appearance/boots_s10_m.sat	appearance/boots_s10_f.sat					x	x			x	x					x	x		
+shared_boots_s11	appearance/boots_s11_m.sat	appearance/boots_s11_f.sat					x	x			x	x					x	x		
+shared_boots_s12	appearance/boots_s12_m.sat	appearance/boots_s12_f.sat					x	x			x	x					x	x		
+shared_boots_s13	appearance/boots_s13_m.sat	appearance/boots_s13_f.sat					x	x			x	x					x	x		
+shared_boots_s14	appearance/boots_s14_m.sat	appearance/boots_s14_f.sat					x	x			x	x					x	x		
+shared_boots_s15	appearance/boots_s15_m.sat	appearance/boots_s15_f.sat					x	x			x	x					x	x		
+shared_boots_s16	appearance/boots_s16_m.sat	appearance/boots_s16_f.sat					x	x			x	x					x	x		
+shared_boots_s17	appearance/boots_s17_m.sat	appearance/boots_s17_f.sat					x	x			x	x					x	x		
+shared_boots_s18	appearance/boots_s18_m.sat	appearance/boots_s18_f.sat					x	x			x	x					x	x		
+shared_boots_s19	appearance/boots_s19_m.sat	appearance/boots_s19_f.sat					x	x			x	x					x	x		
+shared_boots_s20	appearance/boots_s20_m.sat	appearance/boots_s20_f.sat					x	x			x	x					x	x		
+shared_boots_s21	appearance/boots_s21_m.sat	appearance/boots_s21_f.sat					x	x			x	x					x	x		
+shared_boots_s22	appearance/boots_s22_m.sat	appearance/boots_s22_f.sat					x	x			x	x					x	x		
+shared_boots_s23	appearance/boots_s23_m.sat	appearance/boots_s23_f.sat					x	x			x	x					x	x		
+shared_boots_s24	appearance/boots_s24_m.sat	appearance/boots_s24_f.sat					x	x			x	x					x	x		
+shared_boots_s25	appearance/boots_s25_m.sat	appearance/boots_s25_f.sat					x	x			x	x					x	x		
+shared_boots_s26	appearance/boots_s26_m.sat	appearance/boots_s26_f.sat					x	x			x	x					x	x		
+shared_boots_s28	appearance/boots_s28_m.sat	appearance/boots_s28_f.sat					x	x			x	x					x	x		
+shared_boots_s29	appearance/boots_s29_m.sat	appearance/boots_s29_f.sat					x	x			x	x					x	x		
+shared_boots_s30	appearance/boots_s30_m.sat	appearance/boots_s30_f.sat					x	x			x	x					x	x		
+shared_boots_s31	appearance/boots_s31_m.sat	appearance/boots_s31_f.sat					x	x			x	x					x	x		
+shared_boots_s32	appearance/boots_s32_m.sat	appearance/boots_s32_f.sat					x	x			x	x					x	x		
+shared_boots_s33	appearance/boots_s33_m.sat	appearance/boots_s33_f.sat					x	x			x	x					x	x		
+shared_boots_s34	appearance/boots_s34_m.sat	appearance/boots_s34_f.sat					x	x			x	x					x	x		
+shared_boots_s35	appearance/boots_s35_m.sat	appearance/boots_s35_f.sat					x	x			x	x					x	x		
+shared_boots_tusken_raider	appearance/boots_tusken_raider_m.sat	x		x		x	x	x		x	x	x		x		x	x	x		x
+shared_bracelet_s01_l	appearance/bracelet_m_s01_l.sat	appearance/bracelet_f_s01_l.sat			x	x	x	x									x	x		
+shared_bracelet_s02_l	appearance/bracelet_m_s02_l.sat	appearance/bracelet_f_s02_l.sat			x	x	x	x									x	x		
+shared_bracelet_s03_l	appearance/bracelet_m_s03_l.sat	appearance/bracelet_f_s03_l.sat			x	x	x	x									x	x		
+shared_bracelet_s04_l	appearance/bracelet_m_s04_l.sat	appearance/bracelet_f_s04_l.sat			x	x	x	x									x	x		
+shared_bracelet_s05_l	appearance/bracelet_m_s05_l.sat	appearance/bracelet_f_s05_l.sat			x	x	x	x									x	x		
+shared_bracelet_s06_l	appearance/bracelet_m_s06_l.sat	appearance/bracelet_f_s06_l.sat			x	x	x	x									x	x		
+shared_bracelet_s01_r	appearance/bracelet_m_s01_r.sat	appearance/bracelet_f_s01_r.sat			x	x	x	x									x	x		
+shared_bracelet_s02_r	appearance/bracelet_m_s02_r.sat	appearance/bracelet_f_s02_r.sat			x	x	x	x									x	x		
+shared_bracelet_s03_r	appearance/bracelet_m_s03_r.sat	appearance/bracelet_f_s03_r.sat			x	x	x	x									x	x		
+shared_bracelet_s04_r	appearance/bracelet_m_s04_r.sat	appearance/bracelet_f_s04_r.sat			x	x	x	x									x	x		
+shared_bracelet_s05_r	appearance/bracelet_m_s05_r.sat	appearance/bracelet_f_s05_r.sat			x	x	x	x									x	x		
+shared_bracelet_s06_r	appearance/bracelet_m_s06_r.sat	appearance/bracelet_f_s06_r.sat			x	x	x	x									x	x		
+shared_bracer_s01	appearance/bracer_s01_m.sat	appearance/bracer_s01_f.sat					x	x									x	x		
+shared_bracer_s02	appearance/bracer_s02_m.sat	appearance/bracer_s02_f.sat					x	x									x	x		
+shared_bracer_s03	appearance/bracer_s03_m.sat	appearance/bracer_s03_f.sat					x	x									x	x		
+shared_bracer_s04	appearance/bracer_s04_m.sat	appearance/bracer_s04_f.sat					x	x									x	x		
+shared_bracer_s05	appearance/bracer_s05_m.sat	appearance/bracer_s05_f.sat					x	x									x	x		
+shared_bustier_s01	x	appearance/bustier_s01_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bustier_s02	x	appearance/bustier_s02_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_bustier_s03	x	appearance/bustier_s03_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_cape_s01	appearance/cape_s01_m.sat	appearance/cape_s01_f.sat					x	x									x	x		
+shared_cape_s02	appearance/cape_s02_m.sat	appearance/cape_s02_f.sat					x	x									x	x		
+shared_cape_s03	appearance/cape_s03_m.sat	appearance/cape_s03_f.sat					x	x									x	x		
+shared_cape_s04	appearance/cape_s04_m.sat	appearance/cape_s04_f.sat					x	x									x	x		
+shared_cape_s05	appearance/cape_s05_m.sat	appearance/cape_s05_f.sat					x	x									x	x		
+shared_cape_s06	appearance/cape_s06_m.sat	appearance/cape_s06_f.sat					x	x									x	x		
+shared_cape_s07	appearance/cape_s07_m.sat	appearance/cape_s07_f.sat					x	x									x	x		
+shared_cape_s08	appearance/cape_s08_m.sat	appearance/cape_s08_f.sat					x	x									x	x		
+shared_cape_s09	appearance/cape_s09_m.sat	appearance/cape_s09_f.sat					x	x									x	x		
+shared_cape_s10	appearance/cape_s10_m.sat	appearance/cape_s10_f.sat					x	x									x	x		
+shared_cape_s11	appearance/cape_s11_m.sat	appearance/cape_s11_f.sat					x	x									x	x		
+shared_cape_s12	appearance/cape_s12_m.sat	appearance/cape_s12_f.sat					x	x									x	x		
+shared_dress_s02	x	appearance/dress_s02_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s03	x	appearance/dress_s03_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s05	x	appearance/dress_s05_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s06	x	appearance/dress_s06_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s07	x	appearance/dress_s07_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s08	x	appearance/dress_s08_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s08_quest	x	appearance/dress_s08_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s09	x	appearance/dress_s09_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s10	appearance/dress_s10_m.sat	appearance/dress_s10_f.sat					x	x									x	x		
+shared_dress_s11	appearance/dress_s11_m.sat	appearance/dress_s11_f.sat					x	x									x	x		
+shared_dress_s12	appearance/dress_s12_m.sat	appearance/dress_s12_f.sat					x	x									x	x		
+shared_dress_s13	appearance/dress_s13_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_dress_s14	x	appearance/dress_s14_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s15	x	appearance/dress_s15_f.sat	x	x	x	appearance/dress_s15_mon_f.sat	x	x	x	appearance/dress_s15_twk_f.sat	x	appearance/dress_s15_trn_f.sat	x		x		x	x	x	
+shared_dress_s16	x	appearance/dress_s16_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s17	appearance/dress_s17_m.sat	appearance/dress_s17_f.sat					x	x									x	x		
+shared_dress_s18	appearance/dress_s18_m.sat	appearance/dress_s18_f.sat					x	x									x	x		
+shared_dress_s19	appearance/dress_s19_m.sat	appearance/dress_s19_f.sat					x	x									x	x		
+shared_dress_s20	appearance/dress_s20_m.sat	appearance/dress_s20_f.sat					x	x									x	x		
+shared_dress_s21	appearance/dress_s21_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_dress_s22	appearance/dress_s22_m.sat	appearance/dress_s22_f.sat					x	x									x	x		
+shared_dress_s23	appearance/dress_s23_m.sat	appearance/dress_s23_f.sat					x	x									x	x		
+shared_dress_s24	appearance/dress_s24_m.sat	appearance/dress_s24_f.sat					x	x									x	x		
+shared_dress_s25	appearance/dress_s25_m.sat	appearance/dress_s25_f.sat					x	x									x	x		
+shared_dress_s26	x	appearance/dress_s26_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s27	x	appearance/dress_s27_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s28	appearance/dress_s28_m.sat	appearance/dress_s28_f.sat					x	x									x	x		
+shared_dress_s29	x	appearance/dress_s29_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s30	x	appearance/dress_s30_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s31	x	appearance/dress_s31_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s32	x	appearance/dress_s32_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s33	x	appearance/dress_s33_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s34	x	appearance/dress_s34_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_dress_s35	x	appearance/dress_s35_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_earring_s01	appearance/earring_s01.apt	appearance/earring_s01.apt					x	x									x	x		
+shared_earring_s02	appearance/earring_s02.apt	appearance/earring_s02.apt					x	x									x	x		
+shared_earring_s03	appearance/earring_s03.apt	appearance/earring_s03.apt					x	x									x	x		
+shared_earring_s04	appearance/earring_s04.apt	appearance/earring_s04.apt					x	x									x	x		
+shared_earring_s05	appearance/earring_s05.apt	appearance/earring_s05.apt					x	x									x	x		
+shared_earring_s06	appearance/earring_s06.apt	appearance/earring_s06.apt					x	x									x	x		
+shared_earring_s07	appearance/earring_s07.apt	appearance/earring_s07.apt					x	x									x	x		
+shared_earring_s08	appearance/earring_s08.apt	appearance/earring_s08.apt					x	x									x	x		
+shared_earring_s09	appearance/earring_s09.apt	appearance/earring_s09.apt					x	x									x	x		
+shared_earring_s10	appearance/earring_s10.apt	appearance/earring_s10.apt					x	x									x	x		
+shared_earring_s11	appearance/earring_s11.apt	appearance/earring_s11.apt					x	x									x	x		
+shared_earring_s12	appearance/earring_s12.apt	appearance/earring_s12.apt					x	x									x	x		
+shared_earring_s13	appearance/earring_s13_m.apt	appearance/earring_s13_m.apt					x	x									x	x		
+shared_earring_s14	appearance/earring_s14_m.apt	appearance/earring_s14_m.apt					x	x									x	x		
+shared_earring_s15	appearance/earring_s15_m.apt	appearance/earring_s15_m.apt					x	x									x	x		
+shared_eyewear_s01	appearance/eyewear_s01_m.sat	appearance/eyewear_s01_f.sat					x	x									x	x		
+shared_eyewear_s02	appearance/eyewear_s02_m.sat	appearance/eyewear_s02_f.sat					x	x									x	x		
+shared_eyewear_s03	appearance/eyewear_s03_m.sat	appearance/eyewear_s03_f.sat					x	x									x	x		
+shared_eyewear_s04	appearance/eyewear_s04_m.sat	appearance/eyewear_s04_f.sat					x	x									x	x		
+shared_eyewear_s05	appearance/eyewear_s05_m.sat	appearance/eyewear_s05_f.sat					x	x									x	x		
+shared_eyewear_s06	appearance/eyewear_s06_m.sat	appearance/eyewear_s06_f.sat					x	x									x	x		
+shared_gloves_corsec	appearance/gloves_s02_m.sat	appearance/gloves_s02_f.sat					x	x			x	x					x	x		
+shared_gloves_s01	appearance/gloves_s01_m.sat	appearance/gloves_s01_f.sat					x	x			x	x					x	x		
+shared_gloves_s02	appearance/gloves_s02_m.sat	appearance/gloves_s02_f.sat					x	x			x	x					x	x		
+shared_gloves_s03	appearance/gloves_s03_m.sat	appearance/gloves_s03_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s04	appearance/gloves_s04_m.sat	appearance/gloves_s04_f.sat					x	x			x	x					x	x		
+shared_gloves_s05	appearance/gloves_s05_m.sat	appearance/gloves_s05_f.sat					x	x			x	x					x	x		
+shared_gloves_s06	appearance/gloves_s06_m.sat	appearance/gloves_s06_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s07	appearance/gloves_s07_m.sat	appearance/gloves_s07_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s08	appearance/gloves_s08_m.sat	appearance/gloves_s08_f.sat					x	x			x	x					x	x		
+shared_gloves_s09	appearance/gloves_s09_m.sat	appearance/gloves_s09_f.sat					x	x			x	x					x	x		
+shared_gloves_s10	appearance/gloves_s10_m.sat	appearance/gloves_s10_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s11	appearance/gloves_s11_m.sat	appearance/gloves_s11_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s12	appearance/gloves_s12_m.sat	appearance/gloves_s12_f.sat					x	x			x	x					x	x		
+shared_gloves_s13	appearance/gloves_s13_m.sat	appearance/gloves_s13_f.sat			x	x	x	x			x	x					x	x		
+shared_gloves_s14	appearance/gloves_s14_m.sat	appearance/gloves_s14_f.sat					x	x			x	x					x	x		
+shared_gloves_tusken_raider	appearance/gloves_tusken_raider_m.sat	x		x		x	x	x		x	x	x		x		x	x	x		
+shared_goggles_s01	appearance/goggles_s01_m.sat	appearance/goggles_s01_f.sat	appearance/goggles_s01_rod_m.sat	appearance/goggles_s01_rod_f.sat	appearance/goggles_s01_mon_m.sat	appearance/goggles_s01_mon_f.sat	appearance/goggles_s01_wke_m.sat	appearance/goggles_s01_wke_f.sat			appearance/goggles_s01_trn_m.sat	appearance/goggles_s01_trn_f.sat			appearance/goggles_s01_bth_m.sat	appearance/goggles_s01_bth_f.sat	appearance/ith_goggles_s01_m.sat	appearance/ith_goggles_s01_f.sat	appearance/goggles_s01_sul_m.sat	appearance/goggles_s01_sul_f.sat
+shared_goggles_s02	appearance/goggles_s02_m.sat	appearance/goggles_s02_f.sat	appearance/goggles_s02_rod_m.sat	appearance/goggles_s02_rod_f.sat	appearance/goggles_s02_mon_m.sat	appearance/goggles_s02_mon_f.sat	appearance/goggles_s02_wke_m.sat	appearance/goggles_s02_wke_f.sat			appearance/goggles_s02_trn_m.sat	appearance/goggles_s02_trn_f.sat			appearance/goggles_s02_bth_m.sat	appearance/goggles_s02_bth_f.sat	appearance/ith_goggles_s02_m.sat	appearance/ith_goggles_s02_f.sat	appearance/goggles_s02_sul_m.sat	appearance/goggles_s02_sul_f.sat
+shared_goggles_s03	appearance/goggles_s03_m.sat	appearance/goggles_s03_f.sat	appearance/goggles_s03_rod_m.sat	appearance/goggles_s03_rod_f.sat	appearance/goggles_s03_mon_m.sat	appearance/goggles_s03_mon_f.sat	appearance/goggles_s03_wke_m.sat	appearance/goggles_s03_wke_f.sat			appearance/goggles_s03_trn_m.sat	appearance/goggles_s03_trn_f.sat			appearance/goggles_s03_bth_m.sat	appearance/goggles_s03_bth_f.sat	appearance/ith_goggles_s03_m.sat	appearance/ith_goggles_s03_f.sat	appearance/goggles_s03_sul_m.sat	appearance/goggles_s03_sul_f.sat
+shared_hat_chef_s01	appearance/hat_chef_s01_m.sat	appearance/hat_chef_s01_f.sat	appearance/hat_chef_s01_rod_m.sat	appearance/hat_chef_s01_rod_f.sat	appearance/hat_chef_s01_mon_m.sat	appearance/hat_chef_s01_mon_f.sat	appearance/hat_chef_s01_wke_m.sat	appearance/hat_chef_s01_wke_f.sat	appearance/hat_chef_s01_twk_m.sat	appearance/hat_chef_s01_twk_f.sat	appearance/hat_chef_s01_trn_m.sat	appearance/hat_chef_s01_trn_f.sat			appearance/hat_chef_s01_bth_m.sat	appearance/hat_chef_s01_bth_f.sat	x	x	appearance/hat_chef_s01_sul_m.sat	appearance/hat_chef_s01_sul_f.sat
+shared_hat_chef_s02	appearance/hat_chef_s02_m.sat	appearance/hat_chef_s02_f.sat	appearance/hat_chef_s02_rod_m.sat	appearance/hat_chef_s02_rod_f.sat	appearance/hat_chef_s02_mon_m.sat	appearance/hat_chef_s02_mon_f.sat	appearance/hat_chef_s02_wke_m.sat	appearance/hat_chef_s02_wke_f.sat	appearance/hat_chef_s02_twk_m.sat	appearance/hat_chef_s02_twk_f.sat	appearance/hat_chef_s02_trn_m.sat	appearance/hat_chef_s02_trn_f.sat			appearance/hat_chef_s02_bth_m.sat	appearance/hat_chef_s02_bth_f.sat	x	x	appearance/hat_chef_s02_sul_m.sat	appearance/hat_chef_s02_sul_f.sat
+shared_hat_imp_s01	appearance/hat_imperial_s01_m.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x	x
+shared_hat_s01	appearance/hat_s01_m.sat	appearance/hat_s01_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s02	appearance/hat_s02_m.sat	appearance/hat_s02_f.sat	appearance/hat_s02_rod_m.sat	appearance/hat_s02_rod_f.sat	appearance/hat_s02_mon_m.sat	appearance/hat_s02_mon_f.sat	x	x	x	x	appearance/hat_s02_trn_m.sat	appearance/hat_s02_trn_f.sat			appearance/hat_s02_bth_m.sat	appearance/hat_s02_bth_f.sat	x	x	appearance/hat_s02_sul_m.sat	appearance/hat_s02_sul_f.sat
+shared_hat_s03	appearance/hat_s03_m.sat	appearance/hat_s03_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s04	appearance/hat_s04_m.sat	appearance/hat_s04_f.sat	appearance/hat_s04_rod_m.sat	appearance/hat_s04_rod_f.sat	appearance/hat_s04_mon_m.sat	appearance/hat_s04_mon_f.sat	x	x	x	x	appearance/hat_s04_trn_m.sat	appearance/hat_s04_trn_f.sat			appearance/hat_s04_bth_m.sat	appearance/hat_s04_bth_f.sat	x	x	appearance/hat_s04_sul_m.sat	appearance/hat_s04_sul_f.sat
+shared_hat_s05	x	x	x	x	x	x	x	x	appearance/hat_s05_m.sat	appearance/hat_s05_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_hat_s06	appearance/hat_s06_m.sat	appearance/hat_s06_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s07	appearance/hat_s07_m.sat	appearance/hat_s07_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s08	appearance/hat_s08_m.sat	appearance/hat_s08_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s09	appearance/hat_s09_m.sat	appearance/hat_s09_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s10	appearance/hat_s10_m.sat	appearance/hat_s10_f.sat	appearance/hat_s10_rod_m.sat	appearance/hat_s10_rod_f.sat	appearance/hat_s10_mon_m.sat	appearance/hat_s10_mon_f.sat	x	x	x	x	appearance/hat_s10_trn_m.sat	appearance/hat_s10_trn_f.sat			appearance/hat_s10_bth_m.sat	appearance/hat_s10_bth_f.sat	x	x	appearance/hat_s10_sul_m.sat	appearance/hat_s10_sul_f.sat
+shared_hat_s11	appearance/hat_s11_m.sat	appearance/hat_s11_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_hat_s12	appearance/hat_s12_m.sat	appearance/hat_s12_f.sat	appearance/hat_s12_rod_m.sat	appearance/hat_s12_rod_f.sat	appearance/hat_s12_mon_m.sat	appearance/hat_s12_mon_f.sat	x	x	x	x	appearance/hat_s12_trn_m.sat	appearance/hat_s12_trn_f.sat			appearance/hat_s12_bth_m.sat	appearance/hat_s12_bth_f.sat	x	x	appearance/hat_s12_sul_m.sat	appearance/hat_s12_sul_f.sat
+shared_hat_s13	appearance/hat_s13_m.sat	appearance/hat_s13_f.sat	appearance/hat_s13_rod_m.sat	appearance/hat_s13_rod_f.sat	appearance/hat_s13_mon_m.sat	appearance/hat_s13_mon_f.sat	x	x	x	x	appearance/hat_s13_trn_m.sat	appearance/hat_s13_trn_f.sat			appearance/hat_s13_bth_m.sat	appearance/hat_s13_bth_f.sat	x	x	appearance/hat_s13_sul_m.sat	appearance/hat_s13_sul_f.sat
+shared_hat_s14	appearance/hat_s14_m.sat	appearance/hat_s14_f.sat	appearance/hat_s14_rod_m.sat	appearance/hat_s14_rod_f.sat	appearance/hat_s14_mon_m.sat	appearance/hat_s14_mon_f.sat	x	x	x	x	appearance/hat_s14_trn_m.sat	appearance/hat_s14_trn_f.sat			appearance/hat_s14_bth_m.sat	appearance/hat_s14_bth_f.sat	x	x	appearance/hat_s14_sul_m.sat	appearance/hat_s14_sul_f.sat
+shared_hat_s15	x	appearance/hat_s15_f.sat	x	x	x	x	x	x	x	x	x	x					x	x	x	x
+shared_hat_s16	x	appearance/hat_s16_f.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_hat_s17	x	appearance/hat_s17_f.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_hat_s18	appearance/hat_s18_m.sat	appearance/hat_s18_f.sat	appearance/hat_s18_rod_m.sat	appearance/hat_s18_rod_f.sat	appearance/hat_s18_mon_m.sat	appearance/hat_s18_mon_f.sat	x	x	x	x	appearance/hat_s18_trn_m.sat	appearance/hat_s18_trn_f.sat	x	x	appearance/hat_s18_bth_m.sat	appearance/hat_s18_bth_f.sat	x	x	x	x
+shared_hat_twilek_s01	x	x	x	x	x	x	x	x	x	appearance/hat_twk_s01_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_hat_twilek_s02	x	x	x	x	x	x	x	x	x	appearance/hat_twk_s02_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_hat_twilek_s03	x	x	x	x	x	x	x	x	appearance/hat_twk_s03_m.sat	appearance/hat_twk_s03_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_hat_twilek_s04	x	x	x	x	x	x	x	x	appearance/hat_twk_s04_m.sat	appearance/hat_twk_s04_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_hat_twilek_s05	x	x	x	x	x	x	x	x	appearance/hat_twk_s05_m.sat	appearance/hat_twk_s05_f.sat	x	x	x	x	x	x	x	x	x	x
+shared_helmet_alliance	appearance/helmet_alliance_m.sat	appearance/helmet_alliance_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_atat	appearance/helmet_atat_m.sat	appearance/helmet_atat_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_breath_mask	appearance/helmet_breath_mask_m.sat	appearance/helmet_breath_mask_f.sat	appearance/helmet_breath_mask_rod_m.sat	appearance/helmet_breath_mask_rod_f.sat	appearance/helmet_breath_mask_mon_m.sat	appearance/helmet_breath_mask_mon_f.sat	appearance/helmet_breath_mask_wok_m.sat	appearance/helmet_breath_mask_wok_f.sat	appearance/helmet_breath_mask_twk_m.sat	appearance/helmet_breath_mask_twk_f.sat	appearance/helmet_breath_mask_trn_m.sat	appearance/helmet_breath_mask_trn_f.sat			appearance/helmet_breath_mask_bth_m.sat	appearance/helmet_breath_mask_bth_f.sat	x	x	x	x
+shared_helmet_rebel_trooper	appearance/helmet_rebel_trooper_m.sat	appearance/helmet_rebel_trooper_f.sat	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_helmet_royal_guard	appearance/helmet_royal_guard_m.sat	appearance/helmet_royal_guard_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s01	appearance/helmet_s01_m.sat	appearance/helmet_s01_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s02	appearance/helmet_s02_m.sat	appearance/helmet_s02_f.sat	appearance/helmet_s02_rod_m.sat	appearance/helmet_s02_rod_f.sat	appearance/helmet_s02_mon_m.sat	appearance/helmet_s02_mon_f.sat	x	x	x	x	appearance/helmet_s02_trn_m.sat	appearance/helmet_s02_trn_f.sat			appearance/helmet_s02_bth_m.sat	appearance/helmet_s02_bth_f.sat	x	x	x	x
+shared_helmet_s03	appearance/helmet_s03_m.sat	appearance/helmet_s03_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s04	appearance/helmet_s04_m.sat	appearance/helmet_s04_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s06	appearance/helmet_s06_m.sat	appearance/helmet_s06_f.sat	appearance/helmet_s06_rod_m.sat	appearance/helmet_s06_rod_f.sat	appearance/helmet_s06_mon_m.sat	appearance/helmet_s06_mon_f.sat	x	x	x	x	appearance/helmet_s06_trn_m.sat	appearance/helmet_s06_trn_f.sat			appearance/helmet_s06_bth_m.sat	appearance/helmet_s06_bth_f.sat	x	x	appearance/helmet_s06_sul_m.sat	appearance/helmet_s06_sul_f.sat
+shared_helmet_s07	appearance/helmet_s07_m.sat	appearance/helmet_s07_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s08	appearance/helmet_s08_m.sat	appearance/helmet_s08_f.sat	appearance/helmet_s08_rod_m.sat	appearance/helmet_s08_rod_f.sat	appearance/helmet_s08_mon_m.sat	appearance/helmet_s08_mon_f.sat	x	x	x	x	appearance/helmet_s08_trn_m.sat	appearance/helmet_s08_trn_f.sat			appearance/helmet_s08_bth_m.sat	appearance/helmet_s08_bth_f.sat	x	x	x	x
+shared_helmet_s09	appearance/helmet_s09_m.sat	appearance/helmet_s09_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s10	appearance/helmet_s10_m.sat	appearance/helmet_s10_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s11	appearance/helmet_s11_m.sat	appearance/helmet_s11_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_s12	appearance/helmet_s12_m.sat	appearance/helmet_s12_f.sat	appearance/helmet_s12_rod_m.sat	appearance/helmet_s12_rod_f.sat	appearance/helmet_s12_mon_m.sat	appearance/helmet_s12_mon_f.sat	x	x	x	x	appearance/helmet_s12_trn_m.sat	appearance/helmet_s12_trn_f.sat			appearance/helmet_s12_bth_m.sat	appearance/helmet_s12_bth_f.sat	x	x	x	x
+shared_helmet_tie_fighter	appearance/helmet_tie_fighter_m.sat	appearance/helmet_tie_fighter_f.sat	x	x	x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_tusken_raider_s01	appearance/helmet_tusken_raider_s01_m.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x	x
+shared_helmet_tusken_raider_s02	appearance/helmet_tusken_raider_s02_m.sat	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_imperial_officer_outfit	appearance/imperial_officer_m.sat	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_jacket_s02	appearance/jacket_s02_m.sat	appearance/jacket_s02_f.sat					x	x									x	x		
+shared_jacket_s03	appearance/jacket_s03_m.sat	appearance/jacket_s03_f.sat					x	x									x	x		
+shared_jacket_s04	appearance/jacket_s04_m.sat	appearance/jacket_s04_f.sat					x	x									x	x		
+shared_jacket_s05	appearance/jacket_s05_m.sat	appearance/jacket_s05_f.sat					x	x									x	x		
+shared_jacket_s06	appearance/jacket_s06_m.sat	appearance/jacket_s06_f.sat					x	x									x	x		
+shared_jacket_s07	appearance/jacket_s07_m.sat	appearance/jacket_s07_f.sat					x	x									x	x		
+shared_jacket_s08	appearance/jacket_s08_m.sat	appearance/jacket_s08_f.sat					x	x									x	x		
+shared_jacket_s09	appearance/jacket_s09_m.sat	appearance/jacket_s09_f.sat					x	x									x	x		
+shared_jacket_s10	appearance/jacket_s10_m.sat	appearance/jacket_s10_f.sat					x	x									x	x		
+shared_jacket_s11	appearance/jacket_s11_m.sat	appearance/jacket_s11_f.sat					x	x									x	x		
+shared_jacket_s12	appearance/jacket_s12_m.sat	appearance/jacket_s12_f.sat					x	x									x	x		
+shared_jacket_s13	appearance/jacket_s13_m.sat	appearance/jacket_s13_f.sat					x	x									x	x		
+shared_jacket_s14	appearance/jacket_s14_m.sat	appearance/jacket_s14_f.sat					x	x									x	x		
+shared_jacket_s15	appearance/jacket_s15_m.sat	appearance/jacket_s15_f.sat					x	x									x	x		
+shared_jacket_s16	appearance/jacket_s16_m.sat	appearance/jacket_s16_f.sat					x	x									x	x		
+shared_jacket_s17	appearance/jacket_s17_m.sat	appearance/jacket_s17_f.sat					x	x									x	x		
+shared_jacket_s18	appearance/jacket_s18_m.sat	appearance/jacket_s18_f.sat					x	x									x	x		
+shared_jacket_s19	appearance/jacket_s19_m.sat	appearance/jacket_s19_f.sat					x	x									x	x		
+shared_jacket_s21	appearance/jacket_s21_m.sat	appearance/jacket_s21_f.sat					x	x									x	x		
+shared_jacket_s22	appearance/jacket_s22_m.sat	appearance/jacket_s22_f.sat					x	x									x	x		
+shared_jacket_s24	appearance/jacket_s24_m.sat	appearance/jacket_s24_f.sat					x	x									x	x		
+shared_jacket_s25	appearance/jacket_s25_m.sat	appearance/jacket_s25_f.sat					x	x									x	x		
+shared_jacket_s26	x	appearance/jacket_s26_f.sat	x		x		x	x	x		x		x		x		x	x		
+shared_jacket_s27	appearance/jacket_s27_m.sat	appearance/jacket_s27_f.sat					x	x									x	x		
+shared_jacket_s28	appearance/jacket_s28_m.sat	appearance/jacket_s28_f.sat					x	x									x	x		
+shared_jacket_s29	appearance/jacket_s29_m.sat	appearance/jacket_s29_f.sat					x	x									x	x		
+shared_jacket_s30	appearance/jacket_s30_m.sat	appearance/jacket_s30_f.sat					x	x									x	x		
+shared_jacket_s31	appearance/jacket_s31_m.sat	appearance/jacket_s31_f.sat					x	x									x	x		
+shared_jacket_s32	appearance/jacket_s32_m.sat	appearance/jacket_s32_f.sat					x	x									x	x		
+shared_jacket_s33	appearance/jacket_s33_m.sat	appearance/jacket_s33_f.sat					x	x									x	x		
+shared_jacket_s34	appearance/jacket_s34_m.sat	appearance/jacket_s34_f.sat					x	x									x	x		
+shared_jacket_s35	appearance/jacket_s35_m.sat	appearance/jacket_s35_f.sat					x	x									x	x		
+shared_jacket_s36	appearance/jacket_s36_m.sat	appearance/jacket_s36_f.sat					x	x									x	x		
+shared_jacket_s37	appearance/jacket_s37_m.sat	appearance/jacket_s37_f.sat					x	x									x	x		
+shared_jacket_s38	appearance/jacket_s38_m.sat	appearance/jacket_s38_f.sat					x	x									x	x		
+shared_jacket_s39	appearance/jacket_s39_m.sat	appearance/jacket_s39_f.sat					x	x									x	x		
+shared_jacket_s40	appearance/jacket_s40_m.sat	appearance/jacket_s40_f.sat					x	x									x	x		
+shared_jacket_s41	appearance/jacket_s41_m.sat	appearance/jacket_s41_f.sat					x	x									x	x		
+shared_jacket_s42	appearance/jacket_s42_m.sat	appearance/jacket_s42_f.sat					x	x									x	x		
+shared_jacket_s43	appearance/jacket_s43_m.sat	appearance/jacket_s43_f.sat					x	x									x	x		
+shared_jacket_s44	appearance/jacket_s44_m.sat	appearance/jacket_s44_f.sat					x	x									x	x		
+shared_jacket_s45	appearance/jacket_s45_m.sat	appearance/jacket_s45_f.sat					x	x									x	x		
+shared_jacket_s46	appearance/jacket_s46_m.sat	appearance/jacket_s46_f.sat					x	x									x	x		
+shared_jacket_s47	appearance/jacket_s47_m.sat	appearance/jacket_s47_f.sat					x	x									x	x		
+shared_mask_s01	appearance/mask_s01_m.sat	appearance/mask_s01_f.sat					x	x									x	x		
+shared_mask_s02	appearance/mask_s02_m.sat	appearance/mask_s02_f.sat					x	x									x	x		
+shared_armor_nightsister_bicep_r_s01	x	appearance/nightsister_armor_bicep_r_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_boots	x	appearance/nightsister_boots_s01.sat	x		x		x	x	x		x	x	x		x		x	x	x	
+shared_nightsister_dress	x	appearance/nightsister_dress_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_hat_s01	x	appearance/nightsister_hat_s01.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_nightsister_hat_s02	x	appearance/nightsister_hat_s02.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_nightsister_hat_s03	x	appearance/nightsister_hat_s03.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_nightsister_pants_s01	x	appearance/nightsister_pants_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_pants_s02	x	appearance/nightsister_pants_s02.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_shirt_s01	x	appearance/nightsister_shirt_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_shirt_s02	x	appearance/nightsister_shirt_s02.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_nightsister_shirt_s03	x	appearance/nightsister_shirt_s03.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_necklace_s01	appearance/necklace_s01_m.sat	appearance/necklace_s01_f.sat					x	x									x	x		
+shared_necklace_s02	appearance/necklace_s02_m.sat	appearance/necklace_s02_f.sat					x	x									x	x		
+shared_necklace_s03	appearance/necklace_s03_m.sat	appearance/necklace_s03_f.sat					x	x									x	x		
+shared_necklace_s04	appearance/necklace_s04_m.sat	appearance/necklace_s04_f.sat					x	x									x	x		
+shared_necklace_s05	appearance/necklace_s05_m.sat	appearance/necklace_s05_f.sat					x	x									x	x		
+shared_necklace_s06	appearance/necklace_s06_m.sat	appearance/necklace_s06_f.sat					x	x									x	x		
+shared_necklace_s07	appearance/necklace_s07_m.sat	appearance/necklace_s07_f.sat					x	x									x	x		
+shared_necklace_s08	appearance/necklace_s08_m.sat	appearance/necklace_s08_f.sat					x	x									x	x		
+shared_necklace_s09	appearance/necklace_s09_m.sat	appearance/necklace_s09_f.sat					x	x									x	x		
+shared_necklace_s09_quest	appearance/necklace_s09_m.sat	appearance/necklace_s09_f.sat					x	x									x	x		
+shared_necklace_s10	appearance/necklace_s10_m.sat	appearance/necklace_s10_f.sat					x	x									x	x		
+shared_necklace_s11	appearance/necklace_s11_m.sat	appearance/necklace_s11_f.sat					x	x									x	x		
+shared_necklace_s12	appearance/necklace_s12_m.sat	appearance/necklace_s12_f.sat					x	x									x	x		
+shared_pants_s01	appearance/pants_s01_m.sat	appearance/pants_s01_f.sat					x	x									x	x		
+shared_pants_s02	appearance/pants_s02_m.sat	appearance/pants_s02_f.sat					x	x									x	x		
+shared_pants_s04	appearance/pants_s04_m.sat	appearance/pants_s04_f.sat					x	x									x	x		
+shared_pants_s05	appearance/pants_s05_m.sat	appearance/pants_s05_f.sat					x	x									x	x		
+shared_pants_s06	appearance/pants_s06_m.sat	appearance/pants_s06_f.sat					x	x									x	x		
+shared_pants_s07	appearance/pants_s07_m.sat	appearance/pants_s07_f.sat					x	x									x	x		
+shared_pants_s08	appearance/pants_s08_m.sat	appearance/pants_s08_f.sat					x	x									x	x		
+shared_pants_s09	appearance/pants_s09_m.sat	appearance/pants_s09_f.sat					x	x									x	x		
+shared_pants_s10	appearance/pants_s10_m.sat	appearance/pants_s10_f.sat					x	x									x	x		
+shared_pants_s11	appearance/pants_s11_m.sat	appearance/pants_s11_f.sat					x	x									x	x		
+shared_pants_s12	appearance/pants_s12_m.sat	appearance/pants_s12_f.sat					x	x									x	x		
+shared_pants_s13	appearance/pants_s13_m.sat	appearance/pants_s13_f.sat					x	x									x	x		
+shared_pants_s14	appearance/pants_s14_m.sat	appearance/pants_s14_f.sat					x	x									x	x		
+shared_pants_s15	appearance/pants_s15_m.sat	appearance/pants_s15_f.sat					x	x									x	x		
+shared_pants_s17	appearance/pants_s17_m.sat	appearance/pants_s17_f.sat					x	x									x	x		
+shared_pants_s18	x	appearance/pants_s18_f.sat	x		x		x	x	x		x		x		x		x	x		
+shared_pants_s20	appearance/pants_s20_m.sat	appearance/pants_s20_f.sat					x	x									x	x		
+shared_pants_s21	appearance/pants_s21_m.sat	appearance/pants_s21_f.sat					x	x									x	x		
+shared_pants_s22	appearance/pants_s22_m.sat	appearance/pants_s22_f.sat					x	x									x	x		
+shared_pants_s23	appearance/pants_s23_m.sat	appearance/pants_s23_f.sat					x	x									x	x		
+shared_pants_s24	appearance/pants_s24_m.sat	appearance/pants_s24_f.sat					x	x									x	x		
+shared_pants_s25	appearance/pants_s25_m.sat	appearance/pants_s25_f.sat					x	x									x	x		
+shared_pants_s26	appearance/pants_s26_m.sat	appearance/pants_s26_f.sat					x	x									x	x		
+shared_pants_s27	appearance/pants_s27_m.sat	appearance/pants_s27_f.sat					x	x									x	x		
+shared_pants_s28	appearance/pants_s28_m.sat	appearance/pants_s28_f.sat					x	x									x	x		
+shared_pants_s29	appearance/pants_s29_m.sat	appearance/pants_s29_f.sat					x	x									x	x		
+shared_pants_s30	appearance/pants_s30_m.sat	appearance/pants_s30_f.sat					x	x									x	x		
+shared_pants_s31	appearance/pants_s31_m.sat	appearance/pants_s31_f.sat					x	x									x	x		
+shared_pants_s32	appearance/pants_s32_m.sat	appearance/pants_s32_f.sat					x	x									x	x		
+shared_pants_s33	appearance/pants_s33_m.sat	appearance/pants_s33_f.sat					x	x									x	x		
+shared_pants_s34	appearance/pants_s34_m.sat	appearance/pants_s34_f.sat					x	x									x	x		
+shared_ring_nightsister	appearance/ring_s03_m.apt	appearance/ring_s03_f.apt																		
+shared_ring_s01	appearance/ring_s01_m.apt	appearance/ring_s01_f.apt																		
+shared_ring_s02	appearance/ring_s02_m.apt	appearance/ring_s02_f.apt																		
+shared_ring_s03	appearance/ring_s03_m.apt	appearance/ring_s03_f.apt																		
+shared_ring_s03_quest	appearance/ring_s03_m.apt	appearance/ring_s03_f.apt																		
+shared_ring_s04	appearance/ring_s04_m.apt	appearance/ring_s04_f.apt																		
+shared_robe_inquisitor	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_robe_prefect_talmont	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_robe_royal_guard	appearance/robe_royal_guard_m.sat	appearance/robe_royal_guard_f.sat					x	x									x	x		
+shared_robe_s01	appearance/robe_s01_m.sat	appearance/robe_s01_f.sat					x	x									x	x		
+shared_robe_s02	appearance/robe_s02_m.sat	appearance/robe_s02_f.sat					x	x									x	x		
+shared_robe_s03	appearance/robe_s03_m.sat	appearance/robe_s03_f.sat					x	x									x	x		
+shared_robe_s04	appearance/robe_s04_m.sat	appearance/robe_s04_f.sat					x	x									x	x		
+shared_robe_s05	appearance/robe_s05_h0_m.sat	appearance/robe_s05_h0_f.sat					x	x									x	x		
+shared_robe_s05_h1	appearance/robe_s05_h1_m.sat	appearance/robe_s05_h1_f.sat			appearance/robe_s05_h1_mon_m.sat	appearance/robe_s05_h1_mon_f.sat	x	x	appearance/robe_s05_h1_twk_m.sat	appearance/robe_s05_h1_twk_f.sat							x	x		
+shared_robe_s06	appearance/robe_s06_m.sat	appearance/robe_s06_f.sat					x	x									x	x		
+shared_robe_s07	appearance/robe_s07_m.sat	appearance/robe_s07_f.sat					x	x									x	x		
+shared_robe_s08	appearance/robe_s08_m.sat	appearance/robe_s08_f.sat					x	x									x	x		
+shared_robe_s10	appearance/robe_s10_m.sat	appearance/robe_s10_f.sat					x	x									x	x		
+shared_robe_s11	appearance/robe_s11_m.sat	appearance/robe_s11_f.sat					x	x									x	x		
+shared_robe_s12	appearance/robe_s12_m.sat	appearance/robe_s12_f.sat					x	x									x	x		
+shared_robe_s15	appearance/robe_s15_m.sat	appearance/robe_s15_f.sat					x	x									x	x		
+shared_robe_s18	x	x	x	x	x	x	appearance/robe_s18_wke_m.sat	appearance/robe_s18_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_robe_s19	x	appearance/robe_s19_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_robe_s22	appearance/robe_s22_m.sat	appearance/robe_s22_f.sat					x	x									x	x		
+shared_robe_s23	appearance/robe_s23_m.sat	appearance/robe_s23_f.sat					x	x									x	x		
+shared_robe_s24	appearance/robe_s24_m.sat	appearance/robe_s24_f.sat					x	x									x	x		
+shared_robe_s25	appearance/robe_s25_m.sat	appearance/robe_s25_f.sat					x	x									x	x		
+shared_robe_s26	x	appearance/robe_s26_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_robe_s27	appearance/robe_s27_m.sat	appearance/robe_s27_f.sat					x	x									x	x		
+shared_robe_s28	appearance/robe_s28_m.sat	appearance/robe_s28_f.sat					x	x									x	x		
+shared_robe_s30	appearance/robe_s30_m.sat	appearance/robe_s30_f.sat					x	x									x	x		
+shared_robe_s32	appearance/robe_s32_m.sat	appearance/robe_s32_f.sat					x	x									x	x		
+shared_robe_s33	appearance/robe_s33_m.sat	appearance/robe_s33_f.sat					x	x									x	x		
+shared_robe_s34	appearance/robe_s34_m.sat	appearance/robe_s34_f.sat					x	x									x	x		
+shared_robe_s35	appearance/robe_s35_m.sat	appearance/robe_s35_f.sat					x	x									x	x		
+shared_robe_s36	appearance/robe_s36_m.sat	appearance/robe_s36_f.sat					x	x									x	x		
+shared_robe_s37	appearance/robe_s37_m.sat	appearance/robe_s37_f.sat					x	x									x	x		
+shared_robe_s38	appearance/robe_s38_m.sat	appearance/robe_s38_f.sat					x	x									x	x		
+shared_robe_s39	appearance/robe_s39_m.sat	appearance/robe_s39_f.sat					x	x									x	x		
+shared_robe_s40	appearance/robe_s40_m.sat	appearance/robe_s40_f.sat					x	x									x	x		
+shared_robe_tusken_raider_s01	appearance/robe_tusken_raider_s01_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_robe_tusken_raider_s02	appearance/robe_tusken_raider_s02_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_shirt_dera	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_shirt_s01	appearance/shirt_s01_m.sat	appearance/shirt_s01_f.sat					x	x									x	x		
+shared_shirt_s02	appearance/shirt_s02_m.sat	appearance/shirt_s02_f.sat					x	x									x	x		
+shared_shirt_s03	appearance/shirt_s03_m.sat	appearance/shirt_s03_f.sat					x	x									x	x		
+shared_shirt_s03_rebel	appearance/shirt_s03_rebel_m.sat	appearance/shirt_s03_rebel_f.sat					x	x									x	x		
+shared_shirt_s04	appearance/shirt_s04_m.sat	appearance/shirt_s04_f.sat					x	x									x	x		
+shared_shirt_s05	appearance/shirt_s05_m.sat	appearance/shirt_s05_f.sat					x	x									x	x		
+shared_shirt_s07	appearance/shirt_s07_m.sat	appearance/shirt_s07_f.sat					x	x									x	x		
+shared_shirt_s08	appearance/shirt_s08_m.sat	appearance/shirt_s08_f.sat					x	x									x	x		
+shared_shirt_s09	appearance/shirt_s09_m.sat	appearance/shirt_s09_f.sat					x	x									x	x		
+shared_shirt_s10	appearance/shirt_s10_m.sat	appearance/shirt_s10_f.sat					x	x									x	x		
+shared_shirt_s11	appearance/shirt_s11_m.sat	appearance/shirt_s11_f.sat					x	x									x	x		
+shared_shirt_s12	x	appearance/shirt_s12_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_shirt_s13	appearance/shirt_s13_m.sat	appearance/shirt_s13_f.sat					x	x									x	x		
+shared_shirt_s14	appearance/shirt_s14_m.sat	appearance/shirt_s14_f.sat					x	x									x	x		
+shared_shirt_s15	appearance/shirt_s15_m.sat	appearance/shirt_s15_f.sat					x	x									x	x		
+shared_shirt_s16	appearance/shirt_s16_m.sat	appearance/shirt_s16_f.sat					x	x									x	x		
+shared_shirt_s17	appearance/shirt_s17_m.sat	appearance/shirt_s17_f.sat					x	x									x	x		
+shared_shirt_s18	appearance/shirt_s18_m.sat	appearance/shirt_s18_f.sat					x	x									x	x		
+shared_shirt_s19	appearance/shirt_s19_m.sat	appearance/shirt_s19_f.sat					x	x									x	x		
+shared_shirt_s21	appearance/shirt_s21_m.sat	appearance/shirt_s21_f.sat					x	x									x	x		
+shared_shirt_s22	appearance/shirt_s22_m.sat	appearance/shirt_s22_f.sat					x	x									x	x		
+shared_shirt_s23	appearance/shirt_s23_m.sat	appearance/shirt_s23_f.sat					x	x									x	x		
+shared_shirt_s24	x	appearance/shirt_s24_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_shirt_s25	appearance/shirt_s25_m.sat	appearance/shirt_s25_f.sat					x	x									x	x		
+shared_shirt_s26	appearance/shirt_s26_m.sat	appearance/shirt_s26_f.sat					x	x									x	x		
+shared_shirt_s27	appearance/shirt_s27_m.sat	appearance/shirt_s27_f.sat					x	x									x	x		
+shared_shirt_s28	x	appearance/shirt_s28_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_shirt_s29	appearance/shirt_s29_m.sat	appearance/shirt_s29_f.sat					x	x									x	x		
+shared_shirt_s30	appearance/shirt_s30_m.sat	appearance/shirt_s30_f.sat					x	x									x	x		
+shared_shirt_s31	appearance/shirt_s31_m.sat	appearance/shirt_s31_f.sat					x	x									x	x		
+shared_shirt_s32	appearance/shirt_s32_m.sat	appearance/shirt_s32_f.sat					x	x									x	x		
+shared_shirt_s33	appearance/shirt_s33_m.sat	appearance/shirt_s33_f.sat					x	x									x	x		
+shared_shirt_s34	appearance/shirt_s34_m.sat	appearance/shirt_s34_f.sat					x	x									x	x		
+shared_shirt_s35	appearance/shirt_s35_m.sat	appearance/shirt_s35_f.sat					x	x									x	x		
+shared_shirt_s36	appearance/shirt_s36_m.sat	appearance/shirt_s36_f.sat					x	x									x	x		
+shared_shirt_s38	appearance/shirt_s38_m.sat	appearance/shirt_s38_f.sat					x	x									x	x		
+shared_shirt_s39	appearance/shirt_s39_m.sat	appearance/shirt_s39_f.sat					x	x									x	x		
+shared_shirt_s40	appearance/shirt_s40_m.sat	appearance/shirt_s40_f.sat					x	x									x	x		
+shared_shirt_s41	appearance/shirt_s41_m.sat	appearance/shirt_s41_f.sat					x	x									x	x		
+shared_shirt_s42	appearance/shirt_s42_m.sat	appearance/shirt_s42_f.sat					x	x									x	x		
+shared_shirt_s43	appearance/shirt_s43_m.sat	appearance/shirt_s43_f.sat					x	x									x	x		
+shared_shoes_s01	appearance/shoes_s01_m.sat	appearance/shoes_s01_f.sat					x	x			x	x					x	x		
+shared_shoes_s02	appearance/shoes_s02_m.sat	appearance/shoes_s02_f.sat					x	x			x	x					x	x		
+shared_shoes_s03	appearance/shoes_s03_m.sat	appearance/shoes_s03_f.sat					x	x			x	x					x	x		
+shared_shoes_s04	x	appearance/shoes_s04_f.sat	x		x		x	x	x		x	x	x		x		x	x	x	
+shared_shoes_s05	appearance/shoes_s05_m.sat	appearance/shoes_s05_f.sat					x	x			x	x					x	x		
+shared_shoes_s06	appearance/shoes_s06_m.sat	appearance/shoes_s06_f.sat					x	x			x	x					x	x		
+shared_shoes_s07	appearance/shoes_s07_m.sat	appearance/shoes_s07_f.sat					x	x			x	x					x	x		
+shared_shoes_s08	x	appearance/shoes_s08_f.sat	x		x		x	x	x		x	x	x		x		x	x	x	
+shared_shoes_s09	x	appearance/shoes_s09_f.sat	x		x		x	x	x		x	x	x		x		x	x	x	
+shared_singing_mountain_clan_backpack	x	appearance/sing_mtn_clan_backpack_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_armor_smc_s01_bicep_l	x	appearance/sing_mtn_clan_bicep_l_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_armor_smc_s01_bicep_r	x	appearance/sing_mtn_clan_bicep_r_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_boots	x	appearance/sing_mtn_clan_boots_s01.sat	x		x		x	x	x		x	x	x		x		x	x	x	
+shared_armor_smc_s01_bracer_l	x	appearance/sing_mtn_clan_bracer_l_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_armor_smc_s01_bracer_r	x	appearance/sing_mtn_clan_bracer_r_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_hat_s01	x	appearance/sing_mtn_clan_hat_s01.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_singing_mountain_clan_hat_s02	x	appearance/sing_mtn_clan_hat_s02.sat	x	x	x	x	x	x	x	x	x	x	x		x	x	x	x	x	x
+shared_singing_mountain_clan_mask_s01	x	appearance/sing_mtn_clan_mask_s01.sat	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x
+shared_singing_mountain_clan_shirt_s01	x	appearance/sing_mtn_clan_shirt_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_shirt_s02	x	appearance/sing_mtn_clan_shirt_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_shirt_s03	x	appearance/sing_mtn_clan_shirt_s03.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_skirt_s01	x	appearance/sing_mtn_clan_dress_s01.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_skirt_s02	x	appearance/sing_mtn_clan_dress_s02.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_singing_mountain_clan_skirt_s03	x	appearance/sing_mtn_clan_dress_s03.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_skirt_s01	appearance/skirt_s01_m.sat	appearance/skirt_s01_f.sat					x	x									x	x		
+shared_skirt_s03	x	appearance/skirt_s03_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_skirt_s04	x	appearance/skirt_s04_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_skirt_s05	appearance/skirt_s05_m.sat	appearance/skirt_s05_f.sat					x	x									x	x		
+shared_skirt_s06	x	appearance/skirt_s06_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_skirt_s07	x	appearance/skirt_s07_f.sat	x		x		x	x	x		x		x		x		x	x	x	
+shared_skirt_s08	appearance/skirt_s08_m.sat	appearance/skirt_s08_f.sat					x	x									x	x		
+shared_skirt_s09	appearance/skirt_s09_m.sat	appearance/skirt_s09_f.sat					x	x									x	x		
+shared_skirt_s10	appearance/skirt_s10_m.sat	appearance/skirt_s10_f.sat					x	x									x	x		
+shared_skirt_s11	appearance/skirt_s11_m.sat	appearance/skirt_s11_f.sat					x	x									x	x		
+shared_skirt_s12	appearance/skirt_s12_m.sat	appearance/skirt_s12_f.sat					x	x									x	x		
+shared_skirt_s13	appearance/skirt_s13_m.sat	appearance/skirt_s13_f.sat					x	x									x	x		
+shared_skirt_s14	appearance/skirt_s14_m.sat	appearance/skirt_s14_f.sat					x	x									x	x		
+shared_tiara_s01	appearance/tiara_s01_m.sat	appearance/tiara_s01_f.sat					x	x									x	x		
+shared_tiara_s02	appearance/tiara_s02_m.sat	appearance/tiara_s02_f.sat					x	x									x	x		
+shared_underwear_bottom	appearance/underwear_bottom_m.sat	appearance/underwear_bottom_f.sat					x	x									appearance/ith_underwear_bottom_m.sat	appearance/ith_underwear_bottom_f.sat		
+shared_underwear_top	appearance/underwear_top_m.sat	appearance/underwear_top_f.sat					x	x									x	appearance/ith_underwear_top_f.sat		
+shared_utility_belt_tusken_raider	appearance/utility_belt_tusken_raider_m.sat	x		x		x	x	x		x		x		x		x	x	x		x
+shared_vest_hutt_gang_s01	appearance/vest_hutt_gang_s01_m.sat	appearance/vest_hutt_gang_s01_f.sat					x	x									x	x		
+shared_vest_hutt_gang_s02	appearance/vest_hutt_gang_s02_m.sat	appearance/vest_hutt_gang_s02_f.sat					x	x									x	x		
+shared_vest_hutt_gang_s03	appearance/vest_hutt_gang_s03_m.sat	appearance/vest_hutt_gang_s03_f.sat					x	x									x	x		
+shared_vest_s01	appearance/vest_s01_m.sat	appearance/vest_s01_f.sat					x	x									x	x		
+shared_vest_s02	appearance/vest_s02_m.sat	appearance/vest_s02_f.sat					x	x									x	x		
+shared_vest_s03	appearance/vest_s03_m.sat	appearance/vest_s03_f.sat					x	x									x	x		
+shared_vest_s04	appearance/vest_s04_m.sat	appearance/vest_s04_f.sat					x	x									x	x		
+shared_vest_s05	appearance/vest_s05_m.sat	appearance/vest_s05_f.sat					x	x									x	x		
+shared_vest_s06	appearance/vest_s06_m.sat	appearance/vest_s06_f.sat					x	x									x	x		
+shared_vest_s07	appearance/vest_s07_m.sat	appearance/vest_s07_f.sat					x	x									x	x		
+shared_vest_s08	appearance/vest_s08_m.sat	appearance/vest_s08_f.sat					x	x									x	x		
+shared_vest_s09	appearance/vest_s09_m.sat	appearance/vest_s09_f.sat					x	x									x	x		
+shared_vest_s10	appearance/vest_s10_m.sat	appearance/vest_s10_f.sat					x	x									x	x		
+shared_vest_s11	appearance/vest_s11_m.sat	appearance/vest_s11_f.sat					x	x									x	x		
+shared_vest_s12	appearance/vest_s12_m.sat	appearance/vest_s12_f.sat					x	x									x	x		
+shared_vest_s13	appearance/vest_s13_m.sat	appearance/vest_s13_f.sat					x	x									x	x		
+shared_vest_s14	appearance/vest_s14_m.sat	appearance/vest_s14_f.sat					x	x									x	x		
+shared_vest_s15	appearance/vest_s15_m.sat	appearance/vest_s15_f.sat					x	x									x	x		
+shared_vest_s16	appearance/vest_s16_m.sat	appearance/vest_s16_f.sat					x	x									x	x		
+shared_vest_s17	appearance/vest_s17_m.sat	appearance/vest_s17_f.sat					x	x									x	x		
+shared_vest_s18	appearance/vest_s18_m.sat	appearance/vest_s18_f.sat					x	x									x	x		
+shared_wke_gloves_s01	x	x	x	x	x	x	appearance/wke_gloves_s01_m.sat	appearance/wke_gloves_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_gloves_s02	x	x	x	x	x	x	appearance/wke_gloves_s02_m.sat	appearance/wke_gloves_s02_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_gloves_s03	x	x	x	x	x	x	appearance/wke_gloves_s03_m.sat	appearance/wke_gloves_s03_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_gloves_s04	x	x	x	x	x	x	appearance/wke_gloves_s04_m.sat	appearance/wke_gloves_s04_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_hat_s01	x	x	x	x	x	x	appearance/wke_hat_s01_m.sat	appearance/wke_hat_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_hood_s01	x	x	x	x	x	x	appearance/wke_hood_s01_m.sat	appearance/wke_hood_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_hood_s02	x	x	x	x	x	x	appearance/wke_hood_s02_m.sat	appearance/wke_hood_s02_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_hood_s03	x	x	x	x	x	x	appearance/wke_hood_s03_m.sat	appearance/wke_hood_s03_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_lifeday_robe	x	x	x	x	x	x	appearance/wke_lifeday_robe_m.sat	appearance/wke_lifeday_robe_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shirt_s01	x	x	x	x	x	x	appearance/wke_shirt_s01_m.sat	appearance/wke_shirt_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shirt_s02	x	x	x	x	x	x	appearance/wke_shirt_s02_m.sat	appearance/wke_shirt_s02_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shirt_s03	x	x	x	x	x	x	appearance/wke_shirt_s03_m.sat	appearance/wke_shirt_s03_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shirt_s04	x	x	x	x	x	x	appearance/wke_shirt_s04_m.sat	appearance/wke_shirt_s04_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_skirt_s01	x	x	x	x	x	x	appearance/wke_skirt_s01_m.sat	appearance/wke_skirt_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_skirt_s02	x	x	x	x	x	x	appearance/wke_skirt_s02_m.sat	appearance/wke_skirt_s02_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_skirt_s03	x	x	x	x	x	x	appearance/wke_skirt_s03_m.sat	appearance/wke_skirt_s03_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_skirt_s04	x	x	x	x	x	x	appearance/wke_skirt_s04_m.sat	appearance/wke_skirt_s04_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shoulder_pad_s01	x	x	x	x	x	x	appearance/wke_shoulder_pad_s01_m.sat	appearance/wke_shoulder_pad_s01_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_wke_shoulder_pad_s02	x	x	x	x	x	x	appearance/wke_shoulder_pad_s02_m.sat	appearance/wke_shoulder_pad_s02_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_bicep_l	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_bicep_l_wke_m.sat	appearance/armor_kashyyykian_ceremonial_bicep_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_bicep_r	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_bicep_r_wke_m.sat	appearance/armor_kashyyykian_ceremonial_bicep_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_bracer_l	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_bracer_l_wke_m.sat	appearance/armor_kashyyykian_ceremonial_bracer_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_bracer_r	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_bracer_r_wke_m.sat	appearance/armor_kashyyykian_ceremonial_bracer_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_chest_plate	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_chest_plate_wke_m.sat	appearance/armor_kashyyykian_ceremonial_chest_plate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_chestplate	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_chestplate_wke_m.sat	appearance/armor_kashyyykian_ceremonial_chestplate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_ceremonial_leggings	x	x	x	x	x	x	appearance/armor_kashyyykian_ceremonial_leggings_wke_m.sat	appearance/armor_kashyyykian_ceremonial_leggings_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_robe_jedi_dark_s01	appearance/robe_jedi_dark_s01_m.sat	appearance/robe_jedi_dark_s01_f.sat					appearance/robe_jedi_dark_s01_wke_m.sat	appearance/robe_jedi_dark_s01_wke_f.sat			appearance/robe_jedi_dark_s01_trn_m.sat	appearance/robe_jedi_dark_s01_trn_f.sat					appearance/ith_robe_jedi_dark_s01_m.sat	appearance/ith_robe_jedi_dark_s01_f.sat		
+shared_robe_jedi_dark_s02	appearance/robe_jedi_dark_s02_m.sat	appearance/robe_jedi_dark_s02_f.sat					appearance/robe_jedi_dark_s02_wke_m.sat	appearance/robe_jedi_dark_s02_wke_f.sat			appearance/robe_jedi_dark_s02_trn_m.sat	appearance/robe_jedi_dark_s02_trn_f.sat					appearance/ith_robe_jedi_dark_s02_m.sat	appearance/ith_robe_jedi_dark_s02_f.sat		
+shared_robe_jedi_dark_s03	appearance/robe_jedi_dark_s03_m.sat	appearance/robe_jedi_dark_s03_f.sat					appearance/robe_jedi_dark_s03_wke_m.sat	appearance/robe_jedi_dark_s03_wke_f.sat			appearance/robe_jedi_dark_s03_trn_m.sat	appearance/robe_jedi_dark_s03_trn_f.sat					appearance/ith_robe_jedi_dark_s03_m.sat	appearance/ith_robe_jedi_dark_s03_f.sat		
+shared_robe_jedi_dark_s04	appearance/robe_jedi_dark_s04_m.sat	appearance/robe_jedi_dark_s04_f.sat					appearance/robe_jedi_dark_s04_wke_m.sat	appearance/robe_jedi_dark_s04_wke_f.sat			appearance/robe_jedi_dark_s04_trn_m.sat	appearance/robe_jedi_dark_s04_trn_f.sat					appearance/ith_robe_jedi_dark_s04_m.sat	appearance/ith_robe_jedi_dark_s04_f.sat		
+shared_robe_jedi_dark_s05	appearance/robe_jedi_dark_s05_m.sat	appearance/robe_jedi_dark_s05_f.sat					appearance/robe_jedi_dark_s05_wke_m.sat	appearance/robe_jedi_dark_s05_wke_f.sat									appearance/ith_robe_jedi_dark_s05_m.sat	appearance/ith_robe_jedi_dark_s05_f.sat		
+shared_robe_jedi_light_s01	appearance/robe_jedi_light_s01_m.sat	appearance/robe_jedi_light_s01_f.sat					appearance/robe_jedi_light_s01_wke_m.sat	appearance/robe_jedi_light_s01_wke_f.sat			appearance/robe_jedi_light_s01_trn_m.sat	appearance/robe_jedi_light_s01_trn_f.sat					appearance/ith_robe_jedi_light_s01_m.sat	appearance/ith_robe_jedi_light_s01_f.sat		
+shared_robe_jedi_light_s02	appearance/robe_jedi_light_s02_m.sat	appearance/robe_jedi_light_s02_f.sat					appearance/robe_jedi_light_s02_wke_m.sat	appearance/robe_jedi_light_s02_wke_f.sat			appearance/robe_jedi_light_s02_trn_m.sat	appearance/robe_jedi_light_s02_trn_f.sat					appearance/ith_robe_jedi_light_s02_m.sat	appearance/ith_robe_jedi_light_s02_f.sat		
+shared_robe_jedi_light_s03	appearance/robe_jedi_light_s03_m.sat	appearance/robe_jedi_light_s03_f.sat					appearance/robe_jedi_light_s03_wke_m.sat	appearance/robe_jedi_light_s03_wke_f.sat			appearance/robe_jedi_light_s03_trn_m.sat	appearance/robe_jedi_light_s03_trn_f.sat					appearance/ith_robe_jedi_light_s03_m.sat	appearance/ith_robe_jedi_light_s03_f.sat		
+shared_robe_jedi_light_s04	appearance/robe_jedi_light_s04_m.sat	appearance/robe_jedi_light_s04_f.sat					appearance/robe_jedi_light_s04_wke_m.sat	appearance/robe_jedi_light_s04_wke_f.sat			appearance/robe_jedi_light_s04_trn_m.sat	appearance/robe_jedi_light_s04_trn_f.sat					appearance/ith_robe_jedi_light_s04_m.sat	appearance/ith_robe_jedi_light_s04_f.sat		
+shared_robe_jedi_light_s05	appearance/robe_jedi_light_s05_m.sat	appearance/robe_jedi_light_s05_f.sat					appearance/robe_jedi_light_s05_wke_m.sat	appearance/robe_jedi_light_s05_wke_f.sat									appearance/ith_robe_jedi_light_s05_m.sat	appearance/ith_robe_jedi_light_s05_f.sat		
+shared_robe_jedi_padawan	appearance/robe_jedi_padawan_m.sat	appearance/robe_jedi_padawan_f.sat					appearance/robe_jedi_padawan_wke_m.sat	appearance/robe_jedi_padawan_wke_f.sat			appearance/robe_jedi_padawan_trn_m.sat	appearance/robe_jedi_padawan_trn_f.sat					appearance/ith_robe_jedi_padawan_m.sat	appearance/ith_robe_jedi_padawan_f.sat		
+shared_robe_jedi_padawan_generic	appearance/robe_jedi_padawan_m.sat	appearance/robe_jedi_padawan_f.sat					appearance/robe_jedi_padawan_wke_m.sat	appearance/robe_jedi_padawan_wke_f.sat			appearance/robe_jedi_padawan_trn_m.sat	appearance/robe_jedi_padawan_trn_f.sat					appearance/ith_robe_jedi_padawan_m.sat	appearance/ith_robe_jedi_padawan_f.sat		
+shared_armor_kashyyykian_black_mtn_bicep_l	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_bicep_l_wke_m.sat	appearance/armor_kashyyykian_black_mountain_bicep_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_bicep_r	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_bicep_r_wke_m.sat	appearance/armor_kashyyykian_black_mountain_bicep_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_bracer_l	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_bracer_l_wke_m.sat	appearance/armor_kashyyykian_black_mountain_bracer_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_bracer_r	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_bracer_r_wke_m.sat	appearance/armor_kashyyykian_black_mountain_bracer_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_chest_plate	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_chest_plate_wke_m.sat	appearance/armor_kashyyykian_black_mountain_chest_plate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_chestplate	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_chestplate_wke_m.sat	appearance/armor_kashyyykian_black_mountain_chestplate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_black_mtn_leggings	x	x	x	x	x	x	appearance/armor_kashyyykian_black_mountain_leggings_wke_m.sat	appearance/armor_kashyyykian_black_mountain_leggings_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_bicep_l	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_bicep_l_wke_m.sat	appearance/armor_kashyyykian_hunting_bicep_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_bicep_r	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_bicep_r_wke_m.sat	appearance/armor_kashyyykian_hunting_bicep_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_bracer_l	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_bracer_l_wke_m.sat	appearance/armor_kashyyykian_hunting_bracer_l_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_bracer_r	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_bracer_r_wke_m.sat	appearance/armor_kashyyykian_hunting_bracer_r_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_chest_plate	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_chest_plate_wke_m.sat	appearance/armor_kashyyykian_hunting_chest_plate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_chestplate	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_chestplate_wke_m.sat	appearance/armor_kashyyykian_hunting_chestplate_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_armor_kashyyykian_hunting_leggings	x	x	x	x	x	x	appearance/armor_kashyyykian_hunting_leggings_wke_m.sat	appearance/armor_kashyyykian_hunting_leggings_wke_f.sat	x	x	x	x	x	x	x	x	x	x	x	x
+shared_arm_l_s01	appearance/hum_cyborg_s01_arm_l_m.sat	appearance/hum_cyborg_s01_arm_l_f.sat					appearance/wke_cyborg_s01_arm_l_m.sat	appearance/wke_cyborg_s01_arm_l_f.sat									x	x		
+shared_arm_r_s01	appearance/hum_cyborg_s01_arm_r_m.sat	appearance/hum_cyborg_s01_arm_r_f.sat					appearance/wke_cyborg_s01_arm_r_m.sat	appearance/wke_cyborg_s01_arm_r_f.sat									x	x		
+shared_forearm_l_s01	appearance/hum_cyborg_s01_forearm_l_m.sat	appearance/hum_cyborg_s01_forearm_l_f.sat					appearance/wke_cyborg_s01_forearm_l_m.sat	appearance/wke_cyborg_s01_forearm_l_f.sat									x	x		
+shared_forearm_r_s01	appearance/hum_cyborg_s01_forearm_r_m.sat	appearance/hum_cyborg_s01_forearm_r_f.sat					appearance/wke_cyborg_s01_forearm_r_m.sat	appearance/wke_cyborg_s01_forearm_r_f.sat									x	x		
+shared_hand_l_s01	appearance/hum_cyborg_s01_hand_l_m.sat	appearance/hum_cyborg_s01_hand_l_f.sat					appearance/wke_cyborg_s01_hand_l_m.sat	appearance/wke_cyborg_s01_hand_l_f.sat									x	x		
+shared_hand_r_s01	appearance/hum_cyborg_s01_hand_r_m.sat	appearance/hum_cyborg_s01_hand_r_f.sat					appearance/wke_cyborg_s01_hand_r_m.sat	appearance/wke_cyborg_s01_hand_r_f.sat									x	x		
+shared_apron_chef_jacket_s01_ith	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/apron_chef_jacket_s01_ith_m.sat	appearance/apron_chef_jacket_s01_ith_f.sat	x	x
+shared_hat_chef_s01_ith	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/hat_chef_s01_ith_m.sat	appearance/hat_chef_s01_ith_f.sat	x	x
+shared_hat_chef_s02_ith	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/hat_chef_s02_ith_m.sat	appearance/hat_chef_s02_ith_f.sat	x	x
+shared_ith_armor_s01_bicep_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_bicep_l_m.sat	appearance/ith_armor_s01_bicep_l_f.sat	x	x
+shared_ith_armor_s01_bicep_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_bicep_r_m.sat	appearance/ith_armor_s01_bicep_r_f.sat	x	x
+shared_ith_armor_s01_boots	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_boots_m.sat	appearance/ith_armor_s01_boots_f.sat	x	x
+shared_ith_armor_s01_bracer_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_bracer_l_m.sat	appearance/ith_armor_s01_bracer_l_f.sat	x	x
+shared_ith_armor_s01_bracer_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_bracer_r_m.sat	appearance/ith_armor_s01_bracer_r_f.sat	x	x
+shared_ith_armor_s01_chest_plate	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_chest_plate_m.sat	appearance/ith_armor_s01_chest_plate_f.sat	x	x
+shared_ith_armor_s01_gloves	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_gloves_m.sat	appearance/ith_armor_s01_gloves_f.sat	x	x
+shared_ith_armor_s01_helmet	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_helmet_m.sat	appearance/ith_armor_s01_helmet_f.sat	x	x
+shared_ith_armor_s01_leggings	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s01_leggings_m.sat	appearance/ith_armor_s01_leggings_f.sat	x	x
+shared_ith_armor_s02_bicep_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_bicep_l_m.sat	appearance/ith_armor_s02_bicep_l_f.sat	x	x
+shared_ith_armor_s02_bicep_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_bicep_r_m.sat	appearance/ith_armor_s02_bicep_r_f.sat	x	x
+shared_ith_armor_s02_boots	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_boots_m.sat	appearance/ith_armor_s02_boots_f.sat	x	x
+shared_ith_armor_s02_bracer_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_bracer_l_m.sat	appearance/ith_armor_s02_bracer_l_f.sat	x	x
+shared_ith_armor_s02_bracer_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_bracer_r_m.sat	appearance/ith_armor_s02_bracer_r_f.sat	x	x
+shared_ith_armor_s02_chest_plate	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_chest_plate_m.sat	appearance/ith_armor_s02_chest_plate_f.sat	x	x
+shared_ith_armor_s02_gloves	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_gloves_m.sat	appearance/ith_armor_s02_gloves_f.sat	x	x
+shared_ith_armor_s02_helmet	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_helmet_m.sat	appearance/ith_armor_s02_helmet_f.sat	x	x
+shared_ith_armor_s02_leggings	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s02_leggings_m.sat	appearance/ith_armor_s02_leggings_f.sat	x	x
+shared_ith_armor_s03_bicep_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_bicep_l_m.sat	appearance/ith_armor_s03_bicep_l_f.sat	x	x
+shared_ith_armor_s03_bicep_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_bicep_r_m.sat	appearance/ith_armor_s03_bicep_r_f.sat	x	x
+shared_ith_armor_s03_boots	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_boots_m.sat	appearance/ith_armor_s03_boots_f.sat	x	x
+shared_ith_armor_s03_bracer_l	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_bracer_l_m.sat	appearance/ith_armor_s03_bracer_l_f.sat	x	x
+shared_ith_armor_s03_bracer_r	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_bracer_r_m.sat	appearance/ith_armor_s03_bracer_r_f.sat	x	x
+shared_ith_armor_s03_chest_plate	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_chest_plate_m.sat	appearance/ith_armor_s03_chest_plate_f.sat	x	x
+shared_ith_armor_s03_gloves	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_gloves_m.sat	appearance/ith_armor_s03_gloves_f.sat	x	x
+shared_ith_armor_s03_helmet	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_helmet_m.sat	appearance/ith_armor_s03_helmet_f.sat	x	x
+shared_ith_armor_s03_leggings	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_armor_s03_leggings_m.sat	appearance/ith_armor_s03_leggings_f.sat	x	x
+shared_ith_bodysuit_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s01_m.sat	appearance/ith_bodysuit_s01_f.sat	x	x
+shared_ith_bodysuit_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s02_m.sat	appearance/ith_bodysuit_s02_f.sat	x	x
+shared_ith_bodysuit_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s03_m.sat	appearance/ith_bodysuit_s03_f.sat	x	x
+shared_ith_bodysuit_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s04_m.sat	appearance/ith_bodysuit_s04_f.sat	x	x
+shared_ith_bodysuit_s05	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s05_m.sat	appearance/ith_bodysuit_s05_f.sat	x	x
+shared_ith_bodysuit_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_bodysuit_s06_m.sat	appearance/ith_bodysuit_s06_f.sat	x	x
+shared_ith_dress_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_dress_s02_m.sat	appearance/ith_dress_s02_f.sat	x	x
+shared_ith_dress_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_dress_s03_m.sat	appearance/ith_dress_s03_f.sat	x	x
+shared_ith_gloves_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_gloves_s01_m.sat	appearance/ith_gloves_s01_f.sat	x	x
+shared_ith_gloves_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_gloves_s02_m.sat	appearance/ith_gloves_s02_f.sat	x	x
+shared_ith_hat_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_hat_s01_m.sat	appearance/ith_hat_s01_f.sat	x	x
+shared_ith_hat_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_hat_s02_m.sat	appearance/ith_hat_s02_f.sat	x	x
+shared_ith_hat_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_hat_s03_m.sat	appearance/ith_hat_s03_f.sat	x	x
+shared_ith_hat_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_hat_s04_m.sat	appearance/ith_hat_s04_f.sat	x	x
+shared_ith_jacket_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s01_m.sat	appearance/ith_jacket_s01_f.sat	x	x
+shared_ith_jacket_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s02_m.sat	appearance/ith_jacket_s02_f.sat	x	x
+shared_ith_jacket_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s03_m.sat	appearance/ith_jacket_s03_f.sat	x	x
+shared_ith_jacket_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s04_m.sat	appearance/ith_jacket_s04_f.sat	x	x
+shared_ith_jacket_s05	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s05_m.sat	appearance/ith_jacket_s05_f.sat	x	x
+shared_ith_jacket_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s06_m.sat	appearance/ith_jacket_s06_f.sat	x	x
+shared_ith_jacket_s07	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s07_m.sat	appearance/ith_jacket_s07_f.sat	x	x
+shared_ith_jacket_s08	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s08_m.sat	appearance/ith_jacket_s08_f.sat	x	x
+shared_ith_jacket_s09	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s09_m.sat	appearance/ith_jacket_s09_f.sat	x	x
+shared_ith_jacket_s10	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s10_m.sat	appearance/ith_jacket_s10_f.sat	x	x
+shared_ith_jacket_s11	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s11_m.sat	appearance/ith_jacket_s11_f.sat	x	x
+shared_ith_jacket_s12	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s12_m.sat	appearance/ith_jacket_s12_f.sat	x	x
+shared_ith_jacket_s13	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s13_m.sat	appearance/ith_jacket_s13_f.sat	x	x
+shared_ith_jacket_s14	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s14_m.sat	appearance/ith_jacket_s14_f.sat	x	x
+shared_ith_jacket_s15	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_jacket_s15_m.sat	appearance/ith_jacket_s15_f.sat	x	x
+shared_ith_necklace_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s01_m.sat	appearance/ith_necklace_s01_f.sat	x	x
+shared_ith_necklace_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s02_m.sat	appearance/ith_necklace_s02_f.sat	x	x
+shared_ith_necklace_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s03_m.sat	appearance/ith_necklace_s03_f.sat	x	x
+shared_ith_necklace_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s04_m.sat	appearance/ith_necklace_s04_f.sat	x	x
+shared_ith_necklace_s05	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s05_m.sat	appearance/ith_necklace_s05_f.sat	x	x
+shared_ith_necklace_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s06_m.sat	appearance/ith_necklace_s06_f.sat	x	x
+shared_ith_necklace_s07	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s07_m.sat	appearance/ith_necklace_s07_f.sat	x	x
+shared_ith_necklace_s08	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s08_m.sat	appearance/ith_necklace_s08_f.sat	x	x
+shared_ith_necklace_s09	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s09_m.sat	appearance/ith_necklace_s09_f.sat	x	x
+shared_ith_necklace_s10	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s10_m.sat	appearance/ith_necklace_s10_f.sat	x	x
+shared_ith_necklace_s11	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s11_m.sat	appearance/ith_necklace_s11_f.sat	x	x
+shared_ith_necklace_s12	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_necklace_s12_m.sat	appearance/ith_necklace_s12_f.sat	x	x
+shared_ith_pants_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s01_m.sat	appearance/ith_pants_s01_f.sat	x	x
+shared_ith_pants_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s02_m.sat	appearance/ith_pants_s02_f.sat	x	x
+shared_ith_pants_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s03_m.sat	appearance/ith_pants_s03_f.sat	x	x
+shared_ith_pants_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s04_m.sat	appearance/ith_pants_s04_f.sat	x	x
+shared_ith_pants_s05	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s05_m.sat	appearance/ith_pants_s05_f.sat	x	x
+shared_ith_pants_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s06_m.sat	appearance/ith_pants_s06_f.sat	x	x
+shared_ith_pants_s07	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s07_m.sat	appearance/ith_pants_s07_f.sat	x	x
+shared_ith_pants_s08	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s08_m.sat	appearance/ith_pants_s08_f.sat	x	x
+shared_ith_pants_s09	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s09_m.sat	appearance/ith_pants_s09_f.sat	x	x
+shared_ith_pants_s10	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s10_m.sat	appearance/ith_pants_s10_f.sat	x	x
+shared_ith_pants_s11	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s11_m.sat	appearance/ith_pants_s11_f.sat	x	x
+shared_ith_pants_s12	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s12_m.sat	appearance/ith_pants_s12_f.sat	x	x
+shared_ith_pants_s13	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s13_m.sat	appearance/ith_pants_s13_f.sat	x	x
+shared_ith_pants_s14	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s14_m.sat	appearance/ith_pants_s14_f.sat	x	x
+shared_ith_pants_s15	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s15_m.sat	appearance/ith_pants_s15_f.sat	x	x
+shared_ith_pants_s16	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s16_m.sat	appearance/ith_pants_s16_f.sat	x	x
+shared_ith_pants_s17	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s17_m.sat	appearance/ith_pants_s17_f.sat	x	x
+shared_ith_pants_s18	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s18_m.sat	appearance/ith_pants_s18_f.sat	x	x
+shared_ith_pants_s19	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s19_m.sat	appearance/ith_pants_s19_f.sat	x	x
+shared_ith_pants_s20	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s20_m.sat	appearance/ith_pants_s20_f.sat	x	x
+shared_ith_pants_s21	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_pants_s21_m.sat	appearance/ith_pants_s21_f.sat	x	x
+shared_ith_robe_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_robe_s02_m.sat	appearance/ith_robe_s02_f.sat	x	x
+shared_ith_robe_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_robe_s03_m.sat	appearance/ith_robe_s03_f.sat	x	x
+shared_ith_shirt_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s01_m.sat	appearance/ith_shirt_s01_f.sat	x	x
+shared_ith_shirt_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s02_m.sat	appearance/ith_shirt_s02_f.sat	x	x
+shared_ith_shirt_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s03_m.sat	appearance/ith_shirt_s03_f.sat	x	x
+shared_ith_shirt_s04	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s04_m.sat	appearance/ith_shirt_s04_f.sat	x	x
+shared_ith_shirt_s05	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s05_m.sat	appearance/ith_shirt_s05_f.sat	x	x
+shared_ith_shirt_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s06_m.sat	appearance/ith_shirt_s06_f.sat	x	x
+shared_ith_shirt_s07	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s07_m.sat	appearance/ith_shirt_s07_f.sat	x	x
+shared_ith_shirt_s08	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s08_m.sat	appearance/ith_shirt_s08_f.sat	x	x
+shared_ith_shirt_s09	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s09_m.sat	appearance/ith_shirt_s09_f.sat	x	x
+shared_ith_shirt_s10	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s10_m.sat	appearance/ith_shirt_s10_f.sat	x	x
+shared_ith_shirt_s11	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s11_m.sat	appearance/ith_shirt_s11_f.sat	x	x
+shared_ith_shirt_s12	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s12_m.sat	appearance/ith_shirt_s12_f.sat	x	x
+shared_ith_shirt_s13	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s13_m.sat	appearance/ith_shirt_s13_f.sat	x	x
+shared_ith_shirt_s14	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_shirt_s14_m.sat	appearance/ith_shirt_s14_f.sat	x	x
+shared_ith_skirt_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_skirt_s01_m.sat	appearance/ith_skirt_s01_f.sat	x	x
+shared_ith_skirt_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_skirt_s02_m.sat	appearance/ith_skirt_s02_f.sat	x	x
+shared_ith_skirt_s03	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_skirt_s03_m.sat	appearance/ith_skirt_s03_f.sat	x	x
+shared_ith_vest_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_vest_s01_m.sat	appearance/ith_vest_s01_f.sat	x	x
+shared_ith_vest_s02	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_vest_s02_m.sat	appearance/ith_vest_s02_f.sat	x	x
+shared_ith_backpack_s06	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_backpack_s06_m.sat	appearance/ith_backpack_s06_f.sat	x	x
+shared_ith_belt_s18	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_belt_s18_m.sat	appearance/ith_belt_s18_f.sat	x	x
+shared_ith_belt_s19	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_belt_s19_m.sat	appearance/ith_belt_s19_f.sat	x	x
+shared_ith_belt_s20	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_belt_s20_m.sat	appearance/ith_belt_s20_f.sat	x	x
+shared_ith_dress_short_s01	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	x	appearance/ith_dress_short_s01_m.sat	appearance/ith_dress_short_s01_f.sat	x	x
+shared_jacket_ace_imperial	appearance/jacket_ace_imperial_m.sat	appearance/jacket_ace_imperial_f.sat					x	x									appearance/ith_jacket_ace_imperial_m.sat	appearance/ith_jacket_ace_imperial_f.sat		
+shared_jacket_ace_rebel	appearance/jacket_ace_rebel_m.sat	appearance/jacket_ace_rebel_f.sat					x	x									appearance/ith_jacket_ace_rebel_m.sat	appearance/ith_jacket_ace_rebel_f.sat		
+shared_jacket_ace_privateer	appearance/jacket_s39_m.sat	appearance/jacket_s39_f.sat					x	x									x	x		
+shared_helmet_fighter_imperial_ace	appearance/helmet_fighter_imperial_ace_m.sat	appearance/helmet_fighter_imperial_ace_f.sat			x	x	x	x	x	x	x	x			x	x	x	x	x	x
+shared_helmet_fighter_rebel_ace	appearance/helmet_fighter_rebel_ace_m.sat	appearance/helmet_fighter_rebel_ace_f.sat	appearance/helmet_fighter_rebel_ace_rod_m.sat	appearance/helmet_fighter_rebel_ace_rod_f.sat	appearance/helmet_fighter_rebel_ace_mon_m.sat	appearance/helmet_fighter_rebel_ace_mon_f.sat	x	x	appearance/helmet_fighter_rebel_ace_twk_m.sat	appearance/helmet_fighter_rebel_ace_twk_f.sat	appearance/helmet_fighter_rebel_ace_trn_m.sat	appearance/helmet_fighter_rebel_ace_trn_f.sat			appearance/helmet_fighter_rebel_ace_bth_m.sat	appearance/helmet_fighter_rebel_ace_bth_f.sat	x	x	appearance/helmet_fighter_rebel_ace_sul_m.sat	appearance/helmet_fighter_rebel_ace_sul_f.sat
+shared_helmet_fighter_privateer_ace	appearance/helmet_fighter_hutt_m.sat	appearance/helmet_fighter_hutt_f.sat	appearance/helmet_fighter_hutt_rod_m.sat	appearance/helmet_fighter_hutt_rod_f.sat	appearance/helmet_fighter_hutt_mon_m.sat	appearance/helmet_fighter_hutt_mon_f.sat	x	x	appearance/helmet_fighter_hutt_twk_m.sat	appearance/helmet_fighter_hutt_twk_f.sat	appearance/helmet_fighter_hutt_trn_m.sat	appearance/helmet_fighter_hutt_trn_f.sat			appearance/helmet_fighter_hutt_bth_m.sat	appearance/helmet_fighter_hutt_bth_f.sat	x	x	appearance/helmet_fighter_hutt_sul_m.sat	appearance/helmet_fighter_hutt_sul_f.sat
+shared_helmet_fighter_blacksun_ace	appearance/helmet_fighter_blacksun_m.sat	appearance/helmet_fighter_blacksun_f.sat	appearance/helmet_fighter_blacksun_rod_m.sat	appearance/helmet_fighter_blacksun_rod_f.sat	appearance/helmet_fighter_blacksun_mon_m.sat	appearance/helmet_fighter_blacksun_mon_f.sat	x	x	appearance/helmet_fighter_blacksun_twk_m.sat	appearance/helmet_fighter_blacksun_twk_f.sat	appearance/helmet_fighter_blacksun_trn_m.sat	appearance/helmet_fighter_blacksun_trn_f.sat			appearance/helmet_fighter_blacksun_bth_m.sat	appearance/helmet_fighter_blacksun_bth_f.sat	x	x	appearance/helmet_fighter_blacksun_sul_m.sat	appearance/helmet_fighter_blacksun_sul_f.sat
+shared_goggles_s04	appearance/goggles_s04_m.sat	appearance/goggles_s04_f.sat	appearance/goggles_s04_rod_m.sat	appearance/goggles_s04_rod_f.sat	appearance/goggles_s04_mon_m.sat	appearance/goggles_s04_mon_f.sat	appearance/goggles_s04_wke_m.sat	appearance/goggles_s04_wke_f.sat	appearance/goggles_s04_twk_m.sat	appearance/goggles_s04_twk_f.sat	appearance/goggles_s04_trn_m.sat	appearance/goggles_s04_trn_f.sat			appearance/goggles_s04_bth_m.sat	appearance/goggles_s04_bth_f.sat	appearance/ith_goggles_s04_m.sat	appearance/ith_goggles_s04_f.sat	appearance/goggles_s04_sul_m.sat	appearance/goggles_s04_sul_f.sat
+shared_goggles_s05	appearance/goggles_s05_m.sat	appearance/goggles_s05_f.sat	appearance/goggles_s05_rod_m.sat	appearance/goggles_s05_rod_f.sat	appearance/goggles_s05_mon_m.sat	appearance/goggles_s05_mon_f.sat	appearance/goggles_s05_wke_m.sat	appearance/goggles_s05_wke_f.sat	appearance/goggles_s05_twk_m.sat	appearance/goggles_s05_twk_f.sat	appearance/goggles_s05_trn_m.sat	appearance/goggles_s05_trn_f.sat			appearance/goggles_s05_bth_m.sat	appearance/goggles_s05_bth_f.sat	appearance/ith_goggles_s05_m.sat	appearance/ith_goggles_s05_f.sat	appearance/goggles_s05_sul_m.sat	appearance/goggles_s05_sul_f.sat
+shared_goggles_s06	appearance/goggles_s06_m.sat	appearance/goggles_s06_f.sat	appearance/goggles_s06_rod_m.sat	appearance/goggles_s06_rod_f.sat	appearance/goggles_s06_mon_m.sat	appearance/goggles_s06_mon_f.sat	appearance/goggles_s06_wke_m.sat	appearance/goggles_s06_wke_f.sat		appearance/goggles_s06_twk_f.sat	appearance/goggles_s06_trn_m.sat	appearance/goggles_s06_trn_f.sat			appearance/goggles_s06_bth_m.sat	appearance/goggles_s06_bth_f.sat	appearance/ith_goggles_s06_m.sat	appearance/ith_goggles_s06_f.sat	appearance/goggles_s06_sul_m.sat	appearance/goggles_s06_sul_f.sat
+shared_cybernetic_s01_arm_l	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_wke_m.sat	appearance/cyborg_s01_arm_l_wke_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat	appearance/cyborg_s01_arm_l_ith_m.sat	appearance/cyborg_s01_arm_l_ith_f.sat	appearance/cyborg_s01_arm_l_hum_m.sat	appearance/cyborg_s01_arm_l_hum_f.sat
+shared_cybernetic_s01_arm_r	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_wke_m.sat	appearance/cyborg_s01_arm_r_wke_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat	appearance/cyborg_s01_arm_r_ith_m.sat	appearance/cyborg_s01_arm_r_ith_f.sat	appearance/cyborg_s01_arm_r_hum_m.sat	appearance/cyborg_s01_arm_r_hum_f.sat
+shared_cybernetic_s01_torso	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_wke_m.sat	appearance/cyborg_s01_torso_wke_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat	appearance/cyborg_s01_torso_ith_m.sat	appearance/cyborg_s01_torso_ith_f.sat	appearance/cyborg_s01_torso_hum_m.sat	appearance/cyborg_s01_torso_hum_f.sat
+shared_cybernetic_s01_legs	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_wke_m.sat	appearance/cyborg_s01_legs_wke_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat	appearance/cyborg_s01_legs_ith_m.sat	appearance/cyborg_s01_legs_ith_f.sat	appearance/cyborg_s01_legs_hum_m.sat	appearance/cyborg_s01_legs_hum_f.sat
+shared_cybernetic_s02_arm_l	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_wke_m.sat	appearance/cyborg_s02_arm_l_wke_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat	appearance/cyborg_s02_arm_l_ith_m.sat	appearance/cyborg_s02_arm_l_ith_f.sat	appearance/cyborg_s02_arm_l_hum_m.sat	appearance/cyborg_s02_arm_l_hum_f.sat
+shared_cybernetic_s02_arm_r	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_wke_m.sat	appearance/cyborg_s02_arm_r_wke_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat	appearance/cyborg_s02_arm_r_ith_m.sat	appearance/cyborg_s02_arm_r_ith_f.sat	appearance/cyborg_s02_arm_r_hum_m.sat	appearance/cyborg_s02_arm_r_hum_f.sat
+shared_cybernetic_s02_torso	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_wke_m.sat	appearance/cyborg_s02_torso_wke_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat	appearance/cyborg_s02_torso_ith_m.sat	appearance/cyborg_s02_torso_ith_f.sat	appearance/cyborg_s02_torso_hum_m.sat	appearance/cyborg_s02_torso_hum_f.sat
+shared_cybernetic_s02_legs	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_wke_m.sat	appearance/cyborg_s02_legs_wke_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat	appearance/cyborg_s02_legs_ith_m.sat	appearance/cyborg_s02_legs_ith_f.sat	appearance/cyborg_s02_legs_hum_m.sat	appearance/cyborg_s02_legs_hum_f.sat
+shared_cybernetic_s03_arm_l	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_wke_m.sat	appearance/cyborg_s03_arm_l_wke_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat	appearance/cyborg_s03_arm_l_ith_m.sat	appearance/cyborg_s03_arm_l_ith_f.sat	appearance/cyborg_s03_arm_l_hum_m.sat	appearance/cyborg_s03_arm_l_hum_f.sat
+shared_cybernetic_s03_arm_r	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_wke_m.sat	appearance/cyborg_s03_arm_r_wke_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat	appearance/cyborg_s03_arm_r_ith_m.sat	appearance/cyborg_s03_arm_r_ith_f.sat	appearance/cyborg_s03_arm_r_hum_m.sat	appearance/cyborg_s03_arm_r_hum_f.sat
+shared_cybernetic_s04_torso	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_wke_m.sat	appearance/cyborg_s04_torso_wke_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat	appearance/cyborg_s04_torso_ith_m.sat	appearance/cyborg_s04_torso_ith_f.sat	appearance/cyborg_s04_torso_hum_m.sat	appearance/cyborg_s04_torso_hum_f.sat
+shared_cybernetic_s05_arm_l	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_wke_m.sat	appearance/cyborg_s05_arm_l_wke_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat	appearance/cyborg_s05_arm_l_ith_m.sat	appearance/cyborg_s05_arm_l_ith_f.sat	appearance/cyborg_s05_arm_l_hum_m.sat	appearance/cyborg_s05_arm_l_hum_f.sat
+shared_cybernetic_s05_arm_r	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_wke_m.sat	appearance/cyborg_s05_arm_r_wke_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat	appearance/cyborg_s05_arm_r_ith_m.sat	appearance/cyborg_s05_arm_r_ith_f.sat	appearance/cyborg_s05_arm_r_hum_m.sat	appearance/cyborg_s05_arm_r_hum_f.sat
+shared_cybernetic_s05_torso	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_wke_m.sat	appearance/cyborg_s05_torso_wke_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat	appearance/cyborg_s05_torso_ith_m.sat	appearance/cyborg_s05_torso_ith_f.sat	appearance/cyborg_s05_torso_hum_m.sat	appearance/cyborg_s05_torso_hum_f.sat
+shared_cybernetic_s05_legs	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_wke_m.sat	appearance/cyborg_s05_legs_wke_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat	appearance/cyborg_s05_legs_ith_m.sat	appearance/cyborg_s05_legs_ith_f.sat	appearance/cyborg_s05_legs_hum_m.sat	appearance/cyborg_s05_legs_hum_f.sat
+shared_necklace_rodian_safari	appearance/necklace_rodian_safari_m.sat	appearance/necklace_rodian_safari_f.sat					appearance/necklace_rodian_safari_wke_m.sat	appearance/necklace_rodian_safari_wke_f.sat												
+shared_necklace_ace_pilot_rebel	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_wke_m.sat	appearance/necklace_ace_pilot_rebel_wke_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat	appearance/ith_necklace_ace_pilot_rebel_m.sat	appearance/ith_necklace_ace_pilot_rebel_f.sat	appearance/necklace_ace_pilot_rebel_m.sat	appearance/necklace_ace_pilot_rebel_f.sat
+shared_necklace_ace_pilot_neutral	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_wke_m.sat	appearance/necklace_ace_pilot_neutral_wke_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat	appearance/ith_necklace_ace_pilot_neutral_m.sat	appearance/ith_necklace_ace_pilot_neutral_f.sat	appearance/necklace_ace_pilot_neutral_m.sat	appearance/necklace_ace_pilot_neutral_f.sat
+shared_necklace_ace_pilot_empire	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_wke_m.sat	appearance/necklace_ace_pilot_empire_wke_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat	appearance/ith_necklace_ace_pilot_empire_m.sat	appearance/ith_necklace_ace_pilot_empire_f.sat	appearance/necklace_ace_pilot_empire_m.sat	appearance/necklace_ace_pilot_empire_f.sat
+shared_armor_clone_trooper_neutral_s01_helmet.iff	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat									appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat						
+shared_armor_clone_trooper_neutral_s01_chest_plate.iff	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat
+shared_armor_clone_trooper_neutral_s01_bicep_r.iff	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat
+shared_armor_clone_trooper_neutral_s01_bicep_l.iff	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat
+shared_armor_clone_trooper_neutral_s01_bracer_r.iff	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat
+shared_armor_clone_trooper_neutral_s01_bracer_l.iff	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat
+shared_armor_clone_trooper_neutral_s01_gloves.iff	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat
+shared_armor_clone_trooper_neutral_s01_belt.iff	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat
+shared_armor_clone_trooper_neutral_s01_leggings.iff	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat
+shared_armor_clone_trooper_neutral_s01_boots.iff	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat
+shared_armor_clone_trooper_imperial_s01_helmet.iff	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat									appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat						
+shared_armor_clone_trooper_imperial_s01_chest_plate.iff	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat
+shared_armor_clone_trooper_imperial_s01_bicep_r.iff	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat
+shared_armor_clone_trooper_imperial_s01_bicep_l.iff	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat
+shared_armor_clone_trooper_imperial_s01_bracer_r.iff	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat
+shared_armor_clone_trooper_imperial_s01_bracer_l.iff	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat
+shared_armor_clone_trooper_imperial_s01_gloves.iff	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat
+shared_armor_clone_trooper_imperial_s01_belt.iff	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat
+shared_armor_clone_trooper_imperial_s01_leggings.iff	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat
+shared_armor_clone_trooper_imperial_s01_boots.iff	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat
+shared_armor_clone_trooper_rebel_s01_helmet.iff	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat	appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat									appearance/armor_clonetrooper_helmet_m.sat	appearance/armor_clonetrooper_helmet_f.sat						
+shared_armor_clone_trooper_rebel_s01_chest_plate.iff	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat	appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat			appearance/armor_clonetrooper_chest_plate_m.sat	appearance/armor_clonetrooper_chest_plate_f.sat
+shared_armor_clone_trooper_rebel_s01_bicep_r.iff	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat	appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat			appearance/armor_clonetrooper_bicep_r_m.sat	appearance/armor_clonetrooper_bicep_r_f.sat
+shared_armor_clone_trooper_rebel_s01_bicep_l.iff	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat	appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat			appearance/armor_clonetrooper_bicep_l_m.sat	appearance/armor_clonetrooper_bicep_l_f.sat
+shared_armor_clone_trooper_rebel_s01_bracer_r.iff	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat	appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat			appearance/armor_clonetrooper_bracer_r_m.sat	appearance/armor_clonetrooper_bracer_r_f.sat
+shared_armor_clone_trooper_rebel_s01_bracer_l.iff	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat	appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat			appearance/armor_clonetrooper_bracer_l_m.sat	appearance/armor_clonetrooper_bracer_l_f.sat
+shared_armor_clone_trooper_rebel_s01_gloves.iff	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat	appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat			appearance/armor_clonetrooper_gloves_m.sat	appearance/armor_clonetrooper_gloves_f.sat
+shared_armor_clone_trooper_rebel_s01_belt.iff	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat	appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat			appearance/armor_clonetrooper_belt_m.sat	appearance/armor_clonetrooper_belt_f.sat
+shared_armor_clone_trooper_rebel_s01_leggings.iff	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat	appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat			appearance/armor_clonetrooper_leggings_m.sat	appearance/armor_clonetrooper_leggings_f.sat
+shared_armor_clone_trooper_rebel_s01_boots.iff	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat	appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat			appearance/armor_clonetrooper_boots_m.sat	appearance/armor_clonetrooper_boots_f.sat
