@@ -193,8 +193,8 @@ public class SimpleSpawnInfo implements SpawnInfo {
             info.spawnerFlag = NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE;
             info.buildingId = "";
             info.amount = 1;
-            info.minSpawnTime = (int) TimeUnit.SECONDS.convert(8, TimeUnit.MINUTES);
-            info.maxSpawnTime = (int) TimeUnit.SECONDS.convert(12, TimeUnit.MINUTES);
+            info.minSpawnTime = 0;
+            info.maxSpawnTime = 0;
             info.loiterRadius = 15;
         }
 

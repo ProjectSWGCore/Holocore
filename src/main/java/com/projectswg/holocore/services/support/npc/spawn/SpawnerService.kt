@@ -150,8 +150,15 @@ class SpawnerService : Service() {
 
 		spawner.removeNPC(destroyedObject)
 
-		if (spawner.behavior != AIBehavior.PATROL || spawner.npcs.isEmpty())
-			executor.execute((spawner.respawnDelay * 1000).toLong()) { respawn(spawner) }
+		if (spawner.behavior != AIBehavior.PATROL || spawner.npcs.isEmpty()) {
+			val respawnDelay = spawner.respawnDelay
+
+			if (respawnDelay > 0) {
+				executor.execute((respawnDelay * 1000).toLong()) { respawn(spawner) }
+			} else {
+				DestroyObjectIntent.broadcast(spawner.egg)
+			}
+		}
 	}
 
 	private fun handleSpawnerDestroyed(obj: SWGObject) {
