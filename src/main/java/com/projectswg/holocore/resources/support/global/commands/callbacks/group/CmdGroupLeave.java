@@ -13,7 +13,7 @@ public final class CmdGroupLeave implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		if (!(target instanceof CreatureObject))
 			return;
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_LEAVE, player, (CreatureObject) target).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.LEAVE, player, (CreatureObject) target).broadcast();
 	}
 	
 }

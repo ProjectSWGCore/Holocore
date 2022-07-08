@@ -10,7 +10,7 @@ public final class CmdGroupDecline implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_DECLINE, player).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.DECLINE, player).broadcast();
 	}
 	
 }

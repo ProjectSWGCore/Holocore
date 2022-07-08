@@ -65,34 +65,34 @@ public class GroupService extends Service {
 	@IntentHandler
 	private void handleGroupEventIntent(GroupEventIntent gei) {
 		switch (gei.getEventType()) {
-			case GROUP_INVITE:
+			case INVITE:
 				handleGroupInvite(gei.getPlayer(), gei.getTarget());
 				break;
-			case GROUP_UNINVITE:
+			case UNINVITE:
 				handleGroupUninvite(gei.getPlayer(), gei.getTarget());
 				break;
-			case GROUP_JOIN:
+			case JOIN:
 				handleGroupJoin(gei.getPlayer());
 				break;
-			case GROUP_DECLINE:
+			case DECLINE:
 				handleGroupDecline(gei.getPlayer());
 				break;
-			case GROUP_DISBAND:
+			case DISBAND:
 				handleGroupDisband(gei.getPlayer());
 				break;
-			case GROUP_LEAVE:
+			case LEAVE:
 				handleGroupLeave(gei.getPlayer());
 				break;
-			case GROUP_MAKE_LEADER:
+			case MAKE_LEADER:
 				handleMakeLeader(gei.getPlayer(), gei.getTarget());
 				break;
-			case GROUP_KICK:
+			case KICK:
 				handleKick(gei.getPlayer(), gei.getTarget());
 				break;
-			case GROUP_MAKE_MASTER_LOOTER:
+			case MAKE_MASTER_LOOTER:
 				handleMakeMasterLooter(gei.getPlayer(), gei.getTarget());
 				break;
-			case GROUP_LOOT:
+			case LOOT:
 				handleGroupLootOptions(gei.getPlayer());
 				break;
 		}

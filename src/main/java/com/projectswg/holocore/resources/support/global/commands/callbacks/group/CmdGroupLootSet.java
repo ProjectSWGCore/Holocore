@@ -10,7 +10,7 @@ public final class CmdGroupLootSet implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_LOOT, player).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.LOOT, player).broadcast();
 	}
 	
 }

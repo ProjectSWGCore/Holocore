@@ -14,7 +14,7 @@ public final class CmdGroupMakeMasterLooter implements ICmdCallback {
 		if (!(target instanceof CreatureObject))
 			return;
 		
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_MAKE_MASTER_LOOTER, player, (CreatureObject) target).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.MAKE_MASTER_LOOTER, player, (CreatureObject) target).broadcast();
 	}
 	
 }

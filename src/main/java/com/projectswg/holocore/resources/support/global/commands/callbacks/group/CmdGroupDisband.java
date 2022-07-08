@@ -10,7 +10,7 @@ public final class CmdGroupDisband implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_DISBAND, player, null).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.DISBAND, player, null).broadcast();
 	}
 	
 }

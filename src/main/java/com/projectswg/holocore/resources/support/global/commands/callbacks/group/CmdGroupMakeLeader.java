@@ -13,7 +13,7 @@ public final class CmdGroupMakeLeader implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		if (!(target instanceof CreatureObject))
 			return;
-		new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_MAKE_LEADER, player, (CreatureObject) target).broadcast();
+		new GroupEventIntent(GroupEventIntent.GroupEventType.MAKE_LEADER, player, (CreatureObject) target).broadcast();
 	}
 	
 }

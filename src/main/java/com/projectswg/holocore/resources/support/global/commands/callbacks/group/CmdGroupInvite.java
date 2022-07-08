@@ -20,10 +20,10 @@ public final class CmdGroupInvite implements ICmdCallback {
 		}
 		
 		if (farAwayTarget != null) {
-			new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_INVITE, player, farAwayTarget.getCreatureObject()).broadcast();
+			new GroupEventIntent(GroupEventIntent.GroupEventType.INVITE, player, farAwayTarget.getCreatureObject()).broadcast();
 		} else {
 			if (target instanceof CreatureObject) {
-				new GroupEventIntent(GroupEventIntent.GroupEventType.GROUP_INVITE, player, (CreatureObject) target).broadcast();
+				new GroupEventIntent(GroupEventIntent.GroupEventType.INVITE, player, (CreatureObject) target).broadcast();
 			} else {
 				SystemMessageIntent.broadcastPersonal(player, "@group:invite_no_target_self");
 			}
