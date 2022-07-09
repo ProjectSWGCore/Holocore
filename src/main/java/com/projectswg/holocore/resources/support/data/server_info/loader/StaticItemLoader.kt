@@ -76,7 +76,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val consumableInfo: ConsumableItemInfo?
 		val costumeInfo: CostumeItemInfo?
 		val crystalInfo: CrystalItemInfo?
-		val dnaInfo: DnaItemInfo?
 		val grantInfo: GrantItemInfo?
 		val genericInfo: GenericItemInfo?
 		val itemInfo: GenericItemInfo?
@@ -93,7 +92,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			this.consumableInfo = if ("consumable" == type) ConsumableItemInfo(set) else null
 			this.costumeInfo = if ("costume" == type) CostumeItemInfo(set) else null
 			this.crystalInfo = if ("crystal" == type) CrystalItemInfo(set, colorArray) else null
-			this.dnaInfo = if ("dna" == type) DnaItemInfo(set) else null
 			this.grantInfo = if ("grant" == type) GrantItemInfo(set) else null
 			this.genericInfo = if ("generic" == type) GenericItemInfo(set, colorArray) else null
 			this.itemInfo = if ("item" == type) GenericItemInfo(set, colorArray) else null
@@ -164,8 +162,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val maxDmg: Int = set.getInt("crystal_max_dmg").toInt()
 
 	}
-
-	class DnaItemInfo(set: SdbResultSet)
 	
 	class GrantItemInfo(set: SdbResultSet) {
 		

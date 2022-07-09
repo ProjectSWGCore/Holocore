@@ -52,6 +52,7 @@ import java.util.List;
  * Created by Waverunner on 6/9/2015
  * @deprecated use {@link SdbLoader} instead.
  */
+@Deprecated
 public final class ServerFactory extends DataFactory {
 	
 	private static final Object instanceMutex = new Object();

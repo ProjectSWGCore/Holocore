@@ -80,7 +80,7 @@ public class CreatureObject extends TangibleObject {
 	private long 	ownerId					= 0;
 	private int 	battleFatigue			= 0;
 	private long 	statesBitmask			= 0;
-	private SWGList<Integer>	wounds		= new SWGList<>(3, 17);
+	private SWGList<Integer>	wounds		= SWGList.Companion.createIntList(3, 17);
 	private long	lastCombat				= 0;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;

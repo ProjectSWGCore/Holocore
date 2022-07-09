@@ -52,7 +52,7 @@ import java.util.function.Consumer;
 
 public class GroupObject extends SWGObject {
 	
-	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
+	private final SWGList<GroupMember>	groupMembers		= SWGList.Companion.createEncodableList(6, 2, GroupMember::new);
 	private final Map<Long, GroupMember>memberMap			= new ConcurrentHashMap<>();
 
 	private CreatureObject	leader		= null;
@@ -246,6 +246,9 @@ public class GroupObject extends SWGObject {
 	private static class GroupMember implements Encodable {
 		
 		private CreatureObject creature;
+		
+		public GroupMember() {
+		}
 		
 		public GroupMember(CreatureObject creature) {
 			this.creature = creature;

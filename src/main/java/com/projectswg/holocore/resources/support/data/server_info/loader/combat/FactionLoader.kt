@@ -53,7 +53,7 @@ class FactionLoader : DataLoader() {
 	
 	class Faction(set: SdbResultSet) {
 		
-		val name = set.getText("factionName").toLowerCase(Locale.US)
+		val name = set.getText("factionName").lowercase(Locale.US)
 		val isPlayerAllowed = set.getBoolean("playerAllowed")
 		val isAggressive = set.getBoolean("isAggro")
 		val isPvP = set.getBoolean("isPvP")
@@ -62,10 +62,10 @@ class FactionLoader : DataLoader() {
 		private val allies = processList(set.getText("allies"))
 		val combatFactor = set.getInt("combatFactor").toInt()
 		
-		fun isEnemy(faction: String) = enemies.contains(faction.toLowerCase(Locale.US))
+		fun isEnemy(faction: String) = enemies.contains(faction.lowercase(Locale.US))
 		fun isEnemy(faction: Faction) = enemies.contains(faction.name)
 		
-		fun isAlly(faction: String) = name == faction.toLowerCase() || allies.contains(faction.toLowerCase(Locale.US))
+		fun isAlly(faction: String) = name == faction.lowercase() || allies.contains(faction.lowercase(Locale.US))
 		fun isAlly(faction: Faction) = name == faction.name || allies.contains(faction.name)
 		
 		override fun equals(other: Any?): Boolean {
@@ -84,7 +84,7 @@ class FactionLoader : DataLoader() {
 		}
 		
 		private fun processPvpFaction(faction: String): PvpFaction {
-			return when (faction.toLowerCase(Locale.US)) {
+			return when (faction.lowercase(Locale.US)) {
 				"imperial" -> PvpFaction.IMPERIAL
 				"rebel" -> PvpFaction.REBEL
 				else -> PvpFaction.NEUTRAL
@@ -94,7 +94,7 @@ class FactionLoader : DataLoader() {
 		private fun processList(listStr: String): List<String> {
 			if (listStr == "-" || listStr.isBlank())
 				return emptyList()
-			return listStr.toLowerCase(Locale.US).split(';')
+			return listStr.lowercase(Locale.US).split(';')
 		}
 		
 	}

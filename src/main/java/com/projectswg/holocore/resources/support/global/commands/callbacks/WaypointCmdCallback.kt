@@ -36,7 +36,6 @@ import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
-import me.joshlarson.jlcommon.log.Log
 import java.util.*
 
 class WaypointCmdCallback : ICmdCallback {
@@ -78,7 +77,7 @@ class WaypointCmdCallback : ICmdCallback {
 			SystemMessageIntent.broadcastPersonal(player, "Failed to parse waypoint command!")
 			return
 		}
-		val color = when((waypointParameters[Parameter.COLOR] as String?)?.toLowerCase(Locale.US)) {
+		val color = when((waypointParameters[Parameter.COLOR] as String?)?.lowercase(Locale.US)) {
 			"white" -> WaypointColor.WHITE
 			"purple" -> WaypointColor.PURPLE
 			"green" -> WaypointColor.GREEN

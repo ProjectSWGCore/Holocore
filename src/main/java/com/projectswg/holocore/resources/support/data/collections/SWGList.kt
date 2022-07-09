@@ -63,10 +63,6 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		this.decoder = createDecoder(supplier)
 		this.encodedLength = encodedLength
 	}
-	@JvmOverloads
-	@Deprecated(message="use a lambda-based constructor")
-	constructor(page: Int, update: Int, stringType: StringType = StringType.UNSPECIFIED):
-			this(page, update, decoder={throw UnsupportedOperationException("don't know how to decode object")}, encoder=createDefaultEncoder<T>(stringType), encodedLength=createDefaultEncodedLength(stringType))
 	
 	override val size: Int get() = list.size	
 	override fun isEmpty(): Boolean = list.isEmpty()
@@ -171,7 +167,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	
 	override fun encode(): ByteArray {
 		lock.withLock {
-			with(NetBuffer.allocate(8 + list.sumBy(encodedLength))) {
+			with(NetBuffer.allocate(8 + list.sumOf(encodedLength))) {
 				addInt(list.size)
 				addInt(updateCount)
 				list.forEach { encoder(this, it) }
@@ -192,7 +188,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	
 	override fun getLength(): Int {
 		lock.withLock {
-			return 8 + list.sumBy(encodedLength)
+			return 8 + list.sumOf(encodedLength)
 		}
 	}
 	
@@ -241,7 +237,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 			deltaQueueCount = 0
 			
 			updateCount += list.size
-			with(NetBuffer.allocate(11 + list.sumBy(encodedLength))) {
+			with(NetBuffer.allocate(11 + list.sumOf(encodedLength))) {
 				addInt(list.size+1)
 				addInt(updateCount)
 				addByte(3)
@@ -313,20 +309,6 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	}
 	
 	companion object {
-		
-		@JvmStatic
-		fun getSwgList(buffer: NetBuffer, num: Int, `var`: Int, type: StringType): SWGList<String> {
-			val list = SWGList<String>(num, `var`, type)
-			list.decode(buffer)
-			return list
-		}
-		
-		@JvmStatic
-		fun <T: Any> getSwgList(buffer: NetBuffer, num: Int, `var`: Int, c: Class<T>): SWGList<T> {
-			val list = SWGList<T>(num, `var`)
-			list.decode(buffer)
-			return list
-		}
 		
 		fun createByteList(page: Int, update: Int): SWGList<Byte> = SWGList(page, update, NetBuffer::getByte, { buf, b -> buf.addByte(b.toInt())}, {1})
 		fun createShortList(page: Int, update: Int): SWGList<Short> = SWGList(page, update, NetBuffer::getShort, { buf, s -> buf.addShort(s.toInt())}, {2})

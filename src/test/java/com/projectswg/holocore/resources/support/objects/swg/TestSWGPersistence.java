@@ -251,21 +251,11 @@ public class TestSWGPersistence {
 	
 	private void test(SWGObject obj) {
 		switch (obj.getBaselineType()) {
-			case PLAY:
-				testPlayerObject((PlayerObject) obj);
-				break;
-			case ITNO:
-				testIntangibleObject((IntangibleObject) obj);
-				break;
-			case CREO:
-				testCreatureObject((CreatureObject) obj);
-				break;
-			case TANO:
-				testTangibleObject((TangibleObject) obj);
-				break;
-			default:
-				testSWGObject(obj);
-				break;
+			case PLAY -> testPlayerObject((PlayerObject) obj);
+			case ITNO -> testIntangibleObject((IntangibleObject) obj);
+			case CREO -> testCreatureObject((CreatureObject) obj);
+			case TANO -> testTangibleObject((TangibleObject) obj);
+			default -> testSWGObject(obj);
 		}
 	}
 	
