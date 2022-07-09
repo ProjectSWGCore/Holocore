@@ -54,8 +54,8 @@ class PlayerObjectOwnerNP implements MongoPersistable {
 	/** PLAY9-04 */ private			long				craftingComponentBioLink	= 0;
 	/** PLAY9-05 */ private			int 				experimentPoints			= 0;
 	/** PLAY9-06 */ private			int					expModified					= 0;
-	/** PLAY9-07 */ private final	SWGList<String>		friendsList					= new SWGList<>(9, 7, StringType.ASCII);
-	/** PLAY9-08 */ private final	SWGList<String>		ignoreList					= new SWGList<>(9, 8, StringType.ASCII);
+	/** PLAY9-07 */ private final	SWGList<String>		friendsList					= SWGList.Companion.createAsciiList(9, 7);
+	/** PLAY9-08 */ private final	SWGList<String>		ignoreList					= SWGList.Companion.createAsciiList(9, 8);
 	/** PLAY9-09 */ private			int 				languageId					= 0;
 	/** PLAY9-10 */ private			int					food						= 0;
 	/** PLAY9-11 */ private			int					maxFood						= 100;
@@ -316,8 +316,8 @@ class PlayerObjectOwnerNP implements MongoPersistable {
 		craftingComponentBioLink = buffer.getLong();
 		experimentPoints = buffer.getInt();
 		expModified = buffer.getInt();
-		friendsList.addAll(SWGList.getSwgList(buffer, 9, 7, StringType.ASCII));
-		ignoreList.addAll(SWGList.getSwgList(buffer, 9, 8, StringType.ASCII));
+		friendsList.decode(buffer);
+		ignoreList.decode(buffer);
 		languageId = buffer.getInt();
 		food = buffer.getInt();
 		maxFood = buffer.getInt();

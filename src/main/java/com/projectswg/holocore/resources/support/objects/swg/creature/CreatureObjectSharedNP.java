@@ -381,7 +381,7 @@ class CreatureObjectSharedNP implements MongoPersistable {
 		performanceId = buffer.getInt();
 		attributes.decode(buffer);
 		maxAttributes.decode(buffer);
-		equipmentList = SWGList.getSwgList(buffer, 6, 16, Equipment.class);
+		equipmentList.decode(buffer);
 		costume = buffer.getAscii();
 		visible = buffer.getBoolean();
 		buffs = SWGMap.getSwgMap(buffer, 6, 19, CRC.class, Buff.class);

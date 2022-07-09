@@ -52,7 +52,7 @@ class PswgUserDatabaseMaria(private val database: DatabaseTable): PswgUserDataba
 			val statement = getUserStatement.get()
 			statement.setString(1, username)
 			statement.executeQuery().use { set ->
-				return UserMetadata(accountId = set.getInt("userId").toString(16).toUpperCase(Locale.US),
+				return UserMetadata(accountId = set.getInt("userId").toString(16).uppercase(Locale.US),
 									username = username,
 									password = set.getString("password") ?: return null,
 									accessLevel = accessLevel,

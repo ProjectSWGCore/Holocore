@@ -59,7 +59,6 @@ object StaticItemCreator {
 		applyAttributes(obj, info.consumableInfo)
 		applyAttributes(obj, info.costumeInfo)
 		applyAttributes(obj, info.crystalInfo)
-		applyAttributes(obj, info.dnaInfo)
 		applyAttributes(obj, info.grantInfo)
 		applyAttributes(obj, info.genericInfo)
 		applyAttributes(obj, info.itemInfo)
@@ -116,7 +115,7 @@ object StaticItemCreator {
 		obj.requiredCombatLevel = info.requiredLevel
 		obj.requiredFaction = ServerData.factions.getFaction(info.requiredFaction)
 		applyColors(obj, info.color)
-		applyItemValue(info.value, obj);
+		applyItemValue(info.value, obj)
 	}
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {
@@ -139,7 +138,7 @@ object StaticItemCreator {
 		weapon.specialAttackCost = info.specialAttackCost
 		weapon.requiredSkill = info.requiredSkill
 
-		applyItemValue(info.value, obj);
+		applyItemValue(info.value, obj)
 	}
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ConsumableItemInfo?) {
@@ -150,7 +149,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
-		applyItemValue(info.value, obj);
+		applyItemValue(info.value, obj)
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
@@ -161,7 +160,7 @@ object StaticItemCreator {
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CrystalItemInfo?) {
 		if (info == null)
-			return;
+			return
 
 		applyColors(obj, info.color)
 
@@ -182,12 +181,6 @@ object StaticItemCreator {
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.DnaItemInfo?) {
-//		if (info == null)
-//			return;
-	}
-	
-	@Suppress("UNUSED_PARAMETER")
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.GrantItemInfo?) {
 //		if (info == null)
 //			return;
@@ -201,7 +194,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
-		applyItemValue(info.value, obj);
+		applyItemValue(info.value, obj)
 		applyColors(obj, info.color)
 	}
 	
@@ -213,7 +206,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
-		applyItemValue(info.value, obj);
+		applyItemValue(info.value, obj)
 		applyColors(obj, info.color)
 	}
 	
