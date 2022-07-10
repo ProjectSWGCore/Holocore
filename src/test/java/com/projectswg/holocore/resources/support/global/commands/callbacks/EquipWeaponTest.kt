@@ -46,21 +46,21 @@ class EquipWeaponTest : TestRunnerSimulatedWorld() {
 
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		ObjectCreatedIntent.broadcast(creatureObject)
+		broadcastAndWait(ObjectCreatedIntent(creatureObject))
 		return creatureObject
 	}
 
 	private fun createOneHandSwordCL1(): WeaponObject {
 		val oneHandSwordCL1 = StaticItemCreator.createItem("weapon_cl1_1h") as WeaponObject?
 		oneHandSwordCL1 ?: throw RuntimeException("Unable to create weapon")
-		ObjectCreatedIntent.broadcast(oneHandSwordCL1)
+		broadcastAndWait(ObjectCreatedIntent(oneHandSwordCL1))
 		return oneHandSwordCL1
 	}
 
 	private fun createTrandoshanHuntingRifle(): SWGObject {
 		val trandoshanHuntingRifle = StaticItemCreator.createItem("weapon_rifle_trando_hunting") as WeaponObject?
 		trandoshanHuntingRifle ?: throw RuntimeException("Unable to create weapon")
-		ObjectCreatedIntent.broadcast(trandoshanHuntingRifle)
+		broadcastAndWait(ObjectCreatedIntent(trandoshanHuntingRifle))
 		return trandoshanHuntingRifle
 	}
 }
