@@ -36,11 +36,9 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage;
-import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate;
 import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
-import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -65,6 +63,7 @@ import java.util.stream.Stream;
 public class CreatureObject extends TangibleObject {
 	
 	private final CreatureObjectAwareness		awareness	= new CreatureObjectAwareness(this);
+	private final CreatureObjectShared			creo3		= new CreatureObjectShared(this);
 	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP(this);
 	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP(this);
 	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();
@@ -73,26 +72,18 @@ public class CreatureObject extends TangibleObject {
 	private final List<DeltasMessage>			pendingDeltas	= new ArrayList<>();
 	private final AtomicReference<Player>		owner			= new AtomicReference<>(null);
 	
-	private Posture	posture					= Posture.UPRIGHT;
 	private Race	race					= Race.HUMAN_MALE;
-	private double	height					= 0;
-	private byte 	factionRank				= 0;
-	private long 	ownerId					= 0;
-	private int 	battleFatigue			= 0;
-	private long 	statesBitmask			= 0;
-	private SWGList<Integer>	wounds		= SWGList.Companion.createIntList(3, 17);
 	private long	lastCombat				= 0;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
-	private AttributesMutable baseAttributes;
+	private final AttributesMutable baseAttributes;
 	
 	public CreatureObject(long objectId) {
 		super(objectId, BaselineType.CREO);
 		this.baseAttributes = new AttributesMutable(this, 1, 2);
 		initBaseAttributes();
-		initWounds();
 		getAwareness().setAware(AwarenessType.SELF, List.of(this));
 	}
 	
@@ -227,18 +218,13 @@ public class CreatureObject extends TangibleObject {
 		SWGObject targetParent = target.getSuperParent();
 		if (myParent != null && myParent == targetParent)
 			return true;
-
-		switch (target.getBaselineType()) {
-			case WAYP:
-				return false;
-			case SCLT:
-			case BUIO:
-				return true;
-			case CREO:
-				return flatDistanceTo(target) <= 200;
-			default:
-				return flatDistanceTo(target) <= 400;
-		}
+		
+		return switch (target.getBaselineType()) {
+			case WAYP -> false;
+			case SCLT, BUIO -> true;
+			case CREO -> flatDistanceTo(target) <= 200;
+			default -> flatDistanceTo(target) <= 400;
+		};
 	}
 	
 	@Override
@@ -345,7 +331,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public Posture getPosture() {
-		return posture;
+		return creo3.getPosture();
 	}
 	
 	public Race getRace() {
@@ -353,7 +339,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public double getHeight() {
-		return height;
+		return creo3.getHeight();
 	}
 
 	public int getGuildId() {
@@ -401,9 +387,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void setPosture(Posture posture) {
-		this.posture = posture;
-		sendObservers(new PostureUpdate(getObjectId(), posture));
-		sendDelta(3, 11, posture.getId());
+		creo3.setPosture(posture);
 	}
 	
 	public void setRace(Race race) {
@@ -629,8 +613,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public void setHeight(double height) {
-		this.height = height;
-		sendDelta(3, 14, height);
+		creo3.setHeight(height);
 	}
 
 	public void setGuildId(int guildId) {
@@ -759,65 +742,51 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	public byte getFactionRank() {
-		return factionRank;
+		return creo3.getFactionRank();
 	}
 
 	public void setFactionRank(byte factionRank) {
-		this.factionRank = factionRank;
-		sendDelta(3, 14, factionRank);
+		creo3.setFactionRank(factionRank);
 	}
 
 	public long getOwnerId() {
-		return ownerId;
+		return creo3.getOwnerId();
 	}
 
 	public void setOwnerId(long ownerId) {
-		this.ownerId = ownerId;
-		sendDelta(3, 15, ownerId);
+		creo3.setOwnerId(ownerId);
 	}
 
 	public int getBattleFatigue() {
-		return battleFatigue;
+		return creo3.getBattleFatigue();
 	}
 
 	public void setBattleFatigue(int battleFatigue) {
-		this.battleFatigue = battleFatigue;
-		sendDelta(3, 17, battleFatigue);
+		creo3.setBattleFatigue(battleFatigue);
 	}
 
 	public long getStatesBitmask() {
-		return statesBitmask;
+		return creo3.getStatesBitmask();
 	}
 	
 	public boolean isStatesBitmask(CreatureState ... states) {
-		for (CreatureState state : states) {
-			if ((statesBitmask & state.getBitmask()) == 0)
-				return false;
-		}
-		return true;
+		return creo3.isStatesBitmask(states);
 	}
 
 	public void setStatesBitmask(CreatureState ... states) {
-		for (CreatureState state : states)
-			statesBitmask |= state.getBitmask();
-		sendDelta(3, 16, statesBitmask);
+		creo3.setStatesBitmask(states);
 	}
 
 	public void toggleStatesBitmask(CreatureState ... states) {
-		for (CreatureState state : states)
-			statesBitmask ^= state.getBitmask();
-		sendDelta(3, 16, statesBitmask);
+		creo3.toggleStatesBitmask(states);
 	}
 
 	public void clearStatesBitmask(CreatureState ... states) {
-		for (CreatureState state : states)
-			statesBitmask &= ~state.getBitmask();
-		sendDelta(3, 16, statesBitmask);
+		creo3.clearStatesBitmask(states);
 	}
 
 	public void clearAllStatesBitmask() {
-		statesBitmask = 0;
-		sendDelta(3, 16, statesBitmask);
+		creo3.clearAllStatesBitmask();
 	}
 
 	public void addBuff(Buff buff) {
@@ -1014,27 +983,15 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 11 variables - TANO3 (7) + BASE3 (4)
-		bb.addByte(posture.getId()); // 13
-		bb.addByte(factionRank); // 14
-		bb.addLong(ownerId); // 15
-		bb.addFloat((float) height); // 16
-		bb.addInt(battleFatigue); // 17
-		bb.addLong(statesBitmask); // 18
-		bb.addObject(wounds);	// 19
-
-		bb.incrementOperandCount(7);
-	}
-
-	private void initWounds() {
-		wounds.add(0, 0);	// CU only has health wounds :-)
+		creo3.createBaseline3(bb);
 	}
 
 	public void setHealthWounds(int healthWounds) {
-		wounds.set(0, healthWounds);
+		creo3.setHealthWounds(healthWounds);
 	}
 
 	public int getHealthWounds() {
-		return wounds.get(0);
+		return creo3.getHealthWounds();
 	}
 	
 	@Override
@@ -1059,12 +1016,7 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		posture = Posture.getFromId(buffer.getByte());
-		factionRank = buffer.getByte();
-		ownerId = buffer.getLong();
-		height = buffer.getFloat();
-		battleFatigue = buffer.getInt();
-		statesBitmask = buffer.getLong();
+		creo3.parseBaseline3(buffer);
 	}
 	
 	@Override
@@ -1082,15 +1034,10 @@ public class CreatureObject extends TangibleObject {
 	@Override
 	public void saveMongo(MongoData data) {
 		super.saveMongo(data);
+		creo3.saveMongo(data.getDocument("base3"));
 		creo4.saveMongo(data.getDocument("base4"));
 		creo6.saveMongo(data.getDocument("base6"));
-		data.putString("posture", posture.name());
 		data.putString("race", race.name());
-		data.putDouble("height", height);
-		data.putInteger("battleFatigue", battleFatigue);
-		data.putLong("ownerId", ownerId);
-		data.putLong("statesBitmask", statesBitmask);
-		data.putInteger("factionRank", factionRank);
 		data.putArray("skills", skills);
 		data.putDocument("baseAttributes", baseAttributes);
 	}
@@ -1100,15 +1047,10 @@ public class CreatureObject extends TangibleObject {
 		super.readMongo(data);
 		skills.clear();
 
+		creo3.readMongo(data);
 		creo4.readMongo(data.getDocument("base4"));
 		creo6.readMongo(data.getDocument("base6"));
-		posture = Posture.valueOf(data.getString("posture", posture.name()));
 		race = Race.valueOf(data.getString("race", race.name()));
-		height = data.getDouble("height", height);
-		battleFatigue = data.getInteger("battleFatigue", battleFatigue);
-		ownerId = data.getLong("ownerId", ownerId);
-		statesBitmask = data.getLong("statesBitmask", statesBitmask);
-		factionRank = (byte) data.getInteger("factionRank", factionRank);
 		skills.addAll(data.getArray("skills", String.class));
 		data.getDocument("baseAttributes", baseAttributes);
 	}
@@ -1145,7 +1087,7 @@ public class CreatureObject extends TangibleObject {
 	public AttributeList getAttributeList(CreatureObject viewer) {
 		AttributeList attributeList = new AttributeList();
 		
-		if (ownerId > 0) {
+		if (creo3.getOwnerId() > 0) {
 			applyOwnerAttribute(attributeList);
 		}
 		
@@ -1154,7 +1096,7 @@ public class CreatureObject extends TangibleObject {
 	
 	private void applyOwnerAttribute(AttributeList attributeList) {
 		String displayedOwner;
-		SWGObject objectById = ObjectStorageService.ObjectLookup.getObjectById(ownerId);
+		SWGObject objectById = ObjectStorageService.ObjectLookup.getObjectById(creo3.getOwnerId());
 		
 		if (objectById != null ) {
 			displayedOwner = objectById.getObjectName();
