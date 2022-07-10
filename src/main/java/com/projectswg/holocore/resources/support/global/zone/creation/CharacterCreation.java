@@ -45,6 +45,7 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
@@ -181,12 +182,8 @@ public class CharacterCreation {
 	
 	@NotNull
 	private WeaponObject createDefaultWeapon(CreatureObject creatureObj) {
-		WeaponObject defWeapon = (WeaponObject) createInventoryObject(creatureObj, "object/weapon/melee/unarmed/shared_unarmed_default_player.iff");
-		defWeapon.setMaxRange(5);
-		defWeapon.setType(WeaponType.UNARMED);
-		defWeapon.setAttackSpeed(4);
-		defWeapon.setMinDamage(10);
-		defWeapon.setMaxDamage(20);
+		WeaponObject defWeapon = DefaultWeaponFactory.INSTANCE.createDefaultWeapon();
+		defWeapon.moveToContainer(creatureObj);
 		return defWeapon;
 	}
 	

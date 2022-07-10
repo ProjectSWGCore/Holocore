@@ -5,8 +5,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
+import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
@@ -66,21 +65,10 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
 		ObjectCreatedIntent.broadcast(creatureObject)
-		val defaultWeapon = createDefaultWeapon()
+		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defaultWeapon.moveToContainer(creatureObject)
 		creatureObject.equippedWeapon = defaultWeapon
 		return creatureObject
 	}
 
-	private fun createDefaultWeapon(): WeaponObject {
-		val defWeapon = ObjectCreator.createObjectFromTemplate("object/weapon/melee/unarmed/shared_unarmed_default_player.iff") as WeaponObject?
-		defWeapon ?: throw RuntimeException("Unable to create default weapon")
-		ObjectCreatedIntent.broadcast(defWeapon)
-		defWeapon.maxRange = 5f
-		defWeapon.type = WeaponType.UNARMED
-		defWeapon.attackSpeed = 4f
-		defWeapon.minDamage = 10
-		defWeapon.maxDamage = 20
-		return defWeapon
-	}
 }
