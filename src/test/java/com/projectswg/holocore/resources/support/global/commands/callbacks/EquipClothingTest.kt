@@ -54,21 +54,21 @@ class EquipClothingTest : TestRunnerSimulatedWorld() {
 
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		ObjectCreatedIntent.broadcast(creatureObject)
+		broadcastAndWait(ObjectCreatedIntent(creatureObject))
 		return creatureObject
 	}
 
 	private fun createSpecialEditionGoggles(): TangibleObject {
 		val specialEditionGoggles = StaticItemCreator.createItem("item_clothing_goggles_goggles_01_01") as TangibleObject?
 		specialEditionGoggles ?: throw RuntimeException("Unable to create SE Goggles")
-		ObjectCreatedIntent.broadcast(specialEditionGoggles)
+		broadcastAndWait(ObjectCreatedIntent(specialEditionGoggles))
 		return specialEditionGoggles
 	}
 
 	private fun createMuscleShirt(): TangibleObject {
 		val muscleShirt = StaticItemCreator.createItem("item_clothing_shirt_01_42") as TangibleObject?
 		muscleShirt ?: throw RuntimeException("Unable to create Muscle Shirt")
-		ObjectCreatedIntent.broadcast(muscleShirt)
+		broadcastAndWait(ObjectCreatedIntent(muscleShirt))
 		return muscleShirt
 	}
 
