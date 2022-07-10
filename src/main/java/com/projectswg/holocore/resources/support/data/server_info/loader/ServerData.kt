@@ -58,7 +58,6 @@ object ServerData {
 	val playerRoles			by SoftDataLoaderDelegate(::PlayerRoleLoader)
 	val playerStartClothing	by SoftDataLoaderDelegate(::StartClothingLoader)
 	val staticItems			by SoftDataLoaderDelegate(::StaticItemLoader)
-	val roadmapRewards		by SoftDataLoaderDelegate(::RoadmapRewardLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
 	val itemBonusSet		by SoftDataLoaderDelegate(::ItemBonusSetLoader)
 	val combatXpMultipliers	by SoftDataLoaderDelegate(::CombatXpMultiplierLoader)
