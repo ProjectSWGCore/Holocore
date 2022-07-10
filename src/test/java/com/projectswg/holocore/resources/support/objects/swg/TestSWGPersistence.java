@@ -154,6 +154,14 @@ public class TestSWGPersistence {
 		testTangibleObject(obj);
 		
 		Document expected = map(
+				"base3", map(
+						"posture", obj.getPosture().name(),
+						"height", obj.getHeight(),
+						"battleFatigue", obj.getBattleFatigue(),
+						"ownerId", obj.getOwnerId(),
+						"statesBitmask", obj.getStatesBitmask(),
+						"factionRank", (int) obj.getFactionRank()
+				),
 				"base4", map(
 						"accelPercent", obj.getAccelPercent(),
 						"accelScale", obj.getAccelScale(),
@@ -194,13 +202,7 @@ public class TestSWGPersistence {
 								"mindRegen", 0),
 						"buffs", obj.getBuffEntries(b -> true).map(b -> new Document(Map.of("key", MongoData.store(new CRC(b.getCrc())).toDocument(), "val", MongoData.store(b).toDocument()))).collect(Collectors.toList())
 				),
-				"posture", obj.getPosture().name(),
 				"race", obj.getRace().name(),
-				"height", obj.getHeight(),
-				"battleFatigue", obj.getBattleFatigue(),
-				"ownerId", obj.getOwnerId(),
-				"statesBitmask", obj.getStatesBitmask(),
-				"factionRank", (int) obj.getFactionRank(),
 				"skills", obj.getSkills(),
 				"baseAttributes", map(
 						"health", obj.getBaseHealth(),
