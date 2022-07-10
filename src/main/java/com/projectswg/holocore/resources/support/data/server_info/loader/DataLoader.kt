@@ -49,7 +49,6 @@ abstract class DataLoader {
 		fun playerLevels(): PlayerLevelLoader = ServerData.playerLevels
 		fun playerRoles(): PlayerRoleLoader = ServerData.playerRoles
 		fun playerStartClothing(): StartClothingLoader = ServerData.playerStartClothing
-		fun roadmapRewards(): RoadmapRewardLoader = ServerData.roadmapRewards
 		fun buildouts(): BuildoutLoader = buildouts(listOf())
 		fun buildouts(events: Collection<String>): BuildoutLoader = BuildoutLoader.load(events)
 		fun buildingCells(): BuildingCellLoader = ServerData.buildingCells
