@@ -254,7 +254,6 @@ public class WeaponObject extends TangibleObject {
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
-		bb.addFloat(attackSpeed);
 		bb.addInt(accuracy); // pre-NGE
 		bb.addFloat(minRange);
 		bb.addFloat(maxRange);
@@ -262,7 +261,7 @@ public class WeaponObject extends TangibleObject {
 		bb.addInt(elementalType == null ? 0 : elementalType.getNum());
 		bb.addInt(elementalValue); // elementalValue
 		
-		bb.incrementOperandCount(7);
+		bb.incrementOperandCount(6);
 	}
 	
 	@Override
@@ -277,7 +276,6 @@ public class WeaponObject extends TangibleObject {
 	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		attackSpeed = buffer.getFloat();
 		buffer.getInt(); // accuracy
 		buffer.getFloat(); // minRange
 		maxRange = buffer.getFloat();
