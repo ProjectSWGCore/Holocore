@@ -44,11 +44,10 @@ class CombatCommandService : Service() {
 		this.hitTypeMap = EnumMap(HitType::class.java)
 		hitTypeMap[HitType.ATTACK] = CombatCommandAttack.INSTANCE
 		hitTypeMap[HitType.BUFF] = CombatCommandBuff.INSTANCE
-//		hitTypeMap[HitType.DEBUFF] = null
+		hitTypeMap[HitType.DEBUFF] = CombatCommandDebuff
 		hitTypeMap[HitType.HEAL] = CombatCommandHeal.INSTANCE
 		hitTypeMap[HitType.DELAY_ATTACK] = CombatCommandDelayAttack.INSTANCE
 //		hitTypeMap[HitType.REVIVE] = null
-		// TODO: Add in other hit types (DEBUFF/REVIVE)
 	}
 	
 	override fun start(): Boolean {

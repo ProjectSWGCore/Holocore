@@ -66,7 +66,7 @@ public class CreatureObject extends TangibleObject {
 	private final CreatureObjectShared			creo3		= new CreatureObjectShared(this);
 	private final CreatureObjectClientServerNP	creo4 		= new CreatureObjectClientServerNP(this);
 	private final CreatureObjectSharedNP		creo6 		= new CreatureObjectSharedNP(this);
-	private final Map<CreatureObject, Integer> damageMap 	= new HashMap<>();
+	private final Map<CreatureObject, Integer> hateMap = new HashMap<>();
 	private final List<CreatureObject>			sentDuels		= new ArrayList<>();
 	private final Set<Container>				containersOpen	= ConcurrentHashMap.newKeySet();
 	private final List<DeltasMessage>			pendingDeltas	= new ArrayList<>();
@@ -932,22 +932,22 @@ public class CreatureObject extends TangibleObject {
 		return items;
 	}
 	
-	public Map<CreatureObject, Integer> getDamageMap(){
-		return Collections.unmodifiableMap(damageMap);
+	public Map<CreatureObject, Integer> getHateMap(){
+		return Collections.unmodifiableMap(hateMap);
 	}
 	
-	public CreatureObject getHighestDamageDealer(){
-		synchronized (damageMap){
-			return damageMap.keySet().stream().max(Comparator.comparingInt(damageMap::get)).orElse(null);
+	public CreatureObject getMostHated(){
+		synchronized (hateMap){
+			return hateMap.keySet().stream().max(Comparator.comparingInt(hateMap::get)).orElse(null);
 		}
 	}
 	
-	public void handleDamage(CreatureObject attacker, int damage){
-		synchronized (damageMap){
-			if(damageMap.containsKey(attacker))
-				damageMap.put(attacker, damageMap.get(attacker) + damage);
+	public void handleHate(CreatureObject attacker, int hate){
+		synchronized (hateMap){
+			if(hateMap.containsKey(attacker))
+				hateMap.put(attacker, hateMap.get(attacker) + hate);
 			else 
-				damageMap.put(attacker, damage);
+				hateMap.put(attacker, hate);
 		}
 	}
 	

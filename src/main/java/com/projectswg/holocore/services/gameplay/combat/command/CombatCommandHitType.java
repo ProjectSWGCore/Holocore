@@ -30,6 +30,8 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface CombatCommandHitType {
 	
@@ -39,6 +41,6 @@ public interface CombatCommandHitType {
 	default void terminate() {
 		
 	}
-	void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments);
+	void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments);
 	
 }

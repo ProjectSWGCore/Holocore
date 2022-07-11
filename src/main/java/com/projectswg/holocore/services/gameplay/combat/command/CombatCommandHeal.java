@@ -47,6 +47,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
 
@@ -54,7 +56,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments) {
+	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		int healAmount = combatCommand.getAddedDamage();
 		int healingPotency = source.getSkillModValue("expertise_healing_all");
 		int healedDamage = 0;

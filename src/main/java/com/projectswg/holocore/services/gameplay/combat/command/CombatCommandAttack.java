@@ -47,6 +47,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -61,7 +63,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public void handle(CreatureObject source, SWGObject target, CombatCommand command, String arguments) {
+	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand command, @NotNull String arguments) {
 		handle(source, target, null, command);
 	}
 	
@@ -249,7 +251,9 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			
 			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
 			
-			target.handleDamage(source, finalDamage);
+			int hate = (int) (finalDamage * command.getHateDamageModifier());
+			hate += command.getHateAdd();
+			target.handleHate(source, hate);
 		}
 		
 		source.sendObservers(action);
