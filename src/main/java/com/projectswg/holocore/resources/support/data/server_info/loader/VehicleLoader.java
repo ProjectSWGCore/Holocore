@@ -92,9 +92,6 @@ public final class VehicleLoader extends DataLoader {
 		private final double bankingAngle;
 		private final double hoverHeight;
 		private final double autoLevel;
-		private final String playerBuff;
-		private final String vehicleBuff;
-		private final String buffClientEffect;
 		
 		public VehicleInfo(SdbResultSet set) {
 			this.objectReference = set.getText("object_reference");
@@ -118,9 +115,6 @@ public final class VehicleLoader extends DataLoader {
 			this.bankingAngle = set.getReal("banking_angle");
 			this.hoverHeight = set.getReal("hover_height");
 			this.autoLevel = set.getReal("auto_level");
-			this.playerBuff = set.getText("player_buff");
-			this.vehicleBuff = set.getText("vehicle_buff");
-			this.buffClientEffect = set.getText("buff_client_effect");
 		}
 		
 		public String getObjectReference() {
@@ -207,17 +201,6 @@ public final class VehicleLoader extends DataLoader {
 			return autoLevel;
 		}
 		
-		public String getPlayerBuff() {
-			return playerBuff;
-		}
-		
-		public String getVehicleBuff() {
-			return vehicleBuff;
-		}
-		
-		public String getBuffClientEffect() {
-			return buffClientEffect;
-		}
 	}
 	
 }
