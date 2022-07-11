@@ -6,7 +6,6 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
@@ -22,7 +21,6 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 	fun setup() {
 		registerService(CommandQueueService())
 		registerService(CommandExecutionService())
-		registerService(CombatCommandService())
 		registerService(CombatStatusService())
 	}
 

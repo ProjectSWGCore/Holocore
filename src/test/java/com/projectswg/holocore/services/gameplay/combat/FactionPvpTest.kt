@@ -11,7 +11,6 @@ import com.projectswg.holocore.resources.support.global.commands.State
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService
 import com.projectswg.holocore.services.gameplay.faction.FactionFlagService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
@@ -28,7 +27,6 @@ class FactionPvpTest : TestRunnerSimulatedWorld() {
 	fun setup() {
 		registerService(CommandQueueService())
 		registerService(CommandExecutionService())
-		registerService(CombatCommandService())
 		registerService(FactionFlagService())
 		registerService(CombatStatusService())
 	}
