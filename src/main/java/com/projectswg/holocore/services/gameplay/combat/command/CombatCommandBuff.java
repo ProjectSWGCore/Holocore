@@ -38,6 +38,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff;
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction;
@@ -45,7 +47,7 @@ import static com.projectswg.holocore.services.gameplay.combat.command.CombatCom
 enum CombatCommandBuff implements CombatCommandHitType {
 	INSTANCE;
 	
-	public void handle(CreatureObject source, SWGObject targetPrecheck, CombatCommand combatCommand, String arguments) {
+	public void handle(@NotNull CreatureObject source, @Nullable SWGObject targetPrecheck, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		// TODO group buffs
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		

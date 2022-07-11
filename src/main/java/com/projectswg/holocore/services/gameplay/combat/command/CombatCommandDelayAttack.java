@@ -37,6 +37,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 enum CombatCommandDelayAttack implements CombatCommandHitType {
 	INSTANCE;
@@ -59,7 +61,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 	}
 	
 	@Override
-	public void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments) {
+	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		String[] argSplit = arguments.split(" ");
 		Location eggLocation;
 		SWGObject eggParent;

@@ -156,6 +156,8 @@ public class CommandLoader extends DataLoader {
 						.withAddedDamage((int) set.getInt("addedDamage"))
 						.withPercentAddFromWeapon(set.getReal("percentAddFromWeapon"))
 						.withBypassArmor(set.getReal("bypassArmor"))
+						.withHateDamageModifier(set.getReal("hateDamageModifier"))
+						.withHateAdd((int) set.getInt("hateAdd"))
 						.withSpecialLine(set.getText("specialLine"))
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))

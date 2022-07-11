@@ -39,7 +39,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		get() = targets.stream()
 				.filter { creo -> creo.isAttackable(ai) }
 				.filter { creo -> (creo.posture != Posture.INCAPACITATED || spawner.isDeathblow) && creo.posture != Posture.DEAD }
-				.min(Comparator.comparingInt { it.health }).orElse(null)
+				.max(Comparator.comparingInt { ai.hateMap[it] ?: 0 }).orElse(null)
 	
 	override fun onPlayerMoveInAware(player: CreatureObject, distance: Double) {
 		if (distance > spawner.aggressiveRadius) {

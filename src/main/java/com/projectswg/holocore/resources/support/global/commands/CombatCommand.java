@@ -52,6 +52,8 @@ public class CombatCommand extends Command {
 	private final int attackRolls;
 	private final double percentAddFromWeapon;
 	private final double bypassArmor;
+	private final double hateDamageModifier;
+	private final int hateAdd;
 	private final int addedDamage;
 	private final String buffNameTarget;
 	private final String buffNameSelf;
@@ -85,6 +87,8 @@ public class CombatCommand extends Command {
 		this.attackRolls = builder.attackRolls;
 		this.percentAddFromWeapon = builder.percentAddFromWeapon;
 		this.bypassArmor = builder.bypassArmor;
+		this.hateDamageModifier = builder.hateDamageModifier;
+		this.hateAdd = builder.hateAdd;
 		this.addedDamage = builder.addedDamage;
 		this.buffNameTarget = builder.buffNameTarget;
 		this.buffNameSelf = builder.buffNameSelf;
@@ -182,6 +186,14 @@ public class CombatCommand extends Command {
 		return bypassArmor;
 	}
 	
+	public double getHateDamageModifier() {
+		return hateDamageModifier;
+	}
+	
+	public int getHateAdd() {
+		return hateAdd;
+	}
+	
 	public int getAddedDamage() {
 		return addedDamage;
 	}
@@ -265,6 +277,8 @@ public class CombatCommand extends Command {
 		private int attackRolls;
 		private double percentAddFromWeapon;
 		private double bypassArmor;
+		private double hateDamageModifier;
+		private int hateAdd;
 		private int addedDamage;
 		private String buffNameTarget;
 		private String buffNameSelf;
@@ -366,6 +380,16 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withBypassArmor(double bypassArmor) {
 			this.bypassArmor = bypassArmor;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHateDamageModifier(double hateDamageModifier) {
+			this.hateDamageModifier = hateDamageModifier;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHateAdd(int hateAdd) {
+			this.hateAdd = hateAdd;
 			return this;
 		}
 		

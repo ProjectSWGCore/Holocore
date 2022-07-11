@@ -135,7 +135,7 @@ public class CombatExperienceService extends Service {
 	}
 	
 	private boolean didMemberParticipateInCombat(CreatureObject corpse, CreatureObject groupMember) {
-		return corpse.getDamageMap().containsKey(groupMember);
+		return corpse.getHateMap().containsKey(groupMember);
 	}
 	
 	private short getKillerLevel(CreatureObject killer, GroupObject group) {

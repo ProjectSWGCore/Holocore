@@ -90,10 +90,10 @@ public final class GrantLootService extends Service {
 		AIObject corpse = lgi.getCorpse();
 		
 		Location corpseWorldLocation = corpse.getWorldLocation();
-		CreatureObject highestDamageDealer = corpse.getHighestDamageDealer();
-		if (highestDamageDealer == null || !highestDamageDealer.isPlayer())
+		CreatureObject mostHated = corpse.getMostHated();
+		if (mostHated == null || !mostHated.isPlayer())
 			return;
-		long groupId = highestDamageDealer.getGroupId();
+		long groupId = mostHated.getGroupId();
 		
 		List<CreatureObject> looters = new ArrayList<>();
 		if (groupId != 0) {
@@ -120,7 +120,7 @@ public final class GrantLootService extends Service {
 				return;
 			}
 		} else {
-			looters.add(highestDamageDealer);
+			looters.add(mostHated);
 		}
 		lootRestrictions.put(corpse, new StandardLootRestrictions(corpse, looters));
 		SWGObject inventory = corpse.getInventory();
