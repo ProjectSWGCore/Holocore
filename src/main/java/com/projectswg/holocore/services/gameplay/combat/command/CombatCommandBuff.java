@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
+import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
@@ -47,7 +48,8 @@ import static com.projectswg.holocore.services.gameplay.combat.command.CombatCom
 enum CombatCommandBuff implements CombatCommandHitType {
 	INSTANCE;
 	
-	public void handle(@NotNull CreatureObject source, @Nullable SWGObject targetPrecheck, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	@Override
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject targetPrecheck, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		// TODO group buffs
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		
@@ -72,6 +74,8 @@ enum CombatCommandBuff implements CombatCommandHitType {
 		if (!buffNameTarget.isEmpty()) {
 			combatAction.addDefender(new Defender(target.getObjectId(), effectiveTarget.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		}
+		
+		return CombatStatus.SUCCESS;
 	}
 	
 	private boolean isApplyToSelf(CreatureObject source, CreatureObject target) {

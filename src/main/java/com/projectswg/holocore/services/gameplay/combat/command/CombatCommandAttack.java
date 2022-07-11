@@ -63,13 +63,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand command, @NotNull String arguments) {
-		handle(source, target, null, command);
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand command, @NotNull String arguments) {
+		return handle(source, target, null, command);
 	}
 	
-	public void handle(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
-		if (!handleStatus(source, canPerform(source, target, command)))
-			return;
+	public CombatStatus handle(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand command) {
+		CombatStatus combatStatus = canPerform(source, target, command);
+		if (combatStatus != CombatStatus.SUCCESS) {
+			return combatStatus;
+		}
 		
 		for (int i = 0; i < command.getAttackRolls(); i++) {
 			AttackInfo info = new AttackInfo();
@@ -100,6 +102,8 @@ enum CombatCommandAttack implements CombatCommandHitType {
 					break;
 			}
 		}
+		
+		return combatStatus;
 	}
 	
 	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, CombatCommand command) {

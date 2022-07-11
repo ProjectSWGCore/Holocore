@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
+import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
@@ -61,7 +62,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 	}
 	
 	@Override
-	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		String[] argSplit = arguments.split(" ");
 		Location eggLocation;
 		SWGObject eggParent;
@@ -99,6 +100,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 		
 		long interval = (long) (combatCommand.getInitialDelayAttackInterval() * 1000);
 		executor.execute(interval, () -> delayEggLoop(delayEgg, source, target, combatCommand, 1));
+		return CombatStatus.SUCCESS;
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {

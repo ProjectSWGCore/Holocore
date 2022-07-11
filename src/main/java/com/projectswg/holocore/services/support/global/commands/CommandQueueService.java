@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.support.global.commands;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackType;
+import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitType;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -25,6 +26,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon;
+import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandHandler;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -40,10 +43,12 @@ public class CommandQueueService extends Service {
 	
 	private final ScheduledThreadPool executor;
 	private final Map<CreatureObject, CreatureCombatQueue> combatQueueMap;
+	private final CombatCommandHandler combatCommandHandler;
 	
 	public CommandQueueService() {
 		this.executor = new ScheduledThreadPool(4, "command-queue-%d");
 		this.combatQueueMap = new ConcurrentHashMap<>();
+		this.combatCommandHandler = new CombatCommandHandler();
 	}
 	
 	@Override
@@ -57,6 +62,16 @@ public class CommandQueueService extends Service {
 	public boolean terminate() {
 		executor.stop();
 		return executor.awaitTermination(1000);
+	}
+	
+	@Override
+	public boolean start() {
+		return super.start() && combatCommandHandler.start();
+	}
+	
+	@Override
+	public boolean stop() {
+		return super.stop() && combatCommandHandler.stop();
 	}
 	
 	@IntentHandler
@@ -158,30 +173,60 @@ public class CommandQueueService extends Service {
 		private void executeCommandNow(EnqueuedCommand command) {
 			Command rootCommand = command.getCommand();
 			CheckCommandResult checkCommandResult = checkCommand(command);
+			sendQueueRemove(command, checkCommandResult);
 			ErrorCode error = checkCommandResult.getErrorCode();
-			if (error == ErrorCode.SUCCESS) {
-				if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
-					if (!activeCooldownGroups.add(rootCommand.getCooldownGroup()))
-						return;
-					if (isValidCooldownGroup(rootCommand.getCooldownGroup2())) {
-						if (!activeCooldownGroups.add(rootCommand.getCooldownGroup2())) {
-							activeCooldownGroups.remove(rootCommand.getCooldownGroup());
-							return;
-						}
-						startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter());
-					}
-					startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter());
-				}
-				ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
+			
+			if (error != ErrorCode.SUCCESS) {
+				sendCommandFailed(command);
+				return;
 			}
 			
-			sendQueueRemove(command, checkCommandResult);
+			if (command.getCommand() instanceof CombatCommand combatCommand) {
+				CombatStatus combatStatus = combatCommandHandler.executeCombatCommand(
+						command.getSource(),
+						command.getTarget(),
+						combatCommand,
+						command.getArguments());
+				
+				if (combatStatus != CombatStatus.SUCCESS) {
+					CombatCommandCommon.handleStatus(command.getSource(), combatStatus);
+					sendCommandFailed(command);
+					return;
+				}
+			}
+			
+			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
+				if (!activeCooldownGroups.add(rootCommand.getCooldownGroup()))
+					return;
+				if (isValidCooldownGroup(rootCommand.getCooldownGroup2())) {
+					if (!activeCooldownGroups.add(rootCommand.getCooldownGroup2())) {
+						activeCooldownGroups.remove(rootCommand.getCooldownGroup());
+						return;
+					}
+					startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter());
+				}
+				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter());
+			}
+			ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
 		}
 		
 		private void sendQueueRemove(EnqueuedCommand command, CheckCommandResult checkCommandResult) {
 			ErrorCode error = checkCommandResult.getErrorCode();
 			int action = checkCommandResult.getAction();
 			command.getSource().sendSelf(new CommandQueueDequeue(command.getSource().getObjectId(), command.getCounter(), (float) command.getCommand().getExecuteTime(), error, action));
+		}
+		
+		private void sendCommandFailed(EnqueuedCommand enqueuedCommand) {
+			int counter = enqueuedCommand.getCounter();
+			CreatureObject source = enqueuedCommand.getSource();
+			long objectId = source.getObjectId();
+			Command command = enqueuedCommand.getCommand();
+			
+			CommandTimer commandTimer = new CommandTimer(objectId);
+			commandTimer.addFlag(CommandTimer.CommandTimerFlag.FAILED);
+			commandTimer.setCommandNameCrc(command.getCrc());
+			commandTimer.setSequenceId(counter);
+			source.sendSelf(commandTimer);
 		}
 		
 		private boolean isValidCooldownGroup(String group) {

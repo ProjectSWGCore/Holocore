@@ -29,14 +29,12 @@ package com.projectswg.holocore.services.gameplay.combat.command
 
 import com.projectswg.common.data.combat.CombatStatus
 import com.projectswg.common.data.combat.HitType
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import java.util.*
 
-class CombatCommandService : Service() {
+class CombatCommandHandler {
 	
 	private val hitTypeMap: MutableMap<HitType, CombatCommandHitType>
 	
@@ -50,26 +48,19 @@ class CombatCommandService : Service() {
 //		hitTypeMap[HitType.REVIVE] = null
 	}
 	
-	override fun start(): Boolean {
+	fun start(): Boolean {
 		for (hitType in hitTypeMap.values)
 			hitType.initialize()
 		return true
 	}
 	
-	override fun stop(): Boolean {
+	fun stop(): Boolean {
 		for (hitType in hitTypeMap.values)
 			hitType.terminate()
 		return true
 	}
 	
-	@IntentHandler
-	private fun handleChatCommandIntent(eci: ExecuteCommandIntent) {
-		if (!eci.command.isCombatCommand || eci.command !is CombatCommand)
-			return
-		val command = eci.command as CombatCommand
-		
-		val source = eci.source
-
+	fun executeCombatCommand(source: CreatureObject, target: SWGObject?, command: CombatCommand, arguments: String): CombatStatus {
 		val equippedWeapon = source.equippedWeapon
 		val specialAttackCost = equippedWeapon.specialAttackCost
 		source.modifyHealth((-command.healthCost).toInt())
@@ -77,7 +68,8 @@ class CombatCommandService : Service() {
 		source.modifyMind((-command.mindCost * specialAttackCost / 100).toInt())
 		
 		val hitType = hitTypeMap[command.hitType]
-		hitType?.handle(source, eci.target, command, eci.arguments) ?: handleStatus(source, CombatStatus.UNKNOWN)
+
+		return hitType?.handle(source, target, command, arguments) ?: CombatStatus.UNKNOWN
 	}
 
 }

@@ -56,7 +56,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public void handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		int healAmount = combatCommand.getAddedDamage();
 		int healingPotency = source.getSkillModValue("expertise_healing_all");
 		int healedDamage = 0;
@@ -74,7 +74,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 					}
 					case REQUIRED: {    // Target is always used
 						if (target == null) {
-							return;
+							return CombatStatus.NO_TARGET;
 						}
 						
 						// Same logic as OPTIONAL and ALL, so no break!
@@ -82,11 +82,9 @@ enum CombatCommandHeal implements CombatCommandHitType {
 					case OPTIONAL:    // Appears to be the same as ALL
 					case ALL: {    // Target is used IF supplied
 						if (target != null) {
-							if (!(target instanceof CreatureObject)) {
-								return;
+							if (!(target instanceof CreatureObject creatureTarget)) {
+								return CombatStatus.INVALID_TARGET;
 							}
-							
-							CreatureObject creatureTarget = (CreatureObject) target;
 							
 							if (source.isAttackable(creatureTarget)) {
 								healedDamage += doHeal(source, source, healAmount, combatCommand);
@@ -110,12 +108,10 @@ enum CombatCommandHeal implements CombatCommandHitType {
 				
 				for (SWGObject nearbyObject : source.getAware()) {
 					if (sourceLocation.isWithinDistance(nearbyObject.getLocation(), range)) {
-						if (!(nearbyObject instanceof CreatureObject)) {
+						if (!(nearbyObject instanceof CreatureObject nearbyCreature)) {
 							// We can't heal something that's not a creature
 							continue;
 						}
-						
-						CreatureObject nearbyCreature = (CreatureObject) nearbyObject;
 						
 						if (source.isAttackable(nearbyCreature)) {
 							// Don't heal (potential) enemies
@@ -137,6 +133,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		}
 
 		grantMedicalXpPerHealedPointOfDamage(source, healedDamage);
+		return CombatStatus.SUCCESS;
 	}
 
 	private void grantMedicalXpPerHealedPointOfDamage(CreatureObject source, int healedDamage) {

@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
 import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
-import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandService;
 import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
 import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
 import me.joshlarson.jlcommon.control.Manager;
@@ -39,7 +38,6 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 		CloningService.class,
 		DuelService.class,
 		LootManager.class,
-		CombatCommandService.class,
 		CombatDeathblowService.class,
 		CombatExperienceService.class,
 		CombatNpcService.class,

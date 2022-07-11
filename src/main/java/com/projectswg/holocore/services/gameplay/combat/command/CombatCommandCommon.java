@@ -91,7 +91,7 @@ public class CombatCommandCommon {
 			return CombatStatus.NO_WEAPON;
 		
 		if (target == null || source.equals(target))
-			return CombatStatus.SUCCESS;
+			return CombatStatus.INVALID_TARGET;
 		
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
@@ -159,22 +159,12 @@ public class CombatCommandCommon {
 		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
-	static boolean handleStatus(CreatureObject source, CombatStatus status) {
+	public static void handleStatus(CreatureObject source, CombatStatus status) {
 		switch (status) {
-			case SUCCESS:
-				return true;
-			case NO_TARGET:
-				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
-				return false;
-			case TOO_FAR:
-				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-				return false;
-			case INVALID_TARGET:
-				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-				return false;
-			default:
-				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
-				return false;
+			case NO_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
+			case TOO_FAR -> showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
+			case INVALID_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
+			default -> showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
 		}
 	}
 	
