@@ -1,19 +1,19 @@
 package com.projectswg.holocore.services.gameplay.training;
 
 import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrainingTest {
 	
 	private SkillsSdbSkillRepository skillRepository;
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		skillRepository = new SkillsSdbSkillRepository();
 	}

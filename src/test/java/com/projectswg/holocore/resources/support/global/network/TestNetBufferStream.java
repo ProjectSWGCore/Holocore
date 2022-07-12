@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.global.network;
 
 import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 
@@ -59,7 +59,7 @@ public class TestNetBufferStream extends TestRunnerNoIntents {
 			for (int i = 0; i < 10; i++)
 				stream.write(generateTestString(i));
 			for (int i = 0; i < 10; i++)
-				Assert.assertEquals(getTestString(i), stream.getAscii());
+				assertEquals(getTestString(i), stream.getAscii());
 		}
 	}
 	
@@ -69,12 +69,12 @@ public class TestNetBufferStream extends TestRunnerNoIntents {
 			for (int i = 0; i < 10; i++)
 				stream.write(generateTestString(i));
 			for (int i = 0; i < 10; i++) {
-				Assert.assertEquals(getTestString(i), stream.getAscii());
+				assertEquals(getTestString(i), stream.getAscii());
 				if (i == 4) {
 					int rem = stream.remaining();
 					stream.compact();
-					Assert.assertEquals(0, stream.position());
-					Assert.assertEquals(rem, stream.remaining());
+					assertEquals(0, stream.position());
+					assertEquals(rem, stream.remaining());
 				}
 			}
 		}
@@ -86,11 +86,11 @@ public class TestNetBufferStream extends TestRunnerNoIntents {
 			for (int i = 0; i < 10; i++) {
 				stream.write(generateTestString(i));
 				if (i % 2 == 1) {
-					Assert.assertEquals(getTestString(i-1), stream.getAscii());
-					Assert.assertEquals(getTestString(i), stream.getAscii());
+					assertEquals(getTestString(i-1), stream.getAscii());
+					assertEquals(getTestString(i), stream.getAscii());
 				}
 			}
-			Assert.assertEquals(0, stream.remaining());
+			assertEquals(0, stream.remaining());
 		}
 	}
 	
@@ -100,15 +100,15 @@ public class TestNetBufferStream extends TestRunnerNoIntents {
 			for (int i = 0; i < 10; i++) {
 				stream.write(generateTestString(i));
 				if (i % 2 == 1) {
-					Assert.assertEquals(getTestString(i-1), stream.getAscii());
-					Assert.assertEquals(getTestString(i), stream.getAscii());
+					assertEquals(getTestString(i-1), stream.getAscii());
+					assertEquals(getTestString(i), stream.getAscii());
 					int rem = stream.remaining();
 					stream.compact();
-					Assert.assertEquals(0, stream.position());
-					Assert.assertEquals(rem, stream.remaining());
+					assertEquals(0, stream.position());
+					assertEquals(rem, stream.remaining());
 				}
 			}
-			Assert.assertEquals(0, stream.remaining());
+			assertEquals(0, stream.remaining());
 		}
 	}
 	
@@ -118,15 +118,15 @@ public class TestNetBufferStream extends TestRunnerNoIntents {
 			for (int i = 0; i < 10; i++)
 				stream.write(generateTestString(i));
 			for (int i = 0; i < 10; i++) {
-				Assert.assertEquals(getTestString(i), stream.getAscii());
+				assertEquals(getTestString(i), stream.getAscii());
 				if (i == 4)
 					stream.mark();
 			}
-			Assert.assertEquals(0, stream.remaining());
+			assertEquals(0, stream.remaining());
 			stream.rewind();
-			Assert.assertEquals(5*(2+getTestString(0).length()), stream.remaining());
+			assertEquals(5*(2+getTestString(0).length()), stream.remaining());
 			for (int i = 5; i < 10; i++)
-				Assert.assertEquals(getTestString(i), stream.getAscii());
+				assertEquals(getTestString(i), stream.getAscii());
 		}
 	}
 	

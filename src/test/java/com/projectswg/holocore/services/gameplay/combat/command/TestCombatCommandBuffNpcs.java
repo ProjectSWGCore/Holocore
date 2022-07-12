@@ -9,27 +9,20 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(Parameterized.class)
 public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 	
 	private CreatureObject source;
 	private CreatureObject target;
 	
-	@Parameterized.Parameter
-	public Input input;
-	
-	@Parameterized.Parameters(name = "{0}")
 	public static Collection<Input> input() {
 		long group1 = 1234;
 		long group2 = 4321;
@@ -44,8 +37,7 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		);
 	}
 	
-	@Before
-	public void setup() {
+	public void setup(Input input) {
 		source = new GenericCreatureObject(1, "Player", true);
 		source.setFaction(ServerData.INSTANCE.getFactions().getFaction("neutral"));
 		source.setGroupId(input.getPlayerGroupId());
@@ -67,8 +59,10 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		registerService(new BuffService());
 	}
 	
-	@Test
-	public void testReceiveBuff() {
+	@ParameterizedTest
+	@MethodSource("input")
+	public void testReceiveBuff(Input input) {
+		setup(input);
 		String targetBuffName = "hemorrhage";	// Important that the buff actually exists
 		Command command = Command.builder()
 				.withName(targetBuffName)
@@ -87,7 +81,7 @@ public class TestCombatCommandBuffNpcs extends TestRunnerSynchronousIntents {
 		boolean expected = input.isExpected();
 		String caseName = input.getCaseName();
 		
-		assertEquals(caseName, expected, target.hasBuff(targetBuffName));
+		assertEquals(expected, target.hasBuff(targetBuffName), caseName);
 	}
 	
 	private static class Input {

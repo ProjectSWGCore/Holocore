@@ -10,15 +10,15 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class EquipArmorTest : TestRunnerSimulatedWorld() {
 	
 	private val transferItemCallback = TransferItemCallback()
 
-	@Before
+	@BeforeEach
 	fun setUp() {
 		registerService(SkillService())
 	}

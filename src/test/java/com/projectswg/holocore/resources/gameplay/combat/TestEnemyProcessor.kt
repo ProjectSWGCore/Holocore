@@ -36,8 +36,8 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class TestEnemyProcessor: TestRunnerNoIntents() {
 	
@@ -129,8 +129,8 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	
 	private fun testAttackable(player: CreatureObject, npc: CreatureObject, playerFaction: FactionLoader.Faction, npcFaction: FactionLoader.Faction, playerAttackable: Boolean, npcAttackable: Boolean) {
 		player.faction = playerFaction; npc.faction = npcFaction
-		Assert.assertEquals("${player.faction} ${if (playerAttackable) "is not" else "is"} able to attack ${npc.faction}", playerAttackable, EnemyProcessor.isAttackable(player, npc))
-		Assert.assertEquals("${npc.faction} ${if (npcAttackable) "is not" else "is"} able to attack ${player.faction}", npcAttackable, EnemyProcessor.isAttackable(npc, player))
+		assertEquals(playerAttackable, EnemyProcessor.isAttackable(player, npc), "${player.faction} ${if (playerAttackable) "is not" else "is"} able to attack ${npc.faction}")
+		assertEquals(npcAttackable, EnemyProcessor.isAttackable(npc, player), "${npc.faction} ${if (npcAttackable) "is not" else "is"} able to attack ${player.faction}")
 	}
 	
 }

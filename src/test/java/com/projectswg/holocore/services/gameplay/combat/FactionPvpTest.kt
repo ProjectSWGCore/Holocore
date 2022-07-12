@@ -17,13 +17,13 @@ import com.projectswg.holocore.services.support.global.commands.CommandQueueServ
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.Assert.*
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 class FactionPvpTest : TestRunnerSimulatedWorld() {
 
-	@Before
+	@BeforeEach
 	fun setup() {
 		registerService(CommandQueueService())
 		registerService(CommandExecutionService())

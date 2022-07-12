@@ -10,24 +10,19 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
-
-@RunWith(Parameterized.class)
 public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 	
 	private CreatureObject source;
 	private CreatureObject target;
 	
-	@Parameterized.Parameters(name = "{0}")
 	public static Collection<Input> data() {
 		return Arrays.asList(
 				// Neutral cases
@@ -63,11 +58,7 @@ public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 		);
 	}
 	
-	@Parameterized.Parameter // first data value (0) is default
-	public Input input;
-	
-	@Before
-	public void setup() {
+	public void setup(Input input) {
 		source = new GenericCreatureObject(1, "Source Creature");
 		FactionLoader.Faction sourceFaction = ServerData.INSTANCE.getFactions().getFaction(input.getSourceFactionName());
 		source.setFaction(sourceFaction);
@@ -87,8 +78,10 @@ public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 		registerService(new BuffService());
 	}
 	
-	@Test
-	public void testReceiveBuff() {
+	@ParameterizedTest
+	@MethodSource("data")
+	public void testReceiveBuff(Input input) {
+		setup(input);
 		String targetBuffName = "hemorrhage";	// Important that the buff actually exists
 		Command command = Command.builder()
 				.withName(targetBuffName)
@@ -105,9 +98,9 @@ public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 		waitForIntents();	// Let's give the BuffService a chance to process the BuffIntent
 		
 		if (input.isExpected()) {
-			assertTrue("Source should be allowed to buff target", target.hasBuff(targetBuffName));
+			assertTrue(target.hasBuff(targetBuffName), "Source should be allowed to buff target");
 		} else {
-			assertTrue("Source should have buffed themselves and not target due to factional restrictions", source.hasBuff(targetBuffName));
+			assertTrue(source.hasBuff(targetBuffName), "Source should have buffed themselves and not target due to factional restrictions");
 		}
 	}
 	

@@ -28,8 +28,8 @@ package com.projectswg.holocore.resources.support.data.common;
 
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TestQuaternion extends TestRunnerNoIntents {
 	
@@ -50,10 +50,10 @@ public class TestQuaternion extends TestRunnerNoIntents {
 		q2.setHeading(heading2);
 		Quaternion ret = new Quaternion(q1);
 		ret.rotateByQuaternion(q2);
-		Assert.assertEquals(x, ret.getX(), 1E-7);
-		Assert.assertEquals(y, ret.getY(), 1E-7);
-		Assert.assertEquals(z, ret.getZ(), 1E-7);
-		Assert.assertEquals(w, ret.getW(), 1E-7);
-//		Assert.assertEquals((heading1+heading2+360)%360, (ret.getHeading()+360)%360, 1E-7);
+		assertEquals(x, ret.getX(), 1E-7);
+		assertEquals(y, ret.getY(), 1E-7);
+		assertEquals(z, ret.getZ(), 1E-7);
+		assertEquals(w, ret.getW(), 1E-7);
+//		assertEquals((heading1+heading2+360)%360, (ret.getHeading()+360)%360, 1E-7);
 	}
 }

@@ -28,8 +28,8 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource.RawResourceBuilder;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TestRawResource extends TestRunnerNoIntents {
 	
@@ -45,15 +45,15 @@ public class TestRawResource extends TestRunnerNoIntents {
 				.setRecycled(false)
 				.setCrateTemplate("")
 				.build();
-		Assert.assertEquals("resource/resource_names", resource.getName().getFile());
-		Assert.assertEquals("resource_name", resource.getName().getKey());
-		Assert.assertNull(resource.getParent());
-		Assert.assertEquals(15, resource.getMinPools());
-		Assert.assertEquals(30, resource.getMaxPools());
-		Assert.assertEquals(45, resource.getMinTypes());
-		Assert.assertEquals(60, resource.getMaxTypes());
-		Assert.assertEquals("", resource.getCrateTemplate());
-		Assert.assertFalse(resource.isRecycled());
+		assertEquals("resource/resource_names", resource.getName().getFile());
+		assertEquals("resource_name", resource.getName().getKey());
+		assertNull(resource.getParent());
+		assertEquals(15, resource.getMinPools());
+		assertEquals(30, resource.getMaxPools());
+		assertEquals(45, resource.getMinTypes());
+		assertEquals(60, resource.getMaxTypes());
+		assertEquals("", resource.getCrateTemplate());
+		assertFalse(resource.isRecycled());
 		
 		RawResource child = new RawResourceBuilder(2)
 				.setName("child_name")
@@ -65,15 +65,15 @@ public class TestRawResource extends TestRunnerNoIntents {
 				.setRecycled(true)
 				.setCrateTemplate("")
 				.build();
-		Assert.assertEquals("resource/resource_names", child.getName().getFile());
-		Assert.assertEquals("child_name", child.getName().getKey());
-		Assert.assertEquals(resource, child.getParent());
-		Assert.assertEquals(5, child.getMinPools());
-		Assert.assertEquals(6, child.getMaxPools());
-		Assert.assertEquals(7, child.getMinTypes());
-		Assert.assertEquals(8, child.getMaxTypes());
-		Assert.assertEquals("", child.getCrateTemplate());
-		Assert.assertTrue(child.isRecycled());
+		assertEquals("resource/resource_names", child.getName().getFile());
+		assertEquals("child_name", child.getName().getKey());
+		assertEquals(resource, child.getParent());
+		assertEquals(5, child.getMinPools());
+		assertEquals(6, child.getMaxPools());
+		assertEquals(7, child.getMinTypes());
+		assertEquals(8, child.getMaxTypes());
+		assertEquals("", child.getCrateTemplate());
+		assertTrue(child.isRecycled());
 	}
 	
 }

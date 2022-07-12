@@ -1,6 +1,6 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 

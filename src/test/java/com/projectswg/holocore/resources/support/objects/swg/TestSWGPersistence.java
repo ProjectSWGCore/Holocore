@@ -40,8 +40,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import org.bson.Document;
 import org.bson.types.Binary;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,15 +58,15 @@ public class TestSWGPersistence {
 				assertContains((Map<String, Object>) e.getValue(), (Map<String, Object>) actual.get(e.getKey()));
 			} else if (actual.get(e.getKey()) instanceof Collection) {
 				if (!(e.getValue() instanceof Collection))
-					Assert.fail("expected value is not a collection for key: " + e.getKey());
+					fail("expected value is not a collection for key: " + e.getKey());
 				if (!(actual.get(e.getKey()) instanceof Collection))
-					Assert.fail("actual value is not a collection for key: " + e.getKey());
+					fail("actual value is not a collection for key: " + e.getKey());
 				Collection<Object> expectedCollection = (Collection<Object>) e.getValue();
 				Collection<Object> actualCollection = (Collection<Object>) actual.get(e.getKey());
-				Assert.assertEquals("Key: '"+e.getKey()+"' Size mismatch.", expectedCollection.size(), actualCollection.size());
-				Assert.assertTrue("Key: '"+e.getKey()+"' Expected <"+expectedCollection+"> but was <"+actualCollection+">", actualCollection.containsAll(expectedCollection));
+				assertEquals(expectedCollection.size(), actualCollection.size(), "Key: '"+e.getKey()+"' Size mismatch.");
+				assertTrue(actualCollection.containsAll(expectedCollection), "Key: '"+e.getKey()+"' Expected <"+expectedCollection+"> but was <"+actualCollection+">");
 			} else {
-				Assert.assertEquals("Key: '" + e.getKey() + "'", e.getValue(), actual.get(e.getKey()));
+				assertEquals(e.getValue(), actual.get(e.getKey()), "Key: '" + e.getKey() + "'");
 			}
 		}
 	}
@@ -88,7 +88,7 @@ public class TestSWGPersistence {
 		SWGObject gen = SWGObjectFactory.create(new MongoData(saved));
 		Document saved2 = SWGObjectFactory.save(gen, new MongoData()).toDocument();
 		assertContains(expected, saved2);
-		Assert.assertEquals(saved, saved2);
+		assertEquals(saved, saved2);
 	}
 	
 	private void testSWGObject(SWGObject obj) {

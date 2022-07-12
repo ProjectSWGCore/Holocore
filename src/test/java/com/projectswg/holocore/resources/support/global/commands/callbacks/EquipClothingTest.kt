@@ -8,8 +8,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class EquipClothingTest : TestRunnerSimulatedWorld() {
 	

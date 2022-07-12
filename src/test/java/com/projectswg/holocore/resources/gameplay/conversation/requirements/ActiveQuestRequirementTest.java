@@ -2,12 +2,12 @@ package com.projectswg.holocore.resources.gameplay.conversation.requirements;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -17,7 +17,7 @@ public class ActiveQuestRequirementTest {
 	private PlayerObject playerObject;
 	private String questName;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		player = mock(Player.class);
 		playerObject = mock(PlayerObject.class);

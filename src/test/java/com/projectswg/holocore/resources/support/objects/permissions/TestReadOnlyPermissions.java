@@ -30,10 +30,10 @@ package com.projectswg.holocore.resources.support.objects.permissions;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestReadOnlyPermissions {
 
@@ -45,7 +45,7 @@ public class TestReadOnlyPermissions {
 
         boolean movable = permissions.canMove(creature, container);
 
-        assertTrue("An exempt object should be able to move an object with read-only permissions", movable);
+        assertTrue(movable);
     }
 
     @Test
@@ -56,6 +56,6 @@ public class TestReadOnlyPermissions {
 
         boolean movable = permissions.canMove(creature, container);
 
-        assertFalse("Only exempted objects should be able to move an object with read-only permissions", movable);
+        assertFalse(movable);
     }
 }

@@ -28,8 +28,8 @@
 package com.projectswg.holocore.resources.support.global.network;
 
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class TestLittleEndianDataOutputStream extends TestRunnerNoIntents {
 		le.writeLong(1024);
 		le.writeFloat(1.25f);
 		le.writeDouble(1.75);
-		Assert.assertArrayEquals(bb.array(), baos.toByteArray());
+		assertArrayEquals(bb.array(), baos.toByteArray());
 		le.close();
 	}
 	

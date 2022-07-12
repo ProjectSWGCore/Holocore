@@ -28,9 +28,9 @@ package com.projectswg.holocore.resources.support.data.common;
 
 import com.projectswg.common.data.WeatherType;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestWeatherType extends TestRunnerNoIntents {
 

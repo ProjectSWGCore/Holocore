@@ -2,9 +2,9 @@ package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WeaponObjectTest {
 	

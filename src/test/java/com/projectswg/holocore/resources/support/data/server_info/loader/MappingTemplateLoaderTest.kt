@@ -1,7 +1,7 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import junit.framework.TestCase.assertNotNull
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class MappingTemplateLoaderTest {
 	

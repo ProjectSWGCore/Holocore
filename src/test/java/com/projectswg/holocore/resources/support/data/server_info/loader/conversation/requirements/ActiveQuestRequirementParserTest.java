@@ -1,18 +1,18 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader.conversation.requirements;
 
 import com.projectswg.holocore.resources.gameplay.conversation.requirements.ActiveQuestRequirement;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ActiveQuestRequirementParserTest {
 	
 	private ActiveQuestRequirementParser parser;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		parser = new ActiveQuestRequirementParser();
 	}

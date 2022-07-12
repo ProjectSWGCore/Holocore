@@ -46,7 +46,11 @@ sourceSets {
 	}
 	test {
 		dependencies {
-			testImplementation(group="junit", name="junit", version="4.13.2")
+			val junit5Version = "5.8.1"
+			testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
+			testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
+			testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
+
 			testImplementation(group="org.mockito", name="mockito-core", version="3.8.0")
 		}
 	}
@@ -96,4 +100,8 @@ tasks.create<JavaExec>("runDebug") {
 	enableAssertions = true
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
+}
+
+tasks.withType<Test>().configureEach {
+	useJUnitPlatform()
 }

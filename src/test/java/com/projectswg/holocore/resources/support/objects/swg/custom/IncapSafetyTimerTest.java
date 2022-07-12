@@ -1,12 +1,12 @@
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneOffset;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class IncapSafetyTimerTest {
 	

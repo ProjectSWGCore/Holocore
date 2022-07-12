@@ -34,8 +34,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObjectAwareness
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
@@ -57,7 +57,7 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val stack = LinkedList<SWGObject>()
 		
 		// Don't lose any objects
-		Assert.assertEquals(HashSet(awareness), HashSet(create))
+		assertEquals(HashSet(awareness), HashSet(create))
 		
 		// Verify that all bundled objects are next to their parent
 		for (obj in create) {
@@ -69,8 +69,8 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 			if (!obj.isBundledWithin(parent, creature) && stack.peekLast() == parent)
 				stack.pollLast()
 			if (obj.isBundledWithin(parent, creature)) {
-				Assert.assertFalse(obj.toString(), stack.isEmpty())
-				Assert.assertEquals(obj.toString(), parent, stack.last)
+				assertFalse(stack.isEmpty(), obj.toString())
+				assertEquals(parent, stack.last, obj.toString())
 			}
 			stack.add(obj)
 		}
@@ -85,7 +85,7 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val flushData = CreatureObjectAwareness.FlushAwarenessData(creature)
 		val create = flushData.buildCreate(HashSet(), LinkedHashSet(awareness))
 		val destroy = flushData.buildDestroy(HashSet(create), HashSet())
-		Assert.assertEquals(setOf(creature, building1, building2), HashSet(destroy))
+		assertEquals(setOf(creature, building1, building2), HashSet(destroy))
 	}
 	
 	@Test
@@ -99,16 +99,16 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		creature.setAware(AwarenessType.OBJECT, awareness)
 		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
 		for (obj in awareness) {
-			Assert.assertTrue("Should be aware of $obj", creatureObjectAwareness.isAware(obj))
+			assertTrue(creatureObjectAwareness.isAware(obj), "Should be aware of $obj")
 		}
 		
 		creature.setAware(AwarenessType.OBJECT, getRecursiveInfo(creature, listOf(creature)))
 		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
 		for (obj in getRecursiveInfo(creature, listOf(creature))) {
-			Assert.assertTrue("Should be aware of $obj", creatureObjectAwareness.isAware(obj))
+			assertTrue(creatureObjectAwareness.isAware(obj), "Should be aware of $obj")
 		}
 		for (obj in getRecursiveInfo(creature, listOf(building1, building2))) {
-			Assert.assertFalse("Should not be aware of $obj", creatureObjectAwareness.isAware(obj))
+			assertFalse(creatureObjectAwareness.isAware(obj), "Should not be aware of $obj")
 		}
 	}
 	
@@ -144,7 +144,7 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val building = BuildingObject(id)
 		building.template = "object/building/player/shared_player_house_tatooine_small_style_01.iff"
 		building.populateCells()
-		Assert.assertEquals(3, building.cells.size)
+		assertEquals(3, building.cells.size)
 		building.initializeBuilding()
 		return building
 	}
