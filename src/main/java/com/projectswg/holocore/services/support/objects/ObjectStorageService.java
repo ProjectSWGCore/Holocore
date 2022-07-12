@@ -27,7 +27,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
@@ -81,15 +80,12 @@ public class ObjectStorageService extends Service {
 		long startTime = StandardLog.onStartLoad("server objects");
 		List<MongoData> objectDocuments = PswgDatabase.INSTANCE.getObjects().getObjects();
 		Map<Long, SWGObject> objects = new HashMap<>();
-		AtomicLong highestId = new AtomicLong(0);
 		for (MongoData doc : objectDocuments) {
 			SWGObject obj = SWGObjectFactory.create(doc);
 			objects.put(obj.getObjectId(), obj);
-			highestId.updateAndGet(prevHighest -> prevHighest > obj.getObjectId() ? prevHighest : obj.getObjectId());
 			if (obj instanceof PlayerObject) {
 				for (WaypointObject waypoint : ((PlayerObject) obj).getWaypoints().values()) {
 					objects.put(waypoint.getObjectId(), waypoint);
-					highestId.updateAndGet(prevHighest -> prevHighest > waypoint.getObjectId() ? prevHighest : waypoint.getObjectId());
 				}
 			}
 		}
