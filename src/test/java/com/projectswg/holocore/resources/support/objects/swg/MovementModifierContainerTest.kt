@@ -2,8 +2,8 @@ package com.projectswg.holocore.resources.support.objects.swg
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.MovementModifierContainer
 import com.projectswg.holocore.resources.support.objects.swg.creature.MovementModifierIdentifier
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class MovementModifierContainerTest {
 	@Test

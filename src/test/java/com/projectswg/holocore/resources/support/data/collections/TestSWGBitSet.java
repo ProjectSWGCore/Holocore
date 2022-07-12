@@ -29,11 +29,11 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.BitSet;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSWGBitSet extends TestRunnerNoIntents {
 	
@@ -68,12 +68,12 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 		
 		flag.decode(buffer);
 		
-		assertTrue("Flag 1 should be set", flag.get(1));
-		assertTrue("Flag 4 should be set", flag.get(4));
-		assertTrue("Flag 8 should be set", flag.get(8));
-		assertTrue("Flag 16 should be set", flag.get(16));
-		assertTrue("Flag 32 should be set", flag.get(32));
-		assertFalse("Flag 64 should be not set", flag.get(64));
+		assertTrue(flag.get(1));
+		assertTrue(flag.get(4));
+		assertTrue(flag.get(8));
+		assertTrue(flag.get(16));
+		assertTrue(flag.get(32));
+		assertFalse(flag.get(64));
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 		flag.set(4);
 		flag.set(8);
 		
-		assertEquals("Two flags should fill 10 bytes", 10, flag.getLength());
+		assertEquals(10, flag.getLength());
 	}
 
 	@Test

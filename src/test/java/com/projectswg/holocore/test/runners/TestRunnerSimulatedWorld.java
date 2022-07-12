@@ -30,13 +30,13 @@ package com.projectswg.holocore.test.runners;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService;
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage;
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class TestRunnerSimulatedWorld extends TestRunnerSynchronousIntents {
 	
 	private AwarenessService awareness;
 	
-	@Before
+	@BeforeEach
 	public final void setupSimulatedServices() {
 		registerService(new CharacterLookupService());
 		registerService(new SimulatedObjectStorage());

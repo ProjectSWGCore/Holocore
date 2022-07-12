@@ -8,13 +8,13 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestTuneCrystalRadial {
 	
@@ -22,7 +22,7 @@ public class TestTuneCrystalRadial {
 	private GenericPlayer player;
 	private SWGObject crystal;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		radial = new TuneCrystalRadial();
 		player = new GenericPlayer();
@@ -34,30 +34,30 @@ public class TestTuneCrystalRadial {
 	}
 	
 	@Test
-	public void testNotCrystal() {
+	public void youShouldNotBeAbleToTuneObjectsThatAreNotLightsaberCrystals() {
 		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		crystal.setGameObjectType(GameObjectType.GOT_CLOTHING_JACKET);	// Let's change the object type to something different
 		
 		radial.getOptions(options, player, crystal);
 		
-		assertTrue("You should not be able to tune objects that are not lightsaber crystals", options.isEmpty());
+		assertTrue(options.isEmpty());
 	}
 	
 	@Test
-	public void testCrystalUntuned() {
+	public void untunedCrystalsShouldHaveTheTuneRadialOptionForJedi() {
 		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		radial.getOptions(options, player, crystal);
 		
-		assertEquals("Untuned crystals should have one radial option", 1, options.size());
+		assertEquals(1, options.size());
 		
 		RadialOption radialOption = options.get(0);
-		assertEquals("Untuned crystals should present the option of tuning them", "@jedi_spam:tune_crystal", radialOption.getLabel());
+		assertEquals("@jedi_spam:tune_crystal", radialOption.getLabel());
 	}
 	
 	@Test
-	public void testCrystalAlreadyTuned() {
+	public void tunedCrystalShouldHaveNoOptions() {
 		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		
@@ -66,16 +66,16 @@ public class TestTuneCrystalRadial {
 		
 		radial.getOptions(options, player, crystal);
 		
-		assertTrue("Tuned crystals should have no options", options.isEmpty());
+		assertTrue(options.isEmpty());
 	}
 	
 	@Test
-	public void testNotJedi() {
+	public void onlyJediCanTuneCrystals() {
 		player.getCreatureObject().addSkill("swg_dev");	// Something that's not Jedi - doesn't really matter what
 		List<RadialOption> options = new ArrayList<>();
 
 		radial.getOptions(options, player, crystal);
 		
-		assertTrue("Only Jedi should be able to tune crystals", options.isEmpty());
+		assertTrue(options.isEmpty());
 	}
 }

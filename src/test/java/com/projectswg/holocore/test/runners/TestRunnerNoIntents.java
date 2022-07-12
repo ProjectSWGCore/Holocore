@@ -28,19 +28,19 @@
 package com.projectswg.holocore.test.runners;
 
 import me.joshlarson.jlcommon.control.IntentManager;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class TestRunnerNoIntents extends TestRunner {
 	
 	private static final IntentManager INTENT_MANAGER = new IntentManager(0);
 	
-	@Before
+	@BeforeEach
 	public void initializeIntents() {
 		IntentManager.setInstance(INTENT_MANAGER);
 	}
 	
-	@After
+	@AfterEach
 	public void terminateIntents() {
 		IntentManager.setInstance(null);
 	}

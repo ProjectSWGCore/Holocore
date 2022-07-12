@@ -33,8 +33,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -43,9 +43,9 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 	@Test
 	public void testTravelGroups() {
 		TravelHelper helper = new TravelHelper();
-		Assert.assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate()));
-		Assert.assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate()));
-		Assert.assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT_THEED.getTemplate()));
+		assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_SHUTTLE.getTemplate()));
+		assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT.getTemplate()));
+		assertNotNull(helper.getTravelGroup(SpecificObject.SO_TRANSPORT_STARPORT_THEED.getTemplate()));
 	}
 	
 	@Test
@@ -58,15 +58,15 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		};
 		TravelHelper helper = new TravelHelper();
 		for (Terrain terrain : terrains) {
-			Assert.assertEquals(100, helper.getTravelFee(terrain, terrain));
+			assertEquals(100, helper.getTravelFee(terrain, terrain));
 		}
-		Assert.assertEquals(1250, helper.getTravelFee(Terrain.DATHOMIR, Terrain.CORELLIA));
-		Assert.assertEquals(2000, helper.getTravelFee(Terrain.CORELLIA, Terrain.DATHOMIR));
-		Assert.assertEquals(4000, helper.getTravelFee(Terrain.NABOO, Terrain.ENDOR));
-		Assert.assertEquals(500, helper.getTravelFee(Terrain.TATOOINE, Terrain.NABOO));
-		Assert.assertFalse(helper.isValidRoute(Terrain.TATOOINE, Terrain.YAVIN4));
-		Assert.assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.LOK));
-		Assert.assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.NABOO));
+		assertEquals(1250, helper.getTravelFee(Terrain.DATHOMIR, Terrain.CORELLIA));
+		assertEquals(2000, helper.getTravelFee(Terrain.CORELLIA, Terrain.DATHOMIR));
+		assertEquals(4000, helper.getTravelFee(Terrain.NABOO, Terrain.ENDOR));
+		assertEquals(500, helper.getTravelFee(Terrain.TATOOINE, Terrain.NABOO));
+		assertFalse(helper.isValidRoute(Terrain.TATOOINE, Terrain.YAVIN4));
+		assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.LOK));
+		assertTrue(helper.isValidRoute(Terrain.TATOOINE, Terrain.NABOO));
 	}
 	
 	@Test
@@ -80,15 +80,15 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		helper.addTravelPoint(outOfRange);
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		creature.setPosition(Terrain.TATOOINE, 75, 0, 75);
-		Assert.assertEquals(starport, helper.getNearestTravelPoint(creature));
+		assertEquals(starport, helper.getNearestTravelPoint(creature));
 		creature.setPosition(Terrain.TATOOINE, 25, 0, 25);
-		Assert.assertEquals(starport, helper.getNearestTravelPoint(creature));
+		assertEquals(starport, helper.getNearestTravelPoint(creature));
 		creature.setPosition(Terrain.TATOOINE, 500, 0, 500);
-		Assert.assertEquals(starport, helper.getNearestTravelPoint(creature));
+		assertEquals(starport, helper.getNearestTravelPoint(creature));
 		creature.setPosition(Terrain.TATOOINE, -25, 0, -25);
-		Assert.assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
+		assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
 		creature.setPosition(Terrain.TATOOINE, -75, 0, -75);
-		Assert.assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
+		assertEquals(shuttleport, helper.getNearestTravelPoint(creature));
 	}
 	
 	@Test
@@ -97,10 +97,10 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		creature.setPosition(Terrain.TATOOINE, 3500, 5, -4800);
 		List<TravelPoint> destinations = helper.getAvailableTravelPoints(creature, Terrain.YAVIN4);
-		Assert.assertEquals(0, destinations.size());
+		assertEquals(0, destinations.size());
 		destinations = helper.getAvailableTravelPoints(creature, Terrain.LOK);
-		Assert.assertEquals(1, destinations.size());
-		Assert.assertEquals("Nym's Stronghold" , destinations.get(0).getName());
+		assertEquals(1, destinations.size());
+		assertEquals("Nym's Stronghold" , destinations.get(0).getName());
 	}
 	
 	@Test
@@ -109,12 +109,12 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		GenericCreatureObject creature = new GenericCreatureObject(1);
 		creature.setPosition(Terrain.CORELLIA, -75, 0, -4723);
 		List<TravelPoint> destinations = helper.getAvailableTravelPoints(creature, Terrain.YAVIN4);
-		Assert.assertEquals(3, destinations.size());
-		Assert.assertEquals("Imperial Base", destinations.get(0).getName());
-		Assert.assertEquals("Labor Outpost", destinations.get(1).getName());
-		Assert.assertEquals("Mining Outpost", destinations.get(2).getName());
+		assertEquals(3, destinations.size());
+		assertEquals("Imperial Base", destinations.get(0).getName());
+		assertEquals("Labor Outpost", destinations.get(1).getName());
+		assertEquals("Mining Outpost", destinations.get(2).getName());
 		destinations = helper.getAvailableTravelPoints(creature, Terrain.LOK);
-		Assert.assertEquals(0, destinations.size());
+		assertEquals(0, destinations.size());
 	}
 	
 	@Test
@@ -125,10 +125,10 @@ public class TestTravelHelper extends TestRunnerNoIntents {
 		TravelPoint imperialBase = helper.getDestinationPoint(Terrain.YAVIN4, "Imperial Base");
 		TravelPoint coronet = helper.getDestinationPoint(Terrain.CORELLIA, "Coronet Starport");
 		helper.grantTicket(imperialBase, coronet, creature);
-		Assert.assertEquals(imperialBase, helper.getNearestTravelPoint(creature));
-		Assert.assertEquals(1, creature.getSlottedObject("inventory").getContainedObjects().size());
+		assertEquals(imperialBase, helper.getNearestTravelPoint(creature));
+		assertEquals(1, creature.getSlottedObject("inventory").getContainedObjects().size());
 		List<TangibleObject> tickets = helper.getTickets(creature);
-		Assert.assertEquals(1, tickets.size());
+		assertEquals(1, tickets.size());
 		
 	}
 	

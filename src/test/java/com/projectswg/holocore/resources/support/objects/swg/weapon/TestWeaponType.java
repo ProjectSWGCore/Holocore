@@ -1,18 +1,15 @@
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(Parameterized.class)
 public class TestWeaponType {
 	
-	@Parameterized.Parameters(name = "{0}")
 	public static Collection<Input> parameters() {
 		return Arrays.asList(
 				// Melee, not lightsabers
@@ -37,27 +34,27 @@ public class TestWeaponType {
 		);
 	}
 	
-	@Parameterized.Parameter
-	public Input input;
-	
-	@Test
-	public void testMelee() {
+	@ParameterizedTest
+	@MethodSource("parameters")
+	public void testMelee(Input input) {
 		boolean expectMelee = input.isExpectMelee();
 		WeaponType type = input.getType();
 		
 		assertEquals(expectMelee, type.isMelee());
 	}
 	
-	@Test
-	public void testLightsaber() {
+	@ParameterizedTest
+	@MethodSource("parameters")
+	public void testLightsaber(Input input) {
 		boolean expectLightsaber = input.isExpectLightSaber();
 		WeaponType type = input.getType();
 		
 		assertEquals(expectLightsaber, type.isLightsaber());
 	}
 	
-	@Test
-	public void testRanged() {
+	@ParameterizedTest
+	@MethodSource("parameters")
+	public void testRanged(Input input) {
 		boolean expectRanged = input.isExpectRanged();
 		WeaponType type = input.getType();
 		

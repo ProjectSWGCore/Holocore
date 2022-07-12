@@ -8,11 +8,10 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestActivePlayerPredicate {
 	
@@ -26,7 +25,7 @@ public class TestActivePlayerPredicate {
 	private CreatureObject creatureObject;
 	private PlayerObject playerObject;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		player = new GenericPlayer();
 		creatureObject = new GenericCreatureObject(1);
@@ -40,7 +39,7 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("AFK players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -49,7 +48,7 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("LD players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -58,7 +57,7 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Incapacitated players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -67,7 +66,7 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Dead players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -76,7 +75,7 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Cloaked players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -87,13 +86,13 @@ public class TestActivePlayerPredicate {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Players inside private cells should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
 	public void testActive() {
 		boolean actual = predicate.test(player);
 		
-		assertTrue("Active player should not be determined inactive", actual);
+		assertTrue(actual);
 	}
 }

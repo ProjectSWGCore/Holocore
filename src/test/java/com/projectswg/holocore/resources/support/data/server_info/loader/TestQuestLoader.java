@@ -1,9 +1,8 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,17 +10,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(Enclosed.class)
 public class TestQuestLoader {
 	
-	public static class TestQuestInfo {
+	@Nested
+	public class TestQuestInfo {
 		
 		private static QuestLoader.QuestListInfo questInfo;
 		
-		@BeforeClass
-		public static void setup() throws IOException {
+		@BeforeEach
+		public void setup() throws IOException {
 			QuestLoader questLoader = new QuestLoader();
 			questLoader.load();	// May throw an exception
 			
@@ -75,12 +74,13 @@ public class TestQuestLoader {
 	
 	}
 	
-	public static class TestQuestTask {
+	@Nested
+	public class TestQuestTask {
 		
 		private static List<QuestLoader.QuestTaskInfo> taskListInfos;
 		
-		@BeforeClass
-		public static void setup() throws IOException {
+		@BeforeEach
+		public void setup() throws IOException {
 			QuestLoader questLoader = new QuestLoader();
 			
 			taskListInfos = questLoader.getTaskListInfos("quest/purvis_kill_warriors");

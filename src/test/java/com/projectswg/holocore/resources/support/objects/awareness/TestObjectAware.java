@@ -32,13 +32,13 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestObjectAware extends TestRunnerNoIntents {
 	
@@ -47,7 +47,7 @@ public class TestObjectAware extends TestRunnerNoIntents {
 	private SWGObject creature1;
 	private SWGObject creature2;
 	
-	@Before
+	@BeforeEach
 	public void initialize() {
 		tangible1 = new GenericTangibleObject(1);
 		tangible2 = new GenericTangibleObject(2);

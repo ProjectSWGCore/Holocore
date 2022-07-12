@@ -2,8 +2,8 @@ package com.projectswg.holocore.services.gameplay.combat.buffs
 
 import com.projectswg.holocore.resources.support.global.commands.callbacks.BurstRunCmdCallback
 import com.projectswg.holocore.test.resources.GenericCreatureObject
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class BurstRunTest {
 	@Test

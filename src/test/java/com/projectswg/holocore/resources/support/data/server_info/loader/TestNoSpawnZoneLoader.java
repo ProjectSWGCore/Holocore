@@ -2,24 +2,17 @@ package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(Parameterized.class)
 public class TestNoSpawnZoneLoader {
 	
-	@Parameterized.Parameter
-	public Input input;
-	
-	@Parameterized.Parameters(name = "{0}")
 	public static Collection<Input> parameters() {
 		Location mosEisleyLocation = Location.builder()
 				.setTerrain(Terrain.TATOOINE)
@@ -41,16 +34,12 @@ public class TestNoSpawnZoneLoader {
 		);
 	}
 	
-	private NoSpawnZoneLoader loader;
+	private final NoSpawnZoneLoader loader = new NoSpawnZoneLoader();
 	
-	@Before
-	public void setup() throws IOException {
-		loader = new NoSpawnZoneLoader();
+	@ParameterizedTest
+	@MethodSource("parameters")
+	public void testIsInNoSpawnZone(Input input) throws IOException {
 		loader.load();	// We just expect this to not throw an exception
-	}
-	
-	@Test
-	public void testIsInNoSpawnZone() {
 		boolean actual = loader.isInNoSpawnZone(input.getLocation());
 		boolean expected = input.isNoBuildZone();
 		

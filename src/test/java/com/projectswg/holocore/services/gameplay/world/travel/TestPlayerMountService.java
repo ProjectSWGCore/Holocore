@@ -41,9 +41,10 @@ import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.List;
@@ -64,8 +65,8 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		
 		// PCD [object/intangible/vehicle/shared_speederbike_swoop_pcd.iff] should be in the datapad
 		Collection<SWGObject> datapadData = creature.getDatapad().getContainedObjects();
-		Assert.assertEquals(1, datapadData.size());
-		Assert.assertEquals("object/intangible/vehicle/shared_speederbike_swoop_pcd.iff", datapadData.iterator().next().getTemplate());
+		assertEquals(1, datapadData.size());
+		assertEquals("object/intangible/vehicle/shared_speederbike_swoop_pcd.iff", datapadData.iterator().next().getTemplate());
 	}
 	
 	@Test
@@ -91,7 +92,7 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		assertCorrectDismount(creature, vehicle, friend);
 		
 		// Vehicle [object/mobile/vehicle/shared_speederbike_swoop.iff] should now be in the world alongside the player, and aware of eachother
-		Assert.assertEquals(creature.getLocation(), vehicle.getLocation());
+		assertEquals(creature.getLocation(), vehicle.getLocation());
 		
 		broadcastAndWait(new PetDeviceStoreIntent(creature, pcd));
 		updateAwareness();
@@ -135,7 +136,7 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 		assertCorrectDismount(creature, vehicle, friend);
 	}
 	
-	@BeforeClass
+	@BeforeAll
 	public static void enableLogging() {
 		Log.addWrapper(new ConsoleLogWrapper());
 	}
@@ -154,28 +155,28 @@ public class TestPlayerMountService extends TestRunnerSimulatedWorld {
 	}
 	
 	private void assertCorrectStored(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
-		Assert.assertNull(creature.getParent());
+		assertNull(creature.getParent());
 		
-		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
-		Assert.assertFalse(vehicle.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
-		Assert.assertFalse(creature.getAware(AwarenessType.SELF).contains(vehicle));
-		Assert.assertFalse(vehicle.getAware(AwarenessType.SELF).contains(creature));
+		assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
+		assertFalse(vehicle.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
+		assertFalse(creature.getAware(AwarenessType.SELF).contains(vehicle));
+		assertFalse(vehicle.getAware(AwarenessType.SELF).contains(creature));
 	}
 	
 	private void assertCorrectMount(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
-		Assert.assertEquals(vehicle, creature.getParent());
-		Assert.assertNull(vehicle.getParent());
-		Assert.assertTrue(creature.isObserveWithParent());
+		assertEquals(vehicle, creature.getParent());
+		assertNull(vehicle.getParent());
+		assertTrue(creature.isObserveWithParent());
 		
-		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
+		assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
 	}
 	
 	private void assertCorrectDismount(CreatureObject creature, CreatureObject vehicle, SWGObject ... awareness) {
-		Assert.assertNull(creature.getParent());
-		Assert.assertNull(vehicle.getParent());
-		Assert.assertTrue(creature.isObserveWithParent());
+		assertNull(creature.getParent());
+		assertNull(vehicle.getParent());
+		assertTrue(creature.isObserveWithParent());
 		
-		Assert.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
+		assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(List.of(awareness)));
 	}
 	
 }

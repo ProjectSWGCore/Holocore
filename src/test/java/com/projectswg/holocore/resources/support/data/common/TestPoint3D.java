@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.data.common;
 import com.projectswg.common.data.location.Point3D;
 import com.projectswg.common.data.location.Quaternion;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TestPoint3D extends TestRunnerNoIntents {
 	
@@ -39,15 +39,15 @@ public class TestPoint3D extends TestRunnerNoIntents {
 		Point3D p = new Point3D(0, 0, 1);
 		Quaternion q = new Quaternion(0, 1, 0, 0);
 		p.rotateAround(0, 0, 0, q);
-		Assert.assertEquals(0, p.getX(), 1E-7);
-		Assert.assertEquals(0, p.getY(), 1E-7);
-		Assert.assertEquals(-1, p.getZ(), 1E-7);
+		assertEquals(0, p.getX(), 1E-7);
+		assertEquals(0, p.getY(), 1E-7);
+		assertEquals(-1, p.getZ(), 1E-7);
 		p.set(0, 0, 1);
 		q.setHeading(45);
 		p.rotateAround(0, 0, 0, q);
-		Assert.assertEquals(Math.sqrt(2)/2, p.getX(), 1E-7);
-		Assert.assertEquals(0, p.getY(), 1E-7);
-		Assert.assertEquals(Math.sqrt(2)/2, p.getZ(), 1E-7);
+		assertEquals(Math.sqrt(2)/2, p.getX(), 1E-7);
+		assertEquals(0, p.getY(), 1E-7);
+		assertEquals(Math.sqrt(2)/2, p.getZ(), 1E-7);
 	}
 	
 }

@@ -1,19 +1,19 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.common.data.location.Terrain;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDynamicSpawnLoader {
 	
 	private DynamicSpawnLoader loader;
 	
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		loader = new DynamicSpawnLoader();
 		loader.load();	// We just expect this to not throw an exception
@@ -23,13 +23,15 @@ public class TestDynamicSpawnLoader {
 	public void testGetSpawnInfosNullTerrain() {
 		Collection<DynamicSpawnLoader.DynamicSpawnInfo> output = loader.getSpawnInfos(null);
 		
-		assertEquals("Unknown terrain should result in an empty list of dynamic spawns", 0, output.size());
+		assertEquals(0, output.size(), "Unknown terrain should result in an empty list of dynamic spawns");
 	}
 	
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void testGetSpawnInfosUnmodifiable() {
 		Collection<DynamicSpawnLoader.DynamicSpawnInfo> output = loader.getSpawnInfos(Terrain.TATOOINE);	// Hopefully we have spawns on Tatooine
 		
-		output.add(null);	// Adding something to an unmodifiable collection should throw an exception
+		assertThrows(UnsupportedOperationException.class, () -> {
+			output.add(null);
+		});
 	}
 }
