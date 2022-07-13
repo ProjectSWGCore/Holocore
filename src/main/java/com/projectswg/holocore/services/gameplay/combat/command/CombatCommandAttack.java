@@ -27,17 +27,20 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
+import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -196,7 +199,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			if (randomNumberBetween0And100() > toHit) {
 				info.setSuccess(false);
 				
-				ShowFlyText missFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "miss"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255));
+				ShowFlyText missFlyText = new ShowFlyText(target.getObjectId(), new StringId("combat_effects", "miss"), ShowFlyText.Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite());
 				target.sendSelf(missFlyText);
 				source.sendSelf(missFlyText);
 				
@@ -258,9 +261,46 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			int hate = (int) (finalDamage * command.getHateDamageModifier());
 			hate += command.getHateAdd();
 			target.handleHate(source, hate);
+			
+			boolean bothUsingMelee = target.getEquippedWeapon().getType().isMelee() && source.getEquippedWeapon().getType().isMelee();
+			
+			if (bothUsingMelee) {
+				double percentOfDamageToReflectBackToAttacker = target.getSkillModValue("private_melee_dmg_shield") / 100d;
+				
+				if (percentOfDamageToReflectBackToAttacker > 0) {
+					riposte(source, target, rawDamage, percentOfDamageToReflectBackToAttacker);
+				}
+			}
 		}
 		
 		source.sendObservers(action);
+	}
+	
+	private static void riposte(CreatureObject source, CreatureObject target, int rawDamage, double percentOfDamageToReflectBackToAttacker) {
+		int reflectedDamage = (int) (percentOfDamageToReflectBackToAttacker * rawDamage);
+		
+		ShowFlyText riposteFlytext = new ShowFlyText(target.getObjectId(), new StringId("cbt_spam", "dmg_shield_melee_fly"), ShowFlyText.Scale.MEDIUM, SWGColor.Reds.INSTANCE.getOrangered());
+		target.sendSelf(riposteFlytext);
+		source.sendSelf(riposteFlytext);
+		
+		OutOfBandPackage spamMessage = new OutOfBandPackage(new ProsePackage(new StringId("cbt_spam", "dmg_shield_melee_spam"), "TU", target.getObjectName(), "TT", source.getObjectName(), "DI", reflectedDamage));
+		sendRiposteCombatSpam(target, spamMessage);
+		sendRiposteCombatSpam(source, spamMessage);
+		
+		if (source.getHealth() < reflectedDamage) {
+			// Took more damage than they had health left. Final damage becomes the amount of remaining health.
+			RequestCreatureDeathIntent.broadcast(source, target);
+		} else {
+			source.modifyHealth(-reflectedDamage);
+		}
+	}
+	
+	private static void sendRiposteCombatSpam(CreatureObject receiver, OutOfBandPackage spamMessage) {
+		CombatSpam riposteCombatSpamTo = new CombatSpam(receiver.getObjectId());
+		riposteCombatSpamTo.setDataType((byte) 2);
+		riposteCombatSpamTo.setSpamMessage(spamMessage);
+		riposteCombatSpamTo.setSpamType(CombatSpamType.HIT);
+		receiver.sendSelf(riposteCombatSpamTo);
 	}
 	
 	private static double calculateToHit(CreatureObject source, WeaponObject sourceWeapon, CreatureObject target) {

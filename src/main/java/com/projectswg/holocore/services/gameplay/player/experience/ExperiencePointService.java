@@ -1,6 +1,5 @@
 package com.projectswg.holocore.services.gameplay.player.experience;
 
-import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
@@ -9,6 +8,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -68,8 +68,7 @@ public class ExperiencePointService extends Service {
 	
 	private void showFlytext(CreatureObject creatureObject, SWGObject flytextTarget, int xpGained) {
 		OutOfBandPackage message = new OutOfBandPackage(new ProsePackage(new StringId("base_player", "prose_flytext_xp"), "DI", xpGained));
-		RGB magenta = new RGB(255, 0, 255);
-		ShowFlyText packet = new ShowFlyText(flytextTarget.getObjectId(), message, Scale.MEDIUM, magenta);
+		ShowFlyText packet = new ShowFlyText(flytextTarget.getObjectId(), message, Scale.MEDIUM, SWGColor.Violets.INSTANCE.getMagenta());
 		creatureObject.sendSelf(packet);
 	}
 	

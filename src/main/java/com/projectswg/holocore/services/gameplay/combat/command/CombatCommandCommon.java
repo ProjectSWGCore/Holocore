@@ -39,6 +39,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -49,9 +50,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatCommandCommon {
-	
-	private static final RGB COLOR_WHITE = new RGB(255, 255, 255);
-	private static final RGB COLOR_CYAN = new RGB(0, 255, 255);
 	
 	private CombatCommandCommon() {
 		
@@ -161,10 +159,10 @@ public class CombatCommandCommon {
 	
 	public static void handleStatus(CreatureObject source, CombatStatus status) {
 		switch (status) {
-			case NO_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
-			case TOO_FAR -> showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-			case INVALID_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-			default -> showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
+			case NO_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
+			case TOO_FAR -> showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
+			case INVALID_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
+			default -> showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
 		}
 	}
 	
