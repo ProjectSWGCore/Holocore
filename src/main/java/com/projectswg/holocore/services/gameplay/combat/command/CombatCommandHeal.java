@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
@@ -42,6 +41,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -187,7 +187,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		combatAction.addDefender(new Defender(healed.getObjectId(), healed.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
 		
 		OutOfBandPackage oobp = new OutOfBandPackage(new ProsePackage("StringId", new StringId("healing", "heal_fly"), "DI", difference, "TO", attribName));
-		ShowFlyText flyText = new ShowFlyText(healed.getObjectId(), oobp, Scale.MEDIUM, new RGB(46, 139, 87), ShowFlyText.Flag.IS_HEAL);
+		ShowFlyText flyText = new ShowFlyText(healed.getObjectId(), oobp, Scale.MEDIUM, SWGColor.Greens.INSTANCE.getSeagreen(), ShowFlyText.Flag.IS_HEAL);
 		String commandName = combatCommand.getName();
 		SWGPacket effect;
 		
