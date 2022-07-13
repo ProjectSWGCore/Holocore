@@ -1,15 +1,13 @@
 package com.projectswg.holocore.resources.gameplay.conversation.requirements;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ActiveQuestRequirementTest {
 	
@@ -19,11 +17,10 @@ public class ActiveQuestRequirementTest {
 	
 	@BeforeEach
 	public void setup() {
-		player = mock(Player.class);
-		playerObject = mock(PlayerObject.class);
+		GenericCreatureObject genericCreatureObject = new GenericCreatureObject(ObjectCreator.getNextObjectId());
+		player = genericCreatureObject.getOwner();
+		playerObject = genericCreatureObject.getPlayerObject();
 		questName = "testquest";
-		
-		when(player.getPlayerObject()).thenReturn(playerObject);
 	}
 	
 	@Test
@@ -31,8 +28,6 @@ public class ActiveQuestRequirementTest {
 		Integer task = null;
 		boolean active = true;
 		ActiveQuestRequirement requirement = new ActiveQuestRequirement(questName, active, task);
-		
-		when(playerObject.isQuestInJournal(questName)).thenReturn(false);
 		
 		boolean result = requirement.test(player);
 		
@@ -44,9 +39,8 @@ public class ActiveQuestRequirementTest {
 		Integer task = null;
 		boolean active = true;
 		ActiveQuestRequirement requirement = new ActiveQuestRequirement(questName, active, task);
-		
-		when(playerObject.isQuestInJournal(questName)).thenReturn(true);
-		when(playerObject.isQuestComplete(questName)).thenReturn(true);
+		playerObject.addQuest(questName);
+		playerObject.completeQuest(questName);
 		
 		boolean result = requirement.test(player);
 		
@@ -55,13 +49,11 @@ public class ActiveQuestRequirementTest {
 	
 	@Test
 	public void taskActive() {
-		Integer task = 1;
+		int task = 1;
 		boolean active = true;
 		ActiveQuestRequirement requirement = new ActiveQuestRequirement(questName, active, task);
-		
-		when(playerObject.isQuestInJournal(questName)).thenReturn(true);
-		when(playerObject.isQuestComplete(questName)).thenReturn(false);
-		when(playerObject.getQuestActiveTasks(questName)).thenReturn(Collections.singleton(task));
+		playerObject.addQuest(questName);
+		playerObject.addActiveQuestTask(questName, task);
 		
 		boolean result = requirement.test(player);
 		
@@ -70,13 +62,11 @@ public class ActiveQuestRequirementTest {
 	
 	@Test
 	public void taskActiveFlipped() {
-		Integer task = 1;
+		int task = 1;
 		boolean active = false;
 		ActiveQuestRequirement requirement = new ActiveQuestRequirement(questName, active, task);
-		
-		when(playerObject.isQuestInJournal(questName)).thenReturn(true);
-		when(playerObject.isQuestComplete(questName)).thenReturn(false);
-		when(playerObject.getQuestActiveTasks(questName)).thenReturn(Collections.singleton(task));
+		playerObject.addQuest(questName);
+		playerObject.addActiveQuestTask(questName, task);
 		
 		boolean result = requirement.test(player);
 		
@@ -88,10 +78,7 @@ public class ActiveQuestRequirementTest {
 		Integer task = null;
 		boolean active = true;
 		ActiveQuestRequirement requirement = new ActiveQuestRequirement(questName, active, task);
-		
-		when(playerObject.isQuestInJournal(questName)).thenReturn(true);
-		when(playerObject.isQuestComplete(questName)).thenReturn(false);
-		when(playerObject.getQuestActiveTasks(questName)).thenReturn(Collections.singleton(task));
+		playerObject.addQuest(questName);
 		
 		boolean result = requirement.test(player);
 		
