@@ -14,7 +14,6 @@ import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -99,16 +98,11 @@ public class CloningService extends Service {
 
 					String stfCellValue = set.getString("stf_name");
 					String stfName = stfCellValue.equals("-") ? null : stfCellValue;
-					PvpFaction factionRestriction = null;
-
-					switch (stfCellValue) {
-						case "FACTION_REBEL":
-							factionRestriction = PvpFaction.REBEL;
-							break;
-						case "FACTION_IMPERIAL":
-							factionRestriction = PvpFaction.IMPERIAL;
-							break;
-					}
+					PvpFaction factionRestriction = switch (stfCellValue) {
+						case "FACTION_REBEL" -> PvpFaction.REBEL;
+						case "FACTION_IMPERIAL" -> PvpFaction.IMPERIAL;
+						default -> null;
+					};
 					
 					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
 					String objectTemplate = set.getString("structure");
@@ -131,8 +125,10 @@ public class CloningService extends Service {
 			return;
 		
 		Player corpseOwner = corpse.getOwner();
-		new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
-		new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
+		if (corpseOwner != null) {
+			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "prose_victim_dead"), "TT", i.getKiller().getObjectName())).broadcast();
+			new SystemMessageIntent(corpseOwner, new ProsePackage(new StringId("base_player", "revive_exp_msg"), "TT", CLONE_TIMER + " minutes.")).broadcast();
+		}
 		
 		scheduleCloneTimer(corpse);
 	}
@@ -141,11 +137,10 @@ public class CloningService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
 		SWGObject createdObject = i.getObject();
 		
-		if(!(createdObject instanceof BuildingObject)) {
+		if(!(createdObject instanceof BuildingObject createdBuilding)) {
 			return;
 		}
 		
-		BuildingObject createdBuilding = (BuildingObject) createdObject;
 		String objectTemplate = createdBuilding.getTemplate();
 		
 		if(facilityDataMap.containsKey(objectTemplate)) {
@@ -226,31 +221,24 @@ public class CloningService extends Service {
 	}
 	
 	private SuiWindow createSuiWindow(List<BuildingObject> availableFacilities, CreatureObject corpse) {
-		SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", "@base_player:clone_prompt_header");
-		
-		for (BuildingObject cloningFacility : availableFacilities) {
-			FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
-			String name;
-			
-			if (facilityData.getStfName() != null)
-				name = facilityData.getStfName();
-			else if (!cloningFacility.getCurrentCity().isEmpty())
-				name = cloningFacility.getCurrentCity();
-			else
-				name = String.format("%s[%d, %d]", cloningFacility.getTerrain(), (int) cloningFacility.getX(), (int) cloningFacility.getZ());
-			
-			suiWindow.addListItem(name);
-		}
+		BuildingObject closestFacility = availableFacilities.get(0);
+
+		String preDesignated = "Pre-Designated: None";
+		String cashBalance = "Cash Balance: " + corpse.getCashBalance();
+		String help = "\nSelect the desired operation and click OK";
+		String prompt = String.join("\n", preDesignated, cashBalance, help);
+		SuiListBox suiWindow = new SuiListBox(SuiButtons.OK, "@base_player:revive_title", prompt);
+		suiWindow.addListItem("@base_player:revive_closest");
 		
 		suiWindow.addCallback("handleFacilityChoice", (SuiEvent event, Map<String, String> parameters) -> {
 			int selectionIndex = SuiListBox.getSelectedRow(parameters);
-
+			
 			if (event != SuiEvent.OK_PRESSED || selectionIndex >= availableFacilities.size() || selectionIndex < 0) {
 				suiWindow.display(corpse.getOwner());
 				return;
 			}
-
-			if (reviveCorpse(corpse, availableFacilities.get(selectionIndex)) != CloneResult.SUCCESS) {
+			
+			if (reviveCorpse(corpse, closestFacility) != CloneResult.SUCCESS) {
 				suiWindow.display(corpse.getOwner());
 			}
 		});
@@ -347,8 +335,11 @@ public class CloningService extends Service {
 		if(reviveTimers.remove(corpse) != null) {
 			Player corpseOwner = corpse.getOwner();
 		
-			new SystemMessageIntent(corpseOwner, "@base_player:revive_expired").broadcast();
-			suiWindow.close(corpseOwner);
+			if (corpseOwner != null) {
+				new SystemMessageIntent(corpseOwner, "@base_player:revive_expired").broadcast();
+				suiWindow.close(corpseOwner);
+			}
+			
 			forceClone(corpse, facilitiesInTerrain);
 		} else {
 			StandardLog.onPlayerError(this, corpse, "could not be force cloned because no timer was active");
