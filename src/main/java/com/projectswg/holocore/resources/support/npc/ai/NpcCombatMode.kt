@@ -19,7 +19,6 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ThreadLocalRandom
@@ -157,15 +156,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 			return "creatureMeleeAttack"
 		}
 
-		return when (weapon.type) {
-			WeaponType.PISTOL -> "rangedShot"
-			WeaponType.RIFLE -> "rangedShot"
-			WeaponType.LIGHT_RIFLE -> "rangedShot"
-			WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
-			WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
-			WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
-			else -> "meleeHit"
-		}
+		return weapon.type.defaultAttack
 	}
 	
 }

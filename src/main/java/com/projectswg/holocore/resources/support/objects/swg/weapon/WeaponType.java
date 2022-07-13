@@ -26,28 +26,30 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
 public enum WeaponType {
-	RIFLE						(0, "rifle_speed", WeaponClass.RANGED, "rifle_defense", "rifle_accuracy"),
-	CARBINE						(1, "carbine_speed", WeaponClass.RANGED, "carbine_defense", "carbine_accuracy"),
-	PISTOL						(2, "pistol_speed", WeaponClass.RANGED, "pistol_defense", "pistol_accuracy"),
-	HEAVY						(3, "heavyweapon_speed", WeaponClass.RANGED, "heavyweapon_defense", "heavyweapon_accuracy"),
-	ONE_HANDED_MELEE			(4, "onehandmelee_speed", WeaponClass.MELEE, "onehandmelee_defense", "onehandmelee_accuracy"),
-	TWO_HANDED_MELEE			(5, "twohandmelee_speed", WeaponClass.MELEE, "twohandmelee_defense", "twohandmelee_accuracy"),
-	UNARMED						(6, "unarmed_speed", WeaponClass.MELEE, "unarmed_defense", "unarmed_accuracy"),
-	POLEARM_MELEE				(7, "polearm_speed", WeaponClass.MELEE, "polearm_defense", "polearm_accuracy"),
-	THROWN						(8, "thrown_speed", WeaponClass.RANGED, null, "thrown_accuracy"),
-	ONE_HANDED_SABER			(9, "onehandlightsaber_speed", WeaponClass.MELEE, null, "onehandlightsaber_accuracy"),
-	TWO_HANDED_SABER			(10, "twohandlightsaber_speed", WeaponClass.MELEE, null, "twohandlightsaber_accuracy"),
-	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy"),
+	RIFLE						(0, "rifle_speed", WeaponClass.RANGED, "rifle_defense", "rifle_accuracy", "rangedShot"),
+	CARBINE						(1, "carbine_speed", WeaponClass.RANGED, "carbine_defense", "carbine_accuracy", "rangedShot"),
+	PISTOL						(2, "pistol_speed", WeaponClass.RANGED, "pistol_defense", "pistol_accuracy", "rangedShot"),
+	HEAVY						(3, "heavyweapon_speed", WeaponClass.RANGED, "heavyweapon_defense", "heavyweapon_accuracy", "rangedShot"),
+	ONE_HANDED_MELEE			(4, "onehandmelee_speed", WeaponClass.MELEE, "onehandmelee_defense", "onehandmelee_accuracy", "meleeHit"),
+	TWO_HANDED_MELEE			(5, "twohandmelee_speed", WeaponClass.MELEE, "twohandmelee_defense", "twohandmelee_accuracy", "meleeHit"),
+	UNARMED						(6, "unarmed_speed", WeaponClass.MELEE, "unarmed_defense", "unarmed_accuracy", "meleeHit"),
+	POLEARM_MELEE				(7, "polearm_speed", WeaponClass.MELEE, "polearm_defense", "polearm_accuracy", "meleeHit"),
+	THROWN						(8, "thrown_speed", WeaponClass.RANGED, null, "thrown_accuracy", "meleeHit"),
+	ONE_HANDED_SABER			(9, "onehandlightsaber_speed", WeaponClass.MELEE, null, "onehandlightsaber_accuracy", "saberHit"),
+	TWO_HANDED_SABER			(10, "twohandlightsaber_speed", WeaponClass.MELEE, null, "twohandlightsaber_accuracy", "saberHit"),
+	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy", "saberHit"),
 	
 	// TODO these are NGE weapon types we should remove later
-	HEAVY_WEAPON				(12, "unavailable", WeaponClass.RANGED, null, null),
-	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable", WeaponClass.RANGED, null, null),
-	LIGHT_RIFLE					(14, "unavailable", WeaponClass.RANGED, null, null);
+	HEAVY_WEAPON				(12, "unavailable", WeaponClass.RANGED, null, null, ""),
+	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable", WeaponClass.RANGED, null, null, ""),
+	LIGHT_RIFLE					(14, "unavailable", WeaponClass.RANGED, null, null, "");
 	
 	private static final WeaponType [] VALUES = values();
 	
@@ -56,13 +58,15 @@ public enum WeaponType {
 	private final WeaponClass weaponClass;
 	private final String defenseSkillMod;
 	private final String accuracySkillMod;
+	private final String defaultAttack;
 	
-	WeaponType(int num, String speedSkillMod, WeaponClass weaponClass, String defenseSkillMod, String accuracySkillMod) {
+	WeaponType(int num, String speedSkillMod, WeaponClass weaponClass, String defenseSkillMod, String accuracySkillMod, String defaultAttack) {
 		this.num = num;
 		this.speedSkillMod = speedSkillMod;
 		this.weaponClass = weaponClass;
 		this.defenseSkillMod = defenseSkillMod;
 		this.accuracySkillMod = accuracySkillMod;
+		this.defaultAttack = defaultAttack;
 	}
 	
 	public int getNum() {
@@ -133,5 +137,10 @@ public enum WeaponType {
 	 */
 	public boolean isRanged() {
 		return weaponClass == WeaponClass.RANGED;
+	}
+	
+	@NotNull
+	public String getDefaultAttack() {
+		return defaultAttack;
 	}
 }
