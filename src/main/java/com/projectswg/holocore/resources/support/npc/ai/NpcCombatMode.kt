@@ -1,6 +1,5 @@
 package com.projectswg.holocore.resources.support.npc.ai
 
-import com.projectswg.common.data.RGB
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
@@ -12,6 +11,7 @@ import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
+import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -19,7 +19,6 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ThreadLocalRandom
@@ -62,7 +61,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	private fun showExclamationMarkAboveNpc() {
-		ai.sendObservers(ShowFlyText(ai.objectId, StringId("npc_reaction/flytext", "threaten"), ShowFlyText.Scale.SMALL, RGB(204, 0, 0)))
+		ai.sendObservers(ShowFlyText(ai.objectId, StringId("npc_reaction/flytext", "threaten"), ShowFlyText.Scale.SMALL, SWGColor.Reds.red))
 	}
 
 	override fun onModeEnd() {
@@ -157,15 +156,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 			return "creatureMeleeAttack"
 		}
 
-		return when (weapon.type) {
-			WeaponType.PISTOL -> "rangedShot"
-			WeaponType.RIFLE -> "rangedShot"
-			WeaponType.LIGHT_RIFLE -> "rangedShot"
-			WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
-			WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
-			WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
-			else -> "meleeHit"
-		}
+		return weapon.type.defaultAttack
 	}
 	
 }

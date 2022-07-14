@@ -14,6 +14,7 @@ import com.projectswg.holocore.intents.support.global.command.ExecuteCommandInte
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ValidWeapon;
@@ -332,7 +333,7 @@ public class CommandQueueService extends Service {
 		}
 		
 		private void showInvalidWeaponFlyText(CreatureObject source) {
-			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, new RGB(255, 255, 255)));
+			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite()));
 		}
 		
 	}

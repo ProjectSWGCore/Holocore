@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 import com.projectswg.holocore.resources.support.global.commands.callbacks.admin.qatool.CmdQaTool;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.*;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.chat.friend.*;
+import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdAttack;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdCoupDeGrace;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdDuel;
 import com.projectswg.holocore.resources.support.global.commands.callbacks.combat.CmdEndDuel;
@@ -185,6 +186,7 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("cmdCoupDeGrace", CmdCoupDeGrace::new);
 		registerCppCallback("duel", CmdDuel::new);
 		registerCppCallback("endDuel", CmdEndDuel::new);
+		registerScriptCallback("attack", CmdAttack::new);
 	}
 	
 	private void addLootScripts() {

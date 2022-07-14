@@ -26,13 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
-import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -170,7 +170,7 @@ public class AIObject extends CreatureObject {
 	}
 	
 	private void showQuestionMarkAboveNpc() {
-		this.sendObservers(new ShowFlyText(this.getObjectId(), new StringId("npc_reaction/flytext", "alert"), ShowFlyText.Scale.SMALL, new RGB(204, 0, 0)));
+		this.sendObservers(new ShowFlyText(this.getObjectId(), new StringId("npc_reaction/flytext", "alert"), ShowFlyText.Scale.SMALL, SWGColor.Reds.INSTANCE.getRed()));
 	}
 	
 	private void checkAwareAttack(CreatureObject player) {

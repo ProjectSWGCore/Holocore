@@ -187,7 +187,7 @@ public class SkillService extends Service {
 		int pointsRequired = skill.getPointsRequired();
 		int skillPointsSpent = skillPointsSpent(target);
 
-		if (skillPointsSpent(target) + pointsRequired >= SKILL_POINT_CAP) {
+		if (skillPointsSpent(target) + pointsRequired > SKILL_POINT_CAP) {
 			int missingPoints = pointsRequired - (SKILL_POINT_CAP - skillPointsSpent);
 
 			Log.d("%s cannot learn %s because they lack %d skill points", target, skill.getName(), missingPoints);
