@@ -4,6 +4,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 
 class MeleeValidWeaponChecker : ValidWeaponChecker {
 	override fun isValid(weaponType: WeaponType): Boolean {
-		return weaponType.isMelee
+		return weaponType.isMelee && !weaponType.isLightsaber
 	}
 }

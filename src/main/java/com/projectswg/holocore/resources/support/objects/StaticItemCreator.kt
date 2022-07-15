@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.objects
 
+import com.projectswg.common.data.combat.DamageType
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
@@ -166,18 +167,27 @@ object StaticItemCreator {
 
 		val quality = info.quality
 
-		obj.lightsaberPowerCrystalQuality = when (quality) {
-			0 -> LightsaberPowerCrystalQuality.poor
-			1 -> LightsaberPowerCrystalQuality.fair
-			2 -> LightsaberPowerCrystalQuality.good
-			3 -> LightsaberPowerCrystalQuality.quality
-			4 -> LightsaberPowerCrystalQuality.select
-			5 -> LightsaberPowerCrystalQuality.premium
-			6 -> LightsaberPowerCrystalQuality.flawless
-			else -> null
+		val powerCrystal = info.maxDmg > 0
+		if (powerCrystal) {
+			obj.lightsaberPowerCrystalQuality = when (quality) {
+				0 -> LightsaberPowerCrystalQuality.poor
+				1 -> LightsaberPowerCrystalQuality.fair
+				2 -> LightsaberPowerCrystalQuality.good
+				3 -> LightsaberPowerCrystalQuality.quality
+				4 -> LightsaberPowerCrystalQuality.select
+				5 -> LightsaberPowerCrystalQuality.premium
+				6 -> LightsaberPowerCrystalQuality.flawless
+				else -> null
+			}
+			obj.lightsaberPowerCrystalMinDmg = info.minDmg
+			obj.lightsaberPowerCrystalMaxDmg = info.maxDmg
 		}
-		obj.lightsaberPowerCrystalMinDmg = info.minDmg
-		obj.lightsaberPowerCrystalMaxDmg = info.maxDmg
+
+		if (info.elementalDamageType.isNotEmpty()) {
+			val elementalType = DamageType.valueOf(info.elementalDamageType)
+			obj.lightsaberColorCrystalElementalType = elementalType
+			obj.lightsaberColorCrystalDamagePercent = info.elementalDamagePercent
+		}
 	}
 	
 	@Suppress("UNUSED_PARAMETER")

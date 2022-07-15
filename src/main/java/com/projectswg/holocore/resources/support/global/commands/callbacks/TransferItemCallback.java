@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoa
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory;
@@ -43,12 +44,9 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * This callback is used for all three kinds of transfer commands. The commands
- * differ based on object type (misc, armor and weapon). We should NOT trust
- * the client with picking which logic to execute - hence this single callback.
- * @author mads
- */
+import java.util.Collection;
+import java.util.Objects;
+
 public class TransferItemCallback implements ICmdCallback {
 	
 	@Override
@@ -116,9 +114,21 @@ public class TransferItemCallback implements ICmdCallback {
 					return;
 				}
 			}
-
+			
 			// Check if item is being equipped
 			if (newContainer.equals(actor)) {
+				if (weapon) {
+					WeaponObject weaponObject = (WeaponObject) target;
+					TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+					
+					if (lightsaberInventory != null) {
+						if (isMissingColorCrystal(lightsaberInventory)) {
+							SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:lightsaber_no_color");
+							return;
+						}
+					}
+				}
+				
 				if (target instanceof TangibleObject tangibleTarget) {
 					ArmorCategory armorCategory = tangibleTarget.getArmorCategory();
 					
@@ -145,13 +155,71 @@ public class TransferItemCallback implements ICmdCallback {
 				}
 				
 			}
-
+			
+			if (isAddingItemToLightsaber(newContainer)) {
+				if (!(target instanceof TangibleObject tangibleTarget)) {
+					return;
+				}
+				
+				if (!isColorCrystal(tangibleTarget) && !isPowerCrystal(tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_not_crystal");
+					return;
+				}
+				
+				if (!isTuned(tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_tuned");
+					return;
+				}
+				
+				if (!isTunedByUs(actor, tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_owner");
+					return;
+				}
+				
+				SWGObject newContainerParent = newContainer.getParent();
+				if (!(newContainerParent instanceof WeaponObject weaponObject)) {
+					return;
+				}
+				
+				TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+				
+				if (lightsaberInventory == null) {
+					return;
+				}
+				
+				if (isColorCrystal(tangibleTarget)) {
+					if (isMissingColorCrystal(lightsaberInventory)) {
+						changeBladeColorModification(tangibleTarget, weaponObject);
+						weaponObject.setElementalType(tangibleTarget.getLightsaberColorCrystalElementalType());
+						
+						int baseWeaponMaxDamage = getBaseWeaponMaxDamage(weaponObject, lightsaberInventory);
+						
+						weaponObject.setElementalValue(baseWeaponMaxDamage * tangibleTarget.getLightsaberColorCrystalDamagePercent() / 100);
+					} else {
+						SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_already_has_color");
+						return;
+					}
+				}
+				
+				if (isPowerCrystal(tangibleTarget)) {
+					increaseDamageOfLightsaber(tangibleTarget, weaponObject);
+				}
+			}
+			
 			SWGObject oldContainerParent = oldContainer.getParent();
 			
 			// check if this is loot
 			if (oldContainerParent instanceof AIObject && ((AIObject) oldContainerParent).getHealth() <= 0) {
 				LootItemIntent.broadcast(actor, (CreatureObject) oldContainerParent, target);
 				return;
+			}
+			
+			if (isRemovingPowerCrystalFromLightsaber(oldContainerParent, oldContainer, target)) {
+				decreaseDamageOfLightsaber(target, oldContainerParent);
+			}
+			
+			if (isRemovingColorCrystalFromLightsaber(oldContainerParent, oldContainer, target)) {
+				removeElementalDamage(oldContainerParent);
 			}
 			
 			boolean equip = newContainer.equals(actor);
@@ -185,7 +253,127 @@ public class TransferItemCallback implements ICmdCallback {
 			player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 		}
 	}
-
+	
+	private int getBaseWeaponMaxDamage(WeaponObject weaponObject, TangibleObject lightsaberInventory) {
+		int baseWeaponMaxDamage = weaponObject.getMaxDamage();
+		Collection<SWGObject> lightsaberInventoryContainedObjects = lightsaberInventory.getContainedObjects();
+		
+		for (SWGObject lightsaberInventoryContainedObject : lightsaberInventoryContainedObjects) {
+			if (lightsaberInventoryContainedObject instanceof TangibleObject crystal) {
+				baseWeaponMaxDamage -= crystal.getLightsaberPowerCrystalMaxDmg();
+			}
+		}
+		return baseWeaponMaxDamage;
+	}
+	
+	private void removeElementalDamage(SWGObject oldContainerParent) {
+		assert oldContainerParent instanceof WeaponObject;
+		WeaponObject lightsaber = (WeaponObject) oldContainerParent;
+		lightsaber.setElementalValue(0);
+		lightsaber.setElementalType(null);
+	}
+	
+	private boolean isAddingItemToLightsaber(SWGObject newContainer) {
+		SWGObject newContainerParent = newContainer.getParent();
+		if (newContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			return lightsaberInventory != null;
+		}
+		
+		return false;
+	}
+	
+	private void changeBladeColorModification(TangibleObject tangibleTarget, WeaponObject weaponObject) {
+		if (isLavaCrystal(tangibleTarget)) {
+			weaponObject.putCustomization("private/alternate_shader_blade", 1);
+			weaponObject.putCustomization("/private/index_color_blade", 0);
+		} else {
+			Integer colorFromColorCrystal = tangibleTarget.getCustomization("/private/index_color_1");
+			weaponObject.putCustomization("/private/index_color_blade", colorFromColorCrystal);
+		}
+	}
+	
+	private boolean isLavaCrystal(TangibleObject tangibleTarget) {
+		return "object/tangible/component/weapon/lightsaber/shared_lightsaber_module_lava_crystal.iff".equals(tangibleTarget.getTemplate());
+	}
+	
+	private void increaseDamageOfLightsaber(TangibleObject tangibleTarget, WeaponObject weaponObject) {
+		weaponObject.setMinDamage(weaponObject.getMinDamage() + tangibleTarget.getLightsaberPowerCrystalMinDmg());
+		weaponObject.setMaxDamage(weaponObject.getMaxDamage() + tangibleTarget.getLightsaberPowerCrystalMaxDmg());
+	}
+	
+	private void decreaseDamageOfLightsaber(SWGObject target, SWGObject oldContainerParent) {
+		assert oldContainerParent instanceof WeaponObject;
+		WeaponObject lightsaber = (WeaponObject) oldContainerParent;
+		assert target instanceof TangibleObject;
+		TangibleObject tangibleTarget = (TangibleObject) target;
+		lightsaber.setMinDamage(lightsaber.getMinDamage() - tangibleTarget.getLightsaberPowerCrystalMinDmg());
+		lightsaber.setMaxDamage(lightsaber.getMaxDamage() - tangibleTarget.getLightsaberPowerCrystalMaxDmg());
+	}
+	
+	private boolean isRemovingPowerCrystalFromLightsaber(SWGObject oldContainerParent, SWGObject oldContainer, SWGObject target) {
+		if (oldContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			if (oldContainer.equals(lightsaberInventory)) {
+				if (target instanceof TangibleObject tangibleTarget) {
+					return isPowerCrystal(tangibleTarget);
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isRemovingColorCrystalFromLightsaber(SWGObject oldContainerParent, SWGObject oldContainer, SWGObject target) {
+		if (oldContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			if (oldContainer.equals(lightsaberInventory)) {
+				if (target instanceof TangibleObject tangibleTarget) {
+					return isColorCrystal(tangibleTarget);
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isTuned(TangibleObject tangibleTarget) {
+		Long tunedByObjectId = (Long) tangibleTarget.getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+		
+		return tunedByObjectId != null;
+	}
+	
+	private boolean isTunedByUs(CreatureObject actor, TangibleObject tangibleTarget) {
+		Long tunedByObjectId = (Long) tangibleTarget.getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+		return Objects.equals(tunedByObjectId, actor.getObjectId());
+	}
+	
+	private boolean isPowerCrystal(TangibleObject tangibleTarget) {
+		return tangibleTarget.getLightsaberPowerCrystalMaxDmg() > 0;
+	}
+	
+	private boolean isMissingColorCrystal(TangibleObject lightsaberInventory) {
+		Collection<SWGObject> containedObjects = lightsaberInventory.getContainedObjects();
+		
+		for (SWGObject containedObject : containedObjects) {
+			if (containedObject instanceof TangibleObject tangibleContainedObject) {
+				if (isColorCrystal(tangibleContainedObject)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean isColorCrystal(TangibleObject tangibleContainedObject) {
+		// It's not a (valid) power crystal, so it's probably a color crystal
+		return tangibleContainedObject.getLightsaberPowerCrystalMaxDmg() == 0;
+	}
+	
 	private static void sendNotEquippable(Player player) {
 		new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
 		player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));

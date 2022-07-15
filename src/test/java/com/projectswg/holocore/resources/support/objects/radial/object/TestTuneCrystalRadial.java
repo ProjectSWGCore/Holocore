@@ -35,7 +35,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void youShouldNotBeAbleToTuneObjectsThatAreNotLightsaberCrystals() {
-		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("force_title_jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		crystal.setGameObjectType(GameObjectType.GOT_CLOTHING_JACKET);	// Let's change the object type to something different
 		
@@ -46,7 +46,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void untunedCrystalsShouldHaveTheTuneRadialOptionForJedi() {
-		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("force_title_jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		radial.getOptions(options, player, crystal);
 		
@@ -58,7 +58,7 @@ public class TestTuneCrystalRadial {
 	
 	@Test
 	public void tunedCrystalShouldHaveNoOptions() {
-		player.getCreatureObject().addSkill("jedi");	// Only Jedi can tune crystals
+		player.getCreatureObject().addSkill("force_title_jedi");	// Only Jedi can tune crystals
 		List<RadialOption> options = new ArrayList<>();
 		
 		// Let's tune the crystal

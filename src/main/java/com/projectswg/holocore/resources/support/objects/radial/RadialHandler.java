@@ -36,11 +36,18 @@ public enum RadialHandler {
 		initializeMiscRadials();
 		initializeContainerRadials();
 		initializeSpecialEditionGoggleRadials();
+		initializeMeleeWeaponRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
 		classHandlers.put(AIObject.class, aiHandler);
 		classHandlers.put(CreditObject.class, new CreditObjectRadial());
+	}
+	
+	private void initializeMeleeWeaponRadials() {
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_1H, new MeleeWeaponRadial());
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_2H, new MeleeWeaponRadial());
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_POLEARM, new MeleeWeaponRadial());
 	}
 	
 	public void registerHandler(String iff, RadialHandlerInterface handler) {
@@ -55,7 +62,7 @@ public enum RadialHandler {
 		getHandler(target).getOptions(options, player, target);
 	}
 	
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		getHandler(target).handleSelection(player, target, selection);
 	}
 	

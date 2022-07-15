@@ -29,7 +29,7 @@ package com.projectswg.holocore.resources.support.objects.radial.object;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalIntent;
+import com.projectswg.holocore.intents.gameplay.jedi.RequestTuneCrystalIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
@@ -49,12 +49,12 @@ public class TuneCrystalRadial extends SWGObjectRadial {
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		if (isOptionVisible(player, target)) {
-			TuneCrystalIntent.broadcast(player.getCreatureObject(), (TangibleObject) target);	// Shows the confirmation window
+			RequestTuneCrystalIntent.broadcast(player.getCreatureObject(), (TangibleObject) target);	// Shows the confirmation window
 		}
 	}
 	
 	private boolean isOptionVisible(Player player, SWGObject crystal) {
-		boolean jediInitiate = player.getCreatureObject().hasSkill("jedi");
+		boolean jediInitiate = player.getCreatureObject().hasSkill("force_title_jedi");
 
 		return !isTuned(crystal) && GameObjectType.GOT_COMPONENT_SABER_CRYSTAL == crystal.getGameObjectType() && jediInitiate;
 	}

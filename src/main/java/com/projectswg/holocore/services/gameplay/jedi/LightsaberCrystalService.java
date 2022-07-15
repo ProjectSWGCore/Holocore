@@ -26,7 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.jedi;
 
-import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalIntent;
+import com.projectswg.holocore.intents.gameplay.jedi.RequestTuneCrystalIntent;
+import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -47,7 +48,7 @@ import me.joshlarson.jlcommon.control.Service;
 public final class LightsaberCrystalService extends Service {
 	
 	@IntentHandler
-	private void handleTuneCrystalIntent(TuneCrystalIntent intent) {
+	private void handleRequestTuneCrystalIntent(RequestTuneCrystalIntent intent) {
 		CreatureObject tuner = intent.getTuner();
 		TangibleObject crystal = intent.getCrystal();
 		
@@ -64,13 +65,23 @@ public final class LightsaberCrystalService extends Service {
 		SuiMessageBox suiMessageBox = new SuiMessageBox(SuiButtons.YES_NO, "@jedi_spam:confirm_tune_title", "@jedi_spam:confirm_tune_prompt");
 		
 		suiMessageBox.addOkButtonCallback("tune", ((event, parameters) -> {
-			crystal.setServerAttribute(ServerAttribute.LINK_OBJECT_ID, tuner.getObjectId());	// In case the name of the character ever changes
-			crystal.setObjectName( "\\#00FF00" + crystal.getObjectName() + " (tuned)");
-
-			SystemMessageIntent.broadcastPersonal(owner, "@jedi_spam:crystal_tune_success");
+			TuneCrystalNowIntent.broadcast(tuner, crystal);
 		}));
 		
 		suiMessageBox.display(owner);
+	}
+	@IntentHandler
+	private void handleTuneCrystalNowIntent(TuneCrystalNowIntent intent) {
+		CreatureObject tuner = intent.getTuner();
+		TangibleObject crystal = intent.getCrystal();
+		crystal.setServerAttribute(ServerAttribute.LINK_OBJECT_ID, tuner.getObjectId());	// In case the name of the character ever changes
+		crystal.setObjectName( "\\#00FF00" + crystal.getObjectName() + " (tuned)");
+		
+		Player owner = tuner.getOwner();
+		
+		if (owner != null) {
+			SystemMessageIntent.broadcastPersonal(owner, "@jedi_spam:crystal_tune_success");
+		}
 	}
 	
 	private boolean isTuned(TangibleObject crystal) {

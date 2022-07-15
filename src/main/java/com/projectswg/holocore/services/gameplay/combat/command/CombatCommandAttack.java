@@ -36,6 +36,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
+import com.projectswg.holocore.intents.gameplay.combat.ApplyCombatStateIntent;
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
@@ -45,11 +46,13 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import com.projectswg.holocore.services.gameplay.combat.CombatState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,6 +67,9 @@ import static com.projectswg.holocore.services.gameplay.combat.command.CombatCom
 
 enum CombatCommandAttack implements CombatCommandHitType {
 	INSTANCE;
+	
+	private static final String jediArmorSkillMod = "jedi_armor";
+	private static final String tkaArmorSkillMod = "tka_armor";
 	
 	@Override
 	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand command, @NotNull String arguments) {
@@ -235,8 +241,18 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			info.setFinalDamage(rawDamage);
 			info.setDamageType(damageType);
 			
-			// The armor of the target will mitigate some of the damage
-			armorMitigate(info, damageType, target, command);
+			if (command.isBlinding()) {
+				ApplyCombatStateIntent.broadcast(source, target, CombatState.BLINDED);
+			}
+			
+			// The armor of the target will mitigate some damage
+			if (isWearingPhysicalArmor(target)) {
+				physicalArmorMitigate(info, damageType, target, command);
+			} else if (hasInnateJediArmor(target)) {
+				innateJediArmorMitigate(info, target);
+			} else if (hasInnateTerasKasiArmor(target)) {
+				innateTerasKasiArmorMitigate(info, target);
+			}
 			
 			// End rolls
 			int targetHealth = target.getHealth();
@@ -276,6 +292,37 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		source.sendObservers(action);
 	}
 	
+	private static void innateJediArmorMitigate(AttackInfo info, CreatureObject target) {
+		innateArmorMitigate(info, target, jediArmorSkillMod);
+	}
+	
+	private static void innateTerasKasiArmorMitigate(AttackInfo info, CreatureObject target) {
+		innateArmorMitigate(info, target, tkaArmorSkillMod);
+	}
+	
+	private static boolean hasInnateTerasKasiArmor(CreatureObject target) {
+		return target.getSkillModValue(tkaArmorSkillMod) > 0;
+	}
+	
+	
+	private static boolean hasInnateJediArmor(CreatureObject target) {
+		return target.getSkillModValue(jediArmorSkillMod) > 0;
+	}
+	
+	private static boolean isWearingPhysicalArmor(CreatureObject target) {
+		Collection<SWGObject> slottedObjects = target.getSlottedObjects();
+		
+		for (SWGObject slottedObject : slottedObjects) {
+			if (slottedObject instanceof TangibleObject tangibleSlottedObject) {
+				if (tangibleSlottedObject.getProtection() != null) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	private static void riposte(CreatureObject source, CreatureObject target, int rawDamage, double percentOfDamageToReflectBackToAttacker) {
 		int reflectedDamage = (int) (percentOfDamageToReflectBackToAttacker * rawDamage);
 		
@@ -304,16 +351,25 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	}
 	
 	private static double calculateToHit(CreatureObject source, WeaponObject sourceWeapon, CreatureObject target) {
-		int accMod = calculateAccMod(source, sourceWeapon);
-		int defMod = calculateDefMod(source, target);
-		int defPosMod = calculateDefPosMod(sourceWeapon, target);
-		int aimShot = 0;	// TODO The sum of your General Ranged Aiming, and weapon-specific Aiming mods. Only applies if you use Aim prior to your attack.
-		int covMod = 0;	// TODO Defense Modifier for the take cover ability
-		int atkPosMod = calculateAtkPosMod(source);
-		int atkStateMod = 0; // TODO Attackers modifiers for being blind or intimidated. Example of Attacker modifier would be -50 signifying that the attacker suffers a penalty to accuracy. Intimidate and Blind state penalties are unknown factors but it is estimated to be -50 penalty to the hit chance.
-		int defStateMod = 0;	// TODO Defenders modifiers for being stunned, or intimidated . Example of Defender Modifier would be +50 signifying the defender being easier to hit. Stunned and intimidate factors are unknown but it is estimated that they lower primary (melee and ranged) defenses by -50
+		int toHit = 66;
+		toHit += calculateAccMod(source, sourceWeapon);
+		toHit -= calculateDefMod(source, target);
+		toHit += calculateDefPosMod(sourceWeapon, target);
+		toHit += calculateAtkPosMod(source);
+		toHit -= calculateBlindModifier(source);	// Blind attackers have a hard time hitting anything
+		toHit += calculateBlindModifier(target);	// Blind targets have a hard time avoiding anything
 		
-		return 66 + ( accMod - defMod - defPosMod + aimShot - covMod ) / (2d + ( atkPosMod + atkStateMod + defStateMod ) );
+		return toHit;
+	}
+	
+	private static int calculateBlindModifier(CreatureObject target) {
+		if (target.isStatesBitmask(CreatureState.BLINDED)) {
+			return 50;
+		}
+		
+		// TODO Defenders modifiers for being stunned, or intimidated. Example of Defender Modifier would be +50 signifying the defender being easier to hit. Stunned and intimidate factors are unknown but it is estimated that they lower primary (melee and ranged) defenses by -50
+		
+		return 0;
 	}
 	
 	private static int calculateAtkPosMod(CreatureObject source) {
@@ -410,7 +466,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		WeaponObject targetWeapon = target.getEquippedWeapon();
 		WeaponType targetWeaponType = targetWeapon.getType();
 		
-		return target.getSkillModValue(targetWeaponType.getDefenseSkillMod());
+		String defenseSkillMod = targetWeaponType.getDefenseSkillMod();
+		
+		if (defenseSkillMod != null) {
+			return target.getSkillModValue(defenseSkillMod);
+		}
+		
+		return 0;
 	}
 	
 	private static int calculateWeaponDamageMod(CreatureObject source, WeaponObject weapon) {
@@ -423,7 +485,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		}
 	}
 	
-	private static void armorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
+	private static void physicalArmorMitigate(AttackInfo info, DamageType damageType, CreatureObject target, CombatCommand command) {
 		// Armor mitigation
 		int armor = getArmor(damageType, target);
 		float armorReduction = getArmorReduction(armor, command);
@@ -433,6 +495,15 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		
 		info.setArmor(armor);	// Assumed to be the amount of armor points the defender has against the primary damage type
 		info.setBlockedDamage(armorAbsorbed);	// Describes how many points of damage the armor absorbed
+		
+		info.setFinalDamage(currentDamage);
+	}
+	
+	private static void innateArmorMitigate(AttackInfo info, CreatureObject target, String skillMod) {
+		float damageReduction = target.getSkillModValue(skillMod) / 100f;
+		int currentDamage = info.getFinalDamage();
+		int armorAbsorbed = (int) (currentDamage * damageReduction);
+		currentDamage -= armorAbsorbed;
 		
 		info.setFinalDamage(currentDamage);
 	}
