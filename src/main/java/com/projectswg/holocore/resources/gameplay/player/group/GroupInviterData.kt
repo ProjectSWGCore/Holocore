@@ -5,8 +5,8 @@ import com.projectswg.common.network.NetBuffer
 import com.projectswg.holocore.resources.support.global.player.Player
 
 class GroupInviterData(var senderId: Long, var sender: Player?, private var counter: Long, var groupId: Long) : Encodable {
-	override fun decode(data: NetBuffer?) {
-		senderId = data!!.long
+	override fun decode(data: NetBuffer) {
+		senderId = data.long
 		counter = data.long
 	}
 
@@ -17,9 +17,7 @@ class GroupInviterData(var senderId: Long, var sender: Player?, private var coun
 		return data.array()
 	}
 
-	override fun getLength(): Int {
-		return 16
-	}
+	override val length = 16
 
 	fun getCounter() = counter
 
