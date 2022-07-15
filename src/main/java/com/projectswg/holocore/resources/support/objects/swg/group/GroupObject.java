@@ -32,8 +32,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
-import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent.GroupEventType;
+import com.projectswg.holocore.intents.gameplay.player.group.GroupEventLeave;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -108,7 +107,7 @@ public class GroupObject extends SWGObject {
 				Player memberPlayer = member.getPlayer();
 				if (memberPlayer != null){
 					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
-					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventIntent(GroupEventType.LEAVE, memberPlayer).broadcast());
+					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventLeave(memberPlayer).broadcast());
 				    window.display(memberPlayer);
 				}
 			}
