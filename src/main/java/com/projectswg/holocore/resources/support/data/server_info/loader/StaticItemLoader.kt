@@ -160,7 +160,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val quality: Int = set.getInt("crystal_quality").toInt()
 		val minDmg: Int = set.getInt("crystal_min_dmg").toInt()
 		val maxDmg: Int = set.getInt("crystal_max_dmg").toInt()
-
+		val elementalDamageType: String = set.getText("elemental_damage_type")
+		val elementalDamagePercent: Int = set.getInt("elemental_damage_percent").toInt()
 	}
 	
 	class GrantItemInfo(set: SdbResultSet) {

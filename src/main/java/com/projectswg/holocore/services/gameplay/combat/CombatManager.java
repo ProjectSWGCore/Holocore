@@ -44,6 +44,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 		CombatRegenerationService.class,
 		CombatStatusService.class,
 		CombatKnockdownService.class,
+		CombatStateService.class,
 })
 public class CombatManager extends Manager {
 	

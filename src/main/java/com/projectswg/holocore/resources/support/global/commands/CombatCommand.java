@@ -45,6 +45,9 @@ public class CombatCommand extends Command {
 	private final double actionCost;
 	private final double mindCost;
 	private final double knockdownChance;
+	private final boolean blinding;
+	private final String triggerEffect;
+	private final String triggerEffectHardpoint;
 	private final DamageType damageType;
 	private final DamageType elementalType;
 	private final boolean ignoreDistance;
@@ -80,6 +83,9 @@ public class CombatCommand extends Command {
 		this.actionCost = builder.actionCost;
 		this.mindCost = builder.mindCost;
 		this.knockdownChance = builder.knockdownChance;
+		this.blinding = builder.blinding;
+		this.triggerEffect = builder.triggerEffect;
+		this.triggerEffectHardpoint = builder.triggerEffectHardpoint;
 		this.damageType = builder.damageType;
 		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
@@ -156,6 +162,18 @@ public class CombatCommand extends Command {
 	
 	public double getKnockdownChance() {
 		return knockdownChance;
+	}
+	
+	public boolean isBlinding() {
+		return blinding;
+	}
+	
+	public String getTriggerEffect() {
+		return triggerEffect;
+	}
+	
+	public String getTriggerEffectHardpoint() {
+		return triggerEffectHardpoint;
 	}
 	
 	public DamageType getDamageType() {
@@ -270,6 +288,9 @@ public class CombatCommand extends Command {
 		private double actionCost;
 		private double mindCost;
 		private double knockdownChance;
+		private boolean blinding;
+		private String triggerEffect;
+		private String triggerEffectHardpoint;
 		private DamageType damageType;
 		private DamageType elementalType;
 		private boolean ignoreDistance;
@@ -345,6 +366,21 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withKnockdownChance(double knockdownChance) {
 			this.knockdownChance = knockdownChance;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBlinding(boolean blinding) {
+			this.blinding = blinding;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTriggerEffect(String triggerEffect) {
+			this.triggerEffect = triggerEffect;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTriggerEffectHardpoint(String triggerEffectHardpoint) {
+			this.triggerEffectHardpoint = triggerEffectHardpoint;
 			return this;
 		}
 		

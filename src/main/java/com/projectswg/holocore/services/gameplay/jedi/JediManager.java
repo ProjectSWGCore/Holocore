@@ -31,6 +31,9 @@ import me.joshlarson.jlcommon.control.ManagerStructure;
 
 @ManagerStructure(children = {
 		LightsaberCrystalService.class,
+		JediTrialsService.class,
+		LightsaberService.class,
+		ForcePowerService.class,
 })
 public class JediManager extends Manager {
 	

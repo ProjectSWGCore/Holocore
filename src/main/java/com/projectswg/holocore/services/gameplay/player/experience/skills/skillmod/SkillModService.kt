@@ -24,9 +24,9 @@ class SkillModService : Service() {
 				val modValue = skillMod.value
 
 				if (isEquippingItem(cti.container, creature)) {
-					creature.adjustSkillmod(modName, 0, modValue)
+					SkillModIntent(modName, 0, modValue, creature).broadcast()
 				} else if (isUnequippingItem(cti.oldContainer, creature)) {
-					creature.adjustSkillmod(modName, 0, -modValue)
+					SkillModIntent(modName, 0, -modValue, creature).broadcast()
 				}
 			}
 		}

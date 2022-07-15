@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
 import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
@@ -83,6 +84,9 @@ public class TangibleObject extends SWGObject {
 	private int lightsaberPowerCrystalMinDmg;
 	private int lightsaberPowerCrystalMaxDmg;
 	private TicketInformation ticketInformation;
+	private String requiredSkill;
+	private DamageType lightsaberColorCrystalElementalType;
+	private int lightsaberColorCrystalDamagePercent;
 	
 	private Map<String, Integer> skillMods = new LinkedHashMap<>();
 	
@@ -94,7 +98,33 @@ public class TangibleObject extends SWGObject {
 	public TangibleObject(long objectId, BaselineType objectType) {
 		super(objectId, objectType);
 	}
-
+	
+	public String getRequiredSkill() {
+		return requiredSkill;
+	}
+	
+	public void setRequiredSkill(String requiredSkill) {
+		if (!requiredSkill.isBlank()) {
+			this.requiredSkill = requiredSkill;
+		}
+	}
+	
+	public DamageType getLightsaberColorCrystalElementalType() {
+		return lightsaberColorCrystalElementalType;
+	}
+	
+	public void setLightsaberColorCrystalElementalType(DamageType lightsaberColorCrystalElementalType) {
+		this.lightsaberColorCrystalElementalType = lightsaberColorCrystalElementalType;
+	}
+	
+	public int getLightsaberColorCrystalDamagePercent() {
+		return lightsaberColorCrystalDamagePercent;
+	}
+	
+	public void setLightsaberColorCrystalDamagePercent(int lightsaberColorCrystalDamagePercent) {
+		this.lightsaberColorCrystalDamagePercent = lightsaberColorCrystalDamagePercent;
+	}
+	
 	public int getMaxHitPoints() {
 		return maxHitPoints;
 	}
@@ -434,6 +464,10 @@ public class TangibleObject extends SWGObject {
 			attributeList.putNumber("healing_combat_level_required", requiredCombatLevel);
 		}
 		
+		if (requiredSkill != null) {
+			attributeList.putText("skillmodmin", "@skl_n:" + requiredSkill);
+		}
+		
 		if (requiredFaction != null && requiredFaction.getPvpFaction() != PvpFaction.NEUTRAL) {
 			attributeList.putText("faction_restriction", "@pvp_factions:" + requiredFaction.getName());
 		}
@@ -519,6 +553,14 @@ public class TangibleObject extends SWGObject {
 		attributeList.putText("@obj_attr_n:crystal_owner", displayedCrystalOwner);
 		if (lightsaberPowerCrystalQuality != null) {
 			attributeList.putText("@obj_attr_n:quality", lightsaberPowerCrystalQuality.getAttributeName());
+		}
+		
+		if (lightsaberColorCrystalElementalType != null) {
+			attributeList.putText("wpn_elemental_type", "@obj_attr_n:armor_eff_" + lightsaberColorCrystalElementalType.name().toLowerCase(Locale.US));
+		}
+		
+		if (lightsaberColorCrystalDamagePercent > 0) {
+			attributeList.putNumber("damage", lightsaberColorCrystalDamagePercent, "%");
 		}
 	}
 	
@@ -606,6 +648,11 @@ public class TangibleObject extends SWGObject {
 			data.putDocument("ticketInformation", ticketInformation);
 		}
 		data.putArray("visibleComponents", new ArrayList<>(visibleComponents));
+		data.putString("requiredSkill", requiredSkill);
+		if (lightsaberColorCrystalElementalType != null) {
+			data.putString("lightsaberColorCrystalElementalType", lightsaberColorCrystalElementalType.name());
+		}
+		data.putInteger("lightsaberColorCrystalDamagePercent", lightsaberColorCrystalDamagePercent);
 	}
 
 	@Override
@@ -639,6 +686,11 @@ public class TangibleObject extends SWGObject {
 			ticketInformation.readMongo(ticketInformationDocument);
 		}
 		visibleComponents.addAll(data.getArray("visibleComponents", CRC.class));
+		requiredSkill = data.getString("requiredSkill");
+		if (data.containsKey("lightsaberColorCrystalElementalType")) {
+			lightsaberColorCrystalElementalType = DamageType.valueOf(data.getString("lightsaberColorCrystalElementalType"));
+		}
+		lightsaberColorCrystalDamagePercent = data.getInteger("lightsaberColorCrystalDamagePercent", 0);
 	}
 	
 	/**

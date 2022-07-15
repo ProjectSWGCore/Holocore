@@ -35,6 +35,7 @@ import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Locale;
@@ -57,11 +58,19 @@ public class WeaponObject extends TangibleObject {
 	private float woundChance;
 	private String procEffect;
 	private int specialAttackCost = 100;
-	private String requiredSkill;
+	private int forcePowerCost = 100;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
 		setComplexity(0);
+	}
+	
+	public int getForcePowerCost() {
+		return forcePowerCost;
+	}
+	
+	public void setForcePowerCost(int forcePowerCost) {
+		this.forcePowerCost = forcePowerCost;
 	}
 	
 	public float getAttackSpeed() {
@@ -168,22 +177,15 @@ public class WeaponObject extends TangibleObject {
 		this.specialAttackCost = specialAttackCost;
 	}
 	
-	public String getRequiredSkill() {
-		return requiredSkill;
-	}
-	
-	public void setRequiredSkill(String requiredSkill) {
-		if (!requiredSkill.isBlank()) {
-			this.requiredSkill = requiredSkill;
-		}
-	}
-	
 	@Override
 	public AttributeList getAttributeList(CreatureObject viewer) {
 		AttributeList attributeList = super.getAttributeList(viewer);
-		if (requiredSkill != null) {
-			attributeList.putText("skillmodmin", "@skl_n:" + requiredSkill);
-		} else {
+		
+		if (type.isLightsaber()) {
+			attributeList.putNumber("forcecost", forcePowerCost);
+		}
+		
+		if (getRequiredSkill() == null)  {
 			attributeList.putText("skillmodmin", "@cmd_n:none");
 		}
 		
@@ -194,7 +196,7 @@ public class WeaponObject extends TangibleObject {
 		attributeList.putNumber("cat_wpn_damage.wpn_real_speed", moddedWeaponAttackSpeedWithCap);
 		attributeList.putText("cat_wpn_damage.damage", minDamage + "-" + maxDamage);
 		if (elementalType != null) {
-			attributeList.putText("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:armor_eff_elemental_" + elementalType.name().toLowerCase(Locale.US));
+			attributeList.putText("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:armor_eff_" + elementalType.name().toLowerCase(Locale.US));
 			attributeList.putNumber("cat_wpn_damage.wpn_elemental_value", elementalValue);
 		}
 		attributeList.putNumber("cat_wpn_damage.wpn_accuracy", accuracy);
@@ -248,6 +250,11 @@ public class WeaponObject extends TangibleObject {
 		}
 		
 		return weaponDps;
+	}
+	
+	@Nullable
+	public TangibleObject getLightsaberInventory() {
+		return (TangibleObject) getSlottedObject("saber_inv");
 	}
 	
 	@Override
@@ -306,7 +313,7 @@ public class WeaponObject extends TangibleObject {
 		data.putFloat("woundChance", woundChance);
 		data.putString("procEffect", procEffect);
 		data.putInteger("specialAttackCost", specialAttackCost);
-		data.putString("requiredSkill", requiredSkill);
+		data.putInteger("forcePowerCost", forcePowerCost);
 	}
 	
 	@Override
@@ -325,7 +332,7 @@ public class WeaponObject extends TangibleObject {
 		woundChance = data.getFloat("woundChance", 0);
 		procEffect = data.getString("procEffect");
 		specialAttackCost = data.getInteger("specialAttackCost", 100);
-		requiredSkill = data.getString("requiredSkill");
+		forcePowerCost = data.getInteger("forcePowerCost", 100);
 	}
 	
 }

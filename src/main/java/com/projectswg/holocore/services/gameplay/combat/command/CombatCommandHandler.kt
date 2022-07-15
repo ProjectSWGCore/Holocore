@@ -29,6 +29,7 @@ package com.projectswg.holocore.services.gameplay.combat.command
 
 import com.projectswg.common.data.combat.CombatStatus
 import com.projectswg.common.data.combat.HitType
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -68,6 +69,11 @@ class CombatCommandHandler {
 		source.modifyMind((-command.mindCost * specialAttackCost / 100).toInt())
 		
 		val hitType = hitTypeMap[command.hitType]
+
+		if (command.triggerEffect.isNotEmpty()) {
+			val triggerEffect = PlayClientEffectObjectMessage(command.triggerEffect, command.triggerEffectHardpoint, source.objectId, "")
+			source.sendSelf(triggerEffect)
+		}
 
 		return hitType?.handle(source, target, command, arguments) ?: CombatStatus.UNKNOWN
 	}

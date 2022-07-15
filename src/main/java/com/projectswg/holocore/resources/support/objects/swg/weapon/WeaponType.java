@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -85,6 +86,7 @@ public enum WeaponType {
 	 *
 	 * @return e.g. Unarmed Defense
 	 */
+	@Nullable
 	public String getDefenseSkillMod() {
 		return defenseSkillMod;
 	}
