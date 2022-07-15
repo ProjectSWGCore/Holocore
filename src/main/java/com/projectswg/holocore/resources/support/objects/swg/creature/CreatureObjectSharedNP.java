@@ -47,7 +47,7 @@ class CreatureObjectSharedNP implements MongoPersistable {
 
 	private final CreatureObject obj;
 	
-	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, 0);
+	private transient GroupInviterData inviterData	= new GroupInviterData(0, null, 0, 0);
 	private transient long groupId			= 0;
 	
 	private short	level					= 1;
@@ -179,7 +179,12 @@ class CreatureObjectSharedNP implements MongoPersistable {
 	
 	public void updateGroupInviteData(Player sender, long groupId) {
 		inviterData.setSender(sender);
-		inviterData.setId(groupId);
+		if (sender != null) {
+			inviterData.setSenderId(sender.getCreatureObject().getObjectId());
+		} else {
+			inviterData.setSenderId(0);	// Makes the invite window go away
+		}
+		inviterData.setGroupId(groupId);
 		inviterData.incrementCounter();
 	}
 	
