@@ -1,18 +1,24 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
+import com.projectswg.common.data.CRC
 import com.projectswg.common.data.combat.DamageType
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import com.projectswg.holocore.services.gameplay.jedi.LightsaberCrystalService
 import com.projectswg.holocore.services.gameplay.jedi.LightsaberService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
+import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
+import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.Assertions.*
@@ -21,10 +27,10 @@ import org.junit.jupiter.api.Test
 
 class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 
-	private val transferItemCallback = TransferItemCallback()
-
 	@BeforeEach
 	internal fun setUp() {
+		registerService(CommandQueueService())
+		registerService(CommandExecutionService())
 		registerService(SkillService())
 		registerService(LightsaberService())
 		registerService(LightsaberCrystalService())
@@ -42,8 +48,10 @@ class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		colorCrystal.moveToContainer(lightsaber.lightsaberInventory)
 		val args = createArgsForEquippingAnItem(jedi)
+		val transferItemArmorPacket = CommandQueueEnqueue(jedi.objectId, 0, CRC.getCrc("transferitemweapon"), lightsaber.objectId, args)
 
-		transferItemCallback.execute(player, lightsaber, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 		
 		assertEquals(jedi, lightsaber.parent)
 	}
@@ -55,8 +63,10 @@ class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 		val lightsaber = createLightsaber()
 		lightsaber.moveToContainer(jedi.inventory)
 		val args = createArgsForEquippingAnItem(jedi)
+		val transferItemArmorPacket = CommandQueueEnqueue(jedi.objectId, 0, CRC.getCrc("transferitemweapon"), lightsaber.objectId, args)
 
-		transferItemCallback.execute(player, lightsaber, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(jedi.inventory, lightsaber.parent)
 	}
@@ -68,6 +78,9 @@ class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 	private fun createJedi(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
 		broadcastAndWait(ObjectCreatedIntent(creatureObject))
+		val defWeapon = DefaultWeaponFactory.createDefaultWeapon()
+		defWeapon.moveToContainer(creatureObject)
+		creatureObject.equippedWeapon = defWeapon
 		broadcastAndWait(GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true))
 		return creatureObject
 	}

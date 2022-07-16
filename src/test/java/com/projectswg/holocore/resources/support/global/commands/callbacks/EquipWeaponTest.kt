@@ -1,28 +1,47 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
+import com.projectswg.common.data.CRC
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
+import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
+import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class EquipWeaponTest : TestRunnerSimulatedWorld() {
 	
-	private val transferItemCallback = TransferItemCallback()
-	
+	@BeforeEach
+	fun setUp() {
+		registerService(CommandQueueService())
+		registerService(CommandExecutionService())
+	}
+
+	private fun transferItem(player: Player, item: SWGObject, container: SWGObject?) {
+		val args = createArgsForEquippingAnItem(container ?: return)
+		val transferItemArmorPacket = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc("transferitemmisc"), item.objectId, args)
+
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
+	}
+
 	@Test
 	fun `can equip weapon when all requirements are fulfilled`() {
 		val creatureObject = createCreatureObject()
 		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
 		val oneHandSwordCL1 = createOneHandSwordCL1()
 		oneHandSwordCL1.moveToContainer(creatureObject.inventory)
-		val args = createArgsForEquippingAnItem(creatureObject)
 
-		transferItemCallback.execute(player, oneHandSwordCL1, args)
+		transferItem(player, oneHandSwordCL1, creatureObject)
 		
 		assertEquals(creatureObject, oneHandSwordCL1.parent)
 	}
@@ -33,9 +52,8 @@ class EquipWeaponTest : TestRunnerSimulatedWorld() {
 		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
 		val trandoshanHuntingRifle = createTrandoshanHuntingRifle()
 		trandoshanHuntingRifle.moveToContainer(creatureObject.inventory)
-		val args = createArgsForEquippingAnItem(creatureObject)
 
-		transferItemCallback.execute(player, trandoshanHuntingRifle, args)
+		transferItem(player, trandoshanHuntingRifle, creatureObject)
 
 		assertEquals(creatureObject.inventory, trandoshanHuntingRifle.parent)
 	}
@@ -46,6 +64,9 @@ class EquipWeaponTest : TestRunnerSimulatedWorld() {
 
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
+		val defWeapon = DefaultWeaponFactory.createDefaultWeapon()
+		defWeapon.moveToContainer(creatureObject)
+		creatureObject.equippedWeapon = defWeapon
 		broadcastAndWait(ObjectCreatedIntent(creatureObject))
 		return creatureObject
 	}
