@@ -1,9 +1,13 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
+import com.projectswg.common.data.CRC
 import com.projectswg.common.data.combat.DamageType
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -14,6 +18,8 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import com.projectswg.holocore.services.gameplay.jedi.LightsaberCrystalService
 import com.projectswg.holocore.services.gameplay.jedi.LightsaberService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
+import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
+import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.Assertions.*
@@ -22,13 +28,21 @@ import org.junit.jupiter.api.Test
 
 class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 
-	private val transferItemCallback = TransferItemCallback()
-
 	@BeforeEach
 	internal fun setUp() {
+		registerService(CommandQueueService())
+		registerService(CommandExecutionService())
 		registerService(SkillService())
 		registerService(LightsaberService())
 		registerService(LightsaberCrystalService())
+	}
+
+	private fun transferItem(player: Player, item: SWGObject, container: SWGObject?) {
+		val args = createArgsForEquippingAnItem(container ?: return)
+		val transferItemArmorPacket = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc("transferitemmisc"), item.objectId, args)
+
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 	}
 
 	@Test
@@ -42,7 +56,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, colorCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(colorCrystal.lightsaberColorCrystalElementalType, lightsaber.elementalType)
 	}
@@ -58,7 +72,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, colorCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(14, lightsaber.elementalValue)	// The color crystal takes 6% of lightsaber max damage and turns that into the elemental value, rounded down
 	}
@@ -73,9 +87,9 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		colorCrystal1.moveToContainer(jedi.inventory)
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal1)
 		waitForIntents()
-		transferItemCallback.execute(player, colorCrystal1, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
-		transferItemCallback.execute(player, colorCrystal1, createArgsForEquippingAnItem(jedi.inventory))
+		transferItem(player, colorCrystal1, jedi.inventory)
 
 		assertNull(lightsaber.elementalType)
 	}
@@ -90,9 +104,9 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		colorCrystal1.moveToContainer(jedi.inventory)
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal1)
 		waitForIntents()
-		transferItemCallback.execute(player, colorCrystal1, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
-		transferItemCallback.execute(player, colorCrystal1, createArgsForEquippingAnItem(jedi.inventory))
+		transferItem(player, colorCrystal1, jedi.inventory)
 
 		assertEquals(0, lightsaber.elementalValue)
 	}
@@ -109,7 +123,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val expectedMinDmg = lightsaber.minDamage - powerCrystal.lightsaberPowerCrystalMinDmg
 
-		transferItemCallback.execute(player, powerCrystal, createArgsForEquippingAnItem(jedi.inventory))
+		transferItem(player, powerCrystal, jedi.inventory)
 
 		assertEquals(expectedMinDmg, lightsaber.minDamage)
 	}
@@ -126,7 +140,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val expectedMinDmg = lightsaber.maxDamage - powerCrystal.lightsaberPowerCrystalMaxDmg
 
-		transferItemCallback.execute(player, powerCrystal, createArgsForEquippingAnItem(jedi.inventory))
+		transferItem(player, powerCrystal, jedi.inventory)
 
 		assertEquals(expectedMinDmg, lightsaber.maxDamage)
 	}
@@ -143,7 +157,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val expectedMinDmg = lightsaber.minDamage + powerCrystal.lightsaberPowerCrystalMinDmg
 
-		transferItemCallback.execute(player, powerCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(expectedMinDmg, lightsaber.minDamage)
 	}
@@ -160,7 +174,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val expectedMaxDmg = lightsaber.maxDamage + powerCrystal.lightsaberPowerCrystalMaxDmg
 
-		transferItemCallback.execute(player, powerCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(expectedMaxDmg, lightsaber.maxDamage)
 	}
@@ -176,7 +190,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, colorCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(colorCrystal.getCustomization("/private/index_color_1"), lightsaber.getCustomization("/private/index_color_blade"))
 	}
@@ -193,7 +207,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(differentJedi, colorCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, colorCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(jedi.inventory, colorCrystal.parent)
 	}
@@ -210,7 +224,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(differentJedi, powerCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, powerCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(jedi.inventory, powerCrystal.parent)
 	}
@@ -226,7 +240,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, colorCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(lightsaber.lightsaberInventory, colorCrystal.parent)
 	}
@@ -245,7 +259,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		TuneCrystalNowIntent.broadcast(jedi, lavaCrystal)
 		waitForIntents()
 
-		transferItemCallback.execute(player, lavaCrystal, createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return))
+		transferItem(player, lavaCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(0, lightsaber.getCustomization("/private/index_color_blade"))
 		assertEquals(1, lightsaber.getCustomization("private/alternate_shader_blade"))
@@ -264,10 +278,9 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		colorCrystal2.moveToContainer(jedi.inventory)
 		TuneCrystalNowIntent.broadcast(jedi, colorCrystal2)
 		waitForIntents()
-		val args = createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return)
-		transferItemCallback.execute(player, colorCrystal1, args)
+		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
-		transferItemCallback.execute(player, colorCrystal2, args)
+		transferItem(player, colorCrystal2, lightsaber.lightsaberInventory)
 
 		assertEquals(jedi.inventory, colorCrystal2.parent)
 	}
@@ -282,9 +295,8 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		powerCrystal.moveToContainer(jedi.inventory)
 		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
 		waitForIntents()
-		val args = createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return)
 
-		transferItemCallback.execute(player, powerCrystal, args)
+		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(lightsaber.lightsaberInventory, powerCrystal.parent)
 	}
@@ -302,10 +314,9 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		powerCrystal2.moveToContainer(jedi.inventory)
 		TuneCrystalNowIntent.broadcast(jedi, powerCrystal2)
 		waitForIntents()
-		val args = createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return)
-		transferItemCallback.execute(player, powerCrystal1, args)
+		transferItem(player, powerCrystal1, lightsaber.lightsaberInventory)
 
-		transferItemCallback.execute(player, powerCrystal2, args)
+		transferItem(player, powerCrystal2, lightsaber.lightsaberInventory)
 
 		assertEquals(lightsaber.lightsaberInventory, powerCrystal2.parent)
 	}
@@ -319,9 +330,8 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		val trandoshanHuntingRifle = createTrandoshanHuntingRifle()
 		trandoshanHuntingRifle.moveToContainer(jedi.inventory)
 		waitForIntents()
-		val args = createArgsForEquippingAnItem(lightsaber.lightsaberInventory ?: return)
 
-		transferItemCallback.execute(player, trandoshanHuntingRifle, args)
+		transferItem(player, trandoshanHuntingRifle, lightsaber.lightsaberInventory)
 
 		assertEquals(jedi.inventory, trandoshanHuntingRifle.parent)
 	}
@@ -334,6 +344,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
 		val defWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defWeapon.moveToContainer(creatureObject)
+		creatureObject.equippedWeapon = defWeapon
 		broadcastAndWait(ObjectCreatedIntent(creatureObject))
 		broadcastAndWait(ObjectCreatedIntent(creatureObject.inventory))
 		broadcastAndWait(GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true))

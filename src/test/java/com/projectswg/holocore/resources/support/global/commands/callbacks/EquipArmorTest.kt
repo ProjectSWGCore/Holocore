@@ -1,13 +1,19 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
+import com.projectswg.common.data.CRC
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory
 import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
+import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
+import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.Assertions.*
@@ -16,10 +22,10 @@ import org.junit.jupiter.api.Test
 
 class EquipArmorTest : TestRunnerSimulatedWorld() {
 	
-	private val transferItemCallback = TransferItemCallback()
-
 	@BeforeEach
 	fun setUp() {
+		registerService(CommandQueueService())
+		registerService(CommandExecutionService())
 		registerService(SkillService())
 	}
 
@@ -32,8 +38,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(creatureObject)
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_commando_novice", creatureObject, true)
 		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), compositeArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, compositeArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject, compositeArmorHelmet.parent)
 	}
@@ -46,8 +54,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		compositeArmorHelmet.moveToContainer(creatureObject.inventory)
 		val args = createArgsForEquippingAnItem(creatureObject)
 		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), compositeArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, compositeArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject.inventory, compositeArmorHelmet.parent)
 	}
@@ -61,8 +71,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(creatureObject)
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_polearm_novice", creatureObject, true)
 		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), paddedArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, paddedArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject, paddedArmorHelmet.parent)
 	}
@@ -75,8 +87,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		paddedArmorHelmet.moveToContainer(creatureObject.inventory)
 		val args = createArgsForEquippingAnItem(creatureObject)
 		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), paddedArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, paddedArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject.inventory, paddedArmorHelmet.parent)
 	}
@@ -90,8 +104,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(creatureObject)
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_rifleman_novice", creatureObject, true)
 		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), ubeseArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, ubeseArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject, ubeseArmorHelmet.parent)
 	}
@@ -103,9 +119,10 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		val ubeseArmorHelmet = createUbeseArmorHelmet()
 		ubeseArmorHelmet.moveToContainer(creatureObject.inventory)
 		val args = createArgsForEquippingAnItem(creatureObject)
-		waitForIntents()
+		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), ubeseArmorHelmet.objectId, args)
 
-		transferItemCallback.execute(player, ubeseArmorHelmet, args)
+		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		waitForIntents()
 
 		assertEquals(creatureObject.inventory, ubeseArmorHelmet.parent)
 	}
@@ -117,6 +134,9 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
 		broadcastAndWait(ObjectCreatedIntent(creatureObject))
+		val defWeapon = DefaultWeaponFactory.createDefaultWeapon()
+		defWeapon.moveToContainer(creatureObject)
+		creatureObject.equippedWeapon = defWeapon
 		return creatureObject
 	}
 
