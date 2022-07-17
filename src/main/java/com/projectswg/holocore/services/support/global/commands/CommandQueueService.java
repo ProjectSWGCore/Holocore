@@ -2,7 +2,7 @@ package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.AttackType;
-import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitType;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.SWGPacket;
@@ -217,7 +217,7 @@ public class CommandQueueService extends Service {
 						command.getArguments());
 				
 				if (combatStatus != CombatStatus.SUCCESS) {
-					CombatCommandCommon.handleStatus(command.getSource(), combatStatus);
+					CombatCommandCommon.handleStatus(command.getSource(), combatCommand, combatStatus);
 					sendCommandFailed(command);
 					return;
 				}

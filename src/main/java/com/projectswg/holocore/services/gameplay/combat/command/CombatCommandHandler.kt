@@ -27,9 +27,8 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command
 
-import com.projectswg.common.data.combat.CombatStatus
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.common.data.combat.HitType
-import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -64,16 +63,19 @@ class CombatCommandHandler {
 	fun executeCombatCommand(source: CreatureObject, target: SWGObject?, command: CombatCommand, arguments: String): CombatStatus {
 		val equippedWeapon = source.equippedWeapon
 		val specialAttackCost = equippedWeapon.specialAttackCost
-		source.modifyHealth((-command.healthCost).toInt())
-		source.modifyAction((-command.actionCost * specialAttackCost / 100).toInt())
-		source.modifyMind((-command.mindCost * specialAttackCost / 100).toInt())
+		val healthCost = command.healthCost.toInt()
+		val actionCost = (command.actionCost * specialAttackCost / 100).toInt()
+		val mindCost = (command.mindCost * specialAttackCost / 100).toInt()
+		
+		if (healthCost > source.health || actionCost > source.action || mindCost > source.mind) {
+			return CombatStatus.TOO_TIRED
+		}
+		
+		source.modifyHealth(-healthCost)
+		source.modifyAction(-actionCost)
+		source.modifyMind(-mindCost)
 		
 		val hitType = hitTypeMap[command.hitType]
-
-		if (command.triggerEffect.isNotEmpty()) {
-			val triggerEffect = PlayClientEffectObjectMessage(command.triggerEffect, command.triggerEffectHardpoint, source.objectId, "")
-			source.sendSelf(triggerEffect)
-		}
 
 		return hitType?.handle(source, target, command, arguments) ?: CombatStatus.UNKNOWN
 	}

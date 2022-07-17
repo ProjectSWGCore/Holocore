@@ -31,9 +31,10 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackInfo;
 import com.projectswg.common.data.combat.CombatSpamType;
-import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
@@ -157,12 +158,22 @@ public class CombatCommandCommon {
 		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
-	public static void handleStatus(CreatureObject source, CombatStatus status) {
+	public static void handleStatus(CreatureObject source, CombatCommand combatCommand, CombatStatus status) {
 		switch (status) {
 			case NO_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
 			case TOO_FAR -> showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
 			case INVALID_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
+			case TOO_TIRED -> showFlyText(source, "@combat_effects:action_too_tired", Scale.MEDIUM, SWGColor.Oranges.INSTANCE.getOrange(), ShowFlyText.Flag.PRIVATE);
+			case SUCCESS -> showTriggerEffect(source, combatCommand);
 			default -> showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
+		}
+	}
+	
+	private static void showTriggerEffect(CreatureObject source, CombatCommand command) {
+		String triggerEffect = command.getTriggerEffect();
+		if (triggerEffect.length() > 0) {
+			String triggerEffectHardpoint = command.getTriggerEffectHardpoint();
+			source.sendObservers(new PlayClientEffectObjectMessage(triggerEffect, triggerEffectHardpoint, source.getObjectId(), ""));
 		}
 	}
 	

@@ -27,7 +27,7 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitLocation;
 import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;

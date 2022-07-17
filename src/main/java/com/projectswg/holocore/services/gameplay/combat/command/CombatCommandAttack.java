@@ -41,6 +41,7 @@ import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;

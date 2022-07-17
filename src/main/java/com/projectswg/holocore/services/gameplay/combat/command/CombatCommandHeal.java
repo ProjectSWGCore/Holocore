@@ -41,6 +41,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;

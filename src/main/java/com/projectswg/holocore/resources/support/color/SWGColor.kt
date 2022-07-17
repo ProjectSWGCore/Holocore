@@ -13,6 +13,10 @@ object SWGColor {
 		val seagreen = RGB(46, 139, 87)
 		val lawngreen = RGB(124, 252, 0)
 	}
+	
+	object Oranges {
+		val orange = RGB(255, 165, 0)
+	}
 
 	object Reds {
 		val orangered = RGB(255, 69, 0)
