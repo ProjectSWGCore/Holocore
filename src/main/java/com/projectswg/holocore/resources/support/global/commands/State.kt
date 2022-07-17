@@ -4,7 +4,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 
 enum class State(val stateTableId: Int, val commandSdbColumnName: String, private val stateCheck: StateCheck) {
-	COMBAT(1, "S:combat", CreatureStateCheck(CreatureState.COMBAT));
+	COMBAT(1, "S:combat", CreatureStateCheck(CreatureState.COMBAT)),
+	BLEEDING(24, "S:bleeding", CreatureStateCheck(CreatureState.BLEEDING));
 
 	fun isActive(creatureObject: CreatureObject): Boolean {
 		return stateCheck.isActive(creatureObject)
