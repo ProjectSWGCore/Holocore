@@ -27,7 +27,7 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
-import com.projectswg.common.data.combat.CombatStatus;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
