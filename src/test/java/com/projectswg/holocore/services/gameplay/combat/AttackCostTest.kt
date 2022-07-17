@@ -58,6 +58,7 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 		val crc = CRC.getCrc("burstrun")
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, "")))
+		Thread.sleep(150)	// Give the command queue a chance to be processed
 	}
 
 	private fun createCreatureObject(): GenericCreatureObject {

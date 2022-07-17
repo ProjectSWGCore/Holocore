@@ -66,6 +66,7 @@ class FactionPvpTest : TestRunnerSimulatedWorld() {
 		val targetObjectId = target.objectId
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, targetObjectId, "")))
+		Thread.sleep(150)	// Give the command queue a chance to be processed
 	}
 
 	private fun createCreatureObject(): GenericCreatureObject {
