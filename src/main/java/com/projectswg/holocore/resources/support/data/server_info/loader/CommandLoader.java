@@ -164,6 +164,7 @@ public class CommandLoader extends DataLoader {
 						.withMindCost(set.getReal("mindCost"))
 						.withKnockdownChance(set.getReal("knockdownChance"))
 						.withBlinding(set.getBoolean("blinding"))
+						.withBleeding(set.getBoolean("bleeding"))
 						.withTriggerEffect(set.getText("triggerEffect"))
 						.withTriggerEffectHardpoint(set.getText("triggerEffectHardpoint"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
