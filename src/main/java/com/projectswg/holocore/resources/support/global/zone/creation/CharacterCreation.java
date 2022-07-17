@@ -47,7 +47,6 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup;
 import me.joshlarson.jlcommon.utilities.Arguments;
 import org.jetbrains.annotations.NotNull;
@@ -61,12 +60,10 @@ public class CharacterCreation {
 	
 	private final Player player;
 	private final ClientCreateCharacter create;
-	private final String biography;
 
-	public CharacterCreation(Player player, ClientCreateCharacter create, String biography) {
+	public CharacterCreation(Player player, ClientCreateCharacter create) {
 		this.player = player;
 		this.create = create;
-		this.biography = biography;
 	}
 	
 	public CreatureObject createCharacter(AccessLevel accessLevel, ZoneInsertion info) {
@@ -79,7 +76,7 @@ public class CharacterCreation {
 		createHair(creatureObj, create.getHair(), create.getHairCustomization());
 		createStarterClothing(creatureObj, race, create.getClothes());
 		playerObj.setAdminTag(accessLevel);
-		playerObj.setBiography(biography);
+		playerObj.setBiography(create.getBiography());
 
 		ObjectCreatedIntent.broadcast(playerObj);
 		ObjectCreatedIntent.broadcast(creatureObj);
@@ -165,6 +162,9 @@ public class CharacterCreation {
 		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "crafting_artisan_novice", creatureObj, true).broadcast();
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_brawler_novice", creatureObj, true).broadcast();
 		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_marksman_novice", creatureObj, true).broadcast();
+		
+		// Everyone can Burst Run
+		creatureObj.addCommand("burstRun");
 
 		Collection<String> languages = languagesSkillsForRace(creatureObj.getRace());
 

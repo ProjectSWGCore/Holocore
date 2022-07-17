@@ -169,23 +169,17 @@ public class CharacterCreationService extends Service {
 	}
 	
 	private void sendCharCreationFailure(Player player, ClientCreateCharacter create, ErrorMessage err, String actualReason) {
-		NameFailureReason reason = NameFailureReason.NAME_SYNTAX;
-		switch (err) {
-			case NAME_DECLINED_INTERNAL_ERROR:
-			case NAME_APPROVED:
-				reason = NameFailureReason.NAME_RETRY;
-				break;
-			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE:
-				reason = NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
-				break;
-			case NAME_DECLINED_IN_USE:   reason = NameFailureReason.NAME_IN_USE; break;
-			case NAME_DECLINED_EMPTY:    reason = NameFailureReason.NAME_DECLINED_EMPTY; break;
-			case NAME_DECLINED_RESERVED: reason = NameFailureReason.NAME_DEV_RESERVED; break;
-			case NAME_DECLINED_TOO_FAST: reason = NameFailureReason.NAME_TOO_FAST; break;
-			case SERVER_CHARACTER_CREATION_MAX_CHARS: reason = NameFailureReason.TOO_MANY_CHARACTERS; break;
-			default:
-				break;
-		}
+		NameFailureReason reason = switch (err) {
+			case NAME_DECLINED_INTERNAL_ERROR, NAME_APPROVED -> NameFailureReason.NAME_RETRY;
+			case NAME_DECLINED_FICTIONALLY_INAPPROPRIATE -> NameFailureReason.NAME_FICTIONALLY_INAPPRORIATE;
+			case NAME_DECLINED_IN_USE -> NameFailureReason.NAME_IN_USE;
+			case NAME_DECLINED_EMPTY -> NameFailureReason.NAME_DECLINED_EMPTY;
+			case NAME_DECLINED_RESERVED -> NameFailureReason.NAME_DEV_RESERVED;
+			case NAME_DECLINED_TOO_FAST -> NameFailureReason.NAME_TOO_FAST;
+			case SERVER_CHARACTER_CREATION_MAX_CHARS -> NameFailureReason.TOO_MANY_CHARACTERS;
+			default -> NameFailureReason.NAME_SYNTAX;
+		};
+		
 		StandardLog.onPlayerError(this, player, "failed to create character '%s' with server error [%s] from %s", create.getName(), actualReason, create.getSocketAddress());
 		player.sendPacket(new CreateCharacterFailure(reason));
 	}
@@ -225,7 +219,7 @@ public class CharacterCreationService extends Service {
 			Log.e("Failed to get spawn information for location: " + spawnLocation);
 			return null;
 		}
-		CharacterCreation creation = new CharacterCreation(player, create, create.getBiography());
+		CharacterCreation creation = new CharacterCreation(player, create);
 		return creation.createCharacter(player.getAccessLevel(), info);
 	}
 

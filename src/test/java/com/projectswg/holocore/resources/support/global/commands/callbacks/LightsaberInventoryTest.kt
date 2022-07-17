@@ -30,7 +30,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 
 	@BeforeEach
 	internal fun setUp() {
-		registerService(CommandQueueService())
+		registerService(CommandQueueService(5))
 		registerService(CommandExecutionService())
 		registerService(SkillService())
 		registerService(LightsaberService())
