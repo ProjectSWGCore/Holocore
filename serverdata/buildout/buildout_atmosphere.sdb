@@ -136,7 +136,6 @@ bo_atmo_133	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small
 bo_atmo_134	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	1257.0	7.0	3079.0	0	0	0	0	32	TRUE	Crowd - Mos Entha Starport
 bo_atmo_135	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	-2844.0	5.0	2097.0	0	0	0	0	32	TRUE	Crowd - Mos Espa Starport
 bo_atmo_136	TATOOINE	tat_world	0	object/static/particle/pt_smoke.iff	3716.3	20.5	-5176.8	55	0	0	0	128	TRUE	Mos Eisley
-bo_atmo_137	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	3305.5	5.5	-5137.6	34	0	0	0	128	TRUE	Mos Eisley
 bo_atmo_138	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller2.iff	-1374.0	0.0	-3578.0	0	0	0	0	1024	TRUE	Traffic - Bestine Starport
 bo_atmo_139	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	3592.0	5.0	-4793.0	0	0	0	0	1024	TRUE	Traffic - Mos Eisley Starport
 bo_atmo_140	TATOOINE	tat_world	0	object/static/structure/general/distant_ship_controller_general.iff	1257.0	7.0	3079.0	0	0	0	0	1024	TRUE	Traffic - Mos Entha Starport
