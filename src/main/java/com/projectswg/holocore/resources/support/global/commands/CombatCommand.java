@@ -46,6 +46,7 @@ public class CombatCommand extends Command {
 	private final double mindCost;
 	private final double knockdownChance;
 	private final boolean blinding;
+	private final boolean bleeding;
 	private final String triggerEffect;
 	private final String triggerEffectHardpoint;
 	private final DamageType damageType;
@@ -84,6 +85,7 @@ public class CombatCommand extends Command {
 		this.mindCost = builder.mindCost;
 		this.knockdownChance = builder.knockdownChance;
 		this.blinding = builder.blinding;
+		this.bleeding = builder.bleeding;
 		this.triggerEffect = builder.triggerEffect;
 		this.triggerEffectHardpoint = builder.triggerEffectHardpoint;
 		this.damageType = builder.damageType;
@@ -166,6 +168,10 @@ public class CombatCommand extends Command {
 	
 	public boolean isBlinding() {
 		return blinding;
+	}
+	
+	public boolean isBleeding() {
+		return bleeding;
 	}
 	
 	public String getTriggerEffect() {
@@ -289,6 +295,7 @@ public class CombatCommand extends Command {
 		private double mindCost;
 		private double knockdownChance;
 		private boolean blinding;
+		private boolean bleeding;
 		private String triggerEffect;
 		private String triggerEffectHardpoint;
 		private DamageType damageType;
@@ -371,6 +378,11 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withBlinding(boolean blinding) {
 			this.blinding = blinding;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBleeding(boolean bleeding) {
+			this.bleeding = bleeding;
 			return this;
 		}
 		

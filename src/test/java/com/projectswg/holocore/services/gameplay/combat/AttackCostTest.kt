@@ -6,11 +6,13 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
+import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,6 +21,7 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 
 	@BeforeEach
 	fun setup() {
+		registerService(BuffService())
 		registerService(CommandQueueService())
 		registerService(CommandExecutionService())
 		registerService(CombatStatusService())
@@ -52,6 +55,39 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 		burstRun(player)
 
 		assertTrue(creatureObject.mind < creatureObject.maxMind)
+	}
+
+	@Test
+	fun `too tired when combat command requires too much health`() {
+		val creatureObject = createCreatureObject()
+		creatureObject.health = 1
+		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
+
+		burstRun(player)
+
+		assertFalse(creatureObject.hasBuff("burstRun"))
+	}
+
+	@Test
+	fun `too tired when combat command requires too much action`() {
+		val creatureObject = createCreatureObject()
+		creatureObject.action = 1
+		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
+
+		burstRun(player)
+
+		assertFalse(creatureObject.hasBuff("burstRun"))
+	}
+
+	@Test
+	fun `too tired when combat command requires too much mind`() {
+		val creatureObject = createCreatureObject()
+		creatureObject.mind = 1
+		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
+
+		burstRun(player)
+
+		assertFalse(creatureObject.hasBuff("burstRun"))
 	}
 
 	private fun burstRun(player: GenericPlayer) {

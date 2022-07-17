@@ -41,6 +41,7 @@ import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
@@ -52,6 +53,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import com.projectswg.holocore.services.gameplay.combat.BleedingCombatState;
+import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState;
 import com.projectswg.holocore.services.gameplay.combat.CombatState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -242,7 +245,11 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			info.setDamageType(damageType);
 			
 			if (command.isBlinding()) {
-				ApplyCombatStateIntent.broadcast(source, target, CombatState.BLINDED);
+				ApplyCombatStateIntent.broadcast(source, target, new BlindedCombatState());
+			}
+			
+			if (command.isBleeding()) {
+				ApplyCombatStateIntent.broadcast(source, target, new BleedingCombatState());
 			}
 			
 			// The armor of the target will mitigate some damage
