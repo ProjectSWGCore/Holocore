@@ -1,7 +1,6 @@
 package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
-import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackType;
 import com.projectswg.common.data.combat.CombatStatus;
 import com.projectswg.common.data.combat.HitType;
@@ -55,7 +54,7 @@ public class CommandQueueService extends Service {
 	@Override
 	public boolean initialize() {
 		executor.start();
-		executor.executeWithFixedRate(1000, 100, this::executeQueuedCommands);
+		executor.executeWithFixedRate(0, 100, this::executeQueuedCommands);
 		return true;
 	}
 	
@@ -107,7 +106,7 @@ public class CommandQueueService extends Service {
 	
 	@IntentHandler
 	private void handleQueueCommandIntent(QueueCommandIntent qci) {
-		getQueue(qci.getSource()).startCommand(new EnqueuedCommand(qci.getSource(), qci.getCommand(), qci.getTarget(), qci.getArguments(), qci.getCounter()));
+		getQueue(qci.getSource()).queueCommand(new EnqueuedCommand(qci.getSource(), qci.getCommand(), qci.getTarget(), qci.getArguments(), qci.getCounter()));
 	}
 	
 	@IntentHandler
@@ -125,6 +124,7 @@ public class CommandQueueService extends Service {
 	
 	private class CreatureCombatQueue {
 		
+		private static final String GLOBAL_CD_NAME = "globalCD";
 		private final Queue<EnqueuedCommand> commandQueue;
 		private final Set<String> activeCooldownGroups;
 		
@@ -134,18 +134,45 @@ public class CommandQueueService extends Service {
 		}
 		
 		public synchronized void executeNextCommand() {
+			EnqueuedCommand peek = commandQueue.peek();
+			if (peek == null) {
+				return;
+			}
+			Command rootCommand = peek.getCommand();
+			
+			if (isCommandOnCooldown(rootCommand))
+				return;
+			
 			EnqueuedCommand command = commandQueue.poll();
 			if (command != null)
 				execute(command);
 		}
 		
-		public synchronized void startCommand(EnqueuedCommand command) {
-			if (isValidCooldownGroup(command.getCommand().getCooldownGroup()) && command.getCommand().isAddToCombatQueue()) {
-				StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "queued command %s", command.getCommand().getName());
-				if (!commandQueue.contains(command))
-					commandQueue.offer(command);
+		private boolean isCommandOnCooldown(Command rootCommand) {
+			if (activeCooldownGroups.contains(rootCommand.getCooldownGroup())) {
+				return true;
+			} else if (activeCooldownGroups.contains(rootCommand.getCooldownGroup2())) {
+				return true;
 			} else {
+				return activeCooldownGroups.contains(GLOBAL_CD_NAME);
+			}
+		}
+		
+		public synchronized void queueCommand(EnqueuedCommand command) {
+			Command rootCommand = command.getCommand();
+			
+			if (rootCommand.getCooldownGroup().isBlank()) {
 				execute(command);
+			} else {
+				StandardLog.onPlayerTrace(CommandQueueService.this, command.getSource(), "queued command %s", rootCommand.getName());
+				
+				if (commandQueue.size() > 0) {
+					EnqueuedCommand previouslyEnqueuedCommand = commandQueue.remove();
+					
+					sendQueueRemove(previouslyEnqueuedCommand, new CheckCommandResult(ErrorCode.CANCELLED, 0));
+				}
+				
+				commandQueue.offer(command);
 			}
 		}
 		
@@ -196,18 +223,26 @@ public class CommandQueueService extends Service {
 				}
 			}
 			
-			if (isValidCooldownGroup(rootCommand.getCooldownGroup())) {
-				if (!activeCooldownGroups.add(rootCommand.getCooldownGroup()))
-					return;
-				if (isValidCooldownGroup(rootCommand.getCooldownGroup2())) {
-					if (!activeCooldownGroups.add(rootCommand.getCooldownGroup2())) {
-						activeCooldownGroups.remove(rootCommand.getCooldownGroup());
-						return;
-					}
-					startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter());
-				}
-				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter());
+			float moddedWeaponAttackSpeedWithCap = command.getSource().getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(command.getSource());
+			boolean cd1 = rootCommand.getCooldownGroup().length() > 0;
+			boolean cd2 = rootCommand.getCooldownGroup2().length() > 0;
+			
+			if (cd1) {
+				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
+				activeCooldownGroups.add(rootCommand.getCooldownGroup());
 			}
+			
+			if (cd2) {
+				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
+				activeCooldownGroups.add(rootCommand.getCooldownGroup2());
+			}
+			
+			if (cd1 || cd2) {
+				activeCooldownGroups.add(GLOBAL_CD_NAME);
+				executor.execute((long) (moddedWeaponAttackSpeedWithCap * 1000), () -> activeCooldownGroups.remove(GLOBAL_CD_NAME));
+			}
+			
+			
 			ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
 		}
 		
@@ -230,16 +265,10 @@ public class CommandQueueService extends Service {
 			source.sendSelf(commandTimer);
 		}
 		
-		private boolean isValidCooldownGroup(String group) {
-			return !group.isEmpty() && !group.equals("defaultCooldownGroup");
-		}
-		
-		private void startCooldownGroup(CreatureObject creature, Command command, String group, double cooldownTime, int counter) {
-			float moddedWeaponAttackSpeedWithCap = creature.getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(creature);
-			
+		private void startCooldownGroup(CreatureObject creature, Command command, String group, double cooldownTime, int counter, float globalCooldownTime) {
 			CommandTimer commandTimer = new CommandTimer(creature.getObjectId());
 			commandTimer.setCooldownGroupCrc(CRC.getCrc(group));
-			commandTimer.setGlobalCooldownTime(moddedWeaponAttackSpeedWithCap);
+			commandTimer.setGlobalCooldownTime(globalCooldownTime);
 			commandTimer.setCooldownGroupTime((float) cooldownTime);
 			commandTimer.setCommandNameCrc(command.getCrc());
 			commandTimer.setSequenceId(counter);
@@ -248,7 +277,7 @@ public class CommandQueueService extends Service {
 			commandTimer.addFlag(CommandTimer.CommandTimerFlag.EXECUTE);
 			creature.sendSelf(commandTimer);
 			
-			executor.execute((long) ((cooldownTime + moddedWeaponAttackSpeedWithCap) * 1000), () -> activeCooldownGroups.remove(group));
+			executor.execute((long) ((cooldownTime + globalCooldownTime) * 1000), () -> activeCooldownGroups.remove(group));
 		}
 		
 		private CheckCommandResult checkCommand(EnqueuedCommand command) {
