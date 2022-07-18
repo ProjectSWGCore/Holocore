@@ -507,7 +507,7 @@ spawn_tatooine_504	TATOOINE	tat_world	AREA	0	3335.8	5.6	-4758.9	-78	1	a commoner
 spawn_tatooine_505	TATOOINE	tat_world	AREA	0	3334.3	5.6	-4761.7	-57	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	happy			600
 spawn_tatooine_506	TATOOINE	tat_world	AREA	0	3335.8	5.5	-4752.7	-132	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_507	TATOOINE	tat_world	AREA	0	3334.7	5.5	-4751.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
-spawn_tatooine_508	TATOOINE	tat_world	AREA	0	3725.7	5.0	-4760.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
+spawn_tatooine_508	TATOOINE	tat_world	PATROL	0	3725.7	5.0	-4760.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9800	column	idle		commoner	600
 spawn_tatooine_509	TATOOINE	tat_world	AREA	0	3377.0	5.0	-4864.9	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_510	TATOOINE	tat_world	AREA	0	3364.7	5.0	-4679.6	-88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_511	TATOOINE	tat_world	AREA	0	3309.3	5.0	-4530.4	162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
@@ -520,11 +520,11 @@ spawn_tatooine_517	TATOOINE	tat_world	AREA	0	3538.3	5.0	-4692.7	-142	1	a commone
 spawn_tatooine_518	TATOOINE	tat_world	AREA	0	3526.0	5.0	-4721.0	-54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_519	TATOOINE	tat_world	AREA	0	3549.7	5.0	-4708.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		commoner	600
 spawn_tatooine_520	TATOOINE	tat_world	AREA	0	3559.0	5.0	-4725.0	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
-spawn_tatooine_521	TATOOINE	tat_world	AREA	0	3510.9	5.0	-4766.2	44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	TURN	0	0	-	idle		commoner	600
+spawn_tatooine_521	TATOOINE	tat_world	PATROL	0	3510.9	5.0	-4766.2	44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9500	column	idle		commoner	600
 spawn_tatooine_522	TATOOINE	tat_world	AREA	0	3358.9	5.0	-5016.9	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_523	TATOOINE	tat_world	AREA	0	3450.0	5.0	-4890.2	73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_524	TATOOINE	tat_world	AREA	0	3439.8	5.0	-4898.4	73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
-spawn_tatooine_525	TATOOINE	tat_world	AREA	0	3450.7	5.0	-4941.8	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
+spawn_tatooine_525	TATOOINE	tat_world	PATROL	0	3450.7	5.0	-4941.8	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9900	column	idle		commoner	600
 spawn_tatooine_526	TATOOINE	tat_world	AREA	0	3491.1	5.0	-4897.9	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_527	TATOOINE	tat_world	AREA	0	3474.2	5.0	-4740.4	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_528	TATOOINE	tat_world	AREA	0	3389.1	5.0	-4659.2	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
@@ -533,18 +533,18 @@ spawn_tatooine_530	TATOOINE	tat_world	AREA	0	3330.4	5.0	-4819.2	-27	1	a commoner
 spawn_tatooine_531	TATOOINE	tat_world	AREA	0	3328.4	5.0	-4817.3	131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_532	TATOOINE	tat_world	AREA	0	3317.0	5.0	-4838.1	127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		commoner	600
 spawn_tatooine_533	TATOOINE	tat_world	AREA	0	3246.9	5.0	-4861.9	-161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
-spawn_tatooine_534	TATOOINE	tat_world	AREA	0	3280.6	5.0	-4890.2	104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
+spawn_tatooine_534	TATOOINE	tat_world	PATROL	0	3280.6	5.0	-4890.2	104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9600	column	idle		commoner	600
 spawn_tatooine_535	TATOOINE	tat_world	AREA	0	3312.1	5.0	-4926.4	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_536	TATOOINE	tat_world	AREA	0	3515.8	5.0	-4864.9	-71	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		commoner	600
 spawn_tatooine_537	TATOOINE	tat_world	AREA	0	3495.5	5.0	-4706.8	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_consoling			600
 spawn_tatooine_538	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4709.7	-65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
-spawn_tatooine_539	TATOOINE	tat_world	AREA	0	3459.9	5.0	-4755.4	-167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
+spawn_tatooine_539	TATOOINE	tat_world	PATROL	0	3459.9	5.0	-4755.4	-167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_10200	column	idle		commoner	600
 spawn_tatooine_540	TATOOINE	tat_world	AREA	0	3506.7	5.0	-4869.8	28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		commoner	600
 spawn_tatooine_541	TATOOINE	tat_world	AREA	0	3450.3	5.0	-4742.4	-146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		commoner	600
 spawn_tatooine_542	TATOOINE	tat_world	AREA	0	3401.5	5.0	-4780.4	-106	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_543	TATOOINE	tat_world	AREA	0	3386.4	5.0	-4765.3	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_544	TATOOINE	tat_world	AREA	0	3411.7	5.0	-4771.5	94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
-spawn_tatooine_545	TATOOINE	tat_world	AREA	0	3480.4	5.0	-4726.6	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
+spawn_tatooine_545	TATOOINE	tat_world	PATROL	0	3480.4	5.0	-4726.6	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_10300	column	idle		commoner	600
 spawn_tatooine_546	TATOOINE	tat_world	AREA	0	3521.1	5.0	-4711.9	100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		commoner	600
 spawn_tatooine_547	TATOOINE	tat_world	AREA	0	3412.0	5.0	-4906.7	-139	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_consoling			600
 spawn_tatooine_548	TATOOINE	tat_world	AREA	0	3413.2	5.0	-4908.0	-110	1	a criminal	humanoid_criminal	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
@@ -607,7 +607,7 @@ spawn_tatooine_604	TATOOINE	tat_world	AREA	0	3455.7	5.0	-4901.3	-49	1	a Pit Droi
 spawn_tatooine_605	TATOOINE	tat_world	AREA	0	3452.4	5.0	-4896.9	110	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_tatooine_606	TATOOINE	tat_world	AREA	0	3454.3	5.0	-4897.6	-98	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_tatooine_607	TATOOINE	tat_world	AREA	0	3319.7	5.0	-4838.0	-92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-spawn_tatooine_608	TATOOINE	tat_world	AREA	0	3722.1	5.0	-4822.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle			600
+spawn_tatooine_608	TATOOINE	tat_world	PATROL	0	3722.1	5.0	-4822.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9700	column	idle			600
 spawn_tatooine_609	TATOOINE	tat_world	AREA	0	3337.0	5.6	-4756.2	-89	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	entertained			600
 spawn_tatooine_610	TATOOINE	tat_world	AREA	0	3286.2	5.0	-4525.1	8	1	a Rebel coordinator	humanoid_coa2_rebel_coordinator	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_611	TATOOINE	tat_world	AREA	0	3414.3	5.0	-4630.2	128	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -668,7 +668,7 @@ spawn_tatooine_665	TATOOINE	tat_world	AREA	0	3521.6	5.0	-4683.3	-173	1	a commone
 spawn_tatooine_666	TATOOINE	tat_world	AREA	0	3378.9	5.0	-4496.7	102	1	Errik Darksider	humanoid_herald_tatooine_errik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_667	TATOOINE	tat_world	AREA	0	3566.5	5.0	-4714.1	-140	1	Escara Frei	humanoid_medic_escara	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_668	TATOOINE	tat_world	AREA	0	3526.9	5.0	-4777.6	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
-spawn_tatooine_669	TATOOINE	tat_world	AREA	0	3462.9	5.0	-4881.5	46	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
+spawn_tatooine_669	TATOOINE	tat_world	PATROL	0	3462.9	5.0	-4881.5	46	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_10000	column	idle		simple_droid_geek_alert_5	600
 spawn_tatooine_670	TATOOINE	tat_world	AREA	0	3308.0	5.6	-4785.0	71	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_671	TATOOINE	tat_world	AREA	0	3437.7	5.0	-4916.7	83	1	Hunter Javeezo	humanoid_hunter_javeezo	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_672	TATOOINE	tat_world	AREA	0	3186.2	5.0	-4781.3	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
@@ -682,7 +682,7 @@ spawn_tatooine_679	TATOOINE	tat_world	AREA	0	3330.1	5.0	-4861.0	-42	1	Labria	hum
 spawn_tatooine_680	TATOOINE	tat_world	AREA	0	3201.2	5.0	-4646.6	-103	1	Larit	humanoid_tatooine_larit	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_681	TATOOINE	tat_world	AREA	0	3376.0	5.0	-4786.0	124	1	Lorne Prestar	humanoid_lorne_prestar	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_682	TATOOINE	tat_world	AREA	0	3486.0	5.0	-4740.0	-53	1	Lt. Harburik	humanoid_lt_harburik	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-spawn_tatooine_683	TATOOINE	tat_world	AREA	0	3386.4	5.0	-4792.4	13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_683	TATOOINE	tat_world	PATROL	0	3386.4	5.0	-4792.4	13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_10100	column	idle			600
 spawn_tatooine_684	TATOOINE	tat_world	AREA	0	3490.6	5.0	-4778.2	125	1	Matilda Carson (Painting Allocation Engineer)	humanoid_matilda_carson	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 spawn_tatooine_685	TATOOINE	tat_world	AREA	0	3196.4	5.0	-4647.7	62	1	Moa	humanoid_tatooine_moa	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_686	TATOOINE	tat_world	AREA	0	3550.6	5.0	-4933.9	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
