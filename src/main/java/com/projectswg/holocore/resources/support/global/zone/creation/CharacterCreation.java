@@ -164,7 +164,7 @@ public class CharacterCreation {
 		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_marksman_novice", creatureObj, true).broadcast();
 		
 		// Everyone can Burst Run
-		creatureObj.addCommand("burstRun");
+		creatureObj.addCommand("burstrun");
 
 		Collection<String> languages = languagesSkillsForRace(creatureObj.getRace());
 
