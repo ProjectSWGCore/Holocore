@@ -187,6 +187,8 @@ public class NPCCreator {
 			default:
 				break;
 		}
+		if (spawner.getBuildingId().isEmpty() || spawner.getBuildingId().endsWith("_world"))
+			builder.setY(DataLoader.Companion.terrains().getHeight(builder));
 		
 		return builder.build();
 	}

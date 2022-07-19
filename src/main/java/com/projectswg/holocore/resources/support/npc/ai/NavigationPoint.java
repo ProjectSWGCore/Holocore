@@ -1,7 +1,6 @@
 package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -140,11 +139,14 @@ public class NavigationPoint {
 			return new NavigationPoint(parent, Location.builder(l1).setY(DataLoader.Companion.terrains().getHeight(l1)).setHeading(heading).build(), speed);
 		if (percentage >= 1)
 			return new NavigationPoint(parent, Location.builder(l2).setY(DataLoader.Companion.terrains().getHeight(l2)).setHeading(heading).build(), speed);
+		
+		double newX = l1.getX() + (l2.getX()-l1.getX())*percentage;
+		double newZ = l1.getZ() + (l2.getZ()-l1.getZ())*percentage;
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
-				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
-				.setY(DataLoader.Companion.terrains().getHeight(l1.getTerrain(), l1.getX() + (l2.getX()-l1.getX())*percentage, l1.getZ() + (l2.getZ()-l1.getZ())*percentage))
-				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
+				.setX(newX)
+				.setY(DataLoader.Companion.terrains().getHeight(l1.getTerrain(), newX, newZ))
+				.setZ(newZ)
 				.setHeading(heading)
 				.build(), speed);
 	}
