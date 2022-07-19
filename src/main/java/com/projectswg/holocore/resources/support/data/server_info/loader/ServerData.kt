@@ -30,6 +30,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.ConversationLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
+import com.projectswg.holocore.resources.support.data.server_info.loader.terrain.TerrainHeightLoader
 import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.lang.ref.Reference
@@ -84,6 +85,7 @@ object ServerData {
 	val slotArrangements	by SoftDataLoaderDelegate(::SlotArrangementLoader)
 	val planetMapCategories	by SoftDataLoaderDelegate(::PlanetMapCategoryLoader)
 	val zoneInsertions		by SoftDataLoaderDelegate(::TerrainZoneInsertionLoader)
+	val terrains            by SoftDataLoaderDelegate(::TerrainHeightLoader)
 	
 	val commands			by SoftDataLoaderDelegate(::CommandLoader)
 	val travelCosts			by SoftDataLoaderDelegate(::TravelCostLoader)

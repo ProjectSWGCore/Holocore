@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.data.server_info.loader
 
 import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.ConversationLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
+import com.projectswg.holocore.resources.support.data.server_info.loader.terrain.TerrainHeightLoader
 import java.io.IOException
 
 abstract class DataLoader {
@@ -52,6 +53,7 @@ abstract class DataLoader {
 		fun buildouts(): BuildoutLoader = buildouts(listOf())
 		fun buildouts(events: Collection<String>): BuildoutLoader = BuildoutLoader.load(events)
 		fun buildingCells(): BuildingCellLoader = ServerData.buildingCells
+		fun terrains(): TerrainHeightLoader = ServerData.terrains
 		fun lootTables(): LootTableLoader = ServerData.lootTables
 		fun npcs(): NpcLoader = ServerData.npcs
 		fun npcCombatProfiles(): NpcCombatProfileLoader = ServerData.npcCombatProfiles

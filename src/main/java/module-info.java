@@ -16,6 +16,4 @@ open module holocore {
 	requires fast.json;
 	requires kotlin.stdlib;
 	requires kotlin.reflect;
-	
-	requires swgterrain;
 }
