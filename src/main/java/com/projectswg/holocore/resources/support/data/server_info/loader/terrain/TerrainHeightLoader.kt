@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.data.server_info.loader.terrain
 
+import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.swgiff.parsers.SWGParser
 import com.projectswg.common.data.swgiff.parsers.terrain.TerrainTemplate
@@ -45,6 +46,13 @@ class TerrainHeightLoader : DataLoader() {
 	
 	fun getTerrain(terrain: Terrain): TerrainTemplate? {
 		return terrains[terrain]
+	}
+	
+	fun getHeight(l: Location.LocationBuilder): Double = getHeight(l.terrain, l.x, l.z)
+	fun getHeight(l: Location): Double = getHeight(l.terrain, l.x, l.z)
+	
+	fun getHeight(terrain: Terrain, x: Double, z: Double): Double {
+		return terrains[terrain]?.getHeight(x.toFloat(), z.toFloat())?.height?.toDouble() ?: 0.0
 	}
 	
 	companion object {
