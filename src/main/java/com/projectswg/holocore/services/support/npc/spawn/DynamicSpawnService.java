@@ -168,7 +168,7 @@ public class DynamicSpawnService extends Service {
 		double randomOffsetZ = random.nextDouble(-MAX_SPAWN_DISTANCE_TO_PLAYER, MAX_SPAWN_DISTANCE_TO_PLAYER);
 		double eggX = location.getX() + randomOffsetX;
 		double eggZ = location.getZ() + randomOffsetZ;
-		double eggY = getEggY(terrain, eggX, eggZ);
+		double eggY = DataLoader.Companion.terrains().getHeight(terrain, eggX, eggZ);
 		
 		Location eggLocation = Location.builder(location)
 				.setX(eggX)
@@ -224,13 +224,6 @@ public class DynamicSpawnService extends Service {
 		int randomIdx = random.nextInt(0, npcIdCount);
 		
 		return npcIds[randomIdx];
-	}
-	
-	private double getEggY(Terrain terrain, double eggX, double eggZ) {
-		TerrainTemplate template = DataLoader.Companion.terrains().getTerrain(terrain);
-		if (template == null)
-			return 0;
-		return template.getHeight((float) eggX, (float) eggZ).getHeight();
 	}
 	
 }
