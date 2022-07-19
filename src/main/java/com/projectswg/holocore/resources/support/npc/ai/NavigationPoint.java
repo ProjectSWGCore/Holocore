@@ -136,17 +136,24 @@ public class NavigationPoint {
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
 		double heading = Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ()));
 		if (percentage <= 0)
-			return new NavigationPoint(parent, Location.builder(l1).setY(DataLoader.Companion.terrains().getHeight(l1)).setHeading(heading).build(), speed);
+			return new NavigationPoint(parent, Location.builder(l1)
+					.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l1) : l1.getY())
+					.setHeading(heading)
+					.build(), speed);
 		if (percentage >= 1)
-			return new NavigationPoint(parent, Location.builder(l2).setY(DataLoader.Companion.terrains().getHeight(l2)).setHeading(heading).build(), speed);
+			return new NavigationPoint(parent, Location.builder(l2)
+					.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l2) : l2.getY())
+					.setHeading(heading)
+					.build(), speed);
 		
-		double newX = l1.getX() + (l2.getX()-l1.getX())*percentage;
-		double newZ = l1.getZ() + (l2.getZ()-l1.getZ())*percentage;
+		double interpX = l1.getX() + (l2.getX()-l1.getX())*percentage;
+		double interpY = l1.getY() + (l2.getY()-l1.getY())*percentage;
+		double interpZ = l1.getZ() + (l2.getZ()-l1.getZ())*percentage;
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
-				.setX(newX)
-				.setY(DataLoader.Companion.terrains().getHeight(l1.getTerrain(), newX, newZ))
-				.setZ(newZ)
+				.setX(interpX)
+				.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l1.getTerrain(), interpX, interpZ) : interpY)
+				.setZ(interpZ)
 				.setHeading(heading)
 				.build(), speed);
 	}
