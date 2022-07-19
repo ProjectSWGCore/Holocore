@@ -28,15 +28,13 @@ package com.projectswg.holocore.services.support.npc.spawn;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.swgiff.parsers.terrain.TerrainTemplate;
 import com.projectswg.holocore.intents.gameplay.world.spawn.CreateSpawnIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.location.ClosestLocationReducer;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DynamicSpawnLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.NoSpawnZoneLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
-import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainLevelLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo;
@@ -47,8 +45,6 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.utilities.TerrainUtils;
-import dk.madsboddum.swgterrain.api.TerrainEngine;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.Nullable;
@@ -231,9 +227,10 @@ public class DynamicSpawnService extends Service {
 	}
 	
 	private double getEggY(Terrain terrain, double eggX, double eggZ) {
-		TerrainEngine terrainEngine = TerrainUtils.getEngine(terrain);
-		
-		return terrainEngine.getHeight(eggX, eggZ);
+		TerrainTemplate template = DataLoader.Companion.terrains().getTerrain(terrain);
+		if (template == null)
+			return 0;
+		return template.getHeight((float) eggX, (float) eggZ).getHeight();
 	}
 	
 }

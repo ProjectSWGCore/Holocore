@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2020 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2022 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,21 +24,55 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities;
 
-import com.projectswg.common.data.location.Terrain;
-import dk.madsboddum.swgterrain.api.TerrainEngine;
-import dk.madsboddum.swgterrain.api.TerrainEngineFactory;
+package com.projectswg.holocore.resources.support.data.server_info.loader.terrain
 
-import java.io.File;
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.common.data.swgiff.parsers.SWGParser
+import com.projectswg.common.data.swgiff.parsers.terrain.TerrainTemplate
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import java.util.EnumMap
 
-public class TerrainUtils {
+class TerrainHeightLoader : DataLoader() {
 	
-	public static TerrainEngine getEngine(Terrain terrain) {
-		TerrainEngineFactory factory = new TerrainEngineFactory();
-		File trnFile = new File("clientdata/" + terrain.getFile());
+	private val terrains = EnumMap<Terrain, TerrainTemplate>(Terrain::class.java)
+	
+	override fun load() {
+		for (terrain in TERRAIN_LIST) {
+			terrains[terrain] = SWGParser.parse(terrain.file)
+		}
+	}
+	
+	fun getTerrain(terrain: Terrain): TerrainTemplate? {
+		return terrains[terrain]
+	}
+	
+	companion object {
 		
-		return factory.create(trnFile);
+		private val TERRAIN_LIST = listOf(
+			Terrain.CORELLIA,
+			Terrain.DANTOOINE,
+			Terrain.DATHOMIR,
+			Terrain.ENDOR,
+			Terrain.KASHYYYK_DEAD_FOREST,
+			Terrain.KASHYYYK_HUNTING,
+			Terrain.KASHYYYK_MAIN,
+			Terrain.KASHYYYK_NORTH_DUNGEONS,
+			Terrain.KASHYYYK_POB_DUNGEONS,
+			Terrain.KASHYYYK_RRYATT_TRAIL,
+			Terrain.KASHYYYK_SOUTH_DUNGEONS,
+			Terrain.KASHYYYK,
+			Terrain.LOK,
+			Terrain.MUSTAFAR,
+			Terrain.NABOO,
+			Terrain.RORI,
+			Terrain.TAANAB,
+			Terrain.TALUS,
+			Terrain.TATOOINE,
+			Terrain.UMBRA,
+			Terrain.YAVIN4,
+		)
+		
 	}
 	
 }
