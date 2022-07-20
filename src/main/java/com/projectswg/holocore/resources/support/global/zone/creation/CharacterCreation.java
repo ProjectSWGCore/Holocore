@@ -178,6 +178,7 @@ public class CharacterCreation {
 		createInventoryObject(creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
+		createInventoryObject(creatureObj.getInventory(), "object/tangible/instrument/shared_slitherhorn.iff");
 	}
 	
 	@NotNull
