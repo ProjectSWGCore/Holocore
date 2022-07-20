@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.gameplay.combat
 import com.projectswg.common.data.CRC
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
@@ -69,7 +70,7 @@ class FactionPvpTest : TestRunnerSimulatedWorld() {
 		val targetObjectId = target.objectId
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, targetObjectId, "")))
-		Thread.sleep(10)	// Give the command queue a chance to be processed
+		player.waitForNextPacket(CommandTimer::class.java)
 	}
 
 	private fun createCreatureObject(): GenericCreatureObject {
