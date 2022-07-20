@@ -2,12 +2,13 @@ package com.projectswg.holocore.services.gameplay.combat
 
 import com.projectswg.common.data.CRC
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
+import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
@@ -22,21 +23,20 @@ class AbilityTest : TestRunnerSimulatedWorld() {
 
 	@BeforeEach
 	fun setup() {
-		registerService(BuffService())
 		registerService(CommandQueueService(5))
 		registerService(CommandExecutionService())
 		registerService(SkillService())
 	}
-	
+
 	@Test
 	fun `you can execute an ability when you have the skill that grants it`() {
 		val creatureObject = createCreatureObject()
 		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
 		grantRequiredSkillForParryRiposte(creatureObject)
 
-		parryRiposte(player)
-		
-		assertTrue(creatureObject.hasBuff("parryRiposte"))
+		val success = parryRiposte(player)
+
+		assertTrue(success)
 	}
 
 	@Test
@@ -44,9 +44,9 @@ class AbilityTest : TestRunnerSimulatedWorld() {
 		val creatureObject = createCreatureObject()
 		val player = creatureObject.owner ?: throw RuntimeException("Unable to access player")
 
-		parryRiposte(player)
+		val success = parryRiposte(player)
 
-		assertFalse(creatureObject.hasBuff("parryRiposte"))
+		assertFalse(success)
 	}
 
 	private fun grantRequiredSkillForParryRiposte(creatureObject: GenericCreatureObject) {
@@ -54,11 +54,17 @@ class AbilityTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 	}
 
-	private fun parryRiposte(player: GenericPlayer) {
+	private fun parryRiposte(player: GenericPlayer): Boolean {
 		val crc = CRC.getCrc("parryriposte")
+		InboundPacketIntent.broadcast(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, ""))
 
-		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, "")))
-		Thread.sleep(10)	// Give the command queue a chance to be processed
+		val commandTimer = player.waitForNextPacket(CommandTimer::class.java)
+
+		if (commandTimer != null) {
+			return commandTimer.flags.contains(CommandTimer.CommandTimerFlag.EXECUTE)
+		} else {
+			throw RuntimeException("No CommandTimer packet was sent at all")
+		}
 	}
 
 	private fun createCreatureObject(): GenericCreatureObject {
