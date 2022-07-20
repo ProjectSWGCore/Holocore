@@ -1,6 +1,7 @@
 package com.projectswg.holocore.services.gameplay.world.map;
 
 import com.projectswg.common.data.encodables.map.MapLocation;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsMessage;
@@ -113,8 +114,9 @@ public class MapService extends Service {
 		mapLocation.setName(mappingTemplate.getName());
 		mapLocation.setCategory((byte) (category == null ? 0 : category.getIndex()));
 		mapLocation.setSubcategory((byte) (subcategory == null ? 0 : subcategory.getIndex()));
-		mapLocation.setX((float) object.getX());
-		mapLocation.setY((float) object.getZ());
+		Location objectLocation = object.getWorldLocation();
+		mapLocation.setX((float) objectLocation.getX());
+		mapLocation.setY((float) objectLocation.getZ());
 
 		String planet = object.getTerrain().getName();
 
