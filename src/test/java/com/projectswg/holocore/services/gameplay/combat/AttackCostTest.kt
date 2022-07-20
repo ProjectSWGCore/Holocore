@@ -3,6 +3,7 @@ package com.projectswg.holocore.services.gameplay.combat
 import com.projectswg.common.data.CRC
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
+import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
@@ -96,7 +97,7 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 		val crc = CRC.getCrc("burstrun")
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, "")))
-		Thread.sleep(10)	// Give the command queue a chance to be processed
+		(player as GenericPlayer).waitForNextPacket(CommandTimer::class.java)
 	}
 
 	private fun createCreatureObject(): CreatureObject {
