@@ -106,7 +106,7 @@ object/building/naboo/rori_restuss_shuttleport.iff		shuttleport		0	0
 object/mobile/dressed_artisan_trainer_01.iff		trainer	trainer_artisan	0	0
 object/mobile/dressed_artisan_trainer_02.iff		trainer	trainer_artisan	0	0
 object/mobile/dressed_artisan_trainer_03.iff		trainer	trainer_artisan	0	0
-object/mobile/dressed_brawler_trainer_01.iff	;	trainer	trainer_brawler	0	0
+object/mobile/dressed_brawler_trainer_01.iff		trainer	trainer_brawler	0	0
 object/mobile/dressed_brawler_trainer_02.iff		trainer	trainer_brawler	0	0
 object/mobile/dressed_brawler_trainer_03.iff		trainer	trainer_brawler	0	0
 object/mobile/dressed_entertainer_trainer_human_female_01.iff		trainer	trainer_entertainer	0	0
