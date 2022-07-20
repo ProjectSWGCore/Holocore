@@ -11,7 +11,6 @@ public enum Converters {
 	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
 	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
 	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
-	TERRAINS					(ConvertTerrain::new),
 	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/player/role.sdb", false)),
 	COMMANDS_GLOBAL				(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/command/commands_global.sdb", false)),
 	COMMANDS_GROUND				(() -> new ConvertDatatable("datatables/command/command_table_ground.iff", "serverdata/command/commands_ground.sdb", false)),
