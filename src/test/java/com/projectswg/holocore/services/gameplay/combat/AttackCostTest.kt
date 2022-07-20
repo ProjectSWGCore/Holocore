@@ -1,15 +1,17 @@
 package com.projectswg.holocore.services.gameplay.combat
 
 import com.projectswg.common.data.CRC
+import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
-import com.projectswg.holocore.resources.support.objects.ObjectCreator
-import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -22,7 +24,7 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 	@BeforeEach
 	fun setup() {
 		registerService(BuffService())
-		registerService(CommandQueueService())
+		registerService(CommandQueueService(5))
 		registerService(CommandExecutionService())
 		registerService(CombatStatusService())
 	}
@@ -90,19 +92,26 @@ class AttackCostTest : TestRunnerSimulatedWorld() {
 		assertFalse(creatureObject.hasBuff("burstRun"))
 	}
 
-	private fun burstRun(player: GenericPlayer) {
+	private fun burstRun(player: Player) {
 		val crc = CRC.getCrc("burstrun")
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, "")))
-		Thread.sleep(150)	// Give the command queue a chance to be processed
+		Thread.sleep(10)	// Give the command queue a chance to be processed
 	}
 
-	private fun createCreatureObject(): GenericCreatureObject {
-		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		ObjectCreatedIntent.broadcast(creatureObject)
-		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
-		defaultWeapon.moveToContainer(creatureObject)
-		creatureObject.equippedWeapon = defaultWeapon
+	private fun createCreatureObject(): CreatureObject {
+		val player = GenericPlayer()
+		val clientCreateCharacter = ClientCreateCharacter()
+		clientCreateCharacter.biography = ""
+		clientCreateCharacter.clothes = "combat_brawler"
+		clientCreateCharacter.race = "object/creature/player/shared_human_male.iff"
+		clientCreateCharacter.name = "Testing Character"
+		val characterCreation = CharacterCreation(player, clientCreateCharacter)
+
+		val mosEisley = DataLoader.zoneInsertions().getInsertion("tat_moseisley")
+		val creatureObject = characterCreation.createCharacter(AccessLevel.PLAYER, mosEisley)
+		creatureObject.owner = player
+		
 		return creatureObject
 	}
 

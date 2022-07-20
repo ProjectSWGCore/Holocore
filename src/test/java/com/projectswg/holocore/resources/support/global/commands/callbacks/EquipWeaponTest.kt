@@ -22,7 +22,7 @@ class EquipWeaponTest : TestRunnerSimulatedWorld() {
 	
 	@BeforeEach
 	fun setUp() {
-		registerService(CommandQueueService())
+		registerService(CommandQueueService(5))
 		registerService(CommandExecutionService())
 	}
 

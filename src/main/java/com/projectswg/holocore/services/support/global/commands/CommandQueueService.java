@@ -38,23 +38,30 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class CommandQueueService extends Service {
 	
 	private final ScheduledThreadPool executor;
 	private final Map<CreatureObject, CreatureCombatQueue> combatQueueMap;
 	private final CombatCommandHandler combatCommandHandler;
+	private final long delayBetweenCheckingCommandQueue;
 	
 	public CommandQueueService() {
+		this(100);
+	}
+	
+	public CommandQueueService(long delayBetweenCheckingCommandQueue) {
 		this.executor = new ScheduledThreadPool(4, "command-queue-%d");
 		this.combatQueueMap = new ConcurrentHashMap<>();
 		this.combatCommandHandler = new CombatCommandHandler();
+		this.delayBetweenCheckingCommandQueue = delayBetweenCheckingCommandQueue;
 	}
 	
 	@Override
 	public boolean initialize() {
 		executor.start();
-		executor.executeWithFixedRate(0, 100, this::executeQueuedCommands);
+		executor.executeWithFixedRate(0, delayBetweenCheckingCommandQueue, this::executeQueuedCommands);
 		return true;
 	}
 	
@@ -331,6 +338,15 @@ public class CommandQueueService extends Service {
 			}
 			
 			if (rootCommand instanceof CombatCommand combatCommand) {
+				Collection<String> sourceCommands = source.getCommands()
+						.stream()
+						.map(sourceCommand -> sourceCommand.toLowerCase(Locale.US))
+						.collect(Collectors.toSet());
+				
+				if (!sourceCommands.contains(rootCommand.getName())) {
+					return new CheckCommandResult(ErrorCode.ABILITY, 0);
+				}
+				
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
 					switch (combatCommand.getTargetType()) {
