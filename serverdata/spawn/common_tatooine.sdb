@@ -377,7 +377,7 @@ spawn_tatooine_374	TATOOINE	tat_moseisley_combat_gh	AREA	9	-14.0	1.1	-8.5	85	1	a
 spawn_tatooine_375	TATOOINE	tat_moseisley_commerce_gh	PATROL	7	14.3	1.1	-13.9	-169	1	a Merchant trainer	humanoid_trainer_merchant	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9000	column	idle		trainer_crafting_merchant	600
 spawn_tatooine_376	TATOOINE	tat_moseisley_commerce_gh	PATROL	8	2.8	1.1	-9.5	-93	1	an Architect trainer	humanoid_trainer_architect	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9100	column	idle		trainer_crafting_architect	600
 spawn_tatooine_377	TATOOINE	tat_moseisley_commerce_gh	PATROL	9	-13.5	1.1	-11.9	-91	1	a Chef trainer	humanoid_trainer_chef	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9200	column	idle		trainer_crafting_chef	600
-spawn_tatooine_378	TATOOINE	tat_moseisley_hospital	AREA	2	-1.1	0.2	0.6	117	1	a medic	humanoid_trainer_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation		trainer_medic	600
+spawn_tatooine_378	TATOOINE	tat_moseisley_hospital	AREA	2	-1.1	0.2	0.6	117	1	a Medic trainer	humanoid_trainer_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_science_medic	600
 spawn_tatooine_379	TATOOINE	tat_moseisley_hospital	AREA	2	-1.9	0.2	-2.3	-174	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_380	TATOOINE	tat_moseisley_hospital	AREA	2	-2.0	0.2	-3.6	2	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_381	TATOOINE	tat_moseisley_hospital	AREA	2	-8.1	0.2	3.3	-178	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -459,10 +459,9 @@ spawn_tatooine_456	TATOOINE	tat_moseisley_university	PATROL	5	13.4	1.1	5.7	-171	
 spawn_tatooine_457	TATOOINE	tat_moseisley_university	PATROL	6	-15.1	1.1	-0.3	85	1	an Armorsmith trainer	humanoid_trainer_armorsmith	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_9400	column	idle		trainer_crafting_armorsmith	600
 spawn_tatooine_458	TATOOINE	tat_moseisley_university	AREA	8	-3.1	1.1	-8.6	122	1	a Weaponsmith trainer	humanoid_trainer_weaponsmith	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_crafting_weaponsmith	600
 spawn_tatooine_459	TATOOINE	tat_moseisley_university	AREA	9	-10.6	1.1	-13.8	-5	1	a Droid Engineer trainer	humanoid_trainer_droidengineer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_crafting_droidengineer	600
-spawn_tatooine_460	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4786.2	-89	1	a Brawler trainer	humanoid_trainer_brawler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_combat_brawler	600
-spawn_tatooine_461	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4788.2	-89	1	an Entertainer trainer	humanoid_trainer_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_social_entertainer	600
-spawn_tatooine_462	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4790.2	-89	1	a Marksman trainer	humanoid_trainer_marksman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_combat_marksman	600
-spawn_tatooine_463	TATOOINE	tat_world	AREA	0	3533.2	5.0	-4792.2	-89	1	a Medic trainer	humanoid_trainer_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_science_medic	600
+spawn_tatooine_460	TATOOINE	tat_world	AREA	0	3533.1	5.0	-4790.2	-91	1	a Brawler trainer	humanoid_trainer_brawler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_combat_brawler	600
+spawn_tatooine_461	TATOOINE	tat_world	AREA	0	3494.0	5.0	-4868.7	132	1	an Entertainer trainer	humanoid_trainer_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		trainer_social_entertainer	600
+spawn_tatooine_462	TATOOINE	tat_moseisley_combat_gh	AREA	4	2.4	1.1	-5.8	0	1	a Marksman trainer	humanoid_trainer_marksman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair		trainer_combat_marksman	600
 spawn_tatooine_464	TATOOINE	tat_world	AREA	0	3392.8	5.0	-4794.3	-5	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_465	TATOOINE	tat_world	AREA	0	3393.4	5.0	-4791.8	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_466	TATOOINE	tat_world	AREA	0	3357.0	5.0	-4839.6	65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
