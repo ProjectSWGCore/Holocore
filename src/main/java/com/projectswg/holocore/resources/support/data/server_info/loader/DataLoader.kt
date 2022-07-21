@@ -43,9 +43,7 @@ abstract class DataLoader {
 		 */
 		fun buffs(): BuffLoader = ServerData.buffs
 		fun skills(): SkillLoader = ServerData.skills
-		fun skillTemplates(): SkillTemplateLoader = ServerData.skillTemplates
 		fun staticItems(): StaticItemLoader = ServerData.staticItems
-		fun itemBonusSets(): ItemBonusSetLoader = ServerData.itemBonusSet
 		fun combatXpMultipliers(): CombatXpMultiplierLoader = ServerData.combatXpMultipliers
 		fun playerLevels(): PlayerLevelLoader = ServerData.playerLevels
 		fun playerRoles(): PlayerRoleLoader = ServerData.playerRoles
@@ -76,7 +74,6 @@ abstract class DataLoader {
 		fun dynamicSpawns(): DynamicSpawnLoader = ServerData.dynamicSpawns
 		fun terrainLevels(): TerrainLevelLoader = ServerData.terrainLevels
 		fun noSpawnZones(): NoSpawnZoneLoader = ServerData.noSpawnZones
-		fun gcwRegionLoader(): GcwRegionLoader = ServerData.gcwRegionLoader
 		fun conversationLoader(): ConversationLoader = ServerData.conversationLoader
 		fun questLoader(): QuestLoader = ServerData.questLoader
 		fun badges(): BadgeLoader = ServerData.badges
