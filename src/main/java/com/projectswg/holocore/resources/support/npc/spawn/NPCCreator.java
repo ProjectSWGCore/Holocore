@@ -59,7 +59,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCCreator {
 	
-	public static long createNPC(Spawner spawner) {
+	public static AIObject createNPC(Spawner spawner) {
 		Arguments.validate(spawner.getMinLevel() <= spawner.getMaxLevel(), "min level must be less than max level");
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
@@ -97,9 +97,9 @@ public class NPCCreator {
 		try {
 			spawner.getDefaultWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addDefaultWeapon);
 			spawner.getThrownWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addThrownWeapon);
-			List<WeaponObject> defaultWeapon = object.getDefaultWeapon();
-			if (!defaultWeapon.isEmpty())
-				object.setEquippedWeapon(defaultWeapon.get(ThreadLocalRandom.current().nextInt(defaultWeapon.size())));
+			List<WeaponObject> defaultWeapons = object.getDefaultWeapons();
+			if (!defaultWeapons.isEmpty())
+				object.setEquippedWeapon(defaultWeapons.get(ThreadLocalRandom.current().nextInt(defaultWeapons.size())));
 		} catch (Throwable t) {
 			Log.w(t);
 		}
@@ -122,7 +122,7 @@ public class NPCCreator {
 		
 		spawner.addNPC(object);
 		ObjectCreatedIntent.broadcast(object);
-		return object.getObjectId();
+		return object;
 	}
 	
 	private static void setFlags(AIObject object, Spawner spawner) {
