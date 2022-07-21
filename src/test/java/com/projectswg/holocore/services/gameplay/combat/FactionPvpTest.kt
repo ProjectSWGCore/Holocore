@@ -71,6 +71,7 @@ class FactionPvpTest : TestRunnerSimulatedWorld() {
 
 		broadcastAndWait(InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, targetObjectId, "")))
 		player.waitForNextPacket(CommandTimer::class.java)
+		waitForIntents()
 	}
 
 	private fun createCreatureObject(): GenericCreatureObject {
