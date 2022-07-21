@@ -56,7 +56,7 @@ import java.util.concurrent.ScheduledFuture;
 public class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
-	private final List<WeaponObject> defaultWeapon;
+	private final List<WeaponObject> defaultWeapons;
 	private final List<WeaponObject> thrownWeapon;
 	private final SWGObject hiddenInventory;
 	private final IncapSafetyTimer incapSafetyTimer;
@@ -72,7 +72,7 @@ public class AIObject extends CreatureObject {
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
-		this.defaultWeapon = new ArrayList<>();
+		this.defaultWeapons = new ArrayList<>();
 		this.thrownWeapon = new ArrayList<>();
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
 		
@@ -208,8 +208,14 @@ public class AIObject extends CreatureObject {
 	}
 	
 	public void addDefaultWeapon(WeaponObject weapon) {
-		this.defaultWeapon.add(weapon);
+		this.defaultWeapons.add(weapon);
 		weapon.systemMove(hiddenInventory);
+		
+		if ("object/weapon/creature/shared_creature_default_weapon.iff".equals(weapon.getTemplate())) {
+			addCommand("creatureMeleeAttack");
+		} else {
+			addCommand(weapon.getType().getDefaultAttack());
+		}
 	}
 	
 	public void addThrownWeapon(WeaponObject weapon) {
@@ -230,8 +236,8 @@ public class AIObject extends CreatureObject {
 		return spawner;
 	}
 	
-	public List<WeaponObject> getDefaultWeapon() {
-		return Collections.unmodifiableList(defaultWeapon);
+	public List<WeaponObject> getDefaultWeapons() {
+		return Collections.unmodifiableList(defaultWeapons);
 	}
 	
 	public List<WeaponObject> getThrownWeapon() {

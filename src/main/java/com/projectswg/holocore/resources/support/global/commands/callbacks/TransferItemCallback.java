@@ -384,11 +384,19 @@ public class TransferItemCallback implements ICmdCallback {
 			return true;
 		}
 		
+		if (isInstrument(tangibleTarget)) {
+			return true;
+		}
+		
 		Race race = actor.getRace();
 		String template = tangibleTarget.getTemplate();
 		DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
 		
 		return DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
+	}
+	
+	private static boolean isInstrument(TangibleObject tangibleTarget) {
+		return tangibleTarget.getTemplate().contains("/instrument/");
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {
