@@ -50,8 +50,7 @@ object ServerData {
 	 * Skill / Collection
 	 */
 	val skills				by SoftDataLoaderDelegate(::SkillLoader)
-	val skillTemplates		by SoftDataLoaderDelegate(::SkillTemplateLoader)
-	
+
 	/*
 	 * Player
 	 */
@@ -60,7 +59,6 @@ object ServerData {
 	val playerStartClothing	by SoftDataLoaderDelegate(::StartClothingLoader)
 	val staticItems			by SoftDataLoaderDelegate(::StaticItemLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
-	val itemBonusSet		by SoftDataLoaderDelegate(::ItemBonusSetLoader)
 	val combatXpMultipliers	by SoftDataLoaderDelegate(::CombatXpMultiplierLoader)
 
 	/*
@@ -94,7 +92,6 @@ object ServerData {
 	val dynamicSpawns		by SoftDataLoaderDelegate(::DynamicSpawnLoader)
 	val terrainLevels		by SoftDataLoaderDelegate(::TerrainLevelLoader)
 	val noSpawnZones		by SoftDataLoaderDelegate(::NoSpawnZoneLoader)
-	val gcwRegionLoader		by SoftDataLoaderDelegate(::GcwRegionLoader)
 	val conversationLoader	by SoftDataLoaderDelegate(::ConversationLoader)
 	val questLoader			by SoftDataLoaderDelegate(::QuestLoader)
 	val badges  			by SoftDataLoaderDelegate(::BadgeLoader)
