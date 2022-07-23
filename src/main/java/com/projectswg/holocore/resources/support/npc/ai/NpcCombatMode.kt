@@ -12,7 +12,7 @@ import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
@@ -132,11 +132,11 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed)
 		
 		if (target.posture == Posture.INCAPACITATED) {
-			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0)
+			QueueCommandIntent.broadcast(obj, target, "", ServerData.commands.getCommand("deathblow"), 0)
 			return
 		}
 		
-		QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand(getWeaponCommand(weapon)), 0)
+		QueueCommandIntent.broadcast(obj, target, "", ServerData.commands.getCommand(getWeaponCommand(weapon)), 0)
 	}
 	
 	private fun requestAssistance() {

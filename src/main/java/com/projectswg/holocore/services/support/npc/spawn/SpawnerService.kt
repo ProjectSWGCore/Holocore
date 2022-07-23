@@ -37,7 +37,7 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
@@ -57,7 +57,6 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.stream.Collectors
 
@@ -176,7 +175,7 @@ class SpawnerService : Service() {
 		val startTime = StandardLog.onStartLoad("spawners")
 		
 		var count = 0
-		for (spawn in DataLoader.npcStaticSpawns().spawns) {
+		for (spawn in ServerData.npcStaticSpawns.spawns) {
 			try {
 				spawn(spawn)
 				count++
@@ -192,8 +191,8 @@ class SpawnerService : Service() {
 	private fun spawn(spawn: SpawnInfo) {
 		val npcId = spawn.npcId
 
-		if (DataLoader.npcs().getNpc(npcId) == null) {
-			Log.w("Invalid npc %s", npcId);
+		if (ServerData.npcs.getNpc(npcId) == null) {
+			Log.w("Invalid npc %s", npcId)
 			return
 		}
 
