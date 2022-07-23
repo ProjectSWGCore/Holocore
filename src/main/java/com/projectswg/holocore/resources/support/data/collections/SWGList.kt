@@ -176,12 +176,12 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		}
 	}
 	
-	override fun decode(buffer: NetBuffer) {
+	override fun decode(data: NetBuffer) {
 		lock.withLock {
-			val size = buffer.int
-			updateCount = buffer.int
+			val size = data.int
+			updateCount = data.int
 			for (index in 0 until size) {
-				list.add(decoder(buffer))
+				list.add(decoder(data))
 			}
 		}
 	}
