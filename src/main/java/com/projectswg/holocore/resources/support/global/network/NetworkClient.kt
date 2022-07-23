@@ -35,6 +35,7 @@ import com.projectswg.common.network.packets.swg.admin.AdminPacket
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStarted
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped
 import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped.ConnectionStoppedReason
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.ObjectController
 import com.projectswg.holocore.ProjectSWG
 import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent
@@ -64,7 +65,7 @@ import java.util.concurrent.atomic.AtomicReference
 import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
-class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer) -> Unit, closeChannel: () -> Unit): TCPServerChannel, WebSocketServerCallback {
+class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer) -> Unit, private val closeChannel: () -> Unit): TCPServerChannel, WebSocketServerCallback {
 	
 	private val inboundBuffer = ByteBuffer.allocate(INBOUND_BUFFER_SIZE)
 	private val intentChain   = IntentChain()
@@ -96,8 +97,14 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	}
 	
 	override fun onRead() {
-		wsProtocol.onRead(inboundBuffer.array(), 0, inboundBuffer.position())
-		inboundBuffer.position(0)
+		try {
+			wsProtocol.onRead(inboundBuffer.array(), 0, inboundBuffer.position())
+			inboundBuffer.position(0)
+		} catch (t: Throwable) {
+			Log.e("Serious packet issue detected. Closing connection immediately...")
+			Log.e(t)
+			closeChannel()
+		}
 	}
 	
 	override fun onHttpRequest(obj: WebSocketHandler, request: HttpRequest) {
@@ -149,12 +156,17 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 		val crc: Int = swg.int
 		swg.position(0)
 		
-		if (crc == ObjectController.CRC) {
-			onInbound(ObjectController.decodeController(swg))
-		} else {
-			val packet = PacketType.getForCrc(crc)
-			packet?.decode(swg)
-			onInbound(packet)
+		try {
+			if (crc == ObjectController.CRC) {
+				onInbound(ObjectController.decodeController(swg))
+			} else {
+				val packet = PacketType.getForCrc(crc)
+				packet?.decode(swg)
+				onInbound(packet)
+			}
+		} catch (t: Throwable) {
+			Log.w("Failed to parse SWG packet: %08X", crc)
+			Log.w(t)
 		}
 	}
 	

@@ -2,13 +2,13 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.7.0"
+	kotlin("jvm") version "1.7.10"
 	id("org.beryx.jlink") version "2.25.0"
 }
 
-val javaVersion = "17"
-val javaMajorVersion = "17"
-val kotlinTargetJdk = "17"
+val javaVersion = "18.0.2"
+val javaMajorVersion = "18"
+val kotlinTargetJdk = "18"
 
 subprojects {
 	ext {
@@ -75,6 +75,7 @@ idea {
 
 jlink {
 //	addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+	addOptions("--ignore-signing-information")
 	forceMerge("kotlin-stdlib")
 	imageDir.set(file("$buildDir/holocore"))
 	imageZip.set(file("$buildDir/holocore.zip"))
