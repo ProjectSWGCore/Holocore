@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.support.npc.spawn
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.*
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolRouteWaypoint
@@ -47,7 +47,7 @@ import java.util.stream.Collectors
 class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
 	private val spawn: SpawnInfo = Objects.requireNonNull(spawn, "spawn")
-	private val npc: NpcInfo = Objects.requireNonNull(DataLoader.npcs().getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
+	private val npc: NpcInfo = Objects.requireNonNull(ServerData.npcs.getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
 	private val npcsInternal = CopyOnWriteArrayList<AIObject>()
 	
 	val location: Location = Location.builder().setTerrain(spawn.terrain).setPosition(spawn.x, spawn.y, spawn.z).setHeading(spawn.heading.toDouble()).build()
@@ -167,10 +167,10 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 		get() = npc.hue
 	
 	val defaultWeapon: List<String>
-		get() = npc.defaultWeapon.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+		get() = npc.defaultWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
 	val thrownWeapon: List<String>
-		get() = npc.thrownWeapon.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+		get() = npc.thrownWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
 	val aggressiveRadius: Int
 		get() = npc.aggressiveRadius
@@ -212,7 +212,7 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 		if (spawn.patrolId.isEmpty() || spawn.patrolId == "0") { // TODO: Replace the latter with empty string
 			this.patrolRoute = null
 		} else {
-			val waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.patrolId), "Invalid patrol route: " + spawn.patrolId)
+			val waypoints = Objects.requireNonNull(ServerData.npcPatrolRoutes.getPatrolRoute(spawn.patrolId), "Invalid patrol route: " + spawn.patrolId)
 			this.patrolRoute = waypoints.stream().map { ResolvedPatrolWaypoint(it) }.collect(Collectors.toList())
 		}
 	}

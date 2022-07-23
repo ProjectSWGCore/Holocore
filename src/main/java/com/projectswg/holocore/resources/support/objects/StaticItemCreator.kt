@@ -28,7 +28,6 @@
 package com.projectswg.holocore.resources.support.objects
 
 import com.projectswg.common.data.combat.DamageType
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -42,7 +41,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 object StaticItemCreator {
 	
 	fun createItem(itemName: String): SWGObject? {
-		val info = DataLoader.staticItems().getItemByName(itemName) ?: return null
+		val info = ServerData.staticItems.getItemByName(itemName) ?: return null
 		val swgObject = ObjectCreator.createObjectFromTemplate(info.iffTemplate) as? TangibleObject ?: return null
 		
 		applyAttributes(swgObject, info)
