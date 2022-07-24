@@ -31,7 +31,7 @@ class ConvertBuildingCells implements Converter {
 		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/building_cells.sdb"))) {
 			sdb.writeColumnNames("building", "index", "name", "neighbors");
 			Converter.traverseFiles(this, BUILDINGS, sdb, file -> file.getName().endsWith(".iff"));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
