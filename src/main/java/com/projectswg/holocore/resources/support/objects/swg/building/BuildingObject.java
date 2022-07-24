@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.building;
 
+import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.CellInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuildingCellLoader.PortalInfo;
@@ -35,6 +36,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -44,11 +46,14 @@ public class BuildingObject extends TangibleObject {
 	private final Map<Integer, CellObject> idToCell;
 	private final List<Portal> portals;
 	
+	private PlayerStructureInfo playerStructureInfo;
+	
 	public BuildingObject(long objectId) {
 		super(objectId, BaselineType.BUIO);
 		this.nameToCell = new HashMap<>();
 		this.idToCell = new HashMap<>();
 		this.portals = new ArrayList<>();
+		this.playerStructureInfo = null;
 	}
 	
 	public CellObject getCellByName(String cellName) {
@@ -67,6 +72,15 @@ public class BuildingObject extends TangibleObject {
 		return Collections.unmodifiableList(portals);
 	}
 	
+	@Nullable
+	public PlayerStructureInfo getPlayerStructureInfo() {
+		return playerStructureInfo;
+	}
+	
+	public void setPlayerStructureInfo(@Nullable PlayerStructureInfo playerStructureInfo) {
+		this.playerStructureInfo = playerStructureInfo;
+	}
+	
 	@Override
 	public void addObject(SWGObject object) {
 		assert object instanceof CellObject : "Object added to building is not a cell!";
@@ -74,6 +88,22 @@ public class BuildingObject extends TangibleObject {
 		List<CellInfo> cellInfos = DataLoader.Companion.buildingCells().getBuilding(getTemplate());
 		assert cellInfos != null : "No cells exist in this building";
 		addObject((CellObject) object, cellInfos);
+	}
+	
+	@Override
+	public void saveMongo(MongoData data) {
+		super.saveMongo(data);
+		if (playerStructureInfo != null)
+			data.putDocument("playerStructureInfo", playerStructureInfo);
+	}
+	
+	@Override
+	public void readMongo(MongoData data) {
+		super.readMongo(data);
+		if (data.containsKey("playerStructureInfo"))
+			this.playerStructureInfo = data.getDocument("playerStructureInfo", new PlayerStructureInfo(null));
+		else
+			this.playerStructureInfo = null;
 	}
 	
 	public void populateCells() {

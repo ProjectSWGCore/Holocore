@@ -30,6 +30,7 @@ import com.projectswg.common.data.Badges;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.player.Mail;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -63,7 +64,9 @@ public class PlayerObject extends IntangibleObject {
 	private long	lastUpdatePlayTime	= 0;
 	private String	biography			= "";
 	private String	account				= "";
-	private Badges badges			= new Badges();
+	private Badges	badges				= new Badges();
+	private int		lotsAvailable		= 10;
+	private int		lotsUsed			= 0;
 
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
@@ -232,7 +235,23 @@ public class PlayerObject extends IntangibleObject {
 	public Badges getBadges() {
 		return badges;
 	}
-
+	
+	public int getLotsAvailable() {
+		return lotsAvailable;
+	}
+	
+	public void setLotsAvailable(int lotsAvailable) {
+		this.lotsAvailable = lotsAvailable;
+	}
+	
+	public int getLotsUsed() {
+		return lotsUsed;
+	}
+	
+	public void setLotsUsed(int lotsUsed) {
+		this.lotsUsed = lotsUsed;
+	}
+	
 	public void setBornDate(int year, int month, int day) {
 		play3.setBornDate(year, month, day);
 	}

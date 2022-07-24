@@ -41,6 +41,8 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
+import com.projectswg.holocore.resources.support.objects.swg.building.PlayerStructureInfo
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentChain
@@ -61,6 +63,17 @@ class StructureService : Service() {
 	override fun stop(): Boolean {
 		constructionThread.stop()
 		return super.stop() && constructionThread.awaitTermination(1000)
+	}
+	
+	@IntentHandler
+	private fun handleObjectCreatedIntent(oci: ObjectCreatedIntent) {
+		val building = oci.`object` as? BuildingObject ?: return
+		val playerStructureInfo = building.playerStructureInfo ?: return
+		val owner = playerStructureInfo.owner ?: return
+		val structureInfo = ServerData.housing.getStructureInfo(building.template) ?: return
+		
+		owner.playerObject.lotsUsed += structureInfo.lotsNeeded
+		StandardLog.onPlayerTrace(this, owner, "registered as owner for structure %s", building)
 	}
 	
 	@IntentHandler
@@ -87,21 +100,23 @@ class StructureService : Service() {
 			return
 		
 		// Start construction
-		val constructionObject = placeStructure(structureInfo.constructionTemplate, psi.location)
+		val constructionObject = placeStructure(psi.creature, structureInfo.constructionTemplate, psi.location)
 		StandardLog.onPlayerTrace(this, psi.creature, "starting structure construction for %s at %s", structureInfo.structureTemplate, psi.location)
 		
 		// After construction delay, remove construction and place the actual building
 		constructionThread.execute(constructionDelaySec * 1000) {
 			destroyStructure(constructionObject)
-			placeStructure(structureInfo.structureTemplate, psi.location)
+			placeStructure(psi.creature, structureInfo.structureTemplate, psi.location)
 			StandardLog.onPlayerEvent(this, psi.creature, "placed player structure %s at %s", structureInfo.structureTemplate, psi.location)
 		}
 	}
 	
-	private fun placeStructure(template: String, location: Location): SWGObject {
+	private fun placeStructure(creature: CreatureObject, template: String, location: Location): SWGObject {
 		val structure = ObjectCreator.createObjectFromTemplate(template)
-		if (structure is BuildingObject)
+		if (structure is BuildingObject) {
 			structure.populateCells()
+			structure.playerStructureInfo = PlayerStructureInfo(creature)
+		}
 		structure.systemMove(null, location)
 		
 		constructionIntentChain.broadcastAfter(ObjectCreatedIntent(structure))
