@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.structures.terminals
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ElevatorLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -167,6 +168,7 @@ class ElevatorService : Service() {
 			.build()
 		
 		creature.moveToContainer(building.getCellByNumber(floors[targetFloor].cell), newLocation)
+		SystemMessageIntent.broadcastPersonal(creature.owner ?: return, "Now on floor ${floors[targetFloor].floor}")
 	}
 	
 	companion object {
