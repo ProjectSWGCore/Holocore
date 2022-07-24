@@ -56,7 +56,7 @@ class StructureInfoLoader : DataLoader() {
 		
 		val structureTemplate = set.getText("structure")
 		val deedTemplate = set.getText("deed")
-		val constructionTemplate = set.getText("deed")
+		val constructionTemplate = set.getText("construction_template")
 		val footprintTemplate = set.getText("footprint_template")
 		val signTemplate = set.getText("sign_template")
 		val lotsNeeded = set.getInt("lots_needed")
