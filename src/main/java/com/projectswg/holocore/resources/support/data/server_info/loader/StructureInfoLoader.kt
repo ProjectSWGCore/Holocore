@@ -47,7 +47,7 @@ class StructureInfoLoader : DataLoader() {
 	
 	@Throws(IOException::class)
 	override fun load() {
-		SdbLoader.load(File("serverdata/housing/housing_datatable.sdb")).use { set ->
+		SdbLoader.load(File("serverdata/structures/structure_info.sdb")).use { set ->
 			structureInfo = set.stream { StructureInfo(it) }.collect(Collectors.toMap({ it.structureTemplate }, { it }))
 		}
 	}
