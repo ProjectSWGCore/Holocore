@@ -221,6 +221,8 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 			create.clear()
 			for (obj in newAware) {
 				if (!oldAware.contains(obj)) {
+					if (obj.parent != null && !newAware.contains(obj.parent))
+						continue
 					create.add(obj)
 				}
 			}

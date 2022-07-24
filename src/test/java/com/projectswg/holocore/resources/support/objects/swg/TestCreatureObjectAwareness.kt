@@ -112,6 +112,28 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		}
 	}
 	
+	@Test
+	fun testObjectAddedWithoutParent() {
+		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
+		val npc = GenericCreatureObject(20, "", false)
+		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0) }
+		building1.getCellByNumber(1).addObject(npc)
+		val awarenessIncorrect = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, npc))).toList()
+		val awarenessCorrect = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1))).toList()
+		
+		val creatureObjectAwareness = CreatureObjectAwareness(creature)
+		creature.setAware(AwarenessType.OBJECT, awarenessIncorrect)
+		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
+		assertTrue(creatureObjectAwareness.isAware(creature), "Should be aware of itself")
+		assertFalse(creatureObjectAwareness.isAware(npc), "Should not be aware of the NPC yet")
+		
+		creature.setAware(AwarenessType.OBJECT, awarenessCorrect)
+		creatureObjectAwareness.flush(creature.owner ?: throw AssertionError("owner is not defined for creature"))
+		for (obj in awarenessCorrect) {
+			assertTrue(creatureObjectAwareness.isAware(obj), "Should be aware of $obj")
+		}
+	}
+	
 	private fun getRecursiveInfo(creature: CreatureObject, objects: Collection<SWGObject>): List<SWGObject> {
 		val list = ArrayList<SWGObject>()
 		for (obj in objects) {
