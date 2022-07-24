@@ -58,10 +58,6 @@ sourceSets {
 		dependencies {
 			utilityImplementation(project(":"))
 			utilityImplementation(project(":pswgcommon"))
-			utilityImplementation(group="org.jetbrains.kotlin", name="kotlin-stdlib", version="1.3.50")
-			utilityImplementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
-			utilityImplementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			utilityImplementation(group="me.joshlarson", name="fast-json", version="3.0.0")
 		}
 	}
 }
@@ -97,6 +93,12 @@ tasks.create<JavaExec>("runDebug") {
 	enableAssertions = true
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
+}
+
+tasks.create<JavaExec>("runClientdataConversion") {
+	enableAssertions = true
+	classpath = sourceSets["utility"].runtimeClasspath
+	mainClass.set("com.projectswg.utility.ClientdataConvertAll")
 }
 
 tasks.withType<Test>().configureEach {
