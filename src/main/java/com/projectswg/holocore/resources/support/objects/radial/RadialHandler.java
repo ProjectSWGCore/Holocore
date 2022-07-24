@@ -131,6 +131,8 @@ public enum RadialHandler {
 	
 	private void initializeDeedRadials() {
 		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
+			if (structureInfo.getDeedTemplate().isEmpty())
+				continue;
 			registerHandler(structureInfo.getDeedTemplate(), new StructureDeedRadial());
 		}
 	}
