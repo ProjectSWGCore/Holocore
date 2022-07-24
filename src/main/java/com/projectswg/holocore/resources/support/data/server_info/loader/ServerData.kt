@@ -85,6 +85,7 @@ object ServerData {
 	val zoneInsertions		by SoftDataLoaderDelegate(::TerrainZoneInsertionLoader)
 	val terrains            by SoftDataLoaderDelegate(::TerrainHeightLoader)
 	
+	val elevators           by SoftDataLoaderDelegate(::ElevatorLoader)
 	val housing             by SoftDataLoaderDelegate(::StructureInfoLoader)
 	
 	val commands			by SoftDataLoaderDelegate(::CommandLoader)
