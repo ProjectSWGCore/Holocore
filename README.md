@@ -18,7 +18,7 @@ Ready to help bring back an awesome MMORPG with your programming skills?
 
 ## Java Development Kit ##
 In order to compile the source code, you need a JDK installation on your machine. The `JAVA_HOME` environment variable
-should point to the directory of the JDK! It should be version **13** as minimum. You can see your installed Java version
+should point to the directory of the JDK! It should be version **18** as minimum. You can see your installed Java version
 by running `java -version`.
 
 ## Submodules ##
@@ -28,8 +28,7 @@ The project uses submodules. Get them by running: git submodule update --init
 User information is read from a MongoDB database that can be run on any machine on your network. Default is the machine that Holocore is running on.
 
 1. Create database: `use cu`
-2. Create a user for Holocore: `db.createUser({user: "holocore", pwd: "pass", roles: []})`
-3. Create your game user: `db.users.insert({username: "user", password: "pass", accessLevel: "dev", banned: false, characters: []})`
+2. Create your game user: `db.users.insert({username: "user", password: "pass", accessLevel: "dev", banned: false, characters: []})`
 
 Enabling the Character Builder Terminals:
 1. Switch to the relevant database: `use cu`
