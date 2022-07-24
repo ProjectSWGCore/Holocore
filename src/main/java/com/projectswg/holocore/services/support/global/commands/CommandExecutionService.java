@@ -111,6 +111,7 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("kneel", KneelCmdCallback::new);
 		registerCppCallback("serverDestroyObject", ServerDestroyObjectCmdCallback::new);
 		registerCppCallback("findFriend", FindFriendCallback::new);
+		registerCppCallback("placestructure", PlaceStructureCmdCallback::new);
 		
 		registerCppCallback("requestBiography", RequestBiographyCmdCallback::new);
 		registerCppCallback("requestBadges", RequestBadgesCallback::new);

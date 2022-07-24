@@ -3,6 +3,8 @@ package com.projectswg.holocore.resources.support.objects.radial;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
+import com.projectswg.holocore.resources.support.data.server_info.loader.StructureInfoLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.object.*;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
@@ -37,6 +39,7 @@ public enum RadialHandler {
 		initializeContainerRadials();
 		initializeSpecialEditionGoggleRadials();
 		initializeMeleeWeaponRadials();
+		initializeDeedRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
@@ -124,5 +127,13 @@ public enum RadialHandler {
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s02.iff", new SpecialEditionGogglesRadial(false));
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s03.iff", new SpecialEditionGogglesRadial(false));
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s06.iff", new SpecialEditionGogglesRadial(false));
+	}
+	
+	private void initializeDeedRadials() {
+		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
+			if (structureInfo.getDeedTemplate().isEmpty())
+				continue;
+			registerHandler(structureInfo.getDeedTemplate(), new StructureDeedRadial());
+		}
 	}
 }
