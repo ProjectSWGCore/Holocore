@@ -31,6 +31,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.structures.EnterStructurePlacementModeMessage
 import com.projectswg.holocore.intents.gameplay.structures.PlaceStructureIntent
 import com.projectswg.holocore.intents.gameplay.structures.UseStructureDeedIntent
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -68,6 +69,10 @@ class StructureService : Service() {
 		if (deed == null) {
 			StandardLog.onPlayerError(this, usdi.creature, "Attempted to use invalid deed: %s", usdi.deed)
 			DestroyObjectIntent.broadcast(usdi.deed)
+			return
+		}
+		if (usdi.creature.parent != null) {
+			SystemMessageIntent.broadcastPersonal(usdi.creature.owner ?: return, "Cannot use a deed while in a building!")
 			return
 		}
 		StandardLog.onPlayerTrace(this, usdi.creature, "Entering structure placement for deed %s", usdi.deed)
