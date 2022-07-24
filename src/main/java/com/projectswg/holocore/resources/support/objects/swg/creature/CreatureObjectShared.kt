@@ -98,9 +98,7 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 		sendDelta(16, statesBitmask)
 	}
 
-	override fun readMongo(data: MongoData?) {
-		data ?: return
-
+	override fun readMongo(data: MongoData) {
 		val relevantMongoData = getRelevantMongoData(data)
 		posture = Posture.valueOf(relevantMongoData.getString("posture", posture.name))
 		height = relevantMongoData.getDouble("height", height)
@@ -119,8 +117,7 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 		}
 	}
 
-	override fun saveMongo(data: MongoData?) {
-		data ?: return
+	override fun saveMongo(data: MongoData) {
 		data.putString("posture", posture.name)
 		data.putDouble("height", height)
 		data.putInteger("battleFatigue", battleFatigue)

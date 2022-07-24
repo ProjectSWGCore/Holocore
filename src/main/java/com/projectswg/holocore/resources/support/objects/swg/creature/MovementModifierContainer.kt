@@ -36,14 +36,13 @@ class MovementModifierContainer : MongoPersistable {
 		return movementModifierList[0].modifier
 	}
 
-	override fun readMongo(data: MongoData?) {
-		data ?: return
+	override fun readMongo(data: MongoData) {
 		val readMap = data.getMap("movementModifierMap", String::class.java, MovementModifier::class.java)
 		movementModifierMap.putAll(readMap)
 	}
 
-	override fun saveMongo(data: MongoData?) {
-		data?.putMap("movementModifierMap", movementModifierMap)
+	override fun saveMongo(data: MongoData) {
+		data.putMap("movementModifierMap", movementModifierMap)
 	}
 
 	fun removeModifier(movementModifierIdentifier: MovementModifierIdentifier): Float {

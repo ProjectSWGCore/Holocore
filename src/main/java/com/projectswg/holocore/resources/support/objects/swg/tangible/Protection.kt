@@ -11,25 +11,21 @@ data class Protection(
 	var acid: Int,
 	var electricity: Int) : MongoPersistable {
 	
-	override fun readMongo(data: MongoData?) {
-		if (data != null) {
-			kinetic = data.getInteger("kinetic", 0)
-			energy = data.getInteger("energy", 0)
-			heat = data.getInteger("heat", 0)
-			cold = data.getInteger("cold", 0)
-			acid = data.getInteger("acid", 0)
-			electricity = data.getInteger("electricity", 0)
-		}
+	override fun readMongo(data: MongoData) {
+		kinetic = data.getInteger("kinetic", 0)
+		energy = data.getInteger("energy", 0)
+		heat = data.getInteger("heat", 0)
+		cold = data.getInteger("cold", 0)
+		acid = data.getInteger("acid", 0)
+		electricity = data.getInteger("electricity", 0)
 	}
 
-	override fun saveMongo(data: MongoData?) {
-		if (data != null) {
-			data.putInteger("kinetic", kinetic)
-			data.putInteger("energy", energy)
-			data.putInteger("heat", heat)
-			data.putInteger("cold", cold)
-			data.putInteger("acid", acid)
-			data.putInteger("electricity", electricity)
-		}
+	override fun saveMongo(data: MongoData) {
+		data.putInteger("kinetic", kinetic)
+		data.putInteger("energy", energy)
+		data.putInteger("heat", heat)
+		data.putInteger("cold", cold)
+		data.putInteger("acid", acid)
+		data.putInteger("electricity", electricity)
 	}
 }

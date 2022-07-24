@@ -11,21 +11,17 @@ class TicketInformation : MongoPersistable {
 	var arrivalPlanet: Terrain = Terrain.TATOOINE
 	var arrivalPoint: String = ""
 
-	override fun readMongo(data: MongoData?) {
-		if (data != null) {
-			departurePlanet = Terrain.getTerrainFromName(data.getString("departurePlanet"))
-			departurePoint = data.getString("departurePoint", "")
-			arrivalPlanet = Terrain.getTerrainFromName(data.getString("arrivalPlanet"))
-			arrivalPoint = data.getString("arrivalPoint", "")
-		}
+	override fun readMongo(data: MongoData) {
+		departurePlanet = Terrain.getTerrainFromName(data.getString("departurePlanet"))
+		departurePoint = data.getString("departurePoint", "")
+		arrivalPlanet = Terrain.getTerrainFromName(data.getString("arrivalPlanet"))
+		arrivalPoint = data.getString("arrivalPoint", "")
 	}
 
-	override fun saveMongo(data: MongoData?) {
-		if (data != null) {
-			data.putString("departurePlanet", departurePlanet.getName())
-			data.putString("departurePoint", departurePoint)
-			data.putString("arrivalPlanet", arrivalPlanet.getName())
-			data.putString("arrivalPoint", arrivalPoint)
-		}
+	override fun saveMongo(data: MongoData) {
+		data.putString("departurePlanet", departurePlanet.getName())
+		data.putString("departurePoint", departurePoint)
+		data.putString("arrivalPlanet", arrivalPlanet.getName())
+		data.putString("arrivalPoint", arrivalPoint)
 	}
 }

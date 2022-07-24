@@ -5,18 +5,14 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable
 
 class MovementModifier(var modifier: Float = 1.0f, var fromMount: Boolean = false): MongoPersistable, Comparable<MovementModifier> {
 
-	override fun readMongo(data: MongoData?) {
-		if (data != null) {
-			modifier = data.getFloat("modifier", 1.0f)
-			fromMount = data.getBoolean("fromMount", false)
-		}
+	override fun readMongo(data: MongoData) {
+		modifier = data.getFloat("modifier", 1.0f)
+		fromMount = data.getBoolean("fromMount", false)
 	}
 
-	override fun saveMongo(data: MongoData?) {
-		if (data != null ){
-			data.putFloat("modifier", modifier)
-			data.putBoolean("fromMount", fromMount)
-		}
+	override fun saveMongo(data: MongoData) {
+		data.putFloat("modifier", modifier)
+		data.putBoolean("fromMount", fromMount)
 	}
 
 	override fun compareTo(other: MovementModifier): Int {
