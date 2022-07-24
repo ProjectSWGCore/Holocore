@@ -271,13 +271,13 @@ spawn_tatooine_268	TATOOINE	tat_world	AREA	0	-986.6	12.0	-3717.1	136	1	an explor
 spawn_tatooine_269	TATOOINE	tat_world	AREA	0	-1116.8	12.0	-3704.9	145	1	a patron	humanoid_patron_human_male_02	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_270	TATOOINE	tat_world	AREA	0	-1273.3	12.0	-3602.9	-143	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
 spawn_tatooine_271	TATOOINE	tat_world	PATROL	0	-1351.0	12.0	-3678.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_1000	column	idle		commoner	600
-spawn_tatooine_272	TATOOINE	tat_world	PATROL	0	-900.6	19.4	-4032.8	0	1	a recon mercenary	humanoid_tatooine_mercenary_recon	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1100	column	idle			600
-spawn_tatooine_273	TATOOINE	tat_world	PATROL	0	-898.8	19.3	-4026.5	0	1	a mercenary commando	humanoid_tatooine_mercenary_recon_commando	ATTACKABLE	E	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1200	column	idle			600
-spawn_tatooine_274	TATOOINE	tat_world	PATROL	0	-1355.0	12.0	-3659.0	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1300	column	idle			600
+spawn_tatooine_272	TATOOINE	tat_world	PATROL	0	-900.6	19.4	-4032.8	0	1	a recon mercenary	humanoid_tatooine_mercenary_recon	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1100	line	idle			600
+spawn_tatooine_273	TATOOINE	tat_world	PATROL	0	-898.8	19.3	-4026.5	0	1	a mercenary commando	humanoid_tatooine_mercenary_recon_commando	ATTACKABLE	E	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1200	line	idle			600
+spawn_tatooine_274	TATOOINE	tat_world	PATROL	0	-1355.0	12.0	-3659.0	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1300	line	idle			600
 spawn_tatooine_275	TATOOINE	tat_world	AREA	0	-1263.1	12.0	-3563.6	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_276	TATOOINE	tat_world	AREA	0	-1268.6	12.0	-3554.6	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_tatooine_277	TATOOINE	tat_world	PATROL	0	-1144.5	98.0	-3914.8	0	1	a Sand Trooper	humanoid_imperial_sand_trooper	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2700	column	idle			600
-spawn_tatooine_278	TATOOINE	tat_world	PATROL	0	-1147.6	98.0	-3914.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2800	column	idle			600
+spawn_tatooine_277	TATOOINE	tat_world	PATROL	0	-1144.5	98.0	-3914.8	0	1	a Sand Trooper	humanoid_imperial_sand_trooper	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2700	line	idle			600
+spawn_tatooine_278	TATOOINE	tat_world	PATROL	0	-1147.6	98.0	-3914.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2800	line	idle			600
 spawn_tatooine_279	TATOOINE	tat_world	PATROL	0	-1441.8	10.0	-3749.8	-97	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6600	column	idle			600
 spawn_tatooine_280	TATOOINE	tat_world	PATROL	0	-1108.7	12.0	-3632.2	-137	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6700	column	idle			600
 spawn_tatooine_281	TATOOINE	tat_world	PATROL	0	-1387.4	12.0	-3586.2	-11	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6800	column	idle			600
@@ -1451,11 +1451,11 @@ spawn_tatooine_1449	TATOOINE	tat_world	AREA	0	-5940.5	58.7	-6031.3	127	1	an expl
 spawn_tatooine_1450	TATOOINE	tat_world	AREA	0	-5947.1	58.7	-6029.4	107	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1451	TATOOINE	tat_world	AREA	0	-6178.0	90.0	-6381.6	53	1	Klaatu	humanoid_klaatu	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 spawn_tatooine_1452	TATOOINE	tat_world	AREA	0	-5858.0	90.0	-6193.0	48	1	Smuggler Pilot	humanoid_smuggler_pilot	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-spawn_tatooine_1453	TATOOINE	tat_world	PATROL	0	-6196.3	22.8	1800.1	-55	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	POI	Jawa Traders	2	PATROL	0	patrol_tatooine_4900	column	idle			600
+spawn_tatooine_1453	TATOOINE	tat_world	PATROL	0	-6196.3	22.8	1800.1	-55	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	POI	Jawa Traders	2	PATROL	0	patrol_tatooine_4900	line	idle			600
 spawn_tatooine_1454	TATOOINE	tat_world	PATROL	0	-6103.2	23.6	1850.2	-100	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5000	column	idle			600
 spawn_tatooine_1455	TATOOINE	tat_world	PATROL	0	-6204.2	23.1	1703.3	40	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5100	column	idle			600
 spawn_tatooine_1456	TATOOINE	tat_world	PATROL	0	-6196.1	23.3	1802.1	-50	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5200	column	idle		simple_droid_geek_bye_nice_13	600
-spawn_tatooine_1457	TATOOINE	tat_world	PATROL	0	-6078.2	23.8	1800.2	0	1	a Jawa Protector	humanoid_jawa_protector	INVULNERABLE	N	100	100	POI	Jawa Traders	5	PATROL	0	patrol_tatooine_5300	column	idle			600
+spawn_tatooine_1457	TATOOINE	tat_world	PATROL	0	-6078.2	23.8	1800.2	0	1	a Jawa Protector	humanoid_jawa_protector	INVULNERABLE	N	100	100	POI	Jawa Traders	5	PATROL	0	patrol_tatooine_5300	line	idle			600
 spawn_tatooine_1458	TATOOINE	tat_world	AREA	0	-6183.7	23.6	1907.5	-50	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_1459	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
 spawn_tatooine_1460	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
