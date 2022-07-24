@@ -8,15 +8,19 @@ import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.StructureInfoLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import com.projectswg.holocore.services.support.objects.items.StaticItemService;
 
@@ -46,6 +50,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
 				listBox.addListItem("ITEMS - Vehicles");
+				listBox.addListItem("ITEMS - Deeds");
 				listBox.addListItem("Credits");
 				listBox.addListItem("Knockdown");
 
@@ -65,8 +70,9 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 2: handleWeapons(player); break;
 			case 3: handleWearables(player); break;
 			case 4: handleVehicles(player); break;
-			case 5: handleCredits(player); break;
-			case 6: handleKnockdown(player); break;
+			case 5: handleDeeds(player); break;
+			case 6: handleCredits(player); break;
+			case 7: handleKnockdown(player); break;
 		}
 	}
 
@@ -1151,6 +1157,56 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			SWGObject deed = ObjectCreator.createObjectFromTemplate(item);
 			deed.moveToContainer(player.getCreatureObject().getInventory());
 			ObjectCreatedIntent.broadcast(deed);
+		}
+	}
+	
+	private static void handleDeeds(Player player) {
+		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of deeds to acquire.");
+		
+		listBox.addListItem("Structures - Tatooine");
+		listBox.addListItem("Structures - Corellia");
+		listBox.addListItem("Structures - Naboo");
+		listBox.addListItem("Structures - Generic");
+		listBox.addListItem("Structures - Dantooine");
+		listBox.addListItem("Structures - Endor");
+		listBox.addListItem("Structures - Mustafar");
+		listBox.addListItem("Structures - Merchant");
+		listBox.addListItem("Structures - Generator");
+		listBox.addListItem("Structures - Factory");
+		listBox.addListItem("Structures - Mining");
+		listBox.addListItem("Structures - Turret");
+		
+		listBox.addCallback(SuiEvent.OK_PRESSED, "handleDeedSelection", (event, parameters) -> handleDeedSelection(player, parameters));
+		listBox.display(player);
+	}
+	
+	private static void handleDeedSelection(Player player, Map<String, String> parameters) {
+		int selection = SuiListBox.getSelectedRow(parameters);
+		String stringSearch;
+		
+		switch (selection) {
+			case 0  -> stringSearch = "tatooine";
+			case 1  -> stringSearch = "corellia";
+			case 2  -> stringSearch = "naboo";
+			case 3  -> stringSearch = "generic";
+			case 4  -> stringSearch = "dantooine";
+			case 5  -> stringSearch = "endor";
+			case 6  -> stringSearch = "mustafar";
+			case 7  -> stringSearch = "merchant";
+			case 8  -> stringSearch = "generator";
+			case 9  -> stringSearch = "factory";
+			case 10 -> stringSearch = "mining";
+			case 11 -> stringSearch = "turret";
+			default -> { return; }
+		}
+		
+		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
+			if (structureInfo.getStructureTemplate().contains(stringSearch) && !structureInfo.getDeedTemplate().isEmpty()) {
+				TangibleObject deed = ObjectCreator.createObjectFromTemplate(structureInfo.getDeedTemplate(), TangibleObject.class);
+				deed.setServerAttribute(ServerAttribute.DEED_GEN_TEMPLATE, structureInfo.getStructureTemplate());
+				ObjectCreatedIntent.broadcast(deed);
+				deed.moveToContainer(player.getCreatureObject().getInventory());
+			}
 		}
 	}
 }
