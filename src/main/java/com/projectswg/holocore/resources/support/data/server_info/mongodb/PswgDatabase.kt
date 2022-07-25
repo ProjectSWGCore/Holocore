@@ -4,7 +4,12 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
 import com.projectswg.holocore.resources.support.data.server_info.database.*
 import com.projectswg.holocore.resources.support.data.server_info.mariadb.PswgUserDatabaseMaria
+import me.joshlarson.jlcommon.log.Log
 import org.bson.Document
+import java.util.logging.Handler
+import java.util.logging.Level
+import java.util.logging.LogRecord
+import java.util.logging.Logger
 
 object PswgDatabase {
 	
@@ -26,6 +31,7 @@ object PswgDatabase {
 		get() = gcwRegionImpl
 	
 	fun initialize(connectionString: String, databaseName: String) {
+		setupMongoLogging()
 		val client = MongoClients.create(connectionString)
 		val database = client.getDatabase(databaseName)
 		val databaseConfig = Database(database)
@@ -47,6 +53,32 @@ object PswgDatabase {
 		if (table.isMariaDefined())
 			return mariaInitializer(table)
 		return mongoInitializer(table.mongo)
+	}
+	
+	private fun setupMongoLogging() {
+		var mongoLogger: Logger? = Logger.getLogger("com.mongodb")
+		while (mongoLogger != null) {
+			for (handler in mongoLogger.handlers) {
+				mongoLogger.removeHandler(handler)
+			}
+			if (mongoLogger.parent != null)
+				mongoLogger = mongoLogger.parent
+			else
+				break
+		}
+		mongoLogger?.addHandler(object : Handler() {
+			override fun publish(record: LogRecord) {
+				when (record.level) {
+					Level.INFO -> Log.i("MongoDB: %s", record.message)
+					Level.WARNING -> Log.w("MongoDB: %s", record.message)
+					Level.SEVERE -> Log.e("MongoDB: %s", record.message)
+					else -> Log.t("MongoDB: %s", record.message)
+				}
+			}
+			
+			override fun flush() {}
+			override fun close() {}
+		})
 	}
 	
 }
