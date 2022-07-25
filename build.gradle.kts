@@ -9,6 +9,7 @@ plugins {
 val javaVersion = "18.0.2"
 val javaMajorVersion = "18"
 val kotlinTargetJdk = "18"
+val holocoreLogLevel: String? by project
 
 subprojects {
 	ext {
@@ -16,10 +17,6 @@ subprojects {
 		set("javaMajorVersion", javaMajorVersion)
 		set("kotlinTargetJdk", kotlinTargetJdk)
 	}
-}
-
-application {
-	mainClass.set("com.projectswg.holocore.ProjectSWG")
 }
 
 repositories {
@@ -89,10 +86,26 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }
 
-tasks.create<JavaExec>("runDebug") {
+tasks.getByName("run") {
+	this as JavaExec
+	dependsOn(tasks.getByName("test"))
+	
 	enableAssertions = true
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
+}
+
+tasks.create<JavaExec>("runProduction") {
+	this as JavaExec
+	
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
 }
 
 tasks.create<JavaExec>("runClientdataConversion") {

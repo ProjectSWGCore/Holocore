@@ -96,15 +96,7 @@ public class ProjectSWG {
 			return 0;
 		}
 		
-		File logDirectory = new File("log");
-		if (!logDirectory.isDirectory() && !logDirectory.mkdir())
-			Log.w("Failed to make log directory!");
-		if (arguments.containsKey("print-colors"))
-			Log.addWrapper(new AnsiColorLogWrapper());
-		else
-			Log.addWrapper(new ConsoleLogWrapper());
-		Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
-		
+		setupLogging(arguments);
 		if (ProjectSWG.class.getResourceAsStream("/marker.txt") == null) {
 			Log.a("Failed to read Holocore resources - aborting");
 			return -1;
@@ -202,10 +194,35 @@ public class ProjectSWG {
 		PswgDatabase.INSTANCE.initialize(dbStr, db);
 	}
 	
+	private static void setupLogging(Map<String, Object> arguments) {
+		Log.LogLevel logLevel = Log.LogLevel.TRACE;
+		if (arguments.containsKey("log-level")) {
+			try {
+				logLevel = Log.LogLevel.valueOf((String) arguments.get("log-level"));
+			} catch (IllegalArgumentException | ClassCastException e) {
+				System.err.println("Invalid log level: " + arguments.get("log-level"));
+			}
+		}
+		
+		if (arguments.containsKey("print-colors"))
+			Log.addWrapper(new AnsiColorLogWrapper(logLevel));
+		else
+			Log.addWrapper(new ConsoleLogWrapper(logLevel));
+		
+		if (arguments.containsKey("log-file")) {
+			File logDirectory = new File("log");
+			if (!logDirectory.isDirectory() && !logDirectory.mkdir())
+				Log.w("Failed to make log directory!");
+			Log.addWrapper(new FileLogWrapper(new File(logDirectory, "log.txt")));
+		}
+	}
+	
 	private static ArgumentParser createArgumentOptions() {
 		ArgumentParser parser = new ArgumentParser();
 		parser.addArgument(Argument.builder("help").shortName('h').longName("help").isOptional(true).description("print this message").build());
 		parser.addArgument(Argument.builder("print-colors").shortName('C').longName("print-colors").isOptional(true).description("print colors to signify various log levels").build());
+		parser.addArgument(Argument.builder("log-file").shortName('f').longName("log-file").isOptional(true).description("enable logging to file").build());
+		parser.addArgument(Argument.builder("log-level").shortName('l').longName("log-level").argCount('1').isOptional(true).description("specify log level [TRACE, DATA, INFO, WARN, ERROR, ASSERT]").build());
 		parser.addArgument(Argument.builder("database").shortName('c').longName("database").argCount('1').isOptional(true).description("sets the connection string for mongodb (default: mongodb://localhost)").build());
 		parser.addArgument(Argument.builder("database-name").shortName('d').longName("dbName").argCount('1').isOptional(true).description("sets the mongodb database (default: cu)").build());
 		
