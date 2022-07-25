@@ -29,6 +29,7 @@ package com.projectswg.holocore;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
+import com.projectswg.common.data.swgiff.parsers.SWGParser;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
@@ -134,6 +135,7 @@ public class ProjectSWG {
 	
 	// TODO: Replace all iffs with sdbs
 	private static void initializeServerFactory() {
+		SWGParser.setBasePath("serverdata");
 		try {
 			ServerFactory.getInstance().updateServerIffs();
 		} catch (IOException e) {
