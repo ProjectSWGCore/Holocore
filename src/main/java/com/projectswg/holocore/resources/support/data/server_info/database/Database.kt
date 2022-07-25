@@ -29,12 +29,7 @@ package com.projectswg.holocore.resources.support.data.server_info.database
 
 import com.mongodb.client.MongoDatabase
 import com.mongodb.client.model.Filters
-import me.joshlarson.jlcommon.log.Log
 import java.sql.DriverManager
-import java.util.logging.Handler
-import java.util.logging.Level
-import java.util.logging.LogRecord
-import java.util.logging.Logger
 
 class Database(mongo: MongoDatabase) {
 	
@@ -46,35 +41,5 @@ class Database(mongo: MongoDatabase) {
 	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
 	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
 	val gcwRegions = DatabaseTable(mongo.getCollection("gcwregions"), configuration, connection, configuration?.tables?.get("gcwRegions"))
-	
-	init {
-		setupMongoLogging()
-	}
-	
-	private fun setupMongoLogging() {
-		var mongoLogger: Logger? = Logger.getLogger("com.mongodb")
-		while (mongoLogger != null) {
-			for (handler in mongoLogger.handlers) {
-				mongoLogger.removeHandler(handler)
-			}
-			if (mongoLogger.parent != null)
-				mongoLogger = mongoLogger.parent
-			else
-				break
-		}
-		mongoLogger?.addHandler(object : Handler() {
-			override fun publish(record: LogRecord) {
-				when (record.level) {
-					Level.INFO -> Log.i("MongoDB: %s", record.message)
-					Level.WARNING -> Log.w("MongoDB: %s", record.message)
-					Level.SEVERE -> Log.e("MongoDB: %s", record.message)
-					else -> Log.t("MongoDB: %s", record.message)
-				}
-			}
-			
-			override fun flush() {}
-			override fun close() {}
-		})
-	}
 	
 }
