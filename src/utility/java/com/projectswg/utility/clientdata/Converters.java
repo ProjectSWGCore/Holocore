@@ -18,7 +18,8 @@ public enum Converters {
 	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/buff/buff.sdb", true)),
 	SKILLS						(() -> new ConvertDatatable("datatables/skill/skills.iff", "serverdata/skill/skills.sdb", true)),
 	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new),
-	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true));
+	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true)),
+	TERRAINS					(ConvertTerrain::new);
 	
 	private final Supplier<Converter> converter;
 	
