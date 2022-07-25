@@ -98,6 +98,16 @@ tasks.getByName("run") {
 		args = listOf("--log-level", holocoreLogLevel!!)
 }
 
+tasks.create<JavaExec>("runProduction") {
+	this as JavaExec
+	
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
+}
+
 tasks.create<JavaExec>("runClientdataConversion") {
 	enableAssertions = true
 	classpath = sourceSets["utility"].runtimeClasspath
