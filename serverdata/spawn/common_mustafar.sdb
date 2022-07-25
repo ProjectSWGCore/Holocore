@@ -221,7 +221,7 @@ spawn_mustafar_218	MUSTAFAR	mus_mensix	AREA	14	-107.80	10.80	32.50	0	1	a mustafa
 spawn_mustafar_219	MUSTAFAR	mus_mensix	AREA	15	-125.70	10.30	82.80	180	1	Foreman Chivos	humanoid_som_foreman_chivos	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_220	MUSTAFAR	mus_mensix	AREA	16	-127.20	10.30	48.30	136	1	a Mustafarian mining droid	droid_som_mining_claw_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 spawn_mustafar_221	MUSTAFAR	mus_mensix	AREA	16	-120.90	10.80	38.60	-48	1	a Mustafarian mining droid	droid_som_mining_fork_must_mining	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle		simple_droid_stupid_hi_mean_4	600
-spawn_mustafar_222	MUSTAFAR	mus_mensix	AREA	16	-166.60	10.80	39.90	91	1	A Computer Technician	humanoid_som_kenobi_computer_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
+spawn_mustafar_222	MUSTAFAR	mus_mensix	AREA	16	-116.30	10.80	49.00	179	1	A Computer Technician	humanoid_som_kenobi_computer_technician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_223	MUSTAFAR	mus_mensix	AREA	18	-94.50	14.90	2.80	-90	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_224	MUSTAFAR	mus_mensix	AREA	20	-16.40	19.10	-20.40	-75	1	Epo Qetora	humanoid_som_kenobi_epo_qetora	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_225	MUSTAFAR	mus_mensix	AREA	20	-28.80	19.10	-22.00	29	1	Q4P3	droid_som_kenobi_pann_q4p3_protocol	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
@@ -273,8 +273,5 @@ spawn_mustafar_270	MUSTAFAR	mus_world	AREA	0	-2891.7	150.9	1388.0	132	1	a Mustaf
 spawn_mustafar_271	MUSTAFAR	mus_world	AREA	0	-2526.2	225.0	1643.1	163	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_272	MUSTAFAR	mus_world	AREA	0	-2528.0	225.0	1642.7	165	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_273	MUSTAFAR	mus_mensix	AREA	29	-56.3	31.5	-107.1	-90	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_mustafar_274	MUSTAFAR	mus_world	AREA	0	-2488.0	230.0	1636.2	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_mustafar_275	MUSTAFAR	mus_world	AREA	0	-2463.2	230.1	1618.9	-60	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation			600
-spawn_mustafar_276	MUSTAFAR	mus_world	AREA	0	-2465.5	230.1	1620.3	122	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	conversation			600
-spawn_mustafar_277	MUSTAFAR	mus_mensix	AREA	26	-72.0	23.2	-47.9	109	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
-spawn_mustafar_278	MUSTAFAR	mus_mensix	AREA	26	-75.4	23.2	-35.6	92	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_mustafar_274	MUSTAFAR	mus_mensix	AREA	26	-72.0	23.2	-47.9	109	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
+spawn_mustafar_275	MUSTAFAR	mus_mensix	AREA	26	-75.4	23.2	-35.6	92	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
