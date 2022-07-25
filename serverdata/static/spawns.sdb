@@ -69,9 +69,9 @@ player_cityhall	object/tangible/terminal/terminal_player_structure.iff	mayoroffi
 player_cloning	object/tangible/terminal/terminal_cloning.iff	cloninglab	-14	-2.5	3.1	90
 player_cloning	object/tangible/terminal/terminal_insurance.iff	cloninglab	6.3	0.7	-6.69	-90
 player_cloning	object/tangible/terminal/terminal_player_structure.iff	cloninglab	-13.5	-2.1	-6.4	90
-player_decoration_lrg	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		12.0	1.2	-12.0	0
-player_decoration_med	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		8.0	1.2	-8.0	0
-player_decoration_sml	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		4.5	1.2	-4.5	0
+player_decoration_lrg	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		12.0	1	-12.0	0
+player_decoration_med	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		8.0	1	-8.0	0
+player_decoration_sml	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		4.5	1	-4.5	0
 player_garage	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		-3	1	-3	0
 player_guild	object/tangible/terminal/terminal_player_structure.iff	closeta	17.88	2.25	10.45	90
 player_guild_tat_1	object/tangible/terminal/terminal_player_structure.iff	closeta	17.88	2.25	10.45	90
