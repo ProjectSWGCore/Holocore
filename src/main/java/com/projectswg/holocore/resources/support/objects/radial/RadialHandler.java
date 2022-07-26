@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public enum RadialHandler {
 	INSTANCE;
@@ -29,7 +30,6 @@ public enum RadialHandler {
 	private final Map<String, RadialHandlerInterface> handlers = new HashMap<>();
 	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new EnumMap<>(GameObjectType.class);
 	private final Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>();
-	private final SWGObjectRadial genericRadialHandler = new SWGObjectRadial();
 	
 	RadialHandler() {
 		initializeTerminalRadials();
@@ -53,6 +53,10 @@ public enum RadialHandler {
 		registerHandler(GameObjectType.GOT_WEAPON_MELEE_POLEARM, new MeleeWeaponRadial());
 	}
 	
+	public void registerHandler(Class<? extends SWGObject> klass, RadialHandlerInterface handler) {
+		classHandlers.put(klass, handler);
+	}
+	
 	public void registerHandler(String iff, RadialHandlerInterface handler) {
 		handlers.put(iff, handler);
 	}
@@ -62,33 +66,30 @@ public enum RadialHandler {
 	}
 	
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
-		getHandler(target).getOptions(options, player, target);
+		getHandler(target, h -> h.getOptions(options, player, target));
 	}
 	
 	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
-		getHandler(target).handleSelection(player, target, selection);
+		getHandler(target, h -> h.handleSelection(player, target, selection));
 	}
 	
-	@NotNull
-	private RadialHandlerInterface getHandler(SWGObject target) {
+	private void getHandler(SWGObject target, Consumer<RadialHandlerInterface> fn) {
 		String type = target.getTemplate();
 		RadialHandlerInterface handler = handlers.get(type);
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = gotHandlers.get(target.getGameObjectType());
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = gotHandlers.get(target.getGameObjectType().getMask());
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = classHandlers.get(target.getClass());
 		if (handler != null)
-			return handler;
-		
-		return genericRadialHandler;
+			fn.accept(handler);
 	}
 	
 	private void initializeTerminalRadials() {
