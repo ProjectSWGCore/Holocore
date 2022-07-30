@@ -29,13 +29,12 @@ package com.projectswg.holocore.resources.support.data.collections;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.BitSet;
 
 public class SWGFlag extends BitSet implements Encodable {
-	
-	private static final long serialVersionUID = 2L;
 	
 	private final int view;
 	private final int updateType;
@@ -55,12 +54,12 @@ public class SWGFlag extends BitSet implements Encodable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		byte [] encoded = toByteArray();
-		int length = (int) Math.ceil(encoded.length / 4.0);
+		int resultingInts = (encoded.length + 3) / 4; // rounds up
 		
-		NetBuffer buffer = NetBuffer.allocate((length + 1) * 4);
-		buffer.addInt(length);
+		NetBuffer buffer = NetBuffer.allocate(4 + resultingInts * 4);
+		buffer.addInt(resultingInts);
 		buffer.addRawArray(encoded);
 		return buffer.array();
 	}

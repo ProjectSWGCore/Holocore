@@ -52,7 +52,13 @@ public enum PlayerFlags {
 	/** Display the Faction Rank */
 	FACTIONRANK					(9),
 	/** Display the player's location in the matchmaking search */
-	DISPLAY_LOCATION_IN_SEARCH	(10);
+	DISPLAY_LOCATION_IN_SEARCH	(10),
+	/** Out of Character */
+	OUT_OF_CHARACTER			(11),
+	/** Looking For Work */
+	LOOKING_FOR_WORK			(13),
+	/** Anonymous */
+	ANONYMOUS					(127);
 	
 	private static final PlayerFlags [] FLAGS = values();
 	
