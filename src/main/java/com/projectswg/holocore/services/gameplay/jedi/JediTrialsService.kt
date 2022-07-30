@@ -23,7 +23,7 @@ class JediTrialsService : Service() {
 	private val jediPadawanSkill = "force_title_jedi_rank_02"
 
 	@IntentHandler
-	fun handleGrantSkillIntent(intent: GrantSkillIntent) {
+	private fun handleGrantSkillIntent(intent: GrantSkillIntent) {
 		if (intent.intentType == GrantSkillIntent.IntentType.GIVEN) {
 			if (intent.skillName == jediPadawanSkill) {
 				val player = intent.target.owner ?: return
@@ -49,7 +49,7 @@ class JediTrialsService : Service() {
 	}
 
 	@IntentHandler
-	fun handleSurrenderSkillIntent(intent: SurrenderSkillIntent) {
+	private fun handleSurrenderSkillIntent(intent: SurrenderSkillIntent) {
 		val surrenderedSkill = intent.surrenderedSkill
 		val target = intent.target
 

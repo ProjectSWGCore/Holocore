@@ -36,7 +36,7 @@ class ForcePowerService : Service() {
 	}
 
 	@IntentHandler
-	fun handleSkillModIntent(intent: SkillModIntent) {
+	private fun handleSkillModIntent(intent: SkillModIntent) {
 		val skillModName = intent.skillModName
 
 		if (skillModName == "jedi_force_power_max") {
