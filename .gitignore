@@ -2,14 +2,41 @@
 scripts/
 
 # IDE-based
-Holocore.iml
+*.iws
 out
 classes/
-.idea
 .classpath
 .project
+# IntelliJ-User Specific
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+# IntelliJ-Sensitive or high-churn files
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+# IntelliJ-Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+# IntelliJ-With gradle auto import
+.idea/artifacts
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
 
 # Gradle
+bin
 build
 .gradle
 gradle.properties
