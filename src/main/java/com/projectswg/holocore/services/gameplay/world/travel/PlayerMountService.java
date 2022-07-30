@@ -37,6 +37,7 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
@@ -189,6 +190,25 @@ public class PlayerMountService extends Service {
 			return;
 		switch (pei.getEvent()) {
 			case PE_LOGGED_OUT, PE_DISAPPEAR, PE_DESTROYED, PE_SERVER_KICKED -> storeMounts(creature);
+		}
+	}
+	
+	@IntentHandler
+	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
+		SWGObject obj = oti.getObject();
+		if (oti.getOldParent() == oti.getNewParent())
+			return;
+		if (!(obj instanceof CreatureObject player))
+			return;
+		
+		SWGObject oldParent = oti.getOldParent();
+		if (!(oldParent instanceof CreatureObject mount))
+			return;
+		
+		if (player.isStatesBitmask(CreatureState.RIDING_MOUNT) && isMountable(mount) && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+			// Need to do this manually because most of the standard checks don't work in this case
+			emergencyDismount(player, mount);
+			new StoreMountIntent(player, mount).broadcast();
 		}
 	}
 	
@@ -402,6 +422,20 @@ public class PlayerMountService extends Service {
 		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
 		player.moveToContainer(null, mount.getLocation());
 		player.resetMovement();
+		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
+	}
+	
+	private void emergencyDismount(CreatureObject player, CreatureObject mount) {
+		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
+		player.resetMovement();
+		if (mount.getSlottedObject("rider") == null) {
+			for (SWGObject child : mount.getSlottedObjects()) {
+				assert child instanceof CreatureObject;
+				dismount((CreatureObject) child, mount);
+			}
+		}
+		mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
+		mount.setPosture(Posture.UPRIGHT);
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
 	}
 	
