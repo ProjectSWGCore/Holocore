@@ -250,6 +250,12 @@ public class TravelService extends Service {
 			
 			ticketBox.addOkButtonCallback("handleSelectedItem", (event, parameters) -> {
 				int row = SuiListBox.getSelectedRow(parameters);
+				if (row < 0) {
+					if (usableTickets.size() == 1)
+						row = 0;
+					else
+						return;
+				}
 				TangibleObject ticket = usableTickets.get(row);
 				TravelPoint nearestPoint = travel.getNearestTravelPoint(ticket);
 				TravelPoint destinationPoint = (TravelPoint) ticketBox.getListItem(row).getObject();
