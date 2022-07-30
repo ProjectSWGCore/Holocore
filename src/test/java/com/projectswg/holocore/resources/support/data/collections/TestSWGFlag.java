@@ -64,11 +64,34 @@ public class TestSWGFlag extends TestRunnerNoIntents {
 		encoded = flag.encode();
 		assertEquals(4, encoded.length);
 		
+		flag.clear();
+		flag.set(0);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals(1, encoded[4]);
+		
+		flag.clear();
 		flag.set(1);
 		encoded = flag.encode();
 		assertEquals(8, encoded.length);
 		assertEquals(1, encoded[0]);
 		assertEquals(2, encoded[4]);
+		
+		flag.clear();
+		flag.set(7);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals((1 << 7), encoded[4] & 0xFF);
+		
+		flag.clear();
+		flag.set(8);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals(0, encoded[4]);
+		assertEquals(1, encoded[5]);
 	}
 	
 }
