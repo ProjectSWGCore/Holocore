@@ -443,8 +443,6 @@ item_tauntaun_dna	object/tangible/loot/beast/dna_container.iff	dna	DNA Storage D
 item_wampa_dna	object/tangible/loot/beast/dna_container.iff	dna	DNA Storage Device (Wampa)	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	string:beast.dna.creature_template=object/mobile/beast_master/bm_wampa.iff,float:beast.dna.quality=90.000000,int:beast.dna.cs_item=1
 item_pet_mount_carrion_01_01	object/tangible/deed/pet_deed/carrion_spat_generic_deed.iff	grant	Kartha's Cliff-Jumper	1	1000	0		0		0	0				0		carrion_spat					0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 item_pet_mount_lava_flea_01_01	object/tangible/deed/pet_deed/lava_flea_generic_deed.iff	grant	Lava Flea Mount	1	1000	0		0		0	0				0		som_lava_flea_preorder					0	0			1		0	0		-1	-1	-1	-1	0	0	0	ToW expansion
-item_pgc_chronicler_tent_deed	object/tangible/saga_system/rewards/structure_deed_player_tent_chronicler.iff	grant	Structure Deed: Chronicles Tent	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-item_pgc_sandcrawler_house_deed	object/tangible/saga_system/rewards/structure_deed_player_house_sandcrawler.iff	grant	Structure Deed: Sandcrawler House	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 item_roadmap_deed_landspeeder_x31_01_02	object/tangible/loot/generic_deed/vehicle_generic.iff	grant	X-31 Landspeeder Deed	1	1000	0		0		0	0				0	x31						0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 item_roadmap_deed_speederbike_01_02	object/tangible/loot/generic_deed/vehicle_generic.iff	grant	Speederbike Deed	1	1000	0		0		0	0				0	spdrbike						0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 item_roadmap_deed_speederbike_swoop_01_02	object/tangible/loot/generic_deed/vehicle_generic.iff	grant	Swoop Deed	1	1000	0		0		0	0				0	swoop						0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -825,10 +823,10 @@ item_corellia_junk_dwarf_gronda_01_01	object/tangible/loot/creature_loot/generic
 item_corellia_junk_female_dire_cat_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dire Cat Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_female_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Forest Slice Hound Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_female_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Grassland Slice Hound Eye	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_female_sand_panther_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Sand Panther Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_female_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Sand Panther Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_female_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Slice Hound Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_forest_murra_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Forest Murra Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_forest_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Slice Hound Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_giant_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/arm_bone_generic.iff	item	Giant Carrion Spat Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_giant_dalyrake_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Dalyrake Antenna	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_giant_gubbur_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Giant Gubbar Antenna	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -836,7 +834,7 @@ item_corellia_junk_grand_wrix_01_01	object/tangible/loot/creature_loot/generic/g
 item_corellia_junk_grassland_slice_hound_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Grassland Slice Hound Shank	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_great_plains_stalker_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Great Plains Stalker Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_greater_gulginaw_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Greater Gulginaw Guts	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_gronda_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Gronda Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_gronda_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Gronda Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_gronda_elder_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Gronda Elder Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_gronda_juggernaut_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Gronda Juggernaut Leg	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_gubbur_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Gubbur Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -855,7 +853,7 @@ item_corellia_junk_plumed_rasp_01_01	object/tangible/loot/creature_loot/generic/
 item_corellia_junk_rogue_bageraset_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Rogue Bageraset Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Sand Panther Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_sharnaff_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Sharnaff Hoof	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_slice_hound_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Slice Hound Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_slice_hound_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Slice Hound Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_swamp_gurrcat_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Swamp Gurrcat Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_tabage_01_01	object/tangible/loot/creature_loot/generic/heart.iff	item	Tabage Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_violent_krahbu_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Violent Krahbu Eye	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -1282,7 +1280,7 @@ item_naboo_junk_naboo_veermok_scavenger_01_01	object/tangible/loot/creature_loot
 item_naboo_junk_naboo_veermok_scout_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Veermok Scout Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_naboo_junk_naboo_veermok_sentry_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Veermok Sentry Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_naboo_junk_narglatch_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Narglatch Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_naboo_junk_narglatch_cub_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Narglatch Cub Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_naboo_junk_narglatch_cub_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Narglatch Cub Jaw	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_naboo_junk_narglatch_female_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Narglatch Female Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_naboo_junk_nightspider_dirtcrawler_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Nightspider Dirtcrawler Leg	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_naboo_junk_nightspider_vinecrawler_01_01	object/tangible/loot/creature_loot/generic/mantis_arm.iff	item	Nightspider Vinecrawler Mandible	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -1378,7 +1376,7 @@ item_tatooine_junk_dragonet_01_01	object/tangible/loot/creature_loot/generic/gut
 item_tatooine_junk_dune_bantha_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dune Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_dwarf_bantha	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dwarf Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	71	0	0	-
 item_tatooine_junk_dwarf_eopie	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Dwarf Eopie Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
-item_tatooine_junk_dwarf_nuna_01_01	object/tangible/loot/creature_loot/generic/jaw_bone.iff	item	Dwarf Nuna Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
+item_tatooine_junk_dwarf_nuna_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Dwarf Nuna Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
 item_tatooine_junk_eopie_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Eopie Innards	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	40	0	0	-
 item_tatooine_junk_feral_bantha_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Feral Bantha Lungs	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_giant_canyon_krayt_dragon_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Canyon Krayt Dragon Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	1008	0	0	-
