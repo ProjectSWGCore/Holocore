@@ -24,6 +24,11 @@ repositories {
 	mavenCentral()
 }
 
+application {
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	mainModule.set("holocore")
+}
+
 sourceSets {
 	main {
 		dependencies {
