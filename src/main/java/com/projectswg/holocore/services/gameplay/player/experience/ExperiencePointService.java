@@ -38,12 +38,20 @@ public class ExperiencePointService extends Service {
 			SWGObject flytextTarget = ei.getFlytextTarget();
 			boolean xpMultiplied = ei.isXpMultiplied();
 			
-			awardExperience(creatureObject, flytextTarget, playerObject, xpType, experienceGained, xpMultiplied);
+			if (xpMultiplied) {
+				experienceGained *= xpMultiplier;
+			}
+			
+			awardExperience(creatureObject, flytextTarget, playerObject, xpType, experienceGained);
 		}
 	}
 	
-	private void awardExperience(CreatureObject creatureObject, SWGObject flytextTarget, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
-		incrementExperience(creatureObject, playerObject, xpType, xpGained, xpMultiplied);
+	private void awardExperience(CreatureObject creatureObject, SWGObject flytextTarget, PlayerObject playerObject, String xpType, int xpGained) {
+		int currentXp = playerObject.getExperiencePoints(xpType);
+		int newXpTotal = currentXp + xpGained;
+		
+		playerObject.setExperiencePoints(xpType, newXpTotal);
+		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
 		
 		if (!Objects.equals("combat_general", xpType)) {
 			showFlytext(creatureObject, flytextTarget, xpGained);
@@ -56,14 +64,6 @@ public class ExperiencePointService extends Service {
 		StringId xpTypeDisplayName = new StringId("exp_n", xpType);
 		ProsePackage message = new ProsePackage(new StringId("base_player", "prose_grant_xp"), "TO", xpTypeDisplayName);
 		SystemMessageIntent.broadcastPersonal(creatureObject.getOwner(), message, ChatSystemMessage.SystemChatType.CHAT_BOX);
-	}
-	
-	private void incrementExperience(CreatureObject creatureObject, PlayerObject playerObject, String xpType, int xpGained, boolean xpMultiplied) {
-		int currentXp = playerObject.getExperiencePoints(xpType);
-		int newXpTotal = xpMultiplied ? (currentXp + (int) (xpGained * xpMultiplier)) : (currentXp + xpGained);
-		
-		playerObject.setExperiencePoints(xpType, newXpTotal);
-		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
 	}
 	
 	private void showFlytext(CreatureObject creatureObject, SWGObject flytextTarget, int xpGained) {
