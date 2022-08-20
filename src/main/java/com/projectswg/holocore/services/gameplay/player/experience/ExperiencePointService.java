@@ -9,13 +9,13 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.color.SWGColor;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.Objects;
 
@@ -51,7 +51,7 @@ public class ExperiencePointService extends Service {
 		int newXpTotal = currentXp + xpGained;
 		
 		playerObject.setExperiencePoints(xpType, newXpTotal);
-		Log.d("%s gained %d %s XP", creatureObject, xpGained, xpType);
+		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", xpGained, xpType);
 		
 		if (!Objects.equals("combat_general", xpType)) {
 			showFlytext(creatureObject, flytextTarget, xpGained);
