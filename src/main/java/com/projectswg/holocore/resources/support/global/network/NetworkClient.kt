@@ -110,7 +110,6 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	override fun onHttpRequest(obj: WebSocketHandler, request: HttpRequest) {
 		if (request.path == "/health-check") {
 			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to "0"), ByteArray(0)))
-			StandardLog.onPlayerTrace(this, player, "requested health check")
 			return
 		}
 		
@@ -118,7 +117,6 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 			val galaxy = ProjectSWG.getGalaxy()
 			val stats = "{\"name\": \"${galaxy.name}\", \"status\": \"${galaxy.status.name}\"}".encodeToByteArray()
 			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to stats.size.toString()), stats))
-			StandardLog.onPlayerTrace(this, player, "requested server stats")
 			return
 		}
 	}
@@ -171,13 +169,13 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 	}
 	
 	override fun onOpened() {
-		StandardLog.onPlayerTrace(this, player, "connected [TCP]")
 		status.set(SessionStatus.CONNECTING)
 		intentChain.broadcastAfter(ConnectionOpenedIntent(player))
 	}
 	
 	override fun onClosed() {
-		StandardLog.onPlayerTrace(this, player, "disconnected clientReason=$clientDisconnectReason serverReason=$serverDisconnectReason")
+		if (upgraded.get())
+			StandardLog.onPlayerTrace(this, player, "disconnected clientReason=$clientDisconnectReason serverReason=$serverDisconnectReason")
 		intentChain.broadcastAfter(ConnectionClosedIntent(player, ConnectionStoppedReason.OTHER_SIDE_TERMINATED))
 	}
 	
