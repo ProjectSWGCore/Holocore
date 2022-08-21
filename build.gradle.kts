@@ -91,11 +91,18 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }
 
-tasks.getByName("run") {
-	this as JavaExec
+tasks.create<JavaExec>("runDevelopment") {
 	dependsOn(tasks.getByName("test"))
-	
+
 	enableAssertions = true
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
+}
+
+tasks.create<JavaExec>("runProduction") {
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 	
@@ -103,14 +110,8 @@ tasks.getByName("run") {
 		args = listOf("--log-level", holocoreLogLevel!!)
 }
 
-tasks.create<JavaExec>("runProduction") {
-	this as JavaExec
-	
-	classpath = sourceSets.main.get().runtimeClasspath
-	mainClass.set("com.projectswg.holocore.ProjectSWG")
-	
-	if (holocoreLogLevel != null)
-		args = listOf("--log-level", holocoreLogLevel!!)
+tasks.replace("run", JavaExec::class).apply {
+	dependsOn(tasks.getByName("runDevelopment"))
 }
 
 tasks.create<JavaExec>("runClientdataConversion") {
