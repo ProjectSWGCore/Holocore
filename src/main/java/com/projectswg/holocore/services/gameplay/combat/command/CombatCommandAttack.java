@@ -508,6 +508,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	
 	private static void innateArmorMitigate(AttackInfo info, CreatureObject target, String skillMod) {
 		float damageReduction = target.getSkillModValue(skillMod) / 100f;
+		damageReduction -= getArmorBreakPercent(target);
 		int currentDamage = info.getFinalDamage();
 		int armorAbsorbed = (int) (currentDamage * damageReduction);
 		currentDamage -= armorAbsorbed;
@@ -555,14 +556,18 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			}
 		}
 		
-		int privateArmorBreak = creature.getSkillModValue("private_armor_break");
+		double armorBreakPercent = getArmorBreakPercent(creature);
 		
-		if (privateArmorBreak > 0) {
-			double armorBreakPercent = privateArmorBreak / 10d;
+		if (armorBreakPercent > 0) {
 			armor *= (1 - armorBreakPercent / 100d);
 		}
 		
 		return (int) armor;
+	}
+	
+	private static double getArmorBreakPercent(CreatureObject creature) {
+		int privateArmorBreak = creature.getSkillModValue("private_armor_break");
+		return privateArmorBreak / 10d;
 	}
 	
 	/**
