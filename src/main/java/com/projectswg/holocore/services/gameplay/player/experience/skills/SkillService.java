@@ -166,7 +166,7 @@ public class SkillService extends Service {
 		CombatLevel oldCombatLevel = getCombatLevel(target);
 		
 		target.removeSkill(surrenderedSkill);
-		target.removeCommands(skillInfo.getCommands());
+		target.removeCommand(skillInfo.getCommands());
 		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
 		
 		CombatLevel newCombatLevel = getCombatLevel(target);
