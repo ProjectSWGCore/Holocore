@@ -64,6 +64,7 @@ abstract class DataLoader {
 		fun performances(): PerformanceLoader = ServerData.performances
 		fun planetMapCategories(): PlanetMapCategoryLoader = ServerData.planetMapCategories
 		fun commands(): CommandLoader = ServerData.commands
+		fun combatCommands(): CombatCommandLoader = ServerData.combatCommands
 		fun slotDefinitions(): SlotDefinitionLoader = ServerData.slotDefinitions
 		fun slotDescriptors(): SlotDescriptorLoader = ServerData.slotDescriptors
 		fun slotArrangements(): SlotArrangementLoader = ServerData.slotArrangements

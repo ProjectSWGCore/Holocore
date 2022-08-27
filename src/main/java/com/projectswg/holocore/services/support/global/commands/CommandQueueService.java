@@ -215,11 +215,14 @@ public class CommandQueueService extends Service {
 				sendCommandFailed(command);
 				return;
 			}
-			
-			if (command.getCommand() instanceof CombatCommand combatCommand) {
+
+			CombatCommand combatCommand = DataLoader.Companion.combatCommands().getCommand(rootCommand.getName());
+
+			if (combatCommand != null) {
 				CombatStatus combatStatus = combatCommandHandler.executeCombatCommand(
 						command.getSource(),
 						command.getTarget(),
+						rootCommand,
 						combatCommand,
 						command.getArguments());
 				
@@ -337,7 +340,9 @@ public class CommandQueueService extends Service {
 				return new CheckCommandResult(ErrorCode.CANCELLED, 0);
 			}
 			
-			if (rootCommand instanceof CombatCommand combatCommand) {
+			CombatCommand combatCommand = DataLoader.Companion.combatCommands().getCommand(rootCommand.getName());
+
+			if (combatCommand != null) {
 				Collection<String> sourceCommands = source.getCommands()
 						.stream()
 						.map(sourceCommand -> sourceCommand.toLowerCase(Locale.US))
@@ -349,7 +354,7 @@ public class CommandQueueService extends Service {
 				
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
-					switch (combatCommand.getTargetType()) {
+					switch (rootCommand.getTargetType()) {
 						case NONE:
 							target = source;
 							break;

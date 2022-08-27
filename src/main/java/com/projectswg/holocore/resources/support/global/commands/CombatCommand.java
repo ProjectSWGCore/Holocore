@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class CombatCommand extends Command {
+public class CombatCommand {
 	
 	private final ValidTarget validTarget;
 	private final boolean forceCombat;
@@ -71,10 +72,11 @@ public class CombatCommand extends Command {
 	private final double coneLength;
 	private final double coneWidth;
 	private final HealAttrib healAttrib;
-	private final String specialLine;
+	private final String name;
+	private final double maxRange;
+	private final int crc;
 	
 	private CombatCommand(CombatCommandBuilder builder) {
-		super(builder);
 		this.validTarget = builder.validTarget;
 		this.forceCombat = builder.forceCombat;
 		this.animations = builder.animations;
@@ -110,12 +112,9 @@ public class CombatCommand extends Command {
 		this.coneLength = builder.coneLength;
 		this.coneWidth = builder.coneWidth;
 		this.healAttrib = builder.healAttrib;
-		this.specialLine = builder.specialLine;
-	}
-	
-	@Override
-	public boolean isCombatCommand() {
-		return true;
+		this.name = builder.name;
+		this.maxRange = builder.maxRange;
+		this.crc = CRC.getCrc(this.name);
 	}
 	
 	public ValidTarget getValidTarget() {
@@ -270,19 +269,23 @@ public class CombatCommand extends Command {
 		return healAttrib;
 	}
 	
-	public String getSpecialLine() {
-		return specialLine;
+	public String getName() {
+		return name;
 	}
 	
 	public static CombatCommandBuilder builder() {
 		return new CombatCommandBuilder();
 	}
-	
-	public static CombatCommandBuilder builder(Command source) {
-		return new CombatCommandBuilder(source);
+
+	public double getMaxRange() {
+		return maxRange;
 	}
-	
-	public static class CombatCommandBuilder extends CommandBuilder {
+
+	public int getCrc() {
+		return crc;
+	}
+
+	public static class CombatCommandBuilder {
 		
 		private final Map<WeaponType, String[]> animations;
 		
@@ -320,14 +323,10 @@ public class CombatCommand extends Command {
 		private double coneLength;
 		private double coneWidth;
 		private HealAttrib healAttrib;
-		private String specialLine;
+		private String name;
+		private double maxRange;
 		
 		private CombatCommandBuilder() {
-			this.animations = new EnumMap<>(WeaponType.class);
-		}
-		
-		private CombatCommandBuilder(Command command) {
-			super(command);
 			this.animations = new EnumMap<>(WeaponType.class);
 		}
 		
@@ -506,8 +505,13 @@ public class CombatCommand extends Command {
 			return this;
 		}
 		
-		public CombatCommandBuilder withSpecialLine(String specialLine) {
-			this.specialLine = specialLine;
+		public CombatCommandBuilder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public CombatCommandBuilder withMaxRange(double maxRange) {
+			this.maxRange = maxRange;
 			return this;
 		}
 		

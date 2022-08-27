@@ -33,6 +33,7 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -62,7 +63,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 	}
 	
 	@Override
-	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		String[] argSplit = arguments.split(" ");
 		Location eggLocation;
 		SWGObject eggParent;

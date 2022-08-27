@@ -89,6 +89,7 @@ object ServerData {
 	val housing             by SoftDataLoaderDelegate(::StructureInfoLoader)
 	
 	val commands			by SoftDataLoaderDelegate(::CommandLoader)
+	val combatCommands		by SoftDataLoaderDelegate(::CombatCommandLoader)
 	val travelCosts			by SoftDataLoaderDelegate(::TravelCostLoader)
 	val vehicles			by SoftDataLoaderDelegate(::VehicleLoader)
 	val staticPvpZones		by SoftDataLoaderDelegate(::StaticPvpZoneLoader)
