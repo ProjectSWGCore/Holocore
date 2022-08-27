@@ -3,11 +3,12 @@ package com.projectswg.holocore.services.gameplay.combat.command
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
+import com.projectswg.holocore.resources.support.global.commands.Command
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 
 object CombatCommandDebuff : CombatCommandHitType {
-	override fun handle(source: CreatureObject, target: SWGObject?, combatCommand: CombatCommand, arguments: String): CombatStatus {
+	override fun handle(source: CreatureObject, target: SWGObject?, command: Command, combatCommand: CombatCommand, arguments: String): CombatStatus {
 		if (target is CreatureObject) {
 			if (source.isAttackable(target)) {
 				val hateAdd: Int = combatCommand.hateAdd

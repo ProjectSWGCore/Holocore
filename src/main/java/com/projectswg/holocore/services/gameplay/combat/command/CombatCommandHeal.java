@@ -44,6 +44,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -57,7 +58,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		int healAmount = combatCommand.getAddedDamage();
 		int healingPotency = source.getSkillModValue("expertise_healing_all");
 		int healedDamage = 0;
@@ -68,7 +69,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		
 		switch (combatCommand.getAttackType()) {
 			case SINGLE_TARGET: {
-				switch (combatCommand.getTargetType()) {
+				switch (command.getTargetType()) {
 					case NONE: {    // No target used, always heals self
 						healedDamage += doHeal(source, source, healAmount, combatCommand);
 						break;

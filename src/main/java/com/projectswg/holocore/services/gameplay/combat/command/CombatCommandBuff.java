@@ -35,6 +35,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction.Defender;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -49,7 +50,7 @@ enum CombatCommandBuff implements CombatCommandHitType {
 	INSTANCE;
 	
 	@Override
-	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject targetPrecheck, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject targetPrecheck, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		// TODO group buffs
 		addBuff(source, source, combatCommand.getBuffNameSelf());
 		

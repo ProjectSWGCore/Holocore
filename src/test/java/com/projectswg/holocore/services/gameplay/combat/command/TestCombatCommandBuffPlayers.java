@@ -82,18 +82,20 @@ public class TestCombatCommandBuffPlayers extends TestRunnerSynchronousIntents {
 	@MethodSource("data")
 	public void testReceiveBuff(Input input) {
 		setup(input);
+		String commandName = "hemorrhage";
 		String targetBuffName = "hemorrhage";	// Important that the buff actually exists
 		Command command = Command.builder()
-				.withName(targetBuffName)
+				.withName(commandName)
 				.build();
 		
-		CombatCommand combatCommand = CombatCommand.builder(command)
+		CombatCommand combatCommand = CombatCommand.builder()
+				.withName(commandName)
 				.withBuffNameSelf("")
 				.withBuffNameTarget(targetBuffName)
 				.withDefaultAnimation(new String[]{""})
 				.build();
 		
-		CombatCommandBuff.INSTANCE.handle(source, target, combatCommand, "");
+		CombatCommandBuff.INSTANCE.handle(source, target, command, combatCommand, "");
 		
 		waitForIntents();	// Let's give the BuffService a chance to process the BuffIntent
 		

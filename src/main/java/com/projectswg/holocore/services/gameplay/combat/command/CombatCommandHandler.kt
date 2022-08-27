@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.combat.command
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.common.data.combat.HitType
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand
+import com.projectswg.holocore.resources.support.global.commands.Command
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import java.util.*
@@ -60,12 +61,12 @@ class CombatCommandHandler {
 		return true
 	}
 	
-	fun executeCombatCommand(source: CreatureObject, target: SWGObject?, command: CombatCommand, arguments: String): CombatStatus {
+	fun executeCombatCommand(source: CreatureObject, target: SWGObject?, command: Command, combatCommand: CombatCommand, arguments: String): CombatStatus {
 		val equippedWeapon = source.equippedWeapon
 		val specialAttackCost = equippedWeapon.specialAttackCost
-		val healthCost = command.healthCost.toInt()
-		val actionCost = (command.actionCost * specialAttackCost / 100).toInt()
-		val mindCost = (command.mindCost * specialAttackCost / 100).toInt()
+		val healthCost = combatCommand.healthCost.toInt()
+		val actionCost = (combatCommand.actionCost * specialAttackCost / 100).toInt()
+		val mindCost = (combatCommand.mindCost * specialAttackCost / 100).toInt()
 		
 		if (healthCost > source.health || actionCost > source.action || mindCost > source.mind) {
 			return CombatStatus.TOO_TIRED
@@ -75,9 +76,9 @@ class CombatCommandHandler {
 		source.modifyAction(-actionCost)
 		source.modifyMind(-mindCost)
 		
-		val hitType = hitTypeMap[command.hitType]
+		val hitType = hitTypeMap[combatCommand.hitType]
 
-		return hitType?.handle(source, target, command, arguments) ?: CombatStatus.UNKNOWN
+		return hitType?.handle(source, target, command, combatCommand, arguments) ?: CombatStatus.UNKNOWN
 	}
 
 }

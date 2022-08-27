@@ -31,7 +31,6 @@ import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
 import com.projectswg.common.data.combat.AttackInfo;
 import com.projectswg.common.data.combat.CombatSpamType;
-import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
@@ -40,9 +39,9 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
-import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -68,7 +67,7 @@ public class CombatCommandCommon {
 		return combatAction;
 	}
 	
-	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command, CombatSpamType combatSpamType) {
+	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, CombatCommand command, CombatSpamType combatSpamType) {
 		CombatSpam combatSpam = new CombatSpam(receiver.getObjectId());
 		combatSpam.setInfo(info);
 		combatSpam.setAttacker(source.getObjectId());
