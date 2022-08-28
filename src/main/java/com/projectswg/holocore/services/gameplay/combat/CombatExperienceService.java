@@ -193,20 +193,18 @@ public class CombatExperienceService extends Service {
 	}
 	
 	private String xpTypeForWeaponType(WeaponType weaponType) {
-		switch (weaponType) {
-			case UNARMED: return "combat_meleespecialize_unarmed";
-			case TWO_HANDED_MELEE: return "combat_meleespecialize_twohand";
-			case ONE_HANDED_MELEE: return "combat_meleespecialize_onehand";
-			case POLEARM_MELEE: return "combat_meleespecialize_polearm";
-			case RIFLE: return "combat_rangedspecialize_rifle";
-			case CARBINE: return "combat_rangedspecialize_carbine";
-			case PISTOL: return "combat_rangedspecialize_pistol";
-			case HEAVY: return "combat_rangedspecialize_heavy";
-			case ONE_HANDED_SABER: return "combat_meleespecialize_onehandlightsaber";
-			case POLEARM_SABER: return "combat_meleespecialize_polearmlightsaber";
-			case TWO_HANDED_SABER: return "combat_meleespecialize_twohandlightsaber";
-			default: return null;
-		}
+		return switch (weaponType) {
+			case UNARMED -> "combat_meleespecialize_unarmed";
+			case TWO_HANDED_MELEE -> "combat_meleespecialize_twohand";
+			case ONE_HANDED_MELEE -> "combat_meleespecialize_onehand";
+			case POLEARM_MELEE -> "combat_meleespecialize_polearm";
+			case RIFLE -> "combat_rangedspecialize_rifle";
+			case CARBINE -> "combat_rangedspecialize_carbine";
+			case PISTOL -> "combat_rangedspecialize_pistol";
+			case HEAVY -> "combat_rangedspecialize_heavy";
+			case ONE_HANDED_SABER, POLEARM_SABER, TWO_HANDED_SABER -> "jedi_general";
+			default -> null;
+		};
 	}
 	
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
