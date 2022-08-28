@@ -31,7 +31,6 @@ import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.CivilWarPointIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
@@ -44,7 +43,6 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
@@ -76,9 +74,6 @@ public class CmdQaTool implements ICmdCallback {
 				break;
 			case "details":
 				QaToolDetails.sendDetails(player, target, args);
-				break;
-			case "gcw":
-				grantGcw(player, command[1]);
 				break;
 			default:
 				createPrimaryWindow(player);
@@ -174,19 +169,6 @@ public class CmdQaTool implements ICmdCallback {
 	private void displayHelp(Player player) {
 		String prompt = "The following are acceptable arguments that can be used as shortcuts to the various QA tools:\n" + "help -- Displays this window\n";
 		createMessageBox(player, "QA Tool - Help", prompt);
-	}
-	
-	private void grantGcw(Player player, String pointsArg) {
-		PlayerObject receiver = player.getCreatureObject().getPlayerObject();
-		
-		try {
-			int points = Integer.parseInt(pointsArg);
-			CivilWarPointIntent.broadcast(receiver, points);
-			Log.i("GCW command: %s gave themselves %d GCW points", player.getUsername(), points);
-		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, String.format("GCW command: %s is not a number", pointsArg));
-		}
-		
 	}
 	
 	/* Utility Methods */
