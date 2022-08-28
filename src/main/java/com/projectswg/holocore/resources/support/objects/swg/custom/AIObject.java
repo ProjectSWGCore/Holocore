@@ -137,29 +137,30 @@ public class AIObject extends CreatureObject {
 			return;
 		playersNearby.add(player);
 		
-		boolean npcIsInCombat = isInCombat();
+		boolean npcIsInvulnerable = hasOptionFlags(OptionFlag.INVULNERABLE);
 		
-		Instant now = Instant.now();
-		
-		boolean questionMarkTimerExpired = now.isAfter(questionMarkBlockedUntil);
-		
-		if (!npcIsInCombat) {
-			boolean npcIsAggressiveTowardsPlayer = isAttackable(player);
-			
-			if (npcIsAggressiveTowardsPlayer) {
-				boolean playerIsInLineOfSight = isLineOfSight(player);
+		if (!npcIsInvulnerable) {
+			boolean npcIsInCombat = isInCombat();
+			if (!npcIsInCombat) {
+				boolean npcIsAggressiveTowardsPlayer = isAttackable(player);
 				
-				if (playerIsInLineOfSight) {
-					Location playerWorldLocation = player.getWorldLocation();
-					Location aiWorldLocation = this.getWorldLocation();
-					double questionMarkRange = 64;
-					double distanceBetweenNpcAndPlayer = aiWorldLocation.distanceTo(playerWorldLocation);
-					boolean playerIsInRange = distanceBetweenNpcAndPlayer <= questionMarkRange;
+				if (npcIsAggressiveTowardsPlayer) {
+					boolean playerIsInLineOfSight = isLineOfSight(player);
 					
-					if (playerIsInRange) {
-						if (questionMarkTimerExpired) {
-							showQuestionMarkAboveNpc();
-							questionMarkBlockedUntil = Instant.now().plusSeconds(60);
+					if (playerIsInLineOfSight) {
+						Location playerWorldLocation = player.getWorldLocation();
+						Location aiWorldLocation = this.getWorldLocation();
+						double questionMarkRange = 64;
+						double distanceBetweenNpcAndPlayer = aiWorldLocation.distanceTo(playerWorldLocation);
+						boolean playerIsInRange = distanceBetweenNpcAndPlayer <= questionMarkRange;
+						
+						if (playerIsInRange) {
+							Instant now = Instant.now();
+							boolean questionMarkTimerExpired = now.isAfter(questionMarkBlockedUntil);
+							if (questionMarkTimerExpired) {
+								showQuestionMarkAboveNpc();
+								questionMarkBlockedUntil = Instant.now().plusSeconds(60);
+							}
 						}
 					}
 				}
