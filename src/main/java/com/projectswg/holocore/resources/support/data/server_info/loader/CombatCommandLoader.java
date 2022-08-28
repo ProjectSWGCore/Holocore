@@ -5,12 +5,12 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CombatCommandLoader extends DataLoader {
 	
@@ -20,14 +20,30 @@ public class CombatCommandLoader extends DataLoader {
 		this.commandNameMap = new HashMap<>();
 	}
 	
-	public boolean isCommand(String command) {
-		return commandNameMap.containsKey(command);
+	@Nullable
+	public CombatCommand getCombatCommand(String command, Collection<String> ownedCommands) {
+		Set<String> ownedCommandsLowerCased = ownedCommands.stream()
+				.map(ownedCommand -> ownedCommand.toLowerCase(Locale.US))
+				.collect(Collectors.toSet());
+		String basicVersion = command.toLowerCase(Locale.US);
+
+		String advancedVersion = basicVersion + "_2";
+		if (isVersionUsable(ownedCommandsLowerCased, advancedVersion)) {
+			return commandNameMap.get(advancedVersion);
+		}
+
+		String improvedVersion = basicVersion + "_1";
+		if (isVersionUsable(ownedCommandsLowerCased, improvedVersion)) {
+			return commandNameMap.get(improvedVersion);
+		}
+		
+		return commandNameMap.get(basicVersion);
 	}
-	
-	public CombatCommand getCommand(String command) {
-		return commandNameMap.get(command.toLowerCase(Locale.US));
+
+	private boolean isVersionUsable(Set<String> ownedCommandsLowerCased, String version) {
+		return ownedCommandsLowerCased.contains(version) && commandNameMap.containsKey(version);
 	}
-	
+
 	@Override
 	public void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/command/combat_commands.sdb"))) {

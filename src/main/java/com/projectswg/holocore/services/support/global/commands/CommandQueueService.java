@@ -207,7 +207,9 @@ public class CommandQueueService extends Service {
 		
 		private void executeCommandNow(EnqueuedCommand command) {
 			Command rootCommand = command.getCommand();
-			CheckCommandResult checkCommandResult = checkCommand(command);
+			CreatureObject source = command.getSource();
+			CombatCommand combatCommand = DataLoader.Companion.combatCommands().getCombatCommand(rootCommand.getName(), source.getCommands());
+			CheckCommandResult checkCommandResult = checkCommand(command, combatCommand);
 			sendQueueRemove(command, checkCommandResult);
 			ErrorCode error = checkCommandResult.getErrorCode();
 			
@@ -216,34 +218,32 @@ public class CommandQueueService extends Service {
 				return;
 			}
 
-			CombatCommand combatCommand = DataLoader.Companion.combatCommands().getCommand(rootCommand.getName());
-
 			if (combatCommand != null) {
 				CombatStatus combatStatus = combatCommandHandler.executeCombatCommand(
-						command.getSource(),
+						source,
 						command.getTarget(),
 						rootCommand,
 						combatCommand,
 						command.getArguments());
 				
 				if (combatStatus != CombatStatus.SUCCESS) {
-					CombatCommandCommon.handleStatus(command.getSource(), combatCommand, combatStatus);
+					CombatCommandCommon.handleStatus(source, combatCommand, combatStatus);
 					sendCommandFailed(command);
 					return;
 				}
 			}
 			
-			float moddedWeaponAttackSpeedWithCap = command.getSource().getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(command.getSource());
+			float moddedWeaponAttackSpeedWithCap = source.getEquippedWeapon().getModdedWeaponAttackSpeedWithCap(source);
 			boolean cd1 = rootCommand.getCooldownGroup().length() > 0;
 			boolean cd2 = rootCommand.getCooldownGroup2().length() > 0;
 			
 			if (cd1) {
-				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
+				startCooldownGroup(source, rootCommand, rootCommand.getCooldownGroup(), rootCommand.getCooldownTime(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
 				activeCooldownGroups.add(rootCommand.getCooldownGroup());
 			}
 			
 			if (cd2) {
-				startCooldownGroup(command.getSource(), rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
+				startCooldownGroup(source, rootCommand, rootCommand.getCooldownGroup2(), rootCommand.getCooldownTime2(), command.getCounter(), moddedWeaponAttackSpeedWithCap);
 				activeCooldownGroups.add(rootCommand.getCooldownGroup2());
 			}
 			
@@ -253,7 +253,7 @@ public class CommandQueueService extends Service {
 			}
 			
 			
-			ExecuteCommandIntent.broadcast(command.getSource(), command.getTarget(), command.getArguments(), command.getCommand());
+			ExecuteCommandIntent.broadcast(source, command.getTarget(), command.getArguments(), command.getCommand());
 		}
 		
 		private void sendQueueRemove(EnqueuedCommand command, CheckCommandResult checkCommandResult) {
@@ -290,7 +290,7 @@ public class CommandQueueService extends Service {
 			executor.execute((long) ((cooldownTime + globalCooldownTime) * 1000), () -> activeCooldownGroups.remove(group));
 		}
 		
-		private CheckCommandResult checkCommand(EnqueuedCommand command) {
+		private CheckCommandResult checkCommand(EnqueuedCommand command, CombatCommand combatCommand) {
 			Command rootCommand = command.getCommand();
 			CreatureObject source = command.getSource();
 			Set<Locomotion> disallowedLocomotions = rootCommand.getDisallowedLocomotions();
@@ -339,8 +339,6 @@ public class CommandQueueService extends Service {
 				showInvalidWeaponFlyText(source);
 				return new CheckCommandResult(ErrorCode.CANCELLED, 0);
 			}
-			
-			CombatCommand combatCommand = DataLoader.Companion.combatCommands().getCommand(rootCommand.getName());
 
 			if (combatCommand != null) {
 				Collection<String> sourceCommands = source.getCommands()
