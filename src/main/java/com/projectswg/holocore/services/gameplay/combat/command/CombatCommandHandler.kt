@@ -72,13 +72,16 @@ class CombatCommandHandler {
 			return CombatStatus.TOO_TIRED
 		}
 		
-		source.modifyHealth(-healthCost)
-		source.modifyAction(-actionCost)
-		source.modifyMind(-mindCost)
-		
 		val hitType = hitTypeMap[combatCommand.hitType]
+		val combatStatus = hitType?.handle(source, target, command, combatCommand, arguments) ?: CombatStatus.UNKNOWN
 
-		return hitType?.handle(source, target, command, combatCommand, arguments) ?: CombatStatus.UNKNOWN
+		if (combatStatus == CombatStatus.SUCCESS) {
+			source.modifyHealth(-healthCost)
+			source.modifyAction(-actionCost)
+			source.modifyMind(-mindCost)
+		}
+
+		return combatStatus
 	}
 
 }
