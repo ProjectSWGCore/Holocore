@@ -28,7 +28,7 @@ The project uses submodules. Get them by running: git submodule update --init
 User information is read from a MongoDB database that can be run on any machine on your network. Default is the machine that Holocore is running on.
 
 1. Create database: `use cu`
-2. Create your game user: `db.users.insert({username: "user", password: "pass", accessLevel: "dev", banned: false, characters: []})`
+2. Create your game user: `db.users.insert({"username": "user", "password": "pass", "accessLevel": "dev", "banned": false, "characters": []})`
 
 Enabling the Character Builder Terminals:
 1. Switch to the relevant database: `use cu`
