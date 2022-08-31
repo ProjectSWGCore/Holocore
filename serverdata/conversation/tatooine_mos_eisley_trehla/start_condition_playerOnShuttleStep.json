@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_740",
+		"comment": "You will definitely need to learn how the shuttles work if you want to get around in the world. I suggest you go to the Shuttleport."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

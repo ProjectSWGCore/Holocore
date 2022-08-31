@@ -37,25 +37,21 @@ import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.swgfile.visitors.ObjectData.ObjectDataAttribute;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.common.persistable.Persistable;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.data.location.InstanceType;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SlotDefinitionLoader.SlotDefinition;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.network.BaselineObject;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAware;
-import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerPermissions;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.permissions.DefaultPermissions;
@@ -63,7 +59,6 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
@@ -73,16 +68,16 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, Persistable, MongoPersistable {
+public abstract class SWGObject extends BaselineObject implements Comparable<SWGObject>, MongoPersistable {
 	
 	private final long 								objectId;
 	private final InstanceLocation 					location		= new InstanceLocation();
 	private final Set<SWGObject>					containedObjects= new CopyOnWriteArraySet<>();
 	private final Map <String, SWGObject>			slots			= new ConcurrentHashMap<>();
-	private final Map <String, String>				attributes		= Collections.synchronizedMap(new LinkedHashMap<>());
 	private final Map<String, SlotDefinition>		slotsAvailable	= new ConcurrentHashMap<>();
 	private final ObjectAware						awareness		= new ObjectAware();
 	private final Set<CreatureObject>				observers		= ConcurrentHashMap.newKeySet();
@@ -114,6 +109,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private boolean		observeWithParent = true;
 	private boolean		generated		= true;
 	private boolean		persisted		= false;
+	private boolean 	noTrade			= false;
 	
 	public SWGObject() {
 		this(0, null);
@@ -133,6 +129,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		if (arrangementId == -1) {
 			addContainedObject(object);
 		} else {
+			List<List<String>> arrangements = object.getArrangement();
+			
+			for (List<String> possibleSlots : arrangements) {
+				for (String possibleSlot : possibleSlots) {
+					SWGObject slottedObject = getSlottedObject(possibleSlot);
+					
+					if (slottedObject == null) {
+						addSlottedObject(object, possibleSlots, arrangementId);
+						return;
+					}
+				}
+			}
 			addSlottedObject(object, object.getArrangement().get(arrangementId - 4), arrangementId);
 		}
 	}
@@ -176,9 +184,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			// We need to adjust the volume of our container accordingly!
 			setVolume(getVolume() - object.getVolume() - 1);
 		} else {
-			for (String requiredSlot : object.getArrangement().get(object.getSlotArrangement() - 4)) {
-				slots.remove(requiredSlot);
-			}
+			removeSlottedObject(object);
 		}
 		
 		// Remove as parent
@@ -187,6 +193,18 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		object.slotArrangement = -1;
 		
 		onRemovedChild(object);
+	}
+	
+	private void removeSlottedObject(SWGObject object) {
+		List<List<String>> arrangements = object.getArrangement();
+		
+		for (List<String> possibleSlots : arrangements) {
+			for (String possibleSlot : possibleSlots) {
+				if (slots.remove(possibleSlot, object)) {
+					return;
+				}
+			}
+		}
 	}
 	
 	/**
@@ -400,23 +418,6 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	/**
-	 * Adds an attribute with the given value to this object. If the attribute exists, the old value is replaced with the new.
-	 * @param attribute attribute name
-	 * @param value new value for the attribute
-	 */
-	public void addAttribute(String attribute, String value) {
-		if (attribute == null || value == null) {
-			return;
-		}
-
-		attributes.put(attribute, value);
-	}
-	
-	public String removeAttribute(String attribute) {
-		return attributes.remove(attribute);
-	}
-
-	/**
 	 * Gets the object that occupies the specified slot
 	 * @param slotName
 	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
@@ -453,6 +454,17 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		
 		return combined;
+	}
+	
+	public void runOnChildObjectsRecursively(Consumer<SWGObject> op) {
+		for (SWGObject obj : getContainedObjects()) {
+			op.accept(obj);
+			obj.runOnChildObjectsRecursively(op);
+		}
+		for (SWGObject obj : getSlottedObjects()) {
+			op.accept(obj);
+			obj.runOnChildObjectsRecursively(op);
+		}
 	}
 	
 	public void setSlots(@NotNull Collection<String> slots) {
@@ -888,19 +900,25 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public List<List<String>> getArrangement() {
 		return Collections.unmodifiableList(arrangement);
 	}
-
-	public String getAttribute(String attribute) {
-		return attributes.get(attribute);
-	}
-
-	public boolean hasAttribute(String attribute) {
-		return attributes.containsKey(attribute);
+	
+	public boolean isNoTrade() {
+		return noTrade;
 	}
 	
-	public Map<String, String> getAttributes() {
-		return Collections.unmodifiableMap(attributes);
+	public void setNoTrade(boolean noTrade) {
+		this.noTrade = noTrade;
 	}
-
+	
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = new AttributeList();
+		
+		if (noTrade) {
+			attributeList.putNumber("no_trade", 1);
+		}
+		
+		return attributeList;
+	}
+	
 	public int getContainerType() {
 		return containerType;
 	}
@@ -1263,9 +1281,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		data.putString("template", template);
 		data.putDocument("location", location);
 		data.putDocument("permissions", ContainerPermissions.save(new MongoData(), permissions));
-		data.putMap("attributes", attributes);
 		data.putMap("serverAttributes", serverAttributes, ServerAttribute::getKey, Function.identity());
 		data.putBoolean("persisted", persisted);
+		data.putBoolean("noTrade", noTrade);
 	}
 	
 	@Override
@@ -1289,326 +1307,9 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		location.readMongo(data.getDocument("location"));
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));
-		attributes.putAll(data.getMap("attributes", String.class, String.class));
 		data.getMap("serverAttributes", String.class, Object.class).forEach((key, val) -> serverAttributes.put(ServerAttribute.getFromKey(key), val));
 		persisted = data.getBoolean("persisted", false);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(10);
-		location.save(stream);
-		boolean hasParent = parent != null;
-		boolean hasGrandparent = hasParent && parent.getParent() instanceof BuildingObject && parent instanceof CellObject;
-		stream.addBoolean(hasParent);
-		if (hasParent) {
-			SWGObject written = parent;
-			if (hasGrandparent)
-				written = parent.getParent();
-			SWGObjectFactory.save(ObjectCreator.createObjectFromTemplate(written.getObjectId(), written.getTemplate()), stream);
-			stream.addBoolean(hasGrandparent);
-			if (hasGrandparent)
-				stream.addInt(((CellObject) parent).getNumber());
-		}
-		ContainerPermissions.save(stream, permissions);
-		stream.addBoolean(generated);
-		stream.addUnicode(objectName);
-		stringId.save(stream);
-		detailStringId.save(stream);
-		stream.addFloat(complexity);
-		synchronized (attributes) {
-			stream.addMap(attributes, (e) -> {
-				stream.addAscii(e.getKey());
-				stream.addAscii(e.getValue());
-			});
-		}
-		stream.addMap(serverAttributes, e -> {
-			stream.addAscii(e.getKey().getKey());
-			stream.addAscii(e.getKey().store(e.getValue()));
-		});
-		Set<SWGObject> contained = new HashSet<>(containedObjects);
-		contained.addAll(slots.values());
-		contained.remove(null);
-		stream.addList(contained, (c) -> SWGObjectFactory.save(c, stream));
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		switch(stream.getByte()) {
-			default:
-			case 10:
-				readVersion10(stream);
-				break;
-			case 9:
-				readVersion9(stream);
-				break;
-			case 8:
-				readVersion8(stream);
-				break;
-			case 7:
-				readVersion7(stream);
-				break;
-			case 6:
-				readVersion6(stream);
-				break;
-			case 5:
-				readVersion5(stream);
-				break;
-			case 4:
-				readVersion4(stream);
-				break;
-			case 3:
-				readVersion3(stream);
-				break;
-			case 2:
-				readVersion2(stream);
-				break;
-			case 1:
-				readVersion1(stream);
-				break;
-			case 0:
-				readVersion0(stream);
-				break;
-		}
-	}
-	
-	private void readVersion10(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = ContainerPermissions.create(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> {
-			ServerAttribute attr = ServerAttribute.getFromKey(stream.getAscii());
-			serverAttributes.put(attr, attr.retrieve(stream.getAscii()));
-		});
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion9(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = ContainerPermissions.create(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion8(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getBoolean();
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion7(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion6(NetBufferStream stream) {
-		location.read(stream);
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion5(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		areaId = stream.getInt();
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion4(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		new Location().read(stream); // ignored now
-		if (stream.getBoolean()) {
-			parent = SWGObjectFactory.create(stream);
-			if (stream.getBoolean()) {
-				CellObject cell = (CellObject) ObjectCreator.createObjectFromTemplate("object/cell/shared_cell.iff");
-				cell.setNumber(stream.getInt());
-				parent.addObject(cell);
-				parent = cell;
-			}
-		}
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion3(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		new Location().read(stream); // ignored now
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion2(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		stringId.read(stream);
-		detailStringId.read(stream);
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion1(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private void readVersion0(NetBufferStream stream) {
-		Location loc = new Location();
-		loc.read(stream);
-		location.setLocation(loc);
-		if (stream.getBoolean())
-			parent = SWGObjectFactory.create(stream);
-		permissions = readOldPermissions(stream);
-		generated = stream.getAscii().equals("GENERATED");
-		objectName = stream.getUnicode();
-		// Ignore the saved volume - this is now set automagically in addObject() and removeObject()
-		stream.getInt();
-		complexity = stream.getFloat();
-		stream.getFloat(); // loadRange
-		stream.getList((i) -> attributes.put(stream.getAscii(), stream.getAscii()));
-		stream.getList((i) -> addObject(SWGObjectFactory.create(stream)));
-	}
-	
-	private ContainerPermissions readOldPermissions(NetBufferStream stream) {
-		switch (stream.getAscii()) {
-			case "DEFAULT":
-			case "INVENTORY":
-			case "LOOT":
-			default:
-				return DefaultPermissions.getPermissions();
-			case "ADMIN":
-				return AdminPermissions.getPermissions();
-		}
+		noTrade = data.getBoolean("noTrade", false);
 	}
 	
 }

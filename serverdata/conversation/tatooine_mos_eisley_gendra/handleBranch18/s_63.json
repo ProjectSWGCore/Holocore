@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_65",
+		"comment": "Perfect! I told him you'd be up for it. He's had a problem with his spiced tea distributor. Could you make him some spiced tea?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_67",
+				"comment": "I sure can!"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch19/s_67"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_72",
+				"comment": "Is it hard?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch19/s_72"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

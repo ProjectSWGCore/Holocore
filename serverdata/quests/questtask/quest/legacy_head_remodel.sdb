@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.timer	1	legacy_head_remodel_e0					0	20	25
+1	quest.task.ground.comm_player	2	legacy_head_remodel_e1	@quest/ground/legacy_head_remodel:task01_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+2	quest.task.ground.go_to_location	3	legacy_head_remodel_e11					0	0	0
+3	quest.task.ground.comm_player	4	legacy_head_remodel_e12	@quest/ground/legacy_head_remodel:task03_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+4	quest.task.ground.retrieve_item	5	legacy_head_remodel_e4					0	0	0
+5	quest.task.ground.comm_player	6	legacy_head_remodel_e41	@quest/ground/legacy_head_remodel:task05_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+6	quest.task.ground.reward	7	legacy_head_remodel_e101					1	0	0
+7	quest.task.ground.give_item	8	legacy_head_remodel_e5					0	0	0
+8	quest.task.ground.comm_player	9	legacy_head_remodel_e51	@quest/ground/legacy_head_remodel:task08_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+9	quest.task.ground.destroy_multi	10	legacy_head_remodel_e3			legacy_head_pilot		1	0	0
+10	quest.task.ground.comm_player	11	legacy_head_remodel_e51	@quest/ground/legacy_head_remodel:task10_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+11	quest.task.ground.retrieve_item	12	legacy_head_remodel_e6					0	0	0
+12	quest.task.ground.comm_player	13	legacy_head_remodel_e65	@quest/ground/legacy_head_remodel:task12_comm_message_text	object/mobile/ev_9d9.iff			0	0	0
+13	quest.task.ground.wait_for_signal	14	legacy_head_remodel_e67					0	0	0
+14	quest.task.ground.complete_quest		legacy_head_remodel_e8					0	0	0

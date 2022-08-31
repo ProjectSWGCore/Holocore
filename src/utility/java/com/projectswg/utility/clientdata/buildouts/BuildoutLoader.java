@@ -95,8 +95,7 @@ public class BuildoutLoader {
 			object.setPosition(terrain, l.getX(), l.getY(), l.getZ());
 			object.setOrientation(l.getOrientationX(), l.getOrientationY(), l.getOrientationZ(), l.getOrientationW());
 			object.setBuildoutAreaId(areaId);
-			object.setBuildoutEvent(area.getEventRequired());
-			
+
 			setCellInformation(object, buildoutRow.getCellIndex());
 			addObject(officialBuildoutTable, object, buildoutRow.getObjectId(), buildoutRow.getContainerId());
 		}

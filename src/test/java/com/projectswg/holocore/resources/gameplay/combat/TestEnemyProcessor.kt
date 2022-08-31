@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.gameplay.combat
 
+import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
@@ -35,15 +36,15 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class TestEnemyProcessor: TestRunnerNoIntents() {
 	
 	private val neutral = ServerData.factions.getFaction("neutral") ?: throw AssertionError("Failed to lookup 'neutral'")
 	private val rebel = ServerData.factions.getFaction("rebel") ?: throw AssertionError("Failed to lookup 'rebel'")
 	private val imperial = ServerData.factions.getFaction("imperial") ?: throw AssertionError("Failed to lookup 'imperial'")
-	private val gungan = ServerData.factions.getFaction("gungan") ?: throw AssertionError("Failed to lookup 'gungan'")
+	private val jawa = ServerData.factions.getFaction("jawa") ?: throw AssertionError("Failed to lookup 'jawa'")
 	private val townsperson = ServerData.factions.getFaction("townsperson") ?: throw AssertionError("Failed to lookup 'townsperson'")
 	
 	@Test
@@ -51,7 +52,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 		val player1 = GenericCreatureObject(1)
 		val player2 = GenericCreatureObject(2)
 		val statusList = PvpStatus.values()
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (player1Faction in factions) {
 			for (player2Faction in factions) {
@@ -78,12 +79,23 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 		player2.addPlayerToSentDuels(player1)
 		testAttackable(player1, player2, neutral, neutral, playerAttackable = true, npcAttackable = true)
 	}
-	
+
+	@Test
+	fun `incapacitated player can be deathblown when dueling`() {
+		val player1 = GenericCreatureObject(1)
+		val player2 = GenericCreatureObject(2)
+		player1.addPlayerToSentDuels(player2)
+		player2.addPlayerToSentDuels(player1)
+		player2.posture = Posture.INCAPACITATED
+
+		testAttackable(player1, player2, neutral, neutral, playerAttackable = true, npcAttackable = true)
+	}
+
 	@Test
 	fun testPvE() {
 		val player = GenericCreatureObject(1)
 		val npc = AIObject(2)
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (player1Faction in factions) {
 			for (player2Faction in factions) {
@@ -105,7 +117,7 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	fun testEvE() {
 		val npc1 = AIObject(1)
 		val npc2 = AIObject(2)
-		val factions = listOf(neutral, rebel, imperial, gungan, townsperson)
+		val factions = listOf(neutral, rebel, imperial, jawa, townsperson)
 		
 		for (npc1Faction in factions) {
 			for (npc2Faction in factions) {
@@ -117,8 +129,8 @@ class TestEnemyProcessor: TestRunnerNoIntents() {
 	
 	private fun testAttackable(player: CreatureObject, npc: CreatureObject, playerFaction: FactionLoader.Faction, npcFaction: FactionLoader.Faction, playerAttackable: Boolean, npcAttackable: Boolean) {
 		player.faction = playerFaction; npc.faction = npcFaction
-		Assert.assertEquals("${player.faction} ${if (playerAttackable) "is not" else "is"} able to attack ${npc.faction}", playerAttackable, EnemyProcessor.isAttackable(player, npc))
-		Assert.assertEquals("${npc.faction} ${if (npcAttackable) "is not" else "is"} able to attack ${player.faction}", npcAttackable, EnemyProcessor.isAttackable(npc, player))
+		assertEquals(playerAttackable, EnemyProcessor.isAttackable(player, npc), "${player.faction} ${if (playerAttackable) "is not" else "is"} able to attack ${npc.faction}")
+		assertEquals(npcAttackable, EnemyProcessor.isAttackable(npc, player), "${npc.faction} ${if (npcAttackable) "is not" else "is"} able to attack ${player.faction}")
 	}
 	
 }

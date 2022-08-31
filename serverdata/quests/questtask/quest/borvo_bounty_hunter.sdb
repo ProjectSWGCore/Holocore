@@ -1,0 +1,7 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1						0	0	0
+1	quest.task.ground.destroy_multi	2				borvo_bounty_hunter		4	0	0
+2	quest.task.ground.comm_player	3		@quest/ground/borvo_bounty_hunter:task02_comm_message_text	object/mobile/borvo.iff			0	0	0
+3	quest.task.ground.wait_for_signal	4	bountyHunterDead					0	0	0
+4	quest.task.ground.reward							1	0	0

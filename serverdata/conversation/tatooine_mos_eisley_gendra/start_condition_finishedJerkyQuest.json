@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_130",
+		"comment": "I hear your dancing was exquisite. I'm glad that you could help out."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_132",
+				"comment": "I think you sampled it."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch34/s_132"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_136",
+				"comment": "Is there anything else I can do?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch34/s_136"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_193",
+				"comment": "How do I become a pilot?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch34/s_193"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

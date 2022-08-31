@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.control.IntentChain;
@@ -58,7 +59,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCCreator {
 	
-	public static long createNPC(Spawner spawner) {
+	public static AIObject createNPC(Spawner spawner) {
 		Arguments.validate(spawner.getMinLevel() <= spawner.getMaxLevel(), "min level must be less than max level");
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
@@ -79,6 +80,13 @@ public class NPCCreator {
 		object.setWalkSpeed(spawner.getMovementSpeed());
 		object.setHeight(getScale(spawner));
 		
+		int def = detailNpcStat.getDef();
+		int toHit = detailNpcStat.getToHit();
+		for (WeaponClass weaponClass : WeaponClass.values()) {
+			object.adjustSkillmod(weaponClass.getDefenseSkillMod(), def, 0);
+			object.adjustSkillmod(weaponClass.getAccuracySkillMod(), toHit, 0);
+		}
+		
 		int hue = spawner.getHue();
 		if (hue != 0) {
 			// No reason to add color customization if the value is default anyways
@@ -87,11 +95,11 @@ public class NPCCreator {
 		
 		// Assign weapons
 		try {
-			spawner.getPrimaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addPrimaryWeapon);
-			spawner.getSecondaryWeapons().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addSecondaryWeapon);
-			List<WeaponObject> primaryWeapons = object.getPrimaryWeapons();
-			if (!primaryWeapons.isEmpty())
-				object.setEquippedWeapon(primaryWeapons.get(ThreadLocalRandom.current().nextInt(primaryWeapons.size())));
+			spawner.getDefaultWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addDefaultWeapon);
+			spawner.getThrownWeapon().stream().map(w -> createWeapon(detailNpcStat, w)).filter(Objects::nonNull).forEach(object::addThrownWeapon);
+			List<WeaponObject> defaultWeapons = object.getDefaultWeapons();
+			if (!defaultWeapons.isEmpty())
+				object.setEquippedWeapon(defaultWeapons.get(ThreadLocalRandom.current().nextInt(defaultWeapons.size())));
 		} catch (Throwable t) {
 			Log.w(t);
 		}
@@ -114,7 +122,7 @@ public class NPCCreator {
 		
 		spawner.addNPC(object);
 		ObjectCreatedIntent.broadcast(object);
-		return object.getObjectId();
+		return object;
 	}
 	
 	private static void setFlags(AIObject object, Spawner spawner) {
@@ -179,6 +187,8 @@ public class NPCCreator {
 			default:
 				break;
 		}
+		if (spawner.getBuildingId().isEmpty() || spawner.getBuildingId().endsWith("_world"))
+			builder.setY(DataLoader.Companion.terrains().getHeight(builder));
 		
 		return builder.build();
 	}

@@ -1,0 +1,29 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_318",
+		"comment": "Congratulations and good luck with your new duties.  Make us proud!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "imperial"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}

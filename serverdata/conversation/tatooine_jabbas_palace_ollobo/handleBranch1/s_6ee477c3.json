@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_ollobo_jabbas",
+		"key": "s_472f3294",
+		"comment": "Jabba tell Ollobo ta deal fer shooters an' stabbers, Jabba tell Ollobo ta deal fer pretties. Jabba tell Ollobo ta make good deal fer pistol shooters an' polearm stabbers. If'n ya got what Jabba wants, Ollobo deal fer it."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_ollobo_jabbas",
+				"key": "s_e2ee167d",
+				"comment": "I think that I have what Jabba is looking for."
+			},
+			"next": "tatooine_jabbas_palace_ollobo/handleBranch2/s_e2ee167d"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/junk_ollobo_jabbas",
+				"key": "s_b85badf5",
+				"comment": "I don't think that I have anything Jabba is interested in."
+			},
+			"next": "tatooine_jabbas_palace_ollobo/handleBranch2/s_b85badf5"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

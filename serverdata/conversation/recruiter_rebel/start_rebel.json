@@ -1,0 +1,65 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_234",
+		"comment": "Hello friend.  Is there something that I may do to help you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_248",
+				"comment": "I need supplies.  Do you have anything available?"
+			},
+			"next": "recruiter_rebel/rebel_show_supplies"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_286",
+				"comment": "Yes.  I want to hunt Imperial Special Forces.  Sign me up!"
+			},
+			"next": "recruiter_rebel/rebel_go_special_forces"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_276",
+				"comment": "Yes please.  I would like to return to combatant status and not fight the Imperial Special Forces."
+			},
+			"next": "recruiter_rebel/rebel_go_combatant"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_294",
+				"comment": "I need to go on leave for a time."
+			},
+			"next": "recruiter_rebel/rebel_go_on_leave"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_rebel",
+				"key": "s_306",
+				"comment": "This is all too much for me.  I would like to resign completely."
+			},
+			"next": "recruiter_rebel/rebel_go_resign"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute2"
+			}
+		}
+	]
+}

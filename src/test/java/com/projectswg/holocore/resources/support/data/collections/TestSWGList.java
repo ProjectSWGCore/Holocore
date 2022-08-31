@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,13 +48,13 @@ public class TestSWGList extends TestRunnerNoIntents {
 		SWGList<String> swgList = SWGList.Companion.createAsciiList(3, 6);
 		swgList.addAll(List.of(strings));
 		
-		Assert.assertEquals(size, swgList.size());
-		Assert.assertArrayEquals(strings, swgList.toArray());
+		assertEquals(size, swgList.size());
+		assertArrayEquals(strings, swgList.toArray());
 		
 		List<String> list = new ArrayList<>();
 		Collections.addAll(list, strings);
 		
-		Assert.assertArrayEquals(swgList.toArray(), list.toArray());
+		assertArrayEquals(swgList.toArray(), list.toArray());
 	}
 	
 	@Test
@@ -68,14 +68,14 @@ public class TestSWGList extends TestRunnerNoIntents {
 		SWGList<String> swgList = SWGList.Companion.createAsciiList(3, 6);
 		swgList.addAll(strings);
 		
-		Assert.assertEquals(size, swgList.getUpdateCount());
-		Assert.assertEquals(strings, swgList);
+		assertEquals(size, swgList.getUpdateCount());
+		assertEquals(strings, swgList);
 		for (ListIterator<String> it = swgList.listIterator(); it.hasNext(); ) {
 			String str = it.next();
 			it.set(str.replace('t', 'j'));
 		}
-		Assert.assertEquals(strings.stream().map(str -> str.replace('t', 'j')).collect(Collectors.toList()), swgList);
-		Assert.assertEquals(size*2, swgList.getUpdateCount());
+		assertEquals(strings.stream().map(str -> str.replace('t', 'j')).collect(Collectors.toList()), swgList);
+		assertEquals(size*2, swgList.getUpdateCount());
 	}
 	
 	@Test
@@ -93,11 +93,11 @@ public class TestSWGList extends TestRunnerNoIntents {
 		SWGList<String> swgList = SWGList.Companion.createAsciiList(3, 6);
 		Collections.addAll(swgList, strings);
 		byte [] encoded = swgList.encode();
-		Assert.assertArrayEquals(expected.array(), encoded);
-		Assert.assertEquals(encoded.length, swgList.getLength());
+		assertArrayEquals(expected.array(), encoded);
+		assertEquals(encoded.length, swgList.getLength());
 		
 		SWGList<String> decodedList = SWGList.Companion.createAsciiList(3, 6);
 		decodedList.decode(NetBuffer.wrap(encoded));
-		Assert.assertEquals(swgList, decodedList);
+		assertEquals(swgList, decodedList);
 	}
 }

@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_41",
+		"comment": "What are you suggesting?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_42",
+				"comment": "Understood. He will not live through the night."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch6/s_42"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "slit_throat"
+			}
+		}
+	]
+}

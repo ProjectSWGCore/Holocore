@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_sarcastic",
+		"key": "flee_4",
+		"comment": "Everyone out of my way! Droid coming through!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

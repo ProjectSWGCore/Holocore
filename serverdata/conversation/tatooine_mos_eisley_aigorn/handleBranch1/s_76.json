@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_77",
+		"comment": "Good, because there is another leak. It appears Dren is in charge at White Horse, and he knows about the research. He needs to be eliminated as well."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_1135",
+				"comment": "Understood. He will not live through the night."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch2/s_103"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "slit_throat"
+			}
+		}
+	]
+}

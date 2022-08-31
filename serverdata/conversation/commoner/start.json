@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_tutorial_common1",
+		"key": "s_7",
+		"comment": "Sorry, I can't help you"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "wave_on_dismissing"
+			}
+		}
+	]
+}

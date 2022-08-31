@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_42",
+		"comment": "How'd you like to make some fast credits?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_dunir",
+				"key": "s_44",
+				"comment": "I'm always interested in credits; fast, slow or otherwise."
+			},
+			"next": "tatooine_mos_eisley_dunir/handleBranch18/s_44"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

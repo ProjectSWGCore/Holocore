@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_307",
+		"comment": "But I know YOU, %TU. You were with Han Solo when he arrived at the Tansarii Point Station, no?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_309",
+				"comment": "Perhaps you are mistaken, friend."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch2/s_309"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_317",
+				"comment": "Han's in trouble! Jabba is after him!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch2/s_317"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

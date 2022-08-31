@@ -2,6 +2,7 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
@@ -135,14 +136,24 @@ public class NavigationPoint {
 	private static NavigationPoint interpolate(SWGObject parent, Location l1, Location l2, double speed, double percentage) {
 		double heading = Math.toDegrees(Math.atan2(l2.getX()-l1.getX(), l2.getZ()-l1.getZ()));
 		if (percentage <= 0)
-			return new NavigationPoint(parent, Location.builder(l1).setHeading(heading).build(), speed);
+			return new NavigationPoint(parent, Location.builder(l1)
+					.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l1) : l1.getY())
+					.setHeading(heading)
+					.build(), speed);
 		if (percentage >= 1)
-			return new NavigationPoint(parent, Location.builder(l2).setHeading(heading).build(), speed);
+			return new NavigationPoint(parent, Location.builder(l2)
+					.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l2) : l2.getY())
+					.setHeading(heading)
+					.build(), speed);
+		
+		double interpX = l1.getX() + (l2.getX()-l1.getX())*percentage;
+		double interpY = l1.getY() + (l2.getY()-l1.getY())*percentage;
+		double interpZ = l1.getZ() + (l2.getZ()-l1.getZ())*percentage;
 		return new NavigationPoint(parent, Location.builder()
 				.setTerrain(l1.getTerrain())
-				.setX(l1.getX() + (l2.getX()-l1.getX())*percentage)
-				.setY(l1.getY() + (l2.getY()-l1.getY())*percentage)
-				.setZ(l1.getZ() + (l2.getZ()-l1.getZ())*percentage)
+				.setX(interpX)
+				.setY(parent == null ? DataLoader.Companion.terrains().getHeight(l1.getTerrain(), interpX, interpZ) : interpY)
+				.setZ(interpZ)
 				.setHeading(heading)
 				.build(), speed);
 	}

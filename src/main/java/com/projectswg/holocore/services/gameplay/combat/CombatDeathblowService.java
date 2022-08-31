@@ -4,7 +4,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.intents.gameplay.combat.*;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -21,8 +20,7 @@ import java.util.concurrent.Future;
 
 public class CombatDeathblowService extends Service {
 	
-	private static final byte INCAP_TIMER = 10;    // Amount of seconds to be incapacitated
-	private static final String INCAP_BUFF = "incapWeaken";
+	private static final byte INCAP_TIMER = 20;    // Amount of seconds to be incapacitated
 	
 	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
 	private final ScheduledThreadPool executor;
@@ -69,8 +67,7 @@ public class CombatDeathblowService extends Service {
 		Future<?> incapacitationTimer = incapacitatedCreatures.remove(corpse);
 		
 		if (incapacitationTimer != null) {
-			if (incapacitationTimer.cancel(false)) {    // If the task is running, let them get back up
-				new BuffIntent(INCAP_BUFF, killer, corpse, true).broadcast();
+			if (incapacitationTimer.cancel(true)) {    // Interrupt the incap timer and kill the creature immediately
 				killCreature(killer, corpse);
 			}
 		} else {
@@ -96,7 +93,7 @@ public class CombatDeathblowService extends Service {
 		if (corpse.getPosture() == Posture.INCAPACITATED || corpse.getPosture() == Posture.DEAD)
 			return;
 		
-		boolean deathblow = !corpse.isPlayer() || corpse.hasBuff(INCAP_BUFF);
+		boolean deathblow = !corpse.isPlayer();
 		if (!deathblow && killer instanceof AIObject)
 			deathblow = ((AIObject) killer).getSpawner().isDeathblow();
 		
@@ -121,7 +118,6 @@ public class CombatDeathblowService extends Service {
 		// Once the incapacitation counter expires, revive them.
 		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
 		
-		new BuffIntent(INCAP_BUFF, incapacitator, incapacitated, false).broadcast();
 		Player incapacitatorOwner = incapacitator.getOwner();
 		if (incapacitatorOwner != null) { // This will be NPCs most of the time
 			new SystemMessageIntent(incapacitatorOwner, new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
@@ -131,6 +127,9 @@ public class CombatDeathblowService extends Service {
 			new SystemMessageIntent(incapacitatedOwner, new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
 		}
 		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
+		
+		long now = System.currentTimeMillis();
+		incapacitated.setLastIncapTime(now);
 	}
 	
 	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {

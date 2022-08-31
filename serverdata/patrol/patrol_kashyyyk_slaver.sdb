@@ -1,0 +1,147 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_kashyyyk_slaver_100	patrol_kashyyyk_slaver_100	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	686.7	23.8	1657.8	0	Slaver - a blackscale guard
+patrol_kashyyyk_slaver_101	patrol_kashyyyk_slaver_100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	665.1	23.7	1643.4	0	-
+patrol_kashyyyk_slaver_102	patrol_kashyyyk_slaver_100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	623.2	22.7	1642	0	-
+patrol_kashyyyk_slaver_103	patrol_kashyyyk_slaver_100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	596.1	23.7	1643.3	0	-
+patrol_kashyyyk_slaver_200	patrol_kashyyyk_slaver_200	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	644.8	24.0	1761.6	0	Slaver - a blackscale guard
+patrol_kashyyyk_slaver_201	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	634.9	24.7	1748.5	0	-
+patrol_kashyyyk_slaver_202	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	625.8	25.4	1746.4	0	-
+patrol_kashyyyk_slaver_203	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	622.5	25.3	1719.9	0	-
+patrol_kashyyyk_slaver_204	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	625.7	25.3	1745.8	0	-
+patrol_kashyyyk_slaver_205	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	639.5	24.5	1751.4	0	-
+patrol_kashyyyk_slaver_206	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	654.5	22.8	1772.7	0	-
+patrol_kashyyyk_slaver_207	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	715.8	25.9	1753.3	0	-
+patrol_kashyyyk_slaver_208	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	720.6	24.8	1718.9	0	-
+patrol_kashyyyk_slaver_209	patrol_kashyyyk_slaver_200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	698.7	24.3	1670	0	-
+patrol_kashyyyk_slaver_300	patrol_kashyyyk_slaver_300	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	627.5	27.9	1806.8	0	Slaver - a blackscale enforcer
+patrol_kashyyyk_slaver_301	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	646.2	23.5	1794.5	0	-
+patrol_kashyyyk_slaver_302	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	639.1	24.7	1753	0	-
+patrol_kashyyyk_slaver_303	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	644.8	24.3	1748.5	0	-
+patrol_kashyyyk_slaver_304	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	655.3	22.7	1784.5	0	-
+patrol_kashyyyk_slaver_305	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	658.1	23.2	1808	0	-
+patrol_kashyyyk_slaver_306	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	694.4	24.1	1803.8	0	-
+patrol_kashyyyk_slaver_307	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	714.5	24.9	1792	0	-
+patrol_kashyyyk_slaver_308	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	724.5	26.3	1801.5	0	-
+patrol_kashyyyk_slaver_309	patrol_kashyyyk_slaver_300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	674.1	23.9	1815.6	0	-
+patrol_kashyyyk_slaver_400	patrol_kashyyyk_slaver_400	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	543.5	23.7	1812.4	0	Slaver - a blackscale enforcer
+patrol_kashyyyk_slaver_401	patrol_kashyyyk_slaver_400		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	618.6	28.5	1809.9	0	-
+patrol_kashyyyk_slaver_500	patrol_kashyyyk_slaver_500	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	517.6	22.2	1802.1	0	Slaver - a blackscale enforcer
+patrol_kashyyyk_slaver_501	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	492.9	24.6	1784.5	0	-
+patrol_kashyyyk_slaver_502	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	434.2	24.8	1795.2	0	-
+patrol_kashyyyk_slaver_503	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	395.3	24.2	1842.4	0	-
+patrol_kashyyyk_slaver_504	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	402.3	23.7	1882.5	0	-
+patrol_kashyyyk_slaver_505	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	438.4	23.3	1848.3	0	-
+patrol_kashyyyk_slaver_506	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	511.4	23.0	1808.1	0	-
+patrol_kashyyyk_slaver_507	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	518.6	23.2	1829.8	0	-
+patrol_kashyyyk_slaver_508	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	487.9	24.5	1851.2	0	-
+patrol_kashyyyk_slaver_509	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	444.7	24.1	1865	0	-
+patrol_kashyyyk_slaver_510	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	412.9	24.1	1888.6	0	-
+patrol_kashyyyk_slaver_511	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	436.8	27.3	1907	0	-
+patrol_kashyyyk_slaver_512	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	494.5	27.5	1893.3	0	-
+patrol_kashyyyk_slaver_513	patrol_kashyyyk_slaver_500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	532.0	28.6	1856.6	0	-
+patrol_kashyyyk_slaver_600	patrol_kashyyyk_slaver_600	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	371.5	24.1	1908.8	0	Slaver - a blackscale guard
+patrol_kashyyyk_slaver_601	patrol_kashyyyk_slaver_600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	330.7	23.5	1917.2	0	-
+patrol_kashyyyk_slaver_602	patrol_kashyyyk_slaver_600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	308.5	24.8	1932.9	0	-
+patrol_kashyyyk_slaver_603	patrol_kashyyyk_slaver_600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	302.2	24.1	2004.8	0	-
+patrol_kashyyyk_slaver_700	patrol_kashyyyk_slaver_700	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	359.1	25.0	2099	0	Slaver - a blackscale enforcer
+patrol_kashyyyk_slaver_701	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	330.9	24.8	2066.2	0	-
+patrol_kashyyyk_slaver_702	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	345.3	25.7	2046.2	0	-
+patrol_kashyyyk_slaver_703	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	372.5	24.6	2063.5	0	-
+patrol_kashyyyk_slaver_704	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	365.9	24.5	2067.3	0	-
+patrol_kashyyyk_slaver_705	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	360.0	28.4	2061.4	0	-
+patrol_kashyyyk_slaver_706	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	359.3	28.4	2057	0	-
+patrol_kashyyyk_slaver_707	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	355.9	28.4	2061.2	0	-
+patrol_kashyyyk_slaver_708	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	360.5	28.4	2062.4	0	-
+patrol_kashyyyk_slaver_709	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	366.8	24.5	2067.3	0	-
+patrol_kashyyyk_slaver_710	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	365.9	24.9	2054.2	0	-
+patrol_kashyyyk_slaver_711	patrol_kashyyyk_slaver_700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	334.3	25.1	2044.6	0	-
+patrol_kashyyyk_slaver_800	patrol_kashyyyk_slaver_800	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	485.1	26.0	2087.1	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_801	patrol_kashyyyk_slaver_800		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	455.3	24.9	2071.7	0	-
+patrol_kashyyyk_slaver_802	patrol_kashyyyk_slaver_800		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	417.9	25.9	2069.1	0	-
+patrol_kashyyyk_slaver_803	patrol_kashyyyk_slaver_800		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	410.2	24.8	2103.5	0	-
+patrol_kashyyyk_slaver_804	patrol_kashyyyk_slaver_800		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	454.3	25.2	2097.5	0	-
+patrol_kashyyyk_slaver_805	patrol_kashyyyk_slaver_800		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	479.8	26.1	2103.6	0	-
+patrol_kashyyyk_slaver_900	patrol_kashyyyk_slaver_900	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	505.9	24.0	2188.2	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_901	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	503.2	24.0	2202.6	0	-
+patrol_kashyyyk_slaver_902	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	491.1	24.7	2213.7	0	-
+patrol_kashyyyk_slaver_903	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	490.4	28.5	2202.4	0	-
+patrol_kashyyyk_slaver_904	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	487.5	28.5	2197.4	0	-
+patrol_kashyyyk_slaver_905	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	492.9	28.5	2197.4	0	-
+patrol_kashyyyk_slaver_906	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	490.2	28.5	2203.1	0	-
+patrol_kashyyyk_slaver_907	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	491.2	24.6	2214.4	0	-
+patrol_kashyyyk_slaver_908	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	537.0	27.5	2234.7	0	-
+patrol_kashyyyk_slaver_909	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	563.8	27.4	2253.1	0	-
+patrol_kashyyyk_slaver_910	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	578.9	27.0	2298.3	0	-
+patrol_kashyyyk_slaver_911	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	554.3	27.8	2312.8	0	-
+patrol_kashyyyk_slaver_912	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	522.8	28.9	2310.1	0	-
+patrol_kashyyyk_slaver_913	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	536.5	27.4	2241	0	-
+patrol_kashyyyk_slaver_914	patrol_kashyyyk_slaver_900		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	511.3	24.0	2219.1	0	-
+patrol_kashyyyk_slaver_1000	patrol_kashyyyk_slaver_1000	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	547.1	23.2	2167.2	0	Slaver - a blackscale guard
+patrol_kashyyyk_slaver_1001	patrol_kashyyyk_slaver_1000		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	568.7	24.5	2180.9	0	-
+patrol_kashyyyk_slaver_1002	patrol_kashyyyk_slaver_1000		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	588.3	24.4	2202.5	0	-
+patrol_kashyyyk_slaver_1003	patrol_kashyyyk_slaver_1000		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	572.5	24.5	2211.2	0	-
+patrol_kashyyyk_slaver_1100	patrol_kashyyyk_slaver_1100	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	746.9	24.1	2290.3	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_1101	patrol_kashyyyk_slaver_1100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	744.8	23.8	2361.9	0	-
+patrol_kashyyyk_slaver_1102	patrol_kashyyyk_slaver_1100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	758.2	23.2	2371.3	0	-
+patrol_kashyyyk_slaver_1103	patrol_kashyyyk_slaver_1100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	739.2	24.3	2399.5	0	-
+patrol_kashyyyk_slaver_1104	patrol_kashyyyk_slaver_1100		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	708.6	24.5	2423	0	-
+patrol_kashyyyk_slaver_1200	patrol_kashyyyk_slaver_1200	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	666.2	28.4	2403.2	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_1201	patrol_kashyyyk_slaver_1200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	683.1	27.8	2394	0	-
+patrol_kashyyyk_slaver_1202	patrol_kashyyyk_slaver_1200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	706.6	26.1	2322	0	-
+patrol_kashyyyk_slaver_1203	patrol_kashyyyk_slaver_1200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	698.7	27.0	2312.1	0	-
+patrol_kashyyyk_slaver_1204	patrol_kashyyyk_slaver_1200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	691.4	27.4	2331.8	0	-
+patrol_kashyyyk_slaver_1205	patrol_kashyyyk_slaver_1200		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	669.7	27.2	2345.3	0	-
+patrol_kashyyyk_slaver_1300	patrol_kashyyyk_slaver_1300	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	639.7	29.8	2352	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_1301	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	637.5	28.3	2364.3	0	-
+patrol_kashyyyk_slaver_1302	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	596.0	27.8	2377.7	0	-
+patrol_kashyyyk_slaver_1303	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	579.4	27.5	2399.1	0	-
+patrol_kashyyyk_slaver_1304	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	561.8	26.6	2406.4	0	-
+patrol_kashyyyk_slaver_1305	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	536.0	27.0	2364.4	0	-
+patrol_kashyyyk_slaver_1306	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	534.7	23.8	2346.4	0	-
+patrol_kashyyyk_slaver_1307	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	574.6	24.1	2336.1	0	-
+patrol_kashyyyk_slaver_1308	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	609.2	25.0	2305.7	0	-
+patrol_kashyyyk_slaver_1309	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	636.8	23.7	2312.1	0	-
+patrol_kashyyyk_slaver_1310	patrol_kashyyyk_slaver_1300		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	642.6	27.7	2332.4	0	-
+patrol_kashyyyk_slaver_1400	patrol_kashyyyk_slaver_1400	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	340.0	28.1	2264.4	0	Slaver - a blackscale assaulter
+patrol_kashyyyk_slaver_1401	patrol_kashyyyk_slaver_1400		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	310.6	27.1	2250.7	0	-
+patrol_kashyyyk_slaver_1402	patrol_kashyyyk_slaver_1400		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	242.4	27.5	2244.9	0	-
+patrol_kashyyyk_slaver_1403	patrol_kashyyyk_slaver_1400		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	243.9	29.2	2274.8	0	-
+patrol_kashyyyk_slaver_1404	patrol_kashyyyk_slaver_1400		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	319.8	28.1	2285.7	0	-
+patrol_kashyyyk_slaver_1500	patrol_kashyyyk_slaver_1500	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	362.7	27.6	2396	0	Slaver - a blackscale trooper
+patrol_kashyyyk_slaver_1501	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	415.7	24.9	2395.6	0	-
+patrol_kashyyyk_slaver_1502	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	411.1	25.7	2363.7	0	-
+patrol_kashyyyk_slaver_1503	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	407.0	25.7	2353	0	-
+patrol_kashyyyk_slaver_1504	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	411.6	25.7	2342.2	0	-
+patrol_kashyyyk_slaver_1505	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	407.7	23.7	2314.4	0	-
+patrol_kashyyyk_slaver_1506	patrol_kashyyyk_slaver_1500		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	356.2	27.4	2321.4	0	-
+patrol_kashyyyk_slaver_1600	patrol_kashyyyk_slaver_1600	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	254.1	36.5	2349.4	0	Slaver - a blackscale trooper
+patrol_kashyyyk_slaver_1601	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	253.9	35.6	2318.8	0	-
+patrol_kashyyyk_slaver_1602	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	273.0	35.6	2311.7	0	-
+patrol_kashyyyk_slaver_1603	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	278.5	35.6	2305.5	0	-
+patrol_kashyyyk_slaver_1604	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	309.6	35.8	2305.1	0	-
+patrol_kashyyyk_slaver_1605	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	317.6	36.0	2318.3	0	-
+patrol_kashyyyk_slaver_1606	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	324.8	39.5	2319.1	0	-
+patrol_kashyyyk_slaver_1607	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	329.3	39.5	2320.1	0	-
+patrol_kashyyyk_slaver_1608	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	329.3	39.5	2316.1	0	-
+patrol_kashyyyk_slaver_1609	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	323.4	39.5	2318.3	0	-
+patrol_kashyyyk_slaver_1610	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	317.4	36.0	2318	0	-
+patrol_kashyyyk_slaver_1611	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	328.8	35.7	2332.3	0	-
+patrol_kashyyyk_slaver_1612	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	333.3	35.6	2334.1	0	-
+patrol_kashyyyk_slaver_1613	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	336.7	35.7	2354.4	0	-
+patrol_kashyyyk_slaver_1614	patrol_kashyyyk_slaver_1600		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	338.8	35.6	2371.9	0	-
+patrol_kashyyyk_slaver_1700	patrol_kashyyyk_slaver_1700	FLIP	KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	254.4	35.6	2371	0	Slaver - a blackscale trooper
+patrol_kashyyyk_slaver_1701	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	253.9	35.6	2390.8	0	-
+patrol_kashyyyk_slaver_1702	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	261.5	35.7	2392.4	0	-
+patrol_kashyyyk_slaver_1703	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	264.3	35.9	2402.1	0	-
+patrol_kashyyyk_slaver_1704	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	277.5	35.8	2405	0	-
+patrol_kashyyyk_slaver_1705	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	278.2	35.6	2410.4	0	-
+patrol_kashyyyk_slaver_1706	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	325.7	35.6	2411	0	-
+patrol_kashyyyk_slaver_1707	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	327.4	35.8	2398.9	0	-
+patrol_kashyyyk_slaver_1708	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	335.4	39.5	2398.6	0	-
+patrol_kashyyyk_slaver_1709	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	339.7	39.5	2395.6	0	-
+patrol_kashyyyk_slaver_1710	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	335.4	39.5	2397.8	0	-
+patrol_kashyyyk_slaver_1711	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	328.0	35.9	2398.1	0	-
+patrol_kashyyyk_slaver_1712	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	327.1	35.6	2393.3	0	-
+patrol_kashyyyk_slaver_1713	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	340.4	36.0	2390.6	0	-
+patrol_kashyyyk_slaver_1714	patrol_kashyyyk_slaver_1700		KASHYYYK_NORTH_DUNGEONS	kas_slaver_world	0	339.4	35.6	2374.1	0	-

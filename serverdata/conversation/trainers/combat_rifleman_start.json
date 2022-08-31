@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_rifleman",
+		"comment": "Don't stand so close.  I took up the rifle to keep away from people.  If you're willing to study, I'll teach you the same.  Can you handle it?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_rifleman_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_68",
+		"comment": "Yeah, we caught one of them as they were escaping. The Sarlacc had a nice little snack that day, but the rest of them got away. Word is that one of the knaves must be carrying it around."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/ree_yees",
+				"key": "s_70",
+				"comment": "So, I should just find that Sand Splitter knave?"
+			},
+			"next": "tatooine_jabbas_palace_ree_yees/handleBranch9/s_70",
+		}
+	],
+	"requirements": [],
+	"events": []
+}

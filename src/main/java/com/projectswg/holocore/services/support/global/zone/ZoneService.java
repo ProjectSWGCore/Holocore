@@ -7,9 +7,7 @@ import com.projectswg.common.network.packets.swg.login.ClientIdMsg;
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage;
 import com.projectswg.common.network.packets.swg.login.ConnectionServerLagResponse;
 import com.projectswg.common.network.packets.swg.zone.*;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -41,7 +39,6 @@ public class ZoneService extends Service {
 		switch (pei.getEvent()) {
 			case PE_FIRST_ZONE:
 				player.getPlayerObject().initStartPlayTime();
-				sendVersion(player);
 				sendMessageOfTheDay(player);
 				break;
 			case PE_ZONE_IN_SERVER:
@@ -60,10 +57,6 @@ public class ZoneService extends Service {
 			handleClientIdMsg(player, (ClientIdMsg) p);
 		if (p instanceof SetWaypointColor)
 			handleSetWaypointColor(player, (SetWaypointColor) p);
-		if(p instanceof ShowBackpack)
-			handleShowBackpack(player, (ShowBackpack) p);
-		if(p instanceof ShowHelmet)
-			handleShowHelmet(player, (ShowHelmet) p);
 		if (p instanceof LagRequest && player.getPlayerServer() == PlayerServer.ZONE)
 			handleLagRequest(player);
 		if (p instanceof SelectCharacter)
@@ -74,10 +67,6 @@ public class ZoneService extends Service {
 		player.sendPacket(new ConnectionServerLagResponse());
 	}
 	
-	private void sendVersion(Player player) {
-		player.sendPacket(new ChatSystemMessage(ChatSystemMessage.SystemChatType.CHAT_BOX, "This server runs Holocore " + ProjectSWG.VERSION));
-	}
-	
 	private void sendMessageOfTheDay(Player player) {
 		String message = PswgDatabase.INSTANCE.getConfig().getString(this, "firstZoneMessage", "");
 		
@@ -85,14 +74,6 @@ public class ZoneService extends Service {
 			new SystemMessageIntent(player, message).broadcast();	// Send it
 	}
 	
-	private void handleShowBackpack(Player player, ShowBackpack p) {
-		player.getPlayerObject().setShowBackpack(p.showingBackpack());
-	}
-	
-	private void handleShowHelmet(Player player, ShowHelmet p) {
-		player.getPlayerObject().setShowHelmet(p.showingHelmet());
-	}
-
 	private void handleSetWaypointColor(Player player, SetWaypointColor p) {
 		// TODO Should move this to a different service, maybe make a service for other SWGPackets similar to this (ie misc.)
 		PlayerObject ghost = player.getPlayerObject();

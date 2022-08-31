@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_212",
+		"comment": "Ah, then you might want to see Trehla Keelo. She can help you out with more generalized information."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

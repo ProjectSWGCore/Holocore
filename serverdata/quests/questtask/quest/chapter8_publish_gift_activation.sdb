@@ -1,0 +1,12 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.comm_player	1;4;7		@quest/ground/chapter8_publish_gift_activation:task00_comm_message_text	object/mobile/r2.iff			0	0	0
+1	quest.task.ground.go_to_location	2						0	0	0
+2	quest.task.ground.comm_player	3		@quest/ground/chapter8_publish_gift_activation:task02_comm_message_text	object/mobile/r2.iff			0	0	0
+3	quest.task.ground.complete_quest							0	0	0
+4	quest.task.ground.go_to_location	5						0	0	0
+5	quest.task.ground.comm_player	6		@quest/ground/chapter8_publish_gift_activation:task05_comm_message_text	object/mobile/r2.iff			0	0	0
+6	quest.task.ground.complete_quest							0	0	0
+7	quest.task.ground.go_to_location	8						0	0	0
+8	quest.task.ground.comm_player	9		@quest/ground/chapter8_publish_gift_activation:task08_comm_message_text	object/mobile/r2.iff			0	0	0
+9	quest.task.ground.complete_quest							0	0	0

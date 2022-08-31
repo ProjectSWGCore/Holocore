@@ -29,11 +29,16 @@ package com.projectswg.holocore.resources.support.objects.swg.weapon;
 import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.Locale;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -50,9 +55,22 @@ public class WeaponObject extends TangibleObject {
 	// WEAO06
 	private WeaponType type = WeaponType.UNARMED;
 	
+	private float woundChance;
+	private String procEffect;
+	private int specialAttackCost = 100;
+	private int forcePowerCost = 100;
+	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
 		setComplexity(0);
+	}
+	
+	public int getForcePowerCost() {
+		return forcePowerCost;
+	}
+	
+	public void setForcePowerCost(int forcePowerCost) {
+		this.forcePowerCost = forcePowerCost;
 	}
 	
 	public float getAttackSpeed() {
@@ -135,11 +153,114 @@ public class WeaponObject extends TangibleObject {
 		this.maxDamage = maxDamage;
 	}
 	
+	public float getWoundChance() {
+		return woundChance;
+	}
+	
+	public void setWoundChance(float woundChance) {
+		this.woundChance = woundChance;
+	}
+	
+	public String getProcEffect() {
+		return procEffect;
+	}
+	
+	public void setProcEffect(String procEffect) {
+		this.procEffect = procEffect;
+	}
+	
+	public int getSpecialAttackCost() {
+		return specialAttackCost;
+	}
+	
+	public void setSpecialAttackCost(int specialAttackCost) {
+		this.specialAttackCost = specialAttackCost;
+	}
+	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = super.getAttributeList(viewer);
+		
+		if (type.isLightsaber()) {
+			attributeList.putNumber("forcecost", forcePowerCost);
+		}
+		
+		if (getRequiredSkill() == null)  {
+			attributeList.putText("skillmodmin", "@cmd_n:none");
+		}
+		
+		String displayDamageType = "@obj_attr_n:armor_eff_" + damageType.name().toLowerCase(Locale.US);
+		attributeList.putText("cat_wpn_damage.wpn_damage_type", displayDamageType);
+		attributeList.putNumber("cat_wpn_damage.wpn_attack_speed", attackSpeed);
+		float moddedWeaponAttackSpeedWithCap = getModdedWeaponAttackSpeedWithCap(viewer);
+		attributeList.putNumber("cat_wpn_damage.wpn_real_speed", moddedWeaponAttackSpeedWithCap);
+		attributeList.putText("cat_wpn_damage.damage", minDamage + "-" + maxDamage);
+		if (elementalType != null) {
+			attributeList.putText("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:armor_eff_" + elementalType.name().toLowerCase(Locale.US));
+			attributeList.putNumber("cat_wpn_damage.wpn_elemental_value", elementalValue);
+		}
+		attributeList.putNumber("cat_wpn_damage.wpn_accuracy", accuracy);
+		attributeList.putNumber("cat_wpn_damage.woundchance", woundChance, "%");
+		attributeList.putNumber("cat_wpn_damage.wpn_base_dps", getDamagePerSecond(getAttackSpeed()), " / sec");
+		attributeList.putNumber("cat_wpn_damage.wpn_real_dps", getModifiedDamagePerSecond(moddedWeaponAttackSpeedWithCap, viewer), " / sec");
+		if (procEffect != null && !procEffect.isEmpty()) {
+			attributeList.putText("proc_name", "@ui_buff:" + procEffect);
+		}
+		attributeList.putText("cat_wpn_other.wpn_range", String.format("%d-%dm", (int) minRange, (int) maxRange));
+		attributeList.putNumber("cat_wpn_other.attackcost", specialAttackCost);
+		
+		return attributeList;
+	}
+	
+	public float getModdedWeaponAttackSpeedWithCap(CreatureObject creature) {
+		WeaponType equippedWeaponType = getType();
+		int speedMod = getSpeedModBasedOnEquippedWeaponType(creature, equippedWeaponType);
+		
+		float weaponAttackSpeed = getAttackSpeed();
+		float moddedWeaponAttackSpeed = weaponAttackSpeed * (1 - speedMod / 100f);	// Reduce weapon attack speed by %
+		float attackSpeedCap = 1f;
+		return Math.max(attackSpeedCap, moddedWeaponAttackSpeed);
+	}
+	
+	private int getSpeedModBasedOnEquippedWeaponType(CreatureObject creature, WeaponType equippedWeaponType) {
+		int speedMod = 0;
+		
+		Collection<String> speedSkillMods = equippedWeaponType.getSpeedSkillMods();
+		
+		for (String speedSkillMod : speedSkillMods) {
+			speedMod += creature.getSkillModValue(speedSkillMod);
+		}
+		
+		return speedMod;
+	}
+	
+	public float getDamagePerSecond(float attackSpeed) {
+		if (getElementalType() != null) {
+			return (((getMaxDamage() + getElementalValue()  + getMinDamage() + getElementalValue()) / 2f + getElementalValue()) * (1 / attackSpeed));
+		} else {
+			return (((getMaxDamage() + getMinDamage()) / 2f ) * (1 / attackSpeed));
+		}
+	}
+	
+	public float getModifiedDamagePerSecond(float moddedWeaponAttackSpeedWithCap, CreatureObject viewer) {
+		float weaponDps = getDamagePerSecond(moddedWeaponAttackSpeedWithCap);
+		
+		if (getType() == WeaponType.UNARMED) {
+			weaponDps += viewer.getSkillModValue("unarmed_damage");
+		}
+		
+		return weaponDps;
+	}
+	
+	@Nullable
+	public TangibleObject getLightsaberInventory() {
+		return (TangibleObject) getSlottedObject("saber_inv");
+	}
+	
 	@Override
 	public void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
-		bb.addFloat(attackSpeed);
 		bb.addInt(accuracy); // pre-NGE
 		bb.addFloat(minRange);
 		bb.addFloat(maxRange);
@@ -147,7 +268,7 @@ public class WeaponObject extends TangibleObject {
 		bb.addInt(elementalType == null ? 0 : elementalType.getNum());
 		bb.addInt(elementalValue); // elementalValue
 		
-		bb.incrementOperandCount(7);
+		bb.incrementOperandCount(6);
 	}
 	
 	@Override
@@ -162,7 +283,6 @@ public class WeaponObject extends TangibleObject {
 	@Override
 	public void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		attackSpeed = buffer.getFloat();
 		buffer.getInt(); // accuracy
 		buffer.getFloat(); // minRange
 		maxRange = buffer.getFloat();
@@ -189,6 +309,11 @@ public class WeaponObject extends TangibleObject {
 		data.putFloat("attackSpeed", attackSpeed);
 		data.putFloat("maxRange", maxRange);
 		data.putString("weaponType", type.name());
+		data.putInteger("accuracy", accuracy);
+		data.putFloat("woundChance", woundChance);
+		data.putString("procEffect", procEffect);
+		data.putInteger("specialAttackCost", specialAttackCost);
+		data.putInteger("forcePowerCost", forcePowerCost);
 	}
 	
 	@Override
@@ -203,40 +328,11 @@ public class WeaponObject extends TangibleObject {
 		attackSpeed = data.getFloat("attackSpeed", attackSpeed);
 		maxRange = data.getFloat("maxRange", maxRange);
 		type = WeaponType.valueOf(data.getString("weaponType", type.name()));
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-		stream.addInt(minDamage);
-		stream.addInt(maxDamage);
-		stream.addAscii(damageType.name());
-		stream.addAscii(elementalType != null ? elementalType.name() : "");
-		stream.addInt(elementalValue);
-		stream.addFloat(attackSpeed);
-		stream.addFloat(maxRange);
-		stream.addAscii(type.name());
-	}
-
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
-		minDamage = stream.getInt();
-		maxDamage = stream.getInt();
-		damageType = DamageType.valueOf(stream.getAscii());
-		String elementalTypeName = stream.getAscii();
-
-		// A weapon doesn't necessarily have an elemental type
-		if (!elementalTypeName.isEmpty()) {
-			elementalType = DamageType.valueOf(elementalTypeName);
-		}
-
-		elementalValue = stream.getInt();
-		attackSpeed = stream.getFloat();
-		maxRange = stream.getFloat();
-		type = WeaponType.valueOf(stream.getAscii());
+		accuracy = data.getInteger("accuracy", 0);
+		woundChance = data.getFloat("woundChance", 0);
+		procEffect = data.getString("procEffect");
+		specialAttackCost = data.getInteger("specialAttackCost", 100);
+		forcePowerCost = data.getInteger("forcePowerCost", 100);
 	}
 	
 }

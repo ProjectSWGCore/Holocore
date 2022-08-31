@@ -55,9 +55,9 @@ public class ExplorationBadgeService extends Service {
 		
 	@IntentHandler
 	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti){
-		String badgeName = checkExplorationRegions(pti.getPlayer());
-		if (badgeName != null){
-			new GrantBadgeIntent(pti.getPlayer(), badgeName).broadcast();
+		String badgeKey = checkExplorationRegions(pti.getPlayer());
+		if (badgeKey != null){
+			GrantBadgeIntent.broadcast(pti.getPlayer(), badgeKey);
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class ExplorationBadgeService extends Service {
 	
 	private void registerExplorationBadge() {
 		
-		try (RelationalServerData explorerBadgeDatabase = RelationalServerFactory.getServerData("nge/badges/explorationBadges.db", "explorationBadges")) {
+		try (RelationalServerData explorerBadgeDatabase = RelationalServerFactory.getServerData("badges/explorationBadges.db", "explorationBadges")) {
 			try(ResultSet set =  explorerBadgeDatabase.executeQuery(GET_BADGES_SQL)){
 				while (set.next()) {
 					String planet = set.getString("planet").toLowerCase(Locale.ENGLISH);

@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_91",
+		"comment": "Just one more thing. If anyone else gets this data besides me. I will make sure you suffer for a lifetime, understand?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_93",
+				"comment": "I understand. Bad things will happen."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch24/s_93"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_accusingly"
+			}
+		}
+	]
+}

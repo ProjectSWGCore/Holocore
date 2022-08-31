@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_351",
+		"comment": "Welcome back. Did you make a successful transaction?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_353",
+				"comment": "I did indeed."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch14/s_353"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_357",
+				"comment": "I decided not to withdraw any money."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch14/s_357"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

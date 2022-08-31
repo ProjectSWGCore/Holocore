@@ -29,7 +29,7 @@ public final class TerrainLevelLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/dynamic/terrain_levels.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/dynamic/terrain_levels.sdb"))) {
 			while (set.next()) {
 				String planet = set.getText("terrain");
 				Terrain terrain = Terrain.getTerrainFromName(planet);

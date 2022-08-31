@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_51",
+		"comment": "It's better than being dead. Here's where you can find Dunir."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_67",
+				"comment": "Got it."
+			},
+			"next": "tatooine_mos_eisley_niko/handleBranch6/s_67"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

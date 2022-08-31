@@ -3,10 +3,11 @@ package com.projectswg.holocore.resources.support.objects.radial;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
+import com.projectswg.holocore.resources.support.data.server_info.loader.StructureInfoLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.object.*;
 import com.projectswg.holocore.resources.support.objects.radial.object.survey.ObjectSurveyToolRadial;
-import com.projectswg.holocore.resources.support.objects.radial.object.uniform.ObjectUniformBoxRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.PetDeviceRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeedRadial;
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDeviceRadial;
@@ -15,14 +16,13 @@ import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
-import com.projectswg.holocore.services.gameplay.combat.loot.RareLootService;
-import com.projectswg.holocore.services.gameplay.combat.buffs.PowerupService;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public enum RadialHandler {
 	INSTANCE;
@@ -30,7 +30,6 @@ public enum RadialHandler {
 	private final Map<String, RadialHandlerInterface> handlers = new HashMap<>();
 	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new EnumMap<>(GameObjectType.class);
 	private final Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>();
-	private final SWGObjectRadial genericRadialHandler = new SWGObjectRadial();
 	
 	RadialHandler() {
 		initializeTerminalRadials();
@@ -38,13 +37,24 @@ public enum RadialHandler {
 		initializePetRadials();
 		initializeMiscRadials();
 		initializeContainerRadials();
-		initializePowerupRadials();
 		initializeSpecialEditionGoggleRadials();
+		initializeMeleeWeaponRadials();
+		initializeDeedRadials();
 		
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
 		classHandlers.put(AIObject.class, aiHandler);
 		classHandlers.put(CreditObject.class, new CreditObjectRadial());
+	}
+	
+	private void initializeMeleeWeaponRadials() {
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_1H, new MeleeWeaponRadial());
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_2H, new MeleeWeaponRadial());
+		registerHandler(GameObjectType.GOT_WEAPON_MELEE_POLEARM, new MeleeWeaponRadial());
+	}
+	
+	public void registerHandler(Class<? extends SWGObject> klass, RadialHandlerInterface handler) {
+		classHandlers.put(klass, handler);
 	}
 	
 	public void registerHandler(String iff, RadialHandlerInterface handler) {
@@ -56,33 +66,30 @@ public enum RadialHandler {
 	}
 	
 	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
-		getHandler(target).getOptions(options, player, target);
+		getHandler(target, h -> h.getOptions(options, player, target));
 	}
 	
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-		getHandler(target).handleSelection(player, target, selection);
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
+		getHandler(target, h -> h.handleSelection(player, target, selection));
 	}
 	
-	@NotNull
-	private RadialHandlerInterface getHandler(SWGObject target) {
+	private void getHandler(SWGObject target, Consumer<RadialHandlerInterface> fn) {
 		String type = target.getTemplate();
 		RadialHandlerInterface handler = handlers.get(type);
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = gotHandlers.get(target.getGameObjectType());
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = gotHandlers.get(target.getGameObjectType().getMask());
 		if (handler != null)
-			return handler;
+			fn.accept(handler);
 		
 		handler = classHandlers.get(target.getClass());
 		if (handler != null)
-			return handler;
-		
-		return genericRadialHandler;
+			fn.accept(handler);
 	}
 	
 	private void initializeTerminalRadials() {
@@ -106,11 +113,8 @@ public enum RadialHandler {
 	}
 	
 	private void initializeMiscRadials() {
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new UsableObjectRadial());
-		registerHandler("object/tangible/npe/shared_npe_uniform_box.iff", new ObjectUniformBoxRadial());
-		registerHandler(RareLootService.RARE_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.EXCEPTIONAL_CHEST, new RareLootRadial());
-		registerHandler(RareLootService.LEGENDARY_CHEST, new RareLootRadial());
+		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
+		registerHandler("object/tangible/spawning/shared_spawn_egg.iff", new SpawnerRadial());
 	}
 	
 	private void initializeContainerRadials() {
@@ -119,16 +123,18 @@ public enum RadialHandler {
 		registerHandler(GameObjectType.GOT_MISC_CONTAINER_WEARABLE, new ContainerObjectRadial());
 	}
 	
-	private void initializePowerupRadials() {
-		registerHandler(PowerupService.BREASTPLATE, new PowerupRadial());
-		registerHandler(PowerupService.SHIRT, new PowerupRadial());
-		registerHandler(PowerupService.WEAPON, new PowerupRadial());
-	}
-	
 	private void initializeSpecialEditionGoggleRadials() {
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s01.iff", new SpecialEditionGogglesRadial(true));
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s02.iff", new SpecialEditionGogglesRadial(false));
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s03.iff", new SpecialEditionGogglesRadial(false));
 		registerHandler("object/tangible/wearables/goggles/shared_goggles_s06.iff", new SpecialEditionGogglesRadial(false));
+	}
+	
+	private void initializeDeedRadials() {
+		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
+			if (structureInfo.getDeedTemplate().isEmpty())
+				continue;
+			registerHandler(structureInfo.getDeedTemplate(), new StructureDeedRadial());
+		}
 	}
 }

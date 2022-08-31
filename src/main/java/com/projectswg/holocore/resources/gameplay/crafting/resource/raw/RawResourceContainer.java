@@ -58,7 +58,7 @@ public class RawResourceContainer {
 	public void loadResources() {
 		resources.clear();
 		long startTime = StandardLog.onStartLoad("raw resources");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/resources/resources.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/resources/resources.sdb"))) {
 			while (set.next()) {
 				StringBuilder crateTemplate = new StringBuilder(set.getText("crate_template"));
 				crateTemplate.insert(crateTemplate.lastIndexOf("/")+1, "resource_container_");
@@ -70,6 +70,16 @@ public class RawResourceContainer {
 						.setMaxPools((int) set.getInt("max_pools"))
 						.setMinTypes((int) set.getInt("min_types"))
 						.setMaxTypes((int) set.getInt("max_types"))
+						.setAttrColdResistance(set.getInt("attr_cold_resist") != 0)
+						.setAttrConductivity(set.getInt("attr_conductivity") != 0)
+						.setAttrDecayResistance(set.getInt("attr_decay_resist") != 0)
+						.setAttrEntangleResistance(set.getInt("attr_entangle_resist") != 0)
+						.setAttrFlavor(set.getInt("attr_flavor") != 0)
+						.setAttrHeatResistance(set.getInt("attr_heat_resist") != 0)
+						.setAttrMalleability(set.getInt("attr_malleability") != 0)
+						.setAttrOverallQuality(set.getInt("attr_quality") != 0)
+						.setAttrPotentialEnergy(set.getInt("attr_potential_energy") != 0)
+						.setAttrShockResistance(set.getInt("attr_shock_resist") != 0)
 						.setRecycled(set.getInt("recycled") != 0)
 						.build();
 				resources.put(resource.getId(), resource);

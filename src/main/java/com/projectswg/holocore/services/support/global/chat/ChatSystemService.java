@@ -19,46 +19,48 @@ public class ChatSystemService extends Service {
 	
 	@IntentHandler
 	private void handleSystemMessageIntent(SystemMessageIntent smi) {
+		SystemChatType systemChatType = smi.getSystemChatType();
+		
 		switch (smi.getBroadcastType()) {
 			case AREA:
-				broadcastAreaMessage(smi.getMessage(), smi.getReceiver());
+				broadcastAreaMessage(smi.getMessage(), smi.getReceiver(), systemChatType);
 				break;
 			case PLANET:
-				broadcastPlanetMessage(smi.getMessage(), smi.getTerrain());
+				broadcastPlanetMessage(smi.getMessage(), smi.getTerrain(), systemChatType);
 				break;
 			case GALAXY:
-				broadcastGalaxyMessage(smi.getMessage());
+				broadcastGalaxyMessage(smi.getMessage(), systemChatType);
 				break;
 			case PERSONAL:
 				if (smi.getProse() != null) {
-					broadcastPersonalMessage(smi.getReceiver(), smi.getProse());
+					broadcastPersonalMessage(smi.getReceiver(), smi.getProse(), systemChatType);
 				} else {
-					broadcastPersonalMessage(smi.getReceiver(), smi.getMessage());
+					broadcastPersonalMessage(smi.getReceiver(), smi.getMessage(), systemChatType);
 				}
 				break;
 		}
 	}
 	
-	private void broadcastAreaMessage(String message, Player broadcaster) {
-		broadcaster.getCreatureObject().sendObservers(new ChatSystemMessage(SystemChatType.PERSONAL, message));
+	private void broadcastAreaMessage(String message, Player broadcaster, SystemChatType systemChatType) {
+		broadcaster.getCreatureObject().sendObservers(new ChatSystemMessage(systemChatType, message));
 	}
 	
-	private void broadcastPlanetMessage(String message, Terrain terrain) {
-		ChatSystemMessage SWGPacket = new ChatSystemMessage(SystemChatType.PERSONAL, message);
+	private void broadcastPlanetMessage(String message, Terrain terrain, SystemChatType systemChatType) {
+		ChatSystemMessage SWGPacket = new ChatSystemMessage(systemChatType, message);
 		new NotifyPlayersPacketIntent(SWGPacket, terrain).broadcast();
 	}
 	
-	private void broadcastGalaxyMessage(String message) {
-		ChatSystemMessage SWGPacket = new ChatSystemMessage(SystemChatType.PERSONAL, message);
+	private void broadcastGalaxyMessage(String message, SystemChatType systemChatType) {
+		ChatSystemMessage SWGPacket = new ChatSystemMessage(systemChatType, message);
 		new NotifyPlayersPacketIntent(SWGPacket).broadcast();
 	}
 	
-	private void broadcastPersonalMessage(Player player, String message) {
-		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, message));
+	private void broadcastPersonalMessage(Player player, String message, SystemChatType systemChatType) {
+		player.sendPacket(new ChatSystemMessage(systemChatType, message));
 	}
 	
-	private void broadcastPersonalMessage(Player player, ProsePackage prose) {
-		player.sendPacket(new ChatSystemMessage(SystemChatType.PERSONAL, new OutOfBandPackage(prose)));
+	private void broadcastPersonalMessage(Player player, ProsePackage prose, SystemChatType systemChatType) {
+		player.sendPacket(new ChatSystemMessage(systemChatType, new OutOfBandPackage(prose)));
 	}
 	
 }

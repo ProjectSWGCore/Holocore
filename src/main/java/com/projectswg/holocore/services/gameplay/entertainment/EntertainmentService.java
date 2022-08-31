@@ -249,7 +249,7 @@ public class EntertainmentService extends Service {
 	 * @return true if {@code performer} is a Novice Entertainer and false if not
 	 */
 	private boolean isEntertainer(CreatureObject performer) {
-		return performer.hasSkill("class_entertainer_phase1_novice");    // First entertainer skillbox
+		return performer.hasSkill("social_entertainer_novice");    // First entertainer skillbox
 	}
 	
 	private void scheduleExperienceTask(CreatureObject performer, String performanceName) {
@@ -435,10 +435,17 @@ public class EntertainmentService extends Service {
 			int xpGained = performanceCounter * flourishXpMod;
 			
 			if (xpGained > 0) {
-				if (isEntertainer(performer))
-					new ExperienceIntent(performer, "entertainer", xpGained, true).broadcast();
+				if (isEntertainer(performer)) {
+					if (isDancing()) {
+						new ExperienceIntent(performer, performer, "dance", xpGained, true).broadcast();
+					}
+				}
 				performer.setPerformanceCounter(performanceCounter - 1);
 			}
+		}
+		
+		private boolean isDancing() {
+			return performer.getPerformanceId() == 0;
 		}
 		
 	}

@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_895",
+		"comment": "I believe that you are right. The Rebels have a training droid in Moenia named V3-FX that will train you for Vortex Squadron. Is this what you want?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_899",
+				"comment": "Yes!  It will be very novel, being trained by a droid."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch76/s_899"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_907",
+				"comment": "I don't think so. I'd like to choose another planet."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch76/s_907"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_915",
+				"comment": "Honestly, I think I should start over."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch76/s_915"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

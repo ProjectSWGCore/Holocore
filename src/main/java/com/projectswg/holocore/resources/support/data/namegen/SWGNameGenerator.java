@@ -53,7 +53,7 @@ public class SWGNameGenerator {
 	}
 	
 	@NotNull
-	public String generateName(Race race) {
+	public String generateName(@NotNull Race race) {
 		if (!nameFilter.isLoaded())
 			nameFilter.load();
 		return generateName("race_" + race.getSpecies());

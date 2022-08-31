@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_30",
+		"comment": "There really isn't anything else you can do here. We'll let you know if we find anything new."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -51,9 +51,9 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 	@Synchronized
 	fun setTeleportDestination(parent: SWGObject?, location: Location) {
 		if (parent == null)
-			finalTeleportPacket.set(DataTransform(creature.objectId, 0, creature.nextUpdateCount, location, 0f))
+			finalTeleportPacket.set(DataTransform(creature.objectId, creature.nextUpdateCount, location, 0f))
 		else
-			finalTeleportPacket.set(DataTransformWithParent(creature.objectId, 0, creature.nextUpdateCount, parent.objectId, location, 0f))
+			finalTeleportPacket.set(DataTransformWithParent(creature.objectId, creature.nextUpdateCount, parent.objectId, location, 0f))
 	}
 	
 	@Synchronized
@@ -221,6 +221,8 @@ class CreatureObjectAwareness(private val creature: CreatureObject) {
 			create.clear()
 			for (obj in newAware) {
 				if (!oldAware.contains(obj)) {
+					if (obj.parent != null && !newAware.contains(obj.parent))
+						continue
 					create.add(obj)
 				}
 			}

@@ -49,10 +49,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GenericPlayer extends Player {
 	
@@ -62,6 +65,8 @@ public class GenericPlayer extends Player {
 	private final Map<Long, SWGObject> objects;
 	private final List<SWGPacket> packets;
 	private final AtomicBoolean zoning;
+	private final ReentrantLock packetLock;
+	private final Condition packetLockCondition;
 	
 	public GenericPlayer() {
 		super(UNIQUE_ID.incrementAndGet(), null, p -> {});
@@ -69,63 +74,108 @@ public class GenericPlayer extends Player {
 		this.objects = new ConcurrentHashMap<>();
 		this.packets = new ArrayList<>();
 		this.zoning = new AtomicBoolean(false);
+		this.packetLock = new ReentrantLock();
+		this.packetLockCondition = this.packetLock.newCondition();
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket packet) {
-		this.packets.add(packet);
+		packetLock.lock();
+		try {
+			this.packets.add(packet);
+			packetLockCondition.signalAll();
+		} finally {
+			packetLock.unlock();
+		}
 		handlePacket(packet);
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
-		this.packets.addAll(List.of(packet1, packet2));
-		handlePacket(packet1);
-		handlePacket(packet2);
+		sendPacket(packet1);
+		sendPacket(packet2);
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3) {
-		this.packets.addAll(List.of(packet1, packet2, packet3));
-		handlePacket(packet1);
-		handlePacket(packet2);
-		handlePacket(packet3);
+		sendPacket(packet1);
+		sendPacket(packet2);
+		sendPacket(packet3);
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4) {
-		this.packets.addAll(List.of(packet1, packet2, packet3, packet4));
-		handlePacket(packet1);
-		handlePacket(packet2);
-		handlePacket(packet3);
-		handlePacket(packet4);
+		sendPacket(packet1);
+		sendPacket(packet2);
+		sendPacket(packet3);
+		sendPacket(packet4);
 	}
 	
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2, SWGPacket packet3, SWGPacket packet4, SWGPacket packet5) {
-		this.packets.addAll(List.of(packet1, packet2, packet3, packet4, packet5));
-		handlePacket(packet1);
-		handlePacket(packet2);
-		handlePacket(packet3);
-		handlePacket(packet4);
-		handlePacket(packet5);
+		sendPacket(packet1);
+		sendPacket(packet2);
+		sendPacket(packet3);
+		sendPacket(packet4);
+		sendPacket(packet5);
 	}
 	
 	@Nullable
 	public SWGPacket getNextPacket() {
-		if (packets.isEmpty())
-			return null;
-		return packets.remove(0);
+		packetLock.lock();
+		try {
+			if (packets.isEmpty())
+				return null;
+			return packets.remove(0);
+		} finally {
+			packetLock.unlock();
+		}
 	}
 	
 	@Nullable
 	public <T extends SWGPacket> T getNextPacket(Class<T> type) {
-		for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
-			SWGPacket next = it.next();
-			if (type.isInstance(next)) {
-				it.remove();
-				return type.cast(next);
+		packetLock.lock();
+		try {
+			for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
+				SWGPacket next = it.next();
+				if (type.isInstance(next)) {
+					it.remove();
+					return type.cast(next);
+				}
 			}
+		} finally {
+			packetLock.unlock();
+		}
+		return null;
+	}
+	
+	@Nullable
+	public <T extends SWGPacket> T waitForNextPacket(Class<T> type) {
+		return waitForNextPacket(type, 1, TimeUnit.SECONDS);
+	}
+	
+	@Nullable
+	public <T extends SWGPacket> T waitForNextPacket(Class<T> type, long timeout, TimeUnit unit) {
+		packetLock.lock();
+		try {
+			long startTime = System.nanoTime();
+			while (System.nanoTime() - startTime < unit.toNanos(timeout)) {
+				for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
+					SWGPacket next = it.next();
+					if (type.isInstance(next)) {
+						it.remove();
+						return type.cast(next);
+					}
+				}
+				try {
+					//noinspection ResultOfMethodCallIgnored
+					packetLockCondition.awaitNanos(unit.toNanos(timeout) - (System.nanoTime() - startTime));
+				} catch (InterruptedException e) {
+					return null;
+				}
+			}
+		} finally {
+			packetLock.unlock();
 		}
 		return null;
 	}

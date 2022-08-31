@@ -1,0 +1,12 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1;2;3;4;5	findVillage					0	0	0
+1	quest.task.ground.wait_for_signal		fire4					0	0	0
+2	quest.task.ground.wait_for_signal		fire3					0	0	0
+3	quest.task.ground.wait_for_signal		fire2					0	0	0
+4	quest.task.ground.wait_for_signal		fire1					0	0	0
+5	quest.task.ground.wait_for_tasks	6	fireFire					0	0	0
+6	quest.task.ground.destroy_multi	7	killSister2			wod_second_sister_aggro		1	0	0
+7	quest.task.ground.comm_player	8	ghostComm	@quest/ground/wod_sister2:task07_comm_message_text	object/mobile/dressed_wod_ghost_guide_comm.iff			0	0	0
+8	quest.task.ground.wait_for_signal	9	returnGhost					0	0	0
+9	quest.task.ground.complete_quest							0	0	0

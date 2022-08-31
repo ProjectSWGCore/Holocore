@@ -37,66 +37,101 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class GenericCreatureObject extends CreatureObject {
-	
-	private static final AtomicLong GENERATED_IDS = new AtomicLong(1000000);
-	
-	private GenericPlayer player;
-	
-	public GenericCreatureObject(long objectId) {
-		this(objectId, "");
-	}
-	
-	public GenericCreatureObject(long objectId, String name) {
-		this(objectId, name, true);
-	}
-	
-	public GenericCreatureObject(long objectId, String name, boolean character) {
-		super(objectId);
-		player = new GenericPlayer();
-		player.setPlayerState(PlayerState.ZONED_IN);
-		setObjectName(name);
-		setTemplate("object/creature/player/shared_human_male.iff");
-		if (character) {
-			setHasOwner(true);
-			setupAsCharacter(name);
-		}
-	}
-	
-	public void setHasOwner(boolean hasOwner) {
-		if (hasOwner) {
-			setOwner(player);
-		} else {
-			setOwner(null);
-		}
-	}
-	
-	private void setupAsCharacter(String name) {
-		setSlots(List.of("inventory", "datapad", "hangar", "default_weapon", "mission_bag", "hat", "hair", "earring_r", "earring_l", "eyes", "mouth", "neck", "cloak", "back", "chest1", "chest2", "chest3_r", "chest3_l", "bicep_r", "bicep_l", "bracer_lower_r", "bracer_upper_r", "bracer_lower_l", "bracer_upper_l", "wrist_r", "wrist_l", "gloves", "hold_r", "hold_l", "ring_r", "ring_l", "utility_belt", "pants1", "pants2", "shoes", "ghost", "bank", "appearance_inventory", "cybernetic_hand_l", "cybernetic_hand_r"));
-		
-		setArrangement(List.of(List.of("rider")));
-		setGameObjectType(GameObjectType.GOT_CREATURE_CHARACTER);
-		
-		PlayerObject playerObject = new PlayerObject(-getObjectId());
-		playerObject.setTemplate("object/player/shared_player.iff");
-		playerObject.setArrangement(List.of(List.of("ghost")));
-		playerObject.systemMove(this);
-		playerObject.setObjectName(name);
-		createInventoryObject("object/tangible/inventory/shared_character_inventory.iff");
-		createInventoryObject("object/tangible/datapad/shared_character_datapad.iff");
-		createInventoryObject("object/tangible/inventory/shared_appearance_inventory.iff");
-		createInventoryObject("object/tangible/bank/shared_character_bank.iff");
-		createInventoryObject("object/tangible/mission_bag/shared_mission_bag.iff");
-	}
-	
-	@Override
-	public GenericPlayer getOwner() {
-		return (GenericPlayer) super.getOwner();
-	}
-	
-	private void createInventoryObject(String template) {
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(GENERATED_IDS.incrementAndGet(), template);
-		obj.systemMove(this);
-		assert obj.getSlotArrangement() != -1;
-	}
-	
+
+    private static final AtomicLong GENERATED_IDS = new AtomicLong(1000000);
+
+    private GenericPlayer player;
+
+    public GenericCreatureObject(long objectId) {
+        this(objectId, "");
+    }
+
+    public GenericCreatureObject(long objectId, String name) {
+        this(objectId, name, true);
+    }
+
+    public GenericCreatureObject(long objectId, String name, boolean character) {
+        super(objectId);
+        player = new GenericPlayer();
+        player.setPlayerState(PlayerState.ZONED_IN);
+        setObjectName(name);
+        setTemplate("object/creature/player/shared_human_male.iff");
+        if (character) {
+            setHasOwner(true);
+            setupAsCharacter(name);
+        }
+    }
+
+    public void setHasOwner(boolean hasOwner) {
+        if (hasOwner) {
+            setOwner(player);
+        } else {
+            setOwner(null);
+        }
+    }
+
+    private void setupAsCharacter(String name) {
+        setSlots(List.of(
+                "inventory",
+                "datapad",
+                "default_weapon",
+                "mission_bag",
+                "hat",
+                "hair",
+                "earring_r",
+                "earring_l",
+                "eyes",
+                "mouth",
+                "neck",
+                "cloak",
+                "back",
+                "chest1",
+                "chest2",
+                "chest3_r",
+                "chest3_l",
+                "bicep_r",
+                "bicep_l",
+                "bracer_lower_r",
+                "bracer_upper_r",
+                "bracer_lower_l",
+                "bracer_upper_l",
+                "wrist_r",
+                "wrist_l",
+                "gloves",
+                "hold_r",
+                "hold_l",
+                "ring_r",
+                "ring_l",
+                "utility_belt",
+                "pants1",
+                "pants2",
+                "shoes",
+                "ghost",
+                "bank"));
+
+        setArrangement(List.of(List.of("rider")));
+        setGameObjectType(GameObjectType.GOT_CREATURE_CHARACTER);
+
+        PlayerObject playerObject = new PlayerObject(-getObjectId());
+        playerObject.setTemplate("object/player/shared_player.iff");
+        playerObject.setArrangement(List.of(List.of("ghost")));
+        playerObject.systemMove(this);
+        playerObject.setObjectName(name);
+        createInventoryObject("object/tangible/inventory/shared_character_inventory.iff");
+        createInventoryObject("object/tangible/datapad/shared_character_datapad.iff");
+        createInventoryObject("object/tangible/bank/shared_character_bank.iff");
+        createInventoryObject("object/tangible/mission_bag/shared_mission_bag.iff");
+    }
+
+    @Override
+    public GenericPlayer getOwner() {
+        return (GenericPlayer) super.getOwner();
+    }
+
+    private void createInventoryObject(String template) {
+        SWGObject obj = ObjectCreator.createObjectFromTemplate(GENERATED_IDS.incrementAndGet(), template);
+        obj.systemMove(this);
+        assert obj.getSlotArrangement() != -1;
+    }
+
 }

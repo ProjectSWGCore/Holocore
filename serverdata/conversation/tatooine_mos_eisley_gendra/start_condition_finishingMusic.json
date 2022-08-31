@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_70",
+		"comment": "I hear you play music just about as well as you dance. Congratulations, you're going to get a good reputation."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_81",
+				"comment": "Thanks. What else can I do?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch14/s_81"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_82",
+				"comment": "Thanks. I'm going to head off on my own now."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch14/s_82"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_196",
+				"comment": "How do I become a pilot?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch14/s_196"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_335",
+		"comment": "I would have you learn all that you can about independence and survival. I will teach you these things, if you wish to learn."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_337",
+				"comment": "I will go to the bank, if that is what you wish."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch9/s_337"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_341",
+				"comment": "Well, I like credits, so I might as well go to the bank."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch9/s_341"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "rub_chin_thoughtful"
+			}
+		}
+	]
+}

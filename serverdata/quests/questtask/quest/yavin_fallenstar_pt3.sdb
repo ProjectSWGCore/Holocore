@@ -1,0 +1,11 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.wait_for_signal	1;4;7	yavin_fallenstar_e14_interception					0	0	0
+1	quest.task.ground.wait_for_signal	2	yavin_fallenstar_e20_imperial_reward					0	0	0
+2	quest.task.ground.reward	3	yavin_fallenstar_e23_impreward					1	0	0
+3	quest.task.ground.complete_quest		yavin_fallenstar_e32					0	0	0
+4	quest.task.ground.wait_for_signal	5	yavin_fallenstar_e19_rebelchoice					0	0	0
+5	quest.task.ground.reward	6	yavin_fallenstar_e23_rebelreward					1	0	0
+6	quest.task.ground.complete_quest		yavin_fallenstar_e30					0	0	0
+7	quest.task.ground.wait_for_signal	8	yavin_fallenstar_e36_walkaway					0	0	0
+8	quest.task.ground.complete_quest		yavin_fallenstar_e35					0	0	0

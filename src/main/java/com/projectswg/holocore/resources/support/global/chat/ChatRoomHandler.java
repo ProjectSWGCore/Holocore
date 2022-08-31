@@ -41,12 +41,12 @@ import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.services.support.global.chat.ChatRoomService;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -89,7 +89,9 @@ public class ChatRoomHandler {
 		}
 
 		if (player.getAccessLevel() != AccessLevel.PLAYER) {
-			enterChatChannel(player, ChatRoomService.LOG_ROOM_PATH, true);
+			for (AdminChatRooms room : AdminChatRooms.values()) {
+				enterChatChannel(player, room.getRoomPath(), true);
+			}
 		}
 	}
 	
@@ -148,6 +150,15 @@ public class ChatRoomHandler {
 		}
 		
 		enterChatChannel(player, room, 0, ignoreInvitation);
+	}
+	
+	public void leaveChatChannels(Player player) {
+		PlayerObject playerObject = player.getPlayerObject();
+		List<String> joinedChannels = playerObject.getJoinedChannels();
+		
+		for (String joinedChannel : joinedChannels) {
+			leaveChatChannel(player, joinedChannel);
+		}
 	}
 	
 	public void leaveChatChannel(Player player, ChatRoom room, int sequence) {
@@ -303,7 +314,9 @@ public class ChatRoomHandler {
 	}
 
 	private void createAdminChannels(ChatAvatar systemAvatar, String basePath) {
-		createRoom(systemAvatar, false, false, ChatRoomService.LOG_ROOM_PATH, "server log", false);
+		for (AdminChatRooms room : AdminChatRooms.values()) {
+			createRoom(systemAvatar, false, false, room.getRoomPath(), room.getRoomTitle(), false);
+		}
 	}
 	
 	public ChatRoom getRoomById(int roomId) {
@@ -325,6 +338,8 @@ public class ChatRoomHandler {
 	}
 	
 	private static void sendMessage(ChatRoom room, ChatAvatar sender, String message, OutOfBandPackage oob) {
+		if (message.startsWith("\\#"))
+			message = " " + message;
 		ChatRoomMessage chatRoomMessage = new ChatRoomMessage(sender, room.getId(), message, oob);
 		for (ChatAvatar member : room.getMembers()) {
 			Player player = getPlayer(member);
@@ -339,11 +354,14 @@ public class ChatRoomHandler {
 	}
 	
 	private static void sendPacketToMembers(ChatRoom room, SWGPacket packet) {
-		for (ChatAvatar member : room.getMembers()) {
-			getPlayer(member).sendPacket(packet);
-		}
+		room.getMembers()
+				.stream()
+				.map(ChatRoomHandler::getPlayer)
+				.filter(Objects::nonNull)	// Don't try sending packets to players that can't be found
+				.forEach(player -> player.sendPacket(packet));
 	}
 	
+	@Nullable
 	private static Player getPlayer(ChatAvatar avatar) {
 		return PlayerLookup.getPlayerByFirstName(avatar.getName());
 	}

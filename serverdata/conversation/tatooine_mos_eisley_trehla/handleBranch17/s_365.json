@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_367",
+		"comment": "Only if you find something that catches your eye.  It is not necessary."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

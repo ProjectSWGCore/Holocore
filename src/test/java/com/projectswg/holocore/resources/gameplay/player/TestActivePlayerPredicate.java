@@ -3,17 +3,17 @@ package com.projectswg.holocore.resources.gameplay.player;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
-import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
+public class TestActivePlayerPredicate {
 	
 	private final ActivePlayerPredicate predicate;
 	
@@ -25,7 +25,7 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 	private CreatureObject creatureObject;
 	private PlayerObject playerObject;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		player = new GenericPlayer();
 		creatureObject = new GenericCreatureObject(1);
@@ -39,7 +39,7 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("AFK players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -48,7 +48,7 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("LD players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Incapacitated players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Dead players should not be determined active", actual);
+		assertFalse(actual);
 	}
 	
 	@Test
@@ -75,6 +75,24 @@ public class TestActivePlayerPredicate extends TestRunnerSynchronousIntents {
 		
 		boolean actual = predicate.test(player);
 		
-		assertFalse("Cloaked players should not be determined active", actual);
+		assertFalse(actual);
+	}
+	
+	@Test
+	public void testInsidePrivateCell() {
+		CellObject cell = new CellObject(2);
+		cell.setPublic(false);
+		creatureObject.systemMove(cell);
+		
+		boolean actual = predicate.test(player);
+		
+		assertFalse(actual);
+	}
+	
+	@Test
+	public void testActive() {
+		boolean actual = predicate.test(player);
+		
+		assertTrue(actual);
 	}
 }

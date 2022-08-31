@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/ree_yees",
+		"key": "s_58",
+		"comment": "Beneath you? There's no one around here beneath you. But if you're going to keep that attitude up you might end up beneath something else. Like the ground."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_sarcastic",
+		"key": "alert_2",
+		"comment": "If you've come to kill me, take pity on a poor droid."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

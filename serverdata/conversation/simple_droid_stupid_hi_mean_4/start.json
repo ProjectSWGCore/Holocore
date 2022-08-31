@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_stupid",
+		"key": "hi_mean_4",
+		"comment": "You smell bad."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

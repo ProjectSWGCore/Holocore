@@ -31,16 +31,17 @@ import com.projectswg.common.data.location.Point3D
 import com.projectswg.common.network.packets.swg.zone.CreateClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.DestroyClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget
+import com.projectswg.holocore.intents.gameplay.world.spawn.CreateSpawnIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.StaticSpawnInfo
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
+import com.projectswg.holocore.resources.support.npc.spawn.SpawnInfo
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
@@ -112,25 +113,69 @@ class SpawnerService : Service() {
 	
 	@IntentHandler
 	private fun handleDestroyObjectIntent(doi: DestroyObjectIntent) {
-		val destroyedObject = doi.getObject() as? AIObject ?: return
-		
+		val obj = doi.`object`
+
+		if (isNPC(obj)) {
+			handleNPCDestroyed(obj)
+		}
+
+		if (isSpawner(obj)) {
+			handleSpawnerDestroyed(obj)
+		}
+	}
+
+	@IntentHandler
+	private fun handleCreateSpawnIntent(csi: CreateSpawnIntent) {
+		spawn(csi.spawnInfo)
+	}
+
+	private fun isNPC(obj: SWGObject): Boolean {
+		return obj is AIObject
+	}
+
+	private fun isSpawner(obj: SWGObject): Boolean {
+		return obj.getServerAttribute(ServerAttribute.EGG_SPAWNER) != null
+	}
+
+	private fun handleNPCDestroyed(obj: SWGObject) {
+		val destroyedObject = obj as? AIObject ?: return
+
 		val spawner = destroyedObject.spawner
-		
+
 		if (spawner == null) {
-			Log.e("Killed AI object %s has no linked Spawner - it cannot respawn!", destroyedObject)
+			Log.i("Killed AI object %s has no linked Spawner - it will not respawn", destroyedObject)
 			return
 		}
-		
+
 		spawner.removeNPC(destroyedObject)
-		if (spawner.behavior != AIBehavior.PATROL || spawner.npcs.isEmpty())
-			executor.execute((spawner.respawnDelay * 1000).toLong()) { respawn(spawner) }
+
+		if (spawner.behavior != AIBehavior.PATROL || spawner.npcs.isEmpty()) {
+			val respawnDelay = spawner.respawnDelay
+
+			if (respawnDelay > 0) {
+				executor.execute((respawnDelay * 1000).toLong()) { respawn(spawner) }
+			} else {
+				DestroyObjectIntent.broadcast(spawner.egg)
+			}
+		}
 	}
-	
+
+	private fun handleSpawnerDestroyed(obj: SWGObject) {
+		val spawner = obj.getServerAttribute(ServerAttribute.EGG_SPAWNER) as Spawner
+
+		val npcs = spawner.npcs.toList()
+
+		for (npc in npcs) {
+			npc.spawner = null	// Prevents the NPC from respawning
+			DestroyObjectIntent.broadcast(npc)
+		}
+	}
+
 	private fun loadSpawners() {
 		val startTime = StandardLog.onStartLoad("spawners")
 		
 		var count = 0
-		for (spawn in DataLoader.npcStaticSpawns().spawns) {
+		for (spawn in ServerData.npcStaticSpawns.spawns) {
 			try {
 				spawn(spawn)
 				count++
@@ -143,7 +188,14 @@ class SpawnerService : Service() {
 		StandardLog.onEndLoad(count, "spawners", startTime)
 	}
 	
-	private fun spawn(spawn: StaticSpawnInfo) {
+	private fun spawn(spawn: SpawnInfo) {
+		val npcId = spawn.npcId
+
+		if (ServerData.npcs.getNpc(npcId) == null) {
+			Log.w("Invalid npc %s", npcId)
+			return
+		}
+
 		val egg = createEgg(spawn)
 		val spawner = Spawner(spawn, egg)
 		egg.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
@@ -155,11 +207,11 @@ class SpawnerService : Service() {
 		val patrolRoute = spawner.patrolRoute
 		if (patrolRoute != null) {
 			for (waypoint in patrolRoute) {
-				val obj = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/patrol_waypoint.iff")
+				val obj = ObjectCreator.createObjectFromTemplate("object/path_waypoint/path_waypoint_patrol.iff")
 				obj.containerPermissions = AdminPermissions.getPermissions()
 				obj.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
 				
-				obj.objectName = String.format("P: %s\nG: %s\nNPC:%s\nID:%s", waypoint.patrolId, waypoint.groupId, spawn.npcId, spawn.id)
+				obj.objectName = String.format("P: %s\nG: %s\nNPC: %s\nID: %s", waypoint.patrolId, waypoint.groupId, npcId, spawn.id)
 				obj.moveToContainer(waypoint.parent, waypoint.location)
 				ObjectCreatedIntent.broadcast(obj)
 			}
@@ -172,7 +224,7 @@ class SpawnerService : Service() {
 		}
 	}
 	
-	private fun createEgg(spawn: StaticSpawnInfo): SWGObject {
+	private fun createEgg(spawn: SpawnInfo): SWGObject {
 		val spawnerType = SpawnerType.valueOf(spawn.spawnerType)
 		val egg = ObjectCreator.createObjectFromTemplate(spawnerType.objectTemplate)
 		egg.containerPermissions = AdminPermissions.getPermissions()

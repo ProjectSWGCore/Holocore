@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_reimos",
+		"key": "s_314",
+		"comment": "Be careful in Mos Eisley. You never know what's just around the corner in this town."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "whisper"
+			}
+		}
+	]
+}

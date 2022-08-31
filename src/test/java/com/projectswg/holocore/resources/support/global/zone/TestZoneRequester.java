@@ -31,8 +31,8 @@ import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericPlayer;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TestZoneRequester extends TestRunnerNoIntents {
 	
@@ -40,16 +40,16 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 	public void testNullCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();
 		GenericPlayer player = new GenericPlayer();
-		Assert.assertFalse(zr.onZoneRequested(null, player, 0));
-		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
+		assertFalse(zr.onZoneRequested(null, player, 0));
+		assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
 	public void testInvalidCreatureObject() {
 		ZoneRequester zr = new ZoneRequester();
 		GenericPlayer player = new GenericPlayer();
-		Assert.assertFalse(zr.onZoneRequested(new PlayerObject(1), player, 0));
-		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
+		assertFalse(zr.onZoneRequested(new PlayerObject(1), player, 0));
+		assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
@@ -58,8 +58,8 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
 		GenericPlayer player = creature.getOwner();
 		creature.getSlottedObject("ghost").systemMove(null);
-		Assert.assertFalse(zr.onZoneRequested(creature, player, creature.getObjectId()));
-		Assert.assertNotNull(player.getNextPacket(ErrorMessage.class));
+		assertFalse(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		assertNotNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 	@Test
@@ -68,8 +68,8 @@ public class TestZoneRequester extends TestRunnerNoIntents {
 		GenericCreatureObject creature = new GenericCreatureObject(getUniqueId());
 		GenericPlayer player = creature.getOwner();
 		creature.setOwner(null);
-		Assert.assertTrue(zr.onZoneRequested(creature, player, creature.getObjectId()));
-		Assert.assertNull(player.getNextPacket(ErrorMessage.class));
+		assertTrue(zr.onZoneRequested(creature, player, creature.getObjectId()));
+		assertNull(player.getNextPacket(ErrorMessage.class));
 	}
 	
 }

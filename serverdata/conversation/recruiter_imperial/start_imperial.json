@@ -1,0 +1,65 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_imperial",
+		"key": "s_310",
+		"comment": "Greetings, soldier.  What may I do for you?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_324",
+				"comment": "I am looking to requisition some supplies."
+			},
+			"next": "recruiter_imperial/imperial_show_supplies"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_366",
+				"comment": "Yes, I want to join Special Forces, sir!"
+			},
+			"next": "recruiter_imperial/imperial_go_special_forces"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_294",
+				"comment": "Yes, sir, I am ready to resume my duties."
+			},
+			"next": "recruiter_imperial/imperial_go_combatant"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_374",
+				"comment": "I would like to use my personal leave time."
+			},
+			"next": "recruiter_imperial/imperial_go_on_leave"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/faction_recruiter_imperial",
+				"key": "s_386",
+				"comment": "I believe it is time to end my tour of duty.  I would like to resign."
+			},
+			"next": "recruiter_imperial/imperial_go_resign"
+		}
+	],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "imperial"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute2"
+			}
+		}
+	]
+}

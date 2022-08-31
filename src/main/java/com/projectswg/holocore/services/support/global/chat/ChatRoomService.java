@@ -34,15 +34,16 @@ import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomMessageIntent;
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
+import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
 import com.projectswg.holocore.resources.support.global.chat.ChatRoomHandler;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import com.projectswg.holocore.utilities.ChatRoomLogWrapper;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -51,9 +52,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
 public class ChatRoomService extends Service {
-
-	public static final String LOG_ROOM_PATH = "SWG." + ProjectSWG.getGalaxy().getName() + ".admin.ServerLog";
-
+	
 	private final ChatRoomHandler chatRoomHandler;
 	
 	public ChatRoomService() {
@@ -67,7 +66,7 @@ public class ChatRoomService extends Service {
 
 	@Override
 	public boolean start() {
-		Log.addWrapper(new ChatRoomLogWrapper(ChatRoomService.LOG_ROOM_PATH));
+		Log.addWrapper(new ChatRoomLogWrapper());
 
 		return super.start();
 	}
@@ -141,6 +140,15 @@ public class ChatRoomService extends Service {
 	}
 	
 	@IntentHandler
+	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
+		CreatureObject deleted = dci.getCreature();
+		Player player = deleted.getOwner();
+		
+		assert player != null;
+		chatRoomHandler.leaveChatChannels(player);
+	}
+	
+	@IntentHandler
 	private void handleChatRoomUpdateIntent(ChatRoomUpdateIntent crui) {
 		switch (crui.getUpdateType()) {
 			case CREATE:
@@ -168,7 +176,7 @@ public class ChatRoomService extends Service {
 
 	@IntentHandler
 	private void handleSystemChatRoomMessageIntent(SystemChatRoomMessageIntent intent) {
-		chatRoomHandler.sendMessageToRoomFromSystem(intent.getRoomPath(), intent.getMessage(), new OutOfBandPackage());
+		chatRoomHandler.sendMessageToRoomFromSystem(intent.getRoomPath().getRoomPath(), intent.getMessage(), new OutOfBandPackage());
 	}
 	
 	/* Chat Rooms */

@@ -42,7 +42,7 @@ class ConvertSlotArrangement implements Converter {
 	public void convert() {
 		System.out.println("Converting slot arrangements...");
 		
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/abstract/slot_arrangements.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/abstract/slot_arrangements.sdb"))) {
 			sdb.writeColumnNames("iff", "slots");
 			Converter.traverseFiles(this, new File("clientdata/abstract/slot/arrangement"), sdb, f -> f.getName().endsWith(".iff"));
 		} catch (IOException e) {
@@ -55,9 +55,9 @@ class ConvertSlotArrangement implements Converter {
 		SlotArrangementParser arrangement = SWGParser.parse(file);
 		Objects.requireNonNull(arrangement, "Failed to load clientdata");
 		
-		String iff = file.getAbsolutePath();
+		String iff = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
 		String slotArrangement = arrangement.getArrangement().stream().map(slots -> String.join(",", slots)).collect(Collectors.joining(";"));
-		sdb.writeLine(iff.substring(iff.indexOf("abstract/slot/arrangement/")+26, iff.lastIndexOf('.')), slotArrangement);
+		sdb.writeLine(iff, slotArrangement);
 	}
 	
 }

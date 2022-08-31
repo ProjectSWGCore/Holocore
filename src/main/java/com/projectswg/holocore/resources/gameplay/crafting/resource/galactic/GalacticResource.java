@@ -29,8 +29,6 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,11 +38,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
-public class GalacticResource implements Persistable, MongoPersistable {
+public class GalacticResource implements MongoPersistable {
 	
 	private final GalacticResourceStats stats;
 	private final List<GalacticResourceSpawn> spawns;
@@ -71,7 +68,7 @@ public class GalacticResource implements Persistable, MongoPersistable {
 	}
 	
 	public void generateRandomStats() {
-		stats.generateRandomStats();
+		stats.generateRandomStats(rawResource);
 	}
 	
 	public long getId() {
@@ -123,24 +120,6 @@ public class GalacticResource implements Persistable, MongoPersistable {
 	}
 	
 	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		id = stream.getLong();
-		name = stream.getAscii();
-		rawId = stream.getLong();
-		stats.read(stream);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addLong(id);
-		stream.addAscii(name);
-		stream.addLong(rawId);
-		stats.save(stream);
-	}
-	
-	@Override
 	public void readMongo(MongoData data) {
 		spawns.clear();
 		terrainSpawns.clear();
@@ -177,16 +156,6 @@ public class GalacticResource implements Persistable, MongoPersistable {
 	@Override
 	public int hashCode() {
 		return Long.hashCode(id);
-	}
-	
-	public static GalacticResource create(NetBufferStream stream) {
-		GalacticResource resource = new GalacticResource();
-		resource.read(stream);
-		return resource;
-	}
-	
-	public void save(NetBufferStream stream, GalacticResource resource) {
-		resource.save(stream);
 	}
 	
 }

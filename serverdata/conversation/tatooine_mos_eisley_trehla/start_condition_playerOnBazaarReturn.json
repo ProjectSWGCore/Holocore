@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_371",
+		"comment": "Did you find anything that caught your eye?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_373",
+				"comment": "I did, but nothing that I could afford."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch20/s_373"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_377",
+				"comment": "Yes, I did."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch20/s_377"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_381",
+				"comment": "Not really."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch20/s_381"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

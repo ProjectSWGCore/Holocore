@@ -63,10 +63,6 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		this.decoder = createDecoder(supplier)
 		this.encodedLength = encodedLength
 	}
-	@JvmOverloads
-	@Deprecated(message="use a lambda-based constructor")
-	constructor(page: Int, update: Int, stringType: StringType = StringType.UNSPECIFIED):
-			this(page, update, decoder={throw UnsupportedOperationException("don't know how to decode object")}, encoder=createDefaultEncoder<T>(stringType), encodedLength=createDefaultEncodedLength(stringType))
 	
 	override val size: Int get() = list.size	
 	override fun isEmpty(): Boolean = list.isEmpty()
@@ -171,7 +167,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	
 	override fun encode(): ByteArray {
 		lock.withLock {
-			with(NetBuffer.allocate(8 + list.sumBy(encodedLength))) {
+			with(NetBuffer.allocate(8 + list.sumOf(encodedLength))) {
 				addInt(list.size)
 				addInt(updateCount)
 				list.forEach { encoder(this, it) }
@@ -180,21 +176,20 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		}
 	}
 	
-	override fun decode(buffer: NetBuffer) {
+	override fun decode(data: NetBuffer) {
 		lock.withLock {
-			val size = buffer.int
-			updateCount = buffer.int
+			val size = data.int
+			updateCount = data.int
 			for (index in 0 until size) {
-				list.add(decoder(buffer))
+				list.add(decoder(data))
 			}
 		}
 	}
-	
-	override fun getLength(): Int {
-		lock.withLock {
-			return 8 + list.sumBy(encodedLength)
+
+	override val length: Int
+		get() = lock.withLock {
+			return 8 + list.sumOf(encodedLength)
 		}
-	}
 	
 	private fun addRemoveDelta(index: Int) {
 		deltaQueue.add(0)
@@ -241,7 +236,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 			deltaQueueCount = 0
 			
 			updateCount += list.size
-			with(NetBuffer.allocate(11 + list.sumBy(encodedLength))) {
+			with(NetBuffer.allocate(11 + list.sumOf(encodedLength))) {
 				addInt(list.size+1)
 				addInt(updateCount)
 				addByte(3)
@@ -314,27 +309,13 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	
 	companion object {
 		
-		@JvmStatic
-		fun getSwgList(buffer: NetBuffer, num: Int, `var`: Int, type: StringType): SWGList<String> {
-			val list = SWGList<String>(num, `var`, type)
-			list.decode(buffer)
-			return list
-		}
-		
-		@JvmStatic
-		fun <T: Any> getSwgList(buffer: NetBuffer, num: Int, `var`: Int, c: Class<T>): SWGList<T> {
-			val list = SWGList<T>(num, `var`)
-			list.decode(buffer)
-			return list
-		}
-		
 		fun createByteList(page: Int, update: Int): SWGList<Byte> = SWGList(page, update, NetBuffer::getByte, { buf, b -> buf.addByte(b.toInt())}, {1})
 		fun createShortList(page: Int, update: Int): SWGList<Short> = SWGList(page, update, NetBuffer::getShort, { buf, s -> buf.addShort(s.toInt())}, {2})
 		fun createIntList(page: Int, update: Int): SWGList<Int> = SWGList(page, update, NetBuffer::getInt, NetBuffer::addInt) {4}
 		fun createLongList(page: Int, update: Int): SWGList<Long> = SWGList(page, update, NetBuffer::getLong, NetBuffer::addLong) {8}
 		fun createFloatList(page: Int, update: Int): SWGList<Float> = SWGList(page, update, NetBuffer::getFloat, NetBuffer::addFloat) {4}
 		fun createDoubleList(page: Int, update: Int): SWGList<Double> = SWGList(page, update, {buf -> buf.float.toDouble()}, {buf, d -> buf.addFloat(d.toFloat())}, {8})
-		fun <T: Encodable> createEncodableList(page: Int, update: Int, supplier: () -> T): SWGList<T> = SWGList(page, update, supplier, NetBuffer::addEncodable, Encodable::getLength)
+		fun <T: Encodable> createEncodableList(page: Int, update: Int, supplier: () -> T): SWGList<T> = SWGList(page, update, supplier, NetBuffer::addEncodable, Encodable::length)
 		fun createAsciiList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getAscii, NetBuffer::addAscii) {2+it.length}
 		fun createUnicodeList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getUnicode, NetBuffer::addUnicode) {4+it.length*2}
 		

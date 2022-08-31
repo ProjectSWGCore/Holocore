@@ -49,7 +49,7 @@ public final class SlotArrangementLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/abstract/slot_arrangements.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/abstract/slot_arrangements.sdb"))) {
 			while (set.next()) {
 				List<List<String>> arrangement = new ArrayList<>();
 				for (String slots : set.getText("slots").split(";")) {

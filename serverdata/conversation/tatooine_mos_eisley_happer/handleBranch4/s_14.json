@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_16",
+		"comment": "I see. Well, Ms. Jeza seems to have met her fate an hour or more ago. Probably an organized crime related death."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/happer_mos_eisley",
+				"key": "s_18",
+				"comment": "What do you mean organized?  "
+			},
+			"next": "tatooine_mos_eisley_happer/condition_handleBranch5/s_18"
+		},
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "rub_chin_thoughtful"
+			}
+		}
+	]
+}

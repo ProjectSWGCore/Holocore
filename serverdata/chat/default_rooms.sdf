@@ -1,0 +1,19 @@
+Room	Title
+s	s
+Auction	Auction chat for this galaxy
+Galaxy	public chat for the whole galaxy, cannot create rooms here
+Chat	public chat for this galaxy, can create rooms here
+system	system messages for this galaxy
+Imperial	Imperial chat for this galaxy
+Rebel	Rebel chat for this galaxy
+BeastMastery	Beast Mastery chat for this galaxy
+BountyHunter	Bounty Hunter chat for this galaxy
+Entertainer	Entertainer chat for this galaxy
+ForceSensitive	Force Sensitive chat for this galaxy
+GuildLeader	Guild leader chat for this galaxy
+Mayor	Mayor chat for this galaxy
+Medic	Medic chat for this galaxy
+Pilot	Pilot chat for this galaxy
+Politician	Politician chat for this galaxy
+Smuggler	Smuggler chat for this galaxy
+Trader	Trader chat for this galaxy

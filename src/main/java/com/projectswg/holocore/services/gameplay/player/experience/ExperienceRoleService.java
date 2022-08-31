@@ -13,6 +13,8 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
+import java.util.Collection;
+
 public class ExperienceRoleService extends Service {
 	
 	public ExperienceRoleService() {
@@ -33,27 +35,32 @@ public class ExperienceRoleService extends Service {
 		if (gsi.getIntentType() != IntentType.GIVEN)
 			return;
 		
-		RoleInfo qualifyingSkills = DataLoader.Companion.playerRoles().getRoleBySkill(gsi.getSkillName());
-		if (qualifyingSkills == null)
+		Collection<RoleInfo> roles = DataLoader.Companion.playerRoles().getRolesBySkill(gsi.getSkillName());
+		if (roles.isEmpty()) {
 			return;
+		}
 		
 		PlayerObject playerObject = gsi.getTarget().getPlayerObject();
 		assert playerObject != null;
 		
-		playerObject.setProfessionIcon(qualifyingSkills.getIndex());
+		RoleInfo role = roles.iterator().next();
+		playerObject.setProfessionIcon(role.getIndex());
 	}
 	
 	private void changeRoleIcon(CreatureObject creature, int chosenIcon) {
-		RoleInfo qualifyingSkills = DataLoader.Companion.playerRoles().getRoleByIndex(chosenIcon);
-		if (qualifyingSkills == null) {
+		Collection<RoleInfo> roles = DataLoader.Companion.playerRoles().getRolesByIndex(chosenIcon);
+		if (roles.isEmpty()) {
 			Log.w("%s tried to use undefined role icon %d", creature, chosenIcon);
 			return;
 		}
 		PlayerObject playerObject = creature.getPlayerObject();
 		assert playerObject != null;
 		
-		if (creature.hasSkill(qualifyingSkills.getQualifyingSkill()))
-			playerObject.setProfessionIcon(qualifyingSkills.getIndex());
+		boolean creatureQualifiedForRoleIcon = roles.stream().anyMatch(role -> creature.hasSkill(role.getQualifyingSkill()));
+		
+		if (creatureQualifiedForRoleIcon) {
+			playerObject.setProfessionIcon(chosenIcon);
+		}
 	}
 	
 }

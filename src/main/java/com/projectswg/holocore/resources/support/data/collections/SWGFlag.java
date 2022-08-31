@@ -28,16 +28,13 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.BitSet;
 
-public class SWGFlag extends BitSet implements Encodable, Persistable {
-	
-	private static final long serialVersionUID = 2L;
+public class SWGFlag extends BitSet implements Encodable {
 	
 	private final int view;
 	private final int updateType;
@@ -57,12 +54,12 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		byte [] encoded = toByteArray();
-		int length = (int) Math.ceil(encoded.length / 4.0);
+		int resultingInts = (encoded.length + 3) / 4; // rounds up
 		
-		NetBuffer buffer = NetBuffer.allocate((length + 1) * 4);
-		buffer.addInt(length);
+		NetBuffer buffer = NetBuffer.allocate(4 + resultingInts * 4);
+		buffer.addInt(resultingInts);
 		buffer.addRawArray(encoded);
 		return buffer.array();
 	}
@@ -81,17 +78,6 @@ public class SWGFlag extends BitSet implements Encodable, Persistable {
 		return 4 + (int) Math.ceil(super.size()/32.0);
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addArray(toByteArray());
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		clear();
-		xor(valueOf(stream.getArray()));
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof SWGFlag))

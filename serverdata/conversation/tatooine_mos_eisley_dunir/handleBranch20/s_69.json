@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_77",
+		"comment": "Great, here's the box and its destination."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

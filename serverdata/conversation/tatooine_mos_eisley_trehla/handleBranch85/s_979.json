@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_983",
+		"comment": "What would you like to know more about?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_963",
+				"comment": "The Smuggler's Alliance sounds interesting!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch84/s_963"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_995",
+				"comment": "I'd like to know more about the RSF."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch84/s_995"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1027",
+				"comment": "I want to fly for CorSec!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch84/s_1027"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

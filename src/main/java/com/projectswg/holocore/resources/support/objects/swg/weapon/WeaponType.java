@@ -26,38 +26,123 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.weapon;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+
 public enum WeaponType {
-	RIFLE						(0),
-	CARBINE						(1),
-	PISTOL						(2),
-	HEAVY						(3),
-	ONE_HANDED_MELEE			(4),
-	TWO_HANDED_MELEE			(5),
-	UNARMED						(6),
-	POLEARM_MELEE				(7),
-	THROWN						(8),
-	ONE_HANDED_SABER			(9),
-	TWO_HANDED_SABER			(10),
-	POLEARM_SABER				(11),
-	HEAVY_WEAPON				(12),
-	DIRECTIONAL_TARGET_WEAPON	(13),
-	LIGHT_RIFLE					(14);
+	RIFLE						(0, "rifle_speed", WeaponClass.RANGED, "rifle_defense", "rifle_accuracy", "rangedShot"),
+	CARBINE						(1, "carbine_speed", WeaponClass.RANGED, "carbine_defense", "carbine_accuracy", "rangedShot"),
+	PISTOL						(2, "pistol_speed", WeaponClass.RANGED, "pistol_defense", "pistol_accuracy", "rangedShot"),
+	HEAVY						(3, "heavyweapon_speed", WeaponClass.RANGED, "heavyweapon_defense", "heavyweapon_accuracy", "rangedShot"),
+	ONE_HANDED_MELEE			(4, "onehandmelee_speed", WeaponClass.MELEE, "onehandmelee_defense", "onehandmelee_accuracy", "meleeHit"),
+	TWO_HANDED_MELEE			(5, "twohandmelee_speed", WeaponClass.MELEE, "twohandmelee_defense", "twohandmelee_accuracy", "meleeHit"),
+	UNARMED						(6, "unarmed_speed", WeaponClass.MELEE, "unarmed_defense", "unarmed_accuracy", "meleeHit"),
+	POLEARM_MELEE				(7, "polearm_speed", WeaponClass.MELEE, "polearm_defense", "polearm_accuracy", "meleeHit"),
+	THROWN						(8, "thrown_speed", WeaponClass.RANGED, null, "thrown_accuracy", "meleeHit"),
+	ONE_HANDED_SABER			(9, "onehandlightsaber_speed", WeaponClass.MELEE, null, "onehandlightsaber_accuracy", "saberHit"),
+	TWO_HANDED_SABER			(10, "twohandlightsaber_speed", WeaponClass.MELEE, null, "twohandlightsaber_accuracy", "saberHit"),
+	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy", "saberHit"),
+	
+	// TODO these are NGE weapon types we should remove later
+	HEAVY_WEAPON				(12, "unavailable", WeaponClass.RANGED, null, null, ""),
+	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable", WeaponClass.RANGED, null, null, ""),
+	LIGHT_RIFLE					(14, "unavailable", WeaponClass.RANGED, null, null, "");
 	
 	private static final WeaponType [] VALUES = values();
 	
-	private int num;
+	private final int num;
+	private final String speedSkillMod;
+	private final WeaponClass weaponClass;
+	private final String defenseSkillMod;
+	private final String accuracySkillMod;
+	private final String defaultAttack;
 	
-	WeaponType(int num) {
+	WeaponType(int num, String speedSkillMod, WeaponClass weaponClass, String defenseSkillMod, String accuracySkillMod, String defaultAttack) {
 		this.num = num;
+		this.speedSkillMod = speedSkillMod;
+		this.weaponClass = weaponClass;
+		this.defenseSkillMod = defenseSkillMod;
+		this.accuracySkillMod = accuracySkillMod;
+		this.defaultAttack = defaultAttack;
 	}
 	
 	public int getNum() {
 		return num;
 	}
 	
+	/**
+	 *
+	 * @return e.g. Unarmed Speed and Melee Speed
+	 */
+	public Collection<String> getSpeedSkillMods() {
+		return Arrays.asList(speedSkillMod, weaponClass.getSpeedSkillMod());
+	}
+	
+	/**
+	 *
+	 * @return e.g. Unarmed Defense
+	 */
+	@Nullable
+	public String getDefenseSkillMod() {
+		return defenseSkillMod;
+	}
+	
+	public WeaponClass getWeaponClass() {
+		return weaponClass;
+	}
+	
+	public Collection<String> getAccuracySkillMods() {
+		Collection<String> accuracySkillMods = new HashSet<>();
+		
+		if (accuracySkillMod != null) {
+			accuracySkillMods.add(accuracySkillMod);
+		}
+		
+		accuracySkillMods.add(weaponClass.getAccuracySkillMod());
+		
+		return accuracySkillMods;
+	}
+	
 	public static WeaponType getWeaponType(int num) {
 		if (num < 0 || num >= VALUES.length)
 			return RIFLE;
 		return VALUES[num];
+	}
+	
+	/**
+	 * Determines whether this weapon type is in the melee category.
+	 * Lightsabers are included in the melee category!
+	 * @return {@code true} if this weapon type is in the melee category and {@code false} otherwise.
+	 */
+	public boolean isMelee() {
+		return weaponClass == WeaponClass.MELEE;
+	}
+	
+	/**
+	 * Determines whether this weapon type is in the lightsaber category, which is a subcategory of the melee category.
+	 * @return {@code true} if this weapon type is in the lightsaber category and {@code false} otherwise.
+	 */
+	public boolean isLightsaber() {
+		return switch (this) {
+			case ONE_HANDED_SABER, TWO_HANDED_SABER, POLEARM_SABER -> true;
+			default -> false;
+		};
+	}
+	
+	/**
+	 * Determines whether this weapon type is in the ranged category.
+	 * @return {@code true} if this weapon type is in the ranged category and {@code false} otherwise.
+	 */
+	public boolean isRanged() {
+		return weaponClass == WeaponClass.RANGED;
+	}
+	
+	@NotNull
+	public String getDefaultAttack() {
+		return defaultAttack;
 	}
 }

@@ -26,28 +26,32 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.combat.DamageType;
 import com.projectswg.common.data.customization.CustomizationString;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
+import com.projectswg.common.data.encodables.tangible.Race;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent.FactionIntentType;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.gameplay.combat.EnemyProcessor;
-import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,22 +60,35 @@ import java.util.*;
 public class TangibleObject extends SWGObject {
 	
 	private CustomizationString	appearanceData	= new CustomizationString();
+	private final SWGSet<CRC> visibleComponents = new SWGSet<>(3, 5);
 	private int				maxHitPoints	= 1000;
 	private int				components		= 0;
 	private boolean			inCombat		= false;
-	private int				condition		= 0;
+	private int				conditionDamage	= 0;
 	private Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
-	private PvpStatus		pvpStatus = PvpStatus.COMBATANT;
-	private Faction			faction			= null;
+	private PvpStatus		pvpStatus 		= PvpStatus.COMBATANT;
+	private Faction			faction			= ServerData.INSTANCE.getFactions().getFaction(PvpFaction.NEUTRAL.name().toLowerCase(Locale.US));
 	private boolean			visibleGmOnly	= true;
 	private byte []			objectEffects	= new byte[0];
 	private int    			optionFlags     = 0;
 	private int				counter			= 0;
 	private String			currentCity				= "";
 	
-	private SWGSet<Long>	defenders	= new SWGSet<>(6, 3);
+	private Set<Long>	defenders	= new HashSet<>();
 	
-	private SWGMap<String, String> effectsMap	= new SWGMap<>(6, 7);
+	private int requiredCombatLevel;
+	private ArmorCategory armorCategory;
+	private Protection protection;
+	private Faction requiredFaction;
+	private LightsaberPowerCrystalQuality lightsaberPowerCrystalQuality;
+	private int lightsaberPowerCrystalMinDmg;
+	private int lightsaberPowerCrystalMaxDmg;
+	private TicketInformation ticketInformation;
+	private String requiredSkill;
+	private DamageType lightsaberColorCrystalElementalType;
+	private int lightsaberColorCrystalDamagePercent;
+	
+	private Map<String, Integer> skillMods = new LinkedHashMap<>();
 	
 	public TangibleObject(long objectId) {
 		this(objectId, BaselineType.TANO);
@@ -82,61 +99,30 @@ public class TangibleObject extends SWGObject {
 		super(objectId, objectType);
 	}
 	
-	@Override
-	public void moveToContainer(SWGObject newParent) {
-		if (defaultMoveToContainer(newParent))
-			super.moveToContainer(newParent);    // Not stackable, use default behavior
+	public String getRequiredSkill() {
+		return requiredSkill;
 	}
 	
-	@Override
-	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
-		if (!getContainerPermissions().canMove(requester, newParent))
-			return ContainerResult.NO_PERMISSION;
-		return defaultMoveToContainer(newParent) ? super.moveToContainer(requester, newParent) : ContainerResult.SUCCESS;
-	}
-	
-	private boolean defaultMoveToContainer(SWGObject newParent) {
-		int counter = getCounter();
-		
-		// Check if object is stackable
-		if (newParent != null && counter > 0) {
-			// Scan container for matching stackable item
-			String ourTemplate = getTemplate();
-			Map<String, String> ourAttributes = getAttributes();
-			TangibleObject bestMatch = null;
-			
-			for (SWGObject candidate : newParent.getContainedObjects()) {
-				String theirTemplate = candidate.getTemplate();
-				Map<String, String> theirAttributes = candidate.getAttributes();
-				
-				if (candidate == this)
-					continue; // Can't transfer into itself
-				if (!(candidate instanceof TangibleObject))
-					continue; // Item not the correct type
-				if (!ourTemplate.equals(theirTemplate) || !ourAttributes.equals(theirAttributes))
-					continue; // Not eligible for stacking
-				
-				TangibleObject tangibleMatch = (TangibleObject) candidate;
-				if (tangibleMatch.getCounter() >= tangibleMatch.getMaxCounter())
-					continue; // Can't add anything to this object
-				
-				bestMatch = tangibleMatch;
-			}
-			
-			if (bestMatch != null) {
-				int theirCounter = bestMatch.getCounter();
-				int transferAmount = Math.min(bestMatch.getMaxCounter() - theirCounter, counter);
-				
-				bestMatch.setCounter(theirCounter + transferAmount);
-				setCounter(counter - transferAmount);
-				if (getCounter() > 0)
-					return true;
-				DestroyObjectIntent.broadcast(this);
-				return false;
-			}
+	public void setRequiredSkill(String requiredSkill) {
+		if (!requiredSkill.isBlank()) {
+			this.requiredSkill = requiredSkill;
 		}
-		
-		return true;
+	}
+	
+	public DamageType getLightsaberColorCrystalElementalType() {
+		return lightsaberColorCrystalElementalType;
+	}
+	
+	public void setLightsaberColorCrystalElementalType(DamageType lightsaberColorCrystalElementalType) {
+		this.lightsaberColorCrystalElementalType = lightsaberColorCrystalElementalType;
+	}
+	
+	public int getLightsaberColorCrystalDamagePercent() {
+		return lightsaberColorCrystalDamagePercent;
+	}
+	
+	public void setLightsaberColorCrystalDamagePercent(int lightsaberColorCrystalDamagePercent) {
+		this.lightsaberColorCrystalDamagePercent = lightsaberColorCrystalDamagePercent;
 	}
 	
 	public int getMaxHitPoints() {
@@ -151,14 +137,14 @@ public class TangibleObject extends SWGObject {
 		return inCombat;
 	}
 	
-	public int getCondition() {
-		return condition;
+	public int getConditionDamage() {
+		return conditionDamage;
 	}
 	
 	public void setPvpFlags(PvpFlag... pvpFlags) {
 		setPvpFlags(List.of(pvpFlags));
 	}
-	
+
 	public void setPvpFlags(Collection<PvpFlag> pvpFlags) {
 		this.pvpFlags.addAll(pvpFlags);
 		
@@ -168,7 +154,7 @@ public class TangibleObject extends SWGObject {
 	public void clearPvpFlags(PvpFlag ... pvpFlags) {
 		clearPvpFlags(List.of(pvpFlags));
 	}
-	
+
 	public void clearPvpFlags(Collection<PvpFlag> pvpFlags) {
 		this.pvpFlags.removeAll(pvpFlags);
 		
@@ -185,15 +171,13 @@ public class TangibleObject extends SWGObject {
 
 	public void setPvpStatus(PvpStatus pvpStatus) {
 		this.pvpStatus = pvpStatus;
-		
-		sendDelta(3, 5, pvpStatus.getValue());
 	}
 	
 	@Nullable
 	public Faction getFaction() {
 		return faction;
 	}
-	
+
 	public PvpFaction getPvpFaction() {
 		Faction faction = this.faction;
 		if (faction == null)
@@ -203,9 +187,6 @@ public class TangibleObject extends SWGObject {
 	
 	public void setFaction(Faction faction) {
 		this.faction = faction;
-		
-		PvpFaction pvpFaction = faction == null ? PvpFaction.NEUTRAL : faction.getPvpFaction();
-		sendDelta(3, 4, pvpFaction.getCrc());
 	}
 	
 	public Set<PvpFlag> getPvpFlags() {
@@ -222,7 +203,7 @@ public class TangibleObject extends SWGObject {
 	
 	public void putCustomization(String name, int value) {
 		appearanceData.put(name, value);
-		sendDelta(3, 6, appearanceData);
+		sendDelta(3, 4, appearanceData);
 	}
 	
 	public Integer getCustomization(String name) {
@@ -232,16 +213,16 @@ public class TangibleObject extends SWGObject {
 	public Map<String, Integer> getCustomization() {
 		return appearanceData.getVariables();
 	}
-	
+
 	public void setAppearanceData(CustomizationString appearanceData) {
 		this.appearanceData = appearanceData;
 		
-		sendDelta(3, 6, appearanceData);
+		sendDelta(3, 4, appearanceData);
 	}
 	
 	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
-		sendDelta(3, 11, maxHitPoints);
+		sendDelta(3, 9, maxHitPoints);
 	}
 	
 	public void setComponents(int components) {
@@ -250,11 +231,11 @@ public class TangibleObject extends SWGObject {
 	
 	public void setInCombat(boolean inCombat) {
 		this.inCombat = inCombat;
-		sendDelta(6, 2, inCombat);
 	}
 	
-	public void setCondition(int condition) {
-		this.condition = condition;
+	public void setConditionDamage(int conditionDamage) {
+		this.conditionDamage = conditionDamage;
+		sendDelta(3, 8, conditionDamage);
 	}
 	
 	public void setVisibleGmOnly(boolean visibleGmOnly) {
@@ -278,23 +259,23 @@ public class TangibleObject extends SWGObject {
 		for (OptionFlag flag : options) {
 			optionFlags |= flag.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
 
 	public void toggleOptionFlags(OptionFlag ... options) {
 		for (OptionFlag option : options) {
 			optionFlags ^= option.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
 
 	public void removeOptionFlags(OptionFlag ... options) {
 		for (OptionFlag option : options) {
 			optionFlags &= ~option.getFlag();
 		}
-		sendDelta(3, 8, optionFlags);
+		sendDelta(3, 6, optionFlags);
 	}
-	
+
 	public boolean hasOptionFlags(OptionFlag option) {
 		return (optionFlags & option.getFlag()) != 0;
 	}
@@ -310,32 +291,23 @@ public class TangibleObject extends SWGObject {
 	public Set<OptionFlag> getOptionFlags() {
 		return OptionFlag.toEnumSet(optionFlags);
 	}
-	
+
 	public void addDefender(CreatureObject creature) {
-		synchronized (defenders) {
-			if (defenders.add(creature.getObjectId()))
-				defenders.sendDeltaMessage(this);
-		}
+		defenders.add(creature.getObjectId());
 	}
-	
+
 	public void removeDefender(CreatureObject creature) {
-		synchronized (defenders) {
-			if (defenders.remove(creature.getObjectId()))
-				defenders.sendDeltaMessage(this);
-		}
+		defenders.remove(creature.getObjectId());
 	}
-	
+
 	public List<Long> getDefenders() {
 		return new ArrayList<>(defenders);
 	}
-	
+
 	public void clearDefenders() {
-		synchronized (defenders) {
-			defenders.clear();
-			defenders.sendDeltaMessage(this);
-		}
+		defenders.clear();
 	}
-	
+
 	public boolean hasDefenders() {
 		return !defenders.isEmpty();
 	}
@@ -346,13 +318,13 @@ public class TangibleObject extends SWGObject {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-		sendDelta(3, 9, counter);
+		sendDelta(3, 7, counter);
 	}
 	
 	public int getMaxCounter() {
 		return 100;
 	}
-	
+
 	/**
 	 *
 	 * @param otherObject
@@ -361,7 +333,7 @@ public class TangibleObject extends SWGObject {
 	public boolean isAttackable(TangibleObject otherObject) {
 		return EnemyProcessor.INSTANCE.isAttackable(this, otherObject);
 	}
-	
+
 	public Set<PvpFlag> getPvpFlagsFor(TangibleObject observer) {
 		Set<PvpFlag> pvpFlags = EnumSet.noneOf(PvpFlag.class); // More efficient behind the scenes
 		
@@ -383,48 +355,253 @@ public class TangibleObject extends SWGObject {
 		this.currentCity = currentCity;
 	}
 	
+	public int getRequiredCombatLevel() {
+		return requiredCombatLevel;
+	}
+	
+	public void setRequiredCombatLevel(int requiredCombatLevel) {
+		this.requiredCombatLevel = requiredCombatLevel;
+	}
+	
+	public Faction getRequiredFaction() {
+		return requiredFaction;
+	}
+	
+	public void setRequiredFaction(Faction requiredFaction) {
+		this.requiredFaction = requiredFaction;
+	}
+	
+	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
+		int value = base + modifier;
+		
+		if (value == 0) {
+			skillMods.remove(skillModName);
+		} else {
+			skillMods.put(skillModName, value);
+		}
+	}
+	
+	public int getSkillModValue(String skillMod) {
+		return skillMods.getOrDefault(skillMod, 0);
+	}
+	
+	public ArmorCategory getArmorCategory() {
+		return armorCategory;
+	}
+	
+	public void setArmorCategory(ArmorCategory armorCategory) {
+		this.armorCategory = armorCategory;
+	}
+	
+	public Protection getProtection() {
+		return protection;
+	}
+	
+	public void setProtection(Protection protection) {
+		this.protection = protection;
+	}
+	
+	public LightsaberPowerCrystalQuality getLightsaberPowerCrystalQuality() {
+		return lightsaberPowerCrystalQuality;
+	}
+	
+	public void setLightsaberPowerCrystalQuality(LightsaberPowerCrystalQuality lightsaberPowerCrystalQuality) {
+		this.lightsaberPowerCrystalQuality = lightsaberPowerCrystalQuality;
+	}
+	
+	public int getLightsaberPowerCrystalMinDmg() {
+		return lightsaberPowerCrystalMinDmg;
+	}
+	
+	public void setLightsaberPowerCrystalMinDmg(int lightsaberPowerCrystalMinDmg) {
+		this.lightsaberPowerCrystalMinDmg = lightsaberPowerCrystalMinDmg;
+	}
+	
+	public int getLightsaberPowerCrystalMaxDmg() {
+		return lightsaberPowerCrystalMaxDmg;
+	}
+	
+	public void setLightsaberPowerCrystalMaxDmg(int lightsaberPowerCrystalMaxDmg) {
+		this.lightsaberPowerCrystalMaxDmg = lightsaberPowerCrystalMaxDmg;
+	}
+	
+	public TicketInformation getTicketInformation() {
+		return ticketInformation;
+	}
+	
+	public void setTicketInformation(TicketInformation ticketInformation) {
+		this.ticketInformation = ticketInformation;
+	}
+	
+	public Map<String, Integer> getSkillMods() {
+		return skillMods;
+	}
+	
+	@Override
+	public AttributeList getAttributeList(CreatureObject viewer) {
+		AttributeList attributeList = super.getAttributeList(viewer);
+		
+		attributeList.putText("condition", (maxHitPoints - conditionDamage) + "/" + maxHitPoints);
+		attributeList.putNumber("volume", getVolume());
+		if (counter > 0) {
+			attributeList.putNumber("charges", counter);
+		}
+		
+		for (Map.Entry<String, Integer> entry : skillMods.entrySet()) {
+			String skillMod = entry.getKey();
+			Integer value = entry.getValue();
+			
+			attributeList.putNumber("cat_skill_mod_bonus.@stat_n:" + skillMod, value);
+		}
+		
+		// TODO bio-link would go here, if this item is bio-link
+		
+		if (getGameObjectType() == GameObjectType.GOT_COMPONENT_SABER_CRYSTAL) {
+			displayLightsaberCrystalAttributes(attributeList);
+		}
+		
+		if (requiredCombatLevel > 1) {
+			attributeList.putNumber("healing_combat_level_required", requiredCombatLevel);
+		}
+		
+		if (requiredSkill != null) {
+			attributeList.putText("skillmodmin", "@skl_n:" + requiredSkill);
+		}
+		
+		if (requiredFaction != null && requiredFaction.getPvpFaction() != PvpFaction.NEUTRAL) {
+			attributeList.putText("faction_restriction", "@pvp_factions:" + requiredFaction.getName());
+		}
+		
+		if (armorCategory != null) {
+			attributeList.putText("armor_category", armorCategory.getAttributeName());
+		}
+		
+		if (protection != null) {
+			attributeList.putNumber("cat_armor_standard_protection.armor_eff_kinetic", protection.getKinetic());
+			attributeList.putNumber("cat_armor_standard_protection.armor_eff_energy", protection.getEnergy());
+			attributeList.putNumber("cat_armor_special_protection.elemental_heat", protection.getHeat());
+			attributeList.putNumber("cat_armor_special_protection.elemental_cold", protection.getCold());
+			attributeList.putNumber("cat_armor_special_protection.elemental_acid", protection.getAcid());
+			attributeList.putNumber("cat_armor_special_protection.elemental_electricity", protection.getElectricity());
+		}
+		
+		Set<Race> speciesRestrictions = buildSpeciesRestrictions();
+		if (!speciesRestrictions.isEmpty() && isOnlyWearableBySome(speciesRestrictions)) {
+			String raceRestriction = buildRaceRestrictionString(speciesRestrictions);
+			attributeList.putText("species_restrictions.species_name", raceRestriction);
+		}
+		
+		if (ticketInformation != null) {
+			applyTicketAttributes(attributeList);
+		}
+		
+		return attributeList;
+	}
+	
+	private boolean isOnlyWearableBySome(Set<Race> speciesRestrictions) {
+		return speciesRestrictions.size() != Race.values().length;
+	}
+	
+	@NotNull
+	private Set<Race> buildSpeciesRestrictions() {
+		Set<Race> speciesRestrictions = new HashSet<>();
+		
+		for (Race race : Race.values()) {
+			boolean allowedToWear = DataLoader.Companion.speciesRestrictions().isAllowedToWear(getTemplate(), race);
+			
+			if (allowedToWear) {
+				speciesRestrictions.add(race);
+			}
+		}
+		
+		return speciesRestrictions;
+	}
+	
+	private void applyTicketAttributes(AttributeList attributeList) {
+		// Departure attributes
+		attributeList.putText("@obj_attr_n:travel_departure_planet", "@planet_n:" + ticketInformation.getDeparturePlanet().getName());
+		attributeList.putText("@obj_attr_n:travel_departure_point", ticketInformation.getDeparturePoint());
+		
+		// Arrival attributes
+		attributeList.putText("@obj_attr_n:travel_arrival_planet", "@planet_n:" + ticketInformation.getArrivalPlanet().getName());
+		attributeList.putText("@obj_attr_n:travel_arrival_point", ticketInformation.getArrivalPoint());
+	}
+	
+	private void displayLightsaberCrystalAttributes(AttributeList attributeList) {
+		String displayedCrystalOwner;
+		Long lightsaberCrystalOwnerId = (Long) getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+		boolean tuned = lightsaberCrystalOwnerId != null && lightsaberCrystalOwnerId > 0;
+		if (tuned) {
+			if (lightsaberPowerCrystalMinDmg > 0) {
+				attributeList.putNumber("@obj_attr_n:mindamage", lightsaberPowerCrystalMinDmg);
+			}
+			if (lightsaberPowerCrystalMaxDmg > 0) {
+				attributeList.putNumber("@obj_attr_n:maxdamage", lightsaberPowerCrystalMaxDmg);
+			}
+			
+			SWGObject objectById = ObjectStorageService.ObjectLookup.getObjectById(lightsaberCrystalOwnerId);
+			
+			if (objectById != null) {
+				displayedCrystalOwner = objectById.getObjectName();
+			} else {
+				displayedCrystalOwner = "Unknown";
+			}
+		} else {
+			displayedCrystalOwner = "\\#D1F56F UNTUNED \\#FFFFFF ";
+		}
+		
+		attributeList.putText("@obj_attr_n:crystal_owner", displayedCrystalOwner);
+		if (lightsaberPowerCrystalQuality != null) {
+			attributeList.putText("@obj_attr_n:quality", lightsaberPowerCrystalQuality.getAttributeName());
+		}
+		
+		if (lightsaberColorCrystalElementalType != null) {
+			attributeList.putText("wpn_elemental_type", "@obj_attr_n:armor_eff_" + lightsaberColorCrystalElementalType.name().toLowerCase(Locale.US));
+		}
+		
+		if (lightsaberColorCrystalDamagePercent > 0) {
+			attributeList.putNumber("damage", lightsaberColorCrystalDamagePercent, "%");
+		}
+	}
+	
+	private String buildRaceRestrictionString(Set<Race> speciesRestrictions) {
+		StringBuilder displayString = new StringBuilder();
+		Set<String> speciesStrings = new LinkedHashSet<>();
+		
+		for (Race speciesRestriction : speciesRestrictions) {
+			speciesStrings.add(speciesRestriction.getDisplayName());
+		}
+		
+		for (String speciesString : speciesStrings) {
+			displayString.append(speciesString)
+					.append(" ");
+		}
+		
+		return displayString.toString().trim();
+	}
+	
 	@Override
 	protected void createBaseline3(Player target, BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
-		bb.addInt(getPvpFaction().getCrc()); // Faction - 4
-		bb.addInt(pvpStatus.getValue()); // Faction Status - 5
-		bb.addObject(appearanceData); // - 6
-		bb.addInt(0); // Component customization (Set, Integer) - 7
-			bb.addInt(0);
-		bb.addInt(optionFlags); // 8
-		bb.addInt(counter); // Generic Counter -- use count and incap timer - 9
-		bb.addInt(condition); // 10
-		bb.addInt(maxHitPoints); // maxHitPoints - 11
-		bb.addBoolean(visibleGmOnly); // isVisible - 12
+		bb.addObject(appearanceData); // - 4
+		bb.addObject(visibleComponents);	// 5
+		bb.addInt(optionFlags); // 6
+		bb.addInt(counter); // Generic Counter -- use count and incap timer - 7
+		bb.addInt(conditionDamage); // 8
+		bb.addInt(maxHitPoints); // maxHitPoints - 9
+		bb.addBoolean(visibleGmOnly); // isVisible - 10
 		
-		bb.incrementOperandCount(9);
+		bb.incrementOperandCount(7);
 	}
-	
-	@Override
-	protected void createBaseline6(Player target, BaselineBuilder bb) {
-		super.createBaseline6(target, bb);
-		bb.addBoolean(inCombat); // 2 - Combat flag
-		bb.addObject(defenders); // 3 - Defenders List (Set, Long)
-		bb.addInt(0); // 4 - Map color
-		bb.addInt(0); // 5 - Access List
-			bb.addInt(0);
-		bb.addInt(0); // 6 - Guild Access Set
-			bb.addInt(0);
-		bb.addObject(effectsMap); // 7 - Effects Map
-		
-		bb.incrementOperandCount(6);
-	}
-	
+
 	@Override
 	protected void parseBaseline3(NetBuffer buffer) {
 		super.parseBaseline3(buffer);
-		faction = ServerData.INSTANCE.getFactions().getFaction(PvpFaction.getFactionForCrc(buffer.getInt()).name().toLowerCase(Locale.US));
-		pvpStatus = PvpStatus.getStatusForValue(buffer.getInt());
 		appearanceData.decode(buffer);
-		SWGSet.getSwgSet(buffer, 3, 7, Integer.class);
+		visibleComponents.decode(buffer);
 		optionFlags = buffer.getInt();
 		buffer.getInt();
-		condition = buffer.getInt();
+		conditionDamage = buffer.getInt();
 		maxHitPoints = buffer.getInt();
 		visibleGmOnly = buffer.getBoolean();
 	}
@@ -437,56 +614,15 @@ public class TangibleObject extends SWGObject {
 		buffer.getInt();
 		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
 		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
-		effectsMap = SWGMap.getSwgMap(buffer, 6, 7, StringType.ASCII);
 	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(1);
-		appearanceData.save(stream);
-		stream.addInt(maxHitPoints);
-		stream.addInt(components);
-		stream.addInt(condition);
-		stream.addInt(pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
-		stream.addAscii(pvpStatus.name());
-		Faction faction = this.faction;
-		stream.addAscii(faction == null ? "neutral" : faction.getName());
-		stream.addBoolean(visibleGmOnly);
-		stream.addArray(objectEffects);
-		stream.addInt(optionFlags);
-		stream.addMap(effectsMap, (e) -> {
-			stream.addAscii(e.getKey());
-			stream.addAscii(e.getValue());
-		});
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		byte version = stream.getByte();
-		appearanceData.read(stream);
-		maxHitPoints = stream.getInt();
-		components = stream.getInt();
-		if (version == 0)
-			stream.getBoolean();
-		condition = stream.getInt();
-		pvpFlags = PvpFlag.getFlags(stream.getInt());
-		pvpStatus = PvpStatus.valueOf(stream.getAscii());
-		faction = ServerData.INSTANCE.getFactions().getFaction(stream.getAscii().toLowerCase(Locale.US));
-		visibleGmOnly = stream.getBoolean();
-		objectEffects = stream.getArray();
-		optionFlags = stream.getInt();
-		stream.getList((i) -> effectsMap.put(stream.getAscii(), stream.getAscii()));
-	}
-	
+
 	@Override
 	public void saveMongo(MongoData data) {
 		super.saveMongo(data);
 		data.putDocument("appearance", appearanceData);
 		data.putInteger("maxHitPoints", maxHitPoints);
 		data.putInteger("components", components);
-		data.putInteger("condition", condition);
+		data.putInteger("conditionDamage", conditionDamage);
 		data.putInteger("pvpFlags", pvpFlags.stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b));
 		data.putString("pvpStatus", pvpStatus.name());
 		Faction faction = this.faction;
@@ -494,22 +630,80 @@ public class TangibleObject extends SWGObject {
 		data.putBoolean("visibleGmOnly", visibleGmOnly);
 		data.putByteArray("objectEffects", objectEffects);
 		data.putInteger("optionFlags", optionFlags);
-		data.putMap("effectsMap", effectsMap);
+		data.putInteger("counter", counter);
+		data.putInteger("requiredCombatLevel", requiredCombatLevel);
+		data.putMap("skillMods", skillMods);
+		if (armorCategory != null) {
+			data.putString("armorCategory", armorCategory.getId());
+		}
+		if (protection != null) {
+			data.putDocument("protection", protection);
+		}
+		if (lightsaberPowerCrystalQuality != null) {
+			data.putString("lightsaberPowerCrystalQuality", lightsaberPowerCrystalQuality.getId());
+		}
+		data.putInteger("lightsaberPowerCrystalMinDmg", lightsaberPowerCrystalMinDmg);
+		data.putInteger("lightsaberPowerCrystalMaxDmg", lightsaberPowerCrystalMaxDmg);
+		if (ticketInformation != null) {
+			data.putDocument("ticketInformation", ticketInformation);
+		}
+		data.putArray("visibleComponents", new ArrayList<>(visibleComponents));
+		data.putString("requiredSkill", requiredSkill);
+		if (lightsaberColorCrystalElementalType != null) {
+			data.putString("lightsaberColorCrystalElementalType", lightsaberColorCrystalElementalType.name());
+		}
+		data.putInteger("lightsaberColorCrystalDamagePercent", lightsaberColorCrystalDamagePercent);
 	}
-	
+
 	@Override
 	public void readMongo(MongoData data) {
 		super.readMongo(data);
 		appearanceData.readMongo(data.getDocument("appearance"));
 		maxHitPoints = data.getInteger("maxHitPoints", 1000);
 		components = data.getInteger("components", 0);
-		condition = data.getInteger("condition", 0);
+		conditionDamage = data.getInteger("conditionDamage", 0);
 		pvpFlags.addAll(PvpFlag.getFlags(data.getInteger("pvpFlags", 0)));
 		pvpStatus = PvpStatus.valueOf(data.getString("pvpStatus", "COMBATANT"));
 		faction = ServerData.INSTANCE.getFactions().getFaction(data.getString(data.containsKey("pvpFaction") ? "pvpFaction" : "faction", "neutral"));
 		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
 		objectEffects = data.getByteArray("objectEffects");
 		optionFlags = data.getInteger("optionFlags", 0);
-		effectsMap.putAll(data.getMap("effectsMap", String.class, String.class));
+		counter = data.getInteger("counter", 0);
+		requiredCombatLevel = data.getInteger("requiredCombatLevel", 0);
+		skillMods = data.getMap("skillMods", String.class, Integer.class);
+		armorCategory = ArmorCategory.Companion.getById(data.getString("armorCategory"));
+		if (data.containsKey("protection")) {
+			MongoData protectionMongoData = data.getDocument("protection");
+			protection = new Protection(0, 0, 0, 0, 0, 0);
+			protection.readMongo(protectionMongoData);
+		}
+		lightsaberPowerCrystalQuality = LightsaberPowerCrystalQuality.Companion.getById(data.getString("lightsaberPowerCrystalQuality"));
+		lightsaberPowerCrystalMinDmg = data.getInteger("lightsaberPowerCrystalMinDmg", 0);
+		lightsaberPowerCrystalMaxDmg = data.getInteger("lightsaberPowerCrystalMaxDmg", 0);
+		if (data.containsKey("ticketInformation")) {
+			MongoData ticketInformationDocument = data.getDocument("ticketInformation");
+			ticketInformation = new TicketInformation();
+			ticketInformation.readMongo(ticketInformationDocument);
+		}
+		visibleComponents.addAll(data.getArray("visibleComponents", CRC.class));
+		requiredSkill = data.getString("requiredSkill");
+		if (data.containsKey("lightsaberColorCrystalElementalType")) {
+			lightsaberColorCrystalElementalType = DamageType.valueOf(data.getString("lightsaberColorCrystalElementalType"));
+		}
+		lightsaberColorCrystalDamagePercent = data.getInteger("lightsaberColorCrystalDamagePercent", 0);
+	}
+	
+	/**
+	 * Used for weapons to optionally display barrels, stocks and scopes.
+	 * Not all weapons support all three types.
+	 * 
+	 * It's possible it's used for more than just weapons since the variable
+	 * lives on TangibleObject and not WeaponObject.
+	 * 
+	 * @param crc for an extra component to display on the object. Could be the CRC for "scope_sm_6", for instance.
+	 */
+	public void addVisibleComponent(CRC crc) {
+		visibleComponents.add(crc);
+		visibleComponents.sendDeltaMessage(this);	// Despite sending a delta it appears a client relog is necessary before they appear - at least for weapons
 	}
 }

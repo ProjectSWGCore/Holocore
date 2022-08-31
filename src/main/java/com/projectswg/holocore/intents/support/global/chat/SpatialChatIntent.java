@@ -35,12 +35,14 @@ public class SpatialChatIntent extends Intent {
 	private String message;
 	private int chatType;
 	private int moodId;
+	private int languageId;
 	
-	public SpatialChatIntent(Player player, int chatType, String message, int moodId) {
+	public SpatialChatIntent(Player player, int chatType, String message, int moodId, int languageId) {
 		this.player = player;
 		this.message = message;
 		this.chatType = chatType;
 		this.moodId = moodId;
+		this.languageId = languageId;
 	}
 	
 	public Player getPlayer() {
@@ -57,5 +59,9 @@ public class SpatialChatIntent extends Intent {
 	
 	public int getMoodId() {
 		return moodId;
+	}
+	
+	public int getLanguageId() {
+		return languageId;
 	}
 }

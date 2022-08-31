@@ -40,13 +40,13 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestRadialService extends TestRunnerSimulatedWorld {
 	
-	@Before
+	@BeforeEach
 	public void initServices() {
 		registerService(new RadialService());
 	}
@@ -60,7 +60,7 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		sendRequest(creature, tangible, RadialItem.ITEM_USE, RadialItem.ITEM_DESTROY);
 		
 		ObjectMenuResponse response = creature.getOwner().getNextPacket(ObjectMenuResponse.class);
-		Assert.assertNull(response);
+		assertNull(response);
 	}
 	
 	@Test
@@ -72,12 +72,12 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		sendRequest(creature, tangible, RadialItem.ITEM_USE, RadialItem.ITEM_DESTROY);
 		
 		ObjectMenuResponse response = creature.getOwner().getNextPacket(ObjectMenuResponse.class);
-		Assert.assertNotNull(response);
-		Assert.assertEquals(creature.getObjectId(), response.getRequestorId());
-		Assert.assertEquals(tangible.getObjectId(), response.getTargetId());
-		Assert.assertEquals(2, response.getOptions().size());
-		Assert.assertEquals(RadialItem.ITEM_USE, response.getOptions().get(0).getType());
-		Assert.assertEquals(RadialItem.ITEM_DESTROY, response.getOptions().get(1).getType());
+		assertNotNull(response);
+		assertEquals(creature.getObjectId(), response.getRequestorId());
+		assertEquals(tangible.getObjectId(), response.getTargetId());
+		assertEquals(2, response.getOptions().size());
+		assertEquals(RadialItem.ITEM_USE, response.getOptions().get(0).getType());
+		assertEquals(RadialItem.ITEM_DESTROY, response.getOptions().get(1).getType());
 	}
 	
 	@Test
@@ -87,19 +87,19 @@ public class TestRadialService extends TestRunnerSimulatedWorld {
 		registerObject(creature, dead);
 		dead.setPosture(Posture.DEAD);
 		
-		sendRequest(creature, dead, RadialItem.LOOT, RadialItem.EXAMINE);
+		sendRequest(creature, dead, RadialItem.LOOT_ALL, RadialItem.EXAMINE);
 		
 		ObjectMenuResponse response = creature.getOwner().getNextPacket(ObjectMenuResponse.class);
-		Assert.assertNotNull(response);
-		Assert.assertEquals(creature.getObjectId(), response.getRequestorId());
-		Assert.assertEquals(dead.getObjectId(), response.getTargetId());
+		assertNotNull(response);
+		assertEquals(creature.getObjectId(), response.getRequestorId());
+		assertEquals(dead.getObjectId(), response.getTargetId());
 		
-		Assert.assertEquals(2, response.getOptions().size());
-		Assert.assertEquals(RadialItem.LOOT, response.getOptions().get(0).getType());
-		Assert.assertEquals(RadialItem.EXAMINE, response.getOptions().get(1).getType());
+		assertEquals(2, response.getOptions().size());
+		assertEquals(RadialItem.LOOT_ALL, response.getOptions().get(0).getType());
+		assertEquals(RadialItem.EXAMINE, response.getOptions().get(1).getType());
 		
-		Assert.assertEquals(1, response.getOptions().get(0).getChildren().size());
-		Assert.assertEquals(RadialItem.LOOT_ALL, response.getOptions().get(0).getChildren().get(0).getType());
+		assertEquals(1, response.getOptions().get(0).getChildren().size());
+		assertEquals(RadialItem.LOOT, response.getOptions().get(0).getChildren().get(0).getType());
 	}
 	
 	private void sendRequest(CreatureObject source, SWGObject target, RadialItem ... items) {

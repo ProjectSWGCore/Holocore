@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_4bd9d15e",
+		"comment": "That is too bad. Remember to come visit me in the future if you happen to come across anything I would be interested in."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

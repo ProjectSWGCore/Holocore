@@ -1,0 +1,18 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.spawn	1	spawnSheeli					0	0	0
+1	quest.task.ground.wait_for_signal	2;14	rescueSheeli					0	0	0
+2	quest.task.ground.comm_player	3	comm	@quest/ground/u16_nym_themepark_rescue_sheeli:task02_comm_message_text	object/mobile/nym.iff			0	0	0
+3	quest.task.ground.go_to_location	4;11	getToPickUp					0	0	0
+4	quest.task.ground.wait_for_signal	5;8	waitingForShuttle					0	0	0
+5	quest.task.ground.wait_for_signal	6	returnToNymSheeli					0	0	0
+6	quest.task.ground.complete_quest		complete					0	0	0
+7	quest.task.ground.clear_quest		clearIt				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0
+8	quest.task.ground.wait_for_signal		failTask					0	0	0
+9	quest.task.ground.clear_quest		failed				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0
+10	quest.task.ground.clear_quest		failedtimer				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0
+11	quest.task.ground.wait_for_signal		failTask					0	0	0
+12	quest.task.ground.clear_quest		failing				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0
+13	quest.task.ground.clear_quest		clearMe				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0
+14	quest.task.ground.wait_for_signal	15	failTask					0	0	0
+15	quest.task.ground.clear_quest		died				quest/u16_nym_themepark_rescue_sheeli_fail	0	0	0

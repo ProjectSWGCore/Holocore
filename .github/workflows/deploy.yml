@@ -13,10 +13,10 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: true
-    - name: Set up JDK 13
+    - name: Set up JDK 18
       uses: actions/setup-java@v1
       with:
-        java-version: 13
+        java-version: 18
     - name: Build
       run: ./gradlew --no-daemon clean test jlink
     - name: Docker Login
@@ -32,12 +32,12 @@ jobs:
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
         RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
-        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:quality_assurance"
-        docker push "$IMAGE_NAME:quality_assurance"
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:cu_quality_assurance"
+        docker push "$IMAGE_NAME:cu_quality_assurance"
     - name: Docker Push to Master
       if: github.event.release.prerelease == false
       run: |
         IMAGE_NAME=`echo "docker.pkg.github.com/${GITHUB_REPOSITORY,,}/holocore"`
         RELEASE_NAME=`echo $GITHUB_REF | sed 's/refs\/tags\///g'`
-        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:latest"
-        docker push "$IMAGE_NAME:latest"
+        docker tag "$IMAGE_NAME:$RELEASE_NAME" "$IMAGE_NAME:cu_latest"
+        docker push "$IMAGE_NAME:cu_latest"

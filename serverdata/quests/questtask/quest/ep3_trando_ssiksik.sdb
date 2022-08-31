@@ -1,0 +1,18 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1						0	0	0
+1	quest.task.ground.go_to_location	2						0	0	0
+2	quest.task.ground.wait_for_signal	3;6;9;12	talkToPressk					0	0	0
+3	quest.task.ground.timer	4						0	400	401
+4	quest.task.ground.encounter		wkeWaveThree					5	0	0
+5	quest.task.ground.clear_quest							0	0	0
+6	quest.task.ground.timer	7						0	200	201
+7	quest.task.ground.encounter		wkeWaveTwo					5	0	0
+8	quest.task.ground.clear_quest							0	0	0
+9	quest.task.ground.timer	10						0	30	35
+10	quest.task.ground.encounter		wkeWaveOne					5	0	0
+11	quest.task.ground.clear_quest							0	0	0
+12	quest.task.ground.wait_for_tasks	13						0	0	0
+13	quest.task.ground.wait_for_signal	14	reportPressk					0	0	0
+14	quest.task.ground.reward	15						1	0	0
+15	quest.task.ground.complete_quest							0	0	0

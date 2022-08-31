@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_dunir",
+		"key": "s_86",
+		"comment": "Waiting on a package. See me later."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

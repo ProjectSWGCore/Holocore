@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_47",
+		"comment": "My friend needs that spiced tea just as soon as you can get it."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

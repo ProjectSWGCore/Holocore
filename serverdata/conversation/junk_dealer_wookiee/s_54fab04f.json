@@ -1,0 +1,15 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_wke_junk_dealer",
+		"key": "s_84a67771",
+		"comment": "Alright, let me see what you are offering."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_sellable_items",
+			"args": {}
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/boba_fett",
+		"key": "s_480",
+		"comment": "Just leave, before I change my mind."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/boba_fett",
+				"key": "s_752",
+				"comment": "Fine."
+			},
+		},
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

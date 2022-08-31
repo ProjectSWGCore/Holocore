@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_855",
+		"comment": "know three pilots that will suit your needs. Which planet would you like to go to?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_859",
+				"comment": "Tatooine. There's just something about this planet that draws me."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch71/s_859"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_891",
+				"comment": "Naboo. I'm sure there's a lot I can do there."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch71/s_891"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_923",
+				"comment": "Corellia suits me best."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch71/s_923"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

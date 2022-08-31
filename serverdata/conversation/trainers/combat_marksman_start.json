@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_marksman",
+		"comment": "I teach marksmanship.  You won't even need a targeting system after I'm through with you.  Ready to start?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_marksman_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

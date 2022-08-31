@@ -26,19 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.player;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.encoding.StringType;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
-import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFactory;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 
 import java.util.BitSet;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,7 +45,7 @@ import java.util.stream.Collectors;
 /**
  * PLAY 8
  */
-class PlayerObjectOwner implements Persistable, MongoPersistable {
+class PlayerObjectOwner implements MongoPersistable {
 	
 	private final PlayerObject obj;
 	
@@ -57,9 +56,8 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 	/** PLAY8-04 */ private final	SWGBitSet					completedQuests		= new SWGBitSet(8,4);
 	/** PLAY8-05 */ private final	SWGBitSet					activeQuests		= new SWGBitSet(8,5);
 	/** PLAY8-06 */ private			int 						activeQuest			= 0;
-	/** PLAY8-07 */ private final	SWGMap<Integer, Integer>	quests				= new SWGMap<>(8, 7);
-	/** PLAY8-08 */ private			String 						profWheelPosition	= "";
-	
+	/** PLAY8-07 */ private final	SWGMap<CRC, Quest>		quests				= new SWGMap<>(8, 7);
+
 	public PlayerObjectOwner(PlayerObject obj) {
 		this.obj = obj;
 	}
@@ -171,17 +169,8 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		sendDelta(6, activeQuest);
 	}
 	
-	public Map<Integer, Integer> getQuests() {
+	public Map<CRC, Quest> getQuests() {
 		return Collections.unmodifiableMap(quests);
-	}
-	
-	public String getProfWheelPosition() {
-		return profWheelPosition;
-	}
-	
-	public void setProfWheelPosition(String profWheelPosition) {
-		this.profWheelPosition = profWheelPosition;
-		sendDelta(8, profWheelPosition, StringType.ASCII);
 	}
 	
 	public void createBaseline8(BaselineBuilder bb) {
@@ -193,9 +182,8 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		bb.addObject(activeQuests); // 5
 		bb.addInt(activeQuest); // 6
 		bb.addObject(quests); // 7
-		bb.addAscii(profWheelPosition); // 8
-		
-		bb.incrementOperandCount(9);
+
+		bb.incrementOperandCount(8);
 	}
 	
 	@Override
@@ -208,64 +196,153 @@ class PlayerObjectOwner implements Persistable, MongoPersistable {
 		data.putByteArray("activeQuests", activeQuests.toByteArray());
 		data.putInteger("activeQuest", activeQuest);
 		data.putMap("quests", quests);
-		data.putString("profWheelPosition", profWheelPosition);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
-		byte [] emptyByteArray = new byte[0];
 		experience.clear();
 		waypoints.clear();
-		completedQuests.clear();
-		activeQuests.clear();
 		quests.clear();
 		
 		experience.putAll(data.getMap("experience", String.class, Integer.class));
 		data.getArray("waypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> waypoints.put(obj.getObjectId(), obj));
 		forcePower = data.getInteger("forcePower", forcePower);
 		maxForcePower = data.getInteger("maxForcePower", maxForcePower);
-		completedQuests.xor(BitSet.valueOf(data.getByteArray("completedQuests", emptyByteArray)));
-		activeQuests.xor(BitSet.valueOf(data.getByteArray("activeQuests", emptyByteArray)));
+		completedQuests.read(data.getByteArray("completedQuests"));
+		activeQuests.read(data.getByteArray("activeQuests"));
 		activeQuest = data.getInteger("activeQuest", activeQuest);
-		quests.putAll(data.getMap("quests", Integer.class, Integer.class));
-		profWheelPosition = data.getString("profWheelPosition", profWheelPosition);
+		quests.putAll(data.getMap("quests", CRC.class, Quest.class));
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-		stream.addAscii(profWheelPosition);
-		stream.addInt(0);
-		stream.addInt(activeQuest);
-		synchronized (experience) {
-			stream.addMap(experience, (e) -> {
-				stream.addAscii(e.getKey());
-				stream.addInt(e.getValue());
-			});
+	public void addQuest(String questName) {
+		CRC crc = new CRC(questName);
+		quests.put(crc, new Quest());
+		sendDelta(7, quests);
+	}
+	
+	public void removeQuest(String questName) {
+		CRC crc = new CRC(questName);
+		quests.remove(crc);
+		sendDelta(7, quests);
+	}
+	
+	public int incrementQuestCounter(String questName) {
+		CRC crc = new CRC(questName);
+		Quest quest = quests.remove(crc);
+		int counter = quest.getCounter() + 1;
+		quest.setCounter(counter);
+		quests.put(crc, quest);
+		sendDelta(7, quests);
+		
+		return counter;
+	}
+	
+	public boolean isQuestInJournal(String questName) {
+		CRC crc = new CRC(questName);
+		
+		return quests.containsKey(crc);
+	}
+	
+	public boolean isQuestComplete(String questName) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.get(crc);
+			
+			return quest.isComplete();
 		}
-		synchronized (quests) {
-			stream.addMap(quests, (e) -> {
-				stream.addInt(e.getKey());
-				stream.addInt(e.getValue());
-			});
-		}
-		synchronized (waypoints) {
-			stream.addMap(waypoints, (e) -> {
-				stream.addLong(e.getKey());
-				SWGObjectFactory.save(e.getValue(), stream);
-			});
+		
+		return false;
+	}
+	
+	public void addActiveQuestTask(String questName, int taskIndex) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.addActiveTask(taskIndex);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
 		}
 	}
 	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		profWheelPosition = stream.getAscii();
-		stream.getInt();
-		activeQuest = stream.getInt();
-		stream.getList((i) -> experience.put(stream.getAscii(), stream.getInt()));
-		stream.getList((i) -> quests.put(stream.getInt(), stream.getInt()));
-		stream.getList((i) -> waypoints.put(stream.getLong(), (WaypointObject) SWGObjectFactory.create(stream)));
+	public void removeActiveQuestTask(String questName, int taskIndex) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.removeActiveTask(taskIndex);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
+		}
+	}
+	
+	public void addCompleteQuestTask(String questName, int taskIndex) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.addCompletedTask(taskIndex);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
+		}
+	}
+	
+	public void removeCompleteQuestTask(String questName, int taskIndex) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.removeCompletedTask(taskIndex);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
+		}
+	}
+	
+	public Collection<Integer> getQuestActiveTasks(String questName) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.get(crc);
+			
+			return quest.getActiveTasks();
+		}
+		
+		return Collections.emptyList();
+	}
+	
+	public void completeQuest(String questName) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.setComplete(true);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
+		}
+	}
+	
+	public void setQuestRewardReceived(String questName, boolean rewardReceived) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.remove(crc);
+			quest.setRewardReceived(rewardReceived);
+			quests.put(crc, quest);
+			sendDelta(7, quests);
+		}
+	}
+	
+	public boolean isQuestRewardReceived(String questName) {
+		CRC crc = new CRC(questName);
+		
+		if (quests.containsKey(crc)) {
+			Quest quest = quests.get(crc);
+			
+			return quest.isRewardReceived();
+		}
+		
+		return false;
 	}
 	
 	private void sendDelta(int update, Object o) {

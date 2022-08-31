@@ -30,6 +30,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.npc.spawn.SpawnInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import me.joshlarson.jlcommon.log.Log;
@@ -60,7 +61,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/static.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/static.msdb"))) {
 			spawns.addAll(set.parallelStream(StaticSpawnInfo::new).collect(Collectors.toList()));
 		}
 	}
@@ -71,7 +72,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		INVULNERABLE
 	}
 	
-	public static class StaticSpawnInfo {
+	public static class StaticSpawnInfo implements SpawnInfo {
 		
 		private final String id;
 		private final Terrain terrain;
@@ -95,6 +96,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		private final int minSpawnTime;
 		private final int maxSpawnTime;
 		private final int amount;
+		private final String conversationId;
 		
 		private StaticSpawnInfo(SdbResultSet set) {
 			this.id = set.getText("spawn_id");
@@ -144,94 +146,123 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 					this.difficulty = CreatureDifficulty.BOSS;
 					break;
 			}
+			
+			this.conversationId = set.getText("conversation_id");
 		}
 		
+		@Override
 		public String getId() {
 			return id;
 		}
-		
+
+		@Override
 		public Terrain getTerrain() {
 			return terrain;
 		}
-		
+
+		@Override
 		public double getX() {
 			return x;
 		}
-		
+
+		@Override
 		public double getY() {
 			return y;
 		}
-		
+
+		@Override
 		public double getZ() {
 			return z;
 		}
-		
+
+		@Override
 		public int getHeading() {
 			return heading;
 		}
-		
+
+		@Override
 		public int getCellId() {
 			return cellId;
 		}
-		
+
+		@Override
 		public String getSpawnerType() {
 			return spawnerType;
 		}
-		
+
+		@Override
 		public String getNpcId() {
 			return npcId;
 		}
-		
+
+		@Override
 		public SpawnerFlag getSpawnerFlag() {
 			return spawnerFlag;
 		}
-		
+
+		@Override
 		public CreatureDifficulty getDifficulty() {
 			return difficulty;
 		}
-		
+
+		@Override
 		public int getMinLevel() {
 			return minLevel;
 		}
-		
+
+		@Override
 		public int getMaxLevel() {
 			return maxLevel;
 		}
-		
+
+		@Override
 		public String getBuildingId() {
 			return buildingId;
 		}
-		
+
+		@Override
 		public String getMood() {
 			return mood;
 		}
-		
+
+		@Override
 		public AIBehavior getBehavior() {
 			return behavior;
 		}
-		
+
+		@Override
 		public String getPatrolId() {
 			return patrolId;
 		}
-		
+
+		@Override
 		public PatrolFormation getPatrolFormation() {
 			return patrolFormation;
 		}
-		
+
+		@Override
 		public int getLoiterRadius() {
 			return loiterRadius;
 		}
-		
+
+		@Override
 		public int getMinSpawnTime() {
 			return minSpawnTime;
 		}
-		
+
+		@Override
 		public int getMaxSpawnTime() {
 			return maxSpawnTime;
 		}
-		
+
+		@Override
 		public int getAmount() {
 			return amount;
+		}
+		
+		@Override
+		public String getConversationId() {
+			return conversationId;
 		}
 		
 		private static PatrolFormation parsePatrolFormation(String str) {

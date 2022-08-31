@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/chassis_npc",
+		"key": "s_9ed93871",
+		"comment": "Hello. I can construct a ship chassis for you if you are holding a set of chassis blueprints."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/chassis_npc",
+				"key": "s_42d3759c",
+				"comment": "I'll come back later."
+			},
+			"next": "chassis_dealer/later"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

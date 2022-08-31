@@ -1,0 +1,5 @@
+file	enabled
+TEXT	BOOLEAN
+commands_global.sdb	TRUE
+commands_ground.sdb	TRUE
+commands_space.sdb	TRUE

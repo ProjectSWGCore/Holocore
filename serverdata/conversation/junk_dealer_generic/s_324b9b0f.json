@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_12fe83a6",
+		"comment": "You seem to be the adventurous sort so I figured that you might be able to find the parts. I mean they had to go somewhere, although my guess is that they are probably all over the galaxy by now."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_e1a103e5",
+				"comment": "Hmmmm, well how much do you want for these kits?"
+			},
+			"next": "junk_dealer_generic/s_e1a103e5"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

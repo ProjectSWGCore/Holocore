@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1;10;11;13	azure_cabal_proptis_loss_01_null					0	0	0
+1	quest.task.ground.destroy_multi_and_loot	2;3	azure_cabal_proptis_loss_01_counter_clue_1					0	0	0
+2	quest.task.ground.wait_for_signal		tatooine_24_azure_cabal_proptis_loss_01_clue_2					0	0	0
+3	quest.task.ground.destroy_multi_and_loot	4	azure_cabal_proptis_loss_01_hidden_destroy_counter_01					0	0	0
+4	quest.task.ground.comm_player	5	azure_cabal_proptis_loss_01_hoverdale_comm	@quest/ground/tatooine_24_azure_cabal_proptis_loss_01:task04_comm_message_text	object/mobile/dressed_noble_human_male_02.iff			0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6	azure_cabal_proptis_loss_01_hidden_destroy_counter_02					0	0	0
+6	quest.task.ground.comm_player	7	azure_cabal_proptis_loss_01_hoverdale_comm2	@quest/ground/tatooine_24_azure_cabal_proptis_loss_01:task06_comm_message_text	object/mobile/dressed_noble_human_male_02.iff			0	0	0
+7	quest.task.ground.timer	8	azure_cabal_proptis_loss_01_attack_timer					0	15	30
+8	quest.task.ground.encounter	9	azure_cabal_proptis_loss_01_encounter_hoverdale					1	0	0
+9	quest.task.ground.wait_for_signal		tatooine_24_azure_cabal_proptis_loss_01_clue_2					0	0	0
+10	quest.task.ground.retrieve_item		azure_cabal_proptis_loss_01_retrieve_purse					0	0	0
+11	quest.task.ground.wait_for_signal	12	tatooine_24_azure_cabal_proptis_loss_01_wait_search_hideout					0	0	0
+12	quest.task.ground.wait_for_signal		tatooine_24_azure_cabal_proptis_loss_01_wait_return_propti					0	0	0
+13	quest.task.ground.wait_for_tasks		azure_cabal_proptis_loss_01_task_counter					0	0	0

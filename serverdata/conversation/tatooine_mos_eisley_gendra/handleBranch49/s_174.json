@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_176",
+		"comment": "Great. I'll let him know you're coming."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

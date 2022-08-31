@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_78",
+		"comment": "That's right, one of the components of spiced tea is a glass to put it in. Just make more small glasses like you did before, and then you can put tea in them."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_95",
+				"comment": "I think I can do that."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch22/s_95"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_97",
+				"comment": "I'm not sure, this sounds like a lot of work."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch22/s_97"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

@@ -33,8 +33,8 @@ import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.ServiceBase;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,13 +45,13 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	private final Collection<ServiceBase> instantiatedServices = new ArrayList<>();
 	private IntentManager intentManager = null;
 	
-	@Before
+	@BeforeEach
 	public final void setupSynchronous() {
 		intentManager = new IntentManager(1);
 		IntentManager.setInstance(intentManager);
 	}
 	
-	@After
+	@AfterEach
 	public final void cleanupServices() {
 		for (ServiceBase service : instantiatedServices) {
 			service.setIntentManager(null);

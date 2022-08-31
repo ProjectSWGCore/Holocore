@@ -61,6 +61,10 @@ class GalacticResourceSpawner {
 		val startTime = StandardLog.onStartLoad("galactic resources")
 		var resourceCount = 0
 		for (resource in PswgDatabase.resources.resources) {
+			if (isInvalidResource(resource)) {
+				Log.w("Skipping invalid resource %s, could be a serialization error or bad initialization", resource)
+				continue
+			}
 			GalacticResourceContainer.addGalacticResource(resource)
 			if (resource.id > resourceIdMax.get())
 				resourceIdMax.set(resource.id)
@@ -70,8 +74,6 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun saveResources() {
-		val loader = GalacticResourceLoader()
-		loader.saveResources(GalacticResourceContainer.allResources)
 		PswgDatabase.resources.resources = GalacticResourceContainer.allResources
 	}
 	
@@ -125,6 +127,7 @@ class GalacticResourceSpawner {
 			val newName = resourceNameGenerator.generateName("resources")
 			resource = GalacticResource(newId, newName, raw.id)
 			resource.rawResource = raw
+			resource.generateRandomStats()
 			Log.t("Generating new resource: $resource  $raw")
 		} while (!GalacticResourceContainer.addGalacticResource(resource))
 		return resource
@@ -156,6 +159,25 @@ class GalacticResourceSpawner {
 				return test
 		}
 		return if (key.endsWith("kashyyyk")) Terrain.KASHYYYK_MAIN else null
+	}
+
+	private fun isInvalidResource(resource: GalacticResource): Boolean {
+		val stats = resource.stats
+		return isEveryStatZero(stats)
+	}
+
+	private fun isEveryStatZero(stats: GalacticResourceStats): Boolean {
+		return stats.coldResistance == 0 &&
+				stats.conductivity == 0 &&
+				stats.decayResistance == 0 &&
+				stats.entangleResistance == 0 &&
+				stats.flavor == 0 &&
+				stats.heatResistance == 0 &&
+				stats.malleability == 0 &&
+				stats.overallQuality == 0 &&
+				stats.potentialEnergy == 0 &&
+				stats.shockResistance == 0 &&
+				stats.unitToughness == 0
 	}
 	
 	companion object {

@@ -29,15 +29,19 @@ package com.projectswg.holocore.services.gameplay.combat.command;
 
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.RGB;
-import com.projectswg.common.data.combat.*;
+import com.projectswg.common.data.combat.AttackInfo;
+import com.projectswg.common.data.combat.CombatSpamType;
+import com.projectswg.common.data.combat.TrailLocation;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
-import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
@@ -46,9 +50,6 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import java.util.concurrent.ThreadLocalRandom;
 
 public class CombatCommandCommon {
-	
-	private static final RGB COLOR_WHITE = new RGB(255, 255, 255);
-	private static final RGB COLOR_CYAN = new RGB(0, 255, 255);
 	
 	private CombatCommandCommon() {
 		
@@ -63,30 +64,32 @@ public class CombatCommandCommon {
 		combatAction.setClientEffectId((byte) 0);
 		combatAction.setCommandCrc(command.getCrc());
 		combatAction.setTrail(trail);
-		combatAction.setUseLocation(false);
 		return combatAction;
 	}
 	
-	static CombatSpam createCombatSpam(CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, Command command) {
-		CombatSpam combatSpam = new CombatSpam(source.getObjectId());
-		combatSpam.setAttacker(source.getObjectId());
-		combatSpam.setAttackerPosition(source.getLocation().getPosition());
-		combatSpam.setWeapon(weapon.getObjectId());
-		combatSpam.setWeaponName(weapon.getStringId());
-		combatSpam.setDefender(target.getObjectId());
-		combatSpam.setDefenderPosition(target.getLocation().getPosition());
+	static CombatSpam createCombatSpam(CreatureObject receiver, CreatureObject source, TangibleObject target, WeaponObject weapon, AttackInfo info, CombatCommand command, CombatSpamType combatSpamType) {
+		CombatSpam combatSpam = new CombatSpam(receiver.getObjectId());
 		combatSpam.setInfo(info);
+		combatSpam.setAttacker(source.getObjectId());
+		combatSpam.setWeapon(weapon.getObjectId());
+		combatSpam.setDefender(target.getObjectId());
+		combatSpam.setDataType((byte) 0);
 		combatSpam.setAttackName(new StringId("cmd_n", command.getName()));
-		combatSpam.setSpamType(CombatSpamFilterType.ALL);
+		combatSpam.setSpamType(combatSpamType);
+
 		return combatSpam;
 	}
 	
 	static CombatStatus canPerform(CreatureObject source, SWGObject target, CombatCommand c) {
+		if (source.equals(target)) {
+			return CombatStatus.INVALID_TARGET;
+		}
+		
 		if (source.getEquippedWeapon() == null)
 			return CombatStatus.NO_WEAPON;
 		
 		if (target == null || source.equals(target))
-			return CombatStatus.SUCCESS;
+			return CombatStatus.INVALID_TARGET;
 		
 		if (!(target instanceof TangibleObject))
 			return CombatStatus.INVALID_TARGET;
@@ -110,6 +113,7 @@ public class CombatCommandCommon {
 		
 		switch (c.getAttackType()) {
 			case AREA:
+			case CONE:
 			case TARGET_AREA:
 				return canPerformArea(source, c);
 			case SINGLE_TARGET:
@@ -138,7 +142,7 @@ public class CombatCommandCommon {
 		return CombatStatus.SUCCESS;
 	}
 	
-	static int calculateWeaponDamage(CreatureObject source, WeaponObject weapon, CombatCommand command) {
+	static int calculateBaseWeaponDamage(WeaponObject weapon, CombatCommand command) {
 		int minDamage = weapon.getMinDamage();
 		int weaponDamage = ThreadLocalRandom.current().nextInt((weapon.getMaxDamage() - minDamage) + 1) + minDamage;
 		
@@ -153,22 +157,22 @@ public class CombatCommandCommon {
 		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
-	static boolean handleStatus(CreatureObject source, CombatStatus status) {
+	public static void handleStatus(CreatureObject source, CombatCommand combatCommand, CombatStatus status) {
 		switch (status) {
-			case SUCCESS:
-				return true;
-			case NO_TARGET:
-				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
-				return false;
-			case TOO_FAR:
-				showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-				return false;
-			case INVALID_TARGET:
-				showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, COLOR_CYAN, ShowFlyText.Flag.PRIVATE);
-				return false;
-			default:
-				showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, COLOR_WHITE, ShowFlyText.Flag.PRIVATE);
-				return false;
+			case NO_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
+			case TOO_FAR -> showFlyText(source, "@combat_effects:range_too_far", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
+			case INVALID_TARGET -> showFlyText(source, "@combat_effects:target_invalid_fly", Scale.MEDIUM, SWGColor.Blues.INSTANCE.getCyan(), ShowFlyText.Flag.PRIVATE);
+			case TOO_TIRED -> showFlyText(source, "@combat_effects:action_too_tired", Scale.MEDIUM, SWGColor.Oranges.INSTANCE.getOrange(), ShowFlyText.Flag.PRIVATE);
+			case SUCCESS -> showTriggerEffect(source, combatCommand);
+			default -> showFlyText(source, "@combat_effects:action_failed", Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite(), ShowFlyText.Flag.PRIVATE);
+		}
+	}
+	
+	private static void showTriggerEffect(CreatureObject source, CombatCommand command) {
+		String triggerEffect = command.getTriggerEffect();
+		if (triggerEffect.length() > 0) {
+			String triggerEffectHardpoint = command.getTriggerEffectHardpoint();
+			source.sendObservers(new PlayClientEffectObjectMessage(triggerEffect, triggerEffectHardpoint, source.getObjectId(), ""));
 		}
 	}
 	

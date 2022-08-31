@@ -53,7 +53,7 @@ public final class StartClothingLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/player/start_clothing.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/player/start_clothing.sdb"))) {
 			List<String> columns = set.getColumns();
 			while (set.next()) {
 				Race race = Race.getRace(set.getText("race"));
@@ -61,7 +61,11 @@ public final class StartClothingLoader extends DataLoader {
 				for (String clothingName : columns) {
 					if (clothingName.equals("race"))
 						continue;
-					clothingItems.put(clothingName, List.of(set.getText(clothingName).split(";")));
+					String clothingArray = set.getText(clothingName);
+					if (clothingArray.isBlank())
+						continue;
+					
+					clothingItems.put(clothingName, List.of(clothingArray.split(";")));
 				}
 				this.clothing.put(race, Collections.unmodifiableMap(clothingItems));
 			}

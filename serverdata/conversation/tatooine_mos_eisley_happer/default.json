@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_32",
+		"comment": "Sorry citizen, I have a murder scene to attend to."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

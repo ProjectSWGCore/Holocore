@@ -1,0 +1,657 @@
+name	group1	group2	block	priority	icon	duration	effect1_param	effect1_value	effect2_param	effect2_value	effect3_param	effect3_value	effect4_param	effect4_value	effect5_param	effect5_value	state	callback	particle	visible	debuff
+
+testHealthBuff1	medpackHealth			1	buffs.genericBuff	20.0	health	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testHealthBuff2	medpackHealth			2	buffs.genericBuff	30.0	health	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testConstBuff1	medpackConst			1	buffs.genericBuff	20.0	constitution	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testConstBuff2	medpackConst			2	buffs.genericBuff	30.0	constitution	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testAttribBuff1	medpackHealth	medpackConst		1	buffs.genericBuff	40.0	health	100.0	constitution	100.0		0.0		0.0		0.0	-1	none		1	false
+testAttribBuff2	medpackHealth	medpackConst		2	buffs.genericBuff	60.0	health	500.0	constitution	500.0		0.0		0.0		0.0	-1	none		1	false
+testSlopeMove1	slopeMove			1	buffs.genericBuff	15.0	slope_move	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testSlopeMove2	slopeMove			2	buffs.genericBuff	30.0	slope_move	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+testCrafting1	crafting			1	buffs.genericBuff	120.0	general_assembly	20.0	general_experimentation	20.0		0.0		0.0		0.0	-1	none		1	false
+testCrafting2	crafting			2	buffs.genericBuff	180.0	general_assembly	40.0	general_experimentation	40.0		0.0		0.0		0.0	-1	none		1	false
+testDebuff1	debuff			1	buffs.genericDebuff	10.0	health	-100.0	constitution	-100.0		0.0		0.0		0.0	13	none		1	true
+testDebuff2	debuff			1	buffs.genericDebuff	20.0	health	-250.0	constitution	-250.0		0.0		0.0		0.0	13	none		1	true
+testMedBoost1	boost			1	buffs.genericBuff	30.0	movement	30.0	slope_move	25.0	health	100.0	constitution	100.0		0.0	-1	none		1	false
+testMedBoost2	boost			2	buffs.genericBuff	60.0	movement	50.0	slope_move	50.0	health	500.0	constitution	500.0		0.0	-1	none		1	false
+testColdSnare1	snare			1	buffs.genericDebuff	30.0	movement	30.0	health	-100.0	constitution	-100.0		0.0		0.0	14	none		1	true
+testColdSnare2	snare			2	buffs.genericDebuff	60.0	movement	50.0	health	-250.0	constitution	-250.0		0.0		0.0	14	none		1	true
+testLongBuff	long			1	buffs.genericBuff	43200.0	health	1000.0		0.0		0.0		0.0		0.0	-1	none		1	false
+frogBuff	frog	health		4	buffs.genericBuff	10800.0	healthPercent	50.0	constitutionPercent	75.0		0.0		0.0		0.0	-1	none		1	false
+bactaInfusion	healOverTime			1	command.bactaInfusion	24.0		0.0		0.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_heal_over_time.prt	1	false
+bactaInfusion_1	healOverTime			2	command.bactaInfusion	32.0		0.0		0.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_heal_over_time_1.prt	1	false
+bactaInfusion_2	healOverTime			3	command.bactaInfusion	40.0		0.0		0.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_heal_over_time_2.prt	1	false
+nutrientInjection	doctorHealth	health		1	command.nutrientInjection	1200.0	healthPercent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+nutrientInjection_1	doctorHealth	health		2	command.nutrientInjection	2400.0	healthPercent	10.0	constitutionPercent	5.0		0.0		0.0		0.0	-1	none		1	false
+nutrientInjection_2	doctorHealth	health		3	command.nutrientInjection	2700.0	healthPercent	10.0	constitutionPercent	10.0		0.0		0.0		0.0	-1	none		1	false
+adrenalBoost	doctorHaste	haste		2	command.adrenalBoost	1200.0	combat_haste	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+adrenalBoost_1	doctorHaste	haste		4	command.adrenalBoost	2400.0	combat_haste	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+endorphineInjection	doctorStamina	stamina		1	command.endorphineInjection	1200.0	staminaPercent	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+endorphineInjection_1	doctorStamina	stamina		2	command.endorphineInjection	2400.0	staminaPercent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+serotoninInjection	doctorWillpower	willpower		1	command.serotoninInjection	1200.0	willpowerPercent	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+serotoninInjection_1	doctorWillpower	willpower		2	command.serotoninInjection	2400.0	willpowerPercent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+hemorrhage	cmStamina			1	command.hemorrhage	120.0	staminaPercent	-25.0		0.0		0.0		0.0		0.0	-1	none		1	true
+hemorrhage_1	cmStamina			2	command.hemorrhage	240.0	staminaPercent	-50.0		0.0		0.0		0.0		0.0	-1	none		1	true
+traumatize	cmWillpower			1	command.traumatize	120.0	willpowerPercent	-25.0		0.0		0.0		0.0		0.0	-1	none		1	true
+traumatize_1	cmWillpower			2	command.traumatize	240.0	willpowerPercent	-50.0		0.0		0.0		0.0		0.0	-1	none		1	true
+shock	cmResist	stateDebuff		1	command.shock	60.0	private_state_resist_debuff	20.0		0.0		0.0		0.0		0.0	-1	none		1	true
+shock_1	cmResist	stateDebuff		2	command.shock	120.0	private_state_resist_debuff	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+thyroidRupture	cmSlow			1	command.thyroidRupture	60.0	combat_slow	20.0		0.0		0.0		0.0		0.0	-1	none		1	true
+thyroidRupture_1	cmSlow			2	command.thyroidRupture	120.0	combat_slow	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+electrolyteDrain	cmSnare	snare		1	command.electrolyteDrain	60.0	movement	20.0		0.0		0.0		0.0		0.0	-1	none		1	true
+electrolyteDrain_1	cmSnare	snare		2	command.electrolyteDrain	120.0	movement	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+poisonInnoculation	doctorPoison			1	command.poisonInnoculation	1200.0	resistance_poison	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+poisonInnoculation_1	doctorPoison			2	command.poisonInnoculation	2400.0	resistance_poison	80.0	absorption_poison	25.0		0.0		0.0		0.0	-1	none		1	false
+diseaseInnoculation	doctorDisease			1	command.diseaseInnoculation	1200.0	resistance_disease	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+diseaseInnoculation_1	doctorDisease			2	command.diseaseInnoculation	2400.0	resistance_disease	80.0	absorption_disease	25.0		0.0		0.0		0.0	-1	none		1	false
+paralyze	cmParalyze	mez		1	command.paralyze	7.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	mezRecourse		1	false
+paralyze_1	cmParalyze	mez		2	command.paralyze	15.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	mezRecourse		1	false
+rollShot	rollShot			1	command.rollShot	5.0	private_defense_bonus	40.0		0.0		0.0		0.0		0.0	-1	none		0	false
+diveShot	diveShot			1	command.diveShot	5.0	private_defense_bonus	40.0		0.0		0.0		0.0		0.0	-1	none		0	false
+kipUpShot	kipUpShot			1	command.kipUpShot	5.0	private_defense_bonus	40.0		0.0		0.0		0.0		0.0	-1	none		0	false
+swordFlurry	swordFlurry			1	command.swordFlurry	10.0	private_defense_bonus	80.0		0.0		0.0		0.0		0.0	-1	none		0	false
+swordFlurry_1	swordFlurry			2	command.swordFlurry	10.0	private_defense_bonus	120.0		0.0		0.0		0.0		0.0	-1	none		0	false
+centerOfBeing	centerOfBeing			1	command.centerOfBeing	30.0	private_defense_bonus	250.0		0.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_state_centered.prt	1	false
+centerOfBeing_1	centerOfBeing			2	command.centerOfBeing	45.0	private_defense_bonus	500.0		0.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_state_centered.prt	1	false
+recklessShot	recklessShot			1	command.recklessShot	10.0	private_defense_penalty	80.0		0.0		0.0		0.0		0.0	-1	none		0	false
+recklessShot_1	recklessShot			2	command.recklessShot	10.0	private_defense_penalty	80.0		0.0		0.0		0.0		0.0	-1	none		0	false
+recklessShot_2	recklessShot			3	command.recklessShot	10.0	private_defense_penalty	80.0		0.0		0.0		0.0		0.0	-1	none		0	false
+aim	aim			1	command.aim	15.0	private_accuracy_bonus	80.0		0.0		0.0		0.0		0.0	-1	none		0	false
+aim_1	aim			2	command.aim	15.0	private_accuracy_bonus	160.0		0.0		0.0		0.0		0.0	-1	none		0	false
+aim_2	aim			3	command.aim	15.0	private_accuracy_bonus	240.0		0.0		0.0		0.0		0.0	-1	none		0	false
+warningShot	warningShot			1	command.warningShot	15.0	private_defense_penalty	80.0		0.0		0.0		0.0		0.0	-1	none		0	true
+parryRiposte	parryRiposte	dmgShield		1	command.parryRiposte	5.0	private_defense_bonus	80.0	private_melee_dmg_shield	15.0		0.0		0.0		0.0	-1	none		0	false
+duelistStance	duelistStance	dmgShield		1	command.duelistStance	30.0	private_defense_bonus	125.0	private_damage_shield	10.0		0.0		0.0		0.0	-1	none		0	false
+duelistStance_1	duelistStance	dmgShield		2	command.duelistStance	30.0	private_defense_bonus	250.0	private_damage_shield	25.0		0.0		0.0		0.0	-1	none		0	false
+bindingStrike	bindingStrike			1	command.bindingStrike	30.0	stamina	-100.0		0.0		0.0		0.0		0.0	-1	none		0	true
+bindingStrike_1	bindingStrike			2	command.bindingStrike	45.0	stamina	-250.0		0.0		0.0		0.0		0.0	-1	none		0	true
+armorBreak	armorBreak			1	command.armorBreak	15.0	private_armor_break	42.0		0.0		0.0		0.0		0.0	-1	none		0	true
+armorBreak_1	armorBreak			3	command.armorBreak	20.0	private_armor_break	100.0		0.0		0.0		0.0		0.0	-1	none		0	true
+armorBreak_2	armorBreak			4	command.armorBreak	30.0	private_armor_break	150.0		0.0		0.0		0.0		0.0	-1	none		0	true
+berserk	berserk			1	command.berserk	20.0	private_melee_dmg_bonus	25.0		0.0		0.0		0.0		0.0	5	none		1	false
+berserk_1	berserk			2	command.berserk	20.0	private_melee_dmg_bonus	50.0		0.0		0.0		0.0		0.0	5	none		1	false
+startleShot	startleShot			1	command.startleShot	5.0	private_posture_override	1.0		0.0		0.0		0.0		0.0	-1	none		0	true
+startleShot_1	startleShot			2	command.startleShot	5.0	private_posture_override	1.0		0.0		0.0		0.0		0.0	-1	none		0	true
+startleShot_2	startleShot	daze		3	command.startleShot	5.0	private_posture_override	1.0	delay_attack	0.0		0.0		0.0		0.0	-1	dazeRecourse		0	true
+overwhelmingShot	overwhelmingShot			1	command.overwhelmingShot	20.0	private_state_resist_debuff	25.0		0.0		0.0		0.0		0.0	-1	none		1	true
+overwhelmingShot_1	overwhelmingShot			2	command.overwhelmingShot	45.0	private_state_resist_debuff	50.0		0.0		0.0		0.0		0.0	-1	none		1	true
+crippleAttack	crippleAttack	snare		1	command.crippleAttack	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+crippleAttack_1	crippleAttack	snare		2	command.crippleAttack	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+cripplingShot	cripplingShot	snare		1	command.cripplingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+cripplingShot_1	cripplingShot	snare		2	command.cripplingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+kneecapShot	kneecapShot	snare		1	command.kneecapShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+kneecapShot_1	kneecapShot	snare		2	command.kneecapShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+restrainingShot	restrainingShot	snare		1	command.restrainingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+restrainingShot_1	restrainingShot	snare		2	command.restrainingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+stoppingShot	stoppingShot	root		1	command.stoppingShot	10.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+stoppingShot_1	stoppingShot	root		2	command.stoppingShot	15.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+stoppingShot_2	stoppingShot	root		3	command.stoppingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+concussionShot	concussionShot	mez		1	command.concussionShot	20.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	mezRecourse		1	true
+concussionShot_1	concussionShot	mez		2	command.concussionShot	40.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	mezRecourse		1	true
+suppressionFire	suppressionFire			1	command.suppressionFire	2.0	suppression	45.0		0.0		0.0		0.0		0.0	-1	none		1	true
+suppressionFire_1	suppressionFire			2	command.suppressionFire	2.0	suppression	65.0		0.0		0.0		0.0		0.0	-1	none		1	true
+suppressionFire_2	suppressionFire			3	command.suppressionFire	2.0	suppression	75.0		0.0		0.0		0.0		0.0	-1	none		1	true
+warcry	warcry			1	command.warcry	10.0	combat_slow	20.0		0.0		0.0		0.0		0.0	-1	none		1	true
+warcry_1	warcry			2	command.warcry	20.0	combat_slow	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+disarmingShot	disarmingShot	daze		1	command.disarmingShot	3.0	delay_attack	0.0		0.0		0.0		0.0		0.0	-1	dazeRecourse		1	true
+disarmingShot_1	disarmingShot	daze		2	command.disarmingShot	5.0	delay_attack	0.0		0.0		0.0		0.0		0.0	-1	dazeRecourse		1	true
+panicShot	panicShot	daze		1	command.panicShot	15.0	delay_attack	0.0		0.0		0.0		0.0		0.0	-1	dazeRecourse		1	true
+panicShot_1	panicShot	daze		2	command.panicShot	25.0	delay_attack	0.0		0.0		0.0		0.0		0.0	-1	dazeRecourse		1	true
+lowBlow	lowBlow			1	command.lowBlow	20.0	combat_slow	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+mezBlockDebuff	mez			10	state.rage	30.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+dazeBlockDebuff	daze			10	state.anger	20.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+tranqDart	trap			1	buffs.genericDebuff	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	snareEffectOff		1	true
+burstRun	burstrun	escape		1	command.burstRun	60.0	movement	0.0		0.0		0.0		0.0		0.0	-1	removeBurstRun		1	false
+cryobanSnare	cold			1	buffs.cryobanSnare	5.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+intimidate	intimidate			1	command.intimidate	-1.0		0.0		0.0		0.0		0.0		0.0	15	none		1	true
+feign_death	feign_death			1	command.feignDeath	-1.0		0.0		0.0		0.0		0.0		0.0	6	none		1	false
+blind	blind			1	command.blindAttack	-1.0		0.0		0.0		0.0		0.0		0.0	13	none		1	true
+dizzy	dizzy			1	command.dizzyRecovery	-1.0		0.0		0.0		0.0		0.0		0.0	14	none		1	true
+stun	stun			1	command.stunRecovery	-1.0		0.0		0.0		0.0		0.0		0.0	12	none		1	true
+cover	cover			1	command.cover	-1.0		0.0		0.0		0.0		0.0		0.0	0	none		1	false
+bleeding	bleeding			1	state.bleeding	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+poisoned	poisoned			1	state.poisoned	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+diseased	diseased			1	state.diseased	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+onfire	onfire			1	state.onFire	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+armorHinderanceMove	armorMove			1	buffs.armorHinderance	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+armorHinderanceAccuracy	armorAcc			1	buffs.armorHinderance	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+armorHinderanceFireRate	armorRof			1	buffs.armorHinderance	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+weaponHinderance	weapon			1	buffs.weaponHinderance	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+dessert_bofa_treat	foodConstitution			1	buffs.foodDessert	3600.0	constitution	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_travel_biscuits	foodSlopeMove			1	buffs.foodMeal	1200.0	slope_move	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_spiced_tea	foodWillpower			1	buffs.foodBeverage	3600.0	willpower	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_blob_candy	foodStamina			1	buffs.foodDessert	3600.0	stamina	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_exo_protein_wafers	foodMitigateDamage			1	buffs.foodMeal	20.0	script_var	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_aitha	foodHealing			1	buffs.foodBeverage	300.0	healing_efficiency	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_crispic	foodMeleeAcc	foodRangedAcc		1	buffs.foodMeal	900.0	melee_accuracy	40.0	ranged_accuracy	40.0		0.0		0.0		0.0	-1	none		1	false
+drink_caf	foodHealth	foodWillpower		2	buffs.foodBeverage	3600.0	health	100.0	willpower	100.0		0.0		0.0		0.0	-1	none		1	false
+dessert_pkneb	foodCure			1	buffs.foodDessert	300.0	cure_efficiency	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_kanali_wafers	foodHealth	foodConstitution		2	buffs.foodMeal	3600.0	health	100.0	constitution	100.0		0.0		0.0		0.0	-1	none		1	false
+drink_ruby_bliel	foodStimRoundTime			1	buffs.foodBeverage	1200.0	script_var	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_jawa_beer	foodMaskScent			1	buffs.foodBeverage	1200.0	mask_scent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_starshine_surprise	foodIncapRecover			1	buffs.foodBeverage	1200.0	script_var	30.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_teltier_noodles	foodHealth	foodStamina		2	buffs.foodMeal	3600.0	health	100.0	stamina	100.0		0.0		0.0		0.0	-1	none		1	false
+dessert_air_cake	foodDodgeAttack			1	buffs.foodDessert	1200.0	script_var	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_almond_kwevvu_crisp_munchies	foodTameBonus			1	buffs.foodDessert	1200.0	tame_bonus	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_blap_biscuit	foodPetFood			1	buffs.foodDessert	3600.0	healthPercent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_synthsteak	foodMitigateDamage			2	buffs.foodMeat	40.0	script_var	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_cho_nor_hoola	foodPoison			1	buffs.foodMeal	2000.0	resistance_poison	15.0	absorption_poison	15.0		0.0		0.0		0.0	-1	none		1	false
+dish_blood_chowder	foodBleeding			1	buffs.foodMeal	2000.0	resistance_bleeding	15.0	absorption_bleeding	15.0		0.0		0.0		0.0	-1	none		1	false
+dish_veghash	foodCreatureHarvest			1	buffs.foodVegetable	900.0	creature_harvesting	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_karkan_ribenes	foodEnhanceRegen			1	buffs.foodMeat	30.0	constitutionPercent	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_trimpian	foodFire			1	buffs.foodMeal	2000.0	resistance_fire	20.0	absorption_fire	20.0		0.0		0.0		0.0	-1	none		1	false
+dish_ormachek	foodXPIncrease			1	buffs.foodMeal	20.0	script_var	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_havla	foodDisease			1	buffs.foodVegetable	2000.0	resistance_disease	15.0	absorption_disease	20.0		0.0		0.0		0.0	-1	none		1	false
+dish_gruuvan_shaal	foodHealth	foodConstitution		3	buffs.foodMeal	1200.0	health	100.0	constitution	200.0		0.0		0.0		0.0	-1	none		1	false
+dish_scrimpi	foodHealth	foodStamina		3	buffs.foodMeat	1200.0	health	100.0	stamina	200.0		0.0		0.0		0.0	-1	none		1	false
+dish_ahrisa	foodHealth	foodWillpower		3	buffs.foodMeal	1200.0	health	100.0	willpower	200.0		0.0		0.0		0.0	-1	none		1	false
+dish_rakririan_burnout_sauce	foodUnarmedDamage			1	buffs.foodMeal	1200.0	unarmed_damage	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_vegeparsine	foodMeleeDefense			1	buffs.foodVegetable	1200.0	melee_defense	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_bivoli_tempari	foodBuffing			1	buffs.foodMeal	1200.0	buffing_efficiency	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_terratta	foodCamouflage			1	buffs.foodVegetable	1200.0	camouflage	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_pastebread	foodPetFood			2	buffs.foodDessert	3600.0	healthPercent	10.0	constitutionPercent	5.0		0.0		0.0		0.0	-1	none		1	false
+dessert_won_won	foodHealth	foodConstitution		4	buffs.foodDessert	900.0	health	150.0	constitution	200.0	stamina	50.0		0.0		0.0	-1	none		1	false
+dessert_chandad	foodSurveying			1	buffs.foodDessert	1200.0	surveying	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_pyollian_cake	foodCraftBonus			1	buffs.foodDessert	1200.0	script_var	7.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_dweezel	foodTrapping			1	buffs.foodDessert	1200.0	trapping	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_felbar	foodPetFood			3	buffs.foodDessert	3600.0	healthPercent	10.0	constitutionPercent	10.0		0.0		0.0		0.0	-1	none		1	false
+dessert_citros_snow_cake	foodHealing			2	buffs.foodDessert	180.0	healing_efficiency	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_pikatta_pie	foodDodgeAttack			2	buffs.foodDessert	1600.0	script_var	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_gorrnar	foodReduceCloneWounds			1	buffs.foodDessert	1200.0	script_var	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_kiwik_clusjo_swirl	foodHealth	foodStamina		4	buffs.foodDessert	900.0	health	150.0	stamina	200.0	willpower	50.0		0.0		0.0	-1	none		1	false
+dessert_cavaellin_creams	foodIncapRecover			2	buffs.foodDessert	1200.0	script_var	60.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_vagnerian_canape	foodHealth	foodWillpower		4	buffs.foodDessert	900.0	health	150.0	willpower	200.0	constitution	50.0		0.0		0.0	-1	none		1	false
+dessert_sweesonberry_rolls	foodPetFood			4	buffs.foodDessert	3600.0	healthPercent	10.0	constitutionPercent	10.0	private_defense_bonus	10.0	private_accuracy_bonus	10.0		0.0	-1	none		1	false
+dessert_smugglers_delight	foodReduceSpiceDowntime			1	buffs.foodDessert	1200.0	script_var	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_gralinyn_juice	foodCreatureHitBonus			1	buffs.foodBeverage	1200.0	creature_hit_bonus	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_deuterium_pyro	foodRangedAcc			2	buffs.foodBeverage	60.0	ranged_accuracy	120.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_corellian_ale	foodMeleeAcc			2	buffs.foodBeverage	60.0	melee_accuracy	120.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_blue_milk	foodCure			2	buffs.foodBeverage	120.0	cure_efficiency	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_durindfire	foodPoison			2	buffs.foodBeverage	1200.0	resistance_poison	30.0	absorption_poison	15.0		0.0		0.0		0.0	-1	none		1	false
+drink_veronian_berry_wine	foodBleeding			2	buffs.foodBeverage	1200.0	resistance_bleeding	30.0	absorption_bleeding	15.0		0.0		0.0		0.0	-1	none		1	false
+drink_ithorian_mist	foodFire			2	buffs.foodBeverage	1200.0	resistance_fire	30.0	absorption_fire	15.0		0.0		0.0		0.0	-1	none		1	false
+drink_corellian_brandy	foodDisease			2	buffs.foodBeverage	1200.0	resistance_disease	30.0	absorption_disease	15.0		0.0		0.0		0.0	-1	none		1	false
+drink_tssolok	foodIncreaseBuffTime			1	buffs.foodBeverage	1200.0	script_var	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_vasarian_brandy	foodConstitution	foodStamina		5	buffs.foodBeverage	600.0	constitution	200.0	stamina	200.0	willpower	50.0		0.0		0.0	-1	none		1	false
+drink_accarragm	foodStamina	foodWillpower		5	buffs.foodBeverage	600.0	constitution	50.0	stamina	200.0	willpower	200.0		0.0		0.0	-1	none		1	false
+drink_garrmorl	foodConstitution	foodWillpower		5	buffs.foodBeverage	600.0	constitution	200.0	stamina	50.0	willpower	200.0		0.0		0.0	-1	none		1	false
+drink_vayerbok	foodBlock			1	buffs.foodBeverage	1200.0	block	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_bespin_port	foodExperimentBonus			1	buffs.foodBeverage	300.0	script_var	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_elshandruu_pica_thundercloud	foodRangedDefense			1	buffs.foodBeverage	1200.0	ranged_defense	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_breath_of_heaven	foodConstitution	foodStamina		6	buffs.foodBeverage	600.0	health	200.0	constitution	200.0	stamina	200.0	willpower	50.0		0.0	-1	none		1	false
+drink_flameout	foodMitigateDamage			3	buffs.foodBeverage	5.0	script_var	90.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_mandalorian_wine	foodStamina	foodWillpower		6	buffs.foodBeverage	600.0	health	200.0	constitution	50.0	stamina	200.0	willpower	200.0		0.0	-1	none		1	false
+dish_thakitillo	foodHealing			3	buffs.foodMeal	120.0	healing_efficiency	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_vercupti_of_agazza_boleruuee	foodConstitution	foodWillpower		6	buffs.foodMeal	600.0	health	200.0	constitution	200.0	stamina	50.0	willpower	200.0		0.0	-1	none		1	false
+dessert_deneelian_fizz_pudding	foodDodgeAttack			3	buffs.foodDessert	60.0	script_var	30.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dessert_luilris_mushroom_pie	foodHaste	foodDisease		3	buffs.foodDessert	900.0	combat_haste	15.0	resistance_disease	40.0	absorption_disease	20.0	stamina	100.0		0.0	-1	none		1	false
+drink_warrl_surprise	foodDmgShield			1	buffs.foodBeverage	900.0	private_defense_bonus	40.0	private_melee_dmg_shield	10.0	constitution	100.0		0.0		0.0	-1	none		1	false
+tasty_beverage	foodTastyBeverage			1	buffs.foodBeverage	120.0	health	5.0	constitution	5.0	stamina	5.0	willpower	5.0		0.0	-1	none		1	false
+shadowpaw	spice			1	buffs.spiceAction	300.0	constitutionPercent	-10.0	staminaPercent	20.0		0.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+scramjet	spice			1	buffs.spiceHealth	300.0	constitutionPercent	20.0	staminaPercent	-5.0	willpowerPercent	-5.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+grey_gabaki	spice			1	buffs.spiceMind	300.0	healthPercent	-10.0	willpowerPercent	20.0		0.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+sweetblossom	spice			2	buffs.spiceHealth	600.0	healthPercent	10.0	constitutionPercent	20.0	staminaPercent	-10.0	willpowerPercent	-10.0		0.0	-1	handleSpiceDownerEffect		1	false
+giggledust	spice			2	buffs.spiceAction	600.0	staminaPercent	20.0	willpowerPercent	-10.0		0.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+yarrock	spice			2	buffs.spiceMind	600.0	healthPercent	10.0	constitutionPercent	-10.0	willpowerPercent	20.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+sedative_h4b	spice			2	buffs.spiceHealth	600.0	constitutionPercent	20.0	staminaPercent	-10.0	willpowerPercent	10.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+pyrepenol	spice			2	buffs.spiceHealth	600.0	healthPercent	20.0	constitutionPercent	10.0	willpowerPercent	-10.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+droid_lube	spice			2	buffs.spiceAction	600.0	healthPercent	20.0	constitutionPercent	-10.0	staminaPercent	10.0		0.0		0.0	-1	handleSpiceDownerEffect		1	false
+thruster_head	spice			3	buffs.spicePill	900.0	healthPercent	-5.0	constitutionPercent	10.0	staminaPercent	-5.0	willpowerPercent	20.0		0.0	-1	handleSpiceDownerEffect		1	false
+gunjack	spice			3	buffs.spicePill	900.0	healthPercent	10.0	constitutionPercent	10.0	staminaPercent	-20.0	willpowerPercent	20.0		0.0	-1	handleSpiceDownerEffect		1	false
+crash_n_burn	spice			3	buffs.spicePill	900.0	healthPercent	-20.0	constitutionPercent	20.0	staminaPercent	10.0	willpowerPercent	10.0		0.0	-1	handleSpiceDownerEffect		1	false
+neutron_pixey	spice			4	buffs.spiceNeedle	900.0	healthPercent	20.0	constitutionPercent	20.0	staminaPercent	20.0	willpowerPercent	-20.0		0.0	-1	handleSpiceDownerEffect		1	false
+muon_gold	spice			4	buffs.spiceNeedle	900.0	healthPercent	20.0	constitutionPercent	20.0	staminaPercent	-20.0	willpowerPercent	20.0		0.0	-1	handleSpiceDownerEffect		1	false
+booster_blue	spice			4	buffs.spiceNeedle	900.0	healthPercent	20.0	constitutionPercent	-20.0	staminaPercent	20.0	willpowerPercent	20.0		0.0	-1	handleSpiceDownerEffect		1	false
+kwi_boost	spice			4	buffs.spicePill	900.0	healthPercent	-20.0	constitutionPercent	20.0	staminaPercent	20.0	willpowerPercent	20.0		0.0	-1	handleSpiceDownerEffect		1	false
+kliknik_boost	spice			4	buffs.spicePill	900.0	healthPercent	10.0	constitutionPercent	20.0	staminaPercent	20.0	willpowerPercent	10.0		0.0	-1	handleSpiceDownerEffect		1	false
+spice_downer	spiceDowner			1	buffs.spiceDowner	30.0	healthPercent	-20.0	constitutionPercent	-20.0	staminaPercent	-20.0	willpowerPercent	-20.0		0.0	-1	none		1	true
+forceWeaken	forceWeaken	snare		1	jedi.forceWeaken	10.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceWeaken_1	forceWeaken	snare		2	jedi.forceWeaken	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+saberArmorBreak	armorBreak			2	jedi.saberArmorBreak	20.0	private_armor_break	80.0		0.0		0.0		0.0		0.0	-1	none		1	false
+saberArmorBreak_1	armorBreak			5	jedi.saberArmorBreak	30.0	private_armor_break	185.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceWave	forceWave	snare		2	jedi.forceWave	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceWave_1	forceWave	snare		3	jedi.forceWave	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceSuppression	forceSuppression	root		2	jedi.forceSuppression	15.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceSuppression_1	forceSuppression	root		3	jedi.forceSuppression	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+stasis	stasis	mez		3	jedi.stasis	40.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	mezRecourse		1	true
+avoidIncapacitation	avoidIncapacitation			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+avoidIncapacitation_1	avoidIncapacitation_1			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+avoidIncapacitation_2	avoidIncapacitation_2			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+avoidIncapacitation_3	avoidIncapacitation_3			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+avoidIncapacitation_4	avoidIncapacitation_4			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+avoidIncapacitation_5	avoidIncapacitation_5			1	jedi.avoidIncapacitation	30.0	avoid_incap	1.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+forceAbsorb	forceAbsorb			1	jedi.forceAbsorb	30.0	force_absorb	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceAbsorb_1	forceAbsorb			2	jedi.forceAbsorb	60.0	force_absorb	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceShield	forceShield			1	jedi.forceShield	900.0	force_shield	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceShield_1	forceShield			2	jedi.forceShield	1800.0	force_shield	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceArmor	forceArmor			1	jedi.forceArmor	900.0	force_armor	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceArmor_1	forceArmor			2	jedi.forceArmor	1800.0	force_armor	40.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceSpeed	forceSpeed	haste		1	jedi.forceSpeed	360.0	combat_haste	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceSpeed_1	forceSpeed	haste		3	jedi.forceSpeed	720.0	combat_haste	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceRun	forceRun	escape		3	jedi.forceRun	-1.0	movement	0.0	slope_move	33.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_force_speed.prt	1	false
+forceRun_1	forceRun	escape		4	jedi.forceRun	-1.0	movement	0.0	slope_move	66.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_force_speed.prt	1	false
+forceRun_2	forceRun	escape		5	jedi.forceRun	-1.0	movement	0.0	slope_move	99.0		0.0		0.0		0.0	-1	handleClearBuffEffect	appearance/pt_force_speed.prt	1	false
+forceFeedback	forceFeedback			1	jedi.forceFeedback	30.0	force_feedback	65.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceFeedback_1	forceFeedback			2	jedi.forceFeedback	60.0	force_feedback	95.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceResistBleeding	forceResistBleeding			1	jedi.forceResistBleeding	900.0	resistance_bleeding	100.0	absorption_bleeding	25.0		0.0		0.0		0.0	-1	none		1	false
+forceResistDisease	forceResistDisease			1	jedi.forceResistDisease	900.0	resistance_disease	100.0	absorption_disease	25.0		0.0		0.0		0.0	-1	none		1	false
+forceResistStates	forceResistStates			1	jedi.forceResistStates	900.0	resistance_states	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceResistPoison	forceResistPoison			1	jedi.forceResistPoison	900.0	resistance_poison	100.0	absorption_poison	25.0		0.0		0.0		0.0	-1	none		1	false
+forceCloak	forceCloak			1	jedi.forceCloak	-1.0		0.0		0.0		0.0		0.0		0.0	0	none		1	false
+forceInfusion	healOverTime			1	jedi.forceInfusion	24.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceInfusion_1	healOverTime			4	jedi.forceInfusion	48.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceMeditate	forceMeditate			1	jedi.forceMeditate	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceValor	forceValor			1	jedi.forceValor	30.0	saber_block	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceValor_1	forceValor			2	jedi.forceValor	60.0	saber_block	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceAura	forceAura	centerOfBeing		1	jedi.forceAura	30.0	private_defense_bonus	250.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceAura_1	forceAura	centerOfBeing		2	jedi.forceAura	45.0	private_defense_bonus	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
+forceSap	cmStamina	cmWillpower		2	jedi.forceSap	30.0	willpowerPercent	-20.0	staminaPercent	-25.0		0.0		0.0		0.0	-1	none		1	true
+forceSap_1	cmStamina	cmWillpower		3	jedi.forceSap	60.0	willpowerPercent	-30.0	staminaPercent	-35.0		0.0		0.0		0.0	-1	none		1	true
+forceShock	forceShock	stateDebuff		1	jedi.forceShock	60.0	private_state_resist_debuff	20.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceShock_1	forceShock	stateDebuff		2	jedi.forceShock	120.0	private_state_resist_debuff	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+forceChoke	forceChoke			1	jedi.forceChoke	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+innate_regeneration	innateHealthRegen	innateActionRegen		1	command.regeneration	300.0	constitutionPercent	20.0	staminaPercent	20.0		0.0		0.0		0.0	-1	none		1	false
+innate_wookiee_roar	innateWookieeRoar			1	command.wookieeRoar	300.0	private_accuracy_bonus	40.0	private_melee_dmg_bonus	40.0	private_defense_penalty	40.0		0.0		0.0	-1	none		1	false
+innate_vitalize	innateVitalize			1	command.vitalize	300.0	healthPercent	20.0	staminaPercent	-20.0	willpowerPercent	-20.0		0.0		0.0	-1	none		1	false
+newbie_bread	foodConstitution			0	buffs.foodMeal	300.0	constitution	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+newbie_meat	foodHealth			0	buffs.foodMeat	300.0	health	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+newbie_melon	foodStamina			0	buffs.foodVegetable	300.0	stamina	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+newbie_nectar	foodWillpower			0	buffs.foodBeverage	300.0	willpower	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+foraged_berries	foodStamina	foodWillpower		0	buffs.foodMeal	300.0	stamina	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_bugs	foodConstitution	foodStamina		0	buffs.foodMeal	300.0	constitution	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fungus	foodConstitution	foodWillpower		0	buffs.foodMeal	300.0	constitution	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_funk	foodHealth	foodStamina		0	buffs.foodMeal	300.0	health	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_livers	foodHealth	foodConstitution		0	buffs.foodMeal	300.0	health	50.0	constitution	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fruit_1	foodStamina	foodWillpower		0	buffs.foodVegetable	300.0	stamina	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fruit_2	foodConstitution	foodStamina		0	buffs.foodVegetable	300.0	constitution	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fruit_3	foodConstitution	foodWillpower		0	buffs.foodVegetable	300.0	constitution	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fruit_4	foodHealth	foodStamina		0	buffs.foodVegetable	300.0	health	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_fruit_5	foodHealth	foodWillpower		0	buffs.foodVegetable	300.0	health	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_vegetable_2	foodHealth	foodStamina		0	buffs.foodVegetable	300.0	health	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_vegetable_3	foodHealth	foodConstitution		0	buffs.foodVegetable	300.0	health	50.0	constitution	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_vegetable_4	foodStamina	foodWillpower		0	buffs.foodVegetable	300.0	stamina	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+foraged_vegetable_5	foodConstitution	foodStamina		0	buffs.foodVegetable	300.0	constitution	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+enragePet	enragePet			1	command.enragepets	60.0	private_melee_dmg_bonus	25.0	private_defense_penalty	40.0		0.0		0.0		0.0	5	none		1	false
+emboldenPet	emboldenPet			1	command.emboldenpets	300.0	healthPercent	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+perform_inspire_1	performance			1	buffs.genericBuff	300.0	script_var	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+cyborgStrengthBuff	cyborgStrengthBuff			1	command.cyborgStrengthBuff	10.0	melee_damage_mod	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+cyberneticLegs	cyborgLegBoost			1	command.burstRun	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+cyborgBurstRun	cyborgBurstRun	escape		2	command.cyborgBurstRun	60.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+rally	slRally			1	state.rallied	30.0	private_defense_bonus	80.0	ranged_accuracy	40.0	melee_accuracy	40.0		0.0		0.0	-1	none		1	false
+steadyAim	slSteadyAim			1	command.steadyAim	20.0	script_var	120.0		0.0		0.0		0.0		0.0	-1	none		1	false
+powerBoost	tkaPowerBoost			1	command.powerBoost	300.0	health	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
+conceal	stealthBonus			2	command.conceal	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+mask_scent	stealthBonus			1	command.maskScent	-1.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_carbine_acc	fsCarbine			1	buffs.spiceMind	300.0	carbine_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_carbine_spd	fsCarbine			1	buffs.spiceAction	300.0	carbine_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_heavy_acc	fsHeavy			1	buffs.spiceMind	300.0	heavy_weapon_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_heavy_spd	fsHeavy			1	buffs.spiceAction	300.0	heavy_weapon_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_mask_scent	fsMaskScent			1	buffs.spiceAction	300.0	mask_scent	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_melee_acc	fsMelee			1	buffs.spiceMind	300.0	melee_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_melee_def	fsMelee			1	buffs.spiceAction	300.0	melee_defense	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_1h_acc	fs1Hand			1	buffs.spiceMind	300.0	onehandmelee_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_1h_spd	fs1Hand			1	buffs.spiceAction	300.0	onehandmelee_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_pistol_acc	fsPistol			1	buffs.spiceMind	300.0	pistol_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_pistol_spd	fsPistol			1	buffs.spiceAction	300.0	pistol_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_polearm_acc	fsPolearm			1	buffs.spiceMind	300.0	polearm_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_polearm_spd	fsPolearm			1	buffs.spiceAction	300.0	polearm_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_ranged_acc	fsRanged			1	buffs.spiceMind	300.0	ranged_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_ranged_def	fsRanged			1	buffs.spiceAction	300.0	ranged_defense	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_rifle_acc	fsRifle			1	buffs.spiceMind	300.0	rifle_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_rifle_spd	fsRifle			1	buffs.spiceAction	300.0	rifle_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_thrown_acc	fsThrown			1	buffs.spiceMind	300.0	thrown_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_thrown_spd	fsThrown			1	buffs.spiceAction	300.0	thrown_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_2h_acc	fs2Hand			1	buffs.spiceMind	300.0	twohandmelee_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_2h_spd	fs2Hand			1	buffs.spiceAction	300.0	twohandmelee_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_unarmed_acc	fsUnarmed			1	buffs.spiceMind	300.0	unarmed_accuracy	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fs_unarmed_spd	fsUnarmed			1	buffs.spiceAction	300.0	unarmed_speed	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+general_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_general	10.0	faction_bonus	10.0		0.0		0.0		0.0	-1	none		1	false
+artisan_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_artisan	12.0	craft_bonus_artisan	529437.0		0.0		0.0		0.0	-1	none		1	false
+entertainer_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_entertainer	12.0	instrument_bonus	1.0	prop_bonus	1.0		0.0		0.0	-1	none		1	false
+scout_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_scout	12.0		0.0		0.0		0.0		0.0	-1	none		1	false
+chef_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_chef	15.0	craft_bonus_chef	4.0		0.0		0.0		0.0	-1	none		1	false
+tailor_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_tailor	15.0	craft_bonus_tailor	8.0		0.0		0.0		0.0	-1	none		1	false
+bioengineer_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_bioengineer	15.0	craft_bonus_bioengineer	8192.0		0.0		0.0		0.0	-1	none		1	false
+merchant_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_merchant	15.0	hiring	20.0		0.0		0.0		0.0	-1	none		1	false
+imagedesigner_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_imagedesigner	15.0	holoemote_bonus	50.0		0.0		0.0		0.0	-1	none		1	false
+musician_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_musician	15.0	instrument_bonus	1.0		0.0		0.0		0.0	-1	none		1	false
+ranger_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_ranger	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+architect_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_architect	15.0	craft_bonus_architect	1536.0		0.0		0.0		0.0	-1	none		1	false
+droidengineer_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_droidengineer	15.0	craft_bonus_droidengineer	32.0		0.0		0.0		0.0	-1	none		1	false
+weaponsmith_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_weaponsmith	15.0	craft_bonus_weaponsmith	1.0		0.0		0.0		0.0	-1	none		1	false
+shipwright_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_shipwright	15.0	craft_bonus_shipwright	393216.0		0.0		0.0		0.0	-1	none		1	false
+armorsmith_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_armorsmith	15.0	craft_bonus_armorsmith	2.0		0.0		0.0		0.0	-1	none		1	false
+dancer_inspiration	inspiration			1	command.inspire	300.0	xp_bonus_dancer	15.0	prop_bonus	1.0		0.0		0.0		0.0	-1	none		1	false
+petRunSpeed_1	petRunSpeed			1	command.petRunSpeed	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petRunSpeed_2	petRunSpeed			2	command.petRunSpeed	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petRunSpeed_3	petRunSpeed			3	command.petRunSpeed	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petShield_1	petShield			1	command.petShield	15.0	script_var	0.1		0.0		0.0		0.0		0.0	-1	none		1	false
+petShield_2	petShield			2	command.petShield	25.0	script_var	0.25		0.0		0.0		0.0		0.0	-1	none		1	false
+petShield_3	petShield			3	command.petShield	40.0	script_var	0.5		0.0		0.0		0.0		0.0	-1	none		1	false
+petFrenzy_1	petFrenzy			1	command.petFrenzy	15.0	script_var	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petFrenzy_2	petFrenzy			2	command.petFrenzy	25.0	script_var	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petFrenzy_3	petFrenzy			3	command.petFrenzy	40.0	script_var	250.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petDefense_1	petDefense			1	command.petDefense	15.0	script_var	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petDefense_2	petDefense			2	command.petDefense	25.0	script_var	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petDefense_3	petDefense			3	command.petDefense	40.0	script_var	250.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petSnareAttack	petSnare	snare		1	command.petSnareAttack	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petSnareAttack_1	petSnare	snare		2	command.petSnareAttack	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petPinAttack	petPin	mez		1	command.petPinAttack	20.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+petPinAttack_1	petPin	mez		2	command.petPinAttack	30.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+petPinning	pinning			1	command.petPinAttack	20.0	script_var	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petDefenseBreakAttack	petDefenseBreak			1	command.petDefenseBreakAttack	15.0	script_var	-100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+petDefenseBreakAttack_1	petDefenseBreak			2	command.petDefenseBreakAttack	30.0	script_var	-250.0		0.0		0.0		0.0		0.0	-1	none		1	false
+toxic_dissolution	foodMitigateDamage			6	buffs.foodBeverage	60.0	script_var	-15.0		0.0		0.0		0.0		0.0	-1	none		1	true
+corrosion	armorBreak			6	command.armorBreak	60.0	private_armor_break	40.0		0.0		0.0		0.0		0.0	-1	none		1	true
+obfuscation	accuracyDebuff			6	buffs.spiceMind	60.0	ranged_accuracy	-200.0	melee_accuracy	-200.0		0.0		0.0		0.0	-1	none		1	true
+confusion	defenseDebuff			6	buffs.spiceAction	60.0	ranged_defense	-200.0	melee_defense	-200.0		0.0		0.0		0.0	-1	none		1	true
+distraction	forceAura	centerOfBeing	duelistStance	6	command.centerOfBeing	24.0	private_defense_bonus	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+lethargy	cmSlow	warcry		6	command.thyroidRupture	60.0	combat_slow	60.0		0.0		0.0		0.0		0.0	-1	none		1	true
+wavering	snare			6	command.kneecapShot	60.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+enfeeble	stasis	mez		6	jedi.stasis	12.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	true
+bio_etheric_shock	healthDebuff			6	command.vitalize	60.0	healthPercent	-20.0	constitutionPercent	-80.0		0.0		0.0		0.0	-1	none		1	true
+torpor	actionDebuff			6	command.endorphineInjection	60.0	staminaPercent	-30.0		0.0		0.0		0.0		0.0	-1	none		1	true
+vacuity	mindDebuff			6	command.serotoninInjection	60.0	willpowerPercent	-30.0		0.0		0.0		0.0		0.0	-1	none		1	true
+boss_armor_break_immunity	armorBreak			10	command.armorBreak	-1.0	private_armor_break	1.0		0.0		0.0		0.0		0.0	-1	none		0	false
+boss_snare_immunity	snare			10	command.kneecapShot	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		0	false
+boss_root_immunity	root			10	command.stoppingShot	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		0	false
+boss_mez_immunity	stasis	mez		11	state.rage	-1.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		0	false
+boss_slow_immunity	cmSlow	warcry		10	command.warcry	-1.0	combat_slow	1.0		0.0		0.0		0.0		0.0	-1	none		0	false
+biological_suppression	healthDebuff	actionDebuff	mindDebuff	10	command.vitalize	180.0	healthPercent	-50.0	staminaPercent	-50.0	willpowerPercent	-50.0		0.0		0.0	-1	none		1	true
+crystal_buff	centerOfBeing	duelistStance	forceAura	6	command.centerOfBeing	500.0	healing_efficiency	200.0	private_relative_level_mod	15.0	private_raw_damage_bonus	2000.0	health	90000.0	private_defense_bonus	400.0	-1	none		1	false
+crystal_buff_drained	none			6	command.centerOfBeing	120.0	private_accuracy_bonus	75.0	private_raw_damage_bonus	75.0	combat_haste	15.0	stamina	150.0		0.0	-1	none		1	false
+hunted	defenseDebuff			6	buffs.spiceAction	60.0	ranged_defense	-200.0	melee_defense	-200.0		0.0		0.0		0.0	-1	none		1	true
+guardian_taint	mobSlow			6	command.thyroidRupture	60.0	combat_slow	35.0		0.0		0.0		0.0		0.0	-1	none		1	true
+player_armor_break_immunity	armorBreak		nullification	10	command.armorBreak	20.0	private_armor_break	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+player_snare_immunity	snare		nullification	10	command.kneecapShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+player_root_immunity	root		nullification	10	command.stoppingShot	20.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+player_mez_immunity	stasis	mez	nullification	11	state.rage	20.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+player_slow_immunity	cmSlow	warcry	nullification	10	command.warcry	20.0	combat_slow	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_1	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	250.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_2	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	275.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_3	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	300.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_4	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	325.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_5	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	350.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_6	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	375.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_7	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	400.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_8	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	425.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_9	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	450.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_10	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	475.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediForce_11	forcePower			1	cyborg.cyborgSureShot	-1.0	jedi_force_power_max	500.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediRegen_1	forceRegen			1	jedi.forceArmor	-1.0	jedi_force_power_regen	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediRegen_2	forceRegen			1	jedi.forceArmor	-1.0	jedi_force_power_regen	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediRegen_3	forceRegen			1	jedi.forceArmor	-1.0	jedi_force_power_regen	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediRegen_4	forceRegen			1	jedi.forceArmor	-1.0	jedi_force_power_regen	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+jediRegen_5	forceRegen			1	jedi.forceArmor	-1.0	jedi_force_power_regen	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_1	holobuff			1	jedi.forceCloak	900.0	health	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_2	holobuff			2	jedi.forceCloak	900.0	ranged_defense	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_3	holobuff			3	jedi.forceCloak	900.0	melee_defense	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_4	holobuff			4	jedi.forceCloak	900.0	stamina	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_5	holobuff			5	jedi.forceCloak	900.0	willpower	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_6	holobuff			6	jedi.forceCloak	900.0	constitution	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+holocron_7	holobuff			7	jedi.forceCloak	900.0	resistance_fire	30.0	absorption_fire	15.0		0.0		0.0		0.0	-1	none		1	false
+holocron_8	holobuff			8	jedi.forceCloak	35.0	constitutionPercent	75.0	staminaPercent	50.0		0.0		0.0		0.0	-1	none		1	false
+fireAttack	procBuff			5	buffs.genericBuff	180.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+fireAttack_1	procBuff			1	buffs.genericBuff	180.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeHealthBuff	doctorHealth			1	buffs.genericBuff	60.0	health	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeStaminaBuff	doctorStamina			1	buffs.genericBuff	60.0	stamina	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeDefenseBuff	genDefenseBonus			1	buffs.genericBuff	15.0	private_defense_bonus	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeMeleeAccuracy	genAccuracy			1	buffs.genericBuff	60.0	melee_accuracy	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeRngAccuracy	genAccuracy			1	buffs.genericBuff	60.0	ranged_accuracy	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+dish_meat_jerky	foodHealth	foodConstitution		1	buffs.foodMeal	3900.0	health	100.0	constitution	100.0		0.0		0.0		0.0	-1	none		1	false
+trivialRngAcc	genAccuracy			1	buffs.genericBuff	-1.0	ranged_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialMeleeAcc	genAccuracy			1	buffs.genericBuff	-1.0	melee_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialComboRngSpeed	genRngSpeed			1	buffs.genericBuff	-1.0	rifle_speed	1.0	pistol_speed	1.0	carbine_speed	1.0		0.0		0.0	-1	none		1	false
+trivialComboMeleeSpeed	genMeleeSpeed			1	buffs.genericBuff	-1.0	onehandmelee_speed	1.0	polearm_speed	1.0	twohandmelee_speed	1.0	unarmed_speed	1.0		0.0	-1	none		1	false
+trivialSlopeMove	genSlopeMove			1	buffs.genericBuff	-1.0	slope_move	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialUnarmedDamage	genUnarmedDamage			1	buffs.genericBuff	-1.0	unarmed_damage	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialMeleeDefense	genMeleeDefense			1	buffs.genericBuff	-1.0	melee_defense	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialRangedDefense	genRngDefense			1	buffs.genericBuff	-1.0	ranged_defense	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialComboResist	genDotResist			1	buffs.genericBuff	-1.0	resistance_poison	1.0	resistance_disease	1.0	resistance_bleeding	1.0	resistance_fire	1.0		0.0	-1	none		1	false
+trivialHealEfficiency	genHealEfficiency			1	buffs.genericBuff	-1.0	healing_efficiency	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialPistolAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	pistol_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialCarbineAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	carbine_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialRifleAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	rifle_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialUnarmedAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	unarmed_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialPolearmAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	polearm_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivial2hAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	twohandmelee_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivial1hAccuracy	genAccuracy			1	buffs.genericBuff	-1.0	onehandmelee_accuracy	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialPistolSpeed	genRngSpeed			1	buffs.genericBuff	-1.0	pistol_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialCarbineSpeed	genRngSpeed			1	buffs.genericBuff	-1.0	carbine_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialRifleSpeed	genRngSpeed			1	buffs.genericBuff	-1.0	rifle_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialUnarmedSpeed	genMeleeSpeed			1	buffs.genericBuff	-1.0	unarmed_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivialPolearmSpeed	genMeleeSpeed			1	buffs.genericBuff	-1.0	polearm_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivial2hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1.0	twohandmelee_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+trivial1hSpeed	genMeleeSpeed			1	buffs.genericBuff	-1.0	onehandmelee_speed	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_run	slGroupBuff			1	command.formUp	1800.0	group	0.0	movement	0.0	slope_move	50.0		0.0		0.0	-1	none		1	false
+sl_group_acc	slGroupBuff			1	command.steadyAim	1800.0	group	0.0	private_accuracy_bonus	150.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_def	slGroupBuff			1	command.tactics	1800.0	group	0.0	private_defense_bonus	150.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_crit_hit	slGroupBuff			1	command.blazeOfGlory	1800.0	group	0.0	private_crit_bonus	15.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_armor	slGroupBuff			1	command.callToArms	1800.0	group	0.0	private_armor_bonus	1000.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_regen	slGroupBuff			1	command.boostMorale	1800.0	group	0.0	staminaPercent	10.0	willpowerPercent	10.0		0.0		0.0	-1	none		1	false
+sl_group_armor_break	slGroupBuff			1	command.volleyFire	1800.0	group	0.0	private_armor_bypass	25.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_red_cooldown	slGroupBuff			1	command.doubleTime	1800.0	group	0.0	private_cooldown_bonus	50.0		0.0		0.0		0.0	-1	none		1	false
+sl_group_retreat	slGroupBuff			1	command.retreat	90.0	group	0.0	movement	0.0	staminaPercent	-100.0	willpowerPercent	-100.0		0.0	-1	none		1	false
+sl_group_charge	slGroupBuff			1	command.charge	90.0	group	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	false
+sl_charge_debuff	chargePenalty			1	command.charge	180.0	private_defense_penalty	200.0		0.0		0.0		0.0		0.0	-1	none		1	false
+sl_inc_taunt	tauntBuff			2	command.verbalAssault	600.0	private_taunt_bonus	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+sl_dec_taunt	tauntBuff			2	command.combatFeint	600.0	private_taunt_bonus	-50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+sl_inc_dmg	dmgBuff			2	command.highYield	600.0	private_damage_bonus	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+sl_inc_armor	armorBuff			2	command.toughen	600.0	private_armor_bonus	1200.0		0.0		0.0		0.0		0.0	-1	none		1	false
+calledShot	calledShot			1	command.calledShot	30.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	true
+roadmapFsClicky	genBuff_4			50	buffs.genericBuff	30.0	melee_accuracy	25.0	private_defense_bonus	25.0		0.0		0.0		0.0	-1	none		1	false
+roadmapBhClicky	genBuff_4			50	buffs.genericBuff	300.0	droid_tracks	5.0	droid_track_speed	20.0		0.0		0.0		0.0	-1	none		1	false
+roadmapCommandoClicky	genBuff_4			50	buffs.genericBuff	30.0	combat_haste	5.0	stamina	15.0	willpower	10.0		0.0		0.0	-1	none		1	false
+roadmapOfficerClicky	genBuff_4			50	buffs.genericBuff	30.0	group_ranged_defense	5.0	group_melee_defense	5.0	group_slope_move	25.0		0.0		0.0	-1	none		1	false
+roadmapMedicClicky	genBuff_4			50	buffs.genericBuff	30.0	healing_efficiency	25.0	cure_efficiency	25.0		0.0		0.0		0.0	-1	none		1	false
+roadmapSpyClicky	genBuff_4			50	buffs.genericBuff	30.0	combat_haste	5.0	ranged_accuracy	25.0		0.0		0.0		0.0	-1	none		1	false
+roadmapSmugglerClicky	genBuff_4			50	buffs.genericBuff	30.0	combat_haste	5.0	private_defense_bonus	25.0		0.0		0.0		0.0	-1	none		1	false
+roadmapEntertainerClicky	genBuff_4			50	buffs.genericBuff	120.0	healing_music_wound	25.0	healing_dance_wound	25.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDs_1	genBuff_4			20	command.toughen	30.0	private_melee_dmg_shield	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDs_2	genBuff_4			25	command.toughen	30.0	private_melee_dmg_shield	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDs_3	genBuff_4			30	command.toughen	30.0	private_melee_dmg_shield	35.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDs_1	genBuff_4			20	command.toughen	30.0	private_damage_shield	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDs_2	genBuff_4			25	command.toughen	30.0	private_damage_shield	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDs_3	genBuff_4			30	command.toughen	30.0	private_damage_shield	35.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towComboDs_1	genBuff_4			20	command.toughen	30.0	private_damage_shield	10.0	private_melee_dmg_shield	10.0		0.0		0.0		0.0	-1	none		1	false
+towComboDs_2	genBuff_4			25	command.toughen	30.0	private_damage_shield	25.0	private_melee_dmg_shield	25.0		0.0		0.0		0.0	-1	none		1	false
+towComboDs_3	genBuff_4			30	command.toughen	30.0	private_damage_shield	35.0	private_melee_dmg_shield	35.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeAcc_1	genBuff_4			18	command.aim	60.0	melee_accuracy	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeAcc_2	genBuff_4			23	command.aim	60.0	melee_accuracy	115.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeAcc_3	genBuff_4			28	command.aim	60.0	melee_accuracy	175.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngAcc_1	genBuff_4			18	command.aim	60.0	ranged_accuracy	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngAcc_2	genBuff_4			23	command.aim	60.0	ranged_accuracy	115.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngAcc_3	genBuff_4			28	command.aim	60.0	ranged_accuracy	175.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towComboAcc_1	genBuff_4			18	command.aim	60.0	melee_accuracy	75.0	ranged_accuracy	75.0		0.0		0.0		0.0	-1	none		1	false
+towComboAcc_2	genBuff_4			23	command.aim	60.0	melee_accuracy	115.0	ranged_accuracy	115.0		0.0		0.0		0.0	-1	none		1	false
+towComboAcc_3	genBuff_4			28	command.aim	60.0	melee_accuracy	175.0	ranged_accuracy	175.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDef_1	genBuff_4			18	command.toughen	60.0	melee_defense	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDef_2	genBuff_4			23	command.toughen	60.0	melee_defense	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMeleeDef_3	genBuff_4			28	command.toughen	60.0	melee_defense	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDef_1	genBuff_4			18	command.toughen	60.0	ranged_defense	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDef_2	genBuff_4			23	command.toughen	60.0	ranged_defense	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRngDef_3	genBuff_4			28	command.toughen	60.0	ranged_defense	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPrivateDef_1	genBuff_4			19	command.toughen	60.0	private_defense_bonus	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPrivateDef_2	genBuff_4			24	command.toughen	60.0	private_defense_bonus	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPrivateDef_3	genBuff_4			29	command.toughen	60.0	private_defense_bonus	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towComboSpeed_1	genBuff_4			24	command.consider	600.0	ranged_speed	10.0	melee_speed	10.0		0.0		0.0		0.0	-1	none		1	false
+towComboSpeed_2	genBuff_4			29	command.consider	600.0	ranged_speed	25.0	melee_speed	25.0		0.0		0.0		0.0	-1	none		1	false
+towHealth_1	genBuff_3			20	command.regeneration	900.0	health	75.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towHealth_2	genBuff_3			25	command.regeneration	1200.0	health	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towHealth_3	genBuff_3			30	command.regeneration	1500.0	health	150.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towConstitution_1	genBuff_3			20	command.regeneration	900.0	constitution	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towConstitution_2	genBuff_3			25	command.regeneration	1200.0	constitution	65.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towConstitution_3	genBuff_3			30	command.regeneration	1500.0	constitution	85.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towStamina_1	genBuff_3			20	command.regeneration	900.0	stamina	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towStamina_2	genBuff_3			25	command.regeneration	1200.0	stamina	65.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towStamina_3	genBuff_3			30	command.regeneration	1500.0	stamina	85.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towWillpower_1	genBuff_3			20	command.regeneration	900.0	willpower	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towWillpower_2	genBuff_3			25	command.regeneration	1200.0	willpower	65.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towWillpower_3	genBuff_3			30	command.regeneration	1500.0	willpower	85.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towHealthConst_1	genBuff_3			21	command.sampledna	900.0	health	75.0	constitution	50.0		0.0		0.0		0.0	-1	none		1	false
+towHealthConst_2	genBuff_3			26	command.sampledna	1200.0	health	100.0	constitution	65.0		0.0		0.0		0.0	-1	none		1	false
+towHealthStamina_1	genBuff_3			21	command.sampledna	900.0	health	75.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+towHealthStamina_2	genBuff_3			26	command.sampledna	1200.0	health	100.0	stamina	65.0		0.0		0.0		0.0	-1	none		1	false
+towHealthWillpower_1	genBuff_3			21	command.sampledna	900.0	health	75.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+towHealthWillpower_2	genBuff_3			26	command.sampledna	1200.0	health	100.0	willpower	65.0		0.0		0.0		0.0	-1	none		1	false
+towConstStamina_1	genBuff_3			21	command.sampledna	900.0	constitution	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+towConstStamina_2	genBuff_3			26	command.sampledna	1200.0	constitution	65.0	stamina	65.0		0.0		0.0		0.0	-1	none		1	false
+towConstWillpower_1	genBuff_3			21	command.sampledna	900.0	constitution	50.0	willpower	50.0		0.0		0.0		0.0	-1	none		1	false
+towConstWillpower_2	genBuff_3			26	command.sampledna	1200.0	constitution	65.0	willpower	65.0		0.0		0.0		0.0	-1	none		1	false
+towStaminaWillpower_1	genBuff_3			21	command.sampledna	900.0	willpower	50.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+towStaminaWillpower_2	genBuff_3			26	command.sampledna	1200.0	willpower	65.0	stamina	65.0		0.0		0.0		0.0	-1	none		1	false
+towHealthConstStamina	genBuff_3			22	command.secondChance	1200.0	health	75.0	constitution	50.0	stamina	50.0		0.0		0.0	-1	none		1	false
+towHealthConstWillpower	genBuff_3			22	command.secondChance	1200.0	health	75.0	constitution	50.0	willpower	50.0		0.0		0.0	-1	none		1	false
+towHealthStaminaWillpower	genBuff_3			22	command.secondChance	1200.0	health	75.0	stamina	50.0	willpower	50.0		0.0		0.0	-1	none		1	false
+towConstStaminaWillpower	genBuff_3			22	command.secondChance	1200.0	constitution	50.0	stamina	50.0	willpower	50.0		0.0		0.0	-1	none		1	false
+towHealthConStaWill	genBuff_3			23	command.secondChance	1500.0	health	75.0	constitution	50.0	stamina	50.0	willpower	50.0		0.0	-1	none		1	false
+towProcA_1	genBuff_4			20	command.detonateDroid	120.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcA_2	genBuff_4			25	command.detonateDroid	180.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcA_3	genBuff_4			30	command.detonateDroid	300.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcB_1	genBuff_4			20	command.dazzle	120.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcB_2	genBuff_4			25	command.dazzle	180.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcB_3	genBuff_4			30	command.dazzle	300.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towHaste_1	genBuff_4	haste		25	command.adrenalBoost	600.0	combat_haste	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towHaste_2	genBuff_4	haste		30	command.adrenalBoost	900.0	combat_haste	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResist_1	genBuff_4			17	command.countertoxin	1800.0	resistance_poison	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResist_2	genBuff_4			22	command.countertoxin	1800.0	resistance_poison	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResist_3	genBuff_4			27	command.countertoxin	1800.0	resistance_poison	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonAbsorb_1	genBuff_4			17	command.countertoxin	1800.0	absorption_poison	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonAbsorb_2	genBuff_4			22	command.countertoxin	1800.0	absorption_poison	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonAbsorb_3	genBuff_4			27	command.countertoxin	1800.0	absorption_poison	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResistAbsorb_1	genBuff_4			18	command.countertoxin	1800.0	resistance_poison	10.0	absorption_poison	5.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResistAbsorb_2	genBuff_4			23	command.countertoxin	1800.0	resistance_poison	15.0	absorption_poison	10.0		0.0		0.0		0.0	-1	none		1	false
+towPoisonResistAbsorb_3	genBuff_4			28	command.countertoxin	1800.0	resistance_poison	25.0	absorption_poison	20.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResist_1	genBuff_4			17	command.countertoxin	1800.0	resistance_disease	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResist_2	genBuff_4			22	command.countertoxin	1800.0	resistance_disease	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResist_3	genBuff_4			27	command.countertoxin	1800.0	resistance_disease	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseAbsorb_1	genBuff_4			17	command.countertoxin	1800.0	absorption_disease	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseAbsorb_2	genBuff_4			22	command.countertoxin	1800.0	absorption_disease	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseAbsorb_3	genBuff_4			27	command.countertoxin	1800.0	absorption_disease	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResistAbsorb_1	genBuff_4			18	command.countertoxin	1800.0	resistance_disease	10.0	absorption_disease	5.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResistAbsorb_2	genBuff_4			23	command.countertoxin	1800.0	resistance_disease	15.0	absorption_disease	10.0		0.0		0.0		0.0	-1	none		1	false
+towDiseaseResistAbsorb_3	genBuff_4			28	command.countertoxin	1800.0	resistance_disease	25.0	absorption_disease	20.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResist_1	genBuff_4			17	command.bandage	1800.0	resistance_bleeding	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResist_2	genBuff_4			22	command.bandage	1800.0	resistance_bleeding	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResist_3	genBuff_4			27	command.bandage	1800.0	resistance_bleeding	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedAbsorb_1	genBuff_4			17	command.bandage	1800.0	absorption_bleeding	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedAbsorb_2	genBuff_4			22	command.bandage	1800.0	absorption_bleeding	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedAbsorb_3	genBuff_4			27	command.bandage	1800.0	absorption_bleeding	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResistAbsorb_1	genBuff_4			18	command.bandage	1800.0	resistance_bleeding	10.0	absorption_bleeding	5.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResistAbsorb_2	genBuff_4			23	command.bandage	1800.0	resistance_bleeding	15.0	absorption_bleeding	10.0		0.0		0.0		0.0	-1	none		1	false
+towBleedResistAbsorb_3	genBuff_4			28	command.bandage	1800.0	resistance_bleeding	25.0	absorption_bleeding	20.0		0.0		0.0		0.0	-1	none		1	false
+towFireResist_1	genBuff_4			17	command.countertoxinSpray	1800.0	resistance_fire	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireResist_2	genBuff_4			22	command.countertoxinSpray	1800.0	resistance_fire	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireResist_3	genBuff_4			27	command.countertoxinSpray	-1.0	resistance_fire	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireAbsorb_1	genBuff_4			17	command.countertoxinSpray	1800.0	absorption_fire	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireAbsorb_2	genBuff_4			22	command.countertoxinSpray	1800.0	absorption_fire	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireAbsorb_3	genBuff_4			27	command.countertoxinSpray	1800.0	absorption_fire	20.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFireResistAbsorb_1	genBuff_4			18	command.countertoxinSpray	1800.0	resistance_fire	10.0	absorption_fire	5.0		0.0		0.0		0.0	-1	none		1	false
+towFireResistAbsorb_2	genBuff_4			23	command.countertoxinSpray	1800.0	resistance_fire	15.0	absorption_fire	10.0		0.0		0.0		0.0	-1	none		1	false
+towFireResistAbsorb_3	genBuff_4			28	command.countertoxinSpray	1800.0	resistance_fire	25.0	absorption_fire	20.0		0.0		0.0		0.0	-1	none		1	false
+roadmapCQFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	melee_defense	5.0	melee_speed	5.0		0.0		0.0	-1	none		1	false
+roadmapRangedFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	ranged_accuracy	5.0	ranged_speed	5.0		0.0		0.0	-1	none		1	false
+roadmapDefenseFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	melee_defense	5.0	ranged_defense	5.0		0.0		0.0	-1	none		1	false
+roadmapMedicFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	healing_efficiency	5.0	buffing_efficiency	5.0	cure_efficiency	5.0		0.0	-1	none		1	false
+roadmapEntertainerFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	healing_music_wound	5.0	healing_dance_wound	5.0		0.0		0.0	-1	none		1	false
+roadmapTraderFinal	genBuff_1			80	command.inspire	-1.0	health	35.0	general_assembly	5.0	private_defense_bonus	5.0		0.0		0.0	-1	none		1	false
+npeVisualAcuity	genBuff_4			5	buffs.genericBuff	60.0	ranged_accuracy	10.0	ranged_speed	5.0		0.0		0.0		0.0	-1	none		1	false
+npeManualAcuity	genBuff_4			5	buffs.genericBuff	60.0	melee_accuracy	10.0	melee_speed	5.0		0.0		0.0		0.0	-1	none		1	false
+npeHealEff	genBuff_4			5	buffs.genericBuff	60.0	healing_efficiency	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_simple_tea	foodWillpower			1	buffs.foodBeverage	3600.0	willpower	65.0	stamina	50.0		0.0		0.0		0.0	-1	none		1	false
+npeHealthLongDuration	genBuff_3			3	buffs.spiceMind	900.0	health	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeStaminaLongDuration	genBuff_3			3	buffs.spiceAction	900.0	stamina	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeWillLongDuration	genBuff_3			3	buffs.spiceMind	900.0	willpower	25.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeRngSpeedLongDuration	genBuff_4			4	buffs.spiceAction	900.0	ranged_speed	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeMeleeSpeedLongDuration	genBuff_4			3	buffs.spiceAction	900.0	melee_speed	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+npeComboAccLongDuration	genBuff_4			3	buffs.genericBuff	900.0	ranged_accuracy	5.0	melee_accuracy	5.0		0.0		0.0		0.0	-1	none		1	false
+towHealthMinor	genBuff_3			19	command.regeneration	300.0	health	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towCrystalOffenseBurst	genBuff_3			60	command.detonateDroid	300.0	health	100.0	ranged_speed	20.0	melee_speed	20.0		0.0		0.0	-1	none		1	false
+towCrystalDefenseBurst	genBuff_3			60	command.toughen	300.0	health	100.0	private_defense_bonus	50.0		0.0		0.0		0.0	-1	none		1	false
+towCrystalDotImmunity	genBuff_4			60	buffs.spiceHealth	60.0	absorption_poison	50.0	absorption_disease	50.0	absorption_bleeding	50.0	absorption_fire	50.0		0.0	-1	none		1	false
+towHelmetAccuracy	genBuff_1			90	command.aim	-1.0	ranged_accuracy	10.0	melee_accuracy	10.0		0.0		0.0		0.0	-1	none		1	false
+towGlovesHealEff	genBuff_1			90	command.sampledna	-1.0	healing_efficiency	10.0	buffing_efficiency	10.0		0.0		0.0		0.0	-1	none		1	false
+towCrystalUberCombat	genBuff_4	haste		60	command.dazzle	120.0	health	150.0	stamina	150.0	combat_haste	10.0		0.0		0.0	-1	none		1	false
+towCrystalUberDs	genBuff_4			60	command.toughen	120.0	health	250.0	willpower	200.0	private_melee_dmg_shield	40.0	private_damage_shield	40.0	private_defense_bonus	75.0	-1	none		1	false
+towCrystalABImmune	genBuff_4	armorBreak		60	command.toughen	120.0	health	-300.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towRingAbsorption	genBuff_4			90	command.bandage	-1.0	absorption_poison	10.0	absorption_disease	10.0	absorption_bleeding	10.0	absorption_fire	10.0		0.0	-1	none		1	false
+towAbsorption	genBuff_4			60	command.bandage	900.0	absorption_poison	20.0	absorption_disease	20.0	absorption_bleeding	20.0	absorption_fire	20.0		0.0	-1	none		1	false
+towProcB_5	genBuff_4			90	command.dazzle	-1.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcB_6	genBuff_4			40	command.dazzle	120.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcB_7	genBuff_4			40	command.dazzle	120.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcBraceletMelee	genBuff_4			90	command.detonateDroid	-1.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcBraceletRange	genBuff_4			90	command.detonateDroid	-1.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towProcBraceletCombo	genBuff_4			90	command.detonateDroid	-1.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+combatRegenDebuff	combatRegenDebuff			1	jedi.forceChoke	30.0	constitutionPercent	-99.0	willpowerPercent	-99.0	staminaPercent	-99.0		0.0		0.0	-1	none		1	false
+combatMoveDebuff	combatMoveDebuff			0	jedi.forceChoke	30.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+invis_blendIn	invisibility			1	command.blendIn	-1.0	invis	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+invis_camouflage	invisibility			2	command.camouflageSelf	-1.0	invis	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+invis_cover	invisibility			3	command.cover	-1.0	invis	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+invis_urbanStealth	invisibility			4	command.urbanStealth	-1.0	movement	0.0	invis	0.0		0.0		0.0		0.0	-1	none		1	false
+invis_wildernessStealth	invisibility			4	command.wildernessStealth	-1.0	movement	0.0	invis	0.0		0.0		0.0		0.0	-1	none		1	false
+invis_forceCloak	invisibility			5	jedi.forceCloak	-1.0	movement	0.0	invis	0.0		0.0		0.0		0.0	-1	none		1	false
+incognito	incognito			1	command.incognito	-1.0		0.0	invis	0.0		0.0		0.0		0.0	-1	none		1	false
+startled	stealthFailure			1	command.traumatize	20.0	movement	30.0	combat_slow	30.0		0.0		0.0		0.0	-1	none		1	false
+caltropSnare	caltropSnare	snare		3	command.crippleAttack	10.0	movement	25.0		0.0		0.0		0.0		0.0	-1	none		1	true
+flashBang	flashBang			3	command.startleShot	10.0	combat_slow	25.0		0.0		0.0		0.0		0.0	13	none		1	true
+towArmorAssembly	genBuff_4			80	buffs.genericBuff	-1.0	armor_assembly	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towWeaponAssembly	genBuff_4			80	buffs.genericBuff	-1.0	weapon_assembly	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towDroidAssembly	genBuff_4			80	buffs.genericBuff	-1.0	droid_assembly	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMedAssembly	genBuff_4			80	buffs.genericBuff	-1.0	medicine_assembly	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFoodAssembly	genBuff_4			80	buffs.genericBuff	-1.0	food_assembly	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towFacGuardDefenseItem	genBuff_4			58	command.toughen	20.0	private_defense_bonus	200.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towForemanCoolingItem	genBuff_4			58	command.countertoxinSpray	30.0	absorption_fire	18.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towForemanBurstRun	burstrun	escape		1	command.burstRun	60.0	movement	0.0		0.0		0.0		0.0		0.0	-1	removeBurstRun		1	false
+towHk47MoveImmuneItem	snare	root	nullification	11	command.burstRun	20.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towMafosaMezImmune	stasis	mez	nullification	11	state.rage	20.0		0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+towCommanderIIRegenItem	genBuff_3			90	command.dazzle	20.0	constitutionPercent	200.0	willpowerPercent	200.0	staminaPercent	200.0		0.0		0.0	-1	none		1	false
+forceCrystalHealth	forceCrystalHealth			90	jedi.forceArmor	7200.0	health	300.0	constitution	50.0		0.0		0.0		0.0	-1	none		1	false
+forceCrystalForce	forceCrystalForce			90	jedi.forceArmor	7200.0	jedi_force_power_max	400.0	jedi_force_power_regen	2.0		0.0		0.0		0.0	-1	none		1	false
+stop	none			100	command.regeneration	-1.0	movement	0.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedComboAcc_1	genBuff_4			10	command.aim	900.0	ranged_accuracy	15.0	melee_accuracy	15.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedRngDefense_1	genBuff_4			9	command.toughen	900.0	ranged_defense	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedPoisonResist	genBuff_4			9	command.countertoxin	900.0	resistance_poison	10.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedHealth_1	genBuff_3			9	command.regeneration	900.0	health	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedTerrainNeg	genBuff_4			9	command.burstRun	900.0	slope_move	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedRngAcc	genBuff_4			9	command.aim	900.0	ranged_accuracy	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedMeleeAcc	genBuff_4			9	command.aim	900.0	melee_accuracy	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedMeleeDef	genBuff_4			9	command.toughen	900.0	melee_defense	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedComboAcc_2	genBuff_4			10	command.aim	900.0	ranged_accuracy	15.0	melee_accuracy	15.0		0.0		0.0		0.0	-1	none		1	false
+contentClickWillpower	genBuff_3			45	command.traumatize	900.0	willpower	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentClickRngDef	genBuff_4			45	command.toughen	900.0	ranged_defense	8.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentClickConstitution	genBuff_3			45	command.regeneration	900.0	constitution	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentWornComboDef	genBuff_3			75	command.toughen	-1.0	health	15.0	ranged_defense	5.0	melee_defense	5.0		0.0		0.0	-1	none		1	false
+contentChargedHealth_2	genBuff_3			9	command.regeneration	900.0	health	50.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedProcFire	genBuff_4			11	command.detonateDroid	900.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedProcCold	genBuff_4			11	command.detonateDroid	900.0	proc_buff	1.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedRngDefense_2	genBuff_4			9	command.toughen	900.0	ranged_defense	15.0		0.0		0.0		0.0		0.0	-1	none		1	false
+contentChargedComboSpeed	genBuff_4			8	command.consider	900.0	ranged_speed	5.0	melee_speed	5.0		0.0		0.0		0.0	-1	none		1	false
+contentWornThrantaBuff	genBuff_3			74	command.toughen	-1.0	health	15.0	ranged_accuracy	3.0	melee_accuracy	3.0		0.0		0.0	-1	none		1	false
+npeBugJuice	genBuff_4			3	command.toughen	900.0	private_defense_bonus	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+low_morale	low_morale			10	command.boostMorale	1200.0	ranged_defense	-100.0	melee_defense	-100.0	combat_slow	10.0		0.0		0.0	-1	none		1	false
+high_morale	high_morale			10	command.boostMorale	1200.0	ranged_defense	100.0	melee_defense	100.0	combat_haste	10.0		0.0		0.0	-1	none		1	false
+volc_boss_one_1	volc_boss_one			1	command.toughen	-1.0	combat_haste	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+volc_boss_one_2	volc_boss_one			1	command.toughen	-1.0	combat_haste	10.0	private_damage_bonus	30.0		0.0		0.0		0.0	-1	none		1	false
+volc_boss_one_3	volc_boss_one			1	command.toughen	-1.0	combat_haste	15.0	private_damage_bonus	40.0		0.0		0.0		0.0	-1	none		1	false
+volc_boss_one_4	volc_boss_one			1	command.toughen	-1.0	combat_haste	20.0	private_damage_bonus	60.0	private_melee_dmg_shield	35.0	private_damage_shield	35.0		0.0	-1	none		1	false
+volc_boss_one_5	volc_boss_one			1	command.toughen	-1.0	combat_haste	20.0	private_damage_bonus	80.0	private_melee_dmg_shield	40.0	private_damage_shield	40.0		0.0	-1	none		1	false
+volc_boss_one_6	volc_boss_one			1	command.toughen	-1.0	combat_haste	20.0	private_damage_bonus	110.0	private_melee_dmg_shield	40.0	private_damage_shield	40.0	private_armor_bonus	1200.0	-1	none		1	false
+volc_boss_one_7	volc_boss_one			1	command.toughen	-1.0	combat_haste	25.0	private_damage_bonus	150.0	private_melee_dmg_shield	45.0	private_damage_shield	45.0	private_armor_bonus	2500.0	-1	none		1	false
+volc_boss_one_8	volc_boss_one			1	command.toughen	-1.0	combat_haste	30.0	private_damage_bonus	170.0	private_melee_dmg_shield	60.0	private_damage_shield	60.0	private_armor_bonus	4000.0	-1	none		1	false
+uplink_enrage	cmSlow	root	snare	5	command.berserk	18.0	combat_haste	50.0	private_damage_bonus	120.0	private_armor_bonus	1200.0		0.0		0.0	-1	none		1	false
+insidiousMalady	malady			1	command.vitalize	10.0	healthPercent	-10.0		0.0		0.0		0.0		0.0	-1	maladyRecourse		1	false
+insidiousMalady_1	malady			2	command.vitalize	15.0	healthPercent	-15.0		0.0		0.0		0.0		0.0	-1	maladyRecourse_1		1	false
+insidiousMalady_2	malady			3	command.vitalize	15.0	healthPercent	-20.0		0.0		0.0		0.0		0.0	-1	maladyRecourse_2		1	false
+insidiousMalady_3	malady			4	command.vitalize	20.0	healthPercent	-25.0		0.0		0.0		0.0		0.0	-1	maladyRecourse_3		1	false
+insidiousMalady_4	malady			5	command.vitalize	25.0	healthPercent	-30.0		0.0		0.0		0.0		0.0	-1	none		1	false
+euphoria	euphoria			1	buffs.genericBuff	45.0	staminaPercent	4000.0	willpowerPercent	4000.0	jedi_force_power_regen	300.0		0.0		0.0	-1	none		1	false
+sher_kar_rage	skRage			1	command.toughen	15.0	private_damage_bonus	100.0		0.0		0.0		0.0		0.0	-1	none		1	false
+cloakOfLava	armorBreak			8	command.toughen	45.0	private_melee_dmg_shield	100.0	private_damage_shield	100.0	private_armor_bonus	6000.0		0.0		0.0	-1	none		1	false
+seethingAnger	cmSlow	root	snare	1	command.toughen	10.0	private_damage_bonus	30.0		0.0		0.0		0.0		0.0	-1	seetingAngerRecourse		1	false
+seethingAnger_1	cmSlow	root	snare	1	command.toughen	10.0	private_damage_bonus	50.0		0.0		0.0		0.0		0.0	-1	seetingAngerRecourse_1		1	false
+seethingAnger_2	cmSlow	root	snare	1	command.toughen	10.0	private_damage_bonus	80.0		0.0		0.0		0.0		0.0	-1	seetingAngerRecourse_2		1	false
+seethingAnger_3	cmSlow	root	snare	1	command.toughen	10.0	private_damage_bonus	200.0		0.0		0.0		0.0		0.0	-1	seetingAngerRecourse_3		1	false
+seethingAnger_4	cmSlow	root	snare	1	command.toughen	60.0	private_damage_bonus	1000.0		0.0		0.0		0.0		0.0	-1	none		1	false
+drink_rancoraid	cmSnare			3	buffs.foodBeverage	60.0	movement	5.0		0.0		0.0		0.0		0.0	-1	none		1	false
+decrepitStrike	cmSlow			4	command.thyroidRupture	30.0	combat_slow	80.0		0.0		0.0		0.0		0.0	-1	none		1	true
+sk_shockWave	mez			1	command.concussionShot	2.0	delay_attack	0.0	movement	0.0		0.0		0.0		0.0	-1	none		1	true

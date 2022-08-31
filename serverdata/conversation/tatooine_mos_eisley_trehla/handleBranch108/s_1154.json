@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_1156",
+		"comment": "You are welcome.  Safe journeys."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

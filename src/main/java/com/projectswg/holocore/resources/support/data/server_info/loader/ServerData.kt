@@ -28,7 +28,9 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.ConversationLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
+import com.projectswg.holocore.resources.support.data.server_info.loader.terrain.TerrainHeightLoader
 import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.lang.ref.Reference
@@ -42,19 +44,13 @@ object ServerData {
 	 * Combat
 	 */
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
-	val specialLines		by SoftDataLoaderDelegate(::SpecialLineLoader)
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
-	
+
 	/*
-	 * Skill / Expertise / Collection
+	 * Skill / Collection
 	 */
 	val skills				by SoftDataLoaderDelegate(::SkillLoader)
-	val skillTemplates		by SoftDataLoaderDelegate(::SkillTemplateLoader)
-	val expertise			by SoftDataLoaderDelegate(::ExpertiseLoader)
-	val expertiseTrees		by SoftDataLoaderDelegate(::ExpertiseTreeLoader)
-	val expertiseAbilities	by SoftDataLoaderDelegate(::ExpertiseAbilityLoader)
-	val collections			by SoftDataLoaderDelegate(::CollectionLoader)
-	
+
 	/*
 	 * Player
 	 */
@@ -62,9 +58,9 @@ object ServerData {
 	val playerRoles			by SoftDataLoaderDelegate(::PlayerRoleLoader)
 	val playerStartClothing	by SoftDataLoaderDelegate(::StartClothingLoader)
 	val staticItems			by SoftDataLoaderDelegate(::StaticItemLoader)
-	val roadmapRewards		by SoftDataLoaderDelegate(::RoadmapRewardLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
-	
+	val combatXpMultipliers	by SoftDataLoaderDelegate(::CombatXpMultiplierLoader)
+
 	/*
 	 * NPC Info
 	 */
@@ -87,15 +83,24 @@ object ServerData {
 	val slotArrangements	by SoftDataLoaderDelegate(::SlotArrangementLoader)
 	val planetMapCategories	by SoftDataLoaderDelegate(::PlanetMapCategoryLoader)
 	val zoneInsertions		by SoftDataLoaderDelegate(::TerrainZoneInsertionLoader)
+	val terrains            by SoftDataLoaderDelegate(::TerrainHeightLoader)
+	
+	val elevators           by SoftDataLoaderDelegate(::ElevatorLoader)
+	val housing             by SoftDataLoaderDelegate(::StructureInfoLoader)
 	
 	val commands			by SoftDataLoaderDelegate(::CommandLoader)
+	val combatCommands		by SoftDataLoaderDelegate(::CombatCommandLoader)
 	val travelCosts			by SoftDataLoaderDelegate(::TravelCostLoader)
 	val vehicles			by SoftDataLoaderDelegate(::VehicleLoader)
 	val staticPvpZones		by SoftDataLoaderDelegate(::StaticPvpZoneLoader)
 	val dynamicSpawns		by SoftDataLoaderDelegate(::DynamicSpawnLoader)
 	val terrainLevels		by SoftDataLoaderDelegate(::TerrainLevelLoader)
 	val noSpawnZones		by SoftDataLoaderDelegate(::NoSpawnZoneLoader)
-	val gcwRegionLoader		by SoftDataLoaderDelegate(::GcwRegionLoader)
+	val conversationLoader	by SoftDataLoaderDelegate(::ConversationLoader)
+	val questLoader			by SoftDataLoaderDelegate(::QuestLoader)
+	val badges  			by SoftDataLoaderDelegate(::BadgeLoader)
+	val mappingTemplates	by SoftDataLoaderDelegate(::MappingTemplateLoader)
+	val speciesRestrictions	by SoftDataLoaderDelegate(::SpeciesRestrictionLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)

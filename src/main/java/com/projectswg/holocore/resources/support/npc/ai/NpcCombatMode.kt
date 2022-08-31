@@ -1,23 +1,24 @@
 package com.projectswg.holocore.resources.support.npc.ai
 
+import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Point3D
-import com.projectswg.common.data.objects.GameObjectType
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.color.SWGColor
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ThreadLocalRandom
@@ -37,7 +38,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		get() = targets.stream()
 				.filter { creo -> creo.isAttackable(ai) }
 				.filter { creo -> (creo.posture != Posture.INCAPACITATED || spawner.isDeathblow) && creo.posture != Posture.DEAD }
-				.min(Comparator.comparingInt { it.health }).orElse(null)
+				.max(Comparator.comparingInt { ai.hateMap[it] ?: 0 }).orElse(null)
 	
 	override fun onPlayerMoveInAware(player: CreatureObject, distance: Double) {
 		if (distance > spawner.aggressiveRadius) {
@@ -54,17 +55,25 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	override fun onModeStart() {
+		showExclamationMarkAboveNpc()
 		StopNpcMovementIntent.broadcast(ai)
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
 	}
 	
+	private fun showExclamationMarkAboveNpc() {
+		ai.sendObservers(ShowFlyText(ai.objectId, StringId("npc_reaction/flytext", "threaten"), ShowFlyText.Scale.SMALL, SWGColor.Reds.red))
+	}
+
 	override fun onModeEnd() {
 		val obj = ai
-		obj.intendedTargetId = 0
 		obj.lookAtTargetId = 0
 	}
 	
 	override fun act() {
+		if (ai.posture == Posture.DEAD) {
+			return	// Don't waste CPU cycles if the NPC is dead
+		}
+		
 		if (isRooted) {
 			queueNextLoop(500)
 			return
@@ -73,7 +82,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		targets.removeIf { creo -> creo.posture == Posture.INCAPACITATED || creo.posture == Posture.DEAD }
 		if (!targets.isEmpty()) {
 			performCombatAction()
-			queueNextLoop(500 + ThreadLocalRandom.current().nextLong(-50, 50))
+			queueNextLoop(500 + ThreadLocalRandom.current().nextLong(-200, 200))
 		} else {
 			ScheduleNpcModeIntent.broadcast(ai, NpcNavigateMode(ai, returnLocation.get()))
 		}
@@ -93,8 +102,8 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val attackRange = weapon.maxRange.toDouble()
 		val actionRange = attackRange / 2
 		val lineOfSight = obj.isLineOfSight(target)
-		
-		if (targetDistance > actionRange || !lineOfSight) {
+
+		if (ai.walkSpeed > 0 && (targetDistance > actionRange || !lineOfSight)) {
 			val targetLocation = target.location
 			val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-75.0, 75.0)
 			val targetRange = actionRange / 2
@@ -115,19 +124,19 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val distance = obj.worldLocation.distanceTo(target.worldLocation)
 		if (distance > weapon.maxRange)
 			return
-		obj.intendedTargetId = target.objectId
 		obj.lookAtTargetId = target.objectId
 		// If we're close, angle towards target
-		val myLocation = obj.worldLocation
-		val targetLocation = target.worldLocation
-		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(myLocation.getHeadingTo(targetLocation)).build(), npcRunSpeed)
+		val myLocation = obj.location
+		val targetLocation = target.location
+		val headingTo = myLocation.getHeadingTo(targetLocation.position)
+		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed)
 		
 		if (target.posture == Posture.INCAPACITATED) {
-			QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand("deathblow"), 0)
+			QueueCommandIntent.broadcast(obj, target, "", ServerData.commands.getCommand("deathblow"), 0)
 			return
 		}
 		
-		QueueCommandIntent.broadcast(obj, target, "", DataLoader.commands().getCommand(getWeaponCommand(weapon)), 0)
+		QueueCommandIntent.broadcast(obj, target, "", ServerData.commands.getCommand(getWeaponCommand(weapon)), 0)
 	}
 	
 	private fun requestAssistance() {
@@ -142,22 +151,12 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	}
 	
 	private fun getWeaponCommand(weapon: WeaponObject): String {
-		val ai = weapon.parent as AIObject?
-		
-		return if (ai != null && GameObjectType.GOT_CREATURE == ai.gameObjectType) {
-			// Creatures use different default attack abilities than humanoids do
-			"creatureMeleeAttack"    // TODO this is a bit simple as there are ranged attacks available for some creatures as well.
-		} else {
-			when (weapon.type) {
-				WeaponType.PISTOL -> "rangedShotPistol"
-				WeaponType.RIFLE -> "rangedShotRifle"
-				WeaponType.LIGHT_RIFLE -> "rangedShotLightRifle"
-				WeaponType.CARBINE, WeaponType.HEAVY, WeaponType.HEAVY_WEAPON, WeaponType.DIRECTIONAL_TARGET_WEAPON -> "rangedShot"
-				WeaponType.ONE_HANDED_MELEE, WeaponType.TWO_HANDED_MELEE, WeaponType.UNARMED, WeaponType.POLEARM_MELEE, WeaponType.THROWN -> "meleeHit"
-				WeaponType.ONE_HANDED_SABER, WeaponType.TWO_HANDED_SABER, WeaponType.POLEARM_SABER -> "saberHit"
-				else -> "meleeHit"
-			}
+		if (weapon.template == "object/weapon/creature/shared_creature_default_weapon.iff") {
+			// Creature weapon, use the melee attack designed for creatures
+			return "creatureMeleeAttack"
 		}
+
+		return weapon.type.defaultAttack
 	}
 	
 }

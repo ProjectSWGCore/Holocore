@@ -39,15 +39,15 @@ import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointOb
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestObjectAwareness extends TestRunnerNoIntents {
 	
@@ -131,10 +131,10 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		initialize();
 		player.setHasOwner(false);
 		
-		Assert.assertTrue(player.isPlayer());
-		Assert.assertFalse(player.isLoggedInPlayer());
-		Assert.assertTrue(testPlayer.isPlayer());
-		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		assertTrue(player.isPlayer());
+		assertFalse(player.isLoggedInPlayer());
+		assertTrue(testPlayer.isPlayer());
+		assertTrue(testPlayer.isLoggedInPlayer());
 		
 		// Shouldn't be aware of anything else because it's a logged out player
 		for (TestLocation loc : TestLocation.values()) {
@@ -143,10 +143,10 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		}
 		
 		player.setHasOwner(true);
-		Assert.assertTrue(player.isPlayer());
-		Assert.assertTrue(player.isLoggedInPlayer());
-		Assert.assertTrue(testPlayer.isPlayer());
-		Assert.assertTrue(testPlayer.isLoggedInPlayer());
+		assertTrue(player.isPlayer());
+		assertTrue(player.isLoggedInPlayer());
+		assertTrue(testPlayer.isPlayer());
+		assertTrue(testPlayer.isLoggedInPlayer());
 		
 		for (TestLocation loc : TestLocation.values()) {
 			try {
@@ -163,15 +163,15 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		move(TestLocation.BSSI);
 		
-		Assert.assertTrue(player.getAware().contains(testNpc));
+		assertTrue(player.getAware().contains(testNpc));
 		testNpc.systemMove(testCell2);
 		update(testNpc);
 		assertFalse(player.getAware().contains(testNpc));
 		
 		testNpc.systemMove(testCell1);
-		Assert.assertTrue(testNpc.isVisible(player));
+		assertTrue(testNpc.isVisible(player));
 		update(testNpc);
-		Assert.assertTrue(player.getAware().contains(testNpc));
+		assertTrue(player.getAware().contains(testNpc));
 		
 		{
 			SWGPacket packet;
@@ -183,7 +183,7 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		testNpc.systemMove(testCell1);
 		update(testNpc);
-		Assert.assertNull(player.getOwner().getNextPacket());
+		assertNull(player.getOwner().getNextPacket());
 	}
 	
 	@Test
@@ -234,16 +234,16 @@ public class TestObjectAwareness extends TestRunnerNoIntents {
 		
 		// Ensure it doesn't contain the unexpected
 		for (SWGObject a : awareActual) {
-			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
+			assertTrue(player.getOwner() == null || player.isBaselinesSent(a), "Baselines were supposed to be sent: " + a);
 			if (a.getParent() != null)
 				continue;
-			assertTrue("Not supposed to be aware of object: " + a, awareExpected.contains(a));
+			assertTrue(awareExpected.contains(a), "Not supposed to be aware of object: " + a);
 		}
 		
 		// Ensure it contains the expected
 		for (SWGObject a : awareExpected) {
-			assertTrue("Baselines were supposed to be sent: " + a, player.getOwner() == null || player.isBaselinesSent(a));
-			assertTrue("Supposed to be aware of object: " + a, awareActual.contains(a));
+			assertTrue(player.getOwner() == null || player.isBaselinesSent(a), "Baselines were supposed to be sent: " + a);
+			assertTrue(awareActual.contains(a), "Supposed to be aware of object: " + a);
 		}
 	}
 	

@@ -30,9 +30,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.combat.DeathblowIntent;
-import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
-import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent;
 import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
@@ -53,52 +50,25 @@ public class DuelService extends Service {
 		}
 		
 		switch (dpi.getEventType()) {
-			case ACCEPT:
-				handleAcceptDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case CANCEL:
-				handleCancelDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case DECLINE:
-				handleDeclineDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case END:
-				handleEndDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			case REQUEST:
-				handleRequestDuel(dpi.getSender(), dpi.getReciever());
-				break;
-			default:
-				break;
+			case ACCEPT -> handleAcceptDuel(dpi.getSender(), dpi.getReciever());
+			case CANCEL -> handleCancelDuel(dpi.getSender(), dpi.getReciever());
+			case DECLINE -> handleDeclineDuel(dpi.getSender(), dpi.getReciever());
+			case END -> handleEndDuel(dpi.getSender(), dpi.getReciever());
+			case REQUEST -> handleRequestDuel(dpi.getSender(), dpi.getReciever());
 		}
 	}
 	
 	@IntentHandler
-	private void handleDeathblowIntent(DeathblowIntent di) {
-		CreatureObject killer = di.getKiller();
-		CreatureObject corpse = di.getCorpse();
+	private void handleCreatureKilledIntent(CreatureKilledIntent intent) {
+		CreatureObject killer = intent.getKiller();
+		CreatureObject corpse = intent.getCorpse();
 		
 		if (!corpse.isPlayer()) {
 			return;
 		}
 		
 		if (corpse.isDuelingPlayer(killer)) {
-			handleEndDuel(corpse, killer);
-		}
-		
-	}
-	
-	@IntentHandler
-	private void handlCreatureKilledIntent(CreatureKilledIntent cki) {
-		CreatureObject killer = cki.getKiller();
-		CreatureObject corpse = cki.getCorpse();
-		
-		if (!corpse.isPlayer()) {
-			return;
-		}
-		
-		if (corpse.isDuelingPlayer(killer)) {
-			handleEndDuel(corpse, killer);
+			endDuel(killer, corpse);
 		}
 		
 	}
@@ -119,14 +89,16 @@ public class DuelService extends Service {
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
 		
-		new DuelPlayerIntent(accepter, target, DuelPlayerIntent.DuelEventType.BEGINDUEL).broadcast();
+		FactionIntent.broadcastUpdateFlags(accepter);
+		FactionIntent.broadcastUpdateFlags(target);
 	}
 	
 	private void endDuel(CreatureObject ender, CreatureObject target) {
 		ender.removePlayerFromSentDuels(target);
 		target.removePlayerFromSentDuels(ender);
 		
-		new DuelPlayerIntent(ender, target, DuelPlayerIntent.DuelEventType.END).broadcast();
+		FactionIntent.broadcastUpdateFlags(ender);
+		FactionIntent.broadcastUpdateFlags(target);
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {

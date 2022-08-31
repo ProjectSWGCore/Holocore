@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_cheated_gambler",
+		"key": "s_347",
+		"comment": "What do you want?  Just go away."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "gesticulate_wildly"
+			}
+		}
+	]
+}

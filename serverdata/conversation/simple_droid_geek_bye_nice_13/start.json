@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_geek",
+		"key": "bye_nice_13",
+		"comment": "Click, click click. Buzz. Whirr. Whirr. Goodbye."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

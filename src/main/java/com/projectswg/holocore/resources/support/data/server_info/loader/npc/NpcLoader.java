@@ -68,7 +68,7 @@ public final class NpcLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/npc/npc.msdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc.msdb"))) {
 			npcMap.putAll(set.parallelStream(NpcInfo::new).collect(toMap(NpcInfo::getId, Function.identity())));
 		}
 	}
@@ -97,10 +97,10 @@ public final class NpcLoader extends DataLoader {
 			ignore_player			*	TEXT
 			attack_speed				REAL
 			movement_speed				REAL
-			primary_weapon				TEXT
-			primary_weapon_specials	*	TEXT
-			secondary_weapon			TEXT
-			secondary_weapon_specials*	TEXT
+			default_weapon				TEXT
+			default_weapon_specials	*	TEXT
+			thrown_weapon			TEXT
+			thrown_weapon_specials*	TEXT
 			aggressive_radius			INTEGER
 			assist_radius				INTEGER
 			stalker					*	TEXT
@@ -113,9 +113,6 @@ public final class NpcLoader extends DataLoader {
 			loot_table2					TEXT
 			loot_table3_chance			INTEGER
 			loot_table3					TEXT
-			collection_roll			*	INTEGER
-			collection_loot			*	TEXT
-			collection_faction		*	TEXT
 			chronicle_loot_chance	*	INTEGER
 			chronicle_loot_category	*	TEXT
 		 */
@@ -130,8 +127,8 @@ public final class NpcLoader extends DataLoader {
 		private final int hue;
 		private final double scaleMin;
 		private final double scaleMax;
-		private final String primaryWeaponSpecials;
-		private final String secondaryWeaponSpecials;
+		private final String defaultWeaponSpecials;
+		private final String thrownWeaponSpecials;
 		private final int aggressiveRadius;
 		private final int assistRadius;
 		private final boolean deathblow;
@@ -143,8 +140,8 @@ public final class NpcLoader extends DataLoader {
 		private final int lootTable3Chance;
 		
 		private final List<String> iffs;
-		private final List<String> primaryWeapons;
-		private final List<String> secondaryWeapons;
+		private final List<String> defaultWeapon;
+		private final List<String> thrownWeapon;
 		private final HumanoidNpcInfo humanoidInfo;
 		private final DroidNpcInfo droidInfo;
 		private final CreatureNpcInfo creatureInfo;
@@ -162,10 +159,10 @@ public final class NpcLoader extends DataLoader {
 			this.specForce = set.getBoolean("spec_force");
 			this.attackSpeed = set.getReal("attack_speed");
 			this.movementSpeed = set.getReal("movement_speed");
-			this.primaryWeapons = parseWeapons(set.getText("primary_weapon"));
-			this.primaryWeaponSpecials = set.getText("primary_weapon_specials");
-			this.secondaryWeapons = parseWeapons(set.getText("secondary_weapon"));
-			this.secondaryWeaponSpecials = set.getText("secondary_weapon_specials");
+			this.defaultWeapon = parseWeapons(set.getText("default_weapon"));
+			this.defaultWeaponSpecials = set.getText("default_weapon_specials");
+			this.thrownWeapon = parseWeapons(set.getText("thrown_weapon"));
+			this.thrownWeaponSpecials = set.getText("thrown_weapon_specials");
 			this.aggressiveRadius = (int) set.getInt("aggressive_radius");
 			this.assistRadius = (int) set.getInt("assist_radius");
 			this.deathblow = set.getBoolean("death_blow");
@@ -249,20 +246,20 @@ public final class NpcLoader extends DataLoader {
 			return hue;
 		}
 		
-		public List<String> getPrimaryWeapons() {
-			return primaryWeapons;
+		public List<String> getDefaultWeapon() {
+			return defaultWeapon;
 		}
 		
-		public String getPrimaryWeaponSpecials() {
-			return primaryWeaponSpecials;
+		public String getDefaultWeaponSpecials() {
+			return defaultWeaponSpecials;
 		}
 		
-		public List<String> getSecondaryWeapons() {
-			return secondaryWeapons;
+		public List<String> getThrownWeapon() {
+			return thrownWeapon;
 		}
 		
-		public String getSecondaryWeaponSpecials() {
-			return secondaryWeaponSpecials;
+		public String getThrownWeaponSpecials() {
+			return thrownWeaponSpecials;
 		}
 		
 		public int getAggressiveRadius() {

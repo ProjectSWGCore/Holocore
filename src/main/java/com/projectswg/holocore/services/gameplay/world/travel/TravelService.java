@@ -50,9 +50,11 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.staticobject.StaticObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -86,7 +88,7 @@ public class TravelService extends Service {
 	private void handleTravelPointSelectionIntent(TravelPointSelectionIntent tpsi) {
 		CreatureObject traveler = tpsi.getCreature();
 		
-		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName(), tpsi.isInstant()));
+		traveler.sendSelf(new EnterTicketPurchaseModeMessage(traveler.getTerrain().getName(), travel.getNearestTravelPoint(traveler).getName()));
 	}
 	
 	@IntentHandler
@@ -192,7 +194,6 @@ public class TravelService extends Service {
 			
 			shuttle.setOptionFlags(OptionFlag.INVULNERABLE);
 			shuttle.setPosture(Posture.UPRIGHT);
-			shuttle.setShownOnRadar(false);
 		} else if (object.getTemplate().equals(SpecificObject.SO_TICKET_COLLETOR.getTemplate())) {
 			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
 			
@@ -202,6 +203,13 @@ public class TravelService extends Service {
 			}
 			
 			pointForCollector.setCollector(object);
+		} else if (object instanceof BuildingObject && (object.getTemplate().contains("starport") || object.getTemplate().contains("hangar"))) {
+			TravelPoint pointForCollector = travel.getNearestTravelPoint(object);
+			
+			if (pointForCollector == null || pointForCollector.getLocation().flatDistanceTo(object.getLocation()) >= 50)
+				return;
+			
+			pointForCollector.setStarport((BuildingObject) object);
 		}
 	}
 	
@@ -227,14 +235,14 @@ public class TravelService extends Service {
 	}
 	
 	private void handleTicketUseSui(Player player) {
-		List<SWGObject> usableTickets = travel.getTickets(player.getCreatureObject());
+		List<TangibleObject> usableTickets = travel.getTickets(player.getCreatureObject());
 		
 		if (usableTickets.isEmpty()) {	// They don't have a valid ticket.
 			new SystemMessageIntent(player, "@travel:no_ticket_for_shuttle").broadcast();
 		} else {
 			SuiListBox ticketBox = new SuiListBox(SuiButtons.OK_CANCEL, "@travel:select_destination", "@travel:select_destination");
 			
-			for (SWGObject usableTicket : usableTickets) {
+			for (TangibleObject usableTicket : usableTickets) {
 				TravelPoint destinationPoint = travel.getDestinationPoint(usableTicket);
 				
 				ticketBox.addListItem(destinationPoint.getSuiFormat(), destinationPoint);
@@ -242,7 +250,13 @@ public class TravelService extends Service {
 			
 			ticketBox.addOkButtonCallback("handleSelectedItem", (event, parameters) -> {
 				int row = SuiListBox.getSelectedRow(parameters);
-				SWGObject ticket = usableTickets.get(row);
+				if (row < 0) {
+					if (usableTickets.size() == 1)
+						row = 0;
+					else
+						return;
+				}
+				TangibleObject ticket = usableTickets.get(row);
 				TravelPoint nearestPoint = travel.getNearestTravelPoint(ticket);
 				TravelPoint destinationPoint = (TravelPoint) ticketBox.getListItem(row).getObject();
 				travel.handleTicketUse(player, ticket, nearestPoint, destinationPoint);

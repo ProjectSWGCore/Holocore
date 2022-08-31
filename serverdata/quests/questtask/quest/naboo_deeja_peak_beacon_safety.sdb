@@ -1,0 +1,10 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.destroy_multi	1	deeja_peak_beacon_safety_01					13	0	0
+1	quest.task.ground.comm_player	2	deeja_peak_beacon_safety_01b	@quest/ground/naboo_deeja_peak_beacon_safety:task01_comm_message_text	object/mobile/naboo_vance_groten.iff			0	0	0
+2	quest.task.ground.destroy_multi	3	deeja_peak_beacon_safety_02					12	0	0
+3	quest.task.ground.comm_player	4	deeja_peak_beacon_safety_02b	@quest/ground/naboo_deeja_peak_beacon_safety:task03_comm_message_text	object/mobile/naboo_vance_groten.iff			0	0	0
+4	quest.task.ground.destroy_multi	5	deeja_peak_beacon_safety_03			naboo_shaupaut_feral		11	0	0
+5	quest.task.ground.destroy_multi	6	deeja_peak_beacon_safety_04			naboo_shaupaut_feral_blot		1	0	0
+6	quest.task.ground.comm_player	7	deeja_peak_beacon_safety_04b	@quest/ground/naboo_deeja_peak_beacon_safety:task06_comm_message_text	object/mobile/naboo_vance_groten.iff			0	0	0
+7	quest.task.ground.wait_for_signal		deeja_peak_beacon_safety_05					0	0	0

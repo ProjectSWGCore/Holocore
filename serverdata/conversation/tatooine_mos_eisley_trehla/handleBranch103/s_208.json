@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_217",
+		"comment": "I'll just give you directions back to him."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_220",
+				"comment": "Thanks."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch106/s_220"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

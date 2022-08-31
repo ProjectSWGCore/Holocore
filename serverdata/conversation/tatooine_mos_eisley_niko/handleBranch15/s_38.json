@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_43",
+		"comment": "It won't be cold, pal. I can tell you that."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_45",
+				"comment": "I'll see if I can get your coins back."
+			},
+			"next": "tatooine_mos_eisley_niko/handleBranch16/s_45"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "laugh"
+			}
+		}
+	]
+}

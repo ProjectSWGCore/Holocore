@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_331",
+		"comment": "I would have you learn all that you can about independence and survival. I will teach you these things, if you wish to learn."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_333",
+				"comment": "I will follow your instructions."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch8/s_333"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_345",
+				"comment": "I know how to survive. I'll be fine on my own."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch8/s_345"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

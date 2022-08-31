@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_28",
+		"comment": "I don't know exactly.  You shouldn't worry about police matters.  Now excuse me."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

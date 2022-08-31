@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.DamageType
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.SdbIntegerColumnArraySet
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet
+import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.io.File
 import java.io.IOException
@@ -54,8 +55,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	
 	@Throws(IOException::class)
 	override fun load() {
-		SdbLoader.load(File("serverdata/nge/items/master_item.msdb")).use { set ->
-			val colorArray = set.getIntegerArrayParser("index_color_(\\d+)")
+		SdbLoader.load(File("serverdata/items/master_item.msdb")).use { set ->
+			val colorArray = set.getIntegerArrayParser("index_color_(\\d+)", Integer.MAX_VALUE)
 			while (set.next()) {
 				val slot = StaticItemInfo(set, colorArray)
 				itemByName[slot.itemName] = slot
@@ -72,12 +73,12 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val hitPoints: Int = set.getInt("hit_points").toInt()
 		
 		val armorInfo: ArmorItemInfo?
-		val collectionInfo: CollectionItemInfo?
 		val consumableInfo: ConsumableItemInfo?
 		val costumeInfo: CostumeItemInfo?
-		val dnaInfo: DnaItemInfo?
+		val crystalInfo: CrystalItemInfo?
 		val grantInfo: GrantItemInfo?
 		val genericInfo: GenericItemInfo?
+		val itemInfo: GenericItemInfo?
 		val objectInfo: ObjectItemInfo?
 		val schematicInfo: SchematicItemInfo?
 		val storytellerInfo: StorytellerItemInfo?
@@ -88,12 +89,12 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			val type = set.getText("type")
 			
 			this.armorInfo = if ("armor" == type) ArmorItemInfo(set, colorArray) else null
-			this.collectionInfo = if ("collection" == type) CollectionItemInfo(set, colorArray) else null
 			this.consumableInfo = if ("consumable" == type) ConsumableItemInfo(set) else null
 			this.costumeInfo = if ("costume" == type) CostumeItemInfo(set) else null
-			this.dnaInfo = if ("dna" == type) DnaItemInfo(set) else null
+			this.crystalInfo = if ("crystal" == type) CrystalItemInfo(set, colorArray) else null
 			this.grantInfo = if ("grant" == type) GrantItemInfo(set) else null
 			this.genericInfo = if ("generic" == type) GenericItemInfo(set, colorArray) else null
+			this.itemInfo = if ("item" == type) GenericItemInfo(set, colorArray) else null
 			this.objectInfo = if ("object" == type) ObjectItemInfo(set, colorArray) else null
 			this.schematicInfo = if ("schematic" == type) SchematicItemInfo(set) else null
 			this.storytellerInfo = if ("storyteller" == type) StorytellerItemInfo(set) else null
@@ -105,48 +106,28 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	class ArmorItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		
 		val armorLevel: String = set.getText("armor_level")
-		val armorType: ArmorType
+		val armorCategory: ArmorCategory
 		val protection: Int				= set.getInt("protection").toInt()
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
-		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean	= set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
+		val requiredSkill: String		= set.getText("required_skill")
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
-		val wornItemBuff: Int			= set.getInt("worn_item_buff").toInt()
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
-		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int = set.getInt("value").toInt()
 		
 		init {
 			when (set.getText("armor_category")) {
-				"assault" -> this.armorType = ArmorType.ASSAULT
-				"battle" -> this.armorType = ArmorType.BATTLE
-				"recon" -> this.armorType = ArmorType.RECON
+				"assault" -> this.armorCategory = ArmorCategory.assault
+				"battle" -> this.armorCategory = ArmorCategory.battle
+				"recon" -> this.armorCategory = ArmorCategory.reconnaissance
 				else -> throw IllegalArgumentException("Unsupported armor category: " + set.getText("armor_category"))
 			}
 		}
-		
-		enum class ArmorType {
-			ASSAULT,
-			BATTLE,
-			RECON
-		}
-	}
-	
-	class CollectionItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
-		val slotName: String = set.getText("collection_slot_name")
-		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
-			get() = field.clone()
-		
 	}
 	
 	class ConsumableItemInfo(set: SdbResultSet) {
@@ -160,11 +141,11 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val clientEffect: String		= set.getText("client_effect")
 		val clientAnimation: String		= set.getText("client_animation")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
 		val noTrade: Boolean			= set.getInt("no_trade") != 0L
 		val bioLink: Boolean			= set.getInt("bio_link") != 0L
 		val charges: Int				= set.getInt("charges").toInt()
-		
+		val value: Int					= set.getInt("value").toInt()
+
 	}
 	
 	class CostumeItemInfo(set: SdbResultSet) {
@@ -172,8 +153,16 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val buffName: String = set.getText("buff_name")
 		
 	}
-	
-	class DnaItemInfo(set: SdbResultSet)
+
+	class CrystalItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
+		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
+			get() = field.clone()
+		val quality: Int = set.getInt("crystal_quality").toInt()
+		val minDmg: Int = set.getInt("crystal_min_dmg").toInt()
+		val maxDmg: Int = set.getInt("crystal_max_dmg").toInt()
+		val elementalDamageType: String = set.getText("elemental_damage_type")
+		val elementalDamagePercent: Int = set.getInt("elemental_damage_percent").toInt()
+	}
 	
 	class GrantItemInfo(set: SdbResultSet) {
 		
@@ -191,8 +180,9 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	}
 	
 	class GenericItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
-		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+
+		val charges: Int			= set.getInt("charges").toInt()
+		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int				= set.getInt("value").toInt()
 		val isUnique: Boolean		= set.getInt("isUnique") != 0L
@@ -200,8 +190,9 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	}
 	
 	class ObjectItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
-		
-		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+
+		val charges: Int			= set.getInt("charges").toInt()
+		val color: IntArray = Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int = set.getInt("value").toInt()
 		val isUnique: Boolean = set.getInt("isUnique") != 0L
@@ -231,25 +222,20 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val elementalDamage: Int = set.getInt("elemental_damage").toInt()
 		val attackSpeed: Double = set.getReal("attack_speed")
 		val specialAttackCost: Int = set.getInt("special_attack_cost").toInt()
+		val accuracyBonus: Int = set.getInt("accuracy_bonus").toInt()
 		val minRange: Int = set.getInt("min_range_distance").toInt()
 		val maxRange: Int = set.getInt("max_range_distance").toInt()
 		val procEffect: String = set.getText("proc_effect")
-		val targetDps: Int = set.getInt("target_dps").toInt()
-		val actualDps: Int = set.getInt("actual_dps").toInt()
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
-		val requiredProfession: String = set.getText("required_profession")
-		val isRaceWookie: Boolean = set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean = set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean = set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean = set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean = set.getInt("race_rest") != 0L
+		val requiredSkill: String = set.getText("required_skill")
 		val isNoTrade: Boolean = set.getInt("no_trade") != 0L
 		val isBioLink: Boolean = set.getInt("bio_link") != 0L
 		val isDeconstruct: Boolean = set.getInt("deconstruct") != 0L
 		val isSockets: Boolean = set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int> = Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
 		val value: Int = set.getInt("value").toInt()
+		val woundChance: Int = set.getInt("wound_chance").toInt()
 		
 		init {
 			when (set.getText("weapon_type")) {
@@ -290,19 +276,14 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val requiredFaction: String		= set.getText("required_faction")
 		val requiredLevel: Int			= set.getInt("required_level").toInt()
-		val requiredProfession: String	= set.getText("required_profession")
-		val isRaceWookie: Boolean		= set.getInt("race_wookiee") != 0L
-		val isRaceIthorian: Boolean		= set.getInt("race_ithorian") != 0L
-		val isRaceRodian: Boolean		= set.getInt("race_rodian") != 0L
-		val isRaceTrandoshan: Boolean	= set.getInt("race_trandoshan") != 0L
-		val isRaceRest: Boolean			= set.getInt("race_rest") != 0L
+		val requiredSkill: String		= set.getText("required_skill")
 		val isNoTrade: Boolean			= set.getInt("no_trade") != 0L
 		val isBioLink: Boolean			= set.getInt("bio_link") != 0L
 		val wornItemBuff: Int			= set.getInt("worn_item_buff").toInt()
 		val isDeconstruct: Boolean		= set.getInt("deconstruct") != 0L
 		val isSockets: Boolean			= set.getInt("sockets") != 0L
 		val skillMods: Map<String, Int>	= Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
-		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 1, 5)
+		val color: IntArray				= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
 		val value: Int					= set.getInt("value").toInt()
 		
@@ -311,7 +292,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 	companion object {
 		
 		private fun parseSkillMods(modsString: String): Map<String, Int> {
-			val mods = HashMap<String, Int>()    // skillmods/statmods
+			val mods = HashMap<String, Int>()    // skillmods
 			
 			if (modsString.isNotEmpty()) {
 				val modStrings = modsString.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // The mods strings are comma-separated
@@ -320,11 +301,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 					val splitValues = modString.split("=".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()    // Name and value are separated by "="
 					val modName = splitValues[0]
 					
-					// Common statmods end with "_modified"
-					// If not, it's a skillmod
-					val category = if (modName.endsWith("_modified")) "cat_stat_mod_bonus" else "cat_skill_mod_bonus"
-					
-					mods["$category.@stat_n:$modName"] = Integer.parseInt(splitValues[1])
+					mods[modName] = Integer.parseInt(splitValues[1])
 				}
 			}
 			return mods

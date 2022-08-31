@@ -1,0 +1,13 @@
+file	enabled
+TEXT	BOOLEAN
+bartender.sdb	TRUE
+chassis_dealer.sdb	TRUE
+cloning_droid.sdb	TRUE
+commoner.sdb	TRUE
+junk_dealer.sdb	TRUE
+recruiter.sdb	TRUE
+droids.sdb	TRUE
+tatooine_jabbas_palace.sdb	TRUE
+tatooine_mos_eisley.sdb	TRUE
+tatooine_mos_espa_watto.sdb	TRUE
+trainers.sdb	TRUE

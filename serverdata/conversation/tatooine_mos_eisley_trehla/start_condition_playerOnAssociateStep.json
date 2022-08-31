@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_743",
+		"comment": "Please go talk to Trace in Mos Espa."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

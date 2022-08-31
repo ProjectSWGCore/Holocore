@@ -27,18 +27,21 @@
 
 package com.projectswg.holocore.resources.support.objects
 
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.common.data.combat.DamageType
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.StaticItemLoader
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
+import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory
+import com.projectswg.holocore.resources.support.objects.swg.tangible.LightsaberPowerCrystalQuality
+import com.projectswg.holocore.resources.support.objects.swg.tangible.Protection
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import java.util.*
-import kotlin.math.floor
 
 object StaticItemCreator {
 	
 	fun createItem(itemName: String): SWGObject? {
-		val info = DataLoader.staticItems().getItemByName(itemName) ?: return null
+		val info = ServerData.staticItems.getItemByName(itemName) ?: return null
 		val swgObject = ObjectCreator.createObjectFromTemplate(info.iffTemplate) as? TangibleObject ?: return null
 		
 		applyAttributes(swgObject, info)
@@ -46,18 +49,19 @@ object StaticItemCreator {
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.StaticItemInfo) {
-		obj.addAttribute("condition", String.format("%d/%d", info.hitPoints, info.hitPoints))
-		obj.addAttribute("volume", info.volume.toString())
+		obj.maxHitPoints = info.hitPoints
+		obj.volume = info.volume
 		obj.objectName = info.stringName
 		
 		applyAttributes(obj, info.armorInfo)
 		applyAttributes(obj, info.wearableInfo)
 		applyAttributes(obj, info.weaponInfo)
-		applyAttributes(obj, info.collectionInfo)
+		applyAttributes(obj, info.consumableInfo)
 		applyAttributes(obj, info.costumeInfo)
-		applyAttributes(obj, info.dnaInfo)
+		applyAttributes(obj, info.crystalInfo)
 		applyAttributes(obj, info.grantInfo)
 		applyAttributes(obj, info.genericInfo)
+		applyAttributes(obj, info.itemInfo)
 		applyAttributes(obj, info.objectInfo)
 		applyAttributes(obj, info.schematicInfo)
 		applyAttributes(obj, info.storytellerInfo)
@@ -66,90 +70,59 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ArmorItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.requiredProfession.isNotEmpty())
-			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
-		
-		val kineticMax: Int
-		val energyMax: Int
-		when (info.armorType) {
-			StaticItemLoader.ArmorItemInfo.ArmorType.ASSAULT -> {
+
+		obj.requiredCombatLevel = info.requiredLevel
+
+		var kineticMax = 0
+		var energyMax = 0
+		when (info.armorCategory) {
+			ArmorCategory.assault -> {
 				kineticMax = info.protection + 1000
 				energyMax = info.protection - 1000
-				obj.addAttribute("armor_category", "@obj_attr_n:armor_assault")
 			}
-			StaticItemLoader.ArmorItemInfo.ArmorType.BATTLE -> {
+			ArmorCategory.battle -> {
 				kineticMax = info.protection
 				energyMax = info.protection
-				obj.addAttribute("armor_category", "@obj_attr_n:armor_battle")
 			}
-			StaticItemLoader.ArmorItemInfo.ArmorType.RECON -> {
+			ArmorCategory.reconnaissance -> {
 				kineticMax = info.protection - 1000
 				energyMax = info.protection + 1000
-				obj.addAttribute("armor_category", "@obj_attr_n:armor_reconnaissance")
 			}
 		}
+		obj.armorCategory = info.armorCategory
+
+		val protection = Protection(
+			kineticMax,
+			energyMax,
+			info.protection,
+			info.protection,
+			info.protection,
+			info.protection
+		)
 		
-		obj.addAttribute("cat_armor_standard_protection.kinetic", kineticMax.toString())
-		obj.addAttribute("cat_armor_standard_protection.energy", energyMax.toString())
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_heat", info.protection.toString())
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_cold", info.protection.toString())
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_acid", info.protection.toString())
-		obj.addAttribute("cat_armor_special_protection.special_protection_type_electricity", info.protection.toString())
+		obj.protection = protection
 		
 		applySkillMods(obj, info.skillMods)
 		applyColors(obj, info.color)
+		applyItemValue(info.value, obj)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WearableItemInfo?) {
 		if (info == null)
 			return
 		
-		if (info.requiredProfession.isNotEmpty())
-			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
-		
-		if (info.requiredFaction.isNotEmpty())
-			obj.addAttribute("faction_restriction", "@pvp_factions:" + info.requiredFaction)
-		
-		// Apply the mods!
 		applySkillMods(obj, info.skillMods)
+		obj.requiredCombatLevel = info.requiredLevel
+		obj.requiredFaction = ServerData.factions.getFaction(info.requiredFaction)
 		applyColors(obj, info.color)
-		
-		// Add the race restrictions only if there are any
-		val raceRestriction = buildRaceRestrictionString(info)
-		if (raceRestriction.isNotEmpty())
-			obj.addAttribute("species_restrictions.species_name", raceRestriction)
+		applyItemValue(info.value, obj)
 	}
-	
+
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.WeaponItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.requiredProfession.isNotEmpty())
-			obj.addAttribute("class_required", "@ui_roadmap:title_" + info.requiredProfession)
-		obj.addAttribute("required_combat_level", info.requiredLevel.toString())
-		obj.addAttribute("cat_wpn_damage.wpn_damage_type", "@obj_attr_n:${info.damageType.name.toLowerCase(Locale.US)}")
-		obj.addAttribute("cat_wpn_damage.wpn_category", "@obj_attr_n:wpn_category_" + info.weaponType.num)
-		obj.addAttribute("cat_wpn_damage.wpn_attack_speed", (info.attackSpeed / 100).toString())
-		obj.addAttribute("cat_wpn_damage.damage", "${info.minDamage}-${info.maxDamage}")
-		if (info.elementalType != null) {    // Not all weapons have elemental damage.
-			obj.addAttribute("cat_wpn_damage.wpn_elemental_type", "@obj_attr_n:${info.elementalType.name.toLowerCase(Locale.US)}")
-			obj.addAttribute("cat_wpn_damage.wpn_elemental_value", info.elementalDamage.toString())
-		}
-		
-		obj.addAttribute("cat_wpn_damage.weapon_dps", info.actualDps.toString())
-		
-		if (info.procEffect.isNotEmpty())
-		// Not all weapons have a proc effect
-			obj.addAttribute("proc_name", info.procEffect)
-		
-		// TODO set DPS
-		
-		obj.addAttribute("cat_wpn_other.wpn_range", String.format("%d-%dm", info.minRange, info.maxRange))
-		// Ziggy: Special Action Cost would go under cat_wpn_other as well, but it's a pre-NGE artifact.
-		
+		obj.requiredCombatLevel = info.requiredLevel
+
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
 		weapon.attackSpeed = info.attackSpeed.toFloat()
@@ -159,15 +132,24 @@ object StaticItemCreator {
 		weapon.elementalType = info.elementalType
 		weapon.minDamage = info.minDamage
 		weapon.maxDamage = info.maxDamage
+		weapon.accuracy = info.accuracyBonus
+		weapon.woundChance = (info.woundChance / 100f)
+		weapon.procEffect = info.procEffect
+		weapon.specialAttackCost = info.specialAttackCost
+		weapon.requiredSkill = info.requiredSkill
+
+		applyItemValue(info.value, obj)
 	}
-	
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CollectionItemInfo?) {
+
+	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ConsumableItemInfo?) {
 		if (info == null)
 			return
-		
-		obj.addAttribute("collection_name", info.slotName)
-		
-		applyColors(obj, info.color)
+
+		if (info.charges > 0) {
+			obj.counter = info.charges
+		}
+
+		applyItemValue(info.value, obj)
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
@@ -175,11 +157,36 @@ object StaticItemCreator {
 //		if (info == null)
 //			return;
 	}
-	
-	@Suppress("UNUSED_PARAMETER")
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.DnaItemInfo?) {
-//		if (info == null)
-//			return;
+
+	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CrystalItemInfo?) {
+		if (info == null)
+			return
+
+		applyColors(obj, info.color)
+
+		val quality = info.quality
+
+		val powerCrystal = info.maxDmg > 0
+		if (powerCrystal) {
+			obj.lightsaberPowerCrystalQuality = when (quality) {
+				0 -> LightsaberPowerCrystalQuality.poor
+				1 -> LightsaberPowerCrystalQuality.fair
+				2 -> LightsaberPowerCrystalQuality.good
+				3 -> LightsaberPowerCrystalQuality.quality
+				4 -> LightsaberPowerCrystalQuality.select
+				5 -> LightsaberPowerCrystalQuality.premium
+				6 -> LightsaberPowerCrystalQuality.flawless
+				else -> null
+			}
+			obj.lightsaberPowerCrystalMinDmg = info.minDmg
+			obj.lightsaberPowerCrystalMaxDmg = info.maxDmg
+		}
+
+		if (info.elementalDamageType.isNotEmpty()) {
+			val elementalType = DamageType.valueOf(info.elementalDamageType)
+			obj.lightsaberColorCrystalElementalType = elementalType
+			obj.lightsaberColorCrystalDamagePercent = info.elementalDamagePercent
+		}
 	}
 	
 	@Suppress("UNUSED_PARAMETER")
@@ -191,20 +198,24 @@ object StaticItemCreator {
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.GenericItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.value != 0)
-			obj.addAttribute("charges", info.value.toString())
-		
+
+		if (info.charges > 0) {
+			obj.counter = info.charges
+		}
+
+		applyItemValue(info.value, obj)
 		applyColors(obj, info.color)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ObjectItemInfo?) {
 		if (info == null)
 			return
-		
-		if (info.value != 0)
-			obj.addAttribute("charges", info.value.toString())
-		
+
+		if (info.charges != 0) {
+			obj.counter = info.charges
+		}
+
+		applyItemValue(info.value, obj)
 		applyColors(obj, info.color)
 	}
 	
@@ -221,8 +232,9 @@ object StaticItemCreator {
 	}
 	
 	private fun applySkillMods(obj: TangibleObject, skillMods: Map<String, Int>) {
-		for ((key, value) in skillMods)
-			obj.addAttribute(key, value.toString())
+		for ((key, value) in skillMods) {
+			obj.adjustSkillmod(key, value, 0)
+		}
 	}
 	
 	private fun applyColors(obj: TangibleObject, colors: IntArray) {
@@ -232,22 +244,11 @@ object StaticItemCreator {
 			}
 		}
 	}
-	
-	private fun buildRaceRestrictionString(info: StaticItemLoader.WearableItemInfo): String {
-		var races = ""
-		
-		if (info.isRaceWookie)
-			races += "Wookiee "
-		if (info.isRaceIthorian)
-			races += "Ithorian "
-		if (info.isRaceRodian)
-			races += "Rodian "
-		if (info.isRaceTrandoshan)
-			races += "Trandoshan "
-		if (info.isRaceRest)
-			races += "MonCal Human Zabrak Bothan Sullustan Twi'lek "
-		
-		return if (races.isEmpty()) "" else races.substring(0, races.length - 1)
+
+	private fun applyItemValue(value: Int, obj: TangibleObject) {
+		if (value > 0) {
+			obj.setServerAttribute(ServerAttribute.ITEM_VALUE, value)
+		}
 	}
-	
+
 }

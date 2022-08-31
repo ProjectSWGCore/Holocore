@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_niko",
+		"key": "s_62",
+		"comment": "I need a rival gang roughed up. Think you can do that?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_niko",
+				"key": "s_29",
+				"comment": "What did they do?"
+			},
+			"next": "tatooine_mos_eisley_niko/handleBranch13/s_29"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

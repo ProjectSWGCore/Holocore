@@ -1,0 +1,58 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_935",
+		"comment": "All right. I'll transfer a waypoint to your datapad for Captain Kreezo. Is there something else you need?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_754",
+				"comment": "I'd like to know where I can learn to be a pilot."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_754"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1059",
+				"comment": "I'd like to know about the Imperials."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1059"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1075",
+				"comment": "I'd like to know about the Rebels."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1075"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1091",
+				"comment": "I'd like to know about the criminals"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1091"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1107",
+				"comment": "I'm set.  Now I just need to earn credits."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1107"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		}
+	]
+}

@@ -28,7 +28,6 @@
 package com.projectswg.holocore.resources.support.objects.permissions;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -76,16 +75,6 @@ public final class DefaultPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-	}
-	
-	@Override
 	public void readMongo(MongoData data) {
 		
 	}
@@ -109,11 +98,6 @@ public final class DefaultPermissions implements ContainerPermissions {
 	}
 	
 	public static DefaultPermissions getPermissions() {
-		return PERMISSIONS;
-	}
-	
-	public static DefaultPermissions from(NetBufferStream stream) {
-		stream.getByte();
 		return PERMISSIONS;
 	}
 	

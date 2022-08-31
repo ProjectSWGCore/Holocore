@@ -33,8 +33,8 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import com.projectswg.holocore.test.resources.GenericTangibleObject;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -62,16 +62,16 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		b.systemMove(buio.getCellByNumber(3));
 		a.setPosition(-5.97, 0.64, 1);	// Center of portal
 		b.setPosition(-5.97, 0.64, -1);
-		Assert.assertTrue(a.isLineOfSight(b));
-		Assert.assertTrue(b.isLineOfSight(a));
+		assertTrue(a.isLineOfSight(b));
+		assertTrue(b.isLineOfSight(a));
 		a.setPosition(-7.20, 0.64, 1);	// Edge of portal
 		b.setPosition(-7.20, 0.64, -1);
-		Assert.assertTrue(a.isLineOfSight(b));
-		Assert.assertTrue(b.isLineOfSight(a));
+		assertTrue(a.isLineOfSight(b));
+		assertTrue(b.isLineOfSight(a));
 		a.setPosition(-10, 0.64, 1);	// Far beyond portal's view
 		b.setPosition(-7.20, 0.64, -1);
-		Assert.assertFalse(a.isLineOfSight(b));
-		Assert.assertFalse(b.isLineOfSight(a));
+		assertFalse(a.isLineOfSight(b));
+		assertFalse(b.isLineOfSight(a));
 		
 		// Testing portal null-5
 		a.systemMove(null);
@@ -79,18 +79,18 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		// Center of portal
 		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(1, 0.63, 7.5).translateLocation(buio.getLocation()).build());
 		b.setPosition(1, 0.63, 5.5);
-		Assert.assertTrue(a.isLineOfSight(b));
-		Assert.assertTrue(b.isLineOfSight(a));
+		assertTrue(a.isLineOfSight(b));
+		assertTrue(b.isLineOfSight(a));
 		// Edge of portal
 		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(2, 0.63, 7.5).translateLocation(buio.getLocation()).build());
 		b.setPosition(2, 0.63, 5.5);
-		Assert.assertTrue(a.isLineOfSight(b));
-		Assert.assertTrue(b.isLineOfSight(a));
+		assertTrue(a.isLineOfSight(b));
+		assertTrue(b.isLineOfSight(a));
 		// Just beyond portal's view
 		a.setLocation(Location.builder().setTerrain(Terrain.TATOOINE).setPosition(3, 0.63, 7.5).translateLocation(buio.getLocation()).build());
 		b.setPosition(2, 0.63, 5.5);
-		Assert.assertFalse(a.isLineOfSight(b));
-		Assert.assertFalse(b.isLineOfSight(a));
+		assertFalse(a.isLineOfSight(b));
+		assertFalse(b.isLineOfSight(a));
 	}
 	
 	@Test
@@ -103,14 +103,14 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		parent.setLocation(worldLocation);
 		child.setPosition(0, 0, 0);
 		
-		Assert.assertEquals(worldLocation, parent.getWorldLocation());
-		Assert.assertEquals(worldLocation, parent.getLocation());
-		Assert.assertEquals(worldLocation, child.getWorldLocation());
-		Assert.assertEquals(new Location(0, 0, 0, Terrain.NABOO), child.getLocation());
+		assertEquals(worldLocation, parent.getWorldLocation());
+		assertEquals(worldLocation, parent.getLocation());
+		assertEquals(worldLocation, child.getWorldLocation());
+		assertEquals(new Location(0, 0, 0, Terrain.NABOO), child.getLocation());
 		
 		child.setPosition(5, 5, 5);
-		Assert.assertEquals(new Location(20, 22, 24, Terrain.NABOO), child.getWorldLocation());
-		Assert.assertEquals(new Location(5, 5, 5, Terrain.NABOO), child.getLocation());
+		assertEquals(new Location(20, 22, 24, Terrain.NABOO), child.getWorldLocation());
+		assertEquals(new Location(5, 5, 5, Terrain.NABOO), child.getLocation());
 	}
 	
 	@Test
@@ -119,46 +119,52 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		
-		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
-		Assert.assertEquals(Terrain.GONE, child.getTerrain());
+		assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
+		assertEquals(Terrain.GONE, child.getTerrain());
 		
 		child.moveToContainer(parent);
-		Assert.assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
-		Assert.assertEquals(Terrain.ADVENTURE1, child.getTerrain());
+		assertEquals(Terrain.ADVENTURE1, parent.getTerrain());
+		assertEquals(Terrain.ADVENTURE1, child.getTerrain());
 		
 		parent.setTerrain(Terrain.TATOOINE);
-		Assert.assertEquals(Terrain.TATOOINE, parent.getTerrain());
-		Assert.assertEquals(Terrain.TATOOINE, child.getTerrain());
+		assertEquals(Terrain.TATOOINE, parent.getTerrain());
+		assertEquals(Terrain.TATOOINE, child.getTerrain());
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testChildTerrainInvalidParent1() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
-		child.setTerrain(Terrain.TATOOINE);
+		assertThrows(IllegalArgumentException.class, () -> {
+			child.setTerrain(Terrain.TATOOINE);
+		});
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testChildTerrainInvalidParent2() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
-		child.setPosition(Terrain.CORELLIA, 0, 0, 0);
+		assertThrows(IllegalArgumentException.class, () -> {
+			child.setPosition(Terrain.CORELLIA, 0, 0, 0);
+		});
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testChildTerrainInvalidParent3() {
 		SWGObject parent = new GenericCreatureObject(1);
 		SWGObject child = new GenericTangibleObject(2);
 		parent.setTerrain(Terrain.ADVENTURE1);
 		child.moveToContainer(parent);
 		
-		child.setLocation(new Location(0, 0, 0, Terrain.NABOO));
+		assertThrows(IllegalArgumentException.class, () -> {
+			child.setLocation(new Location(0, 0, 0, Terrain.NABOO));
+		});
 	}
 	
 	@Test
@@ -169,26 +175,49 @@ public class TestSWGObject extends TestRunnerNoIntents {
 		child.setArrangement(List.of(List.of("inventory"), List.of("inventory", "datapad")));
 		
 		parent.setSlots(List.of("inventory"));
-		Assert.assertEquals(4, parent.getArrangementId(child));
+		assertEquals(4, parent.getArrangementId(child));
 		
 		parent.setSlots(List.of("inventory", "datapad"));
-		Assert.assertEquals(4, parent.getArrangementId(child));
+		assertEquals(4, parent.getArrangementId(child));
 		
 		parent.removeObject(parent.getDatapad());
 		
 		parent.setSlots(List.of("inventory"));
-		Assert.assertEquals(4, parent.getArrangementId(child));
+		assertEquals(4, parent.getArrangementId(child));
 		
 		parent.setSlots(List.of("inventory", "datapad"));
-		Assert.assertEquals(4, parent.getArrangementId(child));
+		assertEquals(4, parent.getArrangementId(child));
 		
 		child.setArrangement(List.of(List.of("inventory", "datapad")));
 		
 		parent.setSlots(List.of("inventory"));
-		Assert.assertEquals(-1, parent.getArrangementId(child));
+		assertEquals(-1, parent.getArrangementId(child));
 		
 		parent.setSlots(List.of("inventory", "datapad"));
-		Assert.assertEquals(4, parent.getArrangementId(child));
+		assertEquals(4, parent.getArrangementId(child));
 	}
 	
+	@Test
+	public void testMultiplePossibleSlotObjects() {
+		SWGObject parent = new GenericCreatureObject(1);
+		SWGObject ring1 = new GenericTangibleObject(2);
+		ring1.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		SWGObject ring2 = new GenericTangibleObject(3);
+		ring2.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		SWGObject ring3 = new GenericTangibleObject(4);
+		ring3.setArrangement(List.of(List.of("ring_l"), List.of("ring_r")));
+		
+		parent.setSlots(List.of("ring_l", "ring_r"));
+		
+		ring1.moveToContainer(parent);
+		ring2.moveToContainer(parent);
+		
+		assertEquals(parent, ring1.getParent(), "Should be able to equip a ring when slot is unoccupied");
+		assertEquals(parent, ring2.getParent(), "Should be able to equip a second ring when a similar slot is unoccupied");
+		
+		ring3.moveToContainer(parent);
+		
+		assertEquals(parent, ring3.getParent(), "Ring 3 should have been equipped");
+		assertNotEquals(ring1.getParent(), parent, "Ring 1 should have been unequipped");
+	}
 }

@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.npc.ai;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
 
@@ -77,11 +78,12 @@ public class NpcLoiterMode extends NpcMode {
 			theta = random.nextDouble() * Math.PI * 2;
 			l.setX(currentLocation.getX() + Math.cos(theta) * dist);
 			l.setZ(currentLocation.getZ() + Math.sin(theta) * dist);
+			l.setY(DataLoader.Companion.terrains().getHeight(l));
 		} while (!l.isWithinFlatDistance(mainLocation, radius));
 		l.setHeading(l.getYaw() - Math.toDegrees(theta));
 		
-		moveTo(l.build());
-		queueNextLoop(30 + random.nextInt(10));
+		moveTo(getAI().getParent(), l.build());
+		queueNextLoop(30 + random.nextInt(3));
 	}
 	
 }

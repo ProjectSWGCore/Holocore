@@ -28,13 +28,11 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 
 import java.util.BitSet;
 
-public class SWGBitSet extends BitSet implements Encodable, Persistable {
+public class SWGBitSet extends BitSet implements Encodable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -75,17 +73,14 @@ public class SWGBitSet extends BitSet implements Encodable, Persistable {
 		return 8 + (super.length()+7) / 8;
 	}
 	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addArray(toByteArray());
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
+	public void read(byte[] bytes) {
 		clear();
-		xor(valueOf(stream.getArray()));
+
+		if (bytes != null) {
+			xor(valueOf(bytes));
+		}
 	}
-	
+
 	public void sendDeltaMessage(SWGObject target) {
 		target.sendDelta(view, updateType, encode());
 	}

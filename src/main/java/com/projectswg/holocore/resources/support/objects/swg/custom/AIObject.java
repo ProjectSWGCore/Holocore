@@ -26,9 +26,13 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.custom;
 
+import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
+import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -41,6 +45,7 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,9 +56,10 @@ import java.util.concurrent.ScheduledFuture;
 public class AIObject extends CreatureObject {
 	
 	private final Set<CreatureObject> playersNearby;
-	private final List<WeaponObject> primaryWeapons;
-	private final List<WeaponObject> secondaryWeapons;
+	private final List<WeaponObject> defaultWeapons;
+	private final List<WeaponObject> thrownWeapon;
 	private final SWGObject hiddenInventory;
+	private final IncapSafetyTimer incapSafetyTimer;
 	
 	private NpcMode defaultMode;
 	private NpcMode activeMode;
@@ -61,12 +67,13 @@ public class AIObject extends CreatureObject {
 	private ScheduledThreadPool executor;
 	private ScheduledFuture<?> previousScheduled;
 	private String creatureId;
+	private Instant questionMarkBlockedUntil;
 	
 	public AIObject(long objectId) {
 		super(objectId);
 		this.playersNearby = new CopyOnWriteArraySet<>();
-		this.primaryWeapons = new ArrayList<>();
-		this.secondaryWeapons = new ArrayList<>();
+		this.defaultWeapons = new ArrayList<>();
+		this.thrownWeapon = new ArrayList<>();
 		this.hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff");
 		
 		this.spawner = null;
@@ -75,6 +82,8 @@ public class AIObject extends CreatureObject {
 		this.defaultMode = null;
 		this.activeMode = null;
 		this.creatureId = null;
+		incapSafetyTimer = new IncapSafetyTimer(45_000);
+		questionMarkBlockedUntil = Instant.now();
 	}
 	
 	@Override
@@ -128,11 +137,47 @@ public class AIObject extends CreatureObject {
 			return;
 		playersNearby.add(player);
 		
+		boolean npcIsInvulnerable = hasOptionFlags(OptionFlag.INVULNERABLE);
+		
+		if (!npcIsInvulnerable) {
+			boolean npcIsInCombat = isInCombat();
+			if (!npcIsInCombat) {
+				boolean npcIsAggressiveTowardsPlayer = isAttackable(player);
+				
+				if (npcIsAggressiveTowardsPlayer) {
+					boolean playerIsInLineOfSight = isLineOfSight(player);
+					
+					if (playerIsInLineOfSight) {
+						Location playerWorldLocation = player.getWorldLocation();
+						Location aiWorldLocation = this.getWorldLocation();
+						double questionMarkRange = 64;
+						double distanceBetweenNpcAndPlayer = aiWorldLocation.distanceTo(playerWorldLocation);
+						boolean playerIsInRange = distanceBetweenNpcAndPlayer <= questionMarkRange;
+						
+						if (playerIsInRange) {
+							Instant now = Instant.now();
+							boolean questionMarkTimerExpired = now.isAfter(questionMarkBlockedUntil);
+							if (questionMarkTimerExpired) {
+								showQuestionMarkAboveNpc();
+								questionMarkBlockedUntil = Instant.now().plusSeconds(60);
+							}
+						}
+					}
+				}
+			}
+		}
+		
 		checkAwareAttack(player);
 	}
 	
+	private void showQuestionMarkAboveNpc() {
+		this.sendObservers(new ShowFlyText(this.getObjectId(), new StringId("npc_reaction/flytext", "alert"), ShowFlyText.Scale.SMALL, SWGColor.Reds.INSTANCE.getRed()));
+	}
+	
 	private void checkAwareAttack(CreatureObject player) {
-		if (isAttackable(player)) {
+		boolean incapSafetyTimerExpired = incapSafetyTimer.isExpired(System.currentTimeMillis(), player.getLastIncapTime());
+		
+		if (isAttackable(player) && incapSafetyTimerExpired) {
 			double distance = getLocation().flatDistanceTo(player.getLocation());
 			double maxAggroDistance;
 			if (player.isLoggedInPlayer())
@@ -163,13 +208,19 @@ public class AIObject extends CreatureObject {
 		this.spawner = spawner;
 	}
 	
-	public void addPrimaryWeapon(WeaponObject weapon) {
-		this.primaryWeapons.add(weapon);
+	public void addDefaultWeapon(WeaponObject weapon) {
+		this.defaultWeapons.add(weapon);
 		weapon.systemMove(hiddenInventory);
+		
+		if ("object/weapon/creature/shared_creature_default_weapon.iff".equals(weapon.getTemplate())) {
+			addCommand("creatureMeleeAttack");
+		} else {
+			addCommand(weapon.getType().getDefaultAttack());
+		}
 	}
 	
-	public void addSecondaryWeapon(WeaponObject weapon) {
-		this.secondaryWeapons.add(weapon);
+	public void addThrownWeapon(WeaponObject weapon) {
+		this.thrownWeapon.add(weapon);
 		weapon.systemMove(hiddenInventory);
 	}
 	
@@ -186,12 +237,12 @@ public class AIObject extends CreatureObject {
 		return spawner;
 	}
 	
-	public List<WeaponObject> getPrimaryWeapons() {
-		return Collections.unmodifiableList(primaryWeapons);
+	public List<WeaponObject> getDefaultWeapons() {
+		return Collections.unmodifiableList(defaultWeapons);
 	}
 	
-	public List<WeaponObject> getSecondaryWeapons() {
-		return Collections.unmodifiableList(secondaryWeapons);
+	public List<WeaponObject> getThrownWeapon() {
+		return Collections.unmodifiableList(thrownWeapon);
 	}
 	
 	public String getCreatureId() {

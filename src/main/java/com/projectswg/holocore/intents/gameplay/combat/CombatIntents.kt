@@ -30,6 +30,7 @@
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.services.gameplay.combat.CombatState
 import me.joshlarson.jlcommon.control.Intent
 
 /*
@@ -82,5 +83,17 @@ data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObjec
 data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject): Intent() {
 	companion object {
 		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = RequestCreatureDeathIntent(killer, corpse).broadcast()
+	}
+}
+
+data class KnockdownIntent(val victim: CreatureObject): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(victim: CreatureObject) = KnockdownIntent(victim).broadcast()
+	}
+}
+
+data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(attacker: CreatureObject, victim: CreatureObject, combatState: CombatState) = ApplyCombatStateIntent(attacker, victim, combatState).broadcast()
 	}
 }

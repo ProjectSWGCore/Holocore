@@ -27,9 +27,13 @@
 
 package com.projectswg.holocore.resources.support.data.collections;
 
+import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import java.util.BitSet;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSWGBitSet extends TestRunnerNoIntents {
 	
@@ -47,7 +51,61 @@ public class TestSWGBitSet extends TestRunnerNoIntents {
 			33, 0, 0, 0,
 			(1<<4)+(1<<1), 1, 1, 0, 1
 		};
-		Assert.assertArrayEquals(expected, actual);
+		assertArrayEquals(expected, actual);
 	}
 	
+	@Test
+	public void testDecode() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+		
+		byte [] data = new byte[] {
+				5, 0, 0, 0,
+				33, 0, 0, 0,
+				(1<<4)+(1<<1), 1, 1, 0, 1
+		};
+		
+		NetBuffer buffer = NetBuffer.wrap(data);
+		
+		flag.decode(buffer);
+		
+		assertTrue(flag.get(1));
+		assertTrue(flag.get(4));
+		assertTrue(flag.get(8));
+		assertTrue(flag.get(16));
+		assertTrue(flag.get(32));
+		assertFalse(flag.get(64));
+	}
+	
+	@Test
+	public void testGetLength() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+		
+		flag.set(4);
+		flag.set(8);
+		
+		assertEquals(10, flag.getLength());
+	}
+
+	@Test
+	public void testReadBytes_supportsNull() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+
+		flag.set(4);
+		flag.read((byte[]) null);
+
+		assertFalse(flag.get(4));
+	}
+
+	@Test
+	public void testReadBytes_setsFlags() {
+		SWGBitSet flag = new SWGBitSet(3, 16);
+
+		BitSet bitSet = new BitSet();
+		bitSet.set(4);
+		byte[] expected = bitSet.toByteArray();
+
+		flag.read(expected);
+
+		assertTrue(flag.get(4));
+	}
 }

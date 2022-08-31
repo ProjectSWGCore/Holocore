@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_629",
+		"comment": "You are welcome.  Just be careful with it."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

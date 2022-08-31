@@ -26,27 +26,27 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
-import com.projectswg.common.data.objects.GameObjectType;
+import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.ArmorCategory;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * This callback is used for all three kinds of transfer commands. The commands
- * differ based on object type (misc, armor and weapon). We should NOT trust
- * the client with picking which logic to execute - hence this single callback.
- * @author mads
- */
+import java.util.Collection;
+import java.util.Objects;
+
 public class TransferItemCallback implements ICmdCallback {
 	
 	@Override
@@ -69,7 +69,6 @@ public class TransferItemCallback implements ICmdCallback {
 			return;
 		}
 
-		GameObjectType targetGameObjectType = target.getGameObjectType();
 		SWGObject oldContainer = target.getParent();
 		boolean weapon = target instanceof WeaponObject;
 
@@ -97,66 +96,113 @@ public class TransferItemCallback implements ICmdCallback {
 				return;
 			}
 
-			SWGObject appearanceInventory = actor.getSlottedObject("appearance_inventory");
-			assert appearanceInventory != null : "actor does not have an appearance inventory";
-
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.getContainerType() == 2 && target.getContainerType() == 2 && target.getMaxContainerSize() >= newContainer.getMaxContainerSize()) {
 				new SystemMessageIntent(player, "@container_error_message:container12").broadcast();
 				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 				return;
 			}
-
-			// We can't transfer an item into an appearance-equipped container!
-			SWGObject containerParent = newContainer.getParent();
-
-			if (containerParent != null && containerParent.equals(appearanceInventory)) {
-				// Don't be fooled - the message below contains no prose keys
-				new SystemMessageIntent(player, "@container_error_message:container34_prose").broadcast();
-				player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-				return;
+			
+			// If the character doesn't have the right skill, reject it
+			if (target instanceof WeaponObject weaponObject) {
+				String reqSkill = weaponObject.getRequiredSkill();
+				boolean specificSkillIsRequired = reqSkill != null;
+				
+				if (specificSkillIsRequired && !actor.hasSkill(reqSkill)) {
+					new SystemMessageIntent(player, "@error_message:insufficient_skill").broadcast();
+					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+					return;
+				}
 			}
-
+			
 			// Check if item is being equipped
 			if (newContainer.equals(actor)) {
-				// If armor, they must have the "wear_all_armor" ability
-				if (target.getAttribute("armor_category") != null && !actor.hasCommand("wear_all_armor")) {
-					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
-					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-					return;
-				}
-
-				// Check the players level, if they're too low of a level, don't allow them to wear it
-				String reqLevelStr = target.getAttribute("required_combat_level");
-
-				if (reqLevelStr != null && actor.getLevel() < Short.parseShort(reqLevelStr)) {
-					new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
-					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-					return;
+				if (weapon) {
+					WeaponObject weaponObject = (WeaponObject) target;
+					TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+					
+					if (lightsaberInventory != null) {
+						if (isMissingColorCrystal(lightsaberInventory)) {
+							SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:lightsaber_no_color");
+							return;
+						}
+					}
 				}
 				
-				// Make sure the player can wear it based on their species
-				if (!checkSpeciesRestriction(actor, target))
-					return;
-
-				// If the character doesn't have the right profession, reject it
-				if (target.hasAttribute("class_required") && !target.getAttribute("class_required").equals("None")) {
-					String profession = actor.getPlayerObject().getProfession().getName();
-					if (!target.getAttribute("class_required").contains(profession)) {
-						new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
+				if (target instanceof TangibleObject tangibleTarget) {
+					ArmorCategory armorCategory = tangibleTarget.getArmorCategory();
+					
+					if (armorCategory != null) {
+						String requiredCommand = armorCategory.getRequiredCommand();
+						if (!actor.hasCommand(requiredCommand)) {
+							new SystemMessageIntent(player, "@error_message:insufficient_skill").broadcast();
+							player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+							return;
+						}
+					}
+					// Check the players level, if they're too low of a level, don't allow them to wear it
+					if (actor.getLevel() < tangibleTarget.getRequiredCombatLevel()) {
+						new SystemMessageIntent(player, "@base_player:level_too_low").broadcast();
 						player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 						return;
 					}
+					
+					// Make sure the player can wear it based on their species
+					if (!isSpeciesAllowedToWearItem(actor, tangibleTarget)) {
+						sendNotEquippable(player);
+						return;
+					}
 				}
+				
 			}
-
-			// Only empty containers can be Appearance Equipped
-			if (newContainer.equals(appearanceInventory)) {
-				if (targetGameObjectType == GameObjectType.GOT_MISC_CONTAINER_WEARABLE && !target.getContainedObjects().isEmpty()) {
-					// Don't be fooled - the message below contains no prose keys
-					new SystemMessageIntent(player, "@container_error_message:container33_prose").broadcast();
-					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
+			
+			if (isAddingItemToLightsaber(newContainer)) {
+				if (!(target instanceof TangibleObject tangibleTarget)) {
 					return;
+				}
+				
+				if (!isColorCrystal(tangibleTarget) && !isPowerCrystal(tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_not_crystal");
+					return;
+				}
+				
+				if (!isTuned(tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_tuned");
+					return;
+				}
+				
+				if (!isTunedByUs(actor, tangibleTarget)) {
+					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_owner");
+					return;
+				}
+				
+				SWGObject newContainerParent = newContainer.getParent();
+				if (!(newContainerParent instanceof WeaponObject weaponObject)) {
+					return;
+				}
+				
+				TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+				
+				if (lightsaberInventory == null) {
+					return;
+				}
+				
+				if (isColorCrystal(tangibleTarget)) {
+					if (isMissingColorCrystal(lightsaberInventory)) {
+						changeBladeColorModification(tangibleTarget, weaponObject);
+						weaponObject.setElementalType(tangibleTarget.getLightsaberColorCrystalElementalType());
+						
+						int baseWeaponMaxDamage = getBaseWeaponMaxDamage(weaponObject, lightsaberInventory);
+						
+						weaponObject.setElementalValue(baseWeaponMaxDamage * tangibleTarget.getLightsaberColorCrystalDamagePercent() / 100);
+					} else {
+						SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_already_has_color");
+						return;
+					}
+				}
+				
+				if (isPowerCrystal(tangibleTarget)) {
+					increaseDamageOfLightsaber(tangibleTarget, weaponObject);
 				}
 			}
 			
@@ -168,6 +214,14 @@ public class TransferItemCallback implements ICmdCallback {
 				return;
 			}
 			
+			if (isRemovingPowerCrystalFromLightsaber(oldContainerParent, oldContainer, target)) {
+				decreaseDamageOfLightsaber(target, oldContainerParent);
+			}
+			
+			if (isRemovingColorCrystalFromLightsaber(oldContainerParent, oldContainer, target)) {
+				removeElementalDamage(oldContainerParent);
+			}
+			
 			boolean equip = newContainer.equals(actor);
 			
 			switch (target.moveToContainer(actor, newContainer)) {
@@ -175,8 +229,6 @@ public class TransferItemCallback implements ICmdCallback {
 					if (weapon) {
 						changeWeapon(actor, target, equip);
 					}
-					
-					applyEffect(actor, target, equip);
 					break;
 				case CONTAINER_FULL:
 					new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
@@ -201,38 +253,150 @@ public class TransferItemCallback implements ICmdCallback {
 			player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 		}
 	}
-
-	private static boolean isSpecialSpecies(String species) {
-		return species.equals("trandoshan") || species.equals("wookiee") || species.equals("ithorian") || species.equals("rodian");
+	
+	private int getBaseWeaponMaxDamage(WeaponObject weaponObject, TangibleObject lightsaberInventory) {
+		int baseWeaponMaxDamage = weaponObject.getMaxDamage();
+		Collection<SWGObject> lightsaberInventoryContainedObjects = lightsaberInventory.getContainedObjects();
+		
+		for (SWGObject lightsaberInventoryContainedObject : lightsaberInventoryContainedObjects) {
+			if (lightsaberInventoryContainedObject instanceof TangibleObject crystal) {
+				baseWeaponMaxDamage -= crystal.getLightsaberPowerCrystalMaxDmg();
+			}
+		}
+		return baseWeaponMaxDamage;
 	}
-
+	
+	private void removeElementalDamage(SWGObject oldContainerParent) {
+		assert oldContainerParent instanceof WeaponObject;
+		WeaponObject lightsaber = (WeaponObject) oldContainerParent;
+		lightsaber.setElementalValue(0);
+		lightsaber.setElementalType(null);
+	}
+	
+	private boolean isAddingItemToLightsaber(SWGObject newContainer) {
+		SWGObject newContainerParent = newContainer.getParent();
+		if (newContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			return lightsaberInventory != null;
+		}
+		
+		return false;
+	}
+	
+	private void changeBladeColorModification(TangibleObject tangibleTarget, WeaponObject weaponObject) {
+		if (isLavaCrystal(tangibleTarget)) {
+			weaponObject.putCustomization("private/alternate_shader_blade", 1);
+			weaponObject.putCustomization("/private/index_color_blade", 0);
+		} else {
+			Integer colorFromColorCrystal = tangibleTarget.getCustomization("/private/index_color_1");
+			weaponObject.putCustomization("/private/index_color_blade", colorFromColorCrystal);
+		}
+	}
+	
+	private boolean isLavaCrystal(TangibleObject tangibleTarget) {
+		return "object/tangible/component/weapon/lightsaber/shared_lightsaber_module_lava_crystal.iff".equals(tangibleTarget.getTemplate());
+	}
+	
+	private void increaseDamageOfLightsaber(TangibleObject tangibleTarget, WeaponObject weaponObject) {
+		weaponObject.setMinDamage(weaponObject.getMinDamage() + tangibleTarget.getLightsaberPowerCrystalMinDmg());
+		weaponObject.setMaxDamage(weaponObject.getMaxDamage() + tangibleTarget.getLightsaberPowerCrystalMaxDmg());
+	}
+	
+	private void decreaseDamageOfLightsaber(SWGObject target, SWGObject oldContainerParent) {
+		assert oldContainerParent instanceof WeaponObject;
+		WeaponObject lightsaber = (WeaponObject) oldContainerParent;
+		assert target instanceof TangibleObject;
+		TangibleObject tangibleTarget = (TangibleObject) target;
+		lightsaber.setMinDamage(lightsaber.getMinDamage() - tangibleTarget.getLightsaberPowerCrystalMinDmg());
+		lightsaber.setMaxDamage(lightsaber.getMaxDamage() - tangibleTarget.getLightsaberPowerCrystalMaxDmg());
+	}
+	
+	private boolean isRemovingPowerCrystalFromLightsaber(SWGObject oldContainerParent, SWGObject oldContainer, SWGObject target) {
+		if (oldContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			if (oldContainer.equals(lightsaberInventory)) {
+				if (target instanceof TangibleObject tangibleTarget) {
+					return isPowerCrystal(tangibleTarget);
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isRemovingColorCrystalFromLightsaber(SWGObject oldContainerParent, SWGObject oldContainer, SWGObject target) {
+		if (oldContainerParent instanceof WeaponObject weaponObject) {
+			TangibleObject lightsaberInventory = weaponObject.getLightsaberInventory();
+			
+			if (oldContainer.equals(lightsaberInventory)) {
+				if (target instanceof TangibleObject tangibleTarget) {
+					return isColorCrystal(tangibleTarget);
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isTuned(TangibleObject tangibleTarget) {
+		Long tunedByObjectId = (Long) tangibleTarget.getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+		
+		return tunedByObjectId != null;
+	}
+	
+	private boolean isTunedByUs(CreatureObject actor, TangibleObject tangibleTarget) {
+		Long tunedByObjectId = (Long) tangibleTarget.getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+		return Objects.equals(tunedByObjectId, actor.getObjectId());
+	}
+	
+	private boolean isPowerCrystal(TangibleObject tangibleTarget) {
+		return tangibleTarget.getLightsaberPowerCrystalMaxDmg() > 0;
+	}
+	
+	private boolean isMissingColorCrystal(TangibleObject lightsaberInventory) {
+		Collection<SWGObject> containedObjects = lightsaberInventory.getContainedObjects();
+		
+		for (SWGObject containedObject : containedObjects) {
+			if (containedObject instanceof TangibleObject tangibleContainedObject) {
+				if (isColorCrystal(tangibleContainedObject)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean isColorCrystal(TangibleObject tangibleContainedObject) {
+		// It's not a (valid) power crystal, so it's probably a color crystal
+		return tangibleContainedObject.getLightsaberPowerCrystalMaxDmg() == 0;
+	}
+	
 	private static void sendNotEquippable(Player player) {
 		new SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast();
 		player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 	}
 
-	private static boolean checkSpeciesRestriction(CreatureObject actor, SWGObject target) {
-		// Make sure the player can wear it based on their species
-		String actorSpecies = actor.getRace().getSpecies();
-		if (isSpecialSpecies(actorSpecies) && target.hasAttribute("species_restrictions.species_name")) {
-			String restrictedSpecies = target.getAttribute("species_restrictions.species_name").toLowerCase();
-
-			if (actorSpecies.equals("wookiee") && !restrictedSpecies.contains("wookiee")) {
-				sendNotEquippable(actor.getOwner());
-				return false;
-			} else if (actorSpecies.equals("ithorian") && !restrictedSpecies.contains("ithorian")) {
-				sendNotEquippable(actor.getOwner());
-				return false;
-			} else if (actorSpecies.equals("rodian") && !restrictedSpecies.contains("rodian")) {
-				sendNotEquippable(actor.getOwner());
-				return false;
-			} else if (actorSpecies.equals("trandoshan") && !restrictedSpecies.contains("trandoshan")) {
-				sendNotEquippable(actor.getOwner());
-				return false;
-			}
+	private static boolean isSpeciesAllowedToWearItem(CreatureObject actor, TangibleObject tangibleTarget) {
+		if (tangibleTarget instanceof WeaponObject) {
+			return true;
 		}
-
-		return true;
+		
+		if (isInstrument(tangibleTarget)) {
+			return true;
+		}
+		
+		Race race = actor.getRace();
+		String template = tangibleTarget.getTemplate();
+		DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
+		
+		return DataLoader.Companion.speciesRestrictions().isAllowedToWear(template, race);
+	}
+	
+	private static boolean isInstrument(TangibleObject tangibleTarget) {
+		return tangibleTarget.getTemplate().contains("/instrument/");
 	}
 	
 	private static void changeWeapon(CreatureObject actor, SWGObject target, boolean equip) {
@@ -243,20 +407,7 @@ public class TransferItemCallback implements ICmdCallback {
 			// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 			actor.setEquippedWeapon(null);
 		}
-		actor.sendSelf(new PlayMusicMessage(0, "sound/ui_equip_blaster.snd", 1, false));
+		actor.sendSelf(new PlayMusicMessage(0, "sound/pl_all_draw_item.snd", 1, false));
 	}
 	
-	private static void applyEffect(CreatureObject actor, SWGObject target, boolean equip) {
-		String buffValue = target.getAttribute("effect");
-		
-		if (buffValue != null) {
-			String buffName = buffValue.replace("@ui_buff:", "");
-			
-			if (equip) {	// Grant buff
-				new BuffIntent(buffName, actor, actor, false).broadcast();
-			} else {	// Remove buff
-				new BuffIntent(buffName, actor, actor, true).broadcast();
-			}
-		}
-	}
 }

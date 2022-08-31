@@ -28,25 +28,25 @@ package com.projectswg.holocore.services.gameplay.combat;
 
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
+import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -68,7 +68,7 @@ public class CombatExperienceService extends Service {
 	
 	private void loadXpData() {
 		long startTime = StandardLog.onStartLoad("combat XP rates");
-		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("nge/npc/npc_stats.db", "npc_stats")) {
+		try (RelationalDatabase npcStats = RelationalServerFactory.getServerData("npc/npc_stats.db", "npc_stats")) {
 			try (ResultSet set = npcStats.executeQuery("SELECT * FROM npc_stats")) {
 				while (set.next()) {
 					xpData.put(set.getShort("Level"), new XpData(set.getInt("XP"), set.getInt("Elite_XP"), set.getInt("Boss_XP")));
@@ -102,66 +102,115 @@ public class CombatExperienceService extends Service {
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
 		CreatureObject corpse = i.getCorpse();
 		
-		// You don't gain XP by PvP'ing
-		if(corpse.isPlayer()) {
-			return;
-		}
-		
-		CreatureObject killer = i.getKiller();
-		GroupObject group = groupObjects.get(killer.getGroupId());
-		
-		// Ungrouped entertainer
-		if (group == null && isEntertainer(killer)) {
-			return;
-		}
-		
-		short killerLevel = group != null ? group.getLevel() : killer.getLevel();
-		int experienceGained = calculateXpGain(killer, corpse, killerLevel);
-		boolean xpMultiply = experienceGained > 1;
-		
-		if (experienceGained <= 0) {
-			return;
-		}
-		
-		if (group == null) {
-			new ExperienceIntent(killer, "combat", experienceGained, true).broadcast();
-		} else {
-			group.getGroupMemberObjects().stream()
-					.filter(groupMember -> !isEntertainer(groupMember))	// Entertainers don't receive combat XP
-					.filter(groupMember -> !isTrader(groupMember))	// Traders don't receive combat XP
-					.filter(groupMember -> isMemberNearby(corpse, groupMember))	// Must be within range
-					.filter(groupMember -> corpse.getDamageMap().containsKey(groupMember))	// Only members who have done damage receive XP
-					.forEach(eligibleMember -> new ExperienceIntent(eligibleMember, "combat", experienceGained, xpMultiply).broadcast());
-		}
-	}
-	
-	private boolean isEntertainer(CreatureObject creature) {
-		return creature.hasSkill("class_entertainer_phase1_novice");
-	}
-	
-	private boolean isTrader(CreatureObject creature) {
-		List<String> traderSkills = Arrays.asList(
-				"class_domestics_phase1_novice",
-				"class_structures_phase1_novice",
-				"class_munitions_phase1_novice",
-				"class_engineering_phase1_novice"
-		);
-		
-		for (String traderSkill : traderSkills) {
-			if (creature.hasSkill(traderSkill)) {
-				return true;
+		if(corpseIsNpc(corpse)) {
+			CreatureObject killer = i.getKiller();
+			GroupObject group = getGroupThatKillerIsIn(killer);
+			
+			short killerLevel = getKillerLevel(killer, group);
+			int experienceGained = calculateXpGain(killer, corpse, killerLevel);
+			
+			if (experienceGained <= 0) {
+				return;
+			}
+			
+			boolean killerIsGrouped = group != null;
+			
+			if (killerIsGrouped) {
+				grantXpToGroup(corpse, group, experienceGained);
+			} else {
+				grantXpToKiller(killer, corpse, experienceGained);
 			}
 		}
+	}
+	
+	private GroupObject getGroupThatKillerIsIn(CreatureObject killer) {
+		return groupObjects.get(killer.getGroupId());
+	}
+	
+	private void grantXpToGroup(CreatureObject corpse, GroupObject group, int experienceGained) {
+		group.getGroupMemberObjects().stream()
+				.filter(groupMember -> isMemberNearby(corpse, groupMember))
+				.filter(groupMember -> didMemberParticipateInCombat(corpse, groupMember))
+				.forEach(eligibleMember -> grantXpToKiller(eligibleMember, corpse, experienceGained));
+	}
+	
+	private boolean didMemberParticipateInCombat(CreatureObject corpse, CreatureObject groupMember) {
+		return corpse.getHateMap().containsKey(groupMember);
+	}
+	
+	private short getKillerLevel(CreatureObject killer, GroupObject group) {
+		if (group != null) {
+			return group.getLevel();
+		} else {
+			return killer.getLevel();
+		}
+	}
+	
+	private boolean corpseIsNpc(CreatureObject corpse) {
+		return !corpse.isPlayer();
+	}
+	
+	private void grantXpToKiller(CreatureObject killer, CreatureObject corpse, int experienceGained) {
+		boolean xpMultiply = experienceGained > 1;
+		grantWeaponTypeXp(killer, corpse, experienceGained, xpMultiply);
 		
-		return false;
+		if (scoutKilledCreature(killer, corpse)) {
+			grantTrappingXp(killer, experienceGained);
+		}
+		
+		grantCombatXp(killer, corpse, experienceGained, xpMultiply);
+	}
+	
+	private void grantTrappingXp(CreatureObject receiver, int experienceGained) {
+		new ExperienceIntent(receiver, "trapping", (int) Math.ceil(experienceGained / 10f)).broadcast();
+	}
+	
+	private boolean scoutKilledCreature(CreatureObject killer, CreatureObject corpse) {
+		return isKillerScout(killer) && isCorpseCreature(corpse);
+	}
+	
+	private boolean isCorpseCreature(CreatureObject corpse) {
+		return corpse.getGameObjectType() == GameObjectType.GOT_CREATURE;
+	}
+	
+	private boolean isKillerScout(CreatureObject killer) {
+		return killer.hasSkill("outdoors_scout_novice");
+	}
+	
+	private void grantCombatXp(CreatureObject receiver, CreatureObject corpse, int experienceGained, boolean xpMultiply) {
+		new ExperienceIntent(receiver, corpse, "combat_general", (int) Math.ceil(experienceGained / 10f), xpMultiply).broadcast();
+	}
+	
+	private void grantWeaponTypeXp(CreatureObject receiver, CreatureObject corpse, int experienceGained, boolean xpMultiply) {
+		WeaponType weaponType = receiver.getEquippedWeapon().getType();
+		String xpType = xpTypeForWeaponType(weaponType);
+		
+		if (xpType == null) {
+			Log.w("%s did not receive %d xp because the used weapon %s had unrecognized type", receiver, experienceGained, weaponType);
+		}
+		
+		new ExperienceIntent(receiver, corpse, xpType, experienceGained, xpMultiply).broadcast();
+	}
+	
+	private String xpTypeForWeaponType(WeaponType weaponType) {
+		return switch (weaponType) {
+			case UNARMED -> "combat_meleespecialize_unarmed";
+			case TWO_HANDED_MELEE -> "combat_meleespecialize_twohand";
+			case ONE_HANDED_MELEE -> "combat_meleespecialize_onehand";
+			case POLEARM_MELEE -> "combat_meleespecialize_polearm";
+			case RIFLE -> "combat_rangedspecialize_rifle";
+			case CARBINE -> "combat_rangedspecialize_carbine";
+			case PISTOL -> "combat_rangedspecialize_pistol";
+			case HEAVY -> "combat_rangedspecialize_heavy";
+			case ONE_HANDED_SABER, POLEARM_SABER, TWO_HANDED_SABER -> "jedi_general";
+			default -> null;
+		};
 	}
 	
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
 		short corpseLevel = corpse.getLevel();
 		
-		if(killerLevel >= 90){
-			return 0;
-		} else if (killerLevel - corpseLevel >= 10) {
+		if (killerLevel - corpseLevel >= 10) {
 			return 1;
 		} else {
 			XpData xpForLevel = this.xpData.get(corpseLevel);

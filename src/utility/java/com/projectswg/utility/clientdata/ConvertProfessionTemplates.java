@@ -43,7 +43,7 @@ class ConvertProfessionTemplates implements Converter {
 	public void convert() {
 		System.out.println("Converting profession templates...");
 		
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/player/start_clothing.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/player/start_clothing.sdb"))) {
 			sdb.writeColumnNames("race", "combat_brawler", "combat_marksman", "crafting_artisan", "jedi", "outdoors_scout", "science_medic", "social_entertainer");
 			convertFile(sdb, new File("clientdata/creation/profession_defaults.iff"));
 		} catch (IOException e) {

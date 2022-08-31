@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/happer_mos_eisley",
+		"key": "s_4",
+		"comment": "Sorry citizen, I have to attend to this murder scene."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/happer_mos_eisley",
+				"key": "s_9",
+				"comment": "Is that Bera Jeza?  Oh no!"
+			},
+			"next": "tatooine_mos_eisley_happer/condition_handleBranch2/s_9"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

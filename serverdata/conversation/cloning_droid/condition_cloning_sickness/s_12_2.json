@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/clone_droid",
+		"key": "s_16",
+		"comment": "You don't have the funds in your bank to cover the transaction."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,5 @@
+rarity	static_item_id
+TEXT KEY	TEXT
+RARE	item_treasure_map_21_30
+LEGENDARY	item_treasure_map_51_60
+EXCEPTIONAL	item_treasure_map_81_90

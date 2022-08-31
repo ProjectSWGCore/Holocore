@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_combatmedic",
+		"comment": "Sometimes, when you're out in the field, your buddy loses his arm.  I'll show you how to stick it right back on..."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/science_combatmedic_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

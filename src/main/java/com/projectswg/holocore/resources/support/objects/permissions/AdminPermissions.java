@@ -28,7 +28,6 @@
 package com.projectswg.holocore.resources.support.objects.permissions;
 
 import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -64,16 +63,6 @@ public final class AdminPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-	}
-	
-	@Override
 	public void readMongo(MongoData data) {
 		
 	}
@@ -88,11 +77,6 @@ public final class AdminPermissions implements ContainerPermissions {
 	}
 	
 	public static AdminPermissions getPermissions() {
-		return PERMISSIONS;
-	}
-	
-	public static AdminPermissions from(NetBufferStream stream) {
-		stream.getByte();
 		return PERMISSIONS;
 	}
 	

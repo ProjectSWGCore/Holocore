@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "conversation/reelo_baruk",
+		"key": "s_63",
+		"comment": "You look like you might have some fight in ya. Wanna work for Jabba?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/reelo_baruk",
+				"key": "s_65",
+				"comment": "Not really, no."
+			},
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/reelo_baruk",
+				"key": "s_69",
+				"comment": "Let's hear about the job first."
+			},
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/reelo_baruk",
+				"key": "s_100",
+				"comment": "I'll do whatever you want."
+			},
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "snap_finger1"
+			}
+		}
+	]
+}

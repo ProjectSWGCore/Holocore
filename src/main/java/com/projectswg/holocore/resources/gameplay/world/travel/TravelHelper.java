@@ -42,6 +42,8 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.SpecificObject;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TicketInformation;
 import me.joshlarson.jlcommon.concurrency.ThreadPool;
 import me.joshlarson.jlcommon.log.Log;
 
@@ -101,9 +103,10 @@ public class TravelHelper {
 		return pointManager.getPointsForTerrain(nearest, terrain);
 	}
 	
-	public TravelPoint getDestinationPoint(SWGObject ticket) {
-		Terrain planet = Terrain.getTerrainFromName(ticket.getAttribute("@obj_attr_n:travel_arrival_planet").split(":")[1]);
-		String point = ticket.getAttribute("@obj_attr_n:travel_arrival_point");
+	public TravelPoint getDestinationPoint(TangibleObject ticket) {
+		TicketInformation ticketInformation = ticket.getTicketInformation();
+		Terrain planet = ticketInformation.getArrivalPlanet();
+		String point = ticketInformation.getArrivalPoint();
 		return getDestinationPoint(planet, point);
 	}
 	
@@ -117,51 +120,50 @@ public class TravelHelper {
 	
 	public void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
 		// Create the ticket object
-		SWGObject ticket = SpecificObject.SO_TRAVEL_TICKET.createType();
+		TangibleObject ticket = (TangibleObject) SpecificObject.SO_TRAVEL_TICKET.createType();
 		Log.t("Granting ticket for departure: %s/%s  and destination: %s/%s", departure.getLocation(), departure.getName(), destination.getLocation(), destination.getName());
 		
+		TicketInformation ticketInformation = new TicketInformation();
 		// Departure attributes
-		ticket.addAttribute("@obj_attr_n:travel_departure_planet", "@planet_n:" + departure.getTerrain().getName());
-		ticket.addAttribute("@obj_attr_n:travel_departure_point", departure.getName());
+		ticketInformation.setDeparturePlanet(departure.getTerrain());
+		ticketInformation.setDeparturePoint(departure.getName());
 		
 		// Arrival attributes
-		ticket.addAttribute("@obj_attr_n:travel_arrival_planet", "@planet_n:" + destination.getTerrain().getName());
-		ticket.addAttribute("@obj_attr_n:travel_arrival_point", destination.getName());
+		ticketInformation.setArrivalPlanet(destination.getTerrain());
+		ticketInformation.setArrivalPoint(destination.getName());
 		
+		ticket.setTicketInformation(ticketInformation);
 		ticket.moveToContainer(receiver.getSlottedObject("inventory"));
 		new ObjectCreatedIntent(ticket).broadcast();
 	}
 	
-	public List<SWGObject> getTickets(CreatureObject creature) {
+	public List<TangibleObject> getTickets(CreatureObject creature) {
 		Collection<SWGObject> tickets = creature.getItemsByTemplate("inventory", SpecificObject.SO_TRAVEL_TICKET.getTemplate());
-		List<SWGObject> usableTickets = new ArrayList<>();
+		List<TangibleObject> usableTickets = new ArrayList<>();
 		
 		for (SWGObject ticket : tickets) {
-			if (isTicket(ticket) && isTicketUsable(ticket, getNearestTravelPoint(ticket)))
-				usableTickets.add(ticket);
+			if (ticket instanceof TangibleObject tangibleTicket) {
+				if (isTicket(tangibleTicket) && isTicketUsable(tangibleTicket, getNearestTravelPoint(tangibleTicket)))
+					usableTickets.add(tangibleTicket);
+			}
 		}
 		return usableTickets;
 	}
 	
-	public boolean isTicket(SWGObject object) {
-		String departurePlanet = object.getAttribute("@obj_attr_n:travel_departure_planet");
-		String departureDestination = object.getAttribute("@obj_attr_n:travel_departure_point");
-		String arrivalPlanet = object.getAttribute("@obj_attr_n:travel_arrival_planet");
-		String arrivalPoint = object.getAttribute("@obj_attr_n:travel_arrival_point");
-		
-		return departurePlanet != null && departureDestination != null && arrivalPlanet != null && arrivalPoint != null;
+	public boolean isTicket(TangibleObject object) {
+		return object.getTicketInformation() != null;
 	}
 	
-	public boolean isTicketUsable(SWGObject ticket, TravelPoint nearest) {
-		String departurePoint = ticket.getAttribute("@obj_attr_n:travel_departure_point");
-		String departurePlanet = ticket.getAttribute("@obj_attr_n:travel_departure_planet");
-		Terrain departureTerrain = Terrain.getTerrainFromName(departurePlanet.split(":")[1]);
+	public boolean isTicketUsable(TangibleObject ticket, TravelPoint nearest) {
+		TicketInformation ticketInformation = ticket.getTicketInformation();
+		String departurePoint = ticketInformation.getDeparturePoint();
+		Terrain departureTerrain = ticketInformation.getDeparturePlanet();
 		Terrain currentTerrain = ticket.getTerrain();
 		
 		return departureTerrain == currentTerrain && departurePoint.equals(nearest.getName());
 	}
 	
-	public void handleTicketUse(Player player, SWGObject ticket, TravelPoint nearestPoint, TravelPoint destinationPoint) {
+	public void handleTicketUse(Player player, TangibleObject ticket, TravelPoint nearestPoint, TravelPoint destinationPoint) {
 		CreatureObject traveler = player.getCreatureObject();
 		if (!isTicket(ticket)) {
 			Log.e("%s attempted to use an object that isn't a ticket!", player);
@@ -199,7 +201,7 @@ public class TravelHelper {
 	}
 	
 	private void loadTravelPoints() {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/travel/travel.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/travel/travel.sdb"))) {
 			while (set.next()) {
 				loadTravelPoint(set);
 			}

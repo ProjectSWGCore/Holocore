@@ -31,12 +31,8 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
-import com.projectswg.holocore.resources.support.data.collections.SWGBitSet;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
-import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
 
@@ -47,7 +43,7 @@ import java.util.stream.Collectors;
  * PLAY 9
  */
 @SuppressWarnings("ClassWithTooManyFields") // no choice due to SWG protocol
-class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
+class PlayerObjectOwnerNP implements MongoPersistable {
 	
 	private final PlayerObject obj;
 	
@@ -58,8 +54,8 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 	/** PLAY9-04 */ private			long				craftingComponentBioLink	= 0;
 	/** PLAY9-05 */ private			int 				experimentPoints			= 0;
 	/** PLAY9-06 */ private			int					expModified					= 0;
-	/** PLAY9-07 */ private final	SWGList<String>		friendsList					= new SWGList<>(9, 7, StringType.ASCII);
-	/** PLAY9-08 */ private final	SWGList<String>		ignoreList					= new SWGList<>(9, 8, StringType.ASCII);
+	/** PLAY9-07 */ private final	SWGList<String>		friendsList					= SWGList.Companion.createAsciiList(9, 7);
+	/** PLAY9-08 */ private final	SWGList<String>		ignoreList					= SWGList.Companion.createAsciiList(9, 8);
 	/** PLAY9-09 */ private			int 				languageId					= 0;
 	/** PLAY9-10 */ private			int					food						= 0;
 	/** PLAY9-11 */ private			int					maxFood						= 100;
@@ -68,19 +64,8 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 	/** PLAY9-14 */ private			int					meds						= 0;
 	/** PLAY9-15 */ private			int					maxMeds						= 100;
 	/** PLAY9-16 */ private final	SWGMap<Long, WaypointObject> groupWaypoints		= new SWGMap<>(9, 16);
-	/** PLAY9-17 */ private final	SWGSet<Long>		playerHateList				= new SWGSet<>(9, 17);
-	/** PLAY9-18 */ private			int 				killMeter					= 0;
-	/** PLAY9-19 */ private			int					accountLotsOverLimit		= 0;
-	/** PLAY9-20 */ private			long 				petId						= 0;
-	/** PLAY9-21 */ private final	SWGList<String> 	petAbilities				= new SWGList<>(9, 21, StringType.ASCII);
-	/** PLAY9-22 */ private final	SWGList<String> 	activePetAbilities			= new SWGList<>(9, 22, StringType.ASCII);
-	/** PLAY9-23 */ private			byte				galacticReserveDeposit		= 0;
-	/** PLAY9-24 */ private final	SWGBitSet			guildRank					= new SWGBitSet(9, 24);
-	/** PLAY9-25 */ private final	SWGBitSet			citizenRank					= new SWGBitSet(9, 25);
-	/** PLAY9-27 */ private			long				pgcRatingCount				= 0;
-	/** PLAY9-28 */ private			long				pgcRatingTotal				= 0;
-	/** PLAY9-29 */ private			int					pgcLastRatingTime			= 0;
-	
+	/** PLAY9-17 */ private int jediState = 0;
+
 	public PlayerObjectOwnerNP(PlayerObject obj) {
 		this.obj = obj;
 	}
@@ -286,127 +271,13 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		groupWaypoints.sendDeltaMessage(obj);
 	}
 	
-	public Set<Long> getPlayerHateList() {
-		return Collections.unmodifiableSet(playerHateList);
+	public int getJediState() {
+		return jediState;
 	}
 	
-	public void addHatedPlayer(long hatedPlayerId) {
-		if (playerHateList.add(hatedPlayerId))
-			playerHateList.sendDeltaMessage(obj);
-	}
-	
-	public int getKillMeter() {
-		return killMeter;
-	}
-	
-	public void setKillMeter(int killMeter) {
-		this.killMeter = killMeter;
-		sendDelta(18, killMeter);
-	}
-	
-	public int getAccountLotsOverLimit() {
-		return accountLotsOverLimit;
-	}
-	
-	public void setAccountLotsOverLimit(int accountLotsOverLimit) {
-		this.accountLotsOverLimit = accountLotsOverLimit;
-		sendDelta(19, accountLotsOverLimit);
-	}
-	
-	public long getPetId() {
-		return petId;
-	}
-	
-	public void setPetId(long petId) {
-		this.petId = petId;
-		sendDelta(20, petId);
-	}
-	
-	public List<String> getPetAbilities() {
-		return Collections.unmodifiableList(petAbilities);
-	}
-	
-	public void addPetAbility(String ability) {
-		synchronized (petAbilities) {
-			if (petAbilities.contains(ability))
-				return;
-			petAbilities.add(ability);
-			petAbilities.sendDeltaMessage(obj);
-		}
-	}
-	
-	public void removePetAbility(String ability) {
-		if (petAbilities.remove(ability))
-			petAbilities.sendDeltaMessage(obj);
-	}
-	
-	public List<String> getActivePetAbilities() {
-		return Collections.unmodifiableList(activePetAbilities);
-	}
-	
-	public void addActivePetAbility(String ability) {
-		synchronized (activePetAbilities) {
-			if (activePetAbilities.contains(ability))
-				return;
-			activePetAbilities.add(ability);
-			activePetAbilities.sendDeltaMessage(obj);
-		}
-	}
-	
-	public BitSet getGuildRank() {
-		return (BitSet) guildRank.clone();
-	}
-	
-	public void setGuildRank(int guildRank) {
-		this.guildRank.clear();
-		this.guildRank.set(guildRank);
-		this.guildRank.sendDeltaMessage(obj);
-	}
-	
-	public BitSet getCitizenRank() {
-		return (BitSet) citizenRank.clone();
-	}
-	
-	public void setCitizenRank(int citizenRank) {
-		this.citizenRank.clear();
-		this.citizenRank.set(citizenRank);
-		this.citizenRank.sendDeltaMessage(obj);
-	}
-	
-	public byte getGalacticReserveDeposit() {
-		return galacticReserveDeposit;
-	}
-	
-	public void setGalacticReserveDeposit(byte galacticReserveDeposit) {
-		this.galacticReserveDeposit = galacticReserveDeposit;
-		sendDelta(23, galacticReserveDeposit);
-	}
-	
-	public long getPgcRatingCount() {
-		return pgcRatingCount;
-	}
-	
-	public void setPgcRatingCount(long pgcRatingCount) {
-		this.pgcRatingCount = pgcRatingCount;
-		sendDelta(27, pgcRatingCount);
-	}
-	
-	public long getPgcRatingTotal() {
-		return pgcRatingTotal;
-	}
-	
-	public void setPgcRatingTotal(long pgcRatingTotal) {
-		this.pgcRatingTotal = pgcRatingTotal;
-		sendDelta(28, pgcRatingTotal);
-	}
-	
-	public int getPgcLastRatingTime() {
-		return pgcLastRatingTime;
-	}
-	
-	public void setPgcLastRatingTime(int pgcLastRatingTime) {
-		this.pgcLastRatingTime = pgcLastRatingTime;
-		sendDelta(29, pgcLastRatingTime);
+	public void setJediState(int jediState) {
+		this.jediState = jediState;
+		sendDelta(17, jediState);
 	}
 	
 	public void createBaseline9(BaselineBuilder bb) {
@@ -427,22 +298,9 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		bb.addInt(meds); // 14
 		bb.addInt(maxMeds); // 15
 		bb.addObject(groupWaypoints); // 16
-		bb.addObject(playerHateList); // 17
-		bb.addInt(killMeter); // 18
-		bb.addInt(accountLotsOverLimit); // 19
-		bb.addLong(petId); // 20
-		bb.addObject(petAbilities); // 21
-		bb.addObject(activePetAbilities); // 22
-		bb.addByte(galacticReserveDeposit); // 23
-		bb.addObject(guildRank); // 24
-		bb.addObject(citizenRank); // 25
-		bb.addByte(0); // 26
-		bb.addLong(pgcRatingCount); // 27
-		bb.addLong(pgcRatingTotal); // 28
-		bb.addInt(pgcLastRatingTime); // 29
-		bb.addInt(0); // 30
+		bb.addInt(jediState); // 17
 		
-		bb.incrementOperandCount(31);
+		bb.incrementOperandCount(19);
 	}
 	
 	public void parseBaseline9(NetBuffer buffer) {
@@ -450,12 +308,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		friendsList.clear();
 		ignoreList.clear();
 		groupWaypoints.clear();
-		playerHateList.clear();
-		petAbilities.clear();
-		activePetAbilities.clear();
-		guildRank.clear();
-		citizenRank.clear();
-		
+
 		craftingLevel = buffer.getInt();
 		craftingStage = buffer.getInt();
 		nearbyCraftStation = buffer.getLong();
@@ -463,8 +316,8 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		craftingComponentBioLink = buffer.getLong();
 		experimentPoints = buffer.getInt();
 		expModified = buffer.getInt();
-		friendsList.addAll(SWGList.getSwgList(buffer, 9, 7, StringType.ASCII));
-		ignoreList.addAll(SWGList.getSwgList(buffer, 9, 8, StringType.ASCII));
+		friendsList.decode(buffer);
+		ignoreList.decode(buffer);
 		languageId = buffer.getInt();
 		food = buffer.getInt();
 		maxFood = buffer.getInt();
@@ -473,19 +326,8 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		meds = buffer.getInt();
 		maxMeds = buffer.getInt();
 		SWGMap.getSwgMap(buffer, 9, 16, Long.class, WaypointPackage.class).values().forEach(p -> groupWaypoints.put(p.getObjectId(), new WaypointObject(p)));
-		playerHateList.addAll(SWGSet.getSwgSet(buffer, 9, 17, Long.class));
-		killMeter = buffer.getInt();
-		accountLotsOverLimit = buffer.getInt();
-		petId = buffer.getLong();
-		petAbilities.addAll(SWGList.getSwgList(buffer, 9, 21, StringType.ASCII));
-		activePetAbilities.addAll(SWGList.getSwgList(buffer, 9, 22, StringType.ASCII));
-		galacticReserveDeposit = buffer.getByte();
-		guildRank.or(buffer.getEncodable(SWGBitSet.class));
-		citizenRank.or(buffer.getEncodable(SWGBitSet.class));
+		jediState = buffer.getInt();
 		buffer.getByte(); // unknown
-		pgcRatingCount = buffer.getLong();
-		pgcRatingTotal = buffer.getLong();
-		pgcLastRatingTime = buffer.getInt();
 		buffer.getInt(); // unknown
 	}
 	
@@ -508,33 +350,16 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		data.putInteger("meds", meds);
 		data.putInteger("maxMeds", maxMeds);
 		data.putArray("groupWaypoints", groupWaypoints.values().stream().map(WaypointObject::getOOB).collect(Collectors.toList()));
-		data.putArray("playerHateList", playerHateList);
-		data.putInteger("killMeter", killMeter);
-		data.putInteger("accountLotsOverLimit", accountLotsOverLimit);
-		data.putLong("petId", petId);
-		data.putArray("petAbilities", petAbilities);
-		data.putArray("activePetAbilities", activePetAbilities);
-		data.putByteArray("guildRank", guildRank.toByteArray());
-		data.putByteArray("citizenRank", citizenRank.toByteArray());
-		data.putInteger("galacticReserveDeposit", galacticReserveDeposit);
-		data.putLong("pgcRatingCount", pgcRatingCount);
-		data.putLong("pgcRatingTotal", pgcRatingTotal);
-		data.putInteger("pgcLastRatingTime", pgcLastRatingTime);
+		data.putInteger("jediState", jediState);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
-		byte [] emptyByteArray = new byte[0];
 		draftSchematics.clear();
 		friendsList.clear();
 		ignoreList.clear();
 		groupWaypoints.clear();
-		playerHateList.clear();
-		petAbilities.clear();
-		activePetAbilities.clear();
-		guildRank.clear();
-		citizenRank.clear();
-		
+
 		craftingLevel = data.getInteger("craftingLevel", craftingLevel);
 		craftingStage = data.getInteger("craftingStage", craftingStage);
 		nearbyCraftStation = data.getLong("nearbyCraftStation", nearbyCraftStation);
@@ -552,42 +377,7 @@ class PlayerObjectOwnerNP implements Persistable, MongoPersistable {
 		meds = data.getInteger("meds", meds);
 		maxMeds = data.getInteger("maxMeds", maxMeds);
 		data.getArray("groupWaypoints", doc -> new WaypointObject(MongoData.create(doc, WaypointPackage::new))).forEach(obj -> groupWaypoints.put(obj.getObjectId(), obj));
-		playerHateList.addAll(data.getArray("playerHateList", Long.class));
-		killMeter = data.getInteger("killMeter", killMeter);
-		accountLotsOverLimit = data.getInteger("accountLotsOverLimit", accountLotsOverLimit);
-		petId = data.getLong("petId", petId);
-		petAbilities.addAll(data.getArray("petAbilities", String.class));
-		activePetAbilities.addAll(data.getArray("activePetAbilities", String.class));
-		guildRank.xor(BitSet.valueOf((data.getByteArray("guildRank", emptyByteArray))));
-		citizenRank.xor(BitSet.valueOf(data.getByteArray("citizenRank", emptyByteArray)));
-		galacticReserveDeposit = (byte) data.getInteger("galacticReserveDeposit", galacticReserveDeposit);
-		pgcRatingCount = data.getLong("pgcRatingCount", pgcRatingCount);
-		pgcRatingTotal = data.getLong("pgcRatingTotal", pgcRatingTotal);
-		pgcLastRatingTime = data.getInteger("pgcLastRatingTime", pgcLastRatingTime);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(1);
-		stream.addInt(languageId);
-		stream.addInt(killMeter);
-		stream.addLong(petId);
-		stream.addList(friendsList, stream::addAscii);
-		stream.addList(ignoreList, stream::addAscii);
-		stream.addList(petAbilities, stream::addAscii);
-		stream.addList(activePetAbilities, stream::addAscii);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		stream.getByte();
-		languageId = stream.getInt();
-		killMeter = stream.getInt();
-		petId = stream.getLong();
-		stream.getList((i) -> friendsList.add(stream.getAscii()));
-		stream.getList((i) -> ignoreList.add(stream.getAscii()));
-		stream.getList((i) -> petAbilities.add(stream.getAscii()));
-		stream.getList((i) -> activePetAbilities.add(stream.getAscii()));
+		jediState = data.getInteger("jediState", 0);
 	}
 	
 	private void sendDelta(int update, Object o) {

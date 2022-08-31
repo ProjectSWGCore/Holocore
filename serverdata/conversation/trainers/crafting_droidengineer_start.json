@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_droidengineer",
+		"comment": "There's nothing like a busted R2 unit to remind you what's important in life.  C'mon, tell me what you need to know."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/crafting_droidengineer_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

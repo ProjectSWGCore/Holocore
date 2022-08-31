@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_trandoshan_unluto_bartender",
+		"key": "s_1389",
+		"comment": "Hello there outworlder. What can I getcha?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/ep3_trandoshan_unluto_bartender",
+				"key": "s_1391",
+				"comment": "Actually, I am not really interested in a drink."
+			},
+			"next": "bartender/order"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}

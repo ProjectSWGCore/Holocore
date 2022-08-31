@@ -1,0 +1,8 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.nothing	1						0	0	0
+1	quest.task.ground.wait_for_signal	2;4	sordaan_ullerGoToBocctyyy					0	0	0
+2	quest.task.ground.timer	3	sordaan_ullerBetTimer					0	1200	1209
+3	quest.task.ground.clear_quest						quest/ep3_hunt_sordaan_uller_bet_lost	0	0	0
+4	quest.task.ground.destroy_multi	5	sordaan_ullerBet			ep3_etyyy_uller_warhoof		24	0	0
+5	quest.task.ground.clear_quest						quest/ep3_hunt_sordaan_uller_bet_won	0	0	0

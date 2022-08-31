@@ -27,16 +27,20 @@
 
 package com.projectswg.holocore.services.gameplay.combat.command;
 
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
+import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 enum CombatCommandDelayAttack implements CombatCommandHitType {
 	INSTANCE;
@@ -59,7 +63,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 	}
 	
 	@Override
-	public void handle(CreatureObject source, SWGObject target, CombatCommand combatCommand, String arguments) {
+	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		String[] argSplit = arguments.split(" ");
 		Location eggLocation;
 		SWGObject eggParent;
@@ -97,6 +101,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 		
 		long interval = (long) (combatCommand.getInitialDelayAttackInterval() * 1000);
 		executor.execute(interval, () -> delayEggLoop(delayEgg, source, target, combatCommand, 1));
+		return CombatStatus.SUCCESS;
 	}
 	
 	private void delayEggLoop(final SWGObject delayEgg, final CreatureObject source, final SWGObject target, final CombatCommand combatCommand, final int currentLoop) {

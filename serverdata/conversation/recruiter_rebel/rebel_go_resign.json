@@ -1,0 +1,30 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_312",
+		"comment": "So be it.  If you decide that you want to come back, let me know.  But for now, you are no longer a member of the Rebellion."
+	},
+	"playerResponses": [],
+	"requirements": [
+		{
+			"type": "faction_name",
+			"args": {
+				"faction": "rebel"
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "neutral"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "wave_on_dismissing"
+			}
+		}
+	]
+}

@@ -1,8 +1,13 @@
 package com.projectswg.holocore.services.gameplay.player.guild;
 
 import com.projectswg.common.data.objects.GameObjectType;
+import com.projectswg.common.network.packets.SWGPacket;
+import com.projectswg.common.network.packets.swg.zone.guild.GuildRequestMessage;
+import com.projectswg.common.network.packets.swg.zone.guild.GuildResponseMessage;
+import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType;
@@ -19,6 +24,7 @@ import java.util.List;
  * <ol>
  *     <li>Ensures existence of a singleton {@link GuildObject}</li>
  *     <li>Ensures every player is made aware of the {@link GuildObject}</li>
+ *     <li>Responding to requests from players about which guild a specific player is in</li>
  * </ol>
  */
 public class GuildService extends Service {
@@ -58,6 +64,21 @@ public class GuildService extends Service {
 			CreatureObject creature = intent.getPlayer().getCreatureObject();
 			
 			creature.setAware(AwarenessType.GUILD, List.of(guildObject));
+		}
+	}
+	
+	@IntentHandler
+	private void handleInboundPacketIntent(InboundPacketIntent intent) {
+		SWGPacket packet = intent.getPacket();
+		
+		if (packet instanceof GuildRequestMessage) {
+			GuildRequestMessage request = (GuildRequestMessage) packet;
+			long objectId = request.getObjectId();
+			
+			GuildResponseMessage response = new GuildResponseMessage(objectId, "", "");
+			Player requester = intent.getPlayer();
+			
+			requester.sendPacket(response);
 		}
 	}
 }

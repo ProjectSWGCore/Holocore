@@ -1,0 +1,127 @@
+iff_type	child_iff	cell	x	y	z	heading
+TEXT	TEXT	TEXT	REAL	REAL	REAL	REAL
+association_hall	object/tangible/terminal/shared_terminal_elevator.iff	elevator	0.0	2.7	13.2	0
+association_hall	object/tangible/terminal/shared_terminal_elevator.iff	elevator	0.0	-8.5	13.2	0
+bank	object/soundobject/shared_soundobject_marketplace_small.iff		0.0	0.0	0.0	0
+bank	object/tangible/terminal/shared_terminal_bank.iff		0.0	0.5	4.3	0
+bank	object/tangible/terminal/shared_terminal_bank.iff		0.0	0.5	-4.3	180
+bank	object/tangible/terminal/shared_terminal_bank.iff		4.3	0.5	0.0	90
+bank	object/tangible/terminal/shared_terminal_bank.iff		-4.3	0.5	0.0	-90
+cloning	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	2.57	0
+cloning	object/tangible/terminal/shared_terminal_cloning.iff	insurance	1.04	0.1	-1.25	180
+faction_imp_1	object/tangible/terminal/terminal_hq_imperial.iff	mainhall	0	0	-6	0
+faction_imp_1_pvp	object/tangible/terminal/terminal_hq_imperial.iff	mainhall	0	0	-6	0
+faction_imp_2	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_2_pvp	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_3	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_3_pvp	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_4	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_4_pvp	object/tangible/terminal/terminal_hq_imperial.iff	hall1	0	0.25	1.86	0
+faction_imp_5	object/tangible/terminal/terminal_hq_imperial.iff	mainhall	0	1	12.5	180
+faction_imp_5_pvp	object/tangible/terminal/terminal_hq_imperial.iff	mainhall	0	1	12.5	180
+faction_reb_1	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	0	-6	0
+faction_reb_1_pvp	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	0	-6	0
+faction_reb_2	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_2_pvp	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_3	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_3_pvp	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_4	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_4_pvp	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
+faction_reb_5	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	1	12.5	180
+faction_reb_5_pvp	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	1	12.5	180
+kashyyyk_starport	object/creature/npc/theme_park/shared_player_transport.iff		0.0	7.0	0.0	-90
+kashyyyk_starport	object/static/particle/shared_pt_airport_race_light_group.iff		0.0	7.0	0.0	-90
+kashyyyk_starport	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.1	0.0	-17.6	-90
+kashyyyk_starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3.0	0.0	-10.0	315
+military_cloning_imp_sml	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
+military_cloning_imp_sml_2	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
+military_cloning_outpost	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
+military_cloning_outpost_2	object/tangible/terminal/shared_terminal_cloning.iff	room3	-4.0	0.1	-5.6	0
+military_cloning_outpost_3	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
+military_starport_outpost	object/creature/npc/theme_park/shared_player_transport.iff		0.0	7.0	0.0	-90
+military_starport_outpost	object/static/particle/shared_pt_airport_race_light_group.iff		0.0	7.0	0.0	-90
+military_starport_outpost	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.1	0.0	-17.6	-90
+military_starport_outpost	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3.0	0.0	-10.0	315
+mustafar_starport	object/creature/npc/theme_park/shared_player_transport.iff		-55.0	30.0	-160.0	90
+mustafar_starport	object/tangible/terminal/shared_terminal_travel.iff		-60.0	30.7	-130.0	180
+mustafar_starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-45.0	30.7	-152.0	0
+naboo_starport_theed	object/creature/npc/theme_park/shared_player_transport_theed_hangar.iff	hangar	0.0	7.9	21.0	0
+naboo_starport_theed	object/soundobject/shared_soundobject_starport_exterior.iff	hangar	-0.5	7.9	21.0	0
+naboo_starport_theed	object/soundobject/shared_soundobject_starport_interior.iff	hall1	-26.9	0.7	-72.4	0
+naboo_starport_theed	object/soundobject/shared_soundobject_starport_interior.iff	hall2	21.5	0.7	-72.3	0
+naboo_starport_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	42.0	0
+naboo_starport_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	18.5	0
+naboo_starport_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	-5.0	0
+naboo_starport_theed	object/static/particle/shared_pt_airport_race_light_group.iff	hangar	0.0	7.9	-28.5	0
+naboo_starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-16.5	0.8	-68.0	180
+naboo_starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall1	-27.0	0.8	-68.0	180
+naboo_starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	16.5	0.8	-68.0	180
+naboo_starport_theed	object/tangible/terminal/shared_terminal_travel.iff	hall2	27.0	0.8	-68.0	180
+naboo_starport_theed	object/tangible/travel/ticket_collector/shared_ticket_collector.iff	hangar	-9.5	8.0	35.0	180
+player_bank	object/tangible/terminal/shared_terminal_bank.iff		-1	-0.25	0	-90
+player_bank	object/tangible/terminal/shared_terminal_bank.iff		1	-0.25	0	90
+player_bank	object/tangible/terminal/shared_terminal_bank.iff		0	-0.25	-1	180
+player_bank	object/tangible/terminal/terminal_player_structure.iff		0	-0.25	1	0
+player_cantina	object/tangible/terminal/terminal_player_structure.iff	cantina	-4.1	0.8	6.19	157
+player_cityhall	object/tangible/terminal/terminal_city_vote.iff	grandhall	0.25	2	-9.65	0
+player_cityhall	object/tangible/terminal/terminal_city.iff	library	17.07	2	-8.7	0
+player_cityhall	object/tangible/terminal/terminal_player_structure.iff	mayoroffice	-16.78	2	7.9	180
+player_cloning	object/tangible/terminal/terminal_cloning.iff	cloninglab	-14	-2.5	3.1	90
+player_cloning	object/tangible/terminal/terminal_insurance.iff	cloninglab	6.3	0.7	-6.69	-90
+player_cloning	object/tangible/terminal/terminal_player_structure.iff	cloninglab	-13.5	-2.1	-6.4	90
+player_decoration_lrg	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		12.0	1	-12.0	0
+player_decoration_med	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		8.0	1	-8.0	0
+player_decoration_sml	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		4.5	1	-4.5	0
+player_garage	object/tangible/terminal/terminal_player_structure_nosnap_mini.iff		-3	1	-3	0
+player_guild	object/tangible/terminal/terminal_player_structure.iff	closeta	17.88	2.25	10.45	90
+player_guild_tat_1	object/tangible/terminal/terminal_player_structure.iff	closeta	17.88	2.25	10.45	90
+player_guild_tat_2	object/tangible/terminal/terminal_player_structure.iff	lobby	9.13	1	6.36	90
+player_hospital	object/tangible/terminal/terminal_player_structure.iff	mainroom	7.48	0.2	1.5	-90
+player_hospital	object/tangible/terminal/terminal_pm_register.iff	mainroom	8.0	0	-0.5	-90
+player_house_bunker	object/tangible/terminal/terminal_player_structure.iff	entrance	-4.5	0.46	6.33	90
+player_house_corellia_large_1	object/tangible/terminal/terminal_player_structure.iff	mainhall1	3.17	4.59	-4.4	0
+player_house_corellia_large_2	object/tangible/terminal/terminal_player_structure.iff	hallway	-6.22	4.71	-3.85	180
+player_house_corellia_medium_1	object/tangible/terminal/terminal_player_structure.iff	public	3	0.62	6.4	180
+player_house_corellia_medium_2	object/tangible/terminal/terminal_player_structure.iff	lobby	3.5	1.76	-2.87	-90
+player_house_corellia_small_1	object/tangible/terminal/terminal_player_structure.iff	entry	-5	0.74	-2.76	-90
+player_house_corellia_small_2	object/tangible/terminal/terminal_player_structure.iff	entry	-6.5	0.63	3.77	90
+player_house_generic_large_1	object/tangible/terminal/terminal_player_structure.iff	room6	-12.0	4.7	13.5	0
+player_house_generic_large_2	object/tangible/terminal/terminal_player_structure.iff	foyer	-11.0	1.2	4.0	270
+player_house_generic_medium_1	object/tangible/terminal/terminal_player_structure.iff	public	3	0.62	6.4	180
+player_house_generic_medium_2	object/tangible/terminal/terminal_player_structure.iff	entryway	5	-2	6	-180
+player_house_generic_medium_2	object/tangible/terminal/terminal_player_structure.iff	middleroom	-7.15	0.88	5.59	180
+player_house_generic_small_1	object/tangible/terminal/terminal_player_structure.iff	entry	-5	0.74	-1.81	-90
+player_house_generic_small_2	object/tangible/terminal/terminal_player_structure.iff	entry	-6.69	0.62	3.55	90
+player_house_naboo_large_1	object/tangible/terminal/terminal_player_structure.iff	hall1	14.85	4.7	-1.76	-90
+player_house_naboo_medium_1	object/tangible/terminal/terminal_player_structure.iff	foyerdown	9.89	1.1	-10.75	0
+player_house_naboo_medium_2	object/tangible/terminal/terminal_player_structure.iff	foyer	5.62	0.5	7.98	180
+player_house_naboo_small_1	object/tangible/terminal/terminal_player_structure.iff	foyer	3.1	0.7	5.31	-90
+player_house_naboo_small_2	object/tangible/terminal/terminal_player_structure.iff	hall	0.6	0.7	6.15	180
+player_house_tatooine_large_1	object/tangible/terminal/terminal_player_structure.iff	public	8.16	0.5	11.24	180
+player_house_tatooine_medium_1	object/tangible/terminal/terminal_player_structure.iff	foyer	6.94	0.5	7.98	180
+player_house_tatooine_small_1	object/tangible/terminal/terminal_player_structure.iff	foyer	3.79	0.5	6.2	180
+player_house_tatooine_small_2	object/tangible/terminal/terminal_player_structure.iff	foyer	3.79	0.5	6.2	180
+player_shuttleport	object/creature/npc/theme_park/shared_player_shuttle.iff		0.0	0.6	3.0	180
+player_shuttleport	object/static/particle/shared_pt_airport_race_light_group.iff		0.0	0.6	9.0	180
+player_shuttleport	object/tangible/terminal/shared_terminal_travel.iff		6.5	0.9	14.0	0
+player_shuttleport	object/tangible/terminal/terminal_player_structure_nosnap.iff		-9.0	0.9	14.0	90
+player_shuttleport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-6.0	0.9	14.0	0
+player_tent	object/tangible/terminal/terminal_player_structure.iff	r1	-0.15	0.27	-2.76	0
+player_theater	object/tangible/terminal/terminal_player_structure.iff	backstage	-7	4.7	-14.2	90
+shuttleport	object/creature/npc/theme_park/shared_player_shuttle.iff		0.0	0.6	3.0	180
+shuttleport	object/static/particle/shared_pt_airport_race_light_group.iff		0.0	0.6	6.0	180
+shuttleport	object/tangible/terminal/shared_terminal_travel.iff		-13.3	0.6	-9.4	270
+shuttleport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-13.3	0.6	9.4	270
+starport	object/creature/npc/theme_park/shared_player_transport.iff		1.7	0.0	-5.1	180
+starport	object/soundobject/shared_soundobject_cantina_small.iff	departures1	-51.3	2.6	37.4	0
+starport	object/soundobject/shared_soundobject_starport_exterior.iff		1.7	0.0	-5.1	0
+starport	object/soundobject/shared_soundobject_starport_interior.iff	arrivals1	46.5	0.2	40.7	0
+starport	object/soundobject/shared_soundobject_starport_interior.iff	foyer4	0.7	0.6	57.7	0
+starport	object/static/particle/shared_pt_airport_race_light_group.iff		1.7	0.0	-5.1	0
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	11.3	0.6	51.6	-35
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	2.5	0.6	50.0	0
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-3.2	0.6	50.1	0
+starport	object/tangible/terminal/shared_terminal_travel.iff	foyer4	-12.7	0.6	52.0	35
+starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		10.0	0.0	-10.0	90
+tatooine_cloning_small	object/tangible/terminal/shared_terminal_cloning.iff	livingroom1	-0.11	0.1	-0.24	180
+tatooine_luckydespot	object/soundobject/shared_soundobject_cantina_small.iff	cafe	-4.5	7.0	-0.1	0

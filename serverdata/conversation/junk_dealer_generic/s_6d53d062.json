@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/junk_dealer_generic",
+		"key": "s_e29f48dc",
+		"comment": "Apparently this inventor had them all on a shipment that was coming in from the core worlds. As luck would have it the shipment was hijacked en route and all the components were lost to pirates. This caused the inventor to go out of business, leaving all of us stuck with these useless kits."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/junk_dealer_generic",
+				"key": "s_324b9b0f",
+				"comment": "What good would a useless kit do me?"
+			},
+			"next": "junk_dealer_generic/s_324b9b0f"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

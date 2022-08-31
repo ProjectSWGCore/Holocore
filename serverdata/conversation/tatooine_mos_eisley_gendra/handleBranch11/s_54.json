@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_55",
+		"comment": "Well, I'm afraid that's all I have for right now. You could do some crafting on your own, or you could try the crafting terminals if you're looking for more work."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_56",
+				"comment": "I'll just go off on my own."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch8/s_56"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_58",
+				"comment": "Tell me where the terminals are."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch8/s_58"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_219",
+				"comment": "Who else can I talk to?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch8/s_219"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

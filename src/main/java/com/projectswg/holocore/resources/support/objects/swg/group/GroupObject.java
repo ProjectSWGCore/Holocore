@@ -32,8 +32,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent;
-import com.projectswg.holocore.intents.gameplay.player.group.GroupEventIntent.GroupEventType;
+import com.projectswg.holocore.intents.gameplay.player.group.GroupEventLeave;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -52,9 +51,8 @@ import java.util.function.Consumer;
 
 public class GroupObject extends SWGObject {
 	
-	private final SWGList<GroupMember>	groupMembers		= new SWGList<>(6, 2, StringType.ASCII);
+	private final SWGList<GroupMember>	groupMembers		= SWGList.Companion.createEncodableList(6, 2, GroupMember::new);
 	private final Map<Long, GroupMember>memberMap			= new ConcurrentHashMap<>();
-	private final PickupPointTimer		pickupPointTimer	= new PickupPointTimer();
 
 	private CreatureObject	leader		= null;
 	private LootRule		lootRule	= LootRule.FREE_FOR_ALL;
@@ -77,13 +75,8 @@ public class GroupObject extends SWGObject {
 		bb.addInt(0); // formationNameCrc // 6
 		bb.addLong(lootMaster); // 7
 		bb.addInt(lootRule.getId()); // 8
-		bb.addObject(pickupPointTimer); // 9
-		bb.addAscii(""); // PickupPoint planetName // 10
-		bb.addFloat(0); // x
-		bb.addFloat(0); // y
-		bb.addFloat(0); // z
 		
-		bb.incrementOperandCount(9);
+		bb.incrementOperandCount(7);
 	}
 	
 	public void formGroup(CreatureObject leader, CreatureObject member) {
@@ -100,9 +93,6 @@ public class GroupObject extends SWGObject {
 	}
 	
 	public void removeMember(CreatureObject creature) {
-		if (leader.equals(creature) && size() >= 2) {
-			setLeader(groupMembers.get(1));
-		}
 		removeGroupMembers(creature);
 		calculateLevel();
 	}
@@ -117,7 +107,7 @@ public class GroupObject extends SWGObject {
 				Player memberPlayer = member.getPlayer();
 				if (memberPlayer != null){
 					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
-					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventIntent(GroupEventType.GROUP_LEAVE, memberPlayer).broadcast());
+					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventLeave(memberPlayer).broadcast());
 				    window.display(memberPlayer);
 				}
 			}
@@ -252,40 +242,12 @@ public class GroupObject extends SWGObject {
 		groupMembers.sendDeltaMessage(this);
 	}
 	
-	private static class PickupPointTimer implements Encodable {
-		
-		private int start;
-		private int end;
-		
-		public PickupPointTimer() {
-			start = 0;
-			end = 0;
-		}
-		
-		@Override
-		public byte[] encode() {
-			NetBuffer data = NetBuffer.allocate(8);
-			data.addInt(start);
-			data.addInt(end);
-			return data.array();
-		}
-		
-		@Override
-		public void decode(NetBuffer data) {
-			start = data.getInt();
-			end = data.getInt();
-		}
-		
-		@Override
-		public int getLength() {
-			return 8;
-		}
-		
-	}
-	
 	private static class GroupMember implements Encodable {
 		
 		private CreatureObject creature;
+		
+		public GroupMember() {
+		}
 		
 		public GroupMember(CreatureObject creature) {
 			this.creature = creature;

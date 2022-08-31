@@ -40,8 +40,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.test.resources.GenericCreatureObject;
 import org.bson.Document;
 import org.bson.types.Binary;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.List;
@@ -58,15 +58,15 @@ public class TestSWGPersistence {
 				assertContains((Map<String, Object>) e.getValue(), (Map<String, Object>) actual.get(e.getKey()));
 			} else if (actual.get(e.getKey()) instanceof Collection) {
 				if (!(e.getValue() instanceof Collection))
-					Assert.fail("expected value is not a collection for key: " + e.getKey());
+					fail("expected value is not a collection for key: " + e.getKey());
 				if (!(actual.get(e.getKey()) instanceof Collection))
-					Assert.fail("actual value is not a collection for key: " + e.getKey());
+					fail("actual value is not a collection for key: " + e.getKey());
 				Collection<Object> expectedCollection = (Collection<Object>) e.getValue();
 				Collection<Object> actualCollection = (Collection<Object>) actual.get(e.getKey());
-				Assert.assertEquals("Key: '"+e.getKey()+"' Size mismatch.", expectedCollection.size(), actualCollection.size());
-				Assert.assertTrue("Key: '"+e.getKey()+"' Expected <"+expectedCollection+"> but was <"+actualCollection+">", actualCollection.containsAll(expectedCollection));
+				assertEquals(expectedCollection.size(), actualCollection.size(), "Key: '"+e.getKey()+"' Size mismatch.");
+				assertTrue(actualCollection.containsAll(expectedCollection), "Key: '"+e.getKey()+"' Expected <"+expectedCollection+"> but was <"+actualCollection+">");
 			} else {
-				Assert.assertEquals("Key: '" + e.getKey() + "'", e.getValue(), actual.get(e.getKey()));
+				assertEquals(e.getValue(), actual.get(e.getKey()), "Key: '" + e.getKey() + "'");
 			}
 		}
 	}
@@ -88,7 +88,7 @@ public class TestSWGPersistence {
 		SWGObject gen = SWGObjectFactory.create(new MongoData(saved));
 		Document saved2 = SWGObjectFactory.save(gen, new MongoData()).toDocument();
 		assertContains(expected, saved2);
-		Assert.assertEquals(saved, saved2);
+		assertEquals(saved, saved2);
 	}
 	
 	private void testSWGObject(SWGObject obj) {
@@ -127,7 +127,6 @@ public class TestSWGPersistence {
 						)
 				),
 				"permissions", map("type", obj.getContainerPermissions().getType().name()),
-				"attributes", List.of(),
 				"serverAttributes", List.of()
 		);
 		test(obj, expected);
@@ -140,7 +139,7 @@ public class TestSWGPersistence {
 				"appearance", Map.ofEntries(obj.getCustomization().entrySet().stream().map(e -> Map.entry(e.getKey(), e.getValue())).toArray(Entry[]::new)),
 				"maxHitPoints", obj.getMaxHitPoints(),
 				"components", obj.getComponents(),
-				"condition", obj.getCondition(),
+				"conditionDamage", obj.getConditionDamage(),
 				"pvpFlags", obj.getPvpFlags().stream().mapToInt(PvpFlag::getBitmask).reduce(0, (a, b) -> a | b),
 				"pvpStatus", obj.getPvpStatus().name(),
 				"faction", obj.getFaction() == null ? "neutral" : obj.getFaction().getName(),
@@ -155,18 +154,25 @@ public class TestSWGPersistence {
 		testTangibleObject(obj);
 		
 		Document expected = map(
+				"base3", map(
+						"posture", obj.getPosture().name(),
+						"height", obj.getHeight(),
+						"battleFatigue", obj.getBattleFatigue(),
+						"ownerId", obj.getOwnerId(),
+						"statesBitmask", obj.getStatesBitmask(),
+						"factionRank", (int) obj.getFactionRank()
+				),
 				"base4", map(
 						"accelPercent", obj.getAccelPercent(),
 						"accelScale", obj.getAccelScale(),
 						"movementPercent", obj.getMovementPercent(),
 						"movementScale", obj.getMovementScale(),
 						"slopeModPercent", obj.getSlopeModPercent(),
-						"slopeModAngle", obj.getSlopeModPercent(),
+						"slopeModAngle", obj.getSlopeModAngle(),
 						"waterModPercent", obj.getWaterModPercent(),
 						"runSpeed", obj.getRunSpeed(),
 						"walkSpeed", obj.getWalkSpeed(),
-						"turnScale", obj.getTurnScale(),
-						"totalLevelXp", obj.getTotalLevelXp()
+						"turnScale", obj.getTurnScale()
 				),
 				"base6", map(
 						"level", (int) obj.getLevel(),
@@ -175,14 +181,10 @@ public class TestSWGPersistence {
 						"moodAnimation", obj.getMoodAnimation(),
 						"guildId", obj.getGuildId(),
 						"lookAtTargetId", obj.getLookAtTargetId(),
-						"intendedTargetId", obj.getIntendedTargetId(),
 						"moodId", (int) obj.getMoodId(),
 						"costume", obj.getCostume(),
 						"visible", obj.isVisible(),
-						"shownOnRadar", obj.isShownOnRadar(),
-						"beast", obj.isBeast(),
 						"difficulty", obj.getDifficulty().name(),
-						"hologramColor", obj.getHologramColor().name(),
 						"equippedWeapon", obj.getEquippedWeapon() == null ? 0 : obj.getEquippedWeapon().getObjectId(),
 						"attributes", map(
 								"health", obj.getHealth(),
@@ -200,13 +202,7 @@ public class TestSWGPersistence {
 								"mindRegen", 0),
 						"buffs", obj.getBuffEntries(b -> true).map(b -> new Document(Map.of("key", MongoData.store(new CRC(b.getCrc())).toDocument(), "val", MongoData.store(b).toDocument()))).collect(Collectors.toList())
 				),
-				"posture", obj.getPosture().name(),
 				"race", obj.getRace().name(),
-				"height", obj.getHeight(),
-				"battleFatigue", obj.getBattleFatigue(),
-				"ownerId", obj.getOwnerId(),
-				"statesBitmask", obj.getStatesBitmask(),
-				"factionRank", (int) obj.getFactionRank(),
 				"skills", obj.getSkills(),
 				"baseAttributes", map(
 						"health", obj.getBaseHealth(),
@@ -257,21 +253,11 @@ public class TestSWGPersistence {
 	
 	private void test(SWGObject obj) {
 		switch (obj.getBaselineType()) {
-			case PLAY:
-				testPlayerObject((PlayerObject) obj);
-				break;
-			case ITNO:
-				testIntangibleObject((IntangibleObject) obj);
-				break;
-			case CREO:
-				testCreatureObject((CreatureObject) obj);
-				break;
-			case TANO:
-				testTangibleObject((TangibleObject) obj);
-				break;
-			default:
-				testSWGObject(obj);
-				break;
+			case PLAY -> testPlayerObject((PlayerObject) obj);
+			case ITNO -> testIntangibleObject((IntangibleObject) obj);
+			case CREO -> testCreatureObject((CreatureObject) obj);
+			case TANO -> testTangibleObject((TangibleObject) obj);
+			default -> testSWGObject(obj);
 		}
 	}
 	

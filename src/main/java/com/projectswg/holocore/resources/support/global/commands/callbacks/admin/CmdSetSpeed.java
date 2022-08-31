@@ -5,6 +5,7 @@ import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.MovementModifierIdentifier;
 import org.jetbrains.annotations.NotNull;
 
 public final class CmdSetSpeed implements ICmdCallback {
@@ -14,7 +15,7 @@ public final class CmdSetSpeed implements ICmdCallback {
 		CreatureObject creature = player.getCreatureObject();
 		
 		try {
-			creature.setMovementScale(Integer.valueOf(args));
+			creature.setMovementScale(MovementModifierIdentifier.SET_SPEED, Integer.parseInt(args), false);
 		} catch (NumberFormatException e) {
 			SystemMessageIntent.broadcastPersonal(player, args + " is not a valid number!");
 		}

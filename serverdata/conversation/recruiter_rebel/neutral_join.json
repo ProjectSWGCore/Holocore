@@ -1,0 +1,29 @@
+{
+	"npcMessage": {
+		"file": "conversation/faction_recruiter_rebel",
+		"key": "s_304",
+		"comment": "I wish all of our soldiers had your dedication.  I salute you!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "faction_change",
+			"args": {
+				"faction": "rebel"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "salute1"
+			}
+		}
+	]
+}

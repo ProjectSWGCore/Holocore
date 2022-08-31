@@ -1,0 +1,203 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_kashyyyk_main_100	patrol_kashyyyk_main_100	FLIP	KASHYYYK_MAIN	kas_main_world	0	414.5	18.8	958.6	0	Kachirho - a blackscale guard
+patrol_kashyyyk_main_101	patrol_kashyyyk_main_100		KASHYYYK_MAIN	kas_main_world	0	408.6	18.2	916.8	0	-
+patrol_kashyyyk_main_102	patrol_kashyyyk_main_100		KASHYYYK_MAIN	kas_main_world	0	430.3	18.0	879.3	0	-
+patrol_kashyyyk_main_103	patrol_kashyyyk_main_100		KASHYYYK_MAIN	kas_main_world	0	422.1	17.9	824.1	0	-
+patrol_kashyyyk_main_104	patrol_kashyyyk_main_100		KASHYYYK_MAIN	kas_main_world	0	417.8	18.3	770.0	0	-
+patrol_kashyyyk_main_105	patrol_kashyyyk_main_100		KASHYYYK_MAIN	kas_main_world	0	389.2	17.9	719.3	0	-
+patrol_kashyyyk_main_200	patrol_kashyyyk_main_200	FLIP	KASHYYYK_MAIN	kas_main_world	0	749.2	18.0	529.1	0	Kachirho - a Chiss poacher
+patrol_kashyyyk_main_201	patrol_kashyyyk_main_200		KASHYYYK_MAIN	kas_main_world	0	750.0	18.0	586.2	0	-
+patrol_kashyyyk_main_202	patrol_kashyyyk_main_200		KASHYYYK_MAIN	kas_main_world	0	726.2	18.1	618.2	0	-
+patrol_kashyyyk_main_203	patrol_kashyyyk_main_200		KASHYYYK_MAIN	kas_main_world	0	689.1	18.2	636.9	0	-
+patrol_kashyyyk_main_204	patrol_kashyyyk_main_200		KASHYYYK_MAIN	kas_main_world	0	646.5	18.0	647.8	0	-
+patrol_kashyyyk_main_300	patrol_kashyyyk_main_300	LOOP	KASHYYYK_MAIN	kas_main_world	0	-170.2	19.2	464.7	0	Kachirho - a Canopy bandit
+patrol_kashyyyk_main_301	patrol_kashyyyk_main_300		KASHYYYK_MAIN	kas_main_world	0	-145.8	18.3	468.4	0	-
+patrol_kashyyyk_main_302	patrol_kashyyyk_main_300		KASHYYYK_MAIN	kas_main_world	0	-147.7	18.3	499.1	0	-
+patrol_kashyyyk_main_303	patrol_kashyyyk_main_300		KASHYYYK_MAIN	kas_main_world	0	-166.9	20.8	485.7	0	-
+patrol_kashyyyk_main_304	patrol_kashyyyk_main_300		KASHYYYK_MAIN	kas_main_world	0	-180.4	19.0	474.6	0	-
+patrol_kashyyyk_main_400	patrol_kashyyyk_main_400	LOOP	KASHYYYK_MAIN	kas_main_world	0	-372.5	22.3	806.4	0	Kachirho - a Canopy bandit
+patrol_kashyyyk_main_401	patrol_kashyyyk_main_400		KASHYYYK_MAIN	kas_main_world	0	-400.0	23.6	770.6	0	-
+patrol_kashyyyk_main_402	patrol_kashyyyk_main_400		KASHYYYK_MAIN	kas_main_world	0	-403.9	24.1	738.6	0	-
+patrol_kashyyyk_main_403	patrol_kashyyyk_main_400		KASHYYYK_MAIN	kas_main_world	0	-393.4	20.3	702.6	0	-
+patrol_kashyyyk_main_404	patrol_kashyyyk_main_400		KASHYYYK_MAIN	kas_main_world	0	-390.4	18.8	671.3	0	-
+patrol_kashyyyk_main_405	patrol_kashyyyk_main_400		KASHYYYK_MAIN	kas_main_world	0	-401.0	20.8	624.6	0	-
+patrol_kashyyyk_main_500	patrol_kashyyyk_main_500	LOOP	KASHYYYK_MAIN	kas_main_world	0	564.1	30.8	439.0	0	Kachirho - a Trandoshan slaver
+patrol_kashyyyk_main_501	patrol_kashyyyk_main_500		KASHYYYK_MAIN	kas_main_world	0	508.9	31.0	472.0	0	-
+patrol_kashyyyk_main_502	patrol_kashyyyk_main_500		KASHYYYK_MAIN	kas_main_world	0	681.7	31.0	436.4	0	-
+patrol_kashyyyk_main_600	patrol_kashyyyk_main_600	FLIP	KASHYYYK_MAIN	kas_main_world	0	532.9	24.7	431.4	0	Kachirho - a Trandoshan slaver
+patrol_kashyyyk_main_601	patrol_kashyyyk_main_600		KASHYYYK_MAIN	kas_main_world	0	526.9	24.7	360.9	0	-
+patrol_kashyyyk_main_602	patrol_kashyyyk_main_600		KASHYYYK_MAIN	kas_main_world	0	541.4	24.7	254.5	0	-
+patrol_kashyyyk_main_700	patrol_kashyyyk_main_700	FLIP	KASHYYYK_MAIN	kas_main_world	0	220.8	20.6	100.8	0	Kachirho - a Trandoshan slaver
+patrol_kashyyyk_main_701	patrol_kashyyyk_main_700		KASHYYYK_MAIN	kas_main_world	0	251.0	18.2	78.4	0	-
+patrol_kashyyyk_main_702	patrol_kashyyyk_main_700		KASHYYYK_MAIN	kas_main_world	0	218.5	16.9	10.8	0	-
+patrol_kashyyyk_main_800	patrol_kashyyyk_main_800	LOOP	KASHYYYK_MAIN	kas_main_world	0	198.5	21.8	117.3	0	Kachirho - a Trandoshan slaver
+patrol_kashyyyk_main_801	patrol_kashyyyk_main_800		KASHYYYK_MAIN	kas_main_world	0	203.7	26.1	114.6	0	-
+patrol_kashyyyk_main_802	patrol_kashyyyk_main_800		KASHYYYK_MAIN	kas_main_world	0	205.2	26.1	113.9	0	-
+patrol_kashyyyk_main_803	patrol_kashyyyk_main_800		KASHYYYK_MAIN	kas_main_world	0	138.0	19.0	144.7	0	-
+patrol_kashyyyk_main_900	patrol_kashyyyk_main_900	LOOP	KASHYYYK_MAIN	kas_main_world	0	155.9	20.1	182.8	0	Kachirho - a Trandoshan slaver
+patrol_kashyyyk_main_901	patrol_kashyyyk_main_900		KASHYYYK_MAIN	kas_main_world	0	144.3	19.5	186.7	0	-
+patrol_kashyyyk_main_902	patrol_kashyyyk_main_900		KASHYYYK_MAIN	kas_main_world	0	124.9	19.2	165.7	0	-
+patrol_kashyyyk_main_903	patrol_kashyyyk_main_900		KASHYYYK_MAIN	kas_main_world	0	140.8	18.7	147.0	0	-
+patrol_kashyyyk_main_904	patrol_kashyyyk_main_900		KASHYYYK_MAIN	kas_main_world	0	145.2	19.2	167.7	0	-
+patrol_kashyyyk_main_1000	patrol_kashyyyk_main_1000	FLIP	KASHYYYK_MAIN	kas_main_world	0	-444.5	9.3	377.5	0	Kachirho - a Wookiee freedom fighter
+patrol_kashyyyk_main_1001	patrol_kashyyyk_main_1000		KASHYYYK_MAIN	kas_main_world	0	-456.5	7.6	359.8	0	-
+patrol_kashyyyk_main_1002	patrol_kashyyyk_main_1000		KASHYYYK_MAIN	kas_main_world	0	-474.3	7.5	262.9	0	-
+patrol_kashyyyk_main_1003	patrol_kashyyyk_main_1000		KASHYYYK_MAIN	kas_main_world	0	-542.1	7.5	188.7	0	-
+patrol_kashyyyk_main_1100	patrol_kashyyyk_main_1100	FLIP	KASHYYYK_MAIN	kas_main_world	0	-522.3	7.5	146.0	0	Kachirho - a Wookiee freedom fighter
+patrol_kashyyyk_main_1101	patrol_kashyyyk_main_1100		KASHYYYK_MAIN	kas_main_world	0	-480.8	7.5	155.5	0	-
+patrol_kashyyyk_main_1102	patrol_kashyyyk_main_1100		KASHYYYK_MAIN	kas_main_world	0	-419.1	7.1	158.1	0	-
+patrol_kashyyyk_main_1200	patrol_kashyyyk_main_1200	FLIP	KASHYYYK_MAIN	kas_main_world	0	629.7	20.2	-251.7	0	Kachirho - a Wookiee guard
+patrol_kashyyyk_main_1201	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	610.3	22.3	-250.7	0	-
+patrol_kashyyyk_main_1202	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	599.7	24.2	-256.3	0	-
+patrol_kashyyyk_main_1203	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	558.3	30.5	-277.8	0	-
+patrol_kashyyyk_main_1204	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	542.8	33.0	-279.8	0	-
+patrol_kashyyyk_main_1205	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	521.1	34.0	-274.4	0	-
+patrol_kashyyyk_main_1206	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	515.0	33.5	-268.1	0	-
+patrol_kashyyyk_main_1207	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	495.8	28.2	-243.5	0	-
+patrol_kashyyyk_main_1208	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	487.7	24.6	-211.7	0	-
+patrol_kashyyyk_main_1209	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	477.1	24.0	-200.3	0	-
+patrol_kashyyyk_main_1210	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	463.1	24.3	-192.1	0	-
+patrol_kashyyyk_main_1211	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	440.8	22.6	-184.6	0	-
+patrol_kashyyyk_main_1212	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	392.6	24.3	-196.4	0	-
+patrol_kashyyyk_main_1213	patrol_kashyyyk_main_1200		KASHYYYK_MAIN	kas_main_world	0	375.7	31.8	-196.2	0	-
+patrol_kashyyyk_main_1300	patrol_kashyyyk_main_1300	FLIP	KASHYYYK_MAIN	kas_main_world	0	303.0	32.0	-186.7	0	Kachirho - a Wookiee guard
+patrol_kashyyyk_main_1301	patrol_kashyyyk_main_1300		KASHYYYK_MAIN	kas_main_world	0	273.3	32.0	-171.2	0	-
+patrol_kashyyyk_main_1302	patrol_kashyyyk_main_1300		KASHYYYK_MAIN	kas_main_world	0	228.7	32.1	-160.7	0	-
+patrol_kashyyyk_main_1303	patrol_kashyyyk_main_1300		KASHYYYK_MAIN	kas_main_world	0	227.0	33.8	-158.6	0	-
+patrol_kashyyyk_main_1304	patrol_kashyyyk_main_1300		KASHYYYK_MAIN	kas_main_world	0	226.1	33.8	-155.9	0	-
+patrol_kashyyyk_main_1400	patrol_kashyyyk_main_1400	LOOP	KASHYYYK_MAIN	kas_world	0	-473.1	29.90	-10.2	0	Kachirho - a traveller
+patrol_kashyyyk_main_1401	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-476.1	29.80	-16.5	0	-
+patrol_kashyyyk_main_1402	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-489.3	30.60	-45.8	0	-
+patrol_kashyyyk_main_1403	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-499.8	29.90	-50.6	0	-
+patrol_kashyyyk_main_1404	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-504.7	25.4	-56.1	0	-
+patrol_kashyyyk_main_1405	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-507.3	24.4	-58.8	0	-
+patrol_kashyyyk_main_1406	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-522.7	18.9	-71.1	0	-
+patrol_kashyyyk_main_1407	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-539.9	18.1	-77.6	0	-
+patrol_kashyyyk_main_1408	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-565	17.8	-89	0	-
+patrol_kashyyyk_main_1409	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-589.2	18.3	-94.5	0	-
+patrol_kashyyyk_main_1410	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-617.9	18.3	-103.2	0	-
+patrol_kashyyyk_main_1411	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-646.8	18.6	-115.3	0	-
+patrol_kashyyyk_main_1412	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-658.5	19.1	-126.2	0	-
+patrol_kashyyyk_main_1413	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-674.7	18.6	-144.3	0	-
+patrol_kashyyyk_main_1414	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-684.4	18.8	-154.9	0	-
+patrol_kashyyyk_main_1415	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-685.2	18.8	-163.5	0	-
+patrol_kashyyyk_main_1416	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-684.7	18.7	-165.8	0	-
+patrol_kashyyyk_main_1417	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_main_kachirho_starport	1	-11.2	0.1	-17.3	0	-
+patrol_kashyyyk_main_1418	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_main_kachirho_starport	1	-4.7	0.1	-17.5	0	-
+patrol_kashyyyk_main_1419	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_main_kachirho_starport	1	-12.4	0.1	-17.6	0	-
+patrol_kashyyyk_main_1420	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-685.6	18.8	-165.3	0	-
+patrol_kashyyyk_main_1421	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-684.9	18.8	-160.6	0	-
+patrol_kashyyyk_main_1422	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-679.8	18.8	-159	0	-
+patrol_kashyyyk_main_1423	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-673.2	18.8	-158	0	-
+patrol_kashyyyk_main_1424	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-660.3	18.8	-149.6	0	-
+patrol_kashyyyk_main_1425	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-654.6	19.1	-133.6	0	-
+patrol_kashyyyk_main_1426	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-650.2	18.5	-116.4	0	-
+patrol_kashyyyk_main_1427	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-635.2	18.5	-111	0	-
+patrol_kashyyyk_main_1428	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-605.1	18.5	-98.9	0	-
+patrol_kashyyyk_main_1429	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-587	18.3	-92.3	0	-
+patrol_kashyyyk_main_1430	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-562.2	18	-88	0	-
+patrol_kashyyyk_main_1431	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-540.8	17.9	-94.1	0	-
+patrol_kashyyyk_main_1432	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-506.7	18.8	-86.2	0	-
+patrol_kashyyyk_main_1433	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-497.7	20.8	-75.1	0	-
+patrol_kashyyyk_main_1434	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-491.7	24.5	-64.4	0	-
+patrol_kashyyyk_main_1435	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-490	25.4	-61.7	0	-
+patrol_kashyyyk_main_1436	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-488	29.9	-55.4	0	-
+patrol_kashyyyk_main_1437	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-487.9	30.6	-46.9	0	-
+patrol_kashyyyk_main_1438	patrol_kashyyyk_main_1400		KASHYYYK_MAIN	kas_world	0	-481.5	29.9	-29.5	0	-
+patrol_kashyyyk_main_1500	patrol_kashyyyk_main_1500	FLIP	KASHYYYK_MAIN	kas_world	0	-556.7	19.8	-72.7	0	Kachirho - a Rodian Trader
+patrol_kashyyyk_main_1501	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-559.7	18.8	-79.1	0	-
+patrol_kashyyyk_main_1502	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-549.8	18.6	-79.4	0	-
+patrol_kashyyyk_main_1503	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-524.9	17.9	-80.4	0	-
+patrol_kashyyyk_main_1504	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-509.3	18.8	-95.7	0	-
+patrol_kashyyyk_main_1505	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-499.1	17.9	-112.3	0	-
+patrol_kashyyyk_main_1506	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-504.4	17.9	-104.5	0	-
+patrol_kashyyyk_main_1507	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-512	18.6	-98.5	0	-
+patrol_kashyyyk_main_1508	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-522.3	17.8	-101.1	0	-
+patrol_kashyyyk_main_1509	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-526	18.2	-110	0	-
+patrol_kashyyyk_main_1510	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-519.4	18.8	-119.3	0	-
+patrol_kashyyyk_main_1511	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-514.3	18.8	-119.5	0	-
+patrol_kashyyyk_main_1512	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-513.5	19.3	-111.8	0	-
+patrol_kashyyyk_main_1513	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-513.2	18.8	-119.8	0	-
+patrol_kashyyyk_main_1514	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-530.8	18.4	-124.1	0	-
+patrol_kashyyyk_main_1515	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-549.8	18.3	-122.8	0	-
+patrol_kashyyyk_main_1516	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-551.1	19	-127.6	0	-
+patrol_kashyyyk_main_1517	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-550.1	19	-131.4	0	-
+patrol_kashyyyk_main_1518	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-552	19	-127.6	0	-
+patrol_kashyyyk_main_1519	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-553.4	18.4	-123.3	0	-
+patrol_kashyyyk_main_1520	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-572.1	18.8	-117.8	0	-
+patrol_kashyyyk_main_1521	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-590.8	18.6	-114.9	0	-
+patrol_kashyyyk_main_1522	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-600.1	18.6	-104	0	-
+patrol_kashyyyk_main_1523	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-612.6	18.8	-87.7	0	-
+patrol_kashyyyk_main_1524	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-626.1	18.8	-69.5	0	-
+patrol_kashyyyk_main_1525	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-634.5	18.6	-39.9	0	-
+patrol_kashyyyk_main_1526	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-653.5	18.5	-17.6	0	-
+patrol_kashyyyk_main_1527	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-692	17.1	16.3	0	-
+patrol_kashyyyk_main_1528	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-741.3	17.4	58.3	0	-
+patrol_kashyyyk_main_1529	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-778.5	17.8	90.5	0	-
+patrol_kashyyyk_main_1530	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-805.6	18.3	126.4	0	-
+patrol_kashyyyk_main_1531	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-811.4	18.4	171.6	0	-
+patrol_kashyyyk_main_1532	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-796.1	17.9	206.3	0	-
+patrol_kashyyyk_main_1533	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-758.7	17.6	243.5	0	-
+patrol_kashyyyk_main_1534	patrol_kashyyyk_main_1500		KASHYYYK_MAIN	kas_world	0	-744.2	18.6	257.5	0	-
+patrol_kashyyyk_main_1600	patrol_kashyyyk_main_1600	FLIP	KASHYYYK_MAIN	kas_world	0	-744.1	18.6	257.4	0	Kachirho - an Ithorian musician
+patrol_kashyyyk_main_1601	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-745.9	18.6	252.8	0	-
+patrol_kashyyyk_main_1602	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-760.5	18.2	236.3	0	-
+patrol_kashyyyk_main_1603	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-794.2	18.6	198.4	0	-
+patrol_kashyyyk_main_1604	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-807.6	18.9	170.7	0	-
+patrol_kashyyyk_main_1605	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-801.1	18.8	130.7	0	-
+patrol_kashyyyk_main_1606	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-774.4	18.3	93.3	0	-
+patrol_kashyyyk_main_1607	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-741.8	17.5	65	0	-
+patrol_kashyyyk_main_1608	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-685	17.3	15.3	0	-
+patrol_kashyyyk_main_1609	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-644.1	18.8	-21.3	0	-
+patrol_kashyyyk_main_1610	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-615.5	18.8	-51.5	0	-
+patrol_kashyyyk_main_1611	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-592.1	17.8	-77.3	0	-
+patrol_kashyyyk_main_1612	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-583	18.1	-76.2	0	-
+patrol_kashyyyk_main_1613	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-579	18.8	-69.6	0	-
+patrol_kashyyyk_main_1614	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-582.6	18.1	-77.3	0	-
+patrol_kashyyyk_main_1615	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-584.3	18.2	-82.9	0	-
+patrol_kashyyyk_main_1616	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-582.7	18.6	-89.7	0	-
+patrol_kashyyyk_main_1617	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-588.7	18.5	-101.7	0	-
+patrol_kashyyyk_main_1618	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-582.6	18.3	-97.2	0	-
+patrol_kashyyyk_main_1619	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-573.9	18	-88	0	-
+patrol_kashyyyk_main_1620	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-563	18.5	-81.3	0	-
+patrol_kashyyyk_main_1621	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-558	19.8	-75.2	0	-
+patrol_kashyyyk_main_1622	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-556.5	19.8	-72.1	0	-
+patrol_kashyyyk_main_1623	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-556.9	19.8	-75.7	0	-
+patrol_kashyyyk_main_1624	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-559.3	18.4	-83.4	0	-
+patrol_kashyyyk_main_1625	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-578.7	18.4	-92.4	0	-
+patrol_kashyyyk_main_1626	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-600.8	18.3	-97.4	0	-
+patrol_kashyyyk_main_1627	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-614.9	18.4	-100.5	0	-
+patrol_kashyyyk_main_1628	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-629.7	18.8	-106.3	0	-
+patrol_kashyyyk_main_1629	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-639	18.5	-112	0	-
+patrol_kashyyyk_main_1630	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-654.4	18.8	-115	0	-
+patrol_kashyyyk_main_1631	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-667.8	18.8	-127.2	0	-
+patrol_kashyyyk_main_1632	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-676.2	18.8	-143.5	0	-
+patrol_kashyyyk_main_1633	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-686	18.8	-155.2	0	-
+patrol_kashyyyk_main_1634	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-685.3	18.8	-166.6	0	-
+patrol_kashyyyk_main_1635	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_main_kachirho_starport	1	-4.9	0.1	-17.9	0	-
+patrol_kashyyyk_main_1636	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-685.5	18.8	-166.1	0	-
+patrol_kashyyyk_main_1637	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-684.9	18.8	-161.1	0	-
+patrol_kashyyyk_main_1638	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-679.2	18.8	-159.3	0	-
+patrol_kashyyyk_main_1639	patrol_kashyyyk_main_1600		KASHYYYK_MAIN	kas_world	0	-673.5	18.8	-158.5	0	-
+patrol_kashyyyk_main_1700	patrol_kashyyyk_main_1700	FLIP	KASHYYYK_MAIN	kas_world	0	186.8	20.5	-431	0	Kachirho - an explorer
+patrol_kashyyyk_main_1701	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	191	20.5	-430.1	0	-
+patrol_kashyyyk_main_1702	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	198.3	17.7	-427.9	0	-
+patrol_kashyyyk_main_1703	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	233.3	17.9	-404.5	0	-
+patrol_kashyyyk_main_1704	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	274.8	17.9	-399.2	0	-
+patrol_kashyyyk_main_1705	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	293.5	18.2	-426	0	-
+patrol_kashyyyk_main_1706	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	314.3	18.2	-443.9	0	-
+patrol_kashyyyk_main_1707	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	348.8	18.1	-446.1	0	-
+patrol_kashyyyk_main_1708	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	383.3	20.4	-454.6	0	-
+patrol_kashyyyk_main_1709	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	398.3	20	-478.5	0	-
+patrol_kashyyyk_main_1710	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	405	21.8	-492.6	0	-
+patrol_kashyyyk_main_1711	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	423.6	22.4	-508.7	0	-
+patrol_kashyyyk_main_1712	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	446.9	24.2	-523.6	0	-
+patrol_kashyyyk_main_1713	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	464.1	23.9	-545.8	0	-
+patrol_kashyyyk_main_1714	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	498.9	20.4	-553.4	0	-
+patrol_kashyyyk_main_1715	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	534	22.9	-567	0	-
+patrol_kashyyyk_main_1716	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	547.5	23.9	-572.4	0	-
+patrol_kashyyyk_main_1717	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	540.5	23.9	-604	0	-
+patrol_kashyyyk_main_1718	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	543.4	24.3	-622.4	0	-
+patrol_kashyyyk_main_1719	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	561.9	23.9	-633.6	0	-
+patrol_kashyyyk_main_1720	patrol_kashyyyk_main_1700		KASHYYYK_MAIN	kas_world	0	566.7	23.9	-638.8	0	-

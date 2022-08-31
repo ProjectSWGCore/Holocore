@@ -26,25 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.sound;
 
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.holocore.resources.support.objects.swg.staticobject.StaticObject;
 
 public class SoundObject extends StaticObject {
 	
 	public SoundObject(long objectId) {
 		super(objectId);
-	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		super.save(stream);
-		stream.addByte(0);
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		super.read(stream);
-		stream.getByte();
 	}
 	
 }

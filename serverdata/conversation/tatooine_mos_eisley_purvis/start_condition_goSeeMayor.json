@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_132",
+		"comment": "The mayor wants to tell you what a good job you're doing. Not that he'd ever say that to me..."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

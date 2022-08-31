@@ -29,8 +29,8 @@ package com.projectswg.holocore.resources.support.data.collections;
 
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.nio.IntBuffer;
 import java.util.BitSet;
@@ -46,14 +46,14 @@ public class TestSWGFlag extends TestRunnerNoIntents {
 		flag.set(64);
 		flag.set(96);
 		int [] ints = flag.toList();
-		Assert.assertEquals(4, ints.length);
-		Assert.assertEquals((1<<4)+(1<<1), ints[0]);
-		Assert.assertEquals(1, ints[1]);
-		Assert.assertEquals(1, ints[2]);
-		Assert.assertEquals(1, ints[3]);
+		assertEquals(4, ints.length);
+		assertEquals((1<<4)+(1<<1), ints[0]);
+		assertEquals(1, ints[1]);
+		assertEquals(1, ints[2]);
+		assertEquals(1, ints[3]);
 		SWGFlag decoded = new SWGFlag(3, 16);
 		decoded.decode(NetBuffer.wrap(flag.encode()));
-		Assert.assertArrayEquals(flag.encode(), decoded.encode());
+		assertArrayEquals(flag.encode(), decoded.encode());
 	}
 	
 	@Test
@@ -62,13 +62,36 @@ public class TestSWGFlag extends TestRunnerNoIntents {
 		SWGFlag flag = new SWGFlag(3, 16);
 		
 		encoded = flag.encode();
-		Assert.assertEquals(4, encoded.length);
+		assertEquals(4, encoded.length);
 		
+		flag.clear();
+		flag.set(0);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals(1, encoded[4]);
+		
+		flag.clear();
 		flag.set(1);
 		encoded = flag.encode();
-		Assert.assertEquals(8, encoded.length);
-		Assert.assertEquals(1, encoded[0]);
-		Assert.assertEquals(2, encoded[4]);
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals(2, encoded[4]);
+		
+		flag.clear();
+		flag.set(7);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals((1 << 7), encoded[4] & 0xFF);
+		
+		flag.clear();
+		flag.set(8);
+		encoded = flag.encode();
+		assertEquals(8, encoded.length);
+		assertEquals(1, encoded[0]);
+		assertEquals(0, encoded[4]);
+		assertEquals(1, encoded[5]);
 	}
 	
 }

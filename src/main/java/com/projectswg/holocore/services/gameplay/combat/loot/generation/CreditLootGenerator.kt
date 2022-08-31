@@ -61,7 +61,7 @@ class CreditLootGenerator() {
 		
 		// TODO scale with group size?
 		
-		val cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_cash.iff", CreditObject::class.java)
+		val cashObject = ObjectCreator.createObjectFromTemplate("object/tangible/item/shared_loot_credit_chip.iff", CreditObject::class.java)
 		
 		cashObject.amount = credits.toLong()
 		loot.add(cashObject)

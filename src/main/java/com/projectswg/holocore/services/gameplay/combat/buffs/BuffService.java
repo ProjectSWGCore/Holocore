@@ -37,9 +37,10 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
@@ -51,24 +52,28 @@ import java.util.stream.Stream;
 public class BuffService extends Service {
 	
 	/*
-	 * TODO allow removal of buffs with BuffInfo where PLAYER_REMOVABLE == 1
 	 * TODO remove buffs on respec. Listen for respec event and remove buffs with BuffInfo where
 	 *      REMOVE_ON_RESPEC == 1
 	 * TODO remove group buff(s) from receiver when distance between caster and receiver is 100m.
 	 *      Perform same check upon zoning in. Skillmod1 effect name is "group"
 	 */
 	
-	private final BasicScheduledThread timerCheckThread;
-	private final Set<CreatureObject> monitored;
+	private final ScheduledThreadPool timerCheckThread;
+	private final Map<String, BuffCallback> callbackMap;
 	
 	public BuffService() {
-		timerCheckThread = new BasicScheduledThread("buff-timer-check", this::checkBuffTimers);
-		monitored = new HashSet<>();
+		timerCheckThread = new ScheduledThreadPool(1, "buff-timer-check");
+		callbackMap = new HashMap<>();
+		registerCallbacks();
+	}
+	
+	private void registerCallbacks() {
+		callbackMap.put("removeBurstRun", new RemoveBurstRunBuffCallback());
 	}
 	
 	@Override
 	public boolean start() {
-		timerCheckThread.startWithFixedRate(1000, 1000);
+		timerCheckThread.start();
 		return super.start();
 	}
 	
@@ -78,84 +83,49 @@ public class BuffService extends Service {
 		return super.stop();
 	}
 	
-	private void checkBuffTimers() {
-		List<CreatureObject> creatures;
-		synchronized (monitored) {
-			creatures = new ArrayList<>(monitored);
-		}
-		for (CreatureObject creature : creatures) {
-			removeAllBuffs(creature, creature.getBuffEntries(buff -> isBuffExpired(creature, buff)));
-		}
-	}
-	
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
 		String buffName = bi.getBuffName();
 		BuffInfo buffData = bi.getBuffData();
-		
+
 		if (buffData == null) {
 			buffData = getBuff(buffName);
 		}
-		
+
 		Objects.requireNonNull(buffData, "No known buff: " + buffName);
 		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
+		CreatureObject buffer = bi.getBuffer();
+		CreatureObject receiver = bi.getReceiver();
+
 		if (bi.isRemove()) {
-			removeBuff(bi.getReceiver(), buffData, false);
+			removeBuff(receiver, buffData);
 		} else {
-			addBuff(bi.getReceiver(), buffData, bi.getBuffer());
+			addBuff(receiver, buffData, buffer);
 		}
-	}
-	
-	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		CreatureObject creature = pei.getPlayer().getCreatureObject();
-		
-		switch (pei.getEvent()) {
-			case PE_FIRST_ZONE:
-				handleFirstZone(creature);
-				break;
-			case PE_DISAPPEAR:
-				handleDisappear(creature);
-				break;
-			default:
-				break;
-		}
-	}
-	
-	private void handleFirstZone(CreatureObject creature) {
-		if (isCreatureBuffed(creature)) {
-			addToMonitored(creature);
-		}
-	}
-	
-	private void handleDisappear(CreatureObject creature) {
-		removeFromMonitored(creature);
-		removeAllBuffs(creature, creature.getBuffEntries(buff -> !isBuffPersistent(buff)));
 	}
 	
 	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
 		CreatureObject corpse = cki.getCorpse();
 		
-		if (cki.getKiller().isPlayer()) {
-			// PvP death - decay durations of certain buffs
-			corpse.getBuffEntries(buff -> isBuffDecayable(corpse, buff)).forEach(buff -> decayDuration(corpse, buff));
-		} else {
-			// PvE death - remove certain buffs
-			removeAllBuffs(corpse, corpse.getBuffEntries(this::isBuffRemovedOnDeath));
+		// All buffs are removed upon death
+		removeAllBuffs(corpse, corpse.getBuffEntries(buff -> true));
+	}
+	
+	@IntentHandler
+	private void handlePlayerEventIntent(PlayerEventIntent intent) {
+		PlayerEvent event = intent.getEvent();
+		
+		if (event == PlayerEvent.PE_ZONE_IN_SERVER) {
+			removeExpiredBuffs(intent);
 		}
 	}
 	
-	private void addToMonitored(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.add(creature);
-		}
-	}
-	
-	private void removeFromMonitored(CreatureObject creature) {
-		synchronized (monitored) {
-			monitored.remove(creature);
-		}
+	private void removeExpiredBuffs(PlayerEventIntent intent) {
+		Player player = intent.getPlayer();
+		CreatureObject creatureObject = player.getCreatureObject();
+		Stream<Buff> expiredBuffs = creatureObject.getBuffEntries(buff -> isBuffExpired(creatureObject, buff));
+		expiredBuffs.forEach(expiredBuff -> removeBuff(creatureObject, getBuff(expiredBuff)));
 	}
 	
 	private int calculatePlayTime(CreatureObject creature) {
@@ -169,37 +139,15 @@ public class BuffService extends Service {
 	}
 	
 	private boolean isBuffExpired(CreatureObject creature, Buff buff) {
-		return buff.getDuration() >= 0 && calculatePlayTime(creature) >= buff.getEndTime();
-	}
-	
-	private boolean isBuffDecayable(CreatureObject creature, Buff buff) {
-		return !isBuffExpired(creature, buff) && getBuff(buff).isDecayOnPvpDeath();
-	}
-	
-	private boolean isBuffPersistent(Buff buff) {
-		return getBuff(buff).isPersistent();
-	}
-	
-	private boolean isBuffRemovedOnDeath(Buff buff) {
-		return getBuff(buff).isRemoveOnDeath();
+		return calculatePlayTime(creature) >= buff.getEndTime();
 	}
 	
 	private boolean isBuffInfinite(BuffInfo buffData) {
 		return buffData.getDuration() < 0;
 	}
 	
-	private boolean isCreatureBuffed(CreatureObject creature) {
-		return creature.getBuffEntries(buff -> !isBuffInfinite(getBuff(buff))).count() > 0;
-	}
-	
-	private void decayDuration(CreatureObject creature, Buff buff) {
-		int newDuration = (int) (buff.getDuration() * 0.10);	// Duration decays with 10%
-		
-		creature.setBuffDuration(new CRC(buff.getCrc()), buff.getStartTime(), newDuration);
-	}
-	
 	private void removeAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
-		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff), true));
+		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff)));
 	}
 	
 	private void addBuff(CreatureObject receiver, @NotNull BuffInfo buffData, CreatureObject buffer) {
@@ -213,15 +161,12 @@ public class BuffService extends Service {
 			
 			if (buff.getCrc() == buffData.getCrc()) {
 				if (isBuffInfinite(buffData)) {
-					removeBuff(receiver, buffData, true);
-				} else {
-					// TODO skillmods influencing stack increment
-					checkStackCount(receiver, buff, applyTime, 1);
+					removeBuff(receiver, buffData);
 				}
 			} else {
 				BuffInfo oldBuff = getBuff(buff);
 				if (buffData.getPriority() >= oldBuff.getPriority()) {
-					removeBuff(receiver, oldBuff, true);
+					removeBuff(receiver, oldBuff);
 					applyBuff(receiver, buffer, buffData, applyTime);
 				}
 			}
@@ -230,57 +175,20 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData, boolean expired) {
+	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData) {
 		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
 		if (!optionalEntry.isPresent())
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
 		
 		Buff buff = optionalEntry.get();
-		if (buffData.getMaxStackCount() > 1 && !expired && buff.getStackCount() > 1) {
-			checkStackCount(creature, buff, calculatePlayTime(creature), buffData.getMaxStackCount());
-		} else {
-			Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
-			Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
-			
-			checkBuffEffects(buffData, creature, -removedBuff.getStackCount());
-			checkCallback(buffData, creature);
-		}
-		
-		if (!isCreatureBuffed(creature)) {
-			removeFromMonitored(creature);
-		}
-	}
-	
-	private void checkStackCount(CreatureObject receiver, Buff buff, int applyTime, int stackMod) {
-		BuffInfo buffData = getBuff(buff);
-		
-		Objects.requireNonNull(buffData, "No known buff: " + buff.getCrc());
-		// If it's the same buff, we need to check for stacks
-		int maxStackCount = buffData.getMaxStackCount();
-		
-		if (maxStackCount < 2) {
-			removeBuff(receiver, buffData, true);
-			applyBuff(receiver, receiver, buffData, applyTime);
-			return;
-		}
-		
-		if (stackMod + buff.getStackCount() > maxStackCount) {
-			stackMod = maxStackCount;
-		}
-		
-		CRC crc = new CRC(buff.getCrc());
-		receiver.adjustBuffStackCount(crc, stackMod);
-		checkBuffEffects(buffData, receiver, stackMod);
-		
-		// If the stack count was incremented, also renew the duration
-		if (stackMod > 0) {
-			receiver.setBuffDuration(crc, applyTime, (int) buffData.getDuration());
-		}
+		Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
+		Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
+
+		checkBuffEffects(buffData, creature, false);
+		checkCallback(buffData, creature);
 	}
 	
 	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData, int applyTime) {
-		// TODO stack counts upon add/remove need to be defined on a per-buff basis due to skillmod influence. Scripts might not be a bad idea.
-		int stackCount = 1;
 		int buffDuration = (int) buffData.getDuration();
 		
 		{
@@ -288,15 +196,14 @@ public class BuffService extends Service {
 			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();
 			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
 		}
-		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration, (float) buffData.getEffectValue(0), buffDuration, buffer.getObjectId(), stackCount);
-		
-		checkBuffEffects(buffData, receiver, 1);
+		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration);
+
+		checkBuffEffects(buffData, receiver, true);
 		receiver.addBuff(buff);
-		
-		sendParticleEffect(buffData.getParticle(), receiver, buffData.getParticleHardpoint());
-		sendParticleEffect(buffData.getStanceParticle(), receiver, buffData.getParticleHardpoint());
-		
-		addToMonitored(receiver);
+
+		sendParticleEffect(buffData.getParticle(), receiver, "");
+
+		timerCheckThread.execute(buffDuration * 1000L, () -> removeBuff(receiver, buffData));
 	}
 	
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
@@ -312,26 +219,27 @@ public class BuffService extends Service {
 			return;
 		}
 		
-		if (DataLoader.Companion.buffs().containsBuff(callback)) {
-			addBuff(creature, getBuff(callback), creature);
+		if (callbackMap.containsKey(callback)) {
+			BuffCallback buffCallback = callbackMap.get(callback);
+			buffCallback.execute(creature);
 		}
 	}
 	
-	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, int valueFactor) {
+	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, boolean add) {
 		/*
 		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
 		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
 		 *      removal
 		 */
 		for (int i = 0; i < 5; i++)
-			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), valueFactor);
+			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), add);
 	}
 	
-	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, int valueFactor) {
+	private void checkBuffEffect(CreatureObject creature, String effectName, double effectValue, boolean add) {
 		if (effectName != null &&  !effectName.isEmpty()) {
 			if (DataLoader.Companion.commands().isCommand(effectName) && effectValue == 1.0) {
 				// This effect is an ability
-				if (valueFactor > 0) {
+				if (add) {
 					// Buff is being added. Grant the ability.
 					creature.addCommand(effectName);
 				} else {
@@ -340,7 +248,11 @@ public class BuffService extends Service {
 				}
 			} else {
 				// This effect is a skill mod
-				new SkillModIntent(effectName, 0, (int) effectValue * valueFactor, creature).broadcast();
+				if (add) {
+					new SkillModIntent(effectName, 0, (int) effectValue, creature).broadcast();
+				} else {
+					new SkillModIntent(effectName, 0, (int) -effectValue, creature).broadcast();
+				}
 			}
 		}
 	}

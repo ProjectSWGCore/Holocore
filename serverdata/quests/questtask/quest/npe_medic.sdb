@@ -1,0 +1,5 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.perform_action_on_npc	1	npe_medic_heal_1					0	0	0
+1	quest.task.ground.wait_for_signal	2	npe_medic_return					0	0	0
+2	quest.task.ground.complete_quest						quest/npe_pointer_med_template	0	0	0

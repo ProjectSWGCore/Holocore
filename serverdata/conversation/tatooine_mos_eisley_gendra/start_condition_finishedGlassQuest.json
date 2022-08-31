@@ -1,0 +1,35 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_61",
+		"comment": "Oh, those glasses were perfect! My friend thanks you. He was wondering, though, if you had some more free time."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_63",
+				"comment": "Yeah. I'd like to get some more work."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch18/s_63"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_99",
+				"comment": "I think I'm done working for now."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch18/s_99"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_195",
+				"comment": "How do I become a pilot?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch18/s_195"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

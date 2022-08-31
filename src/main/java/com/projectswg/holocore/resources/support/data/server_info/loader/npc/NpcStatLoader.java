@@ -57,7 +57,7 @@ public final class NpcStatLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/npc/npc_stats.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/npc/npc_stats.sdb"))) {
 			npcStatMap.putAll(set.stream(NpcStatInfo::new).collect(toMap(NpcStatInfo::getLevel, Function.identity())));
 		}
 	}

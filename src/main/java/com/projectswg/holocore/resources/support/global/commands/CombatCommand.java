@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands;
 
+import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.combat.*;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class CombatCommand extends Command {
+public class CombatCommand {
 	
 	private final ValidTarget validTarget;
 	private final boolean forceCombat;
@@ -43,6 +44,12 @@ public class CombatCommand extends Command {
 	private final AttackType attackType;
 	private final double healthCost;
 	private final double actionCost;
+	private final double mindCost;
+	private final double knockdownChance;
+	private final boolean blinding;
+	private final boolean bleeding;
+	private final String triggerEffect;
+	private final String triggerEffectHardpoint;
 	private final DamageType damageType;
 	private final DamageType elementalType;
 	private final boolean ignoreDistance;
@@ -50,6 +57,8 @@ public class CombatCommand extends Command {
 	private final int attackRolls;
 	private final double percentAddFromWeapon;
 	private final double bypassArmor;
+	private final double hateDamageModifier;
+	private final int hateAdd;
 	private final int addedDamage;
 	private final String buffNameTarget;
 	private final String buffNameSelf;
@@ -61,11 +70,13 @@ public class CombatCommand extends Command {
 	private final int delayAttackLoops;
 	private final DelayAttackEggPosition eggPosition;
 	private final double coneLength;
+	private final double coneWidth;
 	private final HealAttrib healAttrib;
-	private final String specialLine;
+	private final String name;
+	private final double maxRange;
+	private final int crc;
 	
 	private CombatCommand(CombatCommandBuilder builder) {
-		super(builder);
 		this.validTarget = builder.validTarget;
 		this.forceCombat = builder.forceCombat;
 		this.animations = builder.animations;
@@ -73,6 +84,12 @@ public class CombatCommand extends Command {
 		this.attackType = builder.attackType;
 		this.healthCost = builder.healthCost;
 		this.actionCost = builder.actionCost;
+		this.mindCost = builder.mindCost;
+		this.knockdownChance = builder.knockdownChance;
+		this.blinding = builder.blinding;
+		this.bleeding = builder.bleeding;
+		this.triggerEffect = builder.triggerEffect;
+		this.triggerEffectHardpoint = builder.triggerEffectHardpoint;
 		this.damageType = builder.damageType;
 		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
@@ -80,6 +97,8 @@ public class CombatCommand extends Command {
 		this.attackRolls = builder.attackRolls;
 		this.percentAddFromWeapon = builder.percentAddFromWeapon;
 		this.bypassArmor = builder.bypassArmor;
+		this.hateDamageModifier = builder.hateDamageModifier;
+		this.hateAdd = builder.hateAdd;
 		this.addedDamage = builder.addedDamage;
 		this.buffNameTarget = builder.buffNameTarget;
 		this.buffNameSelf = builder.buffNameSelf;
@@ -91,13 +110,11 @@ public class CombatCommand extends Command {
 		this.delayAttackLoops = builder.delayAttackLoops;
 		this.eggPosition = builder.eggPosition;
 		this.coneLength = builder.coneLength;
+		this.coneWidth = builder.coneWidth;
 		this.healAttrib = builder.healAttrib;
-		this.specialLine = builder.specialLine;
-	}
-	
-	@Override
-	public boolean isCombatCommand() {
-		return true;
+		this.name = builder.name;
+		this.maxRange = builder.maxRange;
+		this.crc = CRC.getCrc(this.name);
 	}
 	
 	public ValidTarget getValidTarget() {
@@ -140,6 +157,30 @@ public class CombatCommand extends Command {
 		return actionCost;
 	}
 	
+	public double getMindCost() {
+		return mindCost;
+	}
+	
+	public double getKnockdownChance() {
+		return knockdownChance;
+	}
+	
+	public boolean isBlinding() {
+		return blinding;
+	}
+	
+	public boolean isBleeding() {
+		return bleeding;
+	}
+	
+	public String getTriggerEffect() {
+		return triggerEffect;
+	}
+	
+	public String getTriggerEffectHardpoint() {
+		return triggerEffectHardpoint;
+	}
+	
 	public DamageType getDamageType() {
 		return damageType;
 	}
@@ -166,6 +207,14 @@ public class CombatCommand extends Command {
 	
 	public double getBypassArmor() {
 		return bypassArmor;
+	}
+	
+	public double getHateDamageModifier() {
+		return hateDamageModifier;
+	}
+	
+	public int getHateAdd() {
+		return hateAdd;
 	}
 	
 	public int getAddedDamage() {
@@ -212,23 +261,31 @@ public class CombatCommand extends Command {
 		return coneLength;
 	}
 	
+	public double getConeWidth() {
+		return coneWidth;
+	}
+	
 	public HealAttrib getHealAttrib() {
 		return healAttrib;
 	}
 	
-	public String getSpecialLine() {
-		return specialLine;
+	public String getName() {
+		return name;
 	}
 	
 	public static CombatCommandBuilder builder() {
 		return new CombatCommandBuilder();
 	}
-	
-	public static CombatCommandBuilder builder(Command source) {
-		return new CombatCommandBuilder(source);
+
+	public double getMaxRange() {
+		return maxRange;
 	}
-	
-	public static class CombatCommandBuilder extends CommandBuilder {
+
+	public int getCrc() {
+		return crc;
+	}
+
+	public static class CombatCommandBuilder {
 		
 		private final Map<WeaponType, String[]> animations;
 		
@@ -238,6 +295,12 @@ public class CombatCommand extends Command {
 		private AttackType attackType;
 		private double healthCost;
 		private double actionCost;
+		private double mindCost;
+		private double knockdownChance;
+		private boolean blinding;
+		private boolean bleeding;
+		private String triggerEffect;
+		private String triggerEffectHardpoint;
 		private DamageType damageType;
 		private DamageType elementalType;
 		private boolean ignoreDistance;
@@ -245,6 +308,8 @@ public class CombatCommand extends Command {
 		private int attackRolls;
 		private double percentAddFromWeapon;
 		private double bypassArmor;
+		private double hateDamageModifier;
+		private int hateAdd;
 		private int addedDamage;
 		private String buffNameTarget;
 		private String buffNameSelf;
@@ -256,15 +321,12 @@ public class CombatCommand extends Command {
 		private int delayAttackLoops;
 		private DelayAttackEggPosition eggPosition;
 		private double coneLength;
+		private double coneWidth;
 		private HealAttrib healAttrib;
-		private String specialLine;
+		private String name;
+		private double maxRange;
 		
 		private CombatCommandBuilder() {
-			this.animations = new EnumMap<>(WeaponType.class);
-		}
-		
-		private CombatCommandBuilder(Command command) {
-			super(command);
 			this.animations = new EnumMap<>(WeaponType.class);
 		}
 		
@@ -303,6 +365,36 @@ public class CombatCommand extends Command {
 			return this;
 		}
 		
+		public CombatCommandBuilder withMindCost(double mindCost) {
+			this.mindCost = mindCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withKnockdownChance(double knockdownChance) {
+			this.knockdownChance = knockdownChance;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBlinding(boolean blinding) {
+			this.blinding = blinding;
+			return this;
+		}
+		
+		public CombatCommandBuilder withBleeding(boolean bleeding) {
+			this.bleeding = bleeding;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTriggerEffect(String triggerEffect) {
+			this.triggerEffect = triggerEffect;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTriggerEffectHardpoint(String triggerEffectHardpoint) {
+			this.triggerEffectHardpoint = triggerEffectHardpoint;
+			return this;
+		}
+		
 		public CombatCommandBuilder withDamageType(DamageType damageType) {
 			this.damageType = damageType;
 			return this;
@@ -335,6 +427,16 @@ public class CombatCommand extends Command {
 		
 		public CombatCommandBuilder withBypassArmor(double bypassArmor) {
 			this.bypassArmor = bypassArmor;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHateDamageModifier(double hateDamageModifier) {
+			this.hateDamageModifier = hateDamageModifier;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHateAdd(int hateAdd) {
+			this.hateAdd = hateAdd;
 			return this;
 		}
 		
@@ -393,13 +495,23 @@ public class CombatCommand extends Command {
 			return this;
 		}
 		
+		public CombatCommandBuilder withConeWidth(double coneWidth) {
+			this.coneWidth = coneWidth;
+			return this;
+		}
+		
 		public CombatCommandBuilder withHealAttrib(HealAttrib healAttrib) {
 			this.healAttrib = healAttrib;
 			return this;
 		}
 		
-		public CombatCommandBuilder withSpecialLine(String specialLine) {
-			this.specialLine = specialLine;
+		public CombatCommandBuilder withName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public CombatCommandBuilder withMaxRange(double maxRange) {
+			this.maxRange = maxRange;
 			return this;
 		}
 		

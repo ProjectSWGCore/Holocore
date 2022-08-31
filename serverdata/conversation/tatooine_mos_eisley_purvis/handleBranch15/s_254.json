@@ -1,0 +1,34 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_258",
+		"comment": "The Tuskens are sneaky. They're living in that junk town just outside the city. I'm going to have you go out there and do some recon."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_260",
+				"comment": "Sounds simple enough."
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch16/s_260"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_272",
+				"comment": "Can you explain a little more?"
+			},
+			"next": "tatooine_mos_eisley_purvis/handleBranch16/s_272"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_away"
+			}
+		}
+	]
+}

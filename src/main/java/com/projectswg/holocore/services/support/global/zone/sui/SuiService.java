@@ -83,10 +83,8 @@ public class SuiService extends Service {
 	
 	private void handleSuiEventNotification(Player player, SuiEventNotification p) {
 		List<SuiBaseWindow> activeWindows = windows.get(player.getNetworkId());
-		if (activeWindows == null || activeWindows.size() <= 0) {
-			Log.w("There are no active windows for %s!", player);
+		if (activeWindows == null || activeWindows.size() <= 0)
 			return;
-		}
 
 		SuiBaseWindow window = getWindowById(activeWindows, p.getWindowId());
 		

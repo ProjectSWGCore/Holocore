@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.data.server_info;
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.*;
 import me.joshlarson.jlcommon.log.Log;
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -92,11 +93,11 @@ public class SdbLoader {
 		 */
 		<T> Stream<T> parallelStream(Function<SdbResultSet, T> transform);
 		
-		SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex);
-		SdbIntegerColumnArraySet getIntegerArrayParser(@Language("RegExp") String regex);
-		SdbLongColumnArraySet getLongArrayParser(@Language("RegExp") String regex);
-		SdbRealColumnArraySet getRealArrayParser(@Language("RegExp") String regex);
-		SdbBooleanColumnArraySet getBooleanArrayParser(@Language("RegExp") String regex);
+		SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex, @Nullable String defValue);
+		SdbIntegerColumnArraySet getIntegerArrayParser(@Language("RegExp") String regex, int defValue);
+		SdbLongColumnArraySet getLongArrayParser(@Language("RegExp") String regex, long defValue);
+		SdbRealColumnArraySet getRealArrayParser(@Language("RegExp") String regex, double defValue);
+		SdbBooleanColumnArraySet getBooleanArrayParser(@Language("RegExp") String regex, boolean defValue);
 		
 		String getText(int index);
 		String getText(String columnName);
@@ -180,28 +181,28 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex) {
-			return new SdbTextColumnArraySet(regex);
+		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex, @Nullable String defValue) {
+			return new SdbTextColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex) {
-			return new SdbIntegerColumnArraySet(regex);
+		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex, int defValue) {
+			return new SdbIntegerColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbLongColumnArraySet getLongArrayParser(String regex) {
-			return new SdbLongColumnArraySet(regex);
+		public SdbLongColumnArraySet getLongArrayParser(String regex, long defValue) {
+			return new SdbLongColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbRealColumnArraySet getRealArrayParser(String regex) {
-			return new SdbRealColumnArraySet(regex);
+		public SdbRealColumnArraySet getRealArrayParser(String regex, double defValue) {
+			return new SdbRealColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex) {
-			return new SdbBooleanColumnArraySet(regex);
+		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex, boolean defValue) {
+			return new SdbBooleanColumnArraySet(regex, defValue);
 		}
 		
 		@Override
@@ -350,28 +351,28 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex) {
-			return new SdbTextColumnArraySet(regex);
+		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex, @Nullable String defValue) {
+			return new SdbTextColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex) {
-			return new SdbIntegerColumnArraySet(regex);
+		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex, int defValue) {
+			return new SdbIntegerColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbLongColumnArraySet getLongArrayParser(String regex) {
-			return new SdbLongColumnArraySet(regex);
+		public SdbLongColumnArraySet getLongArrayParser(String regex, long defValue) {
+			return new SdbLongColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbRealColumnArraySet getRealArrayParser(String regex) {
-			return new SdbRealColumnArraySet(regex);
+		public SdbRealColumnArraySet getRealArrayParser(String regex, double defValue) {
+			return new SdbRealColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex) {
-			return new SdbBooleanColumnArraySet(regex);
+		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex, boolean defValue) {
+			return new SdbBooleanColumnArraySet(regex, defValue);
 		}
 		
 		@Override
@@ -524,28 +525,28 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex) {
-			return new SdbTextColumnArraySet(regex);
+		public SdbTextColumnArraySet getTextArrayParser(@Language("RegExp") String regex, @Nullable String defValue) {
+			return new SdbTextColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex) {
-			return new SdbIntegerColumnArraySet(regex);
+		public SdbIntegerColumnArraySet getIntegerArrayParser(String regex, int defValue) {
+			return new SdbIntegerColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbLongColumnArraySet getLongArrayParser(String regex) {
-			return new SdbLongColumnArraySet(regex);
+		public SdbLongColumnArraySet getLongArrayParser(String regex, long defValue) {
+			return new SdbLongColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbRealColumnArraySet getRealArrayParser(String regex) {
-			return new SdbRealColumnArraySet(regex);
+		public SdbRealColumnArraySet getRealArrayParser(String regex, double defValue) {
+			return new SdbRealColumnArraySet(regex, defValue);
 		}
 		
 		@Override
-		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex) {
-			return new SdbBooleanColumnArraySet(regex);
+		public SdbBooleanColumnArraySet getBooleanArrayParser(String regex, boolean defValue) {
+			return new SdbBooleanColumnArraySet(regex, defValue);
 		}
 		
 		@Override

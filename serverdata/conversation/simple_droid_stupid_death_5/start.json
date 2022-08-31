@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_stupid",
+		"key": "death_5",
+		"comment": "I'm too young to break..."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -58,7 +58,7 @@ public final class VehicleLoader extends DataLoader {
 	
 	@Override
 	public final void load() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/vehicles/vehicles.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/vehicles/vehicles.sdb"))) {
 			while (set.next()) {
 				VehicleInfo vehicle = new VehicleInfo(set);
 				assert !vehicleTemplates.containsKey(vehicle.getObjectTemplate()) : "vehicle template already exists in map";
@@ -74,7 +74,6 @@ public final class VehicleLoader extends DataLoader {
 		private final String objectReference;
 		private final String pcdTemplate;
 		private final String objectTemplate;
-		private final String garageDisplayTemplate;
 		private final int decayRate;
 		private final double repairRate;
 		private final boolean canRepairDisabled;
@@ -93,15 +92,11 @@ public final class VehicleLoader extends DataLoader {
 		private final double bankingAngle;
 		private final double hoverHeight;
 		private final double autoLevel;
-		private final String playerBuff;
-		private final String vehicleBuff;
-		private final String buffClientEffect;
 		
 		public VehicleInfo(SdbResultSet set) {
 			this.objectReference = set.getText("object_reference");
 			this.pcdTemplate = set.getText("pcd_template");
 			this.objectTemplate = set.getText("object_template");
-			this.garageDisplayTemplate = set.getText("garage_display_template");
 			this.decayRate = (int) set.getInt("decay_rate");
 			this.repairRate = set.getReal("repair_rate");
 			this.canRepairDisabled = set.getBoolean("can_repair_disabled");
@@ -120,9 +115,6 @@ public final class VehicleLoader extends DataLoader {
 			this.bankingAngle = set.getReal("banking_angle");
 			this.hoverHeight = set.getReal("hover_height");
 			this.autoLevel = set.getReal("auto_level");
-			this.playerBuff = set.getText("player_buff");
-			this.vehicleBuff = set.getText("vehicle_buff");
-			this.buffClientEffect = set.getText("buff_client_effect");
 		}
 		
 		public String getObjectReference() {
@@ -135,10 +127,6 @@ public final class VehicleLoader extends DataLoader {
 		
 		public String getObjectTemplate() {
 			return objectTemplate;
-		}
-		
-		public String getGarageDisplayTemplate() {
-			return garageDisplayTemplate;
 		}
 		
 		public int getDecayRate() {
@@ -213,17 +201,6 @@ public final class VehicleLoader extends DataLoader {
 			return autoLevel;
 		}
 		
-		public String getPlayerBuff() {
-			return playerBuff;
-		}
-		
-		public String getVehicleBuff() {
-			return vehicleBuff;
-		}
-		
-		public String getBuffClientEffect() {
-			return buffClientEffect;
-		}
 	}
 	
 }

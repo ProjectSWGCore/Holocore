@@ -1,0 +1,276 @@
+patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
+TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
+patrol_talus_100	patrol_talus_100	LOOP	TALUS	tal_world	0	-2178.2	20.0	2282.1	0	Imperial Outpost - route #1
+patrol_talus_101	patrol_talus_100		TALUS	tal_world	0	-2180.3	20.0	2329.3	0	-
+patrol_talus_102	patrol_talus_100		TALUS	tal_world	0	-2200.5	20.0	2329.7	0	-
+patrol_talus_103	patrol_talus_100		TALUS	tal_world	0	-2200.3	20.0	2301.0	0	-
+patrol_talus_104	patrol_talus_100		TALUS	tal_world	0	-2218.6	20.0	2287.4	0	-
+patrol_talus_105	patrol_talus_100		TALUS	tal_world	0	-2232.7	20.0	2283.2	0	-
+patrol_talus_106	patrol_talus_100		TALUS	tal_world	0	-2234.8	20.0	2272.9	0	-
+patrol_talus_107	patrol_talus_100		TALUS	tal_world	0	-2207.8	20.0	2271.7	0	-
+patrol_talus_108	patrol_talus_100		TALUS	tal_world	0	-2188.8	20.0	2278.1	0	-
+patrol_talus_200	patrol_talus_200	FLIP	TALUS	tal_world	0	-2217.0	20.0	2369.9	0	Imperial Outpost - route #2
+patrol_talus_201	patrol_talus_200		TALUS	tal_world	0	-2205.4	20.0	2348.0	0	-
+patrol_talus_202	patrol_talus_200		TALUS	tal_world	0	-2201.9	20.0	2340.6	0	-
+patrol_talus_203	patrol_talus_200		TALUS	tal_world	0	-2183.4	20.0	2339.7	0	-
+patrol_talus_204	patrol_talus_200		TALUS	tal_world	0	-2166.0	20.0	2340.8	0	-
+patrol_talus_205	patrol_talus_200		TALUS	tal_world	0	-2159.5	20.0	2353.7	0	-
+patrol_talus_206	patrol_talus_200		TALUS	tal_world	0	-2151.6	20.0	2367.0	0	-
+patrol_talus_300	patrol_talus_300	FLIP	TALUS	tal_world	0	-2140.7	20.0	2362.9	0	Imperial Outpost - route #3
+patrol_talus_301	patrol_talus_300		TALUS	tal_world	0	-2148.5	20.0	2348.7	0	-
+patrol_talus_302	patrol_talus_300		TALUS	tal_world	0	-2127.6	20.0	2334.8	0	-
+patrol_talus_303	patrol_talus_300		TALUS	tal_world	0	-2124.7	20.0	2318.3	0	-
+patrol_talus_304	patrol_talus_300		TALUS	tal_world	0	-2123.4	20.0	2302.7	0	-
+patrol_talus_305	patrol_talus_300		TALUS	tal_world	0	-2107.6	20.0	2302.4	0	-
+patrol_talus_306	patrol_talus_300		TALUS	tal_world	0	-2095.6	20.0	2302.1	0	-
+patrol_talus_400	patrol_talus_400	FLIP	TALUS	tal_world	0	4074.1	2.0	5282.9	0	Nashal - a pirate
+patrol_talus_401	patrol_talus_400		TALUS	tal_world	0	4092.2	2.0	5261.5	0	-
+patrol_talus_402	patrol_talus_400		TALUS	tal_world	0	4095.9	2.0	5254.3	0	-
+patrol_talus_403	patrol_talus_400		TALUS	tal_world	0	4091.4	2.0	5243.4	0	-
+patrol_talus_404	patrol_talus_400		TALUS	tal_world	0	4078.7	2.0	5231.8	0	-
+patrol_talus_405	patrol_talus_400		TALUS	tal_world	0	4067.0	2.0	5232.0	0	-
+patrol_talus_406	patrol_talus_400		TALUS	tal_world	0	4049.2	2.0	5250.2	0	-
+patrol_talus_407	patrol_talus_400		TALUS	tal_world	0	4034.9	2.0	5261.7	0	-
+patrol_talus_500	patrol_talus_500	FLIP	TALUS	tal_world	0	4098.1	2.0	5297.7	0	Nashal - a pirate
+patrol_talus_501	patrol_talus_500		TALUS	tal_world	0	4082.9	2.0	5283.5	0	-
+patrol_talus_502	patrol_talus_500		TALUS	tal_world	0	4080.9	2.0	5274.3	0	-
+patrol_talus_503	patrol_talus_500		TALUS	tal_world	0	4089.4	2.0	5266.9	0	-
+patrol_talus_504	patrol_talus_500		TALUS	tal_world	0	4104.8	2.0	5276.1	0	-
+patrol_talus_505	patrol_talus_500		TALUS	tal_world	0	4115.4	2.0	5281.6	0	-
+patrol_talus_600	patrol_talus_600	LOOP	TALUS	tal_world	0	5653.6	105.0	-4105.7	0	Binayre Pirate Bunker - a pirate
+patrol_talus_601	patrol_talus_600		TALUS	tal_world	0	5627.0	102.2	-4101.2	0	-
+patrol_talus_602	patrol_talus_600		TALUS	tal_world	0	5609.7	102.4	-4107.5	0	-
+patrol_talus_603	patrol_talus_600		TALUS	tal_world	0	5607.5	104.2	-4121.6	0	-
+patrol_talus_604	patrol_talus_600		TALUS	tal_world	0	5632.6	103.8	-4124.8	0	-
+patrol_talus_700	patrol_talus_700	FLIP	TALUS	tal_world	0	4439.0	2.0	5278.9	0	Nashal - a commoner
+patrol_talus_701	patrol_talus_700		TALUS	tal_world	0	4453.5	2.0	5243.9	0	-
+patrol_talus_702	patrol_talus_700		TALUS	tal_world	0	4465.9	2.0	5212.6	0	-
+patrol_talus_703	patrol_talus_700		TALUS	tal_world	0	4478.8	2.0	5182.7	0	-
+patrol_talus_704	patrol_talus_700		TALUS	tal_world	0	4477.0	2.0	5161.8	0	-
+patrol_talus_705	patrol_talus_700		TALUS	tal_world	0	4483.6	2.0	5146.9	0	-
+patrol_talus_800	patrol_talus_800	FLIP	TALUS	tal_world	0	4317.8	2.0	5287.0	0	Nashal - a commoner
+patrol_talus_801	patrol_talus_800		TALUS	tal_world	0	4230.4	2.0	5287.0	0	-
+patrol_talus_802	patrol_talus_800		TALUS	tal_world	0	4227.6	2.0	5327.1	0	-
+patrol_talus_803	patrol_talus_800		TALUS	tal_world	0	4206.7	2.0	5290.9	0	-
+patrol_talus_900	patrol_talus_900	FLIP	TALUS	tal_world	0	4117.5	2.0	5308.1	0	Nashal - a pirate
+patrol_talus_901	patrol_talus_900		TALUS	tal_world	0	4134.4	2.0	5306.0	0	-
+patrol_talus_902	patrol_talus_900		TALUS	tal_world	0	4137.8	2.0	5293.3	0	-
+patrol_talus_903	patrol_talus_900		TALUS	tal_world	0	4127.8	2.0	5287.3	0	-
+patrol_talus_904	patrol_talus_900		TALUS	tal_world	0	4117.5	2.0	5282.8	0	-
+patrol_talus_1000	patrol_talus_1000	FLIP	TALUS	tal_world	0	4302.5	49.4	4744.7	0	Talusian Smuggler Base - a CLL-8 binary load lifter
+patrol_talus_1001	patrol_talus_1000		TALUS	tal_world	0	4307.7	49.4	4737.8	0	-
+patrol_talus_1002	patrol_talus_1000		TALUS	tal_world	0	4310.9	49.4	4729.1	0	-
+patrol_talus_1003	patrol_talus_1000		TALUS	tal_world	0	4313.7	49.4	4714.5	0	-
+patrol_talus_1004	patrol_talus_1000		TALUS	tal_world	0	4315.3	49.4	4708.2	0	-
+patrol_talus_1005	patrol_talus_1000		TALUS	tal_world	0	4299.7	49.4	4698.9	0	-
+patrol_talus_1006	patrol_talus_1000		TALUS	tal_world	0	4295.0	49.4	4693.3	0	-
+patrol_talus_1007	patrol_talus_1000		TALUS	tal_world	0	4298.7	49.4	4698.6	0	-
+patrol_talus_1008	patrol_talus_1000		TALUS	tal_world	0	4305.4	49.4	4716.4	0	-
+patrol_talus_1009	patrol_talus_1000		TALUS	tal_world	0	4306.4	49.4	4731.9	0	-
+patrol_talus_1010	patrol_talus_1000		TALUS	tal_world	0	4305.0	49.4	4737.9	0	-
+patrol_talus_1100	patrol_talus_1100	FLIP	TALUS	tal_world	0	4268.9	49.4	4705.9	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_1101	patrol_talus_1100		TALUS	tal_world	0	4261.5	49.4	4718.2	0	-
+patrol_talus_1102	patrol_talus_1100		TALUS	tal_world	0	4276.0	49.4	4741.1	0	-
+patrol_talus_1103	patrol_talus_1100		TALUS	tal_world	0	4261.1	49.4	4765.0	0	-
+patrol_talus_1104	patrol_talus_1100		TALUS	tal_world	0	4289.9	49.4	4755.7	0	-
+patrol_talus_1105	patrol_talus_1100		TALUS	tal_world	0	4312.8	49.4	4765.7	0	-
+patrol_talus_1106	patrol_talus_1100		TALUS	tal_world	0	4313.6	49.4	4750.0	0	-
+patrol_talus_1107	patrol_talus_1100		TALUS	tal_world	0	4304.0	49.4	4748.3	0	-
+patrol_talus_1108	patrol_talus_1100		TALUS	tal_world	0	4304.8	49.4	4737.5	0	-
+patrol_talus_1109	patrol_talus_1100		TALUS	tal_world	0	4309.2	49.4	4734.1	0	-
+patrol_talus_1110	patrol_talus_1100		TALUS	tal_world	0	4307.9	49.4	4722.3	0	-
+patrol_talus_1111	patrol_talus_1100		TALUS	tal_world	0	4280.2	49.4	4716.7	0	-
+patrol_talus_1112	patrol_talus_1100		TALUS	tal_world	0	4271.8	49.4	4707.7	0	-
+patrol_talus_1200	patrol_talus_1200	FLIP	TALUS	tal_world	0	4098.1	2.0	5297.7	0	Nashal - a pirate
+patrol_talus_1201	patrol_talus_1200		TALUS	tal_world	0	4082.9	2.0	5283.5	0	-
+patrol_talus_1202	patrol_talus_1200		TALUS	tal_world	0	4080.9	2.0	5274.3	0	-
+patrol_talus_1203	patrol_talus_1200		TALUS	tal_world	0	4089.4	2.0	5266.9	0	-
+patrol_talus_1204	patrol_talus_1200		TALUS	tal_world	0	4104.8	2.0	5276.1	0	-
+patrol_talus_1205	patrol_talus_1200		TALUS	tal_world	0	4115.4	2.0	5281.6	0	-
+patrol_talus_1300	patrol_talus_1300	FLIP	TALUS	tal_world	0	4323.8	49.4	4742.1	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_1301	patrol_talus_1300		TALUS	tal_world	0	4318.1	49.4	4751.0	0	-
+patrol_talus_1302	patrol_talus_1300		TALUS	tal_world	0	4309.7	49.4	4759.8	0	-
+patrol_talus_1303	patrol_talus_1300		TALUS	tal_world	0	4293.4	49.4	4761.1	0	-
+patrol_talus_1304	patrol_talus_1300		TALUS	tal_world	0	4280.1	49.4	4761.3	0	-
+patrol_talus_1305	patrol_talus_1300		TALUS	tal_world	0	4276.8	49.4	4755.1	0	-
+patrol_talus_1306	patrol_talus_1300		TALUS	tal_world	0	4274.0	49.4	4743.2	0	-
+patrol_talus_1307	patrol_talus_1300		TALUS	tal_world	0	4272.7	49.4	4730.3	0	-
+patrol_talus_1308	patrol_talus_1300		TALUS	tal_world	0	4279.9	49.4	4721.7	0	-
+patrol_talus_1309	patrol_talus_1300		TALUS	tal_world	0	4291.4	49.4	4717.6	0	-
+patrol_talus_1310	patrol_talus_1300		TALUS	tal_world	0	4297.6	49.4	4717.3	0	-
+patrol_talus_1311	patrol_talus_1300		TALUS	tal_world	0	4315.1	49.4	4728.6	0	-
+patrol_talus_1400	patrol_talus_1400	FLIP	TALUS	tal_world	0	4219.1	63.2	4675.6	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_1401	patrol_talus_1400		TALUS	tal_world	0	4235.1	60.1	4667.1	0	-
+patrol_talus_1402	patrol_talus_1400		TALUS	tal_world	0	4247.7	56.6	4659.7	0	-
+patrol_talus_1403	patrol_talus_1400		TALUS	tal_world	0	4262.0	52.6	4657.1	0	-
+patrol_talus_1404	patrol_talus_1400		TALUS	tal_world	0	4276.9	51.9	4654.7	0	-
+patrol_talus_1405	patrol_talus_1400		TALUS	tal_world	0	4290.8	56.6	4653.6	0	-
+patrol_talus_1406	patrol_talus_1400		TALUS	tal_world	0	4306.7	61.4	4655.8	0	-
+patrol_talus_1407	patrol_talus_1400		TALUS	tal_world	0	4321.5	65.1	4662.1	0	-
+patrol_talus_1500	patrol_talus_1500	FLIP	TALUS	tal_world	0	4328.6	66.3	4673.5	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_1501	patrol_talus_1500		TALUS	tal_world	0	4313.4	59.8	4672.1	0	-
+patrol_talus_1502	patrol_talus_1500		TALUS	tal_world	0	4306.8	53.7	4679.6	0	-
+patrol_talus_1503	patrol_talus_1500		TALUS	tal_world	0	4297.9	51.1	4682.3	0	-
+patrol_talus_1504	patrol_talus_1500		TALUS	tal_world	0	4286.7	49.9	4684.3	0	-
+patrol_talus_1505	patrol_talus_1500		TALUS	tal_world	0	4272.6	49.9	4691.4	0	-
+patrol_talus_1506	patrol_talus_1500		TALUS	tal_world	0	4255.6	49.0	4699.3	0	-
+patrol_talus_1507	patrol_talus_1500		TALUS	tal_world	0	4247.7	49.5	4714.4	0	-
+patrol_talus_1508	patrol_talus_1500		TALUS	tal_world	0	4242.7	49.9	4728.8	0	-
+patrol_talus_1509	patrol_talus_1500		TALUS	tal_world	0	4243.6	49.2	4752.1	0	-
+patrol_talus_1600	patrol_talus_1600	LOOP	TALUS	tal_world	0	4564.8	2.0	5483.4	0	Nashal - an EG-6 power droid
+patrol_talus_1601	patrol_talus_1600		TALUS	tal_world	0	4554.4	2.0	5440.4	0	-
+patrol_talus_1602	patrol_talus_1600		TALUS	tal_world	0	4469.4	2.0	5461.3	0	-
+patrol_talus_1603	patrol_talus_1600		TALUS	tal_world	0	4415.7	2.0	5447.5	0	-
+patrol_talus_1604	patrol_talus_1600		TALUS	tal_world	0	4400.0	2.0	5440.2	0	-
+patrol_talus_1605	patrol_talus_1600		TALUS	tal_world	0	4381.0	2.0	5415.8	0	-
+patrol_talus_1606	patrol_talus_1600		TALUS	tal_world	0	4409.1	2.0	5395.2	0	-
+patrol_talus_1607	patrol_talus_1600		TALUS	tal_world	0	4389.1	2.0	5425.1	0	-
+patrol_talus_1608	patrol_talus_1600		TALUS	tal_world	0	4406.0	2.0	5444.5	0	-
+patrol_talus_1609	patrol_talus_1600		TALUS	tal_world	0	4452.3	2.0	5453.4	0	-
+patrol_talus_1610	patrol_talus_1600		TALUS	tal_world	0	4487.2	2.0	5487.4	0	-
+patrol_talus_1611	patrol_talus_1600		TALUS	tal_world	0	4499.5	2.0	5504.4	0	-
+patrol_talus_1612	patrol_talus_1600		TALUS	tal_world	0	4545.6	2.0	5485.8	0	-
+patrol_talus_1700	patrol_talus_1700	FLIP	TALUS	tal_world	0	4259.9	49.4	4733.3	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_1701	patrol_talus_1700		TALUS	tal_world	0	4267.5	49.4	4712.1	0	-
+patrol_talus_1702	patrol_talus_1700		TALUS	tal_world	0	4282.6	49.4	4724.5	0	-
+patrol_talus_1703	patrol_talus_1700		TALUS	tal_world	0	4286.6	49.4	4722.1	0	-
+patrol_talus_1704	patrol_talus_1700		TALUS	tal_world	0	4300.4	49.4	4724.9	0	-
+patrol_talus_1705	patrol_talus_1700		TALUS	tal_world	0	4306.4	49.4	4728.5	0	-
+patrol_talus_1706	patrol_talus_1700		TALUS	tal_world	0	4329.7	49.4	4736.1	0	-
+patrol_talus_1707	patrol_talus_1700		TALUS	tal_world	0	4321.7	49.4	4744.6	0	-
+patrol_talus_1708	patrol_talus_1700		TALUS	tal_world	0	4328.4	49.4	4754.1	0	-
+patrol_talus_1709	patrol_talus_1700		TALUS	tal_world	0	4324.4	49.4	4760.4	0	-
+patrol_talus_1710	patrol_talus_1700		TALUS	tal_world	0	4316.9	49.4	4766.1	0	-
+patrol_talus_1711	patrol_talus_1700		TALUS	tal_world	0	4310.6	49.4	4768.6	0	-
+patrol_talus_1712	patrol_talus_1700		TALUS	tal_world	0	4306.7	49.4	4765.3	0	-
+patrol_talus_1713	patrol_talus_1700		TALUS	tal_world	0	4286.0	49.4	4766.3	0	-
+patrol_talus_1714	patrol_talus_1700		TALUS	tal_world	0	4275.2	49.4	4766.3	0	-
+patrol_talus_1715	patrol_talus_1700		TALUS	tal_world	0	4271.5	49.4	4770.0	0	-
+patrol_talus_1716	patrol_talus_1700		TALUS	tal_world	0	4266.4	49.4	4769.0	0	-
+patrol_talus_1717	patrol_talus_1700		TALUS	tal_world	0	4263.2	49.4	4767.9	0	-
+patrol_talus_1718	patrol_talus_1700		TALUS	tal_world	0	4259.5	49.4	4761.8	0	-
+patrol_talus_1719	patrol_talus_1700		TALUS	tal_world	0	4268.6	49.4	4756.3	0	-
+patrol_talus_1720	patrol_talus_1700		TALUS	tal_world	0	4270.3	49.4	4746.1	0	-
+patrol_talus_1721	patrol_talus_1700		TALUS	tal_world	0	4269.5	49.4	4735.0	0	-
+patrol_talus_1800	patrol_talus_1800	FLIP	TALUS	tal_world	0	4386.0	2.0	5268.6	0	Nashal - a settler
+patrol_talus_1801	patrol_talus_1800		TALUS	tal_world	0	4343.0	2.0	5301.1	0	-
+patrol_talus_1802	patrol_talus_1800		TALUS	tal_world	0	4369.0	2.0	5333.1	0	-
+patrol_talus_1803	patrol_talus_1800		TALUS	tal_world	0	4383.1	2.0	5396.3	0	-
+patrol_talus_1804	patrol_talus_1800		TALUS	tal_world	0	4356.1	10.0	5398.8	0	-
+patrol_talus_1805	patrol_talus_1800		TALUS	tal_world	0	4341.7	9.9	5398.3	0	-
+patrol_talus_1806	patrol_talus_1800		TALUS	tal_world	0	4337.7	9.9	5365.6	0	-
+patrol_talus_1807	patrol_talus_1800		TALUS	tal_world	0	4287.8	9.9	5358.8	0	-
+patrol_talus_1900	patrol_talus_1900	FLIP	TALUS	tal_world	0	4269.8	49.4	4772.3	0	Talusian Smuggler Base - an EG-6 power droid
+patrol_talus_1901	patrol_talus_1900		TALUS	tal_world	0	4269.4	49.4	4753.5	0	-
+patrol_talus_1902	patrol_talus_1900		TALUS	tal_world	0	4268.4	49.4	4738.3	0	-
+patrol_talus_1903	patrol_talus_1900		TALUS	tal_world	0	4255.4	49.4	4738.2	0	-
+patrol_talus_1904	patrol_talus_1900		TALUS	tal_world	0	4256.4	49.4	4725.0	0	-
+patrol_talus_1905	patrol_talus_1900		TALUS	tal_world	0	4264.7	49.4	4716.3	0	-
+patrol_talus_1906	patrol_talus_1900		TALUS	tal_world	0	4280.5	49.4	4714.6	0	-
+patrol_talus_1907	patrol_talus_1900		TALUS	tal_world	0	4298.5	49.4	4707.0	0	-
+patrol_talus_1908	patrol_talus_1900		TALUS	tal_world	0	4324.7	49.4	4717.8	0	-
+patrol_talus_1909	patrol_talus_1900		TALUS	tal_world	0	4325.8	49.4	4742.5	0	-
+patrol_talus_1910	patrol_talus_1900		TALUS	tal_world	0	4321.5	49.4	4760.9	0	-
+patrol_talus_1911	patrol_talus_1900		TALUS	tal_world	0	4301.8	49.4	4766.1	0	-
+patrol_talus_1912	patrol_talus_1900		TALUS	tal_world	0	4276.4	49.4	4767.5	0	-
+patrol_talus_2000	patrol_talus_2000	FLIP	TALUS	tal_world	0	4324.9	49.4	4762.5	0	Talusian Smuggler Base - a Talusian smuggler
+patrol_talus_2001	patrol_talus_2000		TALUS	tal_world	0	4319.1	49.4	4759.7	0	-
+patrol_talus_2002	patrol_talus_2000		TALUS	tal_world	0	4306.8	49.4	4761.8	0	-
+patrol_talus_2003	patrol_talus_2000		TALUS	tal_world	0	4295.6	49.4	4762.8	0	-
+patrol_talus_2004	patrol_talus_2000		TALUS	tal_world	0	4283.2	49.4	4763.6	0	-
+patrol_talus_2005	patrol_talus_2000		TALUS	tal_world	0	4267.8	49.4	4763.7	0	-
+patrol_talus_2006	patrol_talus_2000		TALUS	tal_world	0	4261.3	49.4	4766.9	0	-
+patrol_talus_2100	patrol_talus_2100	FLIP	TALUS	tal_world	0	4501.6	2.0	5266.2	0	Nashal - an artisan
+patrol_talus_2101	patrol_talus_2100		TALUS	tal_world	0	4550.6	2.0	5305.1	0	-
+patrol_talus_2102	patrol_talus_2100		TALUS	tal_world	0	4551.9	2.0	5336.6	0	-
+patrol_talus_2103	patrol_talus_2100		TALUS	tal_world	0	4551.3	2.0	5311.5	0	-
+patrol_talus_2104	patrol_talus_2100		TALUS	tal_world	0	4522.9	2.0	5273.3	0	-
+patrol_talus_2105	patrol_talus_2100		TALUS	tal_world	0	4500.3	2.0	5252.4	0	-
+patrol_talus_2200	patrol_talus_2200	FLIP	TALUS	tal_world	0	4271.9	49.4	4704.3	0	Talusian Smuggler Base - an EG-6 power droid
+patrol_talus_2201	patrol_talus_2200		TALUS	tal_world	0	4277.9	49.4	4713.0	0	-
+patrol_talus_2202	patrol_talus_2200		TALUS	tal_world	0	4292.7	49.4	4721.0	0	-
+patrol_talus_2203	patrol_talus_2200		TALUS	tal_world	0	4311.8	49.4	4707.2	0	-
+patrol_talus_2204	patrol_talus_2200		TALUS	tal_world	0	4301.7	49.4	4700.3	0	-
+patrol_talus_2300	patrol_talus_2300	FLIP	TALUS	tal_world	0	4142.1	2.0	5311.1	0	Nashal - a pirate
+patrol_talus_2301	patrol_talus_2300		TALUS	tal_world	0	4143.1	2.0	5285.5	0	-
+patrol_talus_2302	patrol_talus_2300		TALUS	tal_world	0	4148.4	2.0	5278.9	0	-
+patrol_talus_2303	patrol_talus_2300		TALUS	tal_world	0	4164.2	2.0	5280.4	0	-
+patrol_talus_2304	patrol_talus_2300		TALUS	tal_world	0	4163.2	2.0	5294.5	0	-
+patrol_talus_2305	patrol_talus_2300		TALUS	tal_world	0	4162.9	2.0	5307.5	0	-
+patrol_talus_2400	patrol_talus_2400	FLIP	TALUS	tal_world	0	4195.6	71.6	4760.5	0	Talusian Smuggler Base - a Talusian smuggler elite guard
+patrol_talus_2401	patrol_talus_2400		TALUS	tal_world	0	4187.4	69.9	4808.3	0	-
+patrol_talus_2402	patrol_talus_2400		TALUS	tal_world	0	4168.1	71.8	4822.3	0	-
+patrol_talus_2403	patrol_talus_2400		TALUS	tal_world	0	4154.2	74.4	4811.7	0	-
+patrol_talus_2404	patrol_talus_2400		TALUS	tal_world	0	4150.2	75.7	4782.7	0	-
+patrol_talus_2405	patrol_talus_2400		TALUS	tal_world	0	4152.3	68.9	4752.1	0	-
+patrol_talus_2406	patrol_talus_2400		TALUS	tal_world	0	4153.8	63.0	4726.5	0	-
+patrol_talus_2407	patrol_talus_2400		TALUS	tal_world	0	4157.5	61.8	4698.5	0	-
+patrol_talus_2408	patrol_talus_2400		TALUS	tal_world	0	4172.1	62.8	4680.0	0	-
+patrol_talus_2409	patrol_talus_2400		TALUS	tal_world	0	4183.6	63.4	4669.1	0	-
+patrol_talus_2410	patrol_talus_2400		TALUS	tal_world	0	4203.1	62.2	4659.2	0	-
+patrol_talus_2411	patrol_talus_2400		TALUS	tal_world	0	4218.5	60.9	4654.7	0	-
+patrol_talus_2500	patrol_talus_2500	FLIP	TALUS	tal_world	0	4298.8	49.4	4728.2	0	Talusian Smuggler Base - a CLL-8 binary load lifter
+patrol_talus_2501	patrol_talus_2500		TALUS	tal_world	0	4296.0	49.4	4723.0	0	-
+patrol_talus_2502	patrol_talus_2500		TALUS	tal_world	0	4277.3	49.4	4724.6	0	-
+patrol_talus_2503	patrol_talus_2500		TALUS	tal_world	0	4268.7	49.4	4710.0	0	-
+patrol_talus_2600	patrol_talus_2600	FLIP	TALUS	tal_world	0	4398.5	2.0	5016.8	0	Nashal - a nomad
+patrol_talus_2601	patrol_talus_2600		TALUS	tal_world	0	4363.0	2.0	5082.3	0	-
+patrol_talus_2602	patrol_talus_2600		TALUS	tal_world	0	4366.2	2.0	5164.2	0	-
+patrol_talus_2603	patrol_talus_2600		TALUS	tal_world	0	4360.7	2.0	5200.0	0	-
+patrol_talus_2604	patrol_talus_2600		TALUS	tal_world	0	4297.5	2.0	5199.2	0	-
+patrol_talus_2605	patrol_talus_2600		TALUS	tal_world	0	4264.7	2.0	5153.1	0	-
+patrol_talus_2606	patrol_talus_2600		TALUS	tal_world	0	4231.7	2.0	5128.2	0	-
+patrol_talus_2607	patrol_talus_2600		TALUS	tal_world	0	4210.9	2.0	5149.1	0	-
+patrol_talus_2608	patrol_talus_2600		TALUS	tal_world	0	4146.3	2.0	5122.1	0	-
+patrol_talus_2700	patrol_talus_2700	FLIP	TALUS	tal_world	0	540.0	6.5	-2984.9	0	Dearic - a traveller
+patrol_talus_2701	patrol_talus_2700		TALUS	tal_world	0	546.7	6.5	-2983.9	0	-
+patrol_talus_2702	patrol_talus_2700		TALUS	tal_world	0	552.5	6.5	-3002.5	30	-
+patrol_talus_2703	patrol_talus_2700		TALUS	tal_world	0	534.7	6.5	-3009.2	0	-
+patrol_talus_2704	patrol_talus_2700		TALUS	tal_world	0	529.4	6.5	-3015.9	0	-
+patrol_talus_2705	patrol_talus_2700		TALUS	tal_world	0	522.3	6.5	-3009.2	0	-
+patrol_talus_2706	patrol_talus_2700		TALUS	tal_world	0	504.8	6.0	-3013.2	0	-
+patrol_talus_2707	patrol_talus_2700		TALUS	tal_world	0	466.9	6.0	-3017.9	0	-
+patrol_talus_2708	patrol_talus_2700		TALUS	tal_world	0	447.6	6.0	-3045.3	0	-
+patrol_talus_2709	patrol_talus_2700		TALUS	tal_world	0	415.8	6.0	-3044.8	0	-
+patrol_talus_2710	patrol_talus_2700		TALUS	tal_world	0	411.6	6.0	-3036.6	0	-
+patrol_talus_2711	patrol_talus_2700		TALUS	tal_world	0	407.6	6.0	-2996.4	0	-
+patrol_talus_2712	patrol_talus_2700		TALUS	tal_world	0	391.7	6.0	-2971.9	0	-
+patrol_talus_2713	patrol_talus_2700		TALUS	tal_world	0	363.4	6.0	-2959.1	0	-
+patrol_talus_2714	patrol_talus_2700		TALUS	tal_world	0	341.6	6.0	-2944.3	0	-
+patrol_talus_2715	patrol_talus_2700		TALUS	tal_world	0	326.3	6.0	-2931.9	0	-
+patrol_talus_2716	patrol_talus_2700		TALUS	tal_dearic_starport	1	2.2	0.6	77.2	0	-
+patrol_talus_2717	patrol_talus_2700		TALUS	tal_dearic_starport	1	5.6	0.6	77.1	0	-
+patrol_talus_2718	patrol_talus_2700		TALUS	tal_dearic_starport	3	13.5	0.6	78.6	0	-
+patrol_talus_2719	patrol_talus_2700		TALUS	tal_dearic_starport	4	13.8	0.6	68.2	0	-
+patrol_talus_2720	patrol_talus_2700		TALUS	tal_dearic_starport	4	10.5	0.6	53.0	15	-
+patrol_talus_2721	patrol_talus_2700		TALUS	tal_dearic_starport	4	16.1	0.6	59.8	0	-
+patrol_talus_2722	patrol_talus_2700		TALUS	tal_dearic_starport	5	27.7	0.6	61.4	0	-
+patrol_talus_2723	patrol_talus_2700		TALUS	tal_dearic_starport	6	33.7	0.6	56.7	0	-
+patrol_talus_2724	patrol_talus_2700		TALUS	tal_dearic_starport	7	38.2	0.6	47.8	0	-
+patrol_talus_2725	patrol_talus_2700		TALUS	tal_dearic_starport	7	44.3	0.6	40.6	0	-
+patrol_talus_2726	patrol_talus_2700		TALUS	tal_dearic_starport	7	49.3	-0.5	32.8	0	-
+patrol_talus_2727	patrol_talus_2700		TALUS	tal_dearic_starport	13	53.1	1.0	24.5	0	-
+patrol_talus_2728	patrol_talus_2700		TALUS	tal_dearic_starport	16	55.8	1.0	15.0	0	-
+patrol_talus_2729	patrol_talus_2700		TALUS	tal_world	0	255.3	6.0	-2978.7	0	-
+patrol_talus_2730	patrol_talus_2700		TALUS	tal_world	0	245.8	6.0	-2957.5	0	-
+patrol_talus_2731	patrol_talus_2700		TALUS	tal_world	0	235.8	6.0	-2942.7	20	-
+patrol_talus_2800	patrol_talus_2800	FLIP	TALUS	tal_dearic_starport	7	44.8	0.6	46.7	0	Dearic - an Astromech waiter
+patrol_talus_2801	patrol_talus_2800		TALUS	tal_dearic_starport	7	41.6	0.6	45.0	0	-
+patrol_talus_2802	patrol_talus_2800		TALUS	tal_dearic_starport	6	37.1	0.6	51.5	0	-
+patrol_talus_2803	patrol_talus_2800		TALUS	tal_dearic_starport	6	33.4	0.6	59.4	0	-
+patrol_talus_2804	patrol_talus_2800		TALUS	tal_dearic_starport	5	27.8	0.6	62.7	0	-
+patrol_talus_2805	patrol_talus_2800		TALUS	tal_dearic_starport	4	17.5	0.6	61.5	0	-
+patrol_talus_2806	patrol_talus_2800		TALUS	tal_dearic_starport	4	6.5	0.6	60.1	0	-
+patrol_talus_2807	patrol_talus_2800		TALUS	tal_dearic_starport	4	-7.4	0.6	60.0	0	-
+patrol_talus_2808	patrol_talus_2800		TALUS	tal_dearic_starport	8	-18.0	0.6	60.7	0	-
+patrol_talus_2809	patrol_talus_2800		TALUS	tal_dearic_starport	8	-22.1	1.6	60.6	0	-
+patrol_talus_2810	patrol_talus_2800		TALUS	tal_dearic_starport	9	-26.6	1.6	64.2	15	-
+patrol_talus_2811	patrol_talus_2800		TALUS	tal_dearic_starport	9	-27.8	1.6	60.8	0	-
+patrol_talus_2812	patrol_talus_2800		TALUS	tal_dearic_starport	9	-30.7	1.6	55.3	0	-
+patrol_talus_2813	patrol_talus_2800		TALUS	tal_dearic_starport	9	-28.4	1.6	52	15	-
+patrol_talus_2814	patrol_talus_2800		TALUS	tal_dearic_starport	9	-31.7	1.6	60	0	-
+patrol_talus_2815	patrol_talus_2800		TALUS	tal_dearic_starport	9	-35.3	1.6	63.7	15	-
+patrol_talus_2816	patrol_talus_2800		TALUS	tal_dearic_starport	9	-29.6	1.6	50.2	0	-
+patrol_talus_2817	patrol_talus_2800		TALUS	tal_dearic_starport	9	-29.1	1.6	48.5	0	-
+patrol_talus_2818	patrol_talus_2800		TALUS	tal_dearic_starport	9	-31.7	1.6	48.3	0	-
+patrol_talus_2819	patrol_talus_2800		TALUS	tal_dearic_starport	9	-33	1.6	49.6	15	-

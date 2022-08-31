@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_94",
+		"comment": "I'll mark their location for you. People always need some entertainers around. Good luck in the future to you."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_clone_relics_clone_trooper_jabba",
+		"key": "s_137",
+		"comment": "< Jabba chuckles >"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

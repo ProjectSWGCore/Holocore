@@ -27,8 +27,8 @@
 package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TestRawResourceContainer extends TestRunnerNoIntents {
 	
@@ -36,7 +36,7 @@ public class TestRawResourceContainer extends TestRunnerNoIntents {
 	public void testResourcesLoad() {
 		RawResourceContainer loader = new RawResourceContainer();
 		loader.loadResources();
-		Assert.assertEquals(845, loader.getResources().size());
+		assertEquals(845, loader.getResources().size());
 	}
 	
 }

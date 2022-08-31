@@ -27,19 +27,19 @@
 package com.projectswg.holocore.intents.gameplay.world.travel;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class TicketUseIntent extends Intent {
 	
 	private final Player player;
-	private final SWGObject ticket;
+	private final TangibleObject ticket;
 	
 	public TicketUseIntent(Player player) {
 		this(player, null);
 	}
 	
-	public TicketUseIntent(Player player, SWGObject ticket) {
+	public TicketUseIntent(Player player, TangibleObject ticket) {
 		this.player = player;
 		this.ticket = ticket;
 	}
@@ -48,7 +48,7 @@ public class TicketUseIntent extends Intent {
 		return player;
 	}
 	
-	public SWGObject getTicket() {
+	public TangibleObject getTicket() {
 		return ticket;
 	}
 	

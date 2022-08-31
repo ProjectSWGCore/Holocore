@@ -30,11 +30,11 @@ package com.projectswg.holocore.test.runners;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 
 public abstract class TestRunner {
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initializeStatic() {
 		Log.clearWrappers();
 		Log.addWrapper(new ConsoleLogWrapper());

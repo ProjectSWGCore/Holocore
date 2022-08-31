@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_69",
+		"comment": "Superb. Bring ten spiced teas to my friend Muna Skish. He's usually somewhere near the cantina."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

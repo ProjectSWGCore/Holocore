@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.support.npc.spawn
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.*
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolRouteWaypoint
@@ -44,10 +44,10 @@ import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.ThreadLocalRandom
 import java.util.stream.Collectors
 
-class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
+class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
-	private val spawn: StaticSpawnInfo = Objects.requireNonNull(spawn, "spawn")
-	private val npc: NpcInfo = Objects.requireNonNull(DataLoader.npcs().getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
+	private val spawn: SpawnInfo = Objects.requireNonNull(spawn, "spawn")
+	private val npc: NpcInfo = Objects.requireNonNull(ServerData.npcs.getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
 	private val npcsInternal = CopyOnWriteArrayList<AIObject>()
 	
 	val location: Location = Location.builder().setTerrain(spawn.terrain).setPosition(spawn.x, spawn.y, spawn.z).setHeading(spawn.heading.toDouble()).build()
@@ -62,14 +62,20 @@ class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
 	 * `maxRespawnDelay`
 	 */
 	val respawnDelay: Int
-		get() = ThreadLocalRandom.current().nextInt(maxSpawnTime - minSpawnTime + 1) + minSpawnTime
+		get() {
+			return if (maxSpawnTime > 0) {
+				ThreadLocalRandom.current().nextInt(maxSpawnTime - minSpawnTime + 1) + minSpawnTime
+			} else {
+				0;
+			}
+		}
 	
 	/**
 	 * @return a random IFF template
 	 */
 	fun getRandomIffTemplate(): String = getRandom(iffs)
-	fun getRandomPrimaryWeapon(): String = getRandom(primaryWeapons)
-	fun getRandomSecondaryWeapon(): String = getRandom(secondaryWeapons)
+	fun getRandomDefaultWeapon(): String = getRandom(defaultWeapon)
+	fun getRandomThrownWeapon(): String = getRandom(thrownWeapon)
 	
 	fun addNPC(obj: AIObject) {
 		npcsInternal.add(obj)
@@ -126,7 +132,10 @@ class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
 	
 	val maxLevel: Int
 		get() = spawn.maxLevel
-	
+
+	val conversationId: String?
+		get() = spawn.conversationId
+
 	val name: String
 		get() = npc.name
 	
@@ -157,11 +166,11 @@ class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
 	val hue: Int
 		get() = npc.hue
 	
-	val primaryWeapons: List<String>
-		get() = npc.primaryWeapons.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+	val defaultWeapon: List<String>
+		get() = npc.defaultWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
-	val secondaryWeapons: List<String>
-		get() = npc.secondaryWeapons.stream().map { DataLoader.npcWeapons().getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+	val thrownWeapon: List<String>
+		get() = npc.thrownWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
 	
 	val aggressiveRadius: Int
 		get() = npc.aggressiveRadius
@@ -198,12 +207,12 @@ class Spawner(spawn: StaticSpawnInfo, egg: SWGObject) {
 	
 	val creatureInfo: CreatureNpcInfo
 		get() = npc.creatureInfo
-	
+
 	init {
 		if (spawn.patrolId.isEmpty() || spawn.patrolId == "0") { // TODO: Replace the latter with empty string
 			this.patrolRoute = null
 		} else {
-			val waypoints = Objects.requireNonNull(DataLoader.npcPatrolRoutes().getPatrolRoute(spawn.patrolId), "Invalid patrol route: " + spawn.patrolId)
+			val waypoints = Objects.requireNonNull(ServerData.npcPatrolRoutes.getPatrolRoute(spawn.patrolId), "Invalid patrol route: " + spawn.patrolId)
 			this.patrolRoute = waypoints.stream().map { ResolvedPatrolWaypoint(it) }.collect(Collectors.toList())
 		}
 	}

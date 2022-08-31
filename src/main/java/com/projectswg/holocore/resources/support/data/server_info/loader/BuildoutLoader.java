@@ -82,38 +82,46 @@ public final class BuildoutLoader {
 	
 	private void loadStandardBuildouts() {
 		Set<String> events = this.events;
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/objects.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/objects.sdb"))) {
 			while (set.next()) {
-				// "id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"
-				String event = set.getText(3);
-				if (!event.isEmpty() && !events.contains(event))
-					continue;
-
-				SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(1)));
-				obj.setGenerated(false);
-				obj.setLocation(Location.builder().setPosition(set.getReal(5), set.getReal(6), set.getReal(7)).setOrientation(set.getReal(8), set.getReal(9), set.getReal(10), set.getReal(11))
-						.setTerrain(Terrain.valueOf(set.getText(4))).build());
-				obj.setBuildoutTag(set.getText(13));
-				if (set.getInt(12) != 0) {
-					BuildingObject building = (BuildingObject) objectMap.get(set.getInt(2));
-					CellObject cell = building.getCellByNumber((int) set.getInt(12));
-					obj.systemMove(cell);
-				} else if (obj instanceof BuildingObject) {
-					((BuildingObject) obj).populateCells();
-					for (SWGObject cell : obj.getContainedObjects())
-						objectMap.put(cell.getObjectId(), cell);
-					if (!obj.getBuildoutTag().isEmpty())
-						buildingMap.put(obj.getBuildoutTag(), (BuildingObject) obj);
+				try {
+					loadStandardBuildout(events, set);
+				} catch (Exception e) {
+					Log.e("Unable to load standard buildout with id %d, template_crc %d", set.getInt("id"), set.getInt("template_crc"));
 				}
-				objectMap.put(set.getInt(0), obj);
 			}
 		} catch (IOException e) {
 			Log.e(e);
 		}
 	}
 	
+	private void loadStandardBuildout(Set<String> events, SdbResultSet set) {
+		// "id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"
+		String event = set.getText(3);
+		if (!event.isEmpty() && !events.contains(event))
+			return;
+		
+		SWGObject obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString((int) set.getInt(1)));
+		obj.setGenerated(false);
+		obj.setLocation(Location.builder().setPosition(set.getReal(5), set.getReal(6), set.getReal(7)).setOrientation(set.getReal(8), set.getReal(9), set.getReal(10), set.getReal(11))
+				.setTerrain(Terrain.valueOf(set.getText(4))).build());
+		obj.setBuildoutTag(set.getText(13));
+		if (set.getInt(12) != 0) {
+			BuildingObject building = (BuildingObject) objectMap.get(set.getInt(2));
+			CellObject cell = building.getCellByNumber((int) set.getInt(12));
+			obj.systemMove(cell);
+		} else if (obj instanceof BuildingObject) {
+			((BuildingObject) obj).populateCells();
+			for (SWGObject cell : obj.getContainedObjects())
+				objectMap.put(cell.getObjectId(), cell);
+			if (!obj.getBuildoutTag().isEmpty())
+				buildingMap.put(obj.getBuildoutTag(), (BuildingObject) obj);
+		}
+		objectMap.put(set.getInt(0), obj);
+	}
+	
 	private void loadAdditionalBuildouts() {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/nge/buildout/additional_buildouts.sdb"))) {
+		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/additional_buildouts.msdb"))) {
 			while (set.next()) {
 				if (!set.getBoolean("active"))
 					continue;

@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_slang",
+		"key": "threat_15",
+		"comment": "Yer better back off, I'm the fastest droid in the system."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

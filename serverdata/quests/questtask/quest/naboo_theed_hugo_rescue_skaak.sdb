@@ -1,0 +1,16 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1;12;13	theed_hugo_rescue_skaak_00					0	0	0
+1	quest.task.ground.wait_for_tasks	2	theed_hugo_rescue_skaak_03					0	0	0
+2	quest.task.ground.comm_player	3	theed_hugo_rescue_skaak_04	@quest/ground/naboo_theed_hugo_rescue_skaak:task02_comm_message_text	object/mobile/hugo_eckener.iff			0	0	0
+3	quest.task.ground.go_to_location	4	theed_hugo_rescue_00					0	0	0
+4	quest.task.ground.wait_for_signal	5	theed_hugo_rescue_01					0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6	theed_hugo_rescue_02			naboo_darkwalker_solon_gaw		0	0	0
+6	quest.task.ground.destroy_multi_and_loot	7	theed_hugo_rescue_03			naboo_darkwalker_critolus_masse		0	0	0
+7	quest.task.ground.destroy_multi_and_loot	8	theed_hugo_rescue_04			naboo_darkwalker_marcus_gaw		0	0	0
+8	quest.task.ground.retrieve_item	9	theed_hugo_rescue_05					0	0	0
+9	quest.task.ground.wait_for_signal	10	theed_hugo_rescue_06					0	0	0
+10	quest.task.ground.wait_for_signal	11	theed_hugo_rescue_07					0	0	0
+11	quest.task.ground.wait_for_signal		theed_hugo_rescue_08					0	0	0
+12	quest.task.ground.wait_for_signal		theed_hugo_rescue_skaak_01					0	0	0
+13	quest.task.ground.wait_for_signal		theed_hugo_rescue_skaak_02					0	0	0

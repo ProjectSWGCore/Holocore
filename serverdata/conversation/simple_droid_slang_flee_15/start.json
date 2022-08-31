@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "npc_reaction/droid_slang",
+		"key": "flee_15",
+		"comment": "I don' wanna get disassembled!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

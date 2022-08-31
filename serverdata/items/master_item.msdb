@@ -1,0 +1,8 @@
+file	enabled
+TEXT	BOOLEAN
+items_armor.sdb	TRUE
+items_collection.sdb	FALSE
+items_crystal.sdb	TRUE
+items_item.sdb	TRUE
+items_weapon.sdb	TRUE
+items_wearable.sdb	TRUE

@@ -1,0 +1,51 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_751",
+		"comment": "Good. He will know what I need done. It appears that you are ready to fly on your own, fledgling. My last bit of advice is this: learn all you can about both sides of this civil war before choosing a side. Let your conscience guide you. You are more important than you believe and could be the factor that tips the scales. Is there anything you would like to know?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_754",
+				"comment": "I'd like to know where I can learn to be a pilot."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_754"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1059",
+				"comment": "I'd like to know about the Imperials."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1059"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1075",
+				"comment": "I'd like to know about the Rebels."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1075"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1091",
+				"comment": "I'd like to know about the criminals"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1091"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_1107",
+				"comment": "I'm set.  Now I just need to earn credits."
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch56/s_1107"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

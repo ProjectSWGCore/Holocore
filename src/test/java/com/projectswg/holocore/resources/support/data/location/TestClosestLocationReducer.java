@@ -2,17 +2,17 @@ package com.projectswg.holocore.resources.support.data.location;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TestClosestLocationReducer {
 	
 	private ClosestLocationReducer reducer;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		Location base = Location.builder()
 				.setTerrain(Terrain.TATOOINE)
@@ -41,7 +41,7 @@ public class TestClosestLocationReducer {
 		
 		Location reduced = reducer.apply(loc1, loc2);
 		
-		assertNull("Null should be the result when reducing locations not located on the same planet as the base location", reduced);
+		assertNull(reduced, "Null should be the result when reducing locations not located on the same planet as the base location");
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class TestClosestLocationReducer {
 		
 		Location reduced = reducer.apply(closest, farthest);
 		
-		assertEquals("The location closest to the base location should be the reduced location", closest, reduced);
+		assertEquals(closest, reduced, "The location closest to the base location should be the reduced location");
 	}
 	
 	/**
@@ -92,7 +92,7 @@ public class TestClosestLocationReducer {
 		
 		Location reduced = reducer.apply(closestDifferentPlanet, farthestSamePlanet);
 		
-		assertEquals("The location on the same planet should be picked even if it's furthest away from the X Y Z coordinates", farthestSamePlanet, reduced);
+		assertEquals(farthestSamePlanet, reduced, "The location on the same planet should be picked even if it's furthest away from the X Y Z coordinates");
 	}
 	
 }

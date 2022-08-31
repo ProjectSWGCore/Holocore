@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_1152",
+		"comment": "Very well.  I will put the information into your journal.  Fare well and be safe."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

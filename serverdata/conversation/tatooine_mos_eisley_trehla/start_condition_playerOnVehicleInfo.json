@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_632",
+		"comment": "Learn how to use your droid and how to join up with him. The knowledge will serve you in the future."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

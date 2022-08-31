@@ -36,8 +36,8 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,9 +51,9 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		NavigationPoint src = NavigationPoint.at(null, Location.builder().setPosition(0, 0, 0).build(), 0);
 		NavigationPoint dst = NavigationPoint.at(null, Location.builder().setPosition(0, 0, 10).build(), 0);
 		
-		Assert.assertEquals(10, src.distanceTo(dst), 1E-7);
-		Assert.assertEquals(10, dst.distanceTo(src), 1E-7);
-		Assert.assertEquals(5, src.distanceTo(null, Location.builder().setPosition(5, 0, 0).build()), 1E-7);
+		assertEquals(10, src.distanceTo(dst), 1E-7);
+		assertEquals(10, dst.distanceTo(src), 1E-7);
+		assertEquals(5, src.distanceTo(null, Location.builder().setPosition(5, 0, 0).build()), 1E-7);
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		Location end = location(10, 0, 0);
 		List<NavigationPoint> route = from(null, start, end);
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, end, SPEED));
+		assertEquals(route, NavigationPoint.from(null, start, end, SPEED));
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(null, start, worldPortal));
 		route.addAll(from(buio.getCellByNumber(1), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, SPEED));
+		assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	@Test
@@ -100,7 +100,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), end, portal));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, SPEED));
+		assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -121,7 +121,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), portal1, portal2));
 		route.addAll(from(buio.getCellByNumber(2), portal2, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, SPEED));
+		assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(2), end, SPEED));
 	}
 	
 	@Test
@@ -144,7 +144,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(2), portal2, portal3));
 		route.addAll(from(buio.getCellByNumber(3), portal3, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(3), end, SPEED));
+		assertEquals(route, NavigationPoint.from(null, start, buio.getCellByNumber(3), end, SPEED));
 	}
 	
 	@Test
@@ -165,7 +165,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), portal2, portal1));
 		route.addAll(from(null, worldPortal, start));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, SPEED));
+		assertEquals(route, NavigationPoint.from(buio.getCellByNumber(2), end, null, start, SPEED));
 	}
 	
 	@Test
@@ -183,7 +183,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		route.addAll(from(buio.getCellByNumber(1), start, portal));
 		route.addAll(from(buio.getCellByNumber(2), portal, end));
 		
-		Assert.assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, SPEED));
+		assertEquals(route, NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(2), end, SPEED));
 	}
 	
 	@Test
@@ -196,7 +196,7 @@ public class TestNavigationPoint extends TestRunnerNoIntents {
 		Location start = location(5, 0, 5);
 		Location end = location(-5, 0, -5);
 		
-		Assert.assertEquals(from(buio.getCellByNumber(1), start, end), NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(1), end, SPEED));
+		assertEquals(from(buio.getCellByNumber(1), start, end), NavigationPoint.from(buio.getCellByNumber(1), start, buio.getCellByNumber(1), end, SPEED));
 	}
 	
 	private static List<NavigationPoint> from(@Nullable SWGObject parent, @NotNull Location source, @NotNull Location destination) {

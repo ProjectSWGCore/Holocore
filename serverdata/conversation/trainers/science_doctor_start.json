@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_doctor",
+		"comment": "Seven years of your life and you'll be fully qualified.  I'm here to help you get started.  What shall we discuss first?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/science_doctor_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

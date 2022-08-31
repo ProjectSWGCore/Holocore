@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "skill_teacher",
+		"key": "trainer_smuggler",
+		"comment": "I'm not really supposed to be showing anyone how to do this, but you'll keep it to yourself right?  You'd never do anything illegal, I'm sure."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "skill_teacher",
+				"key": "opt1_1",
+				"comment": "I'm interested in learning a skill."
+			},
+			"next": "trainers/combat_smuggler_skills"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

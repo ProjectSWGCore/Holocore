@@ -52,8 +52,6 @@ public class SwgBuildoutArea {
 	private boolean	isolated;
 	private boolean	allowMap;
 	private boolean	internal;
-	private boolean	allowRadarTerrain;
-	private String	eventRequired;
 	// Calculated
 	private int		index;
 	// Used to calculate rows
@@ -86,8 +84,6 @@ public class SwgBuildoutArea {
 		isolated = (Boolean) datatableRow[20];
 		allowMap = (Boolean) datatableRow[21];
 		internal = (Boolean) datatableRow[22];
-		allowRadarTerrain = (Boolean) datatableRow[23];
-		eventRequired = (String) datatableRow[24];
 		reset();
 		calculate(sceneNumber, areaNumber);
 	}
@@ -219,14 +215,6 @@ public class SwgBuildoutArea {
 	
 	public boolean isInternal() {
 		return internal;
-	}
-	
-	public boolean isAllowRadarTerrain() {
-		return allowRadarTerrain;
-	}
-	
-	public String getEventRequired() {
-		return eventRequired;
 	}
 	
 	public int getIndex() {

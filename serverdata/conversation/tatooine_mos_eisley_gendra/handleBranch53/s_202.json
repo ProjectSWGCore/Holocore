@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_168",
+		"comment": "Ah, very well, I have some work if you're interested. A friend of mine owns a cantina and could use some help."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_170",
+				"comment": "What kind of help?"
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch48/s_170"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_178",
+				"comment": "I don't think I want to work right now."
+			},
+			"next": "tatooine_mos_eisley_gendra/handleBranch48/s_178"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

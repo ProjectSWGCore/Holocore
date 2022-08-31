@@ -14,6 +14,7 @@ import com.projectswg.holocore.utilities.SdbGenerator;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 class ConvertBuildingCells implements Converter {
 	
@@ -27,10 +28,10 @@ class ConvertBuildingCells implements Converter {
 	@Override
 	public void convert() {
 		System.out.println("Converting building cells...");
-		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/nge/objects/building_cells.sdb"))) {
+		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/building_cells.sdb"))) {
 			sdb.writeColumnNames("building", "index", "name", "neighbors");
 			Converter.traverseFiles(this, BUILDINGS, sdb, file -> file.getName().endsWith(".iff"));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -53,7 +54,7 @@ class ConvertBuildingCells implements Converter {
 			return;
 		}
 		
-		String building = file.getAbsolutePath().replace(CLIENTDATA.getAbsolutePath() + '/', "");
+		String building = file.getPath().replace("clientdata" + File.separator, "").replace(File.separator, "/");
 		List<PortalLayoutCellTemplate> cells = portalLayoutData.getCells();
 		List<IndexedTriangleList> portals = portalLayoutData.getPortals();
 		
@@ -86,7 +87,7 @@ class ConvertBuildingCells implements Converter {
 				first = false;
 				
 				// minX,minY,minZ,maxX,maxY,maxZ
-				neighbors.append(String.format("[%d,[%.2f,%.2f,%.2f],[%.2f,%.2f,%.2f]]", cells.indexOf(neighbor),
+				neighbors.append(String.format(Locale.US, "[%d,[%.2f,%.2f,%.2f],[%.2f,%.2f,%.2f]]", cells.indexOf(neighbor),
 						portalData.getVertices().stream().mapToDouble(Point3D::getX).min().orElseThrow(),
 						portalData.getVertices().stream().mapToDouble(Point3D::getY).min().orElseThrow(),
 						portalData.getVertices().stream().mapToDouble(Point3D::getZ).min().orElseThrow(),

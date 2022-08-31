@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_39",
+		"comment": "You have done well. I am sure this will bring a good pay off. There is only one problem remaining."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_40",
+				"comment": "What is that?"
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch5/s_40"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

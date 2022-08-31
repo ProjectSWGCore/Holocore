@@ -1,0 +1,10 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_145",
+		"comment": "I'm waiting for you to bring me back some Meat Jerky. Those patrons in the cantina are getting hungry. If you have it, just hand it to me."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": []
+}

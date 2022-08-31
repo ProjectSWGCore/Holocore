@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/trehla_keelo",
+		"key": "s_624",
+		"comment": "As you have been helping me, I have a gift for you. Look in your inventory for your new landspeeder deed. Talk to me again after you call the vehicle."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/trehla_keelo",
+				"key": "s_627",
+				"comment": "Wow!  Thanks!"
+			},
+			"next": "tatooine_mos_eisley_trehla/handleBranch45/s_627"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

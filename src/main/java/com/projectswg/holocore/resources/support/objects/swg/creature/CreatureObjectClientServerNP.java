@@ -31,12 +31,9 @@ import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.encodables.tangible.SkillMod;
 import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
-import com.projectswg.common.persistable.Persistable;
 import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
-import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.Attributes;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,27 +46,32 @@ import java.util.concurrent.locks.ReentrantLock;
  * CREO 4
  */
 @SuppressWarnings("ClassWithTooManyFields") // Required by SWG
-class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
+class CreatureObjectClientServerNP implements MongoPersistable {
 	
+	private static final float DEFAULT_RUNSPEED = 5.376f;
+	private static final float DEFAULT_WALKSPEED = 1.00625f;
+	private static final int DEFAULT_ACCELSCALE = 1;
+	private static final int DEFAULT_TURNSCALE = 1;
+	private static final int DEFAULT_MOVEMENTSCALE = 1;
 	private final CreatureObject obj;
 	private final Lock skillModLock = new ReentrantLock();
+	private final MovementModifierContainer movementModifierContainer = new MovementModifierContainer();
 	
 	/** CREO4-00 */ private float								accelPercent			= 1;
-	/** CREO4-01 */ private float								accelScale				= 1;
+	/** CREO4-01 */ private float								accelScale				= DEFAULT_ACCELSCALE;
 	/** CREO4-02 */ private AttributesMutable					bonusAttributes;
 	/** CREO4-03 */ private SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3, StringType.ASCII);
 	/** CREO4-04 */ private	float								movementPercent			= 1;
-	/** CREO4-05 */ private float								movementScale			= 1;
+	/** CREO4-05 */ private float								movementScale			= DEFAULT_MOVEMENTSCALE;
 	/** CREO4-06 */ private long								performanceListenTarget	= 0;
-	/** CREO4-07 */ private float								runSpeed				= 7.3f;
+	/** CREO4-07 */ private float								runSpeed				= DEFAULT_RUNSPEED;
 	/** CREO4-08 */ private float								slopeModAngle			= 1;
-	/** CREO4-09 */ private float								slopeModPercent			= 1;
-	/** CREO4-10 */ private float								turnScale				= 1;
-	/** CREO4-11 */ private float								walkSpeed				= 1.549f;
+	/** CREO4-09 */ private float								slopeModPercent			= 0;
+	/** CREO4-10 */ private float								turnScale				= DEFAULT_TURNSCALE;
+	/** CREO4-11 */ private float								walkSpeed				= DEFAULT_WALKSPEED;
 	/** CREO4-12 */ private float								waterModPercent			= 0.75f;
 	/** CREO4-13 */ private SWGSet<GroupMissionCriticalObject>	missionCriticalObjects	= new SWGSet<>(4, 13);
 	/** CREO4-14 */ private SWGMap<String, Integer>				commands				= new SWGMap<>(4, 14, StringType.ASCII);
-	/** CREO4-15 */ private int									totalLevelXp			= 0;
 	
 	public CreatureObjectClientServerNP(@NotNull CreatureObject obj) {
 		this.obj = obj;
@@ -93,15 +95,12 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		this.accelScale = accelScale;
 		sendDelta(1, accelScale);
 	}
-	
-	@NotNull
-	public Attributes getBonusAttributes() {
-		return bonusAttributes.getImmutable();
-	}
-	
-	// TODO: Add Bonus Attribute Setters
-	
+
 	public void adjustSkillmod(@NotNull String skillModName, int base, int modifier) {
+		if (base == 0 && modifier == 0) {
+			return;
+		}
+		
 		skillModLock.lock();
 		try {
 			SkillMod skillMod = skillMods.get(skillModName);
@@ -126,99 +125,111 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		SkillMod skillMod = skillMods.get(skillModName);
 		return skillMod != null ? skillMod.getValue() : 0;
 	}
-	
+
 	public float getMovementPercent() {
 		return movementPercent;
 	}
-	
+
 	public void setMovementPercent(float movementPercent) {
+		assert(movementPercent >= 0 && movementPercent <= 1);	// movementPercent should only be used for snares and roots
+		
 		this.movementPercent = movementPercent;
 		sendDelta(4, movementPercent);
 	}
-	
+
 	public float getMovementScale() {
 		return movementScale;
 	}
-	
-	public void setMovementScale(float movementScale) {
-		this.movementScale = movementScale;
-		sendDelta(5, movementScale);
+
+	public void setMovementScale(MovementModifierIdentifier movementModifierIdentifier, float movementScale, boolean fromMount) {
+		assert(movementScale >= 1);	// Should only be used for speed boosts
+		float fastestMovementModifier = movementModifierContainer.putModifier(movementModifierIdentifier, movementScale, fromMount);
+		
+		this.movementScale = fastestMovementModifier;
+		sendDelta(5, fastestMovementModifier);
 	}
 	
+	public void removeMovementScale(MovementModifierIdentifier movementModifierIdentifier) {
+		float fastestMovementModifier = movementModifierContainer.removeModifier(movementModifierIdentifier);
+		
+		this.movementScale = fastestMovementModifier;
+		sendDelta(5, fastestMovementModifier);
+	}
+
 	public long getPerformanceListenTarget() {
 		return performanceListenTarget;
 	}
-	
+
 	public void setPerformanceListenTarget(long performanceListenTarget) {
 		this.performanceListenTarget = performanceListenTarget;
 		sendDelta(6, performanceListenTarget);
 	}
-	
+
 	public float getRunSpeed() {
 		return runSpeed;
 	}
-	
+
 	public void setRunSpeed(float runSpeed) {
 		this.runSpeed = runSpeed;
 		sendDelta(7, runSpeed);
 	}
-	
+
 	public float getSlopeModAngle() {
 		return slopeModAngle;
 	}
-	
+
 	public void setSlopeModAngle(float slopeModAngle) {
 		this.slopeModAngle = slopeModAngle;
 		sendDelta(8, slopeModAngle);
 	}
-	
+
 	public float getSlopeModPercent() {
 		return slopeModPercent;
 	}
-	
+
 	public void setSlopeModPercent(float slopeModPercent) {
 		this.slopeModPercent = slopeModPercent;
 		sendDelta(9, slopeModPercent);
 	}
-	
+
 	public float getTurnScale() {
 		return turnScale;
 	}
-	
+
 	public void setTurnScale(float turnScale) {
 		this.turnScale = turnScale;
 		sendDelta(10, turnScale);
 	}
-	
+
 	public float getWalkSpeed() {
 		return walkSpeed;
 	}
-	
+
 	public void setWalkSpeed(float walkSpeed) {
 		this.walkSpeed = walkSpeed;
 		sendDelta(11, walkSpeed);
 	}
-	
+
 	public float getWaterModPercent() {
 		return waterModPercent;
 	}
-	
+
 	public void setWaterModPercent(float waterModPercent) {
 		this.waterModPercent = waterModPercent;
 		sendDelta(12, waterModPercent);
 	}
-	
+
 	@NotNull
 	public Set<GroupMissionCriticalObject> getMissionCriticalObjects() {
 		return Collections.unmodifiableSet(missionCriticalObjects);
 	}
-	
+
 	public void setMissionCriticalObjects(@NotNull Set<GroupMissionCriticalObject> missionCriticalObjects) {
 		this.missionCriticalObjects.clear();
 		this.missionCriticalObjects.addAll(missionCriticalObjects);
 		this.missionCriticalObjects.sendDeltaMessage(obj);
 	}
-	
+
 	@NotNull
 	public Set<String> getCommands() {
 		return Collections.unmodifiableSet(commands.keySet());
@@ -229,7 +240,7 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		commands.put(command, commands.getOrDefault(command, 0)+1);
 		commands.sendDeltaMessage(obj);
 	}
-	
+
 	public void addCommands(@NotNull String ... commands) {
 		for (String command : commands)
 			this.commands.put(command, this.commands.getOrDefault(command, 0)+1);
@@ -245,18 +256,22 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 			commands.put(command, nVal);
 		commands.sendDeltaMessage(obj);
 	}
-	
+
+	public void removeCommands(@NotNull String... commands) {
+		// TODO: Replace with compute
+		for (String command : commands) {
+			int nVal = this.commands.getOrDefault(command, 0)-1;
+			if (nVal <= 0)
+				this.commands.remove(command);
+			else
+				this.commands.put(command, nVal);
+		}
+
+		this.commands.sendDeltaMessage(obj);
+	}
+
 	public boolean hasCommand(@NotNull String command) {
 		return commands.containsKey(command);
-	}
-	
-	public int getTotalLevelXp() {
-		return totalLevelXp;
-	}
-	
-	public void setTotalLevelXp(int totalLevelXp) {
-		this.totalLevelXp = totalLevelXp;
-		sendDelta(15, totalLevelXp);
 	}
 	
 	public void createBaseline4(BaselineBuilder bb) {
@@ -275,16 +290,15 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		bb.addFloat(waterModPercent); // 12
 		bb.addObject(missionCriticalObjects); // 13
 		bb.addObject(commands); // 14
-		bb.addInt(totalLevelXp); // 15
-		
-		bb.incrementOperandCount(16);
+
+		bb.incrementOperandCount(15);
 	}
 	
 	public void parseBaseline4(NetBuffer buffer) {
 		skillMods.clear();
 		missionCriticalObjects.clear();
 		commands.clear();
-		
+
 		accelPercent = buffer.getFloat();
 		accelScale = buffer.getFloat();
 		bonusAttributes.decode(buffer);
@@ -300,7 +314,6 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		waterModPercent = buffer.getFloat();
 		missionCriticalObjects.addAll(SWGSet.getSwgSet(buffer, 4, 13, GroupMissionCriticalObject.class));
 		commands.putAll(SWGMap.getSwgMap(buffer, 4, 14, StringType.ASCII, Integer.class));
-		totalLevelXp = buffer.getInt();
 	}
 	
 	@Override
@@ -320,15 +333,15 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		data.putDouble("waterModPercent", waterModPercent);
 		data.putMap("commands", commands);
 		data.putArray("missionCriticalObjects", missionCriticalObjects);
-		data.putInteger("totalLevelXp", totalLevelXp);
+		data.putDocument("movementModifiers", movementModifierContainer);
 	}
-	
+
 	@Override
 	public void readMongo(MongoData data) {
 		commands.clear();
 		skillMods.clear();
 		missionCriticalObjects.clear();
-		
+
 		accelPercent = data.getFloat("accelPercent", accelPercent);
 		accelScale = data.getFloat("accelScale", accelScale);
 		data.getDocument("bonusAttributes", bonusAttributes);
@@ -344,73 +357,18 @@ class CreatureObjectClientServerNP implements Persistable, MongoPersistable {
 		turnScale = data.getFloat("turnScale", turnScale);
 		commands.putAll(data.getMap("commands", String.class, Integer.class));
 		missionCriticalObjects.addAll(data.getArray("missionCriticalObjects", GroupMissionCriticalObject.class));
-		totalLevelXp = data.getInteger("totalLevelXp", totalLevelXp);
+		movementModifierContainer.readMongo(data.getDocument("movementModifiers"));
 	}
-	
-	@Override
-	public void save(NetBufferStream stream) {
-		stream.addByte(1);
-		stream.addFloat(accelPercent);
-		stream.addFloat(accelScale);
-		stream.addFloat(movementPercent);
-		stream.addFloat(movementScale);
-		stream.addFloat(runSpeed);
-		stream.addFloat(slopeModAngle);
-		stream.addFloat(slopeModPercent);
-		stream.addFloat(turnScale);
-		stream.addFloat(walkSpeed);
-		stream.addFloat(waterModPercent);
-		stream.addInt(totalLevelXp);
-		bonusAttributes.save(stream);
-		stream.addMap(skillMods, (e) -> {
-			stream.addAscii(e.getKey());
-			e.getValue().save(stream);
-		});
-		stream.addMap(commands, (e) -> {
-			stream.addAscii(e.getKey());
-			stream.addInt(e.getValue());
-		});
-	}
-	
-	@Override
-	public void read(NetBufferStream stream) {
-		byte ver = stream.getByte();
-		accelPercent = stream.getFloat();
-		accelScale = stream.getFloat();
-		movementPercent = stream.getFloat();
-		movementScale = stream.getFloat();
-		runSpeed = stream.getFloat();
-		slopeModAngle = stream.getFloat();
-		slopeModPercent = stream.getFloat();
-		turnScale = stream.getFloat();
-		walkSpeed = stream.getFloat();
-		waterModPercent = stream.getFloat();
-		totalLevelXp = stream.getInt();
-		if (ver == 0) {
-			int [] array = new int[6];
-			stream.getList((i) -> array[i] = stream.getInt());
-			bonusAttributes.setHealth(array[0]);
-			bonusAttributes.setHealthRegen(array[1]);
-			bonusAttributes.setAction(array[2]);
-			bonusAttributes.setActionRegen(array[3]);
-			bonusAttributes.setMind(array[4]);
-			bonusAttributes.setMindRegen(array[5]);
-		} else {
-			bonusAttributes.read(stream);
-		}
-		stream.getList((i) -> {
-			SkillMod mod = new SkillMod();
-			String key = stream.getAscii();
-			mod.read(stream);
-			skillMods.put(key, mod);
-		});
-		if (ver == 0)
-			stream.getList(i -> stream.getAscii());
-		stream.getList((i) -> commands.put(stream.getAscii(), stream.getInt()));
-	}
-	
+
 	private void sendDelta(int update, Object o) {
 		obj.sendDelta(4, update, o);
 	}
 	
+	public void resetMovement() {
+		setWalkSpeed(DEFAULT_WALKSPEED);
+		setRunSpeed(DEFAULT_RUNSPEED);
+		setAccelScale(DEFAULT_ACCELSCALE);
+		setTurnScale(DEFAULT_TURNSCALE);
+		setMovementScale(MovementModifierIdentifier.BASE, DEFAULT_MOVEMENTSCALE, false);
+	}
 }

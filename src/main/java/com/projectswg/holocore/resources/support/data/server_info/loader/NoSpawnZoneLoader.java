@@ -61,7 +61,7 @@ public final class NoSpawnZoneLoader extends DataLoader {
 	
 	@Override
 	public void load() throws IOException {
-		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/nge/spawn/zones_nobuild_nospawn.sdb"))) {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/zones_nobuild_nospawn.sdb"))) {
 			while (set.next()) {
 				String planet = set.getText("terrain");
 				Terrain terrain = Terrain.getTerrainFromName(planet);

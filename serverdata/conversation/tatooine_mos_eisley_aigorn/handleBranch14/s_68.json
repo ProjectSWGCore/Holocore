@@ -1,0 +1,19 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_aigorn",
+		"key": "s_69",
+		"comment": "Of course you do, doesn't everyone?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_aigorn",
+				"key": "s_70",
+				"comment": "I'll be expecting a good pay off, Aigorn."
+			},
+			"next": "tatooine_mos_eisley_aigorn/handleBranch15/s_70"
+		}
+	],
+	"requirements": [],
+	"events": []
+}

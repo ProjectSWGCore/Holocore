@@ -1,24 +1,32 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
 plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.3.70"
-	id("com.github.johnrengelman.shadow") version "5.2.0"
-	id("org.javamodularity.moduleplugin") version "1.5.0"
-	id("org.beryx.jlink") version "2.17.2"
+	kotlin("jvm") version "1.7.10"
+	id("org.beryx.jlink") version "2.25.0"
 }
 
-val javaMajorVersion = "13"
-val kotlinTargetVersion = "12"
+val javaVersion = "18.0.2"
+val javaMajorVersion = "18"
+val kotlinTargetJdk = "18"
+val holocoreLogLevel: String? by project
 
-application {
-	mainClassName = "holocore/com.projectswg.holocore.ProjectSWG"
+subprojects {
+	ext {
+		set("javaVersion", javaVersion)
+		set("javaMajorVersion", javaMajorVersion)
+		set("kotlinTargetJdk", kotlinTargetJdk)
+	}
 }
 
 repositories {
-    jcenter()
+	maven("https://dev.joshlarson.me/maven2")
+	mavenCentral()
+}
+
+application {
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	mainModule.set("holocore")
 }
 
 sourceSets {
@@ -26,42 +34,32 @@ sourceSets {
 		dependencies {
 			implementation(project(":pswgcommon"))
 			implementation(kotlin("stdlib"))
+			implementation(kotlin("reflect"))
 			
-			implementation(group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version="1.3.5")
 			implementation(group="org.xerial", name="sqlite-jdbc", version="3.30.1")
-			implementation(group="org.mariadb.jdbc", name="mariadb-java-client", version="2.5.4")
 			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="me.joshlarson", name="fast-json", version="3.0.0")
-			implementation(group="me.joshlarson", name="jlcommon-network", version="1.0.0")
-			implementation(group="commons-cli", name="commons-cli", version="1.4")
+			implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
+			implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
+			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
+			implementation(group="me.joshlarson", name="websocket", version="0.9.4")
 		}
 	}
 	test {
 		dependencies {
-			implementation(group="junit", name="junit", version="4.12")
-		}
-	}
-	create("display") {
-		dependencies {
-			implementation(project(":pswgcommon"))
+			val junit5Version = "5.8.1"
+			testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
+			testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
+			testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
 		}
 	}
 	create("utility") {
-		dependencies {
-			implementation(project(":pswgcommon"))
-			implementation(group="org.jetbrains.kotlin", name="kotlin-stdlib", version="1.3.50")
-			implementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
-			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="me.joshlarson", name="fast-json", version="3.0.0")
+		val utilityImplementation by configurations.getting {
+			extendsFrom(configurations.implementation.get())
 		}
-	}
-	create("integration") {
+		
 		dependencies {
-			implementation(project(":pswgcommon"))
-			implementation(project(":client-holocore"))
-			implementation(group="org.xerial", name="sqlite-jdbc", version="3.23.1")
-			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="junit", name="junit", version="4.12")
+			utilityImplementation(project(":"))
+			utilityImplementation(project(":pswgcommon"))
 		}
 	}
 }
@@ -75,6 +73,8 @@ idea {
 
 jlink {
 //	addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+	addOptions("--ignore-signing-information")
+	forceMerge("kotlin-stdlib")
 	imageDir.set(file("$buildDir/holocore"))
 	imageZip.set(file("$buildDir/holocore.zip"))
 	launcher {
@@ -84,34 +84,42 @@ jlink {
 	}
 }
 
-tasks.named<ShadowJar>("shadowJar") {
-	archiveBaseName.set("Holocore")
-	archiveClassifier.set("")
-	archiveVersion.set("")
-}
-
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
 	kotlinOptions {
-		jvmTarget = kotlinTargetVersion
+		jvmTarget = kotlinTargetJdk
 	}
+	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }
 
-tasks.create<ShadowJar>("CreateConvertLoginJar") {
-	archiveBaseName.set("ConvertLogin")
-	archiveClassifier.set(null as String?)
-	archiveVersion.set(null as String?)
-	manifest.attributes["Main-Class"] = "com.projectswg.utility.ConvertLogin"
-	from(sourceSets.getByName("utility").output)
-	configurations = listOf(project.configurations.getByName("utilityRuntime"))
-	exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
+tasks.create<JavaExec>("runDevelopment") {
+	dependsOn(tasks.getByName("test"))
+
+	enableAssertions = true
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
 }
 
-tasks.create<ShadowJar>("CreatePacketCaptureProcessor") {
-	archiveBaseName.set("PacketCaptureProcessor")
-	archiveClassifier.set(null as String?)
-	archiveVersion.set(null as String?)
-	manifest.attributes["Main-Class"] = "com.projectswg.utility.packets.ProcessPacketCapture"
-	from(sourceSets.getByName("utility").output)
-	configurations = listOf(project.configurations.getByName("utilityRuntime"))
-	exclude("META-INF/INDEX.LIST", "META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
+tasks.create<JavaExec>("runProduction") {
+	classpath = sourceSets.main.get().runtimeClasspath
+	mainClass.set("com.projectswg.holocore.ProjectSWG")
+	
+	if (holocoreLogLevel != null)
+		args = listOf("--log-level", holocoreLogLevel!!)
+}
+
+tasks.replace("run", JavaExec::class).apply {
+	dependsOn(tasks.getByName("runDevelopment"))
+}
+
+tasks.create<JavaExec>("runClientdataConversion") {
+	enableAssertions = true
+	classpath = sourceSets["utility"].runtimeClasspath
+	mainClass.set("com.projectswg.utility.ClientdataConvertAll")
+}
+
+tasks.withType<Test>().configureEach {
+	useJUnitPlatform()
 }

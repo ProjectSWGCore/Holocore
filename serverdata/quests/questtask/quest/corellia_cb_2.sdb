@@ -1,0 +1,17 @@
+index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
+INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
+0	quest.task.ground.go_to_location	1	investigate					0	0	0
+1	quest.task.ground.comm_player	2;3;4	cb_2_courier	@quest/ground/corellia_cb_2:task01_comm_message_text	object/mobile/cb_cora.iff			0	0	0
+2	quest.task.ground.go_to_location		cb_track					0	0	0
+3	quest.task.ground.wait_for_signal		find_bunker					0	0	0
+4	quest.task.ground.wait_for_tasks	5	cb_2_courier_leg					0	0	0
+5	quest.task.ground.destroy_multi_and_loot	6	cb_2_kill_courier			deflarian_courier		0	0	0
+6	quest.task.ground.comm_player	7	cb_courier_log	@quest/ground/corellia_cb_2:task06_comm_message_text	object/mobile/cb_cora.iff			0	0	0
+7	quest.task.ground.wait_for_signal	8	cb_2_donovan					0	0	0
+8	quest.task.ground.comm_player	9;12;13;14	cb_2_cora_final_tasks	@quest/ground/corellia_cb_2:task08_comm_message_text	object/mobile/cb_cora.iff			0	0	0
+9	quest.task.ground.wait_for_tasks	10	cb_2_escape					0	0	0
+10	quest.task.ground.wait_for_signal	11	cb_2_donovan_free					0	0	0
+11	quest.task.ground.wait_for_signal		cb_2_cora_finish					0	0	0
+12	quest.task.ground.destroy_multi_and_loot		cb_2_vinros			deflarian_vinros		0	0	0
+13	quest.task.ground.destroy_multi		cb_2_henchman			deflarian_henchman		8	0	0
+14	quest.task.ground.destroy_multi		cb_2_underboss			deflarian_underboss		1	0	0
