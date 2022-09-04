@@ -1,0 +1,433 @@
+animation_id	type	comment
+attack_high_center_1_jab_double_light	MELEE	double jab light hit
+attack_high_center_1_jab_double_medium	MELEE	double jab medium hit
+attack_high_center_light_0	MELEE	attack high center light entry 0
+attack_high_center_light_1	MELEE	attack high center light entry 1
+attack_high_center_light_2	MELEE	attack high center light entry 2
+attack_high_center_light_3	MELEE	attack high center light entry 3
+attack_high_center_medium_0	MELEE	attack high center medium entry 0
+attack_high_center_medium_1	MELEE	attack high center medium entry 1
+attack_high_center_medium_2	MELEE	attack high center medium entry 2
+attack_high_center_medium_3	MELEE	attack high center medium entry 3
+attack_high_left_light_0	MELEE	attack high left light entry 0
+attack_high_left_light_1	MELEE	attack high left light entry 1
+attack_high_left_light_2	MELEE	attack high left light entry 2
+attack_high_left_light_3	MELEE	attack high left light entry 3
+attack_high_left_medium_0	MELEE	attack high left medium entry 0
+attack_high_left_medium_1	MELEE	attack high left medium entry 1
+attack_high_left_medium_2	MELEE	attack high left medium entry 2
+attack_high_left_medium_3	MELEE	attack high left medium entry 3
+attack_high_right_0_rear_handhook_light	MELEE	handhook light hit
+attack_high_right_0_rear_handhook_medium	MELEE	handhook medium hit
+attack_high_right_1_lead_arckick_light	MELEE	arckick light
+attack_high_right_1_lead_arckick_medium	MELEE	arckick medium
+attack_high_right_2_punch_roundhouse_light	MELEE	roundhouse high right attack light hit
+attack_high_right_2_punch_roundhouse_medium	MELEE	roundhouse high right attack medium hit
+attack_high_right_2_rear_roundhouse_kick_light	MELEE	roundhouse kick light hit
+attack_high_right_2_rear_roundhouse_kick_medium	MELEE	roundhouse kick medium hit
+attack_high_right_light_0	MELEE	attack high right light entry 0
+attack_high_right_light_1	MELEE	attack high right light entry 1
+attack_high_right_light_2	MELEE	attack high right light entry 2
+attack_high_right_light_3	MELEE	attack high right light entry 3
+attack_high_right_medium_0	MELEE	attack high right medium entry 0
+attack_high_right_medium_1	MELEE	attack high right medium entry 1
+attack_high_right_medium_2	MELEE	attack high right medium entry 2
+attack_high_right_medium_3	MELEE	attack high right medium entry 3
+attack_low_center_light_0	MELEE	attack low center light entry 0
+attack_low_center_light_1	MELEE	attack low center light entry 1
+attack_low_center_light_2	MELEE	attack low center light entry 2
+attack_low_center_light_3	MELEE	attack low center light entry 3
+attack_low_center_medium_0	MELEE	attack low center medium entry 0
+attack_low_center_medium_1	MELEE	attack low center medium entry 1
+attack_low_center_medium_2	MELEE	attack low center medium entry 2
+attack_low_center_medium_3	MELEE	attack low center medium entry 3
+attack_low_left_light_0	MELEE	attack low left light entry 0
+attack_low_left_light_1	MELEE	attack low left light entry 1
+attack_low_left_light_2	MELEE	attack low left light entry 2
+attack_low_left_light_3	MELEE	attack low left light entry 3
+attack_low_left_medium_0	MELEE	attack low left medium entry 0
+attack_low_left_medium_1	MELEE	attack low left medium entry 1
+attack_low_left_medium_2	MELEE	attack low left medium entry 2
+attack_low_left_medium_3	MELEE	attack low left medium entry 3
+attack_low_right_light_0	MELEE	attack low right light entry 0
+attack_low_right_light_1	MELEE	attack low right light entry 1
+attack_low_right_light_2	MELEE	attack low right light entry 2
+attack_low_right_light_3	MELEE	attack low right light entry 3
+attack_low_right_medium_0	MELEE	attack low right medium entry 0
+attack_low_right_medium_1	MELEE	attack low right medium entry 1
+attack_low_right_medium_2	MELEE	attack low right medium entry 2
+attack_low_right_medium_3	MELEE	attack low right medium entry 3
+attack_mid_center_light_0	MELEE	attack mid center light entry 0
+attack_mid_center_light_1	MELEE	attack mid center light entry 1
+attack_mid_center_light_2	MELEE	attack mid center light entry 2
+attack_mid_center_light_3	MELEE	attack mid center light entry 3
+attack_mid_center_medium_0	MELEE	attack mid center medium entry 0
+attack_mid_center_medium_1	MELEE	attack mid center medium entry 1
+attack_mid_center_medium_2	MELEE	attack mid center medium entry 2
+attack_mid_center_medium_3	MELEE	attack mid center medium entry 3
+attack_mid_left_light_0	MELEE	attack mid left light entry 0
+attack_mid_left_light_1	MELEE	attack mid left light entry 1
+attack_mid_left_light_2	MELEE	attack mid left light entry 2
+attack_mid_left_light_3	MELEE	attack mid left light entry 3
+attack_mid_left_medium_0	MELEE	attack mid left medium entry 0
+attack_mid_left_medium_1	MELEE	attack mid left medium entry 1
+attack_mid_left_medium_2	MELEE	attack mid left medium entry 2
+attack_mid_left_medium_3	MELEE	attack mid left medium entry 3
+attack_mid_right_light_0	MELEE	attack mid right light entry 0
+attack_mid_right_light_1	MELEE	attack mid right light entry 1
+attack_mid_right_light_2	MELEE	attack mid right light entry 2
+attack_mid_right_light_3	MELEE	attack mid right light entry 3
+attack_mid_right_medium_0	MELEE	attack mid right medium entry 0
+attack_mid_right_medium_1	MELEE	attack mid right medium entry 1
+attack_mid_right_medium_2	MELEE	attack mid right medium entry 2
+attack_mid_right_medium_3	MELEE	attack mid right medium entry 3
+attack_special_elbow_throw_light	MELEE	elbow throw light hit
+attack_special_elbow_throw_medium	MELEE	elbow throw medium hit
+attack_special_foot_stomp_light	MELEE	foot stomp attack light hit
+attack_special_foot_stomp_medium	MELEE	foot stomp attack medium hit
+attack_special_hammerfist_light	MELEE	hammerfist light hit
+attack_special_hammerfist_medium	MELEE	hammerfist medium hit
+attack_special_headbutt_light	MELEE	headbutt light hit
+attack_special_headbutt_medium	MELEE	headbutt medium hit
+attack_special_knee_strike_light	MELEE	knee strike (whack!) light hit
+attack_special_knee_strike_medium	MELEE	knee strike (whack!) medium hit
+attack_special_shoulder_bash_light	MELEE	shoulder bash light hit
+attack_special_shoulder_bash_medium	MELEE	shoulder bash medium hit
+attack_special_wookiee_slap_light	MELEE	wookiee slap light hit
+attack_special_wookiee_slap_medium	MELEE	wookiee slap medium hit
+change_posture	POSTURE	change posture
+charge	SPECIAL	charge
+combo_2a_light	MELEE	combo 2a light
+combo_2a_medium	MELEE	combo 2a medium
+combo_2b_light	MELEE	combo 2b light
+combo_2b_medium	MELEE	combo 2b medium
+combo_2c_light	MELEE	combo 2c light
+combo_2c_medium	MELEE	combo 2c medium
+combo_2d_light	MELEE	combo 2d light
+combo_2d_medium	MELEE	combo 2d medium
+combo_2e_light	MELEE	combo 2e light
+combo_2e_medium	MELEE	combo 2e medium
+combo_3a_light	MELEE	combo 3a light
+combo_3a_medium	MELEE	combo 3a medium
+combo_3b_light	MELEE	combo 3b light
+combo_3b_medium	MELEE	combo 3b medium
+combo_3c_light	MELEE	combo 3c light
+combo_3c_medium	MELEE	combo 3c medium
+combo_3d_light	MELEE	combo 3d light
+combo_3d_medium	MELEE	combo 3d medium
+combo_3e_light	MELEE	combo 3e light
+combo_3e_medium	MELEE	combo 3e medium
+combo_4a_light	MELEE	combo 4a light
+combo_4a_medium	MELEE	combo 4a medium
+combo_4b_light	MELEE	combo 4b light
+combo_4b_medium	MELEE	combo 4b medium
+combo_4c_light	MELEE	combo 4c light
+combo_4c_medium	MELEE	combo 4c medium
+combo_4d_light	MELEE	combo 4d light
+combo_4d_medium	MELEE	combo 4d medium
+combo_4e_light	MELEE	combo 4e light
+combo_4e_medium	MELEE	combo 4e medium
+combo_5a_light	MELEE	combo 5a light
+combo_5a_medium	MELEE	combo 5a medium
+combo_5b_light	MELEE	combo 5b light
+combo_5b_medium	MELEE	combo 5b medium
+combo_jedi_1_light	JEDI	combo jedi 1 light
+combo_jedi_1_medium	JEDI	combo jedi 1 medium
+combo_jedi_2_light	JEDI	combo jedi 2 light
+combo_jedi_2_medium	JEDI	combo jedi 2 medium
+combo_jedi_3_light	JEDI	combo jedi 3 light
+combo_jedi_3_medium	JEDI	combo jedi 3 medium
+combo_jedi_4_light	JEDI	combo jedi 4 light
+combo_jedi_4_medium	JEDI	combo jedi 4 medium
+counter_high_center_light	MELEE	counter attack center light entry 0
+counter_high_center_medium	MELEE	counter attack center medium entry 0
+counter_high_left_light	MELEE	counter attack left light entry 0
+counter_high_left_medium	MELEE	counter attack left medium entry 0
+counter_high_right_light	MELEE	counter attack right light entry 0
+counter_high_right_medium	MELEE	counter attack right medium entry 0
+counter_low_center_light	MELEE	attack low center light entry 0
+counter_low_center_medium	MELEE	attack low center medium entry 0
+counter_low_left_light	MELEE	attack low left light entry 0
+counter_low_left_medium	MELEE	attack low left medium entry 0
+counter_low_right_light	MELEE	attack low right light entry 0
+counter_low_right_medium	MELEE	attack low right medium entry 0
+counter_mid_center_light	MELEE	attack mid center light entry 0
+counter_mid_center_medium	MELEE	attack mid center medium entry 0
+counter_mid_left_light	MELEE	attack mid left light entry 0
+counter_mid_left_medium	MELEE	attack mid left medium entry 0
+counter_mid_right_light	MELEE	attack mid right light entry 0
+counter_mid_right_medium	MELEE	attack mid right medium entry 0
+creature_attack_heavy	CREATURE	creature attack medium
+creature_attack_light	CREATURE	creature attack light
+creature_attack_ranged_light	CREATURE	creature attack ranged
+creature_attack_ranged_medium	CREATURE	creature attack medium
+creature_attack_special_1_heavy	CREATURE	creature attack special 1 medium
+creature_attack_special_1_light	CREATURE	creature attack special 1 light
+creature_attack_special_2_light	CREATURE	creature attack special 1 light
+creature_attack_special_2_medium	CREATURE	creature attack special 1 medium
+dodge	SPECIAL	dodge standalone
+droid_attack_light	DROID	droid firing attack
+droid_attack_medium	DROID	droid firing attack medium
+execute	JEDI	execute
+fire_1_single	RANGED	none (no response coup de grace animations)
+fire_1_single_light	RANGED	fire 1 single light
+fire_1_single_light_face	RANGED	fire 1 single light face target
+fire_1_single_medium	RANGED	fire 1 single medium hit
+fire_1_single_medium_face	RANGED	fire 1 single medium hit face target
+fire_1_special_single_light	RANGED	fire 1 single light trails (special effects
+fire_1_special_single_light_face	RANGED	fire 1 single light face to target with trails
+fire_1_special_single_medium	RANGED	fire 1 single medium hit withtrails
+fire_1_special_single_medium_face	RANGED	fire 1 single medium hit face target with trails
+fire_3_single_light	RANGED	fire 3 single light
+fire_3_single_light_face	RANGED	fire 3 single light face to target
+fire_3_single_medium	RANGED	fire 3 single medium hit
+fire_3_single_medium_face	RANGED	fire 3 single medium hit face target
+fire_3_special_single_light	RANGED	fire 3 single light trails (special effects)
+fire_3_special_single_light_face	RANGED	fire 3 single light face to target with trails
+fire_3_special_single_medium	RANGED	fire 3 single medium hit withtrails
+fire_3_special_single_medium_face	RANGED	fire 3 single medium hit face target with trails
+fire_5_single_light	RANGED	fire 5 single light hit
+fire_5_single_light_face	RANGED	fire 5 single light hit
+fire_5_single_medium	RANGED	fire 5 single medium hit
+fire_5_single_medium_face	RANGED	fire 5 single medium hit face to target
+fire_5_special_single_light	RANGED	fire 5 single light trails (special effects
+fire_5_special_single_light_face	RANGED	fire 5 single light face to target with trails
+fire_5_special_single_medium	RANGED	fire 5 single medium hit withtrails
+fire_5_special_single_medium_face	RANGED	fire 5 single medium hit face target with trails
+fire_7_single_light	RANGED	fire 7 single light hit
+fire_7_single_light_face	RANGED	fire 7 single light hit
+fire_7_single_medium	RANGED	fire 7 single medium hit
+fire_7_single_medium_face	RANGED	fire 7 single medium hit face to target
+fire_9_single_light	RANGED	fire 9 single light hit
+fire_9_single_light_face	RANGED	fire 9 single light hit
+fire_9_single_medium	RANGED	fire 9 single medium hit
+fire_9_single_medium_face	RANGED	fire 9 single medium hit face to target
+fire_acid_at_location	HEAVY	fire acid at location
+fire_acid_rifle_single_1_light	HEAVY	acid rifle single 1 light
+fire_acid_rifle_single_1_medium	HEAVY	acid rifle single 1 medium
+fire_acid_rifle_single_2_light	HEAVY	acid rifle single 2 light
+fire_acid_rifle_single_2_medium	HEAVY	acid rifle single 2 medium
+fire_acrobatic	SPECIAL	acrobatic fire attack
+fire_area_light	RANGED	fire area light
+fire_area_medium	RANGED	fire area medium
+fire_area_no_trails_light	RANGED	fire area light no trails
+fire_area_no_trails_medium	RANGED	fire area medium no trails
+fire_blue_energy_at_loc	HEAVY	fire blue energy at location
+fire_burst	RANGED	burst fire projectile attack
+fire_defender_posture_change_down	SPECIAL	fire force posture change posture down
+fire_defender_posture_change_up	SPECIAL	fire force posture change posture up
+fire_energy_at_loc	RANGED	fire energy at location
+fire_flame_thrower_blue_single_1_light	HEAVY	flamethrower blue single 1 light
+fire_flame_thrower_blue_single_1_medium	HEAVY	flamethrower blue single 1 medium
+fire_flame_thrower_blue_single_2_light	HEAVY	flamethrower blue single 2 light
+fire_flame_thrower_blue_single_2_medium	HEAVY	flamethrower blue single 2 medium
+fire_flame_thrower_cone_1_light	HEAVY	flamethrower cone 1 light
+fire_flame_thrower_cone_1_medium	HEAVY	flamethrower cone 1 medium
+fire_flame_thrower_cone_2_light	HEAVY	flamethrower cone 2 light
+fire_flame_thrower_cone_2_medium	HEAVY	flamethrower cone 2 medium
+fire_flame_thrower_cone_ice_1_light	HEAVY	flamethrower cone ice gun 1 light
+fire_flame_thrower_single_1_light	HEAVY	flamethrower single 1 light
+fire_flame_thrower_single_1_medium	HEAVY	flamethrower single 1 medium
+fire_flame_thrower_single_2_light	HEAVY	flamethrower single 2 light
+fire_flame_thrower_single_2_medium	HEAVY	flamethrower single 2 medium
+fire_heavy_acid_beam_light	HEAVY	fire acid beam light
+fire_heavy_acid_beam_medium	HEAVY	fire acid beam medium
+fire_heavy_lightning_beam_light	HEAVY	fire lightning beam light
+fire_heavy_lightning_beam_medium	HEAVY	fire lightning beam medium
+fire_heavy_particle_beam_light	HEAVY	fire particle beam light
+fire_heavy_particle_beam_medium	HEAVY	fire heavy particle beam medium
+fire_heavy_rocket_launcher_light	HEAVY	fire heavy rocket launcher light
+fire_heavy_rocket_launcher_medium	HEAVY	fire heavy rocket launcher medium
+fire_ice_at_location	HEAVY	icecannon at location
+fire_ice_cannon_single_1_light	HEAVY	icecannon single 1 light
+fire_ice_cannon_single_1_medium	HEAVY	icecannon single 1 medium
+fire_ice_cannon_single_2_light	HEAVY	icecannon single 2 light
+fire_ice_cannon_single_2_medium	HEAVY	icecannon single 2 medium
+fire_launcherpistol_at_location	HEAVY	launcherpistol at location
+fire_lava_at_location	HEAVY	lavacannon at location
+fire_lava_cannon_single_1_light	HEAVY	lavacannon single 1 light
+fire_lava_cannon_single_1_medium	HEAVY	lavacannon single 1 medium
+fire_lava_cannon_single_2_light	HEAVY	lavacannon single 2 light
+fire_lava_cannon_single_2_medium	HEAVY	lavacannon single 2 medium
+fire_lightning_at_loc	HEAVY	lightning at location
+fire_lightning_rifle_single_1_light	HEAVY	lightning rifle single 1 light
+fire_lightning_rifle_single_1_medium	HEAVY	lightning rifle single 1 medium
+fire_lightning_rifle_single_2_light	HEAVY	lightning rifle single 2 light
+fire_lightning_rifle_single_2_medium	HEAVY	lightning rifle single 2 medium
+fire_rocket_launcher_medium	HEAVY	fire rocket launcher medium
+fire_rockets_at_loc 	HEAVY	fire rocket launcher at location
+fire_single	RANGED	single blaster fire action
+fire_single_shot	RANGED	single shot at location
+fire_stun_at_loc	RANGED	stun at location
+fire_suppression	RANGED	suppression fire projectile attack (this should always fail to hit the defender)
+fire_targetingpistol_at_location	HEAVY	targeting pistol at location
+fire_turret	TURRET	fire turret
+fire_turret_light	TURRET	fire turret light
+fire_turret_medium	TURRET	fire turret medium
+force_absorb_1_particle_light	JEDI	force absorb 1 particle light
+force_absorb_1_particle_medium	JEDI	force absorb 1 particle medium
+force_absorb_2_particles_light	JEDI	force absorb 2 particles light
+force_absorb_2_particles_medium	JEDI	force absorb 2 particles medium
+force_blast_1_particle_light	JEDI	force blast 1 particle light
+force_blast_1_particle_medium	JEDI	force blast 1 particle medium
+force_blast_2_particles_light	JEDI	force blast 2 particles light
+force_blast_2_particles_medium	JEDI	force blast 2 particles medium
+force_channel_1_particle_light	JEDI	force channel 1 particle light
+force_channel_1_particle_medium	JEDI	force channel 1 particle medium
+force_channel_2_particles_light	JEDI	force channel 2 particles light
+force_channel_2_particles_medium	JEDI	force channel 2 particles medium
+force_choke_1_arc_particle_level_1_light	JEDI	force choke 1 particle level 1 arc light
+force_choke_1_arc_particle_level_1_medium	JEDI	force choke 1 particle level arc1 medium
+force_choke_1_particle_level_1_light	JEDI	force choke 1 particle level 1 light
+force_choke_1_particle_level_1_medium	JEDI	force choke 1 particle level 1 medium
+force_choke_vader	JEDI	force choke for darth Vader
+force_drain_1	JEDI	drain force
+force_healing_1	JEDI	force healing
+force_intimidate	JEDI	force intimidate
+force_intimidate_chain	JEDI	force intimidate
+force_knockdown_1_arc_particle_level_1	JEDI	force knockdown 1 particle level 1 medium
+force_knockdown_1_particle_level_1	JEDI	force knockdown 1 particle level 1 medium
+force_lightning_1_arc_particle_level_1_light	JEDI	force lightining 1 particle level 1 light
+force_lightning_1_arc_particle_level_1_medium	JEDI	force lightining 1 particle level 1 medium
+force_lightning_1_arc_particle_level_2_light	JEDI	force lightining 1 particle level 2 light
+force_lightning_1_arc_particle_level_2_medium	JEDI	force lightining 1 particle level 2 medium
+force_lightning_1_arc_particle_level_3_light	JEDI	force lightining 1 particle level 3 light
+force_lightning_1_arc_particle_level_3_medium	JEDI	force lightining 1 particle level 3 medium
+force_lightning_1_arc_particle_level_4_light	JEDI	force lightining 1 particle level 4 light
+force_lightning_1_arc_particle_level_4_medium	JEDI	force lightining 1 particle level 4 medium
+force_lightning_1_arc_particle_level_5_light	JEDI	force lightining 1 particle level 5 light
+force_lightning_1_arc_particle_level_5_medium	JEDI	force lightining 1 particle level 4 medium
+force_lightning_1_particle_level_1_light	JEDI	force lightining 1 particle level 1 light
+force_lightning_1_particle_level_1_medium	JEDI	force lightining 1 particle level 1 medium
+force_lightning_1_particle_level_2_light	JEDI	force lightining 1 particle level 2 light
+force_lightning_1_particle_level_2_medium	JEDI	force lightining 1 particle level 2 medium
+force_lightning_1_particle_level_3_light	JEDI	force lightining 1 particle level 3 light
+force_lightning_1_particle_level_3_medium	JEDI	force lightining 1 particle level 3 medium
+force_lightning_1_particle_level_4_light	JEDI	force lightining 1 particle level 4 light
+force_lightning_1_particle_level_4_medium	JEDI	force lightining 1 particle level 4 medium
+force_lightning_1_particle_level_5_light	JEDI	force lightining 1 particle level 5 light
+force_lightning_1_particle_level_5_medium	JEDI	force lightining 1 particle level 4 medium
+force_mind_blast_1_arc_particle_level_1_light	JEDI	force mind blast 1 particle level 1 arc light
+force_mind_blast_1_arc_particle_level_1_medium	JEDI	force mind blast 1 particle level arc1 medium
+force_mind_blast_1_particle_level_1_light	JEDI	force mind blast 1 particle level 1 light
+force_mind_blast_1_particle_level_1_medium	JEDI	force mind blast 1 particle level 1 medium
+force_strength_anim	JEDI	
+force_throw_1_arc_particle_level_1_light	JEDI	force throw 1 particle level 1 arc light
+force_throw_1_arc_particle_level_1_medium	JEDI	force throw 1 particle level arc1 medium
+force_throw_1_particle_level_1_light	JEDI	force throw 1 particle level 1 light
+force_throw_1_particle_level_1_medium	JEDI	force throw 1 particle level 1 medium
+force_transfer_1	JEDI	transfer force
+force_weaken_1_arc_particle_level_1_light	JEDI	force weaken 1 particle level 1 arc light
+force_weaken_1_arc_particle_level_1_medium	JEDI	force throw 1 particle level arc1 medium
+force_weaken_1_particle_level_1_light	JEDI	force throw 1 particle level 1 light
+force_weaken_1_particle_level_1_medium	JEDI	force throw 1 particle level 1 medium
+forsake_fear_anim	JEDI	
+get_hit_add	SPECIAL	got hit light
+get_hit_add_medium	SPECIAL	got hit medium
+go_incapacitated	SPECIAL	incapacitation stand alone
+heal_other	HEALING	heal other
+heal_self	HEALING	heal self
+intimidate	SPECIAL	intimidate
+knockdown_1hmelee_1	1-HANDED	melee1h knockdown 1
+knockdown_2hmelee_1	2-HANDED	melee2h knockdown 1
+knockdown_polearm_1	POLEARM	polearm knockdnown 1
+knockdown_polearm_2	POLEARM	polearm knockdnown 2
+knockdown_polearm_3	POLEARM	polearm knockdnown 3
+knockdown_unarmed_1	UNARMED	melee2h knockdown 1
+knockdown_unarmed_2	UNARMED	melee2h knockdown 2
+knockdown_unarmed_3	UNARMED	melee2h knockdown 3
+lower_posture_1hmelee_1	1-HANDED	lower posture 1hmelee 1
+lower_posture_2hmelee_1	2-HANDED	lower posture 2hmelee 1
+lower_posture_2hmelee_2	2-HANDED	lower posture 2hmelee 2
+lower_posture_2hmelee_3	2-HANDED	lower posture 2hmelee 3
+lower_posture_2hmelee_4	2-HANDED	lower posture 2hmelee 4
+lower_posture_2hmelee_5	2-HANDED	lower posture 2hmelee 5
+lower_posture_2hmelee_6	2-HANDED	lower posture 2hmelee 6
+lower_posture_polearm_1	POLEARM	polearmlowerposture 1
+lower_posture_polearm_2	POLEARM	lower posture polearm 2
+lower_posture_unarmed_1	UNARMED	lower posture unarmed 1
+melee_coup_de_grace	MELEE	melee coup de grace
+mind_trick_1	JEDI	mind trick 1
+pistol_whip	SPECIAL	
+posture_scramble	POSTURE	posture scramble
+ranged_melee_light	RANGED / MELEE	ranged weapon melee whack attack
+ranged_melee_medium	RANGED / MELEE	ranged weapon melee whack attack medium reaction
+rescue	SPECIAL	rescue
+saberthrow_light	JEDI	
+saberthrow_medium	JEDI	
+saberthrow_posture_change	JEDI	
+showoff_1_light	MELEE	
+showoff_1_medium	MELEE	
+showoff_2_light	MELEE	
+showoff_2_medium	MELEE	
+showoff_3_light	MELEE	
+showoff_3_medium	MELEE	
+showoff_4_light	MELEE	
+showoff_4_medium	MELEE	
+test_flamethrower	TEST	test flamethrower
+test_flamethrower_arc	TEST	test flamethrower arc
+test_heavy_weapon	TEST	test heavy weapon
+test_heavy_weapon_particle_system	TEST	test heavy weapon particle
+test_homing	TEST	test homing
+test_lightning_1	TEST	test lightning 1
+test_lightning_2	TEST	test lightning 2
+test_lightning_passive_actors	TEST	test lightning passive
+test_swoosh	TEST	test swoosh
+test_sword_ricochet	TEST	test sword ricochet
+test_sword_throw	TEST	test sword throw
+throw_grenade	THROWN	
+throw_grenade_far_area_disease	THROWN	
+throw_grenade_far_area_poison	THROWN	
+throw_grenade_far_bug_bomb	THROWN	
+throw_grenade_far_cryoban	THROWN	
+throw_grenade_far_disease	THROWN	
+throw_grenade_far_glop	THROWN	
+throw_grenade_far_healing	THROWN	
+throw_grenade_far_healing_longrange	THROWN	
+throw_grenade_far_imperial_detonator	THROWN	
+throw_grenade_far_poison	THROWN	
+throw_grenade_far_proton	THROWN	
+throw_grenade_medium_area_disease	THROWN	
+throw_grenade_medium_area_poison	THROWN	
+throw_grenade_medium_bug_bomb	THROWN	
+throw_grenade_medium_cryoban	THROWN	
+throw_grenade_medium_disease	THROWN	
+throw_grenade_medium_fragmentation	THROWN	
+throw_grenade_medium_glop	THROWN	
+throw_grenade_medium_healing	THROWN	
+throw_grenade_medium_healing_longrange	THROWN	
+throw_grenade_medium_imperial_detonator	THROWN	
+throw_grenade_medium_poison	THROWN	
+throw_grenade_medium_proton	THROWN	
+throw_grenade_medium_thermal_detonator	THROWN	
+throw_grenade_near_area_disease	THROWN	
+throw_grenade_near_area_poison	THROWN	
+throw_grenade_near_bacta_bomb	THROWN	
+throw_grenade_near_bacta_grenade	THROWN	
+throw_grenade_near_bug_bomb	THROWN	
+throw_grenade_near_cryoban	THROWN	
+throw_grenade_near_disease	THROWN	
+throw_grenade_near_fragmentation	THROWN	
+throw_grenade_near_glop	THROWN	
+throw_grenade_near_healing	THROWN	
+throw_grenade_near_healing_longrange	THROWN	
+throw_grenade_near_imperial_detonator	THROWN	
+throw_grenade_near_poison	THROWN	
+throw_grenade_near_proton	THROWN	
+throw_grenade_near_thermal_detonator	THROWN	
+throw_trap_drowsy_dart	TRAP SCOUT	
+throw_trap_enraging_spur	TRAP SCOUT	
+throw_trap_flash_bomb	TRAP SCOUT	
+throw_trap_melee_def_1	TRAP SCOUT	
+throw_trap_melee_ranged_def_1	TRAP SCOUT	
+throw_trap_noise_maker	TRAP SCOUT	
+throw_trap_ranged_def_1	TRAP SCOUT	
+throw_trap_sonic_pulse	TRAP SCOUT	
+throw_trap_state_def_1	TRAP SCOUT	
+throw_trap_tranq_dart	TRAP SCOUT	
+throw_trap_webber	TRAP SCOUT	
+tumble	SPECIAL	tumble
+tumble_facing	SPECIAL	tumble to posture facing
+unarmed_coup_de_grace	UNARMED	unarmed coup de grace
+veteran_buff_bonus	SPECIAL	
+warcry	SPECIAL	warcry
