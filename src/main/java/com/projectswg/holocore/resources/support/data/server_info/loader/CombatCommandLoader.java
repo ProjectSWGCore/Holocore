@@ -101,6 +101,8 @@ public class CombatCommandLoader extends DataLoader {
 						.withHealthCost(set.getReal("healthCost"))
 						.withActionCost(set.getReal("actionCost"))
 						.withMindCost(set.getReal("mindCost"))
+						.withForceCost(set.getReal("forceCost"))
+						.withForceCostModifier(set.getReal("fcModifier"))
 						.withKnockdownChance(set.getReal("knockdownChance"))
 						.withBlinding(set.getBoolean("blinding"))
 						.withBleeding(set.getBoolean("bleeding"))

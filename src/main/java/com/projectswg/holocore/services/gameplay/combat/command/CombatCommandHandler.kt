@@ -67,8 +67,10 @@ class CombatCommandHandler {
 		val healthCost = combatCommand.healthCost.toInt()
 		val actionCost = (combatCommand.actionCost * specialAttackCost / 100).toInt()
 		val mindCost = (combatCommand.mindCost * specialAttackCost / 100).toInt()
-		
-		if (healthCost > source.health || actionCost > source.action || mindCost > source.mind) {
+		val forceCost = (combatCommand.forceCost) + (equippedWeapon.forcePowerCost * combatCommand.forceCostModifier)
+		val playerObject = source.playerObject
+
+		if (healthCost > source.health || actionCost > source.action || mindCost > source.mind || (playerObject != null && forceCost > playerObject.forcePower)) {
 			return CombatStatus.TOO_TIRED
 		}
 		
@@ -79,6 +81,10 @@ class CombatCommandHandler {
 			source.modifyHealth(-healthCost)
 			source.modifyAction(-actionCost)
 			source.modifyMind(-mindCost)
+			
+			if (playerObject != null) {
+				playerObject.forcePower = (playerObject.forcePower - forceCost).toInt()
+			}
 		}
 
 		return combatStatus
