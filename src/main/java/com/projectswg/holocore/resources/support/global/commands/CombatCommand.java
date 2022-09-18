@@ -45,6 +45,8 @@ public class CombatCommand {
 	private final double healthCost;
 	private final double actionCost;
 	private final double mindCost;
+	private final double forceCost;
+	private final double forceCostModifier;
 	private final double knockdownChance;
 	private final boolean blinding;
 	private final boolean bleeding;
@@ -85,6 +87,8 @@ public class CombatCommand {
 		this.healthCost = builder.healthCost;
 		this.actionCost = builder.actionCost;
 		this.mindCost = builder.mindCost;
+		this.forceCost = builder.forceCost;
+		this.forceCostModifier = builder.forceCostModifier;
 		this.knockdownChance = builder.knockdownChance;
 		this.blinding = builder.blinding;
 		this.bleeding = builder.bleeding;
@@ -159,6 +163,14 @@ public class CombatCommand {
 	
 	public double getMindCost() {
 		return mindCost;
+	}
+	
+	public double getForceCost() {
+		return forceCost;
+	}
+	
+	public double getForceCostModifier() {
+		return forceCostModifier;
 	}
 	
 	public double getKnockdownChance() {
@@ -296,6 +308,8 @@ public class CombatCommand {
 		private double healthCost;
 		private double actionCost;
 		private double mindCost;
+		private double forceCost;
+		private double forceCostModifier;
 		private double knockdownChance;
 		private boolean blinding;
 		private boolean bleeding;
@@ -367,6 +381,16 @@ public class CombatCommand {
 		
 		public CombatCommandBuilder withMindCost(double mindCost) {
 			this.mindCost = mindCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withForceCost(double forceCost) {
+			this.forceCost = forceCost;
+			return this;
+		}
+		
+		public CombatCommandBuilder withForceCostModifier(double forceCostModifier) {
+			this.forceCostModifier = forceCostModifier;
 			return this;
 		}
 		
