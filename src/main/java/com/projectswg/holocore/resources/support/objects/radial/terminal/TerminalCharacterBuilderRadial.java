@@ -5,7 +5,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.data.sui.SuiEvent;
-import com.projectswg.holocore.intents.gameplay.combat.KnockdownIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
@@ -52,7 +52,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Vehicles");
 				listBox.addListItem("ITEMS - Deeds");
 				listBox.addListItem("Credits");
-				listBox.addListItem("Knockdown");
+				listBox.addListItem("Master Brawler");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -72,14 +72,13 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 4: handleVehicles(player); break;
 			case 5: handleDeeds(player); break;
 			case 6: handleCredits(player); break;
-			case 7: handleKnockdown(player); break;
+			case 7: handleMasterBrawler(player); break;
 		}
 	}
 
-	private static void handleKnockdown(Player player) {
-		CreatureObject victim = player.getCreatureObject();
-		
-		KnockdownIntent.broadcast(victim);
+	private static void handleMasterBrawler(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_brawler_master", creatureObject, true);
 	}
 
 	private static void spawnItems(Player player, String ... items) {
