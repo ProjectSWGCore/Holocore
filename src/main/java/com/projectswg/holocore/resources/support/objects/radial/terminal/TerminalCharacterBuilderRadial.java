@@ -43,16 +43,16 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		switch (selection) {
 			case ITEM_USE: {
-				SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category.");
+				SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category");
 
 				listBox.addListItem("TRAVEL - Fast Travel Locations");
+				listBox.addListItem("SKILLS - Grant boxes");
 				listBox.addListItem("ITEMS - Armor");
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
 				listBox.addListItem("ITEMS - Vehicles");
 				listBox.addListItem("ITEMS - Deeds");
 				listBox.addListItem("Credits");
-				listBox.addListItem("Master Brawler");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
 				listBox.display(player);
@@ -66,19 +66,113 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 		switch (selection) {
 			case 0: handleTravel(player); break;
-			case 1: handleArmor(player); break;
-			case 2: handleWeapons(player); break;
-			case 3: handleWearables(player); break;
-			case 4: handleVehicles(player); break;
-			case 5: handleDeeds(player); break;
-			case 6: handleCredits(player); break;
-			case 7: handleMasterBrawler(player); break;
+			case 1: handleSkills(player); break;
+			case 2: handleArmor(player); break;
+			case 3: handleWeapons(player); break;
+			case 4: handleWearables(player); break;
+			case 5: handleVehicles(player); break;
+			case 6: handleDeeds(player); break;
+			case 7: handleCredits(player); break;
 		}
+	}
+
+	private static void handleSkills(Player player) {
+		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a skill you want to learn");
+
+		listBox.addListItem("Social - Entertainer (Master)");
+		listBox.addListItem("Social - Dancer (Novice)");
+		listBox.addListItem("Melee - Brawler (Master)");
+		listBox.addListItem("Melee - Fencer (Novice)");
+		listBox.addListItem("Melee - Pikeman (Novice)");
+		listBox.addListItem("Melee - Swordsman (Novice)");
+		listBox.addListItem("Melee - Teras Kasi (Novice)");
+		listBox.addListItem("Ranged - Marksman (Master)");
+		listBox.addListItem("Ranged - Pistoleer (Novice)");
+		listBox.addListItem("Ranged - Carbineer (Novice)");
+		listBox.addListItem("Ranged - Rifleman (Novice)");
+		listBox.addListItem("Ranged - Commando (Novice)");
+
+		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSkillsSelection", (event, parameters) -> handleSkillsSelection(player, parameters));
+		listBox.display(player);
+	}
+
+	private static void handleSkillsSelection(Player player, Map<String, String> parameters) {
+		int selection = SuiListBox.getSelectedRow(parameters);
+
+		switch (selection) {
+			case 0: handleMasterEntertainer(player); break;
+			case 1: handleNoviceDancer(player); break;
+			case 2: handleMasterBrawler(player); break;
+			case 3: handleNoviceFencer(player); break;
+			case 4: handleNovicePikeman(player); break;
+			case 5: handleNoviceSwordsman(player); break;
+			case 6: handleNoviceTerasKasi(player); break;
+			case 7: handleMasterMarksman(player); break;
+			case 8: handleNovicePistoleer(player); break;
+			case 9: handleNoviceCarbineer(player); break;
+			case 10: handleNoviceRifleman(player); break;
+			case 11: handleNoviceCommando(player); break;
+		}
+	}
+
+	private static void handleMasterEntertainer(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "social_entertainer_master", creatureObject, true);
+	}
+
+	private static void handleNoviceDancer(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "social_dancer_novice", creatureObject, true);
 	}
 
 	private static void handleMasterBrawler(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_brawler_master", creatureObject, true);
+	}
+
+	private static void handleNoviceFencer(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_1hsword_novice", creatureObject, true);
+	}
+
+	private static void handleNovicePikeman(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_polearm_novice", creatureObject, true);
+	}
+
+	private static void handleNoviceSwordsman(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_2hsword_novice", creatureObject, true);
+	}
+
+	private static void handleNoviceTerasKasi(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_unarmed_novice", creatureObject, true);
+	}
+
+	private static void handleMasterMarksman(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_marksman_master", creatureObject, true);
+	}
+
+	private static void handleNovicePistoleer(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_pistol_novice", creatureObject, true);
+	}
+
+	private static void handleNoviceCarbineer(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_carbine_novice", creatureObject, true);
+	}
+
+	private static void handleNoviceRifleman(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_rifleman_novice", creatureObject, true);
+	}
+
+	private static void handleNoviceCommando(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_commando_novice", creatureObject, true);
 	}
 
 	private static void spawnItems(Player player, String ... items) {
@@ -316,7 +410,6 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 3: handlecl30(player); break;
 			case 4: handlecl40(player); break;
 			case 5: handlecl50(player); break;
-
 		}
 	}
 
@@ -1158,10 +1251,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			ObjectCreatedIntent.broadcast(deed);
 		}
 	}
-	
+
 	private static void handleDeeds(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of deeds to acquire.");
-		
+
 		listBox.addListItem("Structures - Tatooine");
 		listBox.addListItem("Structures - Corellia");
 		listBox.addListItem("Structures - Naboo");
@@ -1174,15 +1267,15 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Structures - Factory");
 		listBox.addListItem("Structures - Mining");
 		listBox.addListItem("Structures - Turret");
-		
+
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleDeedSelection", (event, parameters) -> handleDeedSelection(player, parameters));
 		listBox.display(player);
 	}
-	
+
 	private static void handleDeedSelection(Player player, Map<String, String> parameters) {
 		int selection = SuiListBox.getSelectedRow(parameters);
 		String stringSearch;
-		
+
 		switch (selection) {
 			case 0  -> stringSearch = "tatooine";
 			case 1  -> stringSearch = "corellia";
@@ -1198,7 +1291,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 11 -> stringSearch = "turret";
 			default -> { return; }
 		}
-		
+
 		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
 			if (structureInfo.getStructureTemplate().contains(stringSearch) && !structureInfo.getDeedTemplate().isEmpty()) {
 				TangibleObject deed = ObjectCreator.createObjectFromTemplate(structureInfo.getDeedTemplate(), TangibleObject.class);
