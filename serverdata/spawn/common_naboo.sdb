@@ -45,9 +45,9 @@ spawn_naboo_42	NABOO	nab_deeja_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promot
 spawn_naboo_43	NABOO	nab_deeja_house1	AREA	2	-3.9	1.1	-0.5	66	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	conversation			600
 spawn_naboo_44	NABOO	nab_deeja_house1	AREA	2	-1.1	1.1	0	-65	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	conversation			600
 spawn_naboo_45	NABOO	nab_deeja_house1	AREA	2	-3.6	1.1	1.1	111	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	conversation			600
-spawn_naboo_46	NABOO	nab_deeja_house2	AREA	5	-8.1	6.1	-7.4	90	1	Bodyguard	humanoid_clone_morkov_courier_bodyguard	ATTACKABLE	E	15	25	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
-spawn_naboo_47	NABOO	nab_deeja_house2	AREA	5	-8.1	6.1	-9.9	90	1	Bodyguard	humanoid_clone_morkov_courier_bodyguard	ATTACKABLE	E	15	25	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
-spawn_naboo_48	NABOO	nab_deeja_house2	AREA	5	-7.2	6.1	-8.8	90	1	Uwo Poal	humanoid_clone_morkov_courier_uwo_poal	ATTACKABLE	B	15	25	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
+spawn_naboo_46	NABOO	nab_deeja_house2	AREA	5	-8.1	6.1	-7.4	90	1	Bodyguard	humanoid_clone_morkov_courier_bodyguard	ATTACKABLE	E	21	30	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
+spawn_naboo_47	NABOO	nab_deeja_house2	AREA	5	-8.1	6.1	-9.9	90	1	Bodyguard	humanoid_clone_morkov_courier_bodyguard	ATTACKABLE	E	21	30	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
+spawn_naboo_48	NABOO	nab_deeja_house2	AREA	5	-7.2	6.1	-8.8	90	1	Uwo Poal	humanoid_clone_morkov_courier_uwo_poal	ATTACKABLE	B	21	30	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
 spawn_naboo_49	NABOO	nab_deeja_theater	AREA	8	21.9	2.1	64.5	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	idle			600
 spawn_naboo_50	NABOO	nab_deeja_university	AREA	4	-3.9	1.1	-5.8	21	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_51	NABOO	nab_deeja_university	AREA	4	-2.2	1.1	-5.8	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -92,10 +92,10 @@ spawn_naboo_89	NABOO	nab_world	PATROL	0	5312.8	326.0	-1592.0	0	1	a CLL-8 binary 
 spawn_naboo_90	NABOO	nab_world	AREA	0	4691.7	330.2	-1387.6	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_91	NABOO	nab_world	PATROL	0	4764.7	330.3	-1270.7	6	1	a commoner	humanoid_commoner_moncal	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_naboo_6900	column	idle			600
 spawn_naboo_92	NABOO	nab_world	PATROL	0	4984.2	360	-1434.1	92	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_naboo_6600	column	idle			600
-spawn_naboo_93	NABOO	nab_world	AREA	0	4975.6	360.0	-1455.2	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
-spawn_naboo_94	NABOO	nab_world	AREA	0	4973.9	360.0	-1462.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
-spawn_naboo_95	NABOO	nab_world	AREA	0	4975.1	360.0	-1485.4	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
-spawn_naboo_96	NABOO	nab_world	AREA	0	4971.7	360.0	-1485.6	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
+spawn_naboo_93	NABOO	nab_world	AREA	0	4975.6	360.0	-1455.2	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
+spawn_naboo_94	NABOO	nab_world	AREA	0	4973.9	360.0	-1462.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
+spawn_naboo_95	NABOO	nab_world	AREA	0	4975.1	360.0	-1485.4	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
+spawn_naboo_96	NABOO	nab_world	AREA	0	4971.7	360.0	-1485.6	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Dee'ja Peak	1	LOITER	5	0	-	idle			600
 spawn_naboo_97	NABOO	nab_world	PATROL	0	5332.8	327	-1577.6	89	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_naboo_6500	column	idle			600
 spawn_naboo_98	NABOO	nab_world	PATROL	0	5086.6	350	-1511.4	3	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_naboo_7000	column	idle			600
 spawn_naboo_99	NABOO	nab_world	PATROL	0	4976.2	360.0	-1529.4	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Dee'ja Peak	1	PATROL	0	patrol_naboo_1100	column	idle		simple_droid_geek_alert_5	600
@@ -189,8 +189,8 @@ spawn_naboo_186	NABOO	nab_world	AREA	0	5380.7	-192	6636.5	80	1	an artisan	humano
 spawn_naboo_187	NABOO	nab_world	AREA	0	5341.2	-192	6597.3	-120	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_188	NABOO	nab_world	PATROL	0	5392.6	-191.8	6615	107	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6200	column	idle			600
 spawn_naboo_189	NABOO	nab_world	PATROL	0	5173.7	-191.5	6610.2	-129	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6300	column	idle			600
-spawn_naboo_190	NABOO	nab_world	PATROL	0	5139.8	-192.0	6761.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Kaadara	1	PATROL	0	patrol_naboo_1700	column	idle			600
-spawn_naboo_191	NABOO	nab_world	PATROL	0	5144.5	-192.0	6766.7	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Kaadara	1	PATROL	0	patrol_naboo_1800	column	idle			600
+spawn_naboo_190	NABOO	nab_world	PATROL	0	5139.8	-192.0	6761.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Kaadara	1	PATROL	0	patrol_naboo_1700	column	idle			600
+spawn_naboo_191	NABOO	nab_world	PATROL	0	5144.5	-192.0	6766.7	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Kaadara	1	PATROL	0	patrol_naboo_1800	column	idle			600
 spawn_naboo_192	NABOO	nab_world	PATROL	0	5155.4	-192	6851.2	-6	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6100	column	idle			600
 spawn_naboo_193	NABOO	nab_world	AREA	0	5037.7	-192.0	6686.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_194	NABOO	nab_world	AREA	0	5159.5	-192.0	6756.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
@@ -211,12 +211,12 @@ spawn_naboo_208	NABOO	nab_world	AREA	0	5047.5	-192.0	6787.7	-109	1	Mullud Bombo	
 spawn_naboo_209	NABOO	nab_world	AREA	0	5151.0	-192.0	6620.5	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_210	NABOO	nab_world	AREA	0	4938.9	-192.0	6693.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
 spawn_naboo_211	NABOO	nab_world	AREA	0	5206.5	-192.0	6680.9	140	1	Ta'la Vark	humanoid_tala_vark	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
-spawn_naboo_212	NABOO	nab_keren_association_hall	AREA	10	7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_213	NABOO	nab_keren_association_hall	AREA	10	-7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_214	NABOO	nab_keren_association_hall	AREA	10	-10.6	1.7	-6.6	90	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	15	25	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_212	NABOO	nab_keren_association_hall	AREA	10	7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_213	NABOO	nab_keren_association_hall	AREA	10	-7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_214	NABOO	nab_keren_association_hall	AREA	10	-10.6	1.7	-6.6	90	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	21	30	City	Keren	1	IDLE	0	0	-	idle			600
 spawn_naboo_215	NABOO	nab_keren_association_hall	AREA	10	-10.6	1.7	-8.9	45	1	Major Raev	humanoid_clone_imperial_major_raev	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_216	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	-1.4	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_217	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	2.9	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_216	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	-1.4	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_217	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	2.9	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
 spawn_naboo_218	NABOO	nab_keren_association_hall	AREA	16	-8.3	-9.0	-8.7	0	1	Emperor Palpatine Hologram	humanoid_clone_imperial_palpatine_hologram	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
 spawn_naboo_219	NABOO	nab_keren_cantina	AREA	2	30.4	0.1	-8.8	19	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_220	NABOO	nab_keren_cantina	AREA	2	30.2	0.1	-5.5	151	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -251,8 +251,8 @@ spawn_naboo_248	NABOO	nab_keren_hospital	AREA	6	-23	0.3	3.1	-156	1	2-1B (medical
 spawn_naboo_249	NABOO	nab_keren_hospital	AREA	6	-18.6	0.3	2.5	-2	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_250	NABOO	nab_keren_hospital	AREA	6	-24	0.3	1.1	-179	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_251	NABOO	nab_keren_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_252	NABOO	nab_keren_hotel	AREA	10	-25.3	1.6	-3.6	168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
-spawn_naboo_253	NABOO	nab_keren_hotel	AREA	10	-21.6	1.6	-4.2	-168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	15	25	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_252	NABOO	nab_keren_hotel	AREA	10	-25.3	1.6	-3.6	168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+spawn_naboo_253	NABOO	nab_keren_hotel	AREA	10	-21.6	1.6	-4.2	-168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
 spawn_naboo_254	NABOO	nab_keren_hotel	AREA	10	-23.5	1.6	-2.8	179	1	Morkov	humanoid_clone_morkov	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_255	NABOO	nab_keren_house2	AREA	2	-5.2	1.1	0.2	66	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_256	NABOO	nab_keren_house2	AREA	2	-4.9	1.1	2.2	136	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -375,16 +375,16 @@ spawn_naboo_372	NABOO	nab_world	AREA	0	-5521.7	-150.0	3.2	-153	1	a businessman	h
 spawn_naboo_373	NABOO	nab_world	AREA	0	-5503.0	-150.0	-21.0	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
 spawn_naboo_374	NABOO	nab_world	AREA	0	-5539.4	-149.7	-103.6	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
 spawn_naboo_375	NABOO	nab_world	AREA	0	-5470.3	-150.0	0.9	-117	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_376	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	ATTACKABLE	N	15	25	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
-spawn_naboo_377	NABOO	nab_world	PATROL	0	-5491.1	-149.5	-72.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Lake Retreat	3	PATROL	0	patrol_naboo_1500	column	idle			600
-spawn_naboo_378	NABOO	nab_world	AREA	0	-5490.6	-150.0	-93.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Lake Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_376	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	ATTACKABLE	N	21	30	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+spawn_naboo_377	NABOO	nab_world	PATROL	0	-5491.1	-149.5	-72.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	3	PATROL	0	patrol_naboo_1500	column	idle			600
+spawn_naboo_378	NABOO	nab_world	AREA	0	-5490.6	-150.0	-93.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	1	LOITER	5	0	-	idle			600
 spawn_naboo_379	NABOO	nab_world	AREA	0	-5483.1	-150.0	-53.5	-113	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_380	NABOO	nab_world	AREA	0	-5540.1	-150.0	-92.3	79	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_381	NABOO	nab_world	AREA	0	-5564.2	-150.0	-20.0	45	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_382	NABOO	nab_world	AREA	0	-5547.8	-150.0	-66.4	-97	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_383	NABOO	nab_world	PATROL	0	-5533.0	-149.8	-72.0	-89	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	15	25	City	Lake Retreat	1	PATROL	0	patrol_naboo_1400	column	idle			600
-spawn_naboo_384	NABOO	nab_world	PATROL	0	-5497.5	-150.0	-101.1	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	15	25	City	Lake Retreat	1	PATROL	0	patrol_naboo_200	column	idle			600
-spawn_naboo_385	NABOO	nab_world	PATROL	0	-5503.8	-150.0	-41.8	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	15	25	City	Lake Retreat	1	PATROL	0	patrol_naboo_100	column	idle			600
+spawn_naboo_383	NABOO	nab_world	PATROL	0	-5533.0	-149.8	-72.0	-89	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_1400	column	idle			600
+spawn_naboo_384	NABOO	nab_world	PATROL	0	-5497.5	-150.0	-101.1	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_200	column	idle			600
+spawn_naboo_385	NABOO	nab_world	PATROL	0	-5503.8	-150.0	-41.8	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_100	column	idle			600
 spawn_naboo_386	NABOO	nab_world	AREA	0	-5629.4	-156.2	-3.4	-82	1	Brass Marshoo	humanoid_brass_marshoo	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_387	NABOO	nab_world	AREA	0	-5500.4	-150.0	-5.3	86	1	Lareen Dantara	humanoid_lareen_dantara	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_388	NABOO	nab_world	AREA	0	-5476.6	-150.0	-77.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
@@ -477,34 +477,34 @@ spawn_naboo_474	NABOO	nab_world	AREA	0	4862.1	3.4	-4721.9	97	1	a scientist	human
 spawn_naboo_475	NABOO	nab_world	AREA	0	4680.4	3.8	-4911.9	-93	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_476	NABOO	nab_world	AREA	0	4813.9	4.3	-4874.3	-172	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_naboo_477	NABOO	nab_world	AREA	0	4815.2	3.8	-4957.8	79	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Moenia	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
-spawn_naboo_478	NABOO	nab_world	AREA	0	4967.3	4.4	-4879.8	-90	1	a battle ready Rebel recruit	humanoid_rebel_recruit_battle_ready	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_479	NABOO	nab_world	AREA	0	4825.6	4.2	-4566.7	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	15	25	City	Moenia	1	TURN	0	0	-	idle			600
-spawn_naboo_480	NABOO	nab_world	AREA	0	4826.2	4.2	-4568.1	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	15	25	City	Moenia	1	TURN	0	0	-	idle			600
+spawn_naboo_478	NABOO	nab_world	AREA	0	4967.3	4.4	-4879.8	-90	1	a battle ready Rebel recruit	humanoid_rebel_recruit_battle_ready	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_479	NABOO	nab_world	AREA	0	4825.6	4.2	-4566.7	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	21	30	City	Moenia	1	TURN	0	0	-	idle			600
+spawn_naboo_480	NABOO	nab_world	AREA	0	4826.2	4.2	-4568.1	0	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	21	30	City	Moenia	1	TURN	0	0	-	idle			600
 spawn_naboo_481	NABOO	nab_world	PATROL	0	4856.7	3.8	-4927.9	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_naboo_1900	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_naboo_482	NABOO	nab_world	PATROL	0	4729.6	3.8	-4938.5	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_naboo_2000	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_naboo_483	NABOO	nab_world	PATROL	0	4958.2	4.1	-4965	177	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_naboo_7500	column	idle			600
-spawn_naboo_484	NABOO	nab_world	AREA	0	4851.1	4.2	-4680.4	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	15	25	City	Moenia	1	LOITER	5	0	-	idle			600
-spawn_naboo_485	NABOO	nab_world	AREA	0	4861.5	4.2	-4695.2	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	15	25	City	Moenia	1	LOITER	5	0	-	idle			600
-spawn_naboo_486	NABOO	nab_world	AREA	0	4880.8	3.9	-4684.3	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	15	25	City	Moenia	1	LOITER	5	0	-	idle			600
-spawn_naboo_487	NABOO	nab_world	PATROL	0	4939.2	3.8	-4861.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Moenia	1	PATROL	0	patrol_naboo_1000	column	idle			600
-spawn_naboo_488	NABOO	nab_world	PATROL	0	4962.8	3.8	-4831.6	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Moenia	1	PATROL	0	patrol_naboo_900	column	idle			600
-spawn_naboo_489	NABOO	nab_world	PATROL	0	4855.6	4.3	-4803.2	89	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Moenia	1	PATROL	0	patrol_naboo_2300	column	idle			600
-spawn_naboo_490	NABOO	nab_world	AREA	0	4730.0	3.8	-4868.4	79	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_491	NABOO	nab_world	AREA	0	4835.8	4.1	-4732.3	-18	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_492	NABOO	nab_world	AREA	0	4725.8	6.3	-4966.2	0	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_493	NABOO	nab_world	AREA	0	4808.4	6.3	-4981.9	0	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_494	NABOO	nab_world	AREA	0	4886.5	3.8	-4807.3	-137	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_495	NABOO	nab_world	AREA	0	4863.3	3.8	-4788.5	157	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_496	NABOO	nab_world	AREA	0	4975.6	3.8	-4865.3	49	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_497	NABOO	nab_world	AREA	0	4983.4	3.8	-4973.6	-85	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_498	NABOO	nab_world	AREA	0	4971.8	4.6	-4697.3	-80	1	a Rebel guard captain	humanoid_rebel_guard_captain	ATTACKABLE	E	15	25	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_484	NABOO	nab_world	AREA	0	4851.1	4.2	-4680.4	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	21	30	City	Moenia	1	LOITER	5	0	-	idle			600
+spawn_naboo_485	NABOO	nab_world	AREA	0	4861.5	4.2	-4695.2	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	21	30	City	Moenia	1	LOITER	5	0	-	idle			600
+spawn_naboo_486	NABOO	nab_world	AREA	0	4880.8	3.9	-4684.3	0	1	a Mummer thug	humanoid_mummer_thug	AGGRESSIVE	N	21	30	City	Moenia	1	LOITER	5	0	-	idle			600
+spawn_naboo_487	NABOO	nab_world	PATROL	0	4939.2	3.8	-4861.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Moenia	1	PATROL	0	patrol_naboo_1000	column	idle			600
+spawn_naboo_488	NABOO	nab_world	PATROL	0	4962.8	3.8	-4831.6	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Moenia	1	PATROL	0	patrol_naboo_900	column	idle			600
+spawn_naboo_489	NABOO	nab_world	PATROL	0	4855.6	4.3	-4803.2	89	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Moenia	1	PATROL	0	patrol_naboo_2300	column	idle			600
+spawn_naboo_490	NABOO	nab_world	AREA	0	4730.0	3.8	-4868.4	79	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_491	NABOO	nab_world	AREA	0	4835.8	4.1	-4732.3	-18	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_492	NABOO	nab_world	AREA	0	4725.8	6.3	-4966.2	0	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_493	NABOO	nab_world	AREA	0	4808.4	6.3	-4981.9	0	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_494	NABOO	nab_world	AREA	0	4886.5	3.8	-4807.3	-137	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_495	NABOO	nab_world	AREA	0	4863.3	3.8	-4788.5	157	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_496	NABOO	nab_world	AREA	0	4975.6	3.8	-4865.3	49	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_497	NABOO	nab_world	AREA	0	4983.4	3.8	-4973.6	-85	1	a Rebel guard	humanoid_rebel_guard	ATTACKABLE	N	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
+spawn_naboo_498	NABOO	nab_world	AREA	0	4971.8	4.6	-4697.3	-80	1	a Rebel guard captain	humanoid_rebel_guard_captain	ATTACKABLE	E	21	30	City	Moenia	1	IDLE	0	0	-	idle			600
 spawn_naboo_499	NABOO	nab_world	AREA	0	4827.0	4.2	-4697.0	-85	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle		rebel_recruiter	600
-spawn_naboo_500	NABOO	nab_world	AREA	0	4829.2	4.2	-4567.2	0	1	a Rebel section commander	humanoid_rebel_section_commander	ATTACKABLE	E	15	25	City	Moenia	1	TURN	0	0	-	idle			600
+spawn_naboo_500	NABOO	nab_world	AREA	0	4829.2	4.2	-4567.2	0	1	a Rebel section commander	humanoid_rebel_section_commander	ATTACKABLE	E	21	30	City	Moenia	1	TURN	0	0	-	idle			600
 spawn_naboo_501	NABOO	nab_world	PATROL	0	4762	3.9	-4837.7	-57	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_naboo_7300	column	idle			600
-spawn_naboo_502	NABOO	nab_world	PATROL	0	4826.2	3.8	-4918.4	0	1	a Skaak Tipper prowler	humanoid_skaak_tipper_prowler	ATTACKABLE	N	15	25	City	Moenia	1	PATROL	0	patrol_naboo_2200	column	idle			600
-spawn_naboo_503	NABOO	nab_world	PATROL	0	4822.1	4.2	-4722.7	0	1	an elite Rebel commando	humanoid_rebel_commando_elite	ATTACKABLE	E	15	25	City	Moenia	1	PATROL	0	patrol_naboo_2100	column	idle			600
+spawn_naboo_502	NABOO	nab_world	PATROL	0	4826.2	3.8	-4918.4	0	1	a Skaak Tipper prowler	humanoid_skaak_tipper_prowler	ATTACKABLE	N	21	30	City	Moenia	1	PATROL	0	patrol_naboo_2200	column	idle			600
+spawn_naboo_503	NABOO	nab_world	PATROL	0	4822.1	4.2	-4722.7	0	1	an elite Rebel commando	humanoid_rebel_commando_elite	ATTACKABLE	E	21	30	City	Moenia	1	PATROL	0	patrol_naboo_2100	column	idle			600
 spawn_naboo_504	NABOO	nab_world	AREA	0	4803.4	4.2	-4697.0	-71	1	Bertos Goodner (a dancer)	humanoid_rebel_bertos_goodner	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
-spawn_naboo_505	NABOO	nab_world	AREA	0	4503.6	6.7	-5196.2	0	1	Borvo's champion	humanoid_borvo_champion	ATTACKABLE	E	15	25	City	Moenia	1	LOITER	5	0	-	idle			600
+spawn_naboo_505	NABOO	nab_world	AREA	0	4503.6	6.7	-5196.2	0	1	Borvo's champion	humanoid_borvo_champion	ATTACKABLE	E	21	30	City	Moenia	1	LOITER	5	0	-	idle			600
 spawn_naboo_506	NABOO	nab_world	AREA	0	4928.0	3.8	-4816.0	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 spawn_naboo_507	NABOO	nab_world	AREA	0	4723.0	3.8	-4935.0	-179	1	C-3TC	droid_c3tc_protocol	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 spawn_naboo_508	NABOO	nab_world	AREA	0	4893.0	3.8	-4998.0	178	1	Dilvin Lormurojo	humanoid_dilvin_lormurojo	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
@@ -527,10 +527,10 @@ spawn_naboo_524	NABOO	nab_theed_cantina	AREA	1	40.3	0.1	1.3	90	1	a mountain vill
 spawn_naboo_525	NABOO	nab_theed_cantina	AREA	1	42.8	0.1	1.3	-92	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_526	NABOO	nab_theed_cantina	AREA	14	-33.7	0.1	-24.4	179	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_527	NABOO	nab_theed_cantina	AREA	15	-47.7	0.1	-22.8	34	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_528	NABOO	nab_theed_cantina	AREA	2	36.1	0.1	0.8	-25	1	a Jawa	humanoid_jawa	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_528	NABOO	nab_theed_cantina	AREA	2	36.1	0.1	0.8	-25	1	a Jawa	humanoid_jawa	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_529	NABOO	nab_theed_cantina	AREA	2	35.8	0.1	3.1	-167	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_530	NABOO	nab_theed_cantina	AREA	3	2.3	-0.9	-2.5	149	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_531	NABOO	nab_theed_cantina	AREA	3	-9.9	-0.9	-8.6	-57	1	a bounty hunter	humanoid_spynet_operative	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_naboo_531	NABOO	nab_theed_cantina	AREA	3	-9.9	-0.9	-8.6	-57	1	a bounty hunter	humanoid_spynet_operative	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_532	NABOO	nab_theed_cantina	AREA	3	12.1	-0.9	7.9	-12	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_533	NABOO	nab_theed_cantina	AREA	3	10.1	-0.9	7.9	6	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_534	NABOO	nab_theed_cantina	AREA	3	-10.9	-0.9	-5.7	-171	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -538,8 +538,8 @@ spawn_naboo_535	NABOO	nab_theed_cantina	AREA	3	16.6	-0.9	-2.3	-126	1	a patron	hu
 spawn_naboo_536	NABOO	nab_theed_cantina	AREA	3	13.7	-0.9	-2.4	137	1	a patron	humanoid_patron_human_male_01	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_537	NABOO	nab_theed_cantina	AREA	3	-3.2	-0.9	5.7	147	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_standing_drinking	1		600
 spawn_naboo_538	NABOO	nab_theed_cantina	AREA	3	11.1	-0.9	12.0	-179	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_539	NABOO	nab_theed_cantina	AREA	3	24.3	-0.9	11.8	-87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_540	NABOO	nab_theed_cantina	AREA	3	22.2	-0.9	11.9	88	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	conversation			600
+spawn_naboo_539	NABOO	nab_theed_cantina	AREA	3	24.3	-0.9	11.8	-87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
+spawn_naboo_540	NABOO	nab_theed_cantina	AREA	3	22.2	-0.9	11.9	88	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_541	NABOO	nab_theed_cantina	AREA	3	0.7	-0.9	-10.6	-79	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_542	NABOO	nab_theed_cantina	AREA	3	4.0	-0.9	-4.8	3	1	Tyla Jinn	humanoid_tyla_jinn	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_543	NABOO	nab_theed_cantina	AREA	4	17.1	-0.9	-19.9	59	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -593,24 +593,24 @@ spawn_naboo_590	NABOO	nab_theed_hospital	AREA	6	-20.5	0.3	9.8	-178	1	an entertai
 spawn_naboo_591	NABOO	nab_theed_hospital	AREA	10	26.8	7.3	0.2	0	1	Aboo Aramflahad (Cybernetic Specialist)	humanoid_cybernetic_specialist_naboo	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_592	NABOO	nab_theed_hotel1	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_593	NABOO	nab_theed_hotel2	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_594	NABOO	nab_theed_palace	PATROL	3	9	12	69.6	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_3900	column	idle			600
-spawn_naboo_595	NABOO	nab_theed_palace	PATROL	8	34.1	12	45	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_3800	column	idle			600
+spawn_naboo_594	NABOO	nab_theed_palace	PATROL	3	9	12	69.6	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3900	column	idle			600
+spawn_naboo_595	NABOO	nab_theed_palace	PATROL	8	34.1	12	45	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3800	column	idle			600
 spawn_naboo_596	NABOO	nab_theed_palace	AREA	10	-2.7	12	22.1	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_597	NABOO	nab_theed_palace	AREA	10	7.2	12	21.6	75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-spawn_naboo_598	NABOO	nab_theed_palace	PATROL	10	46.4	19	29.4	-173	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_3700	column	idle			600
+spawn_naboo_598	NABOO	nab_theed_palace	PATROL	10	46.4	19	29.4	-173	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3700	column	idle			600
 spawn_naboo_599	NABOO	nab_theed_palace	AREA	16	0.7	27	-101.4	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_600	NABOO	nab_theed_palace	AREA	16	-6	27	-113.5	151	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_601	NABOO	nab_theed_palace	AREA	16	-4.4	27	-115.9	-31	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_602	NABOO	nab_theed_palace	AREA	16	0.1	27	-138.8	179	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
-spawn_naboo_603	NABOO	nab_theed_palace	PATROL	16	5.8	27	-151.5	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_3500	column	idle			600
-spawn_naboo_604	NABOO	nab_theed_palace	PATROL	22	42.8	33	-147.6	-90	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_3600	column	idle			600
+spawn_naboo_603	NABOO	nab_theed_palace	PATROL	16	5.8	27	-151.5	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3500	column	idle			600
+spawn_naboo_604	NABOO	nab_theed_palace	PATROL	22	42.8	33	-147.6	-90	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3600	column	idle			600
 spawn_naboo_605	NABOO	nab_theed_palace	AREA	10	-28.0	19.0	3.1	110	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_606	NABOO	nab_theed_palace	AREA	10	-24.3	19.0	1.7	-68	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_607	NABOO	nab_theed_palace	AREA	10	42.7	19.0	23.7	15	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_608	NABOO	nab_theed_palace	AREA	10	-20.8	12.0	20.7	-90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_609	NABOO	nab_theed_palace	AREA	10	-23.2	12.0	20.7	90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_610	NABOO	nab_theed_palace	AREA	10	43.7	19.0	27.3	-164	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_611	NABOO	nab_theed_palace	AREA	10	20.4	12.0	19.9	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_611	NABOO	nab_theed_palace	AREA	10	20.4	12.0	19.9	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
 spawn_naboo_612	NABOO	nab_theed_palace	AREA	10	0.5	12.0	4.6	0	1	Captain Dinge (RSF Pilot Trainer)	humanoid_captain_dinge	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_613	NABOO	nab_theed_palace	AREA	11	1.5	21.0	-44.0	-11	1	Captain Kaydine (RSF Pilot Trainer)	humanoid_kaydine	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_614	NABOO	nab_theed_palace	AREA	12	30.6	23.0	-32.3	-89	1	Grand Admiral Nial Declann	humanoid_imperial_nial_declann	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -618,23 +618,23 @@ spawn_naboo_615	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-30.5	-92	1	TK-8H2	huma
 spawn_naboo_616	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-34.2	-86	1	TK-9H4	humanoid_imperial_tk9h4	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_617	NABOO	nab_theed_palace	AREA	13	-31.4	27.0	-31.5	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_618	NABOO	nab_theed_palace	AREA	13	-33.5	27.0	-31.3	95	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_619	NABOO	nab_theed_palace	AREA	13	-32.1	27.0	-41.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_619	NABOO	nab_theed_palace	AREA	13	-32.1	27.0	-41.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
 spawn_naboo_620	NABOO	nab_theed_palace	AREA	18	40.4	33.0	-93.8	-90	1	Commander Dulios (RSF Pilot Trainer)	humanoid_commander_dulios	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_621	NABOO	nab_theed_palace	AREA	18	39.7	33.0	-96.8	-69	1	Librarian	humanoid_trivia_librarian	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_622	NABOO	nab_theed_palace	AREA	2	0.0	8.0	92.7	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_622	NABOO	nab_theed_palace	AREA	2	0.0	8.0	92.7	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
 spawn_naboo_623	NABOO	nab_theed_palace	AREA	24	-45.7	33.0	-93.9	88	1	Diness Imler (RSF Pilot Trainer)	humanoid_diness_imler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_624	NABOO	nab_theed_palace	AREA	3	8.9	12.0	82.4	-171	1	Captain Heff (an Imperial Captain)	humanoid_imperial_cpt_heff	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_625	NABOO	nab_theed_palace	AREA	30	3.2	27.0	-169.6	-108	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_626	NABOO	nab_theed_palace	AREA	30	3.1	27.0	-175.4	-22	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_627	NABOO	nab_theed_palace	AREA	31	36.7	27.0	-175.6	-84	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_628	NABOO	nab_theed_palace	AREA	31	36.5	27.0	-169.5	-83	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_625	NABOO	nab_theed_palace	AREA	30	3.2	27.0	-169.6	-108	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_626	NABOO	nab_theed_palace	AREA	30	3.1	27.0	-175.4	-22	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_627	NABOO	nab_theed_palace	AREA	31	36.7	27.0	-175.6	-84	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_628	NABOO	nab_theed_palace	AREA	31	36.5	27.0	-169.5	-83	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_629	NABOO	nab_theed_palace	AREA	32	36.5	27.0	-192.9	-13	1	Queen Kylantha	humanoid_clone_queen_kylantha	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_630	NABOO	nab_theed_palace	AREA	4	20.8	12.0	77.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
-spawn_naboo_631	NABOO	nab_theed_palace	AREA	5	-21.6	12.0	77.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_630	NABOO	nab_theed_palace	AREA	4	20.8	12.0	77.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_631	NABOO	nab_theed_palace	AREA	5	-21.6	12.0	77.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
 spawn_naboo_632	NABOO	nab_theed_palace	AREA	7	1.3	12.0	45.1	-51	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_633	NABOO	nab_theed_palace	AREA	7	0.0	12.0	47.2	179	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
 spawn_naboo_634	NABOO	nab_theed_palace	AREA	7	-1.1	12.0	45.9	46	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-spawn_naboo_635	NABOO	nab_theed_palace	AREA	9	-39.2	12.0	44.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	TURN	0	0	-	idle			600
+spawn_naboo_635	NABOO	nab_theed_palace	AREA	9	-39.2	12.0	44.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
 spawn_naboo_636	NABOO	nab_theed_salon	AREA	1	-9.4	0.6	-2.1	52	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_637	NABOO	nab_theed_salon	AREA	1	-8	0.6	-1.1	-122	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_naboo_638	NABOO	nab_theed_salon	AREA	1	-7.2	0.6	-2.9	-55	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
@@ -818,7 +818,7 @@ spawn_naboo_815	NABOO	nab_world	AREA	0	-5726.4	6.5	4171.1	-90	1	an information b
 spawn_naboo_816	NABOO	nab_world	AREA	0	-5182.4	6	4117.3	140	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
 spawn_naboo_817	NABOO	nab_world	AREA	0	-5777.3	6	4280.8	-92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
 spawn_naboo_818	NABOO	nab_world	PATROL	0	-5182.9	6.6	4204	128	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4500	column	idle		simple_droid_geek_alert_5	600
-spawn_naboo_819	NABOO	nab_world	PATROL	0	-5495.9	14	4475.6	-1	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_4000	column	idle			600
+spawn_naboo_819	NABOO	nab_world	PATROL	0	-5495.9	14	4475.6	-1	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_4000	column	idle			600
 spawn_naboo_820	NABOO	nab_world	PATROL	0	-4921.6	6.0	4151.9	-152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3100	column	idle			600
 spawn_naboo_821	NABOO	nab_world	AREA	0	-5023.9	6.0	4040.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_822	NABOO	nab_world	AREA	0	-5004.8	6.0	4067.5	46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
@@ -833,10 +833,10 @@ spawn_naboo_830	NABOO	nab_world	AREA	0	-4892.2	6.0	4083.0	0	1	a commoner	humanoi
 spawn_naboo_831	NABOO	nab_world	AREA	0	-4866.7	6.0	4160.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
 spawn_naboo_832	NABOO	nab_world	PATROL	0	1854	11.1	2695.0	180	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5300	column	idle			600
 spawn_naboo_833	NABOO	nab_world	PATROL	0	2089.4	29.1	2575.1	147	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5200	column	idle			600
-spawn_naboo_834	NABOO	nab_world	PATROL	0	-5355.3	6.0	4347.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_500	column	idle			600
-spawn_naboo_835	NABOO	nab_world	PATROL	0	-5323.3	6.0	4431.5	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Theed	1	PATROL	0	patrol_naboo_700	column	idle			600
-spawn_naboo_836	NABOO	nab_world	AREA	0	-5344.0	6.0	4395.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Theed	1	LOITER	5	0	-	idle			600
-spawn_naboo_837	NABOO	nab_world	AREA	0	-5344.0	6.0	4364.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	15	25	City	Theed	1	LOITER	5	0	-	idle			600
+spawn_naboo_834	NABOO	nab_world	PATROL	0	-5355.3	6.0	4347.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_500	column	idle			600
+spawn_naboo_835	NABOO	nab_world	PATROL	0	-5323.3	6.0	4431.5	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_700	column	idle			600
+spawn_naboo_836	NABOO	nab_world	AREA	0	-5344.0	6.0	4395.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
+spawn_naboo_837	NABOO	nab_world	AREA	0	-5344.0	6.0	4364.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
 spawn_naboo_838	NABOO	nab_world	PATROL	0	-4931.7	6.5	3995.1	-138	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3200	column	idle			600
 spawn_naboo_839	NABOO	nab_world	AREA	0	-5538.7	6.0	4365.5	93	1	a patron	humanoid_patron_human_male_03	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_840	NABOO	nab_world	PATROL	0	1987.3	11.1	2465.6	131	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5100	column	idle			600
@@ -846,7 +846,7 @@ spawn_naboo_843	NABOO	nab_world	PATROL	0	1576.5	24.1	2842.8	23	1	a traveller	hum
 spawn_naboo_844	NABOO	nab_world	AREA	0	-5112.5	4.8	4597.1	159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_845	NABOO	nab_world	PATROL	0	-4899.9	6.0	4181.1	-50	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3000	column	idle			600
 spawn_naboo_846	NABOO	nab_world	PATROL	0	1439.9	12.1	2783.9	-8	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5800	column	idle		simple_droid_geek_bye_nice_13	600
-spawn_naboo_847	NABOO	nab_world	AREA	0	-5033.2	6.0	4092.3	118	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	15	25	City	Theed	1	IDLE	0	0	-	idle			600
+spawn_naboo_847	NABOO	nab_world	AREA	0	-5033.2	6.0	4092.3	118	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_848	NABOO	nab_world	AREA	0	-5019.0	6.0	4012.0	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_849	NABOO	nab_world	AREA	0	-5832.2	6.0	4121.0	-17	1	Broma Lak	humanoid_naboo_captain_broma_lak	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_850	NABOO	nab_world	AREA	0	-4805.9	6.0	4130.6	-141	1	C-3P0	droid_rebel_quest_u10_c3po	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
@@ -859,258 +859,258 @@ spawn_naboo_856	NABOO	nab_world	AREA	0	-4856.0	6.0	4158.0	-22	1	J1-P0 (a protoco
 spawn_naboo_857	NABOO	nab_world	AREA	0	-4857.4	6.0	4158.8	29	1	Kulton Woodle (a retired freighter captain)	humanoid_kultin_woodle	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_858	NABOO	nab_world	AREA	0	-5479.4	14.0	4467.2	-178	1	Pooja Naberrie	humanoid_pooja_naberrie	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
 spawn_naboo_859	NABOO	nab_world	AREA	0	-5487.0	10.0	4424.9	177	1	Vaik'anna Silverlight	humanoid_herald_naboo_vaikanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-spawn_naboo_860	NABOO	nab_kaadara_detachment_hq	AREA	10	10.7	-11.5	-20.6	21	1	a decorated Imperial colonel	humanoid_imperial_decorated_colonel	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_861	NABOO	nab_kaadara_detachment_hq	AREA	10	20.1	-11.5	-21.8	-48	1	an elite Imperial security guard	humanoid_imperial_elite_security_guard	ATTACKABLE	N	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_862	NABOO	nab_kaadara_detachment_hq	AREA	10	15.0	-11.5	-20.7	2	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	N	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_863	NABOO	nab_kaadara_detachment_hq	AREA	10	12.3	-13.8	-17.1	19	1	an Imperial stormtrooper colonel	humanoid_imperial_stormtrooper_colonel	ATTACKABLE	B	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_864	NABOO	nab_kaadara_detachment_hq	AREA	2	0.2	0.3	2.6	0	1	a toughened Imperial sergeant	humanoid_imperial_sergeant_toughened	ATTACKABLE	N	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_865	NABOO	nab_kaadara_detachment_hq	AREA	5	6.5	-6.8	-8.0	-20	1	an elite Imperial stormsniper	humanoid_imperial_stormsniper_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_866	NABOO	nab_kaadara_detachment_hq	AREA	5	1.0	-6.8	-6.0	81	1	an elite Imperial stormsniper	humanoid_imperial_stormsniper_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_867	NABOO	nab_kaadara_detachment_hq	AREA	7	-5.8	-13.8	-3.8	77	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_868	NABOO	nab_kaadara_detachment_hq	AREA	7	-6.0	-13.8	5.9	150	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_869	NABOO	nab_kaadara_detachment_hq	AREA	7	-5.3	-13.8	-12.5	59	1	an experienced Imperial captain	humanoid_imperial_experienced_captain	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_870	NABOO	nab_kaadara_detachment_hq	AREA	8	-5.8	-13.8	12.9	120	1	an Imperial dead-eye	humanoid_imperial_dead_eye	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_871	NABOO	nab_kaadara_detachment_hq	AREA	8	7.5	-13.8	9.8	-70	1	an Imperial surgeon	humanoid_imperial_surgeon	ATTACKABLE	N	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_872	NABOO	nab_kaadara_detachment_hq	AREA	9	18.0	-13.8	13.0	-95	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_873	NABOO	nab_kaadara_detachment_hq	AREA	9	12.3	-13.8	1.8	59	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_874	NABOO	nab_kaadara_officer_shed	AREA	3	0.0	0.1	-5.9	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_elite	ATTACKABLE	E	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_875	NABOO	nab_kaadara_officer_shed	AREA	4	5.1	0.1	1.9	-90	1	an Imperial stormsurgeon	humanoid_imperial_stormsurgeon	ATTACKABLE	N	15	25	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
-spawn_naboo_876	NABOO	nab_keren_trando_slave_house	AREA	11	-12.2	9.7	8.3	-141	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_877	NABOO	nab_keren_trando_slave_house	AREA	11	-13.6	9.7	6.6	38	1	an Avatar guard captain	humanoid_kashyyyk_avatar_guard_captain	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_878	NABOO	nab_keren_trando_slave_house	AREA	13	0.9	16.5	8.4	-117	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_879	NABOO	nab_keren_trando_slave_house	AREA	13	-1.2	16.5	7.4	65	1	an Avatar guard captain	humanoid_kashyyyk_avatar_guard_captain	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_880	NABOO	nab_keren_trando_slave_house	AREA	14	0.1	7.7	14.7	179	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_881	NABOO	nab_keren_trando_slave_house	AREA	2	14.7	4.7	-1.7	-90	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_882	NABOO	nab_keren_trando_slave_house	AREA	3	-10.7	4.7	2.1	179	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_883	NABOO	nab_keren_trando_slave_house	AREA	8	2.5	-0.9	14.3	-94	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_884	NABOO	nab_keren_trando_slave_house	AREA	8	0.2	-0.9	14.0	82	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	15	25	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
-spawn_naboo_885	NABOO	nab_pirate_bunker	PATROL	10	3.4	-12.0	20.3	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	PATROL	0	patrol_naboo_2400	column	idle			600
-spawn_naboo_886	NABOO	nab_pirate_bunker	AREA	2	-4.6	0.3	-3.5	36	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_887	NABOO	nab_pirate_bunker	AREA	4	3.4	-12.0	31.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_888	NABOO	nab_pirate_bunker	AREA	5	32.5	-12.0	31.0	-90	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_889	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	28.5	37	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_890	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	33.4	128	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_891	NABOO	nab_pirate_bunker	AREA	5	35.6	-12.0	34.4	-139	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_892	NABOO	nab_pirate_bunker	AREA	5	34.8	-12.0	27.0	-68	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_893	NABOO	nab_pirate_bunker	AREA	7	3.5	-16.0	78.8	-179	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_894	NABOO	nab_pirate_bunker	AREA	7	26.7	-16.0	81.5	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_895	NABOO	nab_pirate_bunker	AREA	7	26.8	-16.0	76.6	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_896	NABOO	nab_pirate_bunker	AREA	7	-19.7	-16.0	81.3	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_897	NABOO	nab_pirate_bunker	AREA	7	-19.8	-16.0	76.6	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_898	NABOO	nab_pirate_bunker	AREA	7	18.6	-16.0	80.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_naboo_899	NABOO	nab_pirate_bunker	AREA	7	-10.0	-16.0	79.7	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_naboo_900	NABOO	nab_pirate_bunker	AREA	8	63.2	-16.0	73.3	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_naboo_901	NABOO	nab_pirate_bunker	AREA	8	43.8	-16.0	66.4	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_naboo_902	NABOO	nab_pirate_bunker	AREA	8	77.6	-16.0	63.0	-71	1	a Naboo pirate lieutenant	humanoid_naboo_pirate_lieutenant	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_903	NABOO	nab_pirate_bunker	AREA	9	-41.3	-14.0	84.1	115	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_904	NABOO	nab_pirate_bunker	AREA	9	-43.4	-14.0	75.3	85	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_905	NABOO	nab_pirate_bunker	AREA	9	-29.3	-14.0	81.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_906	NABOO	nab_pirate_bunker	AREA	9	-29.1	-14.0	76.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_907	NABOO	nab_pirate_bunker	AREA	9	-31.7	-14.0	74.0	-65	1	missing	humanoid_naboo_kidnapped_noble_01	ATTACKABLE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_908	NABOO	nab_pirate_bunker	AREA	9	-41.0	-14.0	84.1	0	1	missing	humanoid_naboo_kidnapped_noble_02	ATTACKABLE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_909	NABOO	nab_pirate_bunker	AREA	9	-40.2	-14.0	78.5	0	1	missing	humanoid_naboo_kidnapped_noble_03	ATTACKABLE	N	15	25	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_naboo_910	NABOO	nab_world	AREA	0	-1531.5	278.0	-1741.9	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_naboo_911	NABOO	nab_world	AREA	0	-1511.0	278.0	-1690.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_naboo_912	NABOO	nab_world	AREA	0	-1541.9	278.0	-1721.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_naboo_913	NABOO	nab_world	AREA	0	-1498.3	278.0	-1721.1	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	15	25	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_naboo_914	NABOO	nab_world	AREA	0	-1501.8	278.0	-1736.3	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	15	25	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_naboo_915	NABOO	nab_veermok_cave	AREA	1	23.1	-27.7	-8.7	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_916	NABOO	nab_veermok_cave	AREA	11	91.9	-46.7	-141.1	0	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_917	NABOO	nab_veermok_cave	AREA	11	80.4	-46.5	-143.0	0	1	a veermok scavenger	creature_veermok_scavenger	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_918	NABOO	nab_veermok_cave	AREA	2	51.7	-48.9	-62.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_919	NABOO	nab_veermok_cave	AREA	2	43.7	-47.2	-9.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_920	NABOO	nab_veermok_cave	AREA	2	53.6	-68.0	-36.5	99	1	a veermok	creature_veermok	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
-spawn_naboo_921	NABOO	nab_veermok_cave	AREA	2	24.9	-40.0	-43.3	0	1	a veermok	creature_veermok	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_922	NABOO	nab_veermok_cave	AREA	3	89.8	-63.4	-23.8	0	1	a veermok scout	creature_veermok_scout_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_923	NABOO	nab_veermok_cave	AREA	4	76.2	-75.4	-59.8	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_924	NABOO	nab_veermok_cave	AREA	4	94.3	-76.0	-83.5	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_925	NABOO	nab_veermok_cave	AREA	5	87.2	-46.7	-109.2	0	1	a veermok	creature_veermok	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_926	NABOO	nab_veermok_cave	AREA	5	96.7	-66.3	-108.1	0	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_927	NABOO	nab_veermok_cave	AREA	6	52.6	-77.1	-93.0	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_928	NABOO	nab_veermok_cave	AREA	7	77.9	-65.6	-140.2	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_929	NABOO	nab_veermok_cave	AREA	8	153.5	-66.1	-98.1	-98	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
-spawn_naboo_930	NABOO	nab_veermok_cave	AREA	8	129.8	-66.7	-106.7	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_931	NABOO	nab_veermok_cave	AREA	8	150.5	-66.9	-120.3	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_932	NABOO	nab_veermok_cave	AREA	9	185.4	-65.9	-99.7	-93	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
-spawn_naboo_933	NABOO	nab_veermok_cave	AREA	9	188.1	-66.0	-103.9	-100	1	an alpha veermok	creature_veermok_alpha	ATTACKABLE	N	15	25	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
-spawn_naboo_934	NABOO	nab_world	AREA	0	5718.6	290.0	-1540.3	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	15	25	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_935	NABOO	nab_world	AREA	0	5694.4	-209.6	6951.4	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_936	NABOO	nab_world	AREA	0	5432.8	-209.7	6959.9	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_937	NABOO	nab_world	AREA	0	4863.5	-207.3	6340.7	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_938	NABOO	nab_world	AREA	0	4847.0	-206.3	6289.0	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_939	NABOO	nab_world	AREA	0	5305.9	-205.9	6908.7	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_940	NABOO	nab_world	AREA	0	5250.4	-204.9	6931.4	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_941	NABOO	nab_world	AREA	0	5183.0	-209.5	6954.9	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_942	NABOO	nab_world	AREA	0	5088.0	-205.9	6923.0	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_943	NABOO	nab_world	AREA	0	4903.7	-208.4	6577.6	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_944	NABOO	nab_world	AREA	0	4898.0	-206.1	6511.8	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_945	NABOO	nab_world	AREA	0	4896.6	-204.3	6433.9	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_946	NABOO	nab_world	AREA	0	4893.7	-204.7	6446.6	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_947	NABOO	nab_world	AREA	0	4877.3	-207.6	6398.8	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_948	NABOO	nab_world	AREA	0	5024.7	39.7	4154.0	0	1	a bounty hunter	humanoid_bounty_hunter	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_949	NABOO	nab_world	AREA	0	-6080.2	-209.1	5943.3	0	1	a Bounty Hunter	humanoid_bounty_hunter	AGGRESSIVE	E	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_950	NABOO	nab_world	AREA	0	-2944.9	10.8	1698.6	0	1	a brigand scout	humanoid_brigade_scout	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_951	NABOO	nab_world	AREA	0	-4941.4	-196.4	4716.5	0	1	a devious looking Ankura Gungan	humanoid_gungan_ankura_devious	ATTACKABLE	N	15	25	Outback	Naboo	3	TURN	15	0	-	idle			600
-spawn_naboo_952	NABOO	nab_world	AREA	0	-6081.0	-196.5	6767.8	0	1	a dread pirate	humanoid_dread_pirate	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_953	NABOO	nab_world	AREA	0	4777.2	241.6	-2284.5	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_954	NABOO	nab_world	AREA	0	4762.0	262.4	-2242.6	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_955	NABOO	nab_world	AREA	0	4756.9	264.4	-2337.2	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_956	NABOO	nab_world	AREA	0	4730.2	234.6	-2289.4	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_957	NABOO	nab_world	AREA	0	4719.6	253.7	-2347.9	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_958	NABOO	nab_world	AREA	0	4716.3	239.4	-2309.5	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_959	NABOO	nab_world	AREA	0	4705.8	248.8	-2264.9	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_960	NABOO	nab_world	AREA	0	4705.5	258.6	-2244.0	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_961	NABOO	nab_world	AREA	0	4680.0	262.7	-2331.1	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_962	NABOO	nab_world	AREA	0	4657.8	245.2	-2275.8	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_963	NABOO	nab_world	AREA	0	3461.0	-178.2	4897.0	0	1	a giant fanned rawl	creature_rawl_fanned_giant	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_964	NABOO	nab_world	AREA	0	1214.4	226.8	-1258.3	0	1	a giant fanned rawl	creature_rawl_fanned_giant	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_965	NABOO	nab_world	AREA	0	-4471.6	295.4	-3479.5	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_966	NABOO	nab_world	AREA	0	-4452.0	294.4	-3450.0	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_967	NABOO	nab_world	AREA	0	-4428.1	304.8	-3424.8	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_968	NABOO	nab_world	AREA	0	-236.6	12.1	2806.7	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_969	NABOO	nab_world	AREA	0	-288.5	12.8	2829.4	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_970	NABOO	nab_world	AREA	0	-272.5	12.9	2778.8	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_971	NABOO	nab_world	AREA	0	-274.0	12.9	2823.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_972	NABOO	nab_world	AREA	0	-7553.9	8.9	3707.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_973	NABOO	nab_world	AREA	0	3494.8	-209.2	6634.4	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_974	NABOO	nab_world	AREA	0	-254.9	12.8	2829.7	0	1	a Gungan General	humanoid_gungan_general	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_975	NABOO	nab_world	AREA	0	-290.2	12.8	2809.7	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_976	NABOO	nab_world	AREA	0	-263.2	13.0	2840.3	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_977	NABOO	nab_world	AREA	0	-238.2	11.2	2791.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_978	NABOO	nab_world	AREA	0	-286.6	12.6	2792.9	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_979	NABOO	nab_world	AREA	0	-240.9	12.8	2827.4	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_980	NABOO	nab_world	AREA	0	-255.5	12.5	2778.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_981	NABOO	nab_world	AREA	0	-7310.9	13.8	2742.8	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_982	NABOO	nab_world	AREA	0	3421.5	-198.2	5082.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_983	NABOO	nab_world	AREA	0	-187.1	107.5	-901.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_984	NABOO	nab_world	AREA	0	-3151.4	4.6	2561.1	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_985	NABOO	nab_world	AREA	0	2145.4	-196.0	5426.3	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_986	NABOO	nab_world	AREA	0	-3736.0	80.6	257.8	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_987	NABOO	nab_world	AREA	0	6123.8	168.2	82.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_988	NABOO	nab_world	AREA	0	6117.6	165.4	61.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_989	NABOO	nab_world	AREA	0	6107.3	161.5	63.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_990	NABOO	nab_world	AREA	0	6102.3	159.7	77.4	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_991	NABOO	nab_world	AREA	0	-7552.0	8.7	3715.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_992	NABOO	nab_world	AREA	0	-4428.1	261.7	-2230.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_993	NABOO	nab_world	AREA	0	3488.2	112.5	-2885.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_994	NABOO	nab_world	AREA	0	1234.2	-196.1	5510.1	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_995	NABOO	nab_world	AREA	0	3942.2	5.9	2699.2	20	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	IDLE	0	0	-	idle			600
-spawn_naboo_996	NABOO	nab_world	AREA	0	7588.4	-209.8	6948.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_997	NABOO	nab_world	AREA	0	-7542.9	10.5	2254.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_998	NABOO	nab_world	AREA	0	-1032.4	-209.4	6831.9	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_999	NABOO	nab_world	AREA	0	-6596.8	152.2	-2680.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1000	NABOO	nab_world	AREA	0	1946.7	-187.7	6618.4	0	1	a Gungan priest	humanoid_gungan_priest	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1001	NABOO	nab_world	AREA	0	5869.7	38.5	3051.9	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1002	NABOO	nab_world	AREA	0	5869.5	40.2	3060.7	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1003	NABOO	nab_world	AREA	0	5868.1	39.3	3056.2	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1004	NABOO	nab_world	AREA	0	-7385.9	6.5	-7234.6	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1005	NABOO	nab_world	AREA	0	-7377.4	5.9	-7238.1	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1006	NABOO	nab_world	AREA	0	-7370.6	4.9	-7220.7	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1007	NABOO	nab_world	AREA	0	-242.1	12.9	2819.7	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1008	NABOO	nab_world	AREA	0	-288.3	12.7	2816.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1009	NABOO	nab_world	AREA	0	-5046.8	-197.7	6173.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1010	NABOO	nab_world	AREA	0	3620.8	107.1	549.6	0	1	a highwayman	humanoid_highwayman	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1011	NABOO	nab_world	AREA	0	-1638.4	14.0	-4033.7	-83	1	a Lesser Prophet of the Dark Side	humanoid_jedi_lesser_prophet_of_the_dark_side	ATTACKABLE	E	15	25	Outback	Naboo	1	IDLE	0	0	-	idle			1800
-spawn_naboo_1012	NABOO	nab_world	AREA	0	4135.0	6.7	2911.6	0	1	a male swamp tusk-cat	creature_cat_tusk_male_swamp	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1013	NABOO	nab_world	AREA	0	1253.3	10.7	4295.0	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1014	NABOO	nab_world	AREA	0	-1348.8	-190.2	6533.9	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1015	NABOO	nab_world	AREA	0	6.8	442.2	-1863.7	0	1	a mountain ikopi	creature_ikopi_mountain	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1016	NABOO	nab_world	AREA	0	-7322.1	11.4	-4146.0	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_1017	NABOO	nab_world	AREA	0	-3583.6	92.1	-875.7	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_1018	NABOO	nab_world	AREA	0	1007.4	184.6	-3453.3	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1019	NABOO	nab_world	AREA	0	7346.2	4.1	3605.2	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1020	NABOO	nab_world	AREA	0	-2177.3	-195.7	6357.0	0	1	a Naboo police officer	humanoid_naboo_police	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1021	NABOO	nab_world	AREA	0	4810.2	89.3	-852.9	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1022	NABOO	nab_world	AREA	0	4785.4	87.3	-867.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1023	NABOO	nab_world	AREA	0	4781.8	83.8	-836.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1024	NABOO	nab_world	AREA	0	4350.9	66.2	-729.4	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1025	NABOO	nab_world	AREA	0	4382.4	78.0	-792.3	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1026	NABOO	nab_world	AREA	0	4381.8	68.7	-761.9	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1027	NABOO	nab_world	AREA	0	4357.0	72.7	-776.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1028	NABOO	nab_world	AREA	0	-2406.3	14.3	569.3	0	1	a plasma thief	humanoid_plasma_thief	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_860	NABOO	nab_kaadara_detachment_hq	AREA	10	10.7	-11.5	-20.6	21	1	a decorated Imperial colonel	humanoid_imperial_decorated_colonel	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_861	NABOO	nab_kaadara_detachment_hq	AREA	10	20.1	-11.5	-21.8	-48	1	an elite Imperial security guard	humanoid_imperial_elite_security_guard	ATTACKABLE	N	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_862	NABOO	nab_kaadara_detachment_hq	AREA	10	15.0	-11.5	-20.7	2	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	N	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_863	NABOO	nab_kaadara_detachment_hq	AREA	10	12.3	-13.8	-17.1	19	1	an Imperial stormtrooper colonel	humanoid_imperial_stormtrooper_colonel	ATTACKABLE	B	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_864	NABOO	nab_kaadara_detachment_hq	AREA	2	0.2	0.3	2.6	0	1	a toughened Imperial sergeant	humanoid_imperial_sergeant_toughened	ATTACKABLE	N	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_865	NABOO	nab_kaadara_detachment_hq	AREA	5	6.5	-6.8	-8.0	-20	1	an elite Imperial stormsniper	humanoid_imperial_stormsniper_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_866	NABOO	nab_kaadara_detachment_hq	AREA	5	1.0	-6.8	-6.0	81	1	an elite Imperial stormsniper	humanoid_imperial_stormsniper_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_867	NABOO	nab_kaadara_detachment_hq	AREA	7	-5.8	-13.8	-3.8	77	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_868	NABOO	nab_kaadara_detachment_hq	AREA	7	-6.0	-13.8	5.9	150	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_869	NABOO	nab_kaadara_detachment_hq	AREA	7	-5.3	-13.8	-12.5	59	1	an experienced Imperial captain	humanoid_imperial_experienced_captain	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_870	NABOO	nab_kaadara_detachment_hq	AREA	8	-5.8	-13.8	12.9	120	1	an Imperial dead-eye	humanoid_imperial_dead_eye	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_871	NABOO	nab_kaadara_detachment_hq	AREA	8	7.5	-13.8	9.8	-70	1	an Imperial surgeon	humanoid_imperial_surgeon	ATTACKABLE	N	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_872	NABOO	nab_kaadara_detachment_hq	AREA	9	18.0	-13.8	13.0	-95	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_873	NABOO	nab_kaadara_detachment_hq	AREA	9	12.3	-13.8	1.8	59	1	an elite Imperial stormtrooper	humanoid_imperial_stormtrooper_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_874	NABOO	nab_kaadara_officer_shed	AREA	3	0.0	0.1	-5.9	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_elite	ATTACKABLE	E	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_875	NABOO	nab_kaadara_officer_shed	AREA	4	5.1	0.1	1.9	-90	1	an Imperial stormsurgeon	humanoid_imperial_stormsurgeon	ATTACKABLE	N	21	30	Dungeon	Kaadara Imperial Detachment HQ	1	IDLE	0	0	-	idle			600
+spawn_naboo_876	NABOO	nab_keren_trando_slave_house	AREA	11	-12.2	9.7	8.3	-141	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_877	NABOO	nab_keren_trando_slave_house	AREA	11	-13.6	9.7	6.6	38	1	an Avatar guard captain	humanoid_kashyyyk_avatar_guard_captain	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_878	NABOO	nab_keren_trando_slave_house	AREA	13	0.9	16.5	8.4	-117	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_879	NABOO	nab_keren_trando_slave_house	AREA	13	-1.2	16.5	7.4	65	1	an Avatar guard captain	humanoid_kashyyyk_avatar_guard_captain	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_880	NABOO	nab_keren_trando_slave_house	AREA	14	0.1	7.7	14.7	179	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_881	NABOO	nab_keren_trando_slave_house	AREA	2	14.7	4.7	-1.7	-90	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_882	NABOO	nab_keren_trando_slave_house	AREA	3	-10.7	4.7	2.1	179	1	an Avatar guard	humanoid_kashyyyk_avatar_guard	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_883	NABOO	nab_keren_trando_slave_house	AREA	8	2.5	-0.9	14.3	-94	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_884	NABOO	nab_keren_trando_slave_house	AREA	8	0.2	-0.9	14.0	82	1	a Blackscale Jailer	humanoid_kashyyyk_avatar_blackscale_jailer	AGGRESSIVE	E	21	30	Dungeon	Keren Trando Slave House	1	IDLE	0	0	-	idle			600
+spawn_naboo_885	NABOO	nab_pirate_bunker	PATROL	10	3.4	-12.0	20.3	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	PATROL	0	patrol_naboo_2400	column	idle			600
+spawn_naboo_886	NABOO	nab_pirate_bunker	AREA	2	-4.6	0.3	-3.5	36	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_887	NABOO	nab_pirate_bunker	AREA	4	3.4	-12.0	31.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_888	NABOO	nab_pirate_bunker	AREA	5	32.5	-12.0	31.0	-90	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_889	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	28.5	37	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_890	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	33.4	128	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_891	NABOO	nab_pirate_bunker	AREA	5	35.6	-12.0	34.4	-139	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_892	NABOO	nab_pirate_bunker	AREA	5	34.8	-12.0	27.0	-68	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_893	NABOO	nab_pirate_bunker	AREA	7	3.5	-16.0	78.8	-179	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_894	NABOO	nab_pirate_bunker	AREA	7	26.7	-16.0	81.5	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_895	NABOO	nab_pirate_bunker	AREA	7	26.8	-16.0	76.6	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_896	NABOO	nab_pirate_bunker	AREA	7	-19.7	-16.0	81.3	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_897	NABOO	nab_pirate_bunker	AREA	7	-19.8	-16.0	76.6	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_898	NABOO	nab_pirate_bunker	AREA	7	18.6	-16.0	80.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_naboo_899	NABOO	nab_pirate_bunker	AREA	7	-10.0	-16.0	79.7	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_naboo_900	NABOO	nab_pirate_bunker	AREA	8	63.2	-16.0	73.3	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_naboo_901	NABOO	nab_pirate_bunker	AREA	8	43.8	-16.0	66.4	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_naboo_902	NABOO	nab_pirate_bunker	AREA	8	77.6	-16.0	63.0	-71	1	a Naboo pirate lieutenant	humanoid_naboo_pirate_lieutenant	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_903	NABOO	nab_pirate_bunker	AREA	9	-41.3	-14.0	84.1	115	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_904	NABOO	nab_pirate_bunker	AREA	9	-43.4	-14.0	75.3	85	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_905	NABOO	nab_pirate_bunker	AREA	9	-29.3	-14.0	81.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_906	NABOO	nab_pirate_bunker	AREA	9	-29.1	-14.0	76.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_907	NABOO	nab_pirate_bunker	AREA	9	-31.7	-14.0	74.0	-65	1	missing	humanoid_naboo_kidnapped_noble_01	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_908	NABOO	nab_pirate_bunker	AREA	9	-41.0	-14.0	84.1	0	1	missing	humanoid_naboo_kidnapped_noble_02	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_909	NABOO	nab_pirate_bunker	AREA	9	-40.2	-14.0	78.5	0	1	missing	humanoid_naboo_kidnapped_noble_03	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_naboo_910	NABOO	nab_world	AREA	0	-1531.5	278.0	-1741.9	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_naboo_911	NABOO	nab_world	AREA	0	-1511.0	278.0	-1690.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_naboo_912	NABOO	nab_world	AREA	0	-1541.9	278.0	-1721.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_naboo_913	NABOO	nab_world	AREA	0	-1498.3	278.0	-1721.1	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_naboo_914	NABOO	nab_world	AREA	0	-1501.8	278.0	-1736.3	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_naboo_915	NABOO	nab_veermok_cave	AREA	1	23.1	-27.7	-8.7	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_916	NABOO	nab_veermok_cave	AREA	11	91.9	-46.7	-141.1	0	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_917	NABOO	nab_veermok_cave	AREA	11	80.4	-46.5	-143.0	0	1	a veermok scavenger	creature_veermok_scavenger	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_918	NABOO	nab_veermok_cave	AREA	2	51.7	-48.9	-62.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_919	NABOO	nab_veermok_cave	AREA	2	43.7	-47.2	-9.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_920	NABOO	nab_veermok_cave	AREA	2	53.6	-68.0	-36.5	99	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+spawn_naboo_921	NABOO	nab_veermok_cave	AREA	2	24.9	-40.0	-43.3	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_922	NABOO	nab_veermok_cave	AREA	3	89.8	-63.4	-23.8	0	1	a veermok scout	creature_veermok_scout_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_923	NABOO	nab_veermok_cave	AREA	4	76.2	-75.4	-59.8	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_924	NABOO	nab_veermok_cave	AREA	4	94.3	-76.0	-83.5	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_925	NABOO	nab_veermok_cave	AREA	5	87.2	-46.7	-109.2	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_926	NABOO	nab_veermok_cave	AREA	5	96.7	-66.3	-108.1	0	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_927	NABOO	nab_veermok_cave	AREA	6	52.6	-77.1	-93.0	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_928	NABOO	nab_veermok_cave	AREA	7	77.9	-65.6	-140.2	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_929	NABOO	nab_veermok_cave	AREA	8	153.5	-66.1	-98.1	-98	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+spawn_naboo_930	NABOO	nab_veermok_cave	AREA	8	129.8	-66.7	-106.7	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_931	NABOO	nab_veermok_cave	AREA	8	150.5	-66.9	-120.3	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_932	NABOO	nab_veermok_cave	AREA	9	185.4	-65.9	-99.7	-93	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+spawn_naboo_933	NABOO	nab_veermok_cave	AREA	9	188.1	-66.0	-103.9	-100	1	an alpha veermok	creature_veermok_alpha	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+spawn_naboo_934	NABOO	nab_world	AREA	0	5718.6	290.0	-1540.3	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_935	NABOO	nab_world	AREA	0	5694.4	-209.6	6951.4	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_936	NABOO	nab_world	AREA	0	5432.8	-209.7	6959.9	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_937	NABOO	nab_world	AREA	0	4863.5	-207.3	6340.7	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_938	NABOO	nab_world	AREA	0	4847.0	-206.3	6289.0	0	1	a Beachcomber scoundrel	humanoid_naboo_beachcomber_scoundrel	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_939	NABOO	nab_world	AREA	0	5305.9	-205.9	6908.7	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_940	NABOO	nab_world	AREA	0	5250.4	-204.9	6931.4	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_941	NABOO	nab_world	AREA	0	5183.0	-209.5	6954.9	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_942	NABOO	nab_world	AREA	0	5088.0	-205.9	6923.0	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_943	NABOO	nab_world	AREA	0	4903.7	-208.4	6577.6	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_944	NABOO	nab_world	AREA	0	4898.0	-206.1	6511.8	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_945	NABOO	nab_world	AREA	0	4896.6	-204.3	6433.9	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_946	NABOO	nab_world	AREA	0	4893.7	-204.7	6446.6	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_947	NABOO	nab_world	AREA	0	4877.3	-207.6	6398.8	0	1	a Beachcomber smuggler	humanoid_naboo_beachcomber_smuggler	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_948	NABOO	nab_world	AREA	0	5024.7	39.7	4154.0	0	1	a bounty hunter	humanoid_bounty_hunter	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_949	NABOO	nab_world	AREA	0	-6080.2	-209.1	5943.3	0	1	a Bounty Hunter	humanoid_bounty_hunter	AGGRESSIVE	E	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_950	NABOO	nab_world	AREA	0	-2944.9	10.8	1698.6	0	1	a brigand scout	humanoid_brigade_scout	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_951	NABOO	nab_world	AREA	0	-4941.4	-196.4	4716.5	0	1	a devious looking Ankura Gungan	humanoid_gungan_ankura_devious	ATTACKABLE	N	21	30	Outback	Naboo	3	TURN	15	0	-	idle			600
+spawn_naboo_952	NABOO	nab_world	AREA	0	-6081.0	-196.5	6767.8	0	1	a dread pirate	humanoid_dread_pirate	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_953	NABOO	nab_world	AREA	0	4777.2	241.6	-2284.5	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_954	NABOO	nab_world	AREA	0	4762.0	262.4	-2242.6	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_955	NABOO	nab_world	AREA	0	4756.9	264.4	-2337.2	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_956	NABOO	nab_world	AREA	0	4730.2	234.6	-2289.4	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_957	NABOO	nab_world	AREA	0	4719.6	253.7	-2347.9	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_958	NABOO	nab_world	AREA	0	4716.3	239.4	-2309.5	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_959	NABOO	nab_world	AREA	0	4705.8	248.8	-2264.9	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_960	NABOO	nab_world	AREA	0	4705.5	258.6	-2244.0	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_961	NABOO	nab_world	AREA	0	4680.0	262.7	-2331.1	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_962	NABOO	nab_world	AREA	0	4657.8	245.2	-2275.8	0	1	a feral shaupaut	creature_shaupaut_feral	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_963	NABOO	nab_world	AREA	0	3461.0	-178.2	4897.0	0	1	a giant fanned rawl	creature_rawl_fanned_giant	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_964	NABOO	nab_world	AREA	0	1214.4	226.8	-1258.3	0	1	a giant fanned rawl	creature_rawl_fanned_giant	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_965	NABOO	nab_world	AREA	0	-4471.6	295.4	-3479.5	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_966	NABOO	nab_world	AREA	0	-4452.0	294.4	-3450.0	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_967	NABOO	nab_world	AREA	0	-4428.1	304.8	-3424.8	0	1	a giant peko peko	creature_peko_peko_giant	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_968	NABOO	nab_world	AREA	0	-236.6	12.1	2806.7	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_969	NABOO	nab_world	AREA	0	-288.5	12.8	2829.4	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_970	NABOO	nab_world	AREA	0	-272.5	12.9	2778.8	0	1	a Gungan bomber	humanoid_gungan_bomber	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_971	NABOO	nab_world	AREA	0	-274.0	12.9	2823.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_972	NABOO	nab_world	AREA	0	-7553.9	8.9	3707.5	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_973	NABOO	nab_world	AREA	0	3494.8	-209.2	6634.4	0	1	a Gungan Boss	humanoid_gungan_boss	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_974	NABOO	nab_world	AREA	0	-254.9	12.8	2829.7	0	1	a Gungan General	humanoid_gungan_general	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_975	NABOO	nab_world	AREA	0	-290.2	12.8	2809.7	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_976	NABOO	nab_world	AREA	0	-263.2	13.0	2840.3	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_977	NABOO	nab_world	AREA	0	-238.2	11.2	2791.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_978	NABOO	nab_world	AREA	0	-286.6	12.6	2792.9	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_979	NABOO	nab_world	AREA	0	-240.9	12.8	2827.4	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_980	NABOO	nab_world	AREA	0	-255.5	12.5	2778.2	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_981	NABOO	nab_world	AREA	0	-7310.9	13.8	2742.8	0	1	a Gungan guard	humanoid_gungan_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_982	NABOO	nab_world	AREA	0	3421.5	-198.2	5082.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_983	NABOO	nab_world	AREA	0	-187.1	107.5	-901.0	0	1	a Gungan hunter	humanoid_gungan_hunter	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_984	NABOO	nab_world	AREA	0	-3151.4	4.6	2561.1	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_985	NABOO	nab_world	AREA	0	2145.4	-196.0	5426.3	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_986	NABOO	nab_world	AREA	0	-3736.0	80.6	257.8	0	1	a Gungan mercenary	humanoid_gungan_mercenary	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_987	NABOO	nab_world	AREA	0	6123.8	168.2	82.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_988	NABOO	nab_world	AREA	0	6117.6	165.4	61.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_989	NABOO	nab_world	AREA	0	6107.3	161.5	63.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_990	NABOO	nab_world	AREA	0	6102.3	159.7	77.4	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_991	NABOO	nab_world	AREA	0	-7552.0	8.7	3715.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_992	NABOO	nab_world	AREA	0	-4428.1	261.7	-2230.7	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_993	NABOO	nab_world	AREA	0	3488.2	112.5	-2885.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_994	NABOO	nab_world	AREA	0	1234.2	-196.1	5510.1	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_995	NABOO	nab_world	AREA	0	3942.2	5.9	2699.2	20	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	IDLE	0	0	-	idle			600
+spawn_naboo_996	NABOO	nab_world	AREA	0	7588.4	-209.8	6948.2	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_997	NABOO	nab_world	AREA	0	-7542.9	10.5	2254.3	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_998	NABOO	nab_world	AREA	0	-1032.4	-209.4	6831.9	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_999	NABOO	nab_world	AREA	0	-6596.8	152.2	-2680.5	0	1	a Gungan outcast	humanoid_gungan_outcast	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1000	NABOO	nab_world	AREA	0	1946.7	-187.7	6618.4	0	1	a Gungan priest	humanoid_gungan_priest	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1001	NABOO	nab_world	AREA	0	5869.7	38.5	3051.9	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1002	NABOO	nab_world	AREA	0	5869.5	40.2	3060.7	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1003	NABOO	nab_world	AREA	0	5868.1	39.3	3056.2	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1004	NABOO	nab_world	AREA	0	-7385.9	6.5	-7234.6	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1005	NABOO	nab_world	AREA	0	-7377.4	5.9	-7238.1	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1006	NABOO	nab_world	AREA	0	-7370.6	4.9	-7220.7	0	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1007	NABOO	nab_world	AREA	0	-242.1	12.9	2819.7	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1008	NABOO	nab_world	AREA	0	-288.3	12.7	2816.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1009	NABOO	nab_world	AREA	0	-5046.8	-197.7	6173.8	0	1	a Gungan war chief	humanoid_gungan_war_chief	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1010	NABOO	nab_world	AREA	0	3620.8	107.1	549.6	0	1	a highwayman	humanoid_highwayman	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1011	NABOO	nab_world	AREA	0	-1638.4	14.0	-4033.7	-83	1	a Lesser Prophet of the Dark Side	humanoid_jedi_lesser_prophet_of_the_dark_side	ATTACKABLE	E	21	30	Outback	Naboo	1	IDLE	0	0	-	idle			1800
+spawn_naboo_1012	NABOO	nab_world	AREA	0	4135.0	6.7	2911.6	0	1	a male swamp tusk-cat	creature_cat_tusk_male_swamp	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1013	NABOO	nab_world	AREA	0	1253.3	10.7	4295.0	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1014	NABOO	nab_world	AREA	0	-1348.8	-190.2	6533.9	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1015	NABOO	nab_world	AREA	0	6.8	442.2	-1863.7	0	1	a mountain ikopi	creature_ikopi_mountain	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1016	NABOO	nab_world	AREA	0	-7322.1	11.4	-4146.0	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_1017	NABOO	nab_world	AREA	0	-3583.6	92.1	-875.7	0	1	a mutant hermit spider	creature_spider_hermit_mutant	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_1018	NABOO	nab_world	AREA	0	1007.4	184.6	-3453.3	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1019	NABOO	nab_world	AREA	0	7346.2	4.1	3605.2	0	1	a Naboo monk	humanoid_naboo_monk	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1020	NABOO	nab_world	AREA	0	-2177.3	-195.7	6357.0	0	1	a Naboo police officer	humanoid_naboo_police	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1021	NABOO	nab_world	AREA	0	4810.2	89.3	-852.9	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1022	NABOO	nab_world	AREA	0	4785.4	87.3	-867.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1023	NABOO	nab_world	AREA	0	4781.8	83.8	-836.5	0	1	a Naboo shaupaut elder	creature_shaupaut_elder	ATTACKABLE	E	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1024	NABOO	nab_world	AREA	0	4350.9	66.2	-729.4	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1025	NABOO	nab_world	AREA	0	4382.4	78.0	-792.3	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1026	NABOO	nab_world	AREA	0	4381.8	68.7	-761.9	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1027	NABOO	nab_world	AREA	0	4357.0	72.7	-776.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1028	NABOO	nab_world	AREA	0	-2406.3	14.3	569.3	0	1	a plasma thief	humanoid_plasma_thief	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1029	NABOO	nab_world	AREA	0	-6314.6	5.2	-5088.9	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1030	NABOO	nab_world	AREA	0	954.3	262.0	-1342.8	0	1	a Rebel General	humanoid_rebel_general	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1031	NABOO	nab_world	AREA	0	-4765.6	327.7	-3969.5	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1032	NABOO	nab_world	AREA	0	5512.9	-195.7	6369.3	0	1	a Skaak Tipper crasher	humanoid_naboo_skaak_tipper_crasher	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1033	NABOO	nab_world	AREA	0	5497.2	-197.0	6420.0	0	1	a Skaak Tipper crasher	humanoid_naboo_skaak_tipper_crasher	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1034	NABOO	nab_world	AREA	0	5458.2	-197.5	6403.2	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1035	NABOO	nab_world	AREA	0	5459.0	-197.2	6372.2	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1036	NABOO	nab_world	AREA	0	5487.1	-197.1	6397.5	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1037	NABOO	nab_world	AREA	0	5470.9	-197.9	6430.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1038	NABOO	nab_world	AREA	0	5022.6	91.3	-930.8	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1039	NABOO	nab_world	AREA	0	5013.7	90.8	-945.5	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1040	NABOO	nab_world	PATROL	0	5005.6	90.8	-927.7	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	15	25	Outback	Naboo	1	PATROL	0	patrol_naboo_1300	column	idle			600
-spawn_naboo_1041	NABOO	nab_world	AREA	0	968.9	263.0	-1330.9	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1042	NABOO	nab_world	AREA	0	-677.0	-196.1	5201.9	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1043	NABOO	nab_world	AREA	0	-7407.6	2.9	921.5	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1044	NABOO	nab_world	AREA	0	-1555.5	-195.5	6002.2	0	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1030	NABOO	nab_world	AREA	0	954.3	262.0	-1342.8	0	1	a Rebel General	humanoid_rebel_general	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1031	NABOO	nab_world	AREA	0	-4765.6	327.7	-3969.5	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1032	NABOO	nab_world	AREA	0	5512.9	-195.7	6369.3	0	1	a Skaak Tipper crasher	humanoid_naboo_skaak_tipper_crasher	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1033	NABOO	nab_world	AREA	0	5497.2	-197.0	6420.0	0	1	a Skaak Tipper crasher	humanoid_naboo_skaak_tipper_crasher	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1034	NABOO	nab_world	AREA	0	5458.2	-197.5	6403.2	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1035	NABOO	nab_world	AREA	0	5459.0	-197.2	6372.2	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1036	NABOO	nab_world	AREA	0	5487.1	-197.1	6397.5	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1037	NABOO	nab_world	AREA	0	5470.9	-197.9	6430.9	0	1	a Skaak Tipper maniac	humanoid_naboo_skaak_tipper_maniac	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1038	NABOO	nab_world	AREA	0	5022.6	91.3	-930.8	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1039	NABOO	nab_world	AREA	0	5013.7	90.8	-945.5	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1040	NABOO	nab_world	PATROL	0	5005.6	90.8	-927.7	0	1	a Skaak Tipper thug	humanoid_naboo_skaak_tipper_thug	AGGRESSIVE	N	21	30	Outback	Naboo	1	PATROL	0	patrol_naboo_1300	column	idle			600
+spawn_naboo_1041	NABOO	nab_world	AREA	0	968.9	263.0	-1330.9	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1042	NABOO	nab_world	AREA	0	-677.0	-196.1	5201.9	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1043	NABOO	nab_world	AREA	0	-7407.6	2.9	921.5	0	1	a spineflap guard	creature_spineflap_guard	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1044	NABOO	nab_world	AREA	0	-1555.5	-195.5	6002.2	0	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1045	NABOO	nab_world	AREA	0	-3158.4	4.6	2559.2	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1046	NABOO	nab_world	AREA	0	-5065.4	5.3	3399.4	-131	1	a thug	humanoid_thug_zabrak_male	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	idle			600
-spawn_naboo_1047	NABOO	nab_world	AREA	0	432.1	-209.6	6959.8	0	1	a veermok pygmy	creature_veermok_pygmy	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_1048	NABOO	nab_world	AREA	0	7166.6	22.1	-5765.4	0	1	a veermok pygmy	creature_veermok_pygmy	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			900
-spawn_naboo_1049	NABOO	nab_world	AREA	0	-5099.0	10.6	3020.9	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1050	NABOO	nab_world	AREA	0	-5053.0	12.3	3069.6	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1051	NABOO	nab_world	AREA	0	-5029.5	10.9	3104.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1052	NABOO	nab_world	AREA	0	-5015.4	16.3	3038.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1053	NABOO	nab_world	AREA	0	-4975.1	10.5	3121.1	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1054	NABOO	nab_world	AREA	0	-4906.1	6.4	3208.9	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1055	NABOO	nab_world	AREA	0	-4822.2	11.5	3360.8	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1056	NABOO	nab_world	AREA	0	-4708.5	6.0	3607.4	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1057	NABOO	nab_world	PATROL	0	-4657.5	7.6	3631.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	PATROL	0	patrol_naboo_300	column	idle			600
-spawn_naboo_1058	NABOO	nab_world	PATROL	0	-4884.1	5.0	3238.8	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	15	25	Outback	Naboo	1	PATROL	0	patrol_naboo_400	column	idle			600
+spawn_naboo_1047	NABOO	nab_world	AREA	0	432.1	-209.6	6959.8	0	1	a veermok pygmy	creature_veermok_pygmy	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_1048	NABOO	nab_world	AREA	0	7166.6	22.1	-5765.4	0	1	a veermok pygmy	creature_veermok_pygmy	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			900
+spawn_naboo_1049	NABOO	nab_world	AREA	0	-5099.0	10.6	3020.9	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1050	NABOO	nab_world	AREA	0	-5053.0	12.3	3069.6	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1051	NABOO	nab_world	AREA	0	-5029.5	10.9	3104.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1052	NABOO	nab_world	AREA	0	-5015.4	16.3	3038.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1053	NABOO	nab_world	AREA	0	-4975.1	10.5	3121.1	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1054	NABOO	nab_world	AREA	0	-4906.1	6.4	3208.9	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1055	NABOO	nab_world	AREA	0	-4822.2	11.5	3360.8	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1056	NABOO	nab_world	AREA	0	-4708.5	6.0	3607.4	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1057	NABOO	nab_world	PATROL	0	-4657.5	7.6	3631.7	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	PATROL	0	patrol_naboo_300	column	idle			600
+spawn_naboo_1058	NABOO	nab_world	PATROL	0	-4884.1	5.0	3238.8	0	1	a wild-eyed fambaa	creature_fambaa_wildeyed	AGGRESSIVE	N	21	30	Outback	Naboo	1	PATROL	0	patrol_naboo_400	column	idle			600
 spawn_naboo_1059	NABOO	nab_world	AREA	0	4424.2	5.0	-5072.0	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	npc_angry			600
 spawn_naboo_1060	NABOO	nab_world	AREA	0	-1771.5	12.0	2390.7	-89	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	idle			600
-spawn_naboo_1061	NABOO	nab_world	AREA	0	-1561.4	-195.2	5994.7	0	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1062	NABOO	nab_world	AREA	0	-6601.2	-209.8	5981.0	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1063	NABOO	nab_world	AREA	0	-6600.2	-209.9	5992.9	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1064	NABOO	nab_world	AREA	0	-6589.5	-209.8	5985.3	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1065	NABOO	nab_world	AREA	0	-6582.1	-209.9	5989.3	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1066	NABOO	nab_world	AREA	0	-1774.5	12.1	2387.4	0	1	an IG assassin droid	droid_ig_assassin	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1067	NABOO	nab_world	AREA	0	-2191.9	11.9	689.8	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1068	NABOO	nab_world	AREA	0	-2001.3	11.3	4302.4	0	1	Borvo's mercenary	humanoid_borvo_mercenary	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1069	NABOO	nab_world	AREA	0	5720.5	-192.9	6610.0	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1070	NABOO	nab_world	AREA	0	5236.9	-195.5	6324.8	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1071	NABOO	nab_world	AREA	0	5219.9	-195.5	6369.5	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1072	NABOO	nab_world	AREA	0	6316.6	3.8	4248.5	0	1	Borvo's thief	humanoid_borvo_thief	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1073	NABOO	nab_world	AREA	0	5725.7	-192.9	6599.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1074	NABOO	nab_world	AREA	0	5240.7	-195.5	6350.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1075	NABOO	nab_world	AREA	0	5217.7	-195.5	6347.9	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1076	NABOO	nab_world	AREA	0	5773.5	5.0	-7297.7	0	1	Bounty Hunter	humanoid_borvo_bounty_hunter	AGGRESSIVE	N	15	25	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1061	NABOO	nab_world	AREA	0	-1561.4	-195.2	5994.7	0	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1062	NABOO	nab_world	AREA	0	-6601.2	-209.8	5981.0	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1063	NABOO	nab_world	AREA	0	-6600.2	-209.9	5992.9	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1064	NABOO	nab_world	AREA	0	-6589.5	-209.8	5985.3	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1065	NABOO	nab_world	AREA	0	-6582.1	-209.9	5989.3	0	1	an elder female swamp tusk-cat	creature_cat_tusk_swamp_elder_female	AGGRESSIVE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1066	NABOO	nab_world	AREA	0	-1774.5	12.1	2387.4	0	1	an IG assassin droid	droid_ig_assassin	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1067	NABOO	nab_world	AREA	0	-2191.9	11.9	689.8	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1068	NABOO	nab_world	AREA	0	-2001.3	11.3	4302.4	0	1	Borvo's mercenary	humanoid_borvo_mercenary	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1069	NABOO	nab_world	AREA	0	5720.5	-192.9	6610.0	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1070	NABOO	nab_world	AREA	0	5236.9	-195.5	6324.8	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1071	NABOO	nab_world	AREA	0	5219.9	-195.5	6369.5	0	1	Borvo's soldier	humanoid_borvo_soldier	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1072	NABOO	nab_world	AREA	0	6316.6	3.8	4248.5	0	1	Borvo's thief	humanoid_borvo_thief	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1073	NABOO	nab_world	AREA	0	5725.7	-192.9	6599.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1074	NABOO	nab_world	AREA	0	5240.7	-195.5	6350.8	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1075	NABOO	nab_world	AREA	0	5217.7	-195.5	6347.9	0	1	Borvo's thug	humanoid_borvo_thug	ATTACKABLE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
+spawn_naboo_1076	NABOO	nab_world	AREA	0	5773.5	5.0	-7297.7	0	1	Bounty Hunter	humanoid_borvo_bounty_hunter	AGGRESSIVE	N	21	30	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1077	NABOO	nab_world	AREA	0	4470.8	4.0	-4714.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1078	NABOO	nab_world	AREA	0	1131.5	-188.0	4866.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	5	0	-	idle			600
-spawn_naboo_1079	NABOO	nab_world	AREA	0	5359.7	4.5	-4697.7	0	1	Frangee	humanoid_borvo_frangee	AGGRESSIVE	B	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1080	NABOO	nab_world	AREA	0	-4932.5	-196.2	4733.3	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1081	NABOO	nab_world	AREA	0	-4940.3	-196.5	4689.2	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1082	NABOO	nab_world	AREA	0	-4922.7	-196.2	4703.0	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1083	NABOO	nab_world	AREA	0	-4944.5	-196.4	4717.8	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	15	25	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1079	NABOO	nab_world	AREA	0	5359.7	4.5	-4697.7	0	1	Frangee	humanoid_borvo_frangee	AGGRESSIVE	B	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1080	NABOO	nab_world	AREA	0	-4932.5	-196.2	4733.3	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1081	NABOO	nab_world	AREA	0	-4940.3	-196.5	4689.2	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1082	NABOO	nab_world	AREA	0	-4922.7	-196.2	4703.0	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
+spawn_naboo_1083	NABOO	nab_world	AREA	0	-4944.5	-196.4	4717.8	0	1	Gungan Light Scout	humanoid_gungan_light_scout	ATTACKABLE	N	21	30	Outback	Naboo	1	TURN	0	0	-	idle			600
 spawn_naboo_1084	NABOO	nab_world	AREA	0	-4759.0	6.0	3582.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1085	NABOO	nab_world	AREA	0	5510.6	452.9	-2227.5	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	IDLE	0	0	-	idle			600
 spawn_naboo_1086	NABOO	nab_world	AREA	0	4328.7	295.4	-1251.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	LOITER	5	0	-	idle			600
 spawn_naboo_1087	NABOO	nab_world	AREA	0	1249.9	10.6	4288.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Naboo	1	TURN	0	0	-	idle			600
-spawn_naboo_1088	NABOO	nab_world	AREA	0	-6080.4	-197.5	4684.2	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1089	NABOO	nab_world	AREA	0	-6072.4	-196.4	4832.8	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1090	NABOO	nab_world	AREA	0	-6045.8	-195.5	4676.4	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1091	NABOO	nab_world	AREA	0	-6036.7	-197.8	4825.1	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1092	NABOO	nab_world	AREA	0	-6125.5	-205.2	4891.9	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1093	NABOO	nab_world	AREA	0	-6101.5	-199.7	4872.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1094	NABOO	nab_world	AREA	0	-6034.4	-199.1	4860.2	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1095	NABOO	nab_world	AREA	0	-6033.5	-200.6	4899.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1096	NABOO	nab_world	AREA	0	-6023.1	-201.2	4640.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1097	NABOO	nab_world	AREA	0	-6014.4	-199.5	4697.5	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1098	NABOO	nab_world	AREA	0	-6102.6	-200.2	4751.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1099	NABOO	nab_world	AREA	0	-6085.9	-196.8	4788.3	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1100	NABOO	nab_world	AREA	0	-6078.7	-196.5	4724.7	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1101	NABOO	nab_world	AREA	0	-6066.2	-205.5	4642.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1102	NABOO	nab_world	AREA	0	-6045.4	-195.6	4718.3	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1103	NABOO	nab_world	AREA	0	-6038.0	-197.3	4788.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1104	NABOO	nab_world	AREA	0	-6025.2	-199.6	4760.0	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
-spawn_naboo_1105	NABOO	nab_world	AREA	0	-6116.2	-203.1	4822.4	0	1	a Skaak Tipper bruiser	humanoid_naboo_skaak_tipper_bruiser	AGGRESSIVE	N	15	25	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1088	NABOO	nab_world	AREA	0	-6080.4	-197.5	4684.2	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1089	NABOO	nab_world	AREA	0	-6072.4	-196.4	4832.8	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1090	NABOO	nab_world	AREA	0	-6045.8	-195.5	4676.4	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1091	NABOO	nab_world	AREA	0	-6036.7	-197.8	4825.1	0	1	a Naboo pirate butcher	humanoid_naboo_pirate_butcher	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1092	NABOO	nab_world	AREA	0	-6125.5	-205.2	4891.9	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1093	NABOO	nab_world	AREA	0	-6101.5	-199.7	4872.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1094	NABOO	nab_world	AREA	0	-6034.4	-199.1	4860.2	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1095	NABOO	nab_world	AREA	0	-6033.5	-200.6	4899.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1096	NABOO	nab_world	AREA	0	-6023.1	-201.2	4640.1	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1097	NABOO	nab_world	AREA	0	-6014.4	-199.5	4697.5	0	1	a Naboo pirate mugger	humanoid_naboo_pirate_mugger	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1098	NABOO	nab_world	AREA	0	-6102.6	-200.2	4751.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1099	NABOO	nab_world	AREA	0	-6085.9	-196.8	4788.3	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1100	NABOO	nab_world	AREA	0	-6078.7	-196.5	4724.7	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1101	NABOO	nab_world	AREA	0	-6066.2	-205.5	4642.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1102	NABOO	nab_world	AREA	0	-6045.4	-195.6	4718.3	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1103	NABOO	nab_world	AREA	0	-6038.0	-197.3	4788.8	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1104	NABOO	nab_world	AREA	0	-6025.2	-199.6	4760.0	0	1	a Naboo pirate savage	humanoid_naboo_pirate_savage	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
+spawn_naboo_1105	NABOO	nab_world	AREA	0	-6116.2	-203.1	4822.4	0	1	a Skaak Tipper bruiser	humanoid_naboo_skaak_tipper_bruiser	AGGRESSIVE	N	21	30	Outback	Theed Pirate Outpost	1	LOITER	5	0	-	idle			600
 spawn_naboo_1106	NABOO	nab_emperors_retreat	AREA	1	21.6	0.2	-12.9	-170	1	an Imperial stealth operative	humanoid_imperial_stealth_operative	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	sad			600
 spawn_naboo_1107	NABOO	nab_emperors_retreat	AREA	1	1.8	0.2	-13.7	-6	1	Kaja Or'Zee	humanoid_imperial_kaja_orzee	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1108	NABOO	nab_emperors_retreat	AREA	11	-14.6	0.2	-18.0	37	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_naboo_1109	NABOO	nab_emperors_retreat	AREA	11	-14.1	0.2	-22.4	89	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_1110	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-19.8	102	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	35	45	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
-spawn_naboo_1111	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-28.2	78	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	35	45	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
+spawn_naboo_1110	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-19.8	102	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	21	30	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
+spawn_naboo_1111	NABOO	nab_emperors_retreat	AREA	13	-48.0	0.2	-28.2	78	1	an Elite Novatrooper	humanoid_imperial_stormtrooper_novatrooper_elite	AGGRESSIVE	E	21	30	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1112	NABOO	nab_emperors_retreat	AREA	13	-47.0	0.2	-24.1	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
 spawn_naboo_1113	NABOO	nab_emperors_retreat	AREA	13	-57.3	0.2	-24.1	88	1	Darth Vader	humanoid_imperial_darth_vader	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1114	NABOO	nab_emperors_retreat	AREA	13	-44.1	0.2	-31.4	29	1	Grand Inquisitor Ja'ce Yiaso (Imperial Pilot Trainer)	humanoid_imperial_ja_ce_yiaso	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
@@ -1131,26 +1131,26 @@ spawn_naboo_1128	NABOO	nab_emperors_retreat	AREA	4	23.1	0.2	-41.7	8	1	Inquisitor
 spawn_naboo_1129	NABOO	nab_emperors_retreat	AREA	5	4.3	0.2	-45.5	-13	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1130	NABOO	nab_emperors_retreat	AREA	5	4.9	0.2	-41.8	-6	1	Lord Hethrir	humanoid_imperial_lord_hethrir	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1131	NABOO	nab_emperors_retreat	PATROL	7	-8.5	0.2	-17.2	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	PATROL	0	patrol_naboo_2600	column	idle		simple_droid_slang_threat_15	600
-spawn_naboo_1132	NABOO	nab_world	AREA	0	2433.1	292.0	-3964.5	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1132	NABOO	nab_world	AREA	0	2433.1	292.0	-3964.5	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
 spawn_naboo_1133	NABOO	nab_world	AREA	0	2368.5	291.9	-3943.1	-171	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
-spawn_naboo_1134	NABOO	nab_world	AREA	0	2450.7	292.0	-3948.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1135	NABOO	nab_world	AREA	0	2431.7	292.0	-3977.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1136	NABOO	nab_world	AREA	0	2113.5	293.9	-4186.0	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1137	NABOO	nab_world	AREA	0	2216.8	225.9	-4188.2	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1138	NABOO	nab_world	AREA	0	2402.2	320.2	-3694.6	0	1	an Imperial 1st lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1139	NABOO	nab_world	AREA	0	2309.7	297.4	-3795.6	0	1	an Imperial 1st lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1140	NABOO	nab_world	AREA	0	2558.4	352.3	-3656.5	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1141	NABOO	nab_world	AREA	0	2536.8	295.8	-3875.5	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1142	NABOO	nab_world	AREA	0	2180.3	362.0	-3697.6	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1143	NABOO	nab_world	AREA	0	2445.0	292.0	-3948.5	0	1	an Imperial command security guard	humanoid_imperial_command_security_guard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1144	NABOO	nab_world	AREA	0	2335.4	230.9	-3959.1	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1145	NABOO	nab_world	AREA	0	2347.7	392.1	-3563.4	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1146	NABOO	nab_world	AREA	0	2089.5	263.0	-3777.1	0	1	an Imperial medic	humanoid_imperial_medic	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1147	NABOO	nab_world	AREA	0	1719.2	385.0	-3672.5	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1148	NABOO	nab_world	AREA	0	2378.5	325.0	-4102.4	0	1	an Imperial sharpshooter	humanoid_imperial_sharpshooter	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1149	NABOO	nab_world	AREA	0	1896.3	395.0	-4022.0	0	1	an Imperial surgeon	humanoid_imperial_medic_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1150	NABOO	nab_world	AREA	0	2205.7	228.2	-4076.9	0	1	an Imperial surgeon	humanoid_imperial_medic_hard	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
-spawn_naboo_1151	NABOO	nab_world	AREA	0	2294.3	229.4	-3900.5	0	1	an Imperial warrant officer; 2nd class	humanoid_imperial_warrant_officer_2nd	ATTACKABLE	E	35	45	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1134	NABOO	nab_world	AREA	0	2450.7	292.0	-3948.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1135	NABOO	nab_world	AREA	0	2431.7	292.0	-3977.8	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1136	NABOO	nab_world	AREA	0	2113.5	293.9	-4186.0	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1137	NABOO	nab_world	AREA	0	2216.8	225.9	-4188.2	0	1	an elite Imperial master sergeant	humanoid_imperial_master_sergeant_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1138	NABOO	nab_world	AREA	0	2402.2	320.2	-3694.6	0	1	an Imperial 1st lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1139	NABOO	nab_world	AREA	0	2309.7	297.4	-3795.6	0	1	an Imperial 1st lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1140	NABOO	nab_world	AREA	0	2558.4	352.3	-3656.5	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1141	NABOO	nab_world	AREA	0	2536.8	295.8	-3875.5	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1142	NABOO	nab_world	AREA	0	2180.3	362.0	-3697.6	0	1	an Imperial comm specialist	humanoid_imperial_comm_operator_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1143	NABOO	nab_world	AREA	0	2445.0	292.0	-3948.5	0	1	an Imperial command security guard	humanoid_imperial_command_security_guard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1144	NABOO	nab_world	AREA	0	2335.4	230.9	-3959.1	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1145	NABOO	nab_world	AREA	0	2347.7	392.1	-3563.4	0	1	an Imperial dead-eye	humanoid_imperial_sharpshooter_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1146	NABOO	nab_world	AREA	0	2089.5	263.0	-3777.1	0	1	an Imperial medic	humanoid_imperial_medic	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1147	NABOO	nab_world	AREA	0	1719.2	385.0	-3672.5	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1148	NABOO	nab_world	AREA	0	2378.5	325.0	-4102.4	0	1	an Imperial sharpshooter	humanoid_imperial_sharpshooter	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1149	NABOO	nab_world	AREA	0	1896.3	395.0	-4022.0	0	1	an Imperial surgeon	humanoid_imperial_medic_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1150	NABOO	nab_world	AREA	0	2205.7	228.2	-4076.9	0	1	an Imperial surgeon	humanoid_imperial_medic_hard	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
+spawn_naboo_1151	NABOO	nab_world	AREA	0	2294.3	229.4	-3900.5	0	1	an Imperial warrant officer; 2nd class	humanoid_imperial_warrant_officer_2nd	ATTACKABLE	E	21	30	POI	Emperor's Retreat	1	LOITER	5	0	-	idle			600
 spawn_naboo_1152	NABOO	nab_world	AREA	0	2368.1	291.9	-3945.9	9	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_1153	NABOO	nab_world	AREA	0	2369.5	291.9	-3922.0	-104	1	Captain Thrawn	humanoid_imperial_thrawn	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
 spawn_naboo_1154	NABOO	nab_world	AREA	0	2369.0	291.9	-3921.0	-114	1	Colonel Veers	humanoid_imperial_veers	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	conversation			600
@@ -1160,126 +1160,126 @@ spawn_naboo_1157	NABOO	nab_world	AREA	0	2412.9	292.0	-3939.2	77	1	Imperial Pilot
 spawn_naboo_1158	NABOO	nab_world	AREA	0	2444.2	292.0	-3896.8	-160	1	Inquisitor Fa'Zoll (Imperial Pilot Trainer)	humanoid_imperial_inquisitor_fazoll	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1159	NABOO	nab_world	AREA	0	2415.0	292.0	-3948.0	77	1	Lt. Allard Lissara	humanoid_imperial_lt_allard_lissara	INVULNERABLE	N	100	100	POI	Emperor's Retreat	1	IDLE	0	0	-	idle			600
 spawn_naboo_1160	NABOO	nab_world	AREA	0	-1992.2	5.2	-5422.2	-115	1	Boss Nass	humanoid_boss_nass	INVULNERABLE	N	100	100	POI	Gungan Sacred Place	1	IDLE	0	0	-	idle			600
-spawn_naboo_1161	NABOO	nab_world	AREA	0	4724.8	12.8	-3902.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1162	NABOO	nab_world	AREA	0	4738.1	12.7	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1163	NABOO	nab_world	AREA	0	4761.2	13.4	-3886.2	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1164	NABOO	nab_world	AREA	0	4775.1	14.0	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1165	NABOO	nab_world	AREA	0	4795.9	14.2	-3883.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1166	NABOO	nab_world	AREA	0	4809.8	13.6	-3872.1	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1167	NABOO	nab_world	AREA	0	4736.7	10.6	-3847.9	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1168	NABOO	nab_world	AREA	0	4761.3	8.6	-3862.4	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1169	NABOO	nab_world	AREA	0	4779.8	11.8	-3839.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1170	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1171	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	15	25	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1172	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	humanoid_borvo_montrus	ATTACKABLE	B	15	25	POI	Imperial vs Gungun Battle	1	LOITER	5	0	-	idle			600
-spawn_naboo_1173	NABOO	nab_world	AREA	0	-1992.5	6.1	-5286.1	1	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	15	25	POI	Mordran	1	IDLE	0	0	-	idle			600
-spawn_naboo_1174	NABOO	nab_world	AREA	0	-1943.4	7.1	-5280.0	1	1	an exiled gungan	humanoid_mordran_gungan_exile	AGGRESSIVE	N	15	25	POI	Mordran	1	IDLE	0	0	-	idle			600
-spawn_naboo_1175	NABOO	nab_world	AREA	0	-1968.0	6.0	-5283.9	2	1	an outcast gungan	humanoid_mordran_gungan_outcast	AGGRESSIVE	E	15	25	POI	Mordran	1	IDLE	0	0	-	idle			600
-spawn_naboo_1176	NABOO	nab_world	AREA	0	-1969.0	6.5	-5298.6	2	1	Mordran	humanoid_mordran	AGGRESSIVE	N	15	25	POI	Mordran	1	IDLE	0	0	-	idle			600
-spawn_naboo_1177	NABOO	nab_world	AREA	0	5860.2	8.1	-4736.0	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	15	25	POI	Naglatch Cave	1	LOITER	5	0	-	idle			600
-spawn_naboo_1178	NABOO	nab_narglatch_cave	AREA	1	22.7	-27.4	-7.9	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1179	NABOO	nab_narglatch_cave	AREA	10	63.1	-47.2	-106.9	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1180	NABOO	nab_narglatch_cave	AREA	10	50.2	-51.8	-86.5	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1181	NABOO	nab_narglatch_cave	AREA	11	75.6	-46.5	-141.9	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1182	NABOO	nab_narglatch_cave	AREA	11	90.2	-46.9	-142.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1183	NABOO	nab_narglatch_cave	AREA	2	55.1	-68.4	-38.8	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1184	NABOO	nab_narglatch_cave	AREA	2	23.8	-39.5	-40.9	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1185	NABOO	nab_narglatch_cave	AREA	2	46.6	-48.2	-62.6	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1186	NABOO	nab_narglatch_cave	AREA	2	47.4	-47.3	-15.6	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1187	NABOO	nab_narglatch_cave	AREA	3	87.2	-62.1	-13.3	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1188	NABOO	nab_narglatch_cave	AREA	4	92.2	-76.3	-84.3	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1189	NABOO	nab_narglatch_cave	AREA	4	76.4	-75.4	-62.3	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1190	NABOO	nab_narglatch_cave	AREA	5	94.0	-45.6	-98.4	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1191	NABOO	nab_narglatch_cave	AREA	5	92.3	-46.7	-110.9	0	1	a narglatch matriarch	creature_narglatch_matriarch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1192	NABOO	nab_narglatch_cave	AREA	5	93.9	-66.4	-110.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1193	NABOO	nab_narglatch_cave	AREA	6	58.0	-76.8	-87.2	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1194	NABOO	nab_narglatch_cave	AREA	6	56.1	-71.0	-117.7	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1195	NABOO	nab_narglatch_cave	AREA	7	78.4	-65.5	14.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1196	NABOO	nab_narglatch_cave	AREA	7	91.4	-67.2	-134.4	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1197	NABOO	nab_narglatch_cave	AREA	8	136.5	-67.1	-91.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1198	NABOO	nab_narglatch_cave	AREA	8	147.9	-67.4	-122.6	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1199	NABOO	nab_narglatch_cave	AREA	8	129.2	-66.7	-108.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1200	NABOO	nab_narglatch_cave	AREA	9	188.6	-65.9	-105.6	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1201	NABOO	nab_narglatch_cave	AREA	9	188.5	-66.3	-101.5	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
-spawn_naboo_1202	NABOO	nab_world	AREA	0	5875.4	36.0	-4670.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
-spawn_naboo_1203	NABOO	nab_world	AREA	0	5848.5	36.0	-4658.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	15	25	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
-spawn_naboo_1204	NABOO	nab_weapon_development_facility	PATROL	10	35.9	-12.0	66.1	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2800	column	idle			600
-spawn_naboo_1205	NABOO	nab_weapon_development_facility	AREA	11	44.9	-12.0	85.8	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1206	NABOO	nab_weapon_development_facility	AREA	11	44.9	-12.0	80.2	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1207	NABOO	nab_weapon_development_facility	AREA	11	73.6	-12.0	83.0	92	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1208	NABOO	nab_weapon_development_facility	AREA	12	45.0	-12.0	56.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1209	NABOO	nab_weapon_development_facility	AREA	12	44.9	-12.0	61.5	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1210	NABOO	nab_weapon_development_facility	AREA	13	12.1	-20.0	131.2	90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1211	NABOO	nab_weapon_development_facility	AREA	13	23.4	-20.0	146.2	-179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1212	NABOO	nab_weapon_development_facility	AREA	13	38.5	-20.0	115.8	-25	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1213	NABOO	nab_weapon_development_facility	AREA	13	32.6	-20.0	115.6	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1214	NABOO	nab_weapon_development_facility	AREA	13	35.6	-20.0	145.9	0	1	an Imperial captain	humanoid_imperial_captain	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_1215	NABOO	nab_weapon_development_facility	AREA	13	35.8	-20.0	138.1	0	1	an Imperial exterminator	humanoid_imperial_exterminator	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	TURN	0	0	-	idle			600
-spawn_naboo_1216	NABOO	nab_weapon_development_facility	AREA	13	35.4	-20.0	124.9	-93	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1217	NABOO	nab_weapon_development_facility	AREA	13	38.5	-20.0	127.3	91	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1218	NABOO	nab_weapon_development_facility	AREA	13	33.0	-20.0	128.5	63	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1219	NABOO	nab_weapon_development_facility	AREA	14	56.1	-12.0	21.1	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1220	NABOO	nab_weapon_development_facility	AREA	14	22.8	-12.0	0.2	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1221	NABOO	nab_weapon_development_facility	AREA	14	33.0	-12.0	19.3	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1222	NABOO	nab_weapon_development_facility	AREA	14	52.6	-12.0	0.2	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1223	NABOO	nab_weapon_development_facility	AREA	16	-13.6	-20.0	7.7	179	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1224	NABOO	nab_weapon_development_facility	AREA	16	-10.4	-20.0	-2.7	87	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1225	NABOO	nab_weapon_development_facility	AREA	16	-23.9	-20.0	5.4	99	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1226	NABOO	nab_weapon_development_facility	AREA	16	-9.1	-20.0	0.5	-83	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1227	NABOO	nab_weapon_development_facility	PATROL	18	-30.3	-20.0	54.4	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2900	column	idle			600
-spawn_naboo_1228	NABOO	nab_weapon_development_facility	AREA	19	-33.1	-20.0	93.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1229	NABOO	nab_weapon_development_facility	AREA	19	-11.5	-20.0	93.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1230	NABOO	nab_weapon_development_facility	AREA	19	-37.9	-20.0	103.3	100	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1231	NABOO	nab_weapon_development_facility	AREA	19	-7.3	-20.0	103.4	-110	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1232	NABOO	nab_weapon_development_facility	AREA	19	-37.4	-20.0	100.1	-69	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1233	NABOO	nab_weapon_development_facility	AREA	19	-9.4	-20.0	97.8	-72	1	an Imperial colonel	humanoid_imperial_colonel	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1234	NABOO	nab_weapon_development_facility	AREA	19	-22.5	-20.0	104.5	-2	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1235	NABOO	nab_weapon_development_facility	AREA	2	-4.0	0.3	3.4	88	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1236	NABOO	nab_weapon_development_facility	AREA	21	4.9	-20.0	66.9	-86	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1237	NABOO	nab_weapon_development_facility	AREA	21	-5.3	-20.0	74.5	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1238	NABOO	nab_weapon_development_facility	AREA	21	-4.2	-20.0	67.5	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1239	NABOO	nab_weapon_development_facility	AREA	3	5.0	0.3	-4.0	-90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1240	NABOO	nab_weapon_development_facility	AREA	5	7.5	-12.0	29.1	-150	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1241	NABOO	nab_weapon_development_facility	AREA	5	-0.5	-12.0	28.9	150	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1242	NABOO	nab_weapon_development_facility	AREA	5	26.9	-12.0	50.9	-103	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1243	NABOO	nab_weapon_development_facility	AREA	5	26.8	-12.0	41.4	-82	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1244	NABOO	nab_weapon_development_facility	AREA	5	-19.8	-12.0	50.9	106	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1245	NABOO	nab_weapon_development_facility	AREA	5	-16.6	-12.0	41.1	16	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1246	NABOO	nab_weapon_development_facility	AREA	5	19.5	-12.0	51.2	178	1	a Imperial Warrant Officer II	humanoid_imperial_veteran_warrant_officer_ii	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1247	NABOO	nab_weapon_development_facility	AREA	5	-19.3	-12.0	43.4	0	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_1248	NABOO	nab_weapon_development_facility	PATROL	5	2.8	-12.0	36.8	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2700	column	idle			600
-spawn_naboo_1249	NABOO	nab_weapon_development_facility	AREA	5	3.7	-12.0	65.5	-179	1	an Imperial colonel	humanoid_imperial_colonel	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1250	NABOO	nab_weapon_development_facility	AREA	5	-2.6	-12.0	63.2	-90	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_1251	NABOO	nab_weapon_development_facility	AREA	5	9.8	-12.0	62.9	90	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_naboo_1252	NABOO	nab_weapon_development_facility	AREA	5	3.3	-12.0	30.2	178	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1253	NABOO	nab_weapon_development_facility	AREA	5	2.3	-12.0	64.8	135	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1254	NABOO	nab_weapon_development_facility	AREA	7	-66.9	-20.0	70.4	-177	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1255	NABOO	nab_weapon_development_facility	AREA	7	-73.2	-20.0	70.2	145	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1256	NABOO	nab_weapon_development_facility	AREA	7	-73.5	-20.0	23.6	4	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1257	NABOO	nab_weapon_development_facility	AREA	7	-66.8	-20.0	23.6	-11	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1258	NABOO	nab_weapon_development_facility	AREA	7	-64.1	-20.0	48.5	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1259	NABOO	nab_weapon_development_facility	AREA	7	-53.5	-20.0	40.1	-6	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1260	NABOO	nab_weapon_development_facility	AREA	7	-75.9	-20.0	47.0	90	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1261	NABOO	nab_weapon_development_facility	AREA	7	-74.0	-20.0	65.9	-20	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1262	NABOO	nab_weapon_development_facility	AREA	7	-73.3	-20.0	37.3	-39	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1263	NABOO	nab_weapon_development_facility	AREA	7	-51.6	-20.0	24.7	-56	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1264	NABOO	nab_weapon_development_facility	AREA	8	-56.2	-20.0	11.5	-179	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1265	NABOO	nab_weapon_development_facility	AREA	8	-75.7	-20.0	18.2	-51	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1266	NABOO	nab_weapon_development_facility	AREA	8	-59.7	-20.0	7.4	-161	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1267	NABOO	nab_weapon_development_facility	AREA	8	-62.7	-20.0	7.2	172	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1268	NABOO	nab_weapon_development_facility	AREA	8	-41.4	-20.0	7.8	135	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1161	NABOO	nab_world	AREA	0	4724.8	12.8	-3902.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1162	NABOO	nab_world	AREA	0	4738.1	12.7	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1163	NABOO	nab_world	AREA	0	4761.2	13.4	-3886.2	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1164	NABOO	nab_world	AREA	0	4775.1	14.0	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1165	NABOO	nab_world	AREA	0	4795.9	14.2	-3883.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1166	NABOO	nab_world	AREA	0	4809.8	13.6	-3872.1	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1167	NABOO	nab_world	AREA	0	4736.7	10.6	-3847.9	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1168	NABOO	nab_world	AREA	0	4761.3	8.6	-3862.4	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1169	NABOO	nab_world	AREA	0	4779.8	11.8	-3839.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1170	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1171	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1172	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	humanoid_borvo_montrus	ATTACKABLE	B	21	30	POI	Imperial vs Gungun Battle	1	LOITER	5	0	-	idle			600
+spawn_naboo_1173	NABOO	nab_world	AREA	0	-1992.5	6.1	-5286.1	1	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+spawn_naboo_1174	NABOO	nab_world	AREA	0	-1943.4	7.1	-5280.0	1	1	an exiled gungan	humanoid_mordran_gungan_exile	AGGRESSIVE	N	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+spawn_naboo_1175	NABOO	nab_world	AREA	0	-1968.0	6.0	-5283.9	2	1	an outcast gungan	humanoid_mordran_gungan_outcast	AGGRESSIVE	E	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+spawn_naboo_1176	NABOO	nab_world	AREA	0	-1969.0	6.5	-5298.6	2	1	Mordran	humanoid_mordran	AGGRESSIVE	N	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+spawn_naboo_1177	NABOO	nab_world	AREA	0	5860.2	8.1	-4736.0	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Naglatch Cave	1	LOITER	5	0	-	idle			600
+spawn_naboo_1178	NABOO	nab_narglatch_cave	AREA	1	22.7	-27.4	-7.9	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1179	NABOO	nab_narglatch_cave	AREA	10	63.1	-47.2	-106.9	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1180	NABOO	nab_narglatch_cave	AREA	10	50.2	-51.8	-86.5	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1181	NABOO	nab_narglatch_cave	AREA	11	75.6	-46.5	-141.9	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1182	NABOO	nab_narglatch_cave	AREA	11	90.2	-46.9	-142.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1183	NABOO	nab_narglatch_cave	AREA	2	55.1	-68.4	-38.8	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1184	NABOO	nab_narglatch_cave	AREA	2	23.8	-39.5	-40.9	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1185	NABOO	nab_narglatch_cave	AREA	2	46.6	-48.2	-62.6	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1186	NABOO	nab_narglatch_cave	AREA	2	47.4	-47.3	-15.6	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1187	NABOO	nab_narglatch_cave	AREA	3	87.2	-62.1	-13.3	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1188	NABOO	nab_narglatch_cave	AREA	4	92.2	-76.3	-84.3	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1189	NABOO	nab_narglatch_cave	AREA	4	76.4	-75.4	-62.3	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1190	NABOO	nab_narglatch_cave	AREA	5	94.0	-45.6	-98.4	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1191	NABOO	nab_narglatch_cave	AREA	5	92.3	-46.7	-110.9	0	1	a narglatch matriarch	creature_narglatch_matriarch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1192	NABOO	nab_narglatch_cave	AREA	5	93.9	-66.4	-110.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1193	NABOO	nab_narglatch_cave	AREA	6	58.0	-76.8	-87.2	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1194	NABOO	nab_narglatch_cave	AREA	6	56.1	-71.0	-117.7	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1195	NABOO	nab_narglatch_cave	AREA	7	78.4	-65.5	14.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1196	NABOO	nab_narglatch_cave	AREA	7	91.4	-67.2	-134.4	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1197	NABOO	nab_narglatch_cave	AREA	8	136.5	-67.1	-91.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1198	NABOO	nab_narglatch_cave	AREA	8	147.9	-67.4	-122.6	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1199	NABOO	nab_narglatch_cave	AREA	8	129.2	-66.7	-108.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1200	NABOO	nab_narglatch_cave	AREA	9	188.6	-65.9	-105.6	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1201	NABOO	nab_narglatch_cave	AREA	9	188.5	-66.3	-101.5	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+spawn_naboo_1202	NABOO	nab_world	AREA	0	5875.4	36.0	-4670.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
+spawn_naboo_1203	NABOO	nab_world	AREA	0	5848.5	36.0	-4658.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
+spawn_naboo_1204	NABOO	nab_weapon_development_facility	PATROL	10	35.9	-12.0	66.1	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2800	column	idle			600
+spawn_naboo_1205	NABOO	nab_weapon_development_facility	AREA	11	44.9	-12.0	85.8	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1206	NABOO	nab_weapon_development_facility	AREA	11	44.9	-12.0	80.2	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1207	NABOO	nab_weapon_development_facility	AREA	11	73.6	-12.0	83.0	92	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1208	NABOO	nab_weapon_development_facility	AREA	12	45.0	-12.0	56.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1209	NABOO	nab_weapon_development_facility	AREA	12	44.9	-12.0	61.5	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1210	NABOO	nab_weapon_development_facility	AREA	13	12.1	-20.0	131.2	90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1211	NABOO	nab_weapon_development_facility	AREA	13	23.4	-20.0	146.2	-179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1212	NABOO	nab_weapon_development_facility	AREA	13	38.5	-20.0	115.8	-25	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1213	NABOO	nab_weapon_development_facility	AREA	13	32.6	-20.0	115.6	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1214	NABOO	nab_weapon_development_facility	AREA	13	35.6	-20.0	145.9	0	1	an Imperial captain	humanoid_imperial_captain	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_naboo_1215	NABOO	nab_weapon_development_facility	AREA	13	35.8	-20.0	138.1	0	1	an Imperial exterminator	humanoid_imperial_exterminator	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	TURN	0	0	-	idle			600
+spawn_naboo_1216	NABOO	nab_weapon_development_facility	AREA	13	35.4	-20.0	124.9	-93	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1217	NABOO	nab_weapon_development_facility	AREA	13	38.5	-20.0	127.3	91	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1218	NABOO	nab_weapon_development_facility	AREA	13	33.0	-20.0	128.5	63	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1219	NABOO	nab_weapon_development_facility	AREA	14	56.1	-12.0	21.1	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1220	NABOO	nab_weapon_development_facility	AREA	14	22.8	-12.0	0.2	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1221	NABOO	nab_weapon_development_facility	AREA	14	33.0	-12.0	19.3	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1222	NABOO	nab_weapon_development_facility	AREA	14	52.6	-12.0	0.2	0	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1223	NABOO	nab_weapon_development_facility	AREA	16	-13.6	-20.0	7.7	179	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1224	NABOO	nab_weapon_development_facility	AREA	16	-10.4	-20.0	-2.7	87	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1225	NABOO	nab_weapon_development_facility	AREA	16	-23.9	-20.0	5.4	99	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1226	NABOO	nab_weapon_development_facility	AREA	16	-9.1	-20.0	0.5	-83	1	an Imperial stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1227	NABOO	nab_weapon_development_facility	PATROL	18	-30.3	-20.0	54.4	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2900	column	idle			600
+spawn_naboo_1228	NABOO	nab_weapon_development_facility	AREA	19	-33.1	-20.0	93.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1229	NABOO	nab_weapon_development_facility	AREA	19	-11.5	-20.0	93.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1230	NABOO	nab_weapon_development_facility	AREA	19	-37.9	-20.0	103.3	100	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1231	NABOO	nab_weapon_development_facility	AREA	19	-7.3	-20.0	103.4	-110	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1232	NABOO	nab_weapon_development_facility	AREA	19	-37.4	-20.0	100.1	-69	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1233	NABOO	nab_weapon_development_facility	AREA	19	-9.4	-20.0	97.8	-72	1	an Imperial colonel	humanoid_imperial_colonel	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1234	NABOO	nab_weapon_development_facility	AREA	19	-22.5	-20.0	104.5	-2	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1235	NABOO	nab_weapon_development_facility	AREA	2	-4.0	0.3	3.4	88	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1236	NABOO	nab_weapon_development_facility	AREA	21	4.9	-20.0	66.9	-86	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1237	NABOO	nab_weapon_development_facility	AREA	21	-5.3	-20.0	74.5	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1238	NABOO	nab_weapon_development_facility	AREA	21	-4.2	-20.0	67.5	0	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1239	NABOO	nab_weapon_development_facility	AREA	3	5.0	0.3	-4.0	-90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1240	NABOO	nab_weapon_development_facility	AREA	5	7.5	-12.0	29.1	-150	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1241	NABOO	nab_weapon_development_facility	AREA	5	-0.5	-12.0	28.9	150	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1242	NABOO	nab_weapon_development_facility	AREA	5	26.9	-12.0	50.9	-103	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1243	NABOO	nab_weapon_development_facility	AREA	5	26.8	-12.0	41.4	-82	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1244	NABOO	nab_weapon_development_facility	AREA	5	-19.8	-12.0	50.9	106	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1245	NABOO	nab_weapon_development_facility	AREA	5	-16.6	-12.0	41.1	16	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1246	NABOO	nab_weapon_development_facility	AREA	5	19.5	-12.0	51.2	178	1	a Imperial Warrant Officer II	humanoid_imperial_veteran_warrant_officer_ii	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1247	NABOO	nab_weapon_development_facility	AREA	5	-19.3	-12.0	43.4	0	1	a top secret Imperial specialist	humanoid_imperial_specialist_top_secret	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_naboo_1248	NABOO	nab_weapon_development_facility	PATROL	5	2.8	-12.0	36.8	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	PATROL	0	patrol_naboo_2700	column	idle			600
+spawn_naboo_1249	NABOO	nab_weapon_development_facility	AREA	5	3.7	-12.0	65.5	-179	1	an Imperial colonel	humanoid_imperial_colonel	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1250	NABOO	nab_weapon_development_facility	AREA	5	-2.6	-12.0	63.2	-90	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_naboo_1251	NABOO	nab_weapon_development_facility	AREA	5	9.8	-12.0	62.9	90	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_naboo_1252	NABOO	nab_weapon_development_facility	AREA	5	3.3	-12.0	30.2	178	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1253	NABOO	nab_weapon_development_facility	AREA	5	2.3	-12.0	64.8	135	1	an Imperial Private	humanoid_imperial_private	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1254	NABOO	nab_weapon_development_facility	AREA	7	-66.9	-20.0	70.4	-177	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1255	NABOO	nab_weapon_development_facility	AREA	7	-73.2	-20.0	70.2	145	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1256	NABOO	nab_weapon_development_facility	AREA	7	-73.5	-20.0	23.6	4	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1257	NABOO	nab_weapon_development_facility	AREA	7	-66.8	-20.0	23.6	-11	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1258	NABOO	nab_weapon_development_facility	AREA	7	-64.1	-20.0	48.5	0	1	a Veteran Stormtrooper	humanoid_imperial_veteran_stormtrooper	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1259	NABOO	nab_weapon_development_facility	AREA	7	-53.5	-20.0	40.1	-6	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1260	NABOO	nab_weapon_development_facility	AREA	7	-75.9	-20.0	47.0	90	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1261	NABOO	nab_weapon_development_facility	AREA	7	-74.0	-20.0	65.9	-20	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1262	NABOO	nab_weapon_development_facility	AREA	7	-73.3	-20.0	37.3	-39	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1263	NABOO	nab_weapon_development_facility	AREA	7	-51.6	-20.0	24.7	-56	1	an Imperial specialist	humanoid_imperial_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1264	NABOO	nab_weapon_development_facility	AREA	8	-56.2	-20.0	11.5	-179	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1265	NABOO	nab_weapon_development_facility	AREA	8	-75.7	-20.0	18.2	-51	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1266	NABOO	nab_weapon_development_facility	AREA	8	-59.7	-20.0	7.4	-161	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1267	NABOO	nab_weapon_development_facility	AREA	8	-62.7	-20.0	7.2	172	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1268	NABOO	nab_weapon_development_facility	AREA	8	-41.4	-20.0	7.8	135	1	an Imperial comm specialist	humanoid_imperial_comm_specialist	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
 spawn_naboo_1269	NABOO	nab_weapon_development_facility	AREA	8	-74.7	-20.0	13.0	90	1	an Imperial coordinator	humanoid_coa2_imperial_coordinator	INVULNERABLE	N	100	100	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1270	NABOO	nab_weapon_development_facility	AREA	8	-72.5	-20.0	8.6	-3	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	B	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1271	NABOO	nab_weapon_development_facility	AREA	9	-74.7	-20.0	73.8	13	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1272	NABOO	nab_weapon_development_facility	AREA	9	-46.3	-20.0	81.0	-90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1273	NABOO	nab_weapon_development_facility	AREA	9	-67.8	-20.0	88.4	-179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1274	NABOO	nab_weapon_development_facility	AREA	9	-50.6	-20.0	79.5	-85	1	an Imperial Inquisitor	humanoid_imperial_inquisitor	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
-spawn_naboo_1275	NABOO	nab_world	AREA	0	-6505.9	40.0	-3308.6	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1276	NABOO	nab_world	AREA	0	-6499.3	40.0	-3251.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1277	NABOO	nab_world	AREA	0	-6499.6	40.0	-3247.3	0	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1278	NABOO	nab_world	AREA	0	-6495.6	40.0	-3265.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1279	NABOO	nab_world	AREA	0	-6480.3	40.0	-3331.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1280	NABOO	nab_world	AREA	0	-6528.6	40.0	-3335.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1281	NABOO	nab_world	AREA	0	-6508.1	40.0	-3270.7	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1282	NABOO	nab_world	AREA	0	-6511.8	40.0	-3311.2	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
-spawn_naboo_1283	NABOO	nab_world	AREA	0	-6494.6	40.0	-3286.0	0	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	15	25	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1270	NABOO	nab_weapon_development_facility	AREA	8	-72.5	-20.0	8.6	-3	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	B	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1271	NABOO	nab_weapon_development_facility	AREA	9	-74.7	-20.0	73.8	13	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1272	NABOO	nab_weapon_development_facility	AREA	9	-46.3	-20.0	81.0	-90	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1273	NABOO	nab_weapon_development_facility	AREA	9	-67.8	-20.0	88.4	-179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1274	NABOO	nab_weapon_development_facility	AREA	9	-50.6	-20.0	79.5	-85	1	an Imperial Inquisitor	humanoid_imperial_inquisitor	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	IDLE	0	0	-	idle			600
+spawn_naboo_1275	NABOO	nab_world	AREA	0	-6505.9	40.0	-3308.6	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1276	NABOO	nab_world	AREA	0	-6499.3	40.0	-3251.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1277	NABOO	nab_world	AREA	0	-6499.6	40.0	-3247.3	0	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1278	NABOO	nab_world	AREA	0	-6495.6	40.0	-3265.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1279	NABOO	nab_world	AREA	0	-6480.3	40.0	-3331.5	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1280	NABOO	nab_world	AREA	0	-6528.6	40.0	-3335.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1281	NABOO	nab_world	AREA	0	-6508.1	40.0	-3270.7	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1282	NABOO	nab_world	AREA	0	-6511.8	40.0	-3311.2	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600
+spawn_naboo_1283	NABOO	nab_world	AREA	0	-6494.6	40.0	-3286.0	0	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	21	30	POI	Weapon Development Facility	1	LOITER	5	0	-	idle			600

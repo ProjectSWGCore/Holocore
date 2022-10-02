@@ -92,10 +92,10 @@ spawn_talus_89	TALUS	tal_dearic_hospital	AREA	2	2.7	0.2	3.9	178	1	Ambassador Cha
 spawn_talus_90	TALUS	tal_dearic_hotel	AREA	4	8.3	1	-16.7	74	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
 spawn_talus_91	TALUS	tal_dearic_hotel	AREA	4	0.5	1.2	-21.3	-176	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_92	TALUS	tal_dearic_hotel	AREA	4	7.5	1	-10.4	-44	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_talus_93	TALUS	tal_dearic_hotel	AREA	4	-8.2	1.0	2.0	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	25	40	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_94	TALUS	tal_dearic_hotel	AREA	4	8.9	1.0	-4.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	25	40	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_95	TALUS	tal_dearic_hotel	AREA	4	5.6	1.0	-14.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	25	40	City	Dearic	1	IDLE	0	0	-	idle			600
-spawn_talus_96	TALUS	tal_dearic_hotel	AREA	5	18.3	1.3	10.6	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	25	40	City	Dearic	1	IDLE	0	0	-	idle			600
+spawn_talus_93	TALUS	tal_dearic_hotel	AREA	4	-8.2	1.0	2.0	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+spawn_talus_94	TALUS	tal_dearic_hotel	AREA	4	8.9	1.0	-4.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+spawn_talus_95	TALUS	tal_dearic_hotel	AREA	4	5.6	1.0	-14.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+spawn_talus_96	TALUS	tal_dearic_hotel	AREA	5	18.3	1.3	10.6	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
 spawn_talus_97	TALUS	tal_dearic_hotel	AREA	6	-21.6	1.6	10.7	129	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
 spawn_talus_98	TALUS	tal_dearic_hotel	AREA	6	-25.7	1.6	-1.1	54	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_99	TALUS	tal_dearic_hotel	AREA	6	-23	1.6	3.4	-143	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
@@ -236,8 +236,8 @@ spawn_talus_233	TALUS	tal_imp_outpost_officer_shed	AREA	5	3.6	0.1	-2.9	-118	1	Co
 spawn_talus_234	TALUS	tal_imp_outpost_officer_shed	AREA	6	-4.5	0.1	-4.2	76	1	Prisk Kith'Vys (Imperial Pilot Trainer)	humanoid_imperial_prisk_kith_vys	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_235	TALUS	tal_imp_outpost_starport	AREA	1	-10.7	0.1	-16.1	91	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_talus_236	TALUS	tal_imp_outpost_starport	AREA	1	-7.1	0.1	-16.2	-88	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_237	TALUS	tal_world	PATROL	0	-2184.0	20.0	2278.8	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
-spawn_talus_238	TALUS	tal_world	PATROL	0	-2186.8	20.0	2280.6	0	1	an Imperial Colonel	humanoid_imperial_colonel	ATTACKABLE	E	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
+spawn_talus_237	TALUS	tal_world	PATROL	0	-2184.0	20.0	2278.8	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
+spawn_talus_238	TALUS	tal_world	PATROL	0	-2186.8	20.0	2280.6	0	1	an Imperial Colonel	humanoid_imperial_colonel	ATTACKABLE	E	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
 spawn_talus_239	TALUS	tal_world	AREA	0	-2216.5	20	2362	-39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_240	TALUS	tal_world	AREA	0	-2190	20	2325.8	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
 spawn_talus_241	TALUS	tal_world	AREA	0	-2191.5	20	2308.2	-177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		commoner	600
@@ -248,39 +248,39 @@ spawn_talus_245	TALUS	tal_world	AREA	0	-2222.4	20	2265.9	-15	1	a commoner	humano
 spawn_talus_246	TALUS	tal_world	AREA	0	-2223.2	20	2320.9	1	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_247	TALUS	tal_world	AREA	0	-2201	20	2303.6	131	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_248	TALUS	tal_world	AREA	0	-2223.4	20	2269.7	164	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_249	TALUS	tal_world	PATROL	0	-2184.2	20.0	2278.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
-spawn_talus_250	TALUS	tal_world	PATROL	0	-2216.7	20.0	2372.2	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_200	column	idle			600
-spawn_talus_251	TALUS	tal_world	AREA	0	-2175.9	20.0	2323.5	-176	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_252	TALUS	tal_world	AREA	0	-2176.1	20.0	2321.4	6	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_253	TALUS	tal_world	PATROL	0	-2215.5	20.0	2369.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_200	column	idle			600
-spawn_talus_254	TALUS	tal_world	PATROL	0	-2154.6	20.0	2347.6	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
-spawn_talus_255	TALUS	tal_world	PATROL	0	-2159.0	20.0	2344.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
-spawn_talus_256	TALUS	tal_world	AREA	0	-2093.9	20.0	2257.8	-146	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_257	TALUS	tal_world	AREA	0	-2100.3	20.0	2248.8	34	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_258	TALUS	tal_world	PATROL	0	-2208.7	20.0	2336.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
-spawn_talus_259	TALUS	tal_world	PATROL	0	-2207.8	20.0	2336.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
-spawn_talus_260	TALUS	tal_world	AREA	0	-2188.4	20.0	2397.0	90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_261	TALUS	tal_world	AREA	0	-2178.6	20.0	2397.2	-90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_262	TALUS	tal_world	AREA	0	-2238.0	27.0	2211.0	-97	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_263	TALUS	tal_world	AREA	0	-2227.3	20.0	2330.1	118	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_264	TALUS	tal_world	AREA	0	-2139.3	20.0	2243.2	-118	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_265	TALUS	tal_world	AREA	0	-2174.4	20.0	2300.6	-88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_266	TALUS	tal_world	AREA	0	-2175.7	20.0	2300.7	95	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
-spawn_talus_267	TALUS	tal_world	AREA	0	-2172.4	20.0	2281.7	-89	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_268	TALUS	tal_world	AREA	0	-2127.7	27.0	2210.6	87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_269	TALUS	tal_world	AREA	0	-2134.7	27.0	2209.1	-163	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_talus_270	TALUS	tal_world	AREA	0	-2135.1	27.0	2219.8	17	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_271	TALUS	tal_world	AREA	0	-2138.1	20.0	2240.4	-118	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_272	TALUS	tal_world	AREA	0	-2232.9	27.0	2392.0	15	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_273	TALUS	tal_world	AREA	0	-2141.5	20.0	2246.4	-118	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_274	TALUS	tal_world	AREA	0	-2170.7	20.0	2342.8	-1	1	a Veteran Imperial Corporal	humanoid_imperial_veteran_colonel	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_275	TALUS	tal_world	AREA	0	-2183.2	20.0	2428.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	25	40	City	Imperial Outpost	1	LOITER	5	0	-	idle			900
-spawn_talus_276	TALUS	tal_world	AREA	0	-2186.0	20.0	2292.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	25	40	City	Imperial Outpost	1	TURN	0	0	-	idle			900
-spawn_talus_277	TALUS	tal_world	AREA	0	-2069.4	20.0	2235.3	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	25	40	City	Imperial Outpost	1	LOITER	5	0	-	idle			900
-spawn_talus_278	TALUS	tal_world	AREA	0	-2132.8	27.0	2211.8	0	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_talus_279	TALUS	tal_world	AREA	0	-2194.6	20.0	2343.4	100	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_249	TALUS	tal_world	PATROL	0	-2184.2	20.0	2278.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_100	column	idle			600
+spawn_talus_250	TALUS	tal_world	PATROL	0	-2216.7	20.0	2372.2	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_200	column	idle			600
+spawn_talus_251	TALUS	tal_world	AREA	0	-2175.9	20.0	2323.5	-176	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_252	TALUS	tal_world	AREA	0	-2176.1	20.0	2321.4	6	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_253	TALUS	tal_world	PATROL	0	-2215.5	20.0	2369.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_200	column	idle			600
+spawn_talus_254	TALUS	tal_world	PATROL	0	-2154.6	20.0	2347.6	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
+spawn_talus_255	TALUS	tal_world	PATROL	0	-2159.0	20.0	2344.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
+spawn_talus_256	TALUS	tal_world	AREA	0	-2093.9	20.0	2257.8	-146	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_257	TALUS	tal_world	AREA	0	-2100.3	20.0	2248.8	34	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_258	TALUS	tal_world	PATROL	0	-2208.7	20.0	2336.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
+spawn_talus_259	TALUS	tal_world	PATROL	0	-2207.8	20.0	2336.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	PATROL	0	patrol_talus_300	column	idle			600
+spawn_talus_260	TALUS	tal_world	AREA	0	-2188.4	20.0	2397.0	90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_261	TALUS	tal_world	AREA	0	-2178.6	20.0	2397.2	-90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_262	TALUS	tal_world	AREA	0	-2238.0	27.0	2211.0	-97	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_263	TALUS	tal_world	AREA	0	-2227.3	20.0	2330.1	118	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_264	TALUS	tal_world	AREA	0	-2139.3	20.0	2243.2	-118	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_265	TALUS	tal_world	AREA	0	-2174.4	20.0	2300.6	-88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_266	TALUS	tal_world	AREA	0	-2175.7	20.0	2300.7	95	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_267	TALUS	tal_world	AREA	0	-2172.4	20.0	2281.7	-89	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_268	TALUS	tal_world	AREA	0	-2127.7	27.0	2210.6	87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_269	TALUS	tal_world	AREA	0	-2134.7	27.0	2209.1	-163	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_talus_270	TALUS	tal_world	AREA	0	-2135.1	27.0	2219.8	17	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_talus_271	TALUS	tal_world	AREA	0	-2138.1	20.0	2240.4	-118	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_272	TALUS	tal_world	AREA	0	-2232.9	27.0	2392.0	15	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_talus_273	TALUS	tal_world	AREA	0	-2141.5	20.0	2246.4	-118	1	a Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_squad_leader	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
+spawn_talus_274	TALUS	tal_world	AREA	0	-2170.7	20.0	2342.8	-1	1	a Veteran Imperial Corporal	humanoid_imperial_veteran_colonel	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_talus_275	TALUS	tal_world	AREA	0	-2183.2	20.0	2428.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	41	50	City	Imperial Outpost	1	LOITER	5	0	-	idle			900
+spawn_talus_276	TALUS	tal_world	AREA	0	-2186.0	20.0	2292.0	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	41	50	City	Imperial Outpost	1	TURN	0	0	-	idle			900
+spawn_talus_277	TALUS	tal_world	AREA	0	-2069.4	20.0	2235.3	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	41	50	City	Imperial Outpost	1	LOITER	5	0	-	idle			900
+spawn_talus_278	TALUS	tal_world	AREA	0	-2132.8	27.0	2211.8	0	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_talus_279	TALUS	tal_world	AREA	0	-2194.6	20.0	2343.4	100	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_talus_280	TALUS	tal_world	AREA	0	-2191.7	20.0	2268.6	-91	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter	600
-spawn_talus_281	TALUS	tal_world	AREA	0	-2192.2	20.0	2343.0	-78	1	an Imperial Sergeant Major	humanoid_imperial_sergeant_major	ATTACKABLE	E	25	40	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
+spawn_talus_281	TALUS	tal_world	AREA	0	-2192.2	20.0	2343.0	-78	1	an Imperial Sergeant Major	humanoid_imperial_sergeant_major	ATTACKABLE	E	41	50	City	Imperial Outpost	1	IDLE	0	0	-	conversation			600
 spawn_talus_282	TALUS	tal_world	AREA	0	-2209.3	20.0	2301.4	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_talus_283	TALUS	tal_world	AREA	0	-2213.1	20.0	2301.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Imperial Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
 spawn_talus_284	TALUS	tal_world	AREA	0	-2179.0	20.0	2272.6	-4	1	Captain Ceth Laike	humanoid_imperial_cpt_ceth_laike	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
@@ -288,7 +288,7 @@ spawn_talus_285	TALUS	tal_world	AREA	0	-2152.1	20.0	2304.3	71	1	Gravin Attal	hum
 spawn_talus_286	TALUS	tal_world	AREA	0	-2171.0	20.0	2314.0	-95	1	Officer Edgar	humanoid_imperial_syren5_questgiver	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_287	TALUS	tal_world	AREA	0	-2123.4	20.0	2364.5	-52	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
 spawn_talus_288	TALUS	tal_world	AREA	0	-2231.9	20.0	2221.1	22	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Imperial Outpost	1	IDLE	0	0	-	idle			600
-spawn_talus_289	TALUS	tal_world	AREA	0	-2447.3	38.0	3809.7	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	25	40	City	Imperial vs. Rebel Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_289	TALUS	tal_world	AREA	0	-2447.3	38.0	3809.7	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	41	50	City	Imperial vs. Rebel Battle	1	LOITER	5	0	-	idle			600
 spawn_talus_290	TALUS	tal_nashal_association_hall	AREA	11	11.0	1.8	-19.6	-62	1	Chief Administrator Slooni Jong	humanoid_slooni_jong	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
 spawn_talus_291	TALUS	tal_nashal_association_hall	AREA	10	-5	1.2	-1.1	71	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_292	TALUS	tal_nashal_association_hall	AREA	10	-2.9	1.2	-0.3	-110	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
@@ -387,7 +387,7 @@ spawn_talus_384	TALUS	tal_nashal_starport	AREA	7	36.1	0.6	35.6	74	1	a smuggler	h
 spawn_talus_385	TALUS	tal_nashal_starport	AREA	7	55.4	-0.5	37.7	137	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_386	TALUS	tal_nashal_starport	AREA	7	47.7	0.6	46	4	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_387	TALUS	tal_nashal_starport	AREA	7	40.8	0.6	48.7	114	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_talus_388	TALUS	tal_nashal_starport	AREA	7	54.7	-0.5	34.2	-50	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	25	40	City	Nashal	1	IDLE	0	0	-	idle			600
+spawn_talus_388	TALUS	tal_nashal_starport	AREA	7	54.7	-0.5	34.2	-50	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	41	50	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_389	TALUS	tal_nashal_starport	AREA	7	41.7	0.6	46.5	1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_390	TALUS	tal_nashal_starport	AREA	7	54.6	-0.5	41.7	137	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_391	TALUS	tal_nashal_starport	AREA	9	-33	1.6	50.5	19	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
@@ -415,8 +415,8 @@ spawn_talus_412	TALUS	tal_nashal_university	AREA	7	8.4	1.1	-14.9	0	1	a scientist
 spawn_talus_413	TALUS	tal_nashal_university	AREA	7	6.8	1.1	-13	90	1	a scientist	humanoid_scientist_bothan_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_talus_414	TALUS	tal_nashal_university	AREA	8	-0.9	1.1	-9	-77	1	a scientist	humanoid_scientist_moncal_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_415	TALUS	tal_nashal_university	AREA	8	-2.8	1.1	-8.5	103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_416	TALUS	tal_world	PATROL	0	4074.1	2.0	5282.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Nashal	1	PATROL	0	patrol_talus_400	column	idle			600
-spawn_talus_417	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Nashal	1	PATROL	0	patrol_talus_500	column	idle			600
+spawn_talus_416	TALUS	tal_world	PATROL	0	4074.1	2.0	5282.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_400	column	idle			600
+spawn_talus_417	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_500	column	idle			600
 spawn_talus_418	TALUS	tal_world	AREA	0	4357	2	5183.8	160	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_419	TALUS	tal_world	AREA	0	4333.8	9.9	5372.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		commoner	600
 spawn_talus_420	TALUS	tal_world	PATROL	0	4439.0	2.0	5278.9	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_700	column	idle		commoner	600
@@ -458,15 +458,15 @@ spawn_talus_455	TALUS	tal_world	AREA	0	4357.7	2	5181.7	-20	1	a noble	humanoid_no
 spawn_talus_456	TALUS	tal_world	AREA	0	4361.7	2	5139.3	-91	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	happy			600
 spawn_talus_457	TALUS	tal_world	AREA	0	4359.8	10	5396.4	91	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_458	TALUS	tal_world	PATROL	0	4317.8	2.0	5287.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_800	column	idle		commoner	600
-spawn_talus_459	TALUS	tal_world	PATROL	0	4117.5	2.0	5308.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Nashal	1	PATROL	0	patrol_talus_900	column	idle			600
-spawn_talus_460	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Nashal	1	PATROL	0	patrol_talus_1200	column	idle			600
+spawn_talus_459	TALUS	tal_world	PATROL	0	4117.5	2.0	5308.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_900	column	idle			600
+spawn_talus_460	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_1200	column	idle			600
 spawn_talus_461	TALUS	tal_world	AREA	0	4389.5	2	5281.5	-1	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
 spawn_talus_462	TALUS	tal_world	AREA	0	4064.8	2	5291.6	134	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_463	TALUS	tal_world	AREA	0	4492.4	2	5134.3	-103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_464	TALUS	tal_world	AREA	0	4507.1	2	5089.7	-128	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_465	TALUS	tal_world	AREA	0	4235.1	2	5124.8	-110	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_talus_466	TALUS	tal_world	AREA	0	4379.1	2.0	5283.2	-179	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
-spawn_talus_467	TALUS	tal_world	AREA	0	4174.9	2.0	5110.5	75	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	25	40	City	Nashal	1	IDLE	0	0	-	idle			600
+spawn_talus_467	TALUS	tal_world	AREA	0	4174.9	2.0	5110.5	75	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	41	50	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_468	TALUS	tal_world	AREA	0	4357.4	3	5170.7	-122	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_talus_469	TALUS	tal_world	AREA	0	4490.3	2	5133.8	77	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
 spawn_talus_470	TALUS	tal_world	AREA	0	4367.5	2	5295.4	-83	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -482,425 +482,425 @@ spawn_talus_479	TALUS	tal_world	AREA	0	4098.7	2.0	5314.8	145	1	an artisan	humano
 spawn_talus_480	TALUS	tal_world	AREA	0	4196.8	2.0	5284.4	82	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_481	TALUS	tal_world	AREA	0	4376.0	2.0	5177.2	170	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
 spawn_talus_482	TALUS	tal_world	PATROL	0	4564.8	2.0	5483.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_1600	column	idle		simple_droid_geek_bye_nice_13	600
-spawn_talus_483	TALUS	tal_world	PATROL	0	4142.1	2.0	5311.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	25	40	City	Nashal	1	PATROL	0	patrol_talus_2300	column	idle			600
+spawn_talus_483	TALUS	tal_world	PATROL	0	4142.1	2.0	5311.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_2300	column	idle			600
 spawn_talus_484	TALUS	tal_world	PATROL	0	4386.0	2.0	5268.6	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_1800	column	idle			600
 spawn_talus_485	TALUS	tal_world	PATROL	0	4501.6	2.0	5266.2	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_2100	column	idle			600
 spawn_talus_486	TALUS	tal_world	PATROL	0	4398.5	2.0	5016.8	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_2600	column	idle			600
-spawn_talus_487	TALUS	tal_chunker_bunker	AREA	3	3.6	0.3	-3.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_488	TALUS	tal_chunker_bunker	AREA	4	2.3	-12.0	35.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_489	TALUS	tal_chunker_bunker	AREA	4	-0.2	-12.0	27.4	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_490	TALUS	tal_chunker_bunker	AREA	5	31.6	-12.0	27.9	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_491	TALUS	tal_chunker_bunker	AREA	5	27.5	-12.0	34.7	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_492	TALUS	tal_chunker_bunker	AREA	7	-16.5	-16.0	75.3	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_493	TALUS	tal_chunker_bunker	AREA	7	23.4	-16.0	82.4	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_494	TALUS	tal_chunker_bunker	AREA	7	8.7	-16.0	57.6	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_495	TALUS	tal_chunker_bunker	AREA	7	-7.1	-16.0	83.2	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_496	TALUS	tal_chunker_bunker	AREA	7	14.9	-16.0	73.5	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_497	TALUS	tal_chunker_bunker	AREA	7	9.0	-16.0	63.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_498	TALUS	tal_chunker_bunker	AREA	7	-1.4	-16.0	57.8	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_499	TALUS	tal_chunker_bunker	AREA	7	3.9	-16.0	78.0	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_500	TALUS	tal_chunker_bunker	AREA	8	57.2	-16.0	65.5	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_501	TALUS	tal_chunker_bunker	AREA	8	69.2	-16.0	82.7	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_502	TALUS	tal_chunker_bunker	AREA	8	44.7	-16.0	59.7	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_503	TALUS	tal_chunker_bunker	AREA	8	80.4	-16.0	64.2	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_504	TALUS	tal_chunker_bunker	AREA	8	57.2	-16.0	75.3	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_505	TALUS	tal_chunker_bunker	AREA	8	69.7	-16.0	59.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_506	TALUS	tal_chunker_bunker	AREA	8	46.8	-16.0	83.0	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_507	TALUS	tal_chunker_bunker	AREA	9	-39.3	-14.0	76.0	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_508	TALUS	tal_chunker_bunker	AREA	9	-37.8	-14.0	83.0	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_509	TALUS	tal_world	AREA	0	1369.5	29.0	1465.6	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_510	TALUS	tal_world	AREA	0	1406.6	29.0	1446.3	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_511	TALUS	tal_world	AREA	0	1375.4	29.0	1426.0	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_512	TALUS	tal_world	AREA	0	1356.4	29.0	1446.0	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	25	40	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_487	TALUS	tal_chunker_bunker	AREA	3	3.6	0.3	-3.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_488	TALUS	tal_chunker_bunker	AREA	4	2.3	-12.0	35.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_489	TALUS	tal_chunker_bunker	AREA	4	-0.2	-12.0	27.4	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_490	TALUS	tal_chunker_bunker	AREA	5	31.6	-12.0	27.9	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_491	TALUS	tal_chunker_bunker	AREA	5	27.5	-12.0	34.7	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_492	TALUS	tal_chunker_bunker	AREA	7	-16.5	-16.0	75.3	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_493	TALUS	tal_chunker_bunker	AREA	7	23.4	-16.0	82.4	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_494	TALUS	tal_chunker_bunker	AREA	7	8.7	-16.0	57.6	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_495	TALUS	tal_chunker_bunker	AREA	7	-7.1	-16.0	83.2	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_496	TALUS	tal_chunker_bunker	AREA	7	14.9	-16.0	73.5	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_497	TALUS	tal_chunker_bunker	AREA	7	9.0	-16.0	63.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_498	TALUS	tal_chunker_bunker	AREA	7	-1.4	-16.0	57.8	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_499	TALUS	tal_chunker_bunker	AREA	7	3.9	-16.0	78.0	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_500	TALUS	tal_chunker_bunker	AREA	8	57.2	-16.0	65.5	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_501	TALUS	tal_chunker_bunker	AREA	8	69.2	-16.0	82.7	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_502	TALUS	tal_chunker_bunker	AREA	8	44.7	-16.0	59.7	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_503	TALUS	tal_chunker_bunker	AREA	8	80.4	-16.0	64.2	0	1	a Chunker bruiser	humanoid_chunker_bruiser	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_504	TALUS	tal_chunker_bunker	AREA	8	57.2	-16.0	75.3	0	1	a Chunker creep	humanoid_chunker_creep	AGGRESSIVE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_505	TALUS	tal_chunker_bunker	AREA	8	69.7	-16.0	59.4	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_506	TALUS	tal_chunker_bunker	AREA	8	46.8	-16.0	83.0	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_507	TALUS	tal_chunker_bunker	AREA	9	-39.3	-14.0	76.0	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_508	TALUS	tal_chunker_bunker	AREA	9	-37.8	-14.0	83.0	0	1	a Chunker braggart	humanoid_chunker_braggart	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_509	TALUS	tal_world	AREA	0	1369.5	29.0	1465.6	0	1	a Chunker goon	humanoid_chunker_goon	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_510	TALUS	tal_world	AREA	0	1406.6	29.0	1446.3	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_511	TALUS	tal_world	AREA	0	1375.4	29.0	1426.0	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_512	TALUS	tal_world	AREA	0	1356.4	29.0	1446.0	0	1	a Chunker pest	humanoid_chunker_pest	ATTACKABLE	N	41	50	Dungeon	Chunker Bunker	1	LOITER	5	0	-	idle			600
 spawn_talus_513	TALUS	tal_world	AREA	0	7.4	42.8	-3543.5	-48	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	Dungeon	Genetech Syndicate	1	IDLE	0	0	-	idle			600
-spawn_talus_514	TALUS	tal_world	PATROL	0	4302.5	49.4	4744.7	0	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	ATTACKABLE	N	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1000	column	idle			600
-spawn_talus_515	TALUS	tal_world	PATROL	0	4268.9	49.4	4705.9	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1100	column	idle			600
-spawn_talus_516	TALUS	tal_world	PATROL	0	4323.8	49.4	4742.1	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1300	column	idle			600
-spawn_talus_517	TALUS	tal_world	PATROL	0	4219.1	63.2	4675.6	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1400	column	idle			600
-spawn_talus_518	TALUS	tal_world	PATROL	0	4328.6	66.3	4673.5	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1500	column	idle			600
-spawn_talus_519	TALUS	tal_world	PATROL	0	4259.9	49.4	4733.3	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1700	column	idle			600
-spawn_talus_520	TALUS	tal_world	AREA	0	4317.5	49.4	4707.0	64	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_521	TALUS	tal_world	AREA	0	4310.3	49.4	4769.8	-171	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_522	TALUS	tal_world	AREA	0	4307.2	49.4	4750.7	-84	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_523	TALUS	tal_world	AREA	0	4287.1	49.4	4725.4	0	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_524	TALUS	tal_world	AREA	0	4266.7	49.4	4706.6	59	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_525	TALUS	tal_world	AREA	0	4264.4	49.4	4771.3	157	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_526	TALUS	tal_world	AREA	0	4260.4	49.4	4720.6	-116	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_527	TALUS	tal_world	AREA	0	4257.0	49.4	4760.6	-167	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_528	TALUS	tal_world	PATROL	0	4269.8	49.4	4772.3	0	1	an EG-6 power droid	droid_talus_nashal_power	ATTACKABLE	N	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1900	column	idle			600
-spawn_talus_529	TALUS	tal_world	PATROL	0	4324.9	49.4	4762.5	0	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2000	column	idle			600
-spawn_talus_530	TALUS	tal_world	AREA	0	4349.9	67.7	4684.4	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
-spawn_talus_531	TALUS	tal_world	AREA	0	4215.6	66.8	4743.9	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
-spawn_talus_532	TALUS	tal_world	AREA	0	4208.6	62.8	4702.2	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
-spawn_talus_533	TALUS	tal_world	PATROL	0	4271.9	49.4	4704.3	0	1	an EG-6 power droid	droid_talus_nashal_power	ATTACKABLE	N	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2200	column	idle			600
-spawn_talus_534	TALUS	tal_world	PATROL	0	4195.6	71.6	4760.5	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2400	column	idle			600
-spawn_talus_535	TALUS	tal_world	AREA	0	4352.7	69.3	4675.0	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_536	TALUS	tal_world	AREA	0	4335.4	68.1	4668.9	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_537	TALUS	tal_world	AREA	0	4287.3	63.6	4864.1	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_538	TALUS	tal_world	AREA	0	4274.9	59.2	4833.6	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_539	TALUS	tal_world	AREA	0	4273.5	60.6	4847.0	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_540	TALUS	tal_world	AREA	0	4260.7	62.5	4884.9	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_541	TALUS	tal_world	AREA	0	4219.0	63.3	4721.4	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
-spawn_talus_542	TALUS	tal_world	AREA	0	4284.2	49.4	4769.2	-175	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_543	TALUS	tal_world	AREA	0	4267.1	49.4	4745.7	94	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_544	TALUS	tal_world	AREA	0	4334.9	49.4	4732.4	-69	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_545	TALUS	tal_world	AREA	0	4334.4	49.4	4741.3	-144	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_546	TALUS	tal_world	AREA	0	4333.2	49.4	4751.8	-55	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_547	TALUS	tal_world	AREA	0	4329.7	49.4	4760.6	-150	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	25	40	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
-spawn_talus_548	TALUS	tal_world	PATROL	0	4298.8	49.4	4728.2	0	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	ATTACKABLE	N	25	40	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2500	column	idle			600
-spawn_talus_549	TALUS	tal_world	AREA	0	-4460.4	6.4	4064.2	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_550	TALUS	tal_world	AREA	0	-4067.3	36.3	3662.7	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_551	TALUS	tal_world	AREA	0	-4069.0	36.0	3669.6	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_552	TALUS	tal_world	AREA	0	-3332.3	76.4	5170.8	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_553	TALUS	tal_world	AREA	0	1731.6	6.8	777.9	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_554	TALUS	tal_world	AREA	0	-567.1	53.5	1272.8	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_555	TALUS	tal_world	AREA	0	-3365.8	32.2	-3812.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_514	TALUS	tal_world	PATROL	0	4302.5	49.4	4744.7	0	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	ATTACKABLE	N	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1000	column	idle			600
+spawn_talus_515	TALUS	tal_world	PATROL	0	4268.9	49.4	4705.9	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1100	column	idle			600
+spawn_talus_516	TALUS	tal_world	PATROL	0	4323.8	49.4	4742.1	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1300	column	idle			600
+spawn_talus_517	TALUS	tal_world	PATROL	0	4219.1	63.2	4675.6	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1400	column	idle			600
+spawn_talus_518	TALUS	tal_world	PATROL	0	4328.6	66.3	4673.5	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1500	column	idle			600
+spawn_talus_519	TALUS	tal_world	PATROL	0	4259.9	49.4	4733.3	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1700	column	idle			600
+spawn_talus_520	TALUS	tal_world	AREA	0	4317.5	49.4	4707.0	64	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_521	TALUS	tal_world	AREA	0	4310.3	49.4	4769.8	-171	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_522	TALUS	tal_world	AREA	0	4307.2	49.4	4750.7	-84	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_523	TALUS	tal_world	AREA	0	4287.1	49.4	4725.4	0	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_524	TALUS	tal_world	AREA	0	4266.7	49.4	4706.6	59	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_525	TALUS	tal_world	AREA	0	4264.4	49.4	4771.3	157	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_526	TALUS	tal_world	AREA	0	4260.4	49.4	4720.6	-116	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_527	TALUS	tal_world	AREA	0	4257.0	49.4	4760.6	-167	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_528	TALUS	tal_world	PATROL	0	4269.8	49.4	4772.3	0	1	an EG-6 power droid	droid_talus_nashal_power	ATTACKABLE	N	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_1900	column	idle			600
+spawn_talus_529	TALUS	tal_world	PATROL	0	4324.9	49.4	4762.5	0	1	a Talusian smuggler	humanoid_talus_smuggler	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2000	column	idle			600
+spawn_talus_530	TALUS	tal_world	AREA	0	4349.9	67.7	4684.4	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
+spawn_talus_531	TALUS	tal_world	AREA	0	4215.6	66.8	4743.9	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
+spawn_talus_532	TALUS	tal_world	AREA	0	4208.6	62.8	4702.2	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	TURN	0	0	-	idle			600
+spawn_talus_533	TALUS	tal_world	PATROL	0	4271.9	49.4	4704.3	0	1	an EG-6 power droid	droid_talus_nashal_power	ATTACKABLE	N	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2200	column	idle			600
+spawn_talus_534	TALUS	tal_world	PATROL	0	4195.6	71.6	4760.5	0	1	a Talusian smuggler elite guard	humanoid_talus_smuggler_guard_elite	AGGRESSIVE	E	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2400	column	idle			600
+spawn_talus_535	TALUS	tal_world	AREA	0	4352.7	69.3	4675.0	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_536	TALUS	tal_world	AREA	0	4335.4	68.1	4668.9	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_537	TALUS	tal_world	AREA	0	4287.3	63.6	4864.1	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_538	TALUS	tal_world	AREA	0	4274.9	59.2	4833.6	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_539	TALUS	tal_world	AREA	0	4273.5	60.6	4847.0	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_540	TALUS	tal_world	AREA	0	4260.7	62.5	4884.9	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_541	TALUS	tal_world	AREA	0	4219.0	63.3	4721.4	0	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	LOITER	5	0	-	idle			600
+spawn_talus_542	TALUS	tal_world	AREA	0	4284.2	49.4	4769.2	-175	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_543	TALUS	tal_world	AREA	0	4267.1	49.4	4745.7	94	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_544	TALUS	tal_world	AREA	0	4334.9	49.4	4732.4	-69	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_545	TALUS	tal_world	AREA	0	4334.4	49.4	4741.3	-144	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_546	TALUS	tal_world	AREA	0	4333.2	49.4	4751.8	-55	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_547	TALUS	tal_world	AREA	0	4329.7	49.4	4760.6	-150	1	a Talusian smuggler guard	humanoid_talus_smuggler_guard	AGGRESSIVE	N	41	50	Dungeon	Talusian Smuggler Base	1	IDLE	0	0	-	idle			600
+spawn_talus_548	TALUS	tal_world	PATROL	0	4298.8	49.4	4728.2	0	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	ATTACKABLE	N	41	50	Dungeon	Talusian Smuggler Base	1	PATROL	0	patrol_talus_2500	column	idle			600
+spawn_talus_549	TALUS	tal_world	AREA	0	-4460.4	6.4	4064.2	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_550	TALUS	tal_world	AREA	0	-4067.3	36.3	3662.7	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_551	TALUS	tal_world	AREA	0	-4069.0	36.0	3669.6	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_552	TALUS	tal_world	AREA	0	-3332.3	76.4	5170.8	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_553	TALUS	tal_world	AREA	0	1731.6	6.8	777.9	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_554	TALUS	tal_world	AREA	0	-567.1	53.5	1272.8	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_555	TALUS	tal_world	AREA	0	-3365.8	32.2	-3812.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
 spawn_talus_556	TALUS	tal_world	AREA	0	-3635.0	56.4	6327.3	0	1	a bodyguard	humanoid_bodyguard	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_557	TALUS	tal_world	AREA	0	-1836.1	7.9	1433.4	0	1	a Chadra Fan assassin	humanoid_chadra_fan_assassin	ATTACKABLE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_557	TALUS	tal_world	AREA	0	-1836.1	7.9	1433.4	0	1	a Chadra Fan assassin	humanoid_chadra_fan_assassin	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_558	TALUS	tal_world	AREA	0	4319.9	49.4	4708.3	-119	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
 spawn_talus_559	TALUS	tal_world	AREA	0	4258.2	49.4	4719.6	61	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
-spawn_talus_560	TALUS	tal_world	AREA	0	4096.2	8.3	-55.5	0	1	a comm operator	humanoid_imperial_comm_operator	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_561	TALUS	tal_world	AREA	0	5173.2	32.1	-1738.6	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_562	TALUS	tal_world	AREA	0	1638.1	7.0	5435.9	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_563	TALUS	tal_world	AREA	0	-6682.0	680.5	7267.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_564	TALUS	tal_world	AREA	0	-5808.9	5.1	-6401.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_565	TALUS	tal_world	AREA	0	-3165.2	689.7	6827.6	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_566	TALUS	tal_world	AREA	0	-1732.1	18.1	-2883.2	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_567	TALUS	tal_world	AREA	0	3889.6	29.9	3392.4	0	1	a frontiersman	humanoid_frontiersman	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_568	TALUS	tal_world	AREA	0	4842.2	94.0	-4729.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_569	TALUS	tal_world	AREA	0	-1727.6	17.7	-2885.6	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_570	TALUS	tal_world	AREA	0	-3491.3	40.0	3701.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_571	TALUS	tal_world	AREA	0	-5679.6	7.1	5285.9	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_572	TALUS	tal_world	AREA	0	-3009.7	0.2	1947.3	0	1	a hermit	humanoid_hermit	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_573	TALUS	tal_world	AREA	0	-127.0	2.6	325.5	0	1	a highwayman	humanoid_highwayman	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_574	TALUS	tal_world	AREA	0	-4597.1	40.4	5701.3	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_575	TALUS	tal_world	AREA	0	5438.1	141.2	5581.1	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_576	TALUS	tal_world	AREA	0	-5218.8	48.5	4603.7	0	1	a huf dun	creature_huf_dun	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_577	TALUS	tal_world	AREA	0	-5226.4	48.6	4596.7	0	1	a huf dun bull	creature_huf_dun_bull	ATTACKABLE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_578	TALUS	tal_world	AREA	0	5965.0	2.2	-1184.9	0	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_579	TALUS	tal_world	AREA	0	5407.5	57.3	2662.2	0	1	a kahmurra	creature_kahmurra	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_580	TALUS	tal_world	AREA	0	-4480.2	22.7	64.1	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_581	TALUS	tal_world	AREA	0	-3810.5	2.7	-6486.6	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_582	TALUS	tal_world	AREA	0	-3383.1	38.2	-6016.9	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_583	TALUS	tal_world	AREA	0	4796.7	637.4	-6236.8	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_584	TALUS	tal_world	AREA	0	4795.9	636.5	-6245.5	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_585	TALUS	tal_world	AREA	0	4788.2	636.8	-6234.3	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_586	TALUS	tal_world	AREA	0	4783.9	637.2	-6245.7	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_587	TALUS	tal_world	AREA	0	-2722.4	33.3	-2265.0	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_588	TALUS	tal_world	AREA	0	5350.7	1.1	4544.2	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_589	TALUS	tal_world	AREA	0	4791.5	637.9	-6240.6	0	1	a Lost Aqualish warchief	humanoid_lost_aqualish_warchief	AGGRESSIVE	E	25	40	Outback	Talus	1	IDLE	0	0	-	idle			600
-spawn_talus_590	TALUS	tal_world	AREA	0	-100.9	73.3	2604.0	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_591	TALUS	tal_world	AREA	0	13.8	6.1	-902.6	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_592	TALUS	tal_world	AREA	0	-4909.1	4.0	-4497.9	0	1	a mercenary	humanoid_mercenary_aggro	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_593	TALUS	tal_world	AREA	0	-2257.0	5.3	900.7	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_594	TALUS	tal_world	AREA	0	-4475.0	24.3	56.1	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_595	TALUS	tal_world	AREA	0	7541.3	443.4	876.8	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_596	TALUS	tal_world	AREA	0	7539.5	444.7	886.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_597	TALUS	tal_world	AREA	0	7533.4	443.3	879.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_598	TALUS	tal_world	AREA	0	2119.4	27.9	1275.2	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_599	TALUS	tal_world	AREA	0	911.5	80.7	4643.6	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_600	TALUS	tal_world	AREA	0	5199.2	30.5	-1739.0	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_601	TALUS	tal_world	AREA	0	609.9	43.2	1111.5	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_602	TALUS	tal_world	AREA	0	1116.6	26.9	-1771.7	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_603	TALUS	tal_world	AREA	0	-5143.3	19.1	3236.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_604	TALUS	tal_world	AREA	0	-5150.4	13.0	3192.6	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_605	TALUS	tal_world	AREA	0	-5143.3	36.8	3705.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_606	TALUS	tal_world	AREA	0	1113.0	58.3	1488.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_607	TALUS	tal_world	AREA	0	-5117.5	17.6	3205.9	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_608	TALUS	tal_world	AREA	0	-2595.2	47.0	101.3	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_609	TALUS	tal_world	AREA	0	4096.1	8.5	-48.0	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_610	TALUS	tal_world	AREA	0	-3194.3	50.1	4758.0	0	1	a Rebel SpecForce urban guerrilla	humanoid_rebel_specforce_guerrilla	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_611	TALUS	tal_world	AREA	0	-3631.9	56.5	6328.0	0	1	a scientist	humanoid_scientist	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_612	TALUS	tal_world	AREA	0	-5114.3	19.6	3219.2	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_613	TALUS	tal_world	AREA	0	-4989.0	41.9	5755.8	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_614	TALUS	tal_world	AREA	0	2340.6	38.8	2932.7	0	1	a Sleemo scamp	humanoid_sleemo_scamp	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_615	TALUS	tal_world	AREA	0	-2253.6	5.5	897.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_616	TALUS	tal_world	AREA	0	-1397.2	22.4	2118.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_560	TALUS	tal_world	AREA	0	4096.2	8.3	-55.5	0	1	a comm operator	humanoid_imperial_comm_operator	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_561	TALUS	tal_world	AREA	0	5173.2	32.1	-1738.6	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_562	TALUS	tal_world	AREA	0	1638.1	7.0	5435.9	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_563	TALUS	tal_world	AREA	0	-6682.0	680.5	7267.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_564	TALUS	tal_world	AREA	0	-5808.9	5.1	-6401.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_565	TALUS	tal_world	AREA	0	-3165.2	689.7	6827.6	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_566	TALUS	tal_world	AREA	0	-1732.1	18.1	-2883.2	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_567	TALUS	tal_world	AREA	0	3889.6	29.9	3392.4	0	1	a frontiersman	humanoid_frontiersman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_568	TALUS	tal_world	AREA	0	4842.2	94.0	-4729.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_569	TALUS	tal_world	AREA	0	-1727.6	17.7	-2885.6	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_570	TALUS	tal_world	AREA	0	-3491.3	40.0	3701.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_571	TALUS	tal_world	AREA	0	-5679.6	7.1	5285.9	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_572	TALUS	tal_world	AREA	0	-3009.7	0.2	1947.3	0	1	a hermit	humanoid_hermit	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_573	TALUS	tal_world	AREA	0	-127.0	2.6	325.5	0	1	a highwayman	humanoid_highwayman	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_574	TALUS	tal_world	AREA	0	-4597.1	40.4	5701.3	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_575	TALUS	tal_world	AREA	0	5438.1	141.2	5581.1	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_576	TALUS	tal_world	AREA	0	-5218.8	48.5	4603.7	0	1	a huf dun	creature_huf_dun	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_577	TALUS	tal_world	AREA	0	-5226.4	48.6	4596.7	0	1	a huf dun bull	creature_huf_dun_bull	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_578	TALUS	tal_world	AREA	0	5965.0	2.2	-1184.9	0	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_579	TALUS	tal_world	AREA	0	5407.5	57.3	2662.2	0	1	a kahmurra	creature_kahmurra	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_580	TALUS	tal_world	AREA	0	-4480.2	22.7	64.1	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_581	TALUS	tal_world	AREA	0	-3810.5	2.7	-6486.6	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_582	TALUS	tal_world	AREA	0	-3383.1	38.2	-6016.9	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_583	TALUS	tal_world	AREA	0	4796.7	637.4	-6236.8	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_584	TALUS	tal_world	AREA	0	4795.9	636.5	-6245.5	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_585	TALUS	tal_world	AREA	0	4788.2	636.8	-6234.3	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_586	TALUS	tal_world	AREA	0	4783.9	637.2	-6245.7	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_587	TALUS	tal_world	AREA	0	-2722.4	33.3	-2265.0	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_588	TALUS	tal_world	AREA	0	5350.7	1.1	4544.2	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_589	TALUS	tal_world	AREA	0	4791.5	637.9	-6240.6	0	1	a Lost Aqualish warchief	humanoid_lost_aqualish_warchief	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+spawn_talus_590	TALUS	tal_world	AREA	0	-100.9	73.3	2604.0	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_591	TALUS	tal_world	AREA	0	13.8	6.1	-902.6	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_592	TALUS	tal_world	AREA	0	-4909.1	4.0	-4497.9	0	1	a mercenary	humanoid_mercenary_aggro	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_593	TALUS	tal_world	AREA	0	-2257.0	5.3	900.7	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_594	TALUS	tal_world	AREA	0	-4475.0	24.3	56.1	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_595	TALUS	tal_world	AREA	0	7541.3	443.4	876.8	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_596	TALUS	tal_world	AREA	0	7539.5	444.7	886.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_597	TALUS	tal_world	AREA	0	7533.4	443.3	879.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_598	TALUS	tal_world	AREA	0	2119.4	27.9	1275.2	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_599	TALUS	tal_world	AREA	0	911.5	80.7	4643.6	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_600	TALUS	tal_world	AREA	0	5199.2	30.5	-1739.0	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_601	TALUS	tal_world	AREA	0	609.9	43.2	1111.5	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_602	TALUS	tal_world	AREA	0	1116.6	26.9	-1771.7	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_603	TALUS	tal_world	AREA	0	-5143.3	19.1	3236.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_604	TALUS	tal_world	AREA	0	-5150.4	13.0	3192.6	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_605	TALUS	tal_world	AREA	0	-5143.3	36.8	3705.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_606	TALUS	tal_world	AREA	0	1113.0	58.3	1488.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_607	TALUS	tal_world	AREA	0	-5117.5	17.6	3205.9	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_608	TALUS	tal_world	AREA	0	-2595.2	47.0	101.3	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_609	TALUS	tal_world	AREA	0	4096.1	8.5	-48.0	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_610	TALUS	tal_world	AREA	0	-3194.3	50.1	4758.0	0	1	a Rebel SpecForce urban guerrilla	humanoid_rebel_specforce_guerrilla	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_611	TALUS	tal_world	AREA	0	-3631.9	56.5	6328.0	0	1	a scientist	humanoid_scientist	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_612	TALUS	tal_world	AREA	0	-5114.3	19.6	3219.2	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_613	TALUS	tal_world	AREA	0	-4989.0	41.9	5755.8	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_614	TALUS	tal_world	AREA	0	2340.6	38.8	2932.7	0	1	a Sleemo scamp	humanoid_sleemo_scamp	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_615	TALUS	tal_world	AREA	0	-2253.6	5.5	897.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_616	TALUS	tal_world	AREA	0	-1397.2	22.4	2118.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
 spawn_talus_617	TALUS	tal_world	AREA	0	-3448.9	43.5	6187.3	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_618	TALUS	tal_world	AREA	0	3101.3	65.9	-4063.3	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_619	TALUS	tal_world	AREA	0	3089.9	65.9	-4017.9	0	1	a SpecForce wilderness operative	humanoid_rebel_specforce_wilderness_operative	ATTACKABLE	E	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_620	TALUS	tal_world	AREA	0	2381.8	125.0	-4995.1	0	1	a SpecOps trooper	humanoid_rebel_specops_trooper	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_621	TALUS	tal_world	AREA	0	5965.8	2.2	-1190.7	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_622	TALUS	tal_world	AREA	0	1725.8	22.9	1626.4	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_623	TALUS	tal_world	AREA	0	5981.1	3.5	-1205.6	0	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_624	TALUS	tal_world	AREA	0	-4555.5	140.3	-2903.2	0	1	a Talus Liberation Party patriot	humanoid_liberation_patriot	ATTACKABLE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_625	TALUS	tal_world	AREA	0	-54.3	7.6	979.9	0	1	a thug	humanoid_thug_human_female	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_626	TALUS	tal_world	AREA	0	82.4	11.5	1580.2	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_627	TALUS	tal_world	AREA	0	4971.4	63.9	3847.5	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_628	TALUS	tal_world	AREA	0	-4593.0	0.6	4347.5	0	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_629	TALUS	tal_world	AREA	0	-4001.9	1.4	971.4	0	1	a vicious huf dun	creature_huf_dun_vicious	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_618	TALUS	tal_world	AREA	0	3101.3	65.9	-4063.3	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_619	TALUS	tal_world	AREA	0	3089.9	65.9	-4017.9	0	1	a SpecForce wilderness operative	humanoid_rebel_specforce_wilderness_operative	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_620	TALUS	tal_world	AREA	0	2381.8	125.0	-4995.1	0	1	a SpecOps trooper	humanoid_rebel_specops_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_621	TALUS	tal_world	AREA	0	5965.8	2.2	-1190.7	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_622	TALUS	tal_world	AREA	0	1725.8	22.9	1626.4	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_623	TALUS	tal_world	AREA	0	5981.1	3.5	-1205.6	0	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_624	TALUS	tal_world	AREA	0	-4555.5	140.3	-2903.2	0	1	a Talus Liberation Party patriot	humanoid_liberation_patriot	ATTACKABLE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_625	TALUS	tal_world	AREA	0	-54.3	7.6	979.9	0	1	a thug	humanoid_thug_human_female	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_626	TALUS	tal_world	AREA	0	82.4	11.5	1580.2	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_627	TALUS	tal_world	AREA	0	4971.4	63.9	3847.5	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_628	TALUS	tal_world	AREA	0	-4593.0	0.6	4347.5	0	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_629	TALUS	tal_world	AREA	0	-4001.9	1.4	971.4	0	1	a vicious huf dun	creature_huf_dun_vicious	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
 spawn_talus_630	TALUS	tal_world	AREA	0	618.3	40.9	1087.9	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
 spawn_talus_631	TALUS	tal_world	AREA	0	3880.9	30.0	3390.1	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	TURN	0	0	-	idle			600
 spawn_talus_632	TALUS	tal_world	AREA	0	-3151.4	5.4	-926.8	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_633	TALUS	tal_world	AREA	0	-4759.9	15.8	3932.9	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_634	TALUS	tal_world	AREA	0	-5097.9	9.3	1266.6	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_635	TALUS	tal_world	AREA	0	5473.7	43.0	1097.5	0	1	a woodland kima	creature_kima_woodland	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_636	TALUS	tal_world	AREA	0	-3677.0	35.0	-554.0	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	Outback	Talus	1	TURN	0	0	-	idle			600
-spawn_talus_637	TALUS	tal_world	AREA	0	-3682.3	35.4	-543.3	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_638	TALUS	tal_world	AREA	0	-4021.1	30.1	4621.3	0	1	an Aa'kuan sentinel	humanoid_aakuan_sentinel	ATTACKABLE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_639	TALUS	tal_world	AREA	0	-4915.9	4.5	-4498.3	0	1	an agriculturalist	humanoid_farmer_agriculturist	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_633	TALUS	tal_world	AREA	0	-4759.9	15.8	3932.9	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_634	TALUS	tal_world	AREA	0	-5097.9	9.3	1266.6	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_635	TALUS	tal_world	AREA	0	5473.7	43.0	1097.5	0	1	a woodland kima	creature_kima_woodland	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_636	TALUS	tal_world	AREA	0	-3677.0	35.0	-554.0	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+spawn_talus_637	TALUS	tal_world	AREA	0	-3682.3	35.4	-543.3	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_638	TALUS	tal_world	AREA	0	-4021.1	30.1	4621.3	0	1	an Aa'kuan sentinel	humanoid_aakuan_sentinel	ATTACKABLE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_639	TALUS	tal_world	AREA	0	-4915.9	4.5	-4498.3	0	1	an agriculturalist	humanoid_farmer_agriculturist	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
 spawn_talus_640	TALUS	tal_world	AREA	0	4304.7	49.4	4751.1	96	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 spawn_talus_641	TALUS	tal_world	AREA	0	4256.6	49.4	4759.4	18	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
-spawn_talus_642	TALUS	tal_world	AREA	0	3214.8	8.4	1259.7	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_643	TALUS	tal_world	AREA	0	-6024.1	66.6	-1186.0	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_644	TALUS	tal_world	AREA	0	-5120.6	19.5	3223.0	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_645	TALUS	tal_world	AREA	0	-4977.8	42.7	5754.9	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_646	TALUS	tal_world	AREA	0	-2406.0	23.0	2044.0	0	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_647	TALUS	tal_world	AREA	0	-2384.4	24.0	2033.5	0	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_648	TALUS	tal_world	AREA	0	-2412.3	27.5	2024.9	0	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	25	40	Outback	Talus	1	LOITER	5	0	-	idle			600
-spawn_talus_649	TALUS	tal_aakuan_cave	AREA	2	24.4	-39.0	-37.4	0	1	an Aa'kuan defender	humanoid_aakuan_defender	ATTACKABLE	E	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_650	TALUS	tal_aakuan_cave	AREA	2	43.7	-47.1	-7.7	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_651	TALUS	tal_aakuan_cave	AREA	2	56.3	-68.5	-38.2	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_652	TALUS	tal_aakuan_cave	AREA	3	77.3	-67.4	-34.1	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_653	TALUS	tal_aakuan_cave	AREA	3	69.8	-57.1	-9.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_654	TALUS	tal_aakuan_cave	AREA	3	81.8	-63.4	-19.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_655	TALUS	tal_aakuan_cave	AREA	4	92.3	-76.3	-79.8	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_656	TALUS	tal_aakuan_cave	AREA	4	85.2	-74.7	-53.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_657	TALUS	tal_aakuan_cave	AREA	4	92.1	-76.2	-64.3	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_658	TALUS	tal_aakuan_cave	AREA	5	93.5	-46.5	-120.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_659	TALUS	tal_aakuan_cave	AREA	6	53.3	-76.0	-85.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_660	TALUS	tal_aakuan_cave	AREA	7	70.2	-66.4	-138.4	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_661	TALUS	tal_aakuan_cave	AREA	8	154.3	-65.7	-128.2	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_662	TALUS	tal_aakuan_cave	AREA	8	138.9	-67.3	-93.6	0	1	an Aa'kuan spice guard	humanoid_aakuan_spiceguard	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_663	TALUS	tal_aakuan_cave	AREA	8	112.5	-66.9	-94.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_664	TALUS	tal_aakuan_cave	AREA	8	153.0	-65.9	-96.8	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_665	TALUS	tal_aakuan_cave	AREA	9	188.7	-66.2	-98.4	0	1	an Aa'kuan anarchist	humanoid_aakuan_anarchist	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_666	TALUS	tal_aakuan_cave	AREA	9	186.1	-65.4	-109.8	0	1	an Aa'kuan assassin	humanoid_aakuan_assassin	ATTACKABLE	E	25	40	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_667	TALUS	tal_aakuan_cave	AREA	9	180.4	-66.1	-96.8	0	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	25	40	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_668	TALUS	tal_world	AREA	0	5933.7	40.1	4649.5	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	25	40	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_669	TALUS	tal_world	AREA	0	-1619.7	23.6	622.5	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	25	40	POI	Binayre Camp	1	TURN	0	0	-	idle			600
-spawn_talus_670	TALUS	tal_world	AREA	0	-1640.7	22.4	626.0	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
-spawn_talus_671	TALUS	tal_world	AREA	0	-1626.0	22.7	605.0	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	25	40	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
-spawn_talus_672	TALUS	tal_world	AREA	0	-1619.4	24.9	649.0	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	25	40	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
-spawn_talus_673	TALUS	tal_binayre_bunker	AREA	2	3.7	0.3	-4.0	0	1	a Binayre hooligan	humanoid_binayre_hooligan	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_674	TALUS	tal_binayre_bunker	AREA	4	-3.4	-3.3	4.8	179	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_talus_675	TALUS	tal_binayre_bunker	AREA	5	4.6	-6.8	-4.7	0	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_676	TALUS	tal_binayre_bunker	AREA	6	4.5	-10.3	-18.4	-90	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_talus_677	TALUS	tal_binayre_bunker	AREA	7	-5.8	-13.7	3.5	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_678	TALUS	tal_binayre_bunker	AREA	7	-2.5	-13.7	-6.4	0	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_679	TALUS	tal_binayre_bunker	AREA	8	3.2	-13.8	11.7	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_680	TALUS	tal_binayre_bunker	AREA	9	15.7	-13.8	9.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_681	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_682	TALUS	tal_binayre_bunker	AREA	10	13.7	-11.5	-20.9	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_683	TALUS	tal_binayre_bunker	AREA	10	15.5	-13.8	-10.7	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-spawn_talus_684	TALUS	tal_world	PATROL	0	5653.6	105.0	-4105.7	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	25	40	POI	Binayre Pirate Bunker	2	PATROL	0	patrol_talus_600	column	idle			600
-spawn_talus_685	TALUS	tal_world	AREA	0	5567.6	102.0	-4079.8	0	1	a Binayre hooligan	humanoid_binayre_hooligan	AGGRESSIVE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_686	TALUS	tal_world	AREA	0	5658.9	109.4	-4141.0	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-spawn_talus_687	TALUS	tal_world	AREA	0	5621.9	105.4	-4161.8	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	25	40	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_642	TALUS	tal_world	AREA	0	3214.8	8.4	1259.7	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_643	TALUS	tal_world	AREA	0	-6024.1	66.6	-1186.0	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_644	TALUS	tal_world	AREA	0	-5120.6	19.5	3223.0	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_645	TALUS	tal_world	AREA	0	-4977.8	42.7	5754.9	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_646	TALUS	tal_world	AREA	0	-2406.0	23.0	2044.0	0	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_647	TALUS	tal_world	AREA	0	-2384.4	24.0	2033.5	0	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_648	TALUS	tal_world	AREA	0	-2412.3	27.5	2024.9	0	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+spawn_talus_649	TALUS	tal_aakuan_cave	AREA	2	24.4	-39.0	-37.4	0	1	an Aa'kuan defender	humanoid_aakuan_defender	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_650	TALUS	tal_aakuan_cave	AREA	2	43.7	-47.1	-7.7	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_651	TALUS	tal_aakuan_cave	AREA	2	56.3	-68.5	-38.2	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_652	TALUS	tal_aakuan_cave	AREA	3	77.3	-67.4	-34.1	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_653	TALUS	tal_aakuan_cave	AREA	3	69.8	-57.1	-9.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_654	TALUS	tal_aakuan_cave	AREA	3	81.8	-63.4	-19.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_655	TALUS	tal_aakuan_cave	AREA	4	92.3	-76.3	-79.8	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_656	TALUS	tal_aakuan_cave	AREA	4	85.2	-74.7	-53.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_657	TALUS	tal_aakuan_cave	AREA	4	92.1	-76.2	-64.3	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_658	TALUS	tal_aakuan_cave	AREA	5	93.5	-46.5	-120.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_659	TALUS	tal_aakuan_cave	AREA	6	53.3	-76.0	-85.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_660	TALUS	tal_aakuan_cave	AREA	7	70.2	-66.4	-138.4	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_661	TALUS	tal_aakuan_cave	AREA	8	154.3	-65.7	-128.2	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_662	TALUS	tal_aakuan_cave	AREA	8	138.9	-67.3	-93.6	0	1	an Aa'kuan spice guard	humanoid_aakuan_spiceguard	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_663	TALUS	tal_aakuan_cave	AREA	8	112.5	-66.9	-94.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_664	TALUS	tal_aakuan_cave	AREA	8	153.0	-65.9	-96.8	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_665	TALUS	tal_aakuan_cave	AREA	9	188.7	-66.2	-98.4	0	1	an Aa'kuan anarchist	humanoid_aakuan_anarchist	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_666	TALUS	tal_aakuan_cave	AREA	9	186.1	-65.4	-109.8	0	1	an Aa'kuan assassin	humanoid_aakuan_assassin	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_667	TALUS	tal_aakuan_cave	AREA	9	180.4	-66.1	-96.8	0	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_668	TALUS	tal_world	AREA	0	5933.7	40.1	4649.5	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_669	TALUS	tal_world	AREA	0	-1619.7	23.6	622.5	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	POI	Binayre Camp	1	TURN	0	0	-	idle			600
+spawn_talus_670	TALUS	tal_world	AREA	0	-1640.7	22.4	626.0	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
+spawn_talus_671	TALUS	tal_world	AREA	0	-1626.0	22.7	605.0	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
+spawn_talus_672	TALUS	tal_world	AREA	0	-1619.4	24.9	649.0	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
+spawn_talus_673	TALUS	tal_binayre_bunker	AREA	2	3.7	0.3	-4.0	0	1	a Binayre hooligan	humanoid_binayre_hooligan	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_674	TALUS	tal_binayre_bunker	AREA	4	-3.4	-3.3	4.8	179	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_talus_675	TALUS	tal_binayre_bunker	AREA	5	4.6	-6.8	-4.7	0	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_676	TALUS	tal_binayre_bunker	AREA	6	4.5	-10.3	-18.4	-90	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
+spawn_talus_677	TALUS	tal_binayre_bunker	AREA	7	-5.8	-13.7	3.5	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_678	TALUS	tal_binayre_bunker	AREA	7	-2.5	-13.7	-6.4	0	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_679	TALUS	tal_binayre_bunker	AREA	8	3.2	-13.8	11.7	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_680	TALUS	tal_binayre_bunker	AREA	9	15.7	-13.8	9.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_681	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_682	TALUS	tal_binayre_bunker	AREA	10	13.7	-11.5	-20.9	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_683	TALUS	tal_binayre_bunker	AREA	10	15.5	-13.8	-10.7	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+spawn_talus_684	TALUS	tal_world	PATROL	0	5653.6	105.0	-4105.7	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	41	50	POI	Binayre Pirate Bunker	2	PATROL	0	patrol_talus_600	column	idle			600
+spawn_talus_685	TALUS	tal_world	AREA	0	5567.6	102.0	-4079.8	0	1	a Binayre hooligan	humanoid_binayre_hooligan	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_686	TALUS	tal_world	AREA	0	5658.9	109.4	-4141.0	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+spawn_talus_687	TALUS	tal_world	AREA	0	5621.9	105.4	-4161.8	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
 spawn_talus_688	TALUS	tal_world	AREA	0	5618.0	105.8	-4131.0	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
-spawn_talus_689	TALUS	tal_world	AREA	0	2968.5	16.9	6038.5	0	1	a CorSec Captain	humanoid_corsec_captain	ATTACKABLE	E	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_690	TALUS	tal_world	AREA	0	3014.6	19.2	6061.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_691	TALUS	tal_world	AREA	0	2991.2	31.8	6087.8	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_692	TALUS	tal_world	AREA	0	3041.3	30.8	6055.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_693	TALUS	tal_world	AREA	0	2964.7	17.5	6044.8	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_694	TALUS	tal_world	AREA	0	3009.7	19.8	6064.6	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_695	TALUS	tal_world	AREA	0	2992.8	30.5	6085.0	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_696	TALUS	tal_world	AREA	0	3045.0	31.5	6056.3	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_697	TALUS	tal_world	AREA	0	3006.1	20.8	6071.4	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_698	TALUS	tal_world	AREA	0	3077.9	35.0	6140.2	0	1	a Flail butcher	humanoid_flail_butcher	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_699	TALUS	tal_world	AREA	0	3073.6	35.0	6141.7	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_700	TALUS	tal_world	AREA	0	3072.0	42.6	6093.8	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_701	TALUS	tal_world	AREA	0	3040.3	34.2	6121.3	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_702	TALUS	tal_world	AREA	0	3063.0	32.2	6109.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_703	TALUS	tal_world	AREA	0	3057.3	32.4	6111.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
-spawn_talus_704	TALUS	tal_world	AREA	0	3044.2	33.8	6117.8	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_705	TALUS	tal_world	AREA	0	3063.7	31.8	6104.5	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	25	40	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
-spawn_talus_706	TALUS	tal_detainment_center	AREA	2	-0.2	0.3	3.2	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_707	TALUS	tal_detainment_center	AREA	4	6.0	-9.0	22.8	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_708	TALUS	tal_detainment_center	AREA	4	-1.4	-9.0	30.5	0	1	an Imperial Staff Corporal	humanoid_imperial_staff_corporal	ATTACKABLE	E	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_709	TALUS	tal_detainment_center	AREA	5	-37.5	-9.0	26.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_710	TALUS	tal_detainment_center	AREA	6	-55.4	-9.0	9.9	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_711	TALUS	tal_detainment_center	AREA	6	-55.3	-9.0	45.5	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_712	TALUS	tal_detainment_center	AREA	6	-50.5	-9.0	-5.6	0	1	a special missions engineer	humanoid_imperial_special_missions_engineer	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_713	TALUS	tal_detainment_center	AREA	6	-51.2	-9.0	9.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_714	TALUS	tal_detainment_center	AREA	6	-78.1	-9.0	21.7	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_715	TALUS	tal_detainment_center	AREA	6	-53.5	-9.0	60.9	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_716	TALUS	tal_detainment_center	AREA	7	13.1	-17.0	60.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_717	TALUS	tal_detainment_center	AREA	7	32.4	-17.0	61.0	0	1	an Imperial High General	humanoid_imperial_high_general	ATTACKABLE	E	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_718	TALUS	tal_detainment_center	AREA	7	23.9	-17.0	66.4	0	1	an Imperial Staff Corporal	humanoid_imperial_staff_corporal	ATTACKABLE	E	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_719	TALUS	tal_detainment_center	AREA	8	-10.4	-17.0	75.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_720	TALUS	tal_detainment_center	AREA	9	-42.7	-23.0	112.6	86	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	POI	Detainment Center	1	IDLE	0	0	-	idle			600
-spawn_talus_721	TALUS	tal_detainment_center	AREA	9	14.0	-23.0	112.5	-91	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	POI	Detainment Center	1	IDLE	0	0	-	idle			600
-spawn_talus_722	TALUS	tal_detainment_center	AREA	9	13.7	-23.0	202.1	-99	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	POI	Detainment Center	1	IDLE	0	0	-	idle			600
-spawn_talus_723	TALUS	tal_detainment_center	AREA	9	-42.7	-23.0	202.2	91	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	POI	Detainment Center	1	IDLE	0	0	-	idle			600
-spawn_talus_724	TALUS	tal_detainment_center	AREA	9	-13.7	-23.0	118.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_725	TALUS	tal_detainment_center	AREA	9	7.6	-23.0	156.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_726	TALUS	tal_detainment_center	AREA	9	-16.0	-23.0	194.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_727	TALUS	tal_detainment_center	AREA	9	-36.7	-23.0	155.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_728	TALUS	tal_detainment_center	AREA	10	33.0	-23.0	114.0	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_729	TALUS	tal_detainment_center	AREA	10	41.8	-23.0	114.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_730	TALUS	tal_detainment_center	AREA	10	38.1	-21.0	143.4	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_731	TALUS	tal_detainment_center	AREA	11	-68.3	-23.0	117.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_732	TALUS	tal_detainment_center	AREA	11	-67.0	-21.0	134.1	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_733	TALUS	tal_detainment_center	AREA	11	-66.4	-21.0	147.5	0	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_734	TALUS	tal_detainment_center	AREA	12	20.0	-23.0	223.8	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_735	TALUS	tal_detainment_center	AREA	12	20.2	-23.0	214.7	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_736	TALUS	tal_detainment_center	AREA	12	47.4	-21.0	219.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_737	TALUS	tal_detainment_center	AREA	14	-3.1	-23.0	236.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_689	TALUS	tal_world	AREA	0	2968.5	16.9	6038.5	0	1	a CorSec Captain	humanoid_corsec_captain	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_690	TALUS	tal_world	AREA	0	3014.6	19.2	6061.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_691	TALUS	tal_world	AREA	0	2991.2	31.8	6087.8	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_692	TALUS	tal_world	AREA	0	3041.3	30.8	6055.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_693	TALUS	tal_world	AREA	0	2964.7	17.5	6044.8	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_694	TALUS	tal_world	AREA	0	3009.7	19.8	6064.6	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_695	TALUS	tal_world	AREA	0	2992.8	30.5	6085.0	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_696	TALUS	tal_world	AREA	0	3045.0	31.5	6056.3	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_697	TALUS	tal_world	AREA	0	3006.1	20.8	6071.4	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_698	TALUS	tal_world	AREA	0	3077.9	35.0	6140.2	0	1	a Flail butcher	humanoid_flail_butcher	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_699	TALUS	tal_world	AREA	0	3073.6	35.0	6141.7	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_700	TALUS	tal_world	AREA	0	3072.0	42.6	6093.8	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_701	TALUS	tal_world	AREA	0	3040.3	34.2	6121.3	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_702	TALUS	tal_world	AREA	0	3063.0	32.2	6109.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_703	TALUS	tal_world	AREA	0	3057.3	32.4	6111.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+spawn_talus_704	TALUS	tal_world	AREA	0	3044.2	33.8	6117.8	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_705	TALUS	tal_world	AREA	0	3063.7	31.8	6104.5	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+spawn_talus_706	TALUS	tal_detainment_center	AREA	2	-0.2	0.3	3.2	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_707	TALUS	tal_detainment_center	AREA	4	6.0	-9.0	22.8	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_708	TALUS	tal_detainment_center	AREA	4	-1.4	-9.0	30.5	0	1	an Imperial Staff Corporal	humanoid_imperial_staff_corporal	ATTACKABLE	E	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_709	TALUS	tal_detainment_center	AREA	5	-37.5	-9.0	26.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_710	TALUS	tal_detainment_center	AREA	6	-55.4	-9.0	9.9	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_711	TALUS	tal_detainment_center	AREA	6	-55.3	-9.0	45.5	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_712	TALUS	tal_detainment_center	AREA	6	-50.5	-9.0	-5.6	0	1	a special missions engineer	humanoid_imperial_special_missions_engineer	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_713	TALUS	tal_detainment_center	AREA	6	-51.2	-9.0	9.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_714	TALUS	tal_detainment_center	AREA	6	-78.1	-9.0	21.7	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_715	TALUS	tal_detainment_center	AREA	6	-53.5	-9.0	60.9	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_716	TALUS	tal_detainment_center	AREA	7	13.1	-17.0	60.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_717	TALUS	tal_detainment_center	AREA	7	32.4	-17.0	61.0	0	1	an Imperial High General	humanoid_imperial_high_general	ATTACKABLE	E	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_718	TALUS	tal_detainment_center	AREA	7	23.9	-17.0	66.4	0	1	an Imperial Staff Corporal	humanoid_imperial_staff_corporal	ATTACKABLE	E	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_719	TALUS	tal_detainment_center	AREA	8	-10.4	-17.0	75.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_720	TALUS	tal_detainment_center	AREA	9	-42.7	-23.0	112.6	86	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	POI	Detainment Center	1	IDLE	0	0	-	idle			600
+spawn_talus_721	TALUS	tal_detainment_center	AREA	9	14.0	-23.0	112.5	-91	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	POI	Detainment Center	1	IDLE	0	0	-	idle			600
+spawn_talus_722	TALUS	tal_detainment_center	AREA	9	13.7	-23.0	202.1	-99	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	POI	Detainment Center	1	IDLE	0	0	-	idle			600
+spawn_talus_723	TALUS	tal_detainment_center	AREA	9	-42.7	-23.0	202.2	91	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	POI	Detainment Center	1	IDLE	0	0	-	idle			600
+spawn_talus_724	TALUS	tal_detainment_center	AREA	9	-13.7	-23.0	118.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_725	TALUS	tal_detainment_center	AREA	9	7.6	-23.0	156.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_726	TALUS	tal_detainment_center	AREA	9	-16.0	-23.0	194.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_727	TALUS	tal_detainment_center	AREA	9	-36.7	-23.0	155.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_728	TALUS	tal_detainment_center	AREA	10	33.0	-23.0	114.0	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_729	TALUS	tal_detainment_center	AREA	10	41.8	-23.0	114.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_730	TALUS	tal_detainment_center	AREA	10	38.1	-21.0	143.4	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_731	TALUS	tal_detainment_center	AREA	11	-68.3	-23.0	117.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_732	TALUS	tal_detainment_center	AREA	11	-67.0	-21.0	134.1	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_733	TALUS	tal_detainment_center	AREA	11	-66.4	-21.0	147.5	0	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_734	TALUS	tal_detainment_center	AREA	12	20.0	-23.0	223.8	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_735	TALUS	tal_detainment_center	AREA	12	20.2	-23.0	214.7	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	TURN	0	0	-	idle			600
+spawn_talus_736	TALUS	tal_detainment_center	AREA	12	47.4	-21.0	219.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_737	TALUS	tal_detainment_center	AREA	14	-3.1	-23.0	236.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
 spawn_talus_738	TALUS	tal_detainment_center	AREA	14	-19.5	-23.0	229.1	0	1	an Imperial Army Captain	humanoid_imperial_army_captain	INVULNERABLE	N	100	100	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_739	TALUS	tal_detainment_center	AREA	15	-60.6	-23.0	259.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_740	TALUS	tal_detainment_center	AREA	15	-38.9	-23.0	259.4	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_741	TALUS	tal_detainment_center	AREA	15	-76.5	-23.0	259.2	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_742	TALUS	tal_detainment_center	AREA	16	6.7	-23.0	280.3	0	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_743	TALUS	tal_detainment_center	AREA	16	5.8	-23.0	255.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_739	TALUS	tal_detainment_center	AREA	15	-60.6	-23.0	259.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_740	TALUS	tal_detainment_center	AREA	15	-38.9	-23.0	259.4	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_741	TALUS	tal_detainment_center	AREA	15	-76.5	-23.0	259.2	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_742	TALUS	tal_detainment_center	AREA	16	6.7	-23.0	280.3	0	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_743	TALUS	tal_detainment_center	AREA	16	5.8	-23.0	255.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
 spawn_talus_744	TALUS	tal_detainment_center	AREA	16	-2.7	-23.0	269.1	0	1	an Imperial Army Captain	humanoid_imperial_army_captain	INVULNERABLE	N	100	100	POI	Detainment Center	1	TURN	0	0	-	idle			600
-spawn_talus_745	TALUS	tal_detainment_center	AREA	17	44.7	-23.0	257.1	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_746	TALUS	tal_detainment_center	AREA	17	40.1	-23.0	272.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_747	TALUS	tal_detainment_center	AREA	17	4.9	-23.0	246.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_748	TALUS	tal_world	AREA	0	4988.1	450.1	-6009.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_749	TALUS	tal_world	AREA	0	4970.0	450.1	-6017.9	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	25	40	POI	Detainment Center	1	LOITER	5	0	-	idle			600
-spawn_talus_750	TALUS	tal_traitor_erran	AREA	2	-3.7	0.3	-1.0	-90	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	25	40	POI	Erran Sif	1	IDLE	0	0	-	idle			600
-spawn_talus_751	TALUS	tal_traitor_erran	AREA	4	3.8	-3.3	5.1	-179	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	IDLE	0	0	-	idle			600
-spawn_talus_752	TALUS	tal_traitor_erran	AREA	5	-7.5	-6.8	-6.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_753	TALUS	tal_traitor_erran	AREA	5	-2.4	-6.8	-6.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_754	TALUS	tal_traitor_erran	AREA	6	-4.3	-6.8	-15.2	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_755	TALUS	tal_traitor_erran	AREA	6	6.6	-6.8	-16.0	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_756	TALUS	tal_traitor_erran	AREA	7	5.2	-6.8	-2.1	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_757	TALUS	tal_traitor_erran	AREA	7	5.3	-6.8	-7.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_758	TALUS	tal_traitor_erran	AREA	9	-5.5	-13.8	0.5	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	25	40	POI	Erran Sif	1	LOITER	5	0	-	idle			600
-spawn_talus_759	TALUS	tal_traitor_erran	AREA	9	0.3	-13.8	0.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_760	TALUS	tal_traitor_erran	AREA	9	1.4	-13.8	-14.8	0	1	Doak Sif	humanoid_doak_sif	AGGRESSIVE	B	25	40	POI	Erran Sif	1	IDLE	0	0	-	idle			600
-spawn_talus_761	TALUS	tal_traitor_erran	AREA	9	-4.0	-13.8	-16.6	0	1	Erran Sif	humanoid_erran_sif	AGGRESSIVE	B	25	40	POI	Erran Sif	1	IDLE	0	0	-	idle			600
-spawn_talus_762	TALUS	tal_traitor_erran	AREA	9	-6.9	-13.8	-13.1	0	1	Hirsch Sif	humanoid_hirsch_sif	AGGRESSIVE	B	25	40	POI	Erran Sif	1	IDLE	0	0	-	idle			600
-spawn_talus_763	TALUS	tal_world	AREA	0	2143.4	122.0	-5609.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_764	TALUS	tal_world	AREA	0	2151.5	122.0	-5612.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_765	TALUS	tal_world	AREA	0	2166.5	122.0	-5629.0	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	25	40	POI	Erran Sif	1	TURN	0	0	-	idle			600
-spawn_talus_766	TALUS	tal_giant_decay_mite_cave	AREA	2	7.2	-16.0	-25.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_767	TALUS	tal_giant_decay_mite_cave	AREA	3	0.0	-32.3	-63.4	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_768	TALUS	tal_giant_decay_mite_cave	AREA	3	15.7	-32.1	-78.3	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_769	TALUS	tal_giant_decay_mite_cave	AREA	3	-9.8	-32.4	-80.8	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_770	TALUS	tal_giant_decay_mite_cave	AREA	4	41.4	-37.9	-63.0	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_771	TALUS	tal_giant_decay_mite_cave	AREA	4	45.9	-38.6	-90.8	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_772	TALUS	tal_giant_decay_mite_cave	AREA	4	43.2	-38.0	-95.2	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_773	TALUS	tal_giant_decay_mite_cave	AREA	4	48.2	-38.6	-59.0	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_774	TALUS	tal_giant_decay_mite_cave	AREA	4	50.1	-38.1	-96.7	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_775	TALUS	tal_giant_decay_mite_cave	AREA	5	23.2	-37.9	-120.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_776	TALUS	tal_giant_decay_mite_cave	AREA	5	0.2	-37.7	-148.4	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_777	TALUS	tal_giant_decay_mite_cave	AREA	5	-8.6	-36.7	-140.3	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_778	TALUS	tal_giant_decay_mite_cave	AREA	5	50.4	-40.0	-123.2	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_779	TALUS	tal_giant_decay_mite_cave	AREA	5	65.7	-46.4	-146.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_780	TALUS	tal_giant_decay_mite_cave	AREA	5	35.9	-46.9	-150.5	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_781	TALUS	tal_giant_decay_mite_cave	AREA	5	54.8	-48.9	-181.8	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_782	TALUS	tal_giant_decay_mite_cave	AREA	6	-0.7	-56.0	-180.9	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_783	TALUS	tal_giant_decay_mite_cave	AREA	6	-34.4	-58.5	-180.4	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_784	TALUS	tal_giant_decay_mite_cave	AREA	7	0.9	-55.4	-231.2	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_785	TALUS	tal_giant_decay_mite_cave	AREA	7	-7.9	-56.7	-237.6	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_786	TALUS	tal_giant_decay_mite_cave	AREA	7	-22.0	-55.2	-259.6	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_787	TALUS	tal_giant_decay_mite_cave	AREA	7	-13.0	-57.8	-213.1	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_788	TALUS	tal_giant_decay_mite_cave	AREA	7	-21.8	-57.5	-243.6	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_789	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.9	-89.4	-141.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_790	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.6	-94.3	-139.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_791	TALUS	tal_giant_decay_mite_cave	AREA	8	-85.6	-61.6	-100.0	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_792	TALUS	tal_giant_decay_mite_cave	AREA	8	-83.3	-62.3	-90.0	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_793	TALUS	tal_giant_decay_mite_cave	AREA	8	-57.2	-62.1	-193.6	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_794	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.1	-61.7	-167.2	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_795	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.7	-65.3	-173.5	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_796	TALUS	tal_giant_decay_mite_cave	AREA	8	-121.5	-60.8	-165.7	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_797	TALUS	tal_giant_decay_mite_cave	AREA	8	-100.3	-62.1	-128.7	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_798	TALUS	tal_giant_decay_mite_cave	AREA	8	-99.7	-61.5	-100.3	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_799	TALUS	tal_giant_decay_mite_cave	AREA	9	-44.8	-61.7	-86.9	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_800	TALUS	tal_giant_decay_mite_cave	AREA	9	-23.3	-61.5	-95.8	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_801	TALUS	tal_giant_decay_mite_cave	AREA	9	-43.3	-61.7	-108.8	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_802	TALUS	tal_giant_decay_mite_cave	AREA	9	-22.1	-61.8	-88.5	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_803	TALUS	tal_giant_decay_mite_cave	AREA	9	-56.8	-60.4	-112.8	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_804	TALUS	tal_giant_decay_mite_cave	AREA	10	-56.9	-83.6	-145.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_805	TALUS	tal_giant_decay_mite_cave	AREA	10	-27.1	-68.8	-129.1	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_806	TALUS	tal_giant_decay_mite_cave	AREA	10	-29.0	-72.2	-148.6	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_807	TALUS	tal_giant_decay_mite_cave	AREA	11	-102.5	-91.7	-118.7	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_808	TALUS	tal_giant_decay_mite_cave	AREA	11	-94.0	-92.9	-107.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_809	TALUS	tal_giant_decay_mite_cave	AREA	11	-87.3	-91.7	-90.6	0	1	a giant decay mite queen	creature_mite_giant_decay_queen	AGGRESSIVE	B	25	40	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
-spawn_talus_810	TALUS	tal_world	AREA	0	-5527.7	35.9	-4702.5	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_811	TALUS	tal_world	AREA	0	-5515.2	36.8	-4715.9	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_812	TALUS	tal_world	AREA	0	-5555.1	47.0	-4707.3	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	25	40	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_813	TALUS	tal_giant_fynock_cave	AREA	4	49.5	-38.1	-97.0	0	1	a decay mite	creature_mite_decay	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_814	TALUS	tal_giant_fynock_cave	AREA	4	40.0	-38.1	-70.2	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_815	TALUS	tal_giant_fynock_cave	AREA	4	40.8	-38.0	-98.6	0	1	a rot mite	creature_mite_rot	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_816	TALUS	tal_giant_fynock_cave	AREA	5	65.0	-50.2	-166.0	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_817	TALUS	tal_giant_fynock_cave	AREA	5	56.7	-46.2	-146.3	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_818	TALUS	tal_giant_fynock_cave	AREA	5	30.2	-52.0	-179.0	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_819	TALUS	tal_giant_fynock_cave	AREA	5	35.7	-49.6	-164.3	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_820	TALUS	tal_giant_fynock_cave	AREA	5	-7.8	-36.8	-139.2	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_821	TALUS	tal_giant_fynock_cave	AREA	5	-2.1	-37.4	-144.2	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_745	TALUS	tal_detainment_center	AREA	17	44.7	-23.0	257.1	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_746	TALUS	tal_detainment_center	AREA	17	40.1	-23.0	272.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_747	TALUS	tal_detainment_center	AREA	17	4.9	-23.0	246.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_748	TALUS	tal_world	AREA	0	4988.1	450.1	-6009.4	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_749	TALUS	tal_world	AREA	0	4970.0	450.1	-6017.9	0	1	a detention security guard	humanoid_imperial_security_guard_detention	ATTACKABLE	N	41	50	POI	Detainment Center	1	LOITER	5	0	-	idle			600
+spawn_talus_750	TALUS	tal_traitor_erran	AREA	2	-3.7	0.3	-1.0	-90	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+spawn_talus_751	TALUS	tal_traitor_erran	AREA	4	3.8	-3.3	5.1	-179	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+spawn_talus_752	TALUS	tal_traitor_erran	AREA	5	-7.5	-6.8	-6.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_753	TALUS	tal_traitor_erran	AREA	5	-2.4	-6.8	-6.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_754	TALUS	tal_traitor_erran	AREA	6	-4.3	-6.8	-15.2	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_755	TALUS	tal_traitor_erran	AREA	6	6.6	-6.8	-16.0	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_756	TALUS	tal_traitor_erran	AREA	7	5.2	-6.8	-2.1	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_757	TALUS	tal_traitor_erran	AREA	7	5.3	-6.8	-7.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_758	TALUS	tal_traitor_erran	AREA	9	-5.5	-13.8	0.5	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	LOITER	5	0	-	idle			600
+spawn_talus_759	TALUS	tal_traitor_erran	AREA	9	0.3	-13.8	0.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_760	TALUS	tal_traitor_erran	AREA	9	1.4	-13.8	-14.8	0	1	Doak Sif	humanoid_doak_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+spawn_talus_761	TALUS	tal_traitor_erran	AREA	9	-4.0	-13.8	-16.6	0	1	Erran Sif	humanoid_erran_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+spawn_talus_762	TALUS	tal_traitor_erran	AREA	9	-6.9	-13.8	-13.1	0	1	Hirsch Sif	humanoid_hirsch_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+spawn_talus_763	TALUS	tal_world	AREA	0	2143.4	122.0	-5609.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_764	TALUS	tal_world	AREA	0	2151.5	122.0	-5612.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_765	TALUS	tal_world	AREA	0	2166.5	122.0	-5629.0	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+spawn_talus_766	TALUS	tal_giant_decay_mite_cave	AREA	2	7.2	-16.0	-25.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_767	TALUS	tal_giant_decay_mite_cave	AREA	3	0.0	-32.3	-63.4	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_768	TALUS	tal_giant_decay_mite_cave	AREA	3	15.7	-32.1	-78.3	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_769	TALUS	tal_giant_decay_mite_cave	AREA	3	-9.8	-32.4	-80.8	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_770	TALUS	tal_giant_decay_mite_cave	AREA	4	41.4	-37.9	-63.0	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_771	TALUS	tal_giant_decay_mite_cave	AREA	4	45.9	-38.6	-90.8	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_772	TALUS	tal_giant_decay_mite_cave	AREA	4	43.2	-38.0	-95.2	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_773	TALUS	tal_giant_decay_mite_cave	AREA	4	48.2	-38.6	-59.0	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_774	TALUS	tal_giant_decay_mite_cave	AREA	4	50.1	-38.1	-96.7	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_775	TALUS	tal_giant_decay_mite_cave	AREA	5	23.2	-37.9	-120.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_776	TALUS	tal_giant_decay_mite_cave	AREA	5	0.2	-37.7	-148.4	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_777	TALUS	tal_giant_decay_mite_cave	AREA	5	-8.6	-36.7	-140.3	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_778	TALUS	tal_giant_decay_mite_cave	AREA	5	50.4	-40.0	-123.2	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_779	TALUS	tal_giant_decay_mite_cave	AREA	5	65.7	-46.4	-146.7	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_780	TALUS	tal_giant_decay_mite_cave	AREA	5	35.9	-46.9	-150.5	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_781	TALUS	tal_giant_decay_mite_cave	AREA	5	54.8	-48.9	-181.8	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_782	TALUS	tal_giant_decay_mite_cave	AREA	6	-0.7	-56.0	-180.9	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_783	TALUS	tal_giant_decay_mite_cave	AREA	6	-34.4	-58.5	-180.4	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_784	TALUS	tal_giant_decay_mite_cave	AREA	7	0.9	-55.4	-231.2	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_785	TALUS	tal_giant_decay_mite_cave	AREA	7	-7.9	-56.7	-237.6	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_786	TALUS	tal_giant_decay_mite_cave	AREA	7	-22.0	-55.2	-259.6	0	1	a giant decay mite hatchling	creature_mite_giant_decay_hatchling	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_787	TALUS	tal_giant_decay_mite_cave	AREA	7	-13.0	-57.8	-213.1	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_788	TALUS	tal_giant_decay_mite_cave	AREA	7	-21.8	-57.5	-243.6	0	1	a giant decay mite protector	creature_mite_giant_decay_protector	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_789	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.9	-89.4	-141.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_790	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.6	-94.3	-139.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_791	TALUS	tal_giant_decay_mite_cave	AREA	8	-85.6	-61.6	-100.0	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_792	TALUS	tal_giant_decay_mite_cave	AREA	8	-83.3	-62.3	-90.0	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_793	TALUS	tal_giant_decay_mite_cave	AREA	8	-57.2	-62.1	-193.6	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_794	TALUS	tal_giant_decay_mite_cave	AREA	8	-69.1	-61.7	-167.2	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_795	TALUS	tal_giant_decay_mite_cave	AREA	8	-95.7	-65.3	-173.5	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_796	TALUS	tal_giant_decay_mite_cave	AREA	8	-121.5	-60.8	-165.7	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_797	TALUS	tal_giant_decay_mite_cave	AREA	8	-100.3	-62.1	-128.7	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_798	TALUS	tal_giant_decay_mite_cave	AREA	8	-99.7	-61.5	-100.3	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_799	TALUS	tal_giant_decay_mite_cave	AREA	9	-44.8	-61.7	-86.9	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_800	TALUS	tal_giant_decay_mite_cave	AREA	9	-23.3	-61.5	-95.8	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_801	TALUS	tal_giant_decay_mite_cave	AREA	9	-43.3	-61.7	-108.8	0	1	a giant decay mite harvester	creature_mite_giant_decay_harvester	ATTACKABLE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_802	TALUS	tal_giant_decay_mite_cave	AREA	9	-22.1	-61.8	-88.5	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_803	TALUS	tal_giant_decay_mite_cave	AREA	9	-56.8	-60.4	-112.8	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_804	TALUS	tal_giant_decay_mite_cave	AREA	10	-56.9	-83.6	-145.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_805	TALUS	tal_giant_decay_mite_cave	AREA	10	-27.1	-68.8	-129.1	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_806	TALUS	tal_giant_decay_mite_cave	AREA	10	-29.0	-72.2	-148.6	0	1	a giant decay mite sentry	creature_mite_giant_decay_sentry	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_807	TALUS	tal_giant_decay_mite_cave	AREA	11	-102.5	-91.7	-118.7	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_808	TALUS	tal_giant_decay_mite_cave	AREA	11	-94.0	-92.9	-107.4	0	1	a giant decay mite guardian	creature_mite_giant_decay_guardian	AGGRESSIVE	E	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_809	TALUS	tal_giant_decay_mite_cave	AREA	11	-87.3	-91.7	-90.6	0	1	a giant decay mite queen	creature_mite_giant_decay_queen	AGGRESSIVE	B	41	50	POI	Giant Decay Mite Cave	1	TURN	0	0	-	idle			600
+spawn_talus_810	TALUS	tal_world	AREA	0	-5527.7	35.9	-4702.5	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_811	TALUS	tal_world	AREA	0	-5515.2	36.8	-4715.9	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_812	TALUS	tal_world	AREA	0	-5555.1	47.0	-4707.3	0	1	a giant decay mite soldier	creature_mite_giant_decay_soldier	AGGRESSIVE	N	41	50	POI	Giant Decay Mite Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_813	TALUS	tal_giant_fynock_cave	AREA	4	49.5	-38.1	-97.0	0	1	a decay mite	creature_mite_decay	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_814	TALUS	tal_giant_fynock_cave	AREA	4	40.0	-38.1	-70.2	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_815	TALUS	tal_giant_fynock_cave	AREA	4	40.8	-38.0	-98.6	0	1	a rot mite	creature_mite_rot	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_816	TALUS	tal_giant_fynock_cave	AREA	5	65.0	-50.2	-166.0	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_817	TALUS	tal_giant_fynock_cave	AREA	5	56.7	-46.2	-146.3	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_818	TALUS	tal_giant_fynock_cave	AREA	5	30.2	-52.0	-179.0	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_819	TALUS	tal_giant_fynock_cave	AREA	5	35.7	-49.6	-164.3	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_820	TALUS	tal_giant_fynock_cave	AREA	5	-7.8	-36.8	-139.2	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_821	TALUS	tal_giant_fynock_cave	AREA	5	-2.1	-37.4	-144.2	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
 spawn_talus_822	TALUS	tal_giant_fynock_cave	AREA	5	46.4	-48.3	-180.8	0	1	a thug	humanoid_thug_trandoshan_male	INVULNERABLE	N	100	100	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_823	TALUS	tal_giant_fynock_cave	AREA	7	-8.6	-56.1	-231.8	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_824	TALUS	tal_giant_fynock_cave	AREA	7	-22.3	-55.4	-258.4	0	1	a guf drolg female	creature_guf_drolg_female	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_825	TALUS	tal_giant_fynock_cave	AREA	7	-13.6	-57.7	-216.3	0	1	a minor guf drolg	creature_guf_drolg_minor	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_826	TALUS	tal_giant_fynock_cave	AREA	8	-92.4	-94.4	-136.3	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_827	TALUS	tal_giant_fynock_cave	AREA	8	-85.2	-93.1	-142.4	0	1	a Chunker punk	humanoid_chunker_punk	AGGRESSIVE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_828	TALUS	tal_giant_fynock_cave	AREA	8	-116.1	-61.7	-200.2	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_829	TALUS	tal_giant_fynock_cave	AREA	8	-67.0	-61.9	-196.6	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_830	TALUS	tal_giant_fynock_cave	AREA	8	-100.4	-62.2	-127.7	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_831	TALUS	tal_giant_fynock_cave	AREA	8	-63.3	-62.0	-171.6	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_832	TALUS	tal_giant_fynock_cave	AREA	8	-121.1	-61.4	-171.4	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_833	TALUS	tal_giant_fynock_cave	AREA	8	-97.4	-62.1	-105.4	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_834	TALUS	tal_giant_fynock_cave	AREA	9	-44.4	-61.9	-84.3	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_835	TALUS	tal_giant_fynock_cave	AREA	9	-8.0	-60.3	-96.6	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_836	TALUS	tal_giant_fynock_cave	AREA	9	-45.9	-61.3	-111.5	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_837	TALUS	tal_giant_fynock_cave	AREA	9	-52.7	-60.7	-97.9	0	1	a giant fynock	creature_fynock_giant	AGGRESSIVE	E	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_838	TALUS	tal_giant_fynock_cave	AREA	11	-83.5	-93.6	-112.7	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_839	TALUS	tal_giant_fynock_cave	AREA	11	-101.9	-91.1	-111.0	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_840	TALUS	tal_giant_fynock_cave	AREA	11	-91.2	-92.7	-95.9	0	1	a rabid mutant kahmurra	creature_kahmurra_mutant_rabid	AGGRESSIVE	E	25	40	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
-spawn_talus_841	TALUS	tal_world	AREA	0	1542.7	43.3	-878.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_842	TALUS	tal_world	AREA	0	1542.6	41.2	-847.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_843	TALUS	tal_world	AREA	0	1547.4	40.0	-894.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	25	40	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_844	TALUS	tal_kahmurra_bunker	AREA	2	-4.0	0.3	-0.9	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_845	TALUS	tal_kahmurra_bunker	AREA	4	-4.6	-6.8	5.0	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_846	TALUS	tal_kahmurra_bunker	AREA	5	-4.6	-6.8	-8.9	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_847	TALUS	tal_kahmurra_bunker	AREA	5	-5.9	-6.8	-5.4	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_848	TALUS	tal_kahmurra_bunker	AREA	6	9.0	-6.8	-15.1	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_849	TALUS	tal_kahmurra_bunker	AREA	7	6.4	-6.8	-1.8	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_850	TALUS	tal_kahmurra_bunker	AREA	7	7.0	-6.8	-5.7	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_851	TALUS	tal_kahmurra_bunker	AREA	9	1.1	-13.8	-0.7	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_852	TALUS	tal_kahmurra_bunker	AREA	9	0.1	-13.8	-14.2	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_853	TALUS	tal_kahmurra_bunker	AREA	9	-5.3	-13.8	-14.2	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_854	TALUS	tal_kahmurra_bunker	AREA	9	-1.9	-13.8	-7.4	0	1	a rabid mutant kahmurra	creature_kahmurra_mutant_rabid	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_855	TALUS	tal_world	AREA	0	-4799.1	16.6	-4752.8	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_856	TALUS	tal_world	AREA	0	-4805.0	16.5	-4746.7	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	25	40	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
-spawn_talus_857	TALUS	tal_world	AREA	0	-4776.7	16.9	-4751.6	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	25	40	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
-spawn_talus_858	TALUS	tal_aqualish_cave	AREA	1	2.6	-5.0	9.2	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_859	TALUS	tal_aqualish_cave	AREA	2	9.6	-23.8	-26.9	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_860	TALUS	tal_aqualish_cave	AREA	3	7.8	-40.7	-73.6	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_861	TALUS	tal_aqualish_cave	AREA	3	-11.1	-40.4	-60.6	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_862	TALUS	tal_aqualish_cave	AREA	3	12.0	-40.3	-77.8	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_863	TALUS	tal_aqualish_cave	AREA	4	32.8	-45.3	-52.6	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_864	TALUS	tal_aqualish_cave	AREA	4	46.6	-46.4	-92.2	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_865	TALUS	tal_aqualish_cave	AREA	5	27.7	-60.3	-178.7	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_866	TALUS	tal_aqualish_cave	AREA	5	-7.2	-44.9	-138.2	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_867	TALUS	tal_aqualish_cave	AREA	5	64.1	-54.9	-153.0	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_868	TALUS	tal_aqualish_cave	AREA	5	28.5	-59.7	-184.5	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_869	TALUS	tal_aqualish_cave	AREA	5	49.5	-48.2	-125.5	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_870	TALUS	tal_aqualish_cave	AREA	6	-9.9	-64.7	-199.3	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_871	TALUS	tal_aqualish_cave	AREA	7	-14.9	-64.9	-220.4	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_872	TALUS	tal_aqualish_cave	AREA	7	-13.8	-63.9	-224.3	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_873	TALUS	tal_aqualish_cave	AREA	7	-22.5	-64.1	-254.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_874	TALUS	tal_aqualish_cave	AREA	7	-16.9	-62.9	-261.2	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_875	TALUS	tal_aqualish_cave	AREA	8	-121.3	-70.0	-177.6	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_876	TALUS	tal_aqualish_cave	AREA	8	-81.2	-99.9	-148.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_877	TALUS	tal_aqualish_cave	AREA	8	-88.7	-69.9	-99.6	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_878	TALUS	tal_aqualish_cave	AREA	8	-84.2	-100.8	-145.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_879	TALUS	tal_aqualish_cave	AREA	8	-91.4	-69.9	-97.1	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_880	TALUS	tal_aqualish_cave	AREA	8	-120.5	-68.9	-166.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_881	TALUS	tal_aqualish_cave	AREA	8	-62.3	-70.4	-179.7	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_882	TALUS	tal_aqualish_cave	AREA	8	-63.4	-70.5	-175.3	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_883	TALUS	tal_aqualish_cave	AREA	9	-37.7	-70.8	-87.3	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_884	TALUS	tal_aqualish_cave	AREA	9	-56.3	-68.4	-108.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_885	TALUS	tal_aqualish_cave	AREA	9	-42.4	-70.2	-85.8	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_886	TALUS	tal_aqualish_cave	AREA	9	-60.5	-68.4	-106.6	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_887	TALUS	tal_aqualish_cave	AREA	10	-30.4	-80.1	-144.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_888	TALUS	tal_aqualish_cave	AREA	10	-26.7	-79.9	-146.5	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_889	TALUS	tal_aqualish_cave	AREA	11	-93.8	-101.5	-116.2	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_890	TALUS	tal_aqualish_cave	AREA	11	-86.9	-102.3	-114.0	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_891	TALUS	tal_aqualish_cave	AREA	11	-86.8	-100.7	-104.3	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_892	TALUS	tal_aqualish_cave	AREA	11	-92.0	-100.9	-100.1	0	1	a Lost Aqualish warchief	humanoid_lost_aqualish_warchief	AGGRESSIVE	E	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_893	TALUS	tal_world	AREA	0	-4350.0	30.9	-1429.9	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
-spawn_talus_894	TALUS	tal_world	AREA	0	-4347.6	31.0	-1418.3	0	1	a Lost Aqualish lookout	humanoid_lost_aqualish_lookout	AGGRESSIVE	N	25	40	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
-spawn_talus_895	TALUS	tal_world	AREA	0	4286.0	35.6	886.6	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_896	TALUS	tal_world	AREA	0	4191.0	6.0	1008.1	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
-spawn_talus_897	TALUS	tal_world	AREA	0	4265.3	6.0	1011.8	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
-spawn_talus_898	TALUS	tal_world	AREA	0	4145.1	6.0	983.6	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
-spawn_talus_899	TALUS	tal_world	AREA	0	4219.4	6.0	1012.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_900	TALUS	tal_world	AREA	0	4300.7	6.0	1029.5	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_901	TALUS	tal_world	AREA	0	4147.2	6.0	943.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_902	TALUS	tal_world	AREA	0	4199.3	6.0	985.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_903	TALUS	tal_world	AREA	0	4288.0	6.0	998.1	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
-spawn_talus_904	TALUS	tal_world	AREA	0	4122.6	6.0	976.7	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	25	40	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_823	TALUS	tal_giant_fynock_cave	AREA	7	-8.6	-56.1	-231.8	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_824	TALUS	tal_giant_fynock_cave	AREA	7	-22.3	-55.4	-258.4	0	1	a guf drolg female	creature_guf_drolg_female	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_825	TALUS	tal_giant_fynock_cave	AREA	7	-13.6	-57.7	-216.3	0	1	a minor guf drolg	creature_guf_drolg_minor	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_826	TALUS	tal_giant_fynock_cave	AREA	8	-92.4	-94.4	-136.3	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_827	TALUS	tal_giant_fynock_cave	AREA	8	-85.2	-93.1	-142.4	0	1	a Chunker punk	humanoid_chunker_punk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_828	TALUS	tal_giant_fynock_cave	AREA	8	-116.1	-61.7	-200.2	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_829	TALUS	tal_giant_fynock_cave	AREA	8	-67.0	-61.9	-196.6	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_830	TALUS	tal_giant_fynock_cave	AREA	8	-100.4	-62.2	-127.7	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_831	TALUS	tal_giant_fynock_cave	AREA	8	-63.3	-62.0	-171.6	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_832	TALUS	tal_giant_fynock_cave	AREA	8	-121.1	-61.4	-171.4	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_833	TALUS	tal_giant_fynock_cave	AREA	8	-97.4	-62.1	-105.4	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_834	TALUS	tal_giant_fynock_cave	AREA	9	-44.4	-61.9	-84.3	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_835	TALUS	tal_giant_fynock_cave	AREA	9	-8.0	-60.3	-96.6	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_836	TALUS	tal_giant_fynock_cave	AREA	9	-45.9	-61.3	-111.5	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_837	TALUS	tal_giant_fynock_cave	AREA	9	-52.7	-60.7	-97.9	0	1	a giant fynock	creature_fynock_giant	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_838	TALUS	tal_giant_fynock_cave	AREA	11	-83.5	-93.6	-112.7	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_839	TALUS	tal_giant_fynock_cave	AREA	11	-101.9	-91.1	-111.0	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_840	TALUS	tal_giant_fynock_cave	AREA	11	-91.2	-92.7	-95.9	0	1	a rabid mutant kahmurra	creature_kahmurra_mutant_rabid	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+spawn_talus_841	TALUS	tal_world	AREA	0	1542.7	43.3	-878.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_842	TALUS	tal_world	AREA	0	1542.6	41.2	-847.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_843	TALUS	tal_world	AREA	0	1547.4	40.0	-894.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_844	TALUS	tal_kahmurra_bunker	AREA	2	-4.0	0.3	-0.9	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_845	TALUS	tal_kahmurra_bunker	AREA	4	-4.6	-6.8	5.0	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_846	TALUS	tal_kahmurra_bunker	AREA	5	-4.6	-6.8	-8.9	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_847	TALUS	tal_kahmurra_bunker	AREA	5	-5.9	-6.8	-5.4	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_848	TALUS	tal_kahmurra_bunker	AREA	6	9.0	-6.8	-15.1	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_849	TALUS	tal_kahmurra_bunker	AREA	7	6.4	-6.8	-1.8	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_850	TALUS	tal_kahmurra_bunker	AREA	7	7.0	-6.8	-5.7	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_851	TALUS	tal_kahmurra_bunker	AREA	9	1.1	-13.8	-0.7	0	1	a frenzied kahmurra	creature_kahmurra_frenzied	AGGRESSIVE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_852	TALUS	tal_kahmurra_bunker	AREA	9	0.1	-13.8	-14.2	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_853	TALUS	tal_kahmurra_bunker	AREA	9	-5.3	-13.8	-14.2	0	1	a kahmurra bio engineer	humanoid_kahmurra_bio_engineer	ATTACKABLE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_854	TALUS	tal_kahmurra_bunker	AREA	9	-1.9	-13.8	-7.4	0	1	a rabid mutant kahmurra	creature_kahmurra_mutant_rabid	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_855	TALUS	tal_world	AREA	0	-4799.1	16.6	-4752.8	0	1	a genetically-enhanced kahmurra	creature_kahmurra_gen_enhanced	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_856	TALUS	tal_world	AREA	0	-4805.0	16.5	-4746.7	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	41	50	POI	Kahmurra Biogenetic Research Station	1	TURN	0	0	-	idle			600
+spawn_talus_857	TALUS	tal_world	AREA	0	-4776.7	16.9	-4751.6	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	41	50	POI	Kahmurra Biogenetic Research Station	1	LOITER	5	0	-	idle			600
+spawn_talus_858	TALUS	tal_aqualish_cave	AREA	1	2.6	-5.0	9.2	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_859	TALUS	tal_aqualish_cave	AREA	2	9.6	-23.8	-26.9	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_860	TALUS	tal_aqualish_cave	AREA	3	7.8	-40.7	-73.6	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_861	TALUS	tal_aqualish_cave	AREA	3	-11.1	-40.4	-60.6	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_862	TALUS	tal_aqualish_cave	AREA	3	12.0	-40.3	-77.8	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_863	TALUS	tal_aqualish_cave	AREA	4	32.8	-45.3	-52.6	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_864	TALUS	tal_aqualish_cave	AREA	4	46.6	-46.4	-92.2	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_865	TALUS	tal_aqualish_cave	AREA	5	27.7	-60.3	-178.7	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_866	TALUS	tal_aqualish_cave	AREA	5	-7.2	-44.9	-138.2	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_867	TALUS	tal_aqualish_cave	AREA	5	64.1	-54.9	-153.0	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_868	TALUS	tal_aqualish_cave	AREA	5	28.5	-59.7	-184.5	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_869	TALUS	tal_aqualish_cave	AREA	5	49.5	-48.2	-125.5	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_870	TALUS	tal_aqualish_cave	AREA	6	-9.9	-64.7	-199.3	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_871	TALUS	tal_aqualish_cave	AREA	7	-14.9	-64.9	-220.4	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_872	TALUS	tal_aqualish_cave	AREA	7	-13.8	-63.9	-224.3	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_873	TALUS	tal_aqualish_cave	AREA	7	-22.5	-64.1	-254.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_874	TALUS	tal_aqualish_cave	AREA	7	-16.9	-62.9	-261.2	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_875	TALUS	tal_aqualish_cave	AREA	8	-121.3	-70.0	-177.6	0	1	a Lost Aqualish bomber	humanoid_lost_aqualish_bomber	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_876	TALUS	tal_aqualish_cave	AREA	8	-81.2	-99.9	-148.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_877	TALUS	tal_aqualish_cave	AREA	8	-88.7	-69.9	-99.6	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_878	TALUS	tal_aqualish_cave	AREA	8	-84.2	-100.8	-145.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_879	TALUS	tal_aqualish_cave	AREA	8	-91.4	-69.9	-97.1	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_880	TALUS	tal_aqualish_cave	AREA	8	-120.5	-68.9	-166.4	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_881	TALUS	tal_aqualish_cave	AREA	8	-62.3	-70.4	-179.7	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_882	TALUS	tal_aqualish_cave	AREA	8	-63.4	-70.5	-175.3	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_883	TALUS	tal_aqualish_cave	AREA	9	-37.7	-70.8	-87.3	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_884	TALUS	tal_aqualish_cave	AREA	9	-56.3	-68.4	-108.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_885	TALUS	tal_aqualish_cave	AREA	9	-42.4	-70.2	-85.8	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_886	TALUS	tal_aqualish_cave	AREA	9	-60.5	-68.4	-106.6	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_887	TALUS	tal_aqualish_cave	AREA	10	-30.4	-80.1	-144.5	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_888	TALUS	tal_aqualish_cave	AREA	10	-26.7	-79.9	-146.5	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_889	TALUS	tal_aqualish_cave	AREA	11	-93.8	-101.5	-116.2	0	1	a Lost Aqualish Captain	humanoid_lost_aqualish_captain	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_890	TALUS	tal_aqualish_cave	AREA	11	-86.9	-102.3	-114.0	0	1	a Lost Aqualish infiltrator	humanoid_lost_aqualish_infiltrator	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_891	TALUS	tal_aqualish_cave	AREA	11	-86.8	-100.7	-104.3	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_892	TALUS	tal_aqualish_cave	AREA	11	-92.0	-100.9	-100.1	0	1	a Lost Aqualish warchief	humanoid_lost_aqualish_warchief	AGGRESSIVE	E	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_893	TALUS	tal_world	AREA	0	-4350.0	30.9	-1429.9	0	1	a Lost Aqualish commando	humanoid_lost_aqualish_commando	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	TURN	0	0	-	idle			600
+spawn_talus_894	TALUS	tal_world	AREA	0	-4347.6	31.0	-1418.3	0	1	a Lost Aqualish lookout	humanoid_lost_aqualish_lookout	AGGRESSIVE	N	41	50	POI	Lost Aqualish War Party's Cave	1	LOITER	5	0	-	idle			600
+spawn_talus_895	TALUS	tal_world	AREA	0	4286.0	35.6	886.6	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_896	TALUS	tal_world	AREA	0	4191.0	6.0	1008.1	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+spawn_talus_897	TALUS	tal_world	AREA	0	4265.3	6.0	1011.8	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+spawn_talus_898	TALUS	tal_world	AREA	0	4145.1	6.0	983.6	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+spawn_talus_899	TALUS	tal_world	AREA	0	4219.4	6.0	1012.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_900	TALUS	tal_world	AREA	0	4300.7	6.0	1029.5	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_901	TALUS	tal_world	AREA	0	4147.2	6.0	943.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_902	TALUS	tal_world	AREA	0	4199.3	6.0	985.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_903	TALUS	tal_world	AREA	0	4288.0	6.0	998.1	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+spawn_talus_904	TALUS	tal_world	AREA	0	4122.6	6.0	976.7	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
