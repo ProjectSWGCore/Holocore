@@ -47,6 +47,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 				listBox.addListItem("TRAVEL - Fast Travel Locations");
 				listBox.addListItem("SKILLS - Grant boxes");
+				listBox.addListItem("SKILLS - Unlock Jedi");
 				listBox.addListItem("ITEMS - Armor");
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
@@ -66,17 +67,18 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 		switch (selection) {
 			case 0: handleTravel(player); break;
-			case 1: handleSkills(player); break;
-			case 2: handleArmor(player); break;
-			case 3: handleWeapons(player); break;
-			case 4: handleWearables(player); break;
-			case 5: handleVehicles(player); break;
-			case 6: handleDeeds(player); break;
-			case 7: handleCredits(player); break;
+			case 1: handleSkillsGrantBoxes(player); break;
+			case 2: handleSkillsUnlockJedi(player); break;
+			case 3: handleArmor(player); break;
+			case 4: handleWeapons(player); break;
+			case 5: handleWearables(player); break;
+			case 6: handleVehicles(player); break;
+			case 7: handleDeeds(player); break;
+			case 8: handleCredits(player); break;
 		}
 	}
 
-	private static void handleSkills(Player player) {
+	private static void handleSkillsGrantBoxes(Player player) {
 		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a skill you want to learn");
 
 		listBox.addListItem("Social - Entertainer (Master)");
@@ -173,6 +175,31 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 	private static void handleNoviceCommando(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_commando_novice", creatureObject, true);
+	}
+
+	private static void handleSkillsUnlockJedi(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_light_saber_master", creatureObject, true);
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true);
+		spawnItems(player,
+				"item_color_crystal_02_28",
+				"item_power_crystal_04_19",
+				"item_power_crystal_04_19",
+				"item_power_crystal_04_19",
+				"item_power_crystal_04_19",
+				"item_color_crystal_02_00",
+				"item_color_crystal_02_01",
+				"item_color_crystal_02_02",
+				"item_color_crystal_02_03",
+				"item_color_crystal_02_04",
+				"item_color_crystal_02_05",
+				"item_color_crystal_02_06",
+				"item_color_crystal_02_07",
+				"item_color_crystal_02_08",
+				"item_color_crystal_02_09",
+				"item_color_crystal_02_10",
+				"item_color_crystal_02_11"
+		);
 	}
 
 	private static void spawnItems(Player player, String ... items) {
