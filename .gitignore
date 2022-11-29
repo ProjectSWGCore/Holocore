@@ -49,3 +49,4 @@ gradle.properties
 /bin/
 *.db
 *.iff
+mongo_data
