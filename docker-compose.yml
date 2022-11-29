@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo:5.0.14
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: cu
+    volumes:
+      - ./mongo_data:/data/db
+      - ./mongo_init_scripts:/docker-entrypoint-initdb.d
+
+  mongo-express:
+    image: mongo-express:0.54.0
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/

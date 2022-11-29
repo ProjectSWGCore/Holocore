@@ -25,21 +25,22 @@ by running `java -version`.
 The project uses submodules. Get them by running: git submodule update --init
 
 ## MongoDB ##
-User information is read from a MongoDB database that can be run on any machine on your network. Default is the machine that Holocore is running on.
+A MongoDB instance can be bootstrapped by running `docker-compose up -d`.
 
-1. Create database: `use cu`
-2. Create your game user: `db.users.insert({"username": "user", "password": "pass", "accessLevel": "dev", "banned": false, "characters": []})`
+This will run and initialize a MongoDB instance with a default game server user.
+* Username: user
+* Password: pass
 
-Enabling the Character Builder Terminals:
-1. Switch to the relevant database: `use cu`
-2. Enable the character builder: `db.config.insertOne({ "package": "support.data.dev", "characterBuilder": true })`
+This will also run a web UI, which can be accessed in the browser at: http://localhost:8081
+
+You can stop both with: `docker-compose down`.
 
 ## Running Holocore ##
-Compile and run Holocores main code using Gradle: `./gradlew run`
+Compile and run Holocores main code using Gradle: `./gradlew runDevelopment`
 
 ## Running automated tests ##
 Compile and run Holocores automated tests using Gradle: `./gradlew test --info`
 
 # Running your own server #
-If you're interesting in running your own server, you should use the provided
+If you're interested in running your own server, you should use the provided
 Docker image.
