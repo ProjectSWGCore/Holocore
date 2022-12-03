@@ -133,13 +133,15 @@ enum CombatCommandHeal implements CombatCommandHitType {
 			}
 		}
 
-		grantMedicalXpPerHealedPointOfDamage(source, healedDamage);
+		grantMedicalXp(source, healedDamage);
 		return CombatStatus.SUCCESS;
 	}
 
-	private void grantMedicalXpPerHealedPointOfDamage(CreatureObject source, int healedDamage) {
-		if (healedDamage > 0) {
-			new ExperienceIntent(source, "medical", healedDamage).broadcast();
+	private void grantMedicalXp(CreatureObject source, int healedDamage) {
+		int medicalXp = Math.round((float) healedDamage * 0.25f);
+
+		if (medicalXp > 0) {
+			new ExperienceIntent(source, "medical", medicalXp).broadcast();
 		}
 	}
 
