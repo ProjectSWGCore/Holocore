@@ -70,19 +70,18 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		switch (combatCommand.getAttackType()) {
 			case SINGLE_TARGET: {
 				switch (command.getTargetType()) {
-					case NONE: {    // No target used, always heals self
+					case NONE: {
 						healedDamage += doHeal(source, source, healAmount, combatCommand);
 						break;
 					}
-					case REQUIRED: {    // Target is always used
+					case REQUIRED: {
 						if (target == null) {
 							return CombatStatus.NO_TARGET;
 						}
 						
 						// Same logic as OPTIONAL and ALL, so no break!
 					}
-					case OPTIONAL:    // Appears to be the same as ALL
-					case ALL: {    // Target is used IF supplied
+					case OPTIONAL: {
 						if (target != null) {
 							if (!(target instanceof CreatureObject creatureTarget)) {
 								return CombatStatus.INVALID_TARGET;

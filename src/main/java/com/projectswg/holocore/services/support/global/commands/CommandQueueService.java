@@ -360,7 +360,6 @@ public class CommandQueueService extends Service {
 							target  = command.getTarget();
 							break;
 						case OPTIONAL:
-						case ALL:
 							if (command.getTarget() == null) {
 								target = source;
 							} else if (command.getTarget() instanceof CreatureObject) {
