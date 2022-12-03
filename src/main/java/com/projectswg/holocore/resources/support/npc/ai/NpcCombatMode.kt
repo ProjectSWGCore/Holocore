@@ -30,6 +30,7 @@ import kotlin.math.sin
 class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
 	private val returnLocation = AtomicReference<NavigationPoint>(null)
+	private val startCombatLocation = AtomicReference<Location>(null)
 	private val targets = CopyOnWriteArraySet<CreatureObject>()
 	private val iteration = AtomicLong(0)
 	private val npcRunSpeed = PswgDatabase.config.getDouble(this, "npcRunSpeed", 9.0)
@@ -58,6 +59,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		showExclamationMarkAboveNpc()
 		StopNpcMovementIntent.broadcast(ai)
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
+		startCombatLocation.set(ai.worldLocation)
 	}
 	
 	private fun showExclamationMarkAboveNpc() {
@@ -77,6 +79,10 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		if (isRooted) {
 			queueNextLoop(500)
 			return
+		}
+		
+		if (ai.worldLocation.flatDistanceTo(startCombatLocation.get()) > 100) {
+			targets.clear() // We're too far away from home, no longer interested in combat
 		}
 		
 		targets.removeIf { creo -> creo.posture == Posture.INCAPACITATED || creo.posture == Posture.DEAD }
