@@ -34,16 +34,19 @@ import com.projectswg.holocore.resources.support.data.persistable.SWGObjectFacto
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgObjectDatabase
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import org.bson.Document
+import java.time.Instant
+import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 import java.util.stream.Collectors.toList
 
 class PswgObjectDatabaseMongo(private val collection: MongoCollection<Document>) : PswgObjectDatabase {
 	
 	override val objects: List<MongoData>
-		get() = collection.find().map { MongoData(it) }.into(ArrayList()) ?: ArrayList()
+		get() = collection.find(Filters.exists("deletedAt", false)).map { MongoData(it) }.into(ArrayList()) ?: ArrayList()
 	
 	init {
 		collection.createIndex(Indexes.ascending("id"), IndexOptions().unique(true))
+		collection.createIndex(Indexes.ascending("deletedAt"), IndexOptions().expireAfter(7, TimeUnit.DAYS))
 	}
 	
 	override fun addObject(obj: SWGObject) {
@@ -66,7 +69,7 @@ class PswgObjectDatabaseMongo(private val collection: MongoCollection<Document>)
 	}
 	
 	override fun removeObject(id: Long): Boolean {
-		return collection.deleteOne(Filters.eq("id", id)).deletedCount > 0
+		return collection.updateOne(Filters.eq("id", id), Updates.set("deletedAt", Instant.now())).modifiedCount > 0
 	}
 	
 	override fun getCharacterCount(account: String): Int {
