@@ -225,9 +225,9 @@ public class CommandQueueService extends Service {
 						rootCommand,
 						combatCommand,
 						command.getArguments());
-				
+
+				CombatCommandCommon.handleStatus(source, combatCommand, combatStatus);
 				if (combatStatus != CombatStatus.SUCCESS) {
-					CombatCommandCommon.handleStatus(source, combatCommand, combatStatus);
 					sendCommandFailed(command);
 					return;
 				}
