@@ -56,6 +56,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class TangibleObject extends SWGObject {
 	
@@ -74,7 +75,7 @@ public class TangibleObject extends SWGObject {
 	private int				counter			= 0;
 	private String			currentCity				= "";
 	
-	private Set<Long>	defenders	= new HashSet<>();
+	private Set<Long>	defenders	= new CopyOnWriteArraySet<>();
 	
 	private int requiredCombatLevel;
 	private ArmorCategory armorCategory;
