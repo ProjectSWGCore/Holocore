@@ -70,10 +70,13 @@ public final class LightsaberCrystalService extends Service {
 		
 		suiMessageBox.display(owner);
 	}
+	
 	@IntentHandler
 	private void handleTuneCrystalNowIntent(TuneCrystalNowIntent intent) {
 		CreatureObject tuner = intent.getTuner();
 		TangibleObject crystal = intent.getCrystal();
+		if (isTuned(crystal))
+			return;
 		crystal.setServerAttribute(ServerAttribute.LINK_OBJECT_ID, tuner.getObjectId());	// In case the name of the character ever changes
 		crystal.setObjectName( "\\#00FF00" + crystal.getObjectName() + " (tuned)");
 		
