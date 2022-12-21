@@ -52,6 +52,8 @@ public class CombatCommand {
 	private final boolean bleeding;
 	private final String triggerEffect;
 	private final String triggerEffectHardpoint;
+	private final String targetEffect;
+	private final String targetEffectHardpoint;
 	private final DamageType damageType;
 	private final DamageType elementalType;
 	private final boolean ignoreDistance;
@@ -94,6 +96,8 @@ public class CombatCommand {
 		this.bleeding = builder.bleeding;
 		this.triggerEffect = builder.triggerEffect;
 		this.triggerEffectHardpoint = builder.triggerEffectHardpoint;
+		this.targetEffect = builder.targetEffect;
+		this.targetEffectHardpoint = builder.targetEffectHardpoint;
 		this.damageType = builder.damageType;
 		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
@@ -192,7 +196,15 @@ public class CombatCommand {
 	public String getTriggerEffectHardpoint() {
 		return triggerEffectHardpoint;
 	}
-	
+
+	public String getTargetEffect() {
+		return targetEffect;
+	}
+
+	public String getTargetEffectHardpoint() {
+		return targetEffectHardpoint;
+	}
+
 	public DamageType getDamageType() {
 		return damageType;
 	}
@@ -315,6 +327,8 @@ public class CombatCommand {
 		private boolean bleeding;
 		private String triggerEffect;
 		private String triggerEffectHardpoint;
+		private String targetEffect;
+		private String targetEffectHardpoint;
 		private DamageType damageType;
 		private DamageType elementalType;
 		private boolean ignoreDistance;
@@ -416,6 +430,16 @@ public class CombatCommand {
 		
 		public CombatCommandBuilder withTriggerEffectHardpoint(String triggerEffectHardpoint) {
 			this.triggerEffectHardpoint = triggerEffectHardpoint;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTargetEffect(String targetEffect) {
+			this.targetEffect = targetEffect;
+			return this;
+		}
+		
+		public CombatCommandBuilder withTargetEffectHardpoint(String targetEffectHardpoint) {
+			this.targetEffectHardpoint = targetEffectHardpoint;
 			return this;
 		}
 		
