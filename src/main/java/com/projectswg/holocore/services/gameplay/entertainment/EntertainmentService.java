@@ -328,7 +328,7 @@ public class EntertainmentService extends Service {
 	}
 	
 	private void stopWatching(CreatureObject actor, boolean displaySystemMessage) {
-		actor.setMoodAnimation("");
+		actor.setMoodAnimation("neutral");
 		if (displaySystemMessage)
 			new SystemMessageIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
 		actor.setPerformanceListenTarget(0);

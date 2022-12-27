@@ -122,6 +122,7 @@ public class CommandExecutionService extends Service {
 		registerCppCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
 		registerScriptCallback("knockdownRecovery", KnockdownRecoveryCmdCallback::new);
 		registerScriptCallback("burstRun", BurstRunCmdCallback::new);
+		registerScriptCallback("cmdMeditate", CmdMeditate::new);
 		
 		addAdminScripts();
 		addChatScripts();
