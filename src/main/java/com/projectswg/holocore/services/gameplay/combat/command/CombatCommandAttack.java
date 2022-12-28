@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.*;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
+import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
@@ -239,6 +240,10 @@ enum CombatCommandAttack implements CombatCommandHitType {
 			weaponDamage += weaponDamageMod;
 			
 			int rawDamage = weaponDamage + addedDamage;
+
+			if (target.getPosture() == Posture.KNOCKED_DOWN) {
+				rawDamage *= 1.5;
+			}
 			
 			info.setRawDamage(rawDamage);
 			info.setFinalDamage(rawDamage);
