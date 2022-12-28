@@ -61,6 +61,10 @@ public class StandCmdCallback implements ICmdCallback {
 			creature.setTurnScale(1);
 			StopSamplingIntent.broadcast(creature);
 		}
+		
+		if ("meditating".equals(creature.getMoodAnimation())) {
+			creature.setMoodAnimation("neutral");
+		}
 	}
 	
 }
