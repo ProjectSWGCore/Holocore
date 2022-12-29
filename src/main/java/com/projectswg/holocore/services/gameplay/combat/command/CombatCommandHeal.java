@@ -51,11 +51,11 @@ enum CombatCommandHeal implements CombatCommandHitType {
 	@Override
 	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
 		int healAmount = combatCommand.getAddedDamage();
-		int healingPotency = source.getSkillModValue("expertise_healing_all");
+		int healingEfficiency = source.getSkillModValue("healing_efficiency");
 		int healedDamage = 0;
 
-		if (healingPotency > 0) {
-			healAmount *= healingPotency;
+		if (healingEfficiency > 0) {
+			healAmount *= (healingEfficiency / 100d);
 		}
 		
 		switch (combatCommand.getAttackType()) {
