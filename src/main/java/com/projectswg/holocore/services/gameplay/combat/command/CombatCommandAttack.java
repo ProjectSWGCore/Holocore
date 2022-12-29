@@ -364,14 +364,13 @@ enum CombatCommandAttack implements CombatCommandHitType {
 	
 	private static double calculateToHit(CreatureObject source, WeaponObject sourceWeapon, CreatureObject target) {
 		int toHit = 66;
-		toHit += calculateAccMod(source, sourceWeapon);
-		toHit -= calculateDefMod(source, target);
+		toHit += (calculateAccMod(source, sourceWeapon) - calculateDefMod(source, target)) / 10;
 		toHit += calculateDefPosMod(sourceWeapon, target);
 		toHit += calculateAtkPosMod(source);
 		toHit -= calculateBlindModifier(source);	// Blind attackers have a hard time hitting anything
 		toHit += calculateBlindModifier(target);	// Blind targets have a hard time avoiding anything
 		
-		return toHit;
+		return Math.max(32, toHit);
 	}
 	
 	private static int calculateBlindModifier(CreatureObject target) {
