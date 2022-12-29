@@ -106,6 +106,7 @@ public class CombatCommandLoader extends DataLoader {
 						.withKnockdownChance(set.getReal("knockdownChance"))
 						.withBlinding(set.getBoolean("blinding"))
 						.withBleeding(set.getBoolean("bleeding"))
+						.withStunning(set.getBoolean("stun"))
 						.withTriggerEffect(set.getText("triggerEffect"))
 						.withTriggerEffectHardpoint(set.getText("triggerEffectHardpoint"))
 						.withTargetEffect(set.getText("targetEffect"))

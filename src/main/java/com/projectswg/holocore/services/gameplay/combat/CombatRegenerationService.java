@@ -4,6 +4,7 @@ import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -68,6 +69,10 @@ public class CombatRegenerationService extends Service {
 	private void regenerationActionTick(CreatureObject creature) {
 		if (creature.getAction() >= creature.getMaxAction())
 			return;
+
+		if (creature.isStatesBitmask(CreatureState.STUNNED)) {
+			return;
+		}
 		
 		int modification = creature.getMaxAction() / 40;
 		

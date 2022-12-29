@@ -50,6 +50,7 @@ public class CombatCommand {
 	private final double knockdownChance;
 	private final boolean blinding;
 	private final boolean bleeding;
+	private final boolean stunning;
 	private final String triggerEffect;
 	private final String triggerEffectHardpoint;
 	private final String targetEffect;
@@ -94,6 +95,7 @@ public class CombatCommand {
 		this.knockdownChance = builder.knockdownChance;
 		this.blinding = builder.blinding;
 		this.bleeding = builder.bleeding;
+		this.stunning = builder.stunning;
 		this.triggerEffect = builder.triggerEffect;
 		this.triggerEffectHardpoint = builder.triggerEffectHardpoint;
 		this.targetEffect = builder.targetEffect;
@@ -188,7 +190,11 @@ public class CombatCommand {
 	public boolean isBleeding() {
 		return bleeding;
 	}
-	
+
+	public boolean isStunning() {
+		return stunning;
+	}
+
 	public String getTriggerEffect() {
 		return triggerEffect;
 	}
@@ -325,6 +331,7 @@ public class CombatCommand {
 		private double knockdownChance;
 		private boolean blinding;
 		private boolean bleeding;
+		private boolean stunning;
 		private String triggerEffect;
 		private String triggerEffectHardpoint;
 		private String targetEffect;
@@ -420,6 +427,11 @@ public class CombatCommand {
 		
 		public CombatCommandBuilder withBleeding(boolean bleeding) {
 			this.bleeding = bleeding;
+			return this;
+		}
+		
+		public CombatCommandBuilder withStunning(boolean stunning) {
+			this.stunning = stunning;
 			return this;
 		}
 		
