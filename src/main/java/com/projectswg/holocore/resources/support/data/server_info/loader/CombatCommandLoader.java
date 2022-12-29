@@ -108,6 +108,8 @@ public class CombatCommandLoader extends DataLoader {
 						.withBleeding(set.getBoolean("bleeding"))
 						.withTriggerEffect(set.getText("triggerEffect"))
 						.withTriggerEffectHardpoint(set.getText("triggerEffectHardpoint"))
+						.withTargetEffect(set.getText("targetEffect"))
+						.withTargetEffectHardpoint(set.getText("targetEffectHardpoint"))
 						.withBuffNameTarget(set.getText("buffNameTarget"))
 						.withBuffNameSelf(set.getText("buffNameSelf"))
 						.withDamageType(DamageType.valueOf(set.getText("damageType")))
