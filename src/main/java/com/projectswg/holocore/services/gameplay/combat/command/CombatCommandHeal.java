@@ -55,7 +55,7 @@ enum CombatCommandHeal implements CombatCommandHitType {
 		int healedDamage = 0;
 
 		if (healingEfficiency > 0) {
-			healAmount *= (healingEfficiency / 100d);
+			healAmount *= (100 + healingEfficiency) / 100d;
 		}
 		
 		switch (combatCommand.getAttackType()) {
