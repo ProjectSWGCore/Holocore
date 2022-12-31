@@ -35,10 +35,12 @@ import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Set;
 
 public class WeaponObject extends TangibleObject {
 	
@@ -327,12 +329,33 @@ public class WeaponObject extends TangibleObject {
 		elementalValue = data.getInteger("elementalValue", elementalValue);
 		attackSpeed = data.getFloat("attackSpeed", attackSpeed);
 		maxRange = data.getFloat("maxRange", maxRange);
-		type = WeaponType.valueOf(data.getString("weaponType", type.name()));
+		type = getWeaponType(data);
 		accuracy = data.getInteger("accuracy", 0);
 		woundChance = data.getFloat("woundChance", 0);
 		procEffect = data.getString("procEffect");
 		specialAttackCost = data.getInteger("specialAttackCost", 100);
 		forcePowerCost = data.getInteger("forcePowerCost", 100);
 	}
-	
+
+	@NotNull
+	private WeaponType getWeaponType(MongoData data) {
+		String weaponTypeStr = data.getString("weaponType", type.name());
+
+		// Instead of exploding on server start, let's just patch these weapons to the correct weapon type.
+		if (isRemovedNgeHeavyWeapon(weaponTypeStr)) {
+			return WeaponType.HEAVY;
+		}
+		
+		return WeaponType.valueOf(weaponTypeStr);
+	}
+
+	private static boolean isRemovedNgeHeavyWeapon(String weaponTypeStr) {
+		Set<String> ngeHeavyWeaponStrings = Set.of(
+				"HEAVY_WEAPON",
+				"DIRECTIONAL_TARGET_WEAPON"
+		);
+		
+		return ngeHeavyWeaponStrings.contains(weaponTypeStr);
+	}
+
 }

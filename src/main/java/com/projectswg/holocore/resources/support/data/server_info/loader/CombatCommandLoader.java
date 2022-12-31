@@ -83,7 +83,6 @@ public class CombatCommandLoader extends DataLoader {
 						.withAnimations(WeaponType.TWO_HANDED_MELEE, getAnimationList(set.getText("anim_twohandmelee")))
 						.withAnimations(WeaponType.POLEARM_MELEE, getAnimationList(set.getText("anim_polearm")))
 						.withAnimations(WeaponType.PISTOL, getAnimationList(set.getText("anim_pistol")))
-						.withAnimations(WeaponType.LIGHT_RIFLE, getAnimationList(set.getText("anim_lightRifle")))
 						.withAnimations(WeaponType.CARBINE, getAnimationList(set.getText("anim_carbine")))
 						.withAnimations(WeaponType.RIFLE, getAnimationList(set.getText("anim_rifle")))
 						.withAnimations(WeaponType.THROWN, getAnimationList(set.getText("anim_thrown")))
