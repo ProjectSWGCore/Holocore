@@ -27,10 +27,7 @@ public class TestWeaponType {
 				new Input(WeaponType.RIFLE, false, false, true),
 				new Input(WeaponType.CARBINE, false, false, true),
 				new Input(WeaponType.PISTOL, false, false, true),
-				new Input(WeaponType.HEAVY, false, false, true),
-				new Input(WeaponType.HEAVY_WEAPON, false, false, true),
-				new Input(WeaponType.DIRECTIONAL_TARGET_WEAPON, false, false, true),
-				new Input(WeaponType.LIGHT_RIFLE, false, false, true)
+				new Input(WeaponType.HEAVY, false, false, true)
 		);
 	}
 	

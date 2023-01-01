@@ -251,9 +251,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 				"ONE_HANDED_SABER" -> weaponType = WeaponType.ONE_HANDED_SABER
 				"TWO_HANDED_SABER" -> weaponType = WeaponType.TWO_HANDED_SABER
 				"POLEARM_SABER" -> weaponType = WeaponType.POLEARM_SABER
-				"GROUND_TARGETTING" -> weaponType = WeaponType.HEAVY_WEAPON
-				"DIRECTIONAL_TARGET_WEAPON" -> weaponType = WeaponType.DIRECTIONAL_TARGET_WEAPON
-				"LIGHT_RIFLE" -> weaponType = WeaponType.LIGHT_RIFLE
 				else -> throw IllegalArgumentException("weapon_type is unrecognized: " + set.getText("weapon_type"))
 			}// pre-NGE artifact for pre-NGE heavy weapons
 		}

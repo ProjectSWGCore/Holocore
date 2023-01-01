@@ -45,12 +45,7 @@ public enum WeaponType {
 	THROWN						(8, "thrown_speed", WeaponClass.RANGED, null, "thrown_accuracy", "meleeHit"),
 	ONE_HANDED_SABER			(9, "onehandlightsaber_speed", WeaponClass.MELEE, null, "onehandlightsaber_accuracy", "saberHit"),
 	TWO_HANDED_SABER			(10, "twohandlightsaber_speed", WeaponClass.MELEE, null, "twohandlightsaber_accuracy", "saberHit"),
-	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy", "saberHit"),
-	
-	// TODO these are NGE weapon types we should remove later
-	HEAVY_WEAPON				(12, "unavailable", WeaponClass.RANGED, null, null, ""),
-	DIRECTIONAL_TARGET_WEAPON	(13, "unavailable", WeaponClass.RANGED, null, null, ""),
-	LIGHT_RIFLE					(14, "unavailable", WeaponClass.RANGED, null, null, "");
+	POLEARM_SABER				(11, "polearmlightsaber_speed", WeaponClass.MELEE, null, "polearmlightsaber_accuracy", "saberHit");
 	
 	private static final WeaponType [] VALUES = values();
 	
