@@ -1,82 +1,82 @@
-level	xp_required	xp_type	xp_multiplier	health_granted	tier	comments
-INT	INT	TEXT	INT	INT	TEXT	TEXT
-1	500	combat_meleespecialize_unarmed	1	0		
-2	1000	combat_meleespecialize_onehand	1	50		
-3	6000	combat_meleespecialize_twohand	1	75		
-4	18000	combat_meleespecialize_polearm	1	100		
-5	21000	combat_rangedspecialize_rifle	1	125		
-6	60000	combat_rangedspecialize_pistol	1	150		
-7	91000	combat_rangedspecialize_carbine	1	175		4000
-8	120000	combat_rangedspecialize_heavy	1	200		
-9	140000	bountyhunter	35	225		
-10	182650	jedi_general	1	250		4004
-11	213900	crafting_medicine_general	1	275		
-12	245150	combat_general	3	300		
-13	276400	medical	1	325		
-14	307650	creaturehandler	1	350	tier 7	first novice elite
-15	395150	trapping	1	375		
-16	482650	scout	2	390		marksman +.1line elite
-17	607650			405		
-18	732650			420		marksman +.2line elite
-19	849316			435		
-20	965982			450		
-21	1082650			465		marksman +.3line elite
-22	1307650			480		
-23	1532650			495	tier 8	marksman +1 line elite
-24	1620150			510		
-25	1707650			525		marksman +1.1line elite
-26	1832650			540		
-27	1957650			555		marksman +1.2line elite
-28	2074316			570		
-29	2190982			585		
-30	2307650			600		marksman +1.3line elite
-31	2532650			615		
-32	2757650			630	tier 9	marksman +2 line elite
-33	2845150			645		
-34	2932650			660		marksman +2.1line elite
-35	3057650			675		
-36	3182650			690		marksman +2.2line elite
-37	3299316			705		
-38	3415982			720		
-39	3532650			735		marksman +2.3line elite
-40	3757650			750		
-41	3982650			765	tier 10	marksman +3 line elite
-42	4070150			780		
-43	4157650			795		marksman +2.1line elite
-44	4282650			810		
-45	4407650			825		marksman +2.2line elite
-46	4524316			840		
-47	4640982			855		
-48	4757650			870		marksman +2.3line elite
-49	4982650			885		
-50	5102650			900	tier 11	marksman +4 line elite
-51	5352650			915		
-52	5602650			930		
-53	5852650			945		
-54	6102650			960	tier 12	one elite mastery
-55	6227650			1000		
-56	6390850			1040		
-57	6679050			1080		
-58	6967250			1120		
-59	7255450			1160		
-60	7543650			1200	tier 13	marksman +mastery +1line 2nd elite
-61	7788650			1240		
-62	8033650			1280		
-63	8278650			1320		
-64	8523650			1360		
-65	8768650			1400	tier 14	marksman +mastery +2line 2nd elite
-66	9013650			1440		
-67	9258650			1480		
-68	9503650			1520		
-69	9748650			1560		
-70	9993650			1600	tier 15	marksman +mastery +3line 2nd elite
-71	10242650			1640		
-72	10491650			1680		
-73	10740650			1720		
-74	10989650			1760		
-75	11238650			1800	tier 16	marksman +mastery +4line 2nd elite
-76	11438650			1840		
-77	11638650			1880		
-78	11838650			1920		
-79	12038650			1960		
-80	12238650			2000	tier 17	second elite mastery
+level	xp_required	health_granted	tier	comments	xp_type	xp_multiplier
+INT	INT	INT	TEXT	TEXT	TEXT	INT
+1	0	0			combat_meleespecialize_unarmed	1
+2	500	50			combat_meleespecialize_onehand	1
+3	1000	75			combat_meleespecialize_twohand	1
+4	6000	100			combat_meleespecialize_polearm	1
+5	18000	125			combat_rangedspecialize_rifle	1
+6	21000	150			combat_rangedspecialize_pistol	1
+7	60000	175		4000	combat_rangedspecialize_carbine	1
+8	91000	200			combat_rangedspecialize_heavy	1
+9	120000	225			bountyhunter	35
+10	140000	250		4004	jedi_general	1
+11	182650	275			crafting_medicine_general	1
+12	213900	300			combat_general	3
+13	245150	325			medical	1
+14	276400	350	tier 7	first novice elite	creaturehandler	1
+15	307650	375			trapping	1
+16	395150	390		marksman +.1line elite	scout	2
+17	482650	405				
+18	607650	420		marksman +.2line elite		
+19	732650	435				
+20	849316	450				
+21	965982	465		marksman +.3line elite		
+22	1082650	480				
+23	1307650	495	tier 8	marksman +1 line elite		
+24	1532650	510				
+25	1620150	525		marksman +1.1line elite		
+26	1707650	540				
+27	1832650	555		marksman +1.2line elite		
+28	1957650	570				
+29	2074316	585				
+30	2190982	600		marksman +1.3line elite		
+31	2307650	615				
+32	2532650	630	tier 9	marksman +2 line elite		
+33	2757650	645				
+34	2845150	660		marksman +2.1line elite		
+35	2932650	675				
+36	3057650	690		marksman +2.2line elite		
+37	3182650	705				
+38	3299316	720				
+39	3415982	735		marksman +2.3line elite		
+40	3532650	750				
+41	3757650	765	tier 10	marksman +3 line elite		
+42	3982650	780				
+43	4070150	795		marksman +2.1line elite		
+44	4157650	810				
+45	4282650	825		marksman +2.2line elite		
+46	4407650	840				
+47	4524316	855				
+48	4640982	870		marksman +2.3line elite		
+49	4757650	885				
+50	4982650	900	tier 11	marksman +4 line elite		
+51	5102650	915				
+52	5352650	930				
+53	5602650	945				
+54	5852650	960	tier 12	one elite mastery		
+55	6102650	1000				
+56	6227650	1040				
+57	6390850	1080				
+58	6679050	1120				
+59	6967250	1160				
+60	7255450	1200	tier 13	marksman +mastery +1line 2nd elite		
+61	7543650	1240				
+62	7788650	1280				
+63	8033650	1320				
+64	8278650	1360				
+65	8523650	1400	tier 14	marksman +mastery +2line 2nd elite		
+66	8768650	1440				
+67	9013650	1480				
+68	9258650	1520				
+69	9503650	1560				
+70	9748650	1600	tier 15	marksman +mastery +3line 2nd elite		
+71	9993650	1640				
+72	10242650	1680				
+73	10491650	1720				
+74	10740650	1760				
+75	10989650	1800	tier 16	marksman +mastery +4line 2nd elite		
+76	11238650	1840				
+77	11438650	1880				
+78	11638650	1920				
+79	11838650	1960				
+80	12038650	2000	tier 17	second elite mastery		
