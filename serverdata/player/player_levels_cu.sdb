@@ -1,4 +1,4 @@
-level	required_combat_xp	level_health_added	tier	comments	xp_type	xp_multiplier
+level	xp_required	health_granted	tier	comments	xp_type	xp_multiplier
 INT	INT	INT	TEXT	TEXT	TEXT	INT
 1	0	0			combat_meleespecialize_unarmed	1
 2	500	50			combat_meleespecialize_onehand	1
