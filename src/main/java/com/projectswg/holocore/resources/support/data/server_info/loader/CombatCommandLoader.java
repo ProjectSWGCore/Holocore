@@ -116,7 +116,6 @@ public class CombatCommandLoader extends DataLoader {
 						.withElementalType(DamageType.valueOf(set.getText("elementalType")))
 						.withIgnoreDistance(set.getBoolean("ignore_distance"))
 						.withPvpOnly(set.getBoolean("pvp_only"))
-						.withAttackRolls((int) set.getInt("attack_rolls"))
 						.withMaxRange(set.getReal("maxRange"))
 						.build();
 				commandNameMap.put(command.getName(), command);
