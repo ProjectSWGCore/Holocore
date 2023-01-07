@@ -86,40 +86,23 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		if (combatStatus != CombatStatus.SUCCESS) {
 			return combatStatus;
 		}
-		
-		for (int i = 0; i < combatCommand.getAttackRolls(); i++) {
-			AttackInfo info = new AttackInfo();
-			
-			switch (combatCommand.getAttackType()) {
-				case SINGLE_TARGET:
-					doCombatSingle(source, target, info, combatCommand);
-					break;
-				case AREA:
-					doCombatArea(source, source, info, combatCommand, false);
-					break;
-				case TARGET_AREA:
-					if (target != null) {
-						// Same as AREA, but the target is the destination for the AoE and  can take damage
-						doCombatArea(source, delayEgg != null ? delayEgg : target, info, combatCommand, true);
-					} else {
-						// TODO AoE based on Location instead of delay egg (free-targeting with heavy weapons)
-					}
-					break;
-				case CONE:
-					if (target != null) {
-						doCombatCone(source, target, info, combatCommand);
-					} else {
-						// TODO CoE based on Location (free-targeting with flamethrowers)
-					}
-					break;
-				default:
-					break;
-			}
+
+		AttackInfo info = new AttackInfo();
+
+		switch (combatCommand.getAttackType()) {
+			case SINGLE_TARGET -> doCombatSingle(source, target, info, combatCommand);
+			case AREA -> doCombatArea(source, source, info, combatCommand, false);
+			case TARGET_AREA -> doCombatTargetArea(source, target, delayEgg, combatCommand, info);
+			case CONE -> doCombatCone(source, target, info, combatCommand);
 		}
 		
 		return combatStatus;
 	}
-	
+
+	private static void doCombatTargetArea(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand combatCommand, AttackInfo info) {
+		doCombatArea(source, delayEgg != null ? delayEgg : target, info, combatCommand, true);
+	}
+
 	private void doCombatCone(CreatureObject source, Location targetWorldLocation, AttackInfo info, CombatCommand command) {
 		double coneLength = command.getConeLength();
 		double coneWidth = command.getConeWidth();

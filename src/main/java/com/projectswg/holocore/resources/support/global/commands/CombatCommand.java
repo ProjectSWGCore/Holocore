@@ -59,7 +59,6 @@ public class CombatCommand {
 	private final DamageType elementalType;
 	private final boolean ignoreDistance;
 	private final boolean pvpOnly;
-	private final int attackRolls;
 	private final double percentAddFromWeapon;
 	private final double bypassArmor;
 	private final double hateDamageModifier;
@@ -104,7 +103,6 @@ public class CombatCommand {
 		this.elementalType = builder.elementalType;
 		this.ignoreDistance = builder.ignoreDistance;
 		this.pvpOnly = builder.pvpOnly;
-		this.attackRolls = builder.attackRolls;
 		this.percentAddFromWeapon = builder.percentAddFromWeapon;
 		this.bypassArmor = builder.bypassArmor;
 		this.hateDamageModifier = builder.hateDamageModifier;
@@ -227,10 +225,6 @@ public class CombatCommand {
 		return pvpOnly;
 	}
 	
-	public int getAttackRolls() {
-		return attackRolls;
-	}
-	
 	public double getPercentAddFromWeapon() {
 		return percentAddFromWeapon;
 	}
@@ -340,7 +334,6 @@ public class CombatCommand {
 		private DamageType elementalType;
 		private boolean ignoreDistance;
 		private boolean pvpOnly;
-		private int attackRolls;
 		private double percentAddFromWeapon;
 		private double bypassArmor;
 		private double hateDamageModifier;
@@ -472,11 +465,6 @@ public class CombatCommand {
 		
 		public CombatCommandBuilder withPvpOnly(boolean pvpOnly) {
 			this.pvpOnly = pvpOnly;
-			return this;
-		}
-		
-		public CombatCommandBuilder withAttackRolls(int attackRolls) {
-			this.attackRolls = attackRolls;
 			return this;
 		}
 		
