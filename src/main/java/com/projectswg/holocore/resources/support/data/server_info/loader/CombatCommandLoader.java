@@ -117,6 +117,7 @@ public class CombatCommandLoader extends DataLoader {
 						.withIgnoreDistance(set.getBoolean("ignore_distance"))
 						.withPvpOnly(set.getBoolean("pvp_only"))
 						.withMaxRange(set.getReal("maxRange"))
+						.withHitLocation(HitLocation.valueOf(set.getText("hitLocation")))
 						.build();
 				commandNameMap.put(command.getName(), command);
 			}

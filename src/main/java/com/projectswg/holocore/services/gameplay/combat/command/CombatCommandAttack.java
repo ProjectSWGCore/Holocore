@@ -201,7 +201,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 					observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, combatCommand, CombatSpamType.MISS));
 				}
 				
-				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) 0));
+				action.addDefender(new Defender(target.getObjectId(), target.getPosture(), false, (byte) 0, combatCommand.getHitLocation(), (short) 0));
 				continue;	// This target negated the attack completely - move on to the next target
 			}
 			
@@ -272,7 +272,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 				observerCreature.sendSelf(createCombatSpam(observerCreature, source, target, sourceWeapon, info, combatCommand, CombatSpamType.HIT));
 			}
 			
-			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, HitLocation.HIT_LOCATION_BODY, (short) finalDamage));
+			action.addDefender(new Defender(target.getObjectId(), target.getPosture(), true, (byte) 0, combatCommand.getHitLocation(), (short) finalDamage));
 			
 			int hate = (int) (finalDamage * combatCommand.getHateDamageModifier());
 			hate += combatCommand.getHateAdd();
