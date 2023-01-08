@@ -79,6 +79,7 @@ public class CombatCommand {
 	private final String name;
 	private final double maxRange;
 	private final int crc;
+	private final HitLocation hitLocation;
 	
 	private CombatCommand(CombatCommandBuilder builder) {
 		this.validTarget = builder.validTarget;
@@ -123,6 +124,7 @@ public class CombatCommand {
 		this.name = builder.name;
 		this.maxRange = builder.maxRange;
 		this.crc = CRC.getCrc(this.name);
+		this.hitLocation = builder.hitLocation;
 	}
 	
 	public ValidTarget getValidTarget() {
@@ -309,6 +311,10 @@ public class CombatCommand {
 		return crc;
 	}
 
+	public HitLocation getHitLocation() {
+		return hitLocation;
+	}
+
 	public static class CombatCommandBuilder {
 		
 		private final Map<WeaponType, String[]> animations;
@@ -353,6 +359,7 @@ public class CombatCommand {
 		private HealAttrib healAttrib;
 		private String name;
 		private double maxRange;
+		private HitLocation hitLocation;
 		
 		private CombatCommandBuilder() {
 			this.animations = new EnumMap<>(WeaponType.class);
@@ -560,6 +567,11 @@ public class CombatCommand {
 
 		public CombatCommandBuilder withMaxRange(double maxRange) {
 			this.maxRange = maxRange;
+			return this;
+		}
+		
+		public CombatCommandBuilder withHitLocation(HitLocation hitLocation) {
+			this.hitLocation = hitLocation;
 			return this;
 		}
 		
