@@ -47,7 +47,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 				listBox.addListItem("TRAVEL - Fast Travel Locations");
 				listBox.addListItem("SKILLS - Grant boxes");
-				listBox.addListItem("SKILLS - Unlock Jedi");
+				listBox.addListItem("SKILLS - Unlock Force Sensitive");
 				listBox.addListItem("ITEMS - Armor");
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
@@ -68,7 +68,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		switch (selection) {
 			case 0: handleTravel(player); break;
 			case 1: handleSkillsGrantBoxes(player); break;
-			case 2: handleSkillsUnlockJedi(player); break;
+			case 2: handleSkillsUnlockForceSensitive(player); break;
 			case 3: handleArmor(player); break;
 			case 4: handleWeapons(player); break;
 			case 5: handleWearables(player); break;
@@ -93,6 +93,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Ranged - Carbineer (Novice)");
 		listBox.addListItem("Ranged - Rifleman (Novice)");
 		listBox.addListItem("Ranged - Commando (Novice)");
+		listBox.addListItem("Science - Medic (Master)");
+		listBox.addListItem("Science - Combat Medic (Master)");
+		listBox.addListItem("Science - Doctor (Master)");
+		listBox.addListItem("Force Sensitive - Healing (Novice)");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSkillsSelection", (event, parameters) -> handleSkillsSelection(player, parameters));
 		listBox.display(player);
@@ -114,6 +118,10 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 9: handleNoviceCarbineer(player); break;
 			case 10: handleNoviceRifleman(player); break;
 			case 11: handleNoviceCommando(player); break;
+			case 12: handleMasterMedic(player); break;
+			case 13: handleMasterCombatMedic(player); break;
+			case 14: handleMasterDoctor(player); break;
+			case 15: handleNoviceHealing(player); break;
 		}
 	}
 
@@ -177,7 +185,27 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "combat_commando_novice", creatureObject, true);
 	}
 
-	private static void handleSkillsUnlockJedi(Player player) {
+	private static void handleMasterMedic(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "science_medic_master", creatureObject, true);
+	}
+
+	private static void handleMasterCombatMedic(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "science_combatmedic_master", creatureObject, true);
+	}
+
+	private static void handleMasterDoctor(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "science_doctor_master", creatureObject, true);
+	}
+
+	private static void handleNoviceHealing(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_healing_master", creatureObject, true);
+	}
+
+	private static void handleSkillsUnlockForceSensitive(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_light_saber_master", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true);
