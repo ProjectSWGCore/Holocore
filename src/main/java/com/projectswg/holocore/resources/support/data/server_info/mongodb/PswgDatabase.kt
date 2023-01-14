@@ -17,7 +17,6 @@ object PswgDatabase {
 	private var usersImpl = PswgUserDatabase.createDefault()
 	private var objectsImpl = PswgObjectDatabase.createDefault()
 	private var resourcesImpl = PswgResourceDatabase.createDefault()
-	private var gcwRegionImpl = PswgGcwRegionDatabase.createDefault()
 	
 	val config: PswgConfigDatabase
 		get() = configImpl
@@ -27,8 +26,6 @@ object PswgDatabase {
 		get() = objectsImpl
 	val resources: PswgResourceDatabase
 		get() = resourcesImpl
-	val gcwRegions: PswgGcwRegionDatabase
-		get() = gcwRegionImpl
 	
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
@@ -40,13 +37,11 @@ object PswgDatabase {
 		val users = initTable(databaseConfig.users, defaultCreator = {PswgUserDatabase.createDefault()}, mariaInitializer = ::PswgUserDatabaseMaria, mongoInitializer = ::PswgUserDatabaseMongo)
 		val objects = initTable(databaseConfig.objects, defaultCreator = {PswgObjectDatabase.createDefault()}, mongoInitializer = ::PswgObjectDatabaseMongo)
 		val resources = initTable(databaseConfig.resources, defaultCreator = {PswgResourceDatabase.createDefault()}, mongoInitializer = ::PswgResourceDatabaseMongo)
-		val gcwRegions = initTable(databaseConfig.gcwRegions, defaultCreator = {PswgGcwRegionDatabase.createDefault()}, mongoInitializer = ::PswgGcwRegionDatabaseMongo)
 		
 		this.configImpl = config
 		this.usersImpl = users
 		this.objectsImpl = objects
 		this.resourcesImpl = resources
-		this.gcwRegionImpl = gcwRegions
 	}
 	
 	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {
