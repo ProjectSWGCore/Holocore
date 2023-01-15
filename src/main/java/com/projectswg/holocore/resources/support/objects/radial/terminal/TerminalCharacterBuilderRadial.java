@@ -52,7 +52,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				listBox.addListItem("ITEMS - Weapons");
 				listBox.addListItem("ITEMS - Wearables");
 				listBox.addListItem("ITEMS - Vehicles");
-				listBox.addListItem("ITEMS - Deeds");
+				listBox.addListItem("ITEMS - Tools");
 				listBox.addListItem("Credits");
 
 				listBox.addCallback(SuiEvent.OK_PRESSED, "handleCategorySelection", (event, parameters) -> handleCategorySelection(player, parameters));
@@ -73,7 +73,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 4: handleWeapons(player); break;
 			case 5: handleWearables(player); break;
 			case 6: handleVehicles(player); break;
-			case 7: handleDeeds(player); break;
+			case 7: handleTools(player); break;
 			case 8: handleCredits(player); break;
 		}
 	}
@@ -1307,53 +1307,67 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		}
 	}
 
-	private static void handleDeeds(Player player) {
-		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a set of deeds to acquire.");
+	private static void handleTools(Player player) {
+		SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a tool to acquire.");
 
-		listBox.addListItem("Structures - Tatooine");
-		listBox.addListItem("Structures - Corellia");
-		listBox.addListItem("Structures - Naboo");
-		listBox.addListItem("Structures - Generic");
-		listBox.addListItem("Structures - Dantooine");
-		listBox.addListItem("Structures - Endor");
-		listBox.addListItem("Structures - Mustafar");
-		listBox.addListItem("Structures - Merchant");
-		listBox.addListItem("Structures - Generator");
-		listBox.addListItem("Structures - Factory");
-		listBox.addListItem("Structures - Mining");
-		listBox.addListItem("Structures - Turret");
+		listBox.addListItem("Gas Pocket Survey Device");
+		listBox.addListItem("Chemical Survey Device");
+		listBox.addListItem("Flora Survey Tool");
+		listBox.addListItem("Mineral Survey Device");
+		listBox.addListItem("Water Survey Device");
+		listBox.addListItem("Wind Current Surveying Tool");
 
-		listBox.addCallback(SuiEvent.OK_PRESSED, "handleDeedSelection", (event, parameters) -> handleDeedSelection(player, parameters));
+		listBox.addCallback(SuiEvent.OK_PRESSED, "handleToolsSelection", (event, parameters) -> handleToolsSelection(player, parameters));
 		listBox.display(player);
 	}
 
-	private static void handleDeedSelection(Player player, Map<String, String> parameters) {
+	private static void handleToolsSelection(Player player, Map<String, String> parameters) {
 		int selection = SuiListBox.getSelectedRow(parameters);
-		String stringSearch;
 
 		switch (selection) {
-			case 0  -> stringSearch = "tatooine";
-			case 1  -> stringSearch = "corellia";
-			case 2  -> stringSearch = "naboo";
-			case 3  -> stringSearch = "generic";
-			case 4  -> stringSearch = "dantooine";
-			case 5  -> stringSearch = "endor";
-			case 6  -> stringSearch = "mustafar";
-			case 7  -> stringSearch = "merchant";
-			case 8  -> stringSearch = "generator";
-			case 9  -> stringSearch = "factory";
-			case 10 -> stringSearch = "mining";
-			case 11 -> stringSearch = "turret";
-			default -> { return; }
-		}
-
-		for (StructureInfoLoader.StructureInfo structureInfo : ServerData.INSTANCE.getHousing().getStructures().values()) {
-			if (structureInfo.getStructureTemplate().contains(stringSearch) && !structureInfo.getDeedTemplate().isEmpty()) {
-				TangibleObject deed = ObjectCreator.createObjectFromTemplate(structureInfo.getDeedTemplate(), TangibleObject.class);
-				deed.setServerAttribute(ServerAttribute.DEED_GEN_TEMPLATE, structureInfo.getStructureTemplate());
-				ObjectCreatedIntent.broadcast(deed);
-				deed.moveToContainer(player.getCreatureObject().getInventory());
-			}
+			case 0: handleGas(player); break;
+			case 1: handleChemical(player); break;
+			case 2: handleFlora(player); break;
+			case 3: handleMineral(player); break;
+			case 4: handleWater(player); break;
+			case 5: handleWind(player); break;
 		}
 	}
+
+	private static void handleGas(Player player) {
+		spawnItems(player,
+				"survey_tool_gas"
+		);
+	}
+
+	private static void handleChemical(Player player) {
+		spawnItems(player,
+				"survey_tool_liquid"
+		);
+	}
+
+	private static void handleFlora(Player player) {
+		spawnItems(player,
+				"survey_tool_lumber"
+		);
+	}
+
+	private static void handleMineral(Player player) {
+		spawnItems(player,
+				"survey_tool_mineral"
+		);
+	}
+
+	private static void handleWater(Player player) {
+		spawnItems(player,
+				"survey_tool_moisture"
+		);
+	}
+
+	private static void handleWind(Player player) {
+		spawnItems(player,
+				"survey_tool_wind"
+		);
+	}
+
 }
