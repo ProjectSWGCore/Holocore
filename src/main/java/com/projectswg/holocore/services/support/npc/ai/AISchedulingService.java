@@ -56,7 +56,6 @@ public class AISchedulingService extends Service {
 			return;
 		
 		obj.setActiveMode(mode);
-		mode.onModeStart();
 	}
 	
 	private void stop(@NotNull AIObject obj, @Nullable NpcMode mode) {
@@ -64,7 +63,6 @@ public class AISchedulingService extends Service {
 			return;
 		
 		obj.setActiveMode(null);
-		mode.onModeEnd();
 	}
 	
 }
