@@ -278,7 +278,11 @@ public class AIObject extends CreatureObject {
 	}
 	
 	public void setActiveMode(@Nullable NpcMode mode) {
+		if (this.activeMode != null)
+			this.activeMode.onModeEnd();
 		this.activeMode = mode;
+		if (mode != null)
+			mode.onModeStart();
 		queueNextLoop(0);
 	}
 	
