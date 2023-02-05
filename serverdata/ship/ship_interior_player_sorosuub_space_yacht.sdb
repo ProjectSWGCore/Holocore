@@ -1,0 +1,10 @@
+template	JX	JY	JZ	KX	KY	KZ	PX	PY	PZ	Scripts	CellName	NoCreate	LocationList
+TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	TEXT	TEXT	INTEGER	TEXT
+object/tangible/shipcontrol/shipcontrol_falcon.iff	0	1	0	0	0	1	-0.761144	0.430452	21.1372	script.space.ship.shipcontrol_falcon	bridge	0	
+object/tangible/terminal/terminal_pob_ship.iff	0	1	0	1	0	-1.19209e-07	0.882237	-0.380644	16.3738	script.terminal.terminal_pob_ship	bridge	0	
+object/tangible/furniture/space/frn_chair_falcon_passenger_s01.iff	0	1	0	-0.0499792	0	0.99875	0.747508	0.430452	21.1509		bridge	0	
+object/tangible/ship/interior_components/escape_pod_hatch.iff	-0.522687	0.852525	5.96046e-07	-0.852524	-0.522687	1.34856e-06	6.88948	-3.3927	22.0257	script.space.crafting.escape_hatch	lobby	0	
+object/tangible/terminal/terminal_elevator_up.iff	0	1	0	-1	0	3.57628e-07	1.05087	-3.66955	-15.5655	script.systems.elevator.elevator_up	elevator1	0	
+object/tangible/terminal/terminal_elevator_down.iff	0	1	0	-1	0	3.57628e-07	1.05852	1.33045	-15.563	script.systems.elevator.elevator_down	elevator1	0	
+object/tangible/terminal/terminal_elevator_up.iff	0	1	0	-1	0	7.15256e-07	3.27517	1.23045	-21.8704	script.systems.elevator.elevator_up	elevator2	0	
+object/tangible/terminal/terminal_elevator_down.iff	0	1	0	-1	0	-1.19209e-07	3.25385	5.33045	-21.8635	script.systems.elevator.elevator_down	elevator2	0	
