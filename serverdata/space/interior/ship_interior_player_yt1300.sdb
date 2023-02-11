@@ -1,0 +1,57 @@
+template	JX	JY	JZ	KX	KY	KZ	PX	PY	PZ	Scripts	CellName	NoCreate	LocationList
+TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	TEXT	TEXT	INTEGER	TEXT
+object/tangible/shipcontrol/turretcontrol_falcon.iff	0.0	1.0	0.0	-1.0	0.0	0.0	-3.3	-0.3	0.0	script.space.ship.turret_falcon	turretaccess	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	-0.2	0.0	1.0	4.5	-1.7	-9.5	script.space.ship.ship_interior_autocleanup	storage6	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.2	0.0	1.0	6.2	-1.7	-3.9	script.space.ship.ship_interior_autocleanup	storage6	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	4.2	-1.7	-2.9	script.space.ship.ship_interior_autocleanup	storage6	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	8.0	-1.7	-6.8	script.space.ship.ship_interior_autocleanup	storage6	1	locSparkers
+object/tangible/ship/interior_components/reactor_interior.iff	-0.7	0.0	-0.7	-0.7	0.0	0.7	8.6	-0.2	-9.9	script.space.crafting.interior_component	storage6	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	1.0	0.0	0.0	0.0	0.0	1.0	2.0	-0.4	-7.1	script.space.crafting.interior_component	storage6	0	
+object/tangible/ship/interior_components/capacitor_interior.iff	0.0	1.0	0.0	0.0	0.0	-1.0	3.5	-0.1	-2.0	script.space.crafting.interior_component	storage6	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	0.0	1.0	0.0	0.0	0.0	-1.0	3.5	0.6	-2.0	script.space.crafting.interior_component	storage6	0	
+object/tangible/ship/interior_components/alarm_interior.iff	-0.8	0.0	0.6	0.0	1.0	0.0	10.7	0.1	-7.8	script.space.crafting.alarm	storage6	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-8.2	-1.7	-6.5	script.space.ship.ship_interior_autocleanup	storage5	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-2.0	-1.7	-3.4	script.space.ship.ship_interior_autocleanup	storage5	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-4.4	-1.7	-9.8	script.space.ship.ship_interior_autocleanup	storage5	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-9.1	-1.7	-4.6	script.space.ship.ship_interior_autocleanup	storage5	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-7.6	-1.7	-2.0	script.space.ship.ship_interior_autocleanup	storage5	1	locSparkers
+object/tangible/ship/interior_components/engine_interior.iff	-0.7	0.0	0.7	0.7	0.0	0.7	-8.6	-0.1	-9.8	script.space.crafting.interior_component	storage5	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	-1.0	0.0	-0.1	-0.1	0.0	1.0	-2.1	-0.3	-7.2	script.space.crafting.interior_component	storage5	0	
+object/tangible/ship/interior_components/alarm_interior.iff	0.1	0.0	-1.0	-1.0	0.0	-0.1	-4.5	1.3	-2.0	script.space.crafting.alarm	storage5	0	
+object/tangible/ship/interior_components/weapon_interior.iff	1.0	0.0	0.0	0.0	0.0	-1.0	-4.5	0.0	-2.0	script.space.crafting.interior_component	storage5	0	
+object/tangible/ship/interior_components/weapon_interior.iff	1.0	0.0	0.0	0.0	0.0	-1.0	-3.2	0.0	-2.0	script.space.crafting.interior_component	storage5	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-6.1	-1.6	6.8	script.space.ship.ship_interior_autocleanup	hall4	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-8.8	-1.6	1.0	script.space.ship.ship_interior_autocleanup	hall4	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-9.0	-1.6	-0.1	script.space.ship.ship_interior_autocleanup	hall4	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-8.0	-1.6	4.9	script.space.ship.ship_interior_autocleanup	hall4	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-6.1	-1.6	6.8	script.space.ship.ship_interior_autocleanup	hall4	1	locSparkers
+object/tangible/terminal/terminal_pob_ship.iff	0.0	1.0	0.0	1.0	0.0	0.0	-9.9	-1.7	1.7	script.terminal.terminal_pob_ship	hall4	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	-0.9	0.4	0.0	-0.4	-0.9	0.0	-6.4	1.6	0.0	script.space.crafting.interior_component	hall4	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	0.5	-1.8	8.5	script.space.ship.ship_interior_autocleanup	lounge	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-0.1	-1.9	11.3	script.space.ship.ship_interior_autocleanup	lounge	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	2.8	-1.8	4.3	script.space.ship.ship_interior_autocleanup	lounge	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-1.6	-1.9	4.3	script.space.ship.ship_interior_autocleanup	lounge	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	-2.9	-1.8	7.7	script.space.ship.ship_interior_autocleanup	lounge	1	locSparkers
+object/tangible/ship/interior_components/shield_generator_interior.iff	0.0	1.0	0.0	0.0	0.0	-1.0	2.5	-0.4	11.7	script.space.crafting.interior_component	lounge	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	0.0	1.0	0.0	0.0	0.0	1.0	3.3	0.0	2.8	script.space.crafting.interior_component	lounge	0	
+object/tangible/ship/interior_components/alarm_interior.iff	0.0	0.0	1.0	0.0	1.0	0.0	-1.3	0.5	3.5	script.space.crafting.alarm	lounge	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	0.0	1.0	0.0	0.0	0.0	-1.0	-2.6	-1.0	13.4	script.space.crafting.interior_component	lounge	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	-1.0	0.0	0.0	0.0	0.0	-1.0	-0.1	-1.0	13.5	script.space.crafting.interior_component	lounge	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	12.9	-0.3	10.0	script.space.ship.ship_interior_autocleanup	cockpit	1	locSparkers
+object/tangible/shipcontrol/shipcontrol_falcon.iff	0.0	1.0	0.0	0.0	0.0	1.0	12.3	0.1	12.5	script.space.ship.shipcontrol_falcon	cockpit	0	
+object/tangible/shipcontrol/shipoperations_falcon.iff	0.0	1.0	0.0	-0.1	0.0	1.0	13.6	0.1	12.5	script.space.ship.shipoperations_falcon	cockpit	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	12.8	0.1	13.4	script.space.ship.ship_interior_autocleanup	cockpit	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	14.2	0.1	11.6	script.space.ship.ship_interior_autocleanup	cockpit	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	11.7	0.1	11.1	script.space.ship.ship_interior_autocleanup	cockpit	1	locSparkers
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	0.0	1.0	0.0	1.0	0.0	0.0	10.9	0.5	10.5	script.space.crafting.interior_component	cockpit	0	
+object/tangible/ship/interior_components/plasma_conduit_interior.iff	0.0	1.0	0.0	-1.0	0.0	0.0	14.9	0.5	10.6	script.space.crafting.interior_component	cockpit	0	
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	7.8	-1.6	0.4	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	7.0	-1.6	5.5	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	8.3	-1.6	2.9	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	11.7	-1.6	0.3	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	11.5	-0.8	6.7	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/space/content_infrastructure/generic_egg_small.iff	0.0	1.0	0.0	0.0	0.0	1.0	5.1	-1.6	7.3	script.space.ship.ship_interior_autocleanup	hall1	1	locSparkers
+object/tangible/ship/interior_components/escape_pod_hatch.iff	0.0	1.0	0.0	0.0	0.0	-1.0	11.6	-0.6	1.0	script.space.crafting.escape_hatch	hall1	0	
+object/tangible/ship/interior_components/alarm_interior.iff	0.0	-1.0	0.0	0.1	0.0	-1.0	8.3	2.1	2.1	script.space.crafting.alarm	hall1	0	
+object/tangible/ship/interior_components/alarm_interior.iff	0.0	-1.0	0.0	-0.9	0.0	-0.4	9.6	1.6	6.2	script.space.crafting.alarm	hall1	0	
+object/tangible/container/drum/pob_ship_loot_box.iff	0.0	1.0	0.0	1.0	0.0	0.1	-10.5	-1.7	-2.7	script.space.ship.ship_interior_loot	storage5	0	

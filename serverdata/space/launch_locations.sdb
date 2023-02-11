@@ -1,0 +1,35 @@
+region	pointName	groundScene	groundX	groundY	groundZ	spaceScene	spaceX	spaceY	spaceZ	spaceStationName	spaceLocationIndex
+TEXT	TEXT	TEXT	REAL	REAL	REAL	TEXT	REAL	REAL	REAL	TEXT	INTEGER
+coronet	Coronet Starport	CORELLIA	-66	28	-4707	SPACE_CORELLIA	6519	-5373	-2600	station_corellia	1
+doaba_guerfel	Doaba Guerfel Starport	CORELLIA	3349	308	5598	SPACE_CORELLIA	6519	-5373	-2600	station_corellia	1
+kor_vella	Kor Vella Starport	CORELLIA	-3157	31	2876	SPACE_CORELLIA	6519	-5373	-2600	station_corellia	1
+tyrena	Tyrena Starport	CORELLIA	-5003	21	-2228	SPACE_CORELLIA	6519	-5373	-2600	station_corellia	1
+abandoned_rebel_base_1	Abandoned Rebel Base	DANTOOINE	-6791	46	5572	SPACE_DANTOOINE	1359	-742	-5902	station_dantooine	2
+dantooine_mining_outpost	Dantooine Mining Outpost	DANTOOINE	-636	3	2507	SPACE_DANTOOINE	1359	-742	-5902	station_dantooine	2
+dantooine_pirate_outpost	Dantooine Agro Outpost	DANTOOINE	1570	4	-6416	SPACE_DANTOOINE	1359	-742	-5902	station_dantooine	2
+imperial_outpost	Dantooine Imperial Outpost	DANTOOINE	-4209	3	-2350	SPACE_DANTOOINE	1359	-742	-5902	station_dantooine	2
+dathomir_survey_outpost	Science Outpost	DATHOMIR	-49	18	-1585	SPACE_DATHOMIR	-6880	2742	-3956	station_dathomir	3
+dathomir_trade_outpost	Dathomir Outpost	DATHOMIR	619	6	3092	SPACE_DATHOMIR	-6880	2742	-3956	station_dathomir	3
+endor_neutral_outpost	Research Outpost	ENDOR	3201	24	-3471	SPACE_ENDOR	-5268	-1500	5209	station_endor	4
+endor_smuggler_outpost	Smuggler Outpost	ENDOR	-951	73	1553	SPACE_ENDOR	-5268	-1500	5209	station_endor	4
+kachirho	Kachirho Starport	KASHYYYK_MAIN	-670	18	-137	SPACE_KASHYYYK	-5000	100	-5000	station_kashyyyk	1
+lok_nyms_stronghold	Nym's Stronghold	LOK	479	9	5512	SPACE_LOK	-6235	-5341	113	station_lok	5
+emperors_retreat	The Emperors Retreat	NABOO	2444	292	-3912	SPACE_NABOO	-2491	905	-6460	station_naboo	6
+kaadara	Kaadara Starport	NABOO	5280	-192	6688	SPACE_NABOO	-2491	905	-6460	station_naboo	6
+keren	Keren Starport	NABOO	1372	13	2748	SPACE_NABOO	-2491	905	-6460	station_naboo	6
+moenia	Moenia	NABOO	4731	4	-4678	SPACE_NABOO	-2491	905	-6460	station_naboo	6
+theed	Theed Spaceport	NABOO	-4859	6	4164	SPACE_NABOO	-2491	905	-6460	station_naboo	6
+narmle	Narmle Starport	RORI	-5374	80	-2189	SPACE_NABOO	6226	-4450	484	station_rori	7
+restuss	Restuss Starport	RORI	5286	80	6167	SPACE_NABOO	6226	-4450	484	station_rori	7
+sdungeon_rebel_outpost	Rebel Outpost	RORI	3692	96	-6403	SPACE_NABOO	6226	-4450	484	station_rori	7
+dearic	Dearic Starport	TALUS	264	6	-2952	SPACE_CORELLIA	-6348	-5274	-3956	station_talus	8
+nashal	Nashal Starport	TALUS	4454	2	5354	SPACE_CORELLIA	-6348	-5274	-3956	station_talus	8
+talus_imperial_outpost	Talus Imperial Outpost	TALUS	-2215	20	2309	SPACE_CORELLIA	-6348	-5274	-3956	station_talus	8
+bestine	Bestine Starport	TATOOINE	-1361	12	-3600	SPACE_TATOOINE	2311	-5872	1865	station_tatooine	9
+jabbas_palace	Jabbas Palace	TATOOINE	-6171	90	-6382	SPACE_TATOOINE	2311	-5872	1865	station_tatooine	9
+mos_eisley	Mos Eisley Starport	TATOOINE	3600	5	-4780	SPACE_TATOOINE	2311	-5872	1865	station_tatooine	9
+mos_entha	Mos Entha Spaceport	TATOOINE	1266	7	3065	SPACE_TATOOINE	2311	-5872	1865	station_tatooine	9
+mos_espa	Mos Espa Starport	TATOOINE	-2833	5	2107	SPACE_TATOOINE	2311	-5872	1865	station_tatooine	9
+yavin4_imperial_fort	Imperial Base Starport	YAVIN4	4053	37	-6217	SPACE_YAVIN4	-5570	-5167	-5234	station_yavin4	10
+yavin4_labor_outpost	Yavin IV Labor Outpost	YAVIN4	-6922	73	-5727	SPACE_YAVIN4	-5570	-5167	-5234	station_yavin4	10
+yavin4_mining_outpost	Yavin IV Mining Outpost	YAVIN4	-267	35	4896	SPACE_YAVIN4	-5570	-5167	-5234	station_yavin4	10
