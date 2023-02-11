@@ -1,57 +1,58 @@
-template	slot	cell	x	y	z	comments
-TEXT	TEXT	TEXT	REAL	REAL	REAL	TEXT
-object/ship/player/player_yt1300.iff		cockpit	13.43	0.14	12.88	
-		hall1	12.25	-1.6	0	
-		hall1	10.39	-1.6	0	
-		hall1	8.3	-1.6	0	
-		storage6	8.48	-1.7	-2.17	
-		storage6	3.51	-1.7	-4.61	
-		storage6	8.19	-1.7	-6.55	
-		storage5	-4.36	-1.7	-4.78	
-		storage5	-6.96	-1.7	-3.28	
-		storage5	-9.37	-1.7	-4.52	
-		lounge	2.63	-1.85	09.01	
-		lounge	2.15	-1.85	7.77	
-		lounge	0.48	-1.85	7.83	
-		lounge	-1.19	-1.85	6.76	
-		lounge	-1.48	-1.85	9.67	
-object/ship/player/player_yt2400.iff						
-		bridge	24.7	-0.1	10.3	
-		cargo2	-4.8	-0.2	8.8	
-object/ship/player/player_decimator.iff		cockpit	1.4	2.9	3.6	
-		cockpit	-2.1	2.9	3.7	
-		cockpit	0	0.4	-5.3	
-		storage2	3.1	-1.9	6.6	
-		storage3	3	-2.6	12.7	
-		lounge	-2.2	-2.9	23.2	
-		lounge	0.1	-1.9	28.7	
-object/ship/player/player_tieaggressor.iff	ship_gunner1					
-object/ship/player/player_arc170.iff	ship_gunner1					
-	ship_gunner2					
-object/ship/player/player_ykl37r.iff		cockpit	13.43	0.14	12.88	
-object/ship/player/player_sorosuub_space_yacht.iff		bridge	0.1	0.4	21.7	
-		bridge	2.6	0	19.1	
-		bridge	1.7	0	16.5	
-		bridge	0	0	18.9	
-		bridge	-2.4	0	20.3	
-		bridge	0	0.4	20	
-		observationdeck	2.8	-3.7	8.7	
-		observationdeck	2.7	-3.7	5.8	
-		observationdeck	2.4	-3.7	2.8	
-		observationdeck	0	-3.7	0	
-		observationdeck	-1.7	-3.7	2.5	
-		observationdeck	-3.1	-3.7	5.7	
-		observationdeck	-4	-3.7	8.8	
-		observationdeck	0	-3.7	-5.5	
-		observationdeck	0	-3.7	-10.6	
-object/ship/player/player_ywing.iff	ship_gunner1					
-object/ship/player/player_hutt_turret_ship.iff	ship_gunner1					
-object/ship/player/player_y8_mining_ship.iff		bridge	2.1	28.3	40.5	
-		bridge	-2.2	28.3	41.1	
-		bridge	-4.5	27.7	28.5	
-		bridge	5.7	27.8	27.9	
-		engineering	-6.5	27.8	18.5	
-		engineering	0	27.8	19.1	
-		observation	6.2	27.8	10.8	
-object/ship/player/player_corellian_corvette.iff		elevator57	-17.9	-0.1	94.6	
-		elevatore3	-17.9	-0.1	94.6	
+strChassis	speed_rotation_factor_min	speed_rotation_factor_optimal	speed_rotation_factor_max	slideDamp	engine_accel	engine_decel	engine_yaw_accel	engine_pitch_accel	engine_roll_accel	fltMaxSpeedModifier	strCategory	Level
+TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	TEXT	INTEGER
+player_advanced_xwing	0.2	0.4	0.5	1.5	25	30	200	300	150	0.95	mediumFighter	4
+player_advanced_z95	0.2	0.5	0.9	1.7	50	50	600	600	300	0.95	lightfighter	4
+player_arc170	0.2	0.5	0.75	1.7	40	40	400	400	200	0.97	mediumfighter	4
+player_awing	0.05	0.8	0.8	1.6	40	60	250	250	125	1	interceptor	4
+player_basic_hutt_light	0.2	0.5	0.9	1.9	50	50	600	600	300	0.95	lightfighter	0
+player_basic_tiefighter	0.2	0.5	0.9	1.9	50	50	600	600	300	0.97	lightfighter	0
+player_basic_z95	0.2	0.5	0.9	1.9	50	50	600	600	300	0.93	lightfighter	0
+player_blacksun_heavy_s01	0.2	0.35	0.4	1.3	40	40	100	100	50	0.97	heavyfighter	4
+player_blacksun_heavy_s02	0.2	0.35	0.4	1.3	40	40	100	100	50	0.97	heavyfighter	4
+player_blacksun_heavy_s03	0.2	0.35	0.4	1.3	40	40	100	100	50	0.97	heavyfighter	4
+player_blacksun_heavy_s04	0.2	0.35	0.4	1.3	40	40	100	100	50	0.97	heavyfighter	4
+player_blacksun_light_s01	0.2	0.5	0.75	1.6	35	35	400	400	200	1	lightfighter	2
+player_blacksun_light_s02	0.2	0.5	0.75	1.6	35	35	400	400	200	1	lightfighter	2
+player_blacksun_light_s03	0.2	0.5	0.75	1.6	35	35	400	400	200	1	lightfighter	2
+player_blacksun_light_s04	0.2	0.5	0.75	1.6	35	35	400	400	200	1	lightfighter	2
+player_blacksun_medium_s01	0.2	0.4	0.5	1.3	35	35	200	200	100	0.95	mediumfighter	3
+player_blacksun_medium_s02	0.2	0.4	0.5	1.3	35	35	200	200	100	0.95	mediumfighter	3
+player_blacksun_medium_s03	0.2	0.4	0.5	1.3	35	35	200	200	100	0.95	mediumfighter	3
+player_blacksun_medium_s04	0.2	0.4	0.5	1.3	35	35	200	200	100	0.95	mediumfighter	3
+player_blacksun_vaksai	0.2	0.5	0.75	1.6	35	35	400	400	200	1	mediumFighter	4
+player_bwing	0.1	0.3	0.3	1.3	30	35	75	75	50	0.9	bomber	5
+player_decimator	0.2	0.3	0.3	1.2	10	10	50	50	37.5	0.8	pob	5
+player_firespray	0.2	0.4	0.4	1.6	35	35	100	100	50	0.9	heavyfighter	5
+player_grievous_starship	0.2	0.5	0.8	1.6	40	40	400	400	200	0.95	mediumfighter	4
+player_hutt_heavy_s01	0.2	0.4	0.5	1.3	35	35	100	100	50	0.92	heavyfighter	2
+player_hutt_heavy_s02	0.2	0.4	0.5	1.3	35	35	100	100	50	0.92	heavyfighter	2
+player_hutt_light_s01	0.2	0.5	0.9	1.8	50	50	600	600	300	0.95	lightfighter	0
+player_hutt_light_s02	0.2	0.5	0.9	1.8	50	50	600	600	300	0.95	lightfighter	0
+player_hutt_medium_s01	0.2	0.4	0.6	1.3	30	35	300	300	150	0.95	mediumfighter	1
+player_hutt_medium_s02	0.2	0.4	0.6	1.3	30	35	300	300	150	0.95	mediumfighter	1
+player_hutt_turret_ship	0.2	0.4	0.5	1.3	35	35	100	100	50	0.92	heavyfighter	5
+player_jedi_starfighter	0.2	0.5	0.8	1.6	40	40	400	400	200	0.95	mediumfighter	4
+player_naboo_n1	0.05	0.8	0.8	1.6	40	60	250	250	125	1	interceptor	4
+player_prototype_hutt_light	0.2	0.5	0.9	1.9	50	50	600	600	300	0.95	lightfighter	0
+player_prototype_tiefighter	0.2	0.5	0.9	1.9	50	50	600	600	300	0.97	lightfighter	0
+player_prototype_z95	0.2	0.5	0.9	1.9	50	50	600	600	300	0.93	lightfighter	0
+player_sorosuub_space_yacht	0.2	0.3	0.3	1.1	10	10	50	50	37.5	0.8	pob	0
+player_tie_in	0.2	0.5	0.75	1.6	40	40	400	400	200	0.97	lightfighter	2
+player_tie_light_duty	0.2	0.5	0.9	1.7	50	50	600	600	300	0.96	lightfighter	0
+player_tieadvanced	0.05	0.8	0.8	1.7	40	60	300	300	150	1	interceptor	4
+player_tieadvanced_modified	0.05	0.8	0.8	1.7	40	60	300	300	150	1	interceptor	4
+player_tieaggressor	0.2	0.4	0.4	1.3	20	30	150	200	100	0.95	mediumfighter	4
+player_tiebomber	0.1	0.3	0.3	1.2	30	30	80	80	40	0.95	bomber	3
+player_tiefighter	0.2	0.5	0.75	1.8	40	40	500	500	250	0.98	lightfighter	1
+player_tiefighter_modified	0.2	0.5	0.75	1.8	40	40	500	500	250	0.98	lightfighter	1
+player_tieinterceptor	0.05	0.8	0.8	1.6	40	60	300	300	150	1	interceptor	3
+player_tieinterceptor_imperial_guard	0.05	0.8	0.8	1.6	40	60	300	300	150	1	interceptor	3
+player_tieoppressor	0.2	0.35	0.4	1.3	35	35	100	100	50	0.9	heavyfighter	5
+player_xwing	0.2	0.4	0.5	1.5	25	30	200	300	150	0.95	mediumFighter	3
+player_y8_mining_ship	0.2	0.3	0.3	1.2	15	10	50	50	37.5	0.8	pob	5
+player_ykl37r	0.2	0.3	0.3	1.2	10	10	50	50	37.5	0.8	pob	5
+player_yt1300	0.2	0.3	0.3	1.2	10	10	50	50	37.5	0.8	pob	5
+player_yt2400	0.2	0.3	0.3	1.2	10	10	50	50	37.5	0.8	pob	5
+player_ywing	0.1	0.3	0.5	1.2	25	30	80	80	40	0.9	mediumfighter	1
+player_ywing_longprobe	0.1	0.3	0.35	1.4	25	30	100	100	50	0.9	bomber	2
+player_z95	0.2	0.5	0.9	1.7	50	50	600	600	300	0.95	lightfighter	0
