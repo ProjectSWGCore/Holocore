@@ -223,6 +223,7 @@ public class CreatureObject extends TangibleObject {
 			case WAYP -> false;
 			case SCLT, BUIO -> true;
 			case CREO -> flatDistanceTo(target) <= 200;
+			case SHIP -> flatDistanceTo(target) <= 1000;
 			default -> flatDistanceTo(target) <= 400;
 		};
 	}

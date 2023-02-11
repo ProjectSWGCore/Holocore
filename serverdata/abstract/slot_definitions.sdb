@@ -44,7 +44,7 @@ ship_gunner5_pob	false	false	true	false
 hold_l	false	true	false	false
 datapad	false	false	false	false
 mount_saddle	false	true	false	false
-ship_pilot	false	false	false	false
+ship_pilot	false	false	true	false
 manf_schematic	false	true	true	false
 hold_door	false	true	false	false
 hold_r	false	true	false	false

@@ -132,6 +132,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			List<List<String>> arrangements = object.getArrangement();
 			
 			for (List<String> possibleSlots : arrangements) {
+				boolean validArrangement = true;
+				for (String possibleSlot : possibleSlots) {
+					if (!slotsAvailable.containsKey(possibleSlot)) {
+						validArrangement = false;
+						break;
+					}
+				}
+				if (!validArrangement)
+					continue;
+				
 				for (String possibleSlot : possibleSlots) {
 					SWGObject slottedObject = getSlottedObject(possibleSlot);
 					
@@ -256,13 +266,21 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 			broadcast(new ContainerTransferIntent(this, oldParent, oldArrangement, newParent, this.slotArrangement));
 	}
 	
-	public void moveToSlot(@NotNull SWGObject newParent, String slot, int arrangementId) {
+	public void moveToSlot(@NotNull SWGObject newParent, String slot) {
 		SWGObject oldParent = parent;
 		int oldArrangement = this.slotArrangement;
-		if (oldParent != newParent) {
+		int newArrangement = 4;
+		for (List<String> slots : arrangement) {
+			if (slots.size() == 1 && slots.get(0).equals(slot))
+				break;
+			newArrangement++;
+		}
+		if (newArrangement == arrangement.size() + 4)
+			throw new IllegalArgumentException("slot does not exist");
+		if (oldParent != newParent || oldArrangement != newArrangement) {
 			if (oldParent != null)
 				oldParent.removeObject(this);
-			newParent.addSlottedObject(this, List.of(slot), arrangementId);
+			newParent.addSlottedObject(this, List.of(slot), newArrangement);
 			broadcast(new ContainerTransferIntent(this, oldParent, oldArrangement, newParent, slotArrangement));
 		}
 	}

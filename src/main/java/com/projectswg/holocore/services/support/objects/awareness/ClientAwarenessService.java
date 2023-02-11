@@ -27,13 +27,13 @@
 
 package com.projectswg.holocore.services.support.objects.awareness;
 
-import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.common.network.packets.swg.zone.object_controller.TeleportAck;
+import com.projectswg.common.network.packets.swg.zone.space.ShipUpdateTransformMessage;
 import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
@@ -46,6 +46,7 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
+import com.projectswg.holocore.resources.support.objects.swg.ship.ShipObject;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.IntentMultiplexer;
@@ -91,6 +92,41 @@ public class ClientAwarenessService extends Service {
 		StandardLog.onPlayerEvent(this, player, "zoned in from %s", p.getSocketAddress());
 		new PlayerEventIntent(player, PlayerEvent.PE_ZONE_IN_SERVER).broadcast();
 		player.sendPacket(new CmdSceneReady());
+	}
+	
+	@Multiplexer
+	private void handleShipUpdateTransformMessage(Player player, ShipUpdateTransformMessage sutm) {
+		CreatureObject creature = player.getCreatureObject();
+		if (creature == null) {
+			StandardLog.onPlayerError(this, player, "sent a ShipUpdateTransformMessage without being logged in");
+			return;
+		}
+		if (!creature.isStatesBitmask(CreatureState.PILOTING_SHIP) && !creature.isStatesBitmask(CreatureState.PILOTING_POB_SHIP)) {
+			StandardLog.onPlayerError(this, player, "sent a ShipUpdateTransformMessage when not piloting");
+			return;
+		}
+		SWGObject parent = creature.getParent();
+		if (!(parent instanceof ShipObject ship)) {
+			StandardLog.onPlayerError(this, player, "sent a ShipUpdateTransformMessage with a parent that's not a ship");
+			return;
+		}
+		// TODO: Fix the compile error on the following line
+//		if (ship.getShip6().getShipId() != sutm.getShipId()) {
+//			StandardLog.onPlayerError(this, player, "sent a ShipUpdateTransformMessage for another ship expected: %d  actual: %d", ship.getShip6().getShipId(), sutm.getShipId());
+//			return;
+//		}
+		switch (creature.getPosture()) {
+			case DEAD, INCAPACITATED -> { return; }
+			default -> {}
+		}
+		if (teleporting.contains(creature))
+			return;
+		
+		Location requestedLocation = Location.builder(sutm.getLocation()).setTerrain(creature.getTerrain()).build();
+		moveObjectWithTransform(ship, null, requestedLocation, 100.0);
+		for (SWGObject child : ship.getSlottedObjects()) {
+			moveObjectWithTransform(child, ship, requestedLocation, 100.0);
+		}
 	}
 	
 	@Multiplexer

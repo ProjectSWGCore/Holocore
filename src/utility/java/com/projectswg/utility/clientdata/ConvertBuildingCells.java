@@ -20,6 +20,7 @@ class ConvertBuildingCells implements Converter {
 	
 	private static final File CLIENTDATA = new File("clientdata");
 	private static final File BUILDINGS = new File(CLIENTDATA, "object/building");
+	private static final File SHIPS = new File(CLIENTDATA, "object/ship/player");
 	
 	public ConvertBuildingCells() {
 		
@@ -31,6 +32,7 @@ class ConvertBuildingCells implements Converter {
 		try (SdbGenerator sdb = new SdbGenerator(new File("serverdata/objects/building_cells.sdb"))) {
 			sdb.writeColumnNames("building", "index", "name", "neighbors");
 			Converter.traverseFiles(this, BUILDINGS, sdb, file -> file.getName().endsWith(".iff"));
+			Converter.traverseFiles(this, SHIPS, sdb, file -> file.getName().endsWith(".iff"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -198,6 +198,29 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	
 	@SuppressWarnings("unchecked")
 	// There is type checking in the respective if's
+	public void decode(ByteBuffer data, Class<K> kType, StringType vType) {
+		int size = data.getInt();
+		updateCount.set(data.getInt());
+		
+		NetBuffer buffer = NetBuffer.wrap(data);
+		for (int i = 0; i < size; i++) {
+			buffer.getByte();
+			Object key = buffer.getGeneric(kType);
+			if (key == null) {
+				Log.e("Failed to decode: " + kType.getSimpleName());
+				break;
+			}
+			String value = buffer.getString(vType);
+			if (kType.isAssignableFrom(key.getClass()))
+				put((K) key, (V) value);
+			else
+				Log.e("Failed to insert key=" + key + "  value=" + value);
+		}
+		clearDeltaQueue();
+	}
+	
+	@SuppressWarnings("unchecked")
+	// There is type checking in the respective if's
 	public void decode(ByteBuffer data, Class<K> kType, Class<V> vType) {
 		int size = data.getInt();
 		updateCount.set(data.getInt());
@@ -312,6 +335,12 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	public static <T> SWGMap<String, T> getSwgMap(NetBuffer buffer, int num, int var, StringType keyType, Class<T> c) {
 		SWGMap<String, T> set = new SWGMap<>(num, var, keyType);
 		set.decode(buffer.getBuffer(), keyType, c);
+		return set;
+	}
+	
+	public static <T> SWGMap<T, String> getSwgMap(NetBuffer buffer, int num, int var, Class<T> keyClass, StringType valueType) {
+		SWGMap<T, String> set = new SWGMap<>(num, var, valueType);
+		set.decode(buffer.getBuffer(), keyClass, valueType);
 		return set;
 	}
 	

@@ -305,7 +305,7 @@ public class PlayerMountService extends Service {
 			return;
 		
 		if (player.getObjectId() == mount.getOwnerId()) {
-			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
+			player.moveToSlot(mount, "rider");
 		} else if (mount.getSlottedObject("rider") != null) {
 			GroupObject group = (GroupObject) ObjectLookup.getObjectById(player.getGroupId());
 			if (group == null || !group.getGroupMembers().containsValue(mount.getOwnerId())) {
@@ -319,7 +319,7 @@ public class PlayerMountService extends Service {
 					return;
 				}
 				if (mount.getSlottedObject("rider" + i) == null) {
-					player.moveToSlot(mount, "rider" + i, mount.getArrangementId(player));
+					player.moveToSlot(mount, "rider" + i);
 					added = true;
 					break;
 				}
