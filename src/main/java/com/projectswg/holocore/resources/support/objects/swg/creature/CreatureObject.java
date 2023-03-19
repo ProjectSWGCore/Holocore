@@ -370,6 +370,10 @@ public class CreatureObject extends TangibleObject {
 		return getSlottedObject("ghost") != null;
 	}
 	
+	public SWGObject getMissionBag() {
+		return getSlottedObject("mission_bag");
+	}
+	
 	public boolean isLoggedInPlayer() {
 		return getOwnerShallow() != null && isPlayer();
 	}
