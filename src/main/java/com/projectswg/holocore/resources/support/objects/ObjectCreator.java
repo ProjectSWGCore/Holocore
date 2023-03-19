@@ -66,7 +66,7 @@ public final class ObjectCreator {
 		Misc helper methods
 	 */
 	public static void updateMaxObjectId(long objectId) {
-		OBJECT_ID.updateAndGet(l -> (l < objectId ? objectId : l));
+		OBJECT_ID.updateAndGet(l -> Math.max(l, objectId));
 	}
 	
 	public static long getNextObjectId() {
@@ -120,27 +120,27 @@ public final class ObjectCreator {
 	
 	@NotNull
 	private static SWGObject createObjectFromType(long objectId, String template, BaselineType baseline) {
-		switch (baseline) {
-			case BUIO:	return new BuildingObject(objectId);
-			case CREO:	return new CreatureObject(objectId);
-			case FCYT:	return new FactoryObject(objectId);
-			case GILD:	return new GuildObject(objectId);
-			case GRUP:	return new GroupObject(objectId);
-			case INSO:	return new InstallationObject(objectId);
-			case ITNO:	return new IntangibleObject(objectId);
-			case MISO:	return new MissionObject(objectId);
-			case MSCO:	return new ManufactureSchematicObject(objectId);
-			case PLAY:	return new PlayerObject(objectId);
-			case RCNO:	return new ResourceContainerObject(objectId);
-			case SCLT:	return new CellObject(objectId);
-			case SHIP:	return new ShipObject(objectId);
-			case STAO:	return new StaticObject(objectId);
-			case TANO:	return new TangibleObject(objectId);
-			case WAYP:	return new WaypointObject(objectId);
-			case WEAO:	return new WeaponObject(objectId);
+		return switch (baseline) {
+			case BUIO -> new BuildingObject(objectId);
+			case CREO -> new CreatureObject(objectId);
+			case FCYT -> new FactoryObject(objectId);
+			case GILD -> new GuildObject(objectId);
+			case GRUP -> new GroupObject(objectId);
+			case INSO -> new InstallationObject(objectId);
+			case ITNO -> new IntangibleObject(objectId);
+			case MISO -> new MissionObject(objectId);
+			case MSCO -> new ManufactureSchematicObject(objectId);
+			case PLAY -> new PlayerObject(objectId);
+			case RCNO -> new ResourceContainerObject(objectId);
+			case SCLT -> new CellObject(objectId);
+			case SHIP -> new ShipObject(objectId);
+			case STAO -> new StaticObject(objectId);
+			case TANO -> new TangibleObject(objectId);
+			case WAYP -> new WaypointObject(objectId);
+			case WEAO -> new WeaponObject(objectId);
 			/* Unimplemented baselines */
-			default:	throw new ObjectCreationException(template, "Unimplemented baseline: " + baseline);
-		}
+			default -> throw new ObjectCreationException(template, "Unimplemented baseline: " + baseline);
+		};
 	}
 	
 	private static void handlePostCreation(SWGObject obj, Map<ObjectDataAttribute, Object> attributes) {
@@ -149,10 +149,9 @@ public final class ObjectCreator {
 			obj.setDataAttribute(e.getKey(), value);
 			
 			switch (e.getKey()) {
-				case OBJECT_NAME: obj.setStringId((StringId) value); break;
-				case DETAILED_DESCRIPTION: obj.setDetailStf((StringId) value); break;
-				case CONTAINER_TYPE: obj.setContainerType(((Number) value).intValue()); break;
-				default: break;
+				case OBJECT_NAME -> obj.setStringId((StringId) value);
+				case DETAILED_DESCRIPTION -> obj.setDetailStf((StringId) value);
+				case CONTAINER_TYPE -> obj.setContainerType(((Number) value).intValue());
 			}
 		}
 		
