@@ -27,9 +27,10 @@
 
 package com.projectswg.holocore.resources.support.objects.swg
 
+import com.projectswg.common.encoding.StringType
 import kotlin.reflect.KProperty
 
-class BaselineDelegate<T>(private var value: T, private val page: Int, private val update: Int) {
+class BaselineDelegate<T>(private var value: T, private val page: Int, private val update: Int, private val stringType: StringType? = null) {
 	
 	operator fun getValue(thisRef: SWGObject, property: KProperty<*>): T {
 		return value
@@ -37,7 +38,11 @@ class BaselineDelegate<T>(private var value: T, private val page: Int, private v
 	
 	operator fun setValue(thisRef: SWGObject, property: KProperty<*>, value: T) {
 		this.value = value
-		thisRef.sendDelta(page, update, value)
+		if (stringType != null) {
+			thisRef.sendDelta(page, update, value, stringType)
+		} else {
+			thisRef.sendDelta(page, update, value)
+		}
 	}
 	
 }
