@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.missions
 
 import com.projectswg.common.data.CRC
@@ -6,6 +32,7 @@ import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
 import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
@@ -15,6 +42,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
@@ -32,6 +60,8 @@ import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointOb
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
+import me.joshlarson.jlcommon.log.Log
+import java.util.concurrent.ThreadLocalRandom
 
 class DestroyMissionService : Service() {
 
@@ -122,6 +152,7 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun spawnNpc(location: Location, missionObject: MissionObject) {
+		val difficulty = missionObject.difficulty
 		val egg = ObjectCreator.createObjectFromTemplate(SpawnerType.MISSION_EASY.objectTemplate)
 		egg.containerPermissions = AdminPermissions.getPermissions()
 		egg.moveToContainer(null, location)
@@ -131,8 +162,8 @@ class DestroyMissionService : Service() {
 			.withNpcId("humanoid_kobola_guard")
 			.withDifficulty(CreatureDifficulty.NORMAL)
 			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
-			.withMinLevel(8)
-			.withMaxLevel(12)
+			.withMinLevel(difficulty)
+			.withMaxLevel(difficulty)
 			.withLocation(location)
 			.build()
 
@@ -225,7 +256,7 @@ class DestroyMissionService : Service() {
 	private fun updateMissionObject(missionObject: MissionObject, location: Location) {
 		missionObject.missionType = CRC("destroy")
 		missionObject.missionCreator = "Holocore"
-		missionObject.difficulty = 10
+		missionObject.difficulty = getDifficulty(location.terrain)
 		missionObject.targetName = "NPCs"
 		missionObject.title = StringId("mission/mission_destroy_neutral_easy_npc", "m1t")
 		missionObject.description = StringId("mission/mission_destroy_neutral_easy_npc", "m1d")
@@ -236,6 +267,21 @@ class DestroyMissionService : Service() {
 		missionLocation.terrain = location.terrain
 		missionObject.startLocation = missionLocation
 		missionObject.missionLocation = missionLocation
+	}
+
+	private fun getDifficulty(terrain: Terrain): Int {
+		val terrainLevelInfo = ServerData.terrainLevels.getTerrainLevelInfo(terrain)
+
+		if (terrainLevelInfo == null) {
+			Log.w("Used fallback mission difficulty, as the terrain %s has no level info", terrain.getName())
+			return 10
+		}
+
+		val minLevel = terrainLevelInfo.minLevel.toInt()
+		val maxLevel = terrainLevelInfo.maxLevel.toInt()
+		val random = ThreadLocalRandom.current()
+
+		return random.nextInt(minLevel, maxLevel + 1)
 	}
 
 }
