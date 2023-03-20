@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Holocore" pattern="file[holocore.main]:*/||file[holocore.test]:*/||file[IdeaProjects.holocore.utility]:*/" />
+</component>
