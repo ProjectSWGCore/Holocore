@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -7,22 +7,22 @@
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
  *                                                                                 *
- * This file is part of PSWGCommon.                                                *
+ * This file is part of Holocore.                                                  *
  *                                                                                 *
  * --------------------------------------------------------------------------------*
  *                                                                                 *
- * PSWGCommon is free software: you can redistribute it and/or modify              *
+ * Holocore is free software: you can redistribute it and/or modify                *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
  *                                                                                 *
- * PSWGCommon is distributed in the hope that it will be useful,                   *
+ * Holocore is distributed in the hope that it will be useful,                     *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
  *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
@@ -31,6 +31,7 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,9 +40,11 @@ import java.util.*;
 public final class DynamicSpawnLoader extends DataLoader {
 	
 	private final Map<Terrain, Collection<DynamicSpawnInfo>> terrainSpawns;
+	private final Map<String, DynamicSpawnInfo> dynamicIdToDynamicSpawn;
 	
 	DynamicSpawnLoader() {
 		terrainSpawns = new HashMap<>();
+		dynamicIdToDynamicSpawn = new HashMap<>();
 	}
 	
 	/**
@@ -58,27 +61,34 @@ public final class DynamicSpawnLoader extends DataLoader {
 		return Collections.unmodifiableCollection(terrainSpawns.get(terrain));
 	}
 	
+	public @Nullable DynamicSpawnInfo getSpawnInfo(String dynamicId) {
+		return dynamicIdToDynamicSpawn.get(dynamicId);
+	}
+	
 	@Override
 	public void load() throws IOException {
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/spawn/dynamic/dynamic_spawns.sdb"))) {
 			while (set.next()) {
 				String planetsCellValue = set.getText("planets");
 				String[] planets = planetsCellValue.split(";");
-				DynamicSpawnLoader.DynamicSpawnInfo dynamicSpawninfo = new DynamicSpawnLoader.DynamicSpawnInfo(set);
+				DynamicSpawnLoader.DynamicSpawnInfo dynamicSpawnInfo = new DynamicSpawnLoader.DynamicSpawnInfo(set);
 				
 				for (String planet : planets) {
 					Terrain terrain = Terrain.getTerrainFromName(planet);
 					assert terrain != null : "unable to find terrain by name " + planet;
 					
 					Collection<DynamicSpawnInfo> dynamicSpawnInfos = terrainSpawns.computeIfAbsent(terrain, k -> new ArrayList<>());
-					dynamicSpawnInfos.add(dynamicSpawninfo);
+					dynamicSpawnInfos.add(dynamicSpawnInfo);
 				}
+				
+				dynamicIdToDynamicSpawn.put(dynamicSpawnInfo.dynamicId, dynamicSpawnInfo);
 			}
 		}
 	}
 	
 	public static class DynamicSpawnInfo {
 		private String dynamicId;
+		private String[] lairIds;
 		private String npcBoss;
 		private String npcElite;
 		private String npcNormal1;
@@ -94,6 +104,7 @@ public final class DynamicSpawnLoader extends DataLoader {
 		
 		public DynamicSpawnInfo(SdbLoader.SdbResultSet set) {
 			this.dynamicId = set.getText("dynamic_id");
+			this.lairIds = set.getText("lair_id").split(";");
 			this.npcBoss = set.getText("npc_boss");
 			this.npcElite = set.getText("npc_elite");
 			this.npcNormal1 = set.getText("npc_normal_1");
@@ -121,6 +132,10 @@ public final class DynamicSpawnLoader extends DataLoader {
 		
 		public String getDynamicId() {
 			return dynamicId;
+		}
+		
+		public String[] getLairIds() {
+			return lairIds;
 		}
 		
 		public String getNpcBoss() {
