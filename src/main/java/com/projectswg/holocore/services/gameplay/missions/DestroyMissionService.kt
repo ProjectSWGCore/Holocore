@@ -249,7 +249,7 @@ class DestroyMissionService : Service() {
 		val xx = base.x + (distance * cos(alpha))
 		val zz = base.z + (distance * sin(alpha))
 		val yy = ServerData.terrains.getHeight(base.terrain, xx, zz)
-		
+
 		val randomLocation = Location.builder(base)
 			.setX(xx)
 			.setZ(zz)
@@ -259,7 +259,7 @@ class DestroyMissionService : Service() {
 		if (ServerData.noSpawnZones.isInNoSpawnZone(randomLocation)) {
 			return null
 		}
-		
+
 		return randomLocation
 	}
 
@@ -302,11 +302,12 @@ class DestroyMissionService : Service() {
 	private fun updateMissionObject(missionObject: MissionObject, location: Location, destroyMissionInfo: DestroyMissionLoader.DestroyMissionInfo) {
 		missionObject.missionType = CRC("destroy")
 		missionObject.missionCreator = destroyMissionInfo.creator
-		missionObject.difficulty = getDifficulty(location.terrain)
+		val difficulty = getDifficulty(location.terrain)
+		missionObject.difficulty = difficulty
 		missionObject.targetName = destroyMissionInfo.target
 		missionObject.title = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.titleKey)
 		missionObject.description = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.descriptionKey)
-		missionObject.reward = 100
+		missionObject.reward = randomReward(difficulty)
 		val dynamicId = destroyMissionInfo.dynamicId
 		missionObject.targetAppearance = CRC(getLairIffTemplate(dynamicId))
 		missionObject.setServerAttribute(ServerAttribute.DYNAMIC_ID, dynamicId)
@@ -315,6 +316,15 @@ class DestroyMissionService : Service() {
 		missionLocation.terrain = location.terrain
 		missionObject.startLocation = missionLocation
 		missionObject.missionLocation = missionLocation
+	}
+
+	private fun randomReward(difficulty: Int): Int {
+		val base = difficulty * 100.0
+		val multiplier = (-5 until 5).random()
+			.div(100.0)
+			.plus(1.0)
+		
+		return (base * multiplier).toInt()
 	}
 
 	private fun getLairIffTemplate(dynamicId: String): String {
