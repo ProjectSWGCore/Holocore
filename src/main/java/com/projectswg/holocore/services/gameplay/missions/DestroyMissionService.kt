@@ -64,6 +64,9 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
+import java.lang.Math.toRadians
+import kotlin.math.cos
+import kotlin.math.sin
 
 class DestroyMissionService : Service() {
 
@@ -144,7 +147,7 @@ class DestroyMissionService : Service() {
 			creatureObject.sendSelf(missionAcceptResponse)
 
 			missionObject.moveToContainer(datapad)
-			val location = creatureObject.worldLocation
+			val location = missionObject.startLocation.toLocation()
 			missionObject.waypointPackage = createWaypoint(location)
 
 			spawnNpc(location, missionObject)
@@ -228,9 +231,36 @@ class DestroyMissionService : Service() {
 
 		for (randomDestroyMissionInfo in randomDestroyMissionInfos) {
 			val missionObject = missionObjectIterator.next() as MissionObject
-			updateMissionObject(missionObject, location, randomDestroyMissionInfo)
-			missionObject.tickCount = tickCount.toInt()
+			val randomLocation = randomLocation(location)
+
+			if (randomLocation != null) {
+				updateMissionObject(missionObject, randomLocation, randomDestroyMissionInfo)
+				missionObject.tickCount = tickCount.toInt()
+			}
 		}
+	}
+
+	private fun randomLocation(base: Location): Location? {
+		val distance = (1200 until 2500).random()
+			.toDouble()
+		val direction = (0 until 360).random()
+			.toDouble()
+		val alpha = toRadians(direction)
+		val xx = base.x + (distance * cos(alpha))
+		val zz = base.z + (distance * sin(alpha))
+		val yy = ServerData.terrains.getHeight(base.terrain, xx, zz)
+		
+		val randomLocation = Location.builder(base)
+			.setX(xx)
+			.setZ(zz)
+			.setY(yy)
+			.build()
+
+		if (ServerData.noSpawnZones.isInNoSpawnZone(randomLocation)) {
+			return null
+		}
+		
+		return randomLocation
 	}
 
 	private fun randomDestroyMissionInfos(terrain: Terrain): Collection<DestroyMissionLoader.DestroyMissionInfo> {
