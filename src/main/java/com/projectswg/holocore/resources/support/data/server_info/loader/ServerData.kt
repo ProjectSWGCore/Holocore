@@ -101,6 +101,7 @@ object ServerData {
 	val badges  			by SoftDataLoaderDelegate(::BadgeLoader)
 	val mappingTemplates	by SoftDataLoaderDelegate(::MappingTemplateLoader)
 	val speciesRestrictions	by SoftDataLoaderDelegate(::SpeciesRestrictionLoader)
+	val destroyMissions		by SoftDataLoaderDelegate(::DestroyMissionLoader)
 	val dynamicLairs		by SoftDataLoaderDelegate(::DynamicLairLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)

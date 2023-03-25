@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -7,22 +7,22 @@
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
  *                                                                                 *
- * This file is part of PSWGCommon.                                                *
+ * This file is part of Holocore.                                                  *
  *                                                                                 *
  * --------------------------------------------------------------------------------*
  *                                                                                 *
- * PSWGCommon is free software: you can redistribute it and/or modify              *
+ * Holocore is free software: you can redistribute it and/or modify                *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
  *                                                                                 *
- * PSWGCommon is distributed in the hope that it will be useful,                   *
+ * Holocore is distributed in the hope that it will be useful,                     *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
  *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with PSWGCommon.  If not, see <http://www.gnu.org/licenses/>.             *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
 package com.projectswg.holocore.resources.support.objects.swg;
@@ -40,6 +40,7 @@ public enum ServerAttribute {
 	SET_BONUS_ID		("set_bonus.id",					PredefinedDataType.INT),
 	LINK_OBJECT_ID		("link.object.id",					PredefinedDataType.LONG),
 	ITEM_VALUE			("item.value",						PredefinedDataType.INT),
+	DYNAMIC_ID			("dynamic.id",						PredefinedDataType.STRING),
 	DEED_GEN_TEMPLATE	("deed.generated_template",		PredefinedDataType.STRING);
 	
 	private static final EnumLookup<String, ServerAttribute> KEY_LOOKUP = new EnumLookup<>(ServerAttribute.class, ServerAttribute::getKey);

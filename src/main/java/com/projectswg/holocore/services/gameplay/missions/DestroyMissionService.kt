@@ -33,6 +33,7 @@ import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
+import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
@@ -42,6 +43,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.DestroyMissionLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.Player
@@ -52,6 +54,7 @@ import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
@@ -61,13 +64,11 @@ import com.projectswg.holocore.services.support.objects.ObjectStorageService.Obj
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
-import java.util.concurrent.ThreadLocalRandom
 
 class DestroyMissionService : Service() {
 
 	private val maxAcceptedMissions = 2
-	private val desiredAmountOfMissionObjects = 5
-	private val missionsToGenerate = 1
+	private val missionsToGenerate = 5
 	private val npcToMission = mutableMapOf<AIObject, MissionObject>()
 
 	@IntentHandler
@@ -158,8 +159,14 @@ class DestroyMissionService : Service() {
 		egg.moveToContainer(null, location)
 		ObjectCreatedIntent.broadcast(egg)
 
+		val dynamicId = missionObject.getServerTextAttribute(ServerAttribute.DYNAMIC_ID)
+		val dynamicSpawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
+		val npcId = listOfNotNull(dynamicSpawnInfo?.npcNormal1, dynamicSpawnInfo?.npcNormal2, dynamicSpawnInfo?.npcNormal3, dynamicSpawnInfo?.npcNormal4)
+			.filter { it.isNotBlank() }
+			.random()
+
 		val spawnInfo = SimpleSpawnInfo.builder()
-			.withNpcId("humanoid_kobola_guard")
+			.withNpcId(npcId)
 			.withDifficulty(CreatureDifficulty.NORMAL)
 			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
 			.withMinLevel(difficulty)
@@ -215,12 +222,21 @@ class DestroyMissionService : Service() {
 			throw IllegalStateException("Amount of missions to generate ($missionsToGenerate) was larger than the amount of available MissionObjects ($amountOfAvailableMissionObjects)")
 		}
 
-		val iterator = containedObjects.iterator()
-		for (i in 1..missionsToGenerate) {
-			val containedObject = iterator.next() as MissionObject
-			updateMissionObject(containedObject, creatureObject.location)
-			containedObject.tickCount = tickCount.toInt()
+		val missionObjectIterator = containedObjects.iterator()
+		val location = creatureObject.location
+		val randomDestroyMissionInfos = randomDestroyMissionInfos(location.terrain)
+
+		for (randomDestroyMissionInfo in randomDestroyMissionInfos) {
+			val missionObject = missionObjectIterator.next() as MissionObject
+			updateMissionObject(missionObject, location, randomDestroyMissionInfo)
+			missionObject.tickCount = tickCount.toInt()
 		}
+	}
+
+	private fun randomDestroyMissionInfos(terrain: Terrain): Collection<DestroyMissionLoader.DestroyMissionInfo> {
+		return ServerData.destroyMissions.getDestroyMissions(terrain)
+			.shuffled()
+			.take(missionsToGenerate)
 	}
 
 	private fun synchronizeMissionObjects(missionBag: SWGObject) {
@@ -230,7 +246,7 @@ class DestroyMissionService : Service() {
 
 	private fun createMissingMissions(missionBag: SWGObject) {
 		val actualAmountOfMissionObjects = missionBag.containedObjects.size
-		val missionsToCreate = desiredAmountOfMissionObjects - actualAmountOfMissionObjects
+		val missionsToCreate = missionsToGenerate - actualAmountOfMissionObjects
 
 		for (i in 1..missionsToCreate) {
 			val missionObject = createMissionObject()
@@ -241,7 +257,7 @@ class DestroyMissionService : Service() {
 	private fun destroyExcessMissions(missionBag: SWGObject) {
 		val actualAmountOfMissions = missionBag.containedObjects.size
 		val iterator = missionBag.containedObjects.iterator()
-		for (i in desiredAmountOfMissionObjects until actualAmountOfMissions) {
+		for (i in missionsToGenerate until actualAmountOfMissions) {
 			DestroyObjectIntent.broadcast(iterator.next())
 		}
 	}
@@ -253,20 +269,42 @@ class DestroyMissionService : Service() {
 		return missionObject
 	}
 
-	private fun updateMissionObject(missionObject: MissionObject, location: Location) {
+	private fun updateMissionObject(missionObject: MissionObject, location: Location, destroyMissionInfo: DestroyMissionLoader.DestroyMissionInfo) {
 		missionObject.missionType = CRC("destroy")
-		missionObject.missionCreator = "Holocore"
+		missionObject.missionCreator = destroyMissionInfo.creator
 		missionObject.difficulty = getDifficulty(location.terrain)
-		missionObject.targetName = "NPCs"
-		missionObject.title = StringId("mission/mission_destroy_neutral_easy_npc", "m1t")
-		missionObject.description = StringId("mission/mission_destroy_neutral_easy_npc", "m1d")
+		missionObject.targetName = destroyMissionInfo.target
+		missionObject.title = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.titleKey)
+		missionObject.description = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.descriptionKey)
 		missionObject.reward = 100
-		missionObject.targetAppearance = CRC("object/mobile/shared_dressed_kobola_guard_trandoshan_female_01.iff")
+		val dynamicId = destroyMissionInfo.dynamicId
+		missionObject.targetAppearance = CRC(getLairIffTemplate(dynamicId))
+		missionObject.setServerAttribute(ServerAttribute.DYNAMIC_ID, dynamicId)
 		val missionLocation = MissionObject.MissionLocation()
 		missionLocation.location = location.position
 		missionLocation.terrain = location.terrain
 		missionObject.startLocation = missionLocation
 		missionObject.missionLocation = missionLocation
+	}
+
+	private fun getLairIffTemplate(dynamicId: String): String {
+		val spawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
+		val fallbackLairTemplate = "object/tangible/lair/baz_nitch/shared_lair_baz_nitch.iff"
+
+		if (spawnInfo == null) {
+			Log.w("Unable to find dynamic spawn info for dynamicId $dynamicId, using fallback lair template")
+			return fallbackLairTemplate
+		}
+
+		val randomLairId = spawnInfo.lairIds.random()
+		val dynamicLairInfo = ServerData.dynamicLairs.getDynamicLairInfo(randomLairId)
+
+		if (dynamicLairInfo == null) {
+			Log.w("Unable to find dynamic lair info for lairId ${randomLairId}, using fallback lair template")
+			return fallbackLairTemplate
+		}
+
+		return ClientFactory.formatToSharedFile(dynamicLairInfo.iffTemplate)
 	}
 
 	private fun getDifficulty(terrain: Terrain): Int {
@@ -279,9 +317,8 @@ class DestroyMissionService : Service() {
 
 		val minLevel = terrainLevelInfo.minLevel.toInt()
 		val maxLevel = terrainLevelInfo.maxLevel.toInt()
-		val random = ThreadLocalRandom.current()
 
-		return random.nextInt(minLevel, maxLevel + 1)
+		return (minLevel until maxLevel).random()
 	}
 
 }
