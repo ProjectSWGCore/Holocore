@@ -34,6 +34,7 @@ import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.swgfile.ClientFactory
+import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAbort
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
@@ -92,7 +93,30 @@ class DestroyMissionService : Service() {
 			handleMissionListRequest(packet, player)
 		} else if (packet is MissionAcceptRequest) {
 			handleMissionAcceptRequest(packet, player)
+		} else if (packet is MissionAbort) {
+			handleMissionAbort(packet, player)
 		}
+	}
+
+	private fun handleMissionAbort(request: MissionAbort, player: Player) {
+		val missionObjectId = request.missionObjectId
+		val creatureObject = player.creatureObject
+		val missionObject = ObjectLookup.getObjectById(missionObjectId) as MissionObject
+
+		if (missionObject.parent != creatureObject.datapad) {
+			return
+		}
+
+		npcToMission.filterValues { it == missionObject }
+			.forEach {
+				val key = it.key
+				DestroyObjectIntent.broadcast(key)
+				DestroyObjectIntent.broadcast(npcToMission.remove(key))
+			}
+
+		val response = MissionAbort(creatureObject.objectId)
+		response.missionObjectId = missionObjectId
+		creatureObject.sendSelf(response)
 	}
 
 	@IntentHandler
@@ -323,7 +347,7 @@ class DestroyMissionService : Service() {
 		val multiplier = (-5 until 5).random()
 			.div(100.0)
 			.plus(1.0)
-		
+
 		return (base * multiplier).toInt()
 	}
 
