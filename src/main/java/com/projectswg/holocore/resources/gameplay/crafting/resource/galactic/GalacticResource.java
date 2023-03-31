@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.gameplay.crafting.resource.galactic;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -50,7 +49,6 @@ public class GalacticResource implements MongoPersistable {
 	private long id;
 	private String name;
 	private long rawId;
-	private RawResource rawResource;
 	
 	public GalacticResource() {
 		this(0, "", 0);
@@ -64,11 +62,6 @@ public class GalacticResource implements MongoPersistable {
 		this.id = id;
 		this.name = name;
 		this.rawId = rawResourceId;
-		this.rawResource = null;
-	}
-	
-	public void generateRandomStats() {
-		stats.generateRandomStats(rawResource);
 	}
 	
 	public long getId() {
@@ -81,10 +74,6 @@ public class GalacticResource implements MongoPersistable {
 	
 	public long getRawResourceId() {
 		return rawId;
-	}
-	
-	public RawResource getRawResource() {
-		return rawResource;
 	}
 	
 	public GalacticResourceStats getStats() {
@@ -100,8 +89,8 @@ public class GalacticResource implements MongoPersistable {
 		return spawns == null ? List.of() : Collections.unmodifiableList(spawns);
 	}
 	
-	public void setRawResource(RawResource rawResource) {
-		this.rawResource = rawResource;
+	public void setRawResourceId(long rawId) {
+		this.rawId = rawId;
 	}
 	
 	public void addSpawn(@NotNull GalacticResourceSpawn spawn) {

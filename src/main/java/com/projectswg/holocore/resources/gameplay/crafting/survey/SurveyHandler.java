@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -44,6 +44,7 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawn;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -59,13 +60,13 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
 class SurveyHandler {
-	
+
 	private final CreatureObject creature;
 	private final TangibleObject surveyTool;
 	private final AtomicReference<ScheduledFuture<?>> surveyRequest;
 	private final AtomicReference<GalacticResource> lastSurveyCompleted;
 	private final ScheduledThreadPool executor;
-	
+
 	public SurveyHandler(CreatureObject creature, TangibleObject surveyTool, ScheduledThreadPool executor) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
@@ -73,26 +74,26 @@ class SurveyHandler {
 		this.lastSurveyCompleted = new AtomicReference<>(null);
 		this.executor = executor;
 	}
-	
+
 	public void startSession() {
-		
+
 	}
-	
+
 	public void stopSession() {
 		ScheduledFuture<?> surveyRequest = this.surveyRequest.get();
 		if (surveyRequest != null)
 			surveyRequest.cancel(false);
 	}
-	
+
 	public boolean isSurveying() {
 		ScheduledFuture<?> prev = surveyRequest.get();
 		return prev != null && !prev.isDone();
 	}
-	
+
 	public GalacticResource getLastResourceSurveyed() {
 		return lastSurveyCompleted.get();
 	}
-	
+
 	public void startSurvey(GalacticResource resource) {
 		if (isSurveying())
 			return;
@@ -101,26 +102,26 @@ class SurveyHandler {
 		if (!isAllowedToSurvey(location, resolution, resource))
 			return;
 		assert resolution != null : "verified in isAllowedToSurvey";
-		
+
 		creature.modifyAction((int) (-creature.getMaxAction() / 10.0 * resolution.getCounter()));
 		surveyRequest.set(executor.execute(4000, () -> sendSurveyMessage(resolution, location, resource)));
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("survey", "start_survey"), "TO", resource.getName())));
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(resource), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.getObjectId(), ""));
 	}
-	
+
 	private void sendSurveyMessage(SurveyToolResolution resolution, Location location, GalacticResource resource) {
 		final double baseLocationX = location.getX();
 		final double baseLocationZ = location.getZ();
-		final double rangeHalf = resolution.getRange()/2.0;
-		final double rangeInc = resolution.getRange()/(resolution.getResolution()-1.0);
-		
+		final double rangeHalf = resolution.getRange() / 2.0;
+		final double rangeInc = resolution.getRange() / (resolution.getResolution() - 1.0);
+
 		SurveyMessage surveyMessage = new SurveyMessage();
 		List<GalacticResourceSpawn> spawns = resource.getSpawns(location.getTerrain());
 		double highestX = baseLocationX;
 		double highestZ = baseLocationX;
 		double highestConcentration = 0;
-		
+
 		for (double x = baseLocationX - rangeHalf, xIndex = 0; xIndex < resolution.getResolution(); x += rangeInc, xIndex++) {
 			for (double z = baseLocationZ - rangeHalf, zIndex = 0; zIndex < resolution.getResolution(); z += rangeInc, zIndex++) {
 				double concentration = getConcentration(spawns, location.getTerrain(), x, z);
@@ -135,7 +136,10 @@ class SurveyHandler {
 		creature.sendSelf(surveyMessage);
 		lastSurveyCompleted.set(resource);
 		if (highestConcentration > 0.1) {
-			creature.getPlayerObject().getWaypoints().entrySet().stream()
+			creature.getPlayerObject()
+					.getWaypoints()
+					.entrySet()
+					.stream()
 					.filter(e -> "Resource Survey".equals(e.getValue().getName()))
 					.filter(e -> e.getValue().getColor() == WaypointColor.ORANGE)
 					.filter(e -> e.getValue().getTerrain() == location.getTerrain())
@@ -145,23 +149,23 @@ class SurveyHandler {
 			sendErrorMessage(creature, "survey", "survey_waypoint");
 		}
 	}
-	
+
 	private SurveyToolResolution getCurrentResolution() {
 		Integer counterSetting = (Integer) surveyTool.getServerAttribute(ServerAttribute.SURVEY_TOOL_RANGE);
 		if (counterSetting == null)
 			return null; // Must be set before using - invariant enforced within ObjectSurveyToolRadial.java
 		int counter = counterSetting;
-		
+
 		List<SurveyToolResolution> resolutions = SurveyToolResolution.getOptions(creature);
 		for (SurveyToolResolution resolution : resolutions) {
 			if (resolution.getCounter() == counter)
 				return resolution;
 		}
-		
+
 		// Attempted to set a resolution that wasn't valid
-		return resolutions.isEmpty() ? null : resolutions.get(resolutions.size()-1);
+		return resolutions.isEmpty() ? null : resolutions.get(resolutions.size() - 1);
 	}
-	
+
 	private double getConcentration(List<GalacticResourceSpawn> spawns, Terrain terrain, double x, double z) {
 		int concentration = 0;
 		for (GalacticResourceSpawn spawn : spawns) {
@@ -171,7 +175,7 @@ class SurveyHandler {
 			return 0;
 		return concentration / 100.0;
 	}
-	
+
 	private boolean isAllowedToSurvey(Location location, SurveyToolResolution resolution, GalacticResource resource) {
 		// Player must be standing
 		switch (creature.getPosture()) {
@@ -223,9 +227,9 @@ class SurveyHandler {
 		}
 		return true;
 	}
-	
+
 	private static String getMusicFile(GalacticResource resource) {
-		RawResource rawResource = resource.getRawResource();
+		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "sound/item_mineral_tool_survey.snd";
 		if (RawResourceType.WATER.isResourceType(rawResource))
@@ -243,9 +247,9 @@ class SurveyHandler {
 		Log.w("Unknown raw resource survey music file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
-	
+
 	private static String getEffectFile(GalacticResource resource) {
-		RawResource rawResource = resource.getRawResource();
+		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "clienteffect/survey_tool_mineral.cef";
 		if (RawResourceType.WATER.isResourceType(rawResource))
@@ -263,7 +267,7 @@ class SurveyHandler {
 		Log.w("Unknown raw resource survey effect file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
-	
+
 	private static void createResourceWaypoint(CreatureObject creature, Location location) {
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
 		waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
@@ -272,9 +276,9 @@ class SurveyHandler {
 		ObjectCreatedIntent.broadcast(waypoint);
 		creature.getPlayerObject().addWaypoint(waypoint);
 	}
-	
+
 	private static void sendErrorMessage(CreatureObject creature, String file, String key) {
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId(file, key))));
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,7 +29,7 @@ package com.projectswg.holocore.services.gameplay.crafting.resource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawner;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceContainer;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import me.joshlarson.jlcommon.concurrency.BasicScheduledThread;
 import me.joshlarson.jlcommon.control.Service;
 
@@ -39,33 +39,30 @@ import java.util.concurrent.TimeUnit;
  * In charge of spawning, despawning, and overall management of resources
  */
 public class ResourceService extends Service {
-	
-	private final RawResourceContainer container;
+
 	private final GalacticResourceSpawner spawner;
 	private final BasicScheduledThread spawnerUpdater;
-	
+
 	public ResourceService() {
-		this.container = new RawResourceContainer();
 		this.spawner = new GalacticResourceSpawner();
 		this.spawnerUpdater = new BasicScheduledThread("resource-spawn-updater", spawner::updateAllResources);
 	}
-	
+
 	@Override
 	public boolean initialize() {
-		container.loadResources();
-		for (RawResource rawResource : container.getResources()) {
+		for (RawResource rawResource : ServerData.INSTANCE.getRawResources().getResources()) {
 			GalacticResourceContainer.INSTANCE.addRawResource(rawResource);
 		}
 		spawner.initialize();
 		spawnerUpdater.startWithFixedRate(0, TimeUnit.HOURS.toMillis(3));
 		return super.initialize();
 	}
-	
+
 	@Override
 	public boolean terminate() {
 		spawnerUpdater.stop();
 		spawner.terminate();
 		return super.terminate();
 	}
-	
+
 }

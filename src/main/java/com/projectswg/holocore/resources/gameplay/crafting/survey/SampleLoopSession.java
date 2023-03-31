@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -44,6 +44,7 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -69,49 +70,50 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class SampleLoopSession {
-	
+
 	private final @NotNull CreatureObject creature;
 	private final @NotNull TangibleObject surveyTool;
 	private final @NotNull GalacticResource resource;
 	private final @NotNull Location sampleLocation;
-	
+
 	private SuiWindow sampleWindow;
 	private ScheduledFuture<?> loopFuture;
 	private boolean paused;
 	private int sampleMultiplier;
-	
+
 	public SampleLoopSession(@NotNull CreatureObject creature, @NotNull TangibleObject surveyTool, @NotNull GalacticResource resource, @NotNull Location sampleLocation) {
 		this.creature = creature;
 		this.surveyTool = surveyTool;
 		this.resource = resource;
 		this.sampleLocation = sampleLocation;
-		
+
 		this.sampleWindow = null;
 		this.loopFuture = null;
 		this.paused = false;
 		this.sampleMultiplier = 1;
 	}
-	
+
 	public boolean isMatching(CreatureObject creature, TangibleObject surveyTool, GalacticResource resource, Location sampleLocation) {
 		if (this.sampleLocation.distanceTo(sampleLocation) >= 0.5 || this.sampleLocation.getTerrain() != sampleLocation.getTerrain())
 			return false; // Too far away for the same session
 		return this.creature.equals(creature) && this.surveyTool.equals(surveyTool) && this.resource.equals(resource);
 	}
-	
+
 	public synchronized boolean isSampling() {
 		return loopFuture != null && !loopFuture.isDone();
 	}
-	
+
 	public synchronized void onPlayerMoved() {
 		Location oldLocation = sampleLocation;
 		Location newLocation = creature.getWorldLocation();
-		
+
 		if (oldLocation.distanceTo(newLocation) >= 0.5 || oldLocation.getTerrain() != newLocation.getTerrain())
 			stopSession();
 	}
-	
+
 	/**
 	 * Attempts to start the sample loop session with the specified executor.  If the loop is unable to start, this function returns false; otherwise this function returns true.
+	 *
 	 * @param executor the executor for the loop to run on
 	 * @return TRUE if the sample loop has begin, FALSE otherwise
 	 */
@@ -122,7 +124,7 @@ public class SampleLoopSession {
 		double concentration = getConcentration();
 		if (!isAllowedToSample(concentration))
 			return false;
-		
+
 		loopFuture = executor.executeWithFixedRate(30_000, 30_000, this::sample);
 		creature.setPosture(Posture.CROUCHED);
 		creature.setMovementPercent(0);
@@ -131,7 +133,7 @@ public class SampleLoopSession {
 		StandardLog.onPlayerTrace(this, creature, "started a sample session with %s and concentration %.1f", resource.getName(), concentration);
 		return true;
 	}
-	
+
 	public synchronized void stopSession() {
 		if (loopFuture != null)
 			loopFuture.cancel(false);
@@ -144,25 +146,25 @@ public class SampleLoopSession {
 				sampleWindow.close(owner);
 		}
 		sampleWindow = null;
-		
+
 		creature.setPosture(Posture.UPRIGHT);
 		creature.setMovementPercent(1);
 		creature.setTurnScale(1);
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_cancel"));
 	}
-	
+
 	private void sample() {
 		final double concentration = getConcentration();
 		if (!isAllowedToSample(concentration) || paused)
 			return;
-		
+
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		if (random.nextDouble() > concentration) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_failed"), "TO", resource.getName())));
 			sendSampleEffects();
 			return;
 		}
-		
+
 		int resourceAmount = random.nextInt(19, 25) * sampleMultiplier;
 		if (random.nextDouble() < 0.1) {
 			double roll = random.nextDouble();
@@ -173,7 +175,7 @@ public class SampleLoopSession {
 				openConcentrationWindow();
 			}
 		}
-		
+
 		ResourceContainerObject resourceObject = createResourceObject(resourceAmount);
 		ContainerResult result = resourceObject.moveToContainer(creature, creature.getInventory());
 		switch (result) {
@@ -196,7 +198,7 @@ public class SampleLoopSession {
 		}
 		sendSampleEffects();
 	}
-	
+
 	private void openConcentrationWindow() {
 		SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_CANCEL, "@survey:cnode_t", "@survey:cnode_d");
 		window.setProperty("btnOk", "Text", "@survey:cnode_2");
@@ -216,12 +218,12 @@ public class SampleLoopSession {
 		}
 		paused = true;
 	}
-	
+
 	private void createHighestConcentrationWaypoint() {
 		double highestX = sampleLocation.getX();
 		double highestZ = sampleLocation.getZ();
 		double highest = 0;
-		
+
 		for (double x = sampleLocation.getX() - 5; x < sampleLocation.getX() + 5; x += 1) {
 			for (double z = sampleLocation.getZ() - 5; z < sampleLocation.getZ() + 5; z += 1) {
 				List<GalacticResourceSpawn> spawns = resource.getSpawns(sampleLocation.getTerrain());
@@ -236,13 +238,20 @@ public class SampleLoopSession {
 				}
 			}
 		}
-		
-		creature.getPlayerObject().getWaypoints().entrySet().stream().filter(e -> "Resource Survey".equals(e.getValue().getName())).filter(e -> e.getValue().getColor() == WaypointColor.ORANGE)
-				.filter(e -> e.getValue().getTerrain() == sampleLocation.getTerrain()).map(Entry::getKey).forEach(creature.getPlayerObject()::removeWaypoint);
+
+		creature.getPlayerObject()
+				.getWaypoints()
+				.entrySet()
+				.stream()
+				.filter(e -> "Resource Survey".equals(e.getValue().getName()))
+				.filter(e -> e.getValue().getColor() == WaypointColor.ORANGE)
+				.filter(e -> e.getValue().getTerrain() == sampleLocation.getTerrain())
+				.map(Entry::getKey)
+				.forEach(creature.getPlayerObject()::removeWaypoint);
 		createResourceWaypoint(Location.builder(sampleLocation).setX(highestX).setZ(highestZ).build());
 		creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:node_waypoint"));
 	}
-	
+
 	private boolean isAllowedToSample(double concentration) {
 		if (resource.getSpawns(creature.getTerrain()).isEmpty()) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:sample_empty"));
@@ -277,7 +286,7 @@ public class SampleLoopSession {
 		}
 		return true;
 	}
-	
+
 	private double getConcentration() {
 		List<GalacticResourceSpawn> spawns = resource.getSpawns(creature.getTerrain());
 		double concentration = 0;
@@ -286,11 +295,12 @@ public class SampleLoopSession {
 		}
 		return concentration;
 	}
-	
+
 	private ResourceContainerObject createResourceObject(int amount) {
-		ResourceContainerObject resourceObject = (ResourceContainerObject) ObjectCreator.createObjectFromTemplate(resource.getRawResource().getCrateTemplate());
+		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
+		ResourceContainerObject resourceObject = (ResourceContainerObject) ObjectCreator.createObjectFromTemplate(rawResource.getCrateTemplate());
 		resourceObject.setQuantity(amount);
-		resourceObject.setParentName(resource.getRawResource().getParent().getName().toString());
+		resourceObject.setParentName(rawResource.getParent().getName().toString());
 		resourceObject.setResourceType(resource.getRawResourceId());
 		resourceObject.setResourceName(resource.getName());
 		resourceObject.setObjectName(resource.getName());
@@ -298,20 +308,20 @@ public class SampleLoopSession {
 		resourceObject.setContainerPermissions(ReadWritePermissions.from(creature));
 		return resourceObject;
 	}
-	
+
 	private void assignStats(ResourceContainerObject obj) {
 		GalacticResourceStats stats = resource.getStats();
 		obj.setStats(stats);
 		obj.setServerAttribute(ServerAttribute.GALACTIC_RESOURCE_ID, resource.getId());
 	}
-	
+
 	private void sendSampleEffects() {
 		creature.sendSelf(new PlayMusicMessage(0, getMusicFile(), 1, false));
 		creature.sendObservers(new PlayClientEffectObjectMessage(getEffectFile(), "", creature.getObjectId(), ""));
 	}
-	
+
 	private String getMusicFile() {
-		RawResource rawResource = resource.getRawResource();
+		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "sound/item_mineral_tool_sample.snd";
 		if (RawResourceType.WATER.isResourceType(rawResource))
@@ -329,9 +339,9 @@ public class SampleLoopSession {
 		Log.w("Unknown raw resource sample music file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
-	
+
 	private String getEffectFile() {
-		RawResource rawResource = resource.getRawResource();
+		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
 		if (RawResourceType.MINERAL.isResourceType(rawResource))
 			return "clienteffect/survey_sample_mineral.cef";
 		if (RawResourceType.WATER.isResourceType(rawResource))
@@ -349,7 +359,7 @@ public class SampleLoopSession {
 		Log.w("Unknown raw resource sample effect file: %s with type %s", rawResource, rawResource.getResourceType());
 		return "";
 	}
-	
+
 	private void createResourceWaypoint(Location location) {
 		WaypointObject waypoint = (WaypointObject) ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff");
 		waypoint.setPosition(location.getTerrain(), location.getX(), location.getY(), location.getZ());
@@ -358,5 +368,5 @@ public class SampleLoopSession {
 		ObjectCreatedIntent.broadcast(waypoint);
 		creature.getPlayerObject().addWaypoint(waypoint);
 	}
-	
+
 }
