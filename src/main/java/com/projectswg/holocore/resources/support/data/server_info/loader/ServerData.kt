@@ -27,6 +27,7 @@
 
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
+import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResourceLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.ConversationLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.*
@@ -103,6 +104,7 @@ object ServerData {
 	val speciesRestrictions	by SoftDataLoaderDelegate(::SpeciesRestrictionLoader)
 	val destroyMissions		by SoftDataLoaderDelegate(::DestroyMissionLoader)
 	val dynamicLairs		by SoftDataLoaderDelegate(::DynamicLairLoader)
+	val rawResources		by SoftDataLoaderDelegate(::RawResourceLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)

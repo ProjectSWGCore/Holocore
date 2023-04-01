@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,16 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.gameplay.crafting.resource.raw;
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class TestRawResourceContainer extends TestRunnerNoIntents {
+public class TestRawResourceLoader extends TestRunnerNoIntents {
 	
 	@Test
 	public void testResourcesLoad() {
-		RawResourceContainer loader = new RawResourceContainer();
-		loader.loadResources();
+		RawResourceLoader loader = ServerData.INSTANCE.getRawResources();
 		assertEquals(845, loader.getResources().size());
 	}
 	
