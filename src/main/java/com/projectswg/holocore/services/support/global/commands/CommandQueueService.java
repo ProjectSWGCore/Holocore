@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.common.data.CRC;
@@ -295,6 +321,12 @@ public class CommandQueueService extends Service {
 			CreatureObject source = command.getSource();
 			Set<Locomotion> disallowedLocomotions = rootCommand.getDisallowedLocomotions();
 			Set<Locomotion> sourceLocomotions = new HashSet<>();
+
+			if (isCharacterAbilityRequirementPresent(rootCommand)) {
+				if (isMissingCharacterAbility(rootCommand, source)) {
+					return new CheckCommandResult(ErrorCode.ABILITY, 0);
+				}
+			}
 			
 			@NotNull Locomotion[] locomotions = Locomotion.values();
 			
@@ -341,15 +373,6 @@ public class CommandQueueService extends Service {
 			}
 
 			if (combatCommand != null) {
-				Collection<String> sourceCommands = source.getCommands()
-						.stream()
-						.map(sourceCommand -> sourceCommand.toLowerCase(Locale.US))
-						.collect(Collectors.toSet());
-				
-				if (!sourceCommands.contains(rootCommand.getName())) {
-					return new CheckCommandResult(ErrorCode.ABILITY, 0);
-				}
-				
 				if (combatCommand.getHitType() == HitType.HEAL && combatCommand.getAttackType() == AttackType.SINGLE_TARGET) {
 					SWGObject target;
 					switch (rootCommand.getTargetType()) {
@@ -378,7 +401,26 @@ public class CommandQueueService extends Service {
 			}
 			return new CheckCommandResult(ErrorCode.SUCCESS, 0);
 		}
-		
+
+		private boolean isCharacterAbilityRequirementPresent(Command rootCommand) {
+			return !rootCommand.getCharacterAbility().isBlank();
+		}
+
+		private boolean isMissingCharacterAbility(Command rootCommand, CreatureObject source) {
+			Collection<String> characterAbilities = source.getCommands()
+					.stream()
+					.map(sourceCommand -> sourceCommand.toLowerCase(Locale.US))
+					.collect(Collectors.toSet());
+			String requiredCharacterAbility = rootCommand.getCharacterAbility().toLowerCase(Locale.US);
+			
+			if (requiredCharacterAbility.equalsIgnoreCase("admin")) {
+				// To prevent admin commands only being usable when in God Mode
+				return false;
+			}
+			
+			return !characterAbilities.contains(requiredCharacterAbility);
+		}
+
 		private void showInvalidWeaponFlyText(CreatureObject source) {
 			source.sendSelf(new ShowFlyText(source.getObjectId(), new StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite()));
 		}
