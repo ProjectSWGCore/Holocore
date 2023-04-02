@@ -24,48 +24,18 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.data.control;
+package com.projectswg.holocore.services.support.data
 
-import com.projectswg.holocore.resources.support.data.control.ServerStatus;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.objects
+import me.joshlarson.jlcommon.control.Service
+import me.joshlarson.jlcommon.log.Log
 
-import java.util.concurrent.TimeUnit;
-
-public class ServerStatusIntent extends Intent {
-	
-	private ServerStatus status;
-	private long time;
-	private TimeUnit timeUnit;
-
-	public ServerStatusIntent(@NotNull ServerStatus status) {
-		setStatus(status);
+class ServerDataService : Service() {
+	override fun initialize(): Boolean {
+		if (config.getBoolean(this, "wipeObjects", false)) {
+			Log.d("Cleared %d objects", objects.clearObjects())
+		}
+		return super.initialize()
 	}
-	
-	public ServerStatusIntent(@NotNull ServerStatus status, long time, TimeUnit timeUnit) {
-		this(status);
-		setTime(time);
-		this.timeUnit = timeUnit;
-	}
-	
-	public void setTime(long time) {
-		this.time = time;
-	}
-	
-	public long getTime() {
-		return time;
-	}
-	
-	public void setStatus(@NotNull ServerStatus status) {
-		this.status = status;
-	}
-	
-	public @NotNull ServerStatus getStatus() {
-		return status;
-	}
-	
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
-	
 }

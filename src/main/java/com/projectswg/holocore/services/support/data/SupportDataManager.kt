@@ -24,48 +24,12 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.data.control;
+package com.projectswg.holocore.services.support.data
 
-import com.projectswg.holocore.resources.support.data.control.ServerStatus;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.services.support.data.dev.CustomObjectService
+import com.projectswg.holocore.services.support.data.dev.DeveloperService
+import me.joshlarson.jlcommon.control.Manager
+import me.joshlarson.jlcommon.control.ManagerStructure
 
-import java.util.concurrent.TimeUnit;
-
-public class ServerStatusIntent extends Intent {
-	
-	private ServerStatus status;
-	private long time;
-	private TimeUnit timeUnit;
-
-	public ServerStatusIntent(@NotNull ServerStatus status) {
-		setStatus(status);
-	}
-	
-	public ServerStatusIntent(@NotNull ServerStatus status, long time, TimeUnit timeUnit) {
-		this(status);
-		setTime(time);
-		this.timeUnit = timeUnit;
-	}
-	
-	public void setTime(long time) {
-		this.time = time;
-	}
-	
-	public long getTime() {
-		return time;
-	}
-	
-	public void setStatus(@NotNull ServerStatus status) {
-		this.status = status;
-	}
-	
-	public @NotNull ServerStatus getStatus() {
-		return status;
-	}
-	
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
-	
-}
+@ManagerStructure(children = [DeveloperService::class, CustomObjectService::class, PacketRecordingService::class, ServerDataService::class, ServerStatusService::class])
+class SupportDataManager : Manager()
