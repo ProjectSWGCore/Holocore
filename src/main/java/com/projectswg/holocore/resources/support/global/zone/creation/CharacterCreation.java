@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -132,9 +132,8 @@ public class CharacterCreation {
 	}
 	
 	/** Creates an object with inventory-level world visibility (only the owner) */
-	@NotNull
-	private TangibleObject createInventoryObject(SWGObject container, String template) {
-		return createTangible(container, template);
+	private void createInventoryObject(SWGObject container, String template) {
+		createTangible(container, template);
 	}
 	
 	private void createHair(CreatureObject creatureObj, String hair, CustomizationString customization) {
@@ -198,7 +197,8 @@ public class CharacterCreation {
 		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(race, clothing);
 		if (items != null) {
 			for (String itemTemplate : items) {
-				createDefaultObject(creature, itemTemplate);
+				TangibleObject item = createDefaultObject(creature, itemTemplate);
+				item.setVolume(1);
 			}
 		}
 	}
@@ -210,71 +210,55 @@ public class CharacterCreation {
 		languages.add("social_language_wookiee_comprehend");	// Anyone can comprehend Shyriiwook
 
 		switch (race) {
-			case HUMAN_MALE:
-			case HUMAN_FEMALE:
-				languages.add("social_language_basic_speak");
-				break;
-			case BOTHAN_MALE:
-			case BOTHAN_FEMALE:
+			case HUMAN_MALE, HUMAN_FEMALE -> languages.add("social_language_basic_speak");
+			case BOTHAN_MALE, BOTHAN_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_bothan_speak");
 				languages.add("social_language_bothan_comprehend");
-				break;
-			case ITHORIAN_MALE:
-			case ITHORIAN_FEMALE:
+			}
+			case ITHORIAN_MALE, ITHORIAN_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_ithorian_speak");
 				languages.add("social_language_ithorian_comprehend");
-				break;
-			case TWILEK_MALE:
-			case TWILEK_FEMALE:
+			}
+			case TWILEK_MALE, TWILEK_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_lekku_comprehend");
 				languages.add("social_language_lekku_speak");
 				languages.add("social_language_twilek_comprehend");
 				languages.add("social_language_twilek_speak");
-				break;
-			case MONCAL_MALE:
-			case MONCAL_FEMALE:
+			}
+			case MONCAL_MALE, MONCAL_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_moncalamari_comprehend");
 				languages.add("social_language_moncalamari_speak");
-				break;
-			case RODIAN_MALE:
-			case RODIAN_FEMALE:
+			}
+			case RODIAN_MALE, RODIAN_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_rodian_comprehend");
 				languages.add("social_language_rodian_speak");
-				break;
-			case SULLUSTAN_MALE:
-			case SULLUSTAN_FEMALE:
+			}
+			case SULLUSTAN_MALE, SULLUSTAN_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_sullustan_comprehend");
 				languages.add("social_language_sullustan_speak");
-				break;
-			case TRANDOSHAN_MALE:
-			case TRANDOSHAN_FEMALE:
+			}
+			case TRANDOSHAN_MALE, TRANDOSHAN_FEMALE -> {
 				languages.add("social_language_basic_speak");
 				languages.add("social_language_trandoshan_comprehend");
 				languages.add("social_language_trandoshan_speak");
-				break;
-			case WOOKIEE_MALE:
-			case WOOKIEE_FEMALE:
-				languages.add("social_language_wookiee_speak");
-				break;
+			}
+			case WOOKIEE_MALE, WOOKIEE_FEMALE -> languages.add("social_language_wookiee_speak");
 		}
 
 		return languages;
 	}
 
 	private static int defaultLanguageForRace(Race race) {
-		switch (race) {
-			case WOOKIEE_MALE:
-			case WOOKIEE_FEMALE:
-				return 5;	// Wookiees speak Shyriiwook by default
-			default:
-				return 1;	// Galactic basic
-		}
+		return switch (race) {
+			case WOOKIEE_MALE, WOOKIEE_FEMALE -> 5;    // Wookiees speak Shyriiwook by default
+			default -> 1;    // Galactic basic
+		};
 	}
 
 	private static Location generateRandomLocation(ZoneInsertion info) {
