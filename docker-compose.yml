@@ -1,10 +1,10 @@
-version: '3.1'
+version: '3.8'
 
 services:
 
   mongo:
     image: mongo:5.0.14
-    restart: always
+    restart: "no"
     ports:
       - "27017:27017"
     environment:
@@ -12,13 +12,26 @@ services:
     volumes:
       - ./mongo_data:/data/db
       - ./mongo_init_scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
 
   mongo-express:
     image: mongo-express:0.54.0
-    restart: always
+    restart: "no"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     ports:
       - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
+    healthcheck:
+      test: "wget -O - localhost:8081"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
