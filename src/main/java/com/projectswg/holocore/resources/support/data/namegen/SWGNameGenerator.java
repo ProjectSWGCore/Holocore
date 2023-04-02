@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -44,23 +44,25 @@ public class SWGNameGenerator {
 	private final Map<String, Reference<RaceNameRule>> rules;
 	private final NameFilter nameFilter;
 	
-	/**
-	 * Creates a new instance of {@link SWGNameGenerator} with all racial naming rules loaded.
-	 */
 	public SWGNameGenerator() {
 		this.rules = new HashMap<>();
 		this.nameFilter = new NameFilter();
 	}
 	
 	@NotNull
-	public String generateName(@NotNull Race race) {
+	public String generateRaceName(@NotNull Race race) {
 		if (!nameFilter.isLoaded())
 			nameFilter.load();
 		return generateName("race_" + race.getSpecies());
 	}
 	
 	@NotNull
-	public String generateName(String file) {
+	public String generateResourceName() {
+		return generateName("resources");
+	}
+	
+	@NotNull
+	private String generateName(String file) {
 		if (!nameFilter.isLoaded())
 			nameFilter.load();
 		Reference<RaceNameRule> ruleRef = rules.get(file);
@@ -104,25 +106,14 @@ public class SWGNameGenerator {
 		
 		for (int i = 0; i < l; i++) {
 			char x = instructions.charAt(0);
-			String append;
-			
-			switch (x) {
-				case 'v':
-					append = removeExcessDuplications(rule.getVowels(), buffer.toString(), getRandomElementFrom(rule.getVowels()));
-					break;
-				case 'c':
-					append = removeExcessDuplications(rule.getStartConsonants(), buffer.toString(), getRandomElementFrom(rule.getStartConsonants()));
-					break;
-				case 'd':
-					append = removeExcessDuplications(rule.getEndConsonants(), buffer.toString(), getRandomElementFrom(rule.getEndConsonants()));
-					break;
-				case '/':
-					append = "\'";
-					break;
-				default:
-					append = "";
-					break;
-			}
+			String append = switch (x) {
+				case 'v' -> removeExcessDuplications(rule.getVowels(), buffer.toString(), getRandomElementFrom(rule.getVowels()));
+				case 'c' -> removeExcessDuplications(rule.getStartConsonants(), buffer.toString(), getRandomElementFrom(rule.getStartConsonants()));
+				case 'd' -> removeExcessDuplications(rule.getEndConsonants(), buffer.toString(), getRandomElementFrom(rule.getEndConsonants()));
+				case '/' -> "'";
+				default -> "";
+			};
+
 			if (buffer.length() + append.length() >= rule.getMaxLength())
 				break;
 			buffer.append(append);
@@ -154,7 +145,7 @@ public class SWGNameGenerator {
 		}
 	}
 	
-	private boolean populateRule(RaceNameRule rule, BufferedReader reader) throws IOException {
+	private void populateRule(RaceNameRule rule, BufferedReader reader) throws IOException {
 		String populating = "NONE";
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -165,52 +156,30 @@ public class SWGNameGenerator {
 				populating = getPopulateType(line);
 				
 				if (populating.equals("End"))
-					return true;
+					return;
 				
 			} else if (!line.startsWith("#")) {
 				switch (populating) {
-					case "Settings":
-						populateSettings(rule, line);
-						break;
-					case "Vowels":
-						rule.addVowel(line);
-						break;
-					case "StartConsonants":
-						rule.addStartConsonant(line);
-						break;
-					case "EndConsonants":
-						rule.addEndConsant(line);
-						break;
-					case "Instructions":
-						rule.addInstruction(line);
-						break;
-					default:
-						break;
+					case "Settings" -> populateSettings(rule, line);
+					case "Vowels" -> rule.addVowel(line);
+					case "StartConsonants" -> rule.addStartConsonant(line);
+					case "EndConsonants" -> rule.addEndConsant(line);
+					case "Instructions" -> rule.addInstruction(line);
 				}
 			}
 		}
 		reader.close();
-		
-		return false;
 	}
 	
 	private String getPopulateType(String line) {
-		switch (line) {
-			case "[Settings]":
-				return "Settings";
-			case "[Vowels]":
-				return "Vowels";
-			case "[StartConsonants]":
-				return "StartConsonants";
-			case "[EndConsonants]":
-				return "EndConsonants";
-			case "[Instructions]":
-				return "Instructions";
-			case "[END]":
-				return "End";
-			default:
-				return "End";
-		}
+		return switch (line) {
+			case "[Settings]" -> "Settings";
+			case "[Vowels]" -> "Vowels";
+			case "[StartConsonants]" -> "StartConsonants";
+			case "[EndConsonants]" -> "EndConsonants";
+			case "[Instructions]" -> "Instructions";
+			default -> "End";
+		};
 	}
 	
 	private void populateSettings(RaceNameRule rule, String line) {
