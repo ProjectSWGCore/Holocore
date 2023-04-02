@@ -1,3 +1,0 @@
-terrain	string_file	title_key	description_key	creator	target	dynamic_id
-TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
-TATOOINE	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kobola_assasin
