@@ -124,7 +124,7 @@ class GalacticResourceSpawner {
 		val newId = resourceIdMax.incrementAndGet()
 		var resource: GalacticResource
 		do {
-			val newName = resourceNameGenerator.generateName("resources")
+			val newName = resourceNameGenerator.generateResourceName()
 			resource = GalacticResource(newId, newName, raw.id)
 			resource.rawResourceId = raw.id
 			resource.stats.generateRandomStats(raw)
