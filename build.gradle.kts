@@ -68,6 +68,9 @@ idea {
 	targetVersion = javaMajorVersion
     module {
         inheritOutputDirs = true
+		excludeDirs.add(project.file("log"))
+		excludeDirs.add(project.file("mongo_data"))
+		excludeDirs.add(project.file("odb"))
     }
 }
 
