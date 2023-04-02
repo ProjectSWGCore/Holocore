@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,25 +24,22 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.crafting;
+package com.projectswg.holocore.services.gameplay
 
-import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceService;
-import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyToolService;
-import com.projectswg.holocore.services.gameplay.crafting.trade.TradeService;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+import com.projectswg.holocore.services.gameplay.combat.CombatManager
+import com.projectswg.holocore.services.gameplay.conversation.ConversationService
+import com.projectswg.holocore.services.gameplay.crafting.CraftingManager
+import com.projectswg.holocore.services.gameplay.entertainment.EntertainmentManager
+import com.projectswg.holocore.services.gameplay.faction.FactionManager
+import com.projectswg.holocore.services.gameplay.jedi.JediManager
+import com.projectswg.holocore.services.gameplay.junkdealer.JunkDealerService
+import com.projectswg.holocore.services.gameplay.missions.DestroyMissionService
+import com.projectswg.holocore.services.gameplay.player.PlayerManager
+import com.projectswg.holocore.services.gameplay.structures.StructuresManager
+import com.projectswg.holocore.services.gameplay.trade.TradeService
+import com.projectswg.holocore.services.gameplay.world.WorldManager
+import me.joshlarson.jlcommon.control.Manager
+import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = {
-		ResourceService.class,
-		
-		SurveyToolService.class,
-		
-		TradeService.class
-})
-public class CraftingManager extends Manager {
-	
-	public CraftingManager() {
-		
-	}
-	
-}
+@ManagerStructure(children = [CombatManager::class, ConversationService::class, CraftingManager::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
+class GameplayManager : Manager()
