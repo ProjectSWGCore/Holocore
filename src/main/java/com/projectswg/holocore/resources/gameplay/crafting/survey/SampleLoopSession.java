@@ -53,6 +53,7 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
@@ -63,6 +64,7 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -176,26 +178,13 @@ public class SampleLoopSession {
 			}
 		}
 
-		ResourceContainerObject resourceObject = createResourceObject(resourceAmount);
-		ContainerResult result = resourceObject.moveToContainer(creature, creature.getInventory());
-		switch (result) {
-			case SLOT_OCCUPIED:
-			case SLOT_NO_EXIST:
-			case NO_PERMISSION:
-				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"));
-				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
-				break;
-			case CONTAINER_FULL:
-				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:no_inv_space"));
-				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
-				stopSession();
-				break;
-			case SUCCESS:
-				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
-				creature.sendSelf(new PlayMusicMessage(0, "sound/item_internalstorage_open.snd", 1, false));
-				ObjectCreatedIntent.broadcast(resourceObject);
-				break;
+		ResourceContainerObject resourceObject = getOrCreateResourceObject();
+		if (resourceObject != null) {
+			resourceObject.setQuantity(resourceObject.getQuantity() + resourceAmount);
+			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
+			creature.sendSelf(new PlayMusicMessage(0, "sound/item_internalstorage_open.snd", 1, false));
 		}
+
 		sendSampleEffects();
 	}
 
@@ -296,16 +285,47 @@ public class SampleLoopSession {
 		return concentration;
 	}
 
-	private ResourceContainerObject createResourceObject(int amount) {
+	@Nullable
+	private ResourceContainerObject getOrCreateResourceObject() {
+		SWGObject inventory = creature.getInventory();
 		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
+
+		return inventory.getContainedObjects()
+				.stream()
+				.filter(swgObject -> swgObject instanceof ResourceContainerObject)
+				.map(swgObject -> (ResourceContainerObject) swgObject)
+				.filter(resourceContainerObject -> resource.getRawResourceId() == resourceContainerObject.getResourceType())
+				.findAny()
+				.orElseGet(() -> createResourceObject(rawResource));
+	}
+
+	@Nullable
+	private ResourceContainerObject createResourceObject(RawResource rawResource) {
 		ResourceContainerObject resourceObject = (ResourceContainerObject) ObjectCreator.createObjectFromTemplate(rawResource.getCrateTemplate());
-		resourceObject.setQuantity(amount);
 		resourceObject.setParentName(rawResource.getParent().getName().toString());
 		resourceObject.setResourceType(resource.getRawResourceId());
 		resourceObject.setResourceName(resource.getName());
 		resourceObject.setObjectName(resource.getName());
 		assignStats(resourceObject);
 		resourceObject.setContainerPermissions(ReadWritePermissions.from(creature));
+
+		ContainerResult result = resourceObject.moveToContainer(creature, creature.getInventory());
+
+		switch (result) {
+			case SLOT_OCCUPIED, SLOT_NO_EXIST, NO_PERMISSION -> {
+				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"));
+				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
+				return null;
+			}
+			case CONTAINER_FULL -> {
+				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:no_inv_space"));
+				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
+				stopSession();
+				return null;
+			}
+			case SUCCESS -> ObjectCreatedIntent.broadcast(resourceObject);
+		}
+		
 		return resourceObject;
 	}
 
