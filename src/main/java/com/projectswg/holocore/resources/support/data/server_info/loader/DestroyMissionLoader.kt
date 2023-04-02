@@ -42,7 +42,7 @@ class DestroyMissionLoader : DataLoader() {
 	}
 	
 	override fun load() {
-		val set = SdbLoader.load(File("serverdata/destroy_missions/destroy_missions.msdb"))
+		val set = SdbLoader.load(File("serverdata/missions/destroy/main.msdb"))
 
 		set.use {
 			while (set.next()) {

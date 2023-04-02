@@ -1,0 +1,6 @@
+file	enabled
+TEXT	BOOLEAN
+destroy_creatures.sdb	true
+destroy_npc_general.sdb	true
+destroy_npc_imperial.sdb	true
+destroy_npc_rebel.sdb	true
