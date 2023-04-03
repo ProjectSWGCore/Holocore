@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,7 +30,6 @@ import com.projectswg.common.data.Badges;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.player.Mail;
-import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
@@ -48,6 +47,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class PlayerObject extends IntangibleObject {
 	
 	private static final ZoneId			BORN_DATE_ZONE	= ZoneId.of("America/New_York");
@@ -59,6 +61,7 @@ public class PlayerObject extends IntangibleObject {
 	private final PlayerObjectOwnerNP	play9			= new PlayerObjectOwnerNP(this);
 	private final Set<String>			joinedChannels	= ConcurrentHashMap.newKeySet();
 	private final Map<Integer, Mail>	mails			= new ConcurrentHashMap<>();
+	private final Map<String, Integer>	factionPoints	= new ConcurrentHashMap<>();
 
 	private long	startPlayTime		= 0;
 	private long	lastUpdatePlayTime	= 0;
@@ -71,6 +74,23 @@ public class PlayerObject extends IntangibleObject {
 	public PlayerObject(long objectId) {
 		super(objectId, BaselineType.PLAY);
 		super.setVolume(0);
+	}
+	
+	public int adjustFactionPoints(String faction, int adjustment) {
+		int oldValue = factionPoints.getOrDefault(faction, 0);
+		int value = oldValue + adjustment;
+		int cappedValue = min(max(value, -5000), 5000);
+		int delta = cappedValue - oldValue;
+		
+		if (delta != 0) {
+			factionPoints.put(faction, value);
+		}
+		
+		return delta;
+	}
+	
+	public Map<String, Integer> getFactionPoints() {
+		return new HashMap<>(factionPoints);
 	}
 
 	public String getAccount() {
@@ -669,6 +689,7 @@ public class PlayerObject extends IntangibleObject {
 		data.putString("account", account);
 		data.putMap("mail", mails);
 		badges.saveMongo(data.getDocument("badges"));
+		data.putMap("factionPoints", factionPoints);
 	}
 
 	@Override
@@ -684,6 +705,7 @@ public class PlayerObject extends IntangibleObject {
 		account = data.getString("account", "");
 		mails.putAll(data.getMap("mail", Integer.class, Mail.class));
 		badges.readMongo(data.getDocument("badges"));
+		factionPoints.putAll(data.getMap("factionPoints", String.class, Integer.class));
 	}
 	
 }
