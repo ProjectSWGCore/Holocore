@@ -59,6 +59,7 @@ import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.mission.MissionObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
@@ -74,6 +75,7 @@ class DestroyMissionService : Service() {
 	private val maxAcceptedMissions = 2
 	private val missionsToGenerate = 5
 	private val npcToMission = mutableMapOf<AIObject, MissionObject>()
+	private val missionComplete = StringId("mission/mission_generic", "success_w_amount")
 
 	@IntentHandler
 	private fun handleObjectCreated(objectCreatedIntent: ObjectCreatedIntent) {
@@ -89,12 +91,10 @@ class DestroyMissionService : Service() {
 		val packet = inboundPacketIntent.packet
 		val player = inboundPacketIntent.player
 
-		if (packet is MissionListRequest) {
-			handleMissionListRequest(packet, player)
-		} else if (packet is MissionAcceptRequest) {
-			handleMissionAcceptRequest(packet, player)
-		} else if (packet is MissionAbort) {
-			handleMissionAbort(packet, player)
+		when (packet) {
+			is MissionListRequest   -> handleMissionListRequest(packet, player)
+			is MissionAcceptRequest -> handleMissionAcceptRequest(packet, player)
+			is MissionAbort         -> handleMissionAbort(packet, player)
 		}
 	}
 
@@ -107,12 +107,11 @@ class DestroyMissionService : Service() {
 			return
 		}
 
-		npcToMission.filterValues { it == missionObject }
-			.forEach {
-				val key = it.key
-				DestroyObjectIntent.broadcast(key)
-				DestroyObjectIntent.broadcast(npcToMission.remove(key))
-			}
+		npcToMission.filterValues { it == missionObject }.forEach {
+			val key = it.key
+			DestroyObjectIntent.broadcast(key)
+			DestroyObjectIntent.broadcast(npcToMission.remove(key))
+		}
 
 		val response = MissionAbort(creatureObject.objectId)
 		response.missionObjectId = missionObjectId
@@ -126,18 +125,33 @@ class DestroyMissionService : Service() {
 		if (missionObject != null) {
 			val owner = missionObject.owner
 			if (owner != null) {
-				handleMissionCompleted(owner, missionObject)
+				handleMissionCompleted(owner, missionObject, corpse.location)
 			}
 		}
 	}
 
-	private fun handleMissionCompleted(owner: Player, missionObject: MissionObject) {
-		StandardLog.onPlayerEvent(this, owner, "completed %s", missionObject)
+	private fun handleMissionCompleted(owner: Player, missionObject: MissionObject, location: Location) {
 		DestroyObjectIntent.broadcast(missionObject)
-		val reward = missionObject.reward
-		owner.creatureObject.addToBank(reward.toLong())
-		val missionComplete = StringId("mission/mission_generic", "success_w_amount")
-		SystemMessageIntent.broadcastPersonal(owner, ProsePackage(missionComplete, "DI", reward))
+		val groupId = owner.creatureObject.groupId
+		val grouped = groupId != 0L
+
+		if (grouped) {
+			val groupObject = ObjectLookup.getObjectById(groupId) as GroupObject
+			nearbyGroupMembers(groupObject, location).forEach { grantMissionReward(it, missionObject) }
+		} else {
+			grantMissionReward(owner, missionObject)
+		}
+	}
+
+	private fun nearbyGroupMembers(groupObject: GroupObject, location: Location): List<Player> {
+		return groupObject.groupMemberObjects.mapNotNull { it.owner }.filter { it.creatureObject.location.isWithinFlatDistance(location, 300.0) }
+	}
+
+	private fun grantMissionReward(player: Player, missionObject: MissionObject) {
+		StandardLog.onPlayerEvent(this, player, "completed %s", missionObject)
+		val reward = missionObject.reward.toLong()
+		player.creatureObject.addToBank(reward)
+		SystemMessageIntent.broadcastPersonal(player, ProsePackage(missionComplete, "DI", reward))
 	}
 
 	private fun handleMissionAcceptRequest(missionAcceptRequest: MissionAcceptRequest, player: Player) {
@@ -188,9 +202,9 @@ class DestroyMissionService : Service() {
 
 		val dynamicId = missionObject.getServerTextAttribute(ServerAttribute.DYNAMIC_ID)
 		val dynamicSpawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
-		val npcId = listOfNotNull(dynamicSpawnInfo?.npcNormal1, dynamicSpawnInfo?.npcNormal2, dynamicSpawnInfo?.npcNormal3, dynamicSpawnInfo?.npcNormal4)
-			.filter { it.isNotBlank() }
-			.random()
+		val npcId = listOfNotNull(
+			dynamicSpawnInfo?.npcNormal1, dynamicSpawnInfo?.npcNormal2, dynamicSpawnInfo?.npcNormal3, dynamicSpawnInfo?.npcNormal4
+		).filter { it.isNotBlank() }.random()
 
 		val spawnInfo = SimpleSpawnInfo.builder()
 			.withNpcId(npcId)
@@ -265,20 +279,14 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun randomLocation(base: Location): Location? {
-		val distance = (1200 until 2500).random()
-			.toDouble()
-		val direction = (0 until 360).random()
-			.toDouble()
+		val distance = (1200 until 2500).random().toDouble()
+		val direction = (0 until 360).random().toDouble()
 		val alpha = toRadians(direction)
 		val xx = base.x + (distance * cos(alpha))
 		val zz = base.z + (distance * sin(alpha))
 		val yy = ServerData.terrains.getHeight(base.terrain, xx, zz)
 
-		val randomLocation = Location.builder(base)
-			.setX(xx)
-			.setZ(zz)
-			.setY(yy)
-			.build()
+		val randomLocation = Location.builder(base).setX(xx).setZ(zz).setY(yy).build()
 
 		if (ServerData.noSpawnZones.isInNoSpawnZone(randomLocation)) {
 			return null
@@ -288,9 +296,7 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun randomDestroyMissionInfos(terrain: Terrain): Collection<DestroyMissionLoader.DestroyMissionInfo> {
-		return ServerData.destroyMissions.getDestroyMissions(terrain)
-			.shuffled()
-			.take(missionsToGenerate)
+		return ServerData.destroyMissions.getDestroyMissions(terrain).shuffled().take(missionsToGenerate)
 	}
 
 	private fun synchronizeMissionObjects(missionBag: SWGObject) {
@@ -344,9 +350,7 @@ class DestroyMissionService : Service() {
 
 	private fun randomReward(difficulty: Int): Int {
 		val base = difficulty * 100.0
-		val multiplier = (-5 until 5).random()
-			.div(100.0)
-			.plus(1.0)
+		val multiplier = (-5 until 5).random().div(100.0).plus(1.0)
 
 		return (base * multiplier).toInt()
 	}
