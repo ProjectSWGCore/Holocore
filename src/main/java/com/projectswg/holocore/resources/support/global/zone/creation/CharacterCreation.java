@@ -177,7 +177,7 @@ public class CharacterCreation {
 		createInventoryObject(creatureObj, "object/tangible/datapad/shared_character_datapad.iff");
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff");
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff");
-		createInventoryObject(creatureObj.getInventory(), "object/tangible/instrument/shared_slitherhorn.iff");
+		createItem(creatureObj.getInventory(), "object/tangible/instrument/shared_slitherhorn.iff");
 	}
 	
 	@NotNull
@@ -197,12 +197,16 @@ public class CharacterCreation {
 		List<String> items = DataLoader.Companion.playerStartClothing().getClothing(race, clothing);
 		if (items != null) {
 			for (String itemTemplate : items) {
-				TangibleObject item = createDefaultObject(creature, itemTemplate);
-				item.setVolume(1);
+				createItem(creature, itemTemplate);
 			}
 		}
 	}
-	
+
+	private void createItem(SWGObject container, String itemTemplate) {
+		TangibleObject item = createDefaultObject(container, itemTemplate);
+		item.setVolume(1);
+	}
+
 	private Collection<String> languagesSkillsForRace(Race race) {
 		Collection<String> languages = new HashSet<>();
 
