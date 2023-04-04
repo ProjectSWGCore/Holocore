@@ -24,50 +24,45 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.objects.swg.player
 
-package com.projectswg.holocore.services.gameplay.player.character
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-import com.projectswg.common.network.packets.swg.zone.CharacterSheetResponseMessage
-import com.projectswg.common.network.packets.swg.zone.FactionResponseMessage
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
+class PlayerObjectFactionPointTest {
+	private lateinit var playerObject: PlayerObject
 
-class PlayerCharacterSheetService : Service() {
-
-	@IntentHandler
-	private fun handleExecuteCommandIntent(eci: ExecuteCommandIntent) {
-		if (eci.command.cppCallback != "requestCharacterSheetInfo") return
-
-		val creature = eci.source
-		val player = creature.playerObject ?: return
-		sendCharacterSheetResponseMessage(creature, player)
-		sendFactionResponseMessage(player, creature)
+	@BeforeEach
+	fun setUp() {
+		playerObject = PlayerObject(0)
 	}
 
-	private fun sendCharacterSheetResponseMessage(creature: CreatureObject, player: PlayerObject) {
-		creature.sendSelf(
-			CharacterSheetResponseMessage(
-				lotsUsed = player.lotsAvailable - player.lotsUsed, factionCrc = creature.pvpFaction.crc, factionStatus = creature.pvpStatus.value
-			)
-		)
+	@Test
+	fun adjustment() {
+		val adjustment = playerObject.adjustFactionPoints("rebel", 100)
+		assertEquals(100, adjustment)
 	}
 
-	private fun sendFactionResponseMessage(player: PlayerObject, creature: CreatureObject) {
-		val factionPoints = player.factionPoints
-		val factionNameList = factionPoints.keys.toList()
-		val factionPointList = factionNameList.map { factionPoints.getOrDefault(it, 0) }.map { it.toFloat() }
-		creature.sendSelf(
-			FactionResponseMessage(
-				factionRank = "recruit",    // From datatables/faction/rank.iff, should be dynamic once we implement faction ranks
-				rebelPoints = factionPoints.getOrDefault("rebel", 0),
-				imperialPoints = factionPoints.getOrDefault("imperial", 0),
-				factionNames = factionNameList,
-				factionPoints = factionPointList
-			)
-		)
+	@Test
+	fun `getFactionPoints reflects changes made with adjustFactionPoints`() {
+		playerObject.adjustFactionPoints("rebel", 100)
+		playerObject.adjustFactionPoints("rebel", 50)
+
+		val factionPoints = playerObject.factionPoints
+
+		assertEquals(150, factionPoints["rebel"])
 	}
 
+	@Test
+	fun `going above upper bound is not possible`() {
+		val adjustment = playerObject.adjustFactionPoints("rebel", 5015)
+		assertEquals(5000, adjustment)
+	}
+
+	@Test
+	fun `going below lower bound is not possible`() {
+		val adjustment = playerObject.adjustFactionPoints("rebel", -5015)
+		assertEquals(-5000, adjustment)
+	}
 }

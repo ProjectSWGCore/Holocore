@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -58,8 +58,8 @@ class FactionLoader : DataLoader() {
 		val isAggressive = set.getBoolean("isAggro")
 		val isPvP = set.getBoolean("isPvP")
 		val pvpFaction = processPvpFaction(set.getText("pvpFaction"))
-		private val enemies = processList(set.getText("enemies"))
-		private val allies = processList(set.getText("allies"))
+		val enemies = processList(set.getText("enemies"))
+		val allies = processList(set.getText("allies"))
 		val combatFactor = set.getInt("combatFactor").toInt()
 		
 		fun isEnemy(faction: String) = enemies.contains(faction.lowercase(Locale.US))
@@ -94,7 +94,7 @@ class FactionLoader : DataLoader() {
 		private fun processList(listStr: String): List<String> {
 			if (listStr == "-" || listStr.isBlank())
 				return emptyList()
-			return listStr.lowercase(Locale.US).split(';')
+			return listStr.lowercase(Locale.US).split(';').map { it.trim() }
 		}
 		
 	}
