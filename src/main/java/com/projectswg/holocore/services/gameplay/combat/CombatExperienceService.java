@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -210,7 +210,7 @@ public class CombatExperienceService extends Service {
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
 		short corpseLevel = corpse.getLevel();
 		
-		if (killerLevel - corpseLevel >= 10) {
+		if (killerLevel - corpseLevel >= 5) {
 			return 1;
 		} else {
 			XpData xpForLevel = this.xpData.get(corpseLevel);
@@ -222,17 +222,11 @@ public class CombatExperienceService extends Service {
 
 			CreatureDifficulty creatureDifficulty = corpse.getDifficulty();
 
-			switch (creatureDifficulty) {
-				case BOSS:
-					return xpForLevel.getBossXp();
-				case ELITE:
-					return xpForLevel.getEliteXp();
-				case NORMAL:
-					return xpForLevel.getXp();
-				default:
-					Log.e("%s received no XP: Unsupported creature difficulty %s of corpse %s", killer, creatureDifficulty, corpse);
-					return 0;
-			}
+			return switch (creatureDifficulty) {
+				case BOSS -> xpForLevel.bossXp();
+				case ELITE -> xpForLevel.eliteXp();
+				case NORMAL -> xpForLevel.xp();
+			};
 		}
 	}
 	
@@ -244,30 +238,9 @@ public class CombatExperienceService extends Service {
 	private boolean isMemberNearby(CreatureObject corpse, CreatureObject groupMember) {
 		return corpse.distanceTo(groupMember) <= 128;
 	}
-	
-	private static class XpData {
-		private final int xp;
-		private final int eliteXp;
-		private final int bossXp;
 
-		public XpData(int xp, int eliteXp, int bossXp) {
-			this.xp = xp;
-			this.eliteXp = eliteXp;
-			this.bossXp = bossXp;
-		}
+	private record XpData(int xp, int eliteXp, int bossXp) {
 
-		public int getXp() {
-			return xp;
-		}
-
-		public int getEliteXp() {
-			return eliteXp;
-		}
-
-		public int getBossXp() {
-			return bossXp;
-		}
-		
 	}
 	
 }
