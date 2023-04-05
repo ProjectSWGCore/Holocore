@@ -24,22 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
 package com.projectswg.holocore.resources.support.data.server_info.database
 
-import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.Filters
-import java.sql.DriverManager
+import java.time.LocalDateTime
 
-class Database(mongo: MongoDatabase) {
-	
-	val config = DatabaseTable(mongo.getCollection("config"), null, null, null)
-	private val configuration = config.mongo.find(Filters.exists("connector")).map { DatabaseConfiguration(it) }.first()
-	private val connection = if (configuration == null || configuration.connector != "mariadb") null
-							else DriverManager.getConnection("jdbc:mariadb://${configuration.host}:${configuration.port}/${configuration.database}?autoReconnect=true&user=${configuration.user}&password=${configuration.pass}")
-	val users = DatabaseTable(mongo.getCollection("users"), configuration, connection, configuration?.tables?.get("users"))
-	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
-	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
-	val bazaarInstantSales = DatabaseTable(mongo.getCollection("bazaarInstantSales"), configuration, connection, configuration?.tables?.get("bazaarInstantSales"))
+interface PswgBazaarInstantSalesDatabase {
+	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
+	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
+	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
+	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
 
+	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
+
+	companion object {
+
+		fun createDefault(): PswgBazaarInstantSalesDatabase {
+			return object : PswgBazaarInstantSalesDatabase {
+
+				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
+
+				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
+					return instantSaleItems.toList()
+				}
+
+				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
+					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
+				}
+
+				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
+					instantSaleItems.add(instantSaleItemMetadata)
+				}
+
+				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
+					return instantSaleItems.filter { it.ownerId == ownerId }
+				}
+			}
+		}
+
+	}
 }
