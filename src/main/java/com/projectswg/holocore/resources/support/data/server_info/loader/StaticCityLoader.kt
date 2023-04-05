@@ -24,64 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.structures.housing;
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
-import com.projectswg.holocore.resources.support.data.server_info.loader.StaticCityLoader.City;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import java.io.File
 
-import java.util.Collection;
+class StaticCityLoader : DataLoader() {
+	private val cities = mutableMapOf<Terrain, MutableList<City>>()
 
-public class CityService extends Service {
-
-	@IntentHandler
-	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
-		SWGPacket p = gpi.getPacket();
-		if (p instanceof DataTransform) {
-			performLocationUpdate(gpi.getPlayer().getCreatureObject());
-		}
+	fun getCities(terrain: Terrain): Collection<City> {
+		return cities.getOrElse(terrain) { emptyList() }
 	}
 
-	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent i) {
-		Player player = i.getPlayer();
-		CreatureObject creature = player.getCreatureObject();
-		if (i.getEvent() == PlayerEvent.PE_ZONE_IN_CLIENT) {
-			performLocationUpdate(creature);
-		}
-	}
-
-	@IntentHandler
-	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
-		SWGObject object = i.getObject();
-
-		if (!(object instanceof TangibleObject)) {
-			return;
-		}
-
-		performLocationUpdate((TangibleObject) object);
-	}
-
-	private void performLocationUpdate(TangibleObject object) {
-		Collection<City> cities = ServerData.INSTANCE.getStaticCities().getCities(object.getTerrain());
-		for (City city : cities) {
-			if (city.isWithinRange(object)) {
-				object.setCurrentCity(city.getName());
-				return;
+	override fun load() {
+		SdbLoader.load(File("serverdata/map/cities.sdb")).use { set ->
+			while (set.next()) {
+				val t = Terrain.getTerrainFromName(set.getText("terrain"))
+				val list: MutableList<City> = cities.computeIfAbsent(t) { mutableListOf() }
+				list.add(City(set.getText("city"), set.getInt("x").toInt(), set.getInt("z").toInt(), set.getInt("radius").toInt()))
 			}
 		}
-		object.setCurrentCity("");
 	}
 
+	class City(val name: String, private val x: Int, private val z: Int, private val radius: Int) {
+
+		fun isWithinRange(obj: SWGObject): Boolean {
+			return square(obj.x.toInt() - x) + square(obj.z.toInt() - z) <= square(radius)
+		}
+
+		override fun toString(): String {
+			return String.format("City[%s, (%d, %d), radius=%d]", name, x, z, radius)
+		}
+
+		private fun square(x: Int): Int {
+			return x * x
+		}
+	}
 }
