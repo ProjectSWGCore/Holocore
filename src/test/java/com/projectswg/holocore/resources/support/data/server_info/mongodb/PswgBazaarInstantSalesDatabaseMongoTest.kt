@@ -26,42 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.client.MongoClient
-import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarInstantSalesDatabase
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
-import org.testcontainers.containers.MongoDBContainer
-import org.testcontainers.utility.DockerImageName
 import java.time.LocalDateTime
 import java.time.Month
 
 class PswgBazaarInstantSalesDatabaseMongoTest {
 
-	companion object {
-		private var mongoDBContainer = MongoDBContainer(DockerImageName.parse("mongo:5.0.14"))
-		private lateinit var mongoDBClient: MongoClient
-		private lateinit var database: MongoDatabase
-
-		@JvmStatic
-		@BeforeAll
-		fun setUpAll() {
-			mongoDBContainer.start()
-			mongoDBClient = MongoClients.create(mongoDBContainer.connectionString)
-		}
-
-		@JvmStatic
-		@AfterAll
-		fun afterAll() {
-			mongoDBContainer.stop()
-		}
-	}
+	private lateinit var database: MongoDatabase
 
 	@BeforeEach
 	fun setUp() {
-		database = mongoDBClient.getDatabase("cu")
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
 	}
 
 	@AfterEach

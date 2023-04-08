@@ -24,63 +24,22 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.client.MongoCollection
-import com.mongodb.client.model.Filters
-import com.mongodb.client.model.IndexOptions
-import com.mongodb.client.model.Indexes
-import com.projectswg.common.data.BCrypt
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
-import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
-import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import org.bson.Document
-import org.bson.types.ObjectId
+import com.mongodb.client.MongoClient
+import com.mongodb.client.MongoClients
+import org.testcontainers.containers.MongoDBContainer
+import org.testcontainers.utility.DockerImageName
 
-class PswgUserDatabaseMongo(private val mongoCollection: MongoCollection<Document>) : PswgUserDatabase {
-
+object MongoDBTestContainer {
+	private val mongoDBContainer = MongoDBContainer(DockerImageName.parse("mongo:5.0.14"))
+	val mongoClient: MongoClient
+	
 	init {
-		mongoCollection.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
+		mongoDBContainer.start()
+		mongoClient = MongoClients.create(mongoDBContainer.connectionString)
+		Runtime.getRuntime().addShutdownHook(Thread {
+			mongoDBContainer.stop()
+		})
 	}
-
-	override fun getUser(username: String): UserMetadata? {
-		return mongoCollection.find(Filters.eq("username", username)).map { createUserMetadata(it) }.first()
-	}
-
-	override fun authenticate(userMetadata: UserMetadata, password: String): Boolean {
-		if (password.isEmpty()) return false
-		val dbPass = getPassword(userMetadata) ?: return false
-		return if (plaintextPassword(dbPass)) {
-			dbPass == password
-		} else {
-			val hashedPassword = BCrypt.hashpw(BCrypt.hashpw(password, dbPass), dbPass)
-			dbPass == hashedPassword
-		}
-	}
-
-	private fun plaintextPassword(dbPass: String): Boolean {
-		return dbPass.length != 60 && !dbPass.startsWith("$2")
-	}
-
-	private fun getPassword(userMetadata: UserMetadata): String? {
-		return mongoCollection.find(Filters.eq("_id", ObjectId(userMetadata.accountId))).map { it.getString("password") }.first()
-	}
-
-	private fun createUserMetadata(doc: Document): UserMetadata {
-		val accessLevel = when (doc.getString("accessLevel")) {
-			"warden" -> AccessLevel.WARDEN
-			"csr"    -> AccessLevel.CSR
-			"qa"     -> AccessLevel.QA
-			"dev"    -> AccessLevel.DEV
-			else     -> AccessLevel.PLAYER
-		}
-		return UserMetadata(
-			accountId = doc.getObjectId("_id").toHexString(),
-			username = doc.getString("username"),
-			accessLevel = accessLevel,
-			isBanned = doc.getBoolean("banned")
-		)
-	}
-
 }
