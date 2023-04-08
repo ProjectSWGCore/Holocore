@@ -149,8 +149,8 @@ class DestroyMissionService : Service() {
 
 	private fun grantMissionReward(player: Player, missionObject: MissionObject) {
 		StandardLog.onPlayerEvent(this, player, "completed %s", missionObject)
-		val reward = missionObject.reward.toLong()
-		player.creatureObject.addToBank(reward)
+		val reward = missionObject.reward
+		player.creatureObject.addToBank(reward.toLong())
 		SystemMessageIntent.broadcastPersonal(player, ProsePackage(missionComplete, "DI", reward))
 	}
 
