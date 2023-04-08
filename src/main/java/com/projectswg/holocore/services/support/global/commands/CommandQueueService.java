@@ -144,7 +144,9 @@ public class CommandQueueService extends Service {
 	
 	@IntentHandler
 	private void handleExitCombatIntent(ExitCombatIntent eci) {
-		combatQueueMap.remove(eci.getSource());
+		if (eci.getSource() instanceof CreatureObject creatureSource) {
+			combatQueueMap.remove(creatureSource);
+		}
 	}
 	
 	private void executeQueuedCommands() {

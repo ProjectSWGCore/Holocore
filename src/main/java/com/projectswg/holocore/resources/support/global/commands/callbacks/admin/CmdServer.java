@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,15 +26,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin;
 
+import com.projectswg.common.data.encodables.tangible.PvpFlag;
+import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent;
 import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent.ServerManagementEvent;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiInputBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,6 +58,7 @@ public class CmdServer implements ICmdCallback {
 		listBox.addListItem("Unban Player");
 		listBox.addListItem("Shutdown Server - 15 Minutes");
 		listBox.addListItem("Shutdown Server - Custom Time");
+		listBox.addListItem("Spawn lair");
 
 		listBox.addOkButtonCallback("handleSelectedItem", (event, parameters) -> {
 			int selection = SuiListBox.getSelectedRow(parameters);
@@ -62,12 +69,23 @@ public class CmdServer implements ICmdCallback {
 				case 2: handleUnbanPlayer(player); break;
 				case 3: handleShutdownServer(player); break;
 				case 4: handleCustomShutdownServer(player); break;
+				case 5: handleSpawnLair(player); break;
 				default: Log.i("There is no handle function for selected list item %d", selection); break;
 			}
 		});
 		listBox.display(player);
 	}
-	
+
+	private void handleSpawnLair(Player player) {
+		TangibleObject lair = (TangibleObject) ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile("object/tangible/lair/bark_mite/lair_bark_mite.iff"));
+		lair.setObjectName("a bark mite lair");
+		lair.removeOptionFlags(OptionFlag.INVULNERABLE);
+		lair.setPvpFlags(PvpFlag.YOU_CAN_ATTACK);
+		lair.addOptionFlags(OptionFlag.HAM_BAR);
+		lair.setLocation(player.getCreatureObject().getLocation());
+		ObjectCreatedIntent.broadcast(lair);
+	}
+
 	private static void handleKickPlayer(Player player) {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
 		window.addOkButtonCallback("handleKickPlayer", (event, parameters) -> {

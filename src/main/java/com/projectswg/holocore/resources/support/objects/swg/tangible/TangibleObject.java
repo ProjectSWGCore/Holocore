@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -90,6 +90,7 @@ public class TangibleObject extends SWGObject {
 	private int lightsaberColorCrystalDamagePercent;
 	
 	private Map<String, Integer> skillMods = new LinkedHashMap<>();
+	private long lastCombat = 0;
 	
 	public TangibleObject(long objectId) {
 		this(objectId, BaselineType.TANO);
@@ -293,14 +294,22 @@ public class TangibleObject extends SWGObject {
 		return OptionFlag.toEnumSet(optionFlags);
 	}
 
-	public void addDefender(CreatureObject creature) {
-		defenders.add(creature.getObjectId());
+	public void addDefender(TangibleObject tangibleObject) {
+		defenders.add(tangibleObject.getObjectId());
 	}
 
-	public void removeDefender(CreatureObject creature) {
-		defenders.remove(creature.getObjectId());
+	public void removeDefender(TangibleObject tangibleObject) {
+		defenders.remove(tangibleObject.getObjectId());
 	}
 
+	public void updateLastCombatTime() {
+		lastCombat = System.nanoTime();
+	}
+	
+	public double getTimeSinceLastCombat() {
+		return (System.nanoTime() - lastCombat) / 1E6;
+	}
+	
 	public List<Long> getDefenders() {
 		return new ArrayList<>(defenders);
 	}
