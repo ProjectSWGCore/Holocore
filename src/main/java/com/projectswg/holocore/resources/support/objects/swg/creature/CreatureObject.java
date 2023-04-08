@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -73,7 +73,6 @@ public class CreatureObject extends TangibleObject {
 	private final AtomicReference<Player>		owner			= new AtomicReference<>(null);
 	
 	private Race	race					= Race.HUMAN_MALE;
-	private long	lastCombat				= 0;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
 	
@@ -358,10 +357,6 @@ public class CreatureObject extends TangibleObject {
 		return creo6.getDifficulty();
 	}
 	
-	public double getTimeSinceLastCombat() {
-		return (System.nanoTime() - lastCombat) / 1E6;
-	}
-	
 	public PlayerObject getPlayerObject() {
 		return (PlayerObject) getSlottedObject("ghost");
 	}
@@ -638,10 +633,6 @@ public class CreatureObject extends TangibleObject {
 	public void setDifficulty(CreatureDifficulty difficulty) {
 		creo6.setDifficulty(difficulty);
 		sendDelta(6, 21, difficulty.getDifficulty());
-	}
-	
-	public void updateLastCombatTime() {
-		lastCombat = System.nanoTime();
 	}
 	
 	public String getMoodAnimation() {

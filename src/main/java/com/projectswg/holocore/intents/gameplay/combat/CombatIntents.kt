@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,6 +30,7 @@
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.gameplay.combat.CombatState
 import me.joshlarson.jlcommon.control.Intent
 
@@ -51,14 +52,14 @@ data class CreatureRevivedIntent(val creature: CreatureObject): Intent() {
 		@JvmStatic inline fun broadcast(creature: CreatureObject) = CreatureRevivedIntent(creature).broadcast()
 	}
 }
-data class EnterCombatIntent(val source: CreatureObject, val target: CreatureObject): Intent() {
+data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject): Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(source: CreatureObject, target: CreatureObject) = EnterCombatIntent(source, target).broadcast()
+		@JvmStatic inline fun broadcast(source: TangibleObject, target: TangibleObject) = EnterCombatIntent(source, target).broadcast()
 	}
 }
-data class ExitCombatIntent(val source: CreatureObject): Intent() {
+data class ExitCombatIntent(val source: TangibleObject): Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(source: CreatureObject) = ExitCombatIntent(source).broadcast()
+		@JvmStatic inline fun broadcast(source: TangibleObject) = ExitCombatIntent(source).broadcast()
 	}
 }
 

@@ -50,6 +50,8 @@ sourceSets {
 			testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
 			testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
 			testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
+			testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
+			testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
 		}
 	}
 	create("utility") {
