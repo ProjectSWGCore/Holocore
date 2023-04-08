@@ -24,63 +24,98 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.client.MongoCollection
-import com.mongodb.client.model.Filters
-import com.mongodb.client.model.IndexOptions
-import com.mongodb.client.model.Indexes
-import com.projectswg.common.data.BCrypt
+import com.mongodb.client.MongoDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
-import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
-import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import org.bson.Document
-import org.bson.types.ObjectId
+import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Assertions.*
 
-class PswgUserDatabaseMongo(private val mongoCollection: MongoCollection<Document>) : PswgUserDatabase {
+class PswgUserDatabaseMongoTest {
 
-	init {
-		mongoCollection.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
+	private lateinit var database: MongoDatabase
+
+	@BeforeEach
+	fun setUp() {
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
 	}
 
-	override fun getUser(username: String): UserMetadata? {
-		return mongoCollection.find(Filters.eq("username", username)).map { createUserMetadata(it) }.first()
+	@AfterEach
+	fun tearDown() {
+		database.drop()
 	}
 
-	override fun authenticate(userMetadata: UserMetadata, password: String): Boolean {
-		if (password.isEmpty()) return false
-		val dbPass = getPassword(userMetadata) ?: return false
-		return if (plaintextPassword(dbPass)) {
-			dbPass == password
-		} else {
-			val hashedPassword = BCrypt.hashpw(BCrypt.hashpw(password, dbPass), dbPass)
-			dbPass == hashedPassword
+	private val users: PswgUserDatabase
+		get() {
+			return PswgUserDatabaseMongo(database.getCollection("users"))
 		}
+
+
+	@Test
+	fun `unknown user is null`() {
+		val username = "deathbringer7"
+
+		val userMetadata = users.getUser(username)
+
+		assertNull(userMetadata)
 	}
 
-	private fun plaintextPassword(dbPass: String): Boolean {
-		return dbPass.length != 60 && !dbPass.startsWith("$2")
+	@Test
+	fun `known user is found`() {
+		val username = "deathbringer7"
+		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
+		insertUser(username, hashedPassword)
+
+		val userMetadata = users.getUser(username)
+
+		assertNotNull(userMetadata)
+	}
+	
+	@Test
+	fun `user with plaintext password can be authenticated`() {
+		val username = "laxguy6"
+		val password = "plaintext_password"
+		insertUser(username, password)
+		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+
+		val authenticated = users.authenticate(userMetadata, password)
+
+		assertTrue(authenticated)
+	}
+	
+	@Test
+	fun `user with hashed password can be authenticated`() {
+		val username = "deathbringer7"
+		val password = "thebestpassword"
+		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
+		insertUser(username, hashedPassword)
+		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+
+		val authenticated = users.authenticate(userMetadata, password)
+
+		assertTrue(authenticated)
+	}
+	
+	@Test
+	fun `wrong password is rejected`() {
+		val username = "deathbringer7"
+		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
+		insertUser(username, hashedPassword)
+		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+
+		val authenticated = users.authenticate(userMetadata, "wrong_password")
+
+		assertFalse(authenticated)
 	}
 
-	private fun getPassword(userMetadata: UserMetadata): String? {
-		return mongoCollection.find(Filters.eq("_id", ObjectId(userMetadata.accountId))).map { it.getString("password") }.first()
+	private fun insertUser(username: String, password: String) {
+		val collection = database.getCollection("users")
+		val document = Document()
+		document["username"] = username
+		document["accessLevel"] = "player"
+		document["banned"] = false
+		document["password"] = password
+		collection.insertOne(document)
 	}
-
-	private fun createUserMetadata(doc: Document): UserMetadata {
-		val accessLevel = when (doc.getString("accessLevel")) {
-			"warden" -> AccessLevel.WARDEN
-			"csr"    -> AccessLevel.CSR
-			"qa"     -> AccessLevel.QA
-			"dev"    -> AccessLevel.DEV
-			else     -> AccessLevel.PLAYER
-		}
-		return UserMetadata(
-			accountId = doc.getObjectId("_id").toHexString(),
-			username = doc.getString("username"),
-			accessLevel = accessLevel,
-			isBanned = doc.getBoolean("banned")
-		)
-	}
-
 }

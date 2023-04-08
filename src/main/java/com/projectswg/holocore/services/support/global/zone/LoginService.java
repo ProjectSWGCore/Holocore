@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.global.zone;
 
-import com.projectswg.common.data.BCrypt;
 import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.ErrorMessage;
@@ -150,7 +149,7 @@ public class LoginService extends Service {
 			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", loginRequest.getSocketAddress());
 			onLoginBanned(player);
 			player.sendPacket(new HoloLoginResponsePacket(false, "Sorry, you're banned!"));
-		} else if (isUserValid(user, loginRequest.getPassword())) {
+		} else if (isPasswordValid(user, loginRequest.getPassword())) {
 			StandardLog.onPlayerEvent(this, player, "logged in from %s", loginRequest.getSocketAddress());
 			onSuccessfulLogin(user, player);
 			player.sendPacket(new HoloLoginResponsePacket(true, "", getGalaxies(), getCharacters(user.getUsername())));
@@ -216,7 +215,7 @@ public class LoginService extends Service {
 			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", socketAddress);
 			onLoginBanned(player);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Sorry, you're banned!", false));
-		} else if (isUserValid(user, password)) {
+		} else if (isPasswordValid(user, password)) {
 			StandardLog.onPlayerEvent(this, player, "logged in from %s", socketAddress);
 			onSuccessfulLogin(user, player);
 			sendLoginSuccessPacket(player);
@@ -269,14 +268,8 @@ public class LoginService extends Service {
 		player.sendPacket(clusterStatus);
 	}
 	
-	private boolean isUserValid(UserMetadata user, String password) {
-		if (password.isEmpty())
-			return false;
-		String dbPass = user.getPassword();
-		if (dbPass.length() != 60 && !dbPass.startsWith("$2"))
-			return dbPass.equals(password);
-		password = BCrypt.hashpw(BCrypt.hashpw(password, dbPass), dbPass);
-		return dbPass.equals(password);
+	private boolean isPasswordValid(UserMetadata user, String password) {
+		return PswgDatabase.INSTANCE.getUsers().authenticate(user, password);
 	}
 	
 	private List <Galaxy> getGalaxies() {
