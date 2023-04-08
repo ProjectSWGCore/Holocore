@@ -167,7 +167,7 @@ class DestroyMissionService : Service() {
 			val missionBag = creatureObject.missionBag
 			val datapad = creatureObject.datapad
 
-			if (datapad.containedObjects.size >= maxAcceptedMissions) {
+			if (datapad.containedObjects.filterIsInstance<MissionObject>().size >= maxAcceptedMissions) {
 				handleTooManyMissions(creatureObject, missionId, missionAcceptRequest, player)
 				return
 			}
