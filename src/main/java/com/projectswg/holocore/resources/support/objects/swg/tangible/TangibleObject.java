@@ -221,7 +221,11 @@ public class TangibleObject extends SWGObject {
 		
 		sendDelta(3, 4, appearanceData);
 	}
-	
+
+	public CustomizationString getAppearanceData() {
+		return appearanceData;
+	}
+
 	public void setMaxHitPoints(int maxHitPoints) {
 		this.maxHitPoints = maxHitPoints;
 		sendDelta(3, 9, maxHitPoints);

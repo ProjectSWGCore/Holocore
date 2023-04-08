@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay
 
+import com.projectswg.holocore.services.gameplay.commodities.BazaarService
 import com.projectswg.holocore.services.gameplay.combat.CombatManager
 import com.projectswg.holocore.services.gameplay.conversation.ConversationService
 import com.projectswg.holocore.services.gameplay.crafting.CraftingManager
@@ -41,5 +42,5 @@ import com.projectswg.holocore.services.gameplay.world.WorldManager
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [CombatManager::class, ConversationService::class, CraftingManager::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
+@ManagerStructure(children = [BazaarService::class, CombatManager::class, ConversationService::class, CraftingManager::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
 class GameplayManager : Manager()
