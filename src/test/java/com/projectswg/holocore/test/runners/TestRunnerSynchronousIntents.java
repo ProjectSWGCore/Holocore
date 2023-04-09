@@ -77,7 +77,7 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	}
 
 	protected final <T extends Intent> void registerIntentHandler(Class<T> intentClass, Consumer<@NotNull T> handler) {
-		String consumerKey = getClass().getName() + "#" + currentTestName.getMethodName();
+		String consumerKey = testInfo.getTestClass().orElse(getClass()).getName() + "#" + testInfo.getDisplayName();
 		intentManager.registerForIntent(intentClass, consumerKey, handler);
 	}
 	
