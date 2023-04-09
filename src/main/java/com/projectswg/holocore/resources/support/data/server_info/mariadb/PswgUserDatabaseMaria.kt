@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,27 +36,28 @@ import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
 
-class PswgUserDatabaseMaria(private val database: DatabaseTable): PswgUserDatabase {
-	
+class PswgUserDatabaseMaria(private val database: DatabaseTable) : PswgUserDatabase {
+
 	private val getUserStatement = ThreadLocal.withInitial { database.mariaConnection!!.prepareStatement("SELECT userID, password, banned FROM ${database.mariaTable!!} WHERE username = $1") }
-	
+
 	override fun getUser(username: String): UserMetadata? {
 		try {
 			val accessLevel = when (database.configuration?.accessLevels?.get(username)) {
 				"warden" -> AccessLevel.WARDEN
-				"csr" -> AccessLevel.CSR
-				"qa" -> AccessLevel.QA
-				"dev" -> AccessLevel.DEV
-				else -> AccessLevel.PLAYER
+				"csr"    -> AccessLevel.CSR
+				"qa"     -> AccessLevel.QA
+				"dev"    -> AccessLevel.DEV
+				else     -> AccessLevel.PLAYER
 			}
 			val statement = getUserStatement.get()
 			statement.setString(1, username)
 			statement.executeQuery().use { set ->
-				return UserMetadata(accountId = set.getInt("userId").toString(16).uppercase(Locale.US),
-									username = username,
-									password = set.getString("password") ?: return null,
-									accessLevel = accessLevel,
-									isBanned = set.getInt("banned") != 0)
+				return UserMetadata(
+					accountId = set.getInt("userId").toString(16).uppercase(Locale.US),
+					username = username,
+					accessLevel = accessLevel,
+					isBanned = set.getInt("banned") != 0
+				)
 			}
 		} catch (e: SQLException) {
 			Log.w("SQLException when looking up user: $username")
@@ -64,14 +65,15 @@ class PswgUserDatabaseMaria(private val database: DatabaseTable): PswgUserDataba
 		}
 		return null
 	}
-	
+
+	override fun authenticate(userMetadata: UserMetadata, password: String): Boolean = false
+
 	private inline fun (ResultSet).use(op: (ResultSet) -> Unit) {
-		@Suppress("ConvertTryFinallyToUseCall")
-		try {
+		@Suppress("ConvertTryFinallyToUseCall") try {
 			op(this)
 		} finally {
 			close()
 		}
 	}
-	
+
 }
