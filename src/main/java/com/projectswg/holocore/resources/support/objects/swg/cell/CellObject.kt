@@ -31,7 +31,8 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import java.util.*
+import java.util.Collections
+import kotlin.collections.HashSet
 
 class CellObject(objectId: Long) : SWGObject(objectId, BaselineType.SCLT) {
 	private val portals = HashSet<Portal>()
