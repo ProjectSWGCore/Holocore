@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,12 +33,14 @@ import me.joshlarson.jlcommon.concurrency.Delay;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentManager;
 import me.joshlarson.jlcommon.control.ServiceBase;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	
@@ -72,6 +74,11 @@ public abstract class TestRunnerSynchronousIntents extends TestRunner {
 	protected final void registerObject(SWGObject ... objects) {
 		for (SWGObject object : objects)
 			broadcastAndWait(new ObjectCreatedIntent(object));
+	}
+
+	protected final <T extends Intent> void registerIntentHandler(Class<T> intentClass, Consumer<@NotNull T> handler) {
+		String consumerKey = testInfo.getTestClass().orElse(getClass()).getName() + "#" + testInfo.getDisplayName();
+		intentManager.registerForIntent(intentClass, consumerKey, handler);
 	}
 	
 	protected final void broadcastAndWait(Intent i) {
