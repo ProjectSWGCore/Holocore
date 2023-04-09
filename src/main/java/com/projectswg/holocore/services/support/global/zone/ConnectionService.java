@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -127,14 +127,14 @@ public class ConnectionService extends Service {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.setFlag(PlayerFlags.LD);
+		player.getFlags().set(PlayerFlags.LD);
 	}
 	
 	private void clearPlayerFlag(Player p) {
 		PlayerObject player = p.getPlayerObject();
 		if (player == null)
 			return;
-		player.clearFlag(PlayerFlags.LD);
+		player.getFlags().clear(PlayerFlags.LD);
 	}
 	
 	private void zoneIn(Player p) {

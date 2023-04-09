@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -41,8 +41,8 @@ public class ActivePlayerPredicate implements Predicate<Player> {
 	public boolean test(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		PlayerObject playerObject = creatureObject.getPlayerObject();
-		boolean afk = playerObject.isFlagSet(PlayerFlags.AFK);
-		boolean offline = playerObject.isFlagSet(PlayerFlags.LD);
+		boolean afk = playerObject.getFlags().get(PlayerFlags.AFK);
+		boolean offline = playerObject.getFlags().get(PlayerFlags.LD);
 		boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
 		boolean dead = creatureObject.getPosture() == Posture.DEAD;
 		boolean cloaked = !creatureObject.isVisible();

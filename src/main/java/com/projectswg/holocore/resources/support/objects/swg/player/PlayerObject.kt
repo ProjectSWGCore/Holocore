@@ -119,63 +119,8 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 		removeMail(m.id)
 	}
 
-	val flagsList: BitSet
-		get() = play3.getFlagsList()
-
-	fun setFlag(flag: PlayerFlags) {
-		play3.setFlag(flag.flag)
-	}
-
-	fun clearFlag(flag: PlayerFlags) {
-		play3.clearFlag(flag.flag)
-	}
-
-	fun toggleFlag(flag: PlayerFlags) {
-		play3.toggleFlag(flag.flag)
-	}
-
-	fun setFlags(flags: Set<PlayerFlags>) {
-		play3.setFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
-
-	fun clearFlags(flags: Set<PlayerFlags>) {
-		play3.clearFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
-
-	fun toggleFlags(flags: Set<PlayerFlags>) {
-		play3.toggleFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
-
-	fun isFlagSet(flag: PlayerFlags): Boolean {
-		return play3.isFlagSet(flag.flag)
-	}
-
-	val profileFlags: BitSet
-		get() = play3.getProfileFlags()
-
-	fun setProfileFlag(flag: PlayerFlags) {
-		play3.setProfileFlag(flag.flag)
-	}
-
-	fun clearProfileFlag(flag: PlayerFlags) {
-		play3.clearProfileFlag(flag.flag)
-	}
-
-	fun toggleProfileFlag(flag: PlayerFlags) {
-		play3.toggleProfileFlag(flag.flag)
-	}
-
-	fun setProfileFlags(flags: Set<PlayerFlags>) {
-		play3.setProfileFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
-
-	fun clearProfileFlags(flags: Set<PlayerFlags>) {
-		play3.clearProfileFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
-
-	fun toggleProfileFlags(flags: Set<PlayerFlags>) {
-		play3.toggleProfileFlags(PlayerFlags.bitsetFromFlags(flags))
-	}
+	val flags by play3::flags
+	val profileFlags by play3::profileFlags
 
 	var title by play3::title
 	val playTime by play3::playTime
