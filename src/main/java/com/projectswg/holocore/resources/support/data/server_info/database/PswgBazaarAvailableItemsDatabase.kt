@@ -28,40 +28,39 @@ package com.projectswg.holocore.resources.support.data.server_info.database
 
 import java.time.LocalDateTime
 
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
+interface PswgBazaarAvailableItemsDatabase {
+	fun getAvailableItem(itemObjectId: Long): AvailableItemMetadata?
+	fun addAvailableItem(availableItemMetadata: AvailableItemMetadata)
+	fun getMyAvailableItems(ownerId: Long): Collection<AvailableItemMetadata>
+	fun removeAvailableItem(availableItemMetadata: AvailableItemMetadata)
 
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
+	data class AvailableItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long, val saleType: AvailableItemSaleType)
+
+	enum class AvailableItemSaleType {
+		INSTANT, AUCTION
+	}
 
 	companion object {
 
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
+		fun createDefault(): PswgBazaarAvailableItemsDatabase {
+			return object : PswgBazaarAvailableItemsDatabase {
 
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
+				private val availableItems = mutableListOf<AvailableItemMetadata>()
 
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
+				override fun getAvailableItem(itemObjectId: Long): AvailableItemMetadata? {
+					return availableItems.firstOrNull { it.itemObjectId == itemObjectId }
 				}
 
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
+				override fun addAvailableItem(availableItemMetadata: AvailableItemMetadata) {
+					availableItems.add(availableItemMetadata)
 				}
 
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
+				override fun getMyAvailableItems(ownerId: Long): Collection<AvailableItemMetadata> {
+					return availableItems.filter { it.ownerId == ownerId }
 				}
 
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
+				override fun removeAvailableItem(availableItemMetadata: AvailableItemMetadata) {
+					availableItems.remove(availableItemMetadata)
 				}
 			}
 		}

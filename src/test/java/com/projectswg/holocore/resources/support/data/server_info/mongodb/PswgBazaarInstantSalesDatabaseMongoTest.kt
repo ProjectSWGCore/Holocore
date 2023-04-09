@@ -111,6 +111,18 @@ class PswgBazaarInstantSalesDatabaseMongoTest {
 		assertEquals(0, retrieved)
 	}
 
+	@Test
+	fun `items can be removed`() {
+		val instantSaleItemMetadata = exampleItem()
+		bazaarItems.addInstantSaleItem(instantSaleItemMetadata)
+
+		bazaarItems.removeInstantSaleItem(instantSaleItemMetadata)
+
+		val collection = database.getCollection("bazaarInstantSales")
+		val countDocuments = collection.countDocuments()
+		assertEquals(0, countDocuments)
+	}
+
 	private fun exampleItem() = PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
 		itemObjectId = 1L,
 		price = 1337,

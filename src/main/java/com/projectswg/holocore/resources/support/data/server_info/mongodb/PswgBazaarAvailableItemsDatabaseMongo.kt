@@ -32,12 +32,12 @@ import com.mongodb.client.model.IndexOptions
 import com.mongodb.client.model.Indexes
 import com.mongodb.client.model.ReplaceOptions
 import com.projectswg.common.data.encodables.mongo.MongoData
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarInstantSalesDatabase
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarAvailableItemsDatabase
 import org.bson.Document
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 
-class PswgBazaarInstantSalesDatabaseMongo(private val collection: MongoCollection<Document>) : PswgBazaarInstantSalesDatabase {
+class PswgBazaarAvailableItemsDatabaseMongo(private val collection: MongoCollection<Document>) : PswgBazaarAvailableItemsDatabase {
 
 	private val zoneOffset = ZoneOffset.UTC
 	
@@ -46,48 +46,46 @@ class PswgBazaarInstantSalesDatabaseMongo(private val collection: MongoCollectio
 		collection.createIndex(Indexes.ascending("ownerId"), IndexOptions().unique(false))
 	}
 
-	override fun getInstantSaleItems(): Collection<PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata> {
-		return collection.find().map { documentToInstantSaleItemMetadata(it) }.toList()
+	override fun getAvailableItem(itemObjectId: Long): PswgBazaarAvailableItemsDatabase.AvailableItemMetadata? {
+		return collection.find(Filters.eq("itemObjectId", itemObjectId)).map { documentToAvailableItemMetadata(it) }.first()
 	}
 
-	override fun getInstantSaleItem(itemObjectId: Long): PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata? {
-		return collection.find(Filters.eq("itemObjectId", itemObjectId)).map { documentToInstantSaleItemMetadata(it) }.first()
-	}
-
-	override fun addInstantSaleItem(instantSaleItemMetadata: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata) {
-		val itemObjectId = instantSaleItemMetadata.itemObjectId
-		val document = toDocument(instantSaleItemMetadata)
+	override fun addAvailableItem(availableItemMetadata: PswgBazaarAvailableItemsDatabase.AvailableItemMetadata) {
+		val itemObjectId = availableItemMetadata.itemObjectId
+		val document = toDocument(availableItemMetadata)
 
 		collection.replaceOne(Filters.eq("itemObjectId", itemObjectId), document, ReplaceOptions().upsert(true))
 	}
 
-	override fun getMyInstantSaleItems(ownerId: Long): Collection<PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata> {
-		return collection.find(Filters.eq("ownerId", ownerId)).map { documentToInstantSaleItemMetadata(it) }.toList()
+	override fun getMyAvailableItems(ownerId: Long): Collection<PswgBazaarAvailableItemsDatabase.AvailableItemMetadata> {
+		return collection.find(Filters.eq("ownerId", ownerId)).map { documentToAvailableItemMetadata(it) }.toList()
 	}
 
-	override fun removeInstantSaleItem(instantSaleItemMetadata: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata) {
-		collection.deleteOne(Filters.eq("itemObjectId", instantSaleItemMetadata.itemObjectId))
+	override fun removeAvailableItem(availableItemMetadata: PswgBazaarAvailableItemsDatabase.AvailableItemMetadata) {
+		collection.deleteOne(Filters.eq("itemObjectId", availableItemMetadata.itemObjectId))
 	}
 
-	private fun toDocument(instantSaleItemMetadata: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata): Document {
+	private fun toDocument(availableItemMetadata: PswgBazaarAvailableItemsDatabase.AvailableItemMetadata): Document {
 		val mongoData = MongoData()
-		mongoData.putLong("itemObjectId", instantSaleItemMetadata.itemObjectId)
-		mongoData.putInteger("price", instantSaleItemMetadata.price)
-		mongoData.putDate("expiresAt", instantSaleItemMetadata.expiresAt.toInstant(zoneOffset))
-		mongoData.putString("description", instantSaleItemMetadata.description)
-		mongoData.putLong("ownerId", instantSaleItemMetadata.ownerId)
-		mongoData.putLong("bazaarObjectId", instantSaleItemMetadata.bazaarObjectId)
+		mongoData.putLong("itemObjectId", availableItemMetadata.itemObjectId)
+		mongoData.putInteger("price", availableItemMetadata.price)
+		mongoData.putDate("expiresAt", availableItemMetadata.expiresAt.toInstant(zoneOffset))
+		mongoData.putString("description", availableItemMetadata.description)
+		mongoData.putLong("ownerId", availableItemMetadata.ownerId)
+		mongoData.putLong("bazaarObjectId", availableItemMetadata.bazaarObjectId)
+		mongoData.putString("saleType", availableItemMetadata.saleType.name)
 		return mongoData.toDocument()
 	}
 
-	private fun documentToInstantSaleItemMetadata(document: Document): PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata {
-		return PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
+	private fun documentToAvailableItemMetadata(document: Document): PswgBazaarAvailableItemsDatabase.AvailableItemMetadata {
+		return PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
 			itemObjectId = document.getLong("itemObjectId"),
 			price = document.getInteger("price"),
 			expiresAt = LocalDateTime.ofInstant(document.getDate("expiresAt").toInstant(), zoneOffset),
 			description = document.getString("description"),
 			ownerId = document.getLong("ownerId"),
 			bazaarObjectId = document.getLong("bazaarObjectId"),
+			saleType = PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.valueOf(document.getString("saleType"))
 		)
 	}
 }
