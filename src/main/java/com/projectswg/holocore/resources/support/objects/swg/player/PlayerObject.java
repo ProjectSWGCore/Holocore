@@ -528,10 +528,6 @@ public class PlayerObject extends IntangibleObject {
 		return play9.getExpModified();
 	}
 
-	public void setExpModified() {
-		play9.incrementExpModified();
-	}
-	
 	public List<String> getFriendsList() {
 		return play9.getFriendsList();
 	}
