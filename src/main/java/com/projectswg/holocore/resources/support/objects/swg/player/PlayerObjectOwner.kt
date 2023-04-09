@@ -49,7 +49,7 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 	private val completedQuests = SWGBitSet(8, 4)
 	private val activeQuests = SWGBitSet(8, 5)
 	private val quests = SWGMap<CRC, Quest>(8, 7)
-	
+
 	var forcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 2)
 	var maxForcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 3)
 	var activeQuest by IndirectBaselineDelegate(obj = obj, value = 0, page = 8, update = 6)
