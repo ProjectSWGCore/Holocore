@@ -56,7 +56,7 @@ class PlayerCharacterSheetService : Service() {
 	}
 
 	private fun sendFactionResponseMessage(player: PlayerObject, creature: CreatureObject) {
-		val factionPoints = player.factionPoints
+		val factionPoints = player.getFactionPoints()
 		val factionNameList = factionPoints.keys.toList()
 		val factionPointList = factionNameList.map { factionPoints.getOrDefault(it, 0) }.map { it.toFloat() }
 		creature.sendSelf(
