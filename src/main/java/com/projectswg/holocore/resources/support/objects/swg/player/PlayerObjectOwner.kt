@@ -46,12 +46,13 @@ import java.util.stream.Collectors
 internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistable {
 	private val experience = SWGMap<String, Int>(8, 0, StringType.ASCII)
 	private val waypoints = SWGMap<Long, WaypointObject>(8, 1)
-	var forcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 2)
-	var maxForcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 3)
 	private val completedQuests = SWGBitSet(8, 4)
 	private val activeQuests = SWGBitSet(8, 5)
-	var activeQuest by IndirectBaselineDelegate(obj = obj, value = 0, page = 8, update = 6)
 	private val quests = SWGMap<CRC, Quest>(8, 7)
+	
+	var forcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 2)
+	var maxForcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 3)
+	var activeQuest by IndirectBaselineDelegate(obj = obj, value = 0, page = 8, update = 6)
 
 	fun getExperience(): Map<String, Int> {
 		return Collections.unmodifiableMap(experience)
