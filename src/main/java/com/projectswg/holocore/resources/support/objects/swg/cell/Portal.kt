@@ -24,33 +24,18 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.building
+package com.projectswg.holocore.resources.support.objects.swg.cell
 
-import com.projectswg.common.data.encodables.mongo.MongoData
-import com.projectswg.common.data.encodables.mongo.MongoPersistable
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
+import com.projectswg.common.data.location.Point3D
 
-class PlayerStructureInfo(owner: CreatureObject?) : MongoPersistable {
-	
-	private var ownerId: Long = 0L
-	
-	var owner: CreatureObject? = owner
-		get() {
-			if (field == null && ownerId != 0L)
-				field = ObjectLookup.getObjectById(ownerId) as CreatureObject
-			return field
-		}
-		set(value) {
-			field = value
-			ownerId = value?.objectId ?: 0L
-		}
-	
-	override fun readMongo(data: MongoData) {
-		ownerId = data.getLong("ownerId", 0)
+class Portal(val cell1: CellObject?, val cell2: CellObject?, val frame1: Point3D, val frame2: Point3D, val height: Double) {
+
+	fun getOtherCell(cell: CellObject?): CellObject? {
+		assert(cell === cell1 || cell === cell2)
+		return if (cell1 === cell) cell2 else cell1
 	}
-	
-	override fun saveMongo(data: MongoData) {
-		data.putLong("ownerId", ownerId)
+
+	override fun toString(): String {
+		return "Portal[$cell1 -> $cell2  [$frame1, $frame2] height=$height]"
 	}
 }

@@ -100,7 +100,7 @@ public class CmdGoto implements ICmdCallback  {
 			Log.e(err);
 			return err;
 		}
-		Portal portal = cell.getPortals().stream().min(Comparator.comparingInt(p -> (p.getOtherCell(cell) == null)?0:p.getOtherCell(cell).getNumber())).orElse(null);
+		Portal portal = cell.getPortals().stream().min(Comparator.comparingInt(p -> (p.getOtherCell(cell) == null)?0: p.getOtherCell(cell).getNumber())).orElse(null);
 		
 		double x = 0, y = 0, z = 0;
 		if (portal != null) {
