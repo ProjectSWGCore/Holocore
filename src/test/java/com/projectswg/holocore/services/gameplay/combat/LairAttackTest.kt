@@ -33,6 +33,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
+import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -43,15 +44,13 @@ import com.projectswg.holocore.services.gameplay.faction.FactionFlagService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.objects.ObjectStorageService
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.util.concurrent.atomic.AtomicBoolean
 
 class LairAttackTest : TestRunnerSimulatedWorld() {
 
@@ -62,7 +61,6 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 		registerService(CommandExecutionService())
 		registerService(FactionFlagService())
 		registerService(CombatStatusService())
-		registerService(ObjectStorageService())
 	}
 
 	@Test
@@ -81,11 +79,16 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 		val character = createCharacter()
 		val player = character.owner ?: throw RuntimeException("Unable to access player")
 		val lair = createLair()
+		val destroyedLair = AtomicBoolean(false)
 		lair.maxHitPoints = 1
 
+		registerIntentHandler(DestroyObjectIntent::class.java) {
+			if (it.`object` == lair)
+				destroyedLair.set(true)
+		}
 		meleeHit(player, lair)
 
-		assertNull(ObjectLookup.getObjectById(lair.objectId))
+		assertTrue(destroyedLair.get())
 	}
 
 	private fun meleeHit(player: GenericPlayer, target: SWGObject) {
