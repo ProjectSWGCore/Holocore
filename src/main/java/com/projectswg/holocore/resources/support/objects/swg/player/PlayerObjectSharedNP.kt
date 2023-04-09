@@ -52,5 +52,4 @@ internal class PlayerObjectSharedNP(obj: PlayerObject) : MongoPersistable {
 	override fun readMongo(data: MongoData) {
 		adminTag = data.getInteger("adminTag", adminTag.toInt()).toByte()
 	}
-
 }

@@ -311,10 +311,6 @@ public class PlayerObject extends IntangibleObject {
 				break;
 		}
 	}
-	
-	public String getHome() {
-		return play6.getHome();
-	}
 
 	public boolean addWaypoint(WaypointObject waypoint) {
 		return play8.addWaypoint(waypoint);
