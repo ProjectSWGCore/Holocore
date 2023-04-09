@@ -41,14 +41,6 @@ import kotlin.math.ceil
  * this BitSet resides at within the baseline
  */
 class SWGFlag(private val view: Int, private val updateType: Int) : BitSet(128), Encodable {
-	override fun encode(): ByteArray {
-		val encoded = toByteArray()
-		val resultingInts = (encoded.size + 3) / 4 // rounds up
-		val buffer = NetBuffer.allocate(4 + resultingInts * 4)
-		buffer.addInt(resultingInts)
-		buffer.addRawArray(encoded)
-		return buffer.array()
-	}
 
 	fun wrapper(obj: SWGObject): SWGFlagWrapper<Int> {
 		return wrapper(obj) { it }
@@ -56,6 +48,15 @@ class SWGFlag(private val view: Int, private val updateType: Int) : BitSet(128),
 
 	fun <T> wrapper(obj: SWGObject, converter: (T) -> Int): SWGFlagWrapper<T> {
 		return SWGFlagWrapper(obj, converter)
+	}
+
+	override fun encode(): ByteArray {
+		val encoded = toByteArray()
+		val resultingInts = (encoded.size + 3) / 4 // rounds up
+		val buffer = NetBuffer.allocate(4 + resultingInts * 4)
+		buffer.addInt(resultingInts)
+		buffer.addRawArray(encoded)
+		return buffer.array()
 	}
 
 	override fun decode(data: NetBuffer) {
