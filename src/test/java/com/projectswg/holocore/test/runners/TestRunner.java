@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,10 +30,14 @@ package com.projectswg.holocore.test.runners;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.log.log_wrapper.ConsoleLogWrapper;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.rules.TestName;
 
 public abstract class TestRunner {
-	
+	@Rule
+	public TestName currentTestName = new TestName();
+
 	@BeforeAll
 	public static void initializeStatic() {
 		Log.clearWrappers();
