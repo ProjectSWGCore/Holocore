@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -100,7 +100,7 @@ public class CmdGoto implements ICmdCallback  {
 			Log.e(err);
 			return err;
 		}
-		Portal portal = cell.getPortals().stream().min(Comparator.comparingInt(p -> (p.getOtherCell(cell) == null)?0: p.getOtherCell(cell).getNumber())).orElse(null);
+		Portal portal = cell.getPortals().stream().min(Comparator.comparingInt(p -> (p.getOtherCell(cell) == null)?0:p.getOtherCell(cell).getNumber())).orElse(null);
 		
 		double x = 0, y = 0, z = 0;
 		if (portal != null) {
