@@ -117,7 +117,7 @@ class TestCreatureObjectAwareness: TestRunnerNoIntents() {
 		val creature = GenericCreatureObject(1).apply { setPosition(0.0, 0.0, 0.0) }
 		val npc = GenericCreatureObject(20, "", false)
 		val building1 = createBuilding(2) { setPosition(5.0, 0.0, 5.0) }
-		building1.getCellByNumber(1).addObject(npc)
+		building1.getCellByNumber(1)?.addObject(npc)
 		val awarenessIncorrect = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, npc))).toList()
 		val awarenessCorrect = LinkedHashSet(getRecursiveInfo(creature, listOf(creature, building1))).toList()
 		

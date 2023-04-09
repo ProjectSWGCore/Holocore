@@ -25,49 +25,30 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.services.gameplay.player.character
+package com.projectswg.holocore.resources.gameplay.conversation.requirements
 
-import com.projectswg.common.network.packets.swg.zone.CharacterSheetResponseMessage
-import com.projectswg.common.network.packets.swg.zone.FactionResponseMessage
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
+import com.projectswg.common.network.NetBuffer
+import com.projectswg.holocore.resources.support.objects.swg.player.Quest
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-class PlayerCharacterSheetService : Service() {
+class QuestSerializationTest {
 
-	@IntentHandler
-	private fun handleExecuteCommandIntent(eci: ExecuteCommandIntent) {
-		if (eci.command.cppCallback != "requestCharacterSheetInfo") return
+	@Test
+	fun `test quest encode decode`() {
+		val q = Quest()
+		q.addActiveTask(1)
+		q.addCompletedTask(2)
+		q.counter = 15
+		q.isRewardReceived = true
 
-		val creature = eci.source
-		val player = creature.playerObject ?: return
-		sendCharacterSheetResponseMessage(creature, player)
-		sendFactionResponseMessage(player, creature)
-	}
+		val decoded = Quest()
+		decoded.decode(NetBuffer.wrap(q.encode()))
 
-	private fun sendCharacterSheetResponseMessage(creature: CreatureObject, player: PlayerObject) {
-		creature.sendSelf(
-			CharacterSheetResponseMessage(
-				lotsUsed = player.lotsAvailable - player.lotsUsed, factionCrc = creature.pvpFaction.crc, factionStatus = creature.pvpStatus.value
-			)
-		)
-	}
-
-	private fun sendFactionResponseMessage(player: PlayerObject, creature: CreatureObject) {
-		val factionPoints = player.getFactionPoints()
-		val factionNameList = factionPoints.keys.toList()
-		val factionPointList = factionNameList.map { factionPoints.getOrDefault(it, 0) }.map { it.toFloat() }
-		creature.sendSelf(
-			FactionResponseMessage(
-				factionRank = "recruit",    // From datatables/faction/rank.iff, should be dynamic once we implement faction ranks
-				rebelPoints = factionPoints.getOrDefault("rebel", 0),
-				imperialPoints = factionPoints.getOrDefault("imperial", 0),
-				factionNames = factionNameList,
-				factionPoints = factionPointList
-			)
-		)
+		assertTrue(decoded.getActiveTasks().contains(1))
+		assertEquals(15, decoded.counter)
+		assertEquals(true, decoded.isRewardReceived)
+		assertArrayEquals(q.encode(), decoded.encode())
 	}
 
 }

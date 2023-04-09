@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,15 +24,18 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.objects.swg.factory;
+package com.projectswg.holocore.resources.support.objects.swg.cell
 
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import com.projectswg.common.data.location.Point3D
 
-public class FactoryObject extends TangibleObject {
-	
-	public FactoryObject(long objectId) {
-		super(objectId, BaselineType.FCYT);
+class Portal(val cell1: CellObject?, val cell2: CellObject?, val frame1: Point3D, val frame2: Point3D, val height: Double) {
+
+	fun getOtherCell(cell: CellObject?): CellObject? {
+		assert(cell === cell1 || cell === cell2)
+		return if (cell1 === cell) cell2 else cell1
 	}
-	
+
+	override fun toString(): String {
+		return "Portal[$cell1 -> $cell2  [$frame1, $frame2] height=$height]"
+	}
 }

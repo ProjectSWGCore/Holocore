@@ -24,50 +24,73 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.objects.swg.cell
 
-package com.projectswg.holocore.services.gameplay.player.character
+import com.projectswg.common.network.NetBuffer
+import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType
+import com.projectswg.holocore.resources.support.global.network.BaselineBuilder
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import java.util.Collections
+import kotlin.collections.HashSet
 
-import com.projectswg.common.network.packets.swg.zone.CharacterSheetResponseMessage
-import com.projectswg.common.network.packets.swg.zone.FactionResponseMessage
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
+class CellObject(objectId: Long) : SWGObject(objectId, BaselineType.SCLT) {
+	private val portals = HashSet<Portal>()
 
-class PlayerCharacterSheetService : Service() {
+	var isPublic = true
+	var number = 0
+	var label = ""
+	var cellName = ""
+	private var labelX = 0.0
+	private var labelZ = 0.0
 
-	@IntentHandler
-	private fun handleExecuteCommandIntent(eci: ExecuteCommandIntent) {
-		if (eci.command.cppCallback != "requestCharacterSheetInfo") return
-
-		val creature = eci.source
-		val player = creature.playerObject ?: return
-		sendCharacterSheetResponseMessage(creature, player)
-		sendFactionResponseMessage(player, creature)
+	fun getPortals(): Collection<Portal> {
+		return Collections.unmodifiableCollection(portals)
 	}
 
-	private fun sendCharacterSheetResponseMessage(creature: CreatureObject, player: PlayerObject) {
-		creature.sendSelf(
-			CharacterSheetResponseMessage(
-				lotsUsed = player.lotsAvailable - player.lotsUsed, factionCrc = creature.pvpFaction.crc, factionStatus = creature.pvpStatus.value
-			)
-		)
+	fun getPortalTo(neighbor: CellObject?): Portal? {
+		for (portal in portals) {
+			if (portal.getOtherCell(this) === neighbor) return portal
+		}
+		return null
 	}
 
-	private fun sendFactionResponseMessage(player: PlayerObject, creature: CreatureObject) {
-		val factionPoints = player.getFactionPoints()
-		val factionNameList = factionPoints.keys.toList()
-		val factionPointList = factionNameList.map { factionPoints.getOrDefault(it, 0) }.map { it.toFloat() }
-		creature.sendSelf(
-			FactionResponseMessage(
-				factionRank = "recruit",    // From datatables/faction/rank.iff, should be dynamic once we implement faction ranks
-				rebelPoints = factionPoints.getOrDefault("rebel", 0),
-				imperialPoints = factionPoints.getOrDefault("imperial", 0),
-				factionNames = factionNameList,
-				factionPoints = factionPointList
-			)
-		)
+	fun addPortal(portal: Portal) {
+		portals.add(portal)
 	}
 
+	fun setLabelMapPosition(x: Float, z: Float) {
+		labelX = x.toDouble()
+		labelZ = z.toDouble()
+	}
+
+	override fun createBaseline3(target: Player, bb: BaselineBuilder) {
+		super.createBaseline3(target, bb)
+		bb.addBoolean(isPublic)
+		bb.addInt(number)
+		bb.incrementOperandCount(2)
+	}
+
+	override fun createBaseline6(target: Player, bb: BaselineBuilder) {
+		super.createBaseline6(target, bb)
+		bb.addUnicode(label)
+		bb.addFloat(labelX.toFloat())
+		bb.addFloat(0f)
+		bb.addFloat(labelZ.toFloat())
+		bb.incrementOperandCount(2)
+	}
+
+	override fun parseBaseline3(buffer: NetBuffer) {
+		super.parseBaseline3(buffer)
+		isPublic = buffer.boolean
+		number = buffer.int
+	}
+
+	override fun parseBaseline6(buffer: NetBuffer) {
+		super.parseBaseline6(buffer)
+		label = buffer.unicode
+		labelX = buffer.float.toDouble()
+		buffer.float
+		labelZ = buffer.float.toDouble()
+	}
 }

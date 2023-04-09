@@ -49,7 +49,7 @@ class PlayerObjectFactionPointTest {
 		playerObject.adjustFactionPoints("rebel", 100)
 		playerObject.adjustFactionPoints("rebel", 50)
 
-		val factionPoints = playerObject.factionPoints
+		val factionPoints = playerObject.getFactionPoints()
 
 		assertEquals(150, factionPoints["rebel"])
 	}

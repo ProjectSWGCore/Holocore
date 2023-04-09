@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -25,35 +25,24 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.resources.support.objects.swg.player;
+package com.projectswg.holocore.resources.support.objects.swg
 
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.common.encoding.StringType
+import kotlin.reflect.KProperty
 
-public enum CitizenshipType {
-	NONE	((byte) 0),
-	MAYOR	((byte) 1),
-	MILITIA	((byte) 2),
-	CITIZEN	((byte) 3);
+class IndirectBaselineDelegate<T>(private val obj: SWGObject, private var value: T, private val page: Int, private val update: Int, private val stringType: StringType? = null) {
 	
-	private static final CitizenshipType [] TYPES = values();
-	
-	private final byte type;
-	
-	CitizenshipType(byte type) {
-		this.type = type;
+	operator fun getValue(thisRef: Any, property: KProperty<*>): T {
+		return value
 	}
-	
-	public byte getType() {
-		return type;
-	}
-	
-	@NotNull
-	public static CitizenshipType getFromType(byte type) {
-		for (CitizenshipType ct : TYPES) {
-			if (ct.type == type)
-				return ct;
+
+	operator fun setValue(thisRef: Any, property: KProperty<*>, value: T) {
+		this.value = value
+		if (stringType != null) {
+			obj.sendDelta(page, update, value, stringType)
+		} else {
+			obj.sendDelta(page, update, value)
 		}
-		return NONE;
 	}
 	
 }
