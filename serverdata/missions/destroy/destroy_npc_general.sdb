@@ -1,500 +1,500 @@
 terrain	destroy_type	string_file	title_key	description_key	creator	target	dynamic_id
 TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	aakuan_champion
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	aakuan_sentinal
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	aakuan_steward
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	aakuan_warder
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	alkahara_bandit
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	assassin
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bandit
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	binayre_chief
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	assassin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	bandit
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	bith
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	blackscale
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	alkahara_bandit
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Corellian Eager to be Your Friend	NPCs	assassin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	bothan_diplomat
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	bothan_information_broker
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	bounty_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	brigand_assasin
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m1t	m1d	Shaak Herder on the Great Grass Plains	NPCs	assassin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	brigand_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	chiss_poacher
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	assassin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	commando
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Corellian Rethinking His Life	NPCs	bandit
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	criminal
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	dantari_battlelord_squad
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	dantari_chief_squad
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	droid
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m2t	m2d	Kirkhorn Guarlara Stable	NPCs	bandit
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	droid_assassination
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	bandit
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	explorer
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	forage
 TALUS	general	mission/special/mission_destroy_neutral_easy_pirate	m9t	m9d	Holocore	NPCs	binayre_pirate
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	binayre_ruffian
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	force_crystal_hunter
 TALUS	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	binayre_smuggler
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bith
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	black_sun
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	black_sun_talus
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blackscale
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blood_razor
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	blood_razor_captain
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bomarr_monk_abbot
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bomarr_monk_healer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bomarr_monk_initiate
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	borvo_champion
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	borvo_mercenary
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_diplomat
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bothan_information_broker
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	bounty_hunter
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigade_captain
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigade_general
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigade_infiltrator
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_assasin
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brigand_leader
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	brokensandcrawler_herb
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	burning_sandcrawler
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	cannibal
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	canyon_corsair_captain
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	canyon_corsair_scout
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chadra
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	chiss_poacher
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	commando
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec_traitor
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec_traitor
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec_truthfinder
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	corsec_truthfinder
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	criminal
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dantari_battlelord_squad
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dantari_chief_squad
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	darkwalker_deathraven
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	darkwalker_preylord
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	deathstarruins_junktown
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	deathstarruins_oldcamp
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dervish_camp
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	desert_demon
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	desert_swooper
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dim_u_abbot
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dim_u_preacher
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	donkuwah_battlelord
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	donkuwah_chieftan
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	donkuwah_scout
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	donkuwah_shaman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	donkuwah_spiritmaster
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	drall_abbot
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	drall_chieftain
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	drall_patriot
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	drall_patriot
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_assassination
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droid_battle
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	droideka
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dulok
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dune_stalker
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dune_stalker_enforcer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dune_stalker_outpost
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dune_stalker_scavengers
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	dwb
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	evil_hermit
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	evil_nomad
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	evil_settlers
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	ewok
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	explorer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	farm_naboo
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	farm_tatooine
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	farmer_mineral
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	farmer_moisture
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fed_dub_commander
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fed_dub_constable
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fed_dub_investigator
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	flail_boss
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	flail_cut_throat
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Corellian Public Broadcasting Executive	NPCs	bith
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	force_mystic
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	fugitive
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	gambler
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	highwayman
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m3t	m3d	The Office of the Music Advisor of Naboo	NPCs	bith
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	information_broker
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	bith
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	janta_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	janta_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	janta_rockshaper
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	CEO of Corellian Vehicle Reclamation	NPCs	blackscale
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	janta_scout
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	janta_shaman
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	janta_warrior
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	jedi_dark
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m4t	m4d	The Office of the Music Advisor of Naboo	NPCs	blackscale
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	jedi_dark_knight
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	jedi_dark_master
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	blackscale
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	jedi_dark_side_savage
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	jedi_dark_side_senior
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	jedi_dark_side_sentinel
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m6t	m6d	A Community In Peril	NPCs	bomarr_monk_abbot
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m7t	m7d	A Piqued Local Denizen	NPCs	bomarr_monk_healer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m8t	m8d	A Concerned Tatooine Citizen	NPCs	bomarr_monk_initiate
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m5t	m5d	The Office of the Chief Architect of Naboo	NPCs	borvo_champion
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m6t	m6d	The Office of the Chief Architect of Naboo	NPCs	borvo_mercenary
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	CEO of Corellian Vehicle Reclamation	NPCs	bothan_diplomat
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	jedi_force
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	jedi_light
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	jedi_light_sentinel
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	kunga_hunter
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m7t	m7d	The Office of the Educational Regent of Naboo	NPCs	bothan_diplomat
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	kunga_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	kunga_rockshaper
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m9t	m9d	A Local Japor Carver	NPCs	bothan_diplomat
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	kunga_scout
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	Corellian Fireworks Transport	NPCs	bothan_information_broker
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	kunga_warrior
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	mercenary_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	mercenary_warlord
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	mokk
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m8t	m8d	The Office of the Educational Regent of Naboo	NPCs	bothan_information_broker
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	mokk_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	mokk_leader
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m10t	m10d	Melee of Mos Espa	NPCs	bothan_information_broker
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	mokk_rockshaper
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Corellian Sector Newsfeed	NPCs	bounty_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	mokk_scout
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	mokk_shaman
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	mokk_soothsayer
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	mokk_warrior
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m9t	m9d	Highscouter Twirrl Cove	NPCs	bounty_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	plasma_thief
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	rodian
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m11t	m11d	An Altruistic Citizen	NPCs	bounty_hunter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	rodian_tribe
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	scientist
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	sharpshooter
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	skaak_tipper
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	An Agrilat Swamp Refugee	NPCs	brigand_assasin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	slave
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	slaver
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	slicer
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	spynet_operative
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m10t	m10d	The Master of Science of Naboo	NPCs	brigand_assasin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	terrorist
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	trade_federation
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m12t	m12d	Mos Eisley Police Authority	NPCs	brigand_assasin
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	trandosian_slaver
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Corellian Travellers Looking for an Acquaintance	NPCs	brigand_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	wilder_explorer
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	wilder_frontiersman
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	wilder_outrider
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	wilder_pathfinder
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m11t	m11d	Keren Farms Jut Nut Orchards	NPCs	brigand_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	wilder_trailblazer
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	wilder_traveller
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m13t	m13d	Mos Eisley Police Authority	NPCs	brigand_leader
+DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	wilder_warder
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m14t	m14d	TASKForce Tatooine 	NPCs	brokensandcrawler_herb
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m15t	m15d	A Local Moisture Farmer	NPCs	burning_sandcrawler
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m16t	m16d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	cannibal
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	assassin
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	bandit
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m17t	m17d	Wimateeka	NPCs	chadra
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	A Bela Vistal Councillor	NPCs	chiss_poacher
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	bith
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	blackscale
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	bothan_diplomat
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	bothan_information_broker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m12t	m12d	The Office of the Chief Architect of Naboo	NPCs	chiss_poacher
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	bounty_hunter
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	brigand_assasin
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m18t	m18d	A Heartsick Father	NPCs	chiss_poacher
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	brigand_leader
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	Corellian Just Trying to Live His Life	NPCs	commando
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	chiss_poacher
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	commando
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	criminal
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	droid
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m13t	m13d	The Office of the Educational Regent of Naboo	NPCs	commando
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	droid_assassination
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	droid_battle
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m19t	m19d	Fixer	NPCs	commando
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	explorer
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	Dealer in Corellian Double Brandy	NPCs	corsec
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	forage
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Corellian Masternav Incorporation	NPCs	corsec_traitor
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	freedprisonerscamp
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Corellian Merchants' Guild	NPCs	corsec_truthfinder
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	fugitive
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	criminal
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	gambler
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	highwayman
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	hunter
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	information_broker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m14t	m14d	The Office of the Master of Science of Naboo	NPCs	criminal
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	jedi_dark
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	jedi_light
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m20t	m20d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	criminal
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	jedi_light_sentinel
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	mercenary_leader
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	mercenary_warlord
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m15t	m15d	The Office of the Music Advisor of Naboo	NPCs	darkwalker_deathraven
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m16t	m16d	The Office of the Chief Architect of Naboo	NPCs	darkwalker_preylord
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	mtn_clan_arch_witch_squad
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	mtn_clan_councilwoman_escort
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	dervish_camp
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	desert_demon
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	desert_swooper
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	dim_u_abbot
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	dim_u_preacher
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	mtn_clan_dragoon_squad
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	mtn_clan_huntress_squad
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	mtn_clan_initiate
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	mtn_clan_outcast
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	mtn_clan_rancor_tamer
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Open Shipping Consortium	NPCs	drall_abbot
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m17t	m17d	Kirkhorn Guarlara Stable	NPCs	drall_chieftain
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	drall_patriot
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	mtn_clan_slave_escaped
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Open Shipping Consortium	NPCs	droid
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	nightsister_elder_enclave
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	nightsister_elder_escort
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	nightsister_outcast
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	nightsister_rancor_tamer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m18t	m18d	The Office of the Master of Science of Naboo	NPCs	droid
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	nightsister_rangers
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	nightsister_sentry
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m6t	m6d	A Community In Peril	NPCs	droid
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	nightsister_slave_escaped
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	droid_assassination
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	nightsister_slaver
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	nightsister_spell_weaver
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	nightsister_stalker
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	plasma_thief
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m19t	m19d	The Royal Security Forces	NPCs	droid_assassination
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	rodian
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	rodian_tribe
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m7t	m7d	A Piqued Local Denizen	NPCs	droid_assassination
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	scientist
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	Open Shipping Consortium	NPCs	droid_battle
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	sharpshooter
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	singing_mountain_clan
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	sith_shadow
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	skaak_tipper
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m20t	m20d	The Royal Security Forces	NPCs	droid_battle
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	slave
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	slaver
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m8t	m8d	A Concerned Tatooine Citizen	NPCs	droid_battle
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	slicer
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	spiderclan
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	spynet_operative
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m9t	m9d	A Local Japor Carver	NPCs	dune_stalker
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m10t	m10d	Melee of Mos Espa	NPCs	dune_stalker_enforcer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m11t	m11d	An Altruistic Citizen	NPCs	dune_stalker_outpost
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m12t	m12d	Mos Eisley Police Authority	NPCs	dune_stalker_scavengers
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	terrorist
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m13t	m13d	Mos Eisley Police Authority	NPCs	evil_hermit
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m14t	m14d	TASKForce Tatooine 	NPCs	evil_nomad
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m15t	m15d	A Local Moisture Farmer	NPCs	evil_settlers
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	trade_federation
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Holographer from Outer Rim Territories	NPCs	explorer
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	trandosian_slaver
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	wilder_explorer
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	wilder_frontiersman
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	wilder_outrider
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m1t	m1d	Shaak Herder on the Great Grass Plains	NPCs	explorer
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	wilder_pathfinder
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	wilder_trailblazer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m16t	m16d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	explorer
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	wilder_traveller
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m2t	m2d	Kirkhorn Guarlara Stable	NPCs	farm_naboo
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m17t	m17d	Wimateeka	NPCs	farm_tatooine
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m18t	m18d	A Heartsick Father	NPCs	farmer_mineral
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m19t	m19d	Fixer	NPCs	farmer_moisture
+DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	wilder_warder
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	assassin
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	bandit
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Fertile Prosperity Den, High Leader Sept	NPCs	flail_boss
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	Transposed Sunrise Den, Inaugural Sept	NPCs	flail_cut_throat
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_pirate	m10t	m10d	Holocore	NPCs	focus_pirate
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	forage
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	force_crypt_crawler
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	force_crystal_hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	force_mystic
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	freedprisonerscamp
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	fugitive
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gambler
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gamorrean
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	garyn
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gondula_archaic_ritualist
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gondula_chief
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gondula_elder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gondula_loremaster
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gondula_warrior
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gorg
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gorg_farm
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gorg_glutton
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	great_plains_stalker
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungan
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungan_ankura
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungan_mercenary
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungan_military_base
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungan_statue
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gungawar
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gunrunner
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gunrunner
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gurk
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	gurk_wasteland
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hermit
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hermit_spider
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hermit_spider
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hermit_spider_queen
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hidden_daggers
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hidden_daggers_outpost
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	highwayman
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	huf_dun
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	huf_dun_vicious
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	huff_sennex
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	huff_tusken
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hunter
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hutt_assassin
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	hutt_expedition_force
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	information_broker
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jabba_assasin
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jabba_enforcer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jabba_swooper
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_leader
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_rockshaper
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_scout
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_shaman
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	janta_warrior
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jawa
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jawa_droid_thieves
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jawa_outpost
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jawa_warband
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark_knight
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark_master
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark_side_savage
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark_side_senior
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_dark_side_sentinel
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_force
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jedi_light_sentinel
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jinda_chief
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jinda_elder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jinda_gifted_shaman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jinda_tribesman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	jinda_warrior
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kobola_assasin
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kobola_assasin
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kobola_miner_base
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kobola_underboss
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_battlelord
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_chief
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_dark_shaman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_elder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_laborer
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	korga_scout
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kunga_hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kunga_leader
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kunga_rockshaper
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kunga_scout
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	kunga_warrior
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_activist
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_fanatic
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_loyalist
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_partisan
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_patriot
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	liberation_reactionist
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lord_nyax_disciple
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lord_nyax_fanatic
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lord_nyax_visionary
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_captain
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_commando
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_infiltrator
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_lookout
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_marshal
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_outrider
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	lost_aqualish_warchief
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	marauder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	marauder_blood_crazed_plains
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	marauder_frenzied
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	marauder_wasteland
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mauler
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mauler_champion
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mauler_lord
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mauler_master
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mauler_warlord
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_leader
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mercenary_warlord
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	merek_assassin
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	merek_blood_king
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	merek_bloodstained
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	merek_cavern_creaper
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	merek_king_queen
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	militiaman_tatooine
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_hunter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_leader
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_rockshaper
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_scout
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_shaman
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_soothsayer
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mokk_warrior
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	Janqual Mor, Coronet Mining Corporation	NPCs	forage
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	bith
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	blackscale
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	bothan_diplomat
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	bothan_information_broker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m3t	m3d	The Office of the Music Advisor of Naboo	NPCs	forage
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	bounty_hunter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	brigand_assasin
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m20t	m20d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	forage
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	brigand_leader
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	chiss_poacher
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	commando
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	criminal
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Mindra Nox, Corellian Entrepreneur	NPCs	fugitive
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	deathstarruins_junktown
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	deathstarruins_oldcamp
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	donkuwah_battlelord
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	donkuwah_chieftan
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m4t	m4d	The Office of the Music Advisor of Naboo	NPCs	fugitive
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	donkuwah_scout
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	donkuwah_shaman
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	fugitive
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	donkuwah_spiritmaster
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Dovor Dowwn, Aqualish Businessbeing	NPCs	gambler
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	droid
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	droid_assassination
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	dulok
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m5t	m5d	The Office of the Chief Architect of Naboo	NPCs	gambler
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	dwb
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	ewok
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	gambler
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	explorer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	gamorrean
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	forage
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	fugitive
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	gambler
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	gondula_archaic_ritualist
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	gondula_chief
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	gondula_elder
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	gorg
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	gorg_farm
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m6t	m6d	A Community In Peril	NPCs	gorg_glutton
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Mindra Nox, Corellian Entrepreneur	NPCs	great_plains_stalker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m6t	m6d	The Office of the Chief Architect of Naboo	NPCs	gungan
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m7t	m7d	The Office of the Educational Regent of Naboo	NPCs	gungan_ankura
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m8t	m8d	The Office of the Educational Regent of Naboo	NPCs	gungan_mercenary
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m9t	m9d	Highscouter Twirrl Cove	NPCs	gungan_military_base
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m10t	m10d	The Master of Science of Naboo	NPCs	gungan_statue
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m11t	m11d	Keren Farms Jut Nut Orchards	NPCs	gungawar
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m12t	m12d	The Office of the Chief Architect of Naboo	NPCs	gunrunner
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m7t	m7d	A Piqued Local Denizen	NPCs	gunrunner
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	gondula_loremaster
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	gondula_warrior
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m8t	m8d	A Concerned Tatooine Citizen	NPCs	hermit
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m13t	m13d	The Office of the Educational Regent of Naboo	NPCs	hermit_spider
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	highwayman
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m14t	m14d	The Office of the Master of Science of Naboo	NPCs	hermit_spider_queen
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	Dovor Dowwn, Aqualish Businessbeing	NPCs	hidden_daggers
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Mindra Nox, Corellian Entrepreneur	NPCs	hidden_daggers_outpost
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	A Loving Mother	NPCs	highwayman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	hunter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	information_broker
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	jedi_dark
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	jedi_light
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m15t	m15d	The Office of the Music Advisor of Naboo	NPCs	highwayman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	jedi_light_sentinel
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	jinda_chief
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m9t	m9d	A Local Japor Carver	NPCs	highwayman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	jinda_elder
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	jinda_gifted_shaman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	jinda_tribesman
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m10t	m10d	Melee of Mos Espa	NPCs	huff_sennex
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m11t	m11d	An Altruistic Citizen	NPCs	huff_tusken
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	Concerned Corellian Citizens	NPCs	hunter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	jinda_warrior
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	korga_battlelord
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	korga_chief
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	korga_dark_shaman
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m16t	m16d	The Office of the Chief Architect of Naboo	NPCs	hunter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	korga_elder
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	korga_laborer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m12t	m12d	Mos Eisley Police Authority	NPCs	hunter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	korga_scout
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m13t	m13d	Mos Eisley Police Authority	NPCs	hutt_assassin
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	marauder
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	Captain Sava Matar of the Corvette Null Racket	NPCs	information_broker
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	marauder_blood_crazed_plains
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	marauder_frenzied
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	marauder_wasteland
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	mercenary_leader
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m17t	m17d	Kirkhorn Guarlara Stable	NPCs	information_broker
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	mercenary_warlord
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	merek_assassin
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m14t	m14d	TASKForce Tatooine 	NPCs	information_broker
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m15t	m15d	A Local Moisture Farmer	NPCs	information_broker
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	merek_blood_king
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	merek_bloodstained
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m16t	m16d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	jabba_assasin
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m17t	m17d	Wimateeka	NPCs	jabba_enforcer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m18t	m18d	A Heartsick Father	NPCs	jabba_swooper
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	merek_cavern_creaper
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	merek_king_queen
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	panshee_revered_matriarch
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	panshee_ritualist
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	panshee_tribesman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	panshee_weathered_shaman
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m19t	m19d	Fixer	NPCs	jawa
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m20t	m20d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	jawa_droid_thieves
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	jawa_outpost
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	jawa_warband
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	Captain Sava Matar of the Corvette Null Racket	NPCs	jedi_dark
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	plasma_thief
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	rodian
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	rodian_tribe
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	scientist
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m18t	m18d	The Office of the Master of Science of Naboo	NPCs	jedi_dark
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	sharpshooter
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	skaak_tipper
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	jedi_dark
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	slave
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	slaver
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	slicer
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	spynet_operative
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	terrorist
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	trade_federation
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	trandosian_slaver
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	Corellian Defense Force	NPCs	jedi_light
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	wilder_explorer
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	wilder_frontiersman
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	wilder_outrider
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	wilder_pathfinder
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m19t	m19d	The Royal Security Forces	NPCs	jedi_light
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	wilder_trailblazer
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	wilder_traveller
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	jedi_light
+ENDOR	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	wilder_warder
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	An Anonymous Trandoshan	NPCs	jedi_light_sentinel
+LOK	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	assassin
+LOK	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	bandit
+LOK	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	bith
+LOK	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	blackscale
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m20t	m20d	The Royal Security Forces	NPCs	jedi_light_sentinel
+LOK	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	blood_razor
+LOK	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	blood_razor_captain
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	jedi_light_sentinel
+LOK	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	bothan_diplomat
+LOK	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	bothan_information_broker
+LOK	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	bounty_hunter
+LOK	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	brigand_assasin
+LOK	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	brigand_leader
+LOK	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	canyon_corsair_captain
+LOK	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	canyon_corsair_scout
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m6t	m6d	A Community In Peril	NPCs	kobola_assasin
+LOK	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	chiss_poacher
+LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	commando
+LOK	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	criminal
+LOK	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	droid
+LOK	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	droid_assassination
+LOK	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+LOK	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	droideka
+LOK	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	explorer
+LOK	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	forage
+LOK	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	fugitive
+LOK	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	gambler
+LOK	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	gurk
+LOK	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	gurk_wasteland
+LOK	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	highwayman
+LOK	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	hunter
+LOK	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	information_broker
+LOK	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	jedi_dark
+LOK	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	jedi_light
+LOK	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	jedi_light_sentinel
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Corellian Eager to be Your Friend	NPCs	lord_nyax_disciple
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Corellian Rethinking His Life	NPCs	lord_nyax_fanatic
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Corellian Public Broadcasting Executive	NPCs	lord_nyax_visionary
+LOK	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	mercenary_leader
+LOK	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	mercenary_warlord
+LOK	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	nym
+LOK	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	nym_guard
+LOK	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	nym_patrol
+LOK	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	plasma_thief
+LOK	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	rodian
+LOK	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	rodian_tribe
+LOK	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	scientist
+LOK	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	sharpshooter
+LOK	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	skaak_tipper
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m1t	m1d	Shaak Herder on the Great Grass Plains	NPCs	mauler
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m2t	m2d	Kirkhorn Guarlara Stable	NPCs	mauler_champion
+LOK	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	slave
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m3t	m3d	The Office of the Music Advisor of Naboo	NPCs	mauler_master
+LOK	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	slaver
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	CEO of Corellian Vehicle Reclamation	NPCs	mercenary_leader
+LOK	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	slicer
+LOK	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	spynet_operative
+LOK	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	terrorist
+LOK	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	trade_federation
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m4t	m4d	The Office of the Music Advisor of Naboo	NPCs	mercenary_leader
+LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	trandosian_slaver
+LOK	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	wilder_explorer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m7t	m7d	A Piqued Local Denizen	NPCs	mercenary_leader
+LOK	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	wilder_frontiersman
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	CEO of Corellian Vehicle Reclamation	NPCs	mercenary_warlord
+LOK	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	wilder_outrider
+LOK	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	wilder_pathfinder
+LOK	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	wilder_trailblazer
+LOK	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	wilder_traveller
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m5t	m5d	The Office of the Chief Architect of Naboo	NPCs	mercenary_warlord
+LOK	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	wilder_warder
+RORI	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	assassin
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m8t	m8d	A Concerned Tatooine Citizen	NPCs	mercenary_warlord
+RORI	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	bandit
+RORI	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	bith
+RORI	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	blackscale
+RORI	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	bothan_diplomat
+RORI	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	bothan_information_broker
+RORI	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	bounty_hunter
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m9t	m9d	A Local Japor Carver	NPCs	militiaman_tatooine
+RORI	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	brigade_captain
+RORI	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	brigade_general
+RORI	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	brigade_infiltrator
+RORI	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	brigand_assasin
+RORI	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	brigand_leader
+RORI	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	chiss_poacher
+RORI	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	commando
+RORI	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	criminal
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	monumenter_smuggler
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mos_eisley_police_squad
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_arch_witch_squad
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_councilwoman_escort
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_dragoon_squad
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_huntress_squad
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_initiate
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_outcast
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_rancor_tamer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mtn_clan_slave_escaped
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mummer_captain
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mummer_officer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	muskeg
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	mvillager
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m10t	m10d	Melee of Mos Espa	NPCs	mos_eisley_police_squad
+RORI	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	droid
+RORI	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	droid_assassination
+RORI	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+RORI	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	explorer
+RORI	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	forage
+RORI	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	fugitive
+RORI	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	gambler
+RORI	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	garyn
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m6t	m6d	The Office of the Chief Architect of Naboo	NPCs	mummer_captain
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m7t	m7d	The Office of the Educational Regent of Naboo	NPCs	mummer_officer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m8t	m8d	The Office of the Educational Regent of Naboo	NPCs	muskeg
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m9t	m9d	Highscouter Twirrl Cove	NPCs	mvillager
 NABOO	general	mission/special/mission_destroy_neutral_easy_pirate	m7t	m7d	Holocore	NPCs	naboo_dread_pirate
 NABOO	general	mission/special/mission_destroy_neutral_easy_pirate	m8t	m8d	Holocore	NPCs	naboo_pirate
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	naboo_skaak_tipper
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	narmle
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	narmle_commando
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	narmle_guard
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	neo_cobral_assasin
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	neo_cobral_boss
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	neo_cobral_mugger
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	neo_cobral_overlord
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	neo_cobral_runner
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_elder_enclave
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_elder_escort
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_outcast
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_rancor_tamer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_rangers
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_sentry
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_slave_escaped
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_slaver
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_spell_weaver
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nightsister_stalker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m10t	m10d	The Master of Science of Naboo	NPCs	naboo_skaak_tipper
+RORI	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	hermit_spider
+RORI	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	highwayman
+RORI	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	hunter
+RORI	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	information_broker
+RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	jedi_dark
+RORI	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	jedi_light
+RORI	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	jedi_light_sentinel
+RORI	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	kobola_assasin
+RORI	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	kobola_miner_base
+RORI	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	kobola_underboss
+RORI	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	mauler_lord
+RORI	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	mauler_warlord
+RORI	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	mercenary_leader
+RORI	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	mercenary_warlord
+RORI	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	narmle
+RORI	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	narmle_commando
+RORI	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	narmle_guard
+RORI	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	neo_cobral_assasin
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
 DATHOMIR	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
@@ -505,9 +505,9 @@ RORI	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holoc
 TALUS	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_gangster	m8t	m8d	Holocore	NPCs	nomad
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nym
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nym_guard
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	nym_patrol
+RORI	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	neo_cobral_boss
+RORI	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	neo_cobral_mugger
+RORI	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	neo_cobral_overlord
 LOK	general	mission/special/mission_destroy_neutral_easy_pirate	m8t	m8d	Holocore	NPCs	nym_pirate
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Holocore	NPCs	outlaw
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Holocore	NPCs	outlaw
@@ -519,10 +519,10 @@ RORI	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Hol
 TALUS	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Holocore	NPCs	outlaw
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Holocore	NPCs	outlaw
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_gangster	m12t	m12d	Holocore	NPCs	outlaw
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	panshee_revered_matriarch
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	panshee_ritualist
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	panshee_tribesman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	panshee_weathered_shaman
+RORI	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	neo_cobral_runner
+RORI	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	plasma_thief
+RORI	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	rodian
+RORI	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	rodian_tribe
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_pirate	m10t	m10d	Holocore	NPCs	pirate
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_pirate	m10t	m10d	Holocore	NPCs	pirate
 DATHOMIR	general	mission/special/mission_destroy_neutral_easy_pirate	m10t	m10d	Holocore	NPCs	pirate
@@ -554,31 +554,31 @@ TALUS	general	mission/special/mission_destroy_neutral_easy_gangster	m11t	m11d	Ho
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m11t	m11d	Holocore	NPCs	pirate_cutthroat
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_gangster	m11t	m11d	Holocore	NPCs	pirate_cutthroat
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_pirate	m5t	m5d	Holocore	NPCs	pirate_tatooine
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plague_victim
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	plasma_thief
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	police
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	police_naboo
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	politic
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	prison_break
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m11t	m11d	An Altruistic Citizen	NPCs	plague_victim
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	Corellian Fireworks Transport	NPCs	plasma_thief
+RORI	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	rorgungan_scouts
+RORI	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	rorgungan_warband
+RORI	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	rsf
+RORI	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	rsf_outpost
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m11t	m11d	Keren Farms Jut Nut Orchards	NPCs	plasma_thief
+RORI	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	scientist
+RORI	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	sharpshooter
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m12t	m12d	Mos Eisley Police Authority	NPCs	plasma_thief
+RORI	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	skaak_tipper
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m12t	m12d	The Office of the Chief Architect of Naboo	NPCs	police
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m13t	m13d	The Office of the Educational Regent of Naboo	NPCs	police_naboo
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m14t	m14d	The Office of the Master of Science of Naboo	NPCs	politic
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m13t	m13d	Mos Eisley Police Authority	NPCs	prison_break
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Corellian Sector Newsfeed	NPCs	rodian
+RORI	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	slave
+RORI	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	slaver
+RORI	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	slicer
+RORI	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	spice_collective_courier
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m15t	m15d	The Office of the Music Advisor of Naboo	NPCs	rodian
+RORI	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	spice_collective_miner_base
+RORI	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	spice_collective_mineral_scouts
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m14t	m14d	TASKForce Tatooine 	NPCs	rodian
+RORI	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	spynet_operative
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
 DATHOMIR	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
@@ -589,94 +589,94 @@ RORI	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holoc
 TALUS	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	rodian_thug
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rodian_tribe
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rorgungan_scouts
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rorgungan_warband
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rsf
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rsf
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rsf_outpost
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	rsf_outpost
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	An Agrilat Swamp Refugee	NPCs	rodian_tribe
+RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	terrorist
+RORI	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	trade_federation
+RORI	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	trandosian_slaver
+RORI	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	tusk_cat_rider
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m16t	m16d	The Office of the Chief Architect of Naboo	NPCs	rodian_tribe
+RORI	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	tusk_cat_trainer
+RORI	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	wilder_explorer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m15t	m15d	A Local Moisture Farmer	NPCs	rodian_tribe
+RORI	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	wilder_frontiersman
+RORI	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	wilder_outrider
+RORI	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	wilder_pathfinder
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m17t	m17d	Kirkhorn Guarlara Stable	NPCs	rsf
+RORI	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	wilder_trailblazer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m18t	m18d	The Office of the Master of Science of Naboo	NPCs	rsf_outpost
+RORI	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	wilder_traveller
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	ryll_smuggler
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scavenger
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	scientist
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	selonian_diplomat
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	selonian_outpost
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	selonian_separatists
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sennex
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	settler_moisture
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sharpshooter
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	singing_mountain_clan
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sith_shadow
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	skaak_tipper_naboo
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slave
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slaver
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sleemo_delinquent
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	sleemo_vandal
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	slicer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m16t	m16d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	scavenger
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Corellian Travellers Looking for an Acquaintance	NPCs	scientist
+RORI	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	wilder_warder
+RORI	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	wookiee_brawler
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	aakuan_champion
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	aakuan_sentinal
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m19t	m19d	The Royal Security Forces	NPCs	scientist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	aakuan_steward
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	aakuan_warder
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m17t	m17d	Wimateeka	NPCs	scientist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	assassin
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	A Bela Vistal Councillor	NPCs	selonian_diplomat
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	Corellian Just Trying to Live His Life	NPCs	selonian_outpost
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	Dealer in Corellian Double Brandy	NPCs	selonian_separatists
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m18t	m18d	A Heartsick Father	NPCs	sennex
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m19t	m19d	Fixer	NPCs	settler_moisture
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Corellian Masternav Incorporation	NPCs	sharpshooter
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	bandit
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	binayre_chief
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	binayre_ruffian
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	bith
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m20t	m20d	The Royal Security Forces	NPCs	sharpshooter
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	black_sun
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	black_sun_talus
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m20t	m20d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	sharpshooter
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	blackscale
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	bothan_diplomat
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	bothan_information_broker
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Corellian Merchants' Guild	NPCs	skaak_tipper
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	bounty_hunter
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	brigand_assasin
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	brigand_leader
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	chiss_poacher
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m1t	m1d	Shaak Herder on the Great Grass Plains	NPCs	skaak_tipper
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	commando
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	corsec
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	skaak_tipper
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	corsec_traitor
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m2t	m2d	Kirkhorn Guarlara Stable	NPCs	skaak_tipper_naboo
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	slave
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	corsec_truthfinder
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	criminal
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	drall_patriot
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	droid
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m3t	m3d	The Office of the Music Advisor of Naboo	NPCs	slave
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	droid_assassination
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	slave
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	explorer
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Open Shipping Consortium	NPCs	slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	fed_dub_commander
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	fed_dub_constable
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	fed_dub_investigator
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	forage
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m4t	m4d	The Office of the Music Advisor of Naboo	NPCs	slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	fugitive
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	gambler
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	highwayman
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	huf_dun
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	huf_dun_vicious
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	slicer
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	hunter
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	information_broker
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	jedi_dark
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	jedi_light
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m5t	m5d	The Office of the Chief Architect of Naboo	NPCs	slicer
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	jedi_light_sentinel
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	liberation_activist
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	slicer
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	liberation_fanatic
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
 DATHOMIR	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
@@ -687,35 +687,35 @@ RORI	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holoc
 TALUS	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_smuggler	m2t	m2d	Holocore	NPCs	smuggler
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spice_collective_courier
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spice_collective_miner_base
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spice_collective_mineral_scouts
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spice_fiend
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spiderclan
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	spynet_operative
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	liberation_loyalist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	liberation_partisan
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	liberation_patriot
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	spice_fiend
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	liberation_reactionist
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Open Shipping Consortium	NPCs	spynet_operative
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	lost_aqualish_captain
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	lost_aqualish_commando
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	lost_aqualish_infiltrator
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	lost_aqualish_lookout
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m6t	m6d	The Office of the Chief Architect of Naboo	NPCs	spynet_operative
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	lost_aqualish_marshal
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	lost_aqualish_outrider
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m6t	m6d	A Community In Peril	NPCs	spynet_operative
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	lost_aqualish_warchief
 LOK	general	mission/special/mission_destroy_neutral_easy_pirate	m6t	m6d	Holocore	NPCs	sulfur_lake_pirate
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	swoop_corellia
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	Corellian Discreet Shipping Industry Chamber of Commerce	NPCs	swoop_corellia
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m4t	m4d	Holocore	NPCs	swoop_gang
 TALUS	general	mission/special/mission_destroy_neutral_easy_smuggler	m11t	m11d	Holocore	NPCs	talus_smuggler
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	terrorist
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	Open Shipping Consortium	NPCs	terrorist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	mercenary_leader
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	mercenary_warlord
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	plasma_thief
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	rodian
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m7t	m7d	The Office of the Educational Regent of Naboo	NPCs	terrorist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	rodian_tribe
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	scientist
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m7t	m7d	A Piqued Local Denizen	NPCs	terrorist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	sharpshooter
 CORELLIA	general	mission/special/mission_destroy_neutral_easy_gangster	m3t	m3d	Holocore	NPCs	thief
 DANTOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m3t	m3d	Holocore	NPCs	thief
 DATHOMIR	general	mission/special/mission_destroy_neutral_easy_gangster	m3t	m3d	Holocore	NPCs	thief
@@ -737,116 +737,116 @@ RORI	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holoc
 TALUS	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	thug
 TATOOINE	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	thug
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_gangster	m1t	m1d	Holocore	NPCs	thug
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trade_federation_loyalist
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	trandosian_slaver
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusk_cat_rider
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusk_cat_rider
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusk_cat_trainer
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusk_cat_trainer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_bantha
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_raider
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_raider_kingdom
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_raider_npc
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_raider_village
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	tusken_raider_warband
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Holographer from Outer Rim Territories	NPCs	trade_federation
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	skaak_tipper
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	slave
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	sleemo_delinquent
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m8t	m8d	The Office of the Educational Regent of Naboo	NPCs	trade_federation
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	sleemo_vandal
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	slicer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m8t	m8d	A Concerned Tatooine Citizen	NPCs	trade_federation
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	spynet_operative
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m9t	m9d	Highscouter Twirrl Cove	NPCs	trade_federation_loyalist
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Fertile Prosperity Den, High Leader Sept	NPCs	trandosian_slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	terrorist
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	trade_federation
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	trandosian_slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	wilder_explorer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m10t	m10d	The Master of Science of Naboo	NPCs	trandosian_slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	wilder_frontiersman
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	wilder_outrider
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m9t	m9d	A Local Japor Carver	NPCs	trandosian_slaver
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	wilder_pathfinder
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m11t	m11d	Keren Farms Jut Nut Orchards	NPCs	tusk_cat_rider
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	wilder_trailblazer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m12t	m12d	The Office of the Chief Architect of Naboo	NPCs	tusk_cat_trainer
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	wilder_traveller
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m10t	m10d	Melee of Mos Espa	NPCs	tusken
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m11t	m11d	An Altruistic Citizen	NPCs	tusken_bantha
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m12t	m12d	Mos Eisley Police Authority	NPCs	tusken_raider
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m13t	m13d	Mos Eisley Police Authority	NPCs	tusken_raider_kingdom
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m14t	m14d	TASKForce Tatooine 	NPCs	tusken_raider_npc
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m15t	m15d	A Local Moisture Farmer	NPCs	tusken_raider_village
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m16t	m16d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	tusken_raider_warband
 TATOOINE	general	mission/special/mission_destroy_neutral_hard_pirate	m6t	m6d	Holocore	NPCs	valarian_assassin
 TATOOINE	general	mission/special/mission_destroy_neutral_hard_pirate	m6t	m6d	Holocore	NPCs	valarian_gang
 TATOOINE	general	mission/special/mission_destroy_neutral_hard_pirate	m6t	m6d	Holocore	NPCs	valarian_shuttle
 TATOOINE	general	mission/special/mission_destroy_neutral_hard_pirate	m6t	m6d	Holocore	NPCs	valarian_swooper
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	weequay_outpost
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	weequay_zealots
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_explorer
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_frontiersman
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_outrider
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_pathfinder
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_trailblazer
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_traveller
-CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-DANTOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-DATHOMIR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-ENDOR	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-LOK	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-TALUS	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-TATOOINE	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wilder_warder
-NABOO	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wookiee_brawler
-RORI	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wookiee_brawler
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	wookiee_brawler
-YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	Holocore	NPCs	yavin4_scavenger
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m17t	m17d	Wimateeka	NPCs	weequay_outpost
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m18t	m18d	A Heartsick Father	NPCs	weequay_zealots
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	Transposed Sunrise Den, Inaugural Sept	NPCs	wilder_explorer
+TALUS	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	wilder_warder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	assassin
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	bandit
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	bith
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m13t	m13d	The Office of the Educational Regent of Naboo	NPCs	wilder_explorer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	blackscale
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	bothan_diplomat
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m19t	m19d	Fixer	NPCs	wilder_explorer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	bothan_information_broker
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	Janqual Mor, Coronet Mining Corporation	NPCs	wilder_frontiersman
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	bounty_hunter
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	brigand_assasin
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	brigand_leader
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	chiss_poacher
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m14t	m14d	The Office of the Master of Science of Naboo	NPCs	wilder_frontiersman
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	commando
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	criminal
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m20t	m20d	Bib Fortuna, on behalf of Jabba the Hutt	NPCs	wilder_frontiersman
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	droid
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Mindra Nox, Corellian Entrepreneur	NPCs	wilder_outrider
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	droid_assassination
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	droid_battle
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	explorer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m4t	m4d	Citizens for a Clean Tomorrow	NPCs	force_crypt_crawler
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m15t	m15d	The Office of the Music Advisor of Naboo	NPCs	wilder_outrider
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m5t	m5d	Citizens for a Clean Tomorrow	NPCs	fugitive
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m6t	m6d	An Enraged Daughter	NPCs	gambler
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m1t	m1d	Elza Monimi	NPCs	wilder_outrider
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m7t	m7d	Citizens for a Clean Tomorrow	NPCs	highwayman
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Dovor Dowwn, Aqualish Businessbeing	NPCs	wilder_pathfinder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m8t	m8d	Citizens for a Clean Tomorrow	NPCs	hunter
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m9t	m9d	Citizens for a Clean Tomorrow	NPCs	hutt_expedition_force
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m10t	m10d	An Angry Father	NPCs	information_broker
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m11t	m11d	A Determined Relative	NPCs	information_broker
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m16t	m16d	The Office of the Chief Architect of Naboo	NPCs	wilder_pathfinder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m12t	m12d	A Vengeful Mother	NPCs	jedi_dark
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m13t	m13d	Imperial Office of Criminal Investigations	NPCs	jedi_light
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m2t	m2d	Outraged Citizens	NPCs	wilder_pathfinder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m14t	m14d	Imperial Office of Criminal Investigations	NPCs	jedi_light_sentinel
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Mindra Nox, Corellian Entrepreneur	NPCs	wilder_trailblazer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m15t	m15d	Imperial Office of Criminal Investigations	NPCs	mercenary_leader
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m16t	m16d	Citizens for a Clean Tomorrow	NPCs	mercenary_warlord
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m17t	m17d	Citizens for a Clean Tomorrow	NPCs	plasma_thief
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m18t	m18d	Citizens for a Clean Tomorrow	NPCs	rodian
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m17t	m17d	Kirkhorn Guarlara Stable	NPCs	wilder_trailblazer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m19t	m19d	A Justice Seeker	NPCs	rodian_tribe
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m20t	m20d	A Reformed Soul	NPCs	scientist
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m3t	m3d	A local scavenger needs someone to make his stomping grounds safe.	NPCs	wilder_trailblazer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m21t	m21d	Imperial Office of Criminal Investigations	NPCs	sharpshooter
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	Dovor Dowwn, Aqualish Businessbeing	NPCs	wilder_traveller
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m22t	m22d	Imperial Office of Criminal Investigations	NPCs	skaak_tipper
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m23t	m23d	An Obedient Droid	NPCs	slave
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m24t	m24d	A Woman Scorned	NPCs	slaver
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m25t	m25d	Citizens for a Clean Tomorrow	NPCs	slicer
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m18t	m18d	The Office of the Master of Science of Naboo	NPCs	wilder_traveller
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m26t	m26d	Citizens for a Clean Tomorrow	NPCs	spynet_operative
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m27t	m27d	Citizens for a Clean Tomorrow	NPCs	terrorist
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m4t	m4d	A Group of Wronged Sightseers	NPCs	wilder_traveller
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m28t	m28d	A Concerned Citizen	NPCs	trade_federation
+CORELLIA	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Mindra Nox, Corellian Entrepreneur	NPCs	wilder_warder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m29t	m29d	Citizens for a Clean Tomorrow	NPCs	trandosian_slaver
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m30t	m30d	An Angry Citizen	NPCs	wilder_explorer
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m31t	m31d	A Woman Scorned	NPCs	wilder_frontiersman
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m32t	m32d	A Desperate Relative	NPCs	wilder_outrider
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m19t	m19d	The Royal Security Forces	NPCs	wilder_warder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m33t	m33d	A Cheated Partner	NPCs	wilder_pathfinder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m34t	m34d	A Legitimate Businessman	NPCs	wilder_trailblazer
+TATOOINE	general	mission/mission_destroy_neutral_easy_npc_tatooine	m5t	m5d	Tatooine Coalition for the Preservation of the Prominent Past	NPCs	wilder_warder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m35t	m35d	A Tired Old Pirate	NPCs	wilder_traveller
+NABOO	general	mission/mission_destroy_neutral_easy_npc_naboo	m20t	m20d	The Royal Security Forces	NPCs	wookiee_brawler
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m1t	m1d	A Group of Concerned Citizens	NPCs	wilder_warder
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m2t	m2d	Citizens for a Clean Tomorrow	NPCs	wookiee_brawler
+YAVIN4	general	mission/mission_destroy_neutral_easy_npc	m3t	m3d	Citizens for a Clean Tomorrow	NPCs	yavin4_scavenger
 YAVIN4	general	mission/special/mission_destroy_neutral_easy_smuggler	m10t	m10d	Holocore	NPCs	yavin4_smuggler
