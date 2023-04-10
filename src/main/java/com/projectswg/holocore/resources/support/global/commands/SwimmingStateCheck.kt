@@ -26,16 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 
-enum class State(val stateTableId: Int, val commandSdbColumnName: String, private val stateCheck: StateCheck) {
-	COMBAT(1, "S:combat", CreatureStateCheck(CreatureState.COMBAT)),
-	STUNNED(12, "S:stunned", CreatureStateCheck(CreatureState.STUNNED)),
-	SWIMMING(18, "S:swimming", SwimmingStateCheck()),
-	BLEEDING(24, "S:bleeding", CreatureStateCheck(CreatureState.BLEEDING));
-
-	fun isActive(creatureObject: CreatureObject): Boolean {
-		return stateCheck.isActive(creatureObject)
+class SwimmingStateCheck : StateCheck {
+	override fun isActive(creatureObject: CreatureObject): Boolean {
+		val worldLocation = creatureObject.worldLocation
+		val terrainTemplate = ServerData.terrains.getTerrain(worldLocation.terrain) ?: return false
+		
+		return terrainTemplate.isWater(x = worldLocation.x.toFloat(), z = worldLocation.z.toFloat())
 	}
 }
