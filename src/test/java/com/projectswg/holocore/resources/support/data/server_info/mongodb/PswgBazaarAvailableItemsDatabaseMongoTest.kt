@@ -24,47 +24,83 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.database
+package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
+import com.mongodb.client.MongoDatabase
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarAvailableItemsDatabase
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
+import java.time.Month
 
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
+class PswgBazaarAvailableItemsDatabaseMongoTest {
+	
+	private lateinit var database: MongoDatabase
 
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
+	@BeforeEach
+	fun setUp() {
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
+	}
 
-	companion object {
+	@AfterEach
+	fun tearDown() {
+		database.drop()
+	}
 
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
-
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
-
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
-				}
-
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
-				}
-
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
-				}
-
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
-				}
-			}
+	private val bazaarItems: PswgBazaarAvailableItemsDatabase
+		get() {
+			return PswgBazaarAvailableItemsDatabaseMongo(database.getCollection("bazaarAvailableItems"))
 		}
 
+	@Test
+	fun `specific item is null if it doesn't exist`() {
+		bazaarItems.addAvailableItem(exampleItem())
+
+		val retrieved = bazaarItems.getAvailableItem(2L)
+
+		assertNull(retrieved)
 	}
+	
+	@Test
+	fun `items belonging to a specific owner can be retrieved`() {
+		val added = exampleItem()
+		bazaarItems.addAvailableItem(added)
+
+		val retrieved = bazaarItems.getMyAvailableItems(3L).first()
+
+		assertEquals(added, retrieved)
+	}
+	
+	@Test
+	fun `items belonging to a specific owner is an empty collection if there are no items`() {
+		bazaarItems.addAvailableItem(exampleItem())
+
+		val retrieved = bazaarItems.getMyAvailableItems(4L).size
+
+		assertEquals(0, retrieved)
+	}
+
+	@Test
+	fun `items can be removed`() {
+		val instantSaleItemMetadata = exampleItem()
+		bazaarItems.addAvailableItem(instantSaleItemMetadata)
+
+		bazaarItems.removeAvailableItem(instantSaleItemMetadata)
+
+		val collection = database.getCollection("bazaarAvailableItems")
+		val countDocuments = collection.countDocuments()
+		assertEquals(0, countDocuments)
+	}
+
+	private fun exampleItem() = PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
+		itemObjectId = 1L,
+		price = 1337,
+		expiresAt = LocalDateTime.of(2023, Month.APRIL, 7, 10, 1, 30),
+		description = "This is a great item",
+		bazaarObjectId = 2L,
+		ownerId = 3L,
+		saleType = PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
+	)
 }

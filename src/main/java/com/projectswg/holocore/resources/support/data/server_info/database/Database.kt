@@ -41,5 +41,6 @@ class Database(mongo: MongoDatabase) {
 	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
 	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
 	val bazaarInstantSales = DatabaseTable(mongo.getCollection("bazaarInstantSales"), configuration, connection, configuration?.tables?.get("bazaarInstantSales"))
+	val bazaarAvailableItems = DatabaseTable(mongo.getCollection("bazaarAvailableItems"), configuration, connection, configuration?.tables?.get("bazaarAvailableItems"))
 
 }
