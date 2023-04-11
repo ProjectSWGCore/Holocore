@@ -61,6 +61,7 @@ class BazaarService : Service() {
 		val player = inboundPacketIntent.player
 
 		when (packet) {
+			is CancelLiveAuctionMessage       -> handleCancelLiveAuctionMessage(packet, player)
 			is RetrieveAuctionItemMessage     -> handleRetrieveAuctionItemMessage(packet, player)
 			is BidAuctionMessage              -> handleBidAuctionMessage(packet, player)
 			is CommoditiesItemTypeListRequest -> handleCommoditiesItemTypeListRequest(packet, player)
@@ -69,6 +70,36 @@ class BazaarService : Service() {
 			is CreateImmediateAuctionMessage  -> handleCreateImmediateAuctionMessage(packet, player)
 			is GetAuctionDetails              -> handleGetAuctionDetails(packet, player)
 		}
+	}
+
+	private fun handleCancelLiveAuctionMessage(packet: CancelLiveAuctionMessage, player: Player) {
+		val objectId = packet.objectId
+		val instantSaleItem = PswgDatabase.bazaarInstantSales.getInstantSaleItem(objectId)
+
+		if (instantSaleItem == null) {
+			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 2, vendorRefusal = false))
+			return
+		}
+
+		if (instantSaleItem.ownerId != player.creatureObject.objectId) {
+			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 8, vendorRefusal = false))
+			return
+		}
+
+		PswgDatabase.bazaarInstantSales.removeInstantSaleItem(instantSaleItem)
+		PswgDatabase.bazaarAvailableItems.addAvailableItem(
+			PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
+				itemObjectId = instantSaleItem.itemObjectId,
+				price = instantSaleItem.price,
+				expiresAt = LocalDateTime.now().plusDays(30),
+				description = instantSaleItem.description,
+				ownerId = player.creatureObject.objectId,
+				instantSaleItem.bazaarObjectId,
+				PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
+			)
+		)
+		player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 0, vendorRefusal = false))
+		StandardLog.onPlayerEvent(this, player, "canceled sale of item %s", instantSaleItem)
 	}
 
 	private fun handleRetrieveAuctionItemMessage(packet: RetrieveAuctionItemMessage, player: Player) {
