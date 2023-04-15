@@ -178,6 +178,9 @@ public class FactionFlagService extends Service {
 		
 		target.setFaction(newFaction);
 		target.setPvpStatus(PvpStatus.COMBATANT);	// Reset status to default, preventing special forces state from carrying over
+		if (target instanceof CreatureObject creatureObject) {
+			creatureObject.setFactionRank((byte) 0);
+		}
 		handleFlagChange(target);
 	}
 	
