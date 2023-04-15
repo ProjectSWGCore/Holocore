@@ -24,24 +24,67 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-package com.projectswg.holocore.resources.support.data.server_info.database
+package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
 import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.Filters
-import java.sql.DriverManager
+import com.projectswg.common.data.encodables.chat.ChatAvatar
+import com.projectswg.common.data.encodables.chat.ChatRoom
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-class Database(mongo: MongoDatabase) {
+class PswgChatRoomDatabaseMongoTest {
+	private lateinit var database: MongoDatabase
+
+	@BeforeEach
+	fun setUp() {
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
+	}
+
+	@AfterEach
+	fun tearDown() {
+		database.drop()
+	}
+
+	private val chatRooms: PswgChatRoomDatabase
+		get() {
+			return PswgChatRoomDatabaseMongo(database.getCollection("chatRooms"))
+		}
+
+	@Test
+	fun `chat rooms can be added`() {
+		chatRooms.addChatRoom(exampleChatRoom())
+
+		val collection = database.getCollection("chatRooms")
+		val countDocuments = collection.countDocuments()
+
+		assertEquals(1, countDocuments)
+	}
 	
-	val config = DatabaseTable(mongo.getCollection("config"), null, null, null)
-	private val configuration = config.mongo.find(Filters.exists("connector")).map { DatabaseConfiguration(it) }.first()
-	private val connection = if (configuration == null || configuration.connector != "mariadb") null
-							else DriverManager.getConnection("jdbc:mariadb://${configuration.host}:${configuration.port}/${configuration.database}?autoReconnect=true&user=${configuration.user}&password=${configuration.pass}")
-	val users = DatabaseTable(mongo.getCollection("users"), configuration, connection, configuration?.tables?.get("users"))
-	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
-	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
-	val bazaarInstantSales = DatabaseTable(mongo.getCollection("bazaarInstantSales"), configuration, connection, configuration?.tables?.get("bazaarInstantSales"))
-	val bazaarAvailableItems = DatabaseTable(mongo.getCollection("bazaarAvailableItems"), configuration, connection, configuration?.tables?.get("bazaarAvailableItems"))
-	val chatRooms = DatabaseTable(mongo.getCollection("chatRooms"), configuration, connection, configuration?.tables?.get("chatRooms"))
+	@Test
+	fun `chat rooms can be retrieved`() {
+		val added = exampleChatRoom()
+		chatRooms.addChatRoom(added)
 
+		val retrieved = chatRooms.getChatRooms().first()
+
+		assertEquals(added, retrieved)
+	}
+
+	private fun exampleChatRoom(): ChatRoom {
+		val chatRoom = ChatRoom()
+		chatRoom.id = 3
+		chatRoom.type = 1
+		chatRoom.isModerated = true
+		chatRoom.path = "SWG.Holocore.BestChatRoom"
+		chatRoom.owner = ChatAvatar("Test User 1")
+		chatRoom.creator = ChatAvatar("Test User 2")
+		chatRoom.title = "BestChatRoom"
+		chatRoom.addModerator(ChatAvatar("Test User 3"))
+		chatRoom.addInvited(ChatAvatar("Test User 4"))
+		chatRoom.addBanned(ChatAvatar("Test User 5"))
+		return chatRoom
+	}
 }
