@@ -24,24 +24,28 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
 package com.projectswg.holocore.resources.support.data.server_info.database
 
-import com.mongodb.client.MongoDatabase
-import com.mongodb.client.model.Filters
-import java.sql.DriverManager
+import com.projectswg.common.data.encodables.chat.ChatRoom
 
-class Database(mongo: MongoDatabase) {
+interface PswgChatRoomDatabase {
+	fun getChatRooms(): Collection<ChatRoom>
+	fun addChatRoom(chatRoom: ChatRoom)
 	
-	val config = DatabaseTable(mongo.getCollection("config"), null, null, null)
-	private val configuration = config.mongo.find(Filters.exists("connector")).map { DatabaseConfiguration(it) }.first()
-	private val connection = if (configuration == null || configuration.connector != "mariadb") null
-							else DriverManager.getConnection("jdbc:mariadb://${configuration.host}:${configuration.port}/${configuration.database}?autoReconnect=true&user=${configuration.user}&password=${configuration.pass}")
-	val users = DatabaseTable(mongo.getCollection("users"), configuration, connection, configuration?.tables?.get("users"))
-	val objects = DatabaseTable(mongo.getCollection("objects"), configuration, connection, configuration?.tables?.get("objects"))
-	val resources = DatabaseTable(mongo.getCollection("resources"), configuration, connection, configuration?.tables?.get("resources"))
-	val bazaarInstantSales = DatabaseTable(mongo.getCollection("bazaarInstantSales"), configuration, connection, configuration?.tables?.get("bazaarInstantSales"))
-	val bazaarAvailableItems = DatabaseTable(mongo.getCollection("bazaarAvailableItems"), configuration, connection, configuration?.tables?.get("bazaarAvailableItems"))
-	val chatRooms = DatabaseTable(mongo.getCollection("chatRooms"), configuration, connection, configuration?.tables?.get("chatRooms"))
+	companion object {
 
+		fun createDefault(): PswgChatRoomDatabase {
+			return object : PswgChatRoomDatabase {
+				private val chatRooms = mutableSetOf<ChatRoom>()
+
+				override fun getChatRooms(): Collection<ChatRoom> {
+					return chatRooms.toList()
+				}
+
+				override fun addChatRoom(chatRoom: ChatRoom) {
+					chatRooms.add(chatRoom)
+				}
+			}
+		}
+	}
 }
