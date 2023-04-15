@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -53,14 +53,27 @@ import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import me.joshlarson.jlcommon.utilities.Arguments;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCCreator {
 	
-	public static AIObject createNPC(Spawner spawner) {
+	public static Collection<AIObject> createNPCs(Spawner spawner) {
 		Arguments.validate(spawner.getMinLevel() <= spawner.getMaxLevel(), "min level must be less than max level");
+		int amount = spawner.getAmount();
+		Collection<AIObject> npcs = new ArrayList<>();
+		
+		for (int i = 0; i < amount; i++) {
+			npcs.add(createNPC(spawner));
+		}
+		
+		return npcs;
+	}
+	
+	private static AIObject createNPC(Spawner spawner) {
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		

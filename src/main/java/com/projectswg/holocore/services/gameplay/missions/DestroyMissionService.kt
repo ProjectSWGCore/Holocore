@@ -31,6 +31,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
+import com.projectswg.common.data.encodables.tangible.PvpFlag
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.swgfile.ClientFactory
@@ -38,7 +39,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.MissionA
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
@@ -58,9 +58,11 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.mission.MissionObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
@@ -74,7 +76,7 @@ class DestroyMissionService : Service() {
 
 	private val maxAcceptedMissions = 2
 	private val missionsToGenerate = 5
-	private val npcToMission = mutableMapOf<AIObject, MissionObject>()
+	private val lairToMission = mutableMapOf<TangibleObject, MissionObject>()
 	private val missionComplete = StringId("mission/mission_generic", "success_w_amount")
 
 	@IntentHandler
@@ -107,11 +109,9 @@ class DestroyMissionService : Service() {
 			return
 		}
 
-		npcToMission.filterValues { it == missionObject }.forEach {
-			val key = it.key
-			DestroyObjectIntent.broadcast(key)
-			DestroyObjectIntent.broadcast(npcToMission.remove(key))
-		}
+		val lairs = lairToMission.filterValues { it == missionObject }.keys
+		lairs.forEach { lairToMission.remove(it) }
+		DestroyObjectIntent.broadcast(missionObject)
 
 		val response = MissionAbort(creatureObject.objectId)
 		response.missionObjectId = missionObjectId
@@ -119,13 +119,13 @@ class DestroyMissionService : Service() {
 	}
 
 	@IntentHandler
-	private fun handleCreatureKilled(creatureKilledIntent: CreatureKilledIntent) {
-		val corpse = creatureKilledIntent.corpse
-		val missionObject = npcToMission.remove(corpse)
+	private fun handleDestroyObject(destroyObjectIntent: DestroyObjectIntent) {
+		val destroyedObject = destroyObjectIntent.`object`
+		val missionObject = lairToMission.remove(destroyedObject)
 		if (missionObject != null) {
 			val owner = missionObject.owner
 			if (owner != null) {
-				handleMissionCompleted(owner, missionObject, corpse.location)
+				handleMissionCompleted(owner, missionObject, destroyedObject.location)
 			}
 		}
 	}
@@ -188,12 +188,14 @@ class DestroyMissionService : Service() {
 			val location = missionObject.startLocation.toLocation()
 			missionObject.waypointPackage = createWaypoint(location)
 
-			spawnNpc(location, missionObject)
+			val lair = createLair(missionObject, location)
+			lairToMission[lair] = missionObject
+			spawnNpcs(location, missionObject)
 			StandardLog.onPlayerEvent(this, player, "accepted %s", missionObject)
 		}
 	}
 
-	private fun spawnNpc(location: Location, missionObject: MissionObject) {
+	private fun spawnNpcs(location: Location, missionObject: MissionObject) {
 		val difficulty = missionObject.difficulty
 		val egg = ObjectCreator.createObjectFromTemplate(SpawnerType.MISSION_EASY.objectTemplate)
 		egg.containerPermissions = AdminPermissions.getPermissions()
@@ -213,10 +215,20 @@ class DestroyMissionService : Service() {
 			.withMinLevel(difficulty)
 			.withMaxLevel(difficulty)
 			.withLocation(location)
+			.withAmount(3)
+			.withBehavior(AIBehavior.LOITER)
 			.build()
 
-		val npc = NPCCreator.createNPC(Spawner(spawnInfo, egg))
-		npcToMission[npc] = missionObject
+		NPCCreator.createNPCs(Spawner(spawnInfo, egg))
+	}
+
+	private fun createLair(missionObject: MissionObject, location: Location): TangibleObject {
+		val lair = ObjectCreator.createObjectFromTemplate(missionObject.targetAppearance.string) as TangibleObject
+		lair.removeOptionFlags(OptionFlag.INVULNERABLE)
+		lair.setPvpFlags(PvpFlag.YOU_CAN_ATTACK)
+		lair.moveToContainer(null, location)
+		ObjectCreatedIntent.broadcast(lair)
+		return lair
 	}
 
 	private fun handleTooManyMissions(creatureObject: CreatureObject, missionId: Long, missionAcceptRequest: MissionAcceptRequest, player: Player) {
