@@ -46,7 +46,7 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				SuiListBox listBox = new SuiListBox(SuiButtons.OK_CANCEL, "Character Builder Terminal", "Select a category");
 
 				listBox.addListItem("TRAVEL - Fast Travel Locations");
-				listBox.addListItem("SKILLS - Grant boxes");
+				listBox.addListItem("SKILLS - Grant skillboxes");
 				listBox.addListItem("SKILLS - Unlock Force Sensitive");
 				listBox.addListItem("ITEMS - Armor");
 				listBox.addListItem("ITEMS - Weapons");
@@ -96,7 +96,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		listBox.addListItem("Science - Medic (Master)");
 		listBox.addListItem("Science - Combat Medic (Master)");
 		listBox.addListItem("Science - Doctor (Master)");
-		listBox.addListItem("Force Sensitive - Healing (Novice)");
+		listBox.addListItem("Force Sensitive - Dark Jedi ranks (Ranks)");
+		listBox.addListItem("Force Sensitive - Light Jedi ranks (Ranks)");
+		listBox.addListItem("Force Sensitive - Master Force Defender (Master)");
+		listBox.addListItem("Force Sensitive - Master Force Enhancer (Master)");
+		listBox.addListItem("Force Sensitive - Master Force Healing (Master)");
+		listBox.addListItem("Force Sensitive - Lightsaber Master (Master)");
+		listBox.addListItem("Force Sensitive - Master Force Wielder (Master)");
+		listBox.addListItem("Force Sensitive - Combat Prowess Master (Master)");
+		listBox.addListItem("Force Sensitive - Crafting Mastery (Master)");
+		listBox.addListItem("Force Sensitive - Enhanced Reflexes Master (Master)");
+		listBox.addListItem("Force Sensitive - Heightened Senses Master (Master)");
 
 		listBox.addCallback(SuiEvent.OK_PRESSED, "handleSkillsSelection", (event, parameters) -> handleSkillsSelection(player, parameters));
 		listBox.display(player);
@@ -121,7 +131,17 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 			case 12: handleMasterMedic(player); break;
 			case 13: handleMasterCombatMedic(player); break;
 			case 14: handleMasterDoctor(player); break;
-			case 15: handleNoviceHealing(player); break;
+			case 15: handleJedi_1(player); break;
+			case 16: handleJedi_2(player); break;
+			case 17: handleJedi_3(player); break;
+			case 18: handleJedi_4(player); break;
+			case 19: handleJedi_5(player); break;
+			case 20: handleJedi_6(player); break;
+			case 21: handleJedi_7(player); break;
+			case 22: handleJedi_8(player); break;
+			case 23: handleJedi_9(player); break;
+			case 24: handleJedi_10(player); break;
+			case 25: handleJedi_11(player); break;
 		}
 	}
 
@@ -200,15 +220,64 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "science_doctor_master", creatureObject, true);
 	}
 
-	private static void handleNoviceHealing(Player player) {
+	private static void handleJedi_1(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_rank_dark_master", creatureObject, true);
+	}
+
+	private static void handleJedi_2(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_rank_light_master", creatureObject, true);
+	}
+
+	private static void handleJedi_3(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true);
+	}
+
+	private static void handleJedi_4(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_enhancements_master", creatureObject, true);
+	}
+
+	private static void handleJedi_5(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_healing_master", creatureObject, true);
 	}
 
-	private static void handleSkillsUnlockForceSensitive(Player player) {
+	private static void handleJedi_6(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_light_saber_master", creatureObject, true);
-		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true);
+	}
+
+	private static void handleJedi_7(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_powers_master", creatureObject, true);
+	}
+
+	private static void handleJedi_8(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_combat_prowess_master", creatureObject, true);
+	}
+
+	private static void handleJedi_9(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_crafting_mastery_master", creatureObject, true);
+	}
+
+	private static void handleJedi_10(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_enhanced_reflexes_master", creatureObject, true);
+	}
+
+	private static void handleJedi_11(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_heightened_senses_master", creatureObject, true);
+	}
+
+	private static void handleSkillsUnlockForceSensitive(Player player) {
+		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank_02", creatureObject, true);
 		spawnItems(player,
 				"item_color_crystal_02_28",
 				"item_power_crystal_04_19",
