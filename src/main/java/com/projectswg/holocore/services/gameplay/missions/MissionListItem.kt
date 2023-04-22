@@ -24,31 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.loader
+package com.projectswg.holocore.services.gameplay.missions
 
-import com.projectswg.common.data.location.Terrain
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
+import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
 
-class DestroyMissionLoaderTest {
-	@Test
-	fun `general destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getGeneralDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
-	
-	@Test
-	fun `rebel destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getRebelDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
-	
-	@Test
-	fun `imperial destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getImperialDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
-}
+data class MissionListItem(val location: Location, val creator: String, val difficulty: Int, val target: String, val title: StringId, val description: StringId, val reward: Int, val targetIff: String, val serverAttribute: Pair<ServerAttribute, Any>?)

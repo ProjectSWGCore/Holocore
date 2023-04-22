@@ -24,31 +24,8 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.loader
+package com.projectswg.holocore.services.gameplay.missions
 
-import com.projectswg.common.data.location.Terrain
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
-
-class DestroyMissionLoaderTest {
-	@Test
-	fun `general destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getGeneralDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
-	
-	@Test
-	fun `rebel destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getRebelDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
-	
-	@Test
-	fun `imperial destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getImperialDestroyMissions(Terrain.TATOOINE)
-
-		assertTrue(destroyMissions.isNotEmpty())
-	}
+enum class DestroyMissionTerminalType {
+	GENERAL, REBEL, IMPERIAL
 }
