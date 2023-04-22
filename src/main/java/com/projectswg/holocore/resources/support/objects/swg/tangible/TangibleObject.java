@@ -621,16 +621,6 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
-	protected void parseBaseline6(NetBuffer buffer) {
-		super.parseBaseline6(buffer);
-		inCombat = buffer.getBoolean();
-		defenders = SWGSet.getSwgSet(buffer, 6, 3, Long.TYPE);
-		buffer.getInt();
-		SWGSet.getSwgSet(buffer, 6, 5, StringType.ASCII);
-		SWGSet.getSwgSet(buffer, 6, 6, StringType.ASCII);
-	}
-
-	@Override
 	public void saveMongo(MongoData data) {
 		super.saveMongo(data);
 		data.putDocument("appearance", appearanceData);
