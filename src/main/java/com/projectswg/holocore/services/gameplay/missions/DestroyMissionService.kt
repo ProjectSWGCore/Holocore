@@ -31,10 +31,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor
 import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
-import com.projectswg.common.data.encodables.tangible.PvpFlag
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.location.Terrain
-import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAbort
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
@@ -44,33 +41,18 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.data.server_info.loader.DestroyMissionLoader
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
-import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner
-import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
-import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.mission.MissionObject
-import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
+import com.projectswg.holocore.services.gameplay.missions.DestroyMissionTerminalType.*
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import me.joshlarson.jlcommon.log.Log
-import java.lang.Math.toRadians
-import kotlin.math.cos
-import kotlin.math.sin
 
 class DestroyMissionService : Service() {
 
@@ -155,80 +137,37 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun handleMissionAcceptRequest(missionAcceptRequest: MissionAcceptRequest, player: Player) {
-		if (!isDestroyMissionTerminal(missionAcceptRequest.terminalId)) {
+		val missionTerminal = getDestroyMissionTerminal(missionAcceptRequest.terminalId) ?: return
+		val missionId = missionAcceptRequest.missionId
+		val missionObject = ObjectLookup.getObjectById(missionId) as MissionObject? ?: return
+		val creatureObject = player.creatureObject
+		val missionBag = creatureObject.missionBag
+		val datapad = creatureObject.datapad
+
+		if (datapad.containedObjects.filterIsInstance<MissionObject>().size >= maxAcceptedMissions) {
+			handleTooManyMissions(creatureObject, missionId, missionAcceptRequest, player)
 			return
 		}
 
-		val missionId = missionAcceptRequest.missionId
-		val missionObject = ObjectLookup.getObjectById(missionId) as MissionObject?
-
-		if (missionObject != null) {
-			val creatureObject = player.creatureObject
-			val missionBag = creatureObject.missionBag
-			val datapad = creatureObject.datapad
-
-			if (datapad.containedObjects.filterIsInstance<MissionObject>().size >= maxAcceptedMissions) {
-				handleTooManyMissions(creatureObject, missionId, missionAcceptRequest, player)
-				return
-			}
-
-			if (!missionBag.containedObjects.contains(missionObject)) {
-				StandardLog.onPlayerError(this, player, "requested to accept mission not in their mission_bag")
-				return
-			}
-
-
-			val missionAcceptResponse = MissionAcceptResponse(creatureObject.objectId)
-			missionAcceptResponse.missionObjectId = missionId
-			missionAcceptResponse.terminalType = missionAcceptRequest.terminalType.toInt()
-			missionAcceptResponse.success = 1
-			creatureObject.sendSelf(missionAcceptResponse)
-
-			missionObject.moveToContainer(datapad)
-			val location = missionObject.startLocation.toLocation()
-			missionObject.waypointPackage = createWaypoint(location)
-
-			val lair = createLair(missionObject, location)
-			lairToMission[lair] = missionObject
-			spawnNpcs(location, missionObject)
-			StandardLog.onPlayerEvent(this, player, "accepted %s", missionObject)
+		if (!missionBag.containedObjects.contains(missionObject)) {
+			StandardLog.onPlayerError(this, player, "requested to accept mission not in their mission_bag")
+			return
 		}
-	}
 
-	private fun spawnNpcs(location: Location, missionObject: MissionObject) {
-		val difficulty = missionObject.difficulty
-		val egg = ObjectCreator.createObjectFromTemplate(SpawnerType.MISSION_EASY.objectTemplate)
-		egg.containerPermissions = AdminPermissions.getPermissions()
-		egg.moveToContainer(null, location)
-		ObjectCreatedIntent.broadcast(egg)
 
-		val dynamicId = missionObject.getServerTextAttribute(ServerAttribute.DYNAMIC_ID)
-		val dynamicSpawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
-		val npcId = listOfNotNull(
-			dynamicSpawnInfo?.npcNormal1, dynamicSpawnInfo?.npcNormal2, dynamicSpawnInfo?.npcNormal3, dynamicSpawnInfo?.npcNormal4
-		).filter { it.isNotBlank() }.random()
+		val missionAcceptResponse = MissionAcceptResponse(creatureObject.objectId)
+		missionAcceptResponse.missionObjectId = missionId
+		missionAcceptResponse.terminalType = missionAcceptRequest.terminalType.toInt()
+		missionAcceptResponse.success = 1
+		creatureObject.sendSelf(missionAcceptResponse)
 
-		val spawnInfo = SimpleSpawnInfo.builder()
-			.withNpcId(npcId)
-			.withDifficulty(CreatureDifficulty.NORMAL)
-			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
-			.withMinLevel(difficulty)
-			.withMaxLevel(difficulty)
-			.withLocation(location)
-			.withAmount(3)
-			.withBehavior(AIBehavior.LOITER)
-			.build()
+		missionObject.moveToContainer(datapad)
+		val location = missionObject.startLocation.toLocation()
+		missionObject.waypointPackage = createWaypoint(location)
 
-		NPCCreator.createNPCs(Spawner(spawnInfo, egg))
-	}
-
-	private fun createLair(missionObject: MissionObject, location: Location): TangibleObject {
-		val lair = ObjectCreator.createObjectFromTemplate(missionObject.targetAppearance.string) as TangibleObject
-		lair.removeOptionFlags(OptionFlag.INVULNERABLE)
-		lair.setPvpFlags(PvpFlag.YOU_CAN_ATTACK)
-		lair.moveToContainer(null, location)
-		ObjectCreatedIntent.broadcast(lair)
-		return lair
+		val lair = missionTerminal.acceptMission(missionObject)
+		lairToMission[lair] = missionObject
+		StandardLog.onPlayerEvent(this, player, "accepted %s", missionObject)
 	}
 
 	private fun handleTooManyMissions(creatureObject: CreatureObject, missionId: Long, missionAcceptRequest: MissionAcceptRequest, player: Player) {
@@ -249,25 +188,12 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun handleMissionListRequest(missionListRequest: MissionListRequest, player: Player) {
-		if (!isDestroyMissionTerminal(missionListRequest.terminalId)) {
-			return
-		}
-
+		val missionTerminal = getDestroyMissionTerminal(missionListRequest.terminalId) ?: return
 		val tickCount = missionListRequest.tickCount
 		val creatureObject = player.creatureObject
 		val missionBag = creatureObject.missionBag
-
 		synchronizeMissionObjects(missionBag)
-		generateMissions(missionBag, creatureObject, tickCount)
-	}
-
-	private fun isDestroyMissionTerminal(terminalId: Long): Boolean {
-		val objectById = ObjectLookup.getObjectById(terminalId)
-
-		return objectById?.template == "object/tangible/terminal/shared_terminal_mission.iff"
-	}
-
-	private fun generateMissions(missionBag: SWGObject, creatureObject: CreatureObject, tickCount: Byte) {
+		val missionListItems = missionTerminal.listMissions(player)
 		val containedObjects = missionBag.containedObjects
 		val amountOfAvailableMissionObjects = containedObjects.size
 
@@ -276,39 +202,43 @@ class DestroyMissionService : Service() {
 		}
 
 		val missionObjectIterator = containedObjects.iterator()
-		val location = creatureObject.location
-		val randomDestroyMissionInfos = randomDestroyMissionInfos(location.terrain)
-
-		for (randomDestroyMissionInfo in randomDestroyMissionInfos) {
-			val missionObject = missionObjectIterator.next() as MissionObject
-			val randomLocation = randomLocation(location)
-
-			if (randomLocation != null) {
-				updateMissionObject(missionObject, randomLocation, randomDestroyMissionInfo)
+		for (missionListItem in missionListItems) {
+			if (missionObjectIterator.hasNext()) {
+				val missionObject = missionObjectIterator.next() as MissionObject
+				updateMissionObject(missionObject, missionListItem)
 				missionObject.tickCount = tickCount.toInt()
 			}
 		}
 	}
 
-	private fun randomLocation(base: Location): Location? {
-		val distance = (1200 until 2500).random().toDouble()
-		val direction = (0 until 360).random().toDouble()
-		val alpha = toRadians(direction)
-		val xx = base.x + (distance * cos(alpha))
-		val zz = base.z + (distance * sin(alpha))
-		val yy = ServerData.terrains.getHeight(base.terrain, xx, zz)
-
-		val randomLocation = Location.builder(base).setX(xx).setZ(zz).setY(yy).build()
-
-		if (ServerData.noSpawnZones.isInNoSpawnZone(randomLocation)) {
-			return null
+	private fun updateMissionObject(missionObject: MissionObject, missionListItem: MissionListItem) {
+		val (location, creator, difficulty, target, title, description, reward, targetIff, serverAttribute) = missionListItem
+		missionObject.missionType = CRC("destroy")
+		missionObject.missionCreator = creator
+		missionObject.difficulty = difficulty
+		missionObject.targetName = target
+		missionObject.title = title
+		missionObject.description = description
+		missionObject.reward = reward
+		missionObject.targetAppearance = CRC(targetIff)
+		if (serverAttribute != null) {
+			missionObject.setServerAttribute(serverAttribute.first, serverAttribute.second)
 		}
-
-		return randomLocation
+		val missionLocation = MissionObject.MissionLocation()
+		missionLocation.location = location.position
+		missionLocation.terrain = location.terrain
+		missionObject.startLocation = missionLocation
+		missionObject.missionLocation = missionLocation
 	}
 
-	private fun randomDestroyMissionInfos(terrain: Terrain): Collection<DestroyMissionLoader.DestroyMissionInfo> {
-		return ServerData.destroyMissions.getDestroyMissions(terrain).shuffled().take(missionsToGenerate)
+	private fun getDestroyMissionTerminal(terminalId: Long): DestroyMissionTerminal? {
+		val objectById = ObjectLookup.getObjectById(terminalId) ?: return null
+		return when (objectById.template) {
+			"object/tangible/terminal/shared_terminal_mission.iff"          -> DestroyMissionTerminal(missionsToGenerate, GENERAL)
+			"object/tangible/terminal/shared_terminal_mission_rebel.iff"    -> DestroyMissionTerminal(missionsToGenerate, REBEL)
+			"object/tangible/terminal/shared_terminal_mission_imperial.iff" -> DestroyMissionTerminal(missionsToGenerate, IMPERIAL)
+			else                                                            -> null
+		}
 	}
 
 	private fun synchronizeMissionObjects(missionBag: SWGObject) {
@@ -339,66 +269,6 @@ class DestroyMissionService : Service() {
 		ObjectCreatedIntent.broadcast(missionObject)
 
 		return missionObject
-	}
-
-	private fun updateMissionObject(missionObject: MissionObject, location: Location, destroyMissionInfo: DestroyMissionLoader.DestroyMissionInfo) {
-		missionObject.missionType = CRC("destroy")
-		missionObject.missionCreator = destroyMissionInfo.creator
-		val difficulty = getDifficulty(location.terrain)
-		missionObject.difficulty = difficulty
-		missionObject.targetName = destroyMissionInfo.target
-		missionObject.title = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.titleKey)
-		missionObject.description = StringId(destroyMissionInfo.stringFile, destroyMissionInfo.descriptionKey)
-		missionObject.reward = randomReward(difficulty)
-		val dynamicId = destroyMissionInfo.dynamicId
-		missionObject.targetAppearance = CRC(getLairIffTemplate(dynamicId))
-		missionObject.setServerAttribute(ServerAttribute.DYNAMIC_ID, dynamicId)
-		val missionLocation = MissionObject.MissionLocation()
-		missionLocation.location = location.position
-		missionLocation.terrain = location.terrain
-		missionObject.startLocation = missionLocation
-		missionObject.missionLocation = missionLocation
-	}
-
-	private fun randomReward(difficulty: Int): Int {
-		val base = difficulty * 100.0
-		val multiplier = (-5 until 5).random().div(100.0).plus(1.0)
-
-		return (base * multiplier).toInt()
-	}
-
-	private fun getLairIffTemplate(dynamicId: String): String {
-		val spawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
-		val fallbackLairTemplate = "object/tangible/lair/baz_nitch/shared_lair_baz_nitch.iff"
-
-		if (spawnInfo == null) {
-			Log.w("Unable to find dynamic spawn info for dynamicId $dynamicId, using fallback lair template")
-			return fallbackLairTemplate
-		}
-
-		val randomLairId = spawnInfo.lairIds.random()
-		val dynamicLairInfo = ServerData.dynamicLairs.getDynamicLairInfo(randomLairId)
-
-		if (dynamicLairInfo == null) {
-			Log.w("Unable to find dynamic lair info for lairId ${randomLairId}, using fallback lair template")
-			return fallbackLairTemplate
-		}
-
-		return ClientFactory.formatToSharedFile(dynamicLairInfo.iffTemplate)
-	}
-
-	private fun getDifficulty(terrain: Terrain): Int {
-		val terrainLevelInfo = ServerData.terrainLevels.getTerrainLevelInfo(terrain)
-
-		if (terrainLevelInfo == null) {
-			Log.w("Used fallback mission difficulty, as the terrain %s has no level info", terrain.getName())
-			return 10
-		}
-
-		val minLevel = terrainLevelInfo.minLevel.toInt()
-		val maxLevel = terrainLevelInfo.maxLevel.toInt()
-
-		return (minLevel until maxLevel).random()
 	}
 
 }

@@ -108,8 +108,9 @@ public class FactionFlagService extends Service {
 	@IntentHandler
 	private void handleFactionIntent(FactionIntent fi) {
 		TangibleObject target  = fi.getTarget();
+		SWGObject parent = target.getEffectiveParent();
 		
-		if (!(target instanceof CreatureObject) && !(target.getParent() instanceof CellObject)) // We don't deal with faction updates for inventory items and the like
+		if (parent != null && !(parent instanceof CellObject)) // We don't deal with faction updates for inventory items and the like
 			return;
 		
 		switch (fi.getUpdateType()) {
