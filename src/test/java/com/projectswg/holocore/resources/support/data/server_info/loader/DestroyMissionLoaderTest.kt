@@ -32,8 +32,22 @@ import org.junit.jupiter.api.Test
 
 class DestroyMissionLoaderTest {
 	@Test
-	fun `destroy missions are loaded`() {
-		val destroyMissions = ServerData.destroyMissions.getDestroyMissions(Terrain.TATOOINE)
+	fun `general destroy missions are loaded`() {
+		val destroyMissions = ServerData.destroyMissions.getGeneralDestroyMissions(Terrain.TATOOINE)
+
+		assertTrue(destroyMissions.isNotEmpty())
+	}
+	
+	@Test
+	fun `rebel destroy missions are loaded`() {
+		val destroyMissions = ServerData.destroyMissions.getRebelDestroyMissions(Terrain.TATOOINE)
+
+		assertTrue(destroyMissions.isNotEmpty())
+	}
+	
+	@Test
+	fun `imperial destroy missions are loaded`() {
+		val destroyMissions = ServerData.destroyMissions.getImperialDestroyMissions(Terrain.TATOOINE)
 
 		assertTrue(destroyMissions.isNotEmpty())
 	}

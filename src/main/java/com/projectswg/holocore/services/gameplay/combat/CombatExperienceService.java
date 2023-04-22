@@ -29,17 +29,14 @@ package com.projectswg.holocore.services.gameplay.combat;
 import com.projectswg.common.data.info.RelationalDatabase;
 import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.objects.GameObjectType;
-import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
@@ -48,16 +45,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class CombatExperienceService extends Service {
 	
 	private final Map<Short, XpData> xpData;
-	private final Map<Long, GroupObject> groupObjects;
 
 	public CombatExperienceService() {
 		xpData = new HashMap<>();
-		groupObjects = new ConcurrentHashMap<>();
 	}
 	
 	@Override
@@ -78,24 +72,6 @@ public class CombatExperienceService extends Service {
 			}
 		}
 		StandardLog.onEndLoad(xpData.size(), "combat XP rates", startTime);
-	}
-	
-	@IntentHandler
-	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
-		SWGObject object = i.getObject();
-		
-		if (object.getBaselineType() == BaselineType.GRUP) {
-			groupObjects.put(object.getObjectId(), (GroupObject) object);
-		}
-	}
-	
-	@IntentHandler
-	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
-		SWGObject object = i.getObject();
-		
-		if(object instanceof GroupObject && groupObjects.remove(object.getObjectId()) == null) {
-			Log.w("%s was expected to be in the GroupObject mapping but wasn't", object);
-		}
 	}
 	
 	@IntentHandler
@@ -124,7 +100,12 @@ public class CombatExperienceService extends Service {
 	}
 	
 	private GroupObject getGroupThatKillerIsIn(CreatureObject killer) {
-		return groupObjects.get(killer.getGroupId());
+		long groupId = killer.getGroupId();
+		if (groupId > 0) {
+			return (GroupObject) ObjectStorageService.ObjectLookup.getObjectById(groupId);
+		} else {
+			return null;
+		}
 	}
 	
 	private void grantXpToGroup(CreatureObject corpse, GroupObject group, int experienceGained) {

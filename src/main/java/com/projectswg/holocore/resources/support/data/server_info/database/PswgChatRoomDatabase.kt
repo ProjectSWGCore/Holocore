@@ -26,45 +26,26 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.database
 
-import java.time.LocalDateTime
+import com.projectswg.common.data.encodables.chat.ChatRoom
 
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
-
+interface PswgChatRoomDatabase {
+	fun getChatRooms(): Collection<ChatRoom>
+	fun addChatRoom(chatRoom: ChatRoom)
+	
 	companion object {
 
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
+		fun createDefault(): PswgChatRoomDatabase {
+			return object : PswgChatRoomDatabase {
+				private val chatRooms = mutableSetOf<ChatRoom>()
 
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
-
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
+				override fun getChatRooms(): Collection<ChatRoom> {
+					return chatRooms.toList()
 				}
 
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
-				}
-
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
-				}
-
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
+				override fun addChatRoom(chatRoom: ChatRoom) {
+					chatRooms.add(chatRoom)
 				}
 			}
 		}
-
 	}
 }

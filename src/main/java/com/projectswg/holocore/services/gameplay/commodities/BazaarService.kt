@@ -26,17 +26,26 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.commodities
 
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage
+import com.projectswg.common.data.encodables.oob.ProsePackage
+import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointPackage
+import com.projectswg.common.data.encodables.player.Mail
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.auction.*
 import com.projectswg.common.network.packets.swg.zone.auction.IsVendorOwnerResponseMessage.VendorOwnerResult
 import com.projectswg.holocore.ProjectSWG
+import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarAvailableItemsDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarInstantSalesDatabase
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
@@ -52,12 +61,170 @@ class BazaarService : Service() {
 		val player = inboundPacketIntent.player
 
 		when (packet) {
+			is CancelLiveAuctionMessage       -> handleCancelLiveAuctionMessage(packet, player)
+			is RetrieveAuctionItemMessage     -> handleRetrieveAuctionItemMessage(packet, player)
+			is BidAuctionMessage              -> handleBidAuctionMessage(packet, player)
 			is CommoditiesItemTypeListRequest -> handleCommoditiesItemTypeListRequest(packet, player)
 			is AuctionQueryHeadersMessage     -> handleAuctionQueryHeadersMessage(packet, player)
 			is IsVendorOwnerMessage           -> handleIsVendorOwnerMessage(packet, player)
 			is CreateImmediateAuctionMessage  -> handleCreateImmediateAuctionMessage(packet, player)
 			is GetAuctionDetails              -> handleGetAuctionDetails(packet, player)
 		}
+	}
+
+	private fun handleCancelLiveAuctionMessage(packet: CancelLiveAuctionMessage, player: Player) {
+		val objectId = packet.objectId
+		val instantSaleItem = PswgDatabase.bazaarInstantSales.getInstantSaleItem(objectId)
+
+		if (instantSaleItem == null) {
+			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 2, vendorRefusal = false))
+			return
+		}
+
+		if (instantSaleItem.ownerId != player.creatureObject.objectId) {
+			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 8, vendorRefusal = false))
+			return
+		}
+
+		PswgDatabase.bazaarInstantSales.removeInstantSaleItem(instantSaleItem)
+		PswgDatabase.bazaarAvailableItems.addAvailableItem(
+			PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
+				itemObjectId = instantSaleItem.itemObjectId,
+				price = instantSaleItem.price,
+				expiresAt = LocalDateTime.now().plusDays(30),
+				description = instantSaleItem.description,
+				ownerId = player.creatureObject.objectId,
+				instantSaleItem.bazaarObjectId,
+				PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
+			)
+		)
+		player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 0, vendorRefusal = false))
+		StandardLog.onPlayerEvent(this, player, "canceled sale of item %s", instantSaleItem)
+	}
+
+	private fun handleRetrieveAuctionItemMessage(packet: RetrieveAuctionItemMessage, player: Player) {
+		val objectId = packet.objectId
+		val objectById = ObjectLookup.getObjectById(objectId) ?: return
+		val availableItem = PswgDatabase.bazaarAvailableItems.getAvailableItem(objectId) ?: return
+		val container = getContainer(buyer = player.creatureObject, objectById) ?: return
+
+		if (player.creatureObject.objectId != availableItem.ownerId) {
+			player.sendPacket(RetrieveAuctionItemResponseMessage(objectId = objectId, error = 1))
+			return
+		}
+
+		if (!isSpaceLeftInContainer(container = container, objectById = objectById)) {
+			player.sendPacket(RetrieveAuctionItemResponseMessage(objectId = objectId, error = 12))
+			return
+		}
+
+		PswgDatabase.bazaarAvailableItems.removeAvailableItem(availableItem)
+		objectById.moveToContainer(container)
+		player.sendPacket(RetrieveAuctionItemResponseMessage(objectId = objectId, error = 0))
+		StandardLog.onPlayerEvent(this, player, "retrieved item %s", availableItem)
+	}
+
+	private fun handleBidAuctionMessage(packet: BidAuctionMessage, player: Player) {
+		val objectId = packet.objectId
+		val instantSaleItem = PswgDatabase.bazaarInstantSales.getInstantSaleItem(objectId) ?: return
+		val objectById = ObjectLookup.getObjectById(objectId) ?: return
+		val seller = ObjectLookup.getObjectById(instantSaleItem.ownerId) as CreatureObject? ?: return
+		val bazaarObject = ObjectLookup.getObjectById(instantSaleItem.bazaarObjectId) ?: return
+		val buyer = player.creatureObject
+		val container = getContainer(buyer = buyer, objectById = objectById) ?: return
+
+		if (!buyer.removeFromBankAndCash(instantSaleItem.price.toLong())) {
+			player.sendPacket(BidAuctionResponseMessage(objectId = objectId, error = 9))
+			return
+		}
+
+		PswgDatabase.bazaarInstantSales.removeInstantSaleItem(instantSaleItem)
+
+		if (isSpaceLeftInContainer(container = container, objectById = objectById)) {
+			objectById.moveToContainer(container)
+		} else {
+			PswgDatabase.bazaarAvailableItems.addAvailableItem(
+				PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
+					itemObjectId = instantSaleItem.itemObjectId,
+					price = instantSaleItem.price,
+					expiresAt = LocalDateTime.now().plusDays(30),
+					description = instantSaleItem.description,
+					ownerId = buyer.objectId,
+					bazaarObjectId = instantSaleItem.bazaarObjectId,
+					saleType = PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
+				)
+			)
+		}
+
+		seller.addToBank(instantSaleItem.price.toLong())
+		sendMails(bazaarObject = bazaarObject, objectById = objectById, buyer = buyer, seller = seller, instantSaleItem = instantSaleItem)
+		player.sendPacket(BidAuctionResponseMessage(objectId = objectId, error = 0))
+		StandardLog.onPlayerEvent(this, player, "bought %s", instantSaleItem)
+	}
+
+	private fun isSpaceLeftInContainer(container: SWGObject, objectById: SWGObject) = (container.containedObjects.size + objectById.volume) <= container.maxContainerSize
+
+	private fun getContainer(buyer: CreatureObject, objectById: SWGObject): SWGObject? {
+		return when (objectById) {
+			is TangibleObject   -> buyer.inventory
+			is IntangibleObject -> buyer.datapad
+			else                -> null
+		}
+	}
+
+	private fun sendMails(bazaarObject: SWGObject, objectById: SWGObject, buyer: CreatureObject, seller: CreatureObject, instantSaleItem: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata) {
+		val terminalName = getDisplayName(bazaarObject)
+		val currentCity = getCurrentCity(bazaarObject)
+		val sender = "SWG." + ProjectSWG.getGalaxy().name + ".auctioner"
+		val itemName = getDisplayName(objectById)
+		val location = bazaarObject.location
+		sendMailToSeller(
+			sender = sender,
+			buyer = buyer,
+			seller = seller,
+			itemName = itemName,
+			price = instantSaleItem.price,
+			currentCity = currentCity,
+			location = location
+		)
+		sendMailToBuyer(
+			sender = sender,
+			buyer = buyer,
+			seller = seller,
+			itemName = itemName,
+			price = instantSaleItem.price,
+			currentCity = currentCity,
+			location = location,
+			terminalName = terminalName
+		)
+	}
+
+	private fun sendMailToSeller(sender: String, buyer: CreatureObject, seller: CreatureObject, itemName: String, price: Int, currentCity: String, location: Location) {
+		val terrain = location.terrain
+		val mail = Mail(sender, "@auction:subject_instant_seller", "", seller.objectId)
+		mail.outOfBandPackage = OutOfBandPackage(
+			ProsePackage(StringId("auction", "seller_success"), "TO", itemName, "TT", buyer.objectName, "DI", price),
+			ProsePackage(StringId("auction", "seller_success_location"), "TT", currentCity, "TO", "@planet_n:${terrain.getName()}")
+		)
+
+		PersistentMessageIntent(seller, mail, ProjectSWG.getGalaxy().name).broadcast()
+	}
+
+	private fun sendMailToBuyer(sender: String, buyer: CreatureObject, seller: CreatureObject, itemName: String, price: Int, currentCity: String, location: Location, terminalName: String) {
+		val terrain = location.terrain
+		val mail = Mail(sender, "@auction:subject_instant_buyer", "", buyer.objectId)
+		val waypoint = WaypointPackage()
+		waypoint.terrain = terrain
+		waypoint.position = location.position
+		waypoint.name = terminalName
+		waypoint.isActive = false
+		mail.outOfBandPackage = OutOfBandPackage(
+			ProsePackage(StringId("auction", "buyer_success"), "TO", itemName, "TT", seller.objectName, "DI", price),
+			ProsePackage(StringId("auction", "buyer_success_location"), "TT", currentCity, "TO", "@planet_n:${terrain.getName()}"),
+			waypoint
+		)
+
+		PersistentMessageIntent(buyer, mail, ProjectSWG.getGalaxy().name).broadcast()
 	}
 
 	private fun handleGetAuctionDetails(packet: GetAuctionDetails, player: Player) {
@@ -79,17 +246,17 @@ class BazaarService : Service() {
 		if (objectById.owner != player) {
 			return
 		}
-		
+
 		if (objectById.isNoTrade) {
 			player.sendPacket(
 				CreateAuctionResponseMessage(
 					objectId = objectId, vendorId = packet.vendorId, status = 21
 				)
 			)
-			
+
 			return
 		}
-		
+
 		if (objectById.owner != player) {
 			player.sendPacket(
 				CreateAuctionResponseMessage(
@@ -135,56 +302,45 @@ class BazaarService : Service() {
 		// 7 For Sale (vendor) / Vendor Locations (bazaar)
 		// 8 Stockroom
 		// 9 Offers to Vendor
-		val windowType = packet.windowType
-
-		if (windowType == 2) {
-			handleAllAuctionsWindow(packet, player)
-		} else if (windowType == 3) {
-			handleMySalesWindow(packet, player)
+		when (packet.windowType) {
+			2 -> handleAllAuctionsWindow(packet, player)
+			3 -> handleMySalesWindow(packet, player)
+			5 -> handleAvailableItemsWindow(packet, player)
 		}
+	}
+
+	private fun handleAvailableItemsWindow(packet: AuctionQueryHeadersMessage, player: Player) {
+		val availableItems = PswgDatabase.bazaarAvailableItems.getMyAvailableItems(player.creatureObject.objectId)
+		val now = LocalDateTime.now()
+		handleItemWindow(packet, player, availableItems.mapNotNull { availbleItemToAuctionItem(now, it) })
 	}
 
 	private fun handleMySalesWindow(packet: AuctionQueryHeadersMessage, player: Player) {
 		val instantSaleItems = PswgDatabase.bazaarInstantSales.getMyInstantSaleItems(player.creatureObject.objectId)
-		handleItemWindow(packet, instantSaleItems, player)
+		val now = LocalDateTime.now()
+		handleItemWindow(packet, player, instantSaleItems.mapNotNull { instantSaleItemToAuctionItem(now, it) })
 	}
 
-	private fun handleItemWindow(packet: AuctionQueryHeadersMessage, instantSaleItems: Collection<PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata>, player: Player) {
+	private fun handleItemWindow(packet: AuctionQueryHeadersMessage, player: Player, auctionItems: List<AuctionQueryHeadersResponseMessage.AuctionItem>) {
 		val auctionQueryHeadersResponseMessage = AuctionQueryHeadersResponseMessage()
 		auctionQueryHeadersResponseMessage.updateCounter = packet.updateCounter
 		auctionQueryHeadersResponseMessage.windowType = packet.windowType
-		val now = LocalDateTime.now()
-
-		for (instantSaleItem in instantSaleItems) {
-			val expiresInSeconds = now.until(instantSaleItem.expiresAt, SECONDS).toInt()
-			if (expiresInSeconds < 60) {    // Client crashes if this ever goes below 60
-				continue
-			}
-
-			val objectById = ObjectLookup.getObjectById(instantSaleItem.itemObjectId)
-			val itemOwner = ObjectLookup.getObjectById(instantSaleItem.ownerId)
-
-			if (objectById != null && itemOwner != null) {
-				val auctionItem = toAuctionItem(instantSaleItem, expiresInSeconds, objectById, itemOwner)
-
-				if (auctionItem != null) {
-					auctionQueryHeadersResponseMessage.addItem(auctionItem)
-				}
-			}
-		}
-
+		auctionItems.filter { it.expireTime >= 60 }.forEach { auctionQueryHeadersResponseMessage.addItem(it) }
 		player.sendPacket(auctionQueryHeadersResponseMessage)
 	}
 
-	private fun toAuctionItem(instantSaleItem: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata, expiresInSeconds: Int, objectById: SWGObject, itemOwner: SWGObject): AuctionQueryHeadersResponseMessage.AuctionItem? {
-		val auctionItem = AuctionQueryHeadersResponseMessage.AuctionItem()
+	private fun instantSaleItemToAuctionItem(now: LocalDateTime, instantSaleItem: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata): AuctionQueryHeadersResponseMessage.AuctionItem? {
+		val expiresInSeconds = now.until(instantSaleItem.expiresAt, SECONDS).toInt()
+		val objectById = ObjectLookup.getObjectById(instantSaleItem.itemObjectId) ?: return null
+		val itemOwner = ObjectLookup.getObjectById(instantSaleItem.ownerId) ?: return null
 		val bazaarTerminal = ObjectLookup.getObjectById(instantSaleItem.bazaarObjectId) ?: return null
+		val auctionItem = AuctionQueryHeadersResponseMessage.AuctionItem()
 		auctionItem.objectId = objectById.objectId
 		auctionItem.isInstant = true
 		auctionItem.itemDescription = instantSaleItem.description
 		auctionItem.price = instantSaleItem.price
 		auctionItem.expireTime = expiresInSeconds
-		auctionItem.itemName = getItemName(objectById)
+		auctionItem.itemName = getDisplayName(objectById)
 		auctionItem.ownerId = itemOwner.objectId
 		auctionItem.ownerName = itemOwner.objectName
 		auctionItem.vuid = getMarketName(bazaarTerminal)
@@ -194,12 +350,34 @@ class BazaarService : Service() {
 		return auctionItem
 	}
 
-	private fun handleAllAuctionsWindow(packet: AuctionQueryHeadersMessage, player: Player) {
-		val instantSaleItems = PswgDatabase.bazaarInstantSales.getInstantSaleItems()
-		handleItemWindow(packet, instantSaleItems, player)
+	private fun availbleItemToAuctionItem(now: LocalDateTime, availableItem: PswgBazaarAvailableItemsDatabase.AvailableItemMetadata): AuctionQueryHeadersResponseMessage.AuctionItem? {
+		val expiresInSeconds = now.until(availableItem.expiresAt, SECONDS).toInt()
+		val objectById = ObjectLookup.getObjectById(availableItem.itemObjectId) ?: return null
+		val itemOwner = ObjectLookup.getObjectById(availableItem.ownerId) ?: return null
+		val bazaarTerminal = ObjectLookup.getObjectById(availableItem.bazaarObjectId) ?: return null
+		val auctionItem = AuctionQueryHeadersResponseMessage.AuctionItem()
+		auctionItem.objectId = objectById.objectId
+		auctionItem.isInstant = availableItem.saleType == PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
+		auctionItem.itemDescription = availableItem.description
+		auctionItem.price = availableItem.price
+		auctionItem.expireTime = expiresInSeconds
+		auctionItem.itemName = getDisplayName(objectById)
+		auctionItem.ownerId = itemOwner.objectId
+		auctionItem.ownerName = itemOwner.objectName
+		auctionItem.vuid = getMarketName(bazaarTerminal)
+		auctionItem.bidderName = ""
+		auctionItem.itemType = objectById.gameObjectType.typeMask
+		auctionItem.status = AuctionQueryHeadersResponseMessage.AuctionState.WITHDRAW
+		return auctionItem
 	}
 
-	private fun getItemName(objectById: SWGObject): String? {
+	private fun handleAllAuctionsWindow(packet: AuctionQueryHeadersMessage, player: Player) {
+		val instantSaleItems = PswgDatabase.bazaarInstantSales.getInstantSaleItems()
+		val now = LocalDateTime.now()
+		handleItemWindow(packet, player, instantSaleItems.mapNotNull { instantSaleItemToAuctionItem(now, it) })
+	}
+
+	private fun getDisplayName(objectById: SWGObject): String {
 		val itemName = objectById.objectName
 
 		if (itemName.isNotBlank()) {
@@ -222,9 +400,13 @@ class BazaarService : Service() {
 		val x = terminal.x.toInt()
 		val z = terminal.z.toInt()
 		val terminalId = terminal.objectId
-		val currentCity = ServerData.staticCities.getCities(terminal.terrain).first { it.isWithinRange(terminal) }.name
+		val currentCity = getCurrentCity(terminal)
 		val terrain = terminal.terrain.getName()
 		return "$terrain.$currentCity.$terminalName.$terminalId#$x,$z"
+	}
+
+	private fun getCurrentCity(terminal: SWGObject): String {
+		return ServerData.staticCities.getCities(terminal.terrain).first { it.isWithinRange(terminal) }.name
 	}
 
 	private fun handleCommoditiesItemTypeListRequest(packet: CommoditiesItemTypeListRequest, player: Player) {

@@ -32,15 +32,29 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbR
 import java.io.File
 
 class DestroyMissionLoader : DataLoader() {
-	
-	private val terrainToDestroyMission = mutableMapOf<Terrain, MutableCollection<DestroyMissionInfo>>()
-	
-	fun getDestroyMissions(terrain: Terrain): Collection<DestroyMissionInfo> {
-		return terrainToDestroyMission.getOrElse(terrain) {
+
+	private val terrainToGeneralDestroyMissions = mutableMapOf<Terrain, MutableCollection<DestroyMissionInfo>>()
+	private val terrainToRebelDestroyMissions = mutableMapOf<Terrain, MutableCollection<DestroyMissionInfo>>()
+	private val terrainToImperialDestroyMissions = mutableMapOf<Terrain, MutableCollection<DestroyMissionInfo>>()
+
+	fun getGeneralDestroyMissions(terrain: Terrain): Collection<DestroyMissionInfo> {
+		return terrainToGeneralDestroyMissions.getOrElse(terrain) {
 			emptySet()
 		}
 	}
 	
+	fun getRebelDestroyMissions(terrain: Terrain): Collection<DestroyMissionInfo> {
+		return terrainToRebelDestroyMissions.getOrElse(terrain) {
+			emptySet()
+		}
+	}
+	
+	fun getImperialDestroyMissions(terrain: Terrain): Collection<DestroyMissionInfo> {
+		return terrainToImperialDestroyMissions.getOrElse(terrain) {
+			emptySet()
+		}
+	}
+
 	override fun load() {
 		val set = SdbLoader.load(File("serverdata/missions/destroy/main.msdb"))
 
@@ -48,16 +62,22 @@ class DestroyMissionLoader : DataLoader() {
 			while (set.next()) {
 				val terrain = Terrain.valueOf(set.getText("terrain"))
 				val destroyMissionInfo = DestroyMissionInfo(set)
-				
-				if (terrainToDestroyMission.contains(terrain)) {
-					terrainToDestroyMission[terrain]?.add(destroyMissionInfo)
+				val destroyMissionMap = when (set.getText("destroy_type")) {
+					"general"  -> terrainToGeneralDestroyMissions
+					"imperial" -> terrainToImperialDestroyMissions
+					"rebel"    -> terrainToRebelDestroyMissions
+					else       -> throw IllegalArgumentException("Unknown destroy type ${set.getText("destroy_type")}")
+				}
+
+				if (destroyMissionMap.contains(terrain)) {
+					destroyMissionMap[terrain]?.add(destroyMissionInfo)
 				} else {
-					terrainToDestroyMission[terrain] = mutableSetOf(destroyMissionInfo)
+					destroyMissionMap[terrain] = mutableSetOf(destroyMissionInfo)
 				}
 			}
 		}
 	}
-	
+
 	class DestroyMissionInfo(set: SdbResultSet) {
 		val stringFile: String = set.getText("string_file")
 		val titleKey: String = set.getText("title_key")

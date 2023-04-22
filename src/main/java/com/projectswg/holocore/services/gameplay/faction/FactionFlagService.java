@@ -108,8 +108,9 @@ public class FactionFlagService extends Service {
 	@IntentHandler
 	private void handleFactionIntent(FactionIntent fi) {
 		TangibleObject target  = fi.getTarget();
+		SWGObject parent = target.getEffectiveParent();
 		
-		if (!(target instanceof CreatureObject) && !(target.getParent() instanceof CellObject)) // We don't deal with faction updates for inventory items and the like
+		if (parent != null && !(parent instanceof CellObject)) // We don't deal with faction updates for inventory items and the like
 			return;
 		
 		switch (fi.getUpdateType()) {
@@ -178,6 +179,9 @@ public class FactionFlagService extends Service {
 		
 		target.setFaction(newFaction);
 		target.setPvpStatus(PvpStatus.COMBATANT);	// Reset status to default, preventing special forces state from carrying over
+		if (target instanceof CreatureObject creatureObject) {
+			creatureObject.setFactionRank((byte) 0);
+		}
 		handleFlagChange(target);
 	}
 	

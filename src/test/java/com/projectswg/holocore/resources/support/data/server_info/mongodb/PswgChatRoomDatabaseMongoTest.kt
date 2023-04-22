@@ -24,47 +24,67 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.database
+package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import java.time.LocalDateTime
+import com.mongodb.client.MongoDatabase
+import com.projectswg.common.data.encodables.chat.ChatAvatar
+import com.projectswg.common.data.encodables.chat.ChatRoom
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
+class PswgChatRoomDatabaseMongoTest {
+	private lateinit var database: MongoDatabase
 
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
+	@BeforeEach
+	fun setUp() {
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
+	}
 
-	companion object {
+	@AfterEach
+	fun tearDown() {
+		database.drop()
+	}
 
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
-
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
-
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
-				}
-
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
-				}
-
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
-				}
-
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
-				}
-			}
+	private val chatRooms: PswgChatRoomDatabase
+		get() {
+			return PswgChatRoomDatabaseMongo(database.getCollection("chatRooms"))
 		}
 
+	@Test
+	fun `chat rooms can be added`() {
+		chatRooms.addChatRoom(exampleChatRoom())
+
+		val collection = database.getCollection("chatRooms")
+		val countDocuments = collection.countDocuments()
+
+		assertEquals(1, countDocuments)
+	}
+	
+	@Test
+	fun `chat rooms can be retrieved`() {
+		val added = exampleChatRoom()
+		chatRooms.addChatRoom(added)
+
+		val retrieved = chatRooms.getChatRooms().first()
+
+		assertEquals(added, retrieved)
+	}
+
+	private fun exampleChatRoom(): ChatRoom {
+		val chatRoom = ChatRoom()
+		chatRoom.id = 3
+		chatRoom.type = 1
+		chatRoom.isModerated = true
+		chatRoom.path = "SWG.Holocore.BestChatRoom"
+		chatRoom.owner = ChatAvatar("Test User 1")
+		chatRoom.creator = ChatAvatar("Test User 2")
+		chatRoom.title = "BestChatRoom"
+		chatRoom.addModerator(ChatAvatar("Test User 3"))
+		chatRoom.addInvited(ChatAvatar("Test User 4"))
+		chatRoom.addBanned(ChatAvatar("Test User 5"))
+		return chatRoom
 	}
 }

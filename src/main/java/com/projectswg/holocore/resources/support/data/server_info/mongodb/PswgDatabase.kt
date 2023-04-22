@@ -44,6 +44,8 @@ object PswgDatabase {
 	private var objectsImpl = PswgObjectDatabase.createDefault()
 	private var resourcesImpl = PswgResourceDatabase.createDefault()
 	private var bazaarInstantSalesImpl = PswgBazaarInstantSalesDatabase.createDefault()
+	private var bazaarAvailableItemsImpl = PswgBazaarAvailableItemsDatabase.createDefault()
+	private var chatRoomsImpl = PswgChatRoomDatabase.createDefault()
 	
 	val config: PswgConfigDatabase
 		get() = configImpl
@@ -55,6 +57,10 @@ object PswgDatabase {
 		get() = resourcesImpl
 	val bazaarInstantSales: PswgBazaarInstantSalesDatabase
 		get() = bazaarInstantSalesImpl
+	val bazaarAvailableItems: PswgBazaarAvailableItemsDatabase
+		get() = bazaarAvailableItemsImpl
+	val chatRooms: PswgChatRoomDatabase
+		get() = chatRoomsImpl
 	
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
@@ -67,12 +73,16 @@ object PswgDatabase {
 		val objects = initTable(databaseConfig.objects, defaultCreator = {PswgObjectDatabase.createDefault()}, mongoInitializer = ::PswgObjectDatabaseMongo)
 		val resources = initTable(databaseConfig.resources, defaultCreator = {PswgResourceDatabase.createDefault()}, mongoInitializer = ::PswgResourceDatabaseMongo)
 		val bazaarInstantSales = initTable(databaseConfig.bazaarInstantSales, defaultCreator = {PswgBazaarInstantSalesDatabase.createDefault()}, mongoInitializer = ::PswgBazaarInstantSalesDatabaseMongo)
+		val bazaarAvailableItems = initTable(databaseConfig.bazaarAvailableItems, defaultCreator = {PswgBazaarAvailableItemsDatabase.createDefault()}, mongoInitializer = ::PswgBazaarAvailableItemsDatabaseMongo)
+		val chatRooms = initTable(databaseConfig.chatRooms, defaultCreator = {PswgChatRoomDatabase.createDefault()}, mongoInitializer = ::PswgChatRoomDatabaseMongo)
 		
 		this.configImpl = config
 		this.usersImpl = users
 		this.objectsImpl = objects
 		this.resourcesImpl = resources
 		this.bazaarInstantSalesImpl = bazaarInstantSales
+		this.bazaarAvailableItemsImpl = bazaarAvailableItems
+		this.chatRoomsImpl = chatRooms
 	}
 	
 	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {

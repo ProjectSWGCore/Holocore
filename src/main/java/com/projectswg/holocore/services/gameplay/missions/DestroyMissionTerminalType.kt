@@ -24,47 +24,8 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.database
+package com.projectswg.holocore.services.gameplay.missions
 
-import java.time.LocalDateTime
-
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
-
-	companion object {
-
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
-
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
-
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
-				}
-
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
-				}
-
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
-				}
-
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
-				}
-			}
-		}
-
-	}
+enum class DestroyMissionTerminalType {
+	GENERAL, REBEL, IMPERIAL
 }

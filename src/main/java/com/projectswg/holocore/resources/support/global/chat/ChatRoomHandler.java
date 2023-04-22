@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,8 +36,8 @@ import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
-import com.projectswg.holocore.resources.support.data.server_info.CachedObjectDatabase;
-import com.projectswg.holocore.resources.support.data.server_info.ObjectDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
@@ -52,21 +52,20 @@ import java.util.stream.Collectors;
 
 public class ChatRoomHandler {
 	
-	private final ObjectDatabase<ChatRoom> database;
+	private final PswgChatRoomDatabase database;
 	private final ChatRoomContainer rooms;
 	private final AtomicInteger maxChatRoomId;
 	private final Object roomCreationMutex;
 	
 	public ChatRoomHandler() {
-		this.database = new CachedObjectDatabase<>("odb/chat_rooms.db", ChatRoom::create, ChatRoom::save);
+		this.database = PswgDatabase.INSTANCE.getChatRooms();
 		this.rooms = new ChatRoomContainer();
 		this.maxChatRoomId = new AtomicInteger(0);
 		this.roomCreationMutex = new Object();
 	}
 	
 	public boolean initialize() {
-		database.load();
-		database.traverse((room) -> {
+		database.getChatRooms().forEach((room) -> {
 			if (room.getId() >= maxChatRoomId.get())
 				maxChatRoomId.set(room.getId());
 			if (room.getOwner().equals(ChatAvatar.getSystemAvatar()))
@@ -78,8 +77,6 @@ public class ChatRoomHandler {
 	}
 	
 	public boolean terminate() {
-		database.save();
-		database.close();
 		return true;
 	}
 	
@@ -186,7 +183,7 @@ public class ChatRoomHandler {
 	 * @param moderated Determines if the room should be moderated
 	 * @param path Address for the channel (Ex: SWG.serverName.Imperial)
 	 * @param title Descriptive name of the chat channel (Ex: Imperial chat for this galaxy)
-	 * @param persist If true then this channel will be saved in an {@link ObjectDatabase}
+	 * @param persist If true then this channel will be saved in a persistent data store
 	 * @return TRUE if the room was successfully created, FALSE otherwise
 	 */
 	public boolean createRoom(@NotNull ChatAvatar creator, boolean isPublic, boolean moderated, @NotNull String path, @NotNull String title, boolean persist) {
@@ -199,7 +196,7 @@ public class ChatRoomHandler {
 			
 			// All paths should have parents, lets validate to make sure they exist first. Create them if they don't.
 			// This chunk of code makes this function recursive
-			int lastIndex = path.lastIndexOf('.', path.length());
+			int lastIndex = path.lastIndexOf('.');
 			if (lastIndex != -1) {
 				String parentPath = path.substring(0, lastIndex);
 				if (!parentPath.equals("SWG."+creator.getGalaxy()))
@@ -218,7 +215,7 @@ public class ChatRoomHandler {
 			rooms.addRoom(room);
 			
 			if (persist)
-				database.add(room);
+				database.addChatRoom(room);
 			
 			return true;
 		}
@@ -296,7 +293,7 @@ public class ChatRoomHandler {
 		rooms.handleRows((r) -> createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false));
 		
 		createPlanetChannels(systemAvatar, basePath);
-		createAdminChannels(systemAvatar, basePath);
+		createAdminChannels(systemAvatar);
 		
 		/*
 		 * Battlefield Room path examples: SWG.Bria.corellia.battlefield SWG.Bria.corellia.battlefield.corellia_mountain_fortress.allFactions SWG.Bria.corellia.battlefield.corellia_pvp.allFactions / Imperial / Rebel SWG.Bria.corellia.battlefield.corellia_rebel_riverside_fort.allFactions
@@ -313,7 +310,7 @@ public class ChatRoomHandler {
 		});
 	}
 
-	private void createAdminChannels(ChatAvatar systemAvatar, String basePath) {
+	private void createAdminChannels(ChatAvatar systemAvatar) {
 		for (AdminChatRooms room : AdminChatRooms.values()) {
 			createRoom(systemAvatar, false, false, room.getRoomPath(), room.getRoomTitle(), false);
 		}

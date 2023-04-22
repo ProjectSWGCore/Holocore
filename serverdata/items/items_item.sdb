@@ -460,7 +460,6 @@ anakin_helmet	object/tangible/loot/quest/anakin_helmet.iff	item		1	1000	0		0		0	
 answering_machine_generic	object/tangible/loot/npc_loot/answering_machine_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 archaic_sayormi_blade	object/tangible/loot/creature_loot/kashyyyk_loot/archaic_sayormi_blade.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 ardanium_ii	object/tangible/loot/quest/ardanium_ii.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-ardanium_ii	object/tangible/loot/quest/ardanium_ii.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 armor_repair_device_generic	object/tangible/loot/npc_loot/armor_repair_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 artifact_generic	object/tangible/loot/npc_loot/artifact_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 artifact_rare_s01	object/tangible/loot/misc/artifact_rare_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -471,9 +470,7 @@ avatar_slaver_collar	object/tangible/loot/creature_loot/kashyyyk_loot/avatar_sla
 avatar_worklight	object/tangible/loot/creature_loot/kashyyyk_loot/avatar_worklight.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 axkva_token	object/tangible/loot/misc/axkva_token.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 bacta_ampules_generic	object/tangible/loot/generic_usable/bacta_ampules_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-bacta_ampules_generic	object/tangible/loot/npc_loot/bacta_ampules_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 bacta_tank	object/tangible/loot/generic_usable/bacta_tank.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-bantha_doll	object/tangible/loot/quest/bantha_doll.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 bantha_doll	object/tangible/loot/quest/bantha_doll.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 basket_expensive_s01	object/tangible/loot/misc/basket_expensive_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 basket_generic	object/tangible/loot/npc_loot/basket_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -513,12 +510,10 @@ briefcase_generic	object/tangible/loot/npc_loot/briefcase_generic.iff	item		1	10
 briefcase_s01	object/tangible/loot/misc/briefcase_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 broad_spectrum_med_device_generic	object/tangible/loot/npc_loot/broad_spectrum_med_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 broken_bottle	object/tangible/loot/quest/broken_bottle.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-broken_bottle	object/tangible/loot/quest/broken_bottle.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 brown_rug	object/tangible/loot/misc/brown_rug.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 buddy_level_holocron	object/tangible/loot/misc/buddy_level_holocron.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 bug_jar_generic	object/tangible/loot/npc_loot/bug_jar_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 building_repair_device_generic	object/tangible/loot/generic_usable/building_repair_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-building_repair_device_generic	object/tangible/loot/npc_loot/building_repair_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 building_repair_device_generic_lt_4	object/tangible/loot/generic_usable/building_repair_device_generic_lt_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 building_repair_device_generic_st_4	object/tangible/loot/generic_usable/building_repair_device_generic_st_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 cage_generic	object/tangible/loot/npc_loot/cage_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -531,7 +526,6 @@ camp_remote	object/tangible/loot/quest/force_sensitive/camp_remote.iff	item		1	1
 camp_waypoint_datapad	object/tangible/loot/quest/force_sensitive/camp_waypoint_datapad.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 canister_small_device_generic	object/tangible/loot/npc_loot/canister_small_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 carved_stone	object/tangible/loot/quest/carved_stone.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-carved_stone	object/tangible/loot/quest/carved_stone.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 casserole_binna_jode	object/tangible/loot/misc/casserole_binna_jode.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 casual_rug	object/tangible/loot/misc/casual_rug.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 cave_light	object/tangible/loot/creature_loot/kashyyyk_loot/cave_light.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -539,7 +533,6 @@ chance_cube_8_generic	object/tangible/loot/npc_loot/chance_cube_8_generic.iff	it
 chassis_blueprint_device_generic	object/tangible/loot/npc_loot/chassis_blueprint_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 chassis_blueprint_usuable	object/tangible/loot/generic_usable/chassis_blueprint_usuable.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 chem_dispersion_device_generic	object/tangible/loot/generic_usable/chem_dispersion_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-chem_dispersion_device_generic	object/tangible/loot/npc_loot/chem_dispersion_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 circuit_board_generic	object/tangible/loot/npc_loot/circuit_board_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 clamp_generic	object/tangible/loot/npc_loot/clamp_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 clipon_id_badge_generic	object/tangible/loot/npc_loot/clipon_id_badge_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -552,7 +545,6 @@ comlink_civilian_generic	object/tangible/loot/npc_loot/comlink_civilian_generic.
 comlink_naboo_broken	object/tangible/loot/tool/comlink_naboo_broken.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 copper_battery_generic	object/tangible/loot/npc_loot/copper_battery_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 copper_battery_usuable	object/tangible/loot/generic_usable/copper_battery_usuable.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-corellia_meatlumps_act1_story	object/tangible/loot/quest/corellia_meatlumps_act1_story.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 corellia_meatlumps_act1_story	object/tangible/loot/quest/corellia_meatlumps_act1_story.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 corrupted_fruit	object/tangible/loot/creature_loot/kashyyyk_loot/corrupted_fruit.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 corsec_id_badge	object/tangible/loot/misc/corsec_id_badge.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -635,7 +627,6 @@ damaged_datapad	object/tangible/loot/misc/damaged_datapad.iff	item		1	1000	0		0	
 datadisk	object/tangible/loot/simple_kit/datadisk.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 datadisk_corrupt	object/tangible/loot/misc/datadisk_corrupt.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 datadisk_generic	object/tangible/loot/generic_usable/datadisk_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-datadisk_generic	object/tangible/loot/npc_loot/datadisk_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 datadisk_repair_kit	object/tangible/loot/simple_kit/datadisk_repair_kit.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 datapad_backlight	object/tangible/loot/simple_kit/datapad_backlight.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 datapad_battery	object/tangible/loot/simple_kit/datapad_battery.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -679,7 +670,6 @@ elect_module_misc_01	object/tangible/loot/npc_loot/elect_module_misc_01.iff	item
 elect_module_simple_generic	object/tangible/loot/npc_loot/elect_module_simple_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 elect_module_wires	object/tangible/loot/npc_loot/elect_module_wires.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 elect_power_unit_generic	object/tangible/loot/generic_usable/elect_power_unit_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-elect_power_unit_generic	object/tangible/loot/npc_loot/elect_power_unit_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 electro_polearm_generic	object/tangible/loot/npc_loot/electro_polearm_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 electronic_key_generic	object/tangible/loot/npc_loot/electronic_key_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 empty_datapad	object/tangible/loot/simple_kit/empty_datapad.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -701,10 +691,8 @@ flask_sample_device_generic	object/tangible/loot/npc_loot/flask_sample_device_ge
 flat_canvas	object/tangible/loot/simple_kit/flat_canvas.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 fliptop_calibrator_generic	object/tangible/loot/npc_loot/fliptop_calibrator_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 force_crystal	object/tangible/loot/misc/force_crystal.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-force_crystal	object/tangible/loot/quest/force_sensitive/sharred_force_crystal.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 frag_grenade	object/tangible/loot/generic_usable/frag_grenade.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 frequency_jammer_wire_generic	object/tangible/loot/generic_usable/frequency_jammer_wire_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-frequency_jammer_wire_generic	object/tangible/loot/npc_loot/frequency_jammer_wire_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 frn_all_painting_efol_11_s01	object/tangible/loot/misc/frn_all_painting_efol_11_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 frn_all_painting_efol_11_s02	object/tangible/loot/misc/frn_all_painting_efol_11_s02.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 frn_all_painting_efol_11_s03	object/tangible/loot/misc/frn_all_painting_efol_11_s03.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -722,10 +710,8 @@ fs_tracking_device_case_03	object/tangible/loot/collectible/collectible_parts/fs
 fs_tracking_device_kit	object/tangible/loot/collectible/kits/fs_tracking_device_kit.iff	item	Tracking Device Assembly Kit	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 furniture_repair_device_generic	object/tangible/loot/npc_loot/furniture_repair_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generator_device_generic	object/tangible/loot/generic_usable/generator_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-generator_device_generic	object/tangible/loot/npc_loot/generator_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generator_device_generic_lt_4	object/tangible/loot/generic_usable/generator_device_generic_lt_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generic_crystal	object/tangible/loot/generic_usable/generic_crystal.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-generic_crystal	object/tangible/loot/npc_loot/generic_crystal.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generic_eye_of_mesra	object/tangible/loot/mustafar/generic_eye_of_mesra.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generic_storage_increase	object/tangible/loot/generic_usable/generic_storage_increase.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 generic_tool_kit_generic	object/tangible/loot/npc_loot/generic_tool_kit_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -749,7 +735,6 @@ gungan_lance	object/tangible/loot/misc/gungan_lance.iff	item		1	1000	0		0		0	0		
 gungan_signet	object/tangible/loot/misc/gungan_signet.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 handheld_viewscreen_1_generic	object/tangible/loot/npc_loot/handheld_viewscreen_1_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 handheld_viewscreen_2_generic	object/tangible/loot/generic_usable/handheld_viewscreen_2_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-handheld_viewscreen_2_generic	object/tangible/loot/npc_loot/handheld_viewscreen_2_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 healing_chemical_generic	object/tangible/loot/npc_loot/healing_chemical_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 heating_element	object/tangible/loot/simple_kit/heating_element.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 holocron_splinters_sith_s01	object/tangible/loot/misc/holocron_splinters_sith_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -773,7 +758,6 @@ imperial_rescue_filler01	object/tangible/loot/dungeon/corellian_corvette/imperia
 imperial_rescue_filler02	object/tangible/loot/dungeon/corellian_corvette/imperial_rescue_filler02.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 imperial_rescue_intel	object/tangible/loot/dungeon/corellian_corvette/imperial_rescue_intel.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 impulse_detector_01_generic	object/tangible/loot/generic_usable/impulse_detector_01_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-impulse_detector_01_generic	object/tangible/loot/npc_loot/impulse_detector_01_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 impulse_detector_02_generic	object/tangible/loot/npc_loot/impulse_detector_02_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 impulse_detector_broken_s1	object/tangible/loot/tool/impulse_detector_broken_s1.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 impulse_detector_broken_s2	object/tangible/loot/tool/impulse_detector_broken_s2.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -805,11 +789,11 @@ item_corellia_junk_canoid_hunter_01_01	object/tangible/loot/creature_loot/generi
 item_corellia_junk_canoid_pack_leader_01_01	object/tangible/loot/creature_loot/generic/bug_jar.iff	item	Canoid Pack Leader Parasites	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_carrion_spat_01_01	object/tangible/loot/creature_loot/generic/generic_eye.iff	item	Carrion Spat Eye	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_corellian_butterfly_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Antennae	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_corellian_butterfly_defender_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Defender Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_corellian_butterfly_defender_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Corellian Butterfly Defender Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_corellian_butterfly_drone_01_01	object/tangible/loot/creature_loot/generic/generic_antennae.iff	item	Corellian Butterfly Drone Antennae	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_corellian_butterfly_drone_large_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Large Corellian Butterfly Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_corellian_butterfly_monarch_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Corellian Butterfly Larvae	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_corellia_junk_corellian_butterfly_warrior_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Corellian Butterfly Warrior Organ	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_corellia_junk_corellian_butterfly_warrior_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Corellian Butterfly Warrior Organ	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_corellian_butterfly_worker_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Corellian Butterfly Worker Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_crazed_durni_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Crazed Durni Intestines	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_corellia_junk_crimson_sand_panther_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Crimson Sand Panther Tooth	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -1373,11 +1357,11 @@ item_tatooine_junk_dewback_cannibal_01_01	object/tangible/loot/creature_loot/gen
 item_tatooine_junk_dim_u_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Dim-U Bantha Foot	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_domestic_eopie_01_01	object/tangible/loot/creature_loot/generic/generic_paw.iff	item	Eopie Hoof	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	30	0	0	-
 item_tatooine_junk_dragonet_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Dragonet Intestines	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_tatooine_junk_dune_bantha_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dune Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
-item_tatooine_junk_dwarf_bantha	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Dwarf Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	71	0	0	-
-item_tatooine_junk_dwarf_eopie	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Dwarf Eopie Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
+item_tatooine_junk_dune_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Dune Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
+item_tatooine_junk_dwarf_bantha	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Dwarf Bantha Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	71	0	0	-
+item_tatooine_junk_dwarf_eopie	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Dwarf Eopie Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
 item_tatooine_junk_dwarf_nuna_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Dwarf Nuna Jaw Bone	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	32	0	0	-
-item_tatooine_junk_eopie_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Eopie Innards	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	40	0	0	-
+item_tatooine_junk_eopie_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Eopie Innards	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	40	0	0	-
 item_tatooine_junk_feral_bantha_01_01	object/tangible/loot/creature_loot/generic/lungs_gland.iff	item	Feral Bantha Lungs	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_giant_canyon_krayt_dragon_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Canyon Krayt Dragon Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	1008	0	0	-
 item_tatooine_junk_giant_sand_beetle_01_01	object/tangible/loot/creature_loot/generic/worm_jar.iff	item	Sand Beetle Larva	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -1406,9 +1390,9 @@ item_tatooine_junk_ronto_01_01	object/tangible/loot/creature_loot/generic/generi
 item_tatooine_junk_ronto_male_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Male Ronto Liver	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_scyk_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Scyk Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	78	0	0	-
 item_tatooine_junk_sevorrt_01_01	object/tangible/loot/creature_loot/generic/guts_jar.iff	item	Sevorrt Innards	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	45	0	0	-
-item_tatooine_junk_squill_01_01	object/tangible/loot/creature_loot/generic/heart_s02.iff	item	Squill Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	85	0	0	-
-item_tatooine_junk_swarming_lesser_dewback_01_01	object/tangible/loot/creature_loot/generic/heart_s03.iff	item	Swarming Lesser Dewback Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	85	0	0	-
-item_tatooine_junk_tatooine_mynock_01_01	object/tangible/loot/creature_loot/generic/liver_s02.iff	item	Mynock Digestive Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	34	0	0	-
+item_tatooine_junk_squill_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Squill Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	85	0	0	-
+item_tatooine_junk_swarming_lesser_dewback_01_01	object/tangible/loot/creature_loot/generic/generic_heart.iff	item	Swarming Lesser Dewback Heart	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	85	0	0	-
+item_tatooine_junk_tatooine_mynock_01_01	object/tangible/loot/creature_loot/generic/generic_liver.iff	item	Mynock Digestive Gland	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	34	0	0	-
 item_tatooine_junk_tusken_bantha_01_01	object/tangible/loot/creature_loot/generic/generic_stomach.iff	item	Tusken Bantha Stomach	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
 item_tatooine_junk_variegated_womprat_01_01	object/tangible/loot/creature_loot/generic/thigh_meat_chunk.iff	item	Variegated Womprat Leg	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	85	0	0	-
 item_tatooine_junk_wild_dune_boar_01_01	object/tangible/loot/creature_loot/generic/carnivore_tooth.iff	item	Wild Dune Boar Tusk	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	15	0	0	-
@@ -1501,7 +1485,6 @@ key_electronic_s01	object/tangible/loot/misc/key_electronic_s01.iff	item		1	1000
 kkryytch_feather_01	object/tangible/loot/creature_loot/kashyyyk_loot/kkryytch_feather_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 lance_nightsister_schematic	object/tangible/loot/quest/lance_nightsister_schematic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 large_dispersal_unit_generic	object/tangible/loot/generic_usable/large_dispersal_unit_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-large_dispersal_unit_generic	object/tangible/loot/npc_loot/large_dispersal_unit_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 large_dispersal_unit_generic_lt_4	object/tangible/loot/generic_usable/large_dispersal_unit_generic_lt_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 laser_trap_generic	object/tangible/loot/npc_loot/laser_trap_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 launcher_tube_generic	object/tangible/loot/npc_loot/launcher_tube_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1581,7 +1564,6 @@ mind_pod_stomach	object/tangible/loot/quest/mind_pod_stomach.iff	item		1	1000	0	
 minstyngar_fang_01	object/tangible/loot/creature_loot/kashyyyk_loot/minstyngar_fang_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 minstyngar_horn_01	object/tangible/loot/creature_loot/kashyyyk_loot/minstyngar_horn_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 motivator_device_generic	object/tangible/loot/generic_usable/motivator_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-motivator_device_generic	object/tangible/loot/npc_loot/motivator_device_generic.iff	item	Burnt Out Motivator	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 motor_small_blue	object/tangible/loot/simple_kit/motor_small_blue.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 motor_small_red	object/tangible/loot/simple_kit/motor_small_red.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 mouf_paw_01	object/tangible/loot/creature_loot/kashyyyk_loot/mouf_paw_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1686,7 +1668,6 @@ potion_component_02	object/tangible/loot/creature_loot/kashyyyk_loot/potion_comp
 potion_component_03	object/tangible/loot/creature_loot/kashyyyk_loot/potion_component_03.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 powder_pack	object/tangible/loot/simple_kit/powder_pack.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 power_output_analyzer_generic	object/tangible/loot/generic_usable/power_output_analyzer_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-power_output_analyzer_generic	object/tangible/loot/npc_loot/power_output_analyzer_generic.iff	item	a power output analyzer	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 preserved_bugs_generic	object/tangible/loot/npc_loot/preserved_bugs_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 processor_attachments	object/tangible/loot/simple_kit/processor_attachments.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 proclamation_s01	object/tangible/loot/misc/proclamation_s01.iff	item	An Official Proclamation	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1704,7 +1685,6 @@ quest_stimpack_a_schematic	object/tangible/loot/quest/quest_stimpack_a_schematic
 radar_screen	object/tangible/loot/mustafar/radar_screen.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 radio_generic	object/tangible/loot/npc_loot/radio_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 ration_kit_device_generic	object/tangible/loot/generic_usable/ration_kit_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-ration_kit_device_generic	object/tangible/loot/npc_loot/ration_kit_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rebel_assassin_filler01	object/tangible/loot/dungeon/corellian_corvette/rebel_assassin_filler01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rebel_assassin_filler02	object/tangible/loot/dungeon/corellian_corvette/rebel_assassin_filler02.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rebel_assassin_intel	object/tangible/loot/dungeon/corellian_corvette/rebel_assassin_intel.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1715,7 +1695,6 @@ rebel_rescue_filler01	object/tangible/loot/dungeon/corellian_corvette/rebel_resc
 rebel_rescue_filler02	object/tangible/loot/dungeon/corellian_corvette/rebel_rescue_filler02.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rebel_rescue_intel	object/tangible/loot/dungeon/corellian_corvette/rebel_rescue_intel.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rebreather_generic	object/tangible/loot/generic_usable/rebreather_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-rebreather_generic	object/tangible/loot/npc_loot/rebreather_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 recording_rod_broken	object/tangible/loot/tool/recording_rod_broken.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 recording_rod_generic	object/tangible/loot/npc_loot/recording_rod_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 recording_rod_s01	object/tangible/loot/misc/recording_rod_s01.iff	item	A Recording Rod	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1734,7 +1713,6 @@ rng_weapon_repair_device_generic	object/tangible/loot/npc_loot/rng_weapon_repair
 rock_generic	object/tangible/loot/npc_loot/rock_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rocket_ammo_generic	object/tangible/loot/npc_loot/rocket_ammo_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rocket_generic	object/tangible/loot/generic_usable/rocket_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-rocket_generic	object/tangible/loot/npc_loot/rocket_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 roroo_paw_01	object/tangible/loot/creature_loot/kashyyyk_loot/roroo_paw_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 rudic	object/tangible/loot/quest/rudic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 runestone	object/tangible/loot/quest/runestone.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1757,9 +1735,7 @@ schematic_dress_s08_quest	object/tangible/loot/quest/schematic_dress_s08_quest.i
 schematic_pistol_fwg5_quest	object/tangible/loot/quest/schematic_pistol_fwg5_quest.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 schematic_republic_blaster_quest	object/tangible/loot/quest/schematic_republic_blaster_quest.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 scope_weapon_generic	object/tangible/loot/generic_usable/scope_weapon_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-scope_weapon_generic	object/tangible/loot/npc_loot/scope_weapon_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 scroll_generic	object/tangible/loot/generic_usable/scroll_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-scroll_generic	object/tangible/loot/npc_loot/scroll_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 sculpture_adhesive	object/tangible/loot/collectible/collectible_parts/sculpture_adhesive.iff	item	Nabooian Sculpture Adhesive	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 sculpture_goldinlay_01	object/tangible/loot/collectible/collectible_parts/sculpture_goldinlay_01.iff	item	Nabooian Sculpture Gold Plating - First Coating	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 sculpture_goldinlay_02	object/tangible/loot/collectible/collectible_parts/sculpture_goldinlay_02.iff	item	Nabooian Sculpture Gold Plating - Second Coating	1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1791,7 +1767,6 @@ shoe_soul_generic	object/tangible/loot/npc_loot/shoe_soul_generic.iff	item		1	10
 sith_relic_01	object/tangible/loot/mustafar/sith_relic_01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 slave_collar	object/tangible/loot/misc/slave_collar.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 slave_collar_generic	object/tangible/loot/generic_usable/slave_collar_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-slave_collar_generic	object/tangible/loot/npc_loot/slave_collar_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 small_motor_generic	object/tangible/loot/npc_loot/small_motor_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 smooth_stone	object/tangible/loot/quest/smooth_stone.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 snake_blood	object/tangible/loot/creature_loot/kashyyyk_loot/snake_blood.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1804,12 +1779,10 @@ snake_poison	object/tangible/loot/creature_loot/kashyyyk_loot/snake_poison.iff	i
 snake_riverpearl	object/tangible/loot/creature_loot/kashyyyk_loot/snake_riverpearl.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 snake_riverweed	object/tangible/loot/creature_loot/kashyyyk_loot/snake_riverweed.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 software_module_generic	object/tangible/loot/generic_usable/software_module_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-software_module_generic	object/tangible/loot/npc_loot/software_module_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 software_module_orange_generic	object/tangible/loot/npc_loot/software_module_orange_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 software_module_red_generic	object/tangible/loot/npc_loot/software_module_red_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 solar_panel	object/tangible/loot/npc_loot/solar_panel.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 speaker_generic	object/tangible/loot/generic_usable/speaker_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-speaker_generic	object/tangible/loot/npc_loot/speaker_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 speaker_s01	object/tangible/loot/misc/speaker_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spectrum_recorder	object/tangible/loot/misc/spectrum_recorder.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 sphere_grenade_generic	object/tangible/loot/generic_usable/sphere_grenade_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1833,18 +1806,14 @@ spice_yarrock_generic	object/tangible/loot/npc_loot/spice_yarrock_generic.iff	it
 spinning_blade	object/tangible/loot/simple_kit/spinning_blade.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 sports_award_s01	object/tangible/loot/misc/sports_award_s01.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spray_bottle_generic	object/tangible/loot/generic_usable/spray_bottle_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-spray_bottle_generic	object/tangible/loot/npc_loot/spray_bottle_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spray_unit_small_01_generic	object/tangible/loot/generic_usable/spray_unit_small_01_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-spray_unit_small_01_generic	object/tangible/loot/npc_loot/spray_unit_small_01_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spray_unit_small_02_generic	object/tangible/loot/npc_loot/spray_unit_small_02_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spray_unit_small_03_generic	object/tangible/loot/npc_loot/spray_unit_small_03_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 spray_unit_small_generic	object/tangible/loot/generic_usable/spray_unit_small_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-spray_unit_small_generic	object/tangible/loot/npc_loot/spray_unit_small_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 squill_skull	object/tangible/loot/quest/hero_of_tatooine/squill_skull.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 squill_skull_pile	object/tangible/loot/quest/hero_of_tatooine/squill_skull_pile.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 stasis_field_generic	object/tangible/loot/npc_loot/stasis_field_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 stim_a_generic	object/tangible/loot/generic_usable/stim_a_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-stim_a_generic	object/tangible/loot/npc_loot/stim_a_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 stim_a_generic_lt_4	object/tangible/loot/generic_usable/stim_a_generic_lt_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 stim_a_generic_st_4	object/tangible/loot/generic_usable/stim_a_generic_st_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 stim_medium_generic	object/tangible/loot/generic_usable/stim_medium_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1855,12 +1824,9 @@ stuff_rancor_doll	object/tangible/loot/mustafar/stuff_rancor_doll.iff	item		1	10
 stuffed_dewback_doll	object/tangible/loot/mustafar/stuffed_dewback_doll.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 substance_analyzer_generic	object/tangible/loot/npc_loot/substance_analyzer_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 supplement_liquid	object/tangible/loot/generic_usable/supplement_liquid.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-supplement_liquid	object/tangible/loot/npc_loot/supplement_liquid.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 supplement_solid	object/tangible/loot/npc_loot/supplement_solid.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 supplement_solid_pills	object/tangible/loot/generic_usable/supplement_solid_pills.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-supplement_solid_pills	object/tangible/loot/npc_loot/supplement_solid_pills.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 survey_pad_adv_generic	object/tangible/loot/generic_usable/survey_pad_adv_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-survey_pad_adv_generic	object/tangible/loot/npc_loot/survey_pad_adv_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 survey_pad_adv_generic_lt_4	object/tangible/loot/generic_usable/survey_pad_adv_generic_lt_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 survey_pad_adv_generic_st_4	object/tangible/loot/generic_usable/survey_pad_adv_generic_st_4.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 survey_tool_all	object/tangible/survey_tool/survey_tool_all.iff	item	Complete Resource Survey Tool	1	1000	0		0		0	0				0							0	0			1	crafting_artisan_novice	0	0		-1	-1	-1	-1	0	0	0	-
@@ -1896,9 +1862,7 @@ trophey_lava_lizard_heart	object/tangible/loot/mustafar/trophey_lava_lizard_hear
 trophey_tulrus_spine	object/tangible/loot/mustafar/trophey_tulrus_spine.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 trophey_xandank	object/tangible/loot/mustafar/trophey_xandank.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 tube_paste_generic	object/tangible/loot/generic_usable/tube_paste_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-tube_paste_generic	object/tangible/loot/npc_loot/tube_paste_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 tubed_device_generic	object/tangible/loot/generic_usable/tubed_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-tubed_device_generic	object/tangible/loot/npc_loot/tubed_device_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 tumble_blender	object/tangible/loot/simple_kit/tumble_blender.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 tusken_head	object/tangible/loot/quest/tusken_head.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 tusken_token	object/tangible/loot/misc/tusken_token.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1944,7 +1908,6 @@ wiring_generic	object/tangible/loot/npc_loot/wiring_generic.iff	item		1	1000	0		
 wiring_red	object/tangible/loot/simple_kit/wiring_red.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 worklight	object/tangible/loot/misc/worklight.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 worklight_generic	object/tangible/loot/generic_usable/worklight_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
-worklight_generic	object/tangible/loot/npc_loot/worklight_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 writing_utensils_generic	object/tangible/loot/npc_loot/writing_utensils_generic.iff	item		1	1000	0		0		0	0				0							0	0			1		0	0		-1	-1	-1	-1	0	0	0	-
 acklay_bone_segment_schematic	object/tangible/loot/loot_schematic/geonosian_acklay_bone_armor_schematic.iff	schematic	Interwoven Bone Armor Segment Schematic	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_segment_bone_acklay.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 acklay_muscle_weaving_schematic	object/tangible/loot/loot_schematic/geonosian_acklay_muscle_armor_schematic.iff	schematic	Interwoven R. I. S. Armor Segment Schematic	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_segment_ris_acklay.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -1959,51 +1922,51 @@ armor_bounty_hunter_crafted_chest	object/tangible/loot/loot_schematic/death_watc
 armor_bounty_hunter_crafted_gloves	object/tangible/loot/loot_schematic/death_watch_bounty_hunter_gloves_schematic.iff	schematic	Appearance Schematic Bounty Hunter Armor Gloves	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_bounty_hunter_crafted_gloves.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 armor_bounty_hunter_crafted_helmet	object/tangible/loot/loot_schematic/death_watch_bounty_hunter_helmet_schematic.iff	schematic	Appearance Schematic Bounty Hunter Armor Helmet	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_bounty_hunter_crafted_helmet.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 armor_bounty_hunter_crafted_leggings	object/tangible/loot/loot_schematic/death_watch_bounty_hunter_leggings_schematic.iff	schematic	Appearance Schematic Bounty Hunter Armor Leggings	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_bounty_hunter_crafted_leggings.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-assorted_fruit	object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff	schematic	Assorted Fruit Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_assorted_fruit.iff	0	1	class_domestics_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-bacta_tank	object/tangible/loot/loot_schematic/bacta_tank_schematic.iff	schematic	Bacta Tank Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bacta_tank_large.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-basket_closed	object/tangible/loot/loot_schematic/basket_closed_schematic.iff	schematic	Closed Basket Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_basket_closed.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-bottle_fat	object/tangible/loot/loot_schematic/bottle_fat_schematic.iff	schematic	Fat Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_fat.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-bottle_pear	object/tangible/loot/loot_schematic/bottle_pear_schematic.iff	schematic	Pear-shaped Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_pear.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-bottle_tall	object/tangible/loot/loot_schematic/bottle_tall_schematic.iff	schematic	Tall Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_tall.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-bubble_tank	object/tangible/loot/loot_schematic/bubble_tank_schematic.iff	schematic	Bubble Tank Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bubble_tank.iff	0	1	class_smuggler_phase2_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-cafe_chair	object/tangible/loot/loot_schematic/chair_cafe_schematic.iff	schematic	Cafe Chair Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_chair_cantina.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-campfire	object/tangible/loot/loot_schematic/campfire_schematic.iff	schematic	Campfire Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_cabinet_elegant.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-cantina_chair	object/tangible/loot/loot_schematic/cantina_chair_schematic.iff	schematic	Cantina Chair Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_campfire.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-carved_bowl	object/tangible/loot/loot_schematic/bowl_carved_schematic.iff	schematic	Carved Bowl Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bowl_carved.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-carved_plain	object/tangible/loot/loot_schematic/bowl_plain_schematic.iff	schematic	Plain Bowl Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bowl_plain.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-chemical_recycler	object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff	schematic	Chemical Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_chemical.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-coffee_table_modern	object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff	schematic	Modern Table Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_table_coffee_modern_02.iff	0	1	class_structures_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-command_console	object/tangible/loot/loot_schematic/command_console_schematic.iff	schematic	Command Console Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_command_console.iff	0	1	class_structures_phase4_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-corellian_flagpole	object/tangible/loot/loot_schematic/corellian_flagpole_schematic.iff	schematic	Corellian Flag Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_corellia_flagpole.iff	0	1	class_structures_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-couch_blue	object/tangible/loot/loot_schematic/couch_blue_schematic.iff	schematic	Blue Couch Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_couch_blue.iff	0	1	class_structures_phase3_03		1		0	0		-1	-1	-1	-1	0	0	0	-
-creature_recycler	object/tangible/loot/loot_schematic/creature_recycler_schematic.iff	schematic	Creature Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_creature.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+assorted_fruit_schematic	object/tangible/loot/loot_schematic/assorted_fruit_schematic.iff	schematic	Assorted Fruit Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_assorted_fruit.iff	0	1	class_domestics_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+bacta_tank_schematic	object/tangible/loot/loot_schematic/bacta_tank_schematic.iff	schematic	Bacta Tank Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bacta_tank_large.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+basket_closed_schematic	object/tangible/loot/loot_schematic/basket_closed_schematic.iff	schematic	Closed Basket Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_basket_closed.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+bottle_fat_schematic	object/tangible/loot/loot_schematic/bottle_fat_schematic.iff	schematic	Fat Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_fat.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+bottle_pear_schematic	object/tangible/loot/loot_schematic/bottle_pear_schematic.iff	schematic	Pear-shaped Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_pear.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+bottle_tall_schematic	object/tangible/loot/loot_schematic/bottle_tall_schematic.iff	schematic	Tall Bottle Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bottle_tall.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+bubble_tank_schematic	object/tangible/loot/loot_schematic/bubble_tank_schematic.iff	schematic	Bubble Tank Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bubble_tank.iff	0	1	class_smuggler_phase2_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+cafe_chair_schematic	object/tangible/loot/loot_schematic/chair_cafe_schematic.iff	schematic	Cafe Chair Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_chair_cantina.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+campfire_schematic	object/tangible/loot/loot_schematic/campfire_schematic.iff	schematic	Campfire Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_cabinet_elegant.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+cantina_chair_schematic	object/tangible/loot/loot_schematic/cantina_chair_schematic.iff	schematic	Cantina Chair Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_campfire.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+carved_bowl_schematic	object/tangible/loot/loot_schematic/bowl_carved_schematic.iff	schematic	Carved Bowl Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bowl_carved.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+carved_plain_schematic	object/tangible/loot/loot_schematic/bowl_plain_schematic.iff	schematic	Plain Bowl Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_bowl_plain.iff	0	1	class_domestics_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+chemical_recycler_schematic	object/tangible/loot/loot_schematic/chemical_recycler_schematic.iff	schematic	Chemical Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_chemical.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+coffee_table_modern_schematic	object/tangible/loot/loot_schematic/table_coffee_modern_schematic.iff	schematic	Modern Table Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_table_coffee_modern_02.iff	0	1	class_structures_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+command_console_schematic	object/tangible/loot/loot_schematic/command_console_schematic.iff	schematic	Command Console Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_command_console.iff	0	1	class_structures_phase4_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+corellian_flagpole_schematic	object/tangible/loot/loot_schematic/corellian_flagpole_schematic.iff	schematic	Corellian Flag Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_corellia_flagpole.iff	0	1	class_structures_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+couch_blue_schematic	object/tangible/loot/loot_schematic/couch_blue_schematic.iff	schematic	Blue Couch Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_couch_blue.iff	0	1	class_structures_phase3_03		1		0	0		-1	-1	-1	-1	0	0	0	-
+creature_recycler_schematic	object/tangible/loot/loot_schematic/creature_recycler_schematic.iff	schematic	Creature Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_creature.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
 deprecated_reactor_01_mk1_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Deprecated Schematic for Koensayr Reactor "Star Synthesis" Archetype A	1	1000	0		0		0	0				0						object/draft_schematic/space/reactor/collection_reward_reactor_01_mk4.iff	0	3	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 deprecated_reactor_01_mk2_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Deprecated Schematic for Koensayr Reactor "Star Synthesis" Archetype B	1	1000	0		0		0	0				0						object/draft_schematic/space/reactor/collection_reward_reactor_02_mk4.iff	0	3	class_structures_phase2_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 deprecated_reactor_01_mk3_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Deprecated Schematic for Koensayr Reactor "Star Synthesis" Archetype C	1	1000	0		0		0	0				0						object/draft_schematic/space/reactor/collection_reward_reactor_03_mk4.iff	0	3	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 deprecated_reactor_01_mk4_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Deprecated Schematic for Koensayr Reactor "Star Synthesis" Archetype D	1	1000	0		0		0	0				0						object/draft_schematic/space/reactor/collection_reward_reactor_04_mk4.iff	0	3	class_structures_phase4_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-diagnostic_screen	object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff	schematic	Diagnostic Screen Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_diagnostic_screen.iff	0	1	class_structures_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-droid_body	object/tangible/loot/loot_schematic/droid_body_schematic.iff	schematic	Droid Body Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_droid_body.iff	0	1	class_engineering_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-droid_head	object/tangible/loot/loot_schematic/droid_head_schematic.iff	schematic	Droid Head Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_droid_head.iff	0	1	class_engineering_phase2_03		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_belt	object/tangible/loot/loot_schematic/death_watch_mandalorian_belt_schematic.iff	schematic	Appearance Schematic Mandalorian Belt	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_belt.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_bicep_l	object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_l_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Left Bicep	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bicep_l.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_bicep_r	object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_r_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Right Bicep	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bicep_r.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_boots	object/tangible/loot/loot_schematic/death_watch_mandalorian_boots_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Boots	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_boots.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_bracer_l	object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_l_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Left Bracer	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bracer_l.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_bracer_r	object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_r_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Right Bracer	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bracer_r.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_chest	object/tangible/loot/loot_schematic/death_watch_mandalorian_chest_plate_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Chestplate	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_chest.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_gloves	object/tangible/loot/loot_schematic/death_watch_mandalorian_gloves_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Gloves	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_gloves.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_helmet	object/tangible/loot/loot_schematic/death_watch_mandalorian_helmet_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Helmet	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_helmet.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-dwb_armor_mandalorian_leggings	object/tangible/loot/loot_schematic/death_watch_mandalorian_leggings_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Leggings	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_leggings.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-elegant_cabinet	object/tangible/loot/loot_schematic/elegant_cabinet_schematic.iff	schematic	Elegant Cabinet Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_cabinet_elegant.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+diagnostic_screen_schematic	object/tangible/loot/loot_schematic/diagnostic_screen_schematic.iff	schematic	Diagnostic Screen Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_diagnostic_screen.iff	0	1	class_structures_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+droid_body_schematic	object/tangible/loot/loot_schematic/droid_body_schematic.iff	schematic	Droid Body Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_droid_body.iff	0	1	class_engineering_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+droid_head_schematic	object/tangible/loot/loot_schematic/droid_head_schematic.iff	schematic	Droid Head Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_droid_head.iff	0	1	class_engineering_phase2_03		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_belt_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_belt_schematic.iff	schematic	Appearance Schematic Mandalorian Belt	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_belt.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_bicep_l_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_l_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Left Bicep	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bicep_l.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_bicep_r_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_bicep_r_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Right Bicep	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bicep_r.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_boots_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_boots_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Boots	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_boots.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_bracer_l_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_l_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Left Bracer	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bracer_l.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_bracer_r_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_bracer_r_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Right Bracer	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_bracer_r.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_chest_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_chest_plate_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Chestplate	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_chest.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_gloves_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_gloves_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Gloves	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_gloves.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_helmet_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_helmet_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Helmet	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_helmet.iff	0	1	class_engineering_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+dwb_armor_mandalorian_leggings_schematic	object/tangible/loot/loot_schematic/death_watch_mandalorian_leggings_schematic.iff	schematic	Appearance Schematic Mandalorian Armor Leggings	1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_mandalorian_leggings.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+elegant_cabinet_schematic	object/tangible/loot/loot_schematic/elegant_cabinet_schematic.iff	schematic	Elegant Cabinet Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_cabinet_elegant.iff	0	1	class_engineering_phase1_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 executioners_hack_schematic	object/tangible/loot/loot_schematic/death_watch_executioners_hack_schematic.iff	schematic	Black Sun Executioner's Hack Schematic	1	1000	0		0		0	0				0						object/draft_schematic/weapon/appearance/weapon_appearance_executioners_hack.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-flora_recycler	object/tangible/loot/loot_schematic/flora_recycler_schematic.iff	schematic	Flora Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_flora.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
-foodcart	object/tangible/loot/loot_schematic/foodcart_schematic.iff	schematic	Food Cart Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_food_cart.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-gambling_table	object/tangible/loot/loot_schematic/gambling_table_schematic.iff	schematic	Gaming Table Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_table_gambling.iff	0	1	class_smuggler_phase2_05		1		0	0		-1	-1	-1	-1	0	0	0	-
+flora_recycler_schematic	object/tangible/loot/loot_schematic/flora_recycler_schematic.iff	schematic	Flora Recycler Schematic	1	1000	0		0		0	0				0						object/draft_schematic/item/item_recycler_flora.iff	0	1	class_engineering_phase1_02		1		0	0		-1	-1	-1	-1	0	0	0	-
+foodcart_schematic	object/tangible/loot/loot_schematic/foodcart_schematic.iff	schematic	Food Cart Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_food_cart.iff	0	1	class_domestics_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
+gambling_table_schematic	object/tangible/loot/loot_schematic/gambling_table_schematic.iff	schematic	Gaming Table Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_table_gambling.iff	0	1	class_smuggler_phase2_05		1		0	0		-1	-1	-1	-1	0	0	0	-
 geonosian_reinforcement_core_schematic	object/tangible/loot/loot_schematic/geonosian_reinforcement_core_schematic.iff	schematic	Geonosian Reinforcement Core Schematic	1	1000	0		0		0	0				0						object/draft_schematic/weapon/component/reinforcement_core_geo.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 geonosian_sonic_blaster_schematic	object/tangible/loot/loot_schematic/geonosian_sonic_blaster_schematic.iff	schematic	Geonosian Sonic Blaster Schematic	1	1000	0		0		0	0				0						object/draft_schematic/weapon/appearance/weapon_appearance_pistol_geo_sonic_blaster.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 geonosian_sword_core_schematic	object/tangible/loot/loot_schematic/geonosian_sword_core_schematic.iff	schematic	Geonosian Sword Core Schematic	1	1000	0		0		0	0				0						object/draft_schematic/weapon/component/sword_core_geo.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 geonosian_tenloss_dxr6_schematic	object/tangible/loot/loot_schematic/geonosian_tenloss_dxr6_schematic.iff	schematic	Geonosian Tenloss DXR-6 Schematic	1	1000	0		0		0	0				0						object/draft_schematic/weapon/appearance/weapon_appearance_rifle_tenloss_disrupter.iff	0	5	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
-hanging_planter	object/tangible/loot/loot_schematic/hanging_planter_schematic.iff	schematic	Hanging Planter Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_plant_hanging.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+hanging_planter_schematic	object/tangible/loot/loot_schematic/hanging_planter_schematic.iff	schematic	Hanging Planter Draft Schematic	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_plant_hanging.iff	0	1	class_structures_phase1_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 imperial_assault_trooper_bicep_l_schematic	object/tangible/loot/factional_schematic/imperial_assault_trooper_bicep_l_schematic.iff	schematic		1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_assault_trooper_bicep_l.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 imperial_assault_trooper_bicep_r_schematic	object/tangible/loot/factional_schematic/imperial_assault_trooper_bicep_r_schematic.iff	schematic		1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_assault_trooper_bicep_r.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 imperial_assault_trooper_boots_schematic	object/tangible/loot/factional_schematic/imperial_assault_trooper_boots_schematic.iff	schematic		1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_assault_trooper_boots.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
@@ -2036,21 +1999,21 @@ imperial_stormtrooper_helmet_schematic	object/tangible/loot/factional_schematic/
 imperial_stormtrooper_leggings_schematic	object/tangible/loot/factional_schematic/imperial_stormtrooper_leggings_schematic.iff	schematic		1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_stormtrooper_leggings.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 imperial_stormtrooper_utility_belt_schematic	object/tangible/loot/factional_schematic/imperial_stormtrooper_utility_belt_schematic.iff	schematic		1	1000	0		0		0	0				0						object/draft_schematic/armor/armor_appearance_stormtrooper_utility_belt.iff	0	1	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_armor_recolor_kit_schematic_01	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic Deed: Crafted Armor Color Kit	1	1000	0		0		0	0				0						object/draft_schematic/armor/crafted_armor_recolor_kit.iff	0	3	class_munitions_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
-item_beast_holocron_04_01	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Truffle Pig	1	1000	0		0		0	0				0						bm_pig_forage	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_02	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Domestics	1	1000	0		0		0	0				0						bm_helper_monkey_domestic	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_03	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Engineering	1	1000	0		0		0	0				0						bm_helper_monkey_engineering	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_04	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Structure	1	1000	0		0		0	0				0						bm_helper_monkey_structure	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_05	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Munitions	1	1000	0		0		0	0				0						bm_helper_monkey_munitions	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_06	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Jedi	1	1000	0		0		0	0				0						bm_helper_monkey_jedi	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_07	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Dancing Cat	1	1000	0		0		0	0				0						bm_dancing_cat	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_08	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Dancing Pet	1	1000	0		0		0	0				0						bm_dancing_pet_entertainer	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_09	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Resource Scavenger	1	1000	0		0		0	0				0						bm_survey_bonus	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
-item_beast_holocron_04_10	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Shipwright	1	1000	0		0		0	0				0						bm_helper_monkey_shipwright	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_01_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Truffle Pig	1	1000	0		0		0	0				0						bm_pig_forage	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_02_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Domestics	1	1000	0		0		0	0				0						bm_helper_monkey_domestic	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_03_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Engineering	1	1000	0		0		0	0				0						bm_helper_monkey_engineering	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_04_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Structure	1	1000	0		0		0	0				0						bm_helper_monkey_structure	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_05_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Munitions	1	1000	0		0		0	0				0						bm_helper_monkey_munitions	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_06_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Jedi	1	1000	0		0		0	0				0						bm_helper_monkey_jedi	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_07_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Dancing Cat	1	1000	0		0		0	0				0						bm_dancing_cat	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_08_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Dancing Pet	1	1000	0		0		0	0				0						bm_dancing_pet_entertainer	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_09_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Resource Scavenger	1	1000	0		0		0	0				0						bm_survey_bonus	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
+item_beast_holocron_04_10_schematic	object/tangible/jedi/beast_holocron_generic.iff	schematic	Beast Knowledge: Helper Monkey Shipwright	1	1000	0		0		0	0				0						bm_helper_monkey_shipwright	5	0	expertise_bm_incubation_base_1		1		0	0		-1	-1	-1	-1	0	0	0	beast ability
 item_content_schematic_psg_borvo_02_01	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic: Borvo's Stolen Shield	1	1000	0		0		0	0				0						object/draft_schematic/armor/shield_generator_personal_borvo.iff	0	25	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_content_schematic_psg_droideka_02_01	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic: Droideka Personal Shield	1	1000	0		0		0	0				0						object/draft_schematic/armor/shield_generator_personal_droideka.iff	0	25	class_munitions_phase4_master		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_event_lifeday_bantha_surprise_recipe	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Bantha Surprise Recipe	1	1000	0		0		0	0				0						object/draft_schematic/food/bantha_surprise.iff	0	1	class_domestics_phase4_03		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_framed_beetle_specimen_schematic_01	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Framed Beetle Specimens	1	1000	0		0		0	0				0						object/draft_schematic/furniture/furniture_framed_beetle_specimen_collection_reward.iff	0	1	class_structures_phase1_novice		1		0	0		-1	60	6	-1	1000	0	0	-
-item_gunship_cargo_hold_01	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Gunship Cargo Hold	1	1000	0		0		0	0				0						object/draft_schematic/space/cargo_hold/crg_pob_gunship_huge.iff	0	1	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
+item_gunship_cargo_hold_01_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Gunship Cargo Hold	1	1000	0		0		0	0				0						object/draft_schematic/space/cargo_hold/crg_pob_gunship_huge.iff	0	1	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_gunship_imperial_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Imperial Gunship	1	1000	0		0		0	0				0						object/draft_schematic/space/chassis/player_gunship_imperial.iff	0	1	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_gunship_neutral_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Freelancer Gunship	1	1000	0		0		0	0				0						object/draft_schematic/space/chassis/player_gunship_neutral.iff	0	1	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-
 item_gunship_rebel_schematic	object/tangible/loot/loot_schematic/generic_limited_use.iff	schematic	Schematic for Rebel Gunship	1	1000	0		0		0	0				0						object/draft_schematic/space/chassis/player_gunship_rebel.iff	0	1	class_structures_phase3_novice		1		0	0		-1	-1	-1	-1	0	0	0	-

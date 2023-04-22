@@ -1,108 +1,134 @@
 Template	Name	Category	Subcategory	Type	Flag
 TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER
-object/building/tatooine/cloning_facility_tatooine.iff		cloningfacility		0	0
-object/building/tatooine/cloning_facility_tatooine_small.iff		cloningfacility		0	0
-object/building/tatooine/bank_tatooine.iff		bank		0	0
-object/building/naboo/bank_naboo.iff		bank		0	0
 object/building/corellia/bank_corellia.iff		bank		0	0
-object/building/tatooine/cantina_tatooine.iff		cantina		0	1
-object/building/tatooine/capitol_tatooine.iff		capitol		0	0
-object/building/tatooine/guild_combat_tatooine_style_01.iff		guild	guild_combat	0	0
-object/building/tatooine/guild_commerce_tatooine_style_01.iff		guild	guild_commerce	0	0
-object/building/tatooine/guild_theater_tatooine_style_01.iff		guild	guild_theater	0	1
-object/building/tatooine/guild_university_tatooine_style_01.iff		guild	guild_university	0	0
-object/building/tatooine/hospital_tatooine_style01.iff		medicalcenter		0	1
-object/building/tatooine/hospital_tatooine_style02.iff		medicalcenter		0	1
-object/building/tatooine/hotel_tatooine_style_01.iff		hotel		0	0
-object/building/tatooine/hotel_tatooine_general.iff		hotel		0	0
-object/building/tatooine/junkshop_watto.iff	@map_loc_n:junkshop_watto	junkshop		0	0
-object/building/tatooine/lucky_despot.iff	@map_loc_n:lucky_despot	cantina		0	1
-object/building/tatooine/shuttleport_tatooine.iff		shuttleport		0	0
-object/building/tatooine/starport_tatooine.iff		starport		0	0
+object/building/naboo/bank_naboo.iff		bank		0	0
+object/building/player/city/bank_corellia.iff		bank		0	0
+object/building/player/city/bank_naboo.iff		bank		0	0
+object/building/player/city/bank_tatooine.iff		bank		0	0
+object/building/tatooine/bank_tatooine.iff		bank		0	0
 object/building/corellia/cantina_corellia.iff		cantina		0	1
-object/building/corellia/cloning_corellia.iff		cloningfacility		0	0
-object/building/corellia/guild_combat_corellia_style_01.iff		guild	guild_combat	0	0
-object/building/corellia/guild_commerce_corellia_style_01.iff		guild	guild_commerce	0	0
-object/building/corellia/guild_theater_corellia_s01.iff		guild	guild_theater	0	1
-object/building/corellia/guild_university_corellia_style_01.iff		guild	guild_university	0	0
-object/building/corellia/hospital_corellia.iff		medicalcenter		0	1
-object/building/corellia/hospital_corellia_s02.iff		medicalcenter		0	1
-object/building/corellia/hotel_corellia.iff		hotel		0	0
-object/building/corellia/shuttleport_corellia.iff		shuttleport		0	0
-object/building/corellia/starport_corellia.iff		starport		0	0
+object/building/mustafar/structures/must_new_mining_facility.iff		cantina		0	0
 object/building/naboo/cantina_naboo.iff		cantina		0	1
-object/building/naboo/capitol_naboo_theed.iff		capitol		0	0
-object/building/naboo/cloning_facility_naboo.iff		cloningfacility		0	0
-object/building/naboo/guild_combat_naboo_style_01.iff		guild	guild_combat	0	0
-object/building/naboo/guild_commerce_naboo_style_01.iff		guild	guild_commerce	0	0
-object/building/naboo/guild_theater_naboo_s01.iff		guild	guild_theater	0	1
-object/building/naboo/guild_university_naboo_style_01.iff		guild	guild_university	0	0
-object/building/naboo/hangar_naboo_theed.iff		starport		0	0
-object/building/naboo/hospital_naboo_style01.iff		medicalcenter		0	1
-object/building/naboo/hospital_naboo_style02.iff		medicalcenter		0	1
-object/building/naboo/hotel_naboo_theed.iff		hotel		0	0
+object/building/player/city/cantina_corellia.iff		cantina		0	0
+object/building/player/city/cantina_naboo.iff		cantina		0	0
+object/building/player/city/cantina_tatooine.iff		cantina		0	0
+object/building/tatooine/cantina_tatooine.iff		cantina		0	1
+object/building/tatooine/lucky_despot.iff	@map_loc_n:lucky_despot	cantina		0	1
+object/building/general/cantina_general.iff		cantina		0	1
+object/building/corellia/capitol_corellia.iff		capitol		0	1
+object/building/naboo/capitol_naboo_theed.iff		capitol		0	1
 object/building/naboo/palace_naboo_theed.iff	@map_loc_n:theed_palace	capitol		0	0
-object/building/naboo/shuttleport_naboo.iff		shuttleport		0	0
-object/building/naboo/starport_naboo.iff		starport		0	0
-object/building/military/outpost_cloning_facility.iff		cloningfacility		0	0
+object/building/tatooine/capitol_tatooine.iff		capitol		0	1
+object/building/general/capitol_general.iff		capitol		0	1
+object/building/general/mun_all_capitol_s01.iff		capitol		0	1
+object/building/player/city/cityhall_corellia.iff		city		0	0
+object/building/player/city/cityhall_naboo.iff		city		0	0
+object/building/player/city/cityhall_tatooine.iff		city		0	0
+object/building/corellia/cloning_corellia.iff		cloningfacility		0	0
 object/building/military/outpost_cloning_facility_s02.iff		cloningfacility		0	0
 object/building/military/outpost_cloning_facility_s03.iff		cloningfacility		0	0
-object/building/military/outpost_starport.iff		starport		0	0
-object/building/military/small_imperial_cloning_facility.iff		cloningfacility		0	0
+object/building/military/outpost_cloning_facility.iff		cloningfacility		0	0
 object/building/military/small_imperial_cloning_facility_s02.iff		cloningfacility		0	0
-object/building/corellia/capitol_corellia.iff		capitol		0	0
-object/building/poi/scout_camp_s4.iff			camp	0	1
-object/building/poi/scout_camp_s5.iff			camp	0	1
-object/building/player/city/cloning_naboo.iff		cloningfacility		0	0
+object/building/military/small_imperial_cloning_facility.iff		cloningfacility		0	0
+object/building/mustafar/structures/must_mining_clone_marker.iff		cloningfacility		0	0
+object/building/naboo/cloning_facility_naboo.iff		cloningfacility		0	0
 object/building/player/city/cloning_corellia.iff		cloningfacility		0	0
+object/building/player/city/cloning_naboo.iff		cloningfacility		0	0
 object/building/player/city/cloning_tatooine.iff		cloningfacility		0	0
-object/building/player/city/hospital_naboo.iff		medicalcenter		0	0
-object/building/player/city/hospital_corellia.iff		medicalcenter		0	0
-object/building/player/city/hospital_tatooine.iff		medicalcenter		0	0
-object/building/player/city/cityhall_tatooine.iff		city		0	0
-object/building/player/city/cityhall_naboo.iff		city		0	0
-object/building/player/city/cityhall_corellia.iff		city		0	0
-object/building/player/city/theater_tatooine.iff		theater		0	0
-object/building/player/city/theater_naboo.iff		theater		0	0
-object/building/player/city/theater_corellia.iff		theater		0	0
-object/building/player/city/shuttleport_tatooine.iff		shuttleport		0	0
-object/building/player/city/shuttleport_naboo.iff		shuttleport		0	0
-object/building/player/city/shuttleport_corellia.iff		shuttleport		0	0
-object/building/player/city/bank_corellia.iff		bank		0	0
-object/building/player/city/bank_tatooine.iff		bank		0	0
-object/building/player/city/bank_naboo.iff		bank		0	0
-object/building/player/city/cantina_tatooine.iff		cantina		0	0
-object/building/player/city/cantina_naboo.iff		cantina		0	0
-object/building/player/city/cantina_corellia.iff		cantina		0	0
+object/building/tatooine/cloning_facility_tatooine_small.iff		cloningfacility		0	0
+object/building/tatooine/cloning_facility_tatooine.iff		cloningfacility		0	0
+object/building/general/cloning_facility_general.iff		cloningfacility		0	0
+object/building/general/mun_all_cloning_s01.iff		cloningfacility		0	0
+object/building/tatooine/bank_tatooine.iff	@map_loc_type_n:commoditymarket	terminal		0	0
+object/building/naboo/bank_naboo.iff	@map_loc_type_n:commoditymarket	terminal		0	0
+object/building/corellia/bank_corellia.iff	@map_loc_type_n:commoditymarket	terminal		0	0
+object/building/general/bank_general.iff	@map_loc_type_n:commoditymarket	terminal		0	0
 object/building/corellia/garage_corellia.iff		garage		0	0
 object/building/naboo/parking_garage_naboo_style_1.iff		garage		0	0
-object/building/tatooine/parking_garage_tatooine_style_1.iff		garage		0	0
-object/building/player/player_garage_tatooine_style_01.iff		garage		0	0
 object/building/player/player_garage_corellia_style_01.iff		garage		0	0
 object/building/player/player_garage_naboo_style_01.iff		garage		0	0
-object/building/tatooine/salon_tatooine.iff		salon		0	0
-object/building/corellia/salon_corellia.iff		salon		0	0
-object/building/naboo/salon_naboo.iff		salon		0	0
-object/building/faction_perk/hq/hq_s01_rebel_pvp.iff		rebel	sf_rebel_forward_base	0	1
-object/building/faction_perk/hq/hq_s01_imp_pvp.iff		imperial	sf_imperial_forward_base	0	1
-object/building/faction_perk/hq/hq_s02_rebel_pvp.iff		rebel	sf_rebel_minor_base	0	1
-object/building/faction_perk/hq/hq_s02_imp_pvp.iff		imperial	sf_imperial_minor_base	0	1
-object/building/faction_perk/hq/hq_s03_rebel_pvp.iff		rebel	sf_rebel_major_base	0	1
-object/building/faction_perk/hq/hq_s03_imp_pvp.iff		imperial	sf_imperial_major_base	0	1
-object/building/faction_perk/hq/hq_s04_rebel_pvp.iff		rebel	sf_rebel_hq	0	1
-object/building/faction_perk/hq/hq_s04_imp_pvp.iff		imperial	sf_imperial_hq	0	1
-object/building/faction_perk/hq/hq_s05_rebel_pvp.iff		rebel	sf_rebel_hq	0	1
-object/building/faction_perk/hq/hq_s05_imp_pvp.iff		imperial	sf_imperial_hq	0	1
-object/building/faction_perk/hq/hq_s04_rebel.iff		rebel	rebel_hq	0	0
+object/building/player/player_garage_tatooine_style_01.iff		garage		0	0
+object/building/tatooine/parking_garage_tatooine_style_1.iff		garage		0	0
+object/building/general/parking_garage_general.iff		garage		0	0
+object/building/corellia/guild_combat_corellia_style_01.iff		guild	guild_combat	0	1
+object/building/naboo/guild_combat_naboo_style_01.iff		guild	guild_combat	0	1
+object/building/tatooine/guild_combat_tatooine_style_01.iff		guild	guild_combat	0	1
+object/building/general/guild_combat_general_style_01.iff		guild	guild_combat	0	1
+object/building/general/mun_all_guild_combat_s01.iff		guild	guild_combat	0	1
+object/building/corellia/guild_commerce_corellia_style_01.iff		guild	guild_commerce	0	1
+object/building/naboo/guild_commerce_naboo_style_01.iff		guild	guild_commerce	0	1
+object/building/tatooine/guild_commerce_tatooine_style_01.iff		guild	guild_commerce	0	1
+object/building/general/guild_commerce_general_style_01.iff		guild	guild_commerce	0	1
+object/building/general/mun_all_guild_commerce_s01.iff		guild	guild_commerce	0	1
+object/building/corellia/guild_theater_corellia_s01.iff		guild	guild_theater	0	1
+object/building/naboo/guild_theater_naboo_s01.iff		guild	guild_theater	0	1
+object/building/tatooine/guild_theater_tatooine_style_01.iff		guild	guild_theater	0	1
+object/building/general/mun_all_guild_theater_s01.iff		guild	guild_theater	0	1
+object/building/corellia/guild_university_corellia_style_01.iff		guild	guild_university	0	1
+object/building/naboo/guild_university_naboo_style_01.iff		guild	guild_university	0	1
+object/building/tatooine/guild_university_tatooine_style_01.iff		guild	guild_university	0	1
+object/building/general/guild_university_general_style_01.iff		guild	guild_university	0	1
+object/building/general/mun_all_guild_university_s01.iff		guild	guild_university	0	1
+object/building/corellia/hotel_corellia.iff		hotel		0	0
+object/building/naboo/hotel_naboo_theed.iff		hotel		0	0
+object/building/tatooine/hotel_tatooine_general.iff		hotel		0	0
+object/building/tatooine/hotel_tatooine_style_01.iff		hotel		0	0
+object/building/general/hotel_general_style_1.iff		hotel		0	0
+object/building/general/hotel_general_style_2.iff		hotel		0	0
+object/building/general/mun_all_hotel_s01.iff		hotel		0	0
 object/building/faction_perk/hq/hq_s04_imp.iff		imperial	imperial_hq	0	0
-object/building/faction_perk/hq/hq_s05_rebel.iff		rebel	rebel_hq	0	0
 object/building/faction_perk/hq/hq_s05_imp.iff		imperial	imperial_hq	0	0
-object/building/kashyyyk/mun_kachirho_starport.iff		starport		0	0
-object/building/mustafar/structures/must_new_mining_facility.iff		cantina		0	0
-object/building/mustafar/structures/must_mining_cantina_marker.iff		starport		0	0
-object/building/mustafar/structures/must_mining_clone_marker.iff		cloningfacility		0	0
-object/building/naboo/rori_restuss_starport.iff		starport		0	0
+object/building/faction_perk/hq/hq_s01_imp_pvp.iff		imperial	sf_imperial_forward_base	0	1
+object/building/faction_perk/hq/hq_s04_imp_pvp.iff		imperial	sf_imperial_hq	0	1
+object/building/faction_perk/hq/hq_s05_imp_pvp.iff		imperial	sf_imperial_hq	0	1
+object/building/faction_perk/hq/hq_s03_imp_pvp.iff		imperial	sf_imperial_major_base	0	1
+object/building/faction_perk/hq/hq_s02_imp_pvp.iff		imperial	sf_imperial_minor_base	0	1
+object/building/tatooine/junkshop_watto.iff	@map_loc_n:junkshop_watto	junkshop		0	0
+object/building/general/mun_all_hospital_s01.iff		medicalcenter	hospital	0	1
+object/building/general/mun_all_hospital_s02.iff		medicalcenter		0	1
+object/building/corellia/hospital_corellia_s02.iff		medicalcenter		0	1
+object/building/corellia/hospital_corellia.iff		medicalcenter	hospital	0	1
+object/building/naboo/hospital_naboo_style01.iff		medicalcenter	hospital	0	1
+object/building/naboo/hospital_naboo_style02.iff		medicalcenter		0	1
+object/building/player/city/hospital_corellia.iff		medicalcenter		0	1
+object/building/player/city/hospital_naboo.iff		medicalcenter		0	1
+object/building/player/city/hospital_tatooine.iff		medicalcenter		0	1
+object/building/tatooine/hospital_tatooine_style01.iff		medicalcenter	hospital	0	1
+object/building/tatooine/hospital_tatooine_style02.iff		medicalcenter		0	1
+object/building/faction_perk/hq/hq_s04_rebel.iff		rebel	rebel_hq	0	0
+object/building/faction_perk/hq/hq_s05_rebel.iff		rebel	rebel_hq	0	0
+object/building/faction_perk/hq/hq_s01_rebel_pvp.iff		rebel	sf_rebel_forward_base	0	1
+object/building/faction_perk/hq/hq_s04_rebel_pvp.iff		rebel	sf_rebel_hq	0	1
+object/building/faction_perk/hq/hq_s05_rebel_pvp.iff		rebel	sf_rebel_hq	0	1
+object/building/faction_perk/hq/hq_s03_rebel_pvp.iff		rebel	sf_rebel_major_base	0	1
+object/building/faction_perk/hq/hq_s02_rebel_pvp.iff		rebel	sf_rebel_minor_base	0	1
+object/building/corellia/salon_corellia.iff		salon		0	1
+object/building/naboo/salon_naboo.iff		salon		0	1
+object/building/tatooine/salon_tatooine.iff		salon		0	1
+object/building/corellia/shuttleport_corellia.iff		shuttleport		0	0
 object/building/naboo/rori_restuss_shuttleport.iff		shuttleport		0	0
+object/building/naboo/shuttleport_naboo.iff		shuttleport		0	0
+object/building/player/city/shuttleport_corellia.iff		shuttleport		0	0
+object/building/player/city/shuttleport_naboo.iff		shuttleport		0	0
+object/building/player/city/shuttleport_tatooine.iff		shuttleport		0	0
+object/building/tatooine/shuttleport_tatooine.iff		shuttleport		0	0
+object/building/general/mun_all_landing_pad_s01.iff		shuttleport		0	0
+object/building/general/shuttleport_general.iff		shuttleport		0	0
+object/building/general/starport_general.iff		starport		0	0
+object/building/general/starport_general_style_1.iff		starport		0	0
+object/building/general/starport_general_style_2.iff		starport		0	0
+object/building/corellia/starport_corellia.iff		starport		0	0
+object/building/kashyyyk/mun_kachirho_starport.iff		starport		0	0
+object/building/military/outpost_starport.iff		starport		0	0
+object/building/mustafar/structures/must_mining_cantina_marker.iff		starport		0	0
+object/building/naboo/hangar_naboo_theed.iff		starport		0	0
+object/building/naboo/rori_restuss_starport.iff		starport		0	0
+object/building/naboo/starport_naboo.iff		starport		0	0
+object/building/tatooine/starport_tatooine.iff		starport		0	0
+object/building/general/mun_all_starport_s01.iff		starport		0	0
+object/building/player/city/theater_corellia.iff		theater		0	1
+object/building/player/city/theater_naboo.iff		theater		0	1
+object/building/player/city/theater_tatooine.iff		theater		0	1
 object/mobile/dressed_artisan_trainer_01.iff		trainer	trainer_artisan	0	0
 object/mobile/dressed_artisan_trainer_02.iff		trainer	trainer_artisan	0	0
 object/mobile/dressed_artisan_trainer_03.iff		trainer	trainer_artisan	0	0
@@ -121,3 +147,5 @@ object/mobile/dressed_medic_trainer_03.iff		trainer	trainer_medic	0	0
 object/mobile/dressed_scout_trainer_01.iff		trainer	trainer_scout	0	0
 object/mobile/dressed_scout_trainer_02.iff		trainer	trainer_scout	0	0
 object/mobile/dressed_scout_trainer_03.iff		trainer	trainer_scout	0	0
+object/building/poi/scout_camp_s4.iff			camp	0	1
+object/building/poi/scout_camp_s5.iff			camp	0	1

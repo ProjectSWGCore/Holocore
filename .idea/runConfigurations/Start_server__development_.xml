@@ -11,6 +11,7 @@
       <option name="taskNames">
         <list>
           <option value="runDevelopment" />
+          <option value="--args=&quot;--print-colors&quot;" />
         </list>
       </option>
       <option name="vmOptions" />

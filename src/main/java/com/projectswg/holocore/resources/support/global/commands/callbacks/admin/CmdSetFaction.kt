@@ -24,47 +24,34 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.database
+package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 
-import java.time.LocalDateTime
+import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
-interface PswgBazaarInstantSalesDatabase {
-	fun getInstantSaleItems(): Collection<InstantSaleItemMetadata>
-	fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata?
-	fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-	fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata>
-	fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata)
-
-	data class InstantSaleItemMetadata(val itemObjectId: Long, val price: Int, val expiresAt: LocalDateTime, val description: String, val ownerId: Long, val bazaarObjectId: Long)
-
-	companion object {
-
-		fun createDefault(): PswgBazaarInstantSalesDatabase {
-			return object : PswgBazaarInstantSalesDatabase {
-
-				private val instantSaleItems = mutableListOf<InstantSaleItemMetadata>()
-
-				override fun getInstantSaleItems(): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.toList()
-				}
-
-				override fun getInstantSaleItem(itemObjectId: Long): InstantSaleItemMetadata? {
-					return instantSaleItems.firstOrNull { it.itemObjectId == itemObjectId }
-				}
-
-				override fun addInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.add(instantSaleItemMetadata)
-				}
-
-				override fun getMyInstantSaleItems(ownerId: Long): Collection<InstantSaleItemMetadata> {
-					return instantSaleItems.filter { it.ownerId == ownerId }
-				}
-
-				override fun removeInstantSaleItem(instantSaleItemMetadata: InstantSaleItemMetadata) {
-					instantSaleItems.remove(instantSaleItemMetadata)
-				}
-			}
+class CmdSetFaction : ICmdCallback {
+	override fun execute(player: Player, target: SWGObject?, args: String) {
+		if (player.accessLevel == AccessLevel.PLAYER) {
+			SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(")
+			return
 		}
 
+		val faction = when (args) {
+			"rebels"   -> ServerData.factions.getFaction("rebel")
+			"imperial" -> ServerData.factions.getFaction("imperial")
+			"neutral"  -> ServerData.factions.getFaction("neutral")
+			else       -> null
+		}
+		
+		if (faction != null) {
+			FactionIntent.broadcastUpdateFaction(player.creatureObject, faction)
+		} else {
+			SystemMessageIntent.broadcastPersonal(player, "Unknown faction \"$args\", possible options: rebels|imperial|neutral")
+		}
 	}
 }
