@@ -24,36 +24,69 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.player;
+package com.projectswg.holocore.resources.support.data.collections
 
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.common.encoding.Encodable
+import com.projectswg.common.network.NetBuffer
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import java.util.BitSet
 
-import java.util.function.Predicate;
+class SWGBitSet(private var view: Int, private var updateType: Int) : BitSet(128), Encodable {
 
-public class ActivePlayerPredicate implements Predicate<Player> {
-	@Override
-	public boolean test(Player player) {
-		CreatureObject creatureObject = player.getCreatureObject();
-		PlayerObject playerObject = creatureObject.getPlayerObject();
-		boolean afk = playerObject.getFlags().get(PlayerFlags.AFK);
-		boolean offline = playerObject.getFlags().get(PlayerFlags.LD);
-		boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
-		boolean dead = creatureObject.getPosture() == Posture.DEAD;
-		boolean cloaked = !creatureObject.isVisible();
-		boolean privateCell = false;	// Player might be inside a private building
-		
-		SWGObject parent = creatureObject.getParent();
-		
-		if (parent instanceof CellObject) {
-			privateCell = !((CellObject) parent).isPublic();
+	fun wrapper(obj: SWGObject): SWGBitSetWrapper {
+		return SWGBitSetWrapper(obj)
+	}
+
+	override fun encode(): ByteArray {
+		val bytes = toByteArray()
+		val buffer = NetBuffer.allocate(8 + bytes.size)
+		buffer.addInt(bytes.size)
+		buffer.addInt(super.length())
+		buffer.addRawArray(bytes)
+		return buffer.array()
+	}
+
+	override fun decode(data: NetBuffer) {
+		val len = data.int
+		data.int
+		val bytes = data.getArray(len)
+		clear()
+		or(valueOf(bytes))
+	}
+
+	override val length: Int
+		get() = 8 + (super.length() + 7) / 8
+
+	fun read(bytes: ByteArray?) {
+		clear()
+		if (bytes != null) {
+			xor(valueOf(bytes))
 		}
-		
-		return !afk && !offline && !incapacitated && !dead && !cloaked && !privateCell;
+	}
+
+	fun sendDeltaMessage(target: SWGObject) {
+		target.sendDelta(view, updateType, encode())
+	}
+
+	inner class SWGBitSetWrapper(private val obj: SWGObject) {
+
+		val flags: BitSet
+			get() = this@SWGBitSet.clone() as BitSet
+
+		fun get(): BitSet {
+			return this@SWGBitSet.clone() as BitSet
+		}
+
+		fun add(flags: BitSet) {
+			this@SWGBitSet.or(flags)
+			this@SWGBitSet.sendDeltaMessage(obj)
+		}
+
+		fun set(flags: BitSet) {
+			this@SWGBitSet.clear()
+			this@SWGBitSet.or(flags)
+			this@SWGBitSet.sendDeltaMessage(obj)
+		}
+
 	}
 }

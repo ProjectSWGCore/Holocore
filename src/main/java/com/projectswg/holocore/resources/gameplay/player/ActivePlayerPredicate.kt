@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,65 +24,30 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.collections;
+package com.projectswg.holocore.resources.gameplay.player
 
-import com.projectswg.common.encoding.Encodable;
-import com.projectswg.common.network.NetBuffer;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.player.PlayerFlags
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
+import java.util.function.Predicate
 
-import java.util.BitSet;
+class ActivePlayerPredicate : Predicate<Player> {
+	override fun test(player: Player): Boolean {
+		val creatureObject = player.creatureObject
+		val playerObject = creatureObject.playerObject
 
-public class SWGBitSet extends BitSet implements Encodable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private int view;
-	private int updateType;
-	
-	public SWGBitSet() {
-		super(128);
-	}
-	
-	public SWGBitSet(int view, int updateType) {
-		super(128); // Seems to be the default size for the bitmask sets in SWGPackets
-		this.view = view;
-		this.updateType = updateType;
-	}
-	
-	@Override
-	public byte[] encode() {
-		byte[] bytes = toByteArray();
-		NetBuffer buffer = NetBuffer.allocate(8 + bytes.length);
-		buffer.addInt(bytes.length);
-		buffer.addInt(super.length());
-		buffer.addRawArray(bytes);
-		return buffer.array();
-	}
-	
-	@Override
-	public void decode(NetBuffer data) {
-		int len = data.getInt();
-		data.getInt();
-		byte [] bytes = data.getArray(len);
-		clear();
-		or(BitSet.valueOf(bytes));
-	}
-	
-	@Override
-	public int getLength() {
-		return 8 + (super.length()+7) / 8;
-	}
-	
-	public void read(byte[] bytes) {
-		clear();
+		val afk = playerObject.flags[PlayerFlags.AFK]
+		val offline = playerObject.flags[PlayerFlags.LD]
+		val incapacitated = creatureObject.posture == Posture.INCAPACITATED
+		val dead = creatureObject.posture == Posture.DEAD
+		val cloaked = !creatureObject.isVisible
+		var privateCell = false // Player might be inside a private building
 
-		if (bytes != null) {
-			xor(valueOf(bytes));
+		val parent = creatureObject.parent
+		if (parent is CellObject) {
+			privateCell = !parent.isPublic
 		}
+		return !afk && !offline && !incapacitated && !dead && !cloaked && !privateCell
 	}
-
-	public void sendDeltaMessage(SWGObject target) {
-		target.sendDelta(view, updateType, encode());
-	}
-	
 }

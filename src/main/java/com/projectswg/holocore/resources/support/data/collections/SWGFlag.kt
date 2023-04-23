@@ -96,7 +96,7 @@ class SWGFlag(private val view: Int, private val updateType: Int) : BitSet(128),
 		val flags: BitSet
 			get() = this@SWGFlag.clone() as BitSet
 
-		fun get(flag: T): Boolean {
+		operator fun get(flag: T): Boolean {
 			return this@SWGFlag[converter(flag)]
 		}
 

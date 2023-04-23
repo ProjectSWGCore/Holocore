@@ -45,6 +45,7 @@ import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.math.max
 
 class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLAY) {
 
@@ -74,7 +75,7 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 	fun adjustFactionPoints(faction: String, adjustment: Int): Int {
 		val oldValue = factionPoints.getOrDefault(faction, 0)
 		val value = oldValue + adjustment
-		val cappedValue = Math.min(Math.max(value, -5000), 5000)
+		val cappedValue = value.coerceAtLeast(-5000).coerceAtMost(5000)
 		val delta = cappedValue - oldValue
 		if (delta != 0) {
 			factionPoints[faction] = value
@@ -195,27 +196,11 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 		get() = play8.getWaypoints()
 	var forcePower by play8::forcePower
 	var maxForcePower by play8::maxForcePower
-	var completedQuests: BitSet
-		get() = play8.getCompletedQuests()
-		set(completedQuests) {
-			play8.setCompletedQuests(completedQuests)
-		}
 
-	fun addCompletedQuests(completedQuests: BitSet) {
-		play8.addCompletedQuests(completedQuests)
-	}
-
-	var activeQuests: BitSet
-		get() = play8.getActiveQuests()
-		set(activeQuests) {
-			play8.setActiveQuests(activeQuests)
-		}
-
-	fun addActiveQuests(activeQuests: BitSet) {
-		play8.addActiveQuests(activeQuests)
-	}
-
+	val completedQuests by play8::completedQuests
+	val activeQuests by play8::activeQuests
 	var activeQuest by play8::activeQuest
+
 	val quests: Map<CRC, Quest>
 		get() = play8.getQuests()
 
