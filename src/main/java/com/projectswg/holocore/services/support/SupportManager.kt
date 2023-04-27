@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,23 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.global.chat;
+package com.projectswg.holocore.services.support
 
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+import com.projectswg.holocore.services.support.data.SupportDataManager
+import com.projectswg.holocore.services.support.global.GlobalManager
+import com.projectswg.holocore.services.support.npc.NonPlayerCharacterManager
+import com.projectswg.holocore.services.support.objects.ObjectManager
+import me.joshlarson.jlcommon.control.Manager
+import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = {
-		ChatFriendService.class,
-		ChatInstantMessageService.class,
-		ChatMailService.class,
-		ChatRoomService.class,
-		ChatSpatialService.class,
-		ChatSystemService.class
-})
-public class ChatManager extends Manager {
-	
-	public ChatManager() {
-		
-	}
-	
-}
+@ManagerStructure(children = [SupportDataManager::class, ObjectManager::class, GlobalManager::class, NonPlayerCharacterManager::class])
+class SupportManager : Manager()
