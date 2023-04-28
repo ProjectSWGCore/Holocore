@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,32 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat;
+package com.projectswg.holocore.services.gameplay.player.group
 
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService;
-import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService;
-import com.projectswg.holocore.services.gameplay.combat.duel.DuelService;
-import com.projectswg.holocore.services.gameplay.combat.loot.LootManager;
-import me.joshlarson.jlcommon.control.Manager;
-import me.joshlarson.jlcommon.control.ManagerStructure;
+import me.joshlarson.jlcommon.control.Manager
+import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = {
-		BuffService.class,
-		CloningService.class,
-		DuelService.class,
-		LootManager.class,
-		CombatDeathblowService.class,
-		CombatExperienceService.class,
-		CombatNpcService.class,
-		CombatRegenerationService.class,
-		CombatStatusService.class,
-		CombatKnockdownService.class,
-		CombatStateService.class,
-})
-public class CombatManager extends Manager {
-	
-	public CombatManager() {
-		
-	}
-	
-}
+@ManagerStructure(children = [GroupService::class])
+class GroupManager : Manager()
