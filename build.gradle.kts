@@ -73,7 +73,7 @@ sourceSets {
 	}
 	test {
 		dependencies {
-			val junit5Version = "5.8.1"
+			val junit5Version = "5.9.3"
 			testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
 			testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
 			testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
