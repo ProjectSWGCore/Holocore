@@ -16,17 +16,10 @@ DATHOMIR	3609	1532	32	28	exp_dat_misty_falls_1
 DATHOMIR	3033	1339	32	29	exp_dat_misty_falls_2
 DATHOMIR	-6164	973	32	83	bdg_exp_dat_imp_prison
 DATHOMIR	5697	1935	32	82	bdg_exp_dat_crashed_ship
-DATHOMIR	-5915	-6645	32	6020	exp_icon_deathtroopers_camp_alpha
-DATHOMIR	-6290	-7529	32	6021	exp_icon_deathtroopers_camp_beta
-DATHOMIR	-6815	-6454	32	6022	exp_icon_deathtroopers_camp_gamma
-DATHOMIR	-7142	-6941	32	6023	exp_icon_deathtroopers_camp_delta
-DATHOMIR	-7463	-7392	32	6024	exp_icon_deathtroopers_camp_epsilon
 ENDOR	4596	-2423	32	86	bdg_exp_end_ewok_tree_village
 ENDOR	1454	-3272	32	87	bdg_exp_end_ewok_lake_village
 ENDOR	6051	-2477	16	88	bdg_exp_end_dulok_village
 ENDOR	-4628	-2273	32	89	bdg_exp_end_imp_outpost
-ADVENTURE_2	0	0	0	6244	bdg_hoth_planet
-ADVENTURE_2	0	0	0	6245	bdg_hoth_echo_base
 KASHYYYK_MAIN	-660	-201	64	140	exp_kash_kachirho_found
 LOK	3091	-4638	32	24	exp_lok_volcano
 LOK	-1814	-3086	32	98	bdg_exp_lok_imp_outpost
