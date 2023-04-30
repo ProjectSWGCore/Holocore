@@ -29,7 +29,7 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.7.10"
+	kotlin("jvm") version "1.8.21"
 	id("org.beryx.jlink") version "2.25.0"
 }
 
