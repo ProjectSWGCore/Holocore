@@ -57,40 +57,35 @@ application {
 }
 
 sourceSets {
-	main {
-		dependencies {
-			implementation(project(":pswgcommon"))
-			implementation(kotlin("stdlib"))
-			implementation(kotlin("reflect"))
-			
-			implementation(group="org.xerial", name="sqlite-jdbc", version="3.30.1")
-			implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-			implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
-			implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
-			implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
-			implementation(group="me.joshlarson", name="websocket", version="0.9.4")
-		}
-	}
-	test {
-		dependencies {
-			val junit5Version = "5.9.3"
-			testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
-			testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
-			testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
-			testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
-			testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
-		}
-	}
-	create("utility") {
-		val utilityImplementation by configurations.getting {
-			extendsFrom(configurations.implementation.get())
-		}
-		
-		dependencies {
-			utilityImplementation(project(":"))
-			utilityImplementation(project(":pswgcommon"))
-		}
-	}
+	create("utility")
+}
+
+val utilityImplementation by configurations.getting {
+	extendsFrom(configurations.implementation.get())
+}
+
+dependencies {
+	implementation(project(":pswgcommon"))
+	implementation(kotlin("stdlib"))
+	implementation(kotlin("reflect"))
+	implementation(group="org.xerial", name="sqlite-jdbc", version="3.30.1")
+	implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
+	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
+	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
+	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
+	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
+	
+	utilityImplementation(project(":"))
+	utilityImplementation(project(":pswgcommon"))
+	
+	val junit5Version = "5.9.3"
+	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
+	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
+	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
+	testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
+	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
+
+	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
 }
 
 idea {

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -59,12 +59,12 @@ public class TravelHelper {
 	
 	private final Map<String, TravelGroup> travel;
 	private final ThreadPool travelExecutor;
-	private final TravelPointManager pointManager;
+	private final TravelPointContainer pointContainer;
 	
 	public TravelHelper() {
 		this.travel = new ConcurrentHashMap<>();
 		this.travelExecutor = new ThreadPool(3, "travel-shuttles-%d");
-		this.pointManager = new TravelPointManager();
+		this.pointContainer = new TravelPointContainer();
 		
 		createGalaxyTravels();
 		loadTravelPoints();
@@ -81,7 +81,7 @@ public class TravelHelper {
 	}
 	
 	public void addTravelPoint(TravelPoint point) {
-		pointManager.addTravelPoint(point);
+		pointContainer.addTravelPoint(point);
 	}
 	
 	public boolean isValidRoute(Terrain departure, Terrain destination) {
@@ -100,7 +100,7 @@ public class TravelHelper {
 		if (!isValidRoute(traveller.getTerrain(), terrain))
 			return new ArrayList<>();
 		TravelPoint nearest = getNearestTravelPoint(traveller);
-		return pointManager.getPointsForTerrain(nearest, terrain);
+		return pointContainer.getPointsForTerrain(nearest, terrain);
 	}
 	
 	public TravelPoint getDestinationPoint(TangibleObject ticket) {
@@ -111,11 +111,11 @@ public class TravelHelper {
 	}
 	
 	public TravelPoint getDestinationPoint(Terrain terrain, String pointName) {
-		return pointManager.getDestination(terrain, pointName);
+		return pointContainer.getDestination(terrain, pointName);
 	}
 	
 	public TravelPoint getNearestTravelPoint(SWGObject object) {
-		return pointManager.getNearestPoint(object.getWorldLocation());
+		return pointContainer.getNearestPoint(object.getWorldLocation());
 	}
 	
 	public void grantTicket(TravelPoint departure, TravelPoint destination, SWGObject receiver) {
@@ -225,7 +225,7 @@ public class TravelHelper {
 		TravelGroup group = getTravelGroupForType(type);
 		TravelPoint point = new TravelPoint(pointName, new Location(x, 0, z, travelPlanet), group, type.endsWith("starport"));
 		group.addTravelPoint(point);
-		pointManager.addTravelPoint(point);
+		pointContainer.addTravelPoint(point);
 	}
 	
 	private TravelGroup getTravelGroupForType(String type) {
