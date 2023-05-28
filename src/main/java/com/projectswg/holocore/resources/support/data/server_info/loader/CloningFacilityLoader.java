@@ -27,69 +27,57 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.swgfile.ClientFactory;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CloningFacilityLoader extends DataLoader {
-	
-	private static final String DB_QUERY = "SELECT * FROM cloning_respawn";
+
 	private final Map<String, FacilityData> facilityDataMap;
 
 	public CloningFacilityLoader() {facilityDataMap = new HashMap<>();}
 
-	@Override
-	public void load() throws IOException {
-		loadRespawnData();
-	}
-	
 	@Nullable
 	public FacilityData getFacility(String objectTemplate) {
 		return facilityDataMap.get(objectTemplate);
 	}
 
-	private void loadRespawnData() {
-		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
-			try (ResultSet set = respawnDatabase.executeQuery(DB_QUERY)) {
-				while (set.next()) {
-					int tubeCount = set.getInt("tubes");
-					CloningFacilityLoader.TubeData[] tubeData = new CloningFacilityLoader.TubeData[tubeCount];
+	@Override
+	public void load() throws IOException {
+		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/cloning/cloning_respawn.sdb"))) {
+			while (set.next()) {
+				long tubeCount = set.getInt("tubes");
+				CloningFacilityLoader.TubeData[] tubeData = new CloningFacilityLoader.TubeData[(int) tubeCount];
 
-					for (int i = 1; i <= tubeCount; i++) {
-						String tubeName = "tube" + i;
-						tubeData[i - 1] = new CloningFacilityLoader.TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
-					}
-
-					String stfCellValue = set.getString("stf_name");
-					String stfName = stfCellValue.equals("-") ? null : stfCellValue;
-					PvpFaction factionRestriction = switch (stfCellValue) {
-						case "FACTION_REBEL" -> PvpFaction.REBEL;
-						case "FACTION_IMPERIAL" -> PvpFaction.IMPERIAL;
-						default -> null;
-					};
-
-					CloningFacilityLoader.FacilityData facilityData = new CloningFacilityLoader.FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), CloningFacilityLoader.FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
-					String objectTemplate = set.getString("structure");
-
-					if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
-						// Duplicates are not allowed!
-						Log.e("Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
-					}
+				for (int i = 1; i <= tubeCount; i++) {
+					String tubeName = "tube" + i;
+					tubeData[i - 1] = new CloningFacilityLoader.TubeData(set.getReal(tubeName + "_x"), set.getReal(tubeName + "_z"), set.getReal(tubeName + "_heading"));
 				}
-			} catch (SQLException e) {
-				Log.e(e);
+
+				String stfCellValue = set.getText("stf_name");
+				String stfName = stfCellValue.equals("-") ? null : stfCellValue;
+				PvpFaction factionRestriction = switch (stfCellValue) {
+					case "FACTION_REBEL" -> PvpFaction.REBEL;
+					case "FACTION_IMPERIAL" -> PvpFaction.IMPERIAL;
+					default -> null;
+				};
+
+				CloningFacilityLoader.FacilityData facilityData = new CloningFacilityLoader.FacilityData(factionRestriction, set.getReal("x"), set.getReal("y"), set.getReal("z"), set.getText("cell"), CloningFacilityLoader.FacilityType.valueOf(set.getText("clone_type")), stfName, (int) set.getInt("heading"), tubeData);
+				String objectTemplate = set.getText("structure");
+
+				if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
+					// Duplicates are not allowed!
+					Log.e("Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getLine());
+				}
 			}
 		}
 	}
-	
 
 	public enum FacilityType {
 		STANDARD,
@@ -104,15 +92,16 @@ public class CloningFacilityLoader extends DataLoader {
 	}
 
 	public static class FacilityData {
+
 		private final PvpFaction factionRestriction;
-		private final float x, y, z;
+		private final double x, y, z;
 		private final String cell;
 		private final FacilityType facilityType;
 		private final String stfName;
 		private final int heading;
 		private final TubeData[] tubeData;
 
-		public FacilityData(PvpFaction factionRestriction, float x, float y, float z, String cell, FacilityType facilityType, String stfName, int tubeHeading, TubeData[] tubeData) {
+		public FacilityData(PvpFaction factionRestriction, double x, double y, double z, String cell, FacilityType facilityType, String stfName, int tubeHeading, TubeData[] tubeData) {
 			this.factionRestriction = factionRestriction;
 			this.x = x;
 			this.y = y;
@@ -128,15 +117,15 @@ public class CloningFacilityLoader extends DataLoader {
 			return factionRestriction;
 		}
 
-		public float getX() {
+		public double getX() {
 			return x;
 		}
 
-		public float getY() {
+		public double getY() {
 			return y;
 		}
 
-		public float getZ() {
+		public double getZ() {
 			return z;
 		}
 
@@ -162,23 +151,24 @@ public class CloningFacilityLoader extends DataLoader {
 	}
 
 	public static class TubeData {
-		private final float tubeX, tubeZ, tubeHeading;
 
-		public TubeData(float tubeX, float tubeZ, float tubeHeading) {
+		private final double tubeX, tubeZ, tubeHeading;
+
+		public TubeData(double tubeX, double tubeZ, double tubeHeading) {
 			this.tubeX = tubeX;
 			this.tubeZ = tubeZ;
 			this.tubeHeading = tubeHeading;
 		}
 
-		public float getTubeX() {
+		public double getTubeX() {
 			return tubeX;
 		}
 
-		public float getTubeZ() {
+		public double getTubeZ() {
 			return tubeZ;
 		}
 
-		public float getTubeHeading() {
+		public double getTubeHeading() {
 			return tubeHeading;
 		}
 	}
