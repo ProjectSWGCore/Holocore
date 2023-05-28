@@ -32,8 +32,8 @@ import com.tngtech.archunit.junit.ArchTest
 import com.tngtech.archunit.lang.ArchRule
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods
-import com.tngtech.archunit.library.GeneralCodingRules
 import com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING
+import me.joshlarson.jlcommon.control.Intent
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.Service
@@ -67,6 +67,20 @@ class ArchitectureTest {
 		.haveSimpleNameEndingWith("Service")
 		.should()
 		.beAssignableTo(Service::class.java)
+		.because("using the suffix for other types of classes would cause confusion")
+
+	@ArchTest
+	val intentSuffixApplied: ArchRule = classes().that()
+		.areAssignableTo(Intent::class.java)
+		.should()
+		.haveSimpleNameEndingWith("Intent")
+		.because("they should be easy to find")
+
+	@ArchTest
+	val intentSuffixReserved: ArchRule = classes().that()
+		.haveSimpleNameEndingWith("Intent")
+		.should()
+		.beAssignableTo(Intent::class.java)
 		.because("using the suffix for other types of classes would cause confusion")
 
 	@ArchTest

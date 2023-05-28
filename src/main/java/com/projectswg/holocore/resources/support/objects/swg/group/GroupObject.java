@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,11 +28,10 @@ package com.projectswg.holocore.resources.support.objects.swg.group;
 
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.encoding.Encodable;
-import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.gameplay.player.group.GroupEventLeave;
+import com.projectswg.holocore.intents.gameplay.player.group.LeaveGroupIntent;
 import com.projectswg.holocore.resources.support.data.collections.SWGList;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -107,7 +106,7 @@ public class GroupObject extends SWGObject {
 				Player memberPlayer = member.getPlayer();
 				if (memberPlayer != null){
 					SuiMessageBox window = new SuiMessageBox(SuiButtons.OK_LEAVE_GROUP, "@group:loot_changed", "@group:" + lootRuleMsg);
-					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new GroupEventLeave(memberPlayer).broadcast());
+					window.addCancelButtonCallback("handleLeaveGroup", (event, parameters) -> new LeaveGroupIntent(memberPlayer).broadcast());
 				    window.display(memberPlayer);
 				}
 			}
@@ -254,7 +253,7 @@ public class GroupObject extends SWGObject {
 		}
 		
 		@Override
-		public byte[] encode() {
+		public byte @NotNull [] encode() {
 			String name = creature.getObjectName();
 			NetBuffer data = NetBuffer.allocate(10 + name.length());
 			data.addLong(creature.getObjectId());
@@ -263,7 +262,7 @@ public class GroupObject extends SWGObject {
 		}
 		
 		@Override
-		public void decode(NetBuffer data) {
+		public void decode(@NotNull NetBuffer data) {
 			
 		}
 		

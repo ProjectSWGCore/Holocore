@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.group
 
 import com.projectswg.common.data.encodables.chat.ChatAvatar
@@ -27,52 +53,52 @@ import java.util.concurrent.ConcurrentHashMap
 class GroupService(private val groups: MutableMap<Long, GroupObject> = ConcurrentHashMap()) : Service() {
 
 	@IntentHandler
-	private fun handleGroupEventInvite(intent: GroupEventInvite) {
+	private fun handleGroupEventInvite(intent: InviteToGroupIntent) {
 		handleGroupInvite(intent.player, intent.target)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventUninvite(intent: GroupEventUninvite) {
+	private fun handleGroupEventUninvite(intent: CancelInvitationToGroupIntent) {
 		handleGroupUninvite(intent.player, intent.target)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventJoin(intent: GroupEventJoin) {
+	private fun handleGroupEventJoin(intent: JoinGroupIntent) {
 		handleGroupJoin(intent.player)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventDecline(intent: GroupEventDecline) {
+	private fun handleGroupEventDecline(intent: DeclineGroupInvitationIntent) {
 		handleGroupDecline(intent.player)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventDisband(intent: GroupEventDisband) {
+	private fun handleGroupEventDisband(intent: DisbandGroupIntent) {
 		handleGroupDisband(intent.player)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventLeave(intent: GroupEventLeave) {
+	private fun handleGroupEventLeave(intent: LeaveGroupIntent) {
 		handleGroupLeave(intent.player)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventMakeLeader(intent: GroupEventMakeLeader) {
+	private fun handleGroupEventMakeLeader(intent: MakeGroupLeaderIntent) {
 		handleMakeLeader(intent.player, intent.target)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventKick(intent: GroupEventKick) {
+	private fun handleGroupEventKick(intent: KickGroupMemberIntent) {
 		handleKick(intent.player, intent.target)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventLoot(intent: GroupEventLoot) {
+	private fun handleGroupEventLoot(intent: ShowGroupLootSettingsIntent) {
 		handleGroupLootOptions(intent.player)
 	}
 	
 	@IntentHandler
-	private fun handleGroupEventMakeMasterLooter(intent: GroupEventMakeMasterLooter) {
+	private fun handleGroupEventMakeMasterLooter(intent: MakeMasterLooterOfGroupIntent) {
 		handleMakeMasterLooter(intent.player, intent.target)
 	}
 
