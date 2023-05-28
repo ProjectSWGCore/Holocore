@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.cloning;
 
 import com.projectswg.common.data.encodables.oob.ProsePackage;
@@ -5,12 +31,9 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.encodables.tangible.PvpStatus;
-import com.projectswg.common.data.info.RelationalDatabase;
-import com.projectswg.common.data.info.RelationalServerFactory;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.sui.SuiEvent;
-import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
@@ -20,6 +43,8 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.CloningFacilityLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -34,8 +59,6 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
@@ -44,25 +67,15 @@ import java.util.stream.Collectors;
 
 public class CloningService extends Service {
 	
-	private static final String DB_QUERY = "SELECT * FROM cloning_respawn";
 	private static final long CLONE_TIMER = 30;	// Amount of minutes before a player is forced to clone
-	
 	private final Map<CreatureObject, Future<?>> reviveTimers;
-	private final Map<String, FacilityData> facilityDataMap;
 	private final List<BuildingObject> cloningFacilities;
 	private final ScheduledThreadPool executor;
 	
 	public CloningService() {
 		this.reviveTimers = new HashMap<>();
-		this.facilityDataMap = new HashMap<>();
 		this.cloningFacilities = new ArrayList<>();
 		this.executor = new ScheduledThreadPool(1, "combat-cloning-service");
-	}
-	
-	@Override
-	public boolean initialize() {
-		loadFacilityData();
-		return true;
 	}
 	
 	@Override
@@ -76,46 +89,6 @@ public class CloningService extends Service {
 		executor.stop();
 		executor.awaitTermination(1000);
 		return true;
-	}
-	
-	private void loadFacilityData() {
-		long startTime = StandardLog.onStartLoad("cloning facility data");
-		loadRespawnData();
-		StandardLog.onEndLoad(facilityDataMap.size(), "cloning facility data", startTime);
-	}
-
-	private void loadRespawnData() {
-		try (RelationalDatabase respawnDatabase = RelationalServerFactory.getServerData("cloning/cloning_respawn.db", "cloning_respawn")) {
-			try (ResultSet set = respawnDatabase.executeQuery(DB_QUERY)) {
-				while (set.next()) {
-					int tubeCount = set.getInt("tubes");
-					TubeData[] tubeData = new TubeData[tubeCount];
-
-					for (int i = 1; i <= tubeCount; i++) {
-						String tubeName = "tube" + i;
-						tubeData[i - 1] = new TubeData(set.getFloat(tubeName + "_x"), set.getFloat(tubeName + "_z"), set.getFloat(tubeName + "_heading"));
-					}
-
-					String stfCellValue = set.getString("stf_name");
-					String stfName = stfCellValue.equals("-") ? null : stfCellValue;
-					PvpFaction factionRestriction = switch (stfCellValue) {
-						case "FACTION_REBEL" -> PvpFaction.REBEL;
-						case "FACTION_IMPERIAL" -> PvpFaction.IMPERIAL;
-						default -> null;
-					};
-					
-					FacilityData facilityData = new FacilityData(factionRestriction, set.getFloat("x"), set.getFloat("y"), set.getFloat("z"), set.getString("cell"), FacilityType.valueOf(set.getString("clone_type")), stfName, set.getInt("heading"), tubeData);
-					String objectTemplate = set.getString("structure");
-
-					if (facilityDataMap.put(ClientFactory.formatToSharedFile(objectTemplate), facilityData) != null) {
-						// Duplicates are not allowed!
-						Log.e("Duplicate entry for %s in row %d. Replacing previous entry with new", objectTemplate, set.getRow());
-					}
-				}
-			} catch (SQLException e) {
-				Log.e(e);
-			}
-		}
 	}
 	
 	@IntentHandler
@@ -142,8 +115,8 @@ public class CloningService extends Service {
 		}
 		
 		String objectTemplate = createdBuilding.getTemplate();
-		
-		if(facilityDataMap.containsKey(objectTemplate)) {
+		CloningFacilityLoader.FacilityData facility = ServerData.INSTANCE.getCloningFacilities().getFacility(objectTemplate);
+		if(facility != null) {
 			synchronized(cloningFacilities) {
 				cloningFacilities.add(createdBuilding);
 			}
@@ -247,7 +220,7 @@ public class CloningService extends Service {
 	}
 	
 	private CloneResult reviveCorpse(CreatureObject corpse, BuildingObject selectedFacility) {
-		FacilityData facilityData = facilityDataMap.get(selectedFacility.getTemplate());
+		CloningFacilityLoader.FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
 			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the object template is not in cloning_respawn.sdb", selectedFacility);
@@ -276,14 +249,14 @@ public class CloningService extends Service {
 		return CloneResult.SUCCESS;
 	}
 	
-	private Location getCloneLocation(FacilityData facilityData, BuildingObject selectedFacility) {
+	private Location getCloneLocation(CloningFacilityLoader.FacilityData facilityData, BuildingObject selectedFacility) {
 		LocationBuilder cloneLocation = Location.builder();
 		Location facilityLocation = selectedFacility.getLocation();
-		TubeData[] tubeData = facilityData.getTubeData();
+		CloningFacilityLoader.TubeData[] tubeData = facilityData.getTubeData();
 		int tubeCount = tubeData.length;
 
 		if (tubeCount > 0) {
-			TubeData randomData = tubeData[ThreadLocalRandom.current().nextInt(tubeCount)];
+			CloningFacilityLoader.TubeData randomData = tubeData[ThreadLocalRandom.current().nextInt(tubeCount)];
 			cloneLocation.setTerrain(facilityLocation.getTerrain());
 			cloneLocation.setPosition(randomData.getTubeX(), 0, randomData.getTubeZ());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
@@ -370,7 +343,7 @@ public class CloningService extends Service {
 	}
 	
 	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
-		FacilityData facilityData = facilityDataMap.get(cloningFacility.getTemplate());
+		CloningFacilityLoader.FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(cloningFacility.getTemplate());
 		PvpFaction factionRestriction = facilityData.getFactionRestriction();
 		
 		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
@@ -383,99 +356,7 @@ public class CloningService extends Service {
 		
 		return defaultCloner;
 	}
-	
-	private static class FacilityData {
-		private final PvpFaction factionRestriction;
-		private final float x, y, z;
-		private final String cell;
-		private final FacilityType facilityType;
-		private final String stfName;
-		private final int heading;
-		private final TubeData[] tubeData;
 
-		public FacilityData(PvpFaction factionRestriction, float x, float y, float z, String cell, FacilityType facilityType, String stfName, int tubeHeading, TubeData[] tubeData) {
-			this.factionRestriction = factionRestriction;
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.cell = cell;
-			this.facilityType = facilityType;
-			this.stfName = stfName;
-			this.heading = tubeHeading;
-			this.tubeData = tubeData;
-		}
-
-		public PvpFaction getFactionRestriction() {
-			return factionRestriction;
-		}
-
-		public float getX() {
-			return x;
-		}
-
-		public float getY() {
-			return y;
-		}
-
-		public float getZ() {
-			return z;
-		}
-
-		public String getCell() {
-			return cell;
-		}
-
-		public FacilityType getFacilityType() {
-			return facilityType;
-		}
-
-		public String getStfName() {
-			return stfName;
-		}
-
-		public int getHeading() {
-			return heading;
-		}
-
-		public TubeData[] getTubeData() {
-			return tubeData;
-		}
-	}
-	
-	private enum FacilityType {
-		STANDARD,
-		RESTRICTED,
-		PLAYER_CITY,
-		CAMP,
-		PRIVATE_INSTANCE,
-		FACTION_IMPERIAL,
-		FACTION_REBEL,
-		PVP_REGION_ADVANCED_IMPERIAL,
-		PVP_REGION_ADVANCED_REBEL
-	}
-	
-	private static class TubeData {
-		private final float tubeX, tubeZ, tubeHeading;
-
-		public TubeData(float tubeX, float tubeZ, float tubeHeading) {
-			this.tubeX = tubeX;
-			this.tubeZ = tubeZ;
-			this.tubeHeading = tubeHeading;
-		}
-
-		public float getTubeX() {
-			return tubeX;
-		}
-
-		public float getTubeZ() {
-			return tubeZ;
-		}
-
-		public float getTubeHeading() {
-			return tubeHeading;
-		}
-	}
-	
 	private enum CloneResult {
 		INVALID_SELECTION, TEMPLATE_MISSING, INVALID_CELL, SUCCESS
 	}
