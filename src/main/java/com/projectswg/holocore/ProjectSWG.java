@@ -31,7 +31,6 @@ import com.projectswg.common.data.encodables.galaxy.Galaxy;
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus;
 import com.projectswg.common.data.swgiff.parsers.SWGParser;
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent;
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.control.ServerStatus;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.services.gameplay.GameplayManager;
@@ -53,7 +52,6 @@ import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper;
 import me.joshlarson.jlcommon.utilities.ThreadUtilities;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.OffsetTime;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -103,7 +101,7 @@ public class ProjectSWG {
 		}
 		setupDatabase(arguments);
 		Thread.currentThread().setPriority(10);
-		initializeServerFactory();
+		initializeSWGParser();
 		setupGalaxy(arguments);
 		try (IntentManager intentManager = new IntentManager(false, Runtime.getRuntime().availableProcessors(), 8)) {
 			IntentManager.setInstance(intentManager);
@@ -125,14 +123,8 @@ public class ProjectSWG {
 		return 0;
 	}
 	
-	// TODO: Replace all iffs with sdbs
-	private static void initializeServerFactory() {
+	private static void initializeSWGParser() {
 		SWGParser.setBasePath("serverdata");
-		try {
-			ServerFactory.getInstance().updateServerIffs();
-		} catch (IOException e) {
-			Log.e(e);
-		}
 	}
 	
 	private static void shutdownStaticClasses() {
