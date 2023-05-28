@@ -1,17 +1,40 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.world.map;
 
 import com.projectswg.common.data.encodables.map.MapLocation;
 import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsMessage;
 import com.projectswg.common.network.packets.swg.zone.spatial.GetMapLocationsResponseMessage;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.map.MappingTemplate;
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.MappingTemplateLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PlanetMapCategoryLoader.PlanetMapCategoryInfo;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -19,6 +42,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -80,21 +104,16 @@ public class MapService extends Service {
 	}
 
 	private void loadStaticCityPoints() {
-		DatatableData table = ServerFactory.getDatatable("map/static_city_points.iff");
-		
+		Collection<StaticCityPoint> allPoints = ServerData.INSTANCE.getStaticCityPoints().getAllPoints();
 		PlanetMapCategoryInfo mapCategory = DataLoader.Companion.planetMapCategories().getCategoryByName("city");
 		assert mapCategory != null;
 		byte city = (byte) mapCategory.getIndex();
-		for (int row = 0; row < table.getRowCount(); row++) {
-			List<MapLocation> locations = staticMapLocations.get(table.getCell(row, 0).toString());
-			if (locations == null) {
-				locations = new ArrayList<>();
-				staticMapLocations.put((String) table.getCell(row, 0), locations);
-			}
+		for (StaticCityPoint point : allPoints) {
+			List<MapLocation> locations = staticMapLocations.computeIfAbsent(point.getPlanet(), k -> new ArrayList<>());
 
-			String name = (String) table.getCell(row, 1);
-			float x = (float) table.getCell(row, 2);
-			float z = (float) table.getCell(row, 3);
+			String name = point.getCity();
+			float x = point.getX();
+			float z = point.getZ();
 			locations.add(new MapLocation(locations.size() + 1, name, x, z, city, (byte) 0, false));
 		}
 	}

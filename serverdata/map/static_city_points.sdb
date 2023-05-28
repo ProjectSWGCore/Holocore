@@ -1,5 +1,5 @@
 planet	city	x	z
-s	s	f	f
+TEXT	TEXT	REAL	REAL
 tatooine	Bestine	-1290	-3590
 tatooine	Mos Espa	-2902	2130
 tatooine	Mos Entha	1291	3138
