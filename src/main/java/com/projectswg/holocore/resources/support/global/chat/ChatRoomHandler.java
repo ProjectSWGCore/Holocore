@@ -30,13 +30,12 @@ import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.chat.ChatResult;
 import com.projectswg.common.data.encodables.chat.ChatRoom;
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage;
-import com.projectswg.common.data.swgfile.visitors.DatatableData;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.*;
 import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.loader.PlanetChatRoomLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
@@ -304,9 +303,9 @@ public class ChatRoomHandler {
 	}
 
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {
-		DatatableData planets = ServerFactory.getDatatable("chat/planets.iff");
-		planets.handleRows((r) -> {
-			String path = basePath + planets.getCell(r, 0) + '.';
+		PlanetChatRoomLoader planetChatRooms = ServerData.INSTANCE.getPlanetChatRooms();
+		planetChatRooms.getPlanetNames().forEach(planetName -> {
+			String path = basePath + planetName + '.';
 			createRoom(systemAvatar, true, false, path + "Planet", "public chat for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "system", "system messages for this planet, cannot create rooms here", false);
 			createRoom(systemAvatar, true, false, path + "Chat", "public chat for this planet, can create rooms here", false);

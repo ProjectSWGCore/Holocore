@@ -109,6 +109,7 @@ object ServerData {
 	val explorationBadges	by SoftDataLoaderDelegate(::ExplorationBadgeLoader)
 	val cloningFacilities	by SoftDataLoaderDelegate(::CloningFacilityLoader)
 	val defaultChatRooms	by SoftDataLoaderDelegate(::DefaultChatRoomLoader)
+	val planetChatRooms		by SoftDataLoaderDelegate(::PlanetChatRoomLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)
