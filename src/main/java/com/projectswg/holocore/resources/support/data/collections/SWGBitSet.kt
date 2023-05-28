@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,65 +24,69 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.collections;
+package com.projectswg.holocore.resources.support.data.collections
 
-import com.projectswg.common.encoding.Encodable;
-import com.projectswg.common.network.NetBuffer;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.common.encoding.Encodable
+import com.projectswg.common.network.NetBuffer
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import java.util.BitSet
 
-import java.util.BitSet;
+class SWGBitSet(private var view: Int, private var updateType: Int) : BitSet(128), Encodable {
 
-public class SWGBitSet extends BitSet implements Encodable {
-	
-	private static final long serialVersionUID = 1L;
-	
-	private int view;
-	private int updateType;
-	
-	public SWGBitSet() {
-		super(128);
+	fun wrapper(obj: SWGObject): SWGBitSetWrapper {
+		return SWGBitSetWrapper(obj)
 	}
-	
-	public SWGBitSet(int view, int updateType) {
-		super(128); // Seems to be the default size for the bitmask sets in SWGPackets
-		this.view = view;
-		this.updateType = updateType;
-	}
-	
-	@Override
-	public byte[] encode() {
-		byte[] bytes = toByteArray();
-		NetBuffer buffer = NetBuffer.allocate(8 + bytes.length);
-		buffer.addInt(bytes.length);
-		buffer.addInt(super.length());
-		buffer.addRawArray(bytes);
-		return buffer.array();
-	}
-	
-	@Override
-	public void decode(NetBuffer data) {
-		int len = data.getInt();
-		data.getInt();
-		byte [] bytes = data.getArray(len);
-		clear();
-		or(BitSet.valueOf(bytes));
-	}
-	
-	@Override
-	public int getLength() {
-		return 8 + (super.length()+7) / 8;
-	}
-	
-	public void read(byte[] bytes) {
-		clear();
 
+	override fun encode(): ByteArray {
+		val bytes = toByteArray()
+		val buffer = NetBuffer.allocate(8 + bytes.size)
+		buffer.addInt(bytes.size)
+		buffer.addInt(super.length())
+		buffer.addRawArray(bytes)
+		return buffer.array()
+	}
+
+	override fun decode(data: NetBuffer) {
+		val len = data.int
+		data.int
+		val bytes = data.getArray(len)
+		clear()
+		or(valueOf(bytes))
+	}
+
+	override val length: Int
+		get() = 8 + (super.length() + 7) / 8
+
+	fun read(bytes: ByteArray?) {
+		clear()
 		if (bytes != null) {
-			xor(valueOf(bytes));
+			xor(valueOf(bytes))
 		}
 	}
 
-	public void sendDeltaMessage(SWGObject target) {
-		target.sendDelta(view, updateType, encode());
+	fun sendDeltaMessage(target: SWGObject) {
+		target.sendDelta(view, updateType, encode())
 	}
-	
+
+	inner class SWGBitSetWrapper(private val obj: SWGObject) {
+
+		val flags: BitSet
+			get() = this@SWGBitSet.clone() as BitSet
+
+		fun get(): BitSet {
+			return this@SWGBitSet.clone() as BitSet
+		}
+
+		fun add(flags: BitSet) {
+			this@SWGBitSet.or(flags)
+			this@SWGBitSet.sendDeltaMessage(obj)
+		}
+
+		fun set(flags: BitSet) {
+			this@SWGBitSet.clear()
+			this@SWGBitSet.or(flags)
+			this@SWGBitSet.sendDeltaMessage(obj)
+		}
+
+	}
 }

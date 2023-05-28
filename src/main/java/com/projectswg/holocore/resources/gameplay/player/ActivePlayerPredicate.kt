@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,36 +24,30 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.player;
+package com.projectswg.holocore.resources.gameplay.player
 
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerFlags;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.player.PlayerFlags
+import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
+import java.util.function.Predicate
 
-import java.util.function.Predicate;
+class ActivePlayerPredicate : Predicate<Player> {
+	override fun test(player: Player): Boolean {
+		val creatureObject = player.creatureObject
+		val playerObject = creatureObject.playerObject
 
-public class ActivePlayerPredicate implements Predicate<Player> {
-	@Override
-	public boolean test(Player player) {
-		CreatureObject creatureObject = player.getCreatureObject();
-		PlayerObject playerObject = creatureObject.getPlayerObject();
-		boolean afk = playerObject.isFlagSet(PlayerFlags.AFK);
-		boolean offline = playerObject.isFlagSet(PlayerFlags.LD);
-		boolean incapacitated = creatureObject.getPosture() == Posture.INCAPACITATED;
-		boolean dead = creatureObject.getPosture() == Posture.DEAD;
-		boolean cloaked = !creatureObject.isVisible();
-		boolean privateCell = false;	// Player might be inside a private building
-		
-		SWGObject parent = creatureObject.getParent();
-		
-		if (parent instanceof CellObject) {
-			privateCell = !((CellObject) parent).isPublic();
+		val afk = playerObject.flags[PlayerFlags.AFK]
+		val offline = playerObject.flags[PlayerFlags.LD]
+		val incapacitated = creatureObject.posture == Posture.INCAPACITATED
+		val dead = creatureObject.posture == Posture.DEAD
+		val cloaked = !creatureObject.isVisible
+		var privateCell = false // Player might be inside a private building
+
+		val parent = creatureObject.parent
+		if (parent is CellObject) {
+			privateCell = !parent.isPublic
 		}
-		
-		return !afk && !offline && !incapacitated && !dead && !cloaked && !privateCell;
+		return !afk && !offline && !incapacitated && !dead && !cloaked && !privateCell
 	}
 }

@@ -32,7 +32,9 @@ import com.projectswg.common.encoding.StringType
 import com.projectswg.common.network.NetBuffer
 import com.projectswg.holocore.resources.support.data.collections.SWGFlag
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder
+import com.projectswg.holocore.resources.support.global.player.PlayerFlags
 import com.projectswg.holocore.resources.support.objects.swg.IndirectBaselineDelegate
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.utilities.MathUtils
 import java.util.*
 
@@ -41,85 +43,16 @@ import java.util.*
  */
 internal class PlayerObjectShared(private val obj: PlayerObject) : MongoPersistable {
 
-	private val flagsList = SWGFlag(3, 5)
-	private val profileFlags = SWGFlag(3, 6)
+	private val _flags = SWGFlag(3, 5)
+	val flags = _flags.wrapper(obj) { it: PlayerFlags -> it.flag }
+
+	private val _profileFlags = SWGFlag(3, 6)
+	val profileFlags = _profileFlags.wrapper(obj) { it: PlayerFlags -> it.flag }
 
 	var title by IndirectBaselineDelegate(obj = obj, value = "", page = 3, update = 7, stringType = StringType.ASCII)
 	var bornDate by IndirectBaselineDelegate(obj = obj, value = 0, page = 3, update = 8)
 	var playTime by IndirectBaselineDelegate(obj = obj, value = 0, page = 3, update = 9)
 	var professionIcon by IndirectBaselineDelegate(obj = obj, value = 0, page = 3, update = 10)
-
-	fun getFlagsList(): BitSet {
-		return flagsList.clone() as BitSet
-	}
-
-	fun setFlag(flag: Int) {
-		flagsList.set(flag)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun clearFlag(flag: Int) {
-		flagsList.clear(flag)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun toggleFlag(flag: Int) {
-		flagsList.flip(flag)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun setFlags(flags: BitSet) {
-		flagsList.or(flags)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun clearFlags(flags: BitSet) {
-		flagsList.andNot(flags)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun toggleFlags(flags: BitSet) {
-		flagsList.xor(flags)
-		flagsList.sendDeltaMessage(obj)
-	}
-
-	fun isFlagSet(flag: Int): Boolean {
-		return flagsList[flag]
-	}
-
-	fun getProfileFlags(): BitSet {
-		return profileFlags.clone() as BitSet
-	}
-
-	fun setProfileFlag(flag: Int) {
-		profileFlags.set(flag)
-		profileFlags.sendDeltaMessage(obj)
-	}
-
-	fun clearProfileFlag(flag: Int) {
-		profileFlags.clear(flag)
-		profileFlags.sendDeltaMessage(obj)
-	}
-
-	fun toggleProfileFlag(flag: Int) {
-		profileFlags.flip(flag)
-		profileFlags.sendDeltaMessage(obj)
-	}
-
-	fun setProfileFlags(flags: BitSet) {
-		profileFlags.or(flags)
-		profileFlags.sendDeltaMessage(obj)
-	}
-
-	fun clearProfileFlags(flags: BitSet) {
-		profileFlags.andNot(flags)
-		profileFlags.sendDeltaMessage(obj)
-	}
-
-	fun toggleProfileFlags(flags: BitSet) {
-		profileFlags.xor(flags)
-		profileFlags.sendDeltaMessage(obj)
-	}
 
 	fun incrementPlayTime(playTime: Int) {
 		this.playTime += playTime
@@ -130,8 +63,8 @@ internal class PlayerObjectShared(private val obj: PlayerObject) : MongoPersista
 	}
 
 	fun createBaseline3(bb: BaselineBuilder) {
-		bb.addObject(flagsList) // 5
-		bb.addObject(profileFlags) // 6
+		bb.addObject(_flags) // 5
+		bb.addObject(_profileFlags) // 6
 		bb.addAscii(title) // 7
 		bb.addInt(bornDate) // 8
 		bb.addInt(playTime) // 9
@@ -140,8 +73,8 @@ internal class PlayerObjectShared(private val obj: PlayerObject) : MongoPersista
 	}
 
 	fun parseBaseline3(buffer: NetBuffer) {
-		flagsList.decode(buffer) // 5
-		profileFlags.decode(buffer) // 6
+		_flags.decode(buffer) // 5
+		_profileFlags.decode(buffer) // 6
 		title = buffer.ascii // 7
 		bornDate = buffer.int // 8
 		playTime = buffer.int // 9

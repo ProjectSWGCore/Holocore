@@ -46,8 +46,10 @@ import java.util.stream.Collectors
 internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistable {
 	private val experience = SWGMap<String, Int>(8, 0, StringType.ASCII)
 	private val waypoints = SWGMap<Long, WaypointObject>(8, 1)
-	private val completedQuests = SWGBitSet(8, 4)
-	private val activeQuests = SWGBitSet(8, 5)
+	private val _completedQuests = SWGBitSet(8, 4)
+	val completedQuests = _completedQuests.wrapper(obj)
+	private val _activeQuests = SWGBitSet(8, 5)
+	val activeQuests = _activeQuests.wrapper(obj)
 	private val quests = SWGMap<CRC, Quest>(8, 7)
 
 	var forcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 2)
@@ -102,32 +104,6 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		synchronized(waypoints) { if (waypoints.remove(objId) != null) waypoints.sendDeltaMessage(obj) }
 	}
 
-	fun getCompletedQuests(): BitSet {
-		return completedQuests.clone() as BitSet
-	}
-
-	fun addCompletedQuests(completedQuests: BitSet) {
-		this.completedQuests.or(completedQuests)
-	}
-
-	fun setCompletedQuests(completedQuests: BitSet) {
-		this.completedQuests.clear()
-		this.completedQuests.or(completedQuests)
-	}
-
-	fun getActiveQuests(): BitSet {
-		return activeQuests.clone() as BitSet
-	}
-
-	fun addActiveQuests(activeQuests: BitSet) {
-		this.activeQuests.or(activeQuests)
-	}
-
-	fun setActiveQuests(activeQuests: BitSet) {
-		this.activeQuests.clear()
-		this.activeQuests.or(activeQuests)
-	}
-
 	fun getQuests(): Map<CRC, Quest> {
 		return Collections.unmodifiableMap(quests)
 	}
@@ -137,8 +113,8 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		bb.addObject(waypoints) // 1
 		bb.addInt(forcePower) // 2
 		bb.addInt(maxForcePower) // 3
-		bb.addObject(completedQuests) // 4
-		bb.addObject(activeQuests) // 5
+		bb.addObject(_completedQuests) // 4
+		bb.addObject(_activeQuests) // 5
 		bb.addInt(activeQuest) // 6
 		bb.addObject(quests) // 7
 		bb.incrementOperandCount(8)
@@ -149,8 +125,8 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		data.putArray("waypoints", waypoints.values.stream().map { obj: WaypointObject -> obj.oob }.collect(Collectors.toList()))
 		data.putInteger("forcePower", forcePower)
 		data.putInteger("maxForcePower", maxForcePower)
-		data.putByteArray("completedQuests", completedQuests.toByteArray())
-		data.putByteArray("activeQuests", activeQuests.toByteArray())
+		data.putByteArray("completedQuests", _completedQuests.toByteArray())
+		data.putByteArray("activeQuests", _activeQuests.toByteArray())
 		data.putInteger("activeQuest", activeQuest)
 		data.putMap("quests", quests)
 	}
@@ -164,8 +140,8 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 			.forEach(Consumer { obj: WaypointObject -> waypoints[obj.objectId] = obj })
 		forcePower = data.getInteger("forcePower", forcePower)
 		maxForcePower = data.getInteger("maxForcePower", maxForcePower)
-		completedQuests.read(data.getByteArray("completedQuests"))
-		activeQuests.read(data.getByteArray("activeQuests"))
+		_completedQuests.read(data.getByteArray("completedQuests"))
+		_activeQuests.read(data.getByteArray("activeQuests"))
 		activeQuest = data.getInteger("activeQuest", activeQuest)
 		quests.putAll(data.getMap("quests", CRC::class.java, Quest::class.java))
 	}
