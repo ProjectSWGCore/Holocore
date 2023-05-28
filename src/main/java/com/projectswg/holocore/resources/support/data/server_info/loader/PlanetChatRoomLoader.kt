@@ -26,7 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import java.io.File
 
 class PlanetChatRoomLoader : DataLoader() {
 
@@ -37,11 +38,13 @@ class PlanetChatRoomLoader : DataLoader() {
 	}
 
 	override fun load() {
-		val planets = ServerFactory.getDatatable("chat/planets.iff")
-		planets.handleRows { r: Int ->
-			val planetName = planets.getCell(r, 0) as String
-			planetNames += planetName
+		val set = SdbLoader.load(File("serverdata/chat/planets.sdb"))
+		
+		set.use {
+			while (set.next()) {
+				val planetName = set.getText("planet")
+				planetNames += planetName
+			}
 		}
 	}
-
 }
