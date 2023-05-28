@@ -1,5 +1,5 @@
-Room	Title
-s	s
+room	title
+TEXT	TEXT
 Auction	Auction chat for this galaxy
 Galaxy	public chat for the whole galaxy, cannot create rooms here
 Chat	public chat for this galaxy, can create rooms here
