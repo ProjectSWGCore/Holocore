@@ -108,6 +108,7 @@ object ServerData {
 	val staticCities		by SoftDataLoaderDelegate(::StaticCityLoader)
 	val explorationBadges	by SoftDataLoaderDelegate(::ExplorationBadgeLoader)
 	val cloningFacilities	by SoftDataLoaderDelegate(::CloningFacilityLoader)
+	val defaultChatRooms	by SoftDataLoaderDelegate(::DefaultChatRoomLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)

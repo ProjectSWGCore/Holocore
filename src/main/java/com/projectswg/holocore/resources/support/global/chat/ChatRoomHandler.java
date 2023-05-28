@@ -37,6 +37,7 @@ import com.projectswg.common.network.packets.swg.zone.insertion.ChatRoomList;
 import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.resources.support.data.client_info.ServerFactory;
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -288,18 +289,20 @@ public class ChatRoomHandler {
 		String galaxy = ProjectSWG.getGalaxy().getName();
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar();
 		String basePath = "SWG." + galaxy + '.';
-		
-		DatatableData rooms = ServerFactory.getDatatable("chat/default_rooms.iff");
-		rooms.handleRows((r) -> createRoom(systemAvatar, true, false, basePath + rooms.getCell(r, 0), (String) rooms.getCell(r, 1), false));
-		
+
+		createDefaultChannels(systemAvatar, basePath);
 		createPlanetChannels(systemAvatar, basePath);
 		createAdminChannels(systemAvatar);
-		
-		/*
-		 * Battlefield Room path examples: SWG.Bria.corellia.battlefield SWG.Bria.corellia.battlefield.corellia_mountain_fortress.allFactions SWG.Bria.corellia.battlefield.corellia_pvp.allFactions / Imperial / Rebel SWG.Bria.corellia.battlefield.corellia_rebel_riverside_fort.allFactions
-		 */
 	}
-	
+
+	private void createDefaultChannels(ChatAvatar systemAvatar, String basePath) {
+		ServerData.INSTANCE.getDefaultChatRooms().getAll().forEach(defaultChatRoom -> {
+			String roomName = defaultChatRoom.getName();
+			String roomTitle = defaultChatRoom.getTitle();
+			createRoom(systemAvatar, true, false, basePath + roomName, roomTitle, false);
+		});
+	}
+
 	private void createPlanetChannels(ChatAvatar systemAvatar, String basePath) {
 		DatatableData planets = ServerFactory.getDatatable("chat/planets.iff");
 		planets.handleRows((r) -> {
