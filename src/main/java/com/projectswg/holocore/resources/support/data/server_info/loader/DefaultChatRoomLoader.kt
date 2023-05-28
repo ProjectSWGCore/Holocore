@@ -26,7 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.holocore.resources.support.data.client_info.ServerFactory
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import java.io.File
 
 class DefaultChatRoomLoader : DataLoader() {
 
@@ -37,13 +38,16 @@ class DefaultChatRoomLoader : DataLoader() {
 	}
 	
 	override fun load() {
-		val roomsDatatable = ServerFactory.getDatatable("chat/default_rooms.iff")
-		roomsDatatable.handleRows { r: Int ->
-			val roomName = roomsDatatable.getCell(r, 0) as String
-			val roomTitle = roomsDatatable.getCell(r, 1) as String
+		val set = SdbLoader.load(File("serverdata/chat/default_rooms.sdb"))
 
-			val defaultChatRoom = DefaultChatRoom(roomName, roomTitle)
-			rooms += defaultChatRoom
+		set.use {
+			while (set.next()) {
+				val roomName = set.getText("room")
+				val roomTitle = set.getText("title")
+				
+				val defaultChatRoom = DefaultChatRoom(roomName, roomTitle)
+				rooms += defaultChatRoom
+			}
 		}
 	}
 
