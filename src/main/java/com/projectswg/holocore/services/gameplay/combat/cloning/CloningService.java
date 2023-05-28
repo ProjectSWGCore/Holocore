@@ -43,8 +43,9 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.CloningFacilityLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.FacilityData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
+import com.projectswg.holocore.resources.support.data.server_info.loader.TubeData;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -115,7 +116,7 @@ public class CloningService extends Service {
 		}
 		
 		String objectTemplate = createdBuilding.getTemplate();
-		CloningFacilityLoader.FacilityData facility = ServerData.INSTANCE.getCloningFacilities().getFacility(objectTemplate);
+		FacilityData facility = ServerData.INSTANCE.getCloningFacilities().getFacility(objectTemplate);
 		if(facility != null) {
 			synchronized(cloningFacilities) {
 				cloningFacilities.add(createdBuilding);
@@ -220,7 +221,7 @@ public class CloningService extends Service {
 	}
 	
 	private CloneResult reviveCorpse(CreatureObject corpse, BuildingObject selectedFacility) {
-		CloningFacilityLoader.FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(selectedFacility.getTemplate());
+		FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(selectedFacility.getTemplate());
 
 		if (facilityData == null) {
 			StandardLog.onPlayerError(this, corpse, "could not clone at facility %s because the object template is not in cloning_respawn.sdb", selectedFacility);
@@ -249,14 +250,14 @@ public class CloningService extends Service {
 		return CloneResult.SUCCESS;
 	}
 	
-	private Location getCloneLocation(CloningFacilityLoader.FacilityData facilityData, BuildingObject selectedFacility) {
+	private Location getCloneLocation(FacilityData facilityData, BuildingObject selectedFacility) {
 		LocationBuilder cloneLocation = Location.builder();
 		Location facilityLocation = selectedFacility.getLocation();
-		CloningFacilityLoader.TubeData[] tubeData = facilityData.getTubeData();
-		int tubeCount = tubeData.length;
+		List<TubeData> tubeData = new ArrayList<>(facilityData.getTubes());
+		int tubeCount = tubeData.size();
 
 		if (tubeCount > 0) {
-			CloningFacilityLoader.TubeData randomData = tubeData[ThreadLocalRandom.current().nextInt(tubeCount)];
+			TubeData randomData = tubeData.get(ThreadLocalRandom.current().nextInt(tubeCount));
 			cloneLocation.setTerrain(facilityLocation.getTerrain());
 			cloneLocation.setPosition(randomData.getTubeX(), 0, randomData.getTubeZ());
 			cloneLocation.setOrientation(facilityLocation.getOrientationX(), facilityLocation.getOrientationY(), facilityLocation.getOrientationZ(), facilityLocation.getOrientationW());
@@ -343,7 +344,7 @@ public class CloningService extends Service {
 	}
 	
 	private boolean isFactionAllowed(BuildingObject cloningFacility, CreatureObject corpse) {
-		CloningFacilityLoader.FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(cloningFacility.getTemplate());
+		FacilityData facilityData = ServerData.INSTANCE.getCloningFacilities().getFacility(cloningFacility.getTemplate());
 		PvpFaction factionRestriction = facilityData.getFactionRestriction();
 		
 		return factionRestriction == null || factionRestriction == corpse.getPvpFaction();
