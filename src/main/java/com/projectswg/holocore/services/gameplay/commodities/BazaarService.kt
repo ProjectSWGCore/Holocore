@@ -175,7 +175,7 @@ class BazaarService : Service() {
 	private fun sendMails(bazaarObject: SWGObject, objectById: SWGObject, buyer: CreatureObject, seller: CreatureObject, instantSaleItem: PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata) {
 		val terminalName = getDisplayName(bazaarObject)
 		val currentCity = getCurrentCity(bazaarObject)
-		val sender = "SWG." + ProjectSWG.getGalaxy().name + ".auctioner"
+		val sender = "SWG." + ProjectSWG.galaxy.name + ".auctioner"
 		val itemName = getDisplayName(objectById)
 		val location = bazaarObject.location
 		sendMailToSeller(
@@ -207,7 +207,7 @@ class BazaarService : Service() {
 			ProsePackage(StringId("auction", "seller_success_location"), "TT", currentCity, "TO", "@planet_n:${terrain.getName()}")
 		)
 
-		PersistentMessageIntent(seller, mail, ProjectSWG.getGalaxy().name).broadcast()
+		PersistentMessageIntent(seller, mail, ProjectSWG.galaxy.name).broadcast()
 	}
 
 	private fun sendMailToBuyer(sender: String, buyer: CreatureObject, seller: CreatureObject, itemName: String, price: Int, currentCity: String, location: Location, terminalName: String) {
@@ -224,7 +224,7 @@ class BazaarService : Service() {
 			waypoint
 		)
 
-		PersistentMessageIntent(buyer, mail, ProjectSWG.getGalaxy().name).broadcast()
+		PersistentMessageIntent(buyer, mail, ProjectSWG.galaxy.name).broadcast()
 	}
 
 	private fun handleGetAuctionDetails(packet: GetAuctionDetails, player: Player) {
@@ -410,6 +410,6 @@ class BazaarService : Service() {
 	}
 
 	private fun handleCommoditiesItemTypeListRequest(packet: CommoditiesItemTypeListRequest, player: Player) {
-		player.sendPacket(CommoditiesItemTypeListResponse(ProjectSWG.getGalaxy().name, 0, 0, 0, "test category name", 0, "test type"))
+		player.sendPacket(CommoditiesItemTypeListResponse(ProjectSWG.galaxy.name, 0, 0, 0, "test category name", 0, "test type"))
 	}
 }

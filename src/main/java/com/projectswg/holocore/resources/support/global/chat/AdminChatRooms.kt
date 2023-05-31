@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2020 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,6 +30,6 @@ package com.projectswg.holocore.resources.support.global.chat
 import com.projectswg.holocore.ProjectSWG
 
 enum class AdminChatRooms(val roomTitle: String, val roomPath: String) {
-	SYSTEM_LOG("system log", "SWG." + ProjectSWG.getGalaxy().name + ".admin.SystemLog"),
-	SPAWNER_LOG("spawner log", "SWG." + ProjectSWG.getGalaxy().name + ".admin.SpawnerLog")
+	SYSTEM_LOG("system log", "SWG." + ProjectSWG.galaxy.name + ".admin.SystemLog"),
+	SPAWNER_LOG("spawner log", "SWG." + ProjectSWG.galaxy.name + ".admin.SpawnerLog")
 }

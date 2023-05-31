@@ -118,7 +118,7 @@ public class GroupObject extends SWGObject {
 	}
 	
 	public String getChatRoomPath() {
-		return "SWG." + ProjectSWG.getGalaxy().getName() + ".group." + getObjectId() + ".GroupChat";
+		return "SWG." + ProjectSWG.INSTANCE.getGalaxy().getName() + ".group." + getObjectId() + ".GroupChat";
 	}
 	
 	public long getLeaderId() {

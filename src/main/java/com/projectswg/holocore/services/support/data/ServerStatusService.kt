@@ -67,11 +67,11 @@ class ServerStatusService : Service() {
 	@IntentHandler
 	private fun handleServerStatusIntent(ssi: ServerStatusIntent) {
 		when (ssi.status) {
-			ServerStatus.OFFLINE                          -> ProjectSWG.getGalaxy().status = GalaxyStatus.DOWN
-			ServerStatus.INITIALIZING                     -> ProjectSWG.getGalaxy().status = GalaxyStatus.LOADING
-			ServerStatus.OPEN                             -> ProjectSWG.getGalaxy().status = GalaxyStatus.UP
+			ServerStatus.OFFLINE                          -> ProjectSWG.galaxy.status = GalaxyStatus.DOWN
+			ServerStatus.INITIALIZING                     -> ProjectSWG.galaxy.status = GalaxyStatus.LOADING
+			ServerStatus.OPEN                             -> ProjectSWG.galaxy.status = GalaxyStatus.UP
 			ServerStatus.SHUTDOWN_REQUESTED               -> startShutdownClock(ssi.time, ssi.timeUnit)
-			ServerStatus.LOCKED, ServerStatus.TERMINATING -> ProjectSWG.getGalaxy().status = GalaxyStatus.LOCKED
+			ServerStatus.LOCKED, ServerStatus.TERMINATING -> ProjectSWG.galaxy.status = GalaxyStatus.LOCKED
 		}
 	}
 

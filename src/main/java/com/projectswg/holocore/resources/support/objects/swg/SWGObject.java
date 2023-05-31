@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -1205,7 +1205,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(ProjectSWG.getGalaxy().getId()); // 0
+		bb.addInt(ProjectSWG.INSTANCE.getGalaxy().getId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);

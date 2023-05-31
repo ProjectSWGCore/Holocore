@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -190,10 +190,10 @@ public class ChatMailService extends Service {
 		
 		switch (requestType) {
 			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.getGalaxy().getName(), false);
+				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), false);
 				break;
 			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.getGalaxy().getName(), true);
+				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), true);
 				break;
 		}
 		

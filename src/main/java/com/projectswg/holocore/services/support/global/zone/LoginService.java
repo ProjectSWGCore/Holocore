@@ -274,7 +274,7 @@ public class LoginService extends Service {
 	
 	private List <Galaxy> getGalaxies() {
 		List<Galaxy> galaxies = new ArrayList<>();
-		galaxies.add(ProjectSWG.getGalaxy());
+		galaxies.add(ProjectSWG.INSTANCE.getGalaxy());
 		return galaxies;
 	}
 	
@@ -283,7 +283,7 @@ public class LoginService extends Service {
 		List<CreatureObject> creatures = this.players.get(accountId);
 		if (creatures != null) {
 			for (CreatureObject creature : creatures) {
-				characters.add(new SWGCharacter(creature.getObjectName(), creature.getRace().getCrc(), creature.getObjectId(), ProjectSWG.getGalaxy().getId(), 1));
+				characters.add(new SWGCharacter(creature.getObjectName(), creature.getRace().getCrc(), creature.getObjectId(), ProjectSWG.INSTANCE.getGalaxy().getId(), 1));
 			}
 		}
 		return characters;
