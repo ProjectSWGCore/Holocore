@@ -1,7 +1,8 @@
 ![Banner](https://i.imgur.com/vIaNzCm.png)
 
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg?longCache=true&style=flat)
-![Discord](https://img.shields.io/discord/373548910225915905.svg)
+[![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)
+
 
 # Introduction #
 This is a Star Wars Galaxies server emulator, targeted at the Combat Upgrade (CU)
@@ -46,6 +47,4 @@ If you're interested in running your own server, you should use the provided
 Docker image.
 
 ## Help needed ? ##
-If you have questions or stuck, please use the channels on Discord
-
-![Discord Banner 2](https://discordapp.com/api/guilds/373548910225915905/widget.png?style=banner2)
+If you have questions or stuck, please use the channels on Discord [![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)
