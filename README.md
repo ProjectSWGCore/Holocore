@@ -44,3 +44,8 @@ Compile and run Holocores automated tests using Gradle: `./gradlew test --info`
 # Running your own server #
 If you're interested in running your own server, you should use the provided
 Docker image.
+
+## Help needed ? ##
+If you have questions or stuck, please use the channels on Discord
+
+![Discord Banner 2](https://discordapp.com/api/guilds/373548910225915905/widget.png?style=banner2)
