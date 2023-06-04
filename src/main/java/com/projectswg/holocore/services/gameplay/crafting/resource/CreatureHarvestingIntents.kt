@@ -24,13 +24,12 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.crafting
+package com.projectswg.holocore.services.gameplay.crafting.resource
 
-import com.projectswg.holocore.services.gameplay.crafting.resource.CreatureHarvestingService
-import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceService
-import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyToolService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import me.joshlarson.jlcommon.control.Intent
 
-@ManagerStructure(children = [CreatureHarvestingService::class, ResourceService::class, SurveyToolService::class])
-class CraftingManager : Manager()
+data class HarvestBoneIntent(val player: Player, val target: AIObject): Intent()
+data class HarvestHideIntent(val player: Player, val target: AIObject): Intent()
+data class HarvestMeatIntent(val player: Player, val target: AIObject): Intent()

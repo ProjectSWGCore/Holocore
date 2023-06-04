@@ -36,11 +36,9 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceSpawn;
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResourceStats;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType;
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
@@ -51,20 +49,15 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
-import com.projectswg.holocore.resources.support.objects.permissions.ReadWritePermissions;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
-import com.projectswg.holocore.resources.support.objects.swg.resource.ResourceContainerObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject;
+import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceContainerEventHandler;
+import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceContainerHelper;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
-import me.joshlarson.jlcommon.control.IntentChain;
 import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -178,14 +171,34 @@ public class SampleLoopSession {
 			}
 		}
 
-		ResourceContainerObject resourceObject = getOrCreateResourceObject();
-		if (resourceObject != null) {
-			resourceObject.setQuantity(resourceObject.getQuantity() + resourceAmount);
-			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
-			creature.sendSelf(new PlayMusicMessage(0, "sound/item_internalstorage_open.snd", 1, false));
-		}
+		Player owner = creature.getOwner();
+		if (owner != null) {
+			ResourceContainerEventHandler resourceContainerEventHandler = new ResourceContainerEventHandler() {
 
-		sendSampleEffects();
+				@Override
+				public void onUnknownError() {
+					creature.sendSelf(
+							new ChatSystemMessage(
+									SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"
+							)
+					);
+				}
+
+				@Override
+				public void onInventoryFull() {
+					creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:no_inv_space"));
+					stopSession();
+				}
+
+				@Override
+				public void onSuccess() {
+					creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, new ProsePackage(new StringId("@survey:sample_located"), "DI", resourceAmount, "TO", resource.getName())));
+					creature.sendSelf(new PlayMusicMessage(0, "sound/item_internalstorage_open.snd", 1, false));
+				}
+			};
+			ResourceContainerHelper.INSTANCE.giveResourcesToPlayer(resourceAmount, resource, owner, resourceContainerEventHandler);
+			sendSampleEffects();
+		}
 	}
 
 	private void openConcentrationWindow() {
@@ -283,56 +296,6 @@ public class SampleLoopSession {
 			concentration += spawn.getConcentration(sampleLocation.getTerrain(), sampleLocation.getX(), sampleLocation.getZ()) / 100.0;
 		}
 		return concentration;
-	}
-
-	@Nullable
-	private ResourceContainerObject getOrCreateResourceObject() {
-		SWGObject inventory = creature.getInventory();
-		RawResource rawResource = ServerData.INSTANCE.getRawResources().getResource(resource.getRawResourceId());
-
-		return inventory.getContainedObjects()
-				.stream()
-				.filter(swgObject -> swgObject instanceof ResourceContainerObject)
-				.map(swgObject -> (ResourceContainerObject) swgObject)
-				.filter(resourceContainerObject -> resource.getRawResourceId() == resourceContainerObject.getResourceType())
-				.findAny()
-				.orElseGet(() -> createResourceObject(rawResource));
-	}
-
-	@Nullable
-	private ResourceContainerObject createResourceObject(RawResource rawResource) {
-		ResourceContainerObject resourceObject = (ResourceContainerObject) ObjectCreator.createObjectFromTemplate(rawResource.getCrateTemplate());
-		resourceObject.setParentName(rawResource.getParent().getName().toString());
-		resourceObject.setResourceType(resource.getRawResourceId());
-		resourceObject.setResourceName(resource.getName());
-		resourceObject.setObjectName(resource.getName());
-		assignStats(resourceObject);
-		resourceObject.setContainerPermissions(ReadWritePermissions.from(creature));
-
-		ContainerResult result = resourceObject.moveToContainer(creature, creature.getInventory());
-
-		switch (result) {
-			case SLOT_OCCUPIED, SLOT_NO_EXIST, NO_PERMISSION -> {
-				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"));
-				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
-				return null;
-			}
-			case CONTAINER_FULL -> {
-				creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@survey:no_inv_space"));
-				IntentChain.broadcastChain(new ObjectCreatedIntent(resourceObject), new DestroyObjectIntent(resourceObject));
-				stopSession();
-				return null;
-			}
-			case SUCCESS -> ObjectCreatedIntent.broadcast(resourceObject);
-		}
-		
-		return resourceObject;
-	}
-
-	private void assignStats(ResourceContainerObject obj) {
-		GalacticResourceStats stats = resource.getStats();
-		obj.setStats(stats);
-		obj.setServerAttribute(ServerAttribute.GALACTIC_RESOURCE_ID, resource.getId());
 	}
 
 	private void sendSampleEffects() {
