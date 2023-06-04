@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,23 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.entertainment.dance;
 
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class WatchIntent extends Intent {
 	
-	private final CreatureObject actor;
+	private final Player actor;
 	private final SWGObject target;
 	private final boolean startWatch;
 	
-	public WatchIntent(CreatureObject actor, SWGObject target, boolean startWatch) {
+	public WatchIntent(Player actor, SWGObject target, boolean startWatch) {
 		this.actor = actor;
 		this.target = target;
 		this.startWatch = startWatch;
 	}
 	
-	public CreatureObject getActor() {
+	public Player getActor() {
 		return actor;
 	}
 	

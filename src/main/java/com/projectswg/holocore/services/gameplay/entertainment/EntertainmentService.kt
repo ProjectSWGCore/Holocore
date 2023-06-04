@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,430 +24,355 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.entertainment;
+package com.projectswg.holocore.services.gameplay.entertainment
 
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.network.packets.swg.zone.object_controller.Animation;
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.FlourishIntent;
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.WatchIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.PerformanceLoader.PerformanceInfo;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
+import com.projectswg.common.data.encodables.oob.ProsePackage
+import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.common.network.packets.swg.zone.object_controller.Animation
+import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent
+import com.projectswg.holocore.intents.gameplay.entertainment.dance.FlourishIntent
+import com.projectswg.holocore.intents.gameplay.entertainment.dance.WatchIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.performances
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import me.joshlarson.jlcommon.log.Log
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
+import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+class EntertainmentService : Service() {
+	private val performerMap = mutableMapOf<Long, Performance>()
+	private val executorService = Executors.newSingleThreadScheduledExecutor()
 
-/**
- * @author Mads
- */
-public class EntertainmentService extends Service {
-	
-	// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
-	private static final byte XP_CYCLE_RATE = 10;
-	private static final byte WATCH_RADIUS = 20;
-	
-	private final Map<Long, Performance> performerMap;
-	private final ScheduledExecutorService executorService;
-	
-	public EntertainmentService() {
-		performerMap = new HashMap<>();    // TODO synchronize access?
-		executorService = Executors.newSingleThreadScheduledExecutor();
+	override fun terminate(): Boolean {
+		executorService.shutdownNow()
+		return super.terminate()
 	}
-	
-	@Override
-	public boolean terminate() {
-		executorService.shutdownNow();
-		return super.terminate();
-	}
-	
+
 	@IntentHandler
-	private void handleDanceIntent(DanceIntent di) {
-		CreatureObject dancer = di.getCreatureObject();
-		String danceName = di.getDanceName();
-		
-		if (di.isStartDance()) {
+	private fun handleDanceIntent(di: DanceIntent) {
+		val player = di.player
+		val dancer = player.creatureObject
+		val danceName = di.danceName
+		if (di.isStartDance) {
 			// This intent wants the creature to start dancing
 			// If we're changing dance, allow them to do so
-			boolean changeDance = di.isChangeDance();
-			
-			if (!changeDance && dancer.isPerforming()) {
-				new SystemMessageIntent(dancer.getOwner(), "@performance:already_performing_self").broadcast();
-			} else if (DataLoader.Companion.performances().getPerformanceByName(danceName) != null) {
+			val changeDance = di.isChangeDance
+			if (!changeDance && dancer.isPerforming) {
+				SystemMessageIntent(player, "@performance:already_performing_self").broadcast()
+			} else if (performances().getPerformanceByName(danceName) != null) {
 				// The dance name is valid.
-				if (dancer.hasCommand("startDance+" + danceName)) {
-					
+				if (dancer.hasCommand("startDance+$danceName")) {
 					if (changeDance) {    // If they're changing dance, we just need to change their animation.
-						changeDance(dancer, danceName);
+						changeDance(dancer, danceName)
 					} else {    // Otherwise, they should begin performing now
-						startDancing(dancer, danceName);
+						startDancing(player, danceName)
 					}
 				} else {
 					// This creature doesn't have the ability to perform this dance.
-					new SystemMessageIntent(dancer.getOwner(), "@performance:dance_lack_skill_self").broadcast();
+					SystemMessageIntent(player, "@performance:dance_lack_skill_self").broadcast()
 				}
 			} else {
 				// This dance name is invalid
-				new SystemMessageIntent(dancer.getOwner(), "@performance:dance_unknown_self").broadcast();
+				SystemMessageIntent(player, "@performance:dance_unknown_self").broadcast()
 			}
 		} else {
 			// This intent wants the creature to stop dancing
-			stopDancing(dancer);
+			stopDancing(player)
 		}
 	}
-	
+
 	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		CreatureObject creature = pei.getPlayer().getCreatureObject();
-		
-		if (creature == null)
-			return;
-		
-		switch (pei.getEvent()) {
-			case PE_LOGGED_OUT:
-				// Don't keep giving them XP if they log out
-				if (isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
-					cancelExperienceTask(creature);
-				}
-				
-				break;
-			case PE_ZONE_IN_SERVER:
-				// We need to check if they're dancing in order to start giving them XP
-				if (isEntertainer(creature) && creature.getPosture().equals(Posture.SKILL_ANIMATING)) {
-					scheduleExperienceTask(creature, DataLoader.Companion.performances().getPerformanceByDanceId(Integer.parseInt(creature.getAnimation().replace("dance_", ""))).getPerformanceName());
-				}
-				
-				break;
-			case PE_DISAPPEAR:
-				// If a spectator disappears, they need to stop watching and be removed from the audience
-				long performerId = creature.getPerformanceListenTarget();
-				
-				if (performerId != 0 && performerMap.get(performerId).removeSpectator(creature)) {
-					stopWatching(creature, false);
-				}
-				
-				// If a performer disappears, the audience needs to be cleared
-				// They're also removed from the map of active performers.
-				if (isEntertainer(creature) && creature.isPerforming()) {
-					performerMap.get(creature.getObjectId()).clearSpectators();
-					performerMap.remove(creature.getObjectId());
-				}
-				break;
-			default:
-				break;
+	private fun handlePlayerEventIntent(pei: PlayerEventIntent) {
+		val player = pei.player
+		val creature = player.creatureObject ?: return
+		when (pei.event) {
+			PlayerEvent.PE_LOGGED_OUT -> handlePlayerLoggedOut(creature)
+			PlayerEvent.PE_ZONE_IN_SERVER -> handlePlayerZoneIn(creature)
+			PlayerEvent.PE_DISAPPEAR -> handlePlayerDisappear(player)
+			else -> {}
 		}
 	}
-	
-	@IntentHandler
-	private void handleFlourishIntent(FlourishIntent fi) {
-		Player performer = fi.getPerformer();
-		CreatureObject performerObject = performer.getCreatureObject();
-		
-		if (performerObject.getPerformanceCounter() != 0)
-			return;
-		
-		performerObject.setPerformanceCounter(1);
-		
-		// Send the flourish animation to the owner of the creature and owners of creatures observing
-		performerObject.sendObservers(new Animation(performerObject.getObjectId(), fi.getFlourishName()));
-		new SystemMessageIntent(performer, "@performance:flourish_perform").broadcast();
+
+	private fun handlePlayerDisappear(player: Player) {
+		val creature = player.creatureObject
+		// If a spectator disappears, they need to stop watching and be removed from the audience
+		val performerId = creature.performanceListenTarget
+		val performance = performerMap[performerId]
+		val spectating = performance?.removeSpectator(creature) == true
+		if (performerId != 0L && spectating) {
+			stopWatching(player, false)
+		}
+
+		// If a performer disappears, the audience needs to be cleared
+		// They're also removed from the map of active performers.
+		if (isEntertainer(creature) && creature.isPerforming) {
+			performerMap[creature.objectId]?.clearSpectators()
+			performerMap.remove(creature.objectId)
+		}
 	}
-	
-	@IntentHandler
-	private void handleWatchIntent(WatchIntent wi) {
-		SWGObject target = wi.getTarget();
-		
-		if (target instanceof CreatureObject) {
-			CreatureObject actor = wi.getActor();
-			CreatureObject creature = (CreatureObject) target;
-			Player actorOwner = actor.getOwner();
-			
-			if (!isEntertainer(creature)) {
-				// We can't watch non-entertainers - do nothing
-				return;
+
+	private fun handlePlayerZoneIn(creature: CreatureObject) {
+		if (isEntertainer(creature) && creature.posture == Posture.SKILL_ANIMATING) {
+			val danceId = creature.animation.replace("dance_", "").toInt()
+			val performanceByDanceId = performances().getPerformanceByDanceId(danceId)
+			if (performanceByDanceId != null) {
+				scheduleExperienceTask(
+					creature, performanceByDanceId.performanceName
+				)
 			}
-			
-			if (creature.isPlayer()) {
-				if (creature.isPerforming()) {
-					Performance performance = performerMap.get(creature.getObjectId());
-					
-					if (wi.isStartWatch()) {
-						if (performance.addSpectator(actor)) {
-							startWatching(actor, creature);
+		}
+	}
+
+	private fun handlePlayerLoggedOut(creature: CreatureObject) {
+		if (isEntertainer(creature) && creature.posture == Posture.SKILL_ANIMATING) {
+			cancelExperienceTask(creature)
+		}
+	}
+
+	@IntentHandler
+	private fun handleFlourishIntent(fi: FlourishIntent) {
+		val performer = fi.performer
+		val performerObject = performer.creatureObject
+		if (performerObject.performanceCounter != 0) return
+		performerObject.performanceCounter = 1
+
+		// Send the flourish animation to the owner of the creature and owners of creatures observing
+		performerObject.sendObservers(Animation(performerObject.objectId, fi.flourishName))
+		SystemMessageIntent(performer, "@performance:flourish_perform").broadcast()
+	}
+
+	@IntentHandler
+	private fun handleWatchIntent(wi: WatchIntent) {
+		val target = wi.target
+		if (target is CreatureObject) {
+			val actor = wi.actor
+			if (!isEntertainer(target)) {
+				// We can't watch non-entertainers - do nothing
+				return
+			}
+			if (target.isPlayer) {
+				if (target.isPerforming) {
+					val performance = performerMap[target.objectId] ?: return
+					if (wi.isStartWatch) {
+						if (performance.addSpectator(actor.creatureObject)) {
+							startWatching(actor, target)
 						}
 					} else {
-						if (performance.removeSpectator(actor)) {
-							stopWatching(actor, true);
+						if (performance.removeSpectator(actor.creatureObject)) {
+							stopWatching(actor, true)
 						}
 					}
 				} else {
 					// While this is a valid target for watching, the target is currently not performing.
-					new SystemMessageIntent(actorOwner, new ProsePackage(new StringId("performance", "dance_watch_not_dancing"), "TT", creature.getObjectName())).broadcast();
+					SystemMessageIntent(
+						actor, ProsePackage(StringId("performance", "dance_watch_not_dancing"), "TT", target.objectName)
+					).broadcast()
 				}
 			} else {
 				// You can't watch NPCs, regardless of whether they're dancing or not
-				new SystemMessageIntent(actorOwner, "@performance:dance_watch_npc").broadcast();
+				SystemMessageIntent(actor, "@performance:dance_watch_npc").broadcast()
 			}
 		}
 	}
-	
+
 	@IntentHandler
-	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
-		CreatureObject movedPlayer = pti.getPlayer();
-		long performanceListenTarget = movedPlayer.getPerformanceListenTarget();
-		
-		if (performanceListenTarget != 0) {
+	private fun handlePlayerTransformedIntent(pti: PlayerTransformedIntent) {
+		val movedPlayer = pti.player
+		val performanceListenTarget = movedPlayer.performanceListenTarget
+		if (performanceListenTarget != 0L) {
 			// They're watching a performer!
-			
-			Performance performance = performerMap.get(performanceListenTarget);
-			
+			val performance = performerMap[performanceListenTarget]
 			if (performance == null) {
-				Log.e("Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget);
-				return;
+				Log.e("Couldn't perform range check on %s, because there was no performer with object ID %d", movedPlayer, performanceListenTarget)
+				return
 			}
-			
-			CreatureObject performer = performance.getPerformer();
-			
-			Location performerLocation = performer.getWorldLocation();
-			Location movedPlayerLocation = pti.getPlayer().getWorldLocation();    // Ziggy: The newLocation in PlayerTransformedIntent isn't the world location, which is what we need here
-			
-			if (!movedPlayerLocation.isWithinDistance(performerLocation, WATCH_RADIUS)) {
+			val performer = performance.performer
+			val performerLocation = performer.worldLocation
+			val movedPlayerLocation = pti.player.worldLocation // Ziggy: The newLocation in PlayerTransformedIntent isn't the world location, which is what we need here
+			if (!movedPlayerLocation.isWithinDistance(performerLocation, WATCH_RADIUS.toDouble())) {
 				// They moved out of the defined range! Make them stop watching
 				if (performance.removeSpectator(movedPlayer)) {
-					stopWatching(movedPlayer, true);
+					val player = movedPlayer.owner
+					if (player != null) {
+						stopWatching(player, true)
+					}
 				} else {
-					Log.w("%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer);
+					Log.w(
+						"%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place",
+						movedPlayer,
+						performer
+					)
 				}
 			}
 		}
-		
 	}
-	
+
 	/**
-	 * Checks if the {@code CreatureObject} is a Novice Entertainer.
+	 * Checks if the `CreatureObject` is a Novice Entertainer.
 	 *
 	 * @param performer
-	 * @return true if {@code performer} is a Novice Entertainer and false if not
+	 * @return true if `performer` is a Novice Entertainer and false if not
 	 */
-	private boolean isEntertainer(CreatureObject performer) {
-		return performer.hasSkill("social_entertainer_novice");    // First entertainer skillbox
+	private fun isEntertainer(performer: CreatureObject): Boolean {
+		return performer.hasSkill("social_entertainer_novice") // First entertainer skillbox
 	}
-	
-	private void scheduleExperienceTask(CreatureObject performer, String performanceName) {
-		Log.d("Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE);
-		synchronized (performerMap) {
-			long performerId = performer.getObjectId();
-			Future<?> future = executorService.scheduleAtFixedRate(new EntertainerExperience(performer), XP_CYCLE_RATE, XP_CYCLE_RATE, TimeUnit.SECONDS);
-			
+
+	private fun scheduleExperienceTask(performer: CreatureObject, performanceName: String) {
+		Log.d("Scheduled %s to receive XP every %d seconds", performer, XP_CYCLE_RATE)
+		synchronized(performerMap) {
+			val performerId = performer.objectId
+			val future = executorService.scheduleAtFixedRate(
+				EntertainerExperience(performer),
+				XP_CYCLE_RATE.toLong(),
+				XP_CYCLE_RATE.toLong(),
+				TimeUnit.SECONDS
+			)
+
 			// If they went LD but came back before disappearing
-			if (performerMap.containsKey(performerId)) {
-				Performance performance = performerMap.get(performerId);
-				performance.setFuture(future);
+			val performance = performerMap[performerId]
+			if (performance != null) {
+				performance.future = future
 			} else {
-				performerMap.put(performer.getObjectId(), new Performance(performer, future, performanceName));
+				performerMap.put(performer.objectId, Performance(performer, future, performanceName))
 			}
 		}
 	}
-	
-	private void cancelExperienceTask(CreatureObject performer) {
-		Log.d("%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE);
-		synchronized (performerMap) {
-			Performance performance = performerMap.get(performer.getObjectId());
-			
+
+	private fun cancelExperienceTask(performer: CreatureObject) {
+		Log.d("%s no longer receives XP every %d seconds", performer, XP_CYCLE_RATE)
+		synchronized(performerMap) {
+			val performance = performerMap[performer.objectId]
 			if (performance == null) {
-				Log.e("Couldn't cancel experience task for %s because they weren't found in performerMap", performer);
-				return;
+				Log.e("Couldn't cancel experience task for %s because they weren't found in performerMap", performer)
+				return
 			}
-			
-			Future<?> future = performance.getFuture();
-			
-			// TODO null check?
-			// TODO use return result?
-			future.cancel(false);    // Running tasks are allowed to finish.
+			performance.future.cancel(false)
 		}
 	}
-	
-	private void startDancing(CreatureObject dancer, String danceName) {
-		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(danceName).getDanceVisualId());
-		dancer.setPerformanceId(0);    // 0 - anything else will make it look like we're playing music
-		dancer.setPerformanceCounter(0);
-		dancer.setPerforming(true);
-		dancer.setPosture(Posture.SKILL_ANIMATING);
-		
-		scheduleExperienceTask(dancer, danceName);
-		new SystemMessageIntent(dancer.getOwner(), "@performance:dance_start_self").broadcast();
+
+	private fun startDancing(player: Player, danceName: String) {
+		val dancer = player.creatureObject
+		val performanceByName = performances().getPerformanceByName(danceName)
+		if (performanceByName == null) {
+			StandardLog.onPlayerEvent(this, dancer, "tried to start unknown dance %s", danceName)
+			return
+		}
+		val danceVisualId = performanceByName.danceVisualId
+		dancer.animation = "dance_$danceVisualId"
+		dancer.performanceId = 0 // 0 - anything else will make it look like we're playing music
+		dancer.performanceCounter = 0
+		dancer.isPerforming = true
+		dancer.posture = Posture.SKILL_ANIMATING
+		scheduleExperienceTask(dancer, danceName)
+		SystemMessageIntent(player, "@performance:dance_start_self").broadcast()
 	}
-	
-	private void stopDancing(CreatureObject dancer) {
-		if (dancer.isPerforming()) {
-			dancer.setPerforming(false);
-			dancer.setPosture(Posture.UPRIGHT);
-			dancer.setPerformanceCounter(0);
-			dancer.setAnimation("");
-			
+
+	private fun stopDancing(player: Player) {
+		val dancer = player.creatureObject
+		if (dancer.isPerforming) {
+			dancer.isPerforming = false
+			dancer.posture = Posture.UPRIGHT
+			dancer.performanceCounter = 0
+			dancer.animation = ""
+
 			// Non-entertainers don't receive XP and have no audience - ignore them
 			if (isEntertainer(dancer)) {
-				cancelExperienceTask(dancer);
-				performerMap.remove(dancer.getObjectId()).clearSpectators();
+				cancelExperienceTask(dancer)
+				val performance = performerMap.remove(dancer.objectId)
+				performance?.clearSpectators()
 			}
-			
-			new SystemMessageIntent(dancer.getOwner(), "@performance:dance_stop_self").broadcast();
+			SystemMessageIntent(player, "@performance:dance_stop_self").broadcast()
 		} else {
-			new SystemMessageIntent(dancer.getOwner(), "@performance:dance_not_performing").broadcast();
+			SystemMessageIntent(player, "@performance:dance_not_performing").broadcast()
 		}
 	}
-	
-	private void changeDance(CreatureObject dancer, String newPerformanceName) {
-		performerMap.get(dancer.getObjectId()).setPerformanceName(newPerformanceName);
-		dancer.setAnimation("dance_" + DataLoader.Companion.performances().getPerformanceByName(newPerformanceName).getPerformanceName());
+
+	private fun changeDance(dancer: CreatureObject, newPerformanceName: String) {
+		val performance = performerMap[dancer.objectId]
+		if (performance != null) {
+			performance.performanceName = newPerformanceName
+			val performanceByName = performances().getPerformanceByName(newPerformanceName)
+			if (performanceByName != null) {
+				dancer.animation = "dance_" + performanceByName.performanceName
+			}
+		}
 	}
-	
-	private void startWatching(CreatureObject actor, CreatureObject creature) {
-		actor.setMoodAnimation("entertained");
-		new SystemMessageIntent(actor.getOwner(), new ProsePackage(new StringId("performance", "dance_watch_self"), "TT", creature.getObjectName())).broadcast();
-		actor.setPerformanceListenTarget(creature.getObjectId());
+
+	private fun startWatching(player: Player, creature: CreatureObject) {
+		val actor = player.creatureObject
+		actor.moodAnimation = "entertained"
+		SystemMessageIntent(player, ProsePackage(StringId("performance", "dance_watch_self"), "TT", creature.objectName)).broadcast()
+		actor.performanceListenTarget = creature.objectId
 	}
-	
-	private void stopWatching(CreatureObject actor, boolean displaySystemMessage) {
-		actor.setMoodAnimation("neutral");
-		if (displaySystemMessage)
-			new SystemMessageIntent(actor.getOwner(), "@performance:dance_watch_stop_self").broadcast();
-		actor.setPerformanceListenTarget(0);
+
+	private fun stopWatching(player: Player, displaySystemMessage: Boolean) {
+		val actor = player.creatureObject
+		actor.moodAnimation = "neutral"
+		if (displaySystemMessage) SystemMessageIntent(player, "@performance:dance_watch_stop_self").broadcast()
+		actor.performanceListenTarget = 0
 	}
-	
-	private class Performance {
-		
-		private final CreatureObject performer;
-		private final Set<CreatureObject> audience;
-		private Future<?> future;
-		private String performanceName;
-		
-		public Performance(CreatureObject performer, Future<?> future, String performanceName) {
-			this.performer = performer;
-			this.future = future;
-			this.performanceName = performanceName;
-			audience = new HashSet<>();
+
+	private inner class Performance(val performer: CreatureObject, var future: Future<*>, var performanceName: String) {
+		private val audience = mutableSetOf<CreatureObject>()
+
+		fun addSpectator(spectator: CreatureObject): Boolean {
+			return audience.add(spectator)
 		}
-		
-		public CreatureObject getPerformer() {
-			return performer;
+
+		fun removeSpectator(spectator: CreatureObject): Boolean {
+			return audience.remove(spectator)
 		}
-		
-		public Future<?> getFuture() {
-			return future;
+
+		fun clearSpectators() {
+			audience.mapNotNull { it.owner }.forEach(Consumer { player -> stopWatching(player, true) })
+			audience.clear()
 		}
-		
-		public void setFuture(Future<?> future) {
-			this.future = future;
-		}
-		
-		public String getPerformanceName() {
-			return performanceName;
-		}
-		
-		public boolean addSpectator(CreatureObject spectator) {
-			return audience.add(spectator);
-		}
-		
-		public boolean removeSpectator(CreatureObject spectator) {
-			return audience.remove(spectator);
-		}
-		
-		public void clearSpectators() {
-			audience.forEach(spectator -> stopWatching(spectator, true));
-			audience.clear();
-		}
-		
-		public void setPerformanceName(String performanceName) {
-			this.performanceName = performanceName;
-		}
-		
 	}
-	
-	/**
-	 * Data pulled from the performance.iff table
-	 */
-	private static class PerformanceData {
-		
-		private final String performanceId;
-		private final int flourishXpMod;
-		
-		public PerformanceData(String performanceId, int flourishXpMod) {
-			this.performanceId = performanceId;
-			this.flourishXpMod = flourishXpMod;
-		}
-		
-		public String getPerformanceId() {
-			return performanceId;
-		}
-		
-		public int getFlourishXpMod() {
-			return flourishXpMod;
-		}
-		
-	}
-	
-	private class EntertainerExperience implements Runnable {
-		
-		private final CreatureObject performer;
-		
-		private EntertainerExperience(CreatureObject performer) {
-			this.performer = performer;
-		}
-		
-		@Override
-		public void run() {
-			Performance performance = performerMap.get(performer.getObjectId());
-			
+
+	private inner class EntertainerExperience(private val performer: CreatureObject) : Runnable {
+		override fun run() {
+			val performance = performerMap[performer.objectId]
 			if (performance == null) {
-				StandardLog.onPlayerError(this, performer, "is not in performerMap");
-				return;
+				StandardLog.onPlayerError(this, performer, "is not in performerMap")
+				return
 			}
-			
-			String performanceName = performance.getPerformanceName();
-			PerformanceInfo performanceData = DataLoader.Companion.performances().getPerformanceByName(performanceName);
+			val performanceName = performance.performanceName
+			val performanceData = performances().getPerformanceByName(performanceName)
 			if (performanceData == null) {
-				StandardLog.onPlayerError(this, performer, "was performing unknown performance: '%s'", performanceName);
-				return;
+				StandardLog.onPlayerError(this, performer, "was performing unknown performance: '%s'", performanceName)
+				return
 			}
-			
-			int flourishXpMod = performanceData.getFlourishXpMod();
-			int performanceCounter = performer.getPerformanceCounter();
-			int xpGained = performanceCounter * flourishXpMod;
-			
+			val flourishXpMod = performanceData.flourishXpMod
+			val performanceCounter = performer.performanceCounter
+			val xpGained = performanceCounter * flourishXpMod
 			if (xpGained > 0) {
 				if (isEntertainer(performer)) {
-					if (isDancing()) {
-						new ExperienceIntent(performer, performer, "dance", xpGained, true).broadcast();
+					if (isDancing) {
+						ExperienceIntent(performer, performer, "dance", xpGained, true).broadcast()
 					}
 				}
-				performer.setPerformanceCounter(performanceCounter - 1);
+				performer.performanceCounter = performanceCounter - 1
 			}
 		}
-		
-		private boolean isDancing() {
-			return performer.getPerformanceId() == 0;
-		}
-		
+
+		private val isDancing: Boolean
+			get() = performer.performanceId == 0
 	}
-	
+
+	companion object {
+		// TODO: when performing, make NPCs in a radius of x look towards the player (?) and clap. When they stop, turn back (?) and stop clapping
+		private const val XP_CYCLE_RATE: Byte = 10
+		private const val WATCH_RADIUS: Byte = 20
+	}
 }
