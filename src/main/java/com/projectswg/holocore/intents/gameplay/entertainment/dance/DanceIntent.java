@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,43 +26,43 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.entertainment.dance;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
 
 public class DanceIntent extends Intent {
 	private final String danceName;
-	private final CreatureObject creatureObject;
+	private final Player player;
 	private final boolean changeDance;
 	
 	/**
 	 * Start dancing
 	 * 
 	 * @param danceName
-	 * @param creatureObject
+	 * @param player
 	 */
-	public DanceIntent(String danceName, CreatureObject creatureObject, boolean changeDance) {
+	public DanceIntent(String danceName, Player player, boolean changeDance) {
 		this.danceName = danceName;
-		this.creatureObject = creatureObject;
+		this.player = player;
 		this.changeDance = changeDance;
 	}
 	
 	/**
 	 * Stop dancing
 	 * 
-	 * @param creatureObject
+	 * @param player
 	 */
-	public DanceIntent(CreatureObject creatureObject) {
-		this(null, creatureObject, false);
+	public DanceIntent(Player player) {
+		this(null, player, false);
 	}
 	
 	public String getDanceName() {
 		return danceName;
 	}
-	
-	public CreatureObject getCreatureObject() {
-		return creatureObject;
+
+	public Player getPlayer() {
+		return player;
 	}
-	
+
 	public boolean isStartDance() {
 		return danceName != null;
 	}

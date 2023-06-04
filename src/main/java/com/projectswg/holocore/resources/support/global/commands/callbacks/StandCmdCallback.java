@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -53,7 +53,7 @@ public class StandCmdCallback implements ICmdCallback {
 		
 		if (creature.isPerforming()) {
 			// Ziggy: When you move while dancing, the client wants to execute /stand instead of /stopDance. Blame SOE.
-			new DanceIntent(player.getCreatureObject()).broadcast();
+			new DanceIntent(player).broadcast();
 		} else {
 			creature.clearStatesBitmask(CreatureState.SITTING_ON_CHAIR);
 			creature.setPosture(Posture.UPRIGHT);
