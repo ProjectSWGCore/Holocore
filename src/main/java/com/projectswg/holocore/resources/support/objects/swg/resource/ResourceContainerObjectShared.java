@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,8 +36,8 @@ public class ResourceContainerObjectShared implements MongoPersistable {
 	
 	private final ResourceContainerObject obj;
 	
-	/** RCNO3-13 */ private int	quantity		= 0;
-	/** RCNO3-14 */ private long	resourceType	= 0;
+	/** RCNO3-11 */ private int	quantity		= 0;
+	/** RCNO3-12 */ private long	resourceType	= 0;
 	
 	public ResourceContainerObjectShared(ResourceContainerObject obj) {
 		this.obj = obj;
@@ -49,7 +49,7 @@ public class ResourceContainerObjectShared implements MongoPersistable {
 	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
-		sendDelta(13, quantity);
+		sendDelta(11, quantity);
 	}
 	
 	public long getResourceType() {
@@ -58,7 +58,7 @@ public class ResourceContainerObjectShared implements MongoPersistable {
 	
 	public void setResourceType(long resourceType) {
 		this.resourceType = resourceType;
-		sendDelta(14, resourceType);
+		sendDelta(12, resourceType);
 	}
 	
 	public void createBaseline3(BaselineBuilder bb) {
