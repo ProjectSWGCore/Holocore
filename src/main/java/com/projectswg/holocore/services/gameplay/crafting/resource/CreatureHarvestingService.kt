@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.crafting.resource
 
+import com.projectswg.common.data.encodables.oob.ProsePackage
+import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType
@@ -41,6 +43,13 @@ import me.joshlarson.jlcommon.control.Service
 import kotlin.math.ceil
 
 class CreatureHarvestingService : Service() {
+
+	private val creatureQualities = listOf(
+		CreatureQuality(StringId("skl_use", "creature_quality_fat"), 1.0),
+		CreatureQuality(StringId("skl_use", "creature_quality_medium"), 0.8),
+		CreatureQuality(StringId("skl_use", "creature_quality_scrawny"), 0.5),
+		CreatureQuality(StringId("skl_use", "creature_quality_skinny"), 0.3),
+	)
 
 	@IntentHandler
 	private fun handleHarvestHideIntent(intent: HarvestHideIntent) {
@@ -86,26 +95,31 @@ class CreatureHarvestingService : Service() {
 			return
 		}
 
-		val npcResourceAmount = resourceInfo.amount    // TODO this amount seems too large
-		val amount = npcResourceAmount + ceil(npcResourceAmount * creatureHarvestingMultiplier(player)).toInt()
+		val creatureQuality = creatureQualities.random()
+		val amount = randomizeResourceAmount(resourceInfo, creatureQuality, player)
+		val service = this
 		val eventHandler = object : ResourceContainerEventHandler {
 			override fun onUnknownError() {
 				// TODO
 			}
 
 			override fun onInventoryFull() {
-				// TODO a system message of some sort, to let the player know why nothing is happening
+				SystemMessageIntent.broadcastPersonal(player, "@container_error_message:container03")
 			}
 
 			override fun onSuccess() {
-				StandardLog.onPlayerEvent(
-					this, player, "received %d %s from %s", amount, rawResourceType, ai
-				)    // TODO service name is probably not CreatureHarvestingService
-				SystemMessageIntent.broadcastPersonal(player, "@skl_use:corpse_harvest_success")
+				StandardLog.onPlayerEvent(service, player, "received %d %s from %s", amount, requestedCreatureResourceType, ai)
+				SystemMessageIntent.broadcastPersonal(player, ProsePackage(creatureQuality.stringId, "DI", amount, "TU", spawnedResource.name))
 				ai.isHarvested = true
 			}
 		}
 		ResourceContainerHelper.giveResourcesToPlayer(amount, spawnedResource, player, eventHandler)
+	}
+
+	private fun randomizeResourceAmount(resourceInfo: NpcResourceInfo, creatureQuality: CreatureQuality, player: Player): Int {
+		val baseNpcResourceAmount = ceil(resourceInfo.amount * creatureQuality.multiplier).toInt()
+		val creatureHarvestingSkillModBonus = ceil(baseNpcResourceAmount * creatureHarvestingMultiplier(player)).toInt()
+		return baseNpcResourceAmount + creatureHarvestingSkillModBonus
 	}
 
 	private fun creatureHarvestingMultiplier(player: Player) = player.creatureObject.getSkillModValue("creature_harvesting") / 100.0

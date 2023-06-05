@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.crafting.resource
 
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
@@ -66,33 +64,28 @@ object ResourceContainerHelper {
 		val resourceObject = ObjectCreator.createObjectFromTemplate(rawResource.crateTemplate) as ResourceContainerObject
 		resourceObject.volume = 1
 		resourceObject.parentName = rawResource.parent.name.toString()
-		resourceObject.resourceType = resource.getRawResourceId()
-		resourceObject.resourceName = resource.getName()
-		resourceObject.objectName = resource.getName()
-		assignStats(resourceObject, resource)
+		resourceObject.resourceType = resource.rawResourceId
+		resourceObject.resourceName = resource.name
+		resourceObject.objectName = resource.name
+		resourceObject.stats = resource.stats
+		resourceObject.setServerAttribute(ServerAttribute.GALACTIC_RESOURCE_ID, resource.id)
 		resourceObject.containerPermissions = ReadWritePermissions.from(creature)
 		when (resourceObject.moveToContainer(creature, creature.inventory)) {
-			ContainerResult.SLOT_OCCUPIED, ContainerResult.SLOT_NO_EXIST, ContainerResult.NO_PERMISSION -> {
-				resourceContainerEventHandler.onUnknownError()
-				IntentChain.broadcastChain(ObjectCreatedIntent(resourceObject), DestroyObjectIntent(resourceObject))
-				return null
-			}
-
-			ContainerResult.CONTAINER_FULL                                                              -> {
+			ContainerResult.CONTAINER_FULL -> {
 				IntentChain.broadcastChain(ObjectCreatedIntent(resourceObject), DestroyObjectIntent(resourceObject))
 				resourceContainerEventHandler.onInventoryFull()
 				return null
 			}
 
-			ContainerResult.SUCCESS                                                                     -> ObjectCreatedIntent.broadcast(
-				resourceObject
-			)
+			ContainerResult.SUCCESS        -> ObjectCreatedIntent.broadcast(resourceObject)
+
+			else                           -> {
+				resourceContainerEventHandler.onUnknownError()
+				IntentChain.broadcastChain(ObjectCreatedIntent(resourceObject), DestroyObjectIntent(resourceObject))
+				return null
+			}
 		}
 		return resourceObject
 	}
 
-	private fun assignStats(obj: ResourceContainerObject, resource: GalacticResource) {
-		obj.stats = resource.stats
-		obj.setServerAttribute(ServerAttribute.GALACTIC_RESOURCE_ID, resource.id)
-	}
 }

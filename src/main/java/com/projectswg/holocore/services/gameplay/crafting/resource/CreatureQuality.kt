@@ -24,29 +24,8 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.crafting.resource.raw
+package com.projectswg.holocore.services.gameplay.crafting.resource
 
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcLoader.NpcResourceInfo
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Disabled
-import org.junit.jupiter.api.Test
+import com.projectswg.common.data.encodables.oob.StringId
 
-class CreatureResourceTypeTest {
-
-	@Test
-	@Disabled	// TODO bone_mammal doesn't exist and meat_reptilian has a typo (meat_reptillian)
-	fun `all resource types defined for NPCs exist`() {
-		val unknownResourceTypes = allNpcResourceInfos().filter { it.amount > 0 }
-			.filter { RawResourceType.getByName(it.type) == null }
-			.map { it.type }
-			.toSet()
-
-		assertEquals(emptySet<String>(), unknownResourceTypes)
-	}
-
-	private fun allNpcResourceInfos(): Collection<NpcResourceInfo> {
-		return ServerData.npcs.npcs.map { listOf(it.meatResourceInfo, it.hideResourceInfo, it.boneResourceInfo, it.milkResourceInfo) }.flatten()
-	}
-}
+data class CreatureQuality(val stringId: StringId, val multiplier: Double)
