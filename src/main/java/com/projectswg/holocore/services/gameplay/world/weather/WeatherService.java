@@ -125,8 +125,8 @@ public final class WeatherService extends Service {
 		WeatherType type = weatherForTerrain.get(terrain);
 		
 		swm.setType(type);
-		swm.setCloudVectorX(random.nextFloat()+1);	// randomised
-		swm.setCloudVectorZ(random.nextFloat()+1);	// randomised	
+		swm.setCloudVectorX(random.nextFloat()+1);
+		swm.setCloudVectorZ(random.nextFloat()+1);	
 		swm.setCloudVectorY(0);	// Ziggy: Always 0, clouds don't move up/down
 		
 		return swm;
