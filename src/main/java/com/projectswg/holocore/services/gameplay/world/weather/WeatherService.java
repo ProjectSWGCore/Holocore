@@ -84,13 +84,13 @@ public final class WeatherService extends Service {
 	
 	@Override
 	public boolean terminate() {
+		boolean success = true;
 		try {
 			executor.shutdownNow();
-			executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
-		} catch (InterruptedException e) {
-			
+			success = executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException ignored) {
 		}
-		return super.terminate();
+		return super.terminate() && success;
 	}
 	
 	@IntentHandler
