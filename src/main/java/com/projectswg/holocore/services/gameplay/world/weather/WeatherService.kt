@@ -24,129 +24,103 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.world.weather;
+package com.projectswg.holocore.services.gameplay.world.weather
 
-import com.projectswg.common.data.WeatherType;
-import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.swg.zone.ServerTimeMessage;
-import com.projectswg.common.network.packets.swg.zone.ServerWeatherMessage;
-import com.projectswg.common.utilities.ThreadUtilities;
-import com.projectswg.holocore.ProjectSWG;
-import com.projectswg.holocore.intents.support.global.zone.NotifyPlayersPacketIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
+import com.projectswg.common.data.WeatherType
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.common.network.packets.swg.zone.ServerTimeMessage
+import com.projectswg.common.network.packets.swg.zone.ServerWeatherMessage
+import com.projectswg.common.utilities.ThreadUtilities
+import com.projectswg.holocore.ProjectSWG
+import com.projectswg.holocore.intents.support.global.zone.NotifyPlayersPacketIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+class WeatherService : Service() {
+	private val cycleDuration = Duration.of(10, ChronoUnit.MINUTES)
+	private val terrains = Terrain.values()
+	private val weatherForTerrain = mutableMapOf<Terrain, WeatherType>()
+	private val executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"))
 
-public final class WeatherService extends Service {
-	
-	private final Duration cycleDuration;
-	private final Terrain[] terrains;
-	private final WeatherType[] weatherTypes;
-	private final Map<Terrain, WeatherType> weatherForTerrain;
-	private final Random random;
-	private final ScheduledExecutorService executor;
-	
-	public WeatherService() {
-		cycleDuration = Duration.of(10, ChronoUnit.MINUTES);
-		terrains = Terrain.values();
-		weatherForTerrain = new EnumMap<>(Terrain.class);
-		weatherTypes = WeatherType.values();
-		random = new Random();
-		executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"));
-	}
-	
-	@Override
-	public boolean initialize() {
-		for (Terrain terrain : terrains) {
-			weatherForTerrain.put(terrain, randomWeather());
-			executor.scheduleAtFixedRate(() -> maybeUpdateWeather(terrain), 0, cycleDuration.toSeconds(), TimeUnit.SECONDS);
+	override fun initialize(): Boolean {
+		for (terrain in terrains) {
+			weatherForTerrain[terrain] = randomWeather()
+			executor.scheduleAtFixedRate({ maybeUpdateWeather(terrain) }, 0, cycleDuration.toSeconds(), TimeUnit.SECONDS)
 		}
-		return super.initialize();
+		return super.initialize()
 	}
 
-	private void maybeUpdateWeather(Terrain terrain) {
-		if (random.nextBoolean()) { // 50/50 chance of weather change
-			updateWeather(terrain, randomWeather());
-		}
+	override fun start(): Boolean {
+		executor.scheduleAtFixedRate({ updateTime() }, 30, 30, TimeUnit.SECONDS)
+		return super.start()
 	}
 
-	@Override
-	public boolean start() {
-		executor.scheduleAtFixedRate(this::updateTime, 30, 30, TimeUnit.SECONDS);
-		return super.start();
-	}
-	
-	@Override
-	public boolean terminate() {
-		boolean success = true;
+	override fun terminate(): Boolean {
+		var success = true
 		try {
-			executor.shutdownNow();
-			success = executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
-		} catch (InterruptedException ignored) {
+			executor.shutdownNow()
+			success = executor.awaitTermination(3000, TimeUnit.MILLISECONDS)
+		} catch (ignored: InterruptedException) {
 		}
-		return super.terminate() && success;
+		return super.terminate() && success
 	}
-	
+
 	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent pei){
-		if(pei.getEvent().equals(PlayerEvent.PE_ZONE_IN_CLIENT))
-			handleZoneIn(pei);
+	private fun handlePlayerEventIntent(pei: PlayerEventIntent) {
+		if (pei.event == PlayerEvent.PE_ZONE_IN_CLIENT) handleZoneIn(pei)
 	}
 
-	private void handleZoneIn(PlayerEventIntent pei) {
-		Player p = pei.getPlayer();
-		Terrain t = p.getCreatureObject().getTerrain();
-		
-		p.sendPacket(constructWeatherPacket(t));
-	}
-	
-	private void updateTime() {
-		new NotifyPlayersPacketIntent(new ServerTimeMessage(ProjectSWG.getGalacticTime())).broadcast();
-	}
-	
-	private void updateWeather(Terrain terrain, WeatherType type) {
-		boolean weatherTypeAlreadyActive = weatherForTerrain.containsKey(terrain) && type.equals(weatherForTerrain.get(terrain));
-		if(weatherTypeAlreadyActive)
-			return;
-		
-		weatherForTerrain.put(terrain, type);
-
-		ServerWeatherMessage serverWeatherMessage = constructWeatherPacket(terrain);
-		new NotifyPlayersPacketIntent(serverWeatherMessage, terrain).broadcast();
-	}
-	
-	private ServerWeatherMessage constructWeatherPacket(Terrain terrain) {
-		ServerWeatherMessage swm = new ServerWeatherMessage();
-		WeatherType type = weatherForTerrain.get(terrain);
-		
-		swm.setType(type);
-		swm.setCloudVectorX(random.nextFloat()+1);
-		swm.setCloudVectorZ(random.nextFloat()+1);	
-		swm.setCloudVectorY(0);	// Ziggy: Always 0, clouds don't move up/down
-		
-		return swm;
-	}
-	
-	private WeatherType randomWeather() {
-		WeatherType weather = WeatherType.CLEAR;
-		float roll = random.nextFloat();
-		
-		for(WeatherType candidate : weatherTypes)
-			if(roll <= candidate.getChance())
-				weather = candidate;
-		
-		return weather;
+	private fun handleZoneIn(pei: PlayerEventIntent) {
+		val p = pei.player
+		val t = p.creatureObject.terrain
+		p.sendPacket(constructWeatherPacket(t))
 	}
 
+	private fun updateTime() {
+		NotifyPlayersPacketIntent(ServerTimeMessage(ProjectSWG.getGalacticTime())).broadcast()
+	}
+
+	private fun maybeUpdateWeather(terrain: Terrain) {
+		if (Random.nextBoolean()) { // 50/50 chance of weather change
+			updateWeather(terrain, randomWeather())
+		}
+	}
+
+	private fun updateWeather(terrain: Terrain, type: WeatherType) {
+		val weatherTypeAlreadyActive = weatherForTerrain.containsKey(terrain) && type == weatherForTerrain[terrain]
+		if (weatherTypeAlreadyActive) return
+		weatherForTerrain[terrain] = type
+		val serverWeatherMessage = constructWeatherPacket(terrain)
+		NotifyPlayersPacketIntent(serverWeatherMessage, terrain).broadcast()
+	}
+
+	private fun constructWeatherPacket(terrain: Terrain): ServerWeatherMessage {
+		val swm = ServerWeatherMessage()
+		val type = weatherForTerrain[terrain]
+		swm.type = type
+		swm.cloudVectorX = Random.nextFloat() + 1
+		swm.cloudVectorZ = Random.nextFloat() + 1
+		swm.cloudVectorY = 0f // Always 0, clouds don't move up/down
+		return swm
+	}
+
+	private fun randomWeather(): WeatherType {
+		var weather = WeatherType.CLEAR
+		val roll = Random.nextFloat()
+
+		for (candidate in WeatherType.values()) {
+			if (roll <= candidate.chance) {
+				weather = candidate
+			}
+		}
+
+		return weather
+	}
 }
