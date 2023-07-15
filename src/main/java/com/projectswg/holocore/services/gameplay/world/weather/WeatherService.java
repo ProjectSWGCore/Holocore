@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.gameplay.world.weather;
 
 import com.projectswg.common.data.WeatherType;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.ServerTimeMessage;
 import com.projectswg.common.network.packets.swg.zone.ServerWeatherMessage;
 import com.projectswg.common.utilities.ThreadUtilities;
@@ -110,22 +109,18 @@ public final class WeatherService extends Service {
 		new NotifyPlayersPacketIntent(new ServerTimeMessage(ProjectSWG.getGalacticTime())).broadcast();
 	}
 	
-	private void setWeather(Terrain terrain, WeatherType type) {
-		SWGPacket swm;
-		
-		// Ziggy: Prevent SWGPackets containing the same weather from being sent
-		if(weatherForTerrain.containsKey(terrain))
-			if(type.equals(weatherForTerrain.get(terrain)))
-				return;
+	private void updateWeather(Terrain terrain, WeatherType type) {
+		boolean weatherTypeAlreadyActive = weatherForTerrain.containsKey(terrain) && type.equals(weatherForTerrain.get(terrain));
+		if(weatherTypeAlreadyActive)
+			return;
 		
 		weatherForTerrain.put(terrain, type);
-		
-		swm = constructWeatherPacket(terrain);
-		
-		new NotifyPlayersPacketIntent(swm, terrain).broadcast();
+
+		ServerWeatherMessage serverWeatherMessage = constructWeatherPacket(terrain);
+		new NotifyPlayersPacketIntent(serverWeatherMessage, terrain).broadcast();
 	}
 	
-	private SWGPacket constructWeatherPacket(Terrain terrain) {
+	private ServerWeatherMessage constructWeatherPacket(Terrain terrain) {
 		ServerWeatherMessage swm = new ServerWeatherMessage();
 		WeatherType type = weatherForTerrain.get(terrain);
 		
@@ -161,7 +156,7 @@ public final class WeatherService extends Service {
 			if(!random.nextBoolean()) // 50/50 chance of weather change
 				return;
 			
-			setWeather(terrain, randomWeather());
+			updateWeather(terrain, randomWeather());
 		}
 		
 	}
