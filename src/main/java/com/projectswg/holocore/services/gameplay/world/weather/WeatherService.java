@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -40,6 +40,8 @@ import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
@@ -49,7 +51,7 @@ import java.util.concurrent.TimeUnit;
 
 public final class WeatherService extends Service {
 	
-	private final long cycleDuration;
+	private final Duration cycleDuration;
 	private final Terrain[] terrains;
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
@@ -58,7 +60,7 @@ public final class WeatherService extends Service {
 	private ScheduledExecutorService executor;
 	
 	public WeatherService() {
-		cycleDuration = 600;	// Ziggy: 10 minutes, 600 seconds
+		cycleDuration = Duration.of(10, ChronoUnit.MINUTES);
 		terrains = Terrain.values();
 		weatherForTerrain = new EnumMap<>(Terrain.class);
 		weatherTypes = WeatherType.values();
@@ -70,7 +72,7 @@ public final class WeatherService extends Service {
 		executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"));
 		for (Terrain t : terrains) {
 			weatherForTerrain.put(t, randomWeather());
-			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration, TimeUnit.SECONDS);
+			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration.toSeconds(), TimeUnit.SECONDS);
 		}
 		return super.initialize();
 	}
