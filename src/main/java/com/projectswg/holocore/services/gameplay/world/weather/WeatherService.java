@@ -68,13 +68,19 @@ public final class WeatherService extends Service {
 	
 	@Override
 	public boolean initialize() {
-		for (Terrain t : terrains) {
-			weatherForTerrain.put(t, randomWeather());
-			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration.toSeconds(), TimeUnit.SECONDS);
+		for (Terrain terrain : terrains) {
+			weatherForTerrain.put(terrain, randomWeather());
+			executor.scheduleAtFixedRate(() -> maybeUpdateWeather(terrain), 0, cycleDuration.toSeconds(), TimeUnit.SECONDS);
 		}
 		return super.initialize();
 	}
-	
+
+	private void maybeUpdateWeather(Terrain terrain) {
+		if (random.nextBoolean()) { // 50/50 chance of weather change
+			updateWeather(terrain, randomWeather());
+		}
+	}
+
 	@Override
 	public boolean start() {
 		executor.scheduleAtFixedRate(this::updateTime, 30, 30, TimeUnit.SECONDS);
@@ -142,23 +148,5 @@ public final class WeatherService extends Service {
 		
 		return weather;
 	}
-	
-	private class WeatherChanger implements Runnable {
 
-		private final Terrain terrain;
-		
-		private WeatherChanger(Terrain terrain) {
-			this.terrain = terrain;
-		}
-		
-		@Override
-		public void run() {
-			if(!random.nextBoolean()) // 50/50 chance of weather change
-				return;
-			
-			updateWeather(terrain, randomWeather());
-		}
-		
-	}
-	
 }
