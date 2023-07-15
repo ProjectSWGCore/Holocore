@@ -56,8 +56,7 @@ public final class WeatherService extends Service {
 	private final WeatherType[] weatherTypes;
 	private final Map<Terrain, WeatherType> weatherForTerrain;
 	private final Random random;
-	
-	private ScheduledExecutorService executor;
+	private final ScheduledExecutorService executor;
 	
 	public WeatherService() {
 		cycleDuration = Duration.of(10, ChronoUnit.MINUTES);
@@ -65,11 +64,11 @@ public final class WeatherService extends Service {
 		weatherForTerrain = new EnumMap<>(Terrain.class);
 		weatherTypes = WeatherType.values();
 		random = new Random();
+		executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"));
 	}
 	
 	@Override
 	public boolean initialize() {
-		executor = Executors.newScheduledThreadPool(2, ThreadUtilities.newThreadFactory("environment-service"));
 		for (Terrain t : terrains) {
 			weatherForTerrain.put(t, randomWeather());
 			executor.scheduleAtFixedRate(new WeatherChanger(t), 0, cycleDuration.toSeconds(), TimeUnit.SECONDS);
@@ -86,10 +85,8 @@ public final class WeatherService extends Service {
 	@Override
 	public boolean terminate() {
 		try {
-			if (executor != null) {
-				executor.shutdownNow();
-				executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
-			}
+			executor.shutdownNow();
+			executor.awaitTermination(3000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 			
 		}
