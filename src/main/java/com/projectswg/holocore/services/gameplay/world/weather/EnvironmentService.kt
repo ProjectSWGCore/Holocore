@@ -43,7 +43,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-class WeatherService : Service() {
+class EnvironmentService : Service() {
 	private val cycleDuration = Duration.of(10, ChronoUnit.MINUTES)
 	private val terrains = Terrain.values()
 	private val weatherForTerrain = mutableMapOf<Terrain, WeatherType>()
