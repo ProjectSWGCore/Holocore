@@ -36,8 +36,6 @@ enum class Locomotion(val locomotionTableId: Int, val commandSdbColumnName: Stri
 	PRONE(7, "L:prone", PostureLocomotionCheck(Posture.PRONE)),
 	SITTING(14, "L:sitting", PostureLocomotionCheck(Posture.SITTING)),
 	SKILL_ANIMATING(15, "L:skillAnimating", PostureLocomotionCheck(Posture.SKILL_ANIMATING)),
-	DRIVING_VEHICLE(16, "L:drivingVehicle", DrivingVehicleLocomotionCheck()),
-	RIDING_CREATURE(17, "L:ridingCreature", PostureLocomotionCheck(Posture.RIDING_CREATURE)),
 	KNOCKED_DOWN(18, "L:knockedDown", PostureLocomotionCheck(Posture.KNOCKED_DOWN)),
 	INCAPACITATED(19, "L:incapacitated", PostureLocomotionCheck(Posture.INCAPACITATED)),
 	DEAD(20, "L:dead", PostureLocomotionCheck(Posture.DEAD));
