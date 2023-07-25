@@ -1,50 +1,27 @@
-![Banner](https://i.imgur.com/vIaNzCm.png)
+![Banner](pswg-banner.png)
 
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg?longCache=true&style=flat)
 [![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)
 
-
-# Introduction #
-This is a Star Wars Galaxies server emulator, targeted at the Combat Upgrade (CU)
+# Holocore
+Holocore is a Star Wars Galaxies server emulator, targeted at the [Combat Upgrade (CU)](https://swg.fandom.com/wiki/Combat_Upgrade_Changes)
 era of the game.
 
-# Vision
+## Vision
 * Providing an experience that's reasonably close to the original, out of the box
 * Easily expandable with new functionality
 * Good amount of configuration options for in-game features
-* Efficient use of system resources and solid performance
+* Efficient use of system resources
 
-# Setting up a development environment #
-Ready to help bring back an awesome MMORPG with your programming skills?
+## Contributing
+If you're interested in contributing to the project, please see our [contributing guide](CONTRIBUTING.md).
 
-## Java Development Kit ##
-In order to compile the source code, you need a JDK installation on your machine. The `JAVA_HOME` environment variable
-should point to the directory of the JDK! It should be version **18** as minimum. You can see your installed Java version
-by running `java -version`.
+## Running your own server
+Warning: Holocore is still in early development, and not yet ready for public use. Breaking changes may occur at any time.
 
-## Submodules ##
-The project uses submodules. Get them by running: git submodule update --init
+If you're interested in running your own Holocore server anyway, you can use the provided Docker image.
 
-## MongoDB ##
-A MongoDB instance can be bootstrapped by running `docker-compose up -d`.
+We regularly push new images to [GitHub Packages](https://github.com/ProjectSWGCore/Holocore/pkgs/container/Holocore%2Fholocore).
 
-This will run and initialize a MongoDB instance with a default game server user.
-* Username: user
-* Password: pass
-
-This will also run a web UI, which can be accessed in the browser at: http://localhost:8081
-
-You can stop both with: `docker-compose down`.
-
-## Running Holocore ##
-Compile and run Holocores main code using Gradle: `./gradlew runDevelopment`
-
-## Running automated tests ##
-Compile and run Holocores automated tests using Gradle: `./gradlew test --info`
-
-# Running your own server #
-If you're interested in running your own server, you should use the provided
-Docker image.
-
-## Help needed ? ##
+## Help needed ?
 If you have questions or stuck, please use the channels on Discord [![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)
