@@ -30,7 +30,6 @@ import com.projectswg.holocore.resources.support.data.server_info.database.PswgB
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.time.Month
 
 class CancelLiveAuctionUseCaseTest {
 	
@@ -51,7 +50,7 @@ class CancelLiveAuctionUseCaseTest {
 			PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
 				itemObjectId = 1234,
 				price = 700,
-				expiresAt = LocalDateTime.of(2023, Month.AUGUST, 18, 3, 55),
+				expiresAt = LocalDateTime.now().plusDays(30),
 				description = "Test item",
 				ownerId = 3,
 				bazaarObjectId = 1
@@ -69,7 +68,7 @@ class CancelLiveAuctionUseCaseTest {
 			PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
 				itemObjectId = 1234,
 				price = 700,
-				expiresAt = LocalDateTime.of(2023, Month.AUGUST, 18, 3, 55),
+				expiresAt = LocalDateTime.now().plusDays(30),
 				description = "Test item",
 				ownerId = 2,
 				bazaarObjectId = 1
@@ -87,7 +86,7 @@ class CancelLiveAuctionUseCaseTest {
 			PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
 				itemObjectId = 1234,
 				price = 700,
-				expiresAt = LocalDateTime.of(2023, Month.AUGUST, 18, 3, 55),
+				expiresAt = LocalDateTime.now().plusDays(30),
 				description = "Test item",
 				ownerId = 2,
 				bazaarObjectId = 1
@@ -108,7 +107,7 @@ class CancelLiveAuctionUseCaseTest {
 			PswgBazaarInstantSalesDatabase.InstantSaleItemMetadata(
 				itemObjectId = 1234,
 				price = 700,
-				expiresAt = LocalDateTime.of(2023, Month.AUGUST, 18, 3, 55),
+				expiresAt = LocalDateTime.now().plusDays(30),
 				description = "Test item",
 				ownerId = 2,
 				bazaarObjectId = 1
