@@ -54,6 +54,20 @@ If you're looking for something to work on, check out the [issues page](https://
 
 Some issues require coding, while others are more focused on documentation or other non-coding tasks.
 
+### Creating a pull request
+When you're ready to submit your changes, you can create a pull request.
+
+A pull request is a way to propose your changes to the project. It allows other contributors to review the changes, and suggest improvements.
+
+To create a pull request, follow [this guide](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+### Code review
+Once you've created a pull request, it will be reviewed by other contributors.
+
+If there are any issues or suggestions for improvements, you can simply push new commits, and they will automatically be added to the pull request.
+
+Once the pull request has been approved, it will be merged into the `master` branch.
+
 ## Reporting bugs
 If you've found a bug, please report it as an issue on the [issues page](https://github.com/ProjectSWGCore/Holocore/issues).
 
