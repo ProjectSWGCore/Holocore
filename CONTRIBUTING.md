@@ -1,11 +1,7 @@
 # Contributing
 Thanks for considering taking the time to contribute to Holocore! :heart:
 
-
-
 ## Setting up a development environment
-Ready to help bring back an awesome MMORPG with your programming skills?
-
 This section will guide you through setting up a development environment for Holocore.
 
 ### Docker
@@ -16,7 +12,7 @@ You can download Docker [here](https://www.docker.com/get-started).
 ### IDE
 We recommend using [IntelliJ IDEA](https://www.jetbrains.com/idea/download) as your IDE. It's free and has great support for Gradle projects.
 
-It will also automatically use the project's code style settings, automatically manage license headers.
+It will also automatically use the project's code style settings and add license headers to relevant files.
 This greatly reduces the amount of friction when contributing.
 
 ### Java Development Kit
@@ -29,7 +25,7 @@ The project uses [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submo
 
 Clone them by running: `git submodule update --init`.
 
-You may have to manually update the submodules in the future, if become outdated: `git submodule update`.
+You may have to manually update the submodules in the future, if they become outdated: `git submodule update`.
 
 ### MongoDB
 A MongoDB instance can be bootstrapped by running `docker-compose up -d`.
@@ -49,3 +45,11 @@ In IntelliJ idea, run the **Start server (development)** run configuration.
 
 ### Running automated tests
 In IntelliJ idea, run the **Tests** run configuration.
+
+## Your first contribution
+If you're new to contributing to open source projects, we recommend reading [this guide](https://opensource.guide/how-to-contribute/).
+
+### Finding something to work on
+If you're looking for something to work on, check out the [issues page](https://github.com/ProjectSWGCore/Holocore/issues).
+
+Some issues require coding, while others are more focused on documentation or other non-coding tasks.
