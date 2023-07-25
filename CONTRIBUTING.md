@@ -53,3 +53,13 @@ If you're new to contributing to open source projects, we recommend reading [thi
 If you're looking for something to work on, check out the [issues page](https://github.com/ProjectSWGCore/Holocore/issues).
 
 Some issues require coding, while others are more focused on documentation or other non-coding tasks.
+
+## Reporting bugs
+If you've found a bug, please report it as an issue on the [issues page](https://github.com/ProjectSWGCore/Holocore/issues).
+
+Please include as much information as possible, such as:
+* Steps to reproduce the bug
+* What you expected to happen
+* What actually happened
+* Screenshots, if applicable
+* Server logs, if applicable
