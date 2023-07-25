@@ -55,6 +55,8 @@ import java.time.temporal.ChronoUnit.SECONDS
 
 class BazaarService : Service() {
 
+	private val cancelLiveAuctionUseCase = CancelLiveAuctionUseCase(PswgDatabase.bazaarInstantSales, PswgDatabase.bazaarAvailableItems)
+
 	@IntentHandler
 	private fun handleInboundPacket(inboundPacketIntent: InboundPacketIntent) {
 		val packet = inboundPacketIntent.packet
@@ -74,32 +76,27 @@ class BazaarService : Service() {
 
 	private fun handleCancelLiveAuctionMessage(packet: CancelLiveAuctionMessage, player: Player) {
 		val objectId = packet.objectId
-		val instantSaleItem = PswgDatabase.bazaarInstantSales.getInstantSaleItem(objectId)
+		val creatureObjectId = player.creatureObject.objectId
 
-		if (instantSaleItem == null) {
-			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 2, vendorRefusal = false))
-			return
+		when (cancelLiveAuctionUseCase.cancelLiveAuction(objectId, creatureObjectId)) {
+			CancelLiveAuctionResult.NOT_FOUND -> handleCancelLiveAuctionNotFound(player, objectId)
+			CancelLiveAuctionResult.NOT_OWNER -> handleCancelLiveAuctionNotOwner(player, objectId)
+			CancelLiveAuctionResult.SUCCESS   -> handleCancelLiveAuctionSuccess(player, objectId)
 		}
+	}
 
-		if (instantSaleItem.ownerId != player.creatureObject.objectId) {
-			player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 8, vendorRefusal = false))
-			return
-		}
+	private fun handleCancelLiveAuctionNotOwner(player: Player, objectId: Long) {
+		player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 8, vendorRefusal = false))
+	}
 
-		PswgDatabase.bazaarInstantSales.removeInstantSaleItem(instantSaleItem)
-		PswgDatabase.bazaarAvailableItems.addAvailableItem(
-			PswgBazaarAvailableItemsDatabase.AvailableItemMetadata(
-				itemObjectId = instantSaleItem.itemObjectId,
-				price = instantSaleItem.price,
-				expiresAt = LocalDateTime.now().plusDays(30),
-				description = instantSaleItem.description,
-				ownerId = player.creatureObject.objectId,
-				instantSaleItem.bazaarObjectId,
-				PswgBazaarAvailableItemsDatabase.AvailableItemSaleType.INSTANT
-			)
-		)
+	private fun handleCancelLiveAuctionNotFound(player: Player, objectId: Long) {
+		player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 2, vendorRefusal = false))
+	}
+
+	private fun handleCancelLiveAuctionSuccess(player: Player, objectId: Long) {
 		player.sendPacket(CancelLiveAuctionResponseMessage(objectId = objectId, errorCode = 0, vendorRefusal = false))
-		StandardLog.onPlayerEvent(this, player, "canceled sale of item %s", instantSaleItem)
+		val item = ObjectLookup.getObjectById(objectId)
+		StandardLog.onPlayerEvent(this, player, "canceled sale of item %s", item)
 	}
 
 	private fun handleRetrieveAuctionItemMessage(packet: RetrieveAuctionItemMessage, player: Player) {
