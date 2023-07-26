@@ -128,9 +128,8 @@ class CreatureHarvestingService : Service() {
 		val spawnedResources = getSpawnedResources(player.creatureObject.terrain)
 		for (spawnedResource in spawnedResources) {
 			val rawResource = getRawResource(spawnedResource.rawResourceId) ?: continue
-			val resourceType = rawResource.resourceType
 
-			if (resourceType == rawResourceType) {
+			if (rawResource.name.startsWith(rawResourceType.resourceName + "_")) {
 				return spawnedResource
 			}
 		}
