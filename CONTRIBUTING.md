@@ -54,6 +54,16 @@ If you're looking for something to work on, check out the [issues page](https://
 
 Some issues require coding, while others are more focused on documentation or other non-coding tasks.
 
+### Programming languages
+The project is written in Java and Kotlin, and uses [Gradle](https://gradle.org) as its build system.
+
+We are in the process of transitioning from Java to Kotlin, so some parts of the codebase are still written in Java.
+
+To make that transition as easy as possible, we recommend you **write new code in Kotlin**.
+If you have to edit existing Java code, you may use Java.
+
+If we find ourselves editing a piece of Java code often, we should consider rewriting it in Kotlin. This would be a separate task, and should be discussed in an issue.
+
 ### Creating a pull request
 When you're ready to submit your changes, you can create a pull request.
 
