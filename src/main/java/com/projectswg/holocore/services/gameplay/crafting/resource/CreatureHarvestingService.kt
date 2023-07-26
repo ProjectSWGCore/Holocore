@@ -93,7 +93,7 @@ class CreatureHarvestingService : Service() {
 		val service = this
 		val eventHandler = object : ResourceContainerEventHandler {
 			override fun onUnknownError() {
-				// TODO
+				
 			}
 
 			override fun onInventoryFull() {
