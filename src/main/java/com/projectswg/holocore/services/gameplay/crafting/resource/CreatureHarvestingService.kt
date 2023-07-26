@@ -30,7 +30,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer.getRawResource
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer.getSpawnedResources
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -80,18 +79,12 @@ class CreatureHarvestingService : Service() {
 			SystemMessageIntent.broadcastPersonal(player, "@skl_use:nothing_to_harvest")
 			return
 		}
+
 		val requestedCreatureResourceType = resourceInfo.type
-
-		val rawResourceType = RawResourceType.getByName(requestedCreatureResourceType)
-		if (rawResourceType == null) {
-			StandardLog.onPlayerError(this, player, "unknown resource type %s", requestedCreatureResourceType)
-			return
-		}
-
-		val spawnedResource = getSpawnedResource(player, rawResourceType)
+		val spawnedResource = getSpawnedResource(player, requestedCreatureResourceType)
 
 		if (spawnedResource == null) {
-			StandardLog.onPlayerError(this, player, "unable to find a creature resource of type %s for %s", rawResourceType, ai)
+			StandardLog.onPlayerError(this, player, "unable to find a creature resource of type %s for %s", requestedCreatureResourceType, ai)
 			return
 		}
 
@@ -124,12 +117,12 @@ class CreatureHarvestingService : Service() {
 
 	private fun creatureHarvestingMultiplier(player: Player) = player.creatureObject.getSkillModValue("creature_harvesting") / 100.0
 
-	private fun getSpawnedResource(player: Player, rawResourceType: RawResourceType): GalacticResource? {
+	private fun getSpawnedResource(player: Player, requestedCreatureResourceType: String): GalacticResource? {
 		val spawnedResources = getSpawnedResources(player.creatureObject.terrain)
 		for (spawnedResource in spawnedResources) {
 			val rawResource = getRawResource(spawnedResource.rawResourceId) ?: continue
 
-			if (rawResource.name.startsWith(rawResourceType.resourceName + "_")) {
+			if (rawResource.name.startsWith("${requestedCreatureResourceType}_")) {
 				return spawnedResource
 			}
 		}
