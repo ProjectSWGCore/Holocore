@@ -49,10 +49,22 @@ In IntelliJ idea, run the **Tests** run configuration.
 ## Your first contribution
 If you're new to contributing to open source projects, we recommend reading [this guide](https://opensource.guide/how-to-contribute/).
 
-### Finding something to work on
-If you're looking for something to work on, check out the [issues page](https://github.com/ProjectSWGCore/Holocore/issues).
-
 Some issues require coding, while others are more focused on documentation or other non-coding tasks.
+
+### Good first issues
+If you're new to the project, you can start by looking at the [good first issues](https://github.com/ProjectSWGCore/Holocore/issues?q=is%3Aopen+is%3Aissue+label%3A%22Good+first+issue%22).
+
+These are issues that are relatively easy to fix, and are intended for new contributors to get started with.
+We will try to provide as much information as possible in the issue description, but don't hesitate to ask for more information if you need it.
+
+We're happy to help you get started with your first contribution, so don't hesitate to ask for help.
+A good place to ask questions is on our Discord server, in the #development channel.
+
+[![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)
+
+Once you have completed one or two Good first issues, you can start looking at other issues.
+These may be more complex, but we're happy to help you get started.
+The issue description is likely to be less detailed, so you may have to ask for more information.
 
 ### Creating a pull request
 When you're ready to submit your changes, you can create a pull request.
