@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.crafting.resource
 
+import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
@@ -63,7 +64,7 @@ object ResourceContainerHelper {
 	private fun createResourceObject(creature: CreatureObject, rawResource: RawResource, resource: GalacticResource, resourceContainerEventHandler: ResourceContainerEventHandler): ResourceContainerObject? {
 		val resourceObject = ObjectCreator.createObjectFromTemplate(rawResource.crateTemplate) as ResourceContainerObject
 		resourceObject.volume = 1
-		resourceObject.parentName = rawResource.parent.name.toString()
+		resourceObject.parentName = StringId("resource/resource_names", rawResource.parent.name).toString()
 		resourceObject.resourceType = resource.rawResourceId
 		resourceObject.resourceName = resource.name
 		resourceObject.objectName = resource.name

@@ -187,7 +187,7 @@ public enum RawResourceType {
 	
 	public static RawResourceType getRawResourceType(RawResource resource) {
 		while (resource != null) {
-			RawResourceType type = NAME_LOOKUP.getEnum(resource.getName().getKey(), null);
+			RawResourceType type = NAME_LOOKUP.getEnum(resource.getName(), null);
 			if (type != null)
 				return type;
 			resource = resource.getParent();
@@ -201,11 +201,11 @@ public enum RawResourceType {
 	}
 	
 	private static boolean isSpecificResourceType(RawResourceType type, String extension, RawResource resource) {
-		if (!isResourceNameMatch(resource.getName().getKey(), extension)) {
+		if (!isResourceNameMatch(resource.getName(), extension)) {
 			return false;
 		}
 		do {
-			if (type.getResourceName().equals(resource.getName().getKey()))
+			if (type.getResourceName().equals(resource.getName()))
 				return true;
 			resource = resource.getParent();
 		} while (resource != null);

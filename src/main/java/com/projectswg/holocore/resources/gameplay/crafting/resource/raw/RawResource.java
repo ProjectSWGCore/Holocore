@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,7 +38,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RawResource {
 	
 	private final long id;
-	private final StringId name;
+	private final String name;
 	private final RawResource parent;
 	private final RawResourceType type;
 	private final String crateTemplate;
@@ -97,7 +97,7 @@ public class RawResource {
 		return id;
 	}
 	
-	public StringId getName() {
+	public String getName() {
 		return name;
 	}
 	
@@ -194,7 +194,7 @@ public class RawResource {
 		
 		private final long id;
 		
-		private StringId name = null;
+		private String name = null;
 		private RawResource parent = null;
 		private String crateTemplate = null;
 		private int minTypes = -1;
@@ -219,7 +219,7 @@ public class RawResource {
 		}
 		
 		public RawResourceBuilder setName(String name) {
-			this.name = new StringId("resource/resource_names", name);
+			this.name = name;
 			return this;
 		}
 		
