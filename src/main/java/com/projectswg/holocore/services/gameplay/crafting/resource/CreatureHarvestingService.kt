@@ -61,7 +61,8 @@ class CreatureHarvestingService : Service() {
 
 	@IntentHandler
 	private fun handleHarvestMeatIntent(intent: HarvestMeatIntent) {
-		val (player, ai) = intent
+		val ai = intent.target
+		val player = intent.player
 
 		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
 		grantResources(npcInfo.meatResourceInfo, player, ai)
@@ -69,7 +70,8 @@ class CreatureHarvestingService : Service() {
 
 	@IntentHandler
 	private fun handleHarvestBoneIntent(intent: HarvestBoneIntent) {
-		val (player, ai) = intent
+		val ai = intent.target
+		val player = intent.player
 
 		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
 		grantResources(npcInfo.boneResourceInfo, player, ai)
