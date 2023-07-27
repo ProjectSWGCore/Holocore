@@ -177,11 +177,7 @@ public class SampleLoopSession {
 
 				@Override
 				public void onUnknownError() {
-					creature.sendSelf(
-							new ChatSystemMessage(
-									SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"
-							)
-					);
+					creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "The was an unknown server error when transferring resources to your inventory"));
 				}
 
 				@Override
