@@ -52,7 +52,8 @@ class CreatureHarvestingService : Service() {
 
 	@IntentHandler
 	private fun handleHarvestHideIntent(intent: HarvestHideIntent) {
-		val (player, ai) = intent
+		val ai = intent.target
+		val player = intent.player
 
 		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
 		grantResources(npcInfo.hideResourceInfo, player, ai)
