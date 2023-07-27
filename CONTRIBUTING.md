@@ -66,6 +66,16 @@ Once you have completed one or two Good first issues, you can start looking at o
 These may be more complex, but we're happy to help you get started.
 The issue description is likely to be less detailed, so you may have to ask for more information.
 
+### Programming languages
+The project is written in Java and Kotlin, and uses [Gradle](https://gradle.org) as its build system.
+
+We are in the process of transitioning from Java to Kotlin, so some parts of the codebase are still written in Java.
+
+To make that transition as easy as possible, we recommend you **write new code in Kotlin**.
+If you have to edit existing Java code, you may use Java.
+
+If we find ourselves editing a piece of Java code often, we should consider rewriting it in Kotlin. This would be a separate task, and should be discussed in an issue.
+
 ### Creating a pull request
 When you're ready to submit your changes, you can create a pull request.
 
