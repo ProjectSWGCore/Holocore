@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -145,7 +145,12 @@ public final class NpcLoader extends DataLoader {
 		private final HumanoidNpcInfo humanoidInfo;
 		private final DroidNpcInfo droidInfo;
 		private final CreatureNpcInfo creatureInfo;
-		
+		private final boolean resources;
+		private final NpcResourceInfo milkResourceInfo;
+		private final NpcResourceInfo meatResourceInfo;
+		private final NpcResourceInfo hideResourceInfo;
+		private final NpcResourceInfo boneResourceInfo;
+
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
 			this.name = set.getText("npc_name").intern();
@@ -172,6 +177,11 @@ public final class NpcLoader extends DataLoader {
 			this.lootTable1Chance = (int) set.getInt("loot_table1_chance");
 			this.lootTable2Chance = (int) set.getInt("loot_table2_chance");
 			this.lootTable3Chance = (int) set.getInt("loot_table3_chance");
+			this.resources = set.getBoolean("resources");
+			this.milkResourceInfo = new NpcResourceInfo(set, "milk");
+			this.meatResourceInfo = new NpcResourceInfo(set, "meat");
+			this.hideResourceInfo = new NpcResourceInfo(set, "hide");
+			this.boneResourceInfo = new NpcResourceInfo(set, "bone");
 			
 			if (scaleMax < scaleMin)
 				throw new IllegalArgumentException("scaleMax must be greater than scaleMin");
@@ -297,7 +307,27 @@ public final class NpcLoader extends DataLoader {
 		public int getLootTable3Chance() {
 			return lootTable3Chance;
 		}
-		
+
+		public boolean isResources() {
+			return resources;
+		}
+
+		public NpcResourceInfo getMilkResourceInfo() {
+			return milkResourceInfo;
+		}
+
+		public NpcResourceInfo getMeatResourceInfo() {
+			return meatResourceInfo;
+		}
+
+		public NpcResourceInfo getHideResourceInfo() {
+			return hideResourceInfo;
+		}
+
+		public NpcResourceInfo getBoneResourceInfo() {
+			return boneResourceInfo;
+		}
+
 		public HumanoidNpcInfo getHumanoidInfo() {
 			return humanoidInfo;
 		}
@@ -340,6 +370,24 @@ public final class NpcLoader extends DataLoader {
 			
 		}
 		
+	}
+	
+	public static class NpcResourceInfo {
+		private final int amount;
+		private final String type;
+
+		public NpcResourceInfo(SdbResultSet set, String prefix) {
+			amount = (int) set.getInt(prefix + "_" + "amount");
+			type = set.getText(prefix + "_" + "type");
+		}
+
+		public int getAmount() {
+			return amount;
+		}
+
+		public String getType() {
+			return type;
+		}
 	}
 	
 }

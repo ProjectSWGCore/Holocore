@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -306,6 +306,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param newParent Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
+	@NotNull
 	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject newParent) {
 		ContainerResult result = isAllowedToMove(requester, newParent);
 		if (result == ContainerResult.SUCCESS) {
@@ -321,6 +322,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	 * @param container Where this object should be moved to
 	 * @return {@link ContainerResult}
 	 */
+	@NotNull
 	protected ContainerResult isAllowedToMove(@NotNull CreatureObject requester, SWGObject container) {
 		if (!permissions.canMove(requester, this)) {
 			Log.w("No permission 'MOVE' for requestor %s with object %s", requester, this);

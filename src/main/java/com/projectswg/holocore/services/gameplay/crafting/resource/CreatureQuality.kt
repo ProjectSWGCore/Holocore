@@ -24,13 +24,8 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.crafting
+package com.projectswg.holocore.services.gameplay.crafting.resource
 
-import com.projectswg.holocore.services.gameplay.crafting.resource.CreatureHarvestingService
-import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceService
-import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyToolService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.common.data.encodables.oob.StringId
 
-@ManagerStructure(children = [CreatureHarvestingService::class, ResourceService::class, SurveyToolService::class])
-class CraftingManager : Manager()
+data class CreatureQuality(val stringId: StringId, val multiplier: Double)
