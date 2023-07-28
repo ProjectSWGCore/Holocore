@@ -277,6 +277,10 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 	fun setDraftSchematic(serverCrc: Int, clientCrc: Int, counter: Int) {
 		play9.setDraftSchematic(serverCrc, clientCrc, counter)
 	}
+	
+	fun revokeDraftSchematic(serverCrc: Int, clientCrc: Int) {
+		play9.revokeDraftSchematic(serverCrc, clientCrc)
+	}
 
 	var craftingComponentBioLink by play9::craftingComponentBioLink
 	var experimentPoints by play9::experimentPoints

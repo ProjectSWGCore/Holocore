@@ -26,15 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills;
 
+import com.projectswg.common.data.CRC;
+import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BadgeLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
@@ -197,6 +197,10 @@ public class SkillService extends Service {
 		
 		target.removeSkill(surrenderedSkill);
 		target.removeCommands(skillInfo.getCommands());
+		String[] schematicGroups = skillInfo.getSchematicsGranted();
+		for (String schematicGroup : schematicGroups) {
+			revokeSchematicGroup(target, schematicGroup);
+		}
 		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
 		
 		CombatLevel newCombatLevel = getCombatLevel(target);
@@ -272,7 +276,52 @@ public class SkillService extends Service {
 		target.addCommand(skill.getCommands());
 		
 		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
+		String[] schematicGroups = skill.getSchematicsGranted();
+		for (String schematicGroup : schematicGroups) {
+			grantSchematicGroup(target, schematicGroup);
+		}
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
+	}
+
+	private static void grantSchematicGroup(CreatureObject target, String schematicGroup) {
+		SchematicGroupLoader schematicGroupLoader = ServerData.INSTANCE.getSchematicGroups();
+		Collection<String> schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup);
+
+		for (String schematicInGroup : schematicsInGroup) {
+			grantSchematic(target, schematicInGroup);
+		}
+	}
+
+	private static void grantSchematic(CreatureObject target, String schematicInGroup) {
+		String schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup);
+		int serverCrc = getDraftSchematicServerCrc(schematicInGroupShared);
+		int clientCrc = getDraftSchematicClientCrc(schematicInGroupShared);
+		target.getPlayerObject().setDraftSchematic(serverCrc, clientCrc, 1);
+	}
+
+	private static void revokeSchematicGroup(CreatureObject target, String schematicGroup) {
+		SchematicGroupLoader schematicGroupLoader = ServerData.INSTANCE.getSchematicGroups();
+		Collection<String> schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup);
+
+		for (String schematicInGroup : schematicsInGroup) {
+			revokeSchematic(target, schematicInGroup);
+		}
+	}
+
+	private static void revokeSchematic(CreatureObject target, String schematicInGroup) {
+		String schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup);
+		int serverCrc = getDraftSchematicServerCrc(schematicInGroupShared);
+		int clientCrc = getDraftSchematicClientCrc(schematicInGroupShared);
+		target.getPlayerObject().revokeDraftSchematic(serverCrc, clientCrc);
+	}
+
+	private static int getDraftSchematicServerCrc(String schematicInGroupShared) {
+		return CRC.getCrc(schematicInGroupShared);
+	}
+
+	private static int getDraftSchematicClientCrc(String schematicInGroupShared) {
+		String templateWithoutPrefix = schematicInGroupShared.replace("object/draft_schematic/", "");
+		return CRC.getCrc(templateWithoutPrefix);
 	}
 
 	private int skillPointsSpent(CreatureObject creature) {
