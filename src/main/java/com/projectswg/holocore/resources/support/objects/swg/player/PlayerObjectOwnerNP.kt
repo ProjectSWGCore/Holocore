@@ -173,7 +173,7 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 		bb.addInt(maxMeds) // 15
 		bb.addObject(groupWaypoints) // 16
 		bb.addInt(jediState) // 17
-		bb.incrementOperandCount(19)
+		bb.incrementOperandCount(18)
 	}
 
 	fun parseBaseline9(buffer: NetBuffer) {
@@ -233,6 +233,7 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 		craftingStage = data.getInteger("craftingStage", craftingStage)
 		nearbyCraftStation = data.getLong("nearbyCraftStation", nearbyCraftStation)
 		draftSchematics.putAll(data.getMap("draftSchematics", Long::class.java, Int::class.java))
+		draftSchematics.resetUpdateCount()	// If we don't do this, the client will display 0 draft schematics after a server reboot for all players
 		craftingComponentBioLink = data.getLong("craftingComponentBioLink", craftingComponentBioLink)
 		experimentPoints = data.getInteger("experimentPoints", experimentPoints)
 		expModified = data.getInteger("expModified", expModified)
