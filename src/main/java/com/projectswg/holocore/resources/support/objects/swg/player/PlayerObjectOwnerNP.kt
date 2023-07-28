@@ -70,9 +70,19 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 	}
 
 	fun setDraftSchematic(serverCrc: Int, clientCrc: Int, counter: Int) {
-		val combinedCrc = serverCrc.toLong() shl 32 and -0x100000000L or (clientCrc.toLong() and 0x00000000FFFFFFFFL)
+		val combinedCrc = combinedCrc(serverCrc, clientCrc)
 		draftSchematics[combinedCrc] = counter
 		draftSchematics.sendDeltaMessage(obj)
+	}
+	
+	fun revokeDraftSchematic(serverCrc: Int, clientCrc: Int) {
+		val combinedCrc = combinedCrc(serverCrc, clientCrc)
+		draftSchematics.remove(combinedCrc)
+		draftSchematics.sendDeltaMessage(obj)
+	}
+
+	private fun combinedCrc(serverCrc: Int, clientCrc: Int): Long {
+		return serverCrc.toLong() shl 32 and -0x100000000L or (clientCrc.toLong() and 0x00000000FFFFFFFFL)
 	}
 
 	fun getFriendsList(): List<String> {
