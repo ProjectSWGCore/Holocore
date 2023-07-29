@@ -67,7 +67,6 @@ class DraftSchematicLoader : DataLoader() {
 			val fileToJsonString = fileToJsonString(file)
 			val sharedIffDraftSchematicPath = ClientFactory.formatToSharedFile(iffDraftSchematicPath)
 			val draftSchematic = jsonToDraftSchematic(fileToJsonString, sharedIffDraftSchematicPath)
-			draftSchematic.isCanManufacture = true
 
 			draftSchematics[sharedIffDraftSchematicPath] = draftSchematic
 		}
@@ -164,6 +163,7 @@ class DraftSchematicLoader : DataLoader() {
 		val itemsPerContainer = jsonObject["itemsPerContainer"] as Long?
 		if (itemsPerContainer != null) {
 			draftSchematic.itemsPerContainer = itemsPerContainer.toInt()
+			draftSchematic.isCanManufacture = itemsPerContainer > 0
 		}
 	}
 
