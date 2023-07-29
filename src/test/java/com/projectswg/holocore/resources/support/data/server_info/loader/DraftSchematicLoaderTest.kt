@@ -27,9 +27,8 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader
 
 import com.projectswg.common.data.encodables.oob.StringId
-import com.projectswg.common.data.schematic.IngridientSlot.IngridientType
+import com.projectswg.common.data.schematic.SlotType
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
@@ -101,7 +100,7 @@ class DraftSchematicLoaderTest {
 			fun ingredientType() {
 				val draftSchematic = ServerData.draftSchematics.getDraftSchematic("object/draft_schematic/camp/shared_camp_luxury.iff") ?: fail("Could not find draft schematic")
 
-				assertEquals(IngridientType.IT_RESOURCE_CLASS, draftSchematic.ingridientSlot[0].fromSlotDataOption[0].ingredientType)
+				assertEquals(SlotType.RESOURCES, draftSchematic.ingridientSlot[0].fromSlotDataOption[0].slotType)
 			}
 			
 			@Test

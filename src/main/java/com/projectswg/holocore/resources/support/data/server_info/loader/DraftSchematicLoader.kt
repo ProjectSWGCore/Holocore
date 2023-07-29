@@ -141,7 +141,7 @@ class DraftSchematicLoader : DataLoader() {
 			val name = stringIdName(ingredient)
 			val ingredientName = ingredient["ingredient"] as String
 			val amount = (ingredient["count"] as Long).toInt()
-			slot.addSlotDataOption(DraftSlotDataOption(name, ingredientName, ingredientType, amount))
+			slot.addSlotDataOption(DraftSlotDataOption(name, ingredientName, ingredientType.slotType, amount))
 		}
 	}
 
