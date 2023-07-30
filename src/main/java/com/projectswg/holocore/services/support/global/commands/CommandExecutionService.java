@@ -140,6 +140,7 @@ public class CommandExecutionService extends Service {
 
 	private void addCraftingScripts() {
 		registerCppCallback("requestDraftSlotsBatch", RequestDraftSlotsCallback::new);
+		registerCppCallback("requestResourceWeightsBatch", RequestResourceWeightsBatchCallback::new);
 	}
 
 	private void addEntertainerScripts() {
