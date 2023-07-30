@@ -33,6 +33,7 @@ import com.projectswg.common.data.schematic.DraftSlotDataOption
 import com.projectswg.common.data.schematic.IngridientSlot
 import com.projectswg.common.data.schematic.IngridientSlot.IngridientType
 import com.projectswg.common.data.swgfile.ClientFactory
+import com.projectswg.common.data.swgfile.visitors.ObjectData
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import me.joshlarson.json.JSON
 import me.joshlarson.json.JSONObject
@@ -141,7 +142,7 @@ class DraftSchematicLoader : DataLoader() {
 			val name = stringIdName(ingredient)
 			val ingredientName = ingredient["ingredient"] as String
 			val amount = (ingredient["count"] as Long).toInt()
-			slot.addSlotDataOption(DraftSlotDataOption(name, ingredientName, ingredientType.slotType, amount))
+			slot.addSlotDataOption(DraftSlotDataOption(name, resolveIngredientName(ingredientName), ingredientType.slotType, amount))
 		}
 	}
 
@@ -197,5 +198,17 @@ class DraftSchematicLoader : DataLoader() {
 
 	private fun combinedCrc(serverCrc: Int, clientCrc: Int): Long {
 		return serverCrc.toLong() shl 32 and -0x100000000L or (clientCrc.toLong() and 0x00000000FFFFFFFFL)
+	}
+
+	private fun resolveIngredientName(ingredientName: String): String {
+		if (ingredientName.endsWith(".iff")) {
+			val attributes = ServerData.objectData.getAttributes(ClientFactory.formatToSharedFile(ingredientName))
+			if (attributes != null) {
+				val stringId = attributes[ObjectData.ObjectDataAttribute.OBJECT_NAME] as StringId
+				return stringId.toString()
+			}
+		}
+		
+		return ingredientName
 	}
 }

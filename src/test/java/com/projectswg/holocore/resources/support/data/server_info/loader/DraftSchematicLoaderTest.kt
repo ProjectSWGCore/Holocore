@@ -125,6 +125,13 @@ class DraftSchematicLoaderTest {
 			}
 
 			@Test
+			fun ingredientIffResolved() {
+				val draftSchematic = ServerData.draftSchematics.getDraftSchematic("object/draft_schematic/weapon/shared_bowcaster_assault.iff") ?: fail("Could not find draft schematic")
+
+				assertEquals("@craft_weapon_ingredients_n:blaster_power_handler_advanced", draftSchematic.ingridientSlot[4].fromSlotDataOption[0].ingredientName)
+			}
+
+			@Test
 			fun count() {
 				val draftSchematic = ServerData.draftSchematics.getDraftSchematic("object/draft_schematic/camp/shared_camp_luxury.iff") ?: fail("Could not find draft schematic")
 
