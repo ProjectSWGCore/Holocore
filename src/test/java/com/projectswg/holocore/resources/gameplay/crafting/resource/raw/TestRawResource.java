@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -45,8 +45,7 @@ public class TestRawResource extends TestRunnerNoIntents {
 				.setRecycled(false)
 				.setCrateTemplate("")
 				.build();
-		assertEquals("resource/resource_names", resource.getName().getFile());
-		assertEquals("resource_name", resource.getName().getKey());
+		assertEquals("resource_name", resource.getName());
 		assertNull(resource.getParent());
 		assertEquals(15, resource.getMinPools());
 		assertEquals(30, resource.getMaxPools());
@@ -65,8 +64,7 @@ public class TestRawResource extends TestRunnerNoIntents {
 				.setRecycled(true)
 				.setCrateTemplate("")
 				.build();
-		assertEquals("resource/resource_names", child.getName().getFile());
-		assertEquals("child_name", child.getName().getKey());
+		assertEquals("child_name", child.getName());
 		assertEquals(resource, child.getParent());
 		assertEquals(5, child.getMinPools());
 		assertEquals(6, child.getMaxPools());

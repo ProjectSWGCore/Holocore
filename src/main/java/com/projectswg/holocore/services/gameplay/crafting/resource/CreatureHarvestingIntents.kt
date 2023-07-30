@@ -24,14 +24,12 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.global.commands
+package com.projectswg.holocore.services.gameplay.crafting.resource
 
-import com.projectswg.common.data.encodables.tangible.Posture
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import me.joshlarson.jlcommon.control.Intent
 
-class DrivingVehicleLocomotionCheck : LocomotionCheck {
-	override fun isActive(creatureObject: CreatureObject): Boolean {
-		val parent = creatureObject.parent
-		return parent is CreatureObject && parent.posture == Posture.DRIVING_VEHICLE
-	}
-}
+data class HarvestBoneIntent(val player: Player, val target: AIObject): Intent()
+data class HarvestHideIntent(val player: Player, val target: AIObject): Intent()
+data class HarvestMeatIntent(val player: Player, val target: AIObject): Intent()

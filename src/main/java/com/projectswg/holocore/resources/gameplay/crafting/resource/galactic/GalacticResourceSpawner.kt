@@ -151,7 +151,7 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun getRestrictedResource(resource: RawResource): Terrain? {
-		var key = resource.name.key
+		var key = resource.name
 		if (key.length >= 2 && Character.isDigit(key[key.length - 1]) && key[key.length - 2] == '_')
 			key = key.substring(0, key.lastIndexOf('_'))
 		for (test in ALL_PLANETS) {

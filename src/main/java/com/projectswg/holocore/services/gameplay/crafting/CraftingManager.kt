@@ -26,10 +26,11 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.crafting
 
+import com.projectswg.holocore.services.gameplay.crafting.resource.CreatureHarvestingService
 import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceService
 import com.projectswg.holocore.services.gameplay.crafting.survey.SurveyToolService
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [ResourceService::class, SurveyToolService::class])
+@ManagerStructure(children = [CreatureHarvestingService::class, ResourceService::class, SurveyToolService::class])
 class CraftingManager : Manager()

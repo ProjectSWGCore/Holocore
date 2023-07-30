@@ -33,7 +33,8 @@ enum class State(val stateTableId: Int, val commandSdbColumnName: String, privat
 	COMBAT(1, "S:combat", CreatureStateCheck(CreatureState.COMBAT)),
 	STUNNED(12, "S:stunned", CreatureStateCheck(CreatureState.STUNNED)),
 	SWIMMING(18, "S:swimming", SwimmingStateCheck()),
-	BLEEDING(24, "S:bleeding", CreatureStateCheck(CreatureState.BLEEDING));
+	BLEEDING(24, "S:bleeding", CreatureStateCheck(CreatureState.BLEEDING)),
+	RIDING_MOUNT(27, "S:ridingMount", CreatureStateCheck(CreatureState.RIDING_MOUNT));
 
 	fun isActive(creatureObject: CreatureObject): Boolean {
 		return stateCheck.isActive(creatureObject)
