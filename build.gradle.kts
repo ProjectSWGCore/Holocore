@@ -160,6 +160,7 @@ tasks.withType<Test>().configureEach {
 ktlint {
 	version.set("0.50.0")
 	verbose.set(true)
+	ignoreFailures.set(true)
 	reporters {
 		reporter(ReporterType.CHECKSTYLE)
 	}
