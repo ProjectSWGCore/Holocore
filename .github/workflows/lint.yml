@@ -19,7 +19,7 @@ jobs:
           java-version: 18
       - name: run ktlint
         run: |
-          ./gradlew --no-daemon :build
+          ./gradlew --no-daemon ktlintCheck
         continue-on-error: true
       - uses: yutailang0119/action-ktlint@v3
         with:
