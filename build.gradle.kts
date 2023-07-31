@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 /***********************************************************************************
  * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
@@ -31,6 +33,7 @@ plugins {
 	java
 	kotlin("jvm") version "1.8.21"
 	id("org.beryx.jlink") version "2.25.0"
+	id("org.jlleitschuh.gradle.ktlint") version "11.5.0"
 }
 
 val javaVersion = "18.0.2"
@@ -152,4 +155,12 @@ tasks.create<JavaExec>("runClientdataConversion") {
 
 tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
+}
+
+ktlint {
+	version.set("0.50.0")
+	verbose.set(true)
+	reporters {
+		reporter(ReporterType.CHECKSTYLE)
+	}
 }

@@ -1,0 +1,21 @@
+name: Kotlin Lint
+
+on:
+  pull_request:
+  push:
+    branches: 
+    - master
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: run ktlint
+        run: |
+          ./gradlew --no-daemon :build
+        continue-on-error: true
+      - uses: yutailang0119/action-ktlint@v3
+        with:
+          report-path: build/reports/ktlint/**.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
+        continue-on-error: false # If annotations contain error of severity, action-ktlint exit 1.
