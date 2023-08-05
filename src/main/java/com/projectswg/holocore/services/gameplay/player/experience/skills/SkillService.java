@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills;
 
-import com.projectswg.common.data.CRC;
-import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
@@ -37,6 +35,7 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.DraftSchematicCombinedCrc;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.gameplay.player.experience.*;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -293,10 +292,9 @@ public class SkillService extends Service {
 	}
 
 	private static void grantSchematic(CreatureObject target, String schematicInGroup) {
-		String schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup);
-		int serverCrc = getDraftSchematicServerCrc(schematicInGroupShared);
-		int clientCrc = getDraftSchematicClientCrc(schematicInGroupShared);
-		target.getPlayerObject().setDraftSchematic(serverCrc, clientCrc, 1);
+		DraftSchematicCombinedCrc draftSchematicCombinedCrc = new DraftSchematicCombinedCrc();
+		draftSchematicCombinedCrc.setObjectTemplate(schematicInGroup);
+		target.getPlayerObject().setDraftSchematic(draftSchematicCombinedCrc, 1);
 	}
 
 	private static void revokeSchematicGroup(CreatureObject target, String schematicGroup) {
@@ -309,19 +307,9 @@ public class SkillService extends Service {
 	}
 
 	private static void revokeSchematic(CreatureObject target, String schematicInGroup) {
-		String schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup);
-		int serverCrc = getDraftSchematicServerCrc(schematicInGroupShared);
-		int clientCrc = getDraftSchematicClientCrc(schematicInGroupShared);
-		target.getPlayerObject().revokeDraftSchematic(serverCrc, clientCrc);
-	}
-
-	private static int getDraftSchematicServerCrc(String schematicInGroupShared) {
-		return CRC.getCrc(schematicInGroupShared);
-	}
-
-	private static int getDraftSchematicClientCrc(String schematicInGroupShared) {
-		String templateWithoutPrefix = schematicInGroupShared.replace("object/draft_schematic/", "");
-		return CRC.getCrc(templateWithoutPrefix);
+		DraftSchematicCombinedCrc draftSchematicCombinedCrc = new DraftSchematicCombinedCrc();
+		draftSchematicCombinedCrc.setObjectTemplate(schematicInGroup);
+		target.getPlayerObject().revokeDraftSchematic(draftSchematicCombinedCrc);
 	}
 
 	private int skillPointsSpent(CreatureObject creature) {

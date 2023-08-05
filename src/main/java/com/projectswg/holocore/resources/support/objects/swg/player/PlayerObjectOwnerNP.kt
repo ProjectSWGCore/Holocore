@@ -45,7 +45,7 @@ import java.util.stream.Collectors
  */
 internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersistable {
 
-	private val draftSchematics = SWGMap<Long, Int>(9, 3)
+	private val draftSchematics = SWGMap<DraftSchematicCombinedCrc, Int>(9, 3)
 	private val friendsList: SWGList<String> = createAsciiList(9, 7)
 	private val ignoreList: SWGList<String> = createAsciiList(9, 8)
 	private val groupWaypoints = SWGMap<Long, WaypointObject>(9, 16)
@@ -65,24 +65,18 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 	var maxMeds by IndirectBaselineDelegate(obj = obj, value = 100, page = 9, update = 15)
 	var jediState by IndirectBaselineDelegate(obj = obj, value = 0, page = 9, update = 17)
 
-	fun getDraftSchematics(): Map<Long, Int> {
+	fun getDraftSchematics(): Map<DraftSchematicCombinedCrc, Int> {
 		return Collections.unmodifiableMap(draftSchematics)
 	}
 
-	fun setDraftSchematic(serverCrc: Int, clientCrc: Int, counter: Int) {
-		val combinedCrc = combinedCrc(serverCrc, clientCrc)
-		draftSchematics[combinedCrc] = counter
+	fun setDraftSchematic(draftSchematicCombinedCrc: DraftSchematicCombinedCrc, counter: Int) {
+		draftSchematics[draftSchematicCombinedCrc] = counter
 		draftSchematics.sendDeltaMessage(obj)
 	}
 	
-	fun revokeDraftSchematic(serverCrc: Int, clientCrc: Int) {
-		val combinedCrc = combinedCrc(serverCrc, clientCrc)
-		draftSchematics.remove(combinedCrc)
+	fun revokeDraftSchematic(draftSchematicCombinedCrc: DraftSchematicCombinedCrc) {
+		draftSchematics.remove(draftSchematicCombinedCrc)
 		draftSchematics.sendDeltaMessage(obj)
-	}
-
-	private fun combinedCrc(serverCrc: Int, clientCrc: Int): Long {
-		return serverCrc.toLong() shl 32 and -0x100000000L or (clientCrc.toLong() and 0x00000000FFFFFFFFL)
 	}
 
 	fun getFriendsList(): List<String> {
@@ -184,7 +178,7 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 		craftingLevel = buffer.int
 		craftingStage = buffer.int
 		nearbyCraftStation = buffer.long
-		draftSchematics.putAll(SWGMap.getSwgMap(buffer, 9, 3, Long::class.java, Int::class.java))
+		draftSchematics.putAll(SWGMap.getSwgMap(buffer, 9, 3, DraftSchematicCombinedCrc::class.java, Int::class.java))
 		craftingComponentBioLink = buffer.long
 		experimentPoints = buffer.int
 		expModified = buffer.int
@@ -232,7 +226,7 @@ internal class PlayerObjectOwnerNP(private val obj: PlayerObject) : MongoPersist
 		craftingLevel = data.getInteger("craftingLevel", craftingLevel)
 		craftingStage = data.getInteger("craftingStage", craftingStage)
 		nearbyCraftStation = data.getLong("nearbyCraftStation", nearbyCraftStation)
-		draftSchematics.putAll(data.getMap("draftSchematics", Long::class.java, Int::class.java))
+		draftSchematics.putAll(data.getMap("draftSchematics", DraftSchematicCombinedCrc::class.java, Int::class.java))
 		draftSchematics.resetUpdateCount()	// If we don't do this, the client will display 0 draft schematics after a server reboot for all players
 		craftingComponentBioLink = data.getLong("craftingComponentBioLink", craftingComponentBioLink)
 		experimentPoints = data.getInteger("experimentPoints", experimentPoints)
