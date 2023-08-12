@@ -232,51 +232,62 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 
 	private static void handleJedi_3(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_defender_master", creatureObject, true);
 	}
 
 	private static void handleJedi_4(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_enhancements_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_enhancements_master", creatureObject, true);
 	}
 
 	private static void handleJedi_5(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_healing_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_healing_master", creatureObject, true);
 	}
 
 	private static void handleJedi_6(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_light_saber_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_light_saber_master", creatureObject, true);
 	}
 
 	private static void handleJedi_7(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_powers_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_discipline_powers_master", creatureObject, true);
 	}
 
 	private static void handleJedi_8(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_combat_prowess_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_combat_prowess_master", creatureObject, true);
 	}
 
 	private static void handleJedi_9(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_crafting_mastery_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_crafting_mastery_master", creatureObject, true);
 	}
 
 	private static void handleJedi_10(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_enhanced_reflexes_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_enhanced_reflexes_master", creatureObject, true);
 	}
 
 	private static void handleJedi_11(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_heightened_senses_novice", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_sensitive_heightened_senses_master", creatureObject, true);
 	}
 
 	private static void handleSkillsUnlockForceSensitive(Player player) {
 		CreatureObject creatureObject = player.getCreatureObject();
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank", creatureObject, true);
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank_01", creatureObject, true);
 		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank_02", creatureObject, true);
 		spawnItems(player,
 				"item_color_crystal_02_28",
