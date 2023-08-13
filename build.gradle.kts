@@ -71,33 +71,33 @@ dependencies {
 	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
-	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
-	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
-	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
-	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
-	
+	implementation(group = "org.mongodb", name = "mongodb-driver-sync", version = "3.12.2")
+	implementation(group = "me.joshlarson", name = "fast-json", version = "3.0.1")
+	implementation(group = "me.joshlarson", name = "jlcommon-network", version = "1.1.0")
+	implementation(group = "me.joshlarson", name = "jlcommon-argparse", version = "0.9.6")
+	implementation(group = "me.joshlarson", name = "websocket", version = "0.9.4")
+
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
-	
+
 	val junit5Version = "5.9.3"
-	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
-	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
-	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
-	testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
-	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
+	testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = junit5Version)
+	testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = junit5Version)
+	testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-params", version = junit5Version)
+	testImplementation(group = "org.testcontainers", name = "mongodb", version = "1.18.0")
+	testRuntimeOnly(group = "org.slf4j", name = "slf4j-simple", version = "1.7.36")
 
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
 }
 
 idea {
 	targetVersion = javaMajorVersion
-    module {
-        inheritOutputDirs = true
+	module {
+		inheritOutputDirs = true
 		excludeDirs.add(project.file("log"))
 		excludeDirs.add(project.file("mongo_data"))
 		excludeDirs.add(project.file("odb"))
-    }
+	}
 }
 
 jlink {
@@ -131,16 +131,14 @@ tasks.create<JavaExec>("runDevelopment") {
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 
-	if (holocoreLogLevel != null)
-		args = listOf("--log-level", holocoreLogLevel!!)
+	if (holocoreLogLevel != null) args = listOf("--log-level", holocoreLogLevel!!)
 }
 
 tasks.create<JavaExec>("runProduction") {
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
-	
-	if (holocoreLogLevel != null)
-		args = listOf("--log-level", holocoreLogLevel!!)
+
+	if (holocoreLogLevel != null) args = listOf("--log-level", holocoreLogLevel!!)
 }
 
 tasks.replace("run", JavaExec::class).apply {
