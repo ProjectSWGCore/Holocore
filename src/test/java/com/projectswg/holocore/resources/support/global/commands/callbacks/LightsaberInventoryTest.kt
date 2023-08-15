@@ -262,7 +262,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		transferItem(player, lavaCrystal, lightsaber.lightsaberInventory)
 
 		assertEquals(0, lightsaber.getCustomization("/private/index_color_blade"))
-		assertEquals(1, lightsaber.getCustomization("/private/alternate_shader_blade"))
+		assertEquals(1, lightsaber.getCustomization("private/alternate_shader_blade"))
 	}
 
 	@Test
