@@ -1,15 +1,21 @@
-FROM debian:stretch-slim
+FROM eclipse-temurin:18.0.2.1_1-jdk-alpine AS builder
+WORKDIR /holocore
+ADD . /holocore
+
+RUN ./gradlew --no-daemon jlink
+
+FROM alpine:3.18.3 AS runner
 
 # Adds necessary Holocore files
 RUN mkdir /holocore
-ADD build/holocore/ /holocore
+COPY --from=builder /holocore/build/holocore/ /holocore
 ADD serverdata/ /holocore/serverdata
 
 # Sets up networking
 EXPOSE 44463/tcp
 
 # Sets up timezone - default timezone can be overridden by setting TZ environment variable.
-RUN apt-get install -y tzdata
+RUN apk add --no-cache tzdata
 ENV TZ=UTC
 
 # Sets up execution
