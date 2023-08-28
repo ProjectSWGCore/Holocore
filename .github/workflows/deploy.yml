@@ -13,12 +13,6 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: true
-    - name: Set up JDK 18
-      uses: actions/setup-java@v1
-      with:
-        java-version: 18
-    - name: Build
-      run: ./gradlew --no-daemon clean test jlink
     - name: Docker Login
       run: docker login docker.pkg.github.com -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASS }}"
     - name: Docker Build & Push

@@ -1,4 +1,4 @@
-name: Gradle Test
+name: Test
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
     - cu_quality_assurance
 
 jobs:
-  test:
+  code:
 
     runs-on: ubuntu-latest
 
@@ -23,3 +23,14 @@ jobs:
         java-version: 18
     - name: Test with Gradle
       run: ./gradlew --no-daemon test
+
+  docker_build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: |
+          docker build .
