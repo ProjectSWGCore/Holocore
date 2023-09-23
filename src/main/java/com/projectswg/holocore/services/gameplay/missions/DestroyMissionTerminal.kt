@@ -120,7 +120,7 @@ class DestroyMissionTerminal(private val missionsToGenerate: Int, private val de
 			.withBehavior(AIBehavior.LOITER)
 			.build()
 
-		NPCCreator.createNPCs(Spawner(spawnInfo, egg))
+		NPCCreator.createAllNPCs(Spawner(spawnInfo, egg))
 	}
 
 	private fun createLair(missionObject: MissionObject): TangibleObject {

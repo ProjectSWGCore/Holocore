@@ -80,7 +80,7 @@ class NpcDefaultAttackTest : TestRunnerSynchronousIntents() {
 				.withLocation(inFrontOfMosEisleyStarport)
 				.build()
 
-		return NPCCreator.createNPCs(Spawner(spawnInfo, egg)).first()
+		return NPCCreator.createAllNPCs(Spawner(spawnInfo, egg)).first()
 	}
 
 }
