@@ -9,6 +9,15 @@ The project uses [Docker](https://www.docker.com) to make it easy to run a Mongo
 
 You can download Docker [here](https://www.docker.com/get-started).
 
+If you see the error "Could not find a valid Docker environment" when running automated tests on Linux, you may additionally need to do the following for them to work:
+
+```bash
+$ sudo groupadd docker
+$ sudo gpasswd -a $USER docker
+$ sudo service docker restart
+$ sudo chmod 666 /var/run/docker.sock
+```
+
 ### IDE
 We recommend using [IntelliJ IDEA](https://www.jetbrains.com/idea/download) as your IDE. It's free and has great support for Gradle projects.
 
