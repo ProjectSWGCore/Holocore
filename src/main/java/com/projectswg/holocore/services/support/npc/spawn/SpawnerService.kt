@@ -154,7 +154,7 @@ class SpawnerService : Service() {
 
 			if (respawnDelay > 0) {
 				executor.execute((respawnDelay * 1000).toLong()) {
-					NPCCreator.createAllNPCs(spawner)
+					NPCCreator.createSingleNpc(spawner)
 				}
 			} else {
 				DestroyObjectIntent.broadcast(spawner.egg)
