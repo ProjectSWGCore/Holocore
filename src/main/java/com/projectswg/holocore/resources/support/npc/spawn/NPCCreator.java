@@ -61,19 +61,19 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NPCCreator {
 	
-	public static Collection<AIObject> createNPCs(Spawner spawner) {
+	public static Collection<AIObject> createAllNPCs(Spawner spawner) {
 		Arguments.validate(spawner.getMinLevel() <= spawner.getMaxLevel(), "min level must be less than max level");
 		int amount = spawner.getAmount();
 		Collection<AIObject> npcs = new ArrayList<>();
 		
 		for (int i = 0; i < amount; i++) {
-			npcs.add(createNPC(spawner));
+			npcs.add(createSingleNpc(spawner));
 		}
 		
 		return npcs;
 	}
 	
-	private static AIObject createNPC(Spawner spawner) {
+	public static AIObject createSingleNpc(Spawner spawner) {
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
 		

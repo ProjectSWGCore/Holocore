@@ -154,7 +154,7 @@ class SpawnerService : Service() {
 
 			if (respawnDelay > 0) {
 				executor.execute((respawnDelay * 1000).toLong()) {
-					NPCCreator.createNPCs(spawner)
+					NPCCreator.createSingleNpc(spawner)
 				}
 			} else {
 				DestroyObjectIntent.broadcast(spawner.egg)
@@ -202,7 +202,7 @@ class SpawnerService : Service() {
 		val spawner = Spawner(spawn, egg)
 		egg.setServerAttribute(ServerAttribute.EGG_SPAWNER, spawner)
 
-		NPCCreator.createNPCs(spawner)
+		NPCCreator.createAllNPCs(spawner)
 		
 		val patrolRoute = spawner.patrolRoute
 		if (patrolRoute != null) {
