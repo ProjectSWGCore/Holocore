@@ -16,4 +16,6 @@ open module holocore {
 	requires fast.json;
 	requires kotlin.stdlib;
 	requires kotlin.reflect;
+	requires java.net.http;
+	requires com.auth0.jwt;
 }

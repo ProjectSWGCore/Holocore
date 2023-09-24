@@ -24,15 +24,31 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.data.server_info.oidc
 
-package com.projectswg.holocore.resources.support.data.server_info.mariadb
+import me.joshlarson.json.JSON
+import me.joshlarson.json.JSONObject
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
 
-import com.projectswg.holocore.resources.support.data.server_info.database.Authentication
-import com.projectswg.holocore.resources.support.data.server_info.database.DatabaseTable
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
+class UserinfoEndpoint(private val userinfoEndpoint: String) {
+	private val httpClient = HttpClient.newHttpClient()
 
-class PswgUserDatabaseMaria(private val database: DatabaseTable) : PswgUserDatabase {
-
-	override fun authenticate(username: String, password: String): Authentication = throw UnsupportedOperationException("Cannot authenticate with MariaDB")
-
+	fun userinfo(accessToken: AccessToken): JSONObject {
+		val type = accessToken.type
+		val token = accessToken.token
+		val userinfoHttpRequest = HttpRequest.newBuilder(URI(userinfoEndpoint))
+			.header("Authorization", "$type $token")
+			.GET()
+			.build()
+		val userinfoHttpResponse = httpClient.send(userinfoHttpRequest, HttpResponse.BodyHandlers.ofString())
+		val statusCode = userinfoHttpResponse.statusCode()
+		if (statusCode != 200) {
+			throw RuntimeException("Failed to retrieve userinfo, status code: $statusCode")
+		}
+		val userinfoResponseBodyString = userinfoHttpResponse.body()
+		return JSON.readObject(userinfoResponseBodyString)
+	}
 }

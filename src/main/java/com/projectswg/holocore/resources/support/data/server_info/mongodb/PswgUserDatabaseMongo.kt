@@ -32,6 +32,7 @@ import com.mongodb.client.model.Filters
 import com.mongodb.client.model.IndexOptions
 import com.mongodb.client.model.Indexes
 import com.projectswg.common.data.BCrypt
+import com.projectswg.holocore.resources.support.data.server_info.database.Authentication
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
@@ -44,11 +45,13 @@ class PswgUserDatabaseMongo(private val mongoCollection: MongoCollection<Documen
 		mongoCollection.createIndex(Indexes.ascending("username"), IndexOptions().unique(true))
 	}
 
-	override fun getUser(username: String): UserMetadata? {
-		return mongoCollection.find(Filters.eq("username", username)).map { createUserMetadata(it) }.first()
+	override fun authenticate(username: String, password: String): Authentication {
+		val userMetadata = mongoCollection.find(Filters.eq("username", username)).map { createUserMetadata(it) }.first() ?: return Authentication(false, null)
+		val validPassword = validPassword(password, userMetadata)
+		return Authentication(validPassword, userMetadata)
 	}
 
-	override fun authenticate(userMetadata: UserMetadata, password: String): Boolean {
+	private fun validPassword(password: String, userMetadata: UserMetadata): Boolean {
 		if (password.isEmpty()) return false
 		val dbPass = getPassword(userMetadata) ?: return false
 		return if (plaintextPassword(dbPass)) {

@@ -73,7 +73,8 @@ dependencies {
 	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
 	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
 	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
-	
+	implementation(group="com.auth0", name="java-jwt", version="4.4.0")
+
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
 	
@@ -85,6 +86,7 @@ dependencies {
 	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
 
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
+	testImplementation("com.github.dasniko:testcontainers-keycloak:3.0.0")
 }
 
 idea {

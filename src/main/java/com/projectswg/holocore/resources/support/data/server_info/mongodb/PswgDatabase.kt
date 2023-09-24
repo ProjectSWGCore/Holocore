@@ -30,6 +30,7 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
 import com.projectswg.holocore.resources.support.data.server_info.database.*
 import com.projectswg.holocore.resources.support.data.server_info.mariadb.PswgUserDatabaseMaria
+import com.projectswg.holocore.resources.support.data.server_info.oidc.PswgUserDatabaseOIDC
 import me.joshlarson.jlcommon.log.Log
 import org.bson.Document
 import java.util.logging.Handler
@@ -38,7 +39,7 @@ import java.util.logging.LogRecord
 import java.util.logging.Logger
 
 object PswgDatabase {
-	
+
 	private var configImpl = PswgConfigDatabase.createDefault()
 	private var usersImpl = PswgUserDatabase.createDefault()
 	private var objectsImpl = PswgObjectDatabase.createDefault()
@@ -46,7 +47,7 @@ object PswgDatabase {
 	private var bazaarInstantSalesImpl = PswgBazaarInstantSalesDatabase.createDefault()
 	private var bazaarAvailableItemsImpl = PswgBazaarAvailableItemsDatabase.createDefault()
 	private var chatRoomsImpl = PswgChatRoomDatabase.createDefault()
-	
+
 	val config: PswgConfigDatabase
 		get() = configImpl
 	val users: PswgUserDatabase
@@ -61,21 +62,21 @@ object PswgDatabase {
 		get() = bazaarAvailableItemsImpl
 	val chatRooms: PswgChatRoomDatabase
 		get() = chatRoomsImpl
-	
+
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
 		val client = MongoClients.create(connectionString)
 		val database = client.getDatabase(databaseName)
 		val databaseConfig = Database(database)
-		
+
 		val config = PswgConfigDatabaseMongo(databaseConfig.config.mongo)
-		val users = initTable(databaseConfig.users, defaultCreator = {PswgUserDatabase.createDefault()}, mariaInitializer = ::PswgUserDatabaseMaria, mongoInitializer = ::PswgUserDatabaseMongo)
+		val users = configureUsers(config, databaseConfig)
 		val objects = initTable(databaseConfig.objects, defaultCreator = {PswgObjectDatabase.createDefault()}, mongoInitializer = ::PswgObjectDatabaseMongo)
 		val resources = initTable(databaseConfig.resources, defaultCreator = {PswgResourceDatabase.createDefault()}, mongoInitializer = ::PswgResourceDatabaseMongo)
 		val bazaarInstantSales = initTable(databaseConfig.bazaarInstantSales, defaultCreator = {PswgBazaarInstantSalesDatabase.createDefault()}, mongoInitializer = ::PswgBazaarInstantSalesDatabaseMongo)
 		val bazaarAvailableItems = initTable(databaseConfig.bazaarAvailableItems, defaultCreator = {PswgBazaarAvailableItemsDatabase.createDefault()}, mongoInitializer = ::PswgBazaarAvailableItemsDatabaseMongo)
 		val chatRooms = initTable(databaseConfig.chatRooms, defaultCreator = {PswgChatRoomDatabase.createDefault()}, mongoInitializer = ::PswgChatRoomDatabaseMongo)
-		
+
 		this.configImpl = config
 		this.usersImpl = users
 		this.objectsImpl = objects
@@ -84,7 +85,25 @@ object PswgDatabase {
 		this.bazaarAvailableItemsImpl = bazaarAvailableItems
 		this.chatRoomsImpl = chatRooms
 	}
-	
+
+	private fun configureUsers(config: PswgConfigDatabaseMongo, databaseConfig: Database): PswgUserDatabase {
+		val authorizationServerBaseURI = config.getString(PswgUserDatabaseOIDC::class.java, "authorizationServerBaseURI", "")
+		val wellKnownConfigurationURI = config.getString(PswgUserDatabaseOIDC::class.java, "wellKnownConfigurationURI", "")
+		val clientId = config.getString(PswgUserDatabaseOIDC::class.java, "clientId", "")
+		val clientSecret = config.getString(PswgUserDatabaseOIDC::class.java, "clientSecret", "")
+
+		if (authorizationServerBaseURI.isNotEmpty() && wellKnownConfigurationURI.isNotEmpty() && clientId.isNotEmpty() && clientSecret.isNotEmpty()) {
+			return PswgUserDatabaseOIDC(
+				authorizationServerBaseURI = authorizationServerBaseURI,
+				wellKnownConfigurationURI = wellKnownConfigurationURI,
+				clientId = clientId,
+				clientSecret = clientSecret
+			)
+		}
+
+		return initTable(databaseConfig.users, defaultCreator = { PswgUserDatabase.createDefault() }, mariaInitializer = ::PswgUserDatabaseMaria, mongoInitializer = ::PswgUserDatabaseMongo)
+	}
+
 	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {
 		if (table.isMariaDefined())
 			return mariaInitializer(table)

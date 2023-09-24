@@ -27,21 +27,27 @@ Clone them by running: `git submodule update --init`.
 
 You may have to manually update the submodules in the future, if they become outdated: `git submodule update`.
 
-### MongoDB
-A MongoDB instance can be bootstrapped by running `docker-compose up -d`.
+### Running dependencies
+All runtime dependencies of Holocore can be bootstrapped by running `docker-compose up -d`.
 
-This will run and initialize a MongoDB instance with a default game server user.
-* Username: user
-* Password: pass
+MongoDB and a web UI: http://localhost:8081
 
-This will also run a web UI, which can be accessed in the browser at: http://localhost:8081
+Keycloak for user management: http://localhost:8080
 
-You can stop both with: `docker-compose down`.
+Keycloak has been configured with a default _administrative_ user (won't work for game logins!):
+* **Username:** admin
+* **Password:** admin
+
+You can stop all dependencies with: `docker-compose down`.
 
 ### Running Holocore
-In IntelliJ idea, run the **Start server (development)** run configuration.
+**NOTE**: The dependencies must be running first!
 
-**NOTE**: A MongoDB instance must be running for the server to start.
+In IntelliJ IDEA, run the **Start server (development)** run configuration.
+
+At this point, you should be able to sign in with the default game user:
+* **Username:** user
+* **Password:** pass
 
 ### Running automated tests
 In IntelliJ idea, run the **Tests** run configuration.

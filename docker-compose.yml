@@ -35,3 +35,17 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0.3
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    volumes:
+      # Realms in ./keycloak_import will be imported on first start
+      # Exporting a realm can be done like this while the container is running:
+      # $ docker exec -it holocore-keycloak-1 /opt/keycloak/bin/kc.sh export --dir /opt/keycloak/data/import --users realm_file
+      - ./keycloak_import:/opt/keycloak/data/import
+    command: start-dev --import-realm
