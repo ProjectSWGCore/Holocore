@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.gameplay.crafting.resource
 
 import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer.getRawResource
@@ -110,6 +111,8 @@ class CreatureHarvestingService : Service() {
 			}
 		}
 		ResourceContainerHelper.giveResourcesToPlayer(amount, spawnedResource, player, eventHandler)
+		val experienceGained = player.creatureObject.level * 2
+		ExperienceIntent(player.creatureObject, "scout", experienceGained).broadcast()
 	}
 
 	private fun randomizeResourceAmount(resourceInfo: NpcResourceInfo, creatureQuality: CreatureQuality, player: Player): Int {
