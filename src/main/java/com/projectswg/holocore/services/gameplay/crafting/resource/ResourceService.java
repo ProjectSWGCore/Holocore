@@ -60,6 +60,7 @@ public class ResourceService extends Service {
 
 	@Override
 	public boolean terminate() {
+		GalacticResourceContainer.INSTANCE.clear();
 		spawnerUpdater.stop();
 		spawner.terminate();
 		return super.terminate();
