@@ -24,15 +24,58 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.data.server_info.oidc
 
-package com.projectswg.holocore.resources.support.data.server_info.mariadb
+import me.joshlarson.json.JSON
+import java.math.BigInteger
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.security.KeyFactory
+import java.security.interfaces.RSAPublicKey
+import java.security.spec.RSAPublicKeySpec
+import java.util.*
 
-import com.projectswg.holocore.resources.support.data.server_info.database.Authentication
-import com.projectswg.holocore.resources.support.data.server_info.database.DatabaseTable
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
+class JwksEndpoint(private val jwksUri: String) {
+	private val factory = KeyFactory.getInstance("RSA")
+	private val httpClient = HttpClient.newHttpClient()
 
-class PswgUserDatabaseMaria(private val database: DatabaseTable) : PswgUserDatabase {
+	fun signatureCertificates(): Map<KID, RSAPublicKey> {
+		val httpRequest = HttpRequest.newBuilder(URI(jwksUri)).GET().build()
+		val httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString())
+		val statusCode = httpResponse.statusCode()
+		if (statusCode != 200) {
+			throw RuntimeException("Failed to retrieve signing certs, status code: $statusCode")
+		}
 
-	override fun authenticate(username: String, password: String): Authentication = throw UnsupportedOperationException("Cannot authenticate with MariaDB")
+		val jsonStr = httpResponse.body()
+		val jsonObject = JSON.readObject(jsonStr)
+		val signatureCertificates = mutableMapOf<KID, RSAPublicKey>()
+		val keys = jsonObject.getArray("keys")
+		for (key in keys) {
+			val keyJsonObject = key as Map<String, String>
+			val value = keyJsonObject["kid"] ?: continue
+			val n = keyJsonObject["n"] ?: continue
+			val e = keyJsonObject["e"] ?: continue
 
+			if (keyJsonObject["use"] != "sig") {
+				continue
+			}
+
+			signatureCertificates[KID(value)] = parseRSAPublicKey(n, e)
+		}
+		return signatureCertificates
+	}
+
+	private fun parseRSAPublicKey(n: String, e: String): RSAPublicKey {
+		val urlDecoder = Base64.getUrlDecoder()
+		val modulus = BigInteger(1, urlDecoder.decode(n))
+		val exponent = BigInteger(1, urlDecoder.decode(e))
+		val spec = RSAPublicKeySpec(modulus, exponent)
+
+		return factory.generatePublic(spec) as RSAPublicKey
+	}
 }
+
+data class KID(val value: String)

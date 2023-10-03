@@ -17,11 +17,7 @@ era of the game.
 If you're interested in contributing to the project, please see our [contributing guide](CONTRIBUTING.md).
 
 ## Running your own server
-Warning: Holocore is still in early development, and not yet ready for public use. Breaking changes may occur at any time.
-
-If you're interested in running your own Holocore server anyway, you can use the provided Docker image.
-
-We regularly push new images to [GitHub Packages](https://github.com/ProjectSWGCore/Holocore/pkgs/container/Holocore%2Fholocore).
+If you're interested in running your own Holocore server, please see our [hosting guide](HOSTING.md).
 
 ## Help needed ?
 If you have questions or stuck, please use the channels on Discord [![Discord chat](https://img.shields.io/discord/373548910225915905?logo=discord)](https://discord.gg/BWhBx4F)

@@ -30,15 +30,13 @@ import com.projectswg.holocore.resources.support.global.player.AccessLevel
 
 interface PswgUserDatabase {
 	
-	fun getUser(username: String): UserMetadata?
-	fun authenticate(userMetadata: UserMetadata, password: String): Boolean
+	fun authenticate(username: String, password: String): Authentication
 	
 	companion object {
 		
 		fun createDefault(): PswgUserDatabase {
 			return object : PswgUserDatabase {
-				override fun getUser(username: String): UserMetadata? = null
-				override fun authenticate(userMetadata: UserMetadata, password: String): Boolean = false
+				override fun authenticate(username: String, password: String): Authentication = throw UnsupportedOperationException("Cannot authenticate with default PswgUserDatabase")
 			}
 		}
 		
@@ -46,7 +44,9 @@ interface PswgUserDatabase {
 	
 }
 
-class UserMetadata(val accountId: String, val username: String, val accessLevel: AccessLevel, val isBanned: Boolean) {
+data class Authentication(val success: Boolean, val user: UserMetadata?)
+
+data class UserMetadata(val accountId: String, val username: String, val accessLevel: AccessLevel, val isBanned: Boolean) {
 	
 	override fun toString(): String = "UserMetadata[username=$username accessLevel=$accessLevel banned=$isBanned]"
 	override fun equals(other: Any?): Boolean = if (other is UserMetadata) accountId == other.accountId else false

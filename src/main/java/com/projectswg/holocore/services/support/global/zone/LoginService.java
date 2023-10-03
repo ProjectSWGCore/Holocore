@@ -48,6 +48,7 @@ import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharac
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.database.Authentication;
 import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
@@ -139,24 +140,21 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		
-		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(loginRequest.getUsername());
+		Authentication authentication = PswgDatabase.INSTANCE.getUsers().authenticate(loginRequest.getUsername(), loginRequest.getPassword());
+		UserMetadata user = authentication.getUser();
 		player.setUsername(loginRequest.getUsername());
 		if (user == null) {
-			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", loginRequest.getSocketAddress());
+			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect credentials] from %s", loginRequest.getSocketAddress());
 			onInvalidUserPass(player);
-			player.sendPacket(new HoloLoginResponsePacket(false, "Incorrect username"));
+			player.sendPacket(new HoloLoginResponsePacket(false, "Incorrect credentials"));
 		} else if (user.isBanned()) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", loginRequest.getSocketAddress());
 			onLoginBanned(player);
 			player.sendPacket(new HoloLoginResponsePacket(false, "Sorry, you're banned!"));
-		} else if (isPasswordValid(user, loginRequest.getPassword())) {
+		} else if (isValidCredentials(authentication)) {
 			StandardLog.onPlayerEvent(this, player, "logged in from %s", loginRequest.getSocketAddress());
 			onSuccessfulLogin(user, player);
 			player.sendPacket(new HoloLoginResponsePacket(true, "", getGalaxies(), getCharacters(user.getUsername())));
-		} else {
-			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password] from %s", loginRequest.getSocketAddress());
-			onInvalidUserPass(player);
-			player.sendPacket(new HoloLoginResponsePacket(false, "Incorrect password"));
 		}
 	}
 	
@@ -204,7 +202,8 @@ public class LoginService extends Service {
 			return;
 		}
 		
-		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(username);
+		Authentication authentication = PswgDatabase.INSTANCE.getUsers().authenticate(username, password);
+		UserMetadata user = authentication.getUser();
 		player.setUsername(username);
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", socketAddress);
@@ -215,7 +214,7 @@ public class LoginService extends Service {
 			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", socketAddress);
 			onLoginBanned(player);
 			player.sendPacket(new ErrorMessage("Login Failed!", "Sorry, you're banned!", false));
-		} else if (isPasswordValid(user, password)) {
+		} else if (isValidCredentials(authentication)) {
 			StandardLog.onPlayerEvent(this, player, "logged in from %s", socketAddress);
 			onSuccessfulLogin(user, player);
 			sendLoginSuccessPacket(player);
@@ -268,8 +267,8 @@ public class LoginService extends Service {
 		player.sendPacket(clusterStatus);
 	}
 	
-	private boolean isPasswordValid(UserMetadata user, String password) {
-		return PswgDatabase.INSTANCE.getUsers().authenticate(user, password);
+	private boolean isValidCredentials(Authentication authentication) {
+		return authentication.getSuccess();
 	}
 	
 	private List <Galaxy> getGalaxies() {

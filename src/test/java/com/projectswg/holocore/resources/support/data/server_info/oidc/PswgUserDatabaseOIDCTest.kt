@@ -24,88 +24,79 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.mongodb
+package com.projectswg.holocore.resources.support.data.server_info.oidc
 
-import com.mongodb.client.MongoDatabase
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
-import org.bson.Document
+import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import dasniko.testcontainers.keycloak.KeycloakContainer
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import java.net.URI
 
-class PswgUserDatabaseMongoTest {
+class PswgUserDatabaseOIDCTest {
 
-	private lateinit var database: MongoDatabase
+	companion object {
+		// Could be any identity provider with support for OpenID Connect. Keycloak is easy to set up and run in a container.
+		private val OIDCServer: KeycloakContainer = KeycloakContainer("quay.io/keycloak/keycloak:22.0.3")
+			.withRealmImportFile("./swg-realm.json")
+		private val pswgUserDatabaseOIDC: PswgUserDatabaseOIDC
+			get() {
+				// The realm name, client ID and client secret have been configured in the KeyCloak UI and saved to swg-realm.json
+				val authorizationServerURI = "${OIDCServer.authServerUrl}/realms/swg"
+				val wellKnownConfigurationURI = ".well-known/openid-configuration"
+				return PswgUserDatabaseOIDC(authorizationServerURI, wellKnownConfigurationURI, "holocore-localhost", "nrrtW0NqbNWXn62ii6218QHWbEhVGXaf")
+			}
 
-	@BeforeEach
-	fun setUp() {
-		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
-	}
-
-	@AfterEach
-	fun tearDown() {
-		database.drop()
-	}
-
-	private val users: PswgUserDatabase
-		get() {
-			return PswgUserDatabaseMongo(database.getCollection("users"))
+		@JvmStatic
+		@BeforeAll
+		fun setUp() {
+			OIDCServer.start()
 		}
 
-
-	@Test
-	fun `unknown user is null`() {
-		val username = "deathbringer7"
-
-		val authentication = users.authenticate(username, "password")
-		val userMetadata = authentication.user
-
-		assertNull(userMetadata)
+		@JvmStatic
+		@AfterAll
+		fun tearDown() {
+			OIDCServer.stop()
+		}
 	}
 
 	@Test
-	fun `user with plaintext password can be authenticated`() {
-		val username = "laxguy6"
-		val password = "plaintext_password"
-		insertUser(username, password)
-
-		val authentication = users.authenticate(username, password)
+	fun auth_correct_credentials() {
+		val authentication = pswgUserDatabaseOIDC.authenticate("user", "pass")
 		val authenticated = authentication.success
 
 		assertTrue(authenticated)
 	}
-	
+
 	@Test
-	fun `user with hashed password can be authenticated`() {
-		val username = "deathbringer7"
-		val password = "thebestpassword"
-		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
-		insertUser(username, hashedPassword)
+	fun userinfo() {
+		val authentication = pswgUserDatabaseOIDC.authenticate("user", "pass")
+		val actualUserMetadata = authentication.user ?: fail("User metadata is null, indicating a test setup error")
+		val expectedUserMetadata = UserMetadata(
+			accountId = "5a9e50a3-64b5-4650-a36d-c902fefa904a",
+			username = "user",
+			accessLevel = AccessLevel.DEV,
+			isBanned = false
+		)
 
-		val authentication = users.authenticate(username, password)
-		val authenticated = authentication.success
-
-		assertTrue(authenticated)
+		assertEquals(expectedUserMetadata, actualUserMetadata)
+		assertEquals(expectedUserMetadata.accessLevel, actualUserMetadata.accessLevel)
 	}
-	
-	@Test
-	fun `wrong password is rejected`() {
-		val username = "deathbringer7"
-		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
-		insertUser(username, hashedPassword)
 
-		val authentication = users.authenticate(username, "wrong_password")
+	@Test
+	fun auth_incorrect_credentials() {
+		val authentication = pswgUserDatabaseOIDC.authenticate("user", "wrong_pass")
 		val authenticated = authentication.success
 
 		assertFalse(authenticated)
 	}
 
-	private fun insertUser(username: String, password: String) {
-		val collection = database.getCollection("users")
-		val document = Document()
-		document["username"] = username
-		document["accessLevel"] = "player"
-		document["banned"] = false
-		document["password"] = password
-		collection.insertOne(document)
+	@Test
+	fun banned_user() {
+		val authentication = pswgUserDatabaseOIDC.authenticate("banned-user", "pass")
+		val userMetadata = authentication.user ?: fail("User metadata is null, indicating a test setup error")
+
+		assertTrue(userMetadata.isBanned)
 	}
+
 }

@@ -24,15 +24,31 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.resources.support.data.server_info.oidc
 
-package com.projectswg.holocore.resources.support.data.server_info.mariadb
+import java.nio.charset.StandardCharsets
+import java.util.*
 
-import com.projectswg.holocore.resources.support.data.server_info.database.Authentication
-import com.projectswg.holocore.resources.support.data.server_info.database.DatabaseTable
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
+class OpenIDConnect(authorizationServerUri: String, wellKnownConfigurationURI: String, private val clientId: String, private val clientSecret: String) {
 
-class PswgUserDatabaseMaria(private val database: DatabaseTable) : PswgUserDatabase {
+	val tokenEndpoint: TokenEndpoint
+	val jwksEndpoint: JwksEndpoint
+	val userinfoEndpoint: UserinfoEndpoint
 
-	override fun authenticate(username: String, password: String): Authentication = throw UnsupportedOperationException("Cannot authenticate with MariaDB")
+	init {
+		val wellKnownConfiguration = WellKnownConfiguration(authorizationServerUri, wellKnownConfigurationURI)
+		jwksEndpoint = JwksEndpoint(wellKnownConfiguration.jwksUri)
+		userinfoEndpoint = UserinfoEndpoint(wellKnownConfiguration.userinfoEndpointUri)
+		tokenEndpoint = TokenEndpoint(
+			grantTypesSupported = wellKnownConfiguration.grantTypesSupported,
+			tokenEndpoint = wellKnownConfiguration.tokenEndpointUri,
+			authorizationHeaderValue = authorizationHeaderValue()
+		)
+	}
 
+	private fun authorizationHeaderValue(): String {
+		val charset = StandardCharsets.UTF_8
+		val basicAuthCredentials = Base64.getEncoder().encode("$clientId:$clientSecret".toByteArray(charset)).toString(charset)
+		return "Basic $basicAuthCredentials"
+	}
 }
