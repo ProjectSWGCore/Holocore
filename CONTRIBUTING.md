@@ -48,9 +48,9 @@ This will also run a web UI, which can be accessed in the browser at: http://loc
 You can stop both with: `docker-compose down`.
 
 ### Running Holocore
-In IntelliJ idea, run the **Start server (development)** run configuration.
+In IntelliJ idea, run the **Start** run configuration.
 
-**NOTE**: A MongoDB instance must be running for the server to start.
+**NOTE**: Docker must be running in the background for MongoDB to start properly.
 
 ### Running automated tests
 In IntelliJ idea, run the **Tests** run configuration.
