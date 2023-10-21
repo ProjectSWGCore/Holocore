@@ -866,6 +866,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setServerAttribute(ServerAttribute key, Object value) {
 		serverAttributes.put(key, value);
 	}
+
+	public void removeServerAttribute(ServerAttribute key) {
+		serverAttributes.remove(key);
+	}
 	
 	public Object getDataAttribute(ObjectDataAttribute key) {
 		return dataAttributes.get(key);

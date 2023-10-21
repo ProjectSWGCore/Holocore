@@ -219,20 +219,25 @@ public class PlayerMountService extends Service {
 			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.getTemplate());
 			return;
 		}
-		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
-		
 		DestroyObjectIntent.broadcast(deed);
-		
-		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, vehicleInfo.getObjectTemplate());
-		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
+
+		IntangibleObject vehicleControlDevice = createVehicleControlDevice(creator, pcdTemplate, vehicleInfo);
 		vehicleControlDevice.moveToContainer(creator.getDatapad());
-		ObjectCreatedIntent.broadcast(vehicleControlDevice);
-		
 		SystemMessageIntent.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
 		
 		callMount(creator, vehicleControlDevice);	// Once generated, the vehicle is called
 	}
-	
+
+	@NotNull
+	private static IntangibleObject createVehicleControlDevice(CreatureObject creator, String pcdTemplate, VehicleInfo vehicleInfo) {
+		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
+		ObjectCreatedIntent.broadcast(vehicleControlDevice);
+		CreatureObject mount = createMountObject(creator, vehicleInfo.getObjectTemplate());
+		mount.systemMove(vehicleControlDevice);
+		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
+		return vehicleControlDevice;
+	}
+
 	private void callMount(CreatureObject player, IntangibleObject mountControlDevice) {
 		if (player.getParent() != null || player.isInCombat()) {
 			return;
@@ -242,15 +247,14 @@ public class PlayerMountService extends Service {
 			CloseConnectionIntent.broadcast(player.getOwner(), DisconnectReason.SUSPECTED_HACK);
 			return;
 		}
-		
+
 		String template = mountControlDevice.getServerTextAttribute(ServerAttribute.PCD_PET_TEMPLATE);
-		assert template != null : "mount control device doesn't have mount template attribute";
-		CreatureObject mount = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
-		mount.systemMove(null, player.getLocation());
-		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
-		mount.setFaction(player.getFaction());
-		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
-		
+
+		if (template != null) {
+			patchLegacyMountControlDevice(player, mountControlDevice, template);
+		}
+		CreatureObject mount = (CreatureObject) mountControlDevice.getContainedObjects().iterator().next();
+
 		// TODO after combat there's a delay
 		// TODO update faction status on mount if necessary
 		
@@ -267,6 +271,23 @@ public class PlayerMountService extends Service {
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
+		mount.systemMove(null, player.getLocation());
+
+		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
+		cleanupCalledMounts();
+	}
+
+	private static void patchLegacyMountControlDevice(CreatureObject player, IntangibleObject mountControlDevice, String template) {
+		createMountObject(player, template).systemMove(mountControlDevice);
+		mountControlDevice.removeServerAttribute(ServerAttribute.PCD_PET_TEMPLATE);
+	}
+
+	@NotNull
+	private static CreatureObject createMountObject(CreatureObject player, String template) {
+		CreatureObject mount = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
+		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
+		mount.setFaction(player.getFaction());
+		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
 		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
 		if (vehicleInfo != null) {
 			mount.setRunSpeed(vehicleInfo.getSpeed());
@@ -289,12 +310,11 @@ public class PlayerMountService extends Service {
 			mount.putCustomization("/private/index_auto_level", (int) (vehicleInfo.getAutoLevel() * 100d));
 			mount.putCustomization("/private/index_strafe", vehicleInfo.isStrafe() ? 1 : 0);
 		}
-		
+
 		ObjectCreatedIntent.broadcast(mount);
-		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
-		cleanupCalledMounts();
+		return mount;
 	}
-	
+
 	private void enterMount(CreatureObject player, CreatureObject mount) {
 		if (!isMountable(mount) || mount.getParent() != null) {
 			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when it's not mountable", mount);
@@ -385,9 +405,9 @@ public class PlayerMountService extends Service {
 			if (mounts != null)
 				mounts.remove(new Mount(mountControlDevice, mount));
 			
-			// Destroy the mount
+			// Put away the mount
 			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			player.broadcast(new DestroyObjectIntent(mount));
+			mount.systemMove(mountControlDevice);
 			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		}
 		cleanupCalledMounts();

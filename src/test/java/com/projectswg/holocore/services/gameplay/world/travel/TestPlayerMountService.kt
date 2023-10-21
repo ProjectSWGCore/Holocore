@@ -65,32 +65,7 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		Assertions.assertEquals(1, datapadData.size)
 		Assertions.assertEquals(PCD, datapadData.iterator().next().template)
 	}
-	
-	@Test
-	fun testCallStore() {
-		val friend: CreatureObject = createCreature()
-		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())
-		ObjectCreatedIntent.broadcast(friend)
-		val creature: CreatureObject = createCreature()
-		ObjectCreatedIntent.broadcast(creature)
-		val pcd = ObjectCreator.createObjectFromTemplate(getUniqueId(), PCD) as IntangibleObject
-		ObjectCreatedIntent.broadcast(creature)
-		ObjectCreatedIntent.broadcast(pcd)
-		pcd.systemMove(creature.datapad)
-		pcd.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, SWOOP)
-		broadcastAndWait(PetDeviceCallIntent(creature, pcd))
-		updateAwareness()
-		val vehicle = creature.findAware(SWOOP) as CreatureObject
-		assertCorrectDismount(creature, vehicle, friend)
-		
-		// Vehicle [object/mobile/vehicle/shared_speederbike_swoop.iff] should now be in the world alongside the player, and aware of eachother
-		Assertions.assertEquals(creature.location, vehicle.location)
-		broadcastAndWait(PetDeviceStoreIntent(creature, pcd))
-		updateAwareness()
-		assertCorrectDismount(creature, vehicle, friend)
-		assertCorrectStored(creature, vehicle, friend)
-	}
-	
+
 	@Test
 	fun testMountDismount() {
 		val friend = createNPC()
@@ -105,21 +80,21 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		val pcd = creature.findAware(PCD) as IntangibleObject
 		var vehicle = creature.findAware(SWOOP) as CreatureObject
 		
-		assertCorrectDismount(creature, vehicle, friend)
+		assertCorrectDismount(creature, null, vehicle, friend)
 		broadcastAndWait(PetDeviceStoreIntent(creature, pcd))
 		updateAwareness()
-		assertCorrectDismount(creature, vehicle, friend)
-		assertCorrectStored(creature, vehicle, friend)
+		assertCorrectDismount(creature, pcd, vehicle, friend)
+		assertCorrectStored(creature, pcd, vehicle, friend)
 		broadcastAndWait(PetDeviceCallIntent(creature, pcd))
 		updateAwareness()
 		vehicle = creature.findAware(SWOOP) as CreatureObject
-		assertCorrectDismount(creature, vehicle, friend)
+		assertCorrectDismount(creature, null, vehicle, friend)
 		broadcastAndWait(MountIntent(creature, vehicle))
 		updateAwareness()
 		assertCorrectMount(creature, vehicle, friend)
 		broadcastAndWait(DismountIntent(creature, vehicle))
 		updateAwareness()
-		assertCorrectDismount(creature, vehicle, friend)
+		assertCorrectDismount(creature, null, vehicle, friend)
 	}
 	
 	@Test
@@ -135,7 +110,8 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		broadcastAndWait(VehicleDeedGenerateIntent(creature, deed))
 		updateAwareness()
 		val vehicle = creature.findAware(SWOOP) as CreatureObject
-		assertCorrectDismount(creature, vehicle, friend)
+		val pcd = creature.findAware(PCD) as IntangibleObject
+		assertCorrectDismount(creature, null, vehicle, friend)
 		
 		// Mount
 		broadcastAndWait(MountIntent(creature, vehicle))
@@ -144,16 +120,34 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		// Teleport
 		creature.moveToContainer(null, vehicle.location)
 		waitForIntents()
-		assertCorrectDismount(creature, vehicle, friend)
-		assertCorrectStored(creature, vehicle, friend)
+		assertCorrectDismount(creature, pcd, vehicle, friend)
+		assertCorrectStored(creature, pcd, vehicle, friend)
 	}
-	
-	private fun assertCorrectStored(creature: CreatureObject, vehicle: CreatureObject, vararg awareness: SWGObject) {
+
+	@Test
+	fun testLegacyVehicles() {
+		val creature: CreatureObject = createCreature()
+		ObjectCreatedIntent.broadcast(creature)
+		val pcd = ObjectCreator.createObjectFromTemplate(getUniqueId(), PCD) as IntangibleObject
+		ObjectCreatedIntent.broadcast(creature)
+		ObjectCreatedIntent.broadcast(pcd)
+		pcd.systemMove(creature.datapad)
+		pcd.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, SWOOP)	// Legacy vehicles are identified this way and have no CreatureObject inside the PCD
+		broadcastAndWait(PetDeviceCallIntent(creature, pcd))
+		updateAwareness()
+		val vehicle = creature.findAware(SWOOP) as CreatureObject
+		assertCorrectDismount(creature, null, vehicle)
+
+		Assertions.assertNull(pcd.getServerAttribute(ServerAttribute.PCD_PET_TEMPLATE))
+	}
+
+	private fun assertCorrectStored(creature: CreatureObject, pcd: IntangibleObject, vehicle: CreatureObject, vararg awareness: SWGObject) {
 		Assertions.assertNull(creature.parent)
 		Assertions.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(listOf(*awareness)))
 		Assertions.assertFalse(vehicle.getAware(AwarenessType.OBJECT).containsAll(listOf(*awareness)))
-		Assertions.assertFalse(creature.getAware(AwarenessType.SELF).contains(vehicle))
+		Assertions.assertTrue(creature.getAware(AwarenessType.SELF).contains(vehicle))
 		Assertions.assertFalse(vehicle.getAware(AwarenessType.SELF).contains(creature))
+		Assertions.assertEquals(pcd, vehicle.parent)
 	}
 	
 	private fun assertCorrectMount(creature: CreatureObject, vehicle: CreatureObject, vararg awareness: SWGObject) {
@@ -172,9 +166,9 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		Assertions.assertEquals(vehicle.runSpeed / 2, creature.walkSpeed)
 	}
 	
-	private fun assertCorrectDismount(creature: CreatureObject, vehicle: CreatureObject, vararg awareness: SWGObject) {
+	private fun assertCorrectDismount(creature: CreatureObject, expectedParent: SWGObject?, vehicle: CreatureObject, vararg awareness: SWGObject) {
 		Assertions.assertNull(creature.parent)
-		Assertions.assertNull(vehicle.parent)
+		Assertions.assertEquals(expectedParent, vehicle.parent)
 		Assertions.assertNull(vehicle.getSlottedObject("rider"))
 		Assertions.assertTrue(creature.isObserveWithParent)
 		Assertions.assertTrue(creature.getAware(AwarenessType.OBJECT).containsAll(listOf(*awareness)))
