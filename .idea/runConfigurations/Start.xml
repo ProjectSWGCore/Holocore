@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Start" type="CompoundRunConfigurationType">
+    <toRun name="docker-compose.yml: Compose Deployment" type="docker-deploy" />
+    <toRun name="Start server (development)" type="GradleRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>
