@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 
 class CommandLoaderTest {
 
-    @Test
-    fun abandonQuest() {
-        val abandonQuest = DataLoader.commands().getCommand("abandonQuest")
+	@Test
+	fun abandonQuest() {
+		val abandonQuest = DataLoader.commands().getCommand("abandonQuest")
 
 		assertNotNull(abandonQuest)
-    }
+	}
 
 }
