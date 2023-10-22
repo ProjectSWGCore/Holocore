@@ -231,10 +231,10 @@ public class PlayerMountService extends Service {
 	@NotNull
 	private static IntangibleObject createVehicleControlDevice(CreatureObject creator, String pcdTemplate, VehicleInfo vehicleInfo) {
 		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
-		ObjectCreatedIntent.broadcast(vehicleControlDevice);
 		CreatureObject mount = createMountObject(creator, vehicleInfo.getObjectTemplate());
 		mount.systemMove(vehicleControlDevice);
 		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
+		ObjectCreatedIntent.broadcast(vehicleControlDevice);
 		return vehicleControlDevice;
 	}
 
