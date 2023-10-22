@@ -407,7 +407,7 @@ public class PlayerMountService extends Service {
 			
 			// Put away the mount
 			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			mount.systemMove(mountControlDevice);
+			mount.moveToContainer(mountControlDevice);
 			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		}
 		cleanupCalledMounts();
