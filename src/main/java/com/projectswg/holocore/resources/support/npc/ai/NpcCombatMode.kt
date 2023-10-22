@@ -136,7 +136,16 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val targetLocation = target.location
 		val headingTo = myLocation.getHeadingTo(targetLocation.position)
 		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed)
-		
+
+		val x = obj.worldLocation.x.toFloat()
+		val z = obj.worldLocation.z.toFloat()
+		val terrainTemplate = ServerData.terrains.getTerrain(obj.terrain)
+		val npcInWater = terrainTemplate != null && terrainTemplate.isWater(x, z)
+
+		if (npcInWater) {
+			return
+		}
+
 		if (target.posture == Posture.INCAPACITATED) {
 			QueueCommandIntent.broadcast(obj, target, "", ServerData.commands.getCommand("deathblow"), 0)
 			return
