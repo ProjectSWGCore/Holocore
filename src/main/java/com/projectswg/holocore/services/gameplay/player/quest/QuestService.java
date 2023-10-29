@@ -128,22 +128,11 @@ public class QuestService extends Service {
 	private void handleCompleteQuestIntent(CompleteQuestIntent intent) {
 		Player player = intent.getPlayer();
 		PlayerObject playerObject = player.getPlayerObject();
-		CreatureObject creatureObject = player.getCreatureObject();
 		String questName = intent.getQuestName();
 		
 		if (playerObject.isQuestRewardReceived(questName)) {
 			StandardLog.onPlayerTrace(this, player, "attempted to claim reward for quest %s but they have already received it", questName);
 			return;
-		}
-		
-		QuestLoader.QuestListInfo questListInfo = questLoader.getQuestListInfo(questName);
-		
-		int credits = questListInfo.getCredits();
-		
-		if (credits > 0) {
-			player.sendPacket(new PlayMusicMessage(0, "sound/ui_npe2_quest_credits.snd", 1, false));
-			creatureObject.addToBank(credits);
-			StandardLog.onPlayerEvent(this, player, "received %d credits in bank for completing quest %s", credits, questName);
 		}
 		
 		// TODO award XP, load from tier+level matrix: datatables/quest/quest_experience.iff

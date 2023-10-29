@@ -24,35 +24,55 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.utility;
+package com.projectswg.utility.clientdata;
 
-import com.projectswg.utility.clientdata.Converters;
-
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class ClientdataConvertAll {
+/**
+ * Quest-specific converter that can convert multiple .iff -> multiple .sdb
+ */
+public class ConvertQuestTasks implements Converter {
 	
-	public static void main(String [] args) throws IOException {
-		Converters.OBJECTS_OBJECT_DATA.load();
-
-		Converters.ABSTRACT_SLOT_DEFINITION.load();
-		Converters.ABSTRACT_SLOT_ARRANGEMENT.load();
-		Converters.ABSTRACT_SLOT_DESCRIPTORS.load();
-
-		Converters.OBJECTS_BUILDING_CELLS.load();
-		Converters.BUILDOUT_OBJECTS.load();
-
-		Converters.PROFESSION_TEMPLATES.load();
-
-		Converters.ROLES.load();
-		Converters.COMMANDS_GLOBAL.load();
-		Converters.COMMANDS_GROUND.load();
-		Converters.COMMANDS_SPACE.load();
-		Converters.BUFFS.load();
-		Converters.SKILLS.load();
-		Converters.APPEARANCE_TABLE.load();
-		Converters.QUESTLIST.load();
-		Converters.QUESTTASK.load();
+	private static final String INPUT_BASE_PATH = "datatables/questtask";
+	private static final String OUTPUT_BASE_PATH = "serverdata/quests/questtask";
+	private static final boolean LOWERCASE_COLUMN_NAMES = true;
+	
+	@Override
+	public void convert() {
+		File clientdataFolder = new File("clientdata");
+		Path clientdataPath = clientdataFolder.toPath();
+		
+		try(Stream<Path> pathStream = Files.walk(new File(clientdataFolder, INPUT_BASE_PATH).toPath())) {
+			List<Path> paths = pathStream.filter(path -> path.toString().endsWith(".iff"))
+					.map(clientdataPath::relativize)
+					.collect(Collectors.toList());
+			
+			convertDatatables(paths);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
-	
+
+	private void convertDatatables(Collection<Path> paths) {
+		System.out.println("Converting " +  paths.size() + " tables in " + ConvertQuestTasks.INPUT_BASE_PATH + " to multiple SDBs in " + OUTPUT_BASE_PATH + "...");
+		for (Path path : paths) {
+			convertDatatable(path);
+		}
+	}
+
+	private void convertDatatable(Path path) {
+		String inputDatatablePath = path.toString().replace("\\", "/");
+		String outputSdbPath = inputDatatablePath.replace(ConvertQuestTasks.INPUT_BASE_PATH, OUTPUT_BASE_PATH).replace(".iff", ".sdb");
+		ConvertDatatable converter = new ConvertDatatable(inputDatatablePath, outputSdbPath, LOWERCASE_COLUMN_NAMES);
+		System.out.print("|---");
+		converter.convert();
+	}
+
 }
