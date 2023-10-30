@@ -34,13 +34,18 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.npc.Npc
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import me.joshlarson.jlcommon.log.Log;
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 
 public class CombatExperienceService extends Service {
+
+	private static final float XP_BONUS = 0.05f;
+	private static final float XP_BONUS_LIMIT =1.1f;
 
 	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
@@ -160,10 +165,22 @@ public class CombatExperienceService extends Service {
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
 		short corpseLevel = corpse.getLevel();
 
+		float bonus_factor = 1f;
+		boolean isAggressive, isAssisting, isDeathblow;
+		isAggressive = corpse.hasOptionFlags(OptionFlag.AGGRESSIVE);
+		isAssisting = (((AIObject) corpse).getSpawner()).getAssistRadius() > 0;
+		isDeathblow = (((AIObject) corpse).getSpawner()).isDeathblow();
+
+		if (isAggressive || isAssisting) bonus_factor += XP_BONUS;
+		if (isDeathblow) bonus_factor += XP_BONUS;
+		if (bonus_factor > XP_BONUS_LIMIT) bonus_factor = XP_BONUS_LIMIT;
+
+
 		if (killerLevel - corpseLevel >= 5) {
-			return 1;
+			return (int) (1*bonus_factor);
 		} else {
 			NpcStatLoader.NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(corpseLevel);
+
 
 			if (npcStats == null) {
 				Log.e("%s received no XP: No XP data was found for level %d!", killer, corpseLevel);
@@ -172,12 +189,13 @@ public class CombatExperienceService extends Service {
 
 			CreatureDifficulty creatureDifficulty = corpse.getDifficulty();
 
-			return switch (creatureDifficulty) {
+			int xpGain = switch (creatureDifficulty) {
 				case BOSS -> npcStats.getBossDetailStat().getXp();
 				case ELITE -> npcStats.getEliteDetailStat().getXp();
 				case NORMAL -> npcStats.getNormalDetailStat().getXp();
 			};
-		}
+			return (int) (xpGain * bonus_factor);
+ 		}
 	}
 
 	/**
