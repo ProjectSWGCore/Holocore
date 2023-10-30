@@ -165,19 +165,19 @@ public class CombatExperienceService extends Service {
 	private int calculateXpGain(CreatureObject killer, CreatureObject corpse, short killerLevel) {
 		short corpseLevel = corpse.getLevel();
 
-		float bonus_factor = 1f;
+		float bonusFactor = 1f;
 		boolean isAggressive, isAssisting, isDeathblow;
 		isAggressive = corpse.hasOptionFlags(OptionFlag.AGGRESSIVE);
 		isAssisting = (((AIObject) corpse).getSpawner()).getAssistRadius() > 0;
 		isDeathblow = (((AIObject) corpse).getSpawner()).isDeathblow();
 
-		if (isAggressive || isAssisting) bonus_factor += XP_BONUS;
-		if (isDeathblow) bonus_factor += XP_BONUS;
-		if (bonus_factor > XP_BONUS_LIMIT) bonus_factor = XP_BONUS_LIMIT;
+		if (isAggressive || isAssisting) bonusFactor += XP_BONUS;
+		if (isDeathblow) bonusFactor += XP_BONUS;
+		if (bonusFactor > XP_BONUS_LIMIT) bonusFactor = XP_BONUS_LIMIT;
 
 
 		if (killerLevel - corpseLevel >= 5) {
-			return (int) (1*bonus_factor);
+			return 1;
 		} else {
 			NpcStatLoader.NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(corpseLevel);
 
@@ -194,7 +194,7 @@ public class CombatExperienceService extends Service {
 				case ELITE -> npcStats.getEliteDetailStat().getXp();
 				case NORMAL -> npcStats.getNormalDetailStat().getXp();
 			};
-			return (int) (xpGain * bonus_factor);
+			return (int) (xpGain * bonusFactor);
  		}
 	}
 
