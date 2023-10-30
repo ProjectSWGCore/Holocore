@@ -166,10 +166,9 @@ public class CombatExperienceService extends Service {
 		short corpseLevel = corpse.getLevel();
 
 		float bonusFactor = 1f;
-		boolean isAggressive, isAssisting, isDeathblow;
-		isAggressive = corpse.hasOptionFlags(OptionFlag.AGGRESSIVE);
-		isAssisting = (((AIObject) corpse).getSpawner()).getAssistRadius() > 0;
-		isDeathblow = (((AIObject) corpse).getSpawner()).isDeathblow();
+		boolean isAggressive = corpse.hasOptionFlags(OptionFlag.AGGRESSIVE);
+		boolean isAssisting = (((AIObject) corpse).getSpawner()).getAssistRadius() > 0;
+		boolean isDeathblow = (((AIObject) corpse).getSpawner()).isDeathblow();
 
 		if (isAggressive || isAssisting) bonusFactor += XP_BONUS;
 		if (isDeathblow) bonusFactor += XP_BONUS;
