@@ -50,11 +50,10 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 	val completedQuests = _completedQuests.wrapper(obj)
 	private val _activeQuests = SWGBitSet(8, 5)
 	val activeQuests = _activeQuests.wrapper(obj)
-	private val quests = SWGMap<CRC, Quest>(8, 7)
+	private val quests = SWGMap<CRC, Quest>(8, 6)
 
 	var forcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 2)
 	var maxForcePower by IndirectBaselineDelegate(obj = obj, value = 100, page = 8, update = 3)
-	var activeQuest by IndirectBaselineDelegate(obj = obj, value = 0, page = 8, update = 6)
 
 	fun getExperience(): Map<String, Int> {
 		return Collections.unmodifiableMap(experience)
@@ -115,8 +114,7 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		bb.addInt(maxForcePower) // 3
 		bb.addObject(_completedQuests) // 4
 		bb.addObject(_activeQuests) // 5
-		bb.addInt(activeQuest) // 6
-		bb.addObject(quests) // 7
+		bb.addObject(quests) // 6
 		bb.incrementOperandCount(8)
 	}
 
@@ -127,7 +125,6 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		data.putInteger("maxForcePower", maxForcePower)
 		data.putByteArray("completedQuests", _completedQuests.toByteArray())
 		data.putByteArray("activeQuests", _activeQuests.toByteArray())
-		data.putInteger("activeQuest", activeQuest)
 		data.putMap("quests", quests)
 	}
 
@@ -142,13 +139,14 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 		maxForcePower = data.getInteger("maxForcePower", maxForcePower)
 		_completedQuests.read(data.getByteArray("completedQuests"))
 		_activeQuests.read(data.getByteArray("activeQuests"))
-		activeQuest = data.getInteger("activeQuest", activeQuest)
 		quests.putAll(data.getMap("quests", CRC::class.java, Quest::class.java))
 	}
 
 	fun addQuest(questName: String) {
 		val crc = CRC(questName)
-		quests[crc] = Quest()
+		val quest = Quest()
+		quest.ownerId = obj.objectId
+		quests[crc] = quest
 		sendQuestUpdate()
 	}
 
@@ -240,7 +238,7 @@ internal class PlayerObjectOwner(private val obj: PlayerObject) : MongoPersistab
 	}
 
 	private fun sendQuestUpdate() {
-		obj.sendDelta(8, 7, quests)
+		obj.sendDelta(8, 6, quests)
 	}
 
 }

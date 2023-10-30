@@ -47,14 +47,14 @@ class Quest : Encodable, MongoPersistable {
 		}
 	var isRewardReceived = false
 	var counter = 0
+	var ownerId: Long = 0
 
 	override fun decode(data: NetBuffer) {
-		data.long
+		ownerId = data.long
 		val newActiveTasks = BitSet.valueOf(data.getArray(java.lang.Short.BYTES))
 		val newCompletedTasks = BitSet.valueOf(data.getArray(java.lang.Short.BYTES))
 		isComplete = data.boolean
 		counter = data.int
-		isRewardReceived = data.boolean
 
 		// Must be set at the end to avoid being overwritten on the setter for `isComplete`
 		activeTasks.clear()
@@ -65,16 +65,15 @@ class Quest : Encodable, MongoPersistable {
 
 	override fun encode(): ByteArray {
 		val buffer = NetBuffer.allocate(length)
-		buffer.addLong(0) // ID for quest giver?
+		buffer.addLong(ownerId)
 		buffer.addRawArray(Arrays.copyOf(activeTasks.toByteArray(), java.lang.Short.BYTES))
 		buffer.addRawArray(Arrays.copyOf(completedTasks.toByteArray(), java.lang.Short.BYTES))
 		buffer.addBoolean(isComplete)
 		buffer.addInt(counter)
-		buffer.addBoolean(isRewardReceived)
 		return buffer.array()
 	}
 
-	override val length: Int = 18
+	override val length: Int = 17
 
 	override fun readMongo(data: MongoData) {
 		activeTasks = BitSet.valueOf(data.getByteArray("activeSteps"))

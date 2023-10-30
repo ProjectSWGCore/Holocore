@@ -37,17 +37,17 @@ class QuestSerializationTest {
 	@Test
 	fun `test quest encode decode`() {
 		val q = Quest()
+		q.ownerId = 1234
 		q.addActiveTask(1)
 		q.addCompletedTask(2)
 		q.counter = 15
-		q.isRewardReceived = true
 
 		val decoded = Quest()
 		decoded.decode(NetBuffer.wrap(q.encode()))
 
+		assertEquals(1234, decoded.ownerId)
 		assertTrue(decoded.getActiveTasks().contains(1))
 		assertEquals(15, decoded.counter)
-		assertEquals(true, decoded.isRewardReceived)
 		assertArrayEquals(q.encode(), decoded.encode())
 	}
 

@@ -199,7 +199,6 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 
 	val completedQuests by play8::completedQuests
 	val activeQuests by play8::activeQuests
-	var activeQuest by play8::activeQuest
 
 	val quests: Map<CRC, Quest>
 		get() = play8.getQuests()
