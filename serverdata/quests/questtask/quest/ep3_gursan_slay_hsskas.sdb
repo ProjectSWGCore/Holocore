@@ -1,16 +1,16 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1	taskGoToEtyyy					0	0	0
-1	quest.task.ground.comm_player	2		@quest/ground/ep3_gursan_slay_hsskas:task01_comm_message_text	object/mobile/ep3/ep3_gursan_bryes.iff			0	0	0
-2	quest.task.ground.go_to_location	3	taskGoToSpiderArea					0	0	0
-3	quest.task.ground.comm_player	4		@quest/ground/ep3_gursan_slay_hsskas:task03_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0
-4	quest.task.ground.wait_for_signal	5	taskApproachHsskas					0	0	0
-5	quest.task.ground.comm_player	6		@quest/ground/ep3_gursan_slay_hsskas:task05_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0
-6	quest.task.ground.encounter	8						4	0	0
-7	quest.task.ground.clear_quest							0	0	0
-8	quest.task.ground.comm_player	9		@quest/ground/ep3_gursan_slay_hsskas:task08_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0
-9	quest.task.ground.encounter	11						1	0	0
-10	quest.task.ground.clear_quest							0	0	0
-11	quest.task.ground.wait_for_signal	12	taskReturnHsskasVictorious					0	0	0
-12	quest.task.ground.reward	13						1	0	0
-13	quest.task.ground.complete_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	comm_message_text	npc_appearance_server_template	signal_name	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.go_to_location	@quest/ground/ep3_gursan_slay_hsskas:task00_journal_entry_title	@quest/ground/ep3_gursan_slay_hsskas:task00_journal_entry_description	true			false	1		taskGoToEtyyy	true	sound/music_wookiee_quest_accept.snd						true		true	false	kashyyyk_hunting	615	8	618		30					0	0	0				0		0	0			0						0	0
+quest.task.ground.comm_player			false			false	2			false							true		true	false	tatooine	0.0	0.0	0.0			@quest/ground/ep3_gursan_slay_hsskas:task01_comm_message_text	object/mobile/ep3/ep3_gursan_bryes.iff			0	0	0				0		0	0			0						0	0
+quest.task.ground.go_to_location	@quest/ground/ep3_gursan_slay_hsskas:task02_journal_entry_title	@quest/ground/ep3_gursan_slay_hsskas:task02_journal_entry_description	true			false	3		taskGoToSpiderArea	true							true		true	false	kashyyyk_hunting	692	30	-487		30					0	0	0				0		0	0			0						0	0
+quest.task.ground.comm_player			false			false	4			false							true		true	false	tatooine	0.0	0.0	0.0			@quest/ground/ep3_gursan_slay_hsskas:task03_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0				0		0	0			0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/ep3_gursan_slay_hsskas:task04_journal_entry_title	@quest/ground/ep3_gursan_slay_hsskas:task04_journal_entry_description	true			false	5		taskApproachHsskas	true							true		true	false	tatooine	0.0	0.0	0.0					signalApproachHsskas		0	0	0				0		0	0			0						0	0
+quest.task.ground.comm_player			false			false	6			false							true		true	false	tatooine	0.0	0.0	0.0			@quest/ground/ep3_gursan_slay_hsskas:task05_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0				0		0	0			0						0	0
+quest.task.ground.encounter			false			false	8	7		false							true		true	false	tatooine	0.0	0.0	0.0						ep3_slaver_controlled_webweaver	4	1	5	34	-10		0		0	0			0						0	0
+quest.task.ground.clear_quest			false			false				false	sound/music_wookiee_quest_fail.snd						true		true	false	tatooine	0.0	0.0	0.0							0	0	0				0		0	0			0						0	0
+quest.task.ground.comm_player			false			false	9			false							true		true	false	tatooine	0.0	0.0	0.0			@quest/ground/ep3_gursan_slay_hsskas:task08_comm_message_text	object/mobile/ep3/ep3_broodmaster_hsskas.iff			0	0	0				0		0	0			0						0	0
+quest.task.ground.encounter			false			false	11	10		false							true		true	false	tatooine	0.0	0.0	0.0						ep3_slaver_broodmaster_hsskas	1	1	5	-34	10		0		0	0			0						0	0
+quest.task.ground.clear_quest			false			false				false	sound/music_wookiee_quest_fail.snd						true		true	false	tatooine	0.0	0.0	0.0							0	0	0				0		0	0			0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/ep3_gursan_slay_hsskas:task11_journal_entry_title	@quest/ground/ep3_gursan_slay_hsskas:task11_journal_entry_description	true			false	12		taskReturnHsskasVictorious	true		sound/music_wookiee_quest_success.snd					true		true	false	tatooine	0.0	0.0	0.0					signalReturnHsskasVictorious		0	0	0				0		0	0			0						0	0
+quest.task.ground.reward			false			false	13			false							true		true	false	tatooine	0.0	0.0	0.0							1	0	0				0	Rebel	0	0		object/weapon/melee/2h_sword/2h_sword_sith.iff	1	1	1	1	1		1	0
+quest.task.ground.complete_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0							0	0	0				0		0	0			0						0	0

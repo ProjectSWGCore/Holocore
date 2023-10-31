@@ -1,10 +1,10 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;2;3;4;5						0	0	0
-1	quest.task.ground.destroy_multi_and_loot		osera					0	0	0
-2	quest.task.ground.destroy_multi_and_loot		crystal			ep3_forest_sayormi_witch		0	0	0
-3	quest.task.ground.retrieve_item		blossom					0	0	0
-4	quest.task.ground.destroy_multi_and_loot		silk					0	0	0
-5	quest.task.ground.wait_for_tasks	6	waiting					0	0	0
-6	quest.task.ground.wait_for_signal	7	return					0	0	0
-7	quest.task.ground.reward							1	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	server_template	num_required	item_name	drop_percent	task_quest_name_1	task_task_name_1	task_display_string_1	task_quest_name_2	task_task_name_2	task_display_string_2	task_quest_name_3	task_task_name_3	task_display_string_3	task_quest_name_4	task_task_name_4	task_display_string_4	task_quest_name_5	task_task_name_5	task_display_string_5	task_quest_name_6	task_task_name_6	task_display_string_6	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.nothing			1,2,3,4,5			false	false	false	sound/mus_wookiee_quest_accept.snd					false	tatooine	0.0	0.0	0.0						0	0	0		0	0	0																					0		0	0	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_forest_kerritamba_epic_2:task01_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_2:task01_journal_entry_description			osera	true	false	false						false	tatooine	0.0	0.0	0.0			forest_mouf		Osera Seed	1	70	0		0	0	0																					0		0	0	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_forest_kerritamba_epic_2:task02_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_2:task02_journal_entry_description			crystal	true	false	false						false	tatooine	0.0	0.0	0.0		ep3_forest_sayormi_witch			Ranrt Crystal	1	70	0		0	0	0																					0		0	0	
+		quest.task.ground.retrieve_item	@quest/ground/ep3_forest_kerritamba_epic_2:task03_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_2:task03_journal_entry_description			blossom	true	false	false						false	tatooine	0.0	0.0	0.0						0	0	0	object/tangible/quest/mysess_blossom.iff	1	0	100																					0		0	0	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_forest_kerritamba_epic_2:task04_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_2:task04_journal_entry_description			silk	true	false	false						false	tatooine	0.0	0.0	0.0			forest_webweaver		Webweaver Silk	1	50	0		0	0	0																					0		0	0	
+		quest.task.ground.wait_for_tasks			6			false	false	false						false	tatooine	0.0	0.0	0.0						0	0	0		0	0	0	quest/ep3_forest_kerritamba_epic_2	osera	@quest/ground/ep3_forest_kerritamba_epic_2:task05_task_display_string_1	quest/ep3_forest_kerritamba_epic_2	crystal	@quest/ground/ep3_forest_kerritamba_epic_2:task05_task_display_string_2	quest/ep3_forest_kerritamba_epic_2	silk	@quest/ground/ep3_forest_kerritamba_epic_2:task05_task_display_string_3	quest/ep3_forest_kerritamba_epic_2	blossom	@quest/ground/ep3_forest_kerritamba_epic_2:task05_task_display_string_4									0		0	0	
+		quest.task.ground.wait_for_signal			7			false	false	false						false	tatooine	0.0	0.0	0.0						0	0	0		0	0	0																			curestuff		0		0	0	
+		quest.task.ground.reward	@quest/ground/ep3_forest_kerritamba_epic_2:task07_journal_entry_title					false	true	false	sound/mus_wookiee_quest_sucess.snd					false	tatooine	0.0	0.0	0.0						0	0	0		0	0	0																					0	Rebel	0	3000	

@@ -1,3 +1,3 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi							2	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	target_server_template	social_group	required_region	count	reward_credits
+
+		quest.task.ground.destroy_multi					true	false	false							valarian		2	0

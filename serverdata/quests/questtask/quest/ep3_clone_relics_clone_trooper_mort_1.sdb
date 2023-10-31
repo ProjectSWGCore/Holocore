@@ -1,8 +1,8 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	talkToMorkov					0	0	0
-1	quest.task.ground.wait_for_signal	2;5	meetingCourier					0	0	0
-2	quest.task.ground.destroy_multi_and_loot	3	killedCourier			clone_relics_morkov_courier		0	0	0
-3	quest.task.ground.wait_for_signal	4	logsRecovered					0	0	0
-4	quest.task.ground.complete_quest							0	0	0
-5	quest.task.ground.encounter							2	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task00_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task00_journal_entry_description	1		talkToMorkov	true	true	false	sound/music_themequest_acc_criminal.snd					false	tatooine	0.0	0.0	0.0		talkedToMorkov					0	0	0		0	0	0		
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task01_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task01_journal_entry_description	2,5		meetingCourier	true	true	false						false	tatooine	0.0	0.0	0.0		talkedToCourier					0	0	0		0	0	0		
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task02_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task02_journal_entry_description	3		killedCourier	true	true	false						false	tatooine	0.0	0.0	0.0			clone_relics_morkov_courier			Courier log book	1	100	0		0	0	0		
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task03_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_1:task03_journal_entry_description	4		logsRecovered	true	true	false						false	tatooine	0.0	0.0	0.0		showedMortLog					0	0	0		0	0	0		
+		quest.task.ground.complete_quest						false	false	false						false	tatooine	0.0	0.0	0.0							0	0	0		0	0	0		
+		quest.task.ground.encounter						false	false	false						false	tatooine	0.0	0.0	0.0							0	0	0	clone_relics_morkov_courier_bodyguard	2	5	10	0.0	0.0

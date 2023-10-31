@@ -1,3 +1,0 @@
-quest_name	level	tier	journal_entry_title	journal_entry_description	quest_reward_experience_type	quest_reward_bank_credits	complete_when_tasks_complete	allow_repeats
-TEXT	INTEGER	INTEGER	TEXT	TEXT	TEXT	INTEGER	BOOLEAN	BOOLEAN
-groundquest/_debug/_debug	0	0	@groundquest/_debug/_debug:title	@groundquest/_debug/_debug:title_d		0	false	true

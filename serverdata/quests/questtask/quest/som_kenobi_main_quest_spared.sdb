@@ -1,18 +1,18 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;6;11	talkKenobi1					0	0	0
-1	quest.task.ground.retrieve_item	2;4						0	0	0
-2	quest.task.ground.timer	3						0	70	100
-3	quest.task.ground.retrieve_item		conduit3					0	0	0
-4	quest.task.ground.timer	5						0	35	65
-5	quest.task.ground.encounter							1	0	0
-6	quest.task.ground.retrieve_item	7;9						0	0	0
-7	quest.task.ground.timer	8						0	80	120
-8	quest.task.ground.retrieve_item		conduit2					0	0	0
-9	quest.task.ground.timer	10						0	25	40
-10	quest.task.ground.encounter							2	0	0
-11	quest.task.ground.retrieve_item	12;14						0	0	0
-12	quest.task.ground.timer	13						0	180	240
-13	quest.task.ground.retrieve_item		conduit1					0	0	0
-14	quest.task.ground.timer	15						0	25	40
-15	quest.task.ground.encounter							3	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	server_template	num_required	item_name	drop_percent	retrieve_menu_text	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+quest.task.ground.wait_for_signal	@quest/ground/som_kenobi_main_quest_spared:task00_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task00_journal_entry_description	true			false	1,6,11		talkKenobi1	false							true		true	false	tatooine	0.0	0.0	0.0		talkedKenobi1	false			0		0.0	0.0	0.0		0		0		0	0		0	0	0		
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task01_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task01_journal_entry_description	true			false	2,4			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_w.iff	1	@quest/ground/som_kenobi_main_quest_spared:task01_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task01_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer	@quest/ground/som_kenobi_main_quest_spared:task02_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task02_journal_entry_description	true			false	3			true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		70	100		0	0	0		
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task03_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task03_journal_entry_description	true			false			conduit3	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_w.iff	1	@quest/ground/som_kenobi_main_quest_spared:task03_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task03_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer			false			false	5			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		35	65		0	0	0		
+quest.task.ground.encounter			false			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		0	0	som_kenobi_dark_jedi_minion_mix	1	25	50	0.0	0.0
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task06_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task06_journal_entry_description	true			false	7,9			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_e.iff	1	@quest/ground/som_kenobi_main_quest_spared:task06_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task06_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer	@quest/ground/som_kenobi_main_quest_spared:task07_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task07_journal_entry_description	true			false	8			true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		80	120		0	0	0		
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task08_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task08_journal_entry_description	true			false			conduit2	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_e.iff	1	@quest/ground/som_kenobi_main_quest_spared:task08_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task08_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer			false			false	10			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		25	40		0	0	0		
+quest.task.ground.encounter			false			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		0	0	som_kenobi_dark_jedi_minion_mix	2	25	50	0.0	0.0
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task11_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task11_journal_entry_description	true			false	12,14			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_nw.iff	1	@quest/ground/som_kenobi_main_quest_spared:task11_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task11_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer	@quest/ground/som_kenobi_main_quest_spared:task12_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task12_journal_entry_description	true			false	13			true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		180	240		0	0	0		
+quest.task.ground.retrieve_item	@quest/ground/som_kenobi_main_quest_spared:task13_journal_entry_title	@quest/ground/som_kenobi_main_quest_spared:task13_journal_entry_description	true			false			conduit1	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	object/tangible/quest/som_kenobi_jedi_conduit_nw.iff	1	@quest/ground/som_kenobi_main_quest_spared:task13_item_name	100	@quest/ground/som_kenobi_main_quest_spared:task13_retrieve_menu_text	0	0		0	0	0		
+quest.task.ground.timer			false			false	15			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		25	40		0	0	0		
+quest.task.ground.encounter			false			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0		0	0	som_kenobi_dark_jedi_minion_mix	3	25	50	0.0	0.0

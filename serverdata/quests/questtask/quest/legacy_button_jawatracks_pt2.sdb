@@ -1,17 +1,10 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	legacy_button_jawatracks_e9					0	0	0
-1	quest.task.ground.retrieve_item	10	legacy_button_jawatracks_e10					0	0	0
-2	quest.task.ground.show_message_box	3	legacy_button_jawatracks_e1165					0	0	0
-3	quest.task.ground.wait_for_signal	4	legacy_button_jawatracks_e116					0	0	0
-4	quest.task.ground.destroy_multi	5	legacy_button_jawatracks_e117			greater_desert_womprat		10	0	0
-5	quest.task.ground.wait_for_signal	6	legacy_button_jawatracks_e118					0	0	0
-6	quest.task.ground.reward	7	legacy_button_jawatracks_e119					1	0	0
-7	quest.task.ground.retrieve_item	8	legacy_button_jawatracks_e120					0	0	0
-8	quest.task.ground.show_message_box	9	legacy_button_jawatracks_e121					0	0	0
-9	quest.task.ground.complete_quest		legacy_button_jawatracks_e122				legacy_button_jawatracks_pt3_v2	0	0	0
-10	quest.task.ground.wait_for_signal	11	legacy_button_jawatracks_e16					0	0	0
-11	quest.task.ground.reward	12	legacy_button_jawatracks_e17					1	0	0
-12	quest.task.ground.retrieve_item	13	legacy_button_jawatracks_e18					0	0	0
-13	quest.task.ground.show_message_box	14	legacy_button_jawatracks_e185					0	0	0
-14	quest.task.ground.complete_quest		legacy_button_jawatracks_e101				legacy_button_jawatracks_pt3_v2	0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	radius	min_time	max_time	message_box_title	message_box_text	message_box_sound	message_box_size_width	message_box_size_height	message_box_location_x	message_box_location_y	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+quest.task.ground.wait_for_signal	@quest/ground/legacy_button_jawatracks_pt2:task00_journal_entry_title	@quest/ground/legacy_button_jawatracks_pt2:task00_journal_entry_description	true			false	1		legacy_button_jawatracks_e9	true							true		true	true	tatooine	-2575	0.0	-5517	@quest/ground/legacy_button_jawatracks_pt2:task00_waypoint_name	legacy_button_jawatracks_launch_e14	false			0		0.0	0.0	0.0		0	0				0	0	0	0		0	0	0		
+quest.task.ground.go_to_location	@quest/ground/legacy_button_jawatracks_pt2:task01_journal_entry_title	@quest/ground/legacy_button_jawatracks_pt2:task01_journal_entry_description	true			false	2,5		legacy_button_jawatracks_e95	false							true		true	true	tatooine	-2580	0.0	-5638	@quest/ground/legacy_button_jawatracks_pt2:task01_waypoint_name		false					0.0	0.0	0.0	10.0	0	0				0	0	0	0		0	0	0		
+quest.task.ground.timer	@quest/ground/legacy_button_jawatracks_pt2:task02_journal_entry_title	@quest/ground/legacy_button_jawatracks_pt2:task02_journal_entry_description	true			false	3,4		legacy_button_jawatracks_e11	true	sound/music_combat_bfield_def.snd	sound/music_combat_defeat.snd					true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		60	60				0	0	0	0		0	0	0		
+quest.task.ground.show_message_box			false			false			legacy_button_jawatracks_e116	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	0	@quest/ground/legacy_button_jawatracks_pt2:task03_message_box_title	@quest/ground/legacy_button_jawatracks_pt2:task03_message_box_text	sound/music_combat_e_thru_s_def.snd	-1	-1	-1	-1		0	0	0		
+quest.task.ground.clear_quest			true			false			legacy_button_jawatracks_e117	false						legacy_button_jawatracks_pt2	true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	0				0	0	0	0		0	0	0		
+quest.task.ground.encounter			false			false	7	6	legacy_button_jawatracks_e10	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	0				0	0	0	0	tatooine_lin_demolitionmech	1	5	10	30	30
+quest.task.ground.clear_quest	@quest/ground/legacy_button_jawatracks_pt2:task06_journal_entry_title		true			false			legacy_button_jawatracks_e15	false						legacy_button_jawatracks_pt2	true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	0				0	0	0	0		0	0	0		
+quest.task.ground.complete_quest			false			false			legacy_button_jawatracks_e101	false						legacy_button_jawatracks_pt2a	true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	0				0	0	0	0		0	0	0		

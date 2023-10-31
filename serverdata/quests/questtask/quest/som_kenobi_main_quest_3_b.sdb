@@ -1,16 +1,16 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_tasks	1	tasklist				som_kenobi_main_quest_3_b_visible	0	0	0
-1	quest.task.ground.wait_for_signal	2;5;8;10	talkKenobi2					0	0	0
-2	quest.task.ground.timer	3;4	timer3					0	340	460
-3	quest.task.ground.encounter		encounter5					1	0	0
-4	quest.task.ground.encounter		encounter4					1	0	0
-5	quest.task.ground.timer	6;7	timer2					0	200	320
-6	quest.task.ground.encounter		encounter3					1	0	0
-7	quest.task.ground.encounter		encounter2					1	0	0
-8	quest.task.ground.timer	9	timer1					0	120	180
-9	quest.task.ground.encounter		encounter1					1	0	0
-10	quest.task.ground.go_to_location	11						0	0	0
-11	quest.task.ground.wait_for_signal	12	talkKenobi3					0	0	0
-12	quest.task.ground.destroy_multi	13	killSinistro			som_kenobi_dark_jedi_boss		1	0	0
-13	quest.task.ground.complete_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	task_quest_name_1	task_task_name_1	task_display_string_1	task_quest_name_2	task_task_name_2	task_display_string_2	task_quest_name_3	task_task_name_3	task_display_string_3	task_quest_name_4	task_task_name_4	task_display_string_4	task_quest_name_5	task_task_name_5	task_display_string_5	task_quest_name_6	task_task_name_6	task_display_string_6	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z	radius	target_server_template	social_group	required_region	reward_credits
+
+quest.task.ground.wait_for_tasks			false			false	1		tasklist	false						som_kenobi_main_quest_3_b_visible	true		true	false	tatooine	0.0	0.0	0.0		quest/som_kenobi_main_quest_killed	conduit1		quest/som_kenobi_main_quest_killed	conduit2		quest/som_kenobi_main_quest_killed	conduit3												false					0.0	0.0	0.0	0	0		0	0	0							0
+quest.task.ground.wait_for_signal	@quest/ground/som_kenobi_main_quest_3_b:task01_journal_entry_title	@quest/ground/som_kenobi_main_quest_3_b:task01_journal_entry_description	false			false	2,5,8,10		talkKenobi2	false							true		true	false	tatooine	0.0	0.0	0.0																				talkedKenobi2	false			0		0.0	0.0	0.0	0	0		0	0	0							0
+quest.task.ground.timer			false			false	3,4		timer3	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	340	460		0	0	0							0
+quest.task.ground.encounter			false			false			encounter5	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0	som_kenobi_dark_jedi_minion_4	1	20	30	0.0	0.0					0
+quest.task.ground.encounter			false			false			encounter4	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0	som_kenobi_dark_jedi_minion_4	1	20	30	0.0	0.0					0
+quest.task.ground.timer			false			false	6,7		timer2	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	200	320		0	0	0							0
+quest.task.ground.encounter			false			false			encounter3	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0	som_kenobi_dark_jedi_minion_2	1	20	30	0.0	0.0					0
+quest.task.ground.encounter			false			false			encounter2	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0	som_kenobi_dark_jedi_minion_3	1	20	30	0.0	0.0					0
+quest.task.ground.timer			false			false	9		timer1	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	120	180		0	0	0							0
+quest.task.ground.encounter			false			false			encounter1	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0	som_kenobi_dark_jedi_minion_1	1	20	30	0.0	0.0					0
+quest.task.ground.go_to_location	@quest/ground/som_kenobi_main_quest_3_b:task10_journal_entry_title	@quest/ground/som_kenobi_main_quest_3_b:task10_journal_entry_description	false			false	11			false							true		true	false	mustafar	-2694	42	6077																					false					0.0	0.0	0.0	0	0		0	0	0			10				0
+quest.task.ground.wait_for_signal			false			false	12		talkKenobi3	false							true		true	false	tatooine	0.0	0.0	0.0																				talkedKenobi3	false			0		0.0	0.0	0.0	0	0		0	0	0							0
+quest.task.ground.destroy_multi	@quest/ground/som_kenobi_main_quest_3_b:task12_journal_entry_title	@quest/ground/som_kenobi_main_quest_3_b:task12_journal_entry_description	false			false	13		killSinistro	false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0		1	0	0				som_kenobi_dark_jedi_boss			0
+quest.task.ground.complete_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0																					false					0.0	0.0	0.0	0	0		0	0	0							0

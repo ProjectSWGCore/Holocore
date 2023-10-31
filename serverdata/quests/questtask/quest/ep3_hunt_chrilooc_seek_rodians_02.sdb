@@ -1,7 +1,7 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.wait_for_signal	2	chrilooc_gainEtyyyEntry_02					0	0	0
-2	quest.task.ground.wait_for_signal	3	chrilooc_talkToChrilooc_02					0	0	0
-3	quest.task.ground.reward	4						1	0	0
-4	quest.task.ground.complete_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	count
+
+		quest.task.ground.nothing			1			false	false	false								false	tatooine	0.0	0.0	0.0				0		0	0		0
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_chrilooc_seek_rodians_02:task01_journal_entry_title	@quest/ground/ep3_hunt_chrilooc_seek_rodians_02:task01_journal_entry_description	2		chrilooc_gainEtyyyEntry_02	true	true	false	sound/mus_rodian_quest_accept.snd							false	tatooine	0.0	0.0	0.0		chrilooc_gainEtyyyEntry		0		0	0		0
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_chrilooc_seek_rodians_02:task02_journal_entry_title	@quest/ground/ep3_hunt_chrilooc_seek_rodians_02:task02_journal_entry_description	3		chrilooc_talkToChrilooc_02	true	true	false		sound/mus_rodian_quest_sucess.snd						false	tatooine	0.0	0.0	0.0		chrilooc_talkToChrilooc		0		0	0		0
+		quest.task.ground.reward			4			false	false	false								false	tatooine	0.0	0.0	0.0				0	Rebel	0	300		1
+		quest.task.ground.complete_quest						false	false	false								false	tatooine	0.0	0.0	0.0				0		0	0		0

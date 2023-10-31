@@ -1,11 +1,11 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1;2;3;4						0	0	0
-1	quest.task.ground.destroy_multi					black_sun_minion		1	0	0
-2	quest.task.ground.destroy_multi					black_sun_smuggler		5	0	0
-3	quest.task.ground.destroy_multi					black_sun_initiate		8	0	0
-4	quest.task.ground.wait_for_signal	5						0	0	0
-5	quest.task.ground.wait_for_signal	6						0	0	0
-6	quest.task.ground.wait_for_signal	7						0	0	0
-7	quest.task.ground.reward	8						1	0	0
-8	quest.task.ground.complete_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	planet_name	location_x	location_y	location_z	radius	target_server_template	social_group	required_region	count	reward_credits	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.go_to_location	@quest/ground/c_darndroid2:task00_journal_entry_title	@quest/ground/c_darndroid2:task00_journal_entry_description	1,2,3,4			true	true	false						talus	5353.0	131	5632	20				0	0			0		0	0	
+		quest.task.ground.destroy_multi	@quest/ground/c_darndroid2:task01_journal_entry_title	@quest/ground/c_darndroid2:task01_journal_entry_description				true	true	false											black_sun_minion			1	2000			0		0	0	
+		quest.task.ground.destroy_multi	@quest/ground/c_darndroid2:task02_journal_entry_title	@quest/ground/c_darndroid2:task02_journal_entry_description				true	true	false											black_sun_smuggler			5	1500			0		0	0	
+		quest.task.ground.destroy_multi	@quest/ground/c_darndroid2:task03_journal_entry_title	@quest/ground/c_darndroid2:task03_journal_entry_description				true	true	false											black_sun_initiate			8	1000			0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/c_darndroid2:task04_journal_entry_title	@quest/ground/c_darndroid2:task04_journal_entry_description	5			true	true	false														0	0	c_darndroid2_campdead		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/c_darndroid2:task05_journal_entry_title	@quest/ground/c_darndroid2:task05_journal_entry_description	6			true	true	false														0	0	c_darndroid2_spacedone		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/c_darndroid2:task06_journal_entry_title	@quest/ground/c_darndroid2:task06_journal_entry_description	7			true	true	false														0	0	c_darndroid2_memwipe		0		0	0	
+		quest.task.ground.reward			8			true	false	false														0	0		combat_general	1000	townsperson	50	1000	object/tangible/loot/loot_schematic/droid_head_schematic.iff
+		quest.task.ground.complete_quest	@quest/ground/c_darndroid2:task08_journal_entry_title	@quest/ground/c_darndroid2:task08_journal_entry_description				true	false	false														0	0			0		0	0	

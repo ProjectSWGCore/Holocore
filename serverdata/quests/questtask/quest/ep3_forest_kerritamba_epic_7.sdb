@@ -1,8 +1,8 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;2;3						0	0	0
-1	quest.task.ground.retrieve_item		blossom					0	0	0
-2	quest.task.ground.destroy_multi_and_loot		bag			ep3_forest_sayormi_witch		0	0	0
-3	quest.task.ground.wait_for_tasks	4						0	0	0
-4	quest.task.ground.wait_for_signal	5						0	0	0
-5	quest.task.ground.reward							1	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	server_template	num_required	item_name	drop_percent	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	task_quest_name_1	task_task_name_1	task_display_string_1	task_quest_name_2	task_task_name_2	task_display_string_2	task_quest_name_3	task_task_name_3	task_display_string_3	task_quest_name_4	task_task_name_4	task_display_string_4	task_quest_name_5	task_task_name_5	task_display_string_5	task_quest_name_6	task_task_name_6	task_display_string_6	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	count
+
+		quest.task.ground.nothing			1,2,3			false	false	false	sound/mus_wookiee_quest_accept.snd							false	tatooine	0.0	0.0	0.0			0	0	0					0	0	0																					0		0	0		0
+		quest.task.ground.retrieve_item	@quest/ground/ep3_forest_kerritamba_epic_7:task01_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_7:task01_journal_entry_description			blossom	true	false	false								false	tatooine	0.0	0.0	0.0		object/tangible/quest/mysess_blossom.iff	1	0	100					0	0	0																					0		0	0		0
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_forest_kerritamba_epic_7:task02_journal_entry_title	@quest/ground/ep3_forest_kerritamba_epic_7:task02_journal_entry_description			bag	true	false	false								false	tatooine	0.0	0.0	0.0			0	0	0	ep3_forest_sayormi_witch			Bag of Dust	1	80	0																					0		0	0		0
+		quest.task.ground.wait_for_tasks			4			false	false	false								false	tatooine	0.0	0.0	0.0			0	0	0					0	0	0	quest/ep3_forest_kerritamba_epic_7	bag	@quest/ground/ep3_forest_kerritamba_epic_7:task03_task_display_string_1	quest/ep3_forest_kerritamba_epic_7	blossom	@quest/ground/ep3_forest_kerritamba_epic_7:task03_task_display_string_2															0		0	0		0
+		quest.task.ground.wait_for_signal			5			false	false	false								false	tatooine	0.0	0.0	0.0			0	0	0					0	0	0																			alldone		0		0	0		0
+		quest.task.ground.reward	@quest/ground/ep3_forest_kerritamba_epic_7:task05_journal_entry_title					false	true	false	sound/mus_wookiee_quest_sucess.snd							false	tatooine	0.0	0.0	0.0			0	0	0					0	0	0																					0	Rebel	0	3000	object/tangible/furniture/ep3_rewards/wke_windchime.iff	1

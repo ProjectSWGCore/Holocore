@@ -1,13 +1,13 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;9						0	0	0
-1	quest.task.ground.wait_for_signal	2;6						0	0	0
-2	quest.task.ground.timer	3						0	0	0
-3	quest.task.ground.wait_for_signal	4						0	0	0
-4	quest.task.ground.reward	5						0	0	0
-5	quest.task.ground.complete_quest							0	0	0
-6	quest.task.ground.timer	7						0	0	0
-7	quest.task.ground.encounter							1	0	0
-8	quest.task.ground.clear_quest							0	0	0
-9	quest.task.ground.escort	10						0	0	0
-10	quest.task.ground.clear_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	signal_name	min_time	max_time	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	creature_type	count	min_distance	max_distance	direction	server_template
+
+		quest.task.ground.nothing			1,9		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.wait_for_signal			2,6		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.timer			3		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.wait_for_signal			4		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.reward			5		true	false	false					0	0		0	Rebel	0	0	0		0	0	0		
+		quest.task.ground.complete_quest					true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.timer			7		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.encounter				8	true	false	false					0	0		0		0	0	0		1	5	50	Any	
+		quest.task.ground.clear_quest					true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.escort			10		true	false	false					0	0		0		0	0	0		0	0	0		
+		quest.task.ground.clear_quest					true	false	false					0	0		0		0	0	0		0	0	0		

@@ -1,18 +1,18 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;3;5;7						0	0	0
-1	quest.task.ground.perform	2	espaCantina					0	0	0
-2	quest.task.ground.wait_for_signal		espaContact					0	0	0
-3	quest.task.ground.perform	4						0	0	0
-4	quest.task.ground.wait_for_signal		bestineContact					0	0	0
-5	quest.task.ground.perform	6						0	0	0
-6	quest.task.ground.wait_for_signal		anchorContact					0	0	0
-7	quest.task.ground.wait_for_signal	8;10;12	firstdone					0	0	0
-8	quest.task.ground.perform	9						0	0	0
-9	quest.task.ground.show_message_box		secondinfo					0	0	0
-10	quest.task.ground.perform	11						0	0	0
-11	quest.task.ground.show_message_box		firstinfo					0	0	0
-12	quest.task.ground.perform	13	longdance					0	0	0
-13	quest.task.ground.show_message_box	14	jabbainfo					0	0	0
-14	quest.task.ground.wait_for_signal	15	finalreturn					0	0	0
-15	quest.task.ground.complete_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	perform_duration	perform_building	perform_type	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	message_box_title	message_box_text	message_box_sound	message_box_size_width	message_box_size_height	message_box_location_x	message_box_location_y	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	count	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.nothing			false			false	1,3,5,7			false							true		true	false	tatooine	0.0	0.0	0.0		0		0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.perform	@quest/ground/c_prof_entertainer:task01_journal_entry_title	@quest/ground/c_prof_entertainer:task01_journal_entry_description	true			false	2		espaCantina	true							true		true	true	tatooine	-3030	0.0	2216	@quest/ground/c_prof_entertainer:task01_waypoint_name	300	1256055	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/c_prof_entertainer:task02_journal_entry_title	@quest/ground/c_prof_entertainer:task02_journal_entry_description	true			false			espaContact	true							true		true	false	tatooine	-3030	0.0	2216	@quest/ground/c_prof_entertainer:task02_waypoint_name	0		0	c_prof_ent_espa	false			0		0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.perform	@quest/ground/c_prof_entertainer:task03_journal_entry_title	@quest/ground/c_prof_entertainer:task03_journal_entry_description	true			false	4			true							true		true	true	tatooine	-1178	0.0	-3648	@quest/ground/c_prof_entertainer:task03_waypoint_name	300	1223845	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/c_prof_entertainer:task04_journal_entry_title	@quest/ground/c_prof_entertainer:task04_journal_entry_description	true			false			bestineContact	true							true		true	false	tatooine	-1178	0.0	-3648	@quest/ground/c_prof_entertainer:task04_waypoint_name	0		0	c_prof_ent_bestine	false			0		0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.perform	@quest/ground/c_prof_entertainer:task05_journal_entry_title	@quest/ground/c_prof_entertainer:task05_journal_entry_description	true			false	6			false							true		true	true	tatooine	123	0.0	-5365	@quest/ground/c_prof_entertainer:task05_waypoint_name	300	1213343	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/c_prof_entertainer:task06_journal_entry_title	@quest/ground/c_prof_entertainer:task06_journal_entry_description	true			false			anchorContact	true							true		true	true	tatooine	123	0.0	-5365	@quest/ground/c_prof_entertainer:task06_waypoint_name	0		0	c_prof_ent_anchor	false			0		0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/c_prof_entertainer:task07_journal_entry_title	@quest/ground/c_prof_entertainer:task07_journal_entry_description	true			false	8,10,12		firstdone	true							true		true	true	tatooine	3467	0.0	-4852	@quest/ground/c_prof_entertainer:task07_waypoint_name	0		0	c_prof_ent_firstdone	false			0		0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.perform			false			false	9			false							true		true	false	tatooine	0.0	0.0	0.0		360	1188045	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.show_message_box	@quest/ground/c_prof_entertainer:task09_journal_entry_title	@quest/ground/c_prof_entertainer:task09_journal_entry_description	true			false			secondinfo	false							true		true	false	tatooine	0.0	0.0	0.0		0		0		false					0.0	0.0	0.0	@quest/ground/c_prof_entertainer:task09_message_box_title	@quest/ground/c_prof_entertainer:task09_message_box_text		-1	-1	-1	-1		0		0	0		0		0						0	0
+quest.task.ground.perform			false			false	11			false							true		true	false	tatooine	0.0	0.0	0.0		120	1188045	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.show_message_box	@quest/ground/c_prof_entertainer:task11_journal_entry_title	@quest/ground/c_prof_entertainer:task11_journal_entry_description	true			false			firstinfo	true							true		true	false	tatooine	0.0	0.0	0.0		0		0		false					0.0	0.0	0.0	@quest/ground/c_prof_entertainer:task11_message_box_title	@quest/ground/c_prof_entertainer:task11_message_box_text		-1	-1	-1	-1		0		0	0		0		0						0	0
+quest.task.ground.perform	@quest/ground/c_prof_entertainer:task12_journal_entry_title	@quest/ground/c_prof_entertainer:task12_journal_entry_description	true			false	13		longdance	false							true		true	true	tatooine	3241	0.0	-4845	@quest/ground/c_prof_entertainer:task12_waypoint_name	600	1188045	0		false					0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.show_message_box			false			false	14		jabbainfo	false							true		true	false	tatooine	0.0	0.0	0.0		0		0		false					0.0	0.0	0.0	@quest/ground/c_prof_entertainer:task13_message_box_title	@quest/ground/c_prof_entertainer:task13_message_box_text		-1	-1	-1	-1		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/c_prof_entertainer:task14_journal_entry_title	@quest/ground/c_prof_entertainer:task14_journal_entry_description	true			false	15		finalreturn	false							true		true	true	tatooine	3467	0.0	-4852	@quest/ground/c_prof_entertainer:task14_waypoint_name	0		0	c_prof_ent_finishQuest	false			0		0.0	0.0	0.0				0	0	0	0		0		0	0		0		0						0	0
+quest.task.ground.reward			true			false				false							true		true	false	tatooine	0.0	0.0	0.0		0		0		false					0.0	0.0	0.0				0	0	0	0	entertainer_healing	500	Rebel	0	1000		1		1	0.1	0.1	0.1	0.1		1	0

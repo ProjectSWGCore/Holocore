@@ -1,8 +1,8 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	talkToSolo1					0	0	0
-1	quest.task.ground.wait_for_signal	2	talkedToSolo1					0	0	0
-2	quest.task.ground.wait_for_signal	3	haveMoney					0	0	0
-3	quest.task.ground.wait_for_signal	4	foundFourthMap					0	0	0
-4	quest.task.ground.reward	5						1	0	0
-5	quest.task.ground.complete_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_nym_starmap_4:task00_journal_entry_title	@quest/ground/ep3_clone_relics_nym_starmap_4:task00_journal_entry_description	1		talkToSolo1	true	true	false						false	tatooine	0.0	0.0	0.0		talkedToSolo1		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_nym_starmap_4:task01_journal_entry_title	@quest/ground/ep3_clone_relics_nym_starmap_4:task01_journal_entry_description	2		talkedToSolo1	true	true	false						false	tatooine	0.0	0.0	0.0		giveMoneyToSolo		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_nym_starmap_4:task02_journal_entry_title	@quest/ground/ep3_clone_relics_nym_starmap_4:task02_journal_entry_description	3		haveMoney	true	true	false						false	tatooine	0.0	0.0	0.0		soloPaid		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_nym_starmap_4:task03_journal_entry_title	@quest/ground/ep3_clone_relics_nym_starmap_4:task03_journal_entry_description	4		foundFourthMap	true	true	false						false	tatooine	0.0	0.0	0.0		foundMap4		0		0	0	
+		quest.task.ground.reward			5			false	false	false	sound/mus_trandoshan_quest_sucess.snd					false	tatooine	0.0	0.0	0.0				0	Rebel	0	0	object/tangible/ship/components/weapon/wpn_corellian_heavy_gauss.iff
+		quest.task.ground.complete_quest						false	false	false						false	tatooine	0.0	0.0	0.0				0		0	0	

@@ -1,4 +1,4 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.show_message_box	1						0	0	0
-1	quest.task.ground.wait_for_signal		mustafar_droid_factory_slicing					0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	message_box_title	message_box_text	message_box_sound	message_box_size_width	message_box_size_height	message_box_location_x	message_box_location_y	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z
+
+quest.task.ground.show_message_box			false			false	1			false							true		true	false	tatooine	0.0	0.0	0.0		@quest/ground/som_story_arc_chapter_three_02:task00_message_box_title	@quest/ground/som_story_arc_chapter_three_02:task00_message_box_text		-1	-1	-1	-1		false					0.0	0.0	0.0
+quest.task.ground.wait_for_signal	@quest/ground/som_story_arc_chapter_three_02:task01_journal_entry_title	@quest/ground/som_story_arc_chapter_three_02:task01_journal_entry_description	true			false			mustafar_droid_factory_slicing	true							true		true	false	tatooine	0.0	0.0	0.0					0	0	0	0	mustafar_droid_factory_tool_recieved	false			0		0.0	0.0	0.0

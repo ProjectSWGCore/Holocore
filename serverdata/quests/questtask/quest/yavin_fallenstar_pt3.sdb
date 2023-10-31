@@ -1,11 +1,11 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;4;7	yavin_fallenstar_e14_interception					0	0	0
-1	quest.task.ground.wait_for_signal	2	yavin_fallenstar_e20_imperial_reward					0	0	0
-2	quest.task.ground.reward	3	yavin_fallenstar_e23_impreward					1	0	0
-3	quest.task.ground.complete_quest		yavin_fallenstar_e32					0	0	0
-4	quest.task.ground.wait_for_signal	5	yavin_fallenstar_e19_rebelchoice					0	0	0
-5	quest.task.ground.reward	6	yavin_fallenstar_e23_rebelreward					1	0	0
-6	quest.task.ground.complete_quest		yavin_fallenstar_e30					0	0	0
-7	quest.task.ground.wait_for_signal	8	yavin_fallenstar_e36_walkaway					0	0	0
-8	quest.task.ground.complete_quest		yavin_fallenstar_e35					0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	count	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.wait_for_signal	@quest/ground/yavin_fallenstar_pt3:task00_journal_entry_title	@quest/ground/yavin_fallenstar_pt3:task00_journal_entry_description	false			false	1,4,7		yavin_fallenstar_e14_interception	true							true		true	false	tatooine	0.0	0.0	0.0		yavin_fallenStar_launch_e19	false			0		0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/yavin_fallenstar_pt3:task01_journal_entry_title	@quest/ground/yavin_fallenstar_pt3:task01_journal_entry_description	false			false	2		yavin_fallenstar_e20_imperial_reward	false							true		true	false	tatooine	0.0	0.0	0.0		yavin_fallenStar_launch_e22	false			0		0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.reward	@quest/ground/yavin_fallenstar_pt3:task02_journal_entry_title		false			false	3		yavin_fallenstar_e23_impreward	true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	jabba	2500	10000		1		1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.complete_quest			true			false			yavin_fallenstar_e32	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/yavin_fallenstar_pt3:task04_journal_entry_title	@quest/ground/yavin_fallenstar_pt3:task04_journal_entry_description	false			false	5		yavin_fallenstar_e19_rebelchoice	false							true		true	false	tatooine	0.0	0.0	0.0		yavin_fallenStar_launch_e21	false			0		0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.reward	@quest/ground/yavin_fallenstar_pt3:task05_journal_entry_title		false			false	6		yavin_fallenstar_e23_rebelreward	true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	jabba	2500	10000		1		1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.complete_quest	@quest/ground/yavin_fallenstar_pt3:task06_journal_entry_title		false			false			yavin_fallenstar_e30	true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/yavin_fallenstar_pt3:task07_journal_entry_title	@quest/ground/yavin_fallenstar_pt3:task07_journal_entry_description	false			false	8		yavin_fallenstar_e36_walkaway	false							true		true	false	tatooine	0.0	0.0	0.0		yavin_fallenstar_launch_e35	false			0		0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.complete_quest			true			false			yavin_fallenstar_e35	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0		0	0		0		0						0	0

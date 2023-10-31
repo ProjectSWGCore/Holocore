@@ -1,6 +1,6 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.timer	1						0	5	8
-1	quest.task.ground.encounter	2						6	0	0
-2	quest.task.ground.timer	3						0	20	20
-3	quest.task.ground.clear_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+quest.task.ground.timer			false			false	1			false							true		true	false	tatooine	0.0	0.0	0.0		5	8		0	0	0		
+quest.task.ground.encounter			false			false	2			false							true		true	false	tatooine	0.0	0.0	0.0		0	0	som_kenobi_alien_parasite	6	10	20	0.0	0.0
+quest.task.ground.timer			false			false	3			false							true		true	false	tatooine	0.0	0.0	0.0		20	20		0	0	0		
+quest.task.ground.clear_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		0	0		0	0	0		

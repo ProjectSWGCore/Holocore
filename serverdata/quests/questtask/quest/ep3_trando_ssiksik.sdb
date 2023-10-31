@@ -1,18 +1,18 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.go_to_location	2						0	0	0
-2	quest.task.ground.wait_for_signal	3;6;9;12	talkToPressk					0	0	0
-3	quest.task.ground.timer	4						0	400	401
-4	quest.task.ground.encounter		wkeWaveThree					5	0	0
-5	quest.task.ground.clear_quest							0	0	0
-6	quest.task.ground.timer	7						0	200	201
-7	quest.task.ground.encounter		wkeWaveTwo					5	0	0
-8	quest.task.ground.clear_quest							0	0	0
-9	quest.task.ground.timer	10						0	30	35
-10	quest.task.ground.encounter		wkeWaveOne					5	0	0
-11	quest.task.ground.clear_quest							0	0	0
-12	quest.task.ground.wait_for_tasks	13						0	0	0
-13	quest.task.ground.wait_for_signal	14	reportPressk					0	0	0
-14	quest.task.ground.reward	15						1	0	0
-15	quest.task.ground.complete_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	signal_name	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z	task_quest_name_1	task_task_name_1	task_display_string_1	task_quest_name_2	task_task_name_2	task_display_string_2	task_quest_name_3	task_task_name_3	task_display_string_3	task_quest_name_4	task_task_name_4	task_display_string_4	task_quest_name_5	task_task_name_5	task_display_string_5	task_quest_name_6	task_task_name_6	task_display_string_6	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+		quest.task.ground.nothing			1			false	false	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.go_to_location	@quest/ground/ep3_trando_ssiksik:task01_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task01_journal_entry_description	2			true	true	false	sound/mus_trandoshan_quest_accept.snd							false	kashyyyk_main	-103	18	97		25		0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_trando_ssiksik:task02_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task02_journal_entry_description	3,6,9,12		talkToPressk	true	true	false								false	tatooine	0.0	0.0	0.0			startWookieeAttack	0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.timer			4			false	false	false								false	tatooine	0.0	0.0	0.0				400	401		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.encounter	@quest/ground/ep3_trando_ssiksik:task04_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task04_journal_entry_description		5	wkeWaveThree	true	true	false								false	tatooine	0.0	0.0	0.0				0	0	ep3_npc_wookiee_commando	5	10	25	0.0	0.0																				0		0	0			0						0	0
+		quest.task.ground.clear_quest						false	false	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.timer			7			false	false	false								false	tatooine	0.0	0.0	0.0				200	201		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.encounter	@quest/ground/ep3_trando_ssiksik:task07_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task07_journal_entry_description		8	wkeWaveTwo	true	true	false								false	tatooine	0.0	0.0	0.0				0	0	ep3_npc_wookiee_freedom_fighters	5	10	25	0.0	0.0																				0		0	0			0						0	0
+		quest.task.ground.clear_quest						false	false	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.timer			10			false	false	false								false	tatooine	0.0	0.0	0.0				30	35		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.encounter	@quest/ground/ep3_trando_ssiksik:task10_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task10_journal_entry_description		11	wkeWaveOne	true	true	false								false	tatooine	0.0	0.0	0.0				0	0	ep3_npc_wookiee_freedom_fighters	5	10	25	0.0	0.0																				0		0	0			0						0	0
+		quest.task.ground.clear_quest						false	false	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.wait_for_tasks	@quest/ground/ep3_trando_ssiksik:task12_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task12_journal_entry_description	13			true	true	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0			quest/ep3_trando_ssiksik	wkeWaveOne	@quest/ground/ep3_trando_ssiksik:task12_task_display_string_1	quest/ep3_trando_ssiksik	wkeWaveTwo	@quest/ground/ep3_trando_ssiksik:task12_task_display_string_2	quest/ep3_trando_ssiksik	wkeWaveThree	@quest/ground/ep3_trando_ssiksik:task12_task_display_string_3											0		0	0			0						0	0
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_trando_ssiksik:task13_journal_entry_title	@quest/ground/ep3_trando_ssiksik:task13_journal_entry_description	14		reportPressk	true	true	false		sound/mus_trandoshan_quest_sucess.snd						false	tatooine	0.0	0.0	0.0			rewardSlaverLeader	0	0		0	0	0																						0		0	0			0						0	0
+		quest.task.ground.reward	@quest/ground/ep3_trando_ssiksik:task14_journal_entry_title		15			false	true	false								false	tatooine	0.0	0.0	0.0				0	0		1	0	0																						0	Rebel	0	10000		object/weapon/melee/polearm/ep3/lance_trando.iff	1	1	1	1	1		1	0
+		quest.task.ground.complete_quest						false	false	false								false	tatooine	0.0	0.0	0.0				0	0		0	0	0																						0		0	0			0						0	0

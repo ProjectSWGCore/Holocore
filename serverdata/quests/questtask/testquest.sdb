@@ -1,0 +1,5 @@
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	target	parameter	category	is_visible	show_system_messages	allow_repeats
+
+		cthurow.testtask0	task:title	task:description	1	2	x	y	x:z	true	true	false
+		cthurow.testtask1	task:title	task:description			x	y	x:z	true	true	false
+		cthurow.testtask2	task:title	task:description			x	y	x:z	true	true	false
