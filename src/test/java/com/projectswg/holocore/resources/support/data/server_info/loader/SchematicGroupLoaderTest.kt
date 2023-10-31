@@ -24,38 +24,44 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.utility.clientdata;
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import java.util.function.Supplier;
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-public enum Converters {
-	BUILDOUT_BUILDING_LIST		(ConvertBuildingList::new),
-	BUILDOUT_OBJECTS			(ConvertBuildouts::new),
-	OBJECTS_OBJECT_APPEARANCE	(ConvertAppearances::new),
-	OBJECTS_OBJECT_DATA			(ConvertObjectData::new),
-	OBJECTS_BUILDING_CELLS		(ConvertBuildingCells::new),
-	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
-	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
-	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
-	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/player/role.sdb", false)),
-	COMMANDS_GLOBAL				(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/command/commands_global.sdb", false)),
-	COMMANDS_GROUND				(() -> new ConvertDatatable("datatables/command/command_table_ground.iff", "serverdata/command/commands_ground.sdb", false)),
-	COMMANDS_SPACE				(() -> new ConvertDatatable("datatables/command/command_table_space.iff", "serverdata/command/commands_space.sdb", false)),
-	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/buff/buff.sdb", true)),
-	SKILLS						(() -> new ConvertDatatable("datatables/skill/skills.iff", "serverdata/skill/skills.sdb", true)),
-	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new),
-	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true)),
-	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
-	TERRAINS					(ConvertTerrain::new);
-	
-	private final Supplier<Converter> converter;
-	
-	Converters(Supplier<Converter> converter) {
-		this.converter = converter;
+class SchematicGroupLoaderTest {
+	@Test
+	fun groupsByGroupIdCorrectly() {
+		val groupId = "craftAdvancedCreatureGroup"
+		val expected = setOf(
+			"object/draft_schematic/bio_engineer/creature/creature_torton.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_kimogila.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_rancor.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_fambaa.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_veermok.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_graul.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_huf_dun.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_malkloc.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_sharnaff.iff",
+			"object/draft_schematic/bio_engineer/creature/creature_woolamander.iff",
+		)
+
+		val schematicsInGroup = ServerData.schematicGroups.getSchematicsInGroup(groupId)
+		
+		assertEquals(expected.size, schematicsInGroup.size)
+		assertTrue(schematicsInGroup.containsAll(expected))
 	}
-	
-	public void load() {
-		converter.get().convert();
+
+	@Test
+	fun unknownGroupIdGivesEmptyCollection() {
+		val schematicsInGroup = ServerData.schematicGroups.getSchematicsInGroup("thisGroupDefinitelyDoesNotExist")
+		assertTrue(schematicsInGroup.isEmpty())
 	}
-	
+
+	@Test
+	fun endGroupIdIsIgnored() {
+		// There's a group called "end" in the client info file, but it's not a real group
+		val schematicsInGroup = ServerData.schematicGroups.getSchematicsInGroup("end")
+		assertTrue(schematicsInGroup.isEmpty())
+	}
 }

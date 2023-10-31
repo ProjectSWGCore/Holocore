@@ -119,8 +119,8 @@ public class CommandExecutionService extends Service {
 		registerCppCallback("transferItemArmor", TransferItemCallback::new);
 		registerCppCallback("transferItemWeapon", TransferItemCallback::new);
 		registerScriptCallback("cmdStartLogout", LogoutCmdCallback::new);
-		registerCppCallback("requestDraftSlots", RequestDraftSlotsCallback::new);
 		registerScriptCallback("knockdownRecovery", KnockdownRecoveryCmdCallback::new);
+		
 		registerScriptCallback("burstRun", BurstRunCmdCallback::new);
 		registerScriptCallback("cmdMeditate", CmdMeditate::new);
 		
@@ -135,8 +135,14 @@ public class CommandExecutionService extends Service {
 		addConversationScripts();
 		addQuestScripts();
 		addEntertainerScripts();
+		addCraftingScripts();
 	}
-	
+
+	private void addCraftingScripts() {
+		registerCppCallback("requestDraftSlotsBatch", RequestDraftSlotsCallback::new);
+		registerCppCallback("requestResourceWeightsBatch", RequestResourceWeightsBatchCallback::new);
+	}
+
 	private void addEntertainerScripts() {
 		registerScriptCallback("cmdStartDance", StartDanceCallback::new);
 		registerScriptCallback("cmdChangeDance", ChangeDanceCallback::new);

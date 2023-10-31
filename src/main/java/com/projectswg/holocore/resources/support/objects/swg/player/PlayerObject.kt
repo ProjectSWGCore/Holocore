@@ -270,11 +270,15 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 	var craftingLevel by play9::craftingLevel
 	var craftingStage by play9::craftingStage
 	var nearbyCraftStation by play9::nearbyCraftStation
-	val draftSchematics: Map<Long, Int>
+	val draftSchematics: Map<DraftSchematicCombinedCrc, Int>
 		get() = play9.getDraftSchematics()
 
-	fun setDraftSchematic(serverCrc: Int, clientCrc: Int, counter: Int) {
-		play9.setDraftSchematic(serverCrc, clientCrc, counter)
+	fun setDraftSchematic(draftSchematicCombinedCrc: DraftSchematicCombinedCrc, counter: Int) {
+		play9.setDraftSchematic(draftSchematicCombinedCrc, counter)
+	}
+	
+	fun revokeDraftSchematic(draftSchematicCombinedCrc: DraftSchematicCombinedCrc) {
+		play9.revokeDraftSchematic(draftSchematicCombinedCrc)
 	}
 
 	var craftingComponentBioLink by play9::craftingComponentBioLink

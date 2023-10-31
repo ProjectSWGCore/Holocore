@@ -24,38 +24,57 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.utility.clientdata;
+package com.projectswg.holocore.resources.support.objects.swg.player
 
-import java.util.function.Supplier;
+import com.projectswg.common.data.encodables.mongo.MongoData
+import com.projectswg.common.network.NetBuffer
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-public enum Converters {
-	BUILDOUT_BUILDING_LIST		(ConvertBuildingList::new),
-	BUILDOUT_OBJECTS			(ConvertBuildouts::new),
-	OBJECTS_OBJECT_APPEARANCE	(ConvertAppearances::new),
-	OBJECTS_OBJECT_DATA			(ConvertObjectData::new),
-	OBJECTS_BUILDING_CELLS		(ConvertBuildingCells::new),
-	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
-	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
-	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
-	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/player/role.sdb", false)),
-	COMMANDS_GLOBAL				(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/command/commands_global.sdb", false)),
-	COMMANDS_GROUND				(() -> new ConvertDatatable("datatables/command/command_table_ground.iff", "serverdata/command/commands_ground.sdb", false)),
-	COMMANDS_SPACE				(() -> new ConvertDatatable("datatables/command/command_table_space.iff", "serverdata/command/commands_space.sdb", false)),
-	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/buff/buff.sdb", true)),
-	SKILLS						(() -> new ConvertDatatable("datatables/skill/skills.iff", "serverdata/skill/skills.sdb", true)),
-	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new),
-	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true)),
-	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
-	TERRAINS					(ConvertTerrain::new);
+class DraftSchematicCombinedCrcTest {
 	
-	private final Supplier<Converter> converter;
-	
-	Converters(Supplier<Converter> converter) {
-		this.converter = converter;
+	@Test
+	fun restoreFromPersistenceLayer() {
+		val draftSchematicCombinedCrc = DraftSchematicCombinedCrc()
+		val mongoData = MongoData()
+		mongoData.putString("objectTemplate", "object/draft_schematic/weapon/shared_carbine_blaster_cdef.iff")
+		
+		draftSchematicCombinedCrc.readMongo(mongoData)
+		
+		assertEquals(draftSchematicCombinedCrc.objectTemplate, "object/draft_schematic/weapon/shared_carbine_blaster_cdef.iff")
 	}
-	
-	public void load() {
-		converter.get().convert();
+
+	@Test
+	fun saveToPersistenceLayer() {
+		val draftSchematicCombinedCrc = DraftSchematicCombinedCrc()
+		draftSchematicCombinedCrc.objectTemplate = "object/draft_schematic/weapon/carbine_blaster_cdef.iff"
+		val mongoData = MongoData()
+
+		draftSchematicCombinedCrc.saveMongo(mongoData)
+
+		assertEquals(mongoData.getString("objectTemplate"), "object/draft_schematic/weapon/shared_carbine_blaster_cdef.iff")
 	}
-	
+
+	@Test
+	fun packetEncode() {
+		val draftSchematicCombinedCrc = DraftSchematicCombinedCrc()
+		draftSchematicCombinedCrc.objectTemplate = "object/draft_schematic/instrument/instrument_slitherhorn.iff"
+
+		val encode = draftSchematicCombinedCrc.encode()
+
+		val buffer = NetBuffer.wrap(encode)
+		assertEquals(buffer.long, 8706505225174593761)
+	}
+
+	@Test
+	fun packetDecode() {
+		val draftSchematicCombinedCrc = DraftSchematicCombinedCrc()
+		val buffer = NetBuffer.allocate(8)
+		buffer.addLong(8706505225174593761)
+		buffer.rewind()
+		
+		draftSchematicCombinedCrc.decode(buffer)
+		
+		assertEquals(draftSchematicCombinedCrc.objectTemplate, "object/draft_schematic/instrument/shared_instrument_slitherhorn.iff")
+	}
 }

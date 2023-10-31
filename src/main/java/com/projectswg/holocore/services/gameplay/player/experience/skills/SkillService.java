@@ -32,11 +32,10 @@ import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSk
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BadgeLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.*;
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import com.projectswg.holocore.resources.support.objects.swg.player.DraftSchematicCombinedCrc;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
 import com.projectswg.holocore.services.gameplay.player.experience.*;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -197,6 +196,10 @@ public class SkillService extends Service {
 		
 		target.removeSkill(surrenderedSkill);
 		target.removeCommands(skillInfo.getCommands());
+		String[] schematicGroups = skillInfo.getSchematicsGranted();
+		for (String schematicGroup : schematicGroups) {
+			revokeSchematicGroup(target, schematicGroup);
+		}
 		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
 		
 		CombatLevel newCombatLevel = getCombatLevel(target);
@@ -272,7 +275,41 @@ public class SkillService extends Service {
 		target.addCommand(skill.getCommands());
 		
 		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
+		String[] schematicGroups = skill.getSchematicsGranted();
+		for (String schematicGroup : schematicGroups) {
+			grantSchematicGroup(target, schematicGroup);
+		}
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
+	}
+
+	private static void grantSchematicGroup(CreatureObject target, String schematicGroup) {
+		SchematicGroupLoader schematicGroupLoader = ServerData.INSTANCE.getSchematicGroups();
+		Collection<String> schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup);
+
+		for (String schematicInGroup : schematicsInGroup) {
+			grantSchematic(target, schematicInGroup);
+		}
+	}
+
+	private static void grantSchematic(CreatureObject target, String schematicInGroup) {
+		DraftSchematicCombinedCrc draftSchematicCombinedCrc = new DraftSchematicCombinedCrc();
+		draftSchematicCombinedCrc.setObjectTemplate(schematicInGroup);
+		target.getPlayerObject().setDraftSchematic(draftSchematicCombinedCrc, 1);
+	}
+
+	private static void revokeSchematicGroup(CreatureObject target, String schematicGroup) {
+		SchematicGroupLoader schematicGroupLoader = ServerData.INSTANCE.getSchematicGroups();
+		Collection<String> schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup);
+
+		for (String schematicInGroup : schematicsInGroup) {
+			revokeSchematic(target, schematicInGroup);
+		}
+	}
+
+	private static void revokeSchematic(CreatureObject target, String schematicInGroup) {
+		DraftSchematicCombinedCrc draftSchematicCombinedCrc = new DraftSchematicCombinedCrc();
+		draftSchematicCombinedCrc.setObjectTemplate(schematicInGroup);
+		target.getPlayerObject().revokeDraftSchematic(draftSchematicCombinedCrc);
 	}
 
 	private int skillPointsSpent(CreatureObject creature) {

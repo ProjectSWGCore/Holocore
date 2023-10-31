@@ -24,38 +24,46 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.utility.clientdata;
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import java.util.function.Supplier;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import java.io.File
 
-public enum Converters {
-	BUILDOUT_BUILDING_LIST		(ConvertBuildingList::new),
-	BUILDOUT_OBJECTS			(ConvertBuildouts::new),
-	OBJECTS_OBJECT_APPEARANCE	(ConvertAppearances::new),
-	OBJECTS_OBJECT_DATA			(ConvertObjectData::new),
-	OBJECTS_BUILDING_CELLS		(ConvertBuildingCells::new),
-	ABSTRACT_SLOT_DEFINITION	(ConvertSlotDefinition::new),
-	ABSTRACT_SLOT_DESCRIPTORS	(ConvertSlotDescriptor::new),
-	ABSTRACT_SLOT_ARRANGEMENT	(ConvertSlotArrangement::new),
-	ROLES						(() -> new ConvertDatatable("datatables/role/role.iff", "serverdata/player/role.sdb", false)),
-	COMMANDS_GLOBAL				(() -> new ConvertDatatable("datatables/command/command_table.iff", "serverdata/command/commands_global.sdb", false)),
-	COMMANDS_GROUND				(() -> new ConvertDatatable("datatables/command/command_table_ground.iff", "serverdata/command/commands_ground.sdb", false)),
-	COMMANDS_SPACE				(() -> new ConvertDatatable("datatables/command/command_table_space.iff", "serverdata/command/commands_space.sdb", false)),
-	BUFFS						(() -> new ConvertDatatable("datatables/buff/buff.iff", "serverdata/buff/buff.sdb", true)),
-	SKILLS						(() -> new ConvertDatatable("datatables/skill/skills.iff", "serverdata/skill/skills.sdb", true)),
-	PROFESSION_TEMPLATES		(ConvertProfessionTemplates::new),
-	APPEARANCE_TABLE			(() -> new ConvertDatatable("datatables/appearance/appearance_table.iff", "serverdata/appearance/appearance_table.sdb", true)),
-	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
-	TERRAINS					(ConvertTerrain::new);
-	
-	private final Supplier<Converter> converter;
-	
-	Converters(Supplier<Converter> converter) {
-		this.converter = converter;
+class SchematicGroupLoader : DataLoader() {
+
+	private val schematicGroupMap = mutableMapOf<String, MutableCollection<String>>()
+
+	/**
+	 * Returns a collection of all schematic names in the given group
+	 * Example: getSchematicsInGroup("craftDroidDamageRepairA") returns a collection of ["object/draft_schematic/droid/droid_damage_repair_kit_a.iff"]
+	 */
+	fun getSchematicsInGroup(groupId: String): Collection<String> {
+		return schematicGroupMap.getOrElse(groupId) { emptyList() }
 	}
-	
-	public void load() {
-		converter.get().convert();
+
+	override fun load() {
+		val set = SdbLoader.load(File("serverdata/crafting/schematic_group.sdb"))
+
+		set.use {
+			while (set.next()) {
+				val groupid = set.getText("groupid")
+				val schematicname = set.getText("schematicname")
+				
+				if (groupid != "end") {
+					ensureSchematicGroupExists(groupid)
+					appendSchematicToGroup(groupid, schematicname)
+				}
+			}
+		}
 	}
-	
+
+	private fun appendSchematicToGroup(groupid: String, schematicname: String) {
+		schematicGroupMap[groupid]?.add(schematicname)
+	}
+
+	private fun ensureSchematicGroupExists(groupid: String) {
+		if (!schematicGroupMap.containsKey(groupid)) {
+			schematicGroupMap[groupid] = mutableListOf()
+		}
+	}
 }
