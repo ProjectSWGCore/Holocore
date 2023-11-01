@@ -1,15 +1,14 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1						0	0	0
-1	quest.task.ground.retrieve_item	2;10	searchedComputer					0	0	0
-2	quest.task.ground.wait_for_signal	3;6	needToTalkScientist					0	0	0
-3	quest.task.ground.go_to_location	4	goToMiningOutpost					0	0	0
-4	quest.task.ground.wait_for_signal	5						0	0	0
-5	quest.task.ground.complete_quest							0	0	0
-6	quest.task.ground.timer	7						0	30	60
-7	quest.task.ground.encounter	8						2	0	0
-8	quest.task.ground.timer	9						0	30	60
-9	quest.task.ground.encounter							1	0	0
-10	quest.task.ground.escort							0	0	0
-11	quest.task.ground.show_message_box	12						0	0	0
-12	quest.task.ground.clear_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	server_template	num_required	item_name	drop_percent	signal_name	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+		quest.task.ground.go_to_location	@quest/ground/ep3_clone_relics_boba_fett_5:task00_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task00_journal_entry_description	1			true	true	false						false	dantooine	-568.0	0.0	-3797.0		100.0		0	0	0		0	0		0	0	0		
+		quest.task.ground.retrieve_item	@quest/ground/ep3_clone_relics_boba_fett_5:task01_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task01_journal_entry_description	2,10		searchedComputer	true	true	false						false	tatooine	0.0	0.0	0.0			object/tangible/quest/clone_relics_computer_terminal.iff	1	0	100		0	0		0	0	0		
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_boba_fett_5:task02_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task02_journal_entry_description	3,6		needToTalkScientist	true	true	false						false	tatooine	0.0	0.0	0.0				0	0	0	talkedToScientist	0	0		0	0	0		
+		quest.task.ground.go_to_location	@quest/ground/ep3_clone_relics_boba_fett_5:task03_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task03_journal_entry_description	4		goToMiningOutpost	true	true	false						false	dantooine	-556	1	-3820		10		0	0	0		0	0		0	0	0		
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_boba_fett_5:task04_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task04_journal_entry_description	5			true	true	false						false	tatooine	0.0	0.0	0.0				0	0	0	talkedScientistAgain	0	0		0	0	0		
+		quest.task.ground.complete_quest						false	false	false						false	tatooine	0.0	0.0	0.0				0	0	0		0	0		0	0	0		
+		quest.task.ground.timer			7			false	false	false						false	tatooine	0.0	0.0	0.0				0	0	0		30	60		0	0	0		
+		quest.task.ground.encounter			8			false	false	false						false	tatooine	0.0	0.0	0.0				0	0	0		0	0	clone_relics_warren_agro_droid_s03	2	5	15	0.0	0.0
+		quest.task.ground.timer			9			false	false	false						false	tatooine	0.0	0.0	0.0				0	0	0		30	60		0	0	0		
+		quest.task.ground.encounter						false	false	false						false	tatooine	0.0	0.0	0.0				0	0	0		0	0	clone_relics_warren_agro_droid_s04	1	10	50	0.0	0.0
+		quest.task.ground.escort				11		false	false	false						false	tatooine	0.0	0.0	0.0			clone_relics_warren_scientist	0	0	0		0	0		0	0	0		
+		quest.task.ground.clear_quest	@quest/ground/ep3_clone_relics_boba_fett_5:task11_journal_entry_title	@quest/ground/ep3_clone_relics_boba_fett_5:task11_journal_entry_description				true	true	false						false	tatooine	0.0	0.0	0.0				0	0	0		0	0		0	0	0		

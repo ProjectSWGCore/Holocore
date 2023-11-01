@@ -1,16 +1,16 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;6						0	0	0
-1	quest.task.ground.go_to_location	2	taskGoToTatooine					0	0	0
-2	quest.task.ground.timer	3	jesskTimer					0	60	75
-3	quest.task.ground.encounter	5	taskValarianEncounter					2	0	0
-4	quest.task.ground.clear_quest							0	0	0
-5	quest.task.ground.wait_for_signal		speakWithCheated					0	0	0
-6	quest.task.ground.wait_for_signal	7;10						0	0	0
-7	quest.task.ground.timer	8						0	180	240
-8	quest.task.ground.encounter		taskJesskEncounter					1	0	0
-9	quest.task.ground.clear_quest							0	0	0
-10	quest.task.ground.destroy_multi	11	taskHuntForJessk			ep3_qst_jessk		1	0	0
-11	quest.task.ground.wait_for_signal	12	hasKilledJessk					0	0	0
-12	quest.task.ground.reward	13						1	0	0
-13	quest.task.ground.complete_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z	signal_name	target_server_template	social_group	required_region	reward_credits	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.nothing			1,6			false	false	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0							0		0		0	0	
+		quest.task.ground.go_to_location	@quest/ground/ep3_stren_jessk_bounty:task01_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task01_journal_entry_description	2		taskGoToTatooine	true	true	true								false	tatooine	3528	5	-4803		200	0	0		0	0	0							0		0		0	0	
+		quest.task.ground.timer			3		jesskTimer	false	false	false								false	tatooine	0.0	0.0	0.0			60	75		0	0	0							0		0		0	0	
+		quest.task.ground.encounter	@quest/ground/ep3_stren_jessk_bounty:task03_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task03_journal_entry_description	5	4	taskValarianEncounter	true	true	false								false	tatooine	0.0	0.0	0.0			0	0	valarian_henchman	2	5	8	0.0	0.0					0		0		0	0	
+		quest.task.ground.clear_quest	@quest/ground/ep3_stren_jessk_bounty:task04_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task04_journal_entry_description				false	false	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0							0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_stren_jessk_bounty:task05_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task05_journal_entry_description			speakWithCheated	true	true	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0			gotJesskDirections				0		0		0	0	
+		quest.task.ground.wait_for_signal			7,10			false	false	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0			gotJesskDirections				0		0		0	0	
+		quest.task.ground.timer			8			false	false	false								false	tatooine	0.0	0.0	0.0			180	240		0	0	0							0		0		0	0	
+		quest.task.ground.encounter	@quest/ground/ep3_stren_jessk_bounty:task08_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task08_journal_entry_description		9	taskJesskEncounter	true	true	false								false	tatooine	0.0	0.0	0.0			0	0	ep3_qst_jessk	1	5	12	0.0	0.0					0		0		0	0	
+		quest.task.ground.clear_quest						true	false	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0							0		0		0	0	
+		quest.task.ground.destroy_multi	@quest/ground/ep3_stren_jessk_bounty:task10_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task10_journal_entry_description	11		taskHuntForJessk	true	true	false								false	tatooine	0.0	0.0	0.0			0	0		1	0	0				ep3_qst_jessk			0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_stren_jessk_bounty:task11_journal_entry_title	@quest/ground/ep3_stren_jessk_bounty:task11_journal_entry_description	12		hasKilledJessk	true	true	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0			collectJeskReward				0		0		0	0	
+		quest.task.ground.reward			13			false	false	false								false	tatooine	0.0	0.0	0.0			0	0		1	0	0							0		0	Rebel	0	12000	
+		quest.task.ground.complete_quest						false	false	false								false	tatooine	0.0	0.0	0.0			0	0		0	0	0							0		0		0	0	

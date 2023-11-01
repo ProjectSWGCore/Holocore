@@ -1,9 +1,9 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi	1	killFiveSquadLeaders			cheerleader_rebel_squad_leader_hard		5	0	0
-1	quest.task.ground.destroy_multi	2	killTenCommandos			cheerleader_rebel_commando_hard		10	0	0
-2	quest.task.ground.destroy_multi	3	killRebCorporals			cheerleader_rebel_corporal_hard		3	0	0
-3	quest.task.ground.destroy_multi	4	killRebSergeants			cheerleader_rebel_sergeant_hard		2	0	0
-4	quest.task.ground.destroy_multi	5	KillRebMSergeant			cheerleader_rebel_master_sergeant_hard		1	0	0
-5	quest.task.ground.reward	6	reward					0	0	0
-6	quest.task.ground.reward		reward2					1	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	target_server_template	social_group	required_region	count	reward_credits	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.destroy_multi	@quest/ground/event_gcwcheerleader_cmimp3:task00_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task00_journal_entry_description	true			false	1		killFiveSquadLeaders	true							true		true	false	tatooine	0.0	0.0	0.0		crackdown_rebel_squad_leader_hard			5	0		0		0	0			0						0	0
+quest.task.ground.destroy_multi	@quest/ground/event_gcwcheerleader_cmimp3:task01_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task01_journal_entry_description	true			false	2		killTenCommandos	true							true		true	false	tatooine	0.0	0.0	0.0		crackdown_rebel_commando_hard			10	0		0		0	0			0						0	0
+quest.task.ground.destroy_multi	@quest/ground/event_gcwcheerleader_cmimp3:task02_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task02_journal_entry_description	true			false	3		killRebCorporals	true							true		true	false	tatooine	0.0	0.0	0.0		crackdown_rebel_corporal_hard			3	0		0		0	0			0						0	0
+quest.task.ground.destroy_multi	@quest/ground/event_gcwcheerleader_cmimp3:task03_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task03_journal_entry_description	true			false	4		killRebSergeants	true							true		true	false	tatooine	0.0	0.0	0.0		crackdown_rebel_sergeant_hard			2	0		0		0	0			0						0	0
+quest.task.ground.destroy_multi	@quest/ground/event_gcwcheerleader_cmimp3:task04_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task04_journal_entry_description	true			false	5		KillRebMSergeant	true							true		true	false	tatooine	0.0	0.0	0.0		crackdown_rebel_master_sergeant_hard			1	0		0		0	0			0						0	0
+quest.task.ground.reward	@quest/ground/event_gcwcheerleader_cmimp3:task05_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task05_journal_entry_description	false			false	6		reward	false							true		true	false	tatooine	0.0	0.0	0.0					0	0		0	Imperial	1000	25000			1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.reward	@quest/ground/event_gcwcheerleader_cmimp3:task06_journal_entry_title	@quest/ground/event_gcwcheerleader_cmimp3:task06_journal_entry_description	false			false			reward2	false							true		true	false	tatooine	0.0	0.0	0.0					1	0		0	Rebel	0	0	object/tangible/deed/faction_perk/hq/hq_s01_imperial.iff		1	0.1	0.1	0.1	0.1		1	0

@@ -1,7 +1,7 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	gursanBreachEntry					0	0	0
-1	quest.task.ground.destroy_multi_and_loot	2				ep3_qst_blackscale_captain_beshk		0	0	0
-2	quest.task.ground.wait_for_signal	3	gursanFlipPowerSwitch					0	0	0
-3	quest.task.ground.retrieve_item	4						0	0	0
-4	quest.task.ground.wait_for_signal		gursanTakeToGursan					0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	signal_name	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	server_template	num_required	item_name	drop_percent
+
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_gursan_capture_sequencer_codes:task00_journal_entry_title	@quest/ground/ep3_gursan_capture_sequencer_codes:task00_journal_entry_description	1		gursanBreachEntry	true	true	false						gursanBunkerEntryBreach					0	0	0		0	0	0
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_gursan_capture_sequencer_codes:task01_journal_entry_title	@quest/ground/ep3_gursan_capture_sequencer_codes:task01_journal_entry_description	2			true	true	false							ep3_qst_blackscale_captain_beshk			Command Key Code	1	100	0		0	0	0
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_gursan_capture_sequencer_codes:task02_journal_entry_title	@quest/ground/ep3_gursan_capture_sequencer_codes:task02_journal_entry_description	3		gursanFlipPowerSwitch	true	true	false						gursanPowerFlipped					0	0	0		0	0	0
+		quest.task.ground.retrieve_item	@quest/ground/ep3_gursan_capture_sequencer_codes:task03_journal_entry_title	@quest/ground/ep3_gursan_capture_sequencer_codes:task03_journal_entry_description	4			true	true	false											0	0	0	object/tangible/quest/computer_console.iff	1	0	100
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_gursan_capture_sequencer_codes:task04_journal_entry_title	@quest/ground/ep3_gursan_capture_sequencer_codes:task04_journal_entry_description			gursanTakeToGursan	true	true	false						gursanSequencerEndSignal					0	0	0		0	0	0

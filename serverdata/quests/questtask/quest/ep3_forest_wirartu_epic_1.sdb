@@ -1,18 +1,17 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.wait_for_signal	2;5;8;11						0	0	0
-2	quest.task.ground.timer	3						0	10	10
-3	quest.task.ground.encounter							4	0	0
-4	quest.task.ground.clear_quest							0	0	0
-5	quest.task.ground.timer	6						0	130	70
-6	quest.task.ground.encounter							3	0	0
-7	quest.task.ground.clear_quest							0	0	0
-8	quest.task.ground.timer	9						0	210	210
-9	quest.task.ground.encounter							1	0	0
-10	quest.task.ground.clear_quest							0	0	0
-11	quest.task.ground.timer	12						0	370	370
-12	quest.task.ground.encounter	13						1	0	0
-13	quest.task.ground.wait_for_signal	14	talkWirartu					0	0	0
-14	quest.task.ground.complete_quest							0	0	0
-15	quest.task.ground.clear_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	min_time	max_time	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z
+
+quest.task.ground.nothing	@quest/ground/ep3_forest_wirartu_epic_1:task00_journal_entry_title	@quest/ground/ep3_forest_wirartu_epic_1:task00_journal_entry_description	true			false	1			false	sound/mus_wookiee_quest_accept.snd						true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.wait_for_signal			false			false	2,5,8,11			false							true		true	false	tatooine	0.0	0.0	0.0		startfight	false			0		0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.timer			false			false	3			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	10	10		0	0	0		
+quest.task.ground.encounter			false			false		4		false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0	ep3_arena_webweaver_bonerender	4	5	10	0.0	0.0
+quest.task.ground.clear_quest			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.timer			false			false	6			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	70	70		0	0	0		
+quest.task.ground.encounter			false			false		7		false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0	ep3_arena_uller_hellstalker	3	5	10	0.0	0.0
+quest.task.ground.clear_quest			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.timer			false			false	9			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	150	150		0	0	0		
+quest.task.ground.encounter			false			false		10		false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0	ep3_arena_varactyl_venomblade	1	5	10	0.0	0.0
+quest.task.ground.clear_quest			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.timer			false			false	12			false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	310	310		0	0	0		
+quest.task.ground.encounter			false			false	13	14		false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0	ep3_forest_wirartu	1	5	10	0.0	0.0
+quest.task.ground.wait_for_signal			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		wirartu	false			0		0.0	0.0	0.0	0	0		0	0	0		
+quest.task.ground.clear_quest			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	0	0		0	0	0		

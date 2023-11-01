@@ -1,9 +1,4 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0								0	0	0
-1								0	0	0
-2								0	0	0
-3								0	0	0
-4								0	0	0
-5								0	0	0
-6								0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	target	parameter	is_visible	show_system_messages	allow_repeats
+
+			@spacequest/destroy/naboo_privateer_2:quest_location_t	@spacequest/destroy/naboo_privateer_2:quest_location_d					true	false	true
+			@spacequest/destroy/naboo_privateer_2:quest_destroy_t	@spacequest/destroy/naboo_privateer_2:quest_destroy_d					true	false	true

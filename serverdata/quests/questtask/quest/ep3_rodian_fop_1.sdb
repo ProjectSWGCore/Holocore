@@ -1,4 +1,4 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1						0	0	0
-1	quest.task.ground.destroy_multi_and_loot							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	is_visible	show_system_messages	allow_repeats	target	parameter	planet_name	location_x	location_y	location_z	radius	target_server_template	loot_item_name	loot_items_required	loot_drop_percent	reward_credits
+
+		quest.task.ground.go_to_location	Wookiee slaves?	Head south to the Trandoshan camp. Get close enough to their cages to determine if wookiees are being held as slaves here.	1		false	false	false			kashyyyk	-516	4	383	12			0	0	0
+0		quest.task.ground.destroy_multi_and_loot	Wookiee slaves found!	Destroy the trandoshans and recover three paystubs. They don't deserve to be paid if they're taking slaves!			false	false	false								trandoshan_slaver	Rodian Paystub	3	100	25000

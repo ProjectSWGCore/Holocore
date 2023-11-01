@@ -1,10 +1,10 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	talkJawl1					0	0	0
-1	quest.task.ground.wait_for_signal	2	talkToTeacher					0	0	0
-2	quest.task.ground.wait_for_signal	3	talkJawl2					0	0	0
-3	quest.task.ground.wait_for_signal	4	jabbaMeeting1					0	0	0
-4	quest.task.ground.destroy_multi_and_loot	5	morkovDies			clone_relics_morkov		0	0	0
-5	quest.task.ground.wait_for_signal	6	datapadToJabba					0	0	0
-6	quest.task.ground.reward	7						1	0	0
-7	quest.task.ground.wait_for_signal		mortGoodNewsNeutral					0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task00_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task00_journal_entry_description	1		talkJawl1	true	true	false	sound/music_themequest_acc_criminal.snd					false	tatooine	0.0	0.0	0.0		talkedJawl1					0	0	0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task01_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task01_journal_entry_description	2		talkToTeacher	true	true	false						false	tatooine	0.0	0.0	0.0		talkedToTeacher					0	0	0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task02_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task02_journal_entry_description	3		talkJawl2	true	true	false						false	tatooine	0.0	0.0	0.0		talkedJawl2					0	0	0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task03_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task03_journal_entry_description	4		jabbaMeeting1	true	true	false						false	tatooine	0.0	0.0	0.0		talkedJabba1					0	0	0		0		0	0	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task04_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task04_journal_entry_description	5		morkovDies	true	true	false						false	tatooine	0.0	0.0	0.0			clone_relics_morkov			Morkov's datapad	1	100	0		0		0	0	
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task05_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task05_journal_entry_description	6		datapadToJabba	true	true	false						false	tatooine	0.0	0.0	0.0		datapadReturned					0	0	0		0		0	0	
+		quest.task.ground.reward			7			false	false	false						false	tatooine	0.0	0.0	0.0							0	0	0		0	jabba	3000	0	object/tangible/furniture/ep3_rewards/hologram_yt1300_01.iff
+		quest.task.ground.wait_for_signal	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task07_journal_entry_title	@quest/ground/ep3_clone_relics_clone_trooper_mort_neutral:task07_journal_entry_description			mortGoodNewsNeutral	true	true	false	sound/mus_trandoshan_quest_sucess.snd					false	tatooine	0.0	0.0	0.0		toldMort					0	0	0		0		0	0	

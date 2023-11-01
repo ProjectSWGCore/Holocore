@@ -1,9 +1,9 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1;2;3;4;5;6						0	0	0
-1	quest.task.ground.destroy_multi_and_loot					mutant_bark_mite_queen		0	0	0
-2	quest.task.ground.destroy_multi_and_loot					mutant_bark_mite_soldier		0	0	0
-3	quest.task.ground.destroy_multi_and_loot					mutant_bark_mite_giant		0	0	0
-4	quest.task.ground.destroy_multi_and_loot					mutant_bark_mite_worker		0	0	0
-5	quest.task.ground.destroy_multi_and_loot					mutant_bark_mite_hatchling		0	0	0
-6	quest.task.ground.wait_for_signal							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	planet_name	location_x	location_y	location_z	radius	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits	signal_name
+
+		quest.task.ground.go_to_location	@quest/ground/lf_deadmite:task00_journal_entry_title	@quest/ground/lf_deadmite:task00_journal_entry_description	1,2,3,4,5,6		true	true	false						rori	3572	91	5424	10.0					0	0	0	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/lf_deadmite:task01_journal_entry_title	@quest/ground/lf_deadmite:task01_journal_entry_description			true	true	false											mutant_bark_mite_queen			Mutant Bark Mite Queen Sample	1	100	2000	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/lf_deadmite:task02_journal_entry_title	@quest/ground/lf_deadmite:task02_journal_entry_description			true	true	false											mutant_bark_mite_soldier			Mutant Bark Mite Soldier Sample	1	100	2000	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/lf_deadmite:task03_journal_entry_title	@quest/ground/lf_deadmite:task03_journal_entry_description			true	true	false											mutant_bark_mite_giant			Giantt Bark Mite Sample	3	100	1500	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/lf_deadmite:task04_journal_entry_title	@quest/ground/lf_deadmite:task04_journal_entry_description			true	true	false											mutant_bark_mite_worker			Mutant Bark Mite Worker Sample	3	100	1200	
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/lf_deadmite:task05_journal_entry_title	@quest/ground/lf_deadmite:task05_journal_entry_description			true	true	false											mutant_bark_mite_hatchling			Mutant Bark Mite Hatchling Sample	5	100	1000	
+		quest.task.ground.wait_for_signal	@quest/ground/lf_deadmite:task06_journal_entry_title	@quest/ground/lf_deadmite:task06_journal_entry_description			true	false	false															0	0	0	

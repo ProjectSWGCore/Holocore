@@ -1,4 +1,4 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1						0	0	0
-1	quest.task.ground.encounter							3	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	planet_name	location_x	location_y	location_z	radius	creature_type	count	min_distance	max_distance	direction
+
+		quest.task.ground.go_to_location	@quest/ground/test_encounter:task00_journal_entry_title	@quest/ground/test_encounter:task00_journal_entry_description	1			true	false	false						tatooine	190	190	190	10.0		0	0	0	
+		quest.task.ground.encounter	@quest/ground/test_encounter:task01_journal_entry_title	@quest/ground/test_encounter:task01_journal_entry_description				true	false	false											womprat	3	2	3	Any

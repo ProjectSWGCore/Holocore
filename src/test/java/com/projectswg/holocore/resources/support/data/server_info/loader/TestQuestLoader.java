@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,10 +47,7 @@ public class TestQuestLoader {
 		
 		@BeforeEach
 		public void setup() throws IOException {
-			QuestLoader questLoader = new QuestLoader();
-			questLoader.load();	// May throw an exception
-			
-			questInfo = questLoader.getQuestListInfo("quest/npe_rebel_2");
+			questInfo = ServerData.INSTANCE.getQuestLoader().getQuestListInfo("quest/c_newbie_quest4");
 		}
 		
 		@Test
@@ -33,33 +56,13 @@ public class TestQuestLoader {
 		}
 		
 		@Test
-		public void canLoadLevel() {
-			assertEquals(10, questInfo.getLevel());
-		}
-		
-		@Test
-		public void canLoadTier() {
-			assertEquals(3, questInfo.getTier());
-		}
-		
-		@Test
 		public void canLoadJournalEntryTitle() {
-			assertEquals("@quest/ground/npe_rebel_2:journal_entry_title", questInfo.getJournalEntryTitle());
+			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_title", questInfo.getJournalEntryTitle());
 		}
 		
 		@Test
 		public void canLoadJournalEntryDescription() {
-			assertEquals("@quest/ground/npe_rebel_2:journal_entry_description", questInfo.getJournalEntryDescription());
-		}
-		
-		@Test
-		public void canLoadExperienceType() {
-			assertEquals("quest_combat", questInfo.getExperienceType());
-		}
-		
-		@Test
-		public void canLoadCreditReward() {
-			assertEquals(250, questInfo.getCredits());
+			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_description", questInfo.getJournalEntryDescription());
 		}
 		
 		@Test
@@ -81,24 +84,22 @@ public class TestQuestLoader {
 		
 		@BeforeEach
 		public void setup() throws IOException {
-			QuestLoader questLoader = new QuestLoader();
-			
-			taskListInfos = questLoader.getTaskListInfos("quest/purvis_kill_warriors");
+			taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_syren5");
 		}
 		
 		@Test
 		public void canLoadRightAmountOfTasks() {
-			assertEquals(7, taskListInfos.size());
+			assertEquals(8, taskListInfos.size());
 		}
 		
 		@Test
 		public void canLoadMinTime() {
-			assertEquals(20, taskListInfos.get(5).getMinTime());
+			assertEquals(0, taskListInfos.get(5).getMinTime());
 		}
 		
 		@Test
 		public void canLoadMaxTime() {
-			assertEquals(25, taskListInfos.get(5).getMaxTime());
+			assertEquals(0, taskListInfos.get(5).getMaxTime());
 		}
 		
 		@Test
@@ -108,38 +109,39 @@ public class TestQuestLoader {
 		
 		@Test
 		public void canLoadType() {
-			assertEquals("quest.task.ground.comm_player", taskListInfos.get(6).getType());
+			assertEquals("quest.task.ground.destroy_multi_and_loot", taskListInfos.get(1).getType());
 		}
 		
 		@Test
 		public void canLoadName() {
-			assertEquals("kill_tusken_raider_warriors", taskListInfos.get(0).getName());
+			assertEquals("encounterWithCalHandro", taskListInfos.get(3).getName());
 		}
 		
 		@Test
 		public void canLoadTargetServerTemplate() {
-			assertEquals("tusken_raider_warrior", taskListInfos.get(1).getTargetServerTemplate());
+			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/yavin_fallenstar_pt_2");
+			assertEquals("imperial_major", taskListInfos.get(1).getTargetServerTemplate());
 		}
 		
 		@Test
 		public void canLoadNpcAppearanceServerTemplate() {
-			assertEquals("object/mobile/bib_fortuna.iff", taskListInfos.get(6).getNpcAppearanceServerTemplate());
+			assertEquals("object/mobile/boba_fett.iff", taskListInfos.get(5).getNpcAppearanceServerTemplate());
 		}
 		
 		@Test
 		public void canLoadCommMessageText() {
-			assertEquals("@quest/ground/purvis_kill_warriors:task06_comm_message_text", taskListInfos.get(6).getCommMessageText());
+			assertEquals("@quest/ground/c_syren5:task05_comm_message_text", taskListInfos.get(5).getCommMessageText());
 		}
 		
 		@Test
 		public void canLoadCount() {
-			assertEquals(5, taskListInfos.get(1).getCount());
+			assertEquals(1, taskListInfos.get(4).getCount());
 		}
 		
 		@Test
 		public void canLoadNextTasksOnCompleteMultipleTasks() {
-			Collection<Integer> nextTasksOnComplete = taskListInfos.get(0).getNextTasksOnComplete();
-			Collection<Integer> expected = Arrays.asList(1, 5);
+			Collection<Integer> nextTasksOnComplete = taskListInfos.get(3).getNextTasksOnComplete();
+			Collection<Integer> expected = Arrays.asList(4, 5, 6);
 			
 			assertEquals(expected, nextTasksOnComplete);
 		}

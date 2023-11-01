@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -54,19 +54,29 @@ public class QuestLoader extends DataLoader {
 		
 		List<QuestTaskInfo> questTaskInfos = new ArrayList<>();
 		
+		int index = 0;
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questtask/" + questName + ".sdb"))) {
 			while (set.next()) {
-				int index = (int) set.getInt("index");
-				String type = set.getText("type");
-				String name = set.getText("name");
+				Set<String> columns = new LinkedHashSet<>(set.getColumns());
+				String type = set.getText("attach_script");
+				String name = set.getText("task_name");
 				String commMessageText = set.getText("comm_message_text");
 				String npcAppearanceServerTemplate = set.getText("npc_appearance_server_template");
-				String targetServerTemplate = set.getText("target_server_template");
+				String targetServerTemplate = null;
+				if (columns.contains("target_server_template")) {
+					targetServerTemplate = set.getText("target_server_template");
+				}
 				String grantQuestOnComplete = set.getText("grant_quest_on_complete");
 				int count = (int) set.getInt("count");
-				int minTime = (int) set.getInt("min_time");
-				int maxTime = (int) set.getInt("max_time");
-				String[] nextTasksOnComplete = set.getText("next_tasks_on_complete").split(";");
+				int minTime = 0;
+				if (columns.contains("min_time")) {
+					minTime = (int) set.getInt("min_time");
+				}
+				int maxTime = 0;
+				if (columns.contains("max_time")) {
+					maxTime = (int) set.getInt("max_time");
+				}
+				String[] nextTasksOnComplete = set.getText("tasks_on_complete").split(",");
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -79,7 +89,7 @@ public class QuestLoader extends DataLoader {
 					}
 				}
 				
-				questTaskInfo.setIndex(index);
+				questTaskInfo.setIndex(index++);
 				questTaskInfo.setName(name);
 				questTaskInfo.setCommMessageText(commMessageText);
 				questTaskInfo.setNpcAppearanceServerTemplate(npcAppearanceServerTemplate);
@@ -92,7 +102,7 @@ public class QuestLoader extends DataLoader {
 				questTaskInfos.add(questTaskInfo);
 			}
 		} catch (Exception e) {
-			Log.e(e);
+			throw new RuntimeException("Failed to load quest task info for quest by name " + questName, e);
 		}
 		
 		questTaskInfosMap.put(questName, questTaskInfos);
@@ -114,22 +124,14 @@ public class QuestLoader extends DataLoader {
 					throw new SdbLoaderException(set, new RuntimeException("Duplicate quest list info for quest by name " + questName));
 				}
 				
-				int level = (int) set.getInt("level");
-				int tier = (int) set.getInt("tier");
 				String journalEntryTitle = set.getText("journal_entry_title");
 				String journalEntryDescription = set.getText("journal_entry_description");
-				String experienceType = set.getText("quest_reward_experience_type");
-				int credits = (int) set.getInt("quest_reward_bank_credits");
 				boolean completeWhenTasksComplete = set.getBoolean("complete_when_tasks_complete");
 				boolean repeatable = set.getBoolean("allow_repeats");
 				
 				QuestListInfo listInfo = new QuestListInfo();
-				listInfo.setLevel(level);
-				listInfo.setTier(tier);
 				listInfo.setJournalEntryTitle(journalEntryTitle);
 				listInfo.setJournalEntryDescription(journalEntryDescription);
-				listInfo.setExperienceType(experienceType);
-				listInfo.setCredits(credits);
 				listInfo.setCompleteWhenTasksComplete(completeWhenTasksComplete);
 				listInfo.setRepeatable(repeatable);
 				
@@ -140,12 +142,8 @@ public class QuestLoader extends DataLoader {
 	}
 	
 	public static class QuestListInfo {
-		private int level;
-		private int tier;
 		private String journalEntryTitle;
 		private String journalEntryDescription;
-		private String experienceType;
-		private int credits;
 		private boolean completeWhenTasksComplete;
 		private boolean repeatable;
 		
@@ -169,22 +167,6 @@ public class QuestLoader extends DataLoader {
 			this.completeWhenTasksComplete = completeWhenTasksComplete;
 		}
 		
-		public int getLevel() {
-			return level;
-		}
-		
-		private void setLevel(int level) {
-			this.level = level;
-		}
-		
-		public int getTier() {
-			return tier;
-		}
-		
-		private void setTier(int tier) {
-			this.tier = tier;
-		}
-		
 		public String getJournalEntryTitle() {
 			return journalEntryTitle;
 		}
@@ -199,22 +181,6 @@ public class QuestLoader extends DataLoader {
 		
 		private void setJournalEntryDescription(String journalEntryDescription) {
 			this.journalEntryDescription = journalEntryDescription;
-		}
-		
-		public String getExperienceType() {
-			return experienceType;
-		}
-		
-		private void setExperienceType(String experienceType) {
-			this.experienceType = experienceType;
-		}
-		
-		public int getCredits() {
-			return credits;
-		}
-		
-		private void setCredits(int credits) {
-			this.credits = credits;
 		}
 	}
 	

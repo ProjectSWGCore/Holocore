@@ -1,8 +1,8 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1						0	0	0
-1	quest.task.ground.destroy_multi	2	hracca_huntKkorrwrot			ep3_hracca_kkorrwrot		1	0	0
-2	quest.task.ground.wait_for_signal	3	hracca_kkorrwrotKilled					0	0	0
-3	quest.task.ground.reward	4						1	0	0
-4	quest.task.ground.reward	5						1	0	0
-5	quest.task.ground.complete_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	target_server_template	social_group	required_region	count	reward_credits	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.nothing			false			false	1			false							true		true	false	tatooine	0.0	0.0	0.0					0	0			0		0	0			0						0	0
+quest.task.ground.destroy_multi	@quest/ground/ep3_hunt_hracca_kkorrwrot_hunt:task01_journal_entry_title	@quest/ground/ep3_hunt_hracca_kkorrwrot_hunt:task01_journal_entry_description	true			false	2		hracca_huntKkorrwrot	true	sound/mus_rodian_quest_accept.snd	sound/mus_rodian_quest_sucess.snd					true		true	false	tatooine	0.0	0.0	0.0		ep3_hracca_kkorrwrot			1	0			0		0	0			0						0	0
+quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_hracca_kkorrwrot_hunt:task02_journal_entry_title	@quest/ground/ep3_hunt_hracca_kkorrwrot_hunt:task02_journal_entry_description	true			false	3		hracca_kkorrwrotKilled	true							true		true	false	tatooine	0.0	0.0	0.0					0	0	hracca_kkorrwrotKilled		0		0	0			0						0	0
+quest.task.ground.reward			false			false	4			false							true		true	false	tatooine	0.0	0.0	0.0					1	0			0	Rebel	0	0	object/tangible/wearables/backpack/ep3_chiss_poacher_player_backpack.iff		1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.reward			false			false	5			false							true		true	false	tatooine	0.0	0.0	0.0					1	0			0	Rebel	0	0	object/tangible/furniture/ep3_rewards/ep3_kash_reward_trophy_kkorrwrot.iff		1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.complete_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0					0	0			0		0	0			0						0	0

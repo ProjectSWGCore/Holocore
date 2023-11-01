@@ -1,5 +1,5 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	gotAllKills					0	0	0
-1	quest.task.ground.reward	2	reward					0	0	0
-2	quest.task.ground.reward		reward2					1	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	count	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.wait_for_signal	@quest/ground/event_gcwcheerleader_sfimp50:task00_journal_entry_title	@quest/ground/event_gcwcheerleader_sfimp50:task00_journal_entry_description	true			false	1		gotAllKills	true							true		true	false	tatooine	0.0	0.0	0.0		got_all_kills	false			0		0.0	0.0	0.0		0		0	0		0		0						0	0
+quest.task.ground.reward	@quest/ground/event_gcwcheerleader_sfimp50:task01_journal_entry_title	@quest/ground/event_gcwcheerleader_sfimp50:task01_journal_entry_description	false			false	2		reward	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	Rebel	1500	50000		0		1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.reward	@quest/ground/event_gcwcheerleader_sfimp50:task02_journal_entry_title	@quest/ground/event_gcwcheerleader_sfimp50:task02_journal_entry_description	true			false			reward2	false							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0		0	Rebel	0	0	object/tangible/deed/faction_perk/hq/hq_s04_rebel_pvp.iff	1		1	0.1	0.1	0.1	0.1		1	0

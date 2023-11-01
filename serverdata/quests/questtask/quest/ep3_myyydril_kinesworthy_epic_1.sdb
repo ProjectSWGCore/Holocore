@@ -1,6 +1,6 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.retrieve_item	1						0	0	0
-1	quest.task.ground.retrieve_item	2						0	0	0
-2	quest.task.ground.wait_for_signal	3						0	0	0
-3	quest.task.ground.reward							1	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	server_template	num_required	item_name	drop_percent	signal_name	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item
+
+		quest.task.ground.retrieve_item	@quest/ground/ep3_myyydril_kinesworthy_epic_1:task00_journal_entry_title	@quest/ground/ep3_myyydril_kinesworthy_epic_1:task00_journal_entry_description	1			true	false	false	sound/mus_wookiee_quest_accept.snd					false	tatooine	0.0	0.0	0.0		object/tangible/quest/camp_crate.iff	1	0	100			0		0	0	
+		quest.task.ground.retrieve_item	@quest/ground/ep3_myyydril_kinesworthy_epic_1:task01_journal_entry_title	@quest/ground/ep3_myyydril_kinesworthy_epic_1:task01_journal_entry_description	2			true	false	false						false	tatooine	0.0	0.0	0.0		object/tangible/quest/kines_equipment.iff	1	0	100			0		0	0	
+		quest.task.ground.wait_for_signal			3			false	false	false						false	tatooine	0.0	0.0	0.0			0	0	0	phatLewts		0		0	0	
+		quest.task.ground.reward	@quest/ground/ep3_myyydril_kinesworthy_epic_1:task03_journal_entry_title					false	true	false	sound/mus_wookiee_quest_sucess.snd					false	tatooine	0.0	0.0	0.0			0	0	0			0	Rebel	0	5000	object/tangible/wearables/cybernetic/s05/cybernetic_s05_arm_r.iff

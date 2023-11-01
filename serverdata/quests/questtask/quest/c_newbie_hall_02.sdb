@@ -1,5 +1,5 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	enterRoom7					0	0	0
-1	quest.task.ground.show_message_box	2	getQuest					0	0	0
-2	quest.task.ground.wait_for_signal		explainWaypoint				quest/c_newbie_hall_range01	0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	message_box_title	message_box_text	message_box_sound	message_box_size_width	message_box_size_height	message_box_location_x	message_box_location_y
+
+quest.task.ground.wait_for_signal			false			false	1		enterRoom7	false							true		true	false	tatooine	0.0	0.0	0.0		entered_tutorial_r7	true	object/static/structure/general/waypoint_pulseline_white.iff		0	r6	0.2	-7.0	-78.9				0	0	0	0
+quest.task.ground.show_message_box	@quest/ground/c_newbie_hall_02:task01_journal_entry_title	@quest/ground/c_newbie_hall_02:task01_journal_entry_description	true			false	2		getQuest	true							true		true	false	tatooine	0.0	0.0	0.0			false					0.0	0.0	0.0	@quest/ground/c_newbie_hall_02:task01_message_box_title	@quest/ground/c_newbie_hall_02:task01_message_box_text	sound/tutorial_textbox07_waypoints.snd	-1	-1	-1	-1
+quest.task.ground.wait_for_signal			false			false			explainWaypoint	false						quest/c_newbie_hall_range01	true		true	false	tatooine	0.0	0.0	0.0		explainWaypoint	true	object/static/structure/general/waypoint_personal_blue.iff		0	r7	42.7	-7.0	-76.5				0	0	0	0

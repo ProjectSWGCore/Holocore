@@ -1,5 +1,6 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi	1	tatooine_anchorjobs_bantha_e2					10	0	0
-1	quest.task.ground.comm_player	2	tatooine_anchorjobs_bantha_e4	@quest/ground/tatooine_anchorjobs_bantha:task01_comm_message_text	object/mobile/dressed_anchorjobs_ordo.iff		tatooine_anchorjobs_return_ordo	0	0	0
-2	quest.task.ground.complete_quest		tatooine_anchorjobs_bantha_e6					0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	target_server_template	social_group	required_region	count	reward_credits	comm_message_text	npc_appearance_server_template	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.destroy_multi	@quest/ground/tatooine_anchorjobs_bantha:task00_journal_entry_title	@quest/ground/tatooine_anchorjobs_bantha:task00_journal_entry_description	true			false	1		tatooine_anchorjobs_bantha_e2	false							true		true	false	tatooine	0.0	0.0	0.0			bantha		10	0				0		0	0			0						0	0
+quest.task.ground.comm_player	@quest/ground/tatooine_anchorjobs_bantha:task01_journal_entry_title		false			false	2		tatooine_anchorjobs_bantha_e3	false							true		true	false	tatooine	0.0	0.0	0.0					0	0	@quest/ground/tatooine_anchorjobs_bantha:task01_comm_message_text			0		0	0			0						0	0
+quest.task.ground.reward			false			false	3		tatooine_anchorjobs_bantha_e4	false							true		true	false	tatooine	0.0	0.0	0.0					1	0				0	Imperial	300	2000			1	0.1	0.1	0.1	0.1		1	0
+quest.task.ground.complete_quest			false			false			tatooine_anchorjobs_bantha_e5	false							true		true	false	tatooine	0.0	0.0	0.0					0	0				0		0	0			0						0	0

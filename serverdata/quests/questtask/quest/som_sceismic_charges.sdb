@@ -1,13 +1,13 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;2;3;5;6;7;8						0	0	0
-1	quest.task.ground.retrieve_item							0	0	0
-2	quest.task.ground.retrieve_item							0	0	0
-3	quest.task.ground.retrieve_item	4						0	0	0
-4	quest.task.ground.encounter							1	0	0
-5	quest.task.ground.retrieve_item							0	0	0
-6	quest.task.ground.retrieve_item							0	0	0
-7	quest.task.ground.retrieve_item							0	0	0
-8	quest.task.ground.wait_for_tasks	9						0	0	0
-9	quest.task.ground.wait_for_signal	10						0	0	0
-10	quest.task.ground.reward							1	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	server_template	num_required	item_name	drop_percent	retrieve_menu_text	creature_type	count	min_distance	max_distance	relative_offset_x	relative_offset_z	task_quest_name_1	task_task_name_1	task_display_string_1	task_quest_name_2	task_task_name_2	task_display_string_2	task_quest_name_3	task_task_name_3	task_display_string_3	task_quest_name_4	task_task_name_4	task_display_string_4	task_quest_name_5	task_task_name_5	task_display_string_5	task_quest_name_6	task_task_name_6	task_display_string_6	signal_name	wait_marker_create	wait_marker_template	wait_marker_planet_name	wait_marker_building	wait_marker_cell_name	wait_marker_x	wait_marker_y	wait_marker_z	experience_type	experience_amount	faction_name	faction_amount	bank_credits	item	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
+
+quest.task.ground.nothing			true			false	1,2,3,5,6,7,8			false							true		true	false	tatooine	0.0	0.0	0.0			0	0	0			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false	4			false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.encounter			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			0	0	0			1	5	50	0.0	0.0																				false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.retrieve_item			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			1	0	100			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.wait_for_tasks			true			false	9			false							true		true	false	tatooine	0.0	0.0	0.0			0	0	0			0	0	0																						false					0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.wait_for_signal			true			false	10			false							true		true	false	tatooine	0.0	0.0	0.0			0	0	0			0	0	0																						false			0		0.0	0.0	0.0		0		0	0			0						0	0
+quest.task.ground.reward			true			false				false							true		true	false	tatooine	0.0	0.0	0.0			0	0	0			1	0	0																						false					0.0	0.0	0.0		0	Rebel	0	0			1	0.1	0.1	0.1	0.1		1	0

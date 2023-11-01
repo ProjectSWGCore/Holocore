@@ -1,5 +1,5 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1						0	0	0
-1	quest.task.ground.destroy_multi_and_loot	2				clone_relics_trandoshan_researcher		0	0	0
-2	quest.task.ground.go_to_location							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	target_server_template	social_group	required_region	loot_item_name	loot_items_required	loot_drop_percent	reward_credits
+
+		quest.task.ground.go_to_location	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task00_journal_entry_title	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task00_journal_entry_description	1			true	true	false	sound/mus_wookiee_quest_accept.snd					false	kashyyyk_main	465.0	18.0	240.0		50.0					0	0	0
+		quest.task.ground.destroy_multi_and_loot	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task01_journal_entry_title	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task01_journal_entry_description	2			true	true	false						false	tatooine	0.0	0.0	0.0			clone_relics_trandoshan_researcher			Trandoshan research document	8	100	0
+		quest.task.ground.go_to_location	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task02_journal_entry_title	@quest/ground/ep3_clone_relics_imprisoned_geonosian_1:task02_journal_entry_description				true	true	false						false	kashyyyk_main	-513	19	-112		15.0					0	0	0

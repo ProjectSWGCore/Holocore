@@ -1,5 +1,5 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.go_to_location	1						0	0	0
-1	quest.task.ground.static_escort							0	0	0
-2	quest.task.ground.clear_quest							0	0	0
+prerequisite_tasks	exclusion_tasks	attach_script	journal_entry_title	journal_entry_description	tasks_on_complete	tasks_on_fail	task_name	is_visible	show_system_messages	allow_repeats	music_on_activate	target	parameter	grant_quest_on_complete	grant_quest_on_fail	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	radius	server_template	max_allowed_escort_distance	path_to_point_point_1	location_x_point_1	location_y_point_1	location_z_point_1	path_to_point_point_2	location_x_point_2	location_y_point_2	location_z_point_2	path_to_point_point_3	location_x_point_3	location_y_point_3	location_z_point_3	path_to_point_point_4	location_x_point_4	location_y_point_4	location_z_point_4	path_to_point_point_5	location_x_point_5	location_y_point_5	location_z_point_5	path_to_point_point_6	location_x_point_6	location_y_point_6	location_z_point_6
+
+		quest.task.ground.go_to_location	@quest/ground/test_static_escort:task00_journal_entry_title	@quest/ground/test_static_escort:task00_journal_entry_description	1			true	false	false						false	tatooine	2000	200	2000		20		0	false				false				false				false				false				false			
+		quest.task.ground.static_escort	@quest/ground/test_static_escort:task01_journal_entry_title	@quest/ground/test_static_escort:task01_journal_entry_description		2		true	false	false						false	tatooine	1000	1000	1000			oola	15	true	2050	100	2000	true	2050	100	2050	true	2000	100	2050	false	2000	200	2000	false	0.0	0.0	0.0	false	0.0	0.0	0.0
+		quest.task.ground.clear_quest						true	false	false						false	tatooine	0.0	0.0	0.0				0	false				false				false				false				false				false			

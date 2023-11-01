@@ -1,15 +1,15 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;4;7;10						0	0	0
-1	quest.task.ground.wait_for_signal	2	sordaan_webweaverBetReward					0	0	0
-2	quest.task.ground.wait_for_signal	3	sordaan_talkToHarroom_04					0	0	0
-3	quest.task.ground.clear_quest							0	0	0
-4	quest.task.ground.wait_for_signal	5	sordaan_moufBetReward					0	0	0
-5	quest.task.ground.wait_for_signal	6	sordaan_talkToHarroom_03					0	0	0
-6	quest.task.ground.clear_quest							0	0	0
-7	quest.task.ground.wait_for_signal	8	sordaan_wallugaBetReward					0	0	0
-8	quest.task.ground.wait_for_signal	9	sordaan_talkToHarroom_02					0	0	0
-9	quest.task.ground.clear_quest							0	0	0
-10	quest.task.ground.wait_for_signal	11	sordaan_ullerBetReward					0	0	0
-11	quest.task.ground.wait_for_signal	12	sordaan_talkToHarroom_01					0	0	0
-12	quest.task.ground.clear_quest							0	0	0
+attach_script	journal_entry_title	journal_entry_description	is_visible	prerequisite_tasks	exclusion_tasks	allow_repeats	tasks_on_complete	tasks_on_fail	task_name	show_system_messages	music_on_activate	music_on_complete	music_on_failure	target	parameter	grant_quest_on_complete	grant_quest_on_complete_show_system_message	grant_quest_on_fail	grant_quest_on_fail_show_system_message	create_waypoint	planet_name	location_x	location_y	location_z	waypoint_name	signal_name
+
+quest.task.ground.nothing			false			false	1,4,7,10			false							true		true	false	tatooine	0.0	0.0	0.0		
+quest.task.ground.wait_for_signal			false			false	2		sordaan_webweaverBetReward	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_webweaverBetReward
+quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_sordaan_seek_harroom:task02_journal_entry_title	@quest/ground/ep3_hunt_sordaan_seek_harroom:task02_journal_entry_description	true			false	3		sordaan_talkToHarroom_04	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_talkToHarroom
+quest.task.ground.clear_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		
+quest.task.ground.wait_for_signal			false			false	5		sordaan_moufBetReward	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_moufBetReward
+quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_sordaan_seek_harroom:task05_journal_entry_title	@quest/ground/ep3_hunt_sordaan_seek_harroom:task05_journal_entry_description	true			false	6		sordaan_talkToHarroom_03	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_talkToHarroom
+quest.task.ground.clear_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		
+quest.task.ground.wait_for_signal			false			false	8		sordaan_wallugaBetReward	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_wallugaBetReward
+quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_sordaan_seek_harroom:task08_journal_entry_title	@quest/ground/ep3_hunt_sordaan_seek_harroom:task08_journal_entry_description	true			false	9		sordaan_talkToHarroom_02	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_talkToHarroom
+quest.task.ground.clear_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		
+quest.task.ground.wait_for_signal			false			false	11		sordaan_ullerBetReward	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_ullerBetReward
+quest.task.ground.wait_for_signal	@quest/ground/ep3_hunt_sordaan_seek_harroom:task11_journal_entry_title	@quest/ground/ep3_hunt_sordaan_seek_harroom:task11_journal_entry_description	true			false	12		sordaan_talkToHarroom_01	false							true		true	false	tatooine	0.0	0.0	0.0		sordaan_talkToHarroom
+quest.task.ground.clear_quest			false			false				false							true		true	false	tatooine	0.0	0.0	0.0		
