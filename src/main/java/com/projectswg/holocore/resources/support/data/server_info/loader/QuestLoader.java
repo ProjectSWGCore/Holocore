@@ -60,14 +60,23 @@ public class QuestLoader extends DataLoader {
 				Set<String> columns = new LinkedHashSet<>(set.getColumns());
 				String type = set.getText("attach_script");
 				String name = set.getText("task_name");
-				String commMessageText = set.getText("comm_message_text");
-				String npcAppearanceServerTemplate = set.getText("npc_appearance_server_template");
+				String commMessageText = null;
+				if (columns.contains("comm_message_text")) {
+					commMessageText = set.getText("comm_message_text");
+				}
+				String npcAppearanceServerTemplate = null;
+				if (columns.contains("npc_appearance_server_template")) {
+					npcAppearanceServerTemplate = set.getText("npc_appearance_server_template");
+				}
 				String targetServerTemplate = null;
 				if (columns.contains("target_server_template")) {
 					targetServerTemplate = set.getText("target_server_template");
 				}
 				String grantQuestOnComplete = set.getText("grant_quest_on_complete");
-				int count = (int) set.getInt("count");
+				int count = 0;
+				if (columns.contains("count")) {
+					count = (int) set.getInt("count");
+				}
 				int minTime = 0;
 				if (columns.contains("min_time")) {
 					minTime = (int) set.getInt("min_time");
@@ -77,6 +86,14 @@ public class QuestLoader extends DataLoader {
 					maxTime = (int) set.getInt("max_time");
 				}
 				String[] nextTasksOnComplete = set.getText("tasks_on_complete").split(",");
+				String messageBoxTitle = null;
+				if (columns.contains("message_box_title")) {
+					messageBoxTitle = set.getText("message_box_title");
+				}
+				String messageBoxText = null;
+				if (columns.contains("message_box_text")) {
+					messageBoxText = set.getText("message_box_text");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -98,6 +115,8 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setCount(count);
 				questTaskInfo.setMinTime(minTime);
 				questTaskInfo.setMaxTime(maxTime);
+				questTaskInfo.setMessageBoxTitle(messageBoxTitle);
+				questTaskInfo.setMessageBoxText(messageBoxText);
 				
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -196,6 +215,8 @@ public class QuestLoader extends DataLoader {
 		private String grantQuestOnComplete;
 		private int minTime;
 		private int maxTime;
+		private String messageBoxTitle;
+		private String messageBoxText;
 		
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -204,7 +225,23 @@ public class QuestLoader extends DataLoader {
 		public int getMinTime() {
 			return minTime;
 		}
-		
+
+		public String getMessageBoxTitle() {
+			return messageBoxTitle;
+		}
+
+		public void setMessageBoxTitle(String messageBoxTitle) {
+			this.messageBoxTitle = messageBoxTitle;
+		}
+
+		public String getMessageBoxText() {
+			return messageBoxText;
+		}
+
+		public void setMessageBoxText(String messageBoxText) {
+			this.messageBoxText = messageBoxText;
+		}
+
 		private void setMinTime(int minTime) {
 			this.minTime = minTime;
 		}

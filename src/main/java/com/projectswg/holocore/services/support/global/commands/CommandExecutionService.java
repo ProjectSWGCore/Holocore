@@ -164,6 +164,7 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("cmdInvulnerable", CmdInvulnerable::new);
 		registerScriptCallback("cmdGrantSkill", CmdGrantSkill::new);
 		registerScriptCallback("cmdSetFaction", CmdSetFaction::new);
+		registerScriptCallback("cmdActivateQuest", CmdActivateQuest::new);
 	}
 	
 	private void addChatScripts() {

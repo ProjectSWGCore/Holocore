@@ -124,6 +124,18 @@ public class TestQuestLoader {
 		}
 		
 		@Test
+		public void canLoadMessageBoxTitle() {
+			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_title", taskListInfos.get(0).getMessageBoxTitle());
+		}
+		
+		@Test
+		public void canLoadMessageBoxText() {
+			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_text", taskListInfos.get(0).getMessageBoxText());
+		}
+		
+		@Test
 		public void canLoadNpcAppearanceServerTemplate() {
 			assertEquals("object/mobile/boba_fett.iff", taskListInfos.get(5).getNpcAppearanceServerTemplate());
 		}

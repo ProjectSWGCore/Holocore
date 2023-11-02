@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -45,6 +45,8 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
@@ -247,10 +249,36 @@ public class QuestService extends Service {
 					handleTimer(player, questName, playerObject, currentTask);
 					break;
 				}
+				case "quest.task.ground.show_message_box": {
+					handleShowMessageBox(player, questName, playerObject, currentTask);
+					break;
+				}
 			}
 		}
 	}
-	
+
+	private void handleShowMessageBox(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
+		String messageBoxTitle = currentTask.getMessageBoxTitle();
+		String messageBoxText = currentTask.getMessageBoxText();
+		SuiMessageBox sui = new SuiMessageBox(SuiButtons.OK, messageBoxTitle, messageBoxText);
+		sui.setSize(384, 256);
+		sui.setLocation(320, 256);
+		sui.display(player);
+
+		playerObject.removeActiveQuestTask(questName, currentTask.getIndex());
+		playerObject.addCompleteQuestTask(questName, currentTask.getIndex());
+
+		for (Integer taskIndex : currentTask.getNextTasksOnComplete()) {
+			playerObject.addActiveQuestTask(questName, taskIndex);
+		}
+
+		List<QuestLoader.QuestTaskInfo> taskListInfos = questLoader.getTaskListInfos(questName);
+		Collection<Integer> nextTasksOnComplete = currentTask.getNextTasksOnComplete();
+		List<QuestLoader.QuestTaskInfo> nextTasks = mapActiveTasks(nextTasksOnComplete, taskListInfos);
+
+		handleTaskEvents(player, questName, nextTasks);
+	}
+
 	private void handleCommPlayer(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
 		String commMessageText = currentTask.getCommMessageText();
 		OutOfBandPackage message = new OutOfBandPackage(new ProsePackage(new StringId(commMessageText)));
