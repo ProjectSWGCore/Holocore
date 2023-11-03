@@ -26,8 +26,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
-import com.projectswg.common.data.schematic.DraftSchematic;
-import com.projectswg.common.network.packets.swg.zone.object_controller.DraftSlotsQueryResponse;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -37,7 +35,7 @@ public class RequestDraftSlotsCallback implements ICmdCallback{
 
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		DraftSchematic schematic = new DraftSchematic();		
-		player.sendPacket(new DraftSlotsQueryResponse(schematic));
+		//DraftSchematic schematic = new DraftSchematic();
+		//player.sendPacket(new DraftSlotsQueryResponse(schematic));
 	}
 }
