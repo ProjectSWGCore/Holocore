@@ -287,7 +287,7 @@ public class QuestService extends Service {
 		String sharedTemplate = ClientFactory.formatToSharedFile(currentTask.getNpcAppearanceServerTemplate());
 		CRC modelCrc = new CRC(sharedTemplate);
 		
-		player.sendPacket(new CommPlayerMessage(false, objectId, message, modelCrc, "", 10));
+		player.sendPacket(new CommPlayerMessage(objectId, message, modelCrc, "", 10));
 		
 		playerObject.removeActiveQuestTask(questName, currentTask.getIndex());
 		playerObject.addCompleteQuestTask(questName, currentTask.getIndex());

@@ -27,6 +27,7 @@
 package com.projectswg.holocore.services.gameplay.player.quest
 
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
+import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
@@ -40,7 +41,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import java.util.concurrent.TimeUnit
 
 class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 
@@ -60,6 +60,18 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val suiCreatePageMessage = player.waitForNextPacket(SuiCreatePageMessage::class.java)
 		assertNotNull(suiCreatePageMessage)
 		assertEquals(SuiMessageBox::class, suiCreatePageMessage!!.window::class)
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.comm_player")
+	fun commMessage() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/test_comm_player")
+
+		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
+		assertNotNull(commPlayerMessage)
+		assertEquals(CommPlayerMessage::class, commPlayerMessage!!::class)
 	}
 
 	private fun createPlayer(): GenericPlayer {
