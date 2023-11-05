@@ -26,18 +26,32 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.quest
 
+import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskCounterMessage
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage
+import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.zone.creation.CharacterCreation
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
+import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
+import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
+import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.zone.sui.SuiService
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -48,6 +62,8 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun setUp() {
 		registerService(QuestService())
 		registerService(SuiService())
+		registerService(SkillService())
+		registerService(CombatDeathblowService())
 	}
 
 	@Test
@@ -55,7 +71,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun showMessageBox() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/c_newbie_start")	// This quest immediately wants to display a SUI message box
+		GrantQuestIntent.broadcast(player, "quest/c_newbie_start")    // This quest immediately wants to display a SUI message box
 
 		val suiCreatePageMessage = player.waitForNextPacket(SuiCreatePageMessage::class.java)
 		assertNotNull(suiCreatePageMessage)
@@ -72,6 +88,42 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
 		assertNotNull(commPlayerMessage)
 		assertEquals(CommPlayerMessage::class, commPlayerMessage!!::class)
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.destroy_multi")
+	fun destroyMulti() {
+		val player = createPlayer()
+		GrantQuestIntent.broadcast(player, "quest/test_destroy_multiple")
+		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
+		val womprats = spawnNPCs("creature_womprat", player.creatureObject.location, 3)
+
+		womprats.forEach { womprat ->
+			RequestCreatureDeathIntent.broadcast(player.creatureObject, womprat)
+			val killCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+			assertNotNull(killCountUpdate, "Failed to receive kill count update in time")
+		}
+
+		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
+		assertNotNull(questCompletedMessage, "Failed to receive QuestCompletedMessage in time")
+	}
+
+	private fun spawnNPCs(npcId: String, location: Location, amount: Int): Collection<AIObject> {
+		val egg = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/shared_patrol_spawner.iff")
+		egg.moveToContainer(null, location)
+
+		val spawnInfo = SimpleSpawnInfo.builder()
+			.withNpcId(npcId)
+			.withDifficulty(CreatureDifficulty.NORMAL)
+			.withMinLevel(1)
+			.withMaxLevel(1)
+			.withLocation(location)
+			.withAmount(amount)
+			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
+			.build()
+
+		return NPCCreator.createAllNPCs(Spawner(spawnInfo, egg))
 	}
 
 	private fun createPlayer(): GenericPlayer {
