@@ -48,6 +48,7 @@ import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharac
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
@@ -75,8 +76,14 @@ public class LoginService extends Service {
 	private static final byte [] SESSION_TOKEN = new byte[24];
 	
 	private final Map<String, List<CreatureObject>> players;
+	private final PswgUserDatabase userDatabase;
 	
 	public LoginService() {
+		this(PswgDatabase.INSTANCE.getUsers());
+	}
+
+	public LoginService(PswgUserDatabase pswgUserDatabase) {
+		userDatabase = pswgUserDatabase;
 		this.players = Collections.synchronizedMap(new HashMap<>());
 	}
 	
@@ -139,7 +146,7 @@ public class LoginService extends Service {
 		player.setPlayerState(PlayerState.LOGGING_IN);
 		player.setPlayerServer(PlayerServer.LOGIN);
 		
-		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(loginRequest.getUsername());
+		UserMetadata user = userDatabase.getUser(loginRequest.getUsername());
 		player.setUsername(loginRequest.getUsername());
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", loginRequest.getSocketAddress());
@@ -204,7 +211,7 @@ public class LoginService extends Service {
 			return;
 		}
 		
-		UserMetadata user = PswgDatabase.INSTANCE.getUsers().getUser(username);
+		UserMetadata user = userDatabase.getUser(username);
 		player.setUsername(username);
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", socketAddress);
@@ -269,7 +276,7 @@ public class LoginService extends Service {
 	}
 	
 	private boolean isPasswordValid(UserMetadata user, String password) {
-		return PswgDatabase.INSTANCE.getUsers().authenticate(user, password);
+		return userDatabase.authenticate(user, password);
 	}
 	
 	private List <Galaxy> getGalaxies() {
