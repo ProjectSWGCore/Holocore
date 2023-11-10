@@ -102,10 +102,10 @@ public class CharacterLookupService extends Service {
 			return;
 		
 		String name = creature.getObjectName();
+		name = name.toLowerCase(Locale.US);
 		charactersByFullName.put(name, creature);
 		if (name.indexOf(' ') != -1)
 			name = name.substring(0, name.indexOf(' '));
-		name = name.toLowerCase(Locale.US);
 		charactersByFirstName.put(name, creature);
 	}
 	
