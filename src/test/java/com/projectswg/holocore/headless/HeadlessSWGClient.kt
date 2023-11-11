@@ -119,6 +119,6 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 }
 
 internal fun sendPacket(player: GenericPlayer, packet: SWGPacket) {
-	// Currently broadcasts the InboundPacketIntent directly, but this should be changed to send the packet for real
+	// Currently broadcasts the InboundPacketIntent directly, but this could be changed to send the packet for real
 	InboundPacketIntent.broadcast(player, packet)
 }
