@@ -179,6 +179,32 @@ public class GenericPlayer extends Player {
 		}
 		return null;
 	}
+
+	@Nullable
+	public SWGPacket waitForNextPacket(Set<Class<? extends SWGPacket>> types, long timeout, TimeUnit unit) {
+		packetLock.lock();
+		try {
+			long startTime = System.nanoTime();
+			while (System.nanoTime() - startTime < unit.toNanos(timeout)) {
+				for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
+					SWGPacket next = it.next();
+					if (types.contains(next.getClass())) {
+						it.remove();
+						return next;
+					}
+				}
+				try {
+					//noinspection ResultOfMethodCallIgnored
+					packetLockCondition.awaitNanos(unit.toNanos(timeout) - (System.nanoTime() - startTime));
+				} catch (InterruptedException e) {
+					return null;
+				}
+			}
+		} finally {
+			packetLock.unlock();
+		}
+		return null;
+	}
 	
 	private void handlePacket(SWGPacket packet) {
 		switch (packet.getPacketType()) {

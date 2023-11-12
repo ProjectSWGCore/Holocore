@@ -28,4 +28,4 @@ package com.projectswg.holocore.headless
 
 class AccountBannedException(message: String) : Exception(message)
 class WrongClientVersionException(message: String) : Exception(message)
-class WrongCredentialsException : Exception("Invalid username or password")
+class WrongCredentialsException(message: String) : Exception(message)

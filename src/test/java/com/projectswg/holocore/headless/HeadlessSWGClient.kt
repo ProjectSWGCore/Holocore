@@ -30,7 +30,6 @@ import com.projectswg.common.network.packets.SWGPacket
 import com.projectswg.common.network.packets.swg.ErrorMessage
 import com.projectswg.common.network.packets.swg.login.LoginClientId
 import com.projectswg.common.network.packets.swg.login.LoginClusterStatus
-import com.projectswg.common.network.packets.swg.login.LoginIncorrectClientId
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerState
@@ -58,15 +57,14 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 	fun login(password: String): CharacterSelectionScreen {
 		sendPacket(player, LoginClientId(username, password, version))
 
-		if (player.waitForNextPacket(LoginClusterStatus::class.java, 50, TimeUnit.MILLISECONDS) != null) {
-			return CharacterSelectionScreen(player)
-		} else if (player.waitForNextPacket(LoginIncorrectClientId::class.java, 50, TimeUnit.MILLISECONDS) != null) {
-			throw WrongCredentialsException()
-		} else {
-			val errorMessage = player.waitForNextPacket(ErrorMessage::class.java, 50, TimeUnit.MILLISECONDS)
-			if (errorMessage != null) {
-				handleLoginError(errorMessage)
-			}
+
+		val responsePacket = player.waitForNextPacket(
+			setOf(LoginClusterStatus::class.java, ErrorMessage::class.java), 50, TimeUnit.MILLISECONDS
+		)
+
+		when (responsePacket) {
+			is LoginClusterStatus     -> return CharacterSelectionScreen(player)
+			is ErrorMessage           -> handleLoginError(responsePacket)
 		}
 
 		throw IllegalStateException("Did not receive any known packets in time")
@@ -79,6 +77,8 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 			throw AccountBannedException(message)
 		} else if (message.lowercase().contains("version")) {
 			throw WrongClientVersionException(message)
+		} else if (message.lowercase().contains("password") || message.lowercase().contains("username")) {
+			throw WrongCredentialsException(message)
 		} else {
 			throw IllegalStateException("Unknown error message: $message")
 		}
