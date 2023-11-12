@@ -44,6 +44,7 @@ import java.util.concurrent.TimeUnit
  * This class is the entry point for all headless testing.
  *
  * @param username the username of the player
+ * @param version optionally, a custom client version to use
  */
 class HeadlessSWGClient(private val username: String, private val version: String = "20051010-17:00") {
 
