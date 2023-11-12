@@ -35,7 +35,6 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerState
 import com.projectswg.holocore.test.resources.GenericPlayer
-import me.joshlarson.jlcommon.concurrency.Delay
 import java.util.concurrent.TimeUnit
 
 /**
@@ -58,25 +57,22 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 
 	fun login(password: String): CharacterSelectionScreen {
 		sendPacket(player, LoginClientId(username, password, version))
-		Delay.sleep(50, TimeUnit.MILLISECONDS)
-		val packets = receivedPackets()
-		val success = packets.any { it::class == LoginClusterStatus::class }
-		val invalidCredentials = packets.any { it::class == LoginIncorrectClientId::class }
-		val error = packets.any { it::class == ErrorMessage::class }
 
-		if (success) {
+		if (player.waitForNextPacket(LoginClusterStatus::class.java, 50, TimeUnit.MILLISECONDS) != null) {
 			return CharacterSelectionScreen(player)
-		} else if (invalidCredentials) {
+		} else if (player.waitForNextPacket(LoginIncorrectClientId::class.java, 50, TimeUnit.MILLISECONDS) != null) {
 			throw WrongCredentialsException()
-		} else if (error) {
-			handleLoginError(packets)
+		} else {
+			val errorMessage = player.waitForNextPacket(ErrorMessage::class.java, 50, TimeUnit.MILLISECONDS)
+			if (errorMessage != null) {
+				handleLoginError(errorMessage)
+			}
 		}
 
-		throw IllegalStateException("Unknown packets received: $packets")
+		throw IllegalStateException("Did not receive any known packets in time")
 	}
 
-	private fun handleLoginError(packets: List<SWGPacket>) {
-		val errorMessage = packets.first { it::class == ErrorMessage::class } as ErrorMessage
+	private fun handleLoginError(errorMessage: ErrorMessage) {
 		val message = errorMessage.message
 
 		if (message.lowercase().contains("banned")) {
@@ -86,18 +82,6 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 		} else {
 			throw IllegalStateException("Unknown error message: $message")
 		}
-	}
-
-	private fun receivedPackets(): List<SWGPacket> {
-		val packets = mutableListOf<SWGPacket>()
-		var packet = player.nextPacket
-
-		while (packet != null) {
-			packets.add(packet)
-			packet = player.nextPacket
-		}
-
-		return packets
 	}
 
 	override fun toString(): String {
