@@ -84,7 +84,7 @@ class EnvironmentService : Service() {
 	}
 
 	private fun updateTime() {
-		NotifyPlayersPacketIntent(ServerTimeMessage(ProjectSWG.getGalacticTime())).broadcast()
+		NotifyPlayersPacketIntent(ServerTimeMessage(ProjectSWG.galacticTime)).broadcast()
 	}
 
 	private fun maybeUpdateWeather(terrain: Terrain) {

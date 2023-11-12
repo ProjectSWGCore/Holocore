@@ -35,6 +35,7 @@ import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage;
+import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskCounterMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.AbandonQuestIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.AdvanceQuestIntent;
@@ -197,12 +198,12 @@ public class QuestService extends Service {
 						int max = activeTaskListInfo.getCount();
 						int counter = playerObject.incrementQuestCounter(questName);
 						int remaining = max - counter;
-						
+						int task = activeTaskListInfo.getIndex();
 						StandardLog.onPlayerTrace(this, owner, "%d remaining kills required on quest %s", remaining, questName);
+
+						incrementKillCount(questName, task, owner, counter, max);
 						
-						if (remaining > 0) {
-							incrementKillCount(owner, remaining);
-						} else {
+						if (remaining <= 0) {
 							advanceQuest(questName, owner, activeTaskListInfos);
 						}
 					}
@@ -219,11 +220,11 @@ public class QuestService extends Service {
 		return Objects.equals(targetServerTemplate, stfName);
 	}
 	
-	private void incrementKillCount(Player player, int remaining) {
+	private void incrementKillCount(String questName, int task, Player player, int counter, int max) {
+		player.sendPacket(new QuestTaskCounterMessage(player.getCreatureObject().getObjectId(), questName, task, "@quest/groundquests:destroy_counter", counter, max));
+		int remaining = max - counter;
 		ProsePackage prose = new ProsePackage(new StringId("quest/groundquests", "destroy_multiple_success"), "DI", remaining);
 		SystemMessageIntent.broadcastPersonal(player, prose);
-		
-		player.sendPacket(new PlayMusicMessage(0, "sound/ui_npe2_quest_counter.snd", 1, false));
 	}
 	
 	private void handleTaskEvents(Player player, String questName, Collection<QuestLoader.QuestTaskInfo> currentTasks) {
@@ -253,8 +254,19 @@ public class QuestService extends Service {
 					handleShowMessageBox(player, questName, playerObject, currentTask);
 					break;
 				}
+				case "quest.task.ground.destroy_multi": {
+					handleDestroyMulti(player, questName, currentTask);
+					break;
+				}
 			}
 		}
+	}
+
+	private static void handleDestroyMulti(Player player, String questName, QuestLoader.QuestTaskInfo currentTask) {
+		int task = currentTask.getIndex();
+		int max = currentTask.getCount();
+		int counter = 0;
+		player.sendPacket(new QuestTaskCounterMessage(player.getCreatureObject().getObjectId(), questName, task, "@quest/groundquests:destroy_counter", counter, max));
 	}
 
 	private void handleShowMessageBox(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
