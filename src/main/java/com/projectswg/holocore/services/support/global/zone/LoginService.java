@@ -216,7 +216,7 @@ public class LoginService extends Service {
 		if (user == null) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect username] from %s", socketAddress);
 			onInvalidUserPass(player);
-			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect username", false));
+			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect credentials", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		} else if (user.isBanned()) {
 			StandardLog.onPlayerEvent(this, player, "failed to login [banned] from %s", socketAddress);
@@ -229,7 +229,7 @@ public class LoginService extends Service {
 		} else {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password] from %s", socketAddress);
 			onInvalidUserPass(player);
-			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect password", false));
+			player.sendPacket(new ErrorMessage("Login Failed!", "Incorrect credentials", false));
 			player.sendPacket(new LoginIncorrectClientId(getServerString(), REQUIRED_VERSION));
 		}
 	}
