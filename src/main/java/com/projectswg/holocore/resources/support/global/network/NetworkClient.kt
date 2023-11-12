@@ -113,7 +113,7 @@ class NetworkClient(private val remoteAddress: SocketAddress, write: (ByteBuffer
 		}
 		
 		if (request.path == "/stats") {
-			val galaxy = ProjectSWG.getGalaxy()
+			val galaxy = ProjectSWG.galaxy
 			val stats = "{\"name\": \"${galaxy.name}\", \"status\": \"${galaxy.status.name}\"}".encodeToByteArray()
 			obj.sendHttpFrame(HttpResponse("HTTP/1.1", 200, "OK", mapOf("Content-Length" to stats.size.toString()), stats))
 			return

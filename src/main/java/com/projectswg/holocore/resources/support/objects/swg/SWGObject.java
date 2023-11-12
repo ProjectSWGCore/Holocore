@@ -1207,7 +1207,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	@Override
 	protected void createBaseline6(Player target, BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
-		bb.addInt(ProjectSWG.getGalaxy().getId()); // 0
+		bb.addInt(ProjectSWG.INSTANCE.getGalaxy().getId()); // 0
 		bb.addObject(detailStringId); // 1
 		
 		bb.incrementOperandCount(2);

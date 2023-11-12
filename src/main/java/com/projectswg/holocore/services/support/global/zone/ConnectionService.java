@@ -138,7 +138,7 @@ public class ConnectionService extends Service {
 	}
 	
 	private void zoneIn(Player p) {
-		ProjectSWG.getGalaxy().incrementPopulationCount();
+		ProjectSWG.INSTANCE.getGalaxy().incrementPopulationCount();
 		clearPlayerFlag(p);
 		removeFromDisappear(p);
 		boolean unique = zonedInPlayers.add(p);
@@ -149,7 +149,7 @@ public class ConnectionService extends Service {
 		if (!zonedInPlayers.remove(p))
 			return;
 		StandardLog.onPlayerEvent(this, p, "logged out");
-		ProjectSWG.getGalaxy().decrementPopulationCount();
+		ProjectSWG.INSTANCE.getGalaxy().decrementPopulationCount();
 		setPlayerFlag(p);
 		removeFromDisappear(p);
 		updatePlayTime(p);

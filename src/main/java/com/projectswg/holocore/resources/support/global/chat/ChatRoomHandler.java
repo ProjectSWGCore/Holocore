@@ -285,7 +285,7 @@ public class ChatRoomHandler {
 		 *      SWG.serverName.city.CityId.CityChat title = CityId
 		 */
 		
-		String galaxy = ProjectSWG.getGalaxy().getName();
+		String galaxy = ProjectSWG.INSTANCE.getGalaxy().getName();
 		ChatAvatar systemAvatar = ChatAvatar.getSystemAvatar();
 		String basePath = "SWG." + galaxy + '.';
 
