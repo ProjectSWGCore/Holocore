@@ -77,7 +77,7 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 			throw AccountBannedException(message)
 		} else if (message.lowercase().contains("version")) {
 			throw WrongClientVersionException(message)
-		} else if (message.lowercase().contains("password") || message.lowercase().contains("username")) {
+		} else if (message.lowercase().contains("credentials")) {
 			throw WrongCredentialsException(message)
 		} else {
 			throw IllegalStateException("Unknown error message: $message")
