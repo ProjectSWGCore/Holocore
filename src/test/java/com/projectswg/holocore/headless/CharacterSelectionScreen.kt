@@ -28,16 +28,20 @@ package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.swg.login.ClientIdMsg
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage
-import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
-import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterSuccess
+import com.projectswg.common.network.packets.swg.login.creation.*
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter
 import com.projectswg.holocore.test.resources.GenericPlayer
+import java.lang.RuntimeException
 import java.util.concurrent.TimeUnit
 
 /**
  * Represents everything that happens on the character selection screen.
  */
 class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
+
+	internal val internalCharacters = mutableListOf<Long>()
+	val characters: List<Long>
+		get() = internalCharacters
 
 	/**
 	 * Creates a character belonging to the given player.
@@ -51,9 +55,15 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 		clientCreateCharacter.race = "object/creature/player/shared_human_male.iff"
 		clientCreateCharacter.name = characterName
 		sendPacket(player, clientCreateCharacter)
-		val createCharacterSuccess = player.waitForNextPacket(CreateCharacterSuccess::class.java) ?: throw IllegalStateException("Failed to create character '$characterName' in time")
+		val createCharacterPacket = player.waitForNextPacket(setOf(CreateCharacterSuccess::class.java, CreateCharacterFailure::class.java), 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to create character '$characterName' in time")
 
-		return createCharacterSuccess.id
+		if (createCharacterPacket is CreateCharacterFailure) {
+			throw RuntimeException("Failed to create character '$characterName': ${createCharacterPacket.reason}")
+		} else {
+			val createCharacterSuccess = createCharacterPacket as CreateCharacterSuccess
+			internalCharacters.add(createCharacterSuccess.id)
+			return createCharacterSuccess.id
+		}
 	}
 
 	/**
@@ -66,6 +76,23 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 		player.waitForNextPacket(ClientPermissionsMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive client permissions message in time")
 
 		return ZonedInCharacter(player)
+	}
+
+	/**
+	 * Deletes a character.
+	 * @param characterId the object id of the character to delete - this is the same as the one returned by [createCharacter]
+	 */
+	fun deleteCharacter(characterId: Long) {
+		sendPacket(player, DeleteCharacterRequest(0, characterId))
+		val deleteCharacterResponse = player.waitForNextPacket(
+			DeleteCharacterResponse::class.java,
+			50,
+			TimeUnit.MILLISECONDS
+		) ?: throw IllegalStateException("Failed to receive delete character response in time")
+
+		if (deleteCharacterResponse.isDeleted) {
+			internalCharacters.remove(characterId)
+		}
 	}
 
 	override fun toString(): String {
