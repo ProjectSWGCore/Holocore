@@ -67,7 +67,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class QuestService extends Service {
-	
+
+	private static final StringId PLACED_IN_INVENTORY = new StringId("quest/ground/system_message", "placed_in_inventory");
 	private final ScheduledThreadPool executor;
 	private final QuestLoader questLoader;
 	
@@ -272,12 +273,14 @@ public class QuestService extends Service {
 	}
 
 	private void handleReward(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
-		// TODO should we provide the player with some feedback on what they received? Maybe the sauce code can reveal that.
 		grantXPReward(player, currentTask);
 		grantFactionPointsReward(playerObject, currentTask);
 		grantCreditsReward(player, currentTask);
 		grantLootRewards(player, currentTask);
 		grantItemRewards(player, currentTask);
+		// weapon stuff: weapon	count_weapon	speed	damage	efficiency	elemental_value
+		// armor stuff: armor	count_armor	quality
+		// speed etc. are percentages, the absolute values we must define somewhere else before we can hand out weapons and armor rewards
 
 		playerObject.removeActiveQuestTask(questName, currentTask.getIndex());
 		playerObject.addCompleteQuestTask(questName, currentTask.getIndex());
@@ -317,14 +320,10 @@ public class QuestService extends Service {
 	private static void grantLootRewards(Player player, QuestLoader.QuestTaskInfo currentTask) {
 		int lootCount = currentTask.getLootCount();
 		if (lootCount > 0) {
-			SWGObject inventory = player.getCreatureObject().getInventory();
 			for (int i = 0; i < lootCount; i++) {
 				SWGObject item = StaticItemCreator.INSTANCE.createItem(currentTask.getLootName());
 				if (item != null) {
-					item.moveToContainer(inventory);
-					ObjectCreatedIntent.broadcast(item);
-				} else {
-					// TODO warning..?
+					transferItemToInventory(player, item);
 				}
 			}
 		}
@@ -333,17 +332,18 @@ public class QuestService extends Service {
 	private static void grantItemRewards(Player player, QuestLoader.QuestTaskInfo currentTask) {
 		int itemCount = currentTask.getItemCount();
 		if (itemCount > 0) {
-			SWGObject inventory = player.getCreatureObject().getInventory();
 			for (int i = 0; i < itemCount; i++) {
 				SWGObject item = ObjectCreator.createObjectFromTemplate(currentTask.getItemTemplate());
-				if (item != null) {
-					item.moveToContainer(inventory);
-					ObjectCreatedIntent.broadcast(item);
-				} else {
-					// TODO warning..?
-				}
+				transferItemToInventory(player, item);
 			}
 		}
+	}
+
+	private static void transferItemToInventory(Player player, SWGObject item) {
+		SWGObject inventory = player.getCreatureObject().getInventory();
+		item.moveToContainer(inventory);
+		ObjectCreatedIntent.broadcast(item);
+		SystemMessageIntent.broadcastPersonal(player, new ProsePackage(PLACED_IN_INVENTORY, "TO", item.getStringId()));
 	}
 
 	private static void handleDestroyMulti(Player player, String questName, QuestLoader.QuestTaskInfo currentTask) {
