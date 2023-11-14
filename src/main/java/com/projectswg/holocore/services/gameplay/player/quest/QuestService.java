@@ -115,8 +115,6 @@ public class QuestService extends Service {
 		
 		ProsePackage prose = new ProsePackage(new StringId("quest/ground/system_message", "quest_received"), "TO", questListInfo.getJournalEntryTitle());
 		SystemMessageIntent.broadcastPersonal(player, prose, ChatSystemMessage.SystemChatType.QUEST);
-		
-		player.sendPacket(new PlayMusicMessage(0, "sound/ui_npe2_quest_received.snd", 1, false));
 	}
 	
 	@IntentHandler
@@ -447,8 +445,6 @@ public class QuestService extends Service {
 				
 				nextTasks = currentTasks;
 			}
-		} else {
-			player.sendPacket(new PlayMusicMessage(0, "sound/ui_npe2_quest_step_completed.snd", 1, false));
 		}
 		
 		handleTaskEvents(player, questName, nextTasks);
@@ -465,10 +461,7 @@ public class QuestService extends Service {
 	private void completeQuest(Player player, String questName) {
 		PlayerObject playerObject = player.getPlayerObject();
 		playerObject.completeQuest(questName);
-		player.sendPacket(
-				new QuestCompletedMessage(player.getCreatureObject().getObjectId(), new CRC(questName)),
-				new PlayMusicMessage(0, "sound/ui_npe2_quest_completed.snd", 1, false)
-		);
+		player.sendPacket(new QuestCompletedMessage(player.getCreatureObject().getObjectId(), new CRC(questName)));
 		StandardLog.onPlayerTrace(this, player, "completed quest %s", questName);
 	}
 	
