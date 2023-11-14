@@ -37,11 +37,13 @@ import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage;
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskCounterMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.AbandonQuestIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.AdvanceQuestIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.CompleteQuestIntent;
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
@@ -49,6 +51,9 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
+import com.projectswg.holocore.resources.support.objects.ObjectCreator;
+import com.projectswg.holocore.resources.support.objects.StaticItemCreator;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
@@ -257,6 +262,85 @@ public class QuestService extends Service {
 				case "quest.task.ground.destroy_multi": {
 					handleDestroyMulti(player, questName, currentTask);
 					break;
+				}
+				case "quest.task.ground.reward": {
+					handleReward(player, questName, playerObject, currentTask);
+					break;
+				}
+			}
+		}
+	}
+
+	private void handleReward(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
+		// TODO should we provide the player with some feedback on what they received? Maybe the sauce code can reveal that.
+		grantXPReward(player, currentTask);
+		grantFactionPointsReward(playerObject, currentTask);
+		grantCreditsReward(player, currentTask);
+		grantLootRewards(player, currentTask);
+		grantItemRewards(player, currentTask);
+
+		playerObject.removeActiveQuestTask(questName, currentTask.getIndex());
+		playerObject.addCompleteQuestTask(questName, currentTask.getIndex());
+
+		for (Integer taskIndex : currentTask.getNextTasksOnComplete()) {
+			playerObject.addActiveQuestTask(questName, taskIndex);
+		}
+
+		List<QuestLoader.QuestTaskInfo> taskListInfos = questLoader.getTaskListInfos(questName);
+		Collection<Integer> nextTasksOnComplete = currentTask.getNextTasksOnComplete();
+		List<QuestLoader.QuestTaskInfo> nextTasks = mapActiveTasks(nextTasksOnComplete, taskListInfos);
+
+		handleTaskEvents(player, questName, nextTasks);
+	}
+
+	private static void grantXPReward(Player player, QuestLoader.QuestTaskInfo currentTask) {
+		String experienceType = currentTask.getExperienceType();
+		if (experienceType != null) {
+			new ExperienceIntent(player.getCreatureObject(), experienceType, currentTask.getExperienceAmount()).broadcast();
+		}
+	}
+
+	private static void grantFactionPointsReward(PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
+		String factionName = currentTask.getFactionName();
+		if (factionName != null) {
+			playerObject.adjustFactionPoints(factionName, currentTask.getFactionAmount());
+		}
+	}
+
+	private static void grantCreditsReward(Player player, QuestLoader.QuestTaskInfo currentTask) {
+		int bankCredits = currentTask.getBankCredits();
+		if (bankCredits != 0) {
+			player.getCreatureObject().addToBank(bankCredits);
+		}
+	}
+
+	private static void grantLootRewards(Player player, QuestLoader.QuestTaskInfo currentTask) {
+		int lootCount = currentTask.getLootCount();
+		if (lootCount > 0) {
+			SWGObject inventory = player.getCreatureObject().getInventory();
+			for (int i = 0; i < lootCount; i++) {
+				SWGObject item = StaticItemCreator.INSTANCE.createItem(currentTask.getLootName());
+				if (item != null) {
+					item.moveToContainer(inventory);
+					ObjectCreatedIntent.broadcast(item);
+				} else {
+					// TODO warning..?
+				}
+			}
+		}
+	}
+
+	private static void grantItemRewards(Player player, QuestLoader.QuestTaskInfo currentTask) {
+		int itemCount = currentTask.getItemCount();
+		if (itemCount > 0) {
+			SWGObject inventory = player.getCreatureObject().getInventory();
+			for (int i = 0; i < itemCount; i++) {
+				SWGObject item = ObjectCreator.createObjectFromTemplate(currentTask.getItemTemplate());
+				if (item != null) {
+					item.moveToContainer(inventory);
+					ObjectCreatedIntent.broadcast(item);
+				} else {
+					// TODO warning..?
 				}
 			}
 		}

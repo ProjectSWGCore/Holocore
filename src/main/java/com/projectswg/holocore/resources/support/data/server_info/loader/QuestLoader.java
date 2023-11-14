@@ -27,7 +27,6 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,6 +93,42 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("message_box_text")) {
 					messageBoxText = set.getText("message_box_text");
 				}
+				String experienceType = null;
+				if (columns.contains("experience_type")) {
+					experienceType = set.getText("experience_type");
+				}
+				int experienceAmount = 0;
+				if (columns.contains("experience_amount")) {
+					experienceAmount = (int) set.getInt("experience_amount");
+				}
+				String factionName = null;
+				if (columns.contains("faction_name")) {
+					factionName = set.getText("faction_name").toLowerCase(Locale.ROOT);
+				}
+				int factionAmount = 0;
+				if (columns.contains("faction_amount")) {
+					factionAmount = (int) set.getInt("faction_amount");
+				}
+				int bankCredits = 0;
+				if (columns.contains("bank_credits")) {
+					bankCredits = (int) set.getInt("bank_credits");
+				}
+				int lootCount = 0;
+				if (columns.contains("loot_count")) {
+					lootCount = (int) set.getInt("loot_count");
+				}
+				String lootName = null;
+				if (columns.contains("loot_name")) {
+					lootName = set.getText("loot_name");
+				}
+				int itemCount = 0;
+				if (columns.contains("count")) {
+					itemCount = (int) set.getInt("count");
+				}
+				String itemTemplate = null;
+				if (columns.contains("item")) {
+					itemTemplate = set.getText("item");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -117,6 +152,15 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setMaxTime(maxTime);
 				questTaskInfo.setMessageBoxTitle(messageBoxTitle);
 				questTaskInfo.setMessageBoxText(messageBoxText);
+				questTaskInfo.setExperienceType(experienceType);
+				questTaskInfo.setExperienceAmount(experienceAmount);
+				questTaskInfo.setFactionName(factionName);
+				questTaskInfo.setFactionAmount(factionAmount);
+				questTaskInfo.setBankCredits(bankCredits);
+				questTaskInfo.setLootCount(lootCount);
+				questTaskInfo.setLootName(lootName);
+				questTaskInfo.setItemCount(itemCount);
+				questTaskInfo.setItemTemplate(itemTemplate);
 				
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -217,6 +261,15 @@ public class QuestLoader extends DataLoader {
 		private int maxTime;
 		private String messageBoxTitle;
 		private String messageBoxText;
+		private String experienceType;
+		private int experienceAmount;
+		private String factionName;
+		private int factionAmount;
+		private int bankCredits;
+		private int lootCount;
+		private String lootName;
+		private int itemCount;
+		private String itemTemplate;
 		
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -240,6 +293,78 @@ public class QuestLoader extends DataLoader {
 
 		public void setMessageBoxText(String messageBoxText) {
 			this.messageBoxText = messageBoxText;
+		}
+
+		public String getExperienceType() {
+			return experienceType;
+		}
+
+		public void setExperienceType(String experienceType) {
+			this.experienceType = experienceType;
+		}
+
+		public int getExperienceAmount() {
+			return experienceAmount;
+		}
+
+		public void setExperienceAmount(int experienceAmount) {
+			this.experienceAmount = experienceAmount;
+		}
+
+		public String getFactionName() {
+			return factionName;
+		}
+
+		public void setFactionName(String factionName) {
+			this.factionName = factionName;
+		}
+
+		public int getFactionAmount() {
+			return factionAmount;
+		}
+
+		public void setFactionAmount(int factionAmount) {
+			this.factionAmount = factionAmount;
+		}
+
+		public int getBankCredits() {
+			return bankCredits;
+		}
+
+		public void setBankCredits(int bankCredits) {
+			this.bankCredits = bankCredits;
+		}
+
+		public int getLootCount() {
+			return lootCount;
+		}
+
+		public void setLootCount(int lootCount) {
+			this.lootCount = lootCount;
+		}
+
+		public String getLootName() {
+			return lootName;
+		}
+
+		public void setLootName(String lootName) {
+			this.lootName = lootName;
+		}
+
+		public int getItemCount() {
+			return itemCount;
+		}
+
+		public void setItemCount(int itemCount) {
+			this.itemCount = itemCount;
+		}
+
+		public String getItemTemplate() {
+			return itemTemplate;
+		}
+
+		public void setItemTemplate(String itemTemplate) {
+			this.itemTemplate = itemTemplate;
 		}
 
 		private void setMinTime(int minTime) {
