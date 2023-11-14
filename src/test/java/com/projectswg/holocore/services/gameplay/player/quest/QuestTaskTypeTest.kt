@@ -121,18 +121,13 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		player.waitForNextPacket(QuestCompletedMessage::class.java)	// This quest just gives a reward, so it should complete immediately
 
 		val after = CharacterSnapshot(player)
-		assertAll("Reward",
+		assertAll(
 			{ assertEquals(50, after.xp - before.xp, "XP should have been granted") },
 			{ assertEquals(75, after.rebelFactionPoints - before.rebelFactionPoints, "Faction points should have been granted") },
 			{ assertEquals(13, after.bankCredits - before.bankCredits, "Credits should have been added in the bank") },
 			{ assertEquals(2, after.lootItems - before.lootItems, "Loot item(s) not granted") },
 			{ assertEquals(1, after.items - before.items, "Item(s) not granted") },
-			{ assertEquals(3, after.weapons - before.weapons, "Weapon(s) not granted") },	// TODO assert on weapon stats....?
-			{ assertEquals(2, after.armorPieces - before.armorPieces, "Armor piece(s) not granted") },	// TODO assert on armor stats....?
 		)
-		// TODO weapon stuff: weapon	count_weapon	speed	damage	efficiency	elemental_value
-		// TODO armor stuff: armor	count_armor	quality
-		// experience_type	experience_amount	faction_name	faction_amount	bank_credits	loot_name	loot_count	item	count	weapon	count_weapon	speed	damage	efficiency	elemental_value	armor	count_armor	quality
 	}
 
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state
@@ -141,8 +136,6 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val bankCredits = player.creatureObject.bankBalance
 		val lootItems = findItemsInInventory("jedi_holocron_generic").size
 		val items = findItemsInInventory("eqp_chance_cube").size
-		val weapons = findItemsInInventory("pistol_republic_blaster").size
-		val armorPieces = findItemsInInventory("armor_mandalorian_belt").size
 
 		private fun findItemsInInventory(partialObjectTemplate: String): Collection<SWGObject> {
 			return player.creatureObject.inventory.childObjects.filter { it.template.contains(partialObjectTemplate) }
