@@ -243,6 +243,10 @@ public class QuestService extends Service {
 				continue;
 			}
 			
+			if (currentTask.isVisible()) {
+				player.sendPacket(new PlayMusicMessage(0, "sound/ui_journal_updated.snd", 1, false));
+			}
+			
 			switch (type) {
 				case "quest.task.ground.comm_player": {
 					handleCommPlayer(player, questName, playerObject, currentTask);

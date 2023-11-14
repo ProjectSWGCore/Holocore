@@ -129,6 +129,10 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("item")) {
 					itemTemplate = set.getText("item");
 				}
+				boolean visible = false;
+				if (columns.contains("visible")) {
+					visible = set.getBoolean("visible");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -161,6 +165,7 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setLootName(lootName);
 				questTaskInfo.setItemCount(itemCount);
 				questTaskInfo.setItemTemplate(itemTemplate);
+				questTaskInfo.setVisible(visible);
 				
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -270,6 +275,7 @@ public class QuestLoader extends DataLoader {
 		private String lootName;
 		private int itemCount;
 		private String itemTemplate;
+		private boolean visible;
 		
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -365,6 +371,14 @@ public class QuestLoader extends DataLoader {
 
 		public void setItemTemplate(String itemTemplate) {
 			this.itemTemplate = itemTemplate;
+		}
+
+		public boolean isVisible() {
+			return visible;
+		}
+
+		public void setVisible(boolean visible) {
+			this.visible = visible;
 		}
 
 		private void setMinTime(int minTime) {
