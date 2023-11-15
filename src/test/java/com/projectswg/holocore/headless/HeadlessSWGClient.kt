@@ -28,8 +28,8 @@ package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.SWGPacket
 import com.projectswg.common.network.packets.swg.ErrorMessage
+import com.projectswg.common.network.packets.swg.login.EnumerateCharacterId
 import com.projectswg.common.network.packets.swg.login.LoginClientId
-import com.projectswg.common.network.packets.swg.login.LoginClusterStatus
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerState
@@ -57,17 +57,22 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 	fun login(password: String): CharacterSelectionScreen {
 		sendPacket(player, LoginClientId(username, password, version))
 
-
 		val responsePacket = player.waitForNextPacket(
-			setOf(LoginClusterStatus::class.java, ErrorMessage::class.java), 50, TimeUnit.MILLISECONDS
+			setOf(EnumerateCharacterId::class.java, ErrorMessage::class.java), 50, TimeUnit.MILLISECONDS
 		)
 
 		when (responsePacket) {
-			is LoginClusterStatus     -> return CharacterSelectionScreen(player)
-			is ErrorMessage           -> handleLoginError(responsePacket)
+			is EnumerateCharacterId -> return handleEnumerateCharacterId(responsePacket)
+			is ErrorMessage         -> handleLoginError(responsePacket)
 		}
 
 		throw IllegalStateException("Did not receive any known packets in time")
+	}
+
+	private fun handleEnumerateCharacterId(responsePacket: EnumerateCharacterId): CharacterSelectionScreen {
+		val characterSelectionScreen = CharacterSelectionScreen(player)
+		characterSelectionScreen.internalCharacters.addAll(responsePacket.characters.map { it.id })
+		return characterSelectionScreen
 	}
 
 	private fun handleLoginError(errorMessage: ErrorMessage) {
