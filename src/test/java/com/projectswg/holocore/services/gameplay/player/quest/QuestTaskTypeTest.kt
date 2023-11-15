@@ -43,15 +43,16 @@ import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
 import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
+import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.zone.sui.SuiService
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -64,6 +65,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		registerService(SuiService())
 		registerService(SkillService())
 		registerService(CombatDeathblowService())
+		registerService(ExperiencePointService())
 	}
 
 	@Test
@@ -107,6 +109,37 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 
 		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
 		assertNotNull(questCompletedMessage, "Failed to receive QuestCompletedMessage in time")
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.reward")
+	fun reward() {
+		val player = createPlayer()
+		val before = CharacterSnapshot(player)
+
+		GrantQuestIntent.broadcast(player, "quest/test_reward")
+		player.waitForNextPacket(QuestCompletedMessage::class.java)	// This quest just gives a reward, so it should complete immediately
+
+		val after = CharacterSnapshot(player)
+		assertAll(
+			{ assertEquals(50, after.xp - before.xp, "XP should have been granted") },
+			{ assertEquals(75, after.rebelFactionPoints - before.rebelFactionPoints, "Faction points should have been granted") },
+			{ assertEquals(13, after.bankCredits - before.bankCredits, "Credits should have been added in the bank") },
+			{ assertEquals(2, after.lootItems - before.lootItems, "Loot item(s) not granted") },
+			{ assertEquals(1, after.items - before.items, "Item(s) not granted") },
+		)
+	}
+
+	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state
+		val xp = player.playerObject.getExperiencePoints("dance")
+		val rebelFactionPoints = player.playerObject.getFactionPoints()["rebel"] ?: 0
+		val bankCredits = player.creatureObject.bankBalance
+		val lootItems = findItemsInInventory("jedi_holocron_generic").size
+		val items = findItemsInInventory("eqp_chance_cube").size
+
+		private fun findItemsInInventory(partialObjectTemplate: String): Collection<SWGObject> {
+			return player.creatureObject.inventory.childObjects.filter { it.template.contains(partialObjectTemplate) }
+		}
 	}
 
 	private fun spawnNPCs(npcId: String, location: Location, amount: Int): Collection<AIObject> {
