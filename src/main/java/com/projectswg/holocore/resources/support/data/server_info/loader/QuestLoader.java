@@ -130,8 +130,8 @@ public class QuestLoader extends DataLoader {
 					itemTemplate = set.getText("item");
 				}
 				boolean visible = false;
-				if (columns.contains("visible")) {
-					visible = set.getBoolean("visible");
+				if (columns.contains("is_visible")) {
+					visible = set.getBoolean("is_visible");
 				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
