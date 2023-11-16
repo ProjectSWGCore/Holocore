@@ -150,6 +150,10 @@ public class NPCCreator {
 			case INVULNERABLE:
 				object.addOptionFlags(OptionFlag.INVULNERABLE);
 				break;
+			case QUEST:
+				object.addOptionFlags(OptionFlag.INVULNERABLE);
+				object.addOptionFlags(OptionFlag.INTERESTING);
+				break;
 		}
 	}
 
