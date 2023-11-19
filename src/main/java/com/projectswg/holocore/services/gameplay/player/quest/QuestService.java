@@ -220,10 +220,20 @@ public class QuestService extends Service {
 		String targetServerTemplate = swgQuestTask.getTargetServerTemplate();
 		Spawner spawner = npcCorpse.getSpawner();
 		String stfName = spawner.getStfName();
-		
-		return Objects.equals(targetServerTemplate, stfName);
+		String questSocialGroup = swgQuestTask.getSocialGroup();
+		String npcSocialGroup = npcCorpse.getSpawner().getSocialGroup();
+
+		return isMatchingSocialGroup(questSocialGroup, npcSocialGroup) || isMatchingServerTemplate(targetServerTemplate, stfName);
 	}
-	
+
+	private static boolean isMatchingServerTemplate(String targetServerTemplate, String stfName) {
+		return targetServerTemplate != null && Objects.equals(targetServerTemplate, stfName);
+	}
+
+	private static boolean isMatchingSocialGroup(String questSocialGroup, String npcSocialGroup) {
+		return questSocialGroup != null && questSocialGroup.equalsIgnoreCase(npcSocialGroup);
+	}
+
 	private void incrementKillCount(String questName, int task, Player player, int counter, int max) {
 		player.sendPacket(new QuestTaskCounterMessage(player.getCreatureObject().getObjectId(), questName, task, "@quest/groundquests:destroy_counter", counter, max));
 		int remaining = max - counter;

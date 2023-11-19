@@ -32,6 +32,7 @@ import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbR
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -87,7 +88,7 @@ public final class NpcLoader extends DataLoader {
 			iff_template				TEXT
 			planet					*	TEXT
 			offers_mission			*	TEXT
-			social_group			*	TEXT
+			social_group				TEXT
 			faction						TEXT
 			spec_force					TEXT
 			scale_min				*	REAL
@@ -150,6 +151,7 @@ public final class NpcLoader extends DataLoader {
 		private final NpcResourceInfo meatResourceInfo;
 		private final NpcResourceInfo hideResourceInfo;
 		private final NpcResourceInfo boneResourceInfo;
+		private final String socialGroup;
 
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
@@ -209,6 +211,13 @@ public final class NpcLoader extends DataLoader {
 					break;
 				default:
 					throw new IllegalArgumentException("Unknown NPC niche: " + niche);
+			}
+
+			String socialGroup = set.getText("social_group");
+			if (!"-".equals(socialGroup)) {
+				this.socialGroup = socialGroup;
+			} else {
+				this.socialGroup = null;
 			}
 		}
 		
@@ -326,6 +335,11 @@ public final class NpcLoader extends DataLoader {
 
 		public NpcResourceInfo getBoneResourceInfo() {
 			return boneResourceInfo;
+		}
+
+		@Nullable
+		public String getSocialGroup() {
+			return socialGroup;
 		}
 
 		public HumanoidNpcInfo getHumanoidInfo() {
