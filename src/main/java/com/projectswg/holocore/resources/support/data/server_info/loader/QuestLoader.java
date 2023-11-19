@@ -27,6 +27,7 @@
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -133,6 +134,10 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("visible")) {
 					visible = set.getBoolean("visible");
 				}
+				String socialGroup = null;
+				if (columns.contains("social_group")) {
+					socialGroup = set.getText("social_group");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -166,6 +171,7 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setItemCount(itemCount);
 				questTaskInfo.setItemTemplate(itemTemplate);
 				questTaskInfo.setVisible(visible);
+				questTaskInfo.setSocialGroup(socialGroup);
 				
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -276,6 +282,7 @@ public class QuestLoader extends DataLoader {
 		private int itemCount;
 		private String itemTemplate;
 		private boolean visible;
+		private String socialGroup;
 		
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -379,6 +386,15 @@ public class QuestLoader extends DataLoader {
 
 		public void setVisible(boolean visible) {
 			this.visible = visible;
+		}
+
+		@Nullable
+		public String getSocialGroup() {
+			return socialGroup;
+		}
+
+		public void setSocialGroup(String socialGroup) {
+			this.socialGroup = socialGroup;
 		}
 
 		private void setMinTime(int minTime) {
