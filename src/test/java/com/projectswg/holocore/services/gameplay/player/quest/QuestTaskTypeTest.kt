@@ -93,7 +93,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	}
 
 	@Test
-	@DisplayName("quest.task.ground.destroy_multi")
+	@DisplayName("quest.task.ground.destroy_multi (template)")
 	fun destroyMulti() {
 		val player = createPlayer()
 		GrantQuestIntent.broadcast(player, "quest/test_destroy_multiple")
@@ -109,6 +109,22 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 
 		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
 		assertNotNull(questCompletedMessage, "Failed to receive QuestCompletedMessage in time")
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.destroy_multi (social group)")
+	fun destroyMultiSocialGroup() {
+		val player = createPlayer()
+		GrantQuestIntent.broadcast(player, "quest/tatooine_bestinejobs_bantha")
+		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
+		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 1)
+		val bantha = banthas.first()
+		
+		RequestCreatureDeathIntent.broadcast(player.creatureObject, bantha)
+		
+		val killCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+		assertNotNull(killCountUpdate, "Failed to receive kill count update in time")
 	}
 
 	@Test
