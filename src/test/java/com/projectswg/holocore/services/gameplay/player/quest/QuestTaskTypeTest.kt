@@ -81,15 +81,31 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	}
 
 	@Test
-	@DisplayName("quest.task.ground.comm_player")
-	fun commMessage() {
+	@DisplayName("quest.task.ground.comm_player (with template)")
+	fun commMessageWithTemplate() {
 		val player = createPlayer()
 
 		GrantQuestIntent.broadcast(player, "quest/test_comm_player")
 
 		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
 		assertNotNull(commPlayerMessage)
-		assertEquals(CommPlayerMessage::class, commPlayerMessage!!::class)
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.comm_player (no template)")
+	fun commMessageWithoutTemplate() {
+		val player = createPlayer()
+		GrantQuestIntent.broadcast(player, "quest/tatooine_bestinejobs_bantha")
+		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
+		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 10)
+
+		banthas.forEach { bantha ->
+			RequestCreatureDeathIntent.broadcast(player.creatureObject, bantha)
+		}
+
+		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
+		assertNotNull(commPlayerMessage)
 	}
 
 	@Test
