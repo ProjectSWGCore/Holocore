@@ -165,6 +165,7 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("cmdGrantSkill", CmdGrantSkill::new);
 		registerScriptCallback("cmdSetFaction", CmdSetFaction::new);
 		registerScriptCallback("cmdActivateQuest", CmdActivateQuest::new);
+		registerScriptCallback("cmdKill", CmdKill::new);
 	}
 	
 	private void addChatScripts() {
