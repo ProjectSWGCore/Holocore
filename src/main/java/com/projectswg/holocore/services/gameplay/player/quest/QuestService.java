@@ -61,6 +61,7 @@ import com.projectswg.holocore.resources.support.objects.swg.player.Quest;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -391,10 +392,8 @@ public class QuestService extends Service {
 		String commMessageText = currentTask.getCommMessageText();
 		OutOfBandPackage message = new OutOfBandPackage(new ProsePackage(new StringId(commMessageText)));
 		long objectId = player.getCreatureObject().getObjectId();
-		
-		String sharedTemplate = ClientFactory.formatToSharedFile(currentTask.getNpcAppearanceServerTemplate());
-		CRC modelCrc = new CRC(sharedTemplate);
-		
+		CRC modelCrc = getModelCrc(currentTask);
+
 		player.sendPacket(new CommPlayerMessage(objectId, message, modelCrc, "", 10));
 		
 		playerObject.removeActiveQuestTask(questName, currentTask.getIndex());
@@ -410,7 +409,18 @@ public class QuestService extends Service {
 		
 		handleTaskEvents(player, questName, nextTasks);
 	}
-	
+
+	@NotNull
+	private static CRC getModelCrc(QuestLoader.QuestTaskInfo currentTask) {
+		String npcAppearanceServerTemplate = currentTask.getNpcAppearanceServerTemplate();
+		if (npcAppearanceServerTemplate != null && !npcAppearanceServerTemplate.isBlank()) {
+			String sharedTemplate = ClientFactory.formatToSharedFile(npcAppearanceServerTemplate);
+			return new CRC(sharedTemplate);
+		}
+		
+		return new CRC(0);	// Fallback case, as some tasks don't have an appearance set. The player sees their own character in the comm window.
+	}
+
 	private void handleTimer(Player player, String questName, PlayerObject playerObject, QuestLoader.QuestTaskInfo currentTask) {
 		int minTime = currentTask.getMinTime();
 		int maxTime = currentTask.getMaxTime();
