@@ -334,9 +334,12 @@ public class QuestService extends Service {
 		int lootCount = currentTask.getLootCount();
 		if (lootCount > 0) {
 			for (int i = 0; i < lootCount; i++) {
-				SWGObject item = StaticItemCreator.INSTANCE.createItem(currentTask.getLootName());
-				if (item != null) {
-					transferItemToInventory(player, item);
+				String lootName = currentTask.getLootName();
+				if (lootName != null && !lootName.isBlank()) {
+					SWGObject item = StaticItemCreator.INSTANCE.createItem(lootName);
+					if (item != null) {
+						transferItemToInventory(player, item);
+					}
 				}
 			}
 		}
@@ -346,8 +349,11 @@ public class QuestService extends Service {
 		int itemCount = currentTask.getItemCount();
 		if (itemCount > 0) {
 			for (int i = 0; i < itemCount; i++) {
-				SWGObject item = ObjectCreator.createObjectFromTemplate(currentTask.getItemTemplate());
-				transferItemToInventory(player, item);
+				String itemTemplate = currentTask.getItemTemplate();
+				if (itemTemplate != null && !itemTemplate.isBlank()) {
+					SWGObject item = ObjectCreator.createObjectFromTemplate(itemTemplate);
+					transferItemToInventory(player, item);
+				}
 			}
 		}
 	}
