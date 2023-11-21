@@ -138,6 +138,7 @@ object StaticItemCreator {
 		weapon.specialAttackCost = info.specialAttackCost
 		weapon.requiredSkill = info.requiredSkill
 
+		applySkillMods(obj, info.skillMods)
 		applyItemValue(info.value, obj)
 	}
 
