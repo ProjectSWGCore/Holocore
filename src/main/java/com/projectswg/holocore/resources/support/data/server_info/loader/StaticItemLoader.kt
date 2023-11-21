@@ -229,6 +229,8 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val requiredFaction: String = set.getText("required_faction")
 		val requiredLevel: Int = set.getInt("required_level").toInt()
 		val requiredSkill: String = set.getText("required_skill")
+		val splashDamagePercent: Int = set.getInt("splash_damage").toInt()
+		val splashDamageRadius: Int = set.getInt("radius").toInt()
 		val isNoTrade: Boolean = set.getInt("no_trade") != 0L
 		val isBioLink: Boolean = set.getInt("bio_link") != 0L
 		val isDeconstruct: Boolean = set.getInt("deconstruct") != 0L

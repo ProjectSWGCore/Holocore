@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -61,6 +61,8 @@ public class WeaponObject extends TangibleObject {
 	private String procEffect;
 	private int specialAttackCost = 100;
 	private int forcePowerCost = 100;
+	private int splashDamagePercent = 0;
+	private int splashDamageRadius = 0;
 	
 	public WeaponObject(long objectId) {
 		super(objectId, BaselineType.WEAO);
@@ -178,7 +180,23 @@ public class WeaponObject extends TangibleObject {
 	public void setSpecialAttackCost(int specialAttackCost) {
 		this.specialAttackCost = specialAttackCost;
 	}
-	
+
+	public int getSplashDamagePercent() {
+		return splashDamagePercent;
+	}
+
+	public void setSplashDamagePercent(int splashDamagePercent) {
+		this.splashDamagePercent = splashDamagePercent;
+	}
+
+	public int getSplashDamageRadius() {
+		return splashDamageRadius;
+	}
+
+	public void setSplashDamageRadius(int splashDamageRadius) {
+		this.splashDamageRadius = splashDamageRadius;
+	}
+
 	@Override
 	public AttributeList getAttributeList(CreatureObject viewer) {
 		AttributeList attributeList = super.getAttributeList(viewer);
@@ -203,8 +221,14 @@ public class WeaponObject extends TangibleObject {
 		}
 		attributeList.putNumber("cat_wpn_damage.wpn_accuracy", accuracy);
 		attributeList.putNumber("cat_wpn_damage.woundchance", woundChance, "%");
+		if (splashDamagePercent > 0) {
+			attributeList.putNumber("cat_wpn_damage.aoe_percent", splashDamagePercent, "%");
+		}
 		attributeList.putNumber("cat_wpn_damage.wpn_base_dps", getDamagePerSecond(getAttackSpeed()), " / sec");
 		attributeList.putNumber("cat_wpn_damage.wpn_real_dps", getModifiedDamagePerSecond(moddedWeaponAttackSpeedWithCap, viewer), " / sec");
+		if (splashDamageRadius > 0) {
+			attributeList.putNumber("cat_wpn_damage.wpn_damage_radius", splashDamageRadius);
+		}
 		if (procEffect != null && !procEffect.isEmpty()) {
 			attributeList.putText("proc_name", "@ui_buff:" + procEffect);
 		}
@@ -316,6 +340,8 @@ public class WeaponObject extends TangibleObject {
 		data.putString("procEffect", procEffect);
 		data.putInteger("specialAttackCost", specialAttackCost);
 		data.putInteger("forcePowerCost", forcePowerCost);
+		data.putInteger("splashDamagePercent", splashDamagePercent);
+		data.putInteger("splashDamageRadius", splashDamageRadius);
 	}
 	
 	@Override
@@ -335,6 +361,8 @@ public class WeaponObject extends TangibleObject {
 		procEffect = data.getString("procEffect");
 		specialAttackCost = data.getInteger("specialAttackCost", 100);
 		forcePowerCost = data.getInteger("forcePowerCost", 100);
+		splashDamagePercent = data.getInteger("splashDamagePercent", 0);
+		splashDamageRadius = data.getInteger("splashDamageRadius", 0);
 	}
 
 	@NotNull
