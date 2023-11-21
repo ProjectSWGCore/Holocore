@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,52 +30,56 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
+import org.jetbrains.annotations.Nullable;
 
 public interface SpawnInfo {
-    String getId();
 
-    Terrain getTerrain();
+	String getId();
 
-    double getX();
+	Terrain getTerrain();
 
-    double getY();
+	double getX();
 
-    double getZ();
+	double getY();
 
-    int getHeading();
+	double getZ();
 
-    int getCellId();
+	int getHeading();
 
-    String getSpawnerType();
+	int getCellId();
 
-    String getNpcId();
+	String getSpawnerType();
 
-    NpcStaticSpawnLoader.SpawnerFlag getSpawnerFlag();
+	String getNpcId();
 
-    CreatureDifficulty getDifficulty();
+	NpcStaticSpawnLoader.SpawnerFlag getSpawnerFlag();
 
-    int getMinLevel();
+	CreatureDifficulty getDifficulty();
 
-    int getMaxLevel();
+	int getMinLevel();
 
-    String getBuildingId();
+	int getMaxLevel();
 
-    String getMood();
+	String getBuildingId();
 
-    AIBehavior getBehavior();
+	String getMood();
 
-    String getPatrolId();
+	AIBehavior getBehavior();
 
-    NpcStaticSpawnLoader.PatrolFormation getPatrolFormation();
+	String getPatrolId();
 
-    int getLoiterRadius();
+	NpcStaticSpawnLoader.PatrolFormation getPatrolFormation();
 
-    int getMinSpawnTime();
+	int getLoiterRadius();
 
-    int getMaxSpawnTime();
+	int getMinSpawnTime();
 
-    int getAmount();
-    
-    String getConversationId();
+	int getMaxSpawnTime();
+
+	int getAmount();
+
+	String getConversationId();
+
+	@Nullable Long getEquipmentId();
 
 }

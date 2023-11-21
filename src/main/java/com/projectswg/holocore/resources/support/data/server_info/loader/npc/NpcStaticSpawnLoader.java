@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.support.npc.spawn.SpawnInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -98,6 +99,7 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		private final int maxSpawnTime;
 		private final int amount;
 		private final String conversationId;
+		private final Long equipmentId;
 		
 		private StaticSpawnInfo(SdbResultSet set) {
 			this.id = set.getText("spawn_id");
@@ -149,8 +151,19 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 			}
 			
 			this.conversationId = set.getText("conversation_id");
+			this.equipmentId = parseEquipmentId(set);
 		}
-		
+
+		private static Long parseEquipmentId(SdbResultSet set) {
+			String equipmentIdText = set.getText("equipment_id");
+			
+			if (equipmentIdText.isBlank()) {
+				return null;
+			}
+			
+			return Long.parseLong(equipmentIdText);
+		}
+
 		@Override
 		public String getId() {
 			return id;
@@ -265,7 +278,12 @@ public final class NpcStaticSpawnLoader extends DataLoader {
 		public String getConversationId() {
 			return conversationId;
 		}
-		
+
+		@Override
+		public @Nullable Long getEquipmentId() {
+			return equipmentId;
+		}
+
 		private static PatrolFormation parsePatrolFormation(String str) {
 			switch (str.toUpperCase(Locale.US)) {
 				case "COLUMN":

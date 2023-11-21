@@ -34,6 +34,8 @@ import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.NpcEquipmentLoader;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.DetailNpcStatInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStatLoader.NpcStatInfo;
@@ -42,6 +44,7 @@ import com.projectswg.holocore.resources.support.npc.ai.NpcPatrolMode;
 import com.projectswg.holocore.resources.support.npc.ai.NpcTurningMode;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator.ObjectCreationException;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
@@ -76,6 +79,11 @@ public class NPCCreator {
 	public static AIObject createSingleNpc(Spawner spawner) {
 		int combatLevel = ThreadLocalRandom.current().nextInt(spawner.getMinLevel(), spawner.getMaxLevel()+1);
 		AIObject object = ObjectCreator.createObjectFromTemplate(spawner.getRandomIffTemplate(), AIObject.class);
+
+		Long equipmentId = spawner.getEquipmentId();
+		if (equipmentId != null) {
+			addEquipmentItemsToNpc(object, equipmentId);
+		}
 		
 		NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(combatLevel);
 		DetailNpcStatInfo detailNpcStat = getDetailedNpcStats(npcStats, spawner.getDifficulty());
@@ -137,7 +145,23 @@ public class NPCCreator {
 		ObjectCreatedIntent.broadcast(object);
 		return object;
 	}
-	
+
+	private static void addEquipmentItemsToNpc(AIObject object, Long equipmentId) {
+		NpcEquipmentLoader.NpcEquipmentInfo equipmentInfo = ServerData.INSTANCE.getNpcEquipment().getEquipmentInfo(equipmentId);
+
+		if (equipmentInfo != null) {
+			addEquipmentToSlot(equipmentInfo.getLeftHandTemplate(), "hold_l", object);
+			addEquipmentToSlot(equipmentInfo.getRightHandTemplate(), "hold_r", object);
+		}
+	}
+
+	private static void addEquipmentToSlot(String objectTemplate, String slotName, AIObject object) {
+		if (!objectTemplate.isBlank()) {
+			SWGObject rightHandObject = ObjectCreator.createObjectFromTemplate(objectTemplate);
+			rightHandObject.moveToSlot(object, slotName, 4);
+		}
+	}
+
 	private static void setFlags(AIObject object, Spawner spawner) {
 		switch (spawner.getSpawnerFlag()) {
 			case AGGRESSIVE:
