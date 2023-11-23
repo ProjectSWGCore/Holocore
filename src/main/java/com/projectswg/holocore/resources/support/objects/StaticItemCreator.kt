@@ -137,6 +137,8 @@ object StaticItemCreator {
 		weapon.procEffect = info.procEffect
 		weapon.specialAttackCost = info.specialAttackCost
 		weapon.requiredSkill = info.requiredSkill
+		weapon.splashDamageRadius = info.splashDamageRadius
+		weapon.splashDamagePercent = info.splashDamagePercent
 
 		applyItemValue(info.value, obj)
 	}
