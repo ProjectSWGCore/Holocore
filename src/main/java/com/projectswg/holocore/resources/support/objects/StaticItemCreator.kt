@@ -140,6 +140,7 @@ object StaticItemCreator {
 		weapon.splashDamageRadius = info.splashDamageRadius
 		weapon.splashDamagePercent = info.splashDamagePercent
 
+		applySkillMods(obj, info.skillMods)
 		applyItemValue(info.value, obj)
 	}
 
