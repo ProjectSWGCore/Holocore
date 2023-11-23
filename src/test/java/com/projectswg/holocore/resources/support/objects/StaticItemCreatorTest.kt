@@ -32,11 +32,13 @@ import org.junit.jupiter.api.Test
 
 class StaticItemCreatorTest {
 	@Test
-	fun skillModsOnWeapons() {
+	fun weapons() {
 		val weapon = StaticItemCreator.createItem("weapon_tow_cannon_02_01") as WeaponObject
 
-		val skillMods = weapon.skillMods
-		
-		assertTrue(skillMods.isNotEmpty())
+		assertAll(
+			{ assertTrue(weapon.skillMods.isNotEmpty(), "Skillmods") },
+			{ assertNotNull(weapon.elementalType, "Elemental damage type") },
+			{ assertTrue(weapon.elementalValue > 0, "Elemental damage value") },
+		)
 	}
 }

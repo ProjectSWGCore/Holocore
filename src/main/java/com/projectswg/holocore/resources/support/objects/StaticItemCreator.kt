@@ -130,6 +130,7 @@ object StaticItemCreator {
 		weapon.maxRange = info.maxRange.toFloat()
 		weapon.damageType = info.damageType
 		weapon.elementalType = info.elementalType
+		weapon.elementalValue = info.elementalDamage
 		weapon.minDamage = info.minDamage
 		weapon.maxDamage = info.maxDamage
 		weapon.accuracy = info.accuracyBonus
