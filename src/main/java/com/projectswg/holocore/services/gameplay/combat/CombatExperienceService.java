@@ -106,6 +106,10 @@ public class CombatExperienceService extends Service {
 	}
 
 	private void grantXpToKiller(CreatureObject killer, CreatureObject corpse, int experienceGained) {
+		if (corpse.hasOptionFlags(OptionFlag.INVULNERABLE)) {
+			return;
+		}
+
 		boolean xpMultiply = experienceGained > 1;
 		grantWeaponTypeXp(killer, corpse, experienceGained, xpMultiply);
 
