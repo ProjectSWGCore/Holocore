@@ -38,6 +38,8 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
+import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
+import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
@@ -46,8 +48,7 @@ import com.projectswg.holocore.services.support.global.zone.ZoneService
 import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -64,6 +65,8 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 		registerService(CommandQueueService(5))
 		registerService(CommandExecutionService())
 		registerService(CombatDeathblowService())
+		registerService(ExperiencePointService())
+		registerService(CombatExperienceService())
 	}
 
 	@AfterEach
@@ -75,11 +78,25 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 	fun killNpc() {
 		memoryUserDatabase.addUser("username", "password", AccessLevel.DEV)
 		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-		val npc = spawnNPCs("creature_bantha", character.player.creatureObject.location, 1).first()
+		val npc = spawnNPCs("creature_bantha", character.player.creatureObject.location, 1, NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE).first()
 
 		character.adminKill(npc)
 
 		assertEquals(Posture.DEAD, npc.posture)
+	}
+
+	@Test
+	fun killInvulnerableNpc() {
+		memoryUserDatabase.addUser("username", "password", AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val npc = spawnNPCs("creature_bantha", character.player.creatureObject.location, 1, NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE).first()
+
+		character.adminKill(npc)
+
+		assertAll(
+			{ assertEquals(Posture.DEAD, npc.posture, "admins should be able to kill invulnerable NPCs with /kill") },
+			{ assertTrue(character.player.playerObject.experience.isEmpty(), "admins should not gain experience from killing invulnerable NPCs") }
+		)
 	}
 
 	@Test
@@ -92,7 +109,7 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 		assertNotEquals(Posture.DEAD, character.player.creatureObject)
 	}
 
-	private fun spawnNPCs(npcId: String, location: Location, amount: Int): Collection<AIObject> {
+	private fun spawnNPCs(npcId: String, location: Location, amount: Int, spawnerFlag: NpcStaticSpawnLoader.SpawnerFlag): Collection<AIObject> {
 		val egg = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/shared_patrol_spawner.iff")
 		egg.moveToContainer(null, location)
 
@@ -103,7 +120,7 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 			.withMaxLevel(1)
 			.withLocation(location)
 			.withAmount(amount)
-			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
+			.withSpawnerFlag(spawnerFlag)
 			.build()
 
 		return NPCCreator.createAllNPCs(Spawner(spawnInfo, egg))
