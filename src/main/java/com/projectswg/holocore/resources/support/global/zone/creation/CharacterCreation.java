@@ -156,11 +156,11 @@ public class CharacterCreation {
 		// New characters are Novices in all basic professions in the Combat Upgrade
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_" + creatureObj.getRace().getSpecies(), creatureObj, true).broadcast();
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "social_entertainer_novice", creatureObj, true).broadcast();
-		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "outdoors_scout_novice", creatureObj, true).broadcast();
-		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "science_medic_novice", creatureObj, true).broadcast();
-		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "crafting_artisan_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "outdoors_scout_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "science_medic_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "crafting_artisan_novice", creatureObj, true).broadcast();
 		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_brawler_novice", creatureObj, true).broadcast();
-		// new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_marksman_novice", creatureObj, true).broadcast();
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "combat_marksman_novice", creatureObj, true).broadcast();
 		
 		// Everyone can Burst Run
 		creatureObj.addCommand("burstrun");
