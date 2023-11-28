@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="com.tngtech.archunit.junit.ArchTest" />
       <item index="1" class="java.lang.String" itemvalue="me.joshlarson.jlcommon.control.IntentHandler" />
+      <item index="2" class="java.lang.String" itemvalue="me.joshlarson.jlcommon.control.IntentMultiplexer.Multiplexer" />
     </list>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="temurin-18" project-jdk-type="JavaSDK" />
