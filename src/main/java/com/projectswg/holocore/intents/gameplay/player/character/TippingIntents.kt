@@ -24,17 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player
+@file:Suppress("NOTHING_TO_INLINE")
+package com.projectswg.holocore.intents.gameplay.player.character
 
-import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
-import com.projectswg.holocore.services.gameplay.player.character.PlayerCharacterSheetService
-import com.projectswg.holocore.services.gameplay.player.character.TippingService
-import com.projectswg.holocore.services.gameplay.player.experience.ExperienceManager
-import com.projectswg.holocore.services.gameplay.player.group.GroupManager
-import com.projectswg.holocore.services.gameplay.player.guild.GuildService
-import com.projectswg.holocore.services.gameplay.player.quest.QuestService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
 
-@ManagerStructure(children = [BadgeManager::class, ExperienceManager::class, GroupManager::class, GuildService::class, QuestService::class, PlayerCharacterSheetService::class, TippingService::class])
-class PlayerManager : Manager()
+data class CashTipIntent(val sender: Player, val receiver: Player, val amount: Int): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(sender: Player, receiver: Player, amount: Int) = CashTipIntent(sender, receiver, amount).broadcast()
+	}
+}
+
+data class BankTipIntent(val sender: Player, val receiver: Player, val amount: Int): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(sender: Player, receiver: Player, amount: Int) = BankTipIntent(sender, receiver, amount).broadcast()
+	}
+}

@@ -123,6 +123,7 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("knockdownRecovery", KnockdownRecoveryCmdCallback::new);
 		registerScriptCallback("burstRun", BurstRunCmdCallback::new);
 		registerScriptCallback("cmdMeditate", CmdMeditate::new);
+		registerScriptCallback("cmdTip", CmdTip::new);
 		
 		addAdminScripts();
 		addChatScripts();
