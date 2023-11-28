@@ -26,26 +26,17 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.data.CRC
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification
 import com.projectswg.holocore.test.resources.GenericPlayer
-import java.util.concurrent.TimeUnit
 
-/**
- * Represents everything that can happen to a character that is zoned in.
- */
-class ZonedInCharacter internal constructor(val player: GenericPlayer) {
+class SuiWindow(private val player: GenericPlayer, private val suiWindowId: Int) {
 
-	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = ""): CommandQueueDequeue {
-		val targetObjectId = target?.objectId ?: 0
-		val commandQueueEnqueue = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc(command.lowercase()), targetObjectId, args)
-		sendPacket(player, commandQueueEnqueue)
-		return player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
-	}
-
-	override fun toString(): String {
-		return "ZonedInCharacter(player=$player)"
+	/**
+	 * Invokes the "Ok" button on the SUI window.
+	 */
+	fun clickOk() {
+		val suiEventNotification = SuiEventNotification()
+		suiEventNotification.windowId = suiWindowId
+		sendPacket(player, suiEventNotification)
 	}
 }

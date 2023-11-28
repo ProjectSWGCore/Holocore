@@ -29,3 +29,4 @@ package com.projectswg.holocore.headless
 class AccountBannedException(message: String) : Exception(message)
 class WrongClientVersionException(message: String) : Exception(message)
 class WrongCredentialsException(message: String) : Exception(message)
+class TipException(message: String) : Exception(message)
