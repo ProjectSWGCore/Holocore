@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="runDevelopment" />
+          <option value="runProduction" />
           <option value="--args=&quot;--print-colors&quot;" />
         </list>
       </option>
@@ -19,7 +19,7 @@
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <DebugAllEnabled>false</DebugAllEnabled>
-    <ForceTestExec>false</ForceTestExec>
+    <RunAsTest>false</RunAsTest>
     <method v="2" />
   </configuration>
 </component>
