@@ -26,25 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import java.util.concurrent.TimeUnit
 
 /**
- * Admin command /kill
- * @param target The object to kill
+ * Combat command /surrenderSkill
+ * @param skill the skill to surrender
  */
-fun ZonedInCharacter.adminKill(target: SWGObject?) {
-	sendCommand("kill", target)
-	player.waitForNextPacket(setOf(ChatSystemMessage::class.java, DeltasMessage::class.java), 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
-}
-
-/**
- * Admin command /grantSkill
- * @param skill the skill to grant
- */
-fun ZonedInCharacter.adminGrantSkill(skill: String) {
-	sendCommand("grantSkill", args = skill)
+fun ZonedInCharacter.surrenderSkill(skill: String) {
+	sendCommand("surrenderSkill", args = skill)
 	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
 }
