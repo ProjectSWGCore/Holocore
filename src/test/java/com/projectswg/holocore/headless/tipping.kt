@@ -26,26 +26,51 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.data.CRC
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
+import com.projectswg.common.data.encodables.oob.ProsePackage
+import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.test.resources.GenericPlayer
 import java.util.concurrent.TimeUnit
 
-/**
- * Represents everything that can happen to a character that is zoned in.
- */
-class ZonedInCharacter internal constructor(val player: GenericPlayer) {
+fun ZonedInCharacter.tipCash(target: SWGObject, amount: Int) {
+	sendCommand("tip", target, amount.toString())
+	val packet = player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No known packet received")
+	checkSystemMessage(packet)
+}
 
-	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = ""): CommandQueueDequeue {
-		val targetObjectId = target?.objectId ?: 0
-		val commandQueueEnqueue = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc(command.lowercase()), targetObjectId, args)
-		sendPacket(player, commandQueueEnqueue)
-		return player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
+fun ZonedInCharacter.tipBank(target: SWGObject, amount: Int): SuiWindow {
+	sendCommand("tip", target, "$amount bank")
+	val packet = player.waitForNextPacket(setOf(SuiCreatePageMessage::class.java, ChatSystemMessage::class.java), 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No known packet received")
+
+	if (packet is SuiCreatePageMessage) {
+		val suiWindowId = packet.window.id
+
+		return SuiWindow(player, suiWindowId)
+	} else if (packet is ChatSystemMessage) {
+		checkSystemMessage(packet)
+	}
+	
+	throw IllegalStateException()
+}
+
+private fun checkSystemMessage(packet: ChatSystemMessage) {
+	val oob = packet.oob
+
+	if (oob != null) {
+		val firstOobPackage = oob.packages.first()
+		if (firstOobPackage is ProsePackage) {
+			val key = firstOobPackage.base.key
+
+			if (key != "prose_tip_pass_self") {
+				throw TipException(firstOobPackage.toString())
+			}
+		}
 	}
 
-	override fun toString(): String {
-		return "ZonedInCharacter(player=$player)"
+	val message = packet.message
+
+	if (message != null && message.contains("cannot")) {
+		throw TipException(message)
 	}
 }
+
