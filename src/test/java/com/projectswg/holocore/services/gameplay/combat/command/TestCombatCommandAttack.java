@@ -42,7 +42,7 @@ public class TestCombatCommandAttack {
 		double dirX = targetLocation.getX() - attackerLocation.getX();
 		double dirZ = targetLocation.getZ() - attackerLocation.getZ();
 		
-		CombatCommandAttack instance = CombatCommandAttack.INSTANCE;
+		CombatCommandAttack instance = new CombatCommandAttack(new RandomDie(), new RandomDie());
 		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone1, 30, dirX, dirZ));
 		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone2, 30, dirX, dirZ));
 		assertFalse(instance.isInConeAngle(attackerLocation, collateralOutsideCone, 30, dirX, dirZ));

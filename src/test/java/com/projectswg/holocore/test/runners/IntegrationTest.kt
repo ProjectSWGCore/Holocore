@@ -75,7 +75,7 @@ abstract class IntegrationTest : TestRunnerSynchronousIntents() {
 		registerService(AwarenessService())
 		registerService(LoginService(memoryUserDatabase))
 		registerService(ZoneService())
-		registerService(CommandQueueService(5))
+		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0)))
 		registerService(CommandExecutionService())
 		registerService(CharacterCreationService())
 		registerService(ExperiencePointService())
