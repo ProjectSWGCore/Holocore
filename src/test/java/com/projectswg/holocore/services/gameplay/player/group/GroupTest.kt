@@ -27,39 +27,11 @@
 package com.projectswg.holocore.services.gameplay.player.group
 
 import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
-import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
-import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.ZoneService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeEach
+import com.projectswg.holocore.test.runners.IntegrationTest
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class GroupTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
-
-	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-		registerService(ZoneService())
-		registerService(CharacterCreationService())
-		registerService(SkillService())
-		registerService(CommandQueueService(5))
-		registerService(CommandExecutionService())
-
-		registerService(GroupService())
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
-	}
+class GroupTest : IntegrationTest() {
 
 	@Test
 	fun formGroup() {
@@ -81,8 +53,10 @@ class GroupTest : TestRunnerSimulatedWorld() {
 
 		zonedInCharacter1.makeGroupLeader(zonedInCharacter2)
 
-		assertFalse(zonedInCharacter1.isGroupLeader())
-		assertTrue(zonedInCharacter2.isGroupLeader())
+		assertAll(
+			{ assertFalse(zonedInCharacter1.isGroupLeader()) },
+			{ assertTrue(zonedInCharacter2.isGroupLeader()) },
+		)
 	}
 
 	@Test
@@ -94,8 +68,10 @@ class GroupTest : TestRunnerSimulatedWorld() {
 
 		zonedInCharacter2.makeGroupLeader(zonedInCharacter2)
 
-		assertFalse(zonedInCharacter2.isGroupLeader())
-		assertTrue(zonedInCharacter1.isGroupLeader())
+		assertAll(
+			{ assertFalse(zonedInCharacter2.isGroupLeader()) },
+			{ assertTrue(zonedInCharacter1.isGroupLeader()) },
+		)
 	}
 
 	@Test
@@ -111,9 +87,11 @@ class GroupTest : TestRunnerSimulatedWorld() {
 
 		zonedInCharacter2.leaveCurrentGroup()
 
-		assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter3))
-		assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2))
-		assertFalse(zonedInCharacter3.isInGroupWith(zonedInCharacter2))
+		assertAll(
+			{ assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter3)) },
+			{ assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2)) },
+			{ assertFalse(zonedInCharacter3.isInGroupWith(zonedInCharacter2)) },
+		)
 	}
 
 	@Test
@@ -129,9 +107,11 @@ class GroupTest : TestRunnerSimulatedWorld() {
 
 		zonedInCharacter1.kickFromGroup(zonedInCharacter2)
 
-		assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter3))
-		assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2))
-		assertFalse(zonedInCharacter3.isInGroupWith(zonedInCharacter2))
+		assertAll(
+			{ assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter3)) },
+			{ assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2)) },
+			{ assertFalse(zonedInCharacter3.isInGroupWith(zonedInCharacter2)) },
+		)
 	}
 
 	@Test
@@ -147,14 +127,16 @@ class GroupTest : TestRunnerSimulatedWorld() {
 
 		zonedInCharacter1.leaveCurrentGroup()
 
-		assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2))
-		assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter3))
-		assertTrue(zonedInCharacter2.isGroupLeader() || zonedInCharacter3.isGroupLeader(), "one of the remaining members should be the new leader")
+		assertAll(
+			{ assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter2)) },
+			{ assertFalse(zonedInCharacter1.isInGroupWith(zonedInCharacter3)) },
+			{ assertTrue(zonedInCharacter2.isGroupLeader() || zonedInCharacter3.isGroupLeader(), "one of the remaining members should be the new leader") },
+		)
 	}
 
 	private fun createZonedInCharacter(username: String, characterName: String): ZonedInCharacter {
 		val password = "password"
-		memoryUserDatabase.addUser(username, password)
+		addUser(username, password)
 		return HeadlessSWGClient.createZonedInCharacter(username, password, characterName)
 	}
 

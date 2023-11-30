@@ -26,34 +26,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support
 
-import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.test.runners.IntegrationTest
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class CharacterManagementTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
-
-	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-		registerService(CharacterCreationService())
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
-	}
+class CharacterManagementTest : IntegrationTest() {
 
 	@Test
 	fun deleteCharacter() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("username")
 		val characterSelectionScreen = headlessSWGClient.login("password")
 		val characterId = characterSelectionScreen.createCharacter("firstcharacter")
@@ -65,7 +49,7 @@ class CharacterManagementTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun characterCreationRateLimit() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("username")
 		val characterSelectionScreen = headlessSWGClient.login("password")
 		characterSelectionScreen.createCharacter("firstcharacter")

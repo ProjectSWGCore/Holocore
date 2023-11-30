@@ -27,40 +27,19 @@
 package com.projectswg.holocore.services.gameplay.player.experience
 
 import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.MemoryUserDatabase
 import com.projectswg.holocore.headless.adminGrantSkill
 import com.projectswg.holocore.headless.surrenderSkill
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
-import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
-import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.ZoneService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
+import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class SkillTreeTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
+class SkillTreeTest : IntegrationTest() {
 
 	@BeforeEach
 	fun setUp() {
-		memoryUserDatabase.addUser("username", "password", accessLevel = AccessLevel.DEV)
-		registerService(LoginService(memoryUserDatabase))
-		registerService(ZoneService())
-		registerService(CharacterCreationService())
-		registerService(SkillService())
-		registerService(CommandQueueService(5))
-		registerService(CommandExecutionService())
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
+		addUser("username", "password", accessLevel = AccessLevel.DEV)
 	}
 
 	@Test

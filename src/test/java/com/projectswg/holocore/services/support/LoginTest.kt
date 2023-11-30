@@ -26,32 +26,20 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support
 
-import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
+import com.projectswg.holocore.headless.AccountBannedException
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.WrongClientVersionException
+import com.projectswg.holocore.headless.WrongCredentialsException
+import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class LoginTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
-
-	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
-	}
+class LoginTest : IntegrationTest() {
 
 	@Test
 	fun validCredentials() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("username")
 
 		val characterSelectionScreen = headlessSWGClient.login("password")
@@ -61,7 +49,7 @@ class LoginTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun validCredentialsButBanned() {
-		memoryUserDatabase.addUser("username", "password", banned = true)
+		addUser("username", "password", banned = true)
 		val headlessSWGClient = HeadlessSWGClient("username")
 
 		assertThrows<AccountBannedException> { headlessSWGClient.login("password") }
@@ -69,7 +57,7 @@ class LoginTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun wrongUsername() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("wrongusername")
 
 		assertThrows<WrongCredentialsException> { headlessSWGClient.login("password") }
@@ -77,7 +65,7 @@ class LoginTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun wrongPassword() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("username")
 
 		assertThrows<WrongCredentialsException> { headlessSWGClient.login("wrongpassword") }
@@ -85,7 +73,7 @@ class LoginTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun wrongVersion() {
-		memoryUserDatabase.addUser("username", "password")
+		addUser("username", "password")
 		val headlessSWGClient = HeadlessSWGClient("username", "20030404-14:00")
 
 		assertThrows<WrongClientVersionException> { headlessSWGClient.login("password") }

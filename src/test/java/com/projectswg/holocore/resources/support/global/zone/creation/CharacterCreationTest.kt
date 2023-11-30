@@ -1,47 +1,19 @@
 package com.projectswg.holocore.resources.support.global.zone.creation
 
 import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.MemoryUserDatabase
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
-import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
-import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
-import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
-import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.ZoneService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
+import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class CharacterCreationTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
+class CharacterCreationTest : IntegrationTest() {
 
 	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-		registerService(ZoneService())
-		registerService(CharacterCreationService())
-		registerService(SkillService())
-		registerService(CommandQueueService(5))
-		registerService(CommandExecutionService())
-		registerService(CombatDeathblowService())
-		registerService(ExperiencePointService())
-		registerService(CombatExperienceService())
-
-		memoryUserDatabase.addUser("username", "password")
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
+	fun setUpUser() {
+		addUser("username", "password")
 	}
 
 	@Test
