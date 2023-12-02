@@ -27,10 +27,8 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin;
 
 import com.projectswg.holocore.intents.gameplay.world.spawn.CreateSpawnIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
-import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo;
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType;
@@ -43,11 +41,6 @@ import org.jetbrains.annotations.Nullable;
 public class CmdCreateNpc implements ICmdCallback {
     @Override
     public void execute(@NotNull Player player, @Nullable SWGObject target, @NotNull String args) {
-        if (player.getAccessLevel() == AccessLevel.PLAYER) {
-            SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(");
-            return;
-        }
-
         String[] commandArgs = args.split(" ");
         String npcId = determineNpcId(commandArgs);
         CreatureDifficulty difficulty = determineDifficulty(commandArgs);
