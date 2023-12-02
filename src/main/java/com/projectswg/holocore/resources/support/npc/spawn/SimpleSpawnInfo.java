@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,8 +31,7 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
-
-import java.util.concurrent.TimeUnit;
+import org.jetbrains.annotations.Nullable;
 
 public class SimpleSpawnInfo implements SpawnInfo {
 
@@ -180,7 +179,12 @@ public class SimpleSpawnInfo implements SpawnInfo {
 	public String getConversationId() {
 		return null;
 	}
-	
+
+	@Override
+	public @Nullable Long getEquipmentId() {
+		return null;
+	}
+
 	public static class Builder {
 
         private final SimpleSpawnInfo info;

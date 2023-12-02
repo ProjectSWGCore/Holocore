@@ -135,6 +135,9 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 
 	val conversationId: String?
 		get() = spawn.conversationId
+	
+	val equipmentId: Long?
+		get() = spawn.equipmentId
 
 	val name: String
 		get() = npc.name
