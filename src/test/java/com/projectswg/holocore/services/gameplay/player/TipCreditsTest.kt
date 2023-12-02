@@ -26,7 +26,9 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player
 
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -40,7 +42,7 @@ class TipCreditsTest : IntegrationTest() {
 		val tipAmount = -50
 
 		assertThrows(TipException::class.java) {
-			zonedInCharacter1.tipCash(zonedInCharacter2.player.creatureObject, tipAmount)
+			zonedInCharacter1.tip(zonedInCharacter2.player.creatureObject, tipAmount)
 		}
 	}
 
@@ -61,7 +63,7 @@ class TipCreditsTest : IntegrationTest() {
 		val womprat = spawnNPC("creature_womprat", zonedInCharacter1.player.creatureObject.location)
 		
 		assertThrows(TipException::class.java) {
-			zonedInCharacter1.tipCash(womprat, 1)
+			zonedInCharacter1.tip(womprat, 1)
 		}
 	}
 
@@ -70,7 +72,7 @@ class TipCreditsTest : IntegrationTest() {
 		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
 		
 		assertThrows(TipException::class.java) {
-			zonedInCharacter1.tipCash(zonedInCharacter1.player.creatureObject, 1)
+			zonedInCharacter1.tip(zonedInCharacter1.player.creatureObject, 1)
 		}
 	}
 	
@@ -82,7 +84,7 @@ class TipCreditsTest : IntegrationTest() {
 		val char2Before = CreditsSnapshot(zonedInCharacter2)
 		val tipAmount = 1
 
-		zonedInCharacter1.tipCash(zonedInCharacter2.player.creatureObject, tipAmount)
+		zonedInCharacter1.tip(zonedInCharacter2.player.creatureObject, tipAmount)
 
 		val char1After = CreditsSnapshot(zonedInCharacter1)
 		val char2After = CreditsSnapshot(zonedInCharacter2)
@@ -90,17 +92,6 @@ class TipCreditsTest : IntegrationTest() {
 			{ assertEquals(char1Before.cash - tipAmount, char1After.cash) },
 			{ assertEquals(char2Before.cash + tipAmount, char2After.cash) },
 		)
-	}
-
-	@Test
-	fun insufficientCash() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
-		val tipAmount = zonedInCharacter1.player.creatureObject.cashBalance * 2
-
-		assertThrows(TipException::class.java) {
-			zonedInCharacter1.tipCash(zonedInCharacter2.player.creatureObject, tipAmount)
-		}
 	}
 
 	@Test
@@ -125,6 +116,38 @@ class TipCreditsTest : IntegrationTest() {
 	}
 
 	@Test
+	fun tooFarAway() {
+		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		zonedInCharacter2.adminTeleport(
+			planet = zonedInCharacter1.player.creatureObject.terrain,
+			x = zonedInCharacter1.player.creatureObject.x + 20,
+			y = zonedInCharacter1.player.creatureObject.y,
+			z = zonedInCharacter1.player.creatureObject.z
+		)
+
+		val suiWindow = zonedInCharacter1.tip(zonedInCharacter2.player.creatureObject, 100)
+
+		assertNotNull(suiWindow, "Expected a bank tip window to open")
+	}
+
+	@Test
+	fun differentPlanet() {
+		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		zonedInCharacter2.adminTeleport(	// Same coordinates, but different planet
+			planet = Terrain.DANTOOINE,
+			x = zonedInCharacter1.player.creatureObject.x,
+			y = zonedInCharacter1.player.creatureObject.y,
+			z = zonedInCharacter1.player.creatureObject.z
+		)
+
+		val suiWindow = zonedInCharacter1.tip(zonedInCharacter2.player.creatureObject, 100)
+
+		assertNotNull(suiWindow, "Expected a bank tip window to open")
+	}
+
+	@Test
 	fun insufficientBank() {
 		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
 		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
@@ -138,7 +161,7 @@ class TipCreditsTest : IntegrationTest() {
 
 	private fun createZonedInCharacter(username: String, characterName: String): ZonedInCharacter {
 		val password = "password"
-		addUser(username, password)
+		addUser(username, password, accessLevel = AccessLevel.DEV)
 		return HeadlessSWGClient.createZonedInCharacter(username, password, characterName)
 	}
 
