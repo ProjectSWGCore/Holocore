@@ -38,11 +38,14 @@ import java.util.concurrent.TimeUnit
  */
 class ZonedInCharacter internal constructor(val player: GenericPlayer) {
 
-	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = ""): CommandQueueDequeue {
+	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = "") {
 		val targetObjectId = target?.objectId ?: 0
 		val commandQueueEnqueue = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc(command.lowercase()), targetObjectId, args)
 		sendPacket(player, commandQueueEnqueue)
-		return player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
+		val packet = player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
+		if (packet.error != CommandQueueDequeue.ErrorCode.SUCCESS) {
+			throw CommandFailedException("Command '$command' failed: ${packet.error}")
+		}
 	}
 
 	override fun toString(): String {
