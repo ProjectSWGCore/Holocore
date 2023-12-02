@@ -26,6 +26,10 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformMessage
+import com.projectswg.common.network.packets.swg.zone.UpdateTransformWithParentMessage
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -47,4 +51,29 @@ fun ZonedInCharacter.adminKill(target: SWGObject?) {
 fun ZonedInCharacter.adminGrantSkill(skill: String) {
 	sendCommand("grantSkill", args = skill)
 	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
+}
+
+/**
+ * Admin command /teleport
+ * @param target The object to teleport. If null, the player executing the command will be teleported.
+ * @param planet The planet to teleport to
+ * @param x The x coordinate to teleport to
+ * @param y The y coordinate to teleport to
+ * @param z The z coordinate to teleport to
+ */
+fun ZonedInCharacter.adminTeleport(target: SWGObject? = null, planet: Terrain, x: Number, y: Number, z: Number) {
+	val argList = mutableListOf<String>()
+	if (target != null) {
+		val targetFirstName = target.objectName.split(" ").first()
+		argList.add(targetFirstName)
+	}
+
+	argList.add(planet.getName())
+	argList.add(x.toInt().toString())
+	argList.add(y.toInt().toString())
+	argList.add(z.toInt().toString())
+
+	sendCommand("teleport", args = argList.joinToString(separator = " "))
+
+	player.waitForNextPacket(setOf(UpdateContainmentMessage::class.java, UpdateTransformMessage::class.java, UpdateTransformWithParentMessage::class.java), 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
 }
