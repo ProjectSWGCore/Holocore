@@ -27,58 +27,21 @@
 package com.projectswg.holocore.services.support
 
 import com.projectswg.common.data.encodables.tangible.Posture
-import com.projectswg.common.data.location.Location
-import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.adminKill
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
-import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner
-import com.projectswg.holocore.resources.support.objects.ObjectCreator
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
-import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
-import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
-import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
-import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.ZoneService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
+import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class KillAdminCommandTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
-
-	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-		registerService(ZoneService())
-		registerService(CharacterCreationService())
-		registerService(SkillService())
-		registerService(CommandQueueService(5))
-		registerService(CommandExecutionService())
-		registerService(CombatDeathblowService())
-		registerService(ExperiencePointService())
-		registerService(CombatExperienceService())
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
-	}
+class KillAdminCommandTest : IntegrationTest() {
 
 	@Test
 	fun killNpc() {
-		memoryUserDatabase.addUser("username", "password", AccessLevel.DEV)
+		addUser("username", "password", AccessLevel.DEV)
 		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-		val npc = spawnNPCs("creature_bantha", character.player.creatureObject.location, 1, NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE).first()
+		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
 
 		character.adminKill(npc)
 
@@ -87,9 +50,9 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun killInvulnerableNpc() {
-		memoryUserDatabase.addUser("username", "password", AccessLevel.DEV)
+		addUser("username", "password", AccessLevel.DEV)
 		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-		val npc = spawnNPCs("creature_bantha", character.player.creatureObject.location, 1, NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE).first()
+		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE)
 
 		character.adminKill(npc)
 
@@ -101,29 +64,12 @@ class KillAdminCommandTest : TestRunnerSimulatedWorld() {
 
 	@Test
 	fun killSelf() {
-		memoryUserDatabase.addUser("username", "password", AccessLevel.DEV)
+		addUser("username", "password", AccessLevel.DEV)
 		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
 
 		character.adminKill(character.player.creatureObject)
 
 		assertNotEquals(Posture.DEAD, character.player.creatureObject)
-	}
-
-	private fun spawnNPCs(npcId: String, location: Location, amount: Int, spawnerFlag: NpcStaticSpawnLoader.SpawnerFlag): Collection<AIObject> {
-		val egg = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/shared_patrol_spawner.iff")
-		egg.moveToContainer(null, location)
-
-		val spawnInfo = SimpleSpawnInfo.builder()
-			.withNpcId(npcId)
-			.withDifficulty(CreatureDifficulty.NORMAL)
-			.withMinLevel(1)
-			.withMaxLevel(1)
-			.withLocation(location)
-			.withAmount(amount)
-			.withSpawnerFlag(spawnerFlag)
-			.build()
-
-		return NPCCreator.createAllNPCs(Spawner(spawnInfo, egg))
 	}
 
 }

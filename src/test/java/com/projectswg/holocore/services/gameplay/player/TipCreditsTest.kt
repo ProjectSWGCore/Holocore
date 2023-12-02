@@ -26,55 +26,12 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player
 
-import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
-import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
-import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner
-import com.projectswg.holocore.resources.support.objects.ObjectCreator
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import com.projectswg.holocore.services.gameplay.player.character.TippingService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
-import com.projectswg.holocore.services.support.global.chat.ChatMailService
-import com.projectswg.holocore.services.support.global.chat.ChatSystemService
-import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
-import com.projectswg.holocore.services.support.global.commands.CommandQueueService
-import com.projectswg.holocore.services.support.global.zone.LoginService
-import com.projectswg.holocore.services.support.global.zone.ZoneService
-import com.projectswg.holocore.services.support.global.zone.creation.CharacterCreationService
-import com.projectswg.holocore.services.support.global.zone.sui.SuiService
-import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.AfterEach
+import com.projectswg.holocore.test.runners.IntegrationTest
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class TipCreditsTest : TestRunnerSimulatedWorld() {
-
-	private val memoryUserDatabase = MemoryUserDatabase()
-
-	@BeforeEach
-	fun setUp() {
-		registerService(LoginService(memoryUserDatabase))
-		registerService(ZoneService())
-		registerService(CharacterCreationService())
-		registerService(SkillService())
-		registerService(CommandQueueService(5))
-		registerService(CommandExecutionService())
-		registerService(ChatSystemService())
-		registerService(ChatMailService())
-		registerService(SuiService())
-		registerService(TippingService())
-	}
-
-	@AfterEach
-	fun tearDown() {
-		memoryUserDatabase.clear()
-	}
+class TipCreditsTest : IntegrationTest() {
 
 	@Test
 	fun negativeAmount() {
@@ -101,7 +58,7 @@ class TipCreditsTest : TestRunnerSimulatedWorld() {
 	@Test
 	fun npc() {
 		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val womprat = spawnNPCs("creature_womprat", zonedInCharacter1.player.creatureObject.location, 1).first()
+		val womprat = spawnNPC("creature_womprat", zonedInCharacter1.player.creatureObject.location)
 		
 		assertThrows(TipException::class.java) {
 			zonedInCharacter1.tipCash(womprat, 1)
@@ -181,33 +138,8 @@ class TipCreditsTest : TestRunnerSimulatedWorld() {
 
 	private fun createZonedInCharacter(username: String, characterName: String): ZonedInCharacter {
 		val password = "password"
-		memoryUserDatabase.addUser(username, password)
+		addUser(username, password)
 		return HeadlessSWGClient.createZonedInCharacter(username, password, characterName)
-	}
-
-	companion object {
-		@JvmStatic
-		@BeforeAll
-		fun setUpAll() {
-			ServerData.terrains // Eagerly load, so even the very first command is fast in the 'swimming' state check
-		}
-	}
-
-	private fun spawnNPCs(npcId: String, location: Location, amount: Int): Collection<AIObject> {
-		val egg = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/shared_patrol_spawner.iff")
-		egg.moveToContainer(null, location)
-
-		val spawnInfo = SimpleSpawnInfo.builder()
-			.withNpcId(npcId)
-			.withDifficulty(CreatureDifficulty.NORMAL)
-			.withMinLevel(1)
-			.withMaxLevel(1)
-			.withLocation(location)
-			.withAmount(amount)
-			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
-			.build()
-
-		return NPCCreator.createAllNPCs(Spawner(spawnInfo, egg))
 	}
 
 }

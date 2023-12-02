@@ -27,6 +27,7 @@
 package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
+import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService
 import java.util.concurrent.TimeUnit
@@ -38,22 +39,22 @@ fun ZonedInCharacter.invitePlayerToGroup(other: ZonedInCharacter) {
 
 fun ZonedInCharacter.acceptCurrentGroupInvitation() {
 	sendCommand("join")
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No chat system message received")
+	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.leaveCurrentGroup() {
 	sendCommand("leaveGroup")
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No chat system message received")
+	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.kickFromGroup(other: ZonedInCharacter) {
 	sendCommand("dismissGroupMember", other.player.creatureObject)
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No chat system message received")
+	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.makeGroupLeader(other: ZonedInCharacter) {
 	sendCommand("makeLeader", other.player.creatureObject)
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No chat system message received")
+	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.isInGroupWith(other: ZonedInCharacter): Boolean {
