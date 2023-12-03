@@ -1,0 +1,27 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_bestinejobs_jasha",
+		"key": "s_43",
+		"comment": "Looking to help your pockets more like. But I can't be choosey right now. I have some jobs available, that don't require a security clearance. Look at this list. What are you interested in?]"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_bestinejobs_jasha",
+				"key": "s_44",
+				"comment": "I can help hunting banthas."
+			},
+			"next": "questgiver/kill_banthas"
+		}
+	],
+
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "survey"
+			}
+		}
+	]
+}

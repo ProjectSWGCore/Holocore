@@ -115,7 +115,7 @@ bo_atmo_112	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_larg
 bo_atmo_113	TATOOINE	tat_world	0	object/soundobject/soundobject_marketplace_small.iff	3771.3	7.5	2362.1	0	0	0	0	32	TRUE	Audio - Market Mos Taike
 bo_atmo_114	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_small.iff	3250.0	4.0	-4865.0	0	0	0	0	32	TRUE	Audio - Mos Eisley
 bo_atmo_115	TATOOINE	tat_world	0	object/soundobject/soundobject_city_crowd_medium.iff	3500.0	2.0	-4945.0	0	0	0	0	32	TRUE	Audio - Mos Eisley Bazaar
-bo_atmo_116	TATOOINE	tat_world	0	object/soundobject/soundobject_elevator_music.iff	3328.6	5.6	-4757.2	100	0	0	0	64	TRUE	Audio - Mos Eisley Theater outside
+bo_atmo_116	TATOOINE	tat_world	0	object/soundobject/soundobject_chamber_music.iff	3328.6	5.6	-4757.2	100	0	0	0	48	TRUE	Audio - Mos Eisley Theater outside
 bo_atmo_117	TATOOINE	tat_world	0	object/static/particle/pt_sound_location.iff	3328.6	9.0	-4757.2	100	0	0	0	128	TRUE	Audio - Mos Eisley Theater outside
 bo_atmo_118	TATOOINE	tat_world	0	object/static/particle/particle_newbie_hanging_smoke.iff	3332.1	8.0	-4757.3	-96	0	0	0	128	TRUE	Audio - Mos Eisley Theater outside
 bo_atmo_119	TATOOINE	tat_world	0	object/static/particle/pt_sparks_large.iff	3332.1	5.6	-4757.3	-96	0	0	0	128	TRUE	Audio - Mos Eisley Theater outside
