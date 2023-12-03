@@ -43,7 +43,6 @@ private enum class TipType {
 
 class CmdTip : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
-		val tipType = tipType(args)
 		val amount = args.replace(" bank", "").toIntOrNull()
 		
 		if (amount == null) {
@@ -73,6 +72,7 @@ class CmdTip : ICmdCallback {
 			return
 		}
 
+		val tipType = tipType(args, player, target)
 		if (tipType == TipType.CASH) {
 			CashTipIntent.broadcast(player, targetPlayer, amount)
 		} else if (tipType == TipType.BANK) {
@@ -80,11 +80,19 @@ class CmdTip : ICmdCallback {
 		}
 	}
 
-	private fun tipType(args: String): TipType {
-		return if (args.endsWith(" bank")) {
-			TipType.BANK
-		} else {
-			TipType.CASH
+	private fun tipType(args: String, player: Player, target: SWGObject): TipType {
+		if (args.endsWith(" bank")) {
+			return TipType.BANK
 		}
+
+		if (player.creatureObject.terrain != target.terrain) {
+			return TipType.BANK
+		}
+
+		if (player.creatureObject.worldLocation.distanceTo(target.worldLocation) > 16) {
+			return TipType.BANK
+		}
+
+		return TipType.CASH
 	}
 }

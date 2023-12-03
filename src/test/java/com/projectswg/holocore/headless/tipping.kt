@@ -32,15 +32,37 @@ import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMes
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import java.util.concurrent.TimeUnit
 
-fun ZonedInCharacter.tipCash(target: SWGObject, amount: Int) {
+/**
+ * Simulates the /tip <amount> command on a target.
+ * This includes expected behavior such as the bank tip window opening, if the target is too far away.
+ */
+fun ZonedInCharacter.tip(target: SWGObject, amount: Int): SuiWindow? {
+	val differentPlanets = player.creatureObject.terrain != target.terrain
+	val tooFarAway = player.creatureObject.worldLocation.distanceTo(target.worldLocation) > 16
+
+	if (differentPlanets || tooFarAway) {
+		sendCommand("tip", target, amount.toString())
+		return awaitBankTipResponse()
+	}
+
 	sendCommand("tip", target, amount.toString())
 	val packet = player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No known packet received")
 	checkSystemMessage(packet)
+	return null
 }
 
+/**
+ * Simulates the /tip <amount> bank command on a target.
+ */
 fun ZonedInCharacter.tipBank(target: SWGObject, amount: Int): SuiWindow {
 	sendCommand("tip", target, "$amount bank")
-	val packet = player.waitForNextPacket(setOf(SuiCreatePageMessage::class.java, ChatSystemMessage::class.java), 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No known packet received")
+	return awaitBankTipResponse()
+}
+
+private fun ZonedInCharacter.awaitBankTipResponse(): SuiWindow {
+	val packet = player.waitForNextPacket(
+		setOf(SuiCreatePageMessage::class.java, ChatSystemMessage::class.java), 50, TimeUnit.MILLISECONDS
+	) ?: throw IllegalStateException("No known packet received")
 
 	if (packet is SuiCreatePageMessage) {
 		val suiWindowId = packet.window.id
@@ -49,7 +71,7 @@ fun ZonedInCharacter.tipBank(target: SWGObject, amount: Int): SuiWindow {
 	} else if (packet is ChatSystemMessage) {
 		checkSystemMessage(packet)
 	}
-	
+
 	throw IllegalStateException()
 }
 
