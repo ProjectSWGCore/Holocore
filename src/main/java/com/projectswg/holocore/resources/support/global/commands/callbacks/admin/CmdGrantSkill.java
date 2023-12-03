@@ -24,31 +24,19 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.headless
+package com.projectswg.holocore.resources.support.global.commands.callbacks.admin;
 
-import com.projectswg.common.data.CRC
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.test.resources.GenericPlayer
-import java.util.concurrent.TimeUnit
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
+import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
+import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * Represents everything that can happen to a character that is zoned in.
- */
-class ZonedInCharacter internal constructor(val player: GenericPlayer) {
-
-	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = "") {
-		val targetObjectId = target?.objectId ?: 0
-		val commandQueueEnqueue = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc(command.lowercase()), targetObjectId, args)
-		sendPacket(player, commandQueueEnqueue)
-		val packet = player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
-		if (packet.error != CommandQueueDequeue.ErrorCode.SUCCESS) {
-			throw CommandFailedException("Command '$command' failed: ${packet.error}")
-		}
+public final class CmdGrantSkill implements ICmdCallback {
+	
+	@Override
+	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
+		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, args, player.getCreatureObject(), true);
 	}
-
-	override fun toString(): String {
-		return "ZonedInCharacter(player=$player)"
-	}
+	
 }

@@ -29,7 +29,6 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
-import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -41,12 +40,7 @@ public class CmdSetExperience implements ICmdCallback {
 	@Override
 	public void execute(@NotNull Player player, @Nullable SWGObject target, @NotNull String args) {
 		String[] argArray = args.split(" ");
-		
-		if (player.getAccessLevel() == AccessLevel.PLAYER) {
-			SystemMessageIntent.broadcastPersonal(player, "This command can only be used by admins");
-			return;
-		}
-		
+
 		if (argArray.length != 2) {
 			SystemMessageIntent.broadcastPersonal(player, "Expected format: /setExperience <target> <xpType> <xpGained>");
 			return;

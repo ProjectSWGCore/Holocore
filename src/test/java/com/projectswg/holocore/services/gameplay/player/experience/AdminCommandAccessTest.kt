@@ -24,31 +24,35 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.headless
+package com.projectswg.holocore.services.gameplay.player.experience
 
-import com.projectswg.common.data.CRC
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueDequeue
-import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.test.resources.GenericPlayer
-import java.util.concurrent.TimeUnit
+import com.projectswg.holocore.headless.CommandFailedException
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.adminGrantSkill
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.test.runners.IntegrationTest
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 
-/**
- * Represents everything that can happen to a character that is zoned in.
- */
-class ZonedInCharacter internal constructor(val player: GenericPlayer) {
+class AdminCommandAccessTest : IntegrationTest() {
 
-	internal fun sendCommand(command: String, target: SWGObject? = null, args: String = "") {
-		val targetObjectId = target?.objectId ?: 0
-		val commandQueueEnqueue = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc(command.lowercase()), targetObjectId, args)
-		sendPacket(player, commandQueueEnqueue)
-		val packet = player.waitForNextPacket(CommandQueueDequeue::class.java, 80, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive dequeue for command '$command' in time")
-		if (packet.error != CommandQueueDequeue.ErrorCode.SUCCESS) {
-			throw CommandFailedException("Command '$command' failed: ${packet.error}")
+	@Test
+	fun adminsCanUseAdminCommands() {
+		addUser("admin", "password", accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter("admin", "password", "adminchar")
+
+		assertDoesNotThrow { character.adminGrantSkill("outdoors_scout_master") }
+	}
+
+	@Test
+	fun onlyAdminsCanUseAdminCommands() {
+		addUser("player", "password", accessLevel = AccessLevel.PLAYER)
+		val character = HeadlessSWGClient.createZonedInCharacter("player", "password", "playerchar")
+
+		assertThrows<CommandFailedException> {
+			character.adminGrantSkill("outdoors_scout_master")
 		}
 	}
 
-	override fun toString(): String {
-		return "ZonedInCharacter(player=$player)"
-	}
 }

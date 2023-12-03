@@ -47,6 +47,8 @@ import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
 import com.projectswg.holocore.resources.support.global.commands.State;
+import com.projectswg.holocore.resources.support.global.player.AccessLevel;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -417,7 +419,11 @@ public class CommandQueueService extends Service {
 			
 			if (requiredCharacterAbility.equalsIgnoreCase("admin")) {
 				// To prevent admin commands only being usable when in God Mode
-				return false;
+				Player owner = source.getOwner();
+
+				if (owner != null) {
+					return owner.getAccessLevel() == AccessLevel.PLAYER;
+				}
 			}
 			
 			return !characterAbilities.contains(requiredCharacterAbility);

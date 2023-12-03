@@ -29,18 +29,12 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
-import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 
 class CmdKill : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
-		if (player.accessLevel == AccessLevel.PLAYER) {
-			SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(")
-			return
-		}
-
 		if (target !is CreatureObject) {
 			SystemMessageIntent.broadcastPersonal(player, "You must target a creature!")
 			return

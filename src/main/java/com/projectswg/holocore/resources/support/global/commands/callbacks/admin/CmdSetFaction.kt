@@ -30,17 +30,11 @@ import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
-import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
 class CmdSetFaction : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
-		if (player.accessLevel == AccessLevel.PLAYER) {
-			SystemMessageIntent.broadcastPersonal(player, "Players cannot use this command :(")
-			return
-		}
-
 		val faction = when (args) {
 			"rebels"   -> ServerData.factions.getFaction("rebel")
 			"imperial" -> ServerData.factions.getFaction("imperial")
