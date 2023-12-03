@@ -59,6 +59,7 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.gameplay.combat.BleedingCombatState;
 import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState;
 import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState;
+import kotlin.ranges.IntRange;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,16 +67,21 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 import static com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.*;
 
-enum CombatCommandAttack implements CombatCommandHitType {
-	INSTANCE;
+class CombatCommandAttack implements CombatCommandHitType {
 
 	private static final String jediArmorSkillMod = "jedi_armor";
 	private static final String tkaArmorSkillMod = "tka_armor";
+	private final Die toHitDie;
+	private final Die knockdownDie;
+
+	public CombatCommandAttack(Die toHitDie, Die knockdownDie) {
+		this.toHitDie = toHitDie;
+		this.knockdownDie = knockdownDie;
+	}
 
 	@Override
 	public CombatStatus handle(@NotNull CreatureObject source, @Nullable SWGObject target, @NotNull Command command, @NotNull CombatCommand combatCommand, @NotNull String arguments) {
@@ -100,7 +106,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return combatStatus;
 	}
 
-	private static void doCombatTargetArea(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand combatCommand, AttackInfo info) {
+	private void doCombatTargetArea(CreatureObject source, SWGObject target, SWGObject delayEgg, CombatCommand combatCommand, AttackInfo info) {
 		doCombatArea(source, delayEgg != null ? delayEgg : target, info, combatCommand, true);
 	}
 
@@ -144,7 +150,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		return !(Math.abs(degrees) > coneWidth);
 	}
 
-	private static void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, CombatCommand combatCommand) {
+	private void doCombatSingle(CreatureObject source, SWGObject target, AttackInfo info, CombatCommand combatCommand) {
 		Set<TangibleObject> targets = new HashSet<>();
 
 		if (target instanceof TangibleObject tangibleObject) {
@@ -154,7 +160,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		doCombat(source, targets, info, combatCommand);
 	}
 
-	private static void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, CombatCommand combatCommand, boolean includeOrigin) {
+	private void doCombatArea(CreatureObject source, SWGObject origin, AttackInfo info, CombatCommand combatCommand, boolean includeOrigin) {
 		double aoeRange = combatCommand.getConeLength();
 		SWGObject originParent = origin.getParent();
 		Collection<SWGObject> objectsToCheck = originParent == null ? origin.getObjectsAware() : originParent.getContainedObjects();
@@ -174,7 +180,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		doCombat(source, targets, info, combatCommand);
 	}
 
-	private static void doCombat(CreatureObject source, Set<TangibleObject> targets, AttackInfo info, CombatCommand combatCommand) {
+	private void doCombat(CreatureObject source, Set<TangibleObject> targets, AttackInfo info, CombatCommand combatCommand) {
 		source.updateLastCombatTime();
 		WeaponObject sourceWeapon = source.getEquippedWeapon();
 
@@ -219,10 +225,10 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		action.addDefender(new Defender(tangibleTarget.getObjectId(), Posture.UPRIGHT, true, (byte) 0, combatCommand.getHitLocation(), (short) info.getFinalDamage()));
 	}
 
-	private static void doCombatCreature(CreatureObject source, AttackInfo info, CombatCommand combatCommand, WeaponObject sourceWeapon, CombatAction action, double weaponDamageMod, DamageType damageType, CreatureObject creatureTarget) {
+	private void doCombatCreature(CreatureObject source, AttackInfo info, CombatCommand combatCommand, WeaponObject sourceWeapon, CombatAction action, double weaponDamageMod, DamageType damageType, CreatureObject creatureTarget) {
 		double toHit = calculateToHit(source, sourceWeapon, creatureTarget);
 
-		if (randomNumberBetween0And100() > toHit) {
+		if (toHitDie.roll(new IntRange(0, 100)) > toHit) {
 			info.setSuccess(false);
 
 			ShowFlyText missFlyText = new ShowFlyText(creatureTarget.getObjectId(), new StringId("combat_effects", "miss"), ShowFlyText.Scale.MEDIUM, SWGColor.Whites.INSTANCE.getWhite());
@@ -239,7 +245,7 @@ enum CombatCommandAttack implements CombatCommandHitType {
 
 		double knockdownChance = combatCommand.getKnockdownChance();
 		if (knockdownChance > 0) {
-			if (randomNumberBetween0And100() < knockdownChance) {
+			if (knockdownDie.roll(new IntRange(0, 100)) < knockdownChance) {
 				KnockdownIntent.broadcast(creatureTarget);
 			} else {
 				String yourAttackFailedToKnockDownYourOpponent = "@cbt_spam:knockdown_fail";
@@ -456,10 +462,6 @@ enum CombatCommandAttack implements CombatCommandHitType {
 		}
 
 		return 0;
-	}
-
-	private static int randomNumberBetween0And100() {
-		return ThreadLocalRandom.current().nextInt(0, 101);
 	}
 
 	private static int calculateAccMod(CreatureObject source, WeaponObject sourceWeapon) {

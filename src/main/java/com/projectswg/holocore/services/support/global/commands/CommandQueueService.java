@@ -56,6 +56,8 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon;
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandHandler;
+import com.projectswg.holocore.services.gameplay.combat.command.Die;
+import com.projectswg.holocore.services.gameplay.combat.command.RandomDie;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -80,9 +82,13 @@ public class CommandQueueService extends Service {
 	}
 	
 	public CommandQueueService(long delayBetweenCheckingCommandQueue) {
+		this(delayBetweenCheckingCommandQueue, new RandomDie(), new RandomDie());
+	}
+	
+	public CommandQueueService(long delayBetweenCheckingCommandQueue, Die toHitDie, Die knockdownDie) {
 		this.executor = new ScheduledThreadPool(4, "command-queue-%d");
 		this.combatQueueMap = new ConcurrentHashMap<>();
-		this.combatCommandHandler = new CombatCommandHandler();
+		this.combatCommandHandler = new CombatCommandHandler(toHitDie, knockdownDie);
 		this.delayBetweenCheckingCommandQueue = delayBetweenCheckingCommandQueue;
 	}
 	

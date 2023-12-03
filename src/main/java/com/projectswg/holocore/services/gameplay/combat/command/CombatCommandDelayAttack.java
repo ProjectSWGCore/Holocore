@@ -42,12 +42,13 @@ import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-enum CombatCommandDelayAttack implements CombatCommandHitType {
-	INSTANCE;
-	
+class CombatCommandDelayAttack implements CombatCommandHitType {
+
 	private final ScheduledThreadPool executor;
+	private final CombatCommandAttack combatCommandAttack;
 	
-	CombatCommandDelayAttack() {
+	CombatCommandDelayAttack(CombatCommandAttack combatCommandAttack) {
+		this.combatCommandAttack = combatCommandAttack;
 		this.executor = new ScheduledThreadPool(2, "combat-command-delay-attack-%d");
 	}
 	
@@ -112,7 +113,7 @@ enum CombatCommandDelayAttack implements CombatCommandHitType {
 			delayEgg.sendObservers(new PlayClientEffectObjectMessage(delayAttackParticle, "", delayEgg.getObjectId(), ""));
 		
 		// Handle the attack of this loop
-		CombatCommandAttack.INSTANCE.handle(source, target, delayEgg, combatCommand);
+		combatCommandAttack.handle(source, target, delayEgg, combatCommand);
 		
 		if (currentLoop < combatCommand.getDelayAttackLoops()) {
 			// Recursively schedule another loop if that wouldn't exceed the amount of loops we need to perform

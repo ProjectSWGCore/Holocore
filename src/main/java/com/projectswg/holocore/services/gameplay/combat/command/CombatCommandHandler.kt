@@ -35,17 +35,18 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import java.util.*
 
-class CombatCommandHandler {
+class CombatCommandHandler(toHitDie: Die, knockdownDie: Die) {
 	
 	private val hitTypeMap: MutableMap<HitType, CombatCommandHitType>
 	
 	init {
 		this.hitTypeMap = EnumMap(HitType::class.java)
-		hitTypeMap[HitType.ATTACK] = CombatCommandAttack.INSTANCE
+		val combatCommandAttack = CombatCommandAttack(toHitDie, knockdownDie)
+		hitTypeMap[HitType.ATTACK] = combatCommandAttack
 		hitTypeMap[HitType.BUFF] = CombatCommandBuff.INSTANCE
 		hitTypeMap[HitType.DEBUFF] = CombatCommandDebuff
 		hitTypeMap[HitType.HEAL] = CombatCommandHeal.INSTANCE
-		hitTypeMap[HitType.DELAY_ATTACK] = CombatCommandDelayAttack.INSTANCE
+		hitTypeMap[HitType.DELAY_ATTACK] = CombatCommandDelayAttack(combatCommandAttack)
 //		hitTypeMap[HitType.REVIVE] = null
 	}
 	
