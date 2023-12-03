@@ -1,0 +1,33 @@
+{
+	"npcMessage": {
+		"file": "quest/ground/util/quest_giver_object",
+		"key": "already_completed_quest",
+		"comment": "This quest has already been completed by you and cannot be accepted again."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "string/en/conversation/c_tutorial_rm1",
+				"key": "s_113",
+				"comment": "Oh, alright."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "complete_quest",
+			"args": {
+				"quest": "quest/tatooine_bestinejobs_bantha",
+				"active": true
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "dismiss"
+			}
+		}
+	]
+}

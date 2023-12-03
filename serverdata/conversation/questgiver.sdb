@@ -1,0 +1,4 @@
+conversation_id	conversation_file
+TEXT	TEXT
+questgiver	questgiver/already_completed
+questgiver	questgiver/default
