@@ -69,11 +69,21 @@ fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: Strin
 	sendAttackCommand(target, attackCommand)
 	val packet = player.waitForNextPacket(setOf(DeltasMessage::class.java, SceneDestroyObject::class.java), 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 
-	return if (packet is SceneDestroyObject) {
-		TargetState.DEAD
-	} else {
-		TargetState.ALIVE
+	if (packet is SceneDestroyObject) {
+		if (packet.objectId != target.objectId) {
+			throw IllegalStateException("SceneDestroyObject packet received, but the object ID did not match the target")
+		}
+
+		return TargetState.DEAD
+	} else if (packet is DeltasMessage) {
+		if (packet.objectId != target.objectId) {
+			throw IllegalStateException("DeltasMessage packet received, but the object ID did not match the target")
+		}
+
+		return TargetState.ALIVE
 	}
+
+	throw IllegalStateException("Unhandled packet received: $packet")
 }
 
 /**
