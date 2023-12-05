@@ -33,15 +33,16 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.services.gameplay.combat.command.Die
 import me.joshlarson.jlcommon.control.IntentChain
 import java.util.concurrent.ThreadLocalRandom
 
-class ItemLootGenerator {
+class ItemLootGenerator(private val tableDie: Die, private val groupDie: Die) {
 	
 	fun generate(corpse: CreatureObject, killer: CreatureObject, loot: MutableList<SWGObject>, lootTables: List<NPCLootTable>) {
 		val random = ThreadLocalRandom.current()
 		
-		val tableRoll = random.nextInt(100) + 1
+		val tableRoll = tableDie.roll(1..100)
 		
 		// Admin Variables
 		val admin = killer.hasCommand("admin")
@@ -59,7 +60,7 @@ class ItemLootGenerator {
 			}
 			adminOutput1.append("/ \\#00FF00 loot_table").append(tableId+1)
 			
-			val groupRoll = random.nextInt(100) + 1
+			val groupRoll = groupDie.roll(1..100)
 			val lootTableItem = lootTableLookup.getLootTableItem(npcTable.lootTable, corpse.difficulty.name, corpse.level.toInt()) ?: continue
 			
 			for ((chance, items) in lootTableItem.groups) { // group of items to be granted
