@@ -47,7 +47,7 @@ public class CombatNpcService extends Service {
 		if (i.getKiller().isPlayer())
 			deleteCorpseTasks.put(corpse.getObjectId(), executor.execute(TimeUnit.SECONDS.toMillis(120), () -> deleteCorpse(corpse)));
 		else
-			executor.execute(15000, () -> deleteCorpse(corpse));
+			executor.execute(60000, () -> deleteCorpse(corpse));
 	}
 	
 	@IntentHandler
@@ -71,14 +71,14 @@ public class CombatNpcService extends Service {
 		
 		if (task == null) {
 			Log.w("There should already be a deleteCorpse task for corpse %s!", corpse.toString());
-			executor.execute(15000, () -> deleteCorpse(corpse));
+			executor.execute(30000, () -> deleteCorpse(corpse));
 			return;
 		}
 		
 		// if existing deleteCorpse task has more than 5 seconds remaining, cancel it
 		// if the cancel operation succeeds, schedule another deleteCorpse task for 5 seconds
 		if (task.getDelay(TimeUnit.SECONDS) > 15 && task.cancel(false))
-			executor.execute(15000, () -> deleteCorpse(corpse));
+			executor.execute(30000, () -> deleteCorpse(corpse));
 	}
 	
 	private void deleteCorpse(CreatureObject creatureCorpse) {
