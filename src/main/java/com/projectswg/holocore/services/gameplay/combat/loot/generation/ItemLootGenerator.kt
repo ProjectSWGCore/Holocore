@@ -33,7 +33,7 @@ import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.services.gameplay.combat.command.Die
+import com.projectswg.holocore.resources.support.random.Die
 import me.joshlarson.jlcommon.control.IntentChain
 import java.util.concurrent.ThreadLocalRandom
 

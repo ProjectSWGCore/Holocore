@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test.runners
 
-import com.projectswg.holocore.services.gameplay.combat.command.Die
+import com.projectswg.holocore.resources.support.random.Die
 import java.lang.IllegalArgumentException
 
 data class DeterministicDie(private val hardcodedRoll: Int) : Die {

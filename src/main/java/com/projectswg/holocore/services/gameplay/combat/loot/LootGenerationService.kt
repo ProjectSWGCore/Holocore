@@ -36,8 +36,8 @@ import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDa
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import com.projectswg.holocore.services.gameplay.combat.command.Die
-import com.projectswg.holocore.services.gameplay.combat.command.RandomDie
+import com.projectswg.holocore.resources.support.random.Die
+import com.projectswg.holocore.resources.support.random.RandomDie
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.CreditLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.ItemLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.NPCLootTable

@@ -56,8 +56,8 @@ import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon;
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandHandler;
-import com.projectswg.holocore.services.gameplay.combat.command.Die;
-import com.projectswg.holocore.services.gameplay.combat.command.RandomDie;
+import com.projectswg.holocore.resources.support.random.Die;
+import com.projectswg.holocore.resources.support.random.RandomDie;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;

@@ -56,6 +56,7 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponClass;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType;
+import com.projectswg.holocore.resources.support.random.Die;
 import com.projectswg.holocore.services.gameplay.combat.BleedingCombatState;
 import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState;
 import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState;
