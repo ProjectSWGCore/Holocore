@@ -48,9 +48,3 @@ data class CompleteQuestIntent(val player: Player, val questName: String): Inten
 		@JvmStatic inline fun broadcast(player: Player, questName: String) = CompleteQuestIntent(player, questName).broadcast()
 	}
 }
-
-data class AdvanceQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = AdvanceQuestIntent(player, questName).broadcast()
-	}
-}

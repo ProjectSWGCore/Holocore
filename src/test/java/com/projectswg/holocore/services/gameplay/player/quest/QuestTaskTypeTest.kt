@@ -150,7 +150,8 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val before = CharacterSnapshot(player)
 
 		GrantQuestIntent.broadcast(player, "quest/test_reward")
-		player.waitForNextPacket(QuestCompletedMessage::class.java)	// This quest just gives a reward, so it should complete immediately
+		player.waitForNextPacket(QuestCompletedMessage::class.java) ?: throw IllegalStateException("Quest not completed in time")	// This quest just gives a reward, so it should complete immediately
+		waitForIntents()	// Wait for the reward(s) to be granted
 
 		val after = CharacterSnapshot(player)
 		assertAll(
