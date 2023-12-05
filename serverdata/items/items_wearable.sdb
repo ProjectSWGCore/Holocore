@@ -816,9 +816,6 @@ item_ithorian_gloves_02_01	object/tangible/wearables/ithorian/ith_gloves_s02.iff
 item_ithorian_pants_02_01	object/tangible/wearables/ithorian/ith_pants_s19.iff	wearable	Issued Ithorian Pants	1	1000		0					0		1		0	0	0	0	0	ranged_defense=3	-1	6	63	-1	0	0	npe clothing
 item_ithorian_shirt_02_01	object/tangible/wearables/ithorian/ith_shirt_s09.iff	wearable	Issued Ithorian Shirt	1	1000		0					0		1		0	0	0	0	0	ranged_defense=3	-1	31	63	-1	0	0	npe clothing
 item_ithorian_vest_02_01	object/tangible/wearables/ithorian/ith_vest_s02.iff	wearable	Issued Ithorian Vest	1	1000		0					0		1		0	0	0	0	0	ranged_defense=3	-1	0	63	-1	0	0	npe clothing
-item_lifeday_09_jacket_01	object/tangible/wearables/jacket/jacket_lifeday_09_01.iff	wearable	Life Day Jacket	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
-item_lifeday_09_jacket_02	object/tangible/wearables/jacket/jacket_lifeday_09_02.iff	wearable	Holiday Jacket	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
-item_lifeday_gift_04_13	object/tangible/wearables/necklace/necklace_lifeday.iff	wearable	Wookiee Life Day Necklace	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_pub28_corsec_ring_02_01	object/tangible/wearables/ring/ring_s01.iff	wearable	CorSec Guard Ring	1	1000		0					0		36		0	0	0	0	0	healing_efficiency=9,melee_accuracy=9	-1	-1	-1	-1	2700	0	-
 item_pub28_corsec_ring_02_02	object/tangible/wearables/ring/ring_s02.iff	wearable	CorSec Marksmen Ring	1	1000		0					0		36		0	0	0	0	0	ranged_defense=9,ranged_accuracy=9	-1	-1	-1	-1	2700	0	-
 item_pub28_corsec_ring_02_03	object/tangible/wearables/ring/ring_s03.iff	wearable	CorSec Administrator Ring	1	1000		0					0		36		0	0	0	0	0	melee_defense=9,healing_efficiency=9	-1	-1	-1	-1	2700	0	-
@@ -867,7 +864,6 @@ item_clothing_bikini_leggings_01_01	object/tangible/wearables/bikini/bikini_legg
 item_clothing_bodysuit_at_at_01_01	object/tangible/wearables/bodysuit/bodysuit_atat.iff	wearable	AT-AT Pilot Bodysuit	1	1000		0					0	imperial	1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_bodysuit_bwing_01_01	object/tangible/wearables/bodysuit/bodysuit_bwing.iff	wearable	B-Wing Pilot Bodysuit	1	1000		0					0	rebel	1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_bodysuit_tie_fighter_01_01	object/tangible/wearables/bodysuit/bodysuit_tie_fighter.iff	wearable	Tie Pilot Bodysuit	1	1000		0					0	imperial	1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
-item_clothing_bodysuit_trando_slaver_01_01	object/tangible/wearables/bodysuit/bodysuit_trando_slaver.iff	wearable	Trandoshan Slaver Bodysuit	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_boots_01_03	object/tangible/wearables/boots/boots_s03.iff	wearable	Wrapped Boots	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_boots_01_04	object/tangible/wearables/boots/boots_s04.iff	wearable	Hide Boots	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_boots_01_05	object/tangible/wearables/boots/boots_s05.iff	wearable	Sturdy Boots	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
@@ -917,7 +913,6 @@ item_clothing_gloves_01_12	object/tangible/wearables/gloves/gloves_s12.iff	weara
 item_clothing_gloves_01_13	object/tangible/wearables/gloves/gloves_s13.iff	wearable	Long Uniform Gloves	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_gloves_01_14	object/tangible/wearables/gloves/gloves_s14.iff	wearable	Link-Steel Reinforced Gloves	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_gloves_tusken_raider_01_01	object/tangible/wearables/gloves/gloves_tusken_raider.iff	wearable	Tusken Raider Gloves	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_goggles_anniversary_01_01	object/tangible/wearables/goggles/goggles_anniversary.iff	wearable	Anniversary Goggles	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_goggles_goggles_01_01	object/tangible/wearables/goggles/goggles_s01.iff	wearable	Special Edition Goggles	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_goggles_goggles_01_02	object/tangible/wearables/goggles/goggles_s02.iff	wearable	Special Edition Goggles	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_goggles_goggles_01_03	object/tangible/wearables/goggles/goggles_s03.iff	wearable	Special Edition Goggles	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
@@ -927,8 +922,6 @@ item_clothing_goggles_goggles_01_06	object/tangible/wearables/goggles/goggles_s0
 item_clothing_hat_chef_01_01	object/tangible/wearables/hat/hat_chef_s01.iff	wearable	Kitchen Master's Hat	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_hat_chef_01_02	object/tangible/wearables/hat/hat_chef_s02.iff	wearable	Bake Master's Cap	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_hat_imp_01_01	object/tangible/wearables/hat/hat_imp_s01.iff	wearable	Imperial Command Hat	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_hat_imp_01_02	object/tangible/wearables/hat/hat_imp_s02.iff	wearable		1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_hat_rebel_trooper_01_01	object/tangible/wearables/hat/hat_rebel_trooper_01.iff	wearable	Rebel Trooper Helmet	1	1000		0					0	rebel	1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_hat_01_02	object/tangible/wearables/hat/hat_s02.iff	wearable	Warm Hat	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_hat_01_04	object/tangible/wearables/hat/hat_s04.iff	wearable	Swoop Helm	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_hat_01_10	object/tangible/wearables/hat/hat_s10.iff	wearable	Sunguard	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
@@ -1073,8 +1066,6 @@ item_clothing_robe_01_05	object/tangible/wearables/robe/robe_s05.iff	wearable	Cl
 item_clothing_robe_01_12	object/tangible/wearables/robe/robe_s12.iff	wearable	Grand Mayoral Robe	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_robe_01_18	object/tangible/wearables/robe/robe_s18.iff	wearable	Wookiee Smock	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_robe_01_27	object/tangible/wearables/robe/robe_s27.iff	wearable	Gunman's Duster	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_robe_01_32	object/tangible/wearables/robe/robe_s32.iff	wearable	Robe	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
-item_clothing_robe_01_33	object/tangible/wearables/robe/robe_s33.iff	wearable	Robe	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	100	0	-
 item_clothing_shirt_nightsister_01_01	object/tangible/wearables/shirt/nightsister_shirt_s01.iff	wearable	Nightsister Gruesome Wrap	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_shirt_nightsister_01_02	object/tangible/wearables/shirt/nightsister_shirt_s02.iff	wearable	Nightsister Battle Mantle	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
 item_clothing_shirt_nightsister_01_03	object/tangible/wearables/shirt/nightsister_shirt_s03.iff	wearable	Nightsister Havoc Habit	1	1000		0					0		1		0	0	0	0	0		-1	-1	-1	-1	0	0	-
