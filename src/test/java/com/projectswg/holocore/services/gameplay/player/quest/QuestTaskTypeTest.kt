@@ -163,6 +163,17 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		)
 	}
 
+	@Test
+	@DisplayName("quest.task.ground.nothing")
+	fun nothing() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/test_nothing")
+		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
+
+		assertNotNull(questCompletedMessage, "Quest not completed in time")
+	}
+
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state
 		val xp = player.playerObject.getExperiencePoints("dance")
 		val rebelFactionPoints = player.playerObject.getFactionPoints()["rebel"] ?: 0

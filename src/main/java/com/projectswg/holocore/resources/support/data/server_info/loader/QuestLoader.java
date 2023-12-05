@@ -59,7 +59,10 @@ public class QuestLoader extends DataLoader {
 			while (set.next()) {
 				Set<String> columns = new LinkedHashSet<>(set.getColumns());
 				String type = set.getText("attach_script");
-				String name = set.getText("task_name");
+				String name = null;
+				if (columns.contains("task_name")) {
+					name = set.getText("task_name");
+				}
 				String commMessageText = null;
 				if (columns.contains("comm_message_text")) {
 					commMessageText = set.getText("comm_message_text");
@@ -72,7 +75,10 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("target_server_template")) {
 					targetServerTemplate = set.getText("target_server_template");
 				}
-				String grantQuestOnComplete = set.getText("grant_quest_on_complete");
+				String grantQuestOnComplete = null;
+				if (columns.contains("grant_quest_on_complete")) {
+					grantQuestOnComplete = set.getText("grant_quest_on_complete");
+				}
 				int count = 0;
 				if (columns.contains("count")) {
 					count = (int) set.getInt("count");
@@ -479,6 +485,11 @@ public class QuestLoader extends DataLoader {
 		
 		public void setGrantQuestOnComplete(String grantQuestOnComplete) {
 			this.grantQuestOnComplete = grantQuestOnComplete;
+		}
+
+		@Override
+		public String toString() {
+			return "QuestTaskInfo{" + "index=" + index + ", type='" + type + '\'' + ", name='" + name + '\'' + '}';
 		}
 	}
 }

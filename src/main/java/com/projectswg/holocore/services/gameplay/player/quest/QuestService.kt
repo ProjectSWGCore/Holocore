@@ -187,8 +187,13 @@ class QuestService : Service() {
 				"quest.task.ground.show_message_box" -> handleShowMessageBox(player, questName, currentTask)
 				"quest.task.ground.destroy_multi"    -> handleDestroyMulti(player, questName, currentTask)
 				"quest.task.ground.reward"           -> handleReward(player, questName, playerObject, currentTask)
+				"quest.task.ground.nothing"          -> handleNothing(player, questName, currentTask)
 			}
 		}
+	}
+
+	private fun handleNothing(player: Player, questName: String, currentTask: QuestTaskInfo) {
+		advanceQuest(questName, player, currentTask)
 	}
 
 	private fun handleReward(player: Player, questName: String, playerObject: PlayerObject, currentTask: QuestTaskInfo) {
