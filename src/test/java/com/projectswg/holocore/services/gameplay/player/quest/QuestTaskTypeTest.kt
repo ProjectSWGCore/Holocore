@@ -150,7 +150,8 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val before = CharacterSnapshot(player)
 
 		GrantQuestIntent.broadcast(player, "quest/test_reward")
-		player.waitForNextPacket(QuestCompletedMessage::class.java)	// This quest just gives a reward, so it should complete immediately
+		player.waitForNextPacket(QuestCompletedMessage::class.java) ?: throw IllegalStateException("Quest not completed in time")	// This quest just gives a reward, so it should complete immediately
+		waitForIntents()	// Wait for the reward(s) to be granted
 
 		val after = CharacterSnapshot(player)
 		assertAll(
@@ -160,6 +161,17 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 			{ assertEquals(2, after.lootItems - before.lootItems, "Loot item(s) not granted") },
 			{ assertEquals(1, after.items - before.items, "Item(s) not granted") },
 		)
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.nothing")
+	fun nothing() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/test_nothing")
+		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
+
+		assertNotNull(questCompletedMessage, "Quest not completed in time")
 	}
 
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state
