@@ -24,10 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.command
+package com.projectswg.holocore.headless
 
-class RandomDie : Die {
-	override fun roll(range: IntRange): Int {
-		return range.random()
-	}
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage
+import com.projectswg.common.network.packets.swg.zone.ObjectMenuSelect
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+
+/**
+ * Radials the target and selects the "Loot" option. The loot window is expected to open and an exception will be thrown if it does not.
+ * @return the objects that can be looted from the target
+ */
+fun ZonedInCharacter.loot(target: CreatureObject): Collection<SWGObject> {
+	sendPacket(player, ObjectMenuSelect(target.objectId, RadialItem.LOOT.type.toShort()))
+	player.waitForNextPacket(ClientOpenContainerMessage::class.java) ?: throw IllegalStateException("NPC inventory did not open!")
+	return target.inventory.childObjects
 }

@@ -39,6 +39,8 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
 import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
+import com.projectswg.holocore.services.gameplay.combat.loot.GrantLootService
+import com.projectswg.holocore.services.gameplay.combat.loot.LootGenerationService
 import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
@@ -54,6 +56,8 @@ import com.projectswg.holocore.services.support.global.zone.creation.CharacterCr
 import com.projectswg.holocore.services.support.global.zone.sui.SuiService
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService
+import com.projectswg.holocore.services.support.objects.items.ContainerService
+import com.projectswg.holocore.services.support.objects.radials.RadialService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
@@ -85,8 +89,12 @@ abstract class IntegrationTest : TestRunnerSynchronousIntents() {
 		registerService(ChatSystemService())
 		registerService(ChatMailService())
 		registerService(SuiService())
+		registerService(RadialService())
 		registerService(TippingService())
 		registerService(GroupService())
+		registerService(LootGenerationService(DeterministicDie(1), DeterministicDie(1)))
+		registerService(GrantLootService())
+		registerService(ContainerService())
 	}
 
 	@AfterEach

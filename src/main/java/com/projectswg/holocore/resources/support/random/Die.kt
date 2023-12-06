@@ -24,54 +24,16 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.command;
+package com.projectswg.holocore.resources.support.random
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.resources.support.random.RandomDie;
-import org.junit.jupiter.api.Test;
+/**
+ * A die is a random number generator that can be used to simulate dice rolls.
+ * The abstraction exists to allow for testing, where the die can be replaced with a deterministic implementation.
+ */
+interface Die {
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class TestCombatCommandAttack {
-	@Test
-	public void testConeRange() {
-		Location attackerLocation = new Location.LocationBuilder()
-				.setX(0)
-				.setY(0)
-				.setZ(0)
-				.build();
-		
-		Location targetLocation = new Location.LocationBuilder()
-				.setX(20)
-				.setY(0)
-				.setZ(10)
-				.build();
-		
-		Location collateralInsideCone1 = new Location.LocationBuilder()
-				.setX(10)
-				.setY(0)
-				.setZ(5)
-				.build();
-		
-		Location collateralInsideCone2 = new Location.LocationBuilder()
-				.setX(25)
-				.setY(0)
-				.setZ(10)
-				.build();
-		
-		Location collateralOutsideCone = new Location.LocationBuilder()
-				.setX(-20)
-				.setY(0)
-				.setZ(-15)
-				.build();
-		
-		double dirX = targetLocation.getX() - attackerLocation.getX();
-		double dirZ = targetLocation.getZ() - attackerLocation.getZ();
-		
-		CombatCommandAttack instance = new CombatCommandAttack(new RandomDie(), new RandomDie());
-		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone1, 30, dirX, dirZ));
-		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone2, 30, dirX, dirZ));
-		assertFalse(instance.isInConeAngle(attackerLocation, collateralOutsideCone, 30, dirX, dirZ));
-	}
+	/**
+	 * Rolls the die in the specified range.
+	 */
+	fun roll(range: IntRange): Int
 }

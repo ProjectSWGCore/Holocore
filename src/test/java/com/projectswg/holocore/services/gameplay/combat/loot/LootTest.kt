@@ -24,16 +24,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.command
+package com.projectswg.holocore.services.gameplay.combat.loot
 
-/**
- * A die is a random number generator that can be used to simulate dice rolls.
- * The abstraction exists to allow for testing, where the die can be replaced with a deterministic implementation.
- */
-interface Die {
+import com.projectswg.holocore.headless.HeadlessSWGClient.Companion.createZonedInCharacter
+import com.projectswg.holocore.headless.attack
+import com.projectswg.holocore.headless.loot
+import com.projectswg.holocore.test.runners.IntegrationTest
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
-	/**
-	 * Rolls the die in the specified range.
-	 */
-	fun roll(range: IntRange): Int
+class LootTest : IntegrationTest() {
+	
+	@Test
+	fun itemsAreGenerated() {
+		addUser("player", "pass")
+		val zonedInCharacter = createZonedInCharacter("player", "pass", "tester")
+		val npc = spawnNPC("creature_kreetle_swarmling", zonedInCharacter.player.creatureObject.location)
+		npc.health = 1
+		zonedInCharacter.attack(npc)
+		
+		val availableItems = zonedInCharacter.loot(npc)
+		
+		assertTrue(availableItems.isNotEmpty())
+	}
 }
