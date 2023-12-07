@@ -30,12 +30,12 @@ import com.projectswg.holocore.headless.AccountBannedException
 import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.WrongClientVersionException
 import com.projectswg.holocore.headless.WrongCredentialsException
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class LoginTest : IntegrationTest() {
+class LoginTest : AcceptanceTest() {
 
 	@Test
 	fun validCredentials() {

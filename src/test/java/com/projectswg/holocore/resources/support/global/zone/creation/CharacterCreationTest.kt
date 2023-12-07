@@ -3,13 +3,13 @@ package com.projectswg.holocore.resources.support.global.zone.creation
 import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class CharacterCreationTest : IntegrationTest() {
+class CharacterCreationTest : AcceptanceTest() {
 
 	@BeforeEach
 	fun setUpUser() {

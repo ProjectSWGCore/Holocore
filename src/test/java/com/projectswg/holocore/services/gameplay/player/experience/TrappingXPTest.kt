@@ -28,13 +28,13 @@ package com.projectswg.holocore.services.gameplay.player.experience
 
 import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class TrappingXPTest : IntegrationTest() {
+class TrappingXPTest : AcceptanceTest() {
 
 	@BeforeEach
 	fun setUpUser() {

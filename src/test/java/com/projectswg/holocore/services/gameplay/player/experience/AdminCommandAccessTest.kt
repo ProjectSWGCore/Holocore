@@ -30,12 +30,12 @@ import com.projectswg.holocore.headless.CommandFailedException
 import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.adminGrantSkill
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
-class AdminCommandAccessTest : IntegrationTest() {
+class AdminCommandAccessTest : AcceptanceTest() {
 
 	@Test
 	fun adminsCanUseAdminCommands() {

@@ -63,12 +63,15 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 
 /**
- * Integration test runner that sets up all the services required for a full integration test.
+ * Acceptance test runner that sets up all the services required for an acceptance test.
  * This includes all the services required for a character to be able to log in and perform actions.
  *
- * Integrations tests should be using [com.projectswg.holocore.headless.HeadlessSWGClient] to perform actions.
+ * Read more about acceptance test-driven development here:
+ * https://en.wikipedia.org/wiki/Acceptance_test-driven_development
+ *
+ * Acceptance tests should be using [com.projectswg.holocore.headless.HeadlessSWGClient] to perform actions.
  */
-abstract class IntegrationTest : TestRunnerSynchronousIntents() {
+abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 
 	private val memoryUserDatabase = MemoryUserDatabase()
 

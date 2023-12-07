@@ -30,12 +30,12 @@ import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.adminGrantSkill
 import com.projectswg.holocore.headless.surrenderSkill
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class SkillTreeTest : IntegrationTest() {
+class SkillTreeTest : AcceptanceTest() {
 
 	@BeforeEach
 	fun setUp() {

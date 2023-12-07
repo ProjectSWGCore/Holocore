@@ -29,11 +29,11 @@ package com.projectswg.holocore.services.gameplay.player
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class TipCreditsTest : IntegrationTest() {
+class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun negativeAmount() {
