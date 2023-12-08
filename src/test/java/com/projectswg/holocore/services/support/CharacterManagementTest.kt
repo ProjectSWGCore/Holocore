@@ -27,13 +27,13 @@
 package com.projectswg.holocore.services.support
 
 import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class CharacterManagementTest : IntegrationTest() {
+class CharacterManagementTest : AcceptanceTest() {
 
 	@Test
 	fun deleteCharacter() {

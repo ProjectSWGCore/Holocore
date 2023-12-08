@@ -31,11 +31,11 @@ import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.adminKill
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class KillAdminCommandTest : IntegrationTest() {
+class KillAdminCommandTest : AcceptanceTest() {
 
 	@Test
 	fun killNpc() {

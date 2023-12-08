@@ -29,11 +29,11 @@ package com.projectswg.holocore.services.gameplay.combat.loot
 import com.projectswg.holocore.headless.HeadlessSWGClient.Companion.createZonedInCharacter
 import com.projectswg.holocore.headless.attack
 import com.projectswg.holocore.headless.loot
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class LootTest : IntegrationTest() {
+class LootTest : AcceptanceTest() {
 	
 	@Test
 	fun itemsAreGenerated() {

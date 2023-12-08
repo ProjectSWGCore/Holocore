@@ -27,11 +27,11 @@
 package com.projectswg.holocore.services.gameplay.player.group
 
 import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.test.runners.IntegrationTest
+import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class GroupTest : IntegrationTest() {
+class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun formGroup() {
