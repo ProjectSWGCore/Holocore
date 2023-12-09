@@ -144,6 +144,18 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("social_group")) {
 					socialGroup = set.getText("social_group");
 				}
+				String lootItemName = null;
+				if (columns.contains("loot_item_name")) {
+					lootItemName = set.getText("loot_item_name");
+				}
+				int lootItemsRequired = 0;
+				if (columns.contains("loot_items_required")) {
+					lootItemsRequired = (int) set.getInt("loot_items_required");
+				}
+				int lootDropPercent = 0;
+				if (columns.contains("loot_drop_percent")) {
+					lootDropPercent = (int) set.getInt("loot_drop_percent");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -178,6 +190,9 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setItemTemplate(itemTemplate);
 				questTaskInfo.setVisible(visible);
 				questTaskInfo.setSocialGroup(socialGroup);
+				questTaskInfo.setLootItemName(lootItemName);
+				questTaskInfo.setLootItemsRequired(lootItemsRequired);
+				questTaskInfo.setLootDropPercent(lootDropPercent);
 				
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -289,6 +304,9 @@ public class QuestLoader extends DataLoader {
 		private String itemTemplate;
 		private boolean visible;
 		private String socialGroup;
+		private String lootItemName;
+		private int lootItemsRequired;
+		private int lootDropPercent;
 		
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -401,6 +419,30 @@ public class QuestLoader extends DataLoader {
 
 		public void setSocialGroup(String socialGroup) {
 			this.socialGroup = socialGroup;
+		}
+
+		public String getLootItemName() {
+			return lootItemName;
+		}
+
+		public void setLootItemName(String lootItemName) {
+			this.lootItemName = lootItemName;
+		}
+
+		public int getLootItemsRequired() {
+			return lootItemsRequired;
+		}
+
+		public void setLootItemsRequired(int lootItemsRequired) {
+			this.lootItemsRequired = lootItemsRequired;
+		}
+
+		public int getLootDropPercent() {
+			return lootDropPercent;
+		}
+
+		public void setLootDropPercent(int lootDropPercent) {
+			this.lootDropPercent = lootDropPercent;
 		}
 
 		private void setMinTime(int minTime) {
