@@ -1,4 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.comm_player	1		@quest/ground/chapter8_publish_gift_is_pilot:task00_comm_message_text	object/mobile/r2.iff			0	0	0
-1	quest.task.ground.complete_quest							0	0	0

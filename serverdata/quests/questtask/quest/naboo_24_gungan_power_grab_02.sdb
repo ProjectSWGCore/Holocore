@@ -1,6 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	naboo_24_gungan_power_grab_02_meet_jak					0	0	0
-1	quest.task.ground.wait_for_signal	2	naboo_24_gungan_power_grab_02_convince_jak					0	0	0
-2	quest.task.ground.wait_for_signal	3	naboo_24_gungan_power_grab_02_recover_translator					0	0	0
-3	quest.task.ground.wait_for_signal		naboo_24_gungan_power_grab_02_return_to_broma					0	0	0

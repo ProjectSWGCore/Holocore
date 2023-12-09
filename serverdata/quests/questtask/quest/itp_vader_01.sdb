@@ -1,6 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.destroy_multi	1	itp_vader_01_01			itp_vader_rebel_courier		1	0	0
-1	quest.task.ground.wait_for_signal	2	itp_vader_01_02					0	0	0
-2	quest.task.ground.destroy_multi	3	itp_vader_01_03			itp_vader_message_recipient		1	0	0
-3	quest.task.ground.wait_for_signal		itp_vader_01_04					0	0	0

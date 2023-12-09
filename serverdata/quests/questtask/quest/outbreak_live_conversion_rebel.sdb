@@ -1,6 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.timer	1	timerTask					0	30	30
-1	quest.task.ground.comm_player	2	commGuri	@quest/ground/outbreak_live_conversion_rebel:task01_comm_message_text	object/mobile/han_solo.iff			0	0	0
-2	quest.task.ground.go_to_location	3	gotoQuarantineZone					0	0	0
-3	quest.task.ground.wait_for_signal		speakSolo					0	0	0
