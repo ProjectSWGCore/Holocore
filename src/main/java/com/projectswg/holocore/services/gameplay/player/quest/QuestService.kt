@@ -115,7 +115,6 @@ class QuestService : Service() {
 			return
 		}
 
-		// TODO award XP, load from tier+level matrix: datatables/quest/quest_experience.iff
 		playerObject.setQuestRewardReceived(questName, true)
 	}
 
