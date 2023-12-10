@@ -33,9 +33,9 @@ plugins {
 	id("org.beryx.jlink") version "3.0.1"
 }
 
-val javaVersion = "18.0.2"
-val javaMajorVersion = "18"
-val kotlinTargetJdk = "18"
+val javaVersion = "21.0.1"
+val javaMajorVersion = "21"
+val kotlinTargetJdk = "21"
 val holocoreLogLevel: String? by project
 
 subprojects {
