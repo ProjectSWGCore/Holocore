@@ -30,7 +30,7 @@ plugins {
 	idea
 	java
 	kotlin("jvm") version "1.9.21"
-	id("org.beryx.jlink") version "2.25.0"
+	id("org.beryx.jlink") version "3.0.1"
 }
 
 val javaVersion = "18.0.2"
