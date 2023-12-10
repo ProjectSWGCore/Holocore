@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "quest/ground/som_jundak_hunt_15",
+		"key": "task01_journal_entry_description",
+		"comment": "Hunt down and kill jundak until you can collect 15 of their jagged teeth."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/xandank_trophy",
+				"key": "s_32",
+				"comment": "Tell you what...I will hunt them down for you."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/som_jundak_hunt_15",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/som_jundak_hunt_15"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thumb_up"
+			}
+		}
+	]
+}

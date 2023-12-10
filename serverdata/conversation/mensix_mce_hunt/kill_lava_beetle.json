@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "quest/ground/som_lava_beetle_hunt_15",
+		"key": "task01_journal_entry_description",
+		"comment": "Collect 15 of the Kubaza beetle beads that occasionally form when a kubaza beetle dies and its body explodes. The beads do not always form which might account for their value."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/xandank_trophy",
+				"key": "s_32",
+				"comment": "Tell you what...I will hunt them down for you."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/som_lava_beetle_hunt_15",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/som_lava_beetle_hunt_15"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thumb_up"
+			}
+		}
+	]
+}

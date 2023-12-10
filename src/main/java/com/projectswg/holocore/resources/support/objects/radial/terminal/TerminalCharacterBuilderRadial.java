@@ -306,7 +306,25 @@ public class TerminalCharacterBuilderRadial implements RadialHandlerInterface {
 				"item_color_crystal_02_08",
 				"item_color_crystal_02_09",
 				"item_color_crystal_02_10",
-				"item_color_crystal_02_11"
+				"item_color_crystal_02_11",
+				"weapon_cl30_1h_ls",
+				"weapon_cl40_1h_ls",
+				"weapon_cl50_1h_ls",
+				"weapon_cl60_1h_ls",
+				"weapon_cl70_1h_ls",
+				"weapon_cl80_1h_ls",
+				"weapon_cl30_2h_ls",
+				"weapon_cl40_2h_ls",
+				"weapon_cl50_2h_ls",
+				"weapon_cl60_2h_ls",
+				"weapon_cl70_2h_ls",
+				"weapon_cl80_2h_ls",
+				"weapon_cl30_polearm_ls",
+				"weapon_cl40_polearm_ls",
+				"weapon_cl50_polearm_ls",
+				"weapon_cl60_polearm_ls",
+				"weapon_cl70_polearm_ls",
+				"weapon_cl80_polearm_ls"
 		);
 	}
 

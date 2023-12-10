@@ -266,8 +266,8 @@ spawn_mustafar_263	MUSTAFAR	mus_mensix	PATROL	14	-88.3	10.8	32.4	92	1	an MSE-6 "
 spawn_mustafar_264	MUSTAFAR	mus_mensix	PATROL	20	-28.0	18.6	-15.2	91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mustafar_1000	column	idle		simple_droid_sarcastic_flee_4	600
 spawn_mustafar_265	MUSTAFAR	mus_world	PATROL	0	-2480.4	230.1	1635.5	-2	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mustafar_1100	column	idle			600
 spawn_mustafar_266	MUSTAFAR	mus_mensix	PATROL	29	-39.9	31.5	-117.8	99	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mustafar_1200	column	idle			600
-spawn_mustafar_267	MUSTAFAR	mus_world	PATROL	0	-3169.7	145.1	1372.2	-100	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	PATROL	0	patrol_mustafar_1300	column	idle			600
-spawn_mustafar_268	MUSTAFAR	mus_world	AREA	0	-3123.0	145.3	1332.6	-9	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle			600
+spawn_mustafar_267	MUSTAFAR	mus_world	PATROL	0	-3169.7	145.1	1372.2	-100	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	ATTACKABLE	E	75	80	City	Mensix Mining Facility	1	PATROL	0	patrol_mustafar_1300	column	idle			600
+spawn_mustafar_268	MUSTAFAR	mus_world	AREA	0	-3123.0	145.3	1332.6	-9	1	a mustafarian miner	humanoid_som_mustafarian_miner_a	ATTACKABLE	E	75	80	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			120
 spawn_mustafar_269	MUSTAFAR	mus_world	AREA	0	-3010.7	140.4	1340.1	7	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
 spawn_mustafar_270	MUSTAFAR	mus_world	AREA	0	-2891.7	150.9	1388.0	132	1	a Mustafarian lava miner	humanoid_som_mustafarian_miner	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_271	MUSTAFAR	mus_world	AREA	0	-2526.2	225.0	1643.1	163	1	a mustafarian scout	humanoid_som_mustafarian_scout	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
@@ -275,3 +275,18 @@ spawn_mustafar_272	MUSTAFAR	mus_world	AREA	0	-2528.0	225.0	1642.7	165	1	a mustaf
 spawn_mustafar_273	MUSTAFAR	mus_mensix	AREA	29	-56.3	31.5	-107.1	-90	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_mustafar_274	MUSTAFAR	mus_mensix	AREA	26	-72.0	23.2	-47.9	109	1	a mustafarian miner	humanoid_som_mustafarian_miner_b	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle			600
 spawn_mustafar_275	MUSTAFAR	mus_mensix	AREA	26	-75.4	23.2	-35.6	92	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_mustafar_276	MUSTAFAR	mus_mensix	AREA	29	-49.0	31.0	-112.7	179	1	Mining Corporation Executive	humanoid_som_kenobi_mining_exec	QUEST	N	100	100	City	Mensix Mining Facility	1	IDLE	0	0	-	idle		mensix_mce_hunt	600
+spawn_mustafar_277	MUSTAFAR	mus_world	AREA	0	-2913.7	147.4	1363.1	-119	1	a mustafarian scout	humanoid_som_mustafarian_scout	ATTACKABLE	E	75	80	-	-	2	LOITER	5	0	-	idle			120
+spawn_mustafar_278	MUSTAFAR	mus_world	PATROL	0	-3471.3	188.9	1384.1	127	1	a blistmok	creature_blistmok	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1400	column	idle			10
+spawn_mustafar_279	MUSTAFAR	mus_world	PATROL	0	-3332.1	163.6	1523.9	128	1	a jundak	creature_jundak	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1500	column	idle			10
+spawn_mustafar_280	MUSTAFAR	mus_world	PATROL	0	-3403.3	182.2	1466.8	172	1	a lava beetle	creature_beetle_lava	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1600	column	idle			10
+spawn_mustafar_281	MUSTAFAR	mus_world	PATROL	0	-3291.5	99.8	1122.0	-67	1	a lava flea	creature_flea_lava	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1700	column	idle			10
+spawn_mustafar_282	MUSTAFAR	mus_world	PATROL	0	-3032.4	99.8	1120.8	53	1	a lava runner tanray	creature_tanray_lava_runner	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1800	column	idle			10
+spawn_mustafar_283	MUSTAFAR	mus_world	PATROL	0	-3181.4	99.8	1197.8	7	1	a tulrus	creature_tulrus	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_1900	column	idle			10
+spawn_mustafar_284	MUSTAFAR	mus_world	PATROL	0	-3366.4	158.4	1463.7	-29	1	a xandank	creature_xandank	AGGRESSIVE	N	55	70	-	-	3	PATROL	0	patrol_mustafar_2000	column	idle			10
+spawn_mustafar_285	MUSTAFAR	mus_world	AREA	0	-2914.0	147.2	1378.9	-104	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01			600
+spawn_mustafar_286	MUSTAFAR	mus_world	AREA	0	-2914.7	147.5	1355.0	-87	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02			600
+spawn_mustafar_287	MUSTAFAR	mus_world	AREA	0	-2961.1	140.0	1379.2	-114	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03			600
+spawn_mustafar_288	MUSTAFAR	mus_world	AREA	0	-2960.5	136.8	1344.1	-176	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_01			600
+spawn_mustafar_289	MUSTAFAR	mus_world	AREA	0	-2965.1	134.8	1315.0	160	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_02			600
+spawn_mustafar_290	MUSTAFAR	mus_world	AREA	0	-2993.8	136.7	1322.3	-147	1	Corpse of a Treasure Hunter	humanoid_som_kenobi_treasure_hunter_corpse_02	INVULNERABLE	N	100	100	-	-	1	IDLE	0	0	-	npc_dead_03			600
