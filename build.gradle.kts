@@ -84,7 +84,7 @@ dependencies {
 	testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
 	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
 
-	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
+	testImplementation("com.tngtech.archunit:archunit-junit5:1.2.1")
 }
 
 idea {
