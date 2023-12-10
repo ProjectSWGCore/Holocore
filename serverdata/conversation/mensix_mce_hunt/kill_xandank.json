@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "quest/ground/som_jundak_hunt_15",
+		"key": "task01_journal_entry_description",
+		"comment": "Large Xandank packs are very dangerous and cause a serious hazard to the miners in the region. Culling the numbers of adult Xandank will go a long way to protecting the miners."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/xandank_trophy",
+				"key": "s_32",
+				"comment": "Tell you what...I will hunt them down for you."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/som_xandank_hunt_25",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/som_xandank_hunt_25"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thumb_up"
+			}
+		}
+	]
+}

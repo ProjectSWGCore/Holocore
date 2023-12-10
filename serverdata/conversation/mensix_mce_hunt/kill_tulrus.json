@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "quest/ground/som_jundak_hunt_15",
+		"key": "task01_journal_entry_description",
+		"comment": "The Tulrus population has obviously gotten out of hand. Too often the miners are coming face to face with these dangerous creatures. It is important that the numbers of Tulrus be reduced."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/xandank_trophy",
+				"key": "s_32",
+				"comment": "Tell you what...I will hunt them down for you."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/som_tulrus_hunt_20",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/som_tulrus_hunt_20"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "thumb_up"
+			}
+		}
+	]
+}
