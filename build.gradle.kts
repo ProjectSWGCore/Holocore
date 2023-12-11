@@ -29,13 +29,13 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.8.21"
-	id("org.beryx.jlink") version "2.25.0"
+	kotlin("jvm") version "1.9.21"
+	id("org.beryx.jlink") version "3.0.1"
 }
 
-val javaVersion = "18.0.2"
-val javaMajorVersion = "18"
-val kotlinTargetJdk = "18"
+val javaVersion = "21.0.1"
+val javaMajorVersion = "21"
+val kotlinTargetJdk = "21"
 val holocoreLogLevel: String? by project
 
 subprojects {
@@ -84,7 +84,7 @@ dependencies {
 	testImplementation(group="org.testcontainers", name="mongodb", version="1.18.0")
 	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
 
-	testImplementation("com.tngtech.archunit:archunit-junit5:1.0.1")
+	testImplementation("com.tngtech.archunit:archunit-junit5:1.2.1")
 }
 
 idea {

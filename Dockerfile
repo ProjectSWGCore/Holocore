@@ -1,4 +1,4 @@
-FROM eclipse-temurin:18.0.2.1_1-jdk-alpine AS builder
+FROM eclipse-temurin:21.0.1_12-jdk-alpine AS builder
 WORKDIR /holocore
 ADD . /holocore
 
