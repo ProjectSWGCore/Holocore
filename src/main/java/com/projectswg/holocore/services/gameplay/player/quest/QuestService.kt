@@ -117,7 +117,6 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 			return
 		}
 
-		// TODO award XP, load from tier+level matrix: datatables/quest/quest_experience.iff
 		playerObject.setQuestRewardReceived(questName, true)
 	}
 
