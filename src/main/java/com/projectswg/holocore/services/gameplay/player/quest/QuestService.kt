@@ -55,12 +55,14 @@ import com.projectswg.holocore.resources.support.objects.StaticItemCreator.creat
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
+import com.projectswg.holocore.resources.support.random.Die
+import com.projectswg.holocore.resources.support.random.RandomDie
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ThreadLocalRandom
 
-class QuestService : Service() {
+class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Service() {
 	private val executor = ScheduledThreadPool(1, "quest-service-%d")
 	private val questLoader = ServerData.questLoader
 
@@ -134,20 +136,53 @@ class QuestService : Service() {
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
 				val type = activeTaskListInfo.type
-				if ("quest.task.ground.destroy_multi" == type) {
-					if (isKillPartOfTask(activeTaskListInfo, corpse)) {
-						val max = activeTaskListInfo.count
-						val counter = playerObject.incrementQuestCounter(questName)
-						val remaining = max - counter
-						val task = activeTaskListInfo.index
-						StandardLog.onPlayerTrace(this, owner, "acquired %d/%d kills on task %d of quest %s", counter, max, task, questName)
-						incrementKillCount(questName, task, owner, counter, max)
-						if (remaining <= 0) {
-							advanceQuest(questName, owner, activeTaskListInfo)
-						}
-					}
+				when (type) {
+					"quest.task.ground.destroy_multi"          -> handleKillDestroyMulti(activeTaskListInfo, questName, owner, corpse)
+					"quest.task.ground.destroy_multi_and_loot" -> handleKillDestroyMultiAndLoot(activeTaskListInfo, questName, owner, corpse)
 				}
 			}
+		}
+	}
+
+	private fun handleKillDestroyMultiAndLoot(activeTaskListInfo: QuestTaskInfo, questName: String, owner: Player, corpse: AIObject) {
+		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
+			return
+		}
+		
+		val playerObject = owner.playerObject
+		val roll = destroyMultiAndLootDie.roll(1..100)
+		val itemFound = roll <= activeTaskListInfo.lootDropPercent
+
+		if (itemFound) {
+			val max = activeTaskListInfo.lootItemsRequired
+			val counter = playerObject.incrementQuestCounter(questName)
+			val remaining = max - counter
+			val task = activeTaskListInfo.index
+			StandardLog.onPlayerTrace(this, owner, "acquired %d/%d %s on task %d of quest %s", counter, max, activeTaskListInfo.lootItemName, task, questName)
+			incrementKillItemCount(questName, task, owner, counter, max, activeTaskListInfo.lootItemName)
+			if (remaining <= 0) {
+				advanceQuest(questName, owner, activeTaskListInfo)
+			}
+		} else {
+			StandardLog.onPlayerTrace(this, owner, "failed to acquire '%s' on task %d of quest %s", activeTaskListInfo.lootItemName, activeTaskListInfo.index, questName)
+			SystemMessageIntent.broadcastPersonal(owner, ProsePackage(StringId("quest/groundquests", "destroy_multiple_and_loot_fail"), "TO", activeTaskListInfo.lootItemName))
+		}
+	}
+
+	private fun handleKillDestroyMulti(activeTaskListInfo: QuestTaskInfo, questName: String, owner: Player, corpse: AIObject) {
+		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
+			return
+		}
+		
+		val playerObject = owner.playerObject
+		val max = activeTaskListInfo.count
+		val counter = playerObject.incrementQuestCounter(questName)
+		val remaining = max - counter
+		val task = activeTaskListInfo.index
+		StandardLog.onPlayerTrace(this, owner, "acquired %d/%d kills on task %d of quest %s", counter, max, task, questName)
+		incrementKillCount(questName, task, owner, counter, max)
+		if (remaining <= 0) {
+			advanceQuest(questName, owner, activeTaskListInfo)
 		}
 	}
 
@@ -171,6 +206,17 @@ class QuestService : Service() {
 		SystemMessageIntent.broadcastPersonal(player, prose)
 	}
 
+	private fun incrementKillItemCount(questName: String, task: Int, player: Player, counter: Int, max: Int, itemName: String) {
+		player.sendPacket(
+			QuestTaskCounterMessage(
+				player.creatureObject.objectId, questName, task, "@quest/groundquests:destroy_and_loot_counter", counter, max
+			)
+		)
+		val remaining = max - counter
+		val prose = ProsePackage(StringId("quest/groundquests", "destroy_multiple_and_loot_success"), "TO", itemName, "DI", remaining)
+		SystemMessageIntent.broadcastPersonal(player, prose)
+	}
+
 	private fun handleTaskEvents(player: Player, questName: String) {
 		val playerObject = player.getPlayerObject()
 		val currentTasks = getActiveTaskInfos(questName, playerObject)
@@ -181,13 +227,14 @@ class QuestService : Service() {
 			}
 
 			when (type) {
-				"quest.task.ground.comm_player"      -> handleCommPlayer(player, questName, currentTask)
-				"quest.task.ground.complete_quest"   -> completeQuest(player, questName)
-				"quest.task.ground.timer"            -> handleTimer(player, questName, currentTask)
-				"quest.task.ground.show_message_box" -> handleShowMessageBox(player, questName, currentTask)
-				"quest.task.ground.destroy_multi"    -> handleDestroyMulti(player, questName, currentTask)
-				"quest.task.ground.reward"           -> handleReward(player, questName, playerObject, currentTask)
-				"quest.task.ground.nothing"          -> handleNothing(player, questName, currentTask)
+				"quest.task.ground.comm_player"            -> handleCommPlayer(player, questName, currentTask)
+				"quest.task.ground.complete_quest"         -> completeQuest(player, questName)
+				"quest.task.ground.timer"                  -> handleTimer(player, questName, currentTask)
+				"quest.task.ground.show_message_box"       -> handleShowMessageBox(player, questName, currentTask)
+				"quest.task.ground.destroy_multi"          -> handleDestroyMulti(player, questName, currentTask)
+				"quest.task.ground.destroy_multi_and_loot" -> handleDestroyMultiAndLoot(player, questName, currentTask)
+				"quest.task.ground.reward"                 -> handleReward(player, questName, playerObject, currentTask)
+				"quest.task.ground.nothing"                -> handleNothing(player, questName, currentTask)
 			}
 		}
 	}
@@ -349,6 +396,17 @@ class QuestService : Service() {
 		player.sendPacket(
 			QuestTaskCounterMessage(
 				player.creatureObject.objectId, questName, task, "@quest/groundquests:destroy_counter", counter, max
+			)
+		)
+	}
+
+	private fun handleDestroyMultiAndLoot(player: Player, questName: String, currentTask: QuestTaskInfo) {
+		val task = currentTask.index
+		val max = currentTask.lootItemsRequired
+		val counter = 0
+		player.sendPacket(
+			QuestTaskCounterMessage(
+				player.creatureObject.objectId, questName, task, "@quest/groundquests:destroy_and_loot_counter", counter, max
 			)
 		)
 	}

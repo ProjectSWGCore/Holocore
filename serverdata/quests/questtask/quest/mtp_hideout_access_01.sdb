@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	mtp_hideout_access_01_01					0	0	0
-1	quest.task.ground.retrieve_item	2	mtp_hideout_access_01_02					0	0	0
-2	quest.task.ground.show_message_box	3	mtp_hideout_access_01_03					0	0	0
-3	quest.task.ground.retrieve_item	4	mtp_hideout_access_01_04					0	0	0
-4	quest.task.ground.show_message_box	5	mtp_hideout_access_01_05					0	0	0
-5	quest.task.ground.destroy_multi	6	mtp_hideout_access_01_06			mtp_quest_crate_breaker		1	0	0
-6	quest.task.ground.wait_for_signal		mtp_hideout_access_01_07					0	0	0

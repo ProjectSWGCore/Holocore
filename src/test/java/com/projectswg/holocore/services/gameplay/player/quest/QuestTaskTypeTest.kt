@@ -51,6 +51,7 @@ import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePoi
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.support.global.zone.sui.SuiService
 import com.projectswg.holocore.test.resources.GenericPlayer
+import com.projectswg.holocore.test.runners.DeterministicDie
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
@@ -61,7 +62,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 
 	@BeforeEach
 	fun setUp() {
-		registerService(QuestService())
+		registerService(QuestService(destroyMultiAndLootDie = DeterministicDie(1)))
 		registerService(SuiService())
 		registerService(SkillService())
 		registerService(CombatDeathblowService())
@@ -141,6 +142,25 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		
 		val killCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(killCountUpdate, "Failed to receive kill count update in time")
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.destroy_multi_and_loot")
+	fun destroyMultiAndLoot() {
+		val player = createPlayer()
+		GrantQuestIntent.broadcast(player, "quest/test_destroy_multiple_and_loot")
+		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
+		val rockmites = spawnNPCs("creature_rockmite", player.creatureObject.location, 3)
+
+		rockmites.forEach { rockmite ->
+			RequestCreatureDeathIntent.broadcast(player.creatureObject, rockmite)
+			val itemCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
+			assertNotNull(itemCountUpdate, "Failed to receive item count update in time")
+		}
+
+		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
+		assertNotNull(questCompletedMessage, "Failed to receive QuestCompletedMessage in time")
 	}
 
 	@Test

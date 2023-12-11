@@ -1,7 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;3	gotoInstance					0	0	0
-1	quest.task.ground.retrieve_item	2	find_supplies					0	0	0
-2	quest.task.ground.clear_quest						quest/mtp_hideout_instance_recover_supplies_success	0	0	0
-3	quest.task.ground.timer	4	mtp_quest_timer					0	585	585
-4	quest.task.ground.clear_quest						quest/mtp_hideout_instance_recover_supplies_fail	0	0	0

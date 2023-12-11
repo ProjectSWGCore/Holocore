@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;4;5	quest_u10_01_01					0	0	0
-1	quest.task.ground.wait_for_tasks	2	quest_u10_01_02					0	0	0
-2	quest.task.ground.wait_for_signal	3	quest_u10_01_03					0	0	0
-3	quest.task.ground.complete_quest		quest_u10_01_04					0	0	0
-4	quest.task.ground.destroy_multi		quest_u10_01_02b			quest_u10_helper_droid_queen		1	0	0
-5	quest.task.ground.destroy_multi		quest_u10_01_02a			quest_u10_helper_droid		21	0	0

@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1	tat_espa_body_building_e1					0	0	0
-1	quest.task.ground.wait_for_signal	2	tat_espa_body_building_e2					0	0	0
-2	quest.task.ground.wait_for_signal	3	tat_espa_body_building_e3					0	0	0
-3	quest.task.ground.retrieve_item	4	tat_espa_body_building_e4					0	0	0
-4	quest.task.ground.wait_for_signal	5	tat_espa_body_building_e5					0	0	0
-5	quest.task.ground.complete_quest		tat_espa_body_building_e6					0	0	0

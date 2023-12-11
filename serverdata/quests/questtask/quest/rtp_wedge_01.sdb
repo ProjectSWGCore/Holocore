@@ -1,8 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.wait_for_signal	1;3;4;5	rtp_wedge_01_01					0	0	0
-1	quest.task.ground.wait_for_tasks	2	rtp_wedge_01_02					0	0	0
-2	quest.task.ground.wait_for_signal		rtp_wedge_01_03					0	0	0
-3	quest.task.ground.destroy_multi		rtp_wedge_01_02b			rtp_wedge_stormtrooper_guard		14	0	0
-4	quest.task.ground.retrieve_item		rtp_wedge_01_02a					0	0	0
-5	quest.task.ground.comm_player			@quest/ground/rtp_wedge_01:task05_comm_message_text	object/mobile/dressed_imperial_captain_m.iff			0	0	0

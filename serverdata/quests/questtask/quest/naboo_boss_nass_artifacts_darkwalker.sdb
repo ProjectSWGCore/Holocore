@@ -1,9 +1,0 @@
-index	type	next_tasks_on_complete	name	comm_message_text	npc_appearance_server_template	target_server_template	grant_quest_on_complete	count	min_time	max_time
-INTEGER	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER
-0	quest.task.ground.nothing	1;5;6						0	0	0
-1	quest.task.ground.wait_for_tasks	2;4	boss_nass_artifacts_darkwalker_00					0	0	0
-2	quest.task.ground.destroy_multi_and_loot	3	boss_nass_artifacts_darkwalker_03			naboo_darkwalker_vran_tristen		0	0	0
-3	quest.task.ground.wait_for_signal		boss_nass_artifacts_darkwalker_04					0	0	0
-4	quest.task.ground.comm_player		boss_nass_artifacts_darkwalker_03b	@quest/ground/naboo_boss_nass_artifacts_darkwalker:task04_comm_message_text	object/mobile/boss_nass.iff			0	0	0
-5	quest.task.ground.destroy_multi		boss_nass_artifacts_darkwalker_02			naboo_darkwalker_deathraven		9	0	0
-6	quest.task.ground.destroy_multi		boss_nass_artifacts_darkwalker_01			naboo_darkwalker_preylord		11	0	0
