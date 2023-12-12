@@ -31,6 +31,7 @@ import com.projectswg.common.network.packets.swg.login.creation.ClientCreateChar
 import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskCounterMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskTimerData
 import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage
 import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
@@ -192,6 +193,17 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
 
 		assertNotNull(questCompletedMessage, "Quest not completed in time")
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.timer")
+	fun timer() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/test_timer")
+		val questTaskTimerData = player.waitForNextPacket(QuestTaskTimerData::class.java)
+
+		assertNotNull(questTaskTimerData, "Quest task time should have been sent")
 	}
 
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state

@@ -36,6 +36,7 @@ import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskCounterMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskTimerData
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.AbandonQuestIntent
@@ -277,9 +278,24 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 		val minTime = currentTask.minTime
 		val maxTime = currentTask.maxTime
 		val random = ThreadLocalRandom.current()
-		val delay = random.nextInt(minTime, maxTime) * 1000
-		executor.execute(delay.toLong()) {
-			advanceQuest(questName, player, currentTask)
+		val delaySeconds = random.nextInt(minTime, maxTime + 1)
+		val delayMilliseconds = delaySeconds * 1000
+		executor.execute(delayMilliseconds.toLong()) {	// TODO if the server is restarted, the timer will be lost and the quest will be stuck
+			if (player.playerObject.isQuestInJournal(questName)) {
+				StandardLog.onPlayerTrace(this, player, "timer for task %d of quest %s expired", currentTask.index, questName)
+				advanceQuest(questName, player, currentTask)
+			}
+		}
+
+		if (currentTask.isVisible) {
+			player.playerObject.updatePlayTime()	// So the client can calculate the correct time remaining after we send QuestTaskTimerData
+			val task = currentTask.index
+			val timerPacket = QuestTaskTimerData(player.creatureObject.objectId)
+			timerPacket.questName = questName
+			timerPacket.taskId = task
+			timerPacket.counterText = "@quest/groundquests:timer_timertext"
+			timerPacket.duration = player.playerObject.playTime + delaySeconds
+			player.sendPacket(timerPacket)
 		}
 	}
 
