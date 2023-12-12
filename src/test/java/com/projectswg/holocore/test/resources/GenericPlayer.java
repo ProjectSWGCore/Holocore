@@ -345,13 +345,13 @@ public class GenericPlayer extends Player {
 	}
 	
 	private void handleUpdateCellPermission(UpdateCellPermissionMessage p) {
-		assertTrue(objects.get(p.getCellId()) instanceof CellObject);
+		assertInstanceOf(CellObject.class, objects.get(p.getCellId()));
 	}
 	
 	private void handleUpdatePvpStatusMessage(UpdatePvpStatusMessage p) {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
-		assertTrue(obj instanceof CreatureObject);
+		assertInstanceOf(CreatureObject.class, obj);
 		((CreatureObject) obj).setFaction(ServerData.INSTANCE.getFactions().getFaction(p.getPlayerFaction().name().toLowerCase(Locale.US)));
 		((CreatureObject) obj).setPvpFlags(p.getPvpFlags());
 	}
@@ -368,7 +368,7 @@ public class GenericPlayer extends Player {
 	private void handleUpdatePosture(UpdatePostureMessage p) {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
-		assertTrue(obj instanceof CreatureObject);
+		assertInstanceOf(CreatureObject.class, obj);
 		Posture posture = Posture.getFromId(p.getPosture());
 		assertNotNull(posture);
 		assertNotEquals(Posture.INVALID, posture);
