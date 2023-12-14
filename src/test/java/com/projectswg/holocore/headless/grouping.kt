@@ -27,7 +27,6 @@
 package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
-import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService
 import java.util.concurrent.TimeUnit
@@ -39,22 +38,25 @@ fun ZonedInCharacter.invitePlayerToGroup(other: ZonedInCharacter) {
 
 fun ZonedInCharacter.acceptCurrentGroupInvitation() {
 	sendCommand("join")
-	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.leaveCurrentGroup() {
+	val groupObjectId = player.creatureObject.groupId
 	sendCommand("leaveGroup")
-	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.kickFromGroup(other: ZonedInCharacter) {
+	val groupObjectId = player.creatureObject.groupId
 	sendCommand("dismissGroupMember", other.player.creatureObject)
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.makeGroupLeader(other: ZonedInCharacter) {
+	val groupObjectId = player.creatureObject.groupId
 	sendCommand("makeLeader", other.player.creatureObject)
-	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.isInGroupWith(other: ZonedInCharacter): Boolean {

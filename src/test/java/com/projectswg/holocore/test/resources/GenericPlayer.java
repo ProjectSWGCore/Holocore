@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -165,6 +165,36 @@ public class GenericPlayer extends Player {
 					if (type.isInstance(next)) {
 						it.remove();
 						return type.cast(next);
+					}
+				}
+				try {
+					//noinspection ResultOfMethodCallIgnored
+					packetLockCondition.awaitNanos(unit.toNanos(timeout) - (System.nanoTime() - startTime));
+				} catch (InterruptedException e) {
+					return null;
+				}
+			}
+		} finally {
+			packetLock.unlock();
+		}
+		return null;
+	}
+	@Nullable
+	public DeltasMessage waitForNextObjectDelta(long objectId, long timeout, TimeUnit unit) {
+		Class<? extends SWGPacket> type = DeltasMessage.class;
+		packetLock.lock();
+		try {
+			long startTime = System.nanoTime();
+			while (System.nanoTime() - startTime < unit.toNanos(timeout)) {
+				for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
+					SWGPacket next = it.next();
+					if (type.isInstance(next)) {
+						it.remove();
+						DeltasMessage deltasMessage = (DeltasMessage) next;
+						
+						if (deltasMessage.getObjectId() == objectId) {
+							return deltasMessage;
+						}
 					}
 				}
 				try {
@@ -345,13 +375,13 @@ public class GenericPlayer extends Player {
 	}
 	
 	private void handleUpdateCellPermission(UpdateCellPermissionMessage p) {
-		assertTrue(objects.get(p.getCellId()) instanceof CellObject);
+		assertInstanceOf(CellObject.class, objects.get(p.getCellId()));
 	}
 	
 	private void handleUpdatePvpStatusMessage(UpdatePvpStatusMessage p) {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
-		assertTrue(obj instanceof CreatureObject);
+		assertInstanceOf(CreatureObject.class, obj);
 		((CreatureObject) obj).setFaction(ServerData.INSTANCE.getFactions().getFaction(p.getPlayerFaction().name().toLowerCase(Locale.US)));
 		((CreatureObject) obj).setPvpFlags(p.getPvpFlags());
 	}
@@ -368,7 +398,7 @@ public class GenericPlayer extends Player {
 	private void handleUpdatePosture(UpdatePostureMessage p) {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
-		assertTrue(obj instanceof CreatureObject);
+		assertInstanceOf(CreatureObject.class, obj);
 		Posture posture = Posture.getFromId(p.getPosture());
 		assertNotNull(posture);
 		assertNotEquals(Posture.INVALID, posture);

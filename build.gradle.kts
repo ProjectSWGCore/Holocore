@@ -77,7 +77,7 @@ dependencies {
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
 	
-	val junit5Version = "5.9.3"
+	val junit5Version = "5.10.1"
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version= junit5Version)
 	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version= junit5Version)
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version= junit5Version)
