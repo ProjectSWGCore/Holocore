@@ -101,8 +101,8 @@ jlink {
 //	addOptions("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
 	addOptions("--ignore-signing-information")
 	forceMerge("kotlin-stdlib")
-	imageDir.set(file("$buildDir/holocore"))
-	imageZip.set(file("$buildDir/holocore.zip"))
+	imageDir.set(layout.buildDirectory.dir("holocore"))
+	imageZip.set(layout.buildDirectory.file("holocore.zip"))
 	launcher {
 		name = "holocore"
 		jvmArgs = listOf()
