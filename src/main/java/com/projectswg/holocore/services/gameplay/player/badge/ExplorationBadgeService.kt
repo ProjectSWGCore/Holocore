@@ -48,12 +48,8 @@ class ExplorationBadgeService : Service() {
 		}
 	}
 	@IntentHandler
-	private fun handleObjectTeleportedIntent(pti: ObjectTeleportIntent) {
-		if (pti.`object` !is CreatureObject)
-			return
-		val creatureObject = pti.`object` as CreatureObject
-		if (!creatureObject.isPlayer)
-			return
+	private fun handleObjectTeleportedIntent(oti: ObjectTeleportIntent) {
+		val creatureObject = oti.`object` as? CreatureObject ?: return
 		val explorationBadgeInfo = checkExplorationRegions(creatureObject) ?: return
 		
 		if (!hasBadge(creatureObject, explorationBadgeInfo)) {

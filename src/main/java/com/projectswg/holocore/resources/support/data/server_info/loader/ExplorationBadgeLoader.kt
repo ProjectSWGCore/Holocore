@@ -54,8 +54,8 @@ class ExplorationBadgeLoader : DataLoader() {
 	class ExplorationBadgeInfo(set: SdbLoader.SdbResultSet) {
 		val x = set.getInt("x")
 		val y = set.getInt("y")
-		val radius = set.getInt("y")
-		val badgeSlot = set.getInt("y")
+		val radius = set.getInt("radius")
+		val badgeSlot = set.getInt("badge_slot")
 		val badgeName = set.getText("badge_name")
 	}
 }
