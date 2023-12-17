@@ -156,6 +156,18 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("loot_drop_percent")) {
 					lootDropPercent = (int) set.getInt("loot_drop_percent");
 				}
+				String musicOnActivate = null;
+				if (columns.contains("music_on_activate")) {
+					musicOnActivate = set.getText("music_on_activate");
+				}
+				String musicOnComplete = null;
+				if (columns.contains("music_on_complete")) {
+					musicOnComplete = set.getText("music_on_complete");
+				}
+				String musicOnFailure = null;
+				if (columns.contains("music_on_failure")) {
+					musicOnFailure = set.getText("music_on_failure");
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -193,7 +205,10 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setLootItemName(lootItemName);
 				questTaskInfo.setLootItemsRequired(lootItemsRequired);
 				questTaskInfo.setLootDropPercent(lootDropPercent);
-				
+				questTaskInfo.setMusicOnActivate(musicOnActivate);
+				questTaskInfo.setMusicOnComplete(musicOnComplete);
+				questTaskInfo.setMusicOnFailure(musicOnFailure);
+
 				questTaskInfos.add(questTaskInfo);
 			}
 		} catch (Exception e) {
@@ -307,7 +322,10 @@ public class QuestLoader extends DataLoader {
 		private String lootItemName;
 		private int lootItemsRequired;
 		private int lootDropPercent;
-		
+		private String musicOnActivate;
+		private String musicOnComplete;
+		private String musicOnFailure;
+
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
 		}
@@ -527,6 +545,30 @@ public class QuestLoader extends DataLoader {
 		
 		public void setGrantQuestOnComplete(String grantQuestOnComplete) {
 			this.grantQuestOnComplete = grantQuestOnComplete;
+		}
+
+		public String getMusicOnActivate() {
+			return musicOnActivate;
+		}
+
+		public void setMusicOnActivate(String musicOnActivate) {
+			this.musicOnActivate = musicOnActivate;
+		}
+
+		public String getMusicOnComplete() {
+			return musicOnComplete;
+		}
+
+		public void setMusicOnComplete(String musicOnComplete) {
+			this.musicOnComplete = musicOnComplete;
+		}
+
+		public String getMusicOnFailure() {
+			return musicOnFailure;
+		}
+
+		public void setMusicOnFailure(String musicOnFailure) {
+			this.musicOnFailure = musicOnFailure;
 		}
 
 		@Override
