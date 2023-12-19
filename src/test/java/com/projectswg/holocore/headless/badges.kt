@@ -24,38 +24,18 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.loader
+package com.projectswg.holocore.headless
 
-import com.projectswg.common.data.location.Terrain
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
-import java.io.File
+import com.projectswg.common.data.Badges
+import com.projectswg.common.network.packets.swg.zone.BadgesResponseMessage
 
-class ExplorationBadgeLoader : DataLoader() {
-
-	private val terrainToExplorationBadges = mutableMapOf<Terrain, MutableCollection<ExplorationBadgeInfo>>()
-
-	fun getExplorationBadges(terrain: Terrain): Collection<ExplorationBadgeInfo> {
-		return terrainToExplorationBadges.getOrElse(terrain) { emptyList() }
-	}
-
-	override fun load() {
-		val set = SdbLoader.load(File("serverdata/badges/explorationBadges.sdb"))
-
-		set.use {
-			while (set.next()) {
-				val terrain = Terrain.valueOf(set.getText("planet"))
-				val explorationBadgeInfo = ExplorationBadgeInfo(set)
-				val list: MutableCollection<ExplorationBadgeInfo> = terrainToExplorationBadges.computeIfAbsent(terrain) { mutableListOf() }
-				list.add(explorationBadgeInfo)
-			}
-		}
-	}
-
-	class ExplorationBadgeInfo(set: SdbLoader.SdbResultSet) {
-		val x = set.getInt("x")
-		val y = set.getInt("y")
-		val radius = set.getInt("radius")
-		val badgeSlot = set.getInt("badge_slot")
-		val badgeName = set.getText("badge_name")
-	}
+/**
+ * Requests the badges for the given character.
+ * @param character the character to request badges for (defaults to this character)
+ * @return the badges for the given character
+ */
+fun ZonedInCharacter.requestBadges(character: ZonedInCharacter = this): Badges {
+	sendCommand("requestBadges", character.player.creatureObject)
+	val badgesResponseMessage = player.waitForNextPacket(BadgesResponseMessage::class.java) ?: throw IllegalStateException("Badges not received in time")
+	return badgesResponseMessage.badges
 }

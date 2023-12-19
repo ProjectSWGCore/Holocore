@@ -41,6 +41,7 @@ import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
 import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
 import com.projectswg.holocore.services.gameplay.combat.loot.GrantLootService
 import com.projectswg.holocore.services.gameplay.combat.loot.LootGenerationService
+import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
 import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
@@ -98,6 +99,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(LootGenerationService(DeterministicDie(1), DeterministicDie(1)))
 		registerService(GrantLootService())
 		registerService(ContainerService())
+		registerService(BadgeManager())
 	}
 
 	@AfterEach

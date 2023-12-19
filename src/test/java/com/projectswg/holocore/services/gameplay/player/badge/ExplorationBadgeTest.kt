@@ -24,38 +24,30 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.loader
+package com.projectswg.holocore.services.gameplay.player.badge
 
 import com.projectswg.common.data.location.Terrain
-import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
-import java.io.File
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.adminTeleport
+import com.projectswg.holocore.headless.requestBadges
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-class ExplorationBadgeLoader : DataLoader() {
+class ExplorationBadgeTest : AcceptanceTest() {
+	@Test
+	fun enteringAreaGrantsBadge() {
+		addUser("Test", "Test", AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter("Test", "Test", "char")
 
-	private val terrainToExplorationBadges = mutableMapOf<Terrain, MutableCollection<ExplorationBadgeInfo>>()
+		character.adminTeleport(planet = Terrain.MUSTAFAR, x = 0, y = 0, z = 0)
 
-	fun getExplorationBadges(terrain: Terrain): Collection<ExplorationBadgeInfo> {
-		return terrainToExplorationBadges.getOrElse(terrain) { emptyList() }
-	}
-
-	override fun load() {
-		val set = SdbLoader.load(File("serverdata/badges/explorationBadges.sdb"))
-
-		set.use {
-			while (set.next()) {
-				val terrain = Terrain.valueOf(set.getText("planet"))
-				val explorationBadgeInfo = ExplorationBadgeInfo(set)
-				val list: MutableCollection<ExplorationBadgeInfo> = terrainToExplorationBadges.computeIfAbsent(terrain) { mutableListOf() }
-				list.add(explorationBadgeInfo)
-			}
-		}
-	}
-
-	class ExplorationBadgeInfo(set: SdbLoader.SdbResultSet) {
-		val x = set.getInt("x")
-		val y = set.getInt("y")
-		val radius = set.getInt("radius")
-		val badgeSlot = set.getInt("badge_slot")
-		val badgeName = set.getText("badge_name")
+		val badges = character.requestBadges()
+		val mustafarExplorationBadgeSlot = 171
+		assertAll(
+			{ assertEquals(1, badges.explorationBadgeCount) },
+			{ assertTrue(badges.hasBadge(mustafarExplorationBadgeSlot)) }
+		)
 	}
 }
