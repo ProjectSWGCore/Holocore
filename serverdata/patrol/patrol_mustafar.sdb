@@ -304,21 +304,20 @@ patrol_mustafar_1318	patrol_mustafar_1300		MUSTAFAR	mus_world	0	-3078.5	145.8	13
 patrol_mustafar_1319	patrol_mustafar_1300		MUSTAFAR	mus_world	0	-3105.0	147.3	1371.9	0	-
 patrol_mustafar_1320	patrol_mustafar_1300		MUSTAFAR	mus_world	0	-3136.0	148.5	1375.3	0	-
 patrol_mustafar_1321	patrol_mustafar_1300		MUSTAFAR	mus_world	0	-3155.3	149.3	1376.2	0	-
-patrol_mustafar_1400	patrol_mustafar_1400	FLIP	MUSTAFAR	mus_world	0	-3453.0	173.0	1367.1	0	Mensix - Blistmok wave
-patrol_mustafar_1401	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3453.0	173.0	1367.1	0	-
-patrol_mustafar_1402	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3424.8	160.8	1346.3	0	-
-patrol_mustafar_1403	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3383.1	148.4	1342.3	0	-
-patrol_mustafar_1404	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3350.9	147.0	1323.7	0	-
-patrol_mustafar_1405	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3304.5	144.0	1309.7	0	-
-patrol_mustafar_1406	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3254.3	142.4	1309.1	0	-
-patrol_mustafar_1407	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3216.6	143.9	1311.0	0	-
-patrol_mustafar_1408	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3168.1	143.6	1313.1	0	-
-patrol_mustafar_1409	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3120.5	145.5	1312.2	0	-
-patrol_mustafar_1410	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3070.8	145.3	1311.5	0	-
-patrol_mustafar_1411	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3028.8	142.4	1313.7	0	-
-patrol_mustafar_1412	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2983.8	135.9	1322.2	0	-
-patrol_mustafar_1413	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2954.9	136.4	1350.5	0	-
-patrol_mustafar_1414	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2924.9	142.3	1406.2	30	-
+patrol_mustafar_1400	patrol_mustafar_1400	FLIP	MUSTAFAR	mus_world	0	-3496.9	167.4	1283.6	0	Mensix - Blistmok wave
+patrol_mustafar_1401	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3482.5	163.0	1272.8	0	-
+patrol_mustafar_1402	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3418.5	153.6	1283.4	0	-
+patrol_mustafar_1403	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3361.5	147.2	1289.5	0	-
+patrol_mustafar_1404	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3312.5	144.0	1295.9	0	-
+patrol_mustafar_1405	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3254.3	142.4	1309.1	0	-
+patrol_mustafar_1406	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3216.6	143.9	1311.0	0	-
+patrol_mustafar_1407	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3168.1	143.6	1313.1	0	-
+patrol_mustafar_1408	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3120.5	145.5	1312.2	0	-
+patrol_mustafar_1409	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3070.8	145.3	1311.5	0	-
+patrol_mustafar_1410	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-3028.8	142.4	1313.7	0	-
+patrol_mustafar_1411	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2983.8	135.9	1322.2	0	-
+patrol_mustafar_1412	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2954.9	136.4	1350.5	0	-
+patrol_mustafar_1413	patrol_mustafar_1400		MUSTAFAR	mus_world	0	-2924.9	142.3	1406.2	30	-
 patrol_mustafar_1500	patrol_mustafar_1500	FLIP	MUSTAFAR	mus_world	0	-3332.1	163.6	1523.9	0	Mensix - Jundak wave
 patrol_mustafar_1501	patrol_mustafar_1500		MUSTAFAR	mus_world	0	-3318.5	162.9	1516.0	0	-
 patrol_mustafar_1502	patrol_mustafar_1500		MUSTAFAR	mus_world	0	-3312.6	159.6	1503.9	0	-
