@@ -24,7 +24,7 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.architecture
+package com.projectswg.holocore.architecture.production
 
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests
 import com.tngtech.archunit.junit.AnalyzeClasses
@@ -39,7 +39,7 @@ import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.Service
 
 @AnalyzeClasses(packages = ["com.projectswg.holocore"], importOptions = [DoNotIncludeTests::class])
-class ArchitectureTest {
+class ProductionArchitectureTest {
 
 	@ArchTest
 	val managerSuffixApplied: ArchRule = classes().that()
