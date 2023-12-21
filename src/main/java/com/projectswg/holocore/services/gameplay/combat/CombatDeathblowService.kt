@@ -24,173 +24,160 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat;
+package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.common.data.encodables.oob.ProsePackage;
-import com.projectswg.common.data.encodables.oob.StringId;
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.holocore.intents.gameplay.combat.*;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
+import com.projectswg.common.data.encodables.oob.ProsePackage
+import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.holocore.intents.gameplay.combat.*
+import com.projectswg.holocore.intents.gameplay.combat.CreatureRevivedIntent.Companion.broadcast
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import java.time.Duration
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Future
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Future;
+class CombatDeathblowService : Service() {
+	private val incapacitatedCreatures = ConcurrentHashMap<CreatureObject, Future<*>?>()
+	private val executor = ScheduledThreadPool(1, 3, "combat-deathblow-service")
 
-public class CombatDeathblowService extends Service {
-	
-	private static final byte INCAP_TIMER = 20;    // Amount of seconds to be incapacitated
-	
-	private final Map<CreatureObject, Future<?>> incapacitatedCreatures;
-	private final ScheduledThreadPool executor;
-	
-	public CombatDeathblowService() {
-		this.incapacitatedCreatures = new ConcurrentHashMap<>();
-		this.executor = new ScheduledThreadPool(1, 3, "combat-deathblow-service");
+	override fun start(): Boolean {
+		executor.start()
+		return true
 	}
-	
-	@Override
-	public boolean start() {
-		executor.start();
-		return true;
+
+	override fun stop(): Boolean {
+		executor.stop()
+		executor.awaitTermination(1000)
+		return true
 	}
-	
-	@Override
-	public boolean stop() {
-		executor.stop();
-		executor.awaitTermination(1000);
-		return true;
-	}
-	
+
 	@IntentHandler
-	private void handleDeathblowIntent(DeathblowIntent di) {
-		CreatureObject killer = di.getKiller();
-		CreatureObject corpse = di.getCorpse();
-		
-		// Only deathblowing players is allowed!
-		if (!corpse.isPlayer()) {
-			return;
+	private fun handleDeathblowIntent(di: DeathblowIntent) {
+		val killer = di.killer
+		val corpse = di.corpse
+
+		if (!corpse.isPlayer) {
+			return
 		}
-		
-		// They must be enemies
+
 		if (!corpse.isAttackable(killer)) {
-			return;
+			return
 		}
-		
-		// The target of the deathblow must be incapacitated!
-		if (corpse.getPosture() != Posture.INCAPACITATED) {
-			return;
+
+		if (corpse.posture != Posture.INCAPACITATED) {
+			return
 		}
-		
+
 		// If they're deathblown while incapacitated, their incapacitation expiration timer should cancel
-		Future<?> incapacitationTimer = incapacitatedCreatures.remove(corpse);
-		
+		val incapacitationTimer = incapacitatedCreatures.remove(corpse)
+
 		if (incapacitationTimer != null) {
 			if (incapacitationTimer.cancel(true)) {    // Interrupt the incap timer and kill the creature immediately
-				killCreature(killer, corpse);
+				killCreature(killer, corpse)
 			}
 		} else {
-			// Can't happen with the current code, but in case it's ever refactored...
-			Log.e("Incapacitation timer for player %s being deathblown unexpectedly didn't exist!", "");
+			StandardLog.onPlayerError(this, corpse, "Incapacitation timer for player %s being deathblown unexpectedly didn't exist")
 		}
 	}
-	
+
 	@IntentHandler
-	private void handleIncapacitateCreatureIntent(IncapacitateCreatureIntent ici) {
-		incapacitatePlayer(ici.getIncapper(), ici.getIncappee());
+	private fun handleIncapacitateCreatureIntent(ici: IncapacitateCreatureIntent) {
+		incapacitatePlayer(ici.incapper, ici.incappee)
 	}
-	
+
 	@IntentHandler
-	private void handleKillCreatureIntent(KillCreatureIntent kci) {
-		killCreature(kci.getKiller(), kci.getCorpse());
+	private fun handleKillCreatureIntent(kci: KillCreatureIntent) {
+		killCreature(kci.killer, kci.corpse)
 	}
-	
+
 	@IntentHandler
-	private synchronized void handleRequestCreatureDeathIntent(RequestCreatureDeathIntent rcdi) {
-		CreatureObject corpse = rcdi.getCorpse();
-		CreatureObject killer = rcdi.getKiller();
-		if (corpse.getPosture() == Posture.INCAPACITATED || corpse.getPosture() == Posture.DEAD)
-			return;
-		
-		boolean deathblow = !corpse.isPlayer();
-		if (!deathblow && killer instanceof AIObject)
-			deathblow = ((AIObject) killer).getSpawner().isDeathblow();
-		
-		if (deathblow) {
-			killCreature(rcdi.getKiller(), corpse);
+	@Synchronized
+	private fun handleRequestCreatureDeathIntent(rcdi: RequestCreatureDeathIntent) {
+		val corpse = rcdi.corpse
+		val killer = rcdi.killer
+		if (corpse.posture == Posture.INCAPACITATED || corpse.posture == Posture.DEAD) return
+
+		if (shouldDeathblow(killer, corpse)) {
+			killCreature(rcdi.killer, corpse)
 		} else {
-			incapacitatePlayer(rcdi.getKiller(), corpse);
+			incapacitatePlayer(rcdi.killer, corpse)
 		}
-		corpse.setHealth(0);
-		corpse.setTurnScale(0);
-		corpse.setMovementPercent(0);
-		
-		ExitCombatIntent.broadcast(corpse);
+
+		corpse.health = 0
+		corpse.setTurnScale(0.0)
+		corpse.setMovementPercent(0.0)
+
+		ExitCombatIntent.broadcast(corpse)
 	}
-	
-	private void incapacitatePlayer(CreatureObject incapacitator, CreatureObject incapacitated) {
-		incapacitated.setCounter(INCAP_TIMER);
-		incapacitated.setPosture(Posture.INCAPACITATED);
-		
-		StandardLog.onPlayerEvent(this, incapacitated, "was incapacitated by %s", incapacitator);
-		
+
+	private fun shouldDeathblow(killer: CreatureObject, corpse: CreatureObject): Boolean {
+		if (corpse !is AIObject && killer is AIObject) {	// If PvE
+			return killer.spawner.isDeathblow
+		}
+		return corpse is AIObject
+	}
+
+	private fun incapacitatePlayer(incapacitator: CreatureObject, incapacitated: CreatureObject) {
+		incapacitated.counter = INCAP_TIMER.toSeconds().toInt()
+		incapacitated.posture = Posture.INCAPACITATED
+
+		StandardLog.onPlayerEvent(this, incapacitated, "was incapacitated by %s", incapacitator)
+
 		// Once the incapacitation counter expires, revive them.
-		incapacitatedCreatures.put(incapacitated, executor.execute(INCAP_TIMER * 1000, () -> expireIncapacitation(incapacitated)));
-		
-		Player incapacitatorOwner = incapacitator.getOwner();
+		incapacitatedCreatures[incapacitated] = executor.execute((INCAP_TIMER.toMillis())) { expireIncapacitation(incapacitated) }
+
+		val incapacitatorOwner = incapacitator.owner
 		if (incapacitatorOwner != null) { // This will be NPCs most of the time
-			new SystemMessageIntent(incapacitatorOwner, new ProsePackage(new StringId("base_player", "prose_target_incap"), "TT", incapacitated.getObjectName())).broadcast();
+			SystemMessageIntent(incapacitatorOwner, ProsePackage(StringId("base_player", "prose_target_incap"), "TT", incapacitated.objectName)).broadcast()
 		}
-		Player incapacitatedOwner = incapacitated.getOwner();
+		val incapacitatedOwner = incapacitated.owner
 		if (incapacitatedOwner != null) { // Logged out player
-			new SystemMessageIntent(incapacitatedOwner, new ProsePackage(new StringId("base_player", "prose_victim_incap"), "TT", incapacitator.getObjectName())).broadcast();
+			SystemMessageIntent(incapacitatedOwner, ProsePackage(StringId("base_player", "prose_victim_incap"), "TT", incapacitator.objectName)).broadcast()
 		}
-		new CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast();
-		
-		long now = System.currentTimeMillis();
-		incapacitated.setLastIncapTime(now);
+		CreatureIncapacitatedIntent(incapacitator, incapacitated).broadcast()
+
+		val now = System.currentTimeMillis()
+		incapacitated.lastIncapTime = now
 	}
-	
-	private void expireIncapacitation(CreatureObject incapacitatedPlayer) {
-		incapacitatedCreatures.remove(incapacitatedPlayer);
-		reviveCreature(incapacitatedPlayer);
+
+	private fun expireIncapacitation(incapacitatedPlayer: CreatureObject) {
+		incapacitatedCreatures.remove(incapacitatedPlayer)
+		reviveCreature(incapacitatedPlayer)
 	}
-	
-	private void reviveCreature(CreatureObject revivedCreature) {
-		if (revivedCreature.isPlayer())
-			revivedCreature.setCounter(0);
-		
-		revivedCreature.setPosture(Posture.UPRIGHT);
-		
+
+	private fun reviveCreature(revivedCreature: CreatureObject) {
+		if (revivedCreature.isPlayer) revivedCreature.counter = 0
+
+		revivedCreature.posture = Posture.UPRIGHT
+
 		// The creature is now able to turn around and move
-		revivedCreature.setTurnScale(1);
-		revivedCreature.setMovementPercent(1);
-		
+		revivedCreature.setTurnScale(1.0)
+		revivedCreature.setMovementPercent(1.0)
+
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
-		revivedCreature.setHealth((int) (revivedCreature.getBaseHealth() * 0.1));    // Restores 10% health of their base health
-		CreatureRevivedIntent.broadcast(revivedCreature);
-		
-		StandardLog.onPlayerEvent(this, revivedCreature, "was revived");
+		revivedCreature.health = (revivedCreature.baseHealth * 0.1).toInt() // Restores 10% health of their base health
+		broadcast(revivedCreature)
+
+		StandardLog.onPlayerEvent(this, revivedCreature, "was revived")
 	}
-	
-	private void killCreature(CreatureObject killer, CreatureObject corpse) {
+
+	private fun killCreature(killer: CreatureObject, corpse: CreatureObject) {
 		// We don't want to kill a creature that is already dead
-		if (corpse.getPosture() == Posture.DEAD)
-			return;
-		
-		corpse.setPosture(Posture.DEAD);
-		if (corpse.isPlayer())
-			StandardLog.onPlayerEvent(this, corpse, "was killed by %s", killer);
-		if (killer.isPlayer())
-			StandardLog.onPlayerEvent(this, killer, "killed %s", corpse);
-		new CreatureKilledIntent(killer, corpse).broadcast();
+		if (corpse.posture == Posture.DEAD) return
+
+		corpse.posture = Posture.DEAD
+		if (corpse.isPlayer) StandardLog.onPlayerEvent(this, corpse, "was killed by %s", killer)
+		if (killer.isPlayer) StandardLog.onPlayerEvent(this, killer, "killed %s", corpse)
+		CreatureKilledIntent(killer, corpse).broadcast()
 	}
-	
+
+	companion object {
+		private val INCAP_TIMER = Duration.ofSeconds(20)
+	}
 }
