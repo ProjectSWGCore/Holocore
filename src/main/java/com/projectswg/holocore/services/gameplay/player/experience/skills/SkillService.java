@@ -173,6 +173,7 @@ public class SkillService extends Service {
 
 		Optional<String[]> dependentSkills = target.getSkills().stream()
 				.map(skill -> DataLoader.Companion.skills().getSkillByName(skill))
+				.filter(Objects::nonNull)
 				.map(SkillInfo::getSkillsRequired)
 				.filter(requiredSkills -> {
 					for (String requiredSkill : requiredSkills) {
@@ -192,6 +193,10 @@ public class SkillService extends Service {
 		}
 
 		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(surrenderedSkill);
+		if (skillInfo == null) {
+			StandardLog.onPlayerError(this, target, "could not surrender skill %s because it does not exist", surrenderedSkill);
+			return;
+		}
 		
 		CombatLevel oldCombatLevel = getCombatLevel(target);
 		
@@ -278,6 +283,7 @@ public class SkillService extends Service {
 	private int skillPointsSpent(CreatureObject creature) {
 		return creature.getSkills().stream()
 				.map(skillName -> DataLoader.Companion.skills().getSkillByName(skillName))
+				.filter(Objects::nonNull)
 				.map(SkillInfo::getPointsRequired)
 				.mapToInt(Integer::intValue)
 				.sum();
