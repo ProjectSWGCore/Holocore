@@ -34,6 +34,7 @@ import com.projectswg.holocore.intents.support.global.network.InboundPacketInten
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerState
 import com.projectswg.holocore.test.resources.GenericPlayer
+import java.net.SocketAddress
 import java.util.concurrent.TimeUnit
 
 /**
@@ -108,7 +109,14 @@ class HeadlessSWGClient(private val username: String, private val version: Strin
 
 }
 
+val socketAddress = object: SocketAddress() {
+	override fun toString(): String {
+		return "localhost"	// Used in logging
+	}
+}
+
 internal fun sendPacket(player: GenericPlayer, packet: SWGPacket) {
+	packet.socketAddress = socketAddress
 	// Currently broadcasts the InboundPacketIntent directly, but this could be changed to send the packet for real
 	InboundPacketIntent.broadcast(player, packet)
 }
