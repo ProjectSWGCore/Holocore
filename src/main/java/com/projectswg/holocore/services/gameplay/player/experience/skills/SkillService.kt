@@ -24,281 +24,249 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience.skills;
+package com.projectswg.holocore.services.gameplay.player.experience.skills
 
-import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent;
-import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BadgeLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import com.projectswg.holocore.services.gameplay.player.experience.*;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent
+import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.badges
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.skills
+import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.services.gameplay.player.experience.*
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import java.util.*
 
-import java.util.*;
+class SkillService : Service() {
+	private val combatXpCalculator = CombatXpCalculator(SdbCombatXpMultiplierRepository())
+	private val combatLevelCalculator = CombatLevelCalculator(SdbCombatLevelRepository())
+	private val healthAddedCalculator = HealthAddedCalculator()
 
-public class SkillService extends Service {
-
-	private static final int SKILL_POINT_CAP = 250;
-	private final CombatXpCalculator combatXpCalculator;
-	private final CombatLevelCalculator combatLevelCalculator;
-	private final HealthAddedCalculator healthAddedCalculator;
-
-	public SkillService() {
-		combatXpCalculator = new CombatXpCalculator(new SdbCombatXpMultiplierRepository());
-		combatLevelCalculator = new CombatLevelCalculator(new SdbCombatLevelRepository());
-		healthAddedCalculator = new HealthAddedCalculator();
-	}
-	
 	@IntentHandler
-	private void handleGrantSkillIntent(GrantSkillIntent gsi) {
-		if (gsi.getIntentType() != GrantSkillIntent.IntentType.GRANT) {
-			return;
+	private fun handleGrantSkillIntent(gsi: GrantSkillIntent) {
+		if (gsi.intentType != GrantSkillIntent.IntentType.GRANT) {
+			return
 		}
-		
-		String skillName = gsi.getSkillName();
-		CreatureObject target = gsi.getTarget();
-		SkillInfo skill = DataLoader.Companion.skills().getSkillByName(skillName);
-		if (skill == null)
-			return;
-		
-		CombatLevel oldCombatLevel = getCombatLevel(target);
-		grantSkill(target, skill, gsi.isGrantRequiredSkills());
-		CombatLevel newCombatLevel = getCombatLevel(target);
-		
-		boolean levelChanged = !oldCombatLevel.equals(newCombatLevel);
-		
+
+		val skillName = gsi.skillName
+		val target = gsi.target
+		val skill = skills().getSkillByName(skillName) ?: return
+
+		val oldCombatLevel = getCombatLevel(target)
+		grantSkill(target, skill, gsi.isGrantRequiredSkills)
+		val newCombatLevel = getCombatLevel(target)
+
+		val levelChanged = oldCombatLevel != newCombatLevel
+
 		if (levelChanged) {
-			changeLevel(target, oldCombatLevel, newCombatLevel);
+			changeLevel(target, oldCombatLevel, newCombatLevel)
 		}
-		
-		BadgeLoader.BadgeInfo badgeFromKey = DataLoader.Companion.badges().getBadgeFromKey(skillName);
-		
+
+		val badgeFromKey = badges().getBadgeFromKey(skillName)
+
 		if (badgeFromKey != null) {
-			GrantBadgeIntent.broadcast(target, skillName);
+			GrantBadgeIntent.broadcast(target, skillName)
 		}
 	}
-	
-	private void adjustHealth(CreatureObject target, CombatLevel oldCombatLevel, CombatLevel newCombatLevel) {
-		int healthChange = healthAddedCalculator.calculate(oldCombatLevel, newCombatLevel);
-		target.setLevelHealthGranted(newCombatLevel.getHealthAdded());
-		target.setMaxHealth(target.getMaxHealth() + healthChange);
-		target.setHealth(target.getMaxHealth());
+
+	private fun adjustHealth(target: CreatureObject, oldCombatLevel: CombatLevel, newCombatLevel: CombatLevel) {
+		val healthChange = healthAddedCalculator.calculate(oldCombatLevel, newCombatLevel)
+		target.levelHealthGranted = newCombatLevel.healthAdded
+		target.maxHealth += healthChange
+		target.health = target.maxHealth
 	}
-	
-	private CombatLevel getCombatLevel(CreatureObject target) {
-		Collection<Experience> experienceCollection = getExperienceFromTrainedSkills(target);
-		int oldCombatLevelXpFromTrainedSkills = combatXpCalculator.calculate(experienceCollection);
-		return combatLevelCalculator.calculate(oldCombatLevelXpFromTrainedSkills);
+
+	private fun getCombatLevel(target: CreatureObject): CombatLevel {
+		val experienceCollection = getExperienceFromTrainedSkills(target)
+		val oldCombatLevelXpFromTrainedSkills = combatXpCalculator.calculate(experienceCollection)
+		return combatLevelCalculator.calculate(oldCombatLevelXpFromTrainedSkills)
 	}
-	
-	@NotNull
-	private Collection<Experience> getExperienceFromTrainedSkills(CreatureObject target) {
-		Set<String> trainedSkills = target.getSkills();
-		Collection<Experience> experienceCollection = new ArrayList<>();
-		for (String trainedSkill : trainedSkills) {
-			Experience experience = convertTrainedSkillToExperience(trainedSkill);
-			
+
+	private fun getExperienceFromTrainedSkills(target: CreatureObject): Collection<Experience> {
+		val trainedSkills = target.skills
+		val experienceCollection: MutableCollection<Experience> = ArrayList()
+		for (trainedSkill in trainedSkills) {
+			val experience = convertTrainedSkillToExperience(trainedSkill)
+
 			if (experience != null) {
-				experienceCollection.add(experience);
+				experienceCollection.add(experience)
 			}
 		}
-		
-		return experienceCollection;
+
+		return experienceCollection
 	}
-	
-	private Experience convertTrainedSkillToExperience(String trainedSkill) {
-		SkillInfo trainedSkillInfo = DataLoader.Companion.skills().getSkillByName(trainedSkill);
-		
+
+	private fun convertTrainedSkillToExperience(trainedSkill: String): Experience? {
+		val trainedSkillInfo = skills().getSkillByName(trainedSkill)
+
 		if (trainedSkillInfo != null) {
-			String xpType = trainedSkillInfo.getXpType();
-			int xpCost = trainedSkillInfo.getXpCost();
-			
-			return new Experience(xpType, xpCost);
+			val xpType = trainedSkillInfo.xpType
+			val xpCost = trainedSkillInfo.xpCost
+
+			return Experience(xpType, xpCost)
 		}
-		
-		return null;
+
+		return null
 	}
-	
+
 	@IntentHandler
-	private void handleSetTitleIntent(SetTitleIntent sti) {
-		PlayerObject requester = sti.getRequester();
-		String title = sti.getTitle();
-		
+	private fun handleSetTitleIntent(sti: SetTitleIntent) {
+		val requester = sti.requester
+		val playerObject = requester.playerObject
+		val title = sti.title
+
 		if (title.isBlank()) {
-			requester.setTitle(title);
-			return;
+			playerObject.title = title
+			return
 		}
-		
-		SkillInfo skillData = DataLoader.Companion.skills().getSkillByName(title);
-		if (skillData == null) {
-			// Might be a Collections title or someone playing tricks
-			return;
-		}
-		
-		if (!skillData.isTitle()) {
+
+		val skillData = skills().getSkillByName(title) ?: return
+
+		if (!skillData.isTitle) {
 			// There's a skill with this name, but it doesn't grant a title
-			return;
+			return
 		}
-		
-		CreatureObject creatureObject = Objects.requireNonNull(requester.getOwner()).getCreatureObject();
-		Set<String> skills = creatureObject.getSkills();
-		
+
+		val creatureObject = requester.creatureObject
+		val skills = creatureObject.skills
+
 		if (skills.contains(title)) {
-			requester.setTitle(title);
+			playerObject.title = title
 		}
 	}
 
 	@IntentHandler
-	private void handleSurrenderSkillIntent(SurrenderSkillIntent ssi) {
-		CreatureObject target = ssi.getTarget();
-		String surrenderedSkill = ssi.getSurrenderedSkill();
+	private fun handleSurrenderSkillIntent(ssi: SurrenderSkillIntent) {
+		val target = ssi.target
+		val surrenderedSkill = ssi.surrenderedSkill
 
 		if (!target.hasSkill(surrenderedSkill)) {
-			// They don't even have this skill. Do nothing.
-
-			Log.w("%s could not surrender skill %s because they do not have it", target, surrenderedSkill);
-
-			return;
+			StandardLog.onPlayerError(this, target, "could not surrender skill %s because they do not have it", surrenderedSkill)
+			return
 		}
 
-		Optional<String[]> dependentSkills = target.getSkills().stream()
-				.map(skill -> DataLoader.Companion.skills().getSkillByName(skill))
-				.filter(Objects::nonNull)
-				.map(SkillInfo::getSkillsRequired)
-				.filter(requiredSkills -> {
-					for (String requiredSkill : requiredSkills) {
-						if (requiredSkill.equals(surrenderedSkill)) {
-							return true;
-						}
+		val dependentSkills = target.skills
+			.mapNotNull { skills().getSkillByName(it) }
+			.map { it.skillsRequired }
+			.filter { requiredSkills: Array<String> ->
+				for (requiredSkill in requiredSkills) {
+					if (requiredSkill == surrenderedSkill) {
+						return@filter true
 					}
+				}
+				false
+			}
+			.flatMap { it.toList() }
 
-					return false;
-				})
-				.findAny();
-
-		if (dependentSkills.isPresent()) {
-			Log.d("%s could not surrender skill %s because these skills depend on it: ",
-					target, Arrays.toString(dependentSkills.get()));
-			return;
+		if (dependentSkills.isNotEmpty()) {
+			StandardLog.onPlayerError(this, target, "could not surrender skill %s because these skills depend on it: %s", surrenderedSkill, dependentSkills.joinToString(", "))
+			return
 		}
 
-		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(surrenderedSkill);
+		val skillInfo = skills().getSkillByName(surrenderedSkill)
 		if (skillInfo == null) {
-			StandardLog.onPlayerError(this, target, "could not surrender skill %s because it does not exist", surrenderedSkill);
-			return;
+			StandardLog.onPlayerError(this, target, "could not surrender skill %s because it does not exist", surrenderedSkill)
+			return
 		}
-		
-		CombatLevel oldCombatLevel = getCombatLevel(target);
-		
-		target.removeSkill(surrenderedSkill);
-		target.removeCommands(skillInfo.getCommands());
-		skillInfo.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, 0, -skillModValue, target).broadcast());
-		
-		CombatLevel newCombatLevel = getCombatLevel(target);
-		
-		boolean levelChanged = !oldCombatLevel.equals(newCombatLevel);
-		
+
+		val oldCombatLevel = getCombatLevel(target)
+
+		target.removeSkill(surrenderedSkill)
+		target.removeCommands(*skillInfo.commands)
+		skillInfo.skillMods.forEach { (skillModName: String, skillModValue: Int) -> SkillModIntent(skillModName, 0, -skillModValue, target).broadcast() }
+
+		val newCombatLevel = getCombatLevel(target)
+
+		val levelChanged = oldCombatLevel != newCombatLevel
+
 		if (levelChanged) {
-			changeLevel(target, oldCombatLevel, newCombatLevel);
+			changeLevel(target, oldCombatLevel, newCombatLevel)
 		}
 	}
-	
-	private void changeLevel(CreatureObject target, CombatLevel oldCombatLevel, CombatLevel newCombatLevel) {
-		target.setLevel(newCombatLevel.getLevel());
-		adjustHealth(target, oldCombatLevel, newCombatLevel);
+
+	private fun changeLevel(target: CreatureObject, oldCombatLevel: CombatLevel, newCombatLevel: CombatLevel) {
+		target.setLevel(newCombatLevel.level)
+		adjustHealth(target, oldCombatLevel, newCombatLevel)
 	}
-	
-	private void grantSkill(@NotNull CreatureObject target, @NotNull SkillInfo skill, boolean grantRequired) {
-		int pointsRequired = skill.getPointsRequired();
-		int skillPointsSpent = skillPointsSpent(target);
+
+	private fun grantSkill(target: CreatureObject, skill: SkillInfo, grantRequired: Boolean) {
+		val pointsRequired = skill.pointsRequired
+		val skillPointsSpent = skillPointsSpent(target)
 
 		if (skillPointsSpent + pointsRequired > SKILL_POINT_CAP) {
-			int missingPoints = pointsRequired - (SKILL_POINT_CAP - skillPointsSpent);
+			val missingPoints = pointsRequired - (SKILL_POINT_CAP - skillPointsSpent)
 
-			StandardLog.onPlayerError(this, target, "cannot learn %s because they lack %d skill points", skill.getName(), missingPoints);
-			return;
+			StandardLog.onPlayerError(this, target, "cannot learn %s because they lack %d skill points", skill.name, missingPoints)
+			return
 		}
 
 
-		String parentSkillName = skill.getParent();
-		
+		val parentSkillName = skill.parent
+
 		if (grantRequired) {
-			grantParentSkills(parentSkillName, target);
-			grantRequiredSkills(skill, target);
+			grantParentSkills(parentSkillName, target)
+			grantRequiredSkills(skill, target)
 		}
-		
-		grantSkill(target, skill);
+
+		grantSkill(target, skill)
 	}
-	
-	private void grantParentSkills(String skillName, CreatureObject target) {
-		if (skillName.isEmpty() || target.hasSkill(skillName))
-			return; // Nothing to do here
-		
-		SkillInfo skillInfo = DataLoader.Companion.skills().getSkillByName(skillName);
+
+	private fun grantParentSkills(skillName: String, target: CreatureObject) {
+		if (skillName.isEmpty() || target.hasSkill(skillName)) return  // Nothing to do here
+
+
+		val skillInfo = skills().getSkillByName(skillName)
 		if (skillInfo == null) {
-			StandardLog.onPlayerTrace(this, target, "requires an invalid parent skill: %s", skillName);
-			return;
+			StandardLog.onPlayerTrace(this, target, "requires an invalid parent skill: %s", skillName)
+			return
 		}
-		
-		grantParentSkills(skillInfo.getParent(), target);
-		grantSkill(target, skillInfo);
-	}
-	
-	private void grantRequiredSkills(SkillInfo skillData, CreatureObject target) {
-		String[] requiredSkills = skillData.getSkillsRequired();
-		if (requiredSkills == null)
-			return;
-		
-		SkillLoader skills = DataLoader.Companion.skills();
-		for (String requiredSkillName : requiredSkills) {
-			SkillInfo requiredSkill = skills.getSkillByName(requiredSkillName);
-			if (requiredSkill != null)
-				grantSkill(target, requiredSkill, true);
-		}
-	}
-	
-	private void grantSkill(CreatureObject target, SkillInfo skill) {
-		if ((!skill.getParent().isEmpty() && !target.hasSkill(skill.getParent())) || !hasRequiredSkills(skill, target)) {
-			StandardLog.onPlayerError(this, target, "lacks required skill %s before being granted skill %s", skill.getParent(), skill.getName());
-			return;
-		}
-		if (!target.addSkill(skill.getName()))
-			return;
-		target.addCommand(skill.getCommands());
-		
-		skill.getSkillMods().forEach((skillModName, skillModValue) -> new SkillModIntent(skillModName, skillModValue, 0, target).broadcast());
-		new GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.getName(), target, false).broadcast();
+
+		grantParentSkills(skillInfo.parent, target)
+		grantSkill(target, skillInfo)
 	}
 
-	private int skillPointsSpent(CreatureObject creature) {
-		return creature.getSkills().stream()
-				.map(skillName -> DataLoader.Companion.skills().getSkillByName(skillName))
-				.filter(Objects::nonNull)
-				.map(SkillInfo::getPointsRequired)
-				.mapToInt(Integer::intValue)
-				.sum();
+	private fun grantRequiredSkills(skillData: SkillInfo, target: CreatureObject) {
+		val requiredSkills = skillData.skillsRequired ?: return
+
+		val skills = skills()
+		for (requiredSkillName in requiredSkills) {
+			val requiredSkill = skills.getSkillByName(requiredSkillName)
+			if (requiredSkill != null) grantSkill(target, requiredSkill, true)
+		}
 	}
 
-	private boolean hasRequiredSkills(SkillInfo skillData, CreatureObject creatureObject) {
-		String[] requiredSkills = skillData.getSkillsRequired();
-		if (requiredSkills == null)
-			return true;
-		
-		for (String required : requiredSkills) {
-			if (!creatureObject.hasSkill(required))
-				return false;
+	private fun grantSkill(target: CreatureObject, skill: SkillInfo) {
+		if ((skill.parent.isNotEmpty() && !target.hasSkill(skill.parent)) || !hasRequiredSkills(skill, target)) {
+			StandardLog.onPlayerError(this, target, "lacks required skill %s before being granted skill %s", skill.parent, skill.name)
+			return
 		}
-		return true;
+		if (!target.addSkill(skill.name)) return
+		target.addCommand(*skill.commands)
+
+		skill.skillMods.forEach { (skillModName, skillModValue) -> SkillModIntent(skillModName, skillModValue, 0, target).broadcast() }
+		GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.name, target, false).broadcast()
 	}
-	
+
+	private fun skillPointsSpent(creature: CreatureObject): Int {
+		return creature.skills
+			.mapNotNull { skills().getSkillByName(it) }
+			.sumOf { it.pointsRequired }
+	}
+
+	private fun hasRequiredSkills(skillData: SkillInfo, creatureObject: CreatureObject): Boolean {
+		val requiredSkills = skillData.skillsRequired ?: return true
+
+		for (required in requiredSkills) {
+			if (!creatureObject.hasSkill(required)) return false
+		}
+		return true
+	}
+
+	companion object {
+		private const val SKILL_POINT_CAP = 250
+	}
 }
