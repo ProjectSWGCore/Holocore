@@ -20,7 +20,7 @@ services:
       start_period: 40s
 
   mongo-express:
-    image: mongo-express:0.54.0
+    image: mongo-express:1.0.0
     restart: "no"
     depends_on:
       mongo:
@@ -29,6 +29,8 @@ services:
       - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: ""
+      ME_CONFIG_BASICAUTH_PASSWORD: ""
     healthcheck:
       test: "wget -O - localhost:8081"
       interval: 5s
