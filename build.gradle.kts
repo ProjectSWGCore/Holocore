@@ -68,12 +68,14 @@ dependencies {
 	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(group="org.mongodb", name="mongodb-driver-sync", version="3.12.2")
+	implementation(group="org.mongodb", name="mongodb-driver-sync", version="4.11.1")
 	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
 	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
 	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
-	
+	val slf4jVersion = "1.7.36"
+	runtimeOnly(group="org.slf4j", name="slf4j-jdk14", version= slf4jVersion)
+
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
 	
@@ -83,7 +85,6 @@ dependencies {
 	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.10.1")
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version=junit5Version)
 	testImplementation(group="org.testcontainers", name="mongodb", version="1.19.3")
-	testRuntimeOnly(group="org.slf4j", name="slf4j-simple", version="1.7.36")
 
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.2.1")
 }
