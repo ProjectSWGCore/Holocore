@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -116,7 +116,7 @@ class SkillService : Service() {
 	@IntentHandler
 	private fun handleSetTitleIntent(sti: SetTitleIntent) {
 		val requester = sti.requester
-		val playerObject = requester.playerObject
+		val playerObject = requester.playerObject ?: return
 		val title = sti.title
 
 		if (title.isBlank()) {
