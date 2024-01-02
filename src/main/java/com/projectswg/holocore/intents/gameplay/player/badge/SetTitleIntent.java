@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,16 +26,16 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.player.badge;
 
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.global.player.Player;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
 
 public class SetTitleIntent extends Intent {
 	
 	private final String title;
-	private final PlayerObject requester;
+	private final Player requester;
 	
-	private SetTitleIntent(@NotNull String title, @NotNull PlayerObject requester) {
+	private SetTitleIntent(@NotNull String title, @NotNull Player requester) {
 		this.title = title;
 		this.requester = requester;
 	}
@@ -46,11 +46,11 @@ public class SetTitleIntent extends Intent {
 	}
 	
 	@NotNull
-	public PlayerObject getRequester() {
+	public Player getRequester() {
 		return requester;
 	}
 	
-	public static void broadcast(@NotNull String title, @NotNull PlayerObject requester) {
+	public static void broadcast(@NotNull String title, @NotNull Player requester) {
 		new SetTitleIntent(title, requester).broadcast();
 	}
 	
