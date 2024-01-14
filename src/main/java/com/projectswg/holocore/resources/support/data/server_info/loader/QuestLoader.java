@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -168,6 +168,37 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("music_on_failure")) {
 					musicOnFailure = set.getText("music_on_failure");
 				}
+				boolean createWaypoint = false;
+				if (columns.contains("create_waypoint")) {
+					createWaypoint = set.getBoolean("create_waypoint");
+				}
+				String planetName = null;
+				if (columns.contains("planet_name")) {
+					planetName = set.getText("planet_name");
+				}
+				double locationX = 0;
+				if (columns.contains("location_x")) {
+					locationX = set.getReal("location_x");
+				}
+				double locationY = 0;
+				if (columns.contains("location_y")) {
+					locationY = set.getReal("location_y");
+				}
+				double locationZ = 0;
+				if (columns.contains("location_z")) {
+					locationZ = set.getReal("location_z");
+				}
+				String waypointName = null;
+				if (columns.contains("waypoint_name")) {
+					waypointName = set.getText("waypoint_name");
+				}
+				double radius = 0;
+				if (columns.contains("radius")) {
+					String radiusText = set.getText("radius");	// Is seen as empty string if not set
+					if (!radiusText.isBlank()) {
+						radius = Double.parseDouble(radiusText);
+					}
+				}
 				
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				
@@ -208,6 +239,13 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setMusicOnActivate(musicOnActivate);
 				questTaskInfo.setMusicOnComplete(musicOnComplete);
 				questTaskInfo.setMusicOnFailure(musicOnFailure);
+				questTaskInfo.setCreateWaypoint(createWaypoint);
+				questTaskInfo.setPlanetName(planetName);
+				questTaskInfo.setLocationX(locationX);
+				questTaskInfo.setLocationY(locationY);
+				questTaskInfo.setLocationZ(locationZ);
+				questTaskInfo.setWaypointName(waypointName);
+				questTaskInfo.setRadius(radius);
 
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -325,6 +363,13 @@ public class QuestLoader extends DataLoader {
 		private String musicOnActivate;
 		private String musicOnComplete;
 		private String musicOnFailure;
+		private boolean createWaypoint;
+		private String planetName;
+		private double locationX;
+		private double locationY;
+		private double locationZ;
+		private String waypointName;
+		private double radius;
 
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -569,6 +614,62 @@ public class QuestLoader extends DataLoader {
 
 		public void setMusicOnFailure(String musicOnFailure) {
 			this.musicOnFailure = musicOnFailure;
+		}
+
+		public boolean isCreateWaypoint() {
+			return createWaypoint;
+		}
+
+		public void setCreateWaypoint(boolean createWaypoint) {
+			this.createWaypoint = createWaypoint;
+		}
+
+		public String getPlanetName() {
+			return planetName;
+		}
+
+		public void setPlanetName(String planetName) {
+			this.planetName = planetName;
+		}
+
+		public double getLocationX() {
+			return locationX;
+		}
+
+		public void setLocationX(double locationX) {
+			this.locationX = locationX;
+		}
+
+		public double getLocationY() {
+			return locationY;
+		}
+
+		public void setLocationY(double locationY) {
+			this.locationY = locationY;
+		}
+
+		public double getLocationZ() {
+			return locationZ;
+		}
+
+		public void setLocationZ(double locationZ) {
+			this.locationZ = locationZ;
+		}
+
+		public String getWaypointName() {
+			return waypointName;
+		}
+
+		public void setWaypointName(String waypointName) {
+			this.waypointName = waypointName;
+		}
+
+		public double getRadius() {
+			return radius;
+		}
+
+		public void setRadius(double radius) {
+			this.radius = radius;
 		}
 
 		@Override

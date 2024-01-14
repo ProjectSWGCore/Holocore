@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,6 +27,8 @@
 package com.projectswg.holocore.services.gameplay.player.quest
 
 import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Location.LocationBuilder
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestCompletedMessage
@@ -204,6 +206,24 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val questTaskTimerData = player.waitForNextPacket(QuestTaskTimerData::class.java)
 
 		assertNotNull(questTaskTimerData, "Quest task time should have been sent")
+	}
+
+	@Test
+	@DisplayName("quest.task.ground.go_to_location")
+	fun goToLocation() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/test_go_to_location")
+		val desiredLocation = LocationBuilder()
+			.setTerrain(Terrain.TATOOINE)
+			.setX(-1200.0)
+			.setY(0.0)
+			.setZ(-3600.0)
+			.build()
+		player.creatureObject.moveToLocation(desiredLocation)
+		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
+
+		assertNotNull(questCompletedMessage, "Quest not completed in time")
 	}
 
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state

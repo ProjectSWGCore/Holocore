@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,6 +30,9 @@ import com.projectswg.common.data.CRC
 import com.projectswg.common.data.encodables.oob.OutOfBandPackage
 import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.encodables.oob.waypoint.WaypointColor
+import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.common.network.packets.swg.zone.CommPlayerMessage
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
@@ -44,7 +47,10 @@ import com.projectswg.holocore.intents.gameplay.player.quest.CompleteQuestIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent.Companion.broadcast
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
+import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -56,6 +62,7 @@ import com.projectswg.holocore.resources.support.objects.StaticItemCreator.creat
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
+import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
 import com.projectswg.holocore.resources.support.random.Die
 import com.projectswg.holocore.resources.support.random.RandomDie
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
@@ -126,18 +133,53 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 		val killer = intent.killer
 		val owner = killer.owner ?: return
 		val playerObject = killer.playerObject
-		val entries = playerObject.quests.entries
-		for ((key, quest) in entries) {
-			if (quest.isComplete) {
-				continue
-			}
-			val questName = key.string
+		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
+		for (incompleteQuest in incompleteQuests) {
+			val questName = incompleteQuest.string
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
 				val type = activeTaskListInfo.type
 				when (type) {
 					"quest.task.ground.destroy_multi"          -> handleKillDestroyMulti(activeTaskListInfo, questName, owner, corpse)
 					"quest.task.ground.destroy_multi_and_loot" -> handleKillDestroyMultiAndLoot(activeTaskListInfo, questName, owner, corpse)
+				}
+			}
+		}
+	}
+	
+	@IntentHandler
+	private fun handlePlayerTransformedIntent(intent: PlayerTransformedIntent) {
+		val player = intent.player.ownerShallow ?: return
+		handlePlayerChangeLocation(player, intent.newLocation)
+	}
+	
+	@IntentHandler
+	private fun handleObjectTeleportIntent(intent: ObjectTeleportIntent) {
+		val player = intent.`object`.ownerShallow ?: return
+		handlePlayerChangeLocation(player, intent.newLocation)
+	}
+	
+	private fun handlePlayerChangeLocation(player: Player, newLocation: Location) {
+		val playerObject = player.playerObject
+		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
+		for (incompleteQuest in incompleteQuests) {
+			val questName = incompleteQuest.string
+			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
+			for (activeTaskListInfo in activeTaskListInfos) {
+				val type = activeTaskListInfo.type
+				if (type == "quest.task.ground.go_to_location") {
+					val terrain = Terrain.getTerrainFromName(activeTaskListInfo.planetName)
+					val radius = activeTaskListInfo.radius
+					
+					if (newLocation.isWithinDistance(terrain, activeTaskListInfo.locationX, activeTaskListInfo.locationY, activeTaskListInfo.locationZ, radius)) {
+						StandardLog.onPlayerTrace(this, player, "arrived at location for task %d of quest %s", activeTaskListInfo.index, questName)
+						completeTask(questName, player, activeTaskListInfo)
+						player.sendPacket(PlayMusicMessage(0, "sound/ui_objective_reached.snd", 1, false))
+						playerObject.waypoints.values.find { it.name == activeTaskListInfo.waypointName }?.let {	// if you bothered with renaming the waypoint, you get to keep it
+							playerObject.removeWaypoint(it.objectId)
+							DestroyObjectIntent(it).broadcast()
+						}
+					}
 				}
 			}
 		}
@@ -297,7 +339,24 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 			"quest.task.ground.destroy_multi_and_loot" -> handleDestroyMultiAndLoot(player, questName, currentTask)
 			"quest.task.ground.reward"                 -> handleReward(player, questName, playerObject, currentTask)
 			"quest.task.ground.nothing"                -> handleNothing(player, questName, currentTask)
+			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
 		}
+	}
+
+	private fun handleGoToLocation(player: Player, currentTask: QuestTaskInfo) {
+		if (currentTask.isCreateWaypoint) {
+			createQuestWaypoint(currentTask, player)
+		}
+	}
+
+	private fun createQuestWaypoint(currentTask: QuestTaskInfo, player: Player) {
+		val waypoint = ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff") as WaypointObject
+		waypoint.setPosition(Terrain.getTerrainFromName(currentTask.planetName), currentTask.locationX, currentTask.locationY, currentTask.locationZ)
+		waypoint.color = WaypointColor.YELLOW
+		waypoint.name = currentTask.waypointName
+		waypoint.isActive = true
+		player.playerObject.addWaypoint(waypoint)
+		ObjectCreatedIntent(waypoint).broadcast()
 	}
 
 	private fun completeTask(questName: String, player: Player, currentTask: QuestTaskInfo) {
