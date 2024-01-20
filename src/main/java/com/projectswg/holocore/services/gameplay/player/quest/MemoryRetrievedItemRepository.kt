@@ -24,35 +24,32 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.services.gameplay.player.quest
 
-@file:Suppress("NOTHING_TO_INLINE")
-package com.projectswg.holocore.intents.gameplay.player.quest
-
-import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
-import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import me.joshlarson.jlcommon.control.Intent
+import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 
-data class GrantQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = GrantQuestIntent(player, questName).broadcast()
+/**
+ * Stores previously retrieved items in memory. This is not persistent across server restarts.
+ */
+class MemoryRetrievedItemRepository : RetrievedItemRepository {
+
+	private val retrievedItemMap = mutableMapOf<PlayerObject, MutableMap<String, MutableCollection<SWGObject>>>()
+
+	override fun addRetrieveAttempt(questName: String, playerObject: PlayerObject, retrievedItem: SWGObject) {
+		val questToItems = retrievedItemMap.computeIfAbsent(playerObject) { mutableMapOf() }
+		val items = questToItems.computeIfAbsent(questName) { mutableSetOf() }
+		items.add(retrievedItem)
 	}
-}
 
-data class AbandonQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = AbandonQuestIntent(player, questName).broadcast()
+	override fun hasAttemptedPreviously(questName: String, playerObject: PlayerObject, retrievedItem: SWGObject): Boolean {
+		val questToItems = retrievedItemMap[playerObject] ?: return false
+		val items = questToItems[questName] ?: return false
+		return items.contains(retrievedItem)
 	}
-}
 
-data class CompleteQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = CompleteQuestIntent(player, questName).broadcast()
-	}
-}
-
-data class QuestRetrieveItemIntent(val player: Player, val questName: String, val task: QuestTaskInfo, val item: SWGObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String, task: QuestTaskInfo, item: SWGObject) = QuestRetrieveItemIntent(player, questName, task, item).broadcast()
+	override fun clearPreviousAttempts(questName: String, playerObject: PlayerObject) {
+		val questToItems = retrievedItemMap[playerObject] ?: return
+		questToItems.remove(questName)
 	}
 }

@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader;
 
+import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,6 +44,10 @@ public class QuestLoader extends DataLoader {
 		questTaskInfosMap = Collections.synchronizedMap(new HashMap<>());
 	}
 	
+	public Collection<String> getQuestNames() {
+		return questListInfoMap.keySet();
+	}
+	
 	public QuestListInfo getQuestListInfo(String questName) {
 		return questListInfoMap.get(questName);
 	}
@@ -57,6 +62,7 @@ public class QuestLoader extends DataLoader {
 		int index = 0;
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questtask/" + questName + ".sdb"))) {
 			while (set.next()) {
+				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				Set<String> columns = new LinkedHashSet<>(set.getColumns());
 				String type = set.getText("attach_script");
 				String name = null;
@@ -156,51 +162,61 @@ public class QuestLoader extends DataLoader {
 				if (columns.contains("loot_drop_percent")) {
 					lootDropPercent = (int) set.getInt("loot_drop_percent");
 				}
-				String musicOnActivate = null;
 				if (columns.contains("music_on_activate")) {
-					musicOnActivate = set.getText("music_on_activate");
+					questTaskInfo.setMusicOnActivate(set.getText("music_on_activate"));
 				}
-				String musicOnComplete = null;
 				if (columns.contains("music_on_complete")) {
-					musicOnComplete = set.getText("music_on_complete");
+					questTaskInfo.setMusicOnComplete(set.getText("music_on_complete"));
 				}
-				String musicOnFailure = null;
 				if (columns.contains("music_on_failure")) {
-					musicOnFailure = set.getText("music_on_failure");
+					questTaskInfo.setMusicOnFailure(set.getText("music_on_failure"));
 				}
-				boolean createWaypoint = false;
-				if (columns.contains("create_waypoint")) {
-					createWaypoint = set.getBoolean("create_waypoint");
-				}
-				String planetName = null;
-				if (columns.contains("planet_name")) {
-					planetName = set.getText("planet_name");
-				}
-				double locationX = 0;
-				if (columns.contains("location_x")) {
-					locationX = set.getReal("location_x");
-				}
-				double locationY = 0;
-				if (columns.contains("location_y")) {
-					locationY = set.getReal("location_y");
-				}
-				double locationZ = 0;
-				if (columns.contains("location_z")) {
-					locationZ = set.getReal("location_z");
-				}
-				String waypointName = null;
-				if (columns.contains("waypoint_name")) {
-					waypointName = set.getText("waypoint_name");
-				}
-				double radius = 0;
-				if (columns.contains("radius")) {
-					String radiusText = set.getText("radius");	// Is seen as empty string if not set
-					if (!radiusText.isBlank()) {
-						radius = Double.parseDouble(radiusText);
+				if (type.equals("quest.task.ground.go_to_location")) {
+					if (columns.contains("create_waypoint")) {
+						questTaskInfo.setCreateWaypoint(set.getBoolean("create_waypoint"));
+					}
+					if (columns.contains("planet_name")) {
+						questTaskInfo.setPlanetName(set.getText("planet_name"));
+					}
+					if (columns.contains("location_x")) {
+						questTaskInfo.setLocationX(set.getReal("location_x"));
+					}
+					if (columns.contains("location_y")) {
+						questTaskInfo.setLocationY(set.getReal("location_y"));
+					}
+					if (columns.contains("location_z")) {
+						questTaskInfo.setLocationZ(set.getReal("location_z"));
+					}
+					if (columns.contains("waypoint_name")) {
+						questTaskInfo.setWaypointName(set.getText("waypoint_name"));
+					}
+					if (columns.contains("radius")) {
+						String radiusText = set.getText("radius");	// Is seen as empty string if not set
+						if (!radiusText.isBlank()) {
+							questTaskInfo.setRadius(Double.parseDouble(radiusText));
+						}
 					}
 				}
-				
-				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
+				if (type.equals("quest.task.ground.retrieve_item")) {
+					if (columns.contains("server_template")) {
+						String rawServerTemplate = set.getText("server_template");
+						if (!rawServerTemplate.isBlank()) {
+							questTaskInfo.setServerTemplate(ClientFactory.formatToSharedFile(rawServerTemplate));
+						}
+					}
+					if (columns.contains("num_required")) {
+						questTaskInfo.setNumRequired((int) set.getInt("num_required"));
+					}
+					if (columns.contains("item_name")) {
+						questTaskInfo.setItemName(set.getText("item_name"));
+					}
+					if (columns.contains("drop_percent")) {
+						questTaskInfo.setDropPercent((int) set.getInt("drop_percent"));
+					}
+					if (columns.contains("retrieve_menu_text")) {
+						questTaskInfo.setRetrieveMenuText(set.getText("retrieve_menu_text"));
+					}
+				}
 				
 				questTaskInfo.setType(type);
 				
@@ -236,16 +252,6 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setLootItemName(lootItemName);
 				questTaskInfo.setLootItemsRequired(lootItemsRequired);
 				questTaskInfo.setLootDropPercent(lootDropPercent);
-				questTaskInfo.setMusicOnActivate(musicOnActivate);
-				questTaskInfo.setMusicOnComplete(musicOnComplete);
-				questTaskInfo.setMusicOnFailure(musicOnFailure);
-				questTaskInfo.setCreateWaypoint(createWaypoint);
-				questTaskInfo.setPlanetName(planetName);
-				questTaskInfo.setLocationX(locationX);
-				questTaskInfo.setLocationY(locationY);
-				questTaskInfo.setLocationZ(locationZ);
-				questTaskInfo.setWaypointName(waypointName);
-				questTaskInfo.setRadius(radius);
 
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -370,6 +376,11 @@ public class QuestLoader extends DataLoader {
 		private double locationZ;
 		private String waypointName;
 		private double radius;
+		private String serverTemplate;
+		private int numRequired;
+		private String itemName;
+		private int dropPercent;
+		private String retrieveMenuText;
 
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -670,6 +681,46 @@ public class QuestLoader extends DataLoader {
 
 		public void setRadius(double radius) {
 			this.radius = radius;
+		}
+
+		public String getServerTemplate() {
+			return serverTemplate;
+		}
+
+		public void setServerTemplate(String serverTemplate) {
+			this.serverTemplate = serverTemplate;
+		}
+
+		public int getNumRequired() {
+			return numRequired;
+		}
+
+		public void setNumRequired(int numRequired) {
+			this.numRequired = numRequired;
+		}
+
+		public String getItemName() {
+			return itemName;
+		}
+
+		public void setItemName(String itemName) {
+			this.itemName = itemName;
+		}
+
+		public int getDropPercent() {
+			return dropPercent;
+		}
+
+		public void setDropPercent(int dropPercent) {
+			this.dropPercent = dropPercent;
+		}
+
+		public String getRetrieveMenuText() {
+			return retrieveMenuText;
+		}
+
+		public void setRetrieveMenuText(String retrieveMenuText) {
+			this.retrieveMenuText = retrieveMenuText;
 		}
 
 		@Override
