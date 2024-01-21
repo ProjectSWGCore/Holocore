@@ -24,35 +24,37 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.services.gameplay.player.quest
 
-@file:Suppress("NOTHING_TO_INLINE")
-package com.projectswg.holocore.intents.gameplay.player.quest
-
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.common.data.swgfile.ClientFactory
+import com.projectswg.holocore.intents.gameplay.player.quest.QuestRetrieveItemIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import me.joshlarson.jlcommon.control.Intent
 
-data class GrantQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = GrantQuestIntent(player, questName).broadcast()
+class QuestRetrieveItemRadialHandler(private val retrievedItemRepository: RetrievedItemRepository, private val questName: String, private val task: QuestTaskInfo) : RadialHandlerInterface {
+	private val radialItem = RadialItem.SERVER_MENU1
+
+	override fun getOptions(options: MutableCollection<RadialOption>, player: Player, target: SWGObject) {
+		val playerObject = player.playerObject
+		val questActiveTasks = playerObject.getQuestActiveTasks(questName)
+		
+		if (questActiveTasks.contains(task.index)) {
+			if (target.template.equals(ClientFactory.formatToSharedFile(task.serverTemplate))) {
+				if (!retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, target)) {
+					options.add(RadialOption.create(radialItem, task.retrieveMenuText))
+				}
+			}
+		}
 	}
-}
 
-data class AbandonQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = AbandonQuestIntent(player, questName).broadcast()
-	}
-}
-
-data class CompleteQuestIntent(val player: Player, val questName: String): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String) = CompleteQuestIntent(player, questName).broadcast()
-	}
-}
-
-data class QuestRetrieveItemIntent(val player: Player, val questName: String, val task: QuestTaskInfo, val item: SWGObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, questName: String, task: QuestTaskInfo, item: SWGObject) = QuestRetrieveItemIntent(player, questName, task, item).broadcast()
+	override fun handleSelection(player: Player, target: SWGObject, selection: RadialItem) {
+		if (selection != radialItem)
+			return
+		
+		QuestRetrieveItemIntent(player, questName, task, target).broadcast()
 	}
 }

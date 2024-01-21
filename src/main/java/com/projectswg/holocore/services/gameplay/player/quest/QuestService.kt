@@ -46,6 +46,7 @@ import com.projectswg.holocore.intents.gameplay.player.quest.AbandonQuestIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.CompleteQuestIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent.Companion.broadcast
+import com.projectswg.holocore.intents.gameplay.player.quest.QuestRetrieveItemIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
@@ -59,6 +60,7 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator.createItem
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandler
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
@@ -70,11 +72,23 @@ import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ThreadLocalRandom
 
-class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Service() {
+class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), private val retrieveItemDie: Die = RandomDie()) : Service() {
 	private val executor = ScheduledThreadPool(1, "quest-service-%d")
 	private val questLoader = ServerData.questLoader
-
+	private val retrievedItemRepository: RetrievedItemRepository = MemoryRetrievedItemRepository()
+	
 	override fun initialize(): Boolean {
+		val allQuestNames = questLoader.questNames
+		val what = "quest retrieve_item tasks"
+		val startTime = StandardLog.onStartLoad(what)
+		var quantity = 0
+		for (questName in allQuestNames) {
+			val tasks = questLoader.getTaskListInfos(questName)
+			val retrieveItemTasks = tasks.filter { it.type == "quest.task.ground.retrieve_item" }.filter { !it.serverTemplate.isNullOrBlank() }
+			retrieveItemTasks.forEach { RadialHandler.INSTANCE.registerHandler(it.serverTemplate, QuestRetrieveItemRadialHandler(retrievedItemRepository, questName, it)) }
+			quantity += retrieveItemTasks.size
+		}
+		StandardLog.onEndLoad(quantity, what, startTime)
 		executor.start()
 		return true
 	}
@@ -95,6 +109,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 			StandardLog.onPlayerError(this, player, "already had non-repeatable quest %s", questName)
 			return
 		}
+		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)	// In case this quest is being repeated
 		playerObject.addQuest(questName)
 		StandardLog.onPlayerTrace(this, player, "received quest %s", questName)
 		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_received"), "TO", questListInfo.journalEntryTitle)
@@ -112,6 +127,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 			return
 		}
 		playerObject.removeQuest(questName)
+		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)
+		StandardLog.onPlayerTrace(this, player, "abandoned quest %s", questName)
 	}
 
 	@IntentHandler
@@ -157,6 +174,46 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 	private fun handleObjectTeleportIntent(intent: ObjectTeleportIntent) {
 		val player = intent.`object`.ownerShallow ?: return
 		handlePlayerChangeLocation(player, intent.newLocation)
+	}
+	
+	@IntentHandler
+	private fun handleQuestRetrieveItemIntent(intent: QuestRetrieveItemIntent) {
+		val questName = intent.questName
+		val activeTaskListInfo = intent.task
+		val player = intent.player
+		val item = intent.item
+		val playerObject = player.playerObject
+
+		if (!playerObject.isQuestInJournal(questName)) {
+			return
+		}
+		
+		if (retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, item)) {
+			// The SWG client will display the old radial option for a while before the radial menu is refreshed, so this can easily happen
+			StandardLog.onPlayerError(this, player, "already attempted to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
+			return
+		}
+		
+		val roll = retrieveItemDie.roll(1..100)
+		val itemFound = roll <= activeTaskListInfo.dropPercent
+
+		if (itemFound) {
+			val max = activeTaskListInfo.numRequired
+			val counter = playerObject.incrementQuestCounter(questName)
+			val remaining = max - counter
+			val task = activeTaskListInfo.index
+			StandardLog.onPlayerTrace(this, player, "retrieved %d/%d %s on task %d of quest %s", counter, max, activeTaskListInfo.itemName, task, questName)
+			player.sendPacket(PlayMusicMessage(0, "sound/ui_received_quest_item.snd", 1, false))
+			incrementRetrieveItemCount(questName, task, player, counter, max, activeTaskListInfo.itemName)
+			if (remaining <= 0) {
+				completeTask(questName, player, activeTaskListInfo)
+			}
+		} else {
+			StandardLog.onPlayerTrace(this, player, "failed to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
+			SystemMessageIntent.broadcastPersonal(player, ProsePackage(StringId("quest/groundquests", "retrieve_item_fail"), "TO", activeTaskListInfo.itemName))
+		}
+		
+		retrievedItemRepository.addRetrieveAttempt(questName, playerObject, item)
 	}
 	
 	private fun handlePlayerChangeLocation(player: Player, newLocation: Location) {
@@ -258,6 +315,23 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 		SystemMessageIntent.broadcastPersonal(player, prose)
 	}
 
+	private fun incrementRetrieveItemCount(questName: String, task: Int, player: Player, counter: Int, max: Int, itemName: String) {
+		player.sendPacket(
+			QuestTaskCounterMessage(
+				player.creatureObject.objectId, questName, task, "@quest/groundquests:retrieve_item_counter", counter, max
+			)
+		)
+		
+		val remaining = max - counter
+		if (itemName.isNotBlank()) {
+			val prose = ProsePackage(StringId("quest/groundquests", "retrieve_item_success_named"), "TO", itemName, "DI", remaining)
+			SystemMessageIntent.broadcastPersonal(player, prose)
+		} else {
+			val prose = ProsePackage(StringId("quest/groundquests", "retrieve_item_success"), "DI", remaining)
+			SystemMessageIntent.broadcastPersonal(player, prose)
+		}
+	}
+
 	private fun handleNothing(player: Player, questName: String, currentTask: QuestTaskInfo) {
 		completeTask(questName, player, currentTask)
 	}
@@ -340,9 +414,21 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 			"quest.task.ground.reward"                 -> handleReward(player, questName, playerObject, currentTask)
 			"quest.task.ground.nothing"                -> handleNothing(player, questName, currentTask)
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
+			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
 		}
 	}
 
+	private fun handleRetrieveItem(player: Player, questName: String, currentTask: QuestTaskInfo) {
+		val task = currentTask.index
+		val max = currentTask.numRequired
+		val counter = 0
+		player.sendPacket(
+			QuestTaskCounterMessage(
+				player.creatureObject.objectId, questName, task, "@quest/groundquests:retrieve_item_counter", counter, max
+			)
+		)
+	}
+	
 	private fun handleGoToLocation(player: Player, currentTask: QuestTaskInfo) {
 		if (currentTask.isCreateWaypoint) {
 			createQuestWaypoint(currentTask, player)
@@ -388,6 +474,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie()) : Serv
 		val playerObject = player.getPlayerObject()
 		playerObject.completeQuest(questName)
 		player.sendPacket(QuestCompletedMessage(player.creatureObject.objectId, CRC(questName)))
+		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)
 		StandardLog.onPlayerTrace(this, player, "completed quest %s", questName)
 	}
 
