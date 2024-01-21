@@ -465,7 +465,9 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 		if (nextTasksIdsOnComplete.isEmpty()) {
 			if (questLoader.getQuestListInfo(questName).isCompleteWhenTasksComplete) {
-				completeQuest(player, questName)
+				if (playerObject.getQuestActiveTasks(questName).isEmpty()) {
+					completeQuest(player, questName)
+				}
 			}
 		}
 	}
