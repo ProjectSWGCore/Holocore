@@ -226,6 +226,23 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		assertNotNull(questCompletedMessage, "Quest not completed in time")
 	}
 
+	@Test
+	@DisplayName("quest.task.ground.clear_quest")
+	fun clearQuest() {
+		val player = createPlayer()
+
+		GrantQuestIntent.broadcast(player, "quest/c_newbie_quest6")
+		val desiredLocation = LocationBuilder()
+			.setTerrain(Terrain.TATOOINE)
+			.setX(3429.0)
+			.setY(0.0)
+			.setZ(-4730.0)
+			.build()
+		player.creatureObject.moveToLocation(desiredLocation)
+		
+		assertFalse(player.playerObject.isQuestInJournal("quest/c_newbie_quest6"), "Quest should have been cleared")
+	}
+
 	private class CharacterSnapshot(private val player: GenericPlayer) {	// Helper class to snapshot a character's state
 		val xp = player.playerObject.getExperiencePoints("dance")
 		val rebelFactionPoints = player.playerObject.getFactionPoints()["rebel"] ?: 0
