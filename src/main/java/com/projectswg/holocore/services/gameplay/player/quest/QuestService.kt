@@ -126,8 +126,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			StandardLog.onPlayerTrace(this, player, "attempted to abandon quest %s which they have completed", questName)
 			return
 		}
-		playerObject.removeQuest(questName)
-		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)
+		removeQuest(playerObject, questName)
 		StandardLog.onPlayerTrace(this, player, "abandoned quest %s", questName)
 	}
 
@@ -415,7 +414,14 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			"quest.task.ground.nothing"                -> handleNothing(player, questName, currentTask)
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
 			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
+			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questName)
 		}
+	}
+
+	private fun handleClearQuest(player: Player, questName: String) {
+		val playerObject = player.getPlayerObject()
+		removeQuest(playerObject, questName)
+		StandardLog.onPlayerTrace(this, player, "cleared quest %s", questName)
 	}
 
 	private fun handleRetrieveItem(player: Player, questName: String, currentTask: QuestTaskInfo) {
@@ -433,6 +439,11 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (currentTask.isCreateWaypoint) {
 			createQuestWaypoint(currentTask, player)
 		}
+	}
+
+	private fun removeQuest(playerObject: PlayerObject, questName: String) {
+		playerObject.removeQuest(questName)
+		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)
 	}
 
 	private fun createQuestWaypoint(currentTask: QuestTaskInfo, player: Player) {
