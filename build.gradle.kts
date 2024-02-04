@@ -1,3 +1,6 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 /***********************************************************************************
  * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
@@ -154,4 +157,9 @@ tasks.create<JavaExec>("runClientdataConversion") {
 
 tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
+
+	testLogging {
+		events = setOf(TestLogEvent.FAILED, TestLogEvent.SKIPPED)
+		exceptionFormat = TestExceptionFormat.FULL
+	}
 }
