@@ -32,25 +32,25 @@ item_color_crystal_02_08	object/tangible/component/weapon/lightsaber/lightsaber_
 item_color_crystal_02_09	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	9	-1	-1	ELEMENTAL_ELECTRICAL	2	-
 item_color_crystal_02_10	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	10	-1	-1	ELEMENTAL_HEAT	2	-
 item_color_crystal_02_11	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Color Crystal	1	1000	0	0	0	0	0	0	-1	11	-1	-1	ELEMENTAL_HEAT	2	-
-item_color_crystal_02_12	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Maul's Vengeance	1	1000	0	0	0	0	0	0	-1	12	-1	-1		6	-
-item_color_crystal_02_13	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kun's Blood	1	1000	0	0	0	0	0	0	-1	13	-1	-1		6	-
-item_color_crystal_02_14	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bondara's Folly	1	1000	0	0	0	0	0	0	-1	14	-1	-1		6	-
-item_color_crystal_02_15	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Ulric's Redemption	1	1000	0	0	0	0	0	0	-1	15	-1	-1		6	-
-item_color_crystal_02_16	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bane's Heart	1	1000	0	0	0	0	0	0	-1	16	-1	-1	ELEMENTAL_ELECTRICAL	6	-
-item_color_crystal_02_17	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Gallia's Intuition	1	1000	0	0	0	0	0	0	-1	17	-1	-1		6	-
-item_color_crystal_02_18	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Prowess of Plo Koon	1	1000	0	0	0	0	0	0	-1	18	-1	-1		6	-
-item_color_crystal_02_19	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	B'nar's Sacrifice	1	1000	0	0	0	0	0	0	-1	19	-1	-1	ELEMENTAL_ACID	6	-
+item_color_crystal_02_12	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Maul's Vengeance	1	1000	0	0	0	0	0	0	-1	12	-1	-1	ELEMENTAL_HEAT	4	-
+item_color_crystal_02_13	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kun's Blood	1	1000	0	0	0	0	0	0	-1	13	-1	-1	ELEMENTAL_HEAT	4	-
+item_color_crystal_02_14	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bondara's Folly	1	1000	0	0	0	0	0	0	-1	14	-1	-1	ELEMENTAL_ACID	4	-
+item_color_crystal_02_15	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Ulric's Redemption	1	1000	0	0	0	0	0	0	-1	15	-1	-1	ELEMENTAL_ACID	4	-
+item_color_crystal_02_16	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Bane's Heart	1	1000	0	0	0	0	0	0	-1	16	-1	-1	ELEMENTAL_ELECTRICAL	4	-
+item_color_crystal_02_17	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Gallia's Intuition	1	1000	0	0	0	0	0	0	-1	17	-1	-1	ELEMENTAL_ELECTRICAL	4	-
+item_color_crystal_02_18	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Prowess of Plo Koon	1	1000	0	0	0	0	0	0	-1	18	-1	-1	ELEMENTAL_ELECTRICAL	4	-
+item_color_crystal_02_19	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	B'nar's Sacrifice	1	1000	0	0	0	0	0	0	-1	19	-1	-1	ELEMENTAL_ACID	5	-
 item_color_crystal_02_20	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Windu's Guile	1	1000	0	0	0	0	0	0	-1	20	-1	-1	ELEMENTAL_COLD	6	This is the rank 12 pvp reward crystal, don't use for anything else.
-item_color_crystal_02_21	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Mundi's Response	1	1000	0	0	0	0	0	0	-1	21	-1	-1		6	-
-item_color_crystal_02_22	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Strength of Luminaria	1	1000	0	0	0	0	0	0	-1	22	-1	-1		6	-
-item_color_crystal_02_23	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Baas's Wisdom	1	1000	0	0	0	0	0	0	-1	23	-1	-1		6	-
-item_color_crystal_02_24	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Quintessence of the Force	1	1000	0	0	0	0	0	0	-1	24	-1	-1		6	-
-item_color_crystal_02_25	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Dawn of Dagobah	1	1000	0	0	0	0	0	0	-1	25	-1	-1		6	-
-item_color_crystal_02_26	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Horn's Future	1	1000	0	0	0	0	0	0	-1	26	-1	-1		6	-
-item_color_crystal_02_27	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Qui-gon's Devotion	1	1000	0	0	0	0	0	0	-1	27	-1	-1		6	-
-item_color_crystal_02_28	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kenobi's Legacy	1	1000	0	0	0	0	0	0	-1	28	-1	-1	ELEMENTAL_COLD	6	-
-item_color_crystal_02_29	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Sunrider's Destiny	1	1000	0	0	0	0	0	0	-1	29	-1	-1	ELEMENTAL_HEAT	6	-
-item_color_crystal_02_30	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kit's Ferocity	1	1000	0	0	0	0	0	0	-1	30	-1	-1		6	-
+item_color_crystal_02_21	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Mundi's Response	1	1000	0	0	0	0	0	0	-1	21	-1	-1	ELEMENTAL_COLD	4	-
+item_color_crystal_02_22	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Strength of Luminaria	1	1000	0	0	0	0	0	0	-1	22	-1	-1	ELEMENTAL_COLD	4	-
+item_color_crystal_02_23	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Baas's Wisdom	1	1000	0	0	0	0	0	0	-1	23	-1	-1	ELEMENTAL_COLD	4	-
+item_color_crystal_02_24	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Quintessence of the Force	1	1000	0	0	0	0	0	0	-1	24	-1	-1	ELEMENTAL_ELECTRICAL	4	-
+item_color_crystal_02_25	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Dawn of Dagobah	1	1000	0	0	0	0	0	0	-1	25	-1	-1	ELEMENTAL_ACID	4	-
+item_color_crystal_02_26	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Horn's Future	1	1000	0	0	0	0	0	0	-1	26	-1	-1	ELEMENTAL_ELECTRICAL	4	-
+item_color_crystal_02_27	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Qui-gon's Devotion	1	1000	0	0	0	0	0	0	-1	27	-1	-1	ELEMENTAL_HEAT	4	-
+item_color_crystal_02_28	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kenobi's Legacy	1	1000	0	0	0	0	0	0	-1	28	-1	-1	ELEMENTAL_COLD	4	-
+item_color_crystal_02_29	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Sunrider's Destiny	1	1000	0	0	0	0	0	0	-1	29	-1	-1	ELEMENTAL_HEAT	4	-
+item_color_crystal_02_30	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Kit's Ferocity	1	1000	0	0	0	0	0	0	-1	30	-1	-1	ELEMENTAL_ACID	4	-
 item_power_crystal_04_01	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	1	2	-1	31	-1	-1		0	Poor
 item_power_crystal_04_02	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	0	2	3	-1	31	-1	-1		0	Poor
 item_power_crystal_04_03	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	1	3	4	-1	31	-1	-1		0	Poor
@@ -71,4 +71,4 @@ item_power_crystal_04_17	object/tangible/component/weapon/lightsaber/lightsaber_
 item_power_crystal_04_18	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	18	19	-1	31	-1	-1		0	Premium
 item_power_crystal_04_19	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	19	20	-1	31	-1	-1		0	Flawless
 item_power_crystal_04_20	object/tangible/component/weapon/lightsaber/lightsaber_module_force_crystal.iff	crystal	Power Crystal	1	1000	0	0	0	6	20	22	-1	31	-1	-1		0	Ancient
-item_tow_lava_crystal_06_01	object/tangible/component/weapon/lightsaber/lightsaber_module_lava_crystal.iff	crystal	Lava Crystal	1	1000	0	0	1	0	0	0	-1	-1	-1	-1	ELEMENTAL_HEAT	6	ToW expansion
+item_tow_lava_crystal_06_01	object/tangible/component/weapon/lightsaber/lightsaber_module_lava_crystal.iff	crystal	Lava Crystal	1	1000	0	0	1	0	0	0	-1	-1	-1	-1	ELEMENTAL_HEAT	5	ToW expansion
