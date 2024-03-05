@@ -180,7 +180,7 @@ public class GenericPlayer extends Player {
 		return null;
 	}
 	@Nullable
-	public DeltasMessage waitForNextObjectDelta(long objectId, long timeout, TimeUnit unit) {
+	public DeltasMessage waitForNextObjectDelta(long objectId, int num, int update, long timeout, TimeUnit unit) {
 		Class<? extends SWGPacket> type = DeltasMessage.class;
 		packetLock.lock();
 		try {
@@ -192,7 +192,7 @@ public class GenericPlayer extends Player {
 						it.remove();
 						DeltasMessage deltasMessage = (DeltasMessage) next;
 						
-						if (deltasMessage.getObjectId() == objectId) {
+						if (deltasMessage.getObjectId() == objectId && deltasMessage.getNum() == num && deltasMessage.getUpdate() == update) {
 							return deltasMessage;
 						}
 					}
