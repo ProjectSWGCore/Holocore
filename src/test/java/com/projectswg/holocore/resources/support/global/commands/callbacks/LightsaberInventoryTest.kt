@@ -352,7 +352,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 	}
 
 	private fun createColorCrystal(): TangibleObject {
-		val colorCrystal = StaticItemCreator.createItem("item_color_crystal_02_29") as TangibleObject?
+		val colorCrystal = StaticItemCreator.createItem("item_color_crystal_02_20") as TangibleObject?
 		colorCrystal ?: throw RuntimeException("Unable to create color crystal")
 		broadcastAndWait(ObjectCreatedIntent(colorCrystal))
 
