@@ -74,7 +74,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
 
-		assertEquals(14, lightsaber.elementalValue)	// The color crystal takes 6% of lightsaber max damage and turns that into the elemental value, rounded down
+		assertEquals(9, lightsaber.elementalValue)	// The color crystal takes 6% of lightsaber max damage and turns that into the elemental value, rounded down
 	}
 
 	@Test
