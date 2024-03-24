@@ -37,6 +37,7 @@ import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
@@ -134,6 +135,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 					groupObject.setLootRule(selectedRow)
 					groupObject.displayLootRuleChangeBox(lootRuleMsg)
 					sendSystemMessage(groupLeader, lootRuleMsg)
+					StandardLog.onPlayerEvent(this, groupLeader, "changed the loot rule of their group to %s", lootRuleMsg)
 				}
 			}
 		}
@@ -165,10 +167,12 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 			return
 		}
 		destroyGroup(group, player)
+		StandardLog.onPlayerEvent(this, player, "disbanded their group")
 	}
 
 	private fun handleGroupLeave(player: Player) {
 		removePlayerFromGroup(player.creatureObject)
+		StandardLog.onPlayerEvent(this, player, "left their group")
 	}
 
 	private fun handleGroupInvite(player: Player, target: CreatureObject?) {
@@ -252,6 +256,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		sendSystemMessage(invitee, "decline_self", "TT", invitationSender.characterName)
 		sendSystemMessage(invitationSender, "decline_leader", "TT", invitee.characterName)
 		clearInviteData(creature)
+		StandardLog.onPlayerEvent(this, invitee, "declined group invitation from %s", invitationSender)
 	}
 
 	private fun handleMakeLeader(currentLeader: Player, newLeader: CreatureObject) {
@@ -267,6 +272,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		// Set the group leader to newLeader
 		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.objectName)
 		group.setLeader(newLeader)
+		StandardLog.onPlayerEvent(this, currentLeader, "made %s the new leader of their group", newLeader)
 	}
 
 	private fun handleMakeMasterLooter(player: Player, target: CreatureObject) {
@@ -278,6 +284,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		val group = getGroup(creature.groupId) ?: return
 		group.lootMaster = target.objectId
 		sendGroupSystemMessage(group, "new_master_looter", "TU", target.objectName)
+		StandardLog.onPlayerEvent(this, player, "made %s the master looter of their group", target)
 	}
 
 	private fun handleKick(leader: Player, kickedCreature: CreatureObject) {
@@ -297,6 +304,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 			return
 		}
 		removePlayerFromGroup(kickedCreature)
+		StandardLog.onPlayerEvent(this, leader, "kicked %s from their group", kickedCreature)
 	}
 
 	private fun createGroup(leader: Player, member: Player) {
@@ -307,6 +315,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		ChatRoomUpdateIntent(leader, ChatAvatar(leader.characterChatName), group.chatRoomPath, group.objectId.toString(), false).broadcast()
 		sendSystemMessage(leader, "formed_self", "TT", leader.creatureObject.objectId)
 		onJoinGroup(member, group)
+		StandardLog.onPlayerEvent(this, leader, "formed group %s with %s", group, member)
 	}
 
 	private fun destroyGroup(group: GroupObject, player: Player) {
@@ -330,6 +339,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		}
 		group.addMember(creature)
 		onJoinGroup(player, group)
+		StandardLog.onPlayerEvent(this, creature, "joined group %s", group)
 	}
 
 	private fun onJoinGroup(player: Player, group: GroupObject) {
@@ -374,6 +384,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		}
 		sendSystemMessage(groupLeader, "invite_leader", "TT", invitee.objectName)
 		invitee.updateGroupInviteData(groupLeader, groupId)
+		StandardLog.onPlayerEvent(this, groupLeader, "invited %s to join their group", invitee)
 	}
 
 	private fun sendGroupSystemMessage(group: GroupObject, id: String, vararg objects: Any) {
