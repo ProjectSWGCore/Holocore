@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
+import com.projectswg.common.network.packets.swg.zone.SceneCreateObjectByCrc
+import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService
@@ -33,30 +35,35 @@ import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.invitePlayerToGroup(other: ZonedInCharacter) {
 	sendCommand("invite", other.player.creatureObject)
-	player.waitForNextPacket(ChatSystemMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No chat system message received")
+	player.waitForNextPacket(ChatSystemMessage::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No chat system message received")
 }
 
 fun ZonedInCharacter.acceptCurrentGroupInvitation() {
 	sendCommand("join")
-	player.waitForNextObjectDelta(player.creatureObject.objectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	// GroupObject is created
+	player.waitForNextPacket(SceneCreateObjectByCrc::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.leaveCurrentGroup() {
-	val groupObjectId = player.creatureObject.groupId
 	sendCommand("leaveGroup")
-	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	// GroupObject is destroyed
+	player.waitForNextPacket(SceneDestroyObject::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.kickFromGroup(other: ZonedInCharacter) {
 	val groupObjectId = player.creatureObject.groupId
 	sendCommand("dismissGroupMember", other.player.creatureObject)
-	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	player.waitForNextObjectDelta(groupObjectId, 6, 2, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
 }
 
 fun ZonedInCharacter.makeGroupLeader(other: ZonedInCharacter) {
 	val groupObjectId = player.creatureObject.groupId
 	sendCommand("makeLeader", other.player.creatureObject)
-	player.waitForNextObjectDelta(groupObjectId, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("Packet not received")
+	if (isGroupLeader()) {
+		player.waitForNextObjectDelta(groupObjectId, 6, 2, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
+	} else {
+		player.waitForNextPacket(ChatSystemMessage::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No chat system message received")
+	}
 }
 
 fun ZonedInCharacter.isInGroupWith(other: ZonedInCharacter): Boolean {
