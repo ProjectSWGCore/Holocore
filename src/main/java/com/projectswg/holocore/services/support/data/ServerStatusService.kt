@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -120,7 +120,7 @@ class ServerStatusService : Service() {
 		private const val SHUTDOWN_MESSAGE = "The server will now be shutting down."
 		private fun buildShutdownMessage(timeRemainingSeconds: Long): String? {
 			val unit = getAppropriateTimeUnit(timeRemainingSeconds) ?: return null
-			val remaining = TimeUnit.SECONDS.convert(timeRemainingSeconds, unit)
+			val remaining = unit.convert(timeRemainingSeconds, TimeUnit.SECONDS)
 			var units = unit.name.lowercase()
 			if (remaining == 1L) units = units.substring(0, units.length - 1) // drop the 's'
 			return String.format(SHUTDOWN_PERIODIC, remaining, units)
