@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -183,7 +183,12 @@ public class CmdQaTool implements ICmdCallback {
 	}
 	
 	private static void addListCallback(SuiListBox box, Player player, BiConsumer<Player, Integer> callback) {
-		box.addCallback(SuiEvent.OK_PRESSED, "", (event, parameters) -> callback.accept(player, (int) box.getListItem(SuiListBox.getSelectedRow(parameters)).getId()));
+		box.addCallback(SuiEvent.OK_PRESSED, "", (event, parameters) -> {
+			int index = SuiListBox.getSelectedRow(parameters);
+			if (index < 0 || index >= box.getList().size())
+				return;
+			callback.accept(player, (int) box.getListItem(index).getId());
+		});
 	}
 	
 }
