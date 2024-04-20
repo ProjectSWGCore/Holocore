@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -97,10 +97,10 @@ class EntertainmentService : Service() {
 		val player = pei.player
 		val creature = player.creatureObject ?: return
 		when (pei.event) {
-			PlayerEvent.PE_LOGGED_OUT -> handlePlayerLoggedOut(creature)
+			PlayerEvent.PE_LOGGED_OUT     -> handlePlayerLoggedOut(creature)
 			PlayerEvent.PE_ZONE_IN_SERVER -> handlePlayerZoneIn(creature)
-			PlayerEvent.PE_DISAPPEAR -> handlePlayerDisappear(player)
-			else -> {}
+			PlayerEvent.PE_DISAPPEAR      -> handlePlayerDisappear(player)
+			else                          -> {}
 		}
 	}
 
@@ -116,14 +116,14 @@ class EntertainmentService : Service() {
 
 		// If a performer disappears, the audience needs to be cleared
 		// They're also removed from the map of active performers.
-		if (isEntertainer(creature) && creature.isPerforming) {
+		if (creature.isPerforming) {
 			performerMap[creature.objectId]?.clearSpectators()
 			performerMap.remove(creature.objectId)
 		}
 	}
 
 	private fun handlePlayerZoneIn(creature: CreatureObject) {
-		if (isEntertainer(creature) && creature.posture == Posture.SKILL_ANIMATING) {
+		if (creature.posture == Posture.SKILL_ANIMATING) {
 			val danceId = creature.animation.replace("dance_", "").toInt()
 			val performanceByDanceId = performances().getPerformanceByDanceId(danceId)
 			if (performanceByDanceId != null) {
@@ -135,7 +135,7 @@ class EntertainmentService : Service() {
 	}
 
 	private fun handlePlayerLoggedOut(creature: CreatureObject) {
-		if (isEntertainer(creature) && creature.posture == Posture.SKILL_ANIMATING) {
+		if (creature.posture == Posture.SKILL_ANIMATING) {
 			cancelExperienceTask(creature)
 		}
 	}
@@ -157,10 +157,6 @@ class EntertainmentService : Service() {
 		val target = wi.target
 		if (target is CreatureObject) {
 			val actor = wi.actor
-			if (!isEntertainer(target)) {
-				// We can't watch non-entertainers - do nothing
-				return
-			}
 			if (target.isPlayer) {
 				if (target.isPerforming) {
 					val performance = performerMap[target.objectId] ?: return
@@ -209,23 +205,11 @@ class EntertainmentService : Service() {
 					}
 				} else {
 					Log.w(
-						"%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place",
-						movedPlayer,
-						performer
+						"%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer
 					)
 				}
 			}
 		}
-	}
-
-	/**
-	 * Checks if the `CreatureObject` is a Novice Entertainer.
-	 *
-	 * @param performer
-	 * @return true if `performer` is a Novice Entertainer and false if not
-	 */
-	private fun isEntertainer(performer: CreatureObject): Boolean {
-		return performer.hasSkill("social_entertainer_novice") // First entertainer skillbox
 	}
 
 	private fun scheduleExperienceTask(performer: CreatureObject, performanceName: String) {
@@ -233,10 +217,7 @@ class EntertainmentService : Service() {
 		synchronized(performerMap) {
 			val performerId = performer.objectId
 			val future = executorService.scheduleAtFixedRate(
-				EntertainerExperience(performer),
-				XP_CYCLE_RATE.toLong(),
-				XP_CYCLE_RATE.toLong(),
-				TimeUnit.SECONDS
+				EntertainerExperience(performer), XP_CYCLE_RATE.toLong(), XP_CYCLE_RATE.toLong(), TimeUnit.SECONDS
 			)
 
 			// If they went LD but came back before disappearing
@@ -286,12 +267,9 @@ class EntertainmentService : Service() {
 			dancer.performanceCounter = 0
 			dancer.animation = ""
 
-			// Non-entertainers don't receive XP and have no audience - ignore them
-			if (isEntertainer(dancer)) {
-				cancelExperienceTask(dancer)
-				val performance = performerMap.remove(dancer.objectId)
-				performance?.clearSpectators()
-			}
+			cancelExperienceTask(dancer)
+			val performance = performerMap.remove(dancer.objectId)
+			performance?.clearSpectators()
 			SystemMessageIntent(player, "@performance:dance_stop_self").broadcast()
 		} else {
 			SystemMessageIntent(player, "@performance:dance_not_performing").broadcast()
@@ -357,10 +335,8 @@ class EntertainmentService : Service() {
 			val performanceCounter = performer.performanceCounter
 			val xpGained = performanceCounter * flourishXpMod
 			if (xpGained > 0) {
-				if (isEntertainer(performer)) {
-					if (isDancing) {
-						ExperienceIntent(performer, performer, "dance", xpGained, true).broadcast()
-					}
+				if (isDancing) {
+					ExperienceIntent(performer, performer, "dance", xpGained, true).broadcast()
 				}
 				performer.performanceCounter = performanceCounter - 1
 			}
