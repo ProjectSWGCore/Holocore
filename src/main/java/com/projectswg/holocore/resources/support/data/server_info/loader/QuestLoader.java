@@ -35,30 +35,30 @@ import java.io.IOException;
 import java.util.*;
 
 public class QuestLoader extends DataLoader {
-	
+
 	private final Map<String, QuestListInfo> questListInfoMap;
 	private final Map<String, List<QuestLoader.QuestTaskInfo>> questTaskInfosMap;
-	
+
 	public QuestLoader() {
 		questListInfoMap = Collections.synchronizedMap(new HashMap<>());
 		questTaskInfosMap = Collections.synchronizedMap(new HashMap<>());
 	}
-	
+
 	public Collection<String> getQuestNames() {
 		return questListInfoMap.keySet();
 	}
-	
+
 	public QuestListInfo getQuestListInfo(String questName) {
 		return questListInfoMap.get(questName);
 	}
-	
+
 	public List<QuestTaskInfo> getTaskListInfos(String questName) {
 		if (questTaskInfosMap.containsKey(questName)) {
 			return questTaskInfosMap.get(questName);
 		}
-		
+
 		List<QuestTaskInfo> questTaskInfos = new ArrayList<>();
-		
+
 		int index = 0;
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questtask/" + questName + ".sdb"))) {
 			while (set.next()) {
@@ -85,7 +85,7 @@ public class QuestLoader extends DataLoader {
 						questTaskInfo.setWaypointName(set.getText("waypoint_name"));
 					}
 					if (columns.contains("radius")) {
-						String radiusText = set.getText("radius");	// Is seen as empty string if not set
+						String radiusText = set.getText("radius");    // Is seen as empty string if not set
 						if (!radiusText.isBlank()) {
 							questTaskInfo.setRadius(Double.parseDouble(radiusText));
 						}
@@ -111,16 +111,16 @@ public class QuestLoader extends DataLoader {
 						questTaskInfo.setRetrieveMenuText(set.getText("retrieve_menu_text"));
 					}
 				}
-				
+
 				questTaskInfo.setType(type);
-				
+
 				for (String nextTaskOnComplete : set.getText("tasks_on_complete").split(",")) {
 					if (!nextTaskOnComplete.isBlank()) {
 						int taskIdx = Integer.parseInt(nextTaskOnComplete);
 						questTaskInfo.addTaskOnComplete(taskIdx);
 					}
 				}
-				
+
 				questTaskInfo.setIndex(index++);
 				questTaskInfo.setName(getTaskName(columns, set));
 				questTaskInfo.setCommMessageText(getCommMessageText(columns, set));
@@ -155,9 +155,9 @@ public class QuestLoader extends DataLoader {
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to load quest task info for quest by name " + questName, e);
 		}
-		
+
 		questTaskInfosMap.put(questName, questTaskInfos);
-		
+
 		return questTaskInfos;
 	}
 
@@ -347,77 +347,78 @@ public class QuestLoader extends DataLoader {
 	public void load() throws IOException {
 		loadQuestListInfos();
 	}
-	
+
 	private void loadQuestListInfos() throws IOException {
 		try (SdbLoader.SdbResultSet set = SdbLoader.load(new File("serverdata/quests/questlist/questlist.msdb"))) {
 			while (set.next()) {
 				String questName = set.getText("quest_name");
-				
+
 				if (questListInfoMap.containsKey(questName)) {
 					throw new SdbLoaderException(set, new RuntimeException("Duplicate quest list info for quest by name " + questName));
 				}
-				
+
 				String journalEntryTitle = set.getText("journal_entry_title");
 				String journalEntryDescription = set.getText("journal_entry_description");
 				boolean completeWhenTasksComplete = set.getBoolean("complete_when_tasks_complete");
 				boolean repeatable = set.getBoolean("allow_repeats");
-				
+
 				QuestListInfo listInfo = new QuestListInfo();
 				listInfo.setJournalEntryTitle(journalEntryTitle);
 				listInfo.setJournalEntryDescription(journalEntryDescription);
 				listInfo.setCompleteWhenTasksComplete(completeWhenTasksComplete);
 				listInfo.setRepeatable(repeatable);
-				
-				
+
 				questListInfoMap.put(questName, listInfo);
 			}
 		}
 	}
-	
+
 	public static class QuestListInfo {
+
 		private String journalEntryTitle;
 		private String journalEntryDescription;
 		private boolean completeWhenTasksComplete;
 		private boolean repeatable;
-		
+
 		private QuestListInfo() {
-		
+
 		}
-		
+
 		public boolean isRepeatable() {
 			return repeatable;
 		}
-		
+
 		private void setRepeatable(boolean repeatable) {
 			this.repeatable = repeatable;
 		}
-		
+
 		public boolean isCompleteWhenTasksComplete() {
 			return completeWhenTasksComplete;
 		}
-		
+
 		public void setCompleteWhenTasksComplete(boolean completeWhenTasksComplete) {
 			this.completeWhenTasksComplete = completeWhenTasksComplete;
 		}
-		
+
 		public String getJournalEntryTitle() {
 			return journalEntryTitle;
 		}
-		
+
 		private void setJournalEntryTitle(String journalEntryTitle) {
 			this.journalEntryTitle = journalEntryTitle;
 		}
-		
+
 		public String getJournalEntryDescription() {
 			return journalEntryDescription;
 		}
-		
+
 		private void setJournalEntryDescription(String journalEntryDescription) {
 			this.journalEntryDescription = journalEntryDescription;
 		}
 	}
-	
+
 	public static class QuestTaskInfo {
+
 		private final Collection<Integer> nextTasksOnComplete;
 		private int index;
 		private String type;
@@ -464,7 +465,7 @@ public class QuestLoader extends DataLoader {
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
 		}
-		
+
 		public int getMinTime() {
 			return minTime;
 		}
@@ -601,83 +602,83 @@ public class QuestLoader extends DataLoader {
 		private void setMinTime(int minTime) {
 			this.minTime = minTime;
 		}
-		
+
 		public int getMaxTime() {
 			return maxTime;
 		}
-		
+
 		private void setMaxTime(int maxTime) {
 			this.maxTime = maxTime;
 		}
-		
+
 		public int getIndex() {
 			return index;
 		}
-		
+
 		private void setIndex(int index) {
 			this.index = index;
 		}
-		
+
 		private void addTaskOnComplete(int taskIdx) {
 			nextTasksOnComplete.add(taskIdx);
 		}
-		
+
 		public Collection<Integer> getNextTasksOnComplete() {
 			return new ArrayList<>(nextTasksOnComplete);
 		}
-		
+
 		public String getType() {
 			return type;
 		}
-		
+
 		private void setType(String type) {
 			this.type = type;
 		}
-		
+
 		public String getName() {
 			return name;
 		}
-		
+
 		private void setName(String name) {
 			this.name = name;
 		}
-		
+
 		public String getCommMessageText() {
 			return commMessageText;
 		}
-		
+
 		private void setCommMessageText(String commMessageText) {
 			this.commMessageText = commMessageText;
 		}
-		
+
 		public String getNpcAppearanceServerTemplate() {
 			return npcAppearanceServerTemplate;
 		}
-		
+
 		private void setNpcAppearanceServerTemplate(String npcAppearanceServerTemplate) {
 			this.npcAppearanceServerTemplate = npcAppearanceServerTemplate;
 		}
-		
+
 		public String getTargetServerTemplate() {
 			return targetServerTemplate;
 		}
-		
+
 		private void setTargetServerTemplate(String targetServerTemplate) {
 			this.targetServerTemplate = targetServerTemplate;
 		}
-		
+
 		public int getCount() {
 			return count;
 		}
-		
+
 		private void setCount(int count) {
 			this.count = count;
 		}
-		
+
 		public String getGrantQuestOnComplete() {
 			return grantQuestOnComplete;
 		}
-		
+
 		public void setGrantQuestOnComplete(String grantQuestOnComplete) {
 			this.grantQuestOnComplete = grantQuestOnComplete;
 		}
