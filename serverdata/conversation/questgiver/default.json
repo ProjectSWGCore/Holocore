@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/tatooine_bestinejobs_jasha",
-		"key": "s_43",
-		"comment": "Looking to help your pockets more like. But I can't be choosey right now. I have some jobs available, that don't require a security clearance. Look at this list. What are you interested in?]"
+		"key": "s_34",
+		"comment": "I am a very busy person. This rebellion is causing all sorts of disruptions to Imperial operations and I have to help get things under control. What do you want?"
 	},
 	"playerResponses": [
 		{
@@ -12,6 +12,22 @@
 				"comment": "I can help hunting banthas."
 			},
 			"next": "questgiver/kill_banthas"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_bestinejobs_jasha",
+				"key": "s_68",
+				"comment": "Sounds like a plan."
+			},
+			"next": "questgiver/already_active"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_bestinejobs_jasha",
+				"key": "s_66",
+				"comment": "On second thought no. "
+			},
+			"next": "questgiver/already_completed"
 		}
 	],
 

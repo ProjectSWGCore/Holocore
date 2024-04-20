@@ -1,21 +1,21 @@
 {
 	"npcMessage": {
-		"file": "quest/ground/util/quest_giver_object",
-		"key": "already_completed_quest",
-		"comment": "This quest has already been completed by you and cannot be accepted again."
+		"file": "conversation/tatooine_bestinejobs_jasha",
+		"key": "s_7",
+		"comment": "I need you to complete the tasks that I have assigned you. Now get to it."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
 				"file": "conversation/tatooine_bestinejobs_jasha",
-				"key": "s_73",
-				"comment": "Well I will leave then."
+				"key": "s_65",
+				"comment": "I am on my way."
 			}
 		}
 	],
 	"requirements": [
 		{
-			"type": "complete_quest",
+			"type": "active_quest",
 			"args": {
 				"quest": "quest/tatooine_bestinejobs_bantha",
 				"active": true
@@ -27,6 +27,12 @@
 			"type": "npc_animation",
 			"args": {
 				"animation": "dismiss"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "slow_down"
 			}
 		}
 	]
