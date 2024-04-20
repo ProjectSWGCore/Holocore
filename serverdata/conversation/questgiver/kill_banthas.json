@@ -8,10 +8,9 @@
 		{
 			"playerMessage": {
 				"file": "conversation/tatooine_bestinejobs_jasha",
-				"key": "s_72",
-				"comment": "Good here is the information that you need. Good hunting. "
-			},
-			"next": ""
+				"key": "s_59",
+				"comment": "I'll do it."
+			}
 		}
 	],
 	"requirements": [
