@@ -65,112 +65,6 @@ public class QuestLoader extends DataLoader {
 				QuestTaskInfo questTaskInfo = new QuestTaskInfo();
 				Set<String> columns = new LinkedHashSet<>(set.getColumns());
 				String type = set.getText("attach_script");
-				String name = null;
-				if (columns.contains("task_name")) {
-					name = set.getText("task_name");
-				}
-				String commMessageText = null;
-				if (columns.contains("comm_message_text")) {
-					commMessageText = set.getText("comm_message_text");
-				}
-				String npcAppearanceServerTemplate = null;
-				if (columns.contains("npc_appearance_server_template")) {
-					npcAppearanceServerTemplate = set.getText("npc_appearance_server_template");
-				}
-				String targetServerTemplate = null;
-				if (columns.contains("target_server_template")) {
-					targetServerTemplate = set.getText("target_server_template");
-				}
-				String grantQuestOnComplete = null;
-				if (columns.contains("grant_quest_on_complete")) {
-					grantQuestOnComplete = set.getText("grant_quest_on_complete");
-				}
-				int count = 0;
-				if (columns.contains("count")) {
-					count = (int) set.getInt("count");
-				}
-				int minTime = 0;
-				if (columns.contains("min_time")) {
-					minTime = (int) set.getInt("min_time");
-				}
-				int maxTime = 0;
-				if (columns.contains("max_time")) {
-					maxTime = (int) set.getInt("max_time");
-				}
-				String[] nextTasksOnComplete = set.getText("tasks_on_complete").split(",");
-				String messageBoxTitle = null;
-				if (columns.contains("message_box_title")) {
-					messageBoxTitle = set.getText("message_box_title");
-				}
-				String messageBoxText = null;
-				if (columns.contains("message_box_text")) {
-					messageBoxText = set.getText("message_box_text");
-				}
-				String experienceType = null;
-				if (columns.contains("experience_type")) {
-					experienceType = set.getText("experience_type");
-				}
-				int experienceAmount = 0;
-				if (columns.contains("experience_amount")) {
-					experienceAmount = (int) set.getInt("experience_amount");
-				}
-				String factionName = null;
-				if (columns.contains("faction_name")) {
-					factionName = set.getText("faction_name").toLowerCase(Locale.ROOT);
-				}
-				int factionAmount = 0;
-				if (columns.contains("faction_amount")) {
-					factionAmount = (int) set.getInt("faction_amount");
-				}
-				int bankCredits = 0;
-				if (columns.contains("bank_credits")) {
-					bankCredits = (int) set.getInt("bank_credits");
-				}
-				int lootCount = 0;
-				if (columns.contains("loot_count")) {
-					lootCount = (int) set.getInt("loot_count");
-				}
-				String lootName = null;
-				if (columns.contains("loot_name")) {
-					lootName = set.getText("loot_name");
-				}
-				int itemCount = 0;
-				if (columns.contains("count")) {
-					itemCount = (int) set.getInt("count");
-				}
-				String itemTemplate = null;
-				if (columns.contains("item")) {
-					itemTemplate = set.getText("item");
-				}
-				boolean visible = false;
-				if (columns.contains("is_visible")) {
-					visible = set.getBoolean("is_visible");
-				}
-				String socialGroup = null;
-				if (columns.contains("social_group")) {
-					socialGroup = set.getText("social_group");
-				}
-				String lootItemName = null;
-				if (columns.contains("loot_item_name")) {
-					lootItemName = set.getText("loot_item_name");
-				}
-				int lootItemsRequired = 0;
-				if (columns.contains("loot_items_required")) {
-					lootItemsRequired = (int) set.getInt("loot_items_required");
-				}
-				int lootDropPercent = 0;
-				if (columns.contains("loot_drop_percent")) {
-					lootDropPercent = (int) set.getInt("loot_drop_percent");
-				}
-				if (columns.contains("music_on_activate")) {
-					questTaskInfo.setMusicOnActivate(set.getText("music_on_activate"));
-				}
-				if (columns.contains("music_on_complete")) {
-					questTaskInfo.setMusicOnComplete(set.getText("music_on_complete"));
-				}
-				if (columns.contains("music_on_failure")) {
-					questTaskInfo.setMusicOnFailure(set.getText("music_on_failure"));
-				}
 				if (type.equals("quest.task.ground.go_to_location")) {
 					if (columns.contains("create_waypoint")) {
 						questTaskInfo.setCreateWaypoint(set.getBoolean("create_waypoint"));
@@ -220,7 +114,7 @@ public class QuestLoader extends DataLoader {
 				
 				questTaskInfo.setType(type);
 				
-				for (String nextTaskOnComplete : nextTasksOnComplete) {
+				for (String nextTaskOnComplete : set.getText("tasks_on_complete").split(",")) {
 					if (!nextTaskOnComplete.isBlank()) {
 						int taskIdx = Integer.parseInt(nextTaskOnComplete);
 						questTaskInfo.addTaskOnComplete(taskIdx);
@@ -228,30 +122,33 @@ public class QuestLoader extends DataLoader {
 				}
 				
 				questTaskInfo.setIndex(index++);
-				questTaskInfo.setName(name);
-				questTaskInfo.setCommMessageText(commMessageText);
-				questTaskInfo.setNpcAppearanceServerTemplate(npcAppearanceServerTemplate);
-				questTaskInfo.setTargetServerTemplate(targetServerTemplate);
-				questTaskInfo.setGrantQuestOnComplete(grantQuestOnComplete);
-				questTaskInfo.setCount(count);
-				questTaskInfo.setMinTime(minTime);
-				questTaskInfo.setMaxTime(maxTime);
-				questTaskInfo.setMessageBoxTitle(messageBoxTitle);
-				questTaskInfo.setMessageBoxText(messageBoxText);
-				questTaskInfo.setExperienceType(experienceType);
-				questTaskInfo.setExperienceAmount(experienceAmount);
-				questTaskInfo.setFactionName(factionName);
-				questTaskInfo.setFactionAmount(factionAmount);
-				questTaskInfo.setBankCredits(bankCredits);
-				questTaskInfo.setLootCount(lootCount);
-				questTaskInfo.setLootName(lootName);
-				questTaskInfo.setItemCount(itemCount);
-				questTaskInfo.setItemTemplate(itemTemplate);
-				questTaskInfo.setVisible(visible);
-				questTaskInfo.setSocialGroup(socialGroup);
-				questTaskInfo.setLootItemName(lootItemName);
-				questTaskInfo.setLootItemsRequired(lootItemsRequired);
-				questTaskInfo.setLootDropPercent(lootDropPercent);
+				questTaskInfo.setName(getTaskName(columns, set));
+				questTaskInfo.setCommMessageText(getCommMessageText(columns, set));
+				questTaskInfo.setNpcAppearanceServerTemplate(getNpcAppearanceServerTemplate(columns, set));
+				questTaskInfo.setTargetServerTemplate(getTargetServerTemplate(columns, set));
+				questTaskInfo.setGrantQuestOnComplete(getGrantQuestOnComplete(columns, set));
+				questTaskInfo.setCount(getCount(columns, set));
+				questTaskInfo.setMinTime(getMinTime(columns, set));
+				questTaskInfo.setMaxTime(getMaxTime(columns, set));
+				questTaskInfo.setMessageBoxTitle(getMessageBoxTitle(columns, set));
+				questTaskInfo.setMessageBoxText(getMessageBoxText(columns, set));
+				questTaskInfo.setExperienceType(getExperienceType(columns, set));
+				questTaskInfo.setExperienceAmount(getExperienceAmount(columns, set));
+				questTaskInfo.setFactionName(getFactionName(columns, set));
+				questTaskInfo.setFactionAmount(getFactionAmount(columns, set));
+				questTaskInfo.setBankCredits(getBankCredits(columns, set));
+				questTaskInfo.setLootCount(getLootCount(columns, set));
+				questTaskInfo.setLootName(getLootName(columns, set));
+				questTaskInfo.setItemCount(getCount(columns, set));
+				questTaskInfo.setItemTemplate(getItemTemplate(columns, set));
+				questTaskInfo.setVisible(isVisible(columns, set));
+				questTaskInfo.setSocialGroup(getSocialGroup(columns, set));
+				questTaskInfo.setLootItemName(getLootItemName(columns, set));
+				questTaskInfo.setLootItemsRequired(getLootItemsRequired(columns, set));
+				questTaskInfo.setLootDropPercent(getLootDropPercent(columns, set));
+				questTaskInfo.setMusicOnActivate(getMusicOnActivate(columns, set));
+				questTaskInfo.setMusicOnComplete(getMusicOnComplete(columns, set));
+				questTaskInfo.setMusicOnFailure(getMusicOnFailure(columns, set));
 
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -263,7 +160,189 @@ public class QuestLoader extends DataLoader {
 		
 		return questTaskInfos;
 	}
-	
+
+	private static @Nullable String getMusicOnFailure(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("music_on_failure")) {
+			return set.getText("music_on_failure");
+		}
+		return null;
+	}
+
+	private static @Nullable String getMusicOnComplete(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("music_on_complete")) {
+			return set.getText("music_on_complete");
+		}
+		return null;
+	}
+
+	private static @Nullable String getMusicOnActivate(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("music_on_activate")) {
+			return set.getText("music_on_activate");
+		}
+		return null;
+	}
+
+	private static int getLootDropPercent(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("loot_drop_percent")) {
+			return (int) set.getInt("loot_drop_percent");
+		}
+		return 0;
+	}
+
+	private static int getLootItemsRequired(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("loot_items_required")) {
+			return (int) set.getInt("loot_items_required");
+		}
+		return 0;
+	}
+
+	private static @Nullable String getLootItemName(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("loot_item_name")) {
+			return set.getText("loot_item_name");
+		}
+		return null;
+	}
+
+	private static @Nullable String getSocialGroup(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("social_group")) {
+			return set.getText("social_group");
+		}
+		return null;
+	}
+
+	private static boolean isVisible(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("is_visible")) {
+			return set.getBoolean("is_visible");
+		}
+		return false;
+	}
+
+	private static @Nullable String getItemTemplate(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("item")) {
+			return set.getText("item");
+		}
+		return null;
+	}
+
+	private static @Nullable String getLootName(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("loot_name")) {
+			return set.getText("loot_name");
+		}
+		return null;
+	}
+
+	private static int getLootCount(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("loot_count")) {
+			return (int) set.getInt("loot_count");
+		}
+		return 0;
+	}
+
+	private static int getBankCredits(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("bank_credits")) {
+			return (int) set.getInt("bank_credits");
+		}
+		return 0;
+	}
+
+	private static int getFactionAmount(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("faction_amount")) {
+			return (int) set.getInt("faction_amount");
+		}
+		return 0;
+	}
+
+	private static @Nullable String getFactionName(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("faction_name")) {
+			return set.getText("faction_name").toLowerCase(Locale.ROOT);
+		}
+		return null;
+	}
+
+	private static int getExperienceAmount(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("experience_amount")) {
+			return (int) set.getInt("experience_amount");
+		}
+		return 0;
+	}
+
+	private static @Nullable String getExperienceType(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("experience_type")) {
+			return set.getText("experience_type");
+		}
+		return null;
+	}
+
+	private static @Nullable String getMessageBoxText(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("message_box_text")) {
+			return set.getText("message_box_text");
+		}
+		return null;
+	}
+
+	private static @Nullable String getMessageBoxTitle(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("message_box_title")) {
+			return set.getText("message_box_title");
+		}
+		return null;
+	}
+
+	private static int getMaxTime(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("max_time")) {
+			return (int) set.getInt("max_time");
+		}
+		return 0;
+	}
+
+	private static int getMinTime(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("min_time")) {
+			return (int) set.getInt("min_time");
+		}
+		return 0;
+	}
+
+	private static int getCount(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("count")) {
+			return (int) set.getInt("count");
+		}
+		return 0;
+	}
+
+	private static @Nullable String getGrantQuestOnComplete(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("grant_quest_on_complete")) {
+			return set.getText("grant_quest_on_complete");
+		}
+		return null;
+	}
+
+	private static @Nullable String getTargetServerTemplate(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("target_server_template")) {
+			return set.getText("target_server_template");
+		}
+		return null;
+	}
+
+	private static @Nullable String getNpcAppearanceServerTemplate(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("npc_appearance_server_template")) {
+			return set.getText("npc_appearance_server_template");
+		}
+		return null;
+	}
+
+	private static @Nullable String getCommMessageText(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("comm_message_text")) {
+			return set.getText("comm_message_text");
+		}
+		return null;
+	}
+
+	private static @Nullable String getTaskName(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("task_name")) {
+			return set.getText("task_name");
+		}
+		return null;
+	}
+
 	@Override
 	public void load() throws IOException {
 		loadQuestListInfos();
