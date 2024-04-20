@@ -97,10 +97,10 @@ class EntertainmentService : Service() {
 		val player = pei.player
 		val creature = player.creatureObject ?: return
 		when (pei.event) {
-			PlayerEvent.PE_LOGGED_OUT -> handlePlayerLoggedOut(creature)
+			PlayerEvent.PE_LOGGED_OUT     -> handlePlayerLoggedOut(creature)
 			PlayerEvent.PE_ZONE_IN_SERVER -> handlePlayerZoneIn(creature)
-			PlayerEvent.PE_DISAPPEAR -> handlePlayerDisappear(player)
-			else -> {}
+			PlayerEvent.PE_DISAPPEAR      -> handlePlayerDisappear(player)
+			else                          -> {}
 		}
 	}
 
@@ -205,9 +205,7 @@ class EntertainmentService : Service() {
 					}
 				} else {
 					Log.w(
-						"%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place",
-						movedPlayer,
-						performer
+						"%s ran out of range of %s, but couldn't stop watching because they weren't watching in the first place", movedPlayer, performer
 					)
 				}
 			}
@@ -219,10 +217,7 @@ class EntertainmentService : Service() {
 		synchronized(performerMap) {
 			val performerId = performer.objectId
 			val future = executorService.scheduleAtFixedRate(
-				EntertainerExperience(performer),
-				XP_CYCLE_RATE.toLong(),
-				XP_CYCLE_RATE.toLong(),
-				TimeUnit.SECONDS
+				EntertainerExperience(performer), XP_CYCLE_RATE.toLong(), XP_CYCLE_RATE.toLong(), TimeUnit.SECONDS
 			)
 
 			// If they went LD but came back before disappearing
