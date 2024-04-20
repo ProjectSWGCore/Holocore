@@ -39,14 +39,13 @@ import kotlin.math.max
 import kotlin.math.min
 
 class PlaceStructureCmdCallback : ICmdCallback {
-	
+
 	override fun execute(player: Player, target: SWGObject?, args: String) {
-		val argumentsSplit = args.split(' ', limit=4)
-		if (argumentsSplit.size != 4)
-			return
-		
+		val argumentsSplit = args.split(' ', limit = 4)
+		if (argumentsSplit.size != 4) return
+
 		val creature = player.creatureObject ?: return
-		
+
 		try {
 			val deed = ObjectStorageService.ObjectLookup.getObjectById(argumentsSplit[0].toLong()) as? TangibleObject
 			if (deed == null) {
@@ -57,19 +56,13 @@ class PlaceStructureCmdCallback : ICmdCallback {
 			val locationX = argumentsSplit[1].toDouble()
 			val locationZ = argumentsSplit[2].toDouble()
 			val direction = min(3, max(0, argumentsSplit[3].toInt()))
-			val location = Location.builder()
-				.setTerrain(terrain)
-				.setX(locationX)
-				.setY(ServerData.terrains.getHeight(terrain, locationX, locationZ))
-				.setZ(locationZ)
-				.setHeading(direction * 90.0)
-				.build()
-			
+			val location = Location.builder().setTerrain(terrain).setX(locationX).setY(ServerData.terrains.getHeight(terrain, locationX, locationZ)).setZ(locationZ).setHeading(direction * 90.0).build()
+
 			PlaceStructureIntent(creature, deed, location).broadcast()
 		} catch (e: NumberFormatException) {
 			StandardLog.onPlayerError(this, player, "Invalid arguments to placestructure: %s", args)
 		}
 		StandardLog.onPlayerTrace(this, player, "Requested structure placement: %s", args)
 	}
-	
+
 }
