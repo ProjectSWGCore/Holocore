@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,12 +27,10 @@
 package com.projectswg.holocore.resources.support.global.player;
 
 import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
-import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentChain;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +42,6 @@ import java.util.function.Consumer;
 public class Player implements Comparable<Player> {
 	
 	private final long networkId;
-	private final IntentChain intentChain;
 	private final AtomicReference<CreatureObject> creatureObject;
 	private final AtomicReference<InetSocketAddress> address;
 	private final Consumer<SWGPacket> packetSender;
@@ -59,7 +56,6 @@ public class Player implements Comparable<Player> {
 	public Player(long networkId, InetSocketAddress address, Consumer<SWGPacket> packetSender) {
 		this.networkId = networkId;
 		this.address = new AtomicReference<>(address);
-		this.intentChain = new IntentChain();
 		this.creatureObject = new AtomicReference<>(null);
 		this.packetSender = packetSender;
 	}
@@ -149,11 +145,7 @@ public class Player implements Comparable<Player> {
 	public AccessLevel getAccessLevel() {
 		return accessLevel;
 	}
-	
-	public String getGalaxyName() {
-		return ProjectSWG.INSTANCE.getGalaxy().getName();
-	}
-	
+
 	public CreatureObject getCreatureObject() {
 		return creatureObject.get();
 	}
@@ -171,12 +163,7 @@ public class Player implements Comparable<Player> {
 	public double getTimeSinceLastPacket() {
 		return (System.nanoTime()-lastInboundMessage)/1E6;
 	}
-	
-	public boolean isBaselinesSent(SWGObject obj) {
-		CreatureObject creature = getCreatureObject();
-		return creature == null || creature.isBaselinesSent(obj);
-	}
-	
+
 	public void sendPacket(SWGPacket packet) {
 		packetSender.accept(packet);
 		IntentChain.broadcastChain(new OutboundPacketIntent(this, packet));
@@ -228,14 +215,6 @@ public class Player implements Comparable<Player> {
 				new OutboundPacketIntent(this, packet4),
 				new OutboundPacketIntent(this, packet5)
 		);
-	}
-	
-	public void broadcast(Intent intent) {
-		CreatureObject creatureObject = getCreatureObject();
-		if (creatureObject != null)
-			creatureObject.broadcast(intent);
-		else
-			intentChain.broadcastAfter(intent);
 	}
 	
 	@Override
