@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,11 +27,8 @@
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
 import com.mongodb.client.MongoClients
-import com.mongodb.client.MongoCollection
 import com.projectswg.holocore.resources.support.data.server_info.database.*
-import com.projectswg.holocore.resources.support.data.server_info.mariadb.PswgUserDatabaseMaria
 import me.joshlarson.jlcommon.log.Log
-import org.bson.Document
 import java.util.logging.Handler
 import java.util.logging.Level
 import java.util.logging.LogRecord
@@ -65,16 +62,15 @@ object PswgDatabase {
 	fun initialize(connectionString: String, databaseName: String) {
 		setupMongoLogging()
 		val client = MongoClients.create(connectionString)
-		val database = client.getDatabase(databaseName)
-		val databaseConfig = Database(database)
-		
-		val config = PswgConfigDatabaseMongo(databaseConfig.config.mongo)
-		val users = initTable(databaseConfig.users, defaultCreator = {PswgUserDatabase.createDefault()}, mariaInitializer = ::PswgUserDatabaseMaria, mongoInitializer = ::PswgUserDatabaseMongo)
-		val objects = initTable(databaseConfig.objects, defaultCreator = {PswgObjectDatabase.createDefault()}, mongoInitializer = ::PswgObjectDatabaseMongo)
-		val resources = initTable(databaseConfig.resources, defaultCreator = {PswgResourceDatabase.createDefault()}, mongoInitializer = ::PswgResourceDatabaseMongo)
-		val bazaarInstantSales = initTable(databaseConfig.bazaarInstantSales, defaultCreator = {PswgBazaarInstantSalesDatabase.createDefault()}, mongoInitializer = ::PswgBazaarInstantSalesDatabaseMongo)
-		val bazaarAvailableItems = initTable(databaseConfig.bazaarAvailableItems, defaultCreator = {PswgBazaarAvailableItemsDatabase.createDefault()}, mongoInitializer = ::PswgBazaarAvailableItemsDatabaseMongo)
-		val chatRooms = initTable(databaseConfig.chatRooms, defaultCreator = {PswgChatRoomDatabase.createDefault()}, mongoInitializer = ::PswgChatRoomDatabaseMongo)
+		val mongo = client.getDatabase(databaseName)
+
+		val config = PswgConfigDatabaseMongo(mongo.getCollection("config"))
+		val users = PswgUserDatabaseMongo(mongo.getCollection("users"))
+		val objects = PswgObjectDatabaseMongo(mongo.getCollection("objects"))
+		val resources = PswgResourceDatabaseMongo(mongo.getCollection("resources"))
+		val bazaarInstantSales = PswgBazaarInstantSalesDatabaseMongo(mongo.getCollection("bazaarInstantSales"))
+		val bazaarAvailableItems = PswgBazaarAvailableItemsDatabaseMongo(mongo.getCollection("bazaarAvailableItems"))
+		val chatRooms = PswgChatRoomDatabaseMongo(mongo.getCollection("chatRooms"))
 		
 		this.configImpl = config
 		this.usersImpl = users
@@ -84,13 +80,7 @@ object PswgDatabase {
 		this.bazaarAvailableItemsImpl = bazaarAvailableItems
 		this.chatRoomsImpl = chatRooms
 	}
-	
-	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {
-		if (table.isMariaDefined())
-			return mariaInitializer(table)
-		return mongoInitializer(table.mongo)
-	}
-	
+
 	private fun setupMongoLogging() {
 		var mongoLogger: Logger? = Logger.getLogger("com.mongodb")
 		while (mongoLogger != null) {
