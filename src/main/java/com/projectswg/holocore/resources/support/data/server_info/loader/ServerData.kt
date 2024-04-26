@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -112,6 +112,7 @@ object ServerData {
 	val planetChatRooms		by SoftDataLoaderDelegate(::PlanetChatRoomLoader)
 	val staticCityPoints	by SoftDataLoaderDelegate(::StaticCityPointLoader)
 	val npcEquipment		by SoftDataLoaderDelegate(::NpcEquipmentLoader)
+	val schematicGroups		by SoftDataLoaderDelegate(::SchematicGroupLoader)
 
 	private class WeakDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::WeakReference, loaderCreator)
 	private class SoftDataLoaderDelegate<T: DataLoader>(loaderCreator: () -> T): DataLoaderDelegate<T>(::SoftReference, loaderCreator)
