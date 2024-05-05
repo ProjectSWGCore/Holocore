@@ -57,7 +57,7 @@ spawn_dantooine_56	DANTOOINE	dan_world	AREA	0	-4216.5	3.0	-2436.7	-10	1	SG-567	h
 spawn_dantooine_57	DANTOOINE	dan_mining_outpost_cantina	AREA	1	9.3	0.6	1.8	-39	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_58	DANTOOINE	dan_mining_outpost_cantina	AREA	1	1.0	0.6	3.9	-128	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_59	DANTOOINE	dan_mining_outpost_cantina	AREA	1	0.5	0.6	1.6	-22	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_dantooine_60	DANTOOINE	dan_mining_outpost_cantina	AREA	1	7.1	0.6	1.7	40	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_dantooine_60	DANTOOINE	dan_mining_outpost_cantina	AREA	1	7.1	0.6	1.7	40	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_61	DANTOOINE	dan_mining_outpost_cantina	AREA	1	-1.5	0.6	2.4	61	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_dantooine_62	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-7.5	0.6	3.5	-97	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_63	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-9.1	0.6	3.4	88	1	Adwan Turoldine (CorSec Pilot Trainer)	humanoid_corsec_adwan_turoldine	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
@@ -87,8 +87,8 @@ spawn_dantooine_86	DANTOOINE	dan_world	AREA	0	-593.8	3.0	2527.3	128	1	a miner	hu
 spawn_dantooine_87	DANTOOINE	dan_world	AREA	0	-680.0	3.0	2471.5	11	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_88	DANTOOINE	dan_world	AREA	0	-628.3	3.0	2531.7	64	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
 spawn_dantooine_89	DANTOOINE	dan_world	AREA	0	-627.5	3.0	2534.2	141	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
-spawn_dantooine_90	DANTOOINE	dan_world	AREA	0	-594.9	3.0	2495.3	68	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
-spawn_dantooine_91	DANTOOINE	dan_world	AREA	0	-592.3	3.0	2496.4	-112	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+spawn_dantooine_90	DANTOOINE	dan_world	AREA	0	-594.9	3.0	2495.3	68	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+spawn_dantooine_91	DANTOOINE	dan_world	AREA	0	-592.3	3.0	2496.4	-112	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
 spawn_dantooine_92	DANTOOINE	dan_world	PATROL	0	-540.5	0.1	2514.7	96	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_100	column	idle			600
 spawn_dantooine_93	DANTOOINE	dan_world	AREA	0	-657.5	3.0	2502.5	97	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_94	DANTOOINE	dan_world	PATROL	0	-647.4	3.0	2467.5	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1400	column	idle			600
@@ -100,7 +100,7 @@ spawn_dantooine_99	DANTOOINE	dan_world	PATROL	0	-619.0	3.0	2449.0	0	1	a technici
 spawn_dantooine_100	DANTOOINE	dan_world	AREA	0	-636.3	3.0	2507.8	149	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
 spawn_dantooine_101	DANTOOINE	dan_world	AREA	0	-601.1	3.0	2529.3	59	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_dantooine_102	DANTOOINE	dan_world	PATROL	0	-633.30	3	2456.2	-53		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_3600	column	idle		simple_droid_geek_bye_nice_13	600
-spawn_dantooine_103	DANTOOINE	dan_world	AREA	0	-589.2	3.0	2497.9	-55	1	an Imperial colonel	humanoid_imperial_colonel	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+spawn_dantooine_103	DANTOOINE	dan_world	AREA	0	-589.2	3.0	2497.9	-55	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
 spawn_dantooine_104	DANTOOINE	dan_world	AREA	0	-635.6	3.0	2473.0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle		simple_droid_sarcastic_alert_2	600
 spawn_dantooine_105	DANTOOINE	dan_world	PATROL	0	-637.5	3.0	2484.3	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1600	column	idle		simple_droid_stupid_death_5	600
 spawn_dantooine_106	DANTOOINE	dan_world	AREA	0	-625.6	3.0	2481.3	116	1	Fern Yarrow (an Imperial Pilot)	humanoid_imperial_fern_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600

@@ -14,6 +14,7 @@ common_rori.sdb	TRUE
 common_talus.sdb	TRUE
 common_tatooine.sdb	TRUE
 common_yavin4.sdb	TRUE
+event_emperors_day.sdb	TRUE
 gcw_presence_corellia_imperial.sdb	FALSE
 gcw_presence_corellia_neutral.sdb	TRUE
 gcw_presence_corellia_rebel.sdb	FALSE
@@ -40,3 +41,4 @@ instance_kashyyyk_rryatt.sdb	TRUE
 instance_kashyyyk_slaver.sdb	TRUE
 instance_mustafar_orf.sdb	FALSE
 invasion_droid_army.sdb	TRUE
+invasion_gcw_bestine.sdb	TRUE

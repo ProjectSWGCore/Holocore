@@ -46,7 +46,7 @@ spawn_tatooine_43	TATOOINE	tat_bestine_cantina	AREA	1	40.1	0.1	2.2	82	1	an artis
 spawn_tatooine_44	TATOOINE	tat_bestine_cantina	AREA	1	42.0	0.1	2.2	-91	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_45	TATOOINE	tat_bestine_cantina	AREA	2	32.2	0.1	-7.8	17	1	Okehi Papev	humanoid_victor_questn_cantina	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1		600
 spawn_tatooine_46	TATOOINE	tat_bestine_cantina	AREA	3	0.6	-0.9	11.9	-91	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_47	TATOOINE	tat_bestine_cantina	AREA	3	14.2	-0.9	-4.8	49	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
+spawn_tatooine_47	TATOOINE	tat_bestine_cantina	AREA	3	14.2	-0.9	-4.8	49	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_48	TATOOINE	tat_bestine_cantina	AREA	3	16.5	-0.9	-3.1	-128	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_table			600
 spawn_tatooine_49	TATOOINE	tat_bestine_cantina	AREA	3	-0.7	-0.9	10.2	-10	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_50	TATOOINE	tat_bestine_cantina	AREA	3	-2.2	-0.9	11.9	97	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
@@ -158,7 +158,7 @@ spawn_tatooine_155	TATOOINE	tat_world	AREA	0	-780.9	20.9	-4054.2	0	1	a bantha	cr
 spawn_tatooine_156	TATOOINE	tat_world	AREA	0	-1214.2	12.0	-3597.5	-55	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		bartender	600
 spawn_tatooine_157	TATOOINE	tat_world	AREA	0	-1364.4	12.0	-3692.1	93	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_ground			600
 spawn_tatooine_158	TATOOINE	tat_world	AREA	0	-1222.4	12.0	-3620.3	155	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_tatooine_159	TATOOINE	tat_world	AREA	0	-1094.3	12.6	-3571.5	95	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_tatooine_159	TATOOINE	tat_world	AREA	0	-1094.5	12.6	-3573.4	95	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_160	TATOOINE	tat_world	AREA	0	-1037.2	12.0	-3723.2	-91	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_161	TATOOINE	tat_world	AREA	0	-1222.4	12.0	-3622.9	-11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
 spawn_tatooine_162	TATOOINE	tat_world	AREA	0	-1010.3	12.0	-3728.6	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
