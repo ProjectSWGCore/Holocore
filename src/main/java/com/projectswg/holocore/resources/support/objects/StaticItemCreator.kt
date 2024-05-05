@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -57,14 +57,12 @@ object StaticItemCreator {
 		applyAttributes(obj, info.wearableInfo)
 		applyAttributes(obj, info.weaponInfo)
 		applyAttributes(obj, info.consumableInfo)
-		applyAttributes(obj, info.costumeInfo)
 		applyAttributes(obj, info.crystalInfo)
 		applyAttributes(obj, info.grantInfo)
 		applyAttributes(obj, info.genericInfo)
 		applyAttributes(obj, info.itemInfo)
 		applyAttributes(obj, info.objectInfo)
 		applyAttributes(obj, info.schematicInfo)
-		applyAttributes(obj, info.storytellerInfo)
 	}
 	
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.ArmorItemInfo?) {
@@ -155,12 +153,6 @@ object StaticItemCreator {
 
 		applyItemValue(info.value, obj)
 	}
-	
-	@Suppress("UNUSED_PARAMETER")
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CostumeItemInfo?) {
-//		if (info == null)
-//			return;
-	}
 
 	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.CrystalItemInfo?) {
 		if (info == null)
@@ -229,13 +221,7 @@ object StaticItemCreator {
 //		if (info == null)
 //			return;
 	}
-	
-	@Suppress("UNUSED_PARAMETER")
-	private fun applyAttributes(obj: TangibleObject, info: StaticItemLoader.StorytellerItemInfo?) {
-//		if (info == null)
-//			return;
-	}
-	
+
 	private fun applySkillMods(obj: TangibleObject, skillMods: Map<String, Int>) {
 		for ((key, value) in skillMods) {
 			obj.adjustSkillmod(key, value, 0)

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -74,14 +74,12 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		
 		val armorInfo: ArmorItemInfo?
 		val consumableInfo: ConsumableItemInfo?
-		val costumeInfo: CostumeItemInfo?
 		val crystalInfo: CrystalItemInfo?
 		val grantInfo: GrantItemInfo?
 		val genericInfo: GenericItemInfo?
 		val itemInfo: GenericItemInfo?
 		val objectInfo: ObjectItemInfo?
 		val schematicInfo: SchematicItemInfo?
-		val storytellerInfo: StorytellerItemInfo?
 		val weaponInfo: WeaponItemInfo?
 		val wearableInfo: WearableItemInfo?
 		
@@ -90,14 +88,12 @@ class StaticItemLoader internal constructor() : DataLoader() {
 			
 			this.armorInfo = if ("armor" == type) ArmorItemInfo(set, colorArray) else null
 			this.consumableInfo = if ("consumable" == type) ConsumableItemInfo(set) else null
-			this.costumeInfo = if ("costume" == type) CostumeItemInfo(set) else null
 			this.crystalInfo = if ("crystal" == type) CrystalItemInfo(set, colorArray) else null
 			this.grantInfo = if ("grant" == type) GrantItemInfo(set) else null
 			this.genericInfo = if ("generic" == type) GenericItemInfo(set, colorArray) else null
 			this.itemInfo = if ("item" == type) GenericItemInfo(set, colorArray) else null
 			this.objectInfo = if ("object" == type) ObjectItemInfo(set, colorArray) else null
 			this.schematicInfo = if ("schematic" == type) SchematicItemInfo(set) else null
-			this.storytellerInfo = if ("storyteller" == type) StorytellerItemInfo(set) else null
 			this.weaponInfo = if ("weapon" == type) WeaponItemInfo(set) else null
 			this.wearableInfo = if ("wearable" == type) WearableItemInfo(set, colorArray) else null
 		}
@@ -148,12 +144,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 
 	}
 	
-	class CostumeItemInfo(set: SdbResultSet) {
-		
-		val buffName: String = set.getText("buff_name")
-		
-	}
-
 	class CrystalItemInfo(set: SdbResultSet, colorArray: SdbIntegerColumnArraySet) {
 		val color: IntArray	= Arrays.copyOfRange(colorArray.getArray(set), 0, 5)
 			get() = field.clone()
@@ -207,9 +197,6 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val schematicSkillNeeded: String = set.getText("schematic_skill_needed")
 		
 	}
-	
-	@Suppress("UNUSED_PARAMETER")
-	class StorytellerItemInfo(set: SdbResultSet)
 	
 	class WeaponItemInfo(set: SdbResultSet) {
 		

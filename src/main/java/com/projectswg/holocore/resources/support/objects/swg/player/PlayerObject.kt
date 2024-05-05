@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -35,7 +35,6 @@ import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.Baselin
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.global.player.PlayerFlags
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
 import java.time.Instant
@@ -45,7 +44,6 @@ import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.math.max
 
 class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLAY) {
 
@@ -145,10 +143,6 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 
 	fun setBornDate(time: Instant) {
 		play3.bornDate = BORN_DATE_START.until(LocalDate.ofInstant(time, BORN_DATE_ZONE), ChronoUnit.DAYS).toInt()
-	}
-
-	fun setBornDate(year: Int, month: Int, day: Int) {
-		play3.setBornDate(year, month, day)
 	}
 
 	fun setAdminTag(accessLevel: AccessLevel) {

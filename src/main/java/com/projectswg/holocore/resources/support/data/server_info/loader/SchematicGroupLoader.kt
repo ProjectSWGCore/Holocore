@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,21 +24,46 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.utilities;
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-public class MathUtils {
-	
-	// http://en.wikipedia.org/wiki/Julian_day#Converting_Julian_or_Gregorian_calendar_date_to_Julian_Day_Number
-	public static int julianDay(int year, int month, int day) {
-		int a = (14 - month) / 12;
-		int y = year + 4800 - a;
-		int m = month + 12 * a - 3;
-		return day + Math.floorDiv(153 * m + 2, 5) + (365 * y) + Math.floorDiv(y, 4) - Math.floorDiv(y, 100) + Math.floorDiv(y, 400) - 32045;
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import java.io.File
+
+class SchematicGroupLoader : DataLoader() {
+
+	private val schematicGroupMap = mutableMapOf<String, MutableCollection<String>>()
+
+	/**
+	 * Returns a collection of all schematic names in the given group
+	 * Example: getSchematicsInGroup("craftDroidDamageRepairA") returns a collection of ["object/draft_schematic/droid/droid_damage_repair_kit_a.iff"]
+	 */
+	fun getSchematicsInGroup(groupId: String): Collection<String> {
+		return schematicGroupMap.getOrElse(groupId) { emptyList() }
 	}
-	
-	// Used for calculating born dates
-	public static int numberDaysSince(int y1, int m1, int d1, int y2, int m2, int d2) {
-		return julianDay(y1, m1, d1) - julianDay(y2, m2, d2);
+
+	override fun load() {
+		val set = SdbLoader.load(File("serverdata/crafting/schematic_group.sdb"))
+
+		set.use {
+			while (set.next()) {
+				val groupid = set.getText("groupid")
+				val schematicname = set.getText("schematicname")
+				
+				if (groupid != "end") {
+					ensureSchematicGroupExists(groupid)
+					appendSchematicToGroup(groupid, schematicname)
+				}
+			}
+		}
 	}
-	
+
+	private fun appendSchematicToGroup(groupid: String, schematicname: String) {
+		schematicGroupMap[groupid]?.add(schematicname)
+	}
+
+	private fun ensureSchematicGroupExists(groupid: String) {
+		if (!schematicGroupMap.containsKey(groupid)) {
+			schematicGroupMap[groupid] = mutableListOf()
+		}
+	}
 }
