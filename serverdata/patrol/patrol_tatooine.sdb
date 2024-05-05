@@ -559,19 +559,15 @@ patrol_tatooine_6605	patrol_tatooine_6600		TATOOINE	tat_world	0	-1285.9	12.0	-35
 patrol_tatooine_6606	patrol_tatooine_6600		TATOOINE	tat_world	0	-1289.5	12.0	-3521.5	0	-
 patrol_tatooine_6607	patrol_tatooine_6600		TATOOINE	tat_world	0	-1287.6	12.0	-3484.8	0	-
 patrol_tatooine_6608	patrol_tatooine_6600		TATOOINE	tat_world	0	-1291.5	12.0	-3474.3	15	-
-patrol_tatooine_6700	patrol_tatooine_6700	LOOP	TATOOINE	tat_world	0	-1108.7	12.0	-3632.2	0	City - Bestine - a noble
-patrol_tatooine_6701	patrol_tatooine_6700		TATOOINE	tat_world	0	-1138.4	12.0	-3658.2	0	-
-patrol_tatooine_6702	patrol_tatooine_6700		TATOOINE	tat_world	0	-1191.8	12.0	-3629.3	0	-
-patrol_tatooine_6703	patrol_tatooine_6700		TATOOINE	tat_world	0	-1252.0	12.0	-3621.4	0	-
-patrol_tatooine_6704	patrol_tatooine_6700		TATOOINE	tat_world	0	-1280.3	12.0	-3599.9	0	-
-patrol_tatooine_6705	patrol_tatooine_6700		TATOOINE	tat_world	0	-1256.5	12.0	-3565.9	0	-
-patrol_tatooine_6706	patrol_tatooine_6700		TATOOINE	tat_world	0	-1234.5	12.0	-3546.4	0	-
-patrol_tatooine_6707	patrol_tatooine_6700		TATOOINE	tat_world	0	-1213.6	12.0	-3523.3	0	-
-patrol_tatooine_6708	patrol_tatooine_6700		TATOOINE	tat_world	0	-1181.2	12.0	-3541.2	0	-
-patrol_tatooine_6709	patrol_tatooine_6700		TATOOINE	tat_world	0	-1168.5	12.0	-3532.2	0	-
-patrol_tatooine_6710	patrol_tatooine_6700		TATOOINE	tat_world	0	-1122.0	12.0	-3562.6	0	-
-patrol_tatooine_6711	patrol_tatooine_6700		TATOOINE	tat_world	0	-1096.8	12.0	-3594.9	0	-
-patrol_tatooine_6712	patrol_tatooine_6700		TATOOINE	tat_world	0	-1097.5	12.0	-3614.4	0	-
+patrol_tatooine_6700	patrol_tatooine_6700	FLIP	TATOOINE	tat_world	0	-1108.7	12.0	-3632.2	0	City - Bestine - a noble
+patrol_tatooine_6701	patrol_tatooine_6700		TATOOINE	tat_world	0	-1125.1	12.0	-3649.0	0	-
+patrol_tatooine_6702	patrol_tatooine_6700		TATOOINE	tat_world	0	-1155.9	12.0	-3653.0	0	-
+patrol_tatooine_6703	patrol_tatooine_6700		TATOOINE	tat_world	0	-1190.6	12.0	-3626.8	0	-
+patrol_tatooine_6704	patrol_tatooine_6700		TATOOINE	tat_world	0	-1222.7	12.0	-3613.3	0	-
+patrol_tatooine_6705	patrol_tatooine_6700		TATOOINE	tat_world	0	-1231.3	12.0	-3606.2	0	-
+patrol_tatooine_6706	patrol_tatooine_6700		TATOOINE	tat_world	0	-1249.8	12.0	-3623.3	0	-
+patrol_tatooine_6707	patrol_tatooine_6700		TATOOINE	tat_world	0	-1280.4	12.0	-3626.1	0	-
+patrol_tatooine_6708	patrol_tatooine_6700		TATOOINE	tat_world	0	-1281.2	12.0	3628.9	60	-
 patrol_tatooine_6800	patrol_tatooine_6800	FLIP	TATOOINE	tat_world	0	-1387.5	12.0	-3586.0	15	City - Bestine - a moisture farmer
 patrol_tatooine_6801	patrol_tatooine_6800		TATOOINE	tat_world	0	-1375.3	12.0	-3627.0	0	-
 patrol_tatooine_6802	patrol_tatooine_6800		TATOOINE	tat_bestine_starport	16	52.7	1.0	11.0	0	-
@@ -587,18 +583,11 @@ patrol_tatooine_6811	patrol_tatooine_6800		TATOOINE	tat_bestine_starport	1	1.0	0
 patrol_tatooine_6812	patrol_tatooine_6800		TATOOINE	tat_world	0	-1292.4	12.0	-3591.5	0	-
 patrol_tatooine_6813	patrol_tatooine_6800		TATOOINE	tat_world	0	-1247.0	12.0	-3628.2	0	-
 patrol_tatooine_6814	patrol_tatooine_6800		TATOOINE	tat_world	0	-1191.4	12.0	-3629.9	0	-
-patrol_tatooine_6815	patrol_tatooine_6800		TATOOINE	tat_world	0	-1148.0	12.0	-3663.3	0	-
-patrol_tatooine_6816	patrol_tatooine_6800		TATOOINE	tat_world	0	-1137.9	12.0	-3666.0	0	-
-patrol_tatooine_6900	patrol_tatooine_6900	LOOP	TATOOINE	tat_world	0	-1105.2	12.0	-3704.6	15	City - Bestine - an artisan
-patrol_tatooine_6901	patrol_tatooine_6900		TATOOINE	tat_world	0	-1132.1	12.0	-3692.3	0	-
-patrol_tatooine_6902	patrol_tatooine_6900		TATOOINE	tat_world	0	-1120.6	12.0	-3686.8	0	-
-patrol_tatooine_6903	patrol_tatooine_6900		TATOOINE	tat_world	0	-1129.1	12.0	-3676.5	0	-
-patrol_tatooine_6904	patrol_tatooine_6900		TATOOINE	tat_world	0	-1134.7	12.0	-3669.8	0	-
-patrol_tatooine_6905	patrol_tatooine_6900		TATOOINE	tat_world	0	-1140.2	12.0	-3668.7	0	-
-patrol_tatooine_6906	patrol_tatooine_6900		TATOOINE	tat_world	0	-1192.3	12.0	-3624.5	0	-
-patrol_tatooine_6907	patrol_tatooine_6900		TATOOINE	tat_world	0	-1264.3	12.5	-3641.1	0	-
-patrol_tatooine_6908	patrol_tatooine_6900		TATOOINE	tat_world	0	-1269.1	12.5	-3637.4	0	-
-patrol_tatooine_6909	patrol_tatooine_6900		TATOOINE	tat_world	0	-1294.0	12.5	-3668.7	15	-
+patrol_tatooine_6900	patrol_tatooine_6900	FLIP	TATOOINE	tat_world	0	-1105.2	12.0	-3704.6	15	City - Bestine - an artisan
+patrol_tatooine_6901	patrol_tatooine_6900		TATOOINE	tat_world	0	-1132.1	12.0	-3692.3	25	-
+patrol_tatooine_6902	patrol_tatooine_6900		TATOOINE	tat_world	0	-1120.6	12.0	-3686.8	15	-
+patrol_tatooine_6903	patrol_tatooine_6900		TATOOINE	tat_world	0	-1129.1	12.0	-3676.5	35	-
+patrol_tatooine_6904	patrol_tatooine_6900		TATOOINE	tat_world	0	-1134.7	12.0	-3669.8	20	-
 patrol_tatooine_7000	patrol_tatooine_7000	LOOP	TATOOINE	tat_world	0	1564.2	15.0	3493.9	0	City - Mos Entha - a noble
 patrol_tatooine_7001	patrol_tatooine_7000		TATOOINE	tat_world	0	1544.5	15.0	3482.1	0	-
 patrol_tatooine_7002	patrol_tatooine_7000		TATOOINE	tat_world	0	1544.4	14.9	3473.8	0	-
