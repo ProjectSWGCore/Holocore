@@ -80,11 +80,7 @@ public class BuffService extends Service {
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
 		String buffName = bi.getBuffName();
-		BuffInfo buffData = bi.getBuffData();
-
-		if (buffData == null) {
-			buffData = getBuff(buffName);
-		}
+		BuffInfo buffData = getBuff(buffName);
 
 		Objects.requireNonNull(buffData, "No known buff: " + buffName);
 		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
