@@ -144,8 +144,6 @@ public class BuffService extends Service {
 		String groupName = buffData.getGroup1();
 		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroup1())).findAny();
 		
-		int applyTime = calculatePlayTime(receiver);
-		
 		if (groupBuff.isPresent()) {
 			Buff buff = groupBuff.get();
 			
@@ -157,11 +155,11 @@ public class BuffService extends Service {
 				BuffInfo oldBuff = getBuff(buff);
 				if (buffData.getPriority() >= oldBuff.getPriority()) {
 					removeBuff(receiver, oldBuff);
-					applyBuff(receiver, buffer, buffData, applyTime);
+					applyBuff(receiver, buffer, buffData);
 				}
 			}
 		} else {
-			applyBuff(receiver, buffer, buffData, applyTime);
+			applyBuff(receiver, buffer, buffData);
 		}
 	}
 	
@@ -178,7 +176,8 @@ public class BuffService extends Service {
 		checkCallback(buffData, creature);
 	}
 	
-	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData, int applyTime) {
+	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData) {
+		int applyTime = calculatePlayTime(receiver);
 		int buffDuration = (int) buffData.getDuration();
 		
 		{
