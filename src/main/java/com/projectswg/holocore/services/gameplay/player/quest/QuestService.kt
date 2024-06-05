@@ -415,7 +415,14 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
 			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
 			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questName)
+			else                                       -> handleUnsupportedTaskType(player, questName, currentTask)
 		}
+	}
+
+	private fun handleUnsupportedTaskType(player: Player, questName: String, currentTask: QuestTaskInfo) {
+		StandardLog.onPlayerTrace(this, player, "skipping unsupported task type %s for task %d of quest %s", currentTask.type, currentTask.index, questName)
+		SystemMessageIntent.broadcastPersonal(player, "Quest task type '${currentTask.type}' is not yet supported. Skipping it so you can continue.")
+		completeTask(questName, player, currentTask)
 	}
 
 	private fun handleClearQuest(player: Player, questName: String) {
