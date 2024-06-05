@@ -204,10 +204,6 @@ public class BuffService extends Service {
 	private void checkCallback(BuffInfo buffData, CreatureObject creature) {
 		String callback = buffData.getCallback();
 		
-		if (callback.equals("none")) {
-			return;
-		}
-		
 		if (callbackMap.containsKey(callback)) {
 			BuffCallback buffCallback = callbackMap.get(callback);
 			buffCallback.execute(creature);
