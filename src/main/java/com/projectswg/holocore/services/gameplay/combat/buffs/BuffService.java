@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -51,12 +51,6 @@ import java.util.stream.Stream;
 
 public class BuffService extends Service {
 	
-	/*
-	 * TODO remove buffs on respec. Listen for respec event and remove buffs with BuffInfo where
-	 *      REMOVE_ON_RESPEC == 1
-	 * TODO remove group buff(s) from receiver when distance between caster and receiver is 100m.
-	 *      Perform same check upon zoning in. Skillmod1 effect name is "group"
-	 */
 	
 	private final ScheduledThreadPool timerCheckThread;
 	private final Map<String, BuffCallback> callbackMap;
@@ -226,11 +220,6 @@ public class BuffService extends Service {
 	}
 	
 	private void checkBuffEffects(BuffInfo buffData, CreatureObject creature, boolean add) {
-		/*
-		 * TODO Check effectName == "group". If yes, every group member within 100m range (maybe
-		 *      just the ones aware of the buffer) receive the buff. Once outside range, buff needs
-		 *      removal
-		 */
 		for (int i = 0; i < 5; i++)
 			checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), add);
 	}
