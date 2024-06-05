@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -32,16 +32,14 @@ import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
 
 public class Buff implements Encodable, MongoPersistable {
-	
-	private int crc;
+
 	private int endTime;
 	
 	public Buff() {
-		this(0, 0);
+		this(0);
 	}
 	
-	public Buff(int crc, int endTime) {
-		this.crc = crc;
+	public Buff(int endTime) {
 		this.endTime = endTime;
 	}
 	
@@ -66,47 +64,20 @@ public class Buff implements Encodable, MongoPersistable {
 	
 	@Override
 	public void saveMongo(MongoData data) {
-		data.putInteger("crc", crc);
 		data.putInteger("endTime", endTime);
 	}
 	
 	@Override
 	public void readMongo(MongoData data) {
-		crc = data.getInteger("crc", 0);
 		endTime = data.getInteger("endTime", 0);
-	}
-	
-	public int getCrc() {
-		return crc;
-	}
-	
-	public void setCrc(int crc) {
-		this.crc = crc;
 	}
 	
 	public int getEndTime() {
 		return endTime;
 	}
-	
-	public void setEndTime(int endTime) {
-		this.endTime = endTime;
-	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("Buff[End=%d]", endTime);
 	}
-	
-	@Override
-	public int hashCode() {
-		return crc;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (!(o instanceof Buff))
-			return false;
-		return ((Buff) o).getCrc() == crc;
-	}
-
 }

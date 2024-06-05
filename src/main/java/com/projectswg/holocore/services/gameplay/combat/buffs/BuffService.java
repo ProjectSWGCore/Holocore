@@ -34,6 +34,7 @@ import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -44,17 +45,16 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class BuffService extends Service {
 	
 	
 	private final ScheduledThreadPool timerCheckThread;
 	private final Map<String, BuffCallback> callbackMap;
-	
+	private final BuffLoader buffs = DataLoader.Companion.buffs();
+
 	public BuffService() {
 		timerCheckThread = new ScheduledThreadPool(1, "buff-timer-check");
 		callbackMap = new HashMap<>();
@@ -80,26 +80,20 @@ public class BuffService extends Service {
 	@IntentHandler
 	private void handleBuffIntent(BuffIntent bi) {
 		String buffName = bi.getBuffName();
-		BuffInfo buffData = getBuff(buffName);
-
-		Objects.requireNonNull(buffData, "No known buff: " + buffName);
-		assert buffData.getName().equals(buffName) : "BuffIntent name ["+ buffName +"] does not match BuffData name ["+buffData.getName()+ ']';
+		CRC buffCrc = new CRC(CRC.getCrc(buffName.toLowerCase(Locale.ENGLISH)));
 		CreatureObject buffer = bi.getBuffer();
 		CreatureObject receiver = bi.getReceiver();
 
 		if (bi.isRemove()) {
-			removeBuff(receiver, buffData);
+			removeBuff(receiver, buffCrc);
 		} else {
-			addBuff(receiver, buffData, buffer);
+			addBuff(receiver, buffCrc, buffer);
 		}
 	}
 	
 	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
-		CreatureObject corpse = cki.getCorpse();
-		
-		// All buffs are removed upon death
-		removeAllBuffs(corpse, corpse.getBuffEntries(buff -> true));
+		removeAllBuffs(cki.getCorpse());
 	}
 	
 	@IntentHandler
@@ -107,15 +101,19 @@ public class BuffService extends Service {
 		PlayerEvent event = intent.getEvent();
 		
 		if (event == PlayerEvent.PE_ZONE_IN_SERVER) {
-			removeExpiredBuffs(intent);
+			removeExpiredBuffs(intent.getPlayer().getCreatureObject());
 		}
 	}
 	
-	private void removeExpiredBuffs(PlayerEventIntent intent) {
-		Player player = intent.getPlayer();
-		CreatureObject creatureObject = player.getCreatureObject();
-		Stream<Buff> expiredBuffs = creatureObject.getBuffEntries(buff -> isBuffExpired(creatureObject, buff));
-		expiredBuffs.forEach(expiredBuff -> removeBuff(creatureObject, getBuff(expiredBuff)));
+	private void removeExpiredBuffs(CreatureObject creatureObject) {
+		Collection<CRC> crcsForExpiredBuffs = creatureObject.getBuffs().entrySet().stream()
+				.filter(entry -> {
+					Buff buff = entry.getValue();
+					return isBuffExpired(creatureObject, buff);
+				}).map(Map.Entry::getKey)
+				.toList();
+
+		crcsForExpiredBuffs.forEach(buffCrc -> removeBuff(creatureObject, buffCrc));
 	}
 	
 	private int calculatePlayTime(CreatureObject creature) {
@@ -136,25 +134,41 @@ public class BuffService extends Service {
 		return buffData.getDuration() < 0;
 	}
 	
-	private void removeAllBuffs(CreatureObject creature, Stream<Buff> buffStream) {
-		buffStream.forEach(buff -> removeBuff(creature, getBuff(buff)));
+	private void removeAllBuffs(CreatureObject creature) {
+		Set<CRC> buffCrcs = creature.getBuffs().keySet();
+		buffCrcs.forEach(buffCrc -> removeBuff(creature, buffCrc));
 	}
 	
-	private void addBuff(CreatureObject receiver, @NotNull BuffInfo buffData, CreatureObject buffer) {
+	private void addBuff(CreatureObject receiver, @NotNull CRC buffCrc, CreatureObject buffer) {
+		BuffInfo buffData = buffs.getBuff(buffCrc);
 		String groupName = buffData.getGroup1();
-		Optional<Buff> groupBuff = receiver.getBuffEntries(buff -> groupName.equals(getBuff(buff).getGroup1())).findAny();
+		Optional<CRC> optGroupBuffCrc = receiver.getBuffs().keySet().stream()
+				.map(buffCrc1 -> buffs.getBuff(buffCrc1)).filter(buff -> {
+					CRC candidateBuffCrc = buff.getCrc();
+					BuffInfo candidateBuff = buffs.getBuff(candidateBuffCrc);
+					String candidateBuffGroup1Name = candidateBuff.getGroup1();
+
+					return groupName.equals(candidateBuffGroup1Name);
+				})
+				.map(BuffInfo::getCrc)
+				.findAny();
 		
-		if (groupBuff.isPresent()) {
-			Buff buff = groupBuff.get();
+		if (optGroupBuffCrc.isPresent()) {
+			CRC groupBuffCrc = optGroupBuffCrc.get();
+			boolean sameBuff = groupBuffCrc.equals(buffCrc);
 			
-			if (buff.getCrc() == buffData.getCrc()) {
+			if (sameBuff) {
 				if (isBuffInfinite(buffData)) {
-					removeBuff(receiver, buffData);
+					removeBuff(receiver, buffCrc);
+				} else {
+					// Reset timer
+					removeBuff(receiver, buffCrc);
+					applyBuff(receiver, buffer, buffData);
 				}
 			} else {
-				BuffInfo oldBuff = getBuff(buff);
+				BuffInfo oldBuff = buffs.getBuff(groupBuffCrc);
 				if (buffData.getPriority() >= oldBuff.getPriority()) {
-					removeBuff(receiver, oldBuff);
+					removeBuff(receiver, groupBuffCrc);
 					applyBuff(receiver, buffer, buffData);
 				}
 			}
@@ -163,14 +177,18 @@ public class BuffService extends Service {
 		}
 	}
 	
-	private void removeBuff(CreatureObject creature, @NotNull BuffInfo buffData) {
-		Optional<Buff> optionalEntry = creature.getBuffEntries(buff -> buff.getCrc() == buffData.getCrc()).findAny();
-		if (!optionalEntry.isPresent())
+	private void removeBuff(CreatureObject creature, @NotNull CRC buffCrc) {
+		if (!creature.getBuffs().containsKey(buffCrc))
 			return; // Obique: Used to be an assertion, however if a service sends the removal after it expires it would assert - so I just removed it.
-		
-		Buff buff = optionalEntry.get();
-		Buff removedBuff = creature.removeBuff(new CRC(buff.getCrc()));
+
+		BuffInfo buffData = buffs.getBuff(buffCrc);
+		if (buffData == null) {
+			StandardLog.onPlayerError(this, creature, "unable to remove buff '%s' as it could not be looked up", buffCrc.getString());
+			return;
+		}
+		Buff removedBuff = creature.removeBuff(buffCrc);
 		Objects.requireNonNull(removedBuff, "Buff must exist if being removed");
+		StandardLog.onPlayerTrace(this, creature, "buff '%s' was removed", buffCrc.getString());
 
 		checkBuffEffects(buffData, creature, false);
 		checkCallback(buffData, creature);
@@ -179,22 +197,36 @@ public class BuffService extends Service {
 	private void applyBuff(CreatureObject receiver, CreatureObject buffer, BuffInfo buffData) {
 		int applyTime = calculatePlayTime(receiver);
 		int buffDuration = (int) buffData.getDuration();
+		int endTime = applyTime + buffDuration;
 		
 		{
 			Player bufferPlayer = buffer.getOwner();
 			String bufferUsername = bufferPlayer == null ? "NULL" : bufferPlayer.getUsername();
 			StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.getName(), bufferUsername, buffer.getObjectName(), applyTime, buffDuration);
 		}
-		Buff buff = new Buff(buffData.getCrc(), applyTime + buffDuration);
 
 		checkBuffEffects(buffData, receiver, true);
-		receiver.addBuff(buff);
+		receiver.addBuff(buffData.getCrc(), new Buff(endTime));
 
 		sendParticleEffect(buffData.getParticle(), receiver, "");
 
-		timerCheckThread.execute(buffDuration * 1000L, () -> removeBuff(receiver, buffData));
+		scheduleBuffExpirationCheck(receiver, buffData);
 	}
-	
+
+	private void scheduleBuffExpirationCheck(CreatureObject receiver, BuffInfo buffData) {
+		timerCheckThread.execute(1000L, () -> {
+			Buff buff = receiver.getBuffs().get(buffData.getCrc());
+			if (buff == null) {
+				return;
+			}
+			if (isBuffExpired(receiver, buff)) {
+				removeBuff(receiver, buffData.getCrc());
+			} else {
+				scheduleBuffExpirationCheck(receiver, buffData);
+			}
+		});
+	}
+
 	private void sendParticleEffect(String effectFileName, CreatureObject receiver, String hardPoint) {
 		if (effectFileName != null && !effectFileName.isEmpty()) {
 			receiver.sendObservers(new PlayClientEffectObjectMessage(effectFileName, hardPoint, receiver.getObjectId(), ""));
@@ -236,15 +268,5 @@ public class BuffService extends Service {
 			}
 		}
 	}
-	
-	@Nullable
-	private BuffInfo getBuff(String name) {
-		return DataLoader.Companion.buffs().getBuff(name);
-	}
-	
-	@Nullable
-	private BuffInfo getBuff(@NotNull Buff buff) {
-		return DataLoader.Companion.buffs().getBuff(buff.getCrc());
-	}
-	
+
 }

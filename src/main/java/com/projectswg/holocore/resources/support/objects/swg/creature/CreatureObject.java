@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -57,8 +57,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class CreatureObject extends TangibleObject {
 	
@@ -784,22 +782,24 @@ public class CreatureObject extends TangibleObject {
 		creo3.clearAllStatesBitmask();
 	}
 
-	public void addBuff(Buff buff) {
-		creo6.putBuff(buff, this);
+	public void addBuff(CRC buffCrc, Buff buff) {
+		creo6.putBuff(buffCrc, buff);
 	}
 	
 	public Buff removeBuff(CRC buffCrc) {
-		return creo6.removeBuff(buffCrc, this);
+		return creo6.removeBuff(buffCrc);
 	}
 	
 	public boolean hasBuff(String buffName) {
-		return getBuffEntries(buff -> CRC.getCrc(buffName.toLowerCase(Locale.ENGLISH)) == buff.getCrc()).count() > 0;
+		CRC crc = new CRC(CRC.getCrc(buffName.toLowerCase(Locale.ENGLISH)));
+		return getBuffs().containsKey(crc);
 	}
-	
-	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
-		return creo6.getBuffEntries(predicate);
+
+	@NotNull
+	public Map<CRC, Buff> getBuffs() {
+		return creo6.getBuffs();
 	}
-	
+
 	public boolean isVisible() {
 		return creo6.isVisible();
 	}

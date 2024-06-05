@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,10 +38,10 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.Equipment;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.Map;
 
 class CreatureObjectSharedNP implements MongoPersistable {
 
@@ -308,29 +308,29 @@ class CreatureObjectSharedNP implements MongoPersistable {
 		maxAttributes.setMind(maxMind);
 	}
 	
-	public void putBuff(Buff buff, SWGObject target) {
+	public void putBuff(CRC buffCrc, Buff buff) {
 		synchronized (buffs) {
-			CRC crc = new CRC(buff.getCrc());
-			assert !buffs.containsKey(crc) : "Cannot add a buff twice!";
-			buffs.put(crc, buff);
-			buffs.sendDeltaMessage(target);
+			assert !buffs.containsKey(buffCrc) : "Cannot add a buff twice!";
+			buffs.put(buffCrc, buff);
+			buffs.sendDeltaMessage(obj);
 		}
 	}
 	
-	public Buff removeBuff(CRC buffCrc, SWGObject target) {
+	public Buff removeBuff(CRC buffCrc) {
 		synchronized (buffs) {
 			Buff removedBuff = buffs.remove(buffCrc);
 			if (removedBuff != null) {
-				buffs.sendDeltaMessage(target);
+				buffs.sendDeltaMessage(obj);
 			}
 
 			return removedBuff;
 		}
 	}
 	
-	public Stream<Buff> getBuffEntries(Predicate<Buff> predicate) {
+	@NotNull
+	public Map<CRC, Buff> getBuffs() {
 		synchronized (buffs) {
-			return new ArrayList<>(buffs.values()).stream().filter(predicate);
+			return new HashMap<>(buffs);
 		}
 	}
 	
