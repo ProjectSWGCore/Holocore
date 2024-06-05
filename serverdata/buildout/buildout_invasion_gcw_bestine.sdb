@@ -1,78 +1,78 @@
 buildout_id	terrain	building_name	cell_id	template	x	y	z	heading	x_1	y_1	z_1	radius	active	comment
 INTEGER PRIMARY KEY	TEXT	TEXT	INTEGER	TEXT	REAL	REAL	REAL	REAL	REAL	REAL	REAL	REAL	BOOLEAN	TEXT
-bo_invasion_gcw_bestine_001	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1219.4	9.0	-3623.8	93	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_002	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1213.9	9.0	-3629.8	0	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_003	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1207.6	9.0	-3625.9	92	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_004	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1243.2	9.0	-3622.3	-138	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_005	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1180.7	9.0	-3633.1	-50	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_006	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1103.7	9.0	-3700.5	-57	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_007	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1010.2	9.0	-3702.0	-44	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_008	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1023.1	9.0	-3730.9	-26	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_009	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-977.2	9.0	-3749.0	-49	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_010	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1034.0	8.7	-3577.7	-31	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_011	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1045.8	8.2	-3586.7	-46	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_012	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1081.2	9.0	-3584.0	-79	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_013	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1229.5	9.0	-3493.8	-3	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_014	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1220.9	9.0	-3541.4	-50	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_015	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1195.9	9.0	-3536.3	39	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_016	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1225.5	9.0	-3564.9	-49	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_017	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1245.6	9.0	-3695.4	-12	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_018	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1238.0	9.0	-3693.8	-12	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_019	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1131.1	9.0	-3712.1	41	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_020	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1136.9	9.0	-3707.0	41	0	0	0	128	TRUE	gcw_defender_barricade
-bo_invasion_gcw_bestine_021	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1092.3	9.0	-3493.1	5	0	0	0	128	TRUE	NE Barricade
-bo_invasion_gcw_bestine_022	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1099.0	9.0	-3492.4	5	0	0	0	128	TRUE	NE Barricade
-bo_invasion_gcw_bestine_023	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1216.3	9.0	-3493.3	-3	0	0	0	128	TRUE	NW Barricade
-bo_invasion_gcw_bestine_024	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-973.4	9.0	-3744.7	-49	0	0	0	128	TRUE	SE Barricade
-bo_invasion_gcw_bestine_025	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-980.8	9.0	-3753.1	-49	0	0	0	128	TRUE	SE Barricade
-bo_invasion_gcw_bestine_026	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1337.9	9.0	-3678.5	13	0	0	0	128	TRUE	SW Barricade
-bo_invasion_gcw_bestine_027	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1325.9	9.0	-3681.5	8	0	0	0	128	TRUE	SW Barricade
-bo_invasion_gcw_bestine_028	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1313.6	9.0	-3682.4	4	0	0	0	128	TRUE	SW Barricade
-bo_invasion_gcw_bestine_029	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1280.1	9.0	-3569.4	-160	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_030	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1270.2	9.0	-3574.3	26	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_031	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1265.5	9.0	-3611.9	-77	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_032	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1268.0	9.0	-3622.7	97	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_033	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1242.4	9.0	-3634.5	82	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_034	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1237.7	9.0	-3645.5	37	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_035	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1229.4	9.0	-3652.5	37	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_036	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1101.4	9.0	-3622.7	48	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_037	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1101.5	9.0	-3630.2	127	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_038	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1108.3	9.0	-3638.4	132	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_039	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1162.9	9.0	-3639.5	127	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_040	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1169.7	9.0	-3647.8	132	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_041	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-972.2	12.0	-3737.2	133	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_042	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-988.8	12.0	-3754.9	133	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_043	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1025.4	10.6	-3574.6	162	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_044	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1040.2	11.1	-3581.7	140	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_045	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1141.9	12.0	-3702.4	-139	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_046	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1124.6	12.0	-3716.9	-139	0	0	0	128	TRUE	gcw_defender_tower
-bo_invasion_gcw_bestine_047	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1079.1	12.0	-3488.2	3	0	0	0	128	TRUE	NE Tower
-bo_invasion_gcw_bestine_048	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1113.6	12.0	-3487.0	3	0	0	0	128	TRUE	NE Tower
-bo_invasion_gcw_bestine_049	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1201.6	12.0	-3494.7	0	0	0	0	128	TRUE	NW Tower
-bo_invasion_gcw_bestine_050	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1241.5	12.0	-3496.0	0	0	0	0	128	TRUE	NW Tower
-bo_invasion_gcw_bestine_051	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1307.5	12.0	-3683.2	-172	0	0	0	128	TRUE	SW Tower
-bo_invasion_gcw_bestine_052	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1344.4	12.0	-3676.9	-170	0	0	0	128	TRUE	SW Tower
-bo_invasion_gcw_bestine_053	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-1259.0	66.7	-3287.4	174	0	0	0	128	TRUE	camp
-bo_invasion_gcw_bestine_054	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-866.3	14.7	-3844.7	-22	0	0	0	128	TRUE	camp
-bo_invasion_gcw_bestine_055	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-1222.8	57.1	-3820.3	0	0	0	0	128	TRUE	camp
-bo_invasion_gcw_bestine_056	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-1226.2	64.1	-3816.7	-46	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_057	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-871.3	21.7	-3842.6	-68	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_058	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-1254.7	73.7	-3290.9	127	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_059	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x.iff	-1225.0	12.0	-3617.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_060	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x_2.iff	-889.0	20.0	-3808.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_061	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x_3.iff	-1242.0	56.0	-3818.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_062	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw.iff	-1228.0	14.0	-3521.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_063	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw_2.iff	-1383.0	12.0	-3717.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_064	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw_3.iff	-1287.0	12.0	-3521.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_065	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw.iff	-1042.0	12.0	-3635.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_066	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw_2.iff	-1267.0	12.0	-3626.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_067	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw_3.iff	-1385.0	23.0	-3914.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_068	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1164.9	12.0	-3662.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_069	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1051.0	12.0	-3722.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_070	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1211.9	12.0	-3534.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_071	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1164.9	12.0	-3662.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_072	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1051.0	12.0	-3722.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_073	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1211.9	12.0	-3534.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_074	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1164.9	13.0	-3662.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_075	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1051.0	13.0	-3722.0	0	0	0	0	128	TRUE	-
-bo_invasion_gcw_bestine_076	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1211.9	13.0	-3534.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_001	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1219.4	9.0	-3623.8	93	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_002	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1213.9	9.0	-3629.8	0	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_003	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1207.6	9.0	-3625.9	92	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_004	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1243.2	9.0	-3622.3	-138	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_005	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1180.7	9.0	-3633.1	-50	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_006	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1103.7	9.0	-3700.5	-57	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_007	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1010.2	9.0	-3702.0	-44	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_008	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1023.1	9.0	-3730.9	-26	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_009	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-977.2	9.0	-3749.0	-49	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_010	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1034.0	8.7	-3577.7	-31	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_011	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1045.8	8.2	-3586.7	-46	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_012	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1081.2	9.0	-3584.0	-79	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_013	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1229.5	9.0	-3493.8	-3	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_014	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1220.9	9.0	-3541.4	-50	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_015	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1195.9	9.0	-3536.3	39	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_016	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1225.5	9.0	-3564.9	-49	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_017	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1245.6	9.0	-3695.4	-12	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_018	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1238.0	9.0	-3693.8	-12	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_019	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1131.1	9.0	-3712.1	41	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_020	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1136.9	9.0	-3707.0	41	0	0	0	128	TRUE	gcw_defender_barricade
+buildout_invasion_gcw_bestine_021	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1092.3	9.0	-3493.1	5	0	0	0	128	TRUE	NE Barricade
+buildout_invasion_gcw_bestine_022	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1099.0	9.0	-3492.4	5	0	0	0	128	TRUE	NE Barricade
+buildout_invasion_gcw_bestine_023	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1216.3	9.0	-3493.3	-3	0	0	0	128	TRUE	NW Barricade
+buildout_invasion_gcw_bestine_024	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-973.4	9.0	-3744.7	-49	0	0	0	128	TRUE	SE Barricade
+buildout_invasion_gcw_bestine_025	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-980.8	9.0	-3753.1	-49	0	0	0	128	TRUE	SE Barricade
+buildout_invasion_gcw_bestine_026	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1337.9	9.0	-3678.5	13	0	0	0	128	TRUE	SW Barricade
+buildout_invasion_gcw_bestine_027	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1325.9	9.0	-3681.5	8	0	0	0	128	TRUE	SW Barricade
+buildout_invasion_gcw_bestine_028	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1313.6	9.0	-3682.4	4	0	0	0	128	TRUE	SW Barricade
+buildout_invasion_gcw_bestine_029	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1280.1	9.0	-3569.4	-160	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_030	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1270.2	9.0	-3574.3	26	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_031	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1265.5	9.0	-3611.9	-77	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_032	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1268.0	9.0	-3622.7	97	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_033	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1242.4	9.0	-3634.5	82	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_034	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1237.7	9.0	-3645.5	37	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_035	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1229.4	9.0	-3652.5	37	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_036	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1101.4	9.0	-3622.7	48	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_037	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1101.5	9.0	-3630.2	127	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_038	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1108.3	9.0	-3638.4	132	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_039	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1162.9	9.0	-3639.5	127	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_040	TATOOINE	tat_world	0	object/installation/battlefield/destructible/bfield_wall_rebl_weak.iff	-1169.7	9.0	-3647.8	132	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_041	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-972.2	12.0	-3737.2	133	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_042	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-988.8	12.0	-3754.9	133	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_043	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1025.4	10.6	-3574.6	162	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_044	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1040.2	11.1	-3581.7	140	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_045	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1141.9	12.0	-3702.4	-139	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_046	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1124.6	12.0	-3716.9	-139	0	0	0	128	TRUE	gcw_defender_tower
+buildout_invasion_gcw_bestine_047	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1079.1	12.0	-3488.2	3	0	0	0	128	TRUE	NE Tower
+buildout_invasion_gcw_bestine_048	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1113.6	12.0	-3487.0	3	0	0	0	128	TRUE	NE Tower
+buildout_invasion_gcw_bestine_049	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1201.6	12.0	-3494.7	0	0	0	0	128	TRUE	NW Tower
+buildout_invasion_gcw_bestine_050	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1241.5	12.0	-3496.0	0	0	0	0	128	TRUE	NW Tower
+buildout_invasion_gcw_bestine_051	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1307.5	12.0	-3683.2	-172	0	0	0	128	TRUE	SW Tower
+buildout_invasion_gcw_bestine_052	TATOOINE	tat_world	0	object/static/structure/general/banner_rebel_style_01.iff	-1344.4	12.0	-3676.9	-170	0	0	0	128	TRUE	SW Tower
+buildout_invasion_gcw_bestine_053	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-1259.0	66.7	-3287.4	174	0	0	0	128	TRUE	camp
+buildout_invasion_gcw_bestine_054	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-866.3	14.7	-3844.7	-22	0	0	0	128	TRUE	camp
+buildout_invasion_gcw_bestine_055	TATOOINE	tat_world	0	object/building/military/military_outpost_guard_house_imperial.iff	-1222.8	57.1	-3820.3	0	0	0	0	128	TRUE	camp
+buildout_invasion_gcw_bestine_056	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-1226.2	64.1	-3816.7	-46	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_057	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-871.3	21.7	-3842.6	-68	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_058	TATOOINE	tat_world	0	object/static/worldbuilding/terminal/floor_console_command_01.iff	-1254.7	73.7	-3290.9	127	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_059	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x.iff	-1225.0	50.0	-3617.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_060	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x_2.iff	-889.0	50.0	-3808.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_061	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_t_vs_x_3.iff	-1242.0	56.0	-3818.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_062	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw.iff	-1228.0	50.0	-3521.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_063	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw_2.iff	-1383.0	50.0	-3717.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_064	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_tb_vs_bw_3.iff	-1287.0	50.0	-3521.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_065	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw.iff	-1042.0	50.0	-3635.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_066	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw_2.iff	-1267.0	50.0	-3626.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_067	TATOOINE	tat_world	0	object/static/particle/particle_distant_ships_dogfight_ti_vs_aw_3.iff	-1385.0	50.0	-3914.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_068	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1164.9	12.0	-3662.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_069	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1051.0	12.0	-3722.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_070	TATOOINE	tat_world	0	object/static/particle/pt_smoke_large.iff	-1211.9	12.0	-3534.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_071	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1164.9	12.0	-3662.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_072	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1051.0	12.0	-3722.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_073	TATOOINE	tat_world	0	object/soundobject/soundobject_fire_roaring.iff	-1211.9	12.0	-3534.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_074	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1164.9	13.0	-3662.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_075	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1051.0	13.0	-3722.0	0	0	0	0	128	TRUE	-
+buildout_invasion_gcw_bestine_076	TATOOINE	tat_world	0	object/static/particle/pt_campfire_s01.iff	-1211.9	13.0	-3534.0	0	0	0	0	128	TRUE	-
