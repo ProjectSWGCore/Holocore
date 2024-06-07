@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_335",
 		"comment": "I would have you learn all that you can about independence and survival. I will teach you these things, if you wish to learn."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_337",
 				"comment": "I will go to the bank, if that is what you wish."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_341",
 				"comment": "Well, I like credits, so I might as well go to the bank."
 			},

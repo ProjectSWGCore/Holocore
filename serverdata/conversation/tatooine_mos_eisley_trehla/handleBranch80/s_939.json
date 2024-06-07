@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_943",
 		"comment": "Very well. Which planet would you like?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_859",
 				"comment": "Tatooine. There's just something about this planet that draws me."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_891",
 				"comment": "Naboo. I'm sure there's a lot I can do there."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_923",
 				"comment": "Corellia suits me best."
 			},

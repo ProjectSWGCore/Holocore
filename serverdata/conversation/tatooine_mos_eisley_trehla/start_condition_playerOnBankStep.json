@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_349",
 		"comment": "You didn't go to the bank terminal yet, did you?  Please go there now.  "
 	},

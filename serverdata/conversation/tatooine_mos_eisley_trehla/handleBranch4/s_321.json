@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_323",
 		"comment": "You think you are not extraordinary because that is what you have been taught. Others will profit if you do not reach your potential. You must decide what you wish to do."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_329",
 				"comment": "Since what?"
 			},

@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_766",
 		"comment": "All right, the person that you want to speak with is Lt. Akal Colzet of Storm Squadron. He's a stickler for protocol, so be on your best behavior. He resides in Bestine. Is this what you want?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_768",
 				"comment": "Yes."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_772",
 				"comment": "No. I'd like to choose someone else."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_779",
 				"comment": "Actually, I'd like to start over."
 			},

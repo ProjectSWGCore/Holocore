@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_205",
 		"comment": "You should go return to whoever sent you to me."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_754",
 				"comment": "Can you tell me how to get back to Gendra?"
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1059",
 				"comment": "I guess I should go see this Vourk guy."
 			},

@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_927",
 		"comment": "I see. Captain Kreezo trains pilots for Havoc Squadron from his safehouse in Tyrena. Would you like to go to him?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_931",
 				"comment": "Yes, that sounds good."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_939",
 				"comment": "No. I think I want another planet."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_947",
 				"comment": "On second thought, I want to start over."
 			},

@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_613",
 		"comment": "You are welcome.  I believe in rewarding good students."
 	},

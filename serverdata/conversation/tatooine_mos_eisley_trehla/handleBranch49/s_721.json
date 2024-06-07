@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_724",
 		"comment": "An associate of mine in Mos Espa needs to know what is going on here. I believe that sometime soon, these minor raids will escalate and the last thing that we need here is more war."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_727",
 				"comment": "I will do as you ask."
 			},

@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_359",
 		"comment": "I am here only to guide you, not compel you.  Decisions that you make are yours alone. But, now that you have learned where to save money, I will teach you where to start spending it."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_361",
 				"comment": "And where is that?"
 			},

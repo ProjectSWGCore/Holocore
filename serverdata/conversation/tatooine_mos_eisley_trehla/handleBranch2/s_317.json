@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_319",
 		"comment": "You need not worry about him. He is quite capable of taking care of himself. He helped you because he, like I, see something in you. You may not see it within yourself yet, but you will, if you choose to. I see a spark of greatness within you."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_309",
 				"comment": "But I'm nobody special. "
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_317",
 				"comment": "I'm glad you understand my importance."
 			},

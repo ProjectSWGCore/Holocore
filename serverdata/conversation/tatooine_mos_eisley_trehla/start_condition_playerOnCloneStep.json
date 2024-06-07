@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_401",
 		"comment": "I know that contemplating death is difficult, but you must learn what is available to restore you."
 	},

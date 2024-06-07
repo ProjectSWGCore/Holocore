@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_624",
 		"comment": "As you have been helping me, I have a gift for you. Look in your inventory for your new landspeeder deed. Talk to me again after you call the vehicle."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_627",
 				"comment": "Wow!  Thanks!"
 			},

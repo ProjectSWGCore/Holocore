@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_327",
 		"comment": "Unrealized greatness. You have much to learn still, but as the fledgling's wings grow strong, it may fly far and wide...and so may you, if you choose to."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_329",
 				"comment": "What would you have me do?"
 			},

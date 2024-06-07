@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_604",
 		"comment": "So now you know how to sell things to the junk dealers. When you are out hunting, you will occasionally come across things you don't want. Junk dealers will usually buy it from you."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_606",
 				"comment": "I'm looking forward to it."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_616",
 				"comment": "At least I won't be sending someone else to do my errands."
 			},

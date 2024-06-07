@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_367",
 		"comment": "Only if you find something that catches your eye.  It is not necessary."
 	},

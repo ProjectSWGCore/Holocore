@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_339",
 		"comment": "Good.  I will wait for your return."
 	},

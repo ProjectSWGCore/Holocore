@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_1152",
 		"comment": "Very well.  I will put the information into your journal.  Fare well and be safe."
 	},

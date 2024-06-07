@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_1079",
 		"comment": "They are idealists who believe that the Empire's rule-by-might and strongly human-centric views are evil and wrong. Until recently, their efforts were like sand in the Emperor's shoe."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1083",
 				"comment": "What changed that?"
 			},

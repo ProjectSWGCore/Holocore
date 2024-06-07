@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_572",
 		"comment": "Well, now that you mention it, there is. One of my old datapads has broken beyond my ability to repair. Would you take it to the local junk dealer and sell it to him?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_569",
 				"comment": "I'm happy to help."
 			},
