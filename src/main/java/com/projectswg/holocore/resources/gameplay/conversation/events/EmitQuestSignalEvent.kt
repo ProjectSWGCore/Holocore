@@ -24,12 +24,15 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.conversation.model;
+package com.projectswg.holocore.resources.gameplay.conversation.events
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.intents.gameplay.player.quest.EmitQuestSignalIntent
+import com.projectswg.holocore.resources.gameplay.conversation.model.Event
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 
-public interface Event {
-	void trigger(@NotNull Player player, @NotNull AIObject npc);
+class EmitQuestSignalEvent(private val signalName: String) : Event {
+	override fun trigger(player: Player, npc: AIObject) {
+		EmitQuestSignalIntent.broadcast(player, signalName)
+	}
 }
