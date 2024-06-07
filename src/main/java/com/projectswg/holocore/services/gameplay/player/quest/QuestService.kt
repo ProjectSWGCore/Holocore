@@ -436,7 +436,14 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
 			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
 			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questName)
-			else                                       -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.encounter"              -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.escort"                 -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.perform"                -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.perform_action_on_npc"  -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.remote_encounter"       -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.static_escort"          -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.talk_to_npc"            -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.wait_for_tasks"         -> handleUnsupportedTaskType(player, questName, currentTask)
 		}
 	}
 
