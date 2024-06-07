@@ -76,7 +76,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private val executor = ScheduledThreadPool(1, "quest-service-%d")
 	private val questLoader = ServerData.questLoader
 	private val retrievedItemRepository: RetrievedItemRepository = MemoryRetrievedItemRepository()
-	
+
 	override fun initialize(): Boolean {
 		val allQuestNames = questLoader.questNames
 		val what = "quest retrieve_item tasks"
@@ -109,7 +109,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			StandardLog.onPlayerError(this, player, "already had non-repeatable quest %s", questName)
 			return
 		}
-		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)	// In case this quest is being repeated
+		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)    // In case this quest is being repeated
 		playerObject.addQuest(questName)
 		StandardLog.onPlayerTrace(this, player, "received quest %s", questName)
 		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_received"), "TO", questListInfo.journalEntryTitle)
@@ -162,19 +162,19 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			}
 		}
 	}
-	
+
 	@IntentHandler
 	private fun handlePlayerTransformedIntent(intent: PlayerTransformedIntent) {
 		val player = intent.player.ownerShallow ?: return
 		handlePlayerChangeLocation(player, intent.newLocation)
 	}
-	
+
 	@IntentHandler
 	private fun handleObjectTeleportIntent(intent: ObjectTeleportIntent) {
 		val player = intent.`object`.ownerShallow ?: return
 		handlePlayerChangeLocation(player, intent.newLocation)
 	}
-	
+
 	@IntentHandler
 	private fun handleQuestRetrieveItemIntent(intent: QuestRetrieveItemIntent) {
 		val questName = intent.questName
@@ -186,13 +186,13 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (!playerObject.isQuestInJournal(questName)) {
 			return
 		}
-		
+
 		if (retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, item)) {
 			// The SWG client will display the old radial option for a while before the radial menu is refreshed, so this can easily happen
 			StandardLog.onPlayerError(this, player, "already attempted to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
 			return
 		}
-		
+
 		val roll = retrieveItemDie.roll(1..100)
 		val itemFound = roll <= activeTaskListInfo.dropPercent
 
@@ -211,10 +211,10 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			StandardLog.onPlayerTrace(this, player, "failed to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
 			SystemMessageIntent.broadcastPersonal(player, ProsePackage(StringId("quest/groundquests", "retrieve_item_fail"), "TO", activeTaskListInfo.itemName))
 		}
-		
+
 		retrievedItemRepository.addRetrieveAttempt(questName, playerObject, item)
 	}
-	
+
 	private fun handlePlayerChangeLocation(player: Player, newLocation: Location) {
 		val playerObject = player.playerObject
 		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
@@ -226,12 +226,12 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 				if (type == "quest.task.ground.go_to_location") {
 					val terrain = Terrain.getTerrainFromName(activeTaskListInfo.planetName)
 					val radius = activeTaskListInfo.radius
-					
+
 					if (newLocation.isWithinDistance(terrain, activeTaskListInfo.locationX, activeTaskListInfo.locationY, activeTaskListInfo.locationZ, radius)) {
 						StandardLog.onPlayerTrace(this, player, "arrived at location for task %d of quest %s", activeTaskListInfo.index, questName)
 						completeTask(questName, player, activeTaskListInfo)
 						player.sendPacket(PlayMusicMessage(0, "sound/ui_objective_reached.snd", 1, false))
-						playerObject.waypoints.values.find { it.name == activeTaskListInfo.waypointName }?.let {	// if you bothered with renaming the waypoint, you get to keep it
+						playerObject.waypoints.values.find { it.name == activeTaskListInfo.waypointName }?.let {    // if you bothered with renaming the waypoint, you get to keep it
 							playerObject.removeWaypoint(it.objectId)
 							DestroyObjectIntent(it).broadcast()
 						}
@@ -245,7 +245,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
 			return
 		}
-		
+
 		val playerObject = owner.playerObject
 		val roll = destroyMultiAndLootDie.roll(1..100)
 		val itemFound = roll <= activeTaskListInfo.lootDropPercent
@@ -270,7 +270,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
 			return
 		}
-		
+
 		val playerObject = owner.playerObject
 		val max = activeTaskListInfo.count
 		val counter = playerObject.incrementQuestCounter(questName)
@@ -320,7 +320,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 				player.creatureObject.objectId, questName, task, "@quest/groundquests:retrieve_item_counter", counter, max
 			)
 		)
-		
+
 		val remaining = max - counter
 		if (itemName.isNotBlank()) {
 			val prose = ProsePackage(StringId("quest/groundquests", "retrieve_item_success_named"), "TO", itemName, "DI", remaining)
@@ -372,7 +372,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val random = ThreadLocalRandom.current()
 		val delaySeconds = random.nextInt(minTime, maxTime + 1)
 		val delayMilliseconds = delaySeconds * 1000
-		executor.execute(delayMilliseconds.toLong()) {	// TODO if the server is restarted, the timer will be lost and the quest will be stuck
+		executor.execute(delayMilliseconds.toLong()) {    // TODO if the server is restarted, the timer will be lost and the quest will be stuck
 			if (player.playerObject.isQuestInJournal(questName)) {
 				StandardLog.onPlayerTrace(this, player, "timer for task %d of quest %s expired", currentTask.index, questName)
 				completeTask(questName, player, currentTask)
@@ -380,7 +380,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 
 		if (currentTask.isVisible) {
-			player.playerObject.updatePlayTime()	// So the client can calculate the correct time remaining after we send QuestTaskTimerData
+			player.playerObject.updatePlayTime()    // So the client can calculate the correct time remaining after we send QuestTaskTimerData
 			val task = currentTask.index
 			val timerPacket = QuestTaskTimerData(player.creatureObject.objectId)
 			timerPacket.questName = questName
@@ -415,7 +415,14 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
 			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
 			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questName)
+			else                                       -> handleUnsupportedTaskType(player, questName, currentTask)
 		}
+	}
+
+	private fun handleUnsupportedTaskType(player: Player, questName: String, currentTask: QuestTaskInfo) {
+		StandardLog.onPlayerTrace(this, player, "skipping unsupported task type %s for task %d of quest %s", currentTask.type, currentTask.index, questName)
+		SystemMessageIntent.broadcastPersonal(player, "Quest task type '${currentTask.type}' is not yet supported. Skipping it so you can continue.")
+		completeTask(questName, player, currentTask)
 	}
 
 	private fun handleClearQuest(player: Player, questName: String) {
@@ -434,7 +441,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			)
 		)
 	}
-	
+
 	private fun handleGoToLocation(player: Player, currentTask: QuestTaskInfo) {
 		if (currentTask.isCreateWaypoint) {
 			createQuestWaypoint(currentTask, player)
