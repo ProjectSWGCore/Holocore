@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_863",
 		"comment": "Does it really? Interesting. The pilot that I know here is Commander Da'la Scuna in Mos Espa of Crimson Phoenix. Would you be interested?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_867",
 				"comment": "Yes."
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_875",
 				"comment": "No thank you. I think I'd rather choose another planet."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_883",
 				"comment": "Actually, I'd like to start over."
 			},

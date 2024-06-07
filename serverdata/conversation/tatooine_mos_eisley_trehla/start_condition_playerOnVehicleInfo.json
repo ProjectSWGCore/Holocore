@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_632",
 		"comment": "Learn how to use your droid and how to join up with him. The knowledge will serve you in the future."
 	},

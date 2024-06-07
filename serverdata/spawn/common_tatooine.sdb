@@ -476,7 +476,7 @@ spawn_tatooine_473	TATOOINE	tat_world	AREA	0	3512.1	5.5	-4940.3	58	1	an explorer
 spawn_tatooine_474	TATOOINE	tat_world	AREA	0	3486.5	5.5	-4960.5	-140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_475	TATOOINE	tat_world	AREA	0	3518.7	5.0	-4889.1	-59	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_476	TATOOINE	tat_world	AREA	0	3516.9	5.0	-4888.0	117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-spawn_tatooine_477	TATOOINE	tat_world	AREA	0	3484.2	5.0	-4808.3	-74	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+spawn_tatooine_477	TATOOINE	tat_world	AREA	0	3484.2	5.0	-4808.3	-74	1	Trehla Keelo	humanoid_newbie_tutorial_mentor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_trehla	600
 spawn_tatooine_478	TATOOINE	tat_world	PATROL	0	3426.2	5.6	-4643	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_7500	column	idle		commoner	600
 spawn_tatooine_479	TATOOINE	tat_world	PATROL	0	3477.6	5.0	-4620.3	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_7600	column	idle		commoner	600
 spawn_tatooine_480	TATOOINE	tat_world	PATROL	0	3233.2	5.0	-4581.2	-143	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_7700	column	idle		commoner	600

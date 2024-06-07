@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_379",
 		"comment": "Good. Good. You will often find things you need at the bazaar. It's also a good place to sell those items you do not wish to keep."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_385",
 				"comment": "So now that I know about bazaar terminals, what's next?"
 			},

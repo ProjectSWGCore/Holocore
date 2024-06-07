@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_347",
 		"comment": "We must all walk our own path. Come back to me if you lose your way."
 	},

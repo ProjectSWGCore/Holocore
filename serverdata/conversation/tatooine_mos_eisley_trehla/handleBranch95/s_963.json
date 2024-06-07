@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_967",
 		"comment": "I see. Well, the contact that you need for the Smuggler's Alliance is in town, actually. His name is Dravis and he started the Smuggler's Alliance with Talon Kardde. Is this what you want?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_971",
 				"comment": "Yes, that will do nicely!"
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_979",
 				"comment": "Hmm...maybe I should look at more legitimate avenues."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_987",
 				"comment": "Actually, I'd like to start over."
 			},

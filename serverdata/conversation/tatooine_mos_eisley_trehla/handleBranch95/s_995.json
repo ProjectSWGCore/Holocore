@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_999",
 		"comment": "The Royal Security Forces protect the Royalty of Naboo and the sector from pirates and Rebels. Their headquarters is in the capital city of Theed. Is this what you would like to join?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1003",
 				"comment": "That sounds great! Where do I sign up?"
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1011",
 				"comment": "Actually, sounds rather boring. I want something else."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1019",
 				"comment": "I want to start over. I'm not sure this is for me."
 			},

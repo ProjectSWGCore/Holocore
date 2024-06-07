@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_369",
 		"comment": "You are trying to put one over on me, are you not? Please do as I ask and go to the bazaar terminal."
 	},

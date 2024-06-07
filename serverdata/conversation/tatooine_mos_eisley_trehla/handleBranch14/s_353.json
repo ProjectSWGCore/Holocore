@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_355",
 		"comment": "Good, good. I am sure that you will find the bank to be a useful tool. Now that you have learned where to save money, I will teach you where to start spending it."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_361",
 				"comment": "And where is that?"
 			},

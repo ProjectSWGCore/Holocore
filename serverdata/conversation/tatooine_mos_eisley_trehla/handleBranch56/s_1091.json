@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_1095",
 		"comment": "The criminal influence can be felt everywhere. Hutts have their slimy hands in every despicable trade imaginable. They do not play well together and often work in direct opposition to each other."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_1099",
 				"comment": "Who are they specifically?"
 			},

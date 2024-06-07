@@ -1,13 +1,13 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_791",
 		"comment": "Well, there is certainly an Imperial presence, although I don't think that the officers on duty would consider it a vacation. The pilot trainer that I know there is Lt. Barn Sinkko. He is part of the Imperial Inquisition, which requires a lot from their pilots. Is this what you want?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_795",
 				"comment": "Yes, absolutely!"
 			},
@@ -15,7 +15,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_803",
 				"comment": "The Inquisition? Maybe not. I'd like to choose someone else."
 			},
@@ -23,7 +23,7 @@
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/trehla_keelo",
+				"file": "conversation/c_newbie_mentor",
 				"key": "s_811",
 				"comment": "May I start over? Perhaps the Imperial Navy isn't what I want to do."
 			},

@@ -1,6 +1,6 @@
 {
 	"npcMessage": {
-		"file": "conversation/trehla_keelo",
+		"file": "conversation/c_newbie_mentor",
 		"key": "s_343",
 		"comment": "While I am glad that you are doing as I ask, your attitude could do with some work."
 	},
