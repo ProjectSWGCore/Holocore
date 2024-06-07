@@ -4,6 +4,13 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      # Check for updates to GitHub Actions every week
+      interval: "weekly"
+      day: "saturday"
+
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    allow:
+      - dependency-name: "pswgcommon"
+    schedule:
       interval: "weekly"
       day: "saturday"
