@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,44 +36,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 public final class BuffLoader extends DataLoader {
 	
-	private final Map<Integer, BuffInfo> buffsByCrc;
-	private final Map<String, BuffInfo> buffsByName;
+	private final Map<CRC, BuffInfo> buffsByCrc;
 	
 	BuffLoader() {
 		this.buffsByCrc = new HashMap<>();
-		this.buffsByName = new HashMap<>();
-	}
-	
-	@Nullable
-	public BuffInfo getBuff(int crc) {
-		return buffsByCrc.get(crc);
 	}
 	
 	@Nullable
 	public BuffInfo getBuff(CRC crc) {
-		return getBuff(crc.getCrc());
+		return buffsByCrc.get(crc);
 	}
-	
-	@Nullable
-	public BuffInfo getBuff(String name) {
-		return buffsByName.get(name.toLowerCase(Locale.US));
-	}
-	
-	public boolean containsBuff(int crc) {
-		return buffsByCrc.containsKey(crc);
-	}
-	
-	public boolean containsBuff(String name) {
-		return buffsByName.containsKey(name.toLowerCase(Locale.US));
-	}
-	
+
 	@Override
 	public final void load() throws IOException {
 		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buff/buff.sdb"))) {
@@ -82,7 +61,6 @@ public final class BuffLoader extends DataLoader {
 			while (set.next()) {
 				BuffInfo buff = new BuffInfo(set, effectParams, effectValues);
 				buffsByCrc.put(buff.getCrc(), buff);
-				buffsByName.put(buff.getName().toLowerCase(Locale.US), buff);
 			}
 		}
 	}
@@ -90,7 +68,7 @@ public final class BuffLoader extends DataLoader {
 	public static class BuffInfo {
 		
 		private final String name;
-		private final int crc;
+		private final CRC crc;
 		private final String group1;
 		private final String group2;
 		private final String block;
@@ -128,7 +106,7 @@ public final class BuffLoader extends DataLoader {
 		
 		private BuffInfo(String name, String group1, String group2, String block, int priority, String icon, double duration, String[] effectNames, double[] effectValues, String state, String callback, String particle, int visible, boolean debuff) {
 			this.name = name;
-			this.crc = CRC.getCrc(this.name.toLowerCase(Locale.US));
+			this.crc = new CRC(CRC.getCrc(this.name.toLowerCase(Locale.US)));
 			this.group1 = group1;
 			this.group2 = group2;
 			this.block = block;
@@ -148,7 +126,7 @@ public final class BuffLoader extends DataLoader {
 			return name;
 		}
 		
-		public int getCrc() {
+		public CRC getCrc() {
 			return crc;
 		}
 		
@@ -216,129 +194,6 @@ public final class BuffLoader extends DataLoader {
 			return debuff;
 		}
 		
-		public BuffInfoBuilder builder() {
-			return new BuffInfoBuilder(this);
-		}
-		
 	}
 	
-	public static class BuffInfoBuilder {
-		
-		private String name;
-		private int crc;
-		private String group1;
-		private String group2;
-		private String block;
-		private int priority;
-		private String icon;
-		private double duration;
-		private String[] effectNames;
-		private double[] effectValues;
-		private String state;
-		private String callback;
-		private String particle;
-		private int visible;
-		private boolean debuff;
-		
-		private BuffInfoBuilder(BuffInfo buff) {
-			this.name = buff.getName();
-			this.crc = buff.getCrc();
-			this.group1 = buff.getGroup1();
-			this.group2 = buff.getGroup2();
-			this.block = buff.getBlock();
-			this.priority = buff.getPriority();
-			this.icon = buff.getIcon();
-			this.duration = buff.getDuration();
-			this.effectNames = buff.getEffectNames().clone();
-			this.effectValues = buff.getEffectValues().clone();
-			this.state = buff.getState();
-			this.callback = buff.getCallback();
-			this.particle = buff.getParticle();
-			this.visible = buff.getVisible();
-			this.debuff = buff.isDebuff();
-		}
-		
-		public BuffInfoBuilder setGroup1(String group1) {
-			this.group1 = group1;
-			return this;
-		}
-		
-		public BuffInfoBuilder setGroup2(String group2) {
-			this.group2 = group2;
-			return this;
-		}
-		
-		public BuffInfoBuilder setBlock(String block) {
-			this.block = block;
-			return this;
-		}
-		
-		public BuffInfoBuilder setPriority(int priority) {
-			this.priority = priority;
-			return this;
-		}
-		
-		public BuffInfoBuilder setIcon(String icon) {
-			this.icon = icon;
-			return this;
-		}
-		
-		public BuffInfoBuilder setDuration(double duration) {
-			this.duration = duration;
-			return this;
-		}
-		
-		public BuffInfoBuilder addEffect(String param, double value) {
-			String [] names = Arrays.copyOf(effectNames, effectNames.length+1);
-			double [] values = Arrays.copyOf(effectValues, effectValues.length+1);
-			
-			names[names.length-1] = param;
-			values[values.length-1] = value;
-			return this;
-		}
-		
-		public BuffInfoBuilder setState(String state) {
-			this.state = state;
-			return this;
-		}
-		
-		public BuffInfoBuilder setCallback(String callback) {
-			this.callback = callback;
-			return this;
-		}
-		
-		public BuffInfoBuilder setParticle(String particle) {
-			this.particle = particle;
-			return this;
-		}
-		
-		public BuffInfoBuilder setVisible(int visible) {
-			this.visible = visible;
-			return this;
-		}
-		
-		public BuffInfoBuilder setDebuff(boolean debuff) {
-			this.debuff = debuff;
-			return this;
-		}
-		
-		public BuffInfo build() {
-			return new BuffInfo(
-					name,
-					group1,
-					group2,
-					block,
-					priority,
-					icon,
-					duration,
-					effectNames,
-					effectValues,
-					state,
-					callback,
-					particle,
-					visible,
-					debuff
-			);
-		}
-	}
 }

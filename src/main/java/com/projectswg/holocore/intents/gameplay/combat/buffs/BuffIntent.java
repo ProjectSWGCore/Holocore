@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,33 +26,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.combat.buffs;
 
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.Intent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BuffIntent extends Intent {
 	
-	private String buffName;
-	private BuffInfo buffData;
+	private final String buffName;
 	private final CreatureObject buffer, receiver;
 	private final boolean remove;
 	
-	public BuffIntent(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
+	private BuffIntent(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
 		this.buffName = buffName;
 		this.buffer = buffer;
 		this.receiver = receiver;
 		this.remove = remove;
 	}
 	
-	public BuffIntent(@NotNull BuffInfo buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		this.buffData = buffData;
-		this.buffer = buffer;
-		this.receiver = receiver;
-		this.remove = remove;
-	}
 	
 	@NotNull
 	public CreatureObject getReceiver() {
@@ -64,15 +54,11 @@ public class BuffIntent extends Intent {
 		return buffer;
 	}
 	
-	@Nullable
+	@NotNull
 	public String getBuffName() {
 		return buffName;
 	}
 	
-	@Nullable
-	public BuffLoader.BuffInfo getBuffData() {
-		return buffData;
-	}
 	
 	public boolean isRemove() {
 		return remove;
@@ -82,8 +68,5 @@ public class BuffIntent extends Intent {
 		new BuffIntent(buffName, buffer, receiver, remove).broadcast();
 	}
 	
-	public static void broadcast(@NotNull BuffInfo buffData, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		new BuffIntent(buffData, buffer, receiver, remove).broadcast();
-	}
 	
 }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,7 +27,6 @@
 
 package com.projectswg.holocore.resources.support.objects.swg;
 
-import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
@@ -200,7 +199,7 @@ public class TestSWGPersistence {
 								"actionRegen", 0,
 								"mind", obj.getMaxMind(),
 								"mindRegen", 0),
-						"buffs", obj.getBuffEntries(b -> true).map(b -> new Document(Map.of("key", MongoData.store(new CRC(b.getCrc())).toDocument(), "val", MongoData.store(b).toDocument()))).collect(Collectors.toList())
+						"buffs", obj.getBuffs().entrySet().stream().map(entry -> new Document(Map.of("key", MongoData.store(entry.getKey()).toDocument(), "val", MongoData.store(entry.getValue()).toDocument()))).collect(Collectors.toList())
 				),
 				"race", obj.getRace().name(),
 				"skills", obj.getSkills(),
