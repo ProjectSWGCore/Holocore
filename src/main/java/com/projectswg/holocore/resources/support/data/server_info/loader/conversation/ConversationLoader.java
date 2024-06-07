@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -200,6 +200,7 @@ public class ConversationLoader extends DataLoader {
 		eventParserMap.put("show_sellable_items", new ShowSellableItemsEventParser());
 		eventParserMap.put("grant_quest", new GrantQuestEventParser());
 		eventParserMap.put("show_available_skills", new ShowAvailableSkillsEventParser());
+		eventParserMap.put("emit_quest_signal", new EmitQuestSignalEventParser());
 	}
 	
 	private void loadSpawnToConversations() throws IOException {

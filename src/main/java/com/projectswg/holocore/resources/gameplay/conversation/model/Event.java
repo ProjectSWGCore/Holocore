@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,7 +28,8 @@ package com.projectswg.holocore.resources.gameplay.conversation.model;
 
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import org.jetbrains.annotations.NotNull;
 
 public interface Event {
-	void trigger(Player player, AIObject npc);
+	void trigger(@NotNull Player player, @NotNull AIObject npc);
 }

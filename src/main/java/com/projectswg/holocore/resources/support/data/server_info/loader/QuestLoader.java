@@ -149,6 +149,7 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setMusicOnActivate(getMusicOnActivate(columns, set));
 				questTaskInfo.setMusicOnComplete(getMusicOnComplete(columns, set));
 				questTaskInfo.setMusicOnFailure(getMusicOnFailure(columns, set));
+				questTaskInfo.setSignalName(getSignalName(columns, set));
 
 				questTaskInfos.add(questTaskInfo);
 			}
@@ -199,6 +200,13 @@ public class QuestLoader extends DataLoader {
 	private static @Nullable String getLootItemName(Set<String> columns, SdbLoader.SdbResultSet set) {
 		if (columns.contains("loot_item_name")) {
 			return set.getText("loot_item_name");
+		}
+		return null;
+	}
+
+	private static @Nullable String getSignalName(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("signal_name")) {
+			return set.getText("signal_name");
 		}
 		return null;
 	}
@@ -461,6 +469,7 @@ public class QuestLoader extends DataLoader {
 		private String itemName;
 		private int dropPercent;
 		private String retrieveMenuText;
+		private String signalName;
 
 		private QuestTaskInfo() {
 			nextTasksOnComplete = new ArrayList<>();
@@ -801,6 +810,14 @@ public class QuestLoader extends DataLoader {
 
 		public void setRetrieveMenuText(String retrieveMenuText) {
 			this.retrieveMenuText = retrieveMenuText;
+		}
+
+		public String getSignalName() {
+			return signalName;
+		}
+
+		public void setSignalName(String signalName) {
+			this.signalName = signalName;
 		}
 
 		@Override
