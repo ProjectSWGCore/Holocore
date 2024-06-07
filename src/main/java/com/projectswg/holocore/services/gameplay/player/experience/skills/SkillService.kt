@@ -26,6 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills
 
+import com.projectswg.common.data.CRC
+import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
@@ -34,6 +36,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.skills.Surrend
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.badges
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.skills
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.schematicGroups
 import com.projectswg.holocore.resources.support.data.server_info.loader.SkillLoader.SkillInfo
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.services.gameplay.player.experience.*
@@ -178,7 +181,10 @@ class SkillService : Service() {
 		target.removeSkill(surrenderedSkill)
 		target.removeCommands(*skillInfo.commands)
 		skillInfo.skillMods.forEach { (skillModName: String, skillModValue: Int) -> SkillModIntent(skillModName, 0, -skillModValue, target).broadcast() }
-
+		val schematicGroups = skillInfo.schematicsGranted
+		for (schematicGroup in schematicGroups) {
+			revokeSchematicGroup(target, schematicGroup)
+		}
 		val newCombatLevel = getCombatLevel(target)
 
 		val levelChanged = oldCombatLevel != newCombatLevel
@@ -248,8 +254,56 @@ class SkillService : Service() {
 		target.addCommand(*skill.commands)
 
 		skill.skillMods.forEach { (skillModName, skillModValue) -> SkillModIntent(skillModName, skillModValue, 0, target).broadcast() }
+
+		val schematicGroups = skill.schematicsGranted
+		for (schematicGroup in schematicGroups) {
+			grantSchematicGroup(target, schematicGroup)
+		}
+		
 		GrantSkillIntent(GrantSkillIntent.IntentType.GIVEN, skill.name, target, false).broadcast()
 	}
+
+	private fun grantSchematicGroup(target: CreatureObject, schematicGroup: String) {
+		val schematicGroupLoader = schematicGroups
+		val schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup)
+
+		for (schematicInGroup in schematicsInGroup) {
+			grantSchematic(target, schematicInGroup)
+		}
+	}
+
+	private fun grantSchematic(target: CreatureObject, schematicInGroup: String) {
+		val schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup)
+		val serverCrc = getDraftSchematicServerCrc(schematicInGroupShared)
+		val clientCrc = getDraftSchematicClientCrc(schematicInGroupShared)
+		target.playerObject.setDraftSchematic(serverCrc, clientCrc, 1)
+	}
+
+	private fun revokeSchematicGroup(target: CreatureObject, schematicGroup: String) {
+		val schematicGroupLoader = schematicGroups
+		val schematicsInGroup = schematicGroupLoader.getSchematicsInGroup(schematicGroup)
+
+		for (schematicInGroup in schematicsInGroup) {
+			revokeSchematic(target, schematicInGroup)
+		}
+	}
+
+	private fun revokeSchematic(target: CreatureObject, schematicInGroup: String) {
+		val schematicInGroupShared = ClientFactory.formatToSharedFile(schematicInGroup)
+		val serverCrc = getDraftSchematicServerCrc(schematicInGroupShared)
+		val clientCrc = getDraftSchematicClientCrc(schematicInGroupShared)
+		target.playerObject.revokeDraftSchematic(serverCrc, clientCrc)
+	}
+
+	private fun getDraftSchematicServerCrc(schematicInGroupShared: String): Int {
+		return CRC.getCrc(schematicInGroupShared)
+	}
+
+	private fun getDraftSchematicClientCrc(schematicInGroupShared: String): Int {
+		val templateWithoutPrefix = schematicInGroupShared.replace("object/draft_schematic/", "")
+		return CRC.getCrc(templateWithoutPrefix)
+	}
+
 
 	private fun skillPointsSpent(creature: CreatureObject): Int {
 		return creature.skills
