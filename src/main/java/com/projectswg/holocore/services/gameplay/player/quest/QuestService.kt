@@ -518,8 +518,9 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	private fun grantXPReward(player: Player, currentTask: QuestTaskInfo) {
 		val experienceType = currentTask.experienceType
-		if (experienceType != null) {
-			ExperienceIntent(player.creatureObject, experienceType, currentTask.experienceAmount).broadcast()
+		val experienceAmount = currentTask.experienceAmount
+		if (!experienceType.isNullOrBlank() && experienceAmount > 0) {
+			ExperienceIntent(player.creatureObject, experienceType, experienceAmount).broadcast()
 		}
 	}
 
