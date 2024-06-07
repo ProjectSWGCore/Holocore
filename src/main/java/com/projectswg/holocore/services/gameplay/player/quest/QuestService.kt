@@ -42,11 +42,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.quest.Qu
 import com.projectswg.common.network.packets.swg.zone.object_controller.quest.QuestTaskTimerData
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
-import com.projectswg.holocore.intents.gameplay.player.quest.AbandonQuestIntent
-import com.projectswg.holocore.intents.gameplay.player.quest.CompleteQuestIntent
-import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
+import com.projectswg.holocore.intents.gameplay.player.quest.*
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent.Companion.broadcast
-import com.projectswg.holocore.intents.gameplay.player.quest.QuestRetrieveItemIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
@@ -141,6 +138,30 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 
 		playerObject.setQuestRewardReceived(questName, true)
+	}
+
+	@IntentHandler
+	private fun handleEmitQuestSignalIntent(intent: EmitQuestSignalIntent) {
+		val player = intent.player
+		val playerObject = player.playerObject
+		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
+		for (incompleteQuest in incompleteQuests) {
+			val questName = incompleteQuest.string
+			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
+			for (activeTaskListInfo in activeTaskListInfos) {
+				val type = activeTaskListInfo.type
+				if (type == "quest.task.ground.wait_for_signal") {
+					if (intent.signalName == activeTaskListInfo.signalName) {
+						handleSignal(activeTaskListInfo, questName, player);
+					}
+				}
+			}
+		}
+	}
+
+	private fun handleSignal(activeTaskListInfo: QuestTaskInfo, questName: String, player: Player) {
+		StandardLog.onPlayerTrace(this, player, "signal '%s' was received by task %d in quest %s", activeTaskListInfo.signalName, activeTaskListInfo.index, questName)
+		completeTask(questName, player, activeTaskListInfo)
 	}
 
 	@IntentHandler

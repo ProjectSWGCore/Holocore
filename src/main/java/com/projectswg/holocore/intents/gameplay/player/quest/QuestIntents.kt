@@ -56,3 +56,10 @@ data class QuestRetrieveItemIntent(val player: Player, val questName: String, va
 		@JvmStatic inline fun broadcast(player: Player, questName: String, task: QuestTaskInfo, item: SWGObject) = QuestRetrieveItemIntent(player, questName, task, item).broadcast()
 	}
 }
+
+
+data class EmitQuestSignalIntent(val player: Player, val signalName: String): Intent() {
+	companion object {
+		@JvmStatic inline fun broadcast(player: Player, signalName: String) = EmitQuestSignalIntent(player, signalName).broadcast()
+	}
+}
