@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,7 +31,7 @@ import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.combat.DuelPlayerIntent;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
+import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionFlagsIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import me.joshlarson.jlcommon.control.IntentHandler;
@@ -88,17 +88,17 @@ public class DuelService extends Service {
 		accepter.addPlayerToSentDuels(target);
 		sendSystemMessage(accepter, target, "accept_self");
 		sendSystemMessage(target, accepter, "accept_target");
-		
-		FactionIntent.broadcastUpdateFlags(accepter);
-		FactionIntent.broadcastUpdateFlags(target);
+
+		new UpdateFactionFlagsIntent(accepter).broadcast();
+		new UpdateFactionFlagsIntent(target).broadcast();
 	}
 	
 	private void endDuel(CreatureObject ender, CreatureObject target) {
 		ender.removePlayerFromSentDuels(target);
 		target.removePlayerFromSentDuels(ender);
-		
-		FactionIntent.broadcastUpdateFlags(ender);
-		FactionIntent.broadcastUpdateFlags(target);
+
+		new UpdateFactionFlagsIntent(ender).broadcast();
+		new UpdateFactionFlagsIntent(target).broadcast();
 	}
 	
 	private void handleEndDuel(CreatureObject ender, CreatureObject target) {

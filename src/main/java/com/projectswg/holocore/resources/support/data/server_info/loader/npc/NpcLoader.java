@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,12 +26,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader.npc;
 
+import com.projectswg.common.data.encodables.tangible.PvpFaction;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction;
+import me.joshlarson.jlcommon.log.Log;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -153,6 +155,8 @@ public final class NpcLoader extends DataLoader {
 		private final NpcResourceInfo boneResourceInfo;
 		private final String socialGroup;
 
+		private static final Faction DEFAULT_FACTION = ServerData.INSTANCE.getFactions().getFaction(PvpFaction.NEUTRAL.name().toLowerCase(Locale.US));
+
 		public NpcInfo(SdbResultSet set) {
 			this.id = set.getText("npc_id");
 			this.name = set.getText("npc_name").intern();
@@ -161,7 +165,14 @@ public final class NpcLoader extends DataLoader {
 			this.hue = (int) set.getInt("hue");
 			this.stfName = set.getText("stf_name");
 			this.niche = set.getText("niche").intern();
-			this.faction = ServerData.INSTANCE.getFactions().getFaction(set.getText("faction"));
+			String factionString = set.getText("faction");
+			Faction faction = ServerData.INSTANCE.getFactions().getFaction(factionString);
+			if (faction == null) {
+				if (!factionString.equals("-"))
+					Log.w("Unknown faction: %s", factionString);
+				faction = DEFAULT_FACTION;
+			}
+			this.faction = faction;
 			this.iffs = List.of(set.getText("iff_template").split(";")).stream().map(s -> "object/mobile/"+s).map(ClientFactory::formatToSharedFile).collect(Collectors.toUnmodifiableList());
 			this.specForce = set.getBoolean("spec_force");
 			this.attackSpeed = set.getReal("attack_speed");

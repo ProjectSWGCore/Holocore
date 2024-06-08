@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -37,7 +37,7 @@ import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
+import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
@@ -280,7 +280,7 @@ public class CloningService extends Service {
 		corpse.sendObservers(new PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.getObjectId(), ""));
 		corpse.sendSelf(new PlayMusicMessage(0, "sound/item_repairobj.snd", 1, false));
 		if (corpse.getPvpFaction() != PvpFaction.NEUTRAL) {
-			corpse.broadcast(new FactionIntent(corpse, PvpStatus.ONLEAVE));
+			corpse.broadcast(new UpdateFactionStatusIntent(corpse, PvpStatus.ONLEAVE));
 		}
 	}
 	

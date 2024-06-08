@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,37 +24,17 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.gcw.faction;
+package com.projectswg.holocore.intents.gameplay.gcw
 
-import com.projectswg.common.data.location.Location;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.common.data.encodables.tangible.PvpStatus
+import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class RegisterPvpZoneIntent extends Intent {
-	
-	private final String id;
-	private final Location location;
-	private final double radius;
-	
-	private RegisterPvpZoneIntent(String id, Location location, double radius) {
-		this.id = id;
-		this.location = location;
-		this.radius = radius;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	
-	public Location getLocation() {
-		return location;
-	}
-	
-	public double getRadius() {
-		return radius;
-	}
-	
-	public static void broadcast(@NotNull String id, @NotNull Location location, double radius) {
-		new RegisterPvpZoneIntent(id, location, radius).broadcast();
-	}
-}
+data class UpdateFactionIntent(val target: TangibleObject, val newFaction: Faction) : Intent()
+data class UpdateFactionStatusIntent(val target: TangibleObject, val newStatus: PvpStatus) : Intent()
+data class UpdateFactionFlagsIntent(val target: TangibleObject) : Intent()
+
+data class RegisterPvpZoneIntent(val id: String, val location: Location, val radius: Double) : Intent()
+data class UnregisterPvpZoneIntent(val id: String) : Intent()

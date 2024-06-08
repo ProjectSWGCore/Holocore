@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 
-import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent
+import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
@@ -43,7 +43,7 @@ class CmdSetFaction : ICmdCallback {
 		}
 		
 		if (faction != null) {
-			FactionIntent.broadcastUpdateFaction(player.creatureObject, faction)
+			UpdateFactionIntent(player.creatureObject, faction).broadcast()
 		} else {
 			SystemMessageIntent.broadcastPersonal(player, "Unknown faction \"$args\", possible options: rebels|imperial|neutral")
 		}
