@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -25,44 +25,25 @@
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
-package com.projectswg.holocore.intents.gameplay.combat.duel;
+@file:Suppress("NOTHING_TO_INLINE")
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
+package com.projectswg.holocore.intents.gameplay.combat
 
-public class DuelPlayerIntent extends Intent {
-	
-	private final CreatureObject sender;
-	private final CreatureObject reciever;
-	private DuelEventType eventType;
-	
-	public DuelPlayerIntent(CreatureObject sender, CreatureObject reciever, DuelEventType eventType) {
-		this.sender = sender;
-		this.reciever = reciever;
-		this.eventType = eventType;
-	}
-	
-	public CreatureObject getSender() {
-		return sender;
-	}
-	
-	public CreatureObject getReciever() {
-		return reciever;
-	}
-	
-	public DuelEventType getEventType() {
-		return eventType;
-	}
-	
-	public void setDuelEventType(DuelEventType eventType) {
-		this.eventType = eventType;
-	}
-	
-	public enum DuelEventType {
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import me.joshlarson.jlcommon.control.Intent
+
+class DuelPlayerIntent(val sender: CreatureObject, val receiver: CreatureObject, var eventType: DuelEventType) : Intent() {
+
+	enum class DuelEventType {
 		ACCEPT,
 		CANCEL,
 		DECLINE,
 		END,
 		REQUEST
+	}
+
+	companion object {
+		@JvmStatic
+		inline fun broadcast(sender: CreatureObject, receiver: CreatureObject, eventType: DuelEventType) = DuelPlayerIntent(sender, receiver, eventType).broadcast()
 	}
 }

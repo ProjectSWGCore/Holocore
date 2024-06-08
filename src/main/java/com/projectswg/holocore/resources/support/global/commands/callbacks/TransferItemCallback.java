@@ -28,7 +28,7 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
+import com.projectswg.holocore.intents.gameplay.combat.LootItemIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;

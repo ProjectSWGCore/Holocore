@@ -34,7 +34,7 @@ import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLa
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupCloseLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupOpenLotteryWindow;
 import com.projectswg.common.network.packets.swg.zone.object_controller.loot.GroupRequestLotteryItems;
-import com.projectswg.holocore.intents.gameplay.combat.loot.*;
+import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;

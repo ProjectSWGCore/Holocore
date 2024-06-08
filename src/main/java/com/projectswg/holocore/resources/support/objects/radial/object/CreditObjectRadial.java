@@ -2,7 +2,7 @@ package com.projectswg.holocore.resources.support.objects.radial.object;
 
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootItemIntent;
+import com.projectswg.holocore.intents.gameplay.combat.LootItemIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;

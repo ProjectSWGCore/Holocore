@@ -37,64 +37,82 @@ import me.joshlarson.jlcommon.control.Intent
 /*
  * Combat events after the fact
  */
-data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject): Intent() {
+data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = CreatureIncapacitatedIntent(incapper, incapee).broadcast()
+		@JvmStatic
+		inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = CreatureIncapacitatedIntent(incapper, incapee).broadcast()
 	}
 }
-data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject): Intent() {
+
+data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = CreatureKilledIntent(killer, corpse).broadcast()
+		@JvmStatic
+		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = CreatureKilledIntent(killer, corpse).broadcast()
 	}
 }
-data class CreatureRevivedIntent(val creature: CreatureObject): Intent() {
+
+data class CreatureRevivedIntent(val creature: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(creature: CreatureObject) = CreatureRevivedIntent(creature).broadcast()
+		@JvmStatic
+		inline fun broadcast(creature: CreatureObject) = CreatureRevivedIntent(creature).broadcast()
 	}
 }
-data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject): Intent() {
+
+data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(source: TangibleObject, target: TangibleObject) = EnterCombatIntent(source, target).broadcast()
+		@JvmStatic
+		inline fun broadcast(source: TangibleObject, target: TangibleObject) = EnterCombatIntent(source, target).broadcast()
 	}
 }
-data class ExitCombatIntent(val source: TangibleObject): Intent() {
+
+data class ExitCombatIntent(val source: TangibleObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(source: TangibleObject) = ExitCombatIntent(source).broadcast()
+		@JvmStatic
+		inline fun broadcast(source: TangibleObject) = ExitCombatIntent(source).broadcast()
 	}
 }
 
 /*
  * Combat event requests
  */
-data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject): Intent() {
+data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = IncapacitateCreatureIntent(incapper, incapee).broadcast()
-	}
-}
-data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = KillCreatureIntent(killer, corpse).broadcast()
-	}
-}
-data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = DeathblowIntent(killer, corpse).broadcast()
-	}
-}
-data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = RequestCreatureDeathIntent(killer, corpse).broadcast()
+		@JvmStatic
+		inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = IncapacitateCreatureIntent(incapper, incapee).broadcast()
 	}
 }
 
-data class KnockdownIntent(val victim: CreatureObject): Intent() {
+data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(victim: CreatureObject) = KnockdownIntent(victim).broadcast()
+		@JvmStatic
+		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = KillCreatureIntent(killer, corpse).broadcast()
 	}
 }
 
-data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState): Intent() {
+data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
 	companion object {
-		@JvmStatic inline fun broadcast(attacker: CreatureObject, victim: CreatureObject, combatState: CombatState) = ApplyCombatStateIntent(attacker, victim, combatState).broadcast()
+		@JvmStatic
+		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = DeathblowIntent(killer, corpse).broadcast()
+	}
+}
+
+data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
+	companion object {
+		@JvmStatic
+		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = RequestCreatureDeathIntent(killer, corpse).broadcast()
+	}
+}
+
+data class KnockdownIntent(val victim: CreatureObject) : Intent() {
+	companion object {
+		@JvmStatic
+		inline fun broadcast(victim: CreatureObject) = KnockdownIntent(victim).broadcast()
+	}
+}
+
+data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState) : Intent() {
+	companion object {
+		@JvmStatic
+		inline fun broadcast(attacker: CreatureObject, victim: CreatureObject, combatState: CombatState) = ApplyCombatStateIntent(attacker, victim, combatState).broadcast()
 	}
 }

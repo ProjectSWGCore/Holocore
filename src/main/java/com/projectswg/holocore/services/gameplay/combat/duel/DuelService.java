@@ -30,7 +30,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.data.encodables.oob.StringId;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.combat.duel.DuelPlayerIntent;
+import com.projectswg.holocore.intents.gameplay.combat.DuelPlayerIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.faction.FactionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -45,16 +45,16 @@ public class DuelService extends Service {
 	
 	@IntentHandler
 	private void handleDuelPlayerIntent(DuelPlayerIntent dpi) {
-		if (dpi.getReciever() == null || !dpi.getReciever().isPlayer() || dpi.getSender().equals(dpi.getReciever())) {
+		if (!dpi.getReceiver().isPlayer() || dpi.getSender().equals(dpi.getReceiver())) {
 			return;
 		}
 		
 		switch (dpi.getEventType()) {
-			case ACCEPT -> handleAcceptDuel(dpi.getSender(), dpi.getReciever());
-			case CANCEL -> handleCancelDuel(dpi.getSender(), dpi.getReciever());
-			case DECLINE -> handleDeclineDuel(dpi.getSender(), dpi.getReciever());
-			case END -> handleEndDuel(dpi.getSender(), dpi.getReciever());
-			case REQUEST -> handleRequestDuel(dpi.getSender(), dpi.getReciever());
+			case ACCEPT -> handleAcceptDuel(dpi.getSender(), dpi.getReceiver());
+			case CANCEL -> handleCancelDuel(dpi.getSender(), dpi.getReceiver());
+			case DECLINE -> handleDeclineDuel(dpi.getSender(), dpi.getReceiver());
+			case END -> handleEndDuel(dpi.getSender(), dpi.getReceiver());
+			case REQUEST -> handleRequestDuel(dpi.getSender(), dpi.getReceiver());
 		}
 	}
 	

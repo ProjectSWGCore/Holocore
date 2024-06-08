@@ -262,9 +262,9 @@ class CombatCommandAttack implements CombatCommandHitType {
 			rawDamage *= 1.5;
 		}
 
+		info.setDamageType(damageType);
 		info.setRawDamage(rawDamage);
 		info.setFinalDamage(rawDamage);
-		info.setDamageType(damageType);
 
 		if (combatCommand.isBlinding()) {
 			ApplyCombatStateIntent.broadcast(source, creatureTarget, new BlindedCombatState());

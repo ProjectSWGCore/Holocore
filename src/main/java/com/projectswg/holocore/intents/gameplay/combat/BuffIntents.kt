@@ -24,49 +24,17 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat.buffs;
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+@file:Suppress("NOTHING_TO_INLINE")
 
-public class BuffIntent extends Intent {
-	
-	private final String buffName;
-	private final CreatureObject buffer, receiver;
-	private final boolean remove;
-	
-	private BuffIntent(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		this.buffName = buffName;
-		this.buffer = buffer;
-		this.receiver = receiver;
-		this.remove = remove;
+package com.projectswg.holocore.intents.gameplay.combat
+
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import me.joshlarson.jlcommon.control.Intent
+
+class BuffIntent(val buffName: String, val buffer: CreatureObject, val receiver: CreatureObject, val isRemove: Boolean) : Intent() {
+	companion object {
+		@JvmStatic
+		inline fun broadcast(buffName: String, buffer: CreatureObject, receiver: CreatureObject, remove: Boolean) = BuffIntent(buffName, buffer, receiver, remove).broadcast()
 	}
-	
-	
-	@NotNull
-	public CreatureObject getReceiver() {
-		return receiver;
-	}
-	
-	@NotNull
-	public CreatureObject getBuffer() {
-		return buffer;
-	}
-	
-	@NotNull
-	public String getBuffName() {
-		return buffName;
-	}
-	
-	
-	public boolean isRemove() {
-		return remove;
-	}
-	
-	public static void broadcast(@NotNull String buffName, @NotNull CreatureObject buffer, @NotNull CreatureObject receiver, boolean remove) {
-		new BuffIntent(buffName, buffer, receiver, remove).broadcast();
-	}
-	
-	
 }

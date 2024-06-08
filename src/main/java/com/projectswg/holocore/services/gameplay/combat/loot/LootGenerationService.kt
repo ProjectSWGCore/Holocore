@@ -27,8 +27,8 @@
 package com.projectswg.holocore.services.gameplay.combat.loot
 
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
-import com.projectswg.holocore.intents.gameplay.combat.loot.CorpseLootedIntent
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootGeneratedIntent
+import com.projectswg.holocore.intents.gameplay.combat.CorpseLootedIntent
+import com.projectswg.holocore.intents.gameplay.combat.LootGeneratedIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData

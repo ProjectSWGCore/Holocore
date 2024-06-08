@@ -29,7 +29,7 @@ package com.projectswg.holocore.resources.support.objects.radial.`object`
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.gameplay.combat.loot.LootRequestIntent.Companion.broadcast
+import com.projectswg.holocore.intents.gameplay.combat.LootRequestIntent.Companion.broadcast
 import com.projectswg.holocore.resources.gameplay.combat.loot.LootType
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData

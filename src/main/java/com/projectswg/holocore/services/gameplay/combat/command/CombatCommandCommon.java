@@ -38,7 +38,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyT
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText.Scale;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction;
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
-import com.projectswg.holocore.intents.gameplay.combat.buffs.BuffIntent;
+import com.projectswg.holocore.intents.gameplay.combat.BuffIntent;
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
