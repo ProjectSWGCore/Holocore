@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,7 +31,7 @@ import com.projectswg.common.data.encodables.tangible.PvpFlag
 import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
@@ -102,7 +102,7 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 
 	private fun createCharacter(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "species_human", creatureObject, true)
+		GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_human", creatureObject, true).broadcast()
 		ObjectCreatedIntent.broadcast(creatureObject)
 		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defaultWeapon.moveToContainer(creatureObject)

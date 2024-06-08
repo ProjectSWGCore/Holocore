@@ -1,6 +1,6 @@
 package com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod
 
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
 import com.projectswg.holocore.intents.support.objects.swg.ContainerTransferIntent
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject

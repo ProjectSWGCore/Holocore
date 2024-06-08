@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin;
 
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -36,7 +36,7 @@ public final class CmdGrantSkill implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, args, player.getCreatureObject(), true);
+		new GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, args, player.getCreatureObject(), true).broadcast();
 	}
 	
 }

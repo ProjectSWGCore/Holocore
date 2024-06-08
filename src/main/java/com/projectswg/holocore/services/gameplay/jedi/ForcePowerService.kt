@@ -1,6 +1,6 @@
 package com.projectswg.holocore.services.gameplay.jedi
 
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler

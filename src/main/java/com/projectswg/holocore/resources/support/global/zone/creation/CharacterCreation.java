@@ -32,7 +32,7 @@ import com.projectswg.common.data.encodables.tangible.Race;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion;

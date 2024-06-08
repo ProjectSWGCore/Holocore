@@ -31,7 +31,7 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.holocore.ProjectSWG
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo

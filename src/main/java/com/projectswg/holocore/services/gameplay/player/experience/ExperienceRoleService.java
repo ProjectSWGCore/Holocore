@@ -2,8 +2,8 @@ package com.projectswg.holocore.services.gameplay.player.experience;
 
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.object_controller.ChangeRoleIconChoice;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent;
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent.IntentType;
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent;
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent.IntentType;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.PlayerRoleLoader.RoleInfo;

@@ -31,8 +31,8 @@ import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMess
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
 import com.projectswg.holocore.ProjectSWG
 import com.projectswg.holocore.intents.gameplay.jedi.CreateTestLightsaberIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SurrenderSkillIntent
 import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.global.player.Player

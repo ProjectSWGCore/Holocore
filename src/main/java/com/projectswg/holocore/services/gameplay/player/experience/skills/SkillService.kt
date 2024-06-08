@@ -30,9 +30,9 @@ import com.projectswg.common.data.CRC
 import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent
 import com.projectswg.holocore.intents.gameplay.player.badge.SetTitleIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SkillModIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.SurrenderSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.SurrenderSkillIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.badges
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.skills

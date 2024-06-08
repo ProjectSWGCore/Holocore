@@ -4,7 +4,7 @@ import com.projectswg.common.data.CRC
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData

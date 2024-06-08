@@ -32,7 +32,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionIntent
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent
-import com.projectswg.holocore.intents.gameplay.player.experience.skills.GrantSkillIntent
+import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -103,7 +103,7 @@ class FactionPvpTest : TestRunnerSimulatedWorld() {
 
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		GrantSkillIntent.broadcast(GrantSkillIntent.IntentType.GRANT, "species_human", creatureObject, true)
+		GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_human", creatureObject, true).broadcast()
 		ObjectCreatedIntent.broadcast(creatureObject)
 		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defaultWeapon.moveToContainer(creatureObject)
