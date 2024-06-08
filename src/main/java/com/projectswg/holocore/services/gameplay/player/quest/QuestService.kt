@@ -101,6 +101,10 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val questName = intent.questName
 		val playerObject = player.getPlayerObject()
 		val questListInfo = questLoader.getQuestListInfo(questName)
+		if (questListInfo == null) {
+			StandardLog.onPlayerError(this, player, "could not receive unknown quest '%s'", questName)
+			return
+		}
 		val repeatable = java.lang.Boolean.TRUE == questListInfo.isRepeatable
 		if (!repeatable && playerObject.isQuestInJournal(questName)) {
 			StandardLog.onPlayerError(this, player, "already had non-repeatable quest %s", questName)
@@ -371,11 +375,16 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private fun handleShowMessageBox(player: Player, questName: String, currentTask: QuestTaskInfo) {
 		val messageBoxTitle = currentTask.messageBoxTitle
 		val messageBoxText = currentTask.messageBoxText
+		val messageBoxSound = currentTask.messageBoxSound
 		val sui = SuiMessageBox(SuiButtons.OK, messageBoxTitle, messageBoxText)
+		sui.addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
+		sui.addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
 		sui.setSize(384, 256)
 		sui.setLocation(320, 256)
 		sui.display(player)
-		completeTask(questName, player, currentTask)
+		if (!messageBoxSound.isNullOrBlank()) {
+			player.sendPacket(PlayMusicMessage(0, messageBoxSound, 1, false))
+		}
 	}
 
 	private fun handleCommPlayer(player: Player, questName: String, currentTask: QuestTaskInfo) {

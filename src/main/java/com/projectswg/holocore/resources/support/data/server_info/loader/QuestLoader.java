@@ -132,6 +132,7 @@ public class QuestLoader extends DataLoader {
 				questTaskInfo.setMaxTime(getMaxTime(columns, set));
 				questTaskInfo.setMessageBoxTitle(getMessageBoxTitle(columns, set));
 				questTaskInfo.setMessageBoxText(getMessageBoxText(columns, set));
+				questTaskInfo.setMessageBoxSound(getMessageBoxSound(columns, set));
 				questTaskInfo.setExperienceType(getExperienceType(columns, set));
 				questTaskInfo.setExperienceAmount(getExperienceAmount(columns, set));
 				questTaskInfo.setFactionName(getFactionName(columns, set));
@@ -288,6 +289,13 @@ public class QuestLoader extends DataLoader {
 		return null;
 	}
 
+	private static @Nullable String getMessageBoxSound(Set<String> columns, SdbLoader.SdbResultSet set) {
+		if (columns.contains("message_box_sound")) {
+			return set.getText("message_box_sound");
+		}
+		return null;
+	}
+
 	private static @Nullable String getMessageBoxTitle(Set<String> columns, SdbLoader.SdbResultSet set) {
 		if (columns.contains("message_box_title")) {
 			return set.getText("message_box_title");
@@ -440,6 +448,7 @@ public class QuestLoader extends DataLoader {
 		private int maxTime;
 		private String messageBoxTitle;
 		private String messageBoxText;
+		private String messageBoxSound;
 		private String experienceType;
 		private int experienceAmount;
 		private String factionName;
@@ -493,6 +502,14 @@ public class QuestLoader extends DataLoader {
 
 		public void setMessageBoxText(String messageBoxText) {
 			this.messageBoxText = messageBoxText;
+		}
+		
+		public void setMessageBoxSound(String messageBoxSound) {
+			this.messageBoxSound = messageBoxSound;
+		}
+
+		public String getMessageBoxSound() {
+			return messageBoxSound;
 		}
 
 		public String getExperienceType() {
