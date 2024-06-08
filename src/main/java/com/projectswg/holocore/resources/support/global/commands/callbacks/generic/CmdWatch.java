@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks.generic;
 
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.WatchIntent;
+import com.projectswg.holocore.intents.gameplay.entertainment.WatchIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;

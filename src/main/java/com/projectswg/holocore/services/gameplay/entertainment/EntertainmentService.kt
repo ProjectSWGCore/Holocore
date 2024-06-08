@@ -30,9 +30,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.network.packets.swg.zone.object_controller.Animation
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.FlourishIntent
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.WatchIntent
+import com.projectswg.holocore.intents.gameplay.entertainment.*
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
@@ -60,36 +58,36 @@ class EntertainmentService : Service() {
 	}
 
 	@IntentHandler
-	private fun handleDanceIntent(di: DanceIntent) {
-		val player = di.player
+	private fun handleStartDanceIntent(sdi: StartDanceIntent) {
+		val player = sdi.player
 		val dancer = player.creatureObject
-		val danceName = di.danceName
-		if (di.isStartDance) {
-			// This intent wants the creature to start dancing
-			// If we're changing dance, allow them to do so
-			val changeDance = di.isChangeDance
-			if (!changeDance && dancer.isPerforming) {
-				SystemMessageIntent(player, "@performance:already_performing_self").broadcast()
-			} else if (performances().getPerformanceByName(danceName) != null) {
-				// The dance name is valid.
-				if (dancer.hasCommand("startDance+$danceName")) {
-					if (changeDance) {    // If they're changing dance, we just need to change their animation.
-						changeDance(dancer, danceName)
-					} else {    // Otherwise, they should begin performing now
-						startDancing(player, danceName)
-					}
-				} else {
-					// This creature doesn't have the ability to perform this dance.
-					SystemMessageIntent(player, "@performance:dance_lack_skill_self").broadcast()
-				}
-			} else {
-				// This dance name is invalid
-				SystemMessageIntent(player, "@performance:dance_unknown_self").broadcast()
-			}
-		} else {
-			// This intent wants the creature to stop dancing
-			stopDancing(player)
+
+		if (!sdi.isChangeDance && dancer.isPerforming) {
+			SystemMessageIntent(player, "@performance:already_performing_self").broadcast()
+			return
 		}
+
+		if (performances().getPerformanceByName(sdi.danceName) == null) {
+			SystemMessageIntent(player, "@performance:dance_unknown_self").broadcast()
+			return
+		}
+
+		if (!dancer.hasCommand("startDance+${sdi.danceName}")) {
+			// This creature doesn't have the ability to perform this dance.
+			SystemMessageIntent(player, "@performance:dance_lack_skill_self").broadcast()
+			return
+		}
+
+		if (sdi.isChangeDance) {    // If they're changing dance, we just need to change their animation.
+			changeDance(dancer, sdi.danceName)
+		} else {    // Otherwise, they should begin performing now
+			startDancing(player, sdi.danceName)
+		}
+	}
+
+	@IntentHandler
+	private fun handleStopDanceIntent(sdi: StopDanceIntent) {
+		stopDancing(sdi.player)
 	}
 
 	@IntentHandler

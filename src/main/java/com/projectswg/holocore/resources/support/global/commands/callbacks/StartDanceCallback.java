@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
-import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
+import com.projectswg.holocore.intents.gameplay.entertainment.StartDanceIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -60,7 +60,7 @@ public class StartDanceCallback implements ICmdCallback {
 				if (abilityName.startsWith(ABILITY_NAME_PREFIX)) {
 					String displayName = abilityName.replace(ABILITY_NAME_PREFIX, "");
 					String firstCharacter = displayName.substring(0, 1);
-					String otherCharacters = displayName.substring(1, displayName.length());
+					String otherCharacters = displayName.substring(1);
 
 					listBox.addListItem(firstCharacter.toUpperCase(Locale.ENGLISH) + otherCharacters);
 				}
@@ -70,12 +70,12 @@ public class StartDanceCallback implements ICmdCallback {
 				int selection = SuiListBox.getSelectedRow(parameters);
 				String selectedDanceName = listBox.getListItem(selection).getName().toLowerCase(Locale.ENGLISH);
 				
-				new DanceIntent(selectedDanceName, player, changeDance).broadcast();
+				new StartDanceIntent(selectedDanceName, player, changeDance).broadcast();
 			});
 			
 			listBox.display(player);
 		} else {
-			new DanceIntent(args, player, changeDance).broadcast();
+			new StartDanceIntent(args, player, changeDance).broadcast();
 		}
 	}
 }

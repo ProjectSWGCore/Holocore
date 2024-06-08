@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,51 +24,13 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.entertainment.dance;
+package com.projectswg.holocore.intents.gameplay.entertainment
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class DanceIntent extends Intent {
-	private final String danceName;
-	private final Player player;
-	private final boolean changeDance;
-	
-	/**
-	 * Start dancing
-	 * 
-	 * @param danceName
-	 * @param player
-	 */
-	public DanceIntent(String danceName, Player player, boolean changeDance) {
-		this.danceName = danceName;
-		this.player = player;
-		this.changeDance = changeDance;
-	}
-	
-	/**
-	 * Stop dancing
-	 * 
-	 * @param player
-	 */
-	public DanceIntent(Player player) {
-		this(null, player, false);
-	}
-	
-	public String getDanceName() {
-		return danceName;
-	}
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	public boolean isStartDance() {
-		return danceName != null;
-	}
-	
-	public boolean isChangeDance() {
-		return changeDance;
-	}
-	
-}
+data class StartDanceIntent(val danceName: String, val player: Player, val isChangeDance: Boolean) : Intent()
+data class StopDanceIntent(val player: Player): Intent()
+data class FlourishIntent(val performer: Player, val flourishName: String) : Intent()
+data class WatchIntent(val actor: Player, val target: SWGObject, val isStartWatch: Boolean) : Intent()
