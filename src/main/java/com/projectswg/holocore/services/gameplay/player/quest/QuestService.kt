@@ -101,6 +101,10 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val questName = intent.questName
 		val playerObject = player.getPlayerObject()
 		val questListInfo = questLoader.getQuestListInfo(questName)
+		if (questListInfo == null) {
+			StandardLog.onPlayerError(this, player, "could not receive unknown quest '%s'", questName)
+			return
+		}
 		val repeatable = java.lang.Boolean.TRUE == questListInfo.isRepeatable
 		if (!repeatable && playerObject.isQuestInJournal(questName)) {
 			StandardLog.onPlayerError(this, player, "already had non-repeatable quest %s", questName)
