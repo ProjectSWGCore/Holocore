@@ -376,10 +376,11 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val messageBoxTitle = currentTask.messageBoxTitle
 		val messageBoxText = currentTask.messageBoxText
 		val sui = SuiMessageBox(SuiButtons.OK, messageBoxTitle, messageBoxText)
+		sui.addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
+		sui.addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
 		sui.setSize(384, 256)
 		sui.setLocation(320, 256)
 		sui.display(player)
-		completeTask(questName, player, currentTask)
 	}
 
 	private fun handleCommPlayer(player: Player, questName: String, currentTask: QuestTaskInfo) {
