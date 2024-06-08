@@ -105,7 +105,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 10)
 
 		banthas.forEach { bantha ->
-			RequestCreatureDeathIntent.broadcast(player.creatureObject, bantha)
+			RequestCreatureDeathIntent(player.creatureObject, bantha).broadcast()
 		}
 
 		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
@@ -122,7 +122,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val womprats = spawnNPCs("creature_womprat", player.creatureObject.location, 3)
 
 		womprats.forEach { womprat ->
-			RequestCreatureDeathIntent.broadcast(player.creatureObject, womprat)
+			RequestCreatureDeathIntent(player.creatureObject, womprat).broadcast()
 			val killCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 			assertNotNull(killCountUpdate, "Failed to receive kill count update in time")
 		}
@@ -141,7 +141,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 1)
 		val bantha = banthas.first()
 		
-		RequestCreatureDeathIntent.broadcast(player.creatureObject, bantha)
+		RequestCreatureDeathIntent(player.creatureObject, bantha).broadcast()
 		
 		val killCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(killCountUpdate, "Failed to receive kill count update in time")
@@ -157,7 +157,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val rockmites = spawnNPCs("creature_rockmite", player.creatureObject.location, 3)
 
 		rockmites.forEach { rockmite ->
-			RequestCreatureDeathIntent.broadcast(player.creatureObject, rockmite)
+			RequestCreatureDeathIntent(player.creatureObject, rockmite).broadcast()
 			val itemCountUpdate = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 			assertNotNull(itemCountUpdate, "Failed to receive item count update in time")
 		}

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,6 +38,6 @@ public class NpcConversationStartCmdCallback implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, @Nullable SWGObject target, @NotNull String args) {
-		StartConversationIntent.broadcast(player.getCreatureObject(), (AIObject) target);
+		new StartConversationIntent(player.getCreatureObject(), (AIObject) target).broadcast();
 	}
 }

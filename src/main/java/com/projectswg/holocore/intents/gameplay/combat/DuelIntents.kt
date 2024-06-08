@@ -42,8 +42,4 @@ class DuelPlayerIntent(val sender: CreatureObject, val receiver: CreatureObject,
 		REQUEST
 	}
 
-	companion object {
-		@JvmStatic
-		inline fun broadcast(sender: CreatureObject, receiver: CreatureObject, eventType: DuelEventType) = DuelPlayerIntent(sender, receiver, eventType).broadcast()
-	}
 }

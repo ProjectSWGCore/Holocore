@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,9 +24,6 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -37,82 +34,18 @@ import me.joshlarson.jlcommon.control.Intent
 /*
  * Combat events after the fact
  */
-data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = CreatureIncapacitatedIntent(incapper, incapee).broadcast()
-	}
-}
-
-data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = CreatureKilledIntent(killer, corpse).broadcast()
-	}
-}
-
-data class CreatureRevivedIntent(val creature: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(creature: CreatureObject) = CreatureRevivedIntent(creature).broadcast()
-	}
-}
-
-data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(source: TangibleObject, target: TangibleObject) = EnterCombatIntent(source, target).broadcast()
-	}
-}
-
-data class ExitCombatIntent(val source: TangibleObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(source: TangibleObject) = ExitCombatIntent(source).broadcast()
-	}
-}
+data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
+data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
+data class CreatureRevivedIntent(val creature: CreatureObject) : Intent()
+data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent()
+data class ExitCombatIntent(val source: TangibleObject) : Intent()
 
 /*
  * Combat event requests
  */
-data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(incapper: CreatureObject, incapee: CreatureObject) = IncapacitateCreatureIntent(incapper, incapee).broadcast()
-	}
-}
-
-data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = KillCreatureIntent(killer, corpse).broadcast()
-	}
-}
-
-data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = DeathblowIntent(killer, corpse).broadcast()
-	}
-}
-
-data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(killer: CreatureObject, corpse: CreatureObject) = RequestCreatureDeathIntent(killer, corpse).broadcast()
-	}
-}
-
-data class KnockdownIntent(val victim: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(victim: CreatureObject) = KnockdownIntent(victim).broadcast()
-	}
-}
-
-data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(attacker: CreatureObject, victim: CreatureObject, combatState: CombatState) = ApplyCombatStateIntent(attacker, victim, combatState).broadcast()
-	}
-}
+data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
+data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
+data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
+data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
+data class KnockdownIntent(val victim: CreatureObject) : Intent()
+data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState) : Intent()

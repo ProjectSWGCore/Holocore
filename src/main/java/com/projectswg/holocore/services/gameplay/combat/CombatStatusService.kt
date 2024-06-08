@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -60,7 +60,7 @@ class CombatStatusService : Service() {
 	private fun periodicCombatStatusChecks() {
 		for (tangibleObject in inCombat) {
 			if (tangibleObject.timeSinceLastCombat >= 10E3)
-				ExitCombatIntent.broadcast(tangibleObject)
+				ExitCombatIntent(tangibleObject).broadcast()
 		}
 	}
 	
@@ -90,7 +90,7 @@ class CombatStatusService : Service() {
 		for (defender in defenders) {
 			defender.removeDefender(source)
 			if (!defender.hasDefenders())
-				ExitCombatIntent.broadcast(defender)
+				ExitCombatIntent(defender).broadcast()
 		}
 		if (source.hasDefenders())
 			return

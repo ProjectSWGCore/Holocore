@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,31 +24,22 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.crafting.survey;
+package com.projectswg.holocore.resources.support.global.commands.callbacks.survey
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.intents.gameplay.crafting.StartSamplingIntent
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.storage.GalacticResourceContainer.getGalacticResourceByName
+import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
-public class StartSurveyToolIntent extends Intent {
-	
-	private final CreatureObject creature;
-	private final TangibleObject surveyTool;
-	
-	public StartSurveyToolIntent(@NotNull CreatureObject creature, @NotNull TangibleObject surveyTool) {
-		this.creature = creature;
-		this.surveyTool = surveyTool;
+class CmdRequestCoreSample : ICmdCallback {
+	override fun execute(player: Player, target: SWGObject?, args: String) {
+		val resource = getGalacticResourceByName(args)
+		if (resource == null) {
+			SystemMessageIntent.broadcastPersonal(player, "@survey:sample_select_type")
+			return
+		}
+		StartSamplingIntent(player.creatureObject, resource).broadcast()
 	}
-	
-	@NotNull
-	public CreatureObject getCreature() {
-		return creature;
-	}
-	
-	@NotNull
-	public TangibleObject getSurveyTool() {
-		return surveyTool;
-	}
-	
 }

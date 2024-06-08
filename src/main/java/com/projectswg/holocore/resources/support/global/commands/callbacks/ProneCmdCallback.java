@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,7 +27,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks;
 
 import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.holocore.intents.gameplay.crafting.survey.StopSamplingIntent;
+import com.projectswg.holocore.intents.gameplay.crafting.StopSamplingIntent;
 import com.projectswg.holocore.intents.gameplay.entertainment.dance.DanceIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.commands.Locomotion;
@@ -56,7 +56,7 @@ public class ProneCmdCallback implements ICmdCallback {
 			creature.setPosture(Posture.PRONE);
 			creature.setTurnScale(1);
 			creature.setMovementPercent(0.50);
-			StopSamplingIntent.broadcast(creature);
+			new StopSamplingIntent(creature).broadcast();
 		}
 	}
 

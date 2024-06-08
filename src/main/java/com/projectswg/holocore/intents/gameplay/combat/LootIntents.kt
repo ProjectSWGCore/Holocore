@@ -24,9 +24,6 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.holocore.resources.gameplay.combat.loot.LootType
@@ -37,46 +34,13 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import me.joshlarson.jlcommon.control.Intent
 
-data class CorpseLootedIntent(val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(corpse: CreatureObject) = CorpseLootedIntent(corpse).broadcast()
-	}
-}
-
-data class LootGeneratedIntent(val corpse: AIObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(corpse: AIObject) = LootGeneratedIntent(corpse).broadcast()
-	}
-}
+data class CorpseLootedIntent(val corpse: CreatureObject) : Intent()
+data class LootGeneratedIntent(val corpse: AIObject) : Intent()
 
 /** Requests to transfer a particular item from a corpse */
-data class LootItemIntent(val looter: CreatureObject, val corpse: CreatureObject, val item: SWGObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(looter: CreatureObject, corpse: CreatureObject, item: SWGObject) = LootItemIntent(looter, corpse, item).broadcast()
-	}
-}
-
-data class LootLotteryStartedIntent(val corpse: CreatureObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(corpse: CreatureObject) = LootLotteryStartedIntent(corpse).broadcast()
-	}
-}
+data class LootItemIntent(val looter: CreatureObject, val corpse: CreatureObject, val item: SWGObject) : Intent()
+data class LootLotteryStartedIntent(val corpse: CreatureObject) : Intent()
 
 /** Requests a particular high-level action on a corpse */
-data class LootRequestIntent(val player: Player, val target: CreatureObject, val type: LootType) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(player: Player, target: CreatureObject, type: LootType) = LootRequestIntent(player, target, type).broadcast()
-	}
-}
-
-data class OpenRareChestIntent(val actor: CreatureObject, val chest: TangibleObject) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(actor: CreatureObject, chest: TangibleObject) = OpenRareChestIntent(actor, chest).broadcast()
-	}
-}
+data class LootRequestIntent(val player: Player, val target: CreatureObject, val type: LootType) : Intent()
+data class OpenRareChestIntent(val actor: CreatureObject, val chest: TangibleObject) : Intent()

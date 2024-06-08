@@ -4,7 +4,7 @@ import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage.SystemChatType;
-import com.projectswg.holocore.intents.gameplay.crafting.survey.StartSurveyToolIntent;
+import com.projectswg.holocore.intents.gameplay.crafting.StartSurveyToolIntent;
 import com.projectswg.holocore.resources.gameplay.crafting.survey.SurveyToolResolution;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;

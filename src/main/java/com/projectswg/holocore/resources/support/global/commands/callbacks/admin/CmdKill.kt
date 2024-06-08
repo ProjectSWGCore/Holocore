@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -41,10 +41,9 @@ class CmdKill : ICmdCallback {
 		}
 
 		if (player.creatureObject != target) {
-			RequestCreatureDeathIntent.broadcast(player.creatureObject, target)
+			RequestCreatureDeathIntent(player.creatureObject, target).broadcast()
 		} else {
 			SystemMessageIntent.broadcastPersonal(player, "You cannot kill yourself!")
 		}
 	}
-
 }

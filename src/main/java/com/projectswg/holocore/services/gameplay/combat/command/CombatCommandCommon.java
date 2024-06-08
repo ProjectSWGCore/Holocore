@@ -154,7 +154,7 @@ public class CombatCommandCommon {
 			return;
 		}
 		
-		BuffIntent.broadcast(buffName, caster, receiver, false);
+		new BuffIntent(buffName, caster, receiver, false).broadcast();
 	}
 	
 	public static void handleStatus(CreatureObject source, CombatCommand combatCommand, CombatStatus status) {

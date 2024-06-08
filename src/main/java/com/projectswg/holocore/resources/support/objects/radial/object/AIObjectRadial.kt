@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,7 +29,7 @@ package com.projectswg.holocore.resources.support.objects.radial.`object`
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.holocore.intents.gameplay.combat.LootRequestIntent.Companion.broadcast
+import com.projectswg.holocore.intents.gameplay.combat.LootRequestIntent
 import com.projectswg.holocore.resources.gameplay.combat.loot.LootType
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -103,8 +103,8 @@ class AIObjectRadial : RadialHandlerInterface {
 			return
 		}
 		when (selection) {
-			RadialItem.LOOT         -> broadcast(player, ai, LootType.LOOT)
-			RadialItem.LOOT_ALL     -> broadcast(player, ai, LootType.LOOT_ALL)
+			RadialItem.LOOT         -> LootRequestIntent(player, ai, LootType.LOOT).broadcast()
+			RadialItem.LOOT_ALL     -> LootRequestIntent(player, ai, LootType.LOOT_ALL).broadcast()
 			RadialItem.SERVER_MENU1 -> HarvestBoneIntent(player, ai).broadcast()
 			RadialItem.SERVER_MENU2 -> HarvestHideIntent(player, ai).broadcast()
 			RadialItem.SERVER_MENU3 -> HarvestMeatIntent(player, ai).broadcast()

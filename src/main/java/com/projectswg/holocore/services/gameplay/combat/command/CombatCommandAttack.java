@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -191,8 +191,8 @@ class CombatCommandAttack implements CombatCommandHitType {
 		DamageType damageType = getDamageType(combatCommand, sourceWeapon);
 		for (TangibleObject tangibleTarget : targets) {
 			tangibleTarget.updateLastCombatTime();
-			EnterCombatIntent.broadcast(source, tangibleTarget);
-			EnterCombatIntent.broadcast(tangibleTarget, source);
+			new EnterCombatIntent(source, tangibleTarget).broadcast();
+			new EnterCombatIntent(tangibleTarget, source).broadcast();
 
 			if (tangibleTarget instanceof CreatureObject creatureTarget) {
 				doCombatCreature(source, info, combatCommand, sourceWeapon, action, weaponDamageMod, damageType, creatureTarget);
@@ -214,7 +214,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 
 		if (nextConditionDamage > tangibleTarget.getMaxHitPoints()) {
 			DestroyObjectIntent.broadcast(tangibleTarget);
-			ExitCombatIntent.broadcast(tangibleTarget);
+			new ExitCombatIntent(tangibleTarget).broadcast();
 		} else {
 			tangibleTarget.setConditionDamage(nextConditionDamage);
 		}
@@ -247,7 +247,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 		double knockdownChance = combatCommand.getKnockdownChance();
 		if (knockdownChance > 0) {
 			if (knockdownDie.roll(new IntRange(0, 100)) < knockdownChance) {
-				KnockdownIntent.broadcast(creatureTarget);
+				new KnockdownIntent(creatureTarget).broadcast();
 			} else {
 				String yourAttackFailedToKnockDownYourOpponent = "@cbt_spam:knockdown_fail";
 				SystemMessageIntent.broadcastPersonal(source.getOwner(), yourAttackFailedToKnockDownYourOpponent);
@@ -267,15 +267,15 @@ class CombatCommandAttack implements CombatCommandHitType {
 		info.setFinalDamage(rawDamage);
 
 		if (combatCommand.isBlinding()) {
-			ApplyCombatStateIntent.broadcast(source, creatureTarget, new BlindedCombatState());
+			new ApplyCombatStateIntent(source, creatureTarget, new BlindedCombatState()).broadcast();
 		}
 
 		if (combatCommand.isBleeding()) {
-			ApplyCombatStateIntent.broadcast(source, creatureTarget, new BleedingCombatState());
+			new ApplyCombatStateIntent(source, creatureTarget, new BleedingCombatState()).broadcast();
 		}
 
 		if (combatCommand.isStunning()) {
-			ApplyCombatStateIntent.broadcast(source, creatureTarget, new StunnedCombatState());
+			new ApplyCombatStateIntent(source, creatureTarget, new StunnedCombatState()).broadcast();
 		}
 
 		// The armor of the target will mitigate some damage
@@ -293,7 +293,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 		final int finalDamage;
 		if (targetHealth <= info.getFinalDamage()) {
 			finalDamage = targetHealth;    // Target took more damage than they had health left. Final damage becomes the amount of remaining health.
-			RequestCreatureDeathIntent.broadcast(source, creatureTarget);
+			new RequestCreatureDeathIntent(source, creatureTarget).broadcast();
 		} else {
 			finalDamage = info.getFinalDamage();
 			creatureTarget.modifyHealth(-finalDamage);
@@ -374,7 +374,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 
 		if (source.getHealth() < reflectedDamage) {
 			// Took more damage than they had health left. Final damage becomes the amount of remaining health.
-			RequestCreatureDeathIntent.broadcast(source, target);
+			new RequestCreatureDeathIntent(source, target).broadcast();
 		} else {
 			source.modifyHealth(-reflectedDamage);
 		}

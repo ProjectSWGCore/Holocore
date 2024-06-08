@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,35 +24,14 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.crafting.survey;
+package com.projectswg.holocore.intents.gameplay.crafting
 
-import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class StartSurveyingIntent extends Intent {
-	
-	private final CreatureObject creature;
-	private final GalacticResource resource;
-	
-	public StartSurveyingIntent(@NotNull CreatureObject creature, @NotNull GalacticResource resource) {
-		this.creature = creature;
-		this.resource = resource;
-	}
-	
-	@NotNull
-	public CreatureObject getCreature() {
-		return creature;
-	}
-	
-	@NotNull
-	public GalacticResource getResource() {
-		return resource;
-	}
-	
-	public static void broadcast(@NotNull CreatureObject creature, @NotNull GalacticResource resource) {
-		new StartSurveyingIntent(creature, resource).broadcast();
-	}
-	
-}
+data class StartSamplingIntent(val creature: CreatureObject, val resource: GalacticResource) : Intent()
+data class StartSurveyingIntent(val creature: CreatureObject, val resource: GalacticResource) : Intent()
+data class StartSurveyToolIntent(val creature: CreatureObject, val surveyTool: TangibleObject) : Intent()
+data class StopSamplingIntent(val creature: CreatureObject) : Intent()

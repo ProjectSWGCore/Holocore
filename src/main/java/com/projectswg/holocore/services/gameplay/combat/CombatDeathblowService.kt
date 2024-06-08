@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,7 +30,6 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.holocore.intents.gameplay.combat.*
-import com.projectswg.holocore.intents.gameplay.combat.CreatureRevivedIntent.Companion.broadcast
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -113,7 +112,7 @@ class CombatDeathblowService : Service() {
 		corpse.setTurnScale(0.0)
 		corpse.setMovementPercent(0.0)
 
-		ExitCombatIntent.broadcast(corpse)
+		ExitCombatIntent(corpse).broadcast()
 	}
 
 	private fun shouldDeathblow(killer: CreatureObject, corpse: CreatureObject): Boolean {
@@ -162,7 +161,7 @@ class CombatDeathblowService : Service() {
 
 		// Give 'em a percentage of their health and schedule them for HAM regeneration.
 		revivedCreature.health = (revivedCreature.baseHealth * 0.1).toInt() // Restores 10% health of their base health
-		broadcast(revivedCreature)
+		CreatureRevivedIntent(revivedCreature).broadcast()
 
 		StandardLog.onPlayerEvent(this, revivedCreature, "was revived")
 	}

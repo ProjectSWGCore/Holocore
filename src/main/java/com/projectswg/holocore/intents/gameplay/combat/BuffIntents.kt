@@ -24,17 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-@file:Suppress("NOTHING_TO_INLINE")
-
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.Intent
 
-class BuffIntent(val buffName: String, val buffer: CreatureObject, val receiver: CreatureObject, val isRemove: Boolean) : Intent() {
-	companion object {
-		@JvmStatic
-		inline fun broadcast(buffName: String, buffer: CreatureObject, receiver: CreatureObject, remove: Boolean) = BuffIntent(buffName, buffer, receiver, remove).broadcast()
-	}
-}
+class BuffIntent(val buffName: String, val buffer: CreatureObject, val receiver: CreatureObject, val isRemove: Boolean) : Intent()
