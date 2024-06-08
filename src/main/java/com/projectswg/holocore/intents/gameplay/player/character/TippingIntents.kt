@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,20 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-@file:Suppress("NOTHING_TO_INLINE")
 package com.projectswg.holocore.intents.gameplay.player.character
 
 import com.projectswg.holocore.resources.support.global.player.Player
 import me.joshlarson.jlcommon.control.Intent
 
-data class CashTipIntent(val sender: Player, val receiver: Player, val amount: Int): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(sender: Player, receiver: Player, amount: Int) = CashTipIntent(sender, receiver, amount).broadcast()
-	}
-}
-
-data class BankTipIntent(val sender: Player, val receiver: Player, val amount: Int): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(sender: Player, receiver: Player, amount: Int) = BankTipIntent(sender, receiver, amount).broadcast()
-	}
-}
+data class CashTipIntent(val sender: Player, val receiver: Player, val amount: Int) : Intent()
+data class BankTipIntent(val sender: Player, val receiver: Player, val amount: Int) : Intent()

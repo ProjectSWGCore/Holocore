@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,7 +29,6 @@ package com.projectswg.holocore.services.gameplay.jedi
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.holocore.intents.gameplay.jedi.RequestTuneCrystalIntent
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent
-import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent.Companion.broadcast
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
@@ -48,7 +47,7 @@ class LightsaberCrystalService : Service() {
 		}
 		val owner = tuner.owner ?: return
 		val suiMessageBox = SuiMessageBox(SuiButtons.YES_NO, "@jedi_spam:confirm_tune_title", "@jedi_spam:confirm_tune_prompt")
-		suiMessageBox.addOkButtonCallback("tune") { _: SuiEvent?, _: Map<String?, String?>? -> broadcast(tuner, crystal) }
+		suiMessageBox.addOkButtonCallback("tune") { _: SuiEvent?, _: Map<String?, String?>? -> TuneCrystalNowIntent(tuner, crystal).broadcast() }
 		suiMessageBox.display(owner)
 	}
 

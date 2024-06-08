@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,13 +30,13 @@ import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.Intent
 
-class InviteToGroupIntent(val player: Player, val target: CreatureObject): Intent()
-class CancelInvitationToGroupIntent(val player: Player, val target: CreatureObject): Intent()
-class MakeGroupLeaderIntent(val player: Player, val target: CreatureObject): Intent()
-class KickGroupMemberIntent(val player: Player, val target: CreatureObject): Intent()
-class MakeMasterLooterOfGroupIntent(val player: Player, val target: CreatureObject): Intent()
-class JoinGroupIntent(val player: Player): Intent()
-class DeclineGroupInvitationIntent(val player: Player): Intent()
-class DisbandGroupIntent(val player: Player): Intent()
-class LeaveGroupIntent(val player: Player): Intent()
-class ShowGroupLootSettingsIntent(val player: Player): Intent()
+data class InviteToGroupIntent(val player: Player, val target: CreatureObject): Intent()
+data class CancelInvitationToGroupIntent(val player: Player, val target: CreatureObject): Intent()
+data class MakeGroupLeaderIntent(val player: Player, val target: CreatureObject): Intent()
+data class KickGroupMemberIntent(val player: Player, val target: CreatureObject): Intent()
+data class MakeMasterLooterOfGroupIntent(val player: Player, val target: CreatureObject): Intent()
+data class JoinGroupIntent(val player: Player): Intent()
+data class DeclineGroupInvitationIntent(val player: Player): Intent()
+data class DisbandGroupIntent(val player: Player): Intent()
+data class LeaveGroupIntent(val player: Player): Intent()
+data class ShowGroupLootSettingsIntent(val player: Player): Intent()

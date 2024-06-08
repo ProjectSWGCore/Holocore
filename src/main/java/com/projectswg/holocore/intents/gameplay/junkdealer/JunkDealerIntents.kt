@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,16 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-@file:Suppress("NOTHING_TO_INLINE")
 package com.projectswg.holocore.intents.gameplay.junkdealer
 
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import me.joshlarson.jlcommon.control.Intent
 
-data class SellItemsIntent(val player: Player, val npc: AIObject): Intent() {
-	companion object {
-		@JvmStatic inline fun broadcast(player: Player, npc: AIObject) = SellItemsIntent(player, npc).broadcast()
-	}
-}
+data class SellItemsIntent(val player: Player, val npc: AIObject) : Intent()

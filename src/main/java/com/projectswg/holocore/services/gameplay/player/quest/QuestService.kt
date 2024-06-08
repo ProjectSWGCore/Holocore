@@ -43,7 +43,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.quest.Qu
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceIntent
 import com.projectswg.holocore.intents.gameplay.player.quest.*
-import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent.Companion.broadcast
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
@@ -506,7 +505,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		playerObject.addCompleteQuestTask(questName, currentTask.index)
 		val grantQuestOnComplete = currentTask.grantQuestOnComplete
 		if (grantQuestOnComplete != null && grantQuestOnComplete.isNotBlank()) {
-			broadcast(player, grantQuestOnComplete)
+			GrantQuestIntent(player, grantQuestOnComplete).broadcast()
 		}
 
 		if (currentTask.musicOnComplete != null && currentTask.musicOnComplete.isNotBlank()) {

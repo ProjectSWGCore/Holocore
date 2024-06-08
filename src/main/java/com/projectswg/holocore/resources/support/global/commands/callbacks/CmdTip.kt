@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -74,9 +74,9 @@ class CmdTip : ICmdCallback {
 
 		val tipType = tipType(args, player, target)
 		if (tipType == TipType.CASH) {
-			CashTipIntent.broadcast(player, targetPlayer, amount)
+			CashTipIntent(player, targetPlayer, amount).broadcast()
 		} else if (tipType == TipType.BANK) {
-			BankTipIntent.broadcast(player, targetPlayer, amount)
+			BankTipIntent(player, targetPlayer, amount).broadcast()
 		}
 	}
 

@@ -61,7 +61,7 @@ class NewbieService : Service() {
 		}
 
 		val player = intent.player
-		GrantQuestIntent.broadcast(player, "quest/c_newbie_start")
+		GrantQuestIntent(player, "quest/c_newbie_start").broadcast()
 
 		recentlyCreatedCharacters.remove(creatureObject)
 	}

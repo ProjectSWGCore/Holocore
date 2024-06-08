@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
 import com.projectswg.common.data.CRC
@@ -53,7 +79,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal = createColorCrystal()
 		colorCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
+		TuneCrystalNowIntent(jedi, colorCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
@@ -69,7 +95,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal = createColorCrystal()
 		colorCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
+		TuneCrystalNowIntent(jedi, colorCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
@@ -85,7 +111,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal1 = createColorCrystal()
 		colorCrystal1.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal1)
+		TuneCrystalNowIntent(jedi, colorCrystal1).broadcast()
 		waitForIntents()
 		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
@@ -102,7 +128,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal1 = createColorCrystal()
 		colorCrystal1.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal1)
+		TuneCrystalNowIntent(jedi, colorCrystal1).broadcast()
 		waitForIntents()
 		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
@@ -119,7 +145,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(lightsaber.lightsaberInventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
+		TuneCrystalNowIntent(jedi, powerCrystal).broadcast()
 		waitForIntents()
 		val expectedMinDmg = lightsaber.minDamage - powerCrystal.lightsaberPowerCrystalMinDmg
 
@@ -136,7 +162,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(lightsaber.lightsaberInventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
+		TuneCrystalNowIntent(jedi, powerCrystal).broadcast()
 		waitForIntents()
 		val expectedMinDmg = lightsaber.maxDamage - powerCrystal.lightsaberPowerCrystalMaxDmg
 
@@ -153,7 +179,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
+		TuneCrystalNowIntent(jedi, powerCrystal).broadcast()
 		waitForIntents()
 		val expectedMinDmg = lightsaber.minDamage + powerCrystal.lightsaberPowerCrystalMinDmg
 
@@ -170,7 +196,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
+		TuneCrystalNowIntent(jedi, powerCrystal).broadcast()
 		waitForIntents()
 		val expectedMaxDmg = lightsaber.maxDamage + powerCrystal.lightsaberPowerCrystalMaxDmg
 
@@ -187,7 +213,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal = createColorCrystal()
 		colorCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
+		TuneCrystalNowIntent(jedi, colorCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
@@ -204,7 +230,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal = createColorCrystal()
 		colorCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(differentJedi, colorCrystal)
+		TuneCrystalNowIntent(differentJedi, colorCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
@@ -221,7 +247,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(differentJedi, powerCrystal)
+		TuneCrystalNowIntent(differentJedi, powerCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
@@ -237,7 +263,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal = createColorCrystal()
 		colorCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal)
+		TuneCrystalNowIntent(jedi, colorCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, colorCrystal, lightsaber.lightsaberInventory)
@@ -256,7 +282,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val lavaCrystal = createLavaCrystal()
 		lavaCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, lavaCrystal)
+		TuneCrystalNowIntent(jedi, lavaCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, lavaCrystal, lightsaber.lightsaberInventory)
@@ -273,10 +299,10 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val colorCrystal1 = createColorCrystal()
 		colorCrystal1.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal1)
+		TuneCrystalNowIntent(jedi, colorCrystal1).broadcast()
 		val colorCrystal2 = createColorCrystal()
 		colorCrystal2.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, colorCrystal2)
+		TuneCrystalNowIntent(jedi, colorCrystal2).broadcast()
 		waitForIntents()
 		transferItem(player, colorCrystal1, lightsaber.lightsaberInventory)
 
@@ -293,7 +319,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal = createPowerCrystal()
 		powerCrystal.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal)
+		TuneCrystalNowIntent(jedi, powerCrystal).broadcast()
 		waitForIntents()
 
 		transferItem(player, powerCrystal, lightsaber.lightsaberInventory)
@@ -309,10 +335,10 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		lightsaber.moveToContainer(jedi.inventory)
 		val powerCrystal1 = createPowerCrystal()
 		powerCrystal1.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal1)
+		TuneCrystalNowIntent(jedi, powerCrystal1).broadcast()
 		val powerCrystal2 = createPowerCrystal()
 		powerCrystal2.moveToContainer(jedi.inventory)
-		TuneCrystalNowIntent.broadcast(jedi, powerCrystal2)
+		TuneCrystalNowIntent(jedi, powerCrystal2).broadcast()
 		waitForIntents()
 		transferItem(player, powerCrystal1, lightsaber.lightsaberInventory)
 

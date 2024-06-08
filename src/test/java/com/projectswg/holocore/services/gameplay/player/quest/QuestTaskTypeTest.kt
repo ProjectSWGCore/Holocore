@@ -77,7 +77,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun showMessageBox() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/c_newbie_start")    // This quest immediately wants to display a SUI message box
+		GrantQuestIntent(player, "quest/c_newbie_start").broadcast()    // This quest immediately wants to display a SUI message box
 
 		val suiCreatePageMessage = player.waitForNextPacket(SuiCreatePageMessage::class.java)
 		assertNotNull(suiCreatePageMessage)
@@ -89,7 +89,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun commMessageWithTemplate() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/test_comm_player")
+		GrantQuestIntent(player, "quest/test_comm_player").broadcast()
 
 		val commPlayerMessage = player.waitForNextPacket(CommPlayerMessage::class.java)
 		assertNotNull(commPlayerMessage)
@@ -99,7 +99,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	@DisplayName("quest.task.ground.comm_player (no template)")
 	fun commMessageWithoutTemplate() {
 		val player = createPlayer()
-		GrantQuestIntent.broadcast(player, "quest/tatooine_bestinejobs_bantha")
+		GrantQuestIntent(player, "quest/tatooine_bestinejobs_bantha").broadcast()
 		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
 		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 10)
@@ -116,7 +116,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	@DisplayName("quest.task.ground.destroy_multi (template)")
 	fun destroyMulti() {
 		val player = createPlayer()
-		GrantQuestIntent.broadcast(player, "quest/test_destroy_multiple")
+		GrantQuestIntent(player, "quest/test_destroy_multiple").broadcast()
 		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
 		val womprats = spawnNPCs("creature_womprat", player.creatureObject.location, 3)
@@ -135,7 +135,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	@DisplayName("quest.task.ground.destroy_multi (social group)")
 	fun destroyMultiSocialGroup() {
 		val player = createPlayer()
-		GrantQuestIntent.broadcast(player, "quest/tatooine_bestinejobs_bantha")
+		GrantQuestIntent(player, "quest/tatooine_bestinejobs_bantha").broadcast()
 		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
 		val banthas = spawnNPCs("creature_bantha", player.creatureObject.location, 1)
@@ -151,7 +151,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	@DisplayName("quest.task.ground.destroy_multi_and_loot")
 	fun destroyMultiAndLoot() {
 		val player = createPlayer()
-		GrantQuestIntent.broadcast(player, "quest/test_destroy_multiple_and_loot")
+		GrantQuestIntent(player, "quest/test_destroy_multiple_and_loot").broadcast()
 		val declareRequiredKillCount = player.waitForNextPacket(QuestTaskCounterMessage::class.java)
 		assertNotNull(declareRequiredKillCount, "Failed to receive initial required kill count in time")
 		val rockmites = spawnNPCs("creature_rockmite", player.creatureObject.location, 3)
@@ -172,7 +172,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 		val player = createPlayer()
 		val before = CharacterSnapshot(player)
 
-		GrantQuestIntent.broadcast(player, "quest/test_reward")
+		GrantQuestIntent(player, "quest/test_reward").broadcast()
 		player.waitForNextPacket(QuestCompletedMessage::class.java) ?: throw IllegalStateException("Quest not completed in time")	// This quest just gives a reward, so it should complete immediately
 		waitForIntents()	// Wait for the reward(s) to be granted
 
@@ -191,7 +191,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun nothing() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/test_nothing")
+		GrantQuestIntent(player, "quest/test_nothing").broadcast()
 		val questCompletedMessage = player.waitForNextPacket(QuestCompletedMessage::class.java)
 
 		assertNotNull(questCompletedMessage, "Quest not completed in time")
@@ -202,7 +202,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun timer() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/test_timer")
+		GrantQuestIntent(player, "quest/test_timer").broadcast()
 		val questTaskTimerData = player.waitForNextPacket(QuestTaskTimerData::class.java)
 
 		assertNotNull(questTaskTimerData, "Quest task time should have been sent")
@@ -213,7 +213,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun goToLocation() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/test_go_to_location")
+		GrantQuestIntent(player, "quest/test_go_to_location").broadcast()
 		val desiredLocation = LocationBuilder()
 			.setTerrain(Terrain.TATOOINE)
 			.setX(-1200.0)
@@ -231,7 +231,7 @@ class QuestTaskTypeTest : TestRunnerSynchronousIntents() {
 	fun clearQuest() {
 		val player = createPlayer()
 
-		GrantQuestIntent.broadcast(player, "quest/c_newbie_quest6")
+		GrantQuestIntent(player, "quest/c_newbie_quest6").broadcast()
 		val desiredLocation = LocationBuilder()
 			.setTerrain(Terrain.TATOOINE)
 			.setX(3429.0)

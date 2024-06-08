@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -49,7 +49,7 @@ public class TuneCrystalRadial extends SWGObjectRadial {
 	@Override
 	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
 		if (isOptionVisible(player, target)) {
-			RequestTuneCrystalIntent.broadcast(player.getCreatureObject(), (TangibleObject) target);	// Shows the confirmation window
+			new RequestTuneCrystalIntent(player.getCreatureObject(), (TangibleObject) target).broadcast();	// Shows the confirmation window
 		}
 	}
 	

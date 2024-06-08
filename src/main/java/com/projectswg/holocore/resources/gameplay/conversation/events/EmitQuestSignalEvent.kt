@@ -33,6 +33,6 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 
 class EmitQuestSignalEvent(private val signalName: String) : Event {
 	override fun trigger(player: Player, npc: AIObject) {
-		EmitQuestSignalIntent.broadcast(player, signalName)
+		EmitQuestSignalIntent(player, signalName).broadcast()
 	}
 }

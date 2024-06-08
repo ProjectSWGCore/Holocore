@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,12 +30,13 @@ import com.projectswg.holocore.intents.gameplay.junkdealer.SellItemsIntent;
 import com.projectswg.holocore.resources.gameplay.conversation.model.Event;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
+import org.jetbrains.annotations.NotNull;
 
 public class ShowSellableItemsEvent implements Event {
 	
 	@Override
-	public void trigger(Player player, AIObject npc) {
-		SellItemsIntent.broadcast(player, npc);
+	public void trigger(@NotNull Player player, @NotNull AIObject npc) {
+		new SellItemsIntent(player, npc).broadcast();
 	}
 
 }
