@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,7 +28,7 @@ package com.projectswg.holocore.services.support.data.dev;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.objects.ObjectCreator;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -143,13 +143,13 @@ public class DeveloperService extends Service {
 		CellObject cell = building.getCellByNumber(cellNumber);
 		assert cell != null : "cell does not exist";
 		obj.moveToContainer(cell, x, y, z);
-		ObjectCreatedIntent.broadcast(obj);
+		new ObjectCreatedIntent(obj).broadcast();
 	}
 	
 	private <T extends SWGObject> T spawnObject(String template, Location l, Class<T> c) {
 		T obj = ObjectCreator.createObjectFromTemplate(template, c);
 		obj.setLocation(l);
-		ObjectCreatedIntent.broadcast(obj);
+		new ObjectCreatedIntent(obj).broadcast();
 		return obj;
 	}
 	

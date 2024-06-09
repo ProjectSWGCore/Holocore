@@ -30,7 +30,7 @@ import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
 import com.projectswg.holocore.intents.gameplay.world.CreateSpawnIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.location.ClosestLocationReducer;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.*;
@@ -89,7 +89,7 @@ public class DynamicSpawnService extends Service {
 			
 			if (SPAWNER_TYPE.getObjectTemplate().equals(egg.getTemplate())) {
 				// If the dynamic NPC dies, don't let it respawn to prevent overcrowding an area
-				DestroyObjectIntent.broadcast(egg);
+				new DestroyObjectIntent(egg).broadcast();
 			}
 		}
 	}

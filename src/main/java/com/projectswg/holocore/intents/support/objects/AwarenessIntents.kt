@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,43 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
+package com.projectswg.holocore.intents.support.objects
 
-package com.projectswg.holocore.intents.support.objects.items;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import me.joshlarson.jlcommon.control.Intent
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
-
-public class OpenContainerIntent extends Intent {
-	
-	private final CreatureObject creature;
-	private final SWGObject container;
-	private final String slot;
-	
-	public OpenContainerIntent(@NotNull CreatureObject creature, @NotNull SWGObject container, @NotNull String slot) {
-		this.creature = creature;
-		this.container = container;
-		this.slot = slot;
-	}
-	
-	public CreatureObject getCreature() {
-		return creature;
-	}
-	
-	public SWGObject getContainer() {
-		return container;
-	}
-	
-	public String getSlot() {
-		return slot;
-	}
-	
-	public static void broadcast(@NotNull CreatureObject creature, @NotNull SWGObject container) {
-		broadcast(creature, container, "");
-	}
-	
-	public static void broadcast(@NotNull CreatureObject creature, @NotNull SWGObject container, @NotNull String slot) {
-		new OpenContainerIntent(creature, container, slot).broadcast();
-	}
-}
+data class ForceAwarenessUpdateIntent(val obj: SWGObject) : Intent()

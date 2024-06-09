@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,65 +24,17 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.objects.swg;
+package com.projectswg.holocore.intents.support.objects
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class ObjectTeleportIntent extends Intent {
-	
-	private final SWGObject object;
-	private final SWGObject oldParent;
-	private final SWGObject newParent;
-	private final Location oldLocation;
-	private final Location newLocation;
-	
-	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
-		this(object, oldParent, null, oldLocation, newLocation);
-	}
-	
-	public ObjectTeleportIntent(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
-		this.object = object;
-		this.oldParent = oldParent;
-		this.newParent = newParent;
-		this.oldLocation = oldLocation;
-		this.newLocation = newLocation;
-	}
-	
-	@NotNull
-	public SWGObject getObject() {
-		return object;
-	}
-	
-	@Nullable
-	public SWGObject getOldParent() {
-		return oldParent;
-	}
-	
-	@Nullable
-	public SWGObject getNewParent() {
-		return newParent;
-	}
-	
-	@NotNull
-	public Location getOldLocation() {
-		return oldLocation;
-	}
-	
-	@NotNull
-	public Location getNewLocation() {
-		return newLocation;
-	}
-	
-	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
-		new ObjectTeleportIntent(object, oldParent, oldLocation, newLocation).broadcast();
-	}
-	
-	public static void broadcast(@NotNull SWGObject object, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation) {
-		new ObjectTeleportIntent(object, oldParent, newParent, oldLocation, newLocation).broadcast();
-	}
-	
+data class ContainerTransferIntent(val obj: SWGObject, val oldContainer: SWGObject?, val oldArrangement: Int, val container: SWGObject?, val arrangement: Int) : Intent()
+data class DestroyObjectIntent(val `object`: SWGObject) : Intent()
+data class MoveObjectIntent(val obj: SWGObject, val parent: SWGObject?, val newLocation: Location, val speed: Double) : Intent() {
+	constructor(obj: SWGObject, newLocation: Location, speed: Double) : this(obj, null, newLocation, speed)
 }
+
+data class ObjectCreatedIntent(val obj: SWGObject) : Intent()
+data class ObjectTeleportIntent(val obj: SWGObject, val oldParent: SWGObject?, val newParent: SWGObject?, val oldLocation: Location, val newLocation: Location) : Intent()

@@ -30,7 +30,7 @@ package com.projectswg.holocore.services.support.global.admin
 import com.projectswg.common.data.CRC
 import com.projectswg.holocore.intents.support.global.chat.SystemChatRoomMessageIntent
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.global.chat.AdminChatRooms
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
@@ -80,7 +80,7 @@ class AdminSpawnerService : Service() {
 				else -> SpawnerType.AREA.objectTemplate
 			})
 			egg.moveToContainer(creature.parent, location)
-			ObjectCreatedIntent.broadcast(egg)
+			ObjectCreatedIntent(egg).broadcast()
 			SystemChatRoomMessageIntent(AdminChatRooms.SPAWNER_LOG, "\\${color}\\The spawner $type ($comment) has been created at your location").broadcast()
 		}
 	}

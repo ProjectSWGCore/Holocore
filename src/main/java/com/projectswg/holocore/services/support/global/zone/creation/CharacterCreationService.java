@@ -33,7 +33,7 @@ import com.projectswg.common.network.packets.swg.login.creation.ClientVerifyAndL
 import com.projectswg.common.network.packets.swg.login.creation.CreateCharacterFailure.NameFailureReason;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.CreatedCharacterIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.namegen.NameFilter;
 import com.projectswg.holocore.resources.support.data.namegen.SWGNameGenerator;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
@@ -161,7 +161,7 @@ public class CharacterCreationService extends Service {
 		}
 		// Test for hacking
 		if (!creationRestriction.createdCharacter(player)) {
-			DestroyObjectIntent.broadcast(creature);
+			new DestroyObjectIntent(creature).broadcast();
 			sendCharCreationFailure(player, create, ErrorMessage.NAME_DECLINED_INTERNAL_ERROR, "too many attempts - hacked");
 			return null;
 		}

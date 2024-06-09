@@ -35,9 +35,9 @@ import com.projectswg.holocore.intents.support.global.command.ExecuteCommandInte
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
@@ -195,7 +195,7 @@ public class PlayerMountService extends Service {
 	
 	@IntentHandler
 	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject obj = oti.getObject();
+		SWGObject obj = oti.getObj();
 		if (oti.getOldParent() == oti.getNewParent())
 			return;
 		if (!(obj instanceof CreatureObject player))
@@ -221,12 +221,12 @@ public class PlayerMountService extends Service {
 		}
 		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
 		
-		DestroyObjectIntent.broadcast(deed);
+		new DestroyObjectIntent(deed).broadcast();
 		
 		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, vehicleInfo.getObjectTemplate());
 		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
 		vehicleControlDevice.moveToContainer(creator.getDatapad());
-		ObjectCreatedIntent.broadcast(vehicleControlDevice);
+		new ObjectCreatedIntent(vehicleControlDevice).broadcast();
 		
 		SystemMessageIntent.Companion.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
 		
@@ -250,7 +250,7 @@ public class PlayerMountService extends Service {
 		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
 		mount.setFaction(player.getFaction());
 		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
-		
+
 		// TODO after combat there's a delay
 		// TODO update faction status on mount if necessary
 		
@@ -290,7 +290,7 @@ public class PlayerMountService extends Service {
 			mount.putCustomization("/private/index_strafe", vehicleInfo.isStrafe() ? 1 : 0);
 		}
 		
-		ObjectCreatedIntent.broadcast(mount);
+		new ObjectCreatedIntent(mount).broadcast();
 		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
 		cleanupCalledMounts();
 	}

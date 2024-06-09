@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,8 +33,8 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.holocore.intents.gameplay.junkdealer.SellItemsIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox;
@@ -70,7 +70,7 @@ public class JunkDealerService extends Service {
 	
 	@IntentHandler
 	private void handleMoveObjectIntent(MoveObjectIntent intent) {
-		SWGObject object = intent.getObject();
+		SWGObject object = intent.getObj();
 		
 		if (!(object instanceof CreatureObject)) {
 			return;

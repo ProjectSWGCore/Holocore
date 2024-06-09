@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,55 +24,13 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.objects.swg;
+package com.projectswg.holocore.intents.support.objects
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.services.support.objects.items.StaticItemService
+import me.joshlarson.jlcommon.control.Intent
 
-public class MoveObjectIntent extends Intent {
-	
-	private final SWGObject object;
-	private final SWGObject parent;
-	private final Location newLocation;
-	private final double speed;
-	
-	public MoveObjectIntent(SWGObject object, Location newLocation, double speed) {
-		this.object = object;
-		this.parent = null;
-		this.newLocation = newLocation;
-		this.speed = speed;
-	}
-	
-	public MoveObjectIntent(SWGObject object, SWGObject parent, Location newLocation, double speed) {
-		this.object = object;
-		this.parent = parent;
-		this.newLocation = newLocation;
-		this.speed = speed;
-	}
-	
-	public SWGObject getObject() {
-		return object;
-	}
-	
-	public SWGObject getParent() {
-		return parent;
-	}
-	
-	public Location getNewLocation() {
-		return newLocation;
-	}
-	
-	public double getSpeed() {
-		return speed;
-	}
-	
-	public static void broadcast(SWGObject object, Location newLocation, double speed) {
-		new MoveObjectIntent(object, newLocation, speed).broadcast();
-	}
-	
-	public static void broadcast(SWGObject object, SWGObject parent, Location newLocation, double speed) {
-		new MoveObjectIntent(object, parent, newLocation, speed).broadcast();
-	}
-	
-}
+data class CloseContainerIntent(val creature: CreatureObject, val container: SWGObject, val slot: String) : Intent()
+class CreateStaticItemIntent(val requester: SWGObject, val container: SWGObject, val objectCreationHandler: StaticItemService.ObjectCreationHandler, vararg val itemNames: String) : Intent()
+data class OpenContainerIntent(val creature: CreatureObject, val container: SWGObject, val slot: String) : Intent()

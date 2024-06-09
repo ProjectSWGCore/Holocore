@@ -30,7 +30,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Point3D
 import com.projectswg.holocore.intents.gameplay.player.badge.GrantBadgeIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent
+import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ExplorationBadgeLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.explorationBadges
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -49,7 +49,7 @@ class ExplorationBadgeService : Service() {
 	}
 	@IntentHandler
 	private fun handleObjectTeleportedIntent(oti: ObjectTeleportIntent) {
-		val creatureObject = oti.`object` as? CreatureObject ?: return
+		val creatureObject = oti.obj as? CreatureObject ?: return
 		val explorationBadgeInfo = checkExplorationRegions(creatureObject) ?: return
 		
 		if (!hasBadge(creatureObject, explorationBadgeInfo)) {

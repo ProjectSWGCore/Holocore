@@ -33,9 +33,9 @@ import com.projectswg.common.data.location.Terrain;
 import com.projectswg.common.data.sui.SuiEvent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.DeleteCharacterIntent;
-import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ForceAwarenessUpdateIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -132,7 +132,7 @@ public class CmdQaTool implements ICmdCallback {
 				new DeleteCharacterIntent((CreatureObject) target).broadcast();
 			} else {
 				Log.i("[%s] Requested deletion of object: %s", player.getUsername(), target);
-				DestroyObjectIntent.broadcast(target);
+				new DestroyObjectIntent(target).broadcast();
 			}
 		});
 		inputBox.display(player);

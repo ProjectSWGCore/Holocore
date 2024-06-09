@@ -28,7 +28,7 @@ package com.projectswg.holocore.resources.support.objects.swg.custom;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint;
 import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType;
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner;
@@ -117,11 +117,11 @@ public abstract class NpcMode {
 	}
 	
 	public final void moveTo(SWGObject parent, Location location) {
-		MoveObjectIntent.broadcast(obj, parent, location, getWalkSpeed());
+		new MoveObjectIntent(obj, parent, location, getWalkSpeed()).broadcast();
 	}
 	
 	public final void moveTo(Location location) {
-		MoveObjectIntent.broadcast(obj, location, getWalkSpeed());
+		new MoveObjectIntent(obj, location, getWalkSpeed()).broadcast();
 	}
 	
 	public final void walkTo(SWGObject parent, Location location) {

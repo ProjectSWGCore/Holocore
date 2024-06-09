@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -34,7 +34,7 @@ import com.projectswg.holocore.ProjectSWG;
 import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
@@ -58,7 +58,7 @@ public class ChatMailService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject obj = oci.getObject();
+		SWGObject obj = oci.getObj();
 		if (!(obj instanceof PlayerObject))
 			return;
 		

@@ -32,7 +32,7 @@ import com.projectswg.holocore.intents.support.data.control.BanPlayerIntent;
 import com.projectswg.holocore.intents.support.data.control.KickPlayerIntent;
 import com.projectswg.holocore.intents.support.data.control.ShutdownServerIntent;
 import com.projectswg.holocore.intents.support.data.control.UnbanPlayerIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons;
@@ -85,7 +85,7 @@ public class CmdServer implements ICmdCallback {
 		lair.setPvpFlags(PvpFlag.YOU_CAN_ATTACK);
 		lair.addOptionFlags(OptionFlag.HAM_BAR);
 		lair.setLocation(player.getCreatureObject().getLocation());
-		ObjectCreatedIntent.broadcast(lair);
+		new ObjectCreatedIntent(lair).broadcast();
 	}
 
 	private static void handleKickPlayer(Player player) {

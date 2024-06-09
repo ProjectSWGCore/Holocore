@@ -45,8 +45,8 @@ import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.DeleteCharacterIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase;
 import com.projectswg.holocore.resources.support.data.server_info.database.UserMetadata;
@@ -89,7 +89,7 @@ public class LoginService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject obj = oci.getObject();
+		SWGObject obj = oci.getObj();
 		if (!(obj instanceof PlayerObject player))
 			return;
 		CreatureObject creature = (CreatureObject) player.getParent();
@@ -102,7 +102,7 @@ public class LoginService extends Service {
 	private void handleDeleteCharacterIntent(DeleteCharacterIntent dci) {
 		SWGObject obj = dci.getCreature();
 		if (PswgDatabase.INSTANCE.getObjects().removeObject(obj.getObjectId())) {
-			DestroyObjectIntent.broadcast(obj);
+			new DestroyObjectIntent(obj).broadcast();
 			Player owner = obj.getOwner();
 			if (owner != null)
 				new CloseConnectionIntent(owner, DisconnectReason.APPLICATION).broadcast();
@@ -182,7 +182,7 @@ public class LoginService extends Service {
 		}
 		player.sendPacket(new DeleteCharacterResponse(success));
 		if (success) {
-			DestroyObjectIntent.broadcast(obj);
+			new DestroyObjectIntent(obj).broadcast();
 			Player owner = obj.getOwner();
 			if (owner != null)
 				new CloseConnectionIntent(owner, DisconnectReason.APPLICATION).broadcast();

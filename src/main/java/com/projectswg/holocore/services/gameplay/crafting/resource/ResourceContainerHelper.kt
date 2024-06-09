@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,8 +27,8 @@
 package com.projectswg.holocore.services.gameplay.crafting.resource
 
 import com.projectswg.common.data.encodables.oob.StringId
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.GalacticResource
 import com.projectswg.holocore.resources.gameplay.crafting.resource.raw.RawResource
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.rawResources
@@ -78,7 +78,7 @@ object ResourceContainerHelper {
 				return null
 			}
 
-			ContainerResult.SUCCESS        -> ObjectCreatedIntent.broadcast(resourceObject)
+			ContainerResult.SUCCESS        -> ObjectCreatedIntent(resourceObject).broadcast()
 
 			else                           -> {
 				resourceContainerEventHandler.onUnknownError()

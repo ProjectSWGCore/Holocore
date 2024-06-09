@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.missions
 
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
@@ -6,7 +32,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.MissionA
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.global.player.Player
@@ -129,7 +155,7 @@ class DestroyMissionListTest : TestRunnerSimulatedWorld() {
     private fun createMissionTerminal(): SWGObject {
         val missionTerminal =
             ObjectCreator.createObjectFromTemplate("object/tangible/terminal/shared_terminal_mission.iff")
-        ObjectCreatedIntent.broadcast(missionTerminal)
+        ObjectCreatedIntent(missionTerminal).broadcast()
         return missionTerminal
     }
 
@@ -161,7 +187,7 @@ class DestroyMissionListTest : TestRunnerSimulatedWorld() {
     private fun createMissionObject(): MissionObject {
         val missionObject =
             ObjectCreator.createObjectFromTemplate("object/mission/shared_mission_object.iff") as MissionObject
-        ObjectCreatedIntent.broadcast(missionObject)
+        ObjectCreatedIntent(missionObject).broadcast()
 
         return missionObject
     }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.tangible;
 
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.objects.permissions.ContainerResult;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
@@ -66,7 +66,7 @@ public class CreditObject extends TangibleObject {
 		requester.addToCash(amount);
 		
 		systemMove(null);
-		DestroyObjectIntent.broadcast(this);
+		new DestroyObjectIntent(this).broadcast();
 		return ContainerResult.SUCCESS;
 	}
 	

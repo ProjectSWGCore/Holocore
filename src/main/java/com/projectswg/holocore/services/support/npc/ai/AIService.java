@@ -28,8 +28,8 @@ package com.projectswg.holocore.services.support.npc.ai;
 
 import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
@@ -73,7 +73,7 @@ public class AIService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		if (!(oci.getObject() instanceof AIObject obj))
+		if (!(oci.getObj() instanceof AIObject obj))
 			return;
 		if (aiObjects.add(obj) && started.get())
 			obj.start(executor);

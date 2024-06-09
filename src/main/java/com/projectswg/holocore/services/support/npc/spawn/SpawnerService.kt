@@ -34,8 +34,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.Intended
 import com.projectswg.holocore.intents.gameplay.world.CreateSpawnIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
@@ -156,7 +156,7 @@ class SpawnerService : Service() {
 					NPCCreator.createAllNPCs(spawner)
 				}
 			} else {
-				DestroyObjectIntent.broadcast(spawner.egg)
+				DestroyObjectIntent(spawner.egg).broadcast()
 			}
 		}
 	}
@@ -168,7 +168,7 @@ class SpawnerService : Service() {
 
 		for (npc in npcs) {
 			npc.spawner = null	// Prevents the NPC from respawning
-			DestroyObjectIntent.broadcast(npc)
+			DestroyObjectIntent(npc).broadcast()
 		}
 	}
 
@@ -212,7 +212,7 @@ class SpawnerService : Service() {
 				
 				obj.objectName = String.format("P: %s\nG: %s\nNPC: %s\nID: %s", waypoint.patrolId, waypoint.groupId, npcId, spawn.id)
 				obj.moveToContainer(waypoint.parent, waypoint.location)
-				ObjectCreatedIntent.broadcast(obj)
+				ObjectCreatedIntent(obj).broadcast()
 			}
 		}
 	}
@@ -226,7 +226,7 @@ class SpawnerService : Service() {
 		else
 			egg.objectName = String.format("%s\nNPC: %s\nG: %s", spawn.id, spawn.npcId, spawn.patrolId)
 		egg.systemMove(getCell(spawn.id, spawn.cellId, spawn.buildingId), Location.builder().setTerrain(spawn.terrain).setPosition(spawn.x, spawn.y, spawn.z).setHeading(spawn.heading.toDouble()).build())
-		ObjectCreatedIntent.broadcast(egg)
+		ObjectCreatedIntent(egg).broadcast()
 		return egg
 	}
 	

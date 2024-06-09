@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2022 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,7 +31,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ElevatorLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
@@ -52,7 +52,7 @@ class ElevatorService : Service() {
 	
 	@IntentHandler
 	private fun handleMoveObjectIntent(moi: MoveObjectIntent) {
-		val creature = moi.`object` as? CreatureObject ?: return
+		val creature = moi.obj as? CreatureObject ?: return
 		if (!creature.isPlayer)
 			return
 		// Now dealing with players only
@@ -65,7 +65,7 @@ class ElevatorService : Service() {
 		}
 		
 		// Not going to be in a building
-		val building = moi.parent.parent as? BuildingObject
+		val building = moi.parent?.parent as? BuildingObject
 		if (building == null) {
 			removeFromElevatorMap(creature)
 			return

@@ -33,8 +33,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
@@ -103,7 +103,7 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 	private fun createCharacter(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
 		GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "species_human", creatureObject, true).broadcast()
-		ObjectCreatedIntent.broadcast(creatureObject)
+		ObjectCreatedIntent(creatureObject).broadcast()
 		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defaultWeapon.moveToContainer(creatureObject)
 		creatureObject.equippedWeapon = defaultWeapon
@@ -114,7 +114,7 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 		val lair = ObjectCreator.createObjectFromTemplate(ClientFactory.formatToSharedFile("object/tangible/lair/bantha/lair_bantha.iff")) as TangibleObject
 		lair.removeOptionFlags(OptionFlag.INVULNERABLE)
 		lair.setPvpFlags(PvpFlag.YOU_CAN_ATTACK)
-		ObjectCreatedIntent.broadcast(lair)
+		ObjectCreatedIntent(lair).broadcast()
 		return lair
 	}
 }

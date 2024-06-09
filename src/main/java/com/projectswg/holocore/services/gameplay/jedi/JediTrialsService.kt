@@ -34,7 +34,7 @@ import com.projectswg.holocore.intents.gameplay.jedi.CreateTestLightsaberIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.SurrenderSkillIntent
 import com.projectswg.holocore.intents.support.global.chat.PersistentMessageIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
@@ -109,7 +109,7 @@ class JediTrialsService : Service() {
 		padawanRobe.isNoTrade = true
 		padawanRobe.adjustSkillmod("jedi_force_power_max", 250, 0)
 		padawanRobe.adjustSkillmod("jedi_force_power_regen", 10, 0)
-		ObjectCreatedIntent.broadcast(padawanRobe);
+		ObjectCreatedIntent(padawanRobe).broadcast()
 		return padawanRobe
 	}
 

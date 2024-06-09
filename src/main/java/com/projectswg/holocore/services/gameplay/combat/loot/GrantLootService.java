@@ -37,8 +37,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.loot.Gro
 import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.OpenContainerIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
 import com.projectswg.holocore.resources.gameplay.combat.loot.LootType;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -295,7 +295,7 @@ public final class GrantLootService extends Service {
 				onLootedCredits(looter, amount);
 			}
 			
-			DestroyObjectIntent.broadcast(target);
+			new DestroyObjectIntent(target).broadcast();
 		}
 		
 		protected void onLooted(CreatureObject looter, CreatureObject corpse) {
@@ -340,7 +340,7 @@ public final class GrantLootService extends Service {
 			switch (type) {
 				case LOOT: // Open loot box
 					if (!lootItems.isEmpty())
-						OpenContainerIntent.broadcast(looter, lootInventory);
+						new OpenContainerIntent(looter, lootInventory, "").broadcast();
 					break;
 				case LOOT_ALL: // Request to loot all items
 					for (SWGObject loot : lootItems)

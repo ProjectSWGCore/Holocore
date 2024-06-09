@@ -27,8 +27,8 @@
 package com.projectswg.holocore.services.support.objects.items
 
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.support.objects.items.CreateStaticItemIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.CreateStaticItemIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -57,7 +57,7 @@ class StaticItemService : Service() {
 			if (obj != null) {
 				objects.add(obj)
 				obj.moveToContainer(container)
-				ObjectCreatedIntent.broadcast(obj)
+				ObjectCreatedIntent(obj).broadcast()
 			} else {
 				Log.d("%s could not be spawned because the item name is unknown", itemName)
 				val requesterOwner = csii.requester.owner

@@ -38,8 +38,7 @@ import com.projectswg.holocore.intents.support.global.network.CloseConnectionInt
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.global.zone.RequestZoneInIntent;
-import com.projectswg.holocore.intents.support.objects.awareness.ForceAwarenessUpdateIntent;
-import com.projectswg.holocore.intents.support.objects.swg.*;
+import com.projectswg.holocore.intents.support.objects.*;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -113,7 +112,7 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		awareness.createObject(oci.getObject());
+		awareness.createObject(oci.getObj());
 	}
 	
 	@IntentHandler
@@ -126,7 +125,7 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
-		@NotNull SWGObject obj = oti.getObject();
+		@NotNull SWGObject obj = oti.getObj();
 		@Nullable SWGObject newParent = oti.getNewParent();
 		@NotNull Location oldLocation = oti.getOldLocation();
 		@NotNull Location newLocation = oti.getNewLocation();
@@ -151,22 +150,22 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleMoveObjectIntent(MoveObjectIntent moi) {
-		moveObjectWithTransform(moi.getObject(), moi.getParent(), moi.getNewLocation(), moi.getSpeed());
+		moveObjectWithTransform(moi.getObj(), moi.getParent(), moi.getNewLocation(), moi.getSpeed());
 	}
 	
 	@IntentHandler
 	private void handleContainerTransferIntent(ContainerTransferIntent cti) {
-		@NotNull SWGObject obj = cti.getObject();
+		@NotNull SWGObject obj = cti.getObj();
 		@Nullable SWGObject oldContainer = cti.getOldContainer();
 		@Nullable SWGObject newContainer = cti.getContainer();
 		
-		awareness.updateObject(cti.getObject());
+		awareness.updateObject(cti.getObj());
 		sendObjectUpdates(obj, oldContainer, newContainer, obj.getLocation(), obj.getLocation(), 0);
 	}
 	
 	@IntentHandler
 	private void handleForceAwarenessUpdateIntent(ForceAwarenessUpdateIntent faui) {
-		awareness.updateObject(faui.getObject());
+		awareness.updateObject(faui.getObj());
 	}
 	
 	@IntentHandler

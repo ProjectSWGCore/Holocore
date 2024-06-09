@@ -29,7 +29,7 @@ package com.projectswg.holocore.services.gameplay.combat.loot
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.CorpseLootedIntent
 import com.projectswg.holocore.intents.gameplay.combat.LootGeneratedIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
@@ -101,10 +101,10 @@ class LootGenerationService(tableDie: Die = RandomDie(), groupDie: Die = RandomD
 		val lootInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_creature_inventory.iff")
 		loot.forEach { obj ->
 			obj.moveToContainer(lootInventory)
-			ObjectCreatedIntent.broadcast(obj)
+			ObjectCreatedIntent(obj).broadcast()
 		}
 		lootInventory.moveToContainer(corpse, corpse.location)
-		ObjectCreatedIntent.broadcast(lootInventory)
+		ObjectCreatedIntent(lootInventory).broadcast()
 		LootGeneratedIntent(corpse).broadcast()
 	}
 	

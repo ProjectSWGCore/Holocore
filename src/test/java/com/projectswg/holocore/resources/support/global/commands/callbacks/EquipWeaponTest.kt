@@ -29,7 +29,7 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks
 import com.projectswg.common.data.CRC
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator

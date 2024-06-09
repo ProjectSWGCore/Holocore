@@ -32,7 +32,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.holocore.intents.gameplay.jedi.TuneCrystalNowIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
@@ -431,8 +431,8 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		val fourthGenerationSaberInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_lightsaber_inventory_4.iff") as TangibleObject
 		fourthGenerationSaberInventory.moveToContainer(fourthGenerationSaber)
 
-		ObjectCreatedIntent.broadcast(fourthGenerationSaber)
-		ObjectCreatedIntent.broadcast(fourthGenerationSaberInventory)
+		ObjectCreatedIntent(fourthGenerationSaber).broadcast()
+		ObjectCreatedIntent(fourthGenerationSaberInventory).broadcast()
 		waitForIntents()
 		return fourthGenerationSaber
 	}

@@ -31,7 +31,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
@@ -94,7 +94,7 @@ class AbilityTest : TestRunnerSimulatedWorld() {
 
 	private fun createCreatureObject(): GenericCreatureObject {
 		val creatureObject = GenericCreatureObject(ObjectCreator.getNextObjectId())
-		ObjectCreatedIntent.broadcast(creatureObject)
+		ObjectCreatedIntent(creatureObject).broadcast()
 		val defaultWeapon = DefaultWeaponFactory.createDefaultWeapon()
 		defaultWeapon.moveToContainer(creatureObject)
 		creatureObject.equippedWeapon = defaultWeapon

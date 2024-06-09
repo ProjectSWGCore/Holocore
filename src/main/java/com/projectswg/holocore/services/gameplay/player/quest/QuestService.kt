@@ -45,9 +45,9 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.intents.gameplay.player.quest.*
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -195,7 +195,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	@IntentHandler
 	private fun handleObjectTeleportIntent(intent: ObjectTeleportIntent) {
-		val player = intent.`object`.ownerShallow ?: return
+		val player = intent.obj.ownerShallow ?: return
 		handlePlayerChangeLocation(player, intent.newLocation)
 	}
 
@@ -605,7 +605,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private fun transferItemToInventory(player: Player, item: SWGObject) {
 		val inventory = player.creatureObject.getInventory()
 		item.moveToContainer(inventory)
-		ObjectCreatedIntent.broadcast(item)
+		ObjectCreatedIntent(item).broadcast()
 		SystemMessageIntent.broadcastPersonal(
 			player, ProsePackage(StringId("quest/ground/system_message", "placed_in_inventory"), "TO", item.stringId)
 		)

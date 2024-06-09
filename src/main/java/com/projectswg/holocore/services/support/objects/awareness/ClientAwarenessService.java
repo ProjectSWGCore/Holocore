@@ -36,8 +36,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.Teleport
 import com.projectswg.holocore.intents.gameplay.world.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectTeleportIntent;
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
@@ -70,7 +70,7 @@ public class ClientAwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
-		@NotNull SWGObject obj = oti.getObject();
+		@NotNull SWGObject obj = oti.getObj();
 		
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			teleporting.add(obj);
@@ -176,7 +176,7 @@ public class ClientAwarenessService extends Service {
 	}
 	
 	private static void moveObjectWithTransform(SWGObject obj, SWGObject parent, Location requestedLocation, double speed) {
-		MoveObjectIntent.broadcast(obj, parent, requestedLocation, speed);
+		new MoveObjectIntent(obj, parent, requestedLocation, speed).broadcast();
 	}
 	
 }

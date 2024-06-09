@@ -33,7 +33,7 @@ import com.projectswg.common.data.location.Location.LocationBuilder;
 import com.projectswg.common.data.objects.GameObjectType;
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.NpcEquipmentLoader;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
@@ -143,7 +143,7 @@ public class NPCCreator {
 		setNPCFaction(object, spawner.getFaction(), spawner.isSpecForce());
 		
 		spawner.addNPC(object);
-		ObjectCreatedIntent.broadcast(object);
+		new ObjectCreatedIntent(object).broadcast();
 		return object;
 	}
 

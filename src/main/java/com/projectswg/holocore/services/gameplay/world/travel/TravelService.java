@@ -40,7 +40,7 @@ import com.projectswg.holocore.intents.gameplay.world.TicketUseIntent;
 import com.projectswg.holocore.intents.gameplay.world.TravelPointSelectionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelHelper;
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint;
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
@@ -178,7 +178,7 @@ public class TravelService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject object = oci.getObject();
+		SWGObject object = oci.getObj();
 		
 		// There are non-functional shuttles, which are StaticObject. We run an instanceof check to make sure that we ignore those.
 		if (travel.getTravelGroup(object.getTemplate()) != null && !(object instanceof StaticObject)) {

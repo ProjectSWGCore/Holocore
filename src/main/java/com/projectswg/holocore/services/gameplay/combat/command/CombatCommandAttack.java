@@ -42,7 +42,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam;
 import com.projectswg.holocore.intents.gameplay.combat.*;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus;
 import com.projectswg.holocore.resources.support.color.SWGColor;
 import com.projectswg.holocore.resources.support.global.commands.CombatCommand;
@@ -213,7 +213,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 		info.setFinalDamage(rawDamage);
 
 		if (nextConditionDamage > tangibleTarget.getMaxHitPoints()) {
-			DestroyObjectIntent.broadcast(tangibleTarget);
+			new DestroyObjectIntent(tangibleTarget).broadcast();
 			new ExitCombatIntent(tangibleTarget).broadcast();
 		} else {
 			tangibleTarget.setConditionDamage(nextConditionDamage);

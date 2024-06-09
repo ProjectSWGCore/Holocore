@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -40,8 +40,8 @@ import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent;
 import com.projectswg.holocore.intents.gameplay.conversation.ProgressConversationIntent;
 import com.projectswg.holocore.intents.gameplay.conversation.StartConversationIntent;
 import com.projectswg.holocore.intents.gameplay.conversation.StopConversationIntent;
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.gameplay.conversation.model.Conversation;
 import com.projectswg.holocore.resources.gameplay.conversation.model.Event;
 import com.projectswg.holocore.resources.gameplay.conversation.model.PlayerResponse;
@@ -92,7 +92,7 @@ public class ConversationService extends Service {
 	
 	@IntentHandler
 	private void handleMoveObjectIntent(MoveObjectIntent intent) {
-		SWGObject object = intent.getObject();
+		SWGObject object = intent.getObj();
 		
 		if (!(object instanceof CreatureObject)) {
 			return;
@@ -117,7 +117,7 @@ public class ConversationService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent intent) {
-		SWGObject object = intent.getObject();
+		SWGObject object = intent.getObj();
 		
 		if (!(object instanceof AIObject)) {
 			return;
@@ -296,7 +296,7 @@ public class ConversationService extends Service {
 				.setHeading(headingTo)
 				.build();
 		
-		MoveObjectIntent.broadcast(npc, npc.getParent(), newNpcWorldLocation, 0);
+		new MoveObjectIntent(npc, npc.getParent(), newNpcWorldLocation, 0).broadcast();
 	}
 	
 	private void abortConversation(CreatureObject creatureObject) {

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,8 +38,8 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.MissionA
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
@@ -63,7 +63,7 @@ class DestroyMissionService : Service() {
 
 	@IntentHandler
 	private fun handleObjectCreated(objectCreatedIntent: ObjectCreatedIntent) {
-		val swgObject = objectCreatedIntent.`object`
+		val swgObject = objectCreatedIntent.obj
 
 		if ("object/tangible/mission_bag/shared_mission_bag.iff" == swgObject.template) {
 			synchronizeMissionObjects(swgObject)
@@ -93,7 +93,7 @@ class DestroyMissionService : Service() {
 
 		val lairs = lairToMission.filterValues { it == missionObject }.keys
 		lairs.forEach { lairToMission.remove(it) }
-		DestroyObjectIntent.broadcast(missionObject)
+		DestroyObjectIntent(missionObject).broadcast()
 
 		val response = MissionAbort(creatureObject.objectId)
 		response.missionObjectId = missionObjectId
@@ -113,7 +113,7 @@ class DestroyMissionService : Service() {
 	}
 
 	private fun handleMissionCompleted(owner: Player, missionObject: MissionObject, location: Location) {
-		DestroyObjectIntent.broadcast(missionObject)
+		DestroyObjectIntent(missionObject).broadcast()
 		val groupId = owner.creatureObject.groupId
 		val grouped = groupId != 0L
 
@@ -260,13 +260,13 @@ class DestroyMissionService : Service() {
 		val actualAmountOfMissions = missionBag.containedObjects.size
 		val iterator = missionBag.containedObjects.iterator()
 		for (i in missionsToGenerate until actualAmountOfMissions) {
-			DestroyObjectIntent.broadcast(iterator.next())
+			DestroyObjectIntent(iterator.next()).broadcast()
 		}
 	}
 
 	private fun createMissionObject(): MissionObject {
 		val missionObject = ObjectCreator.createObjectFromTemplate("object/mission/shared_mission_object.iff") as MissionObject
-		ObjectCreatedIntent.broadcast(missionObject)
+		ObjectCreatedIntent(missionObject).broadcast()
 
 		return missionObject
 	}

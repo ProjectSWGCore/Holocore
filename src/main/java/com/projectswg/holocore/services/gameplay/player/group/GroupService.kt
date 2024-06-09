@@ -35,8 +35,8 @@ import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent
 import com.projectswg.holocore.intents.support.global.chat.ChatRoomUpdateIntent.UpdateType
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer

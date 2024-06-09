@@ -40,8 +40,8 @@ import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
 import com.projectswg.holocore.resources.support.data.server_info.loader.FacilityData;
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData;
@@ -109,7 +109,7 @@ public class CloningService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent i) {
-		SWGObject createdObject = i.getObject();
+		SWGObject createdObject = i.getObj();
 		
 		if(!(createdObject instanceof BuildingObject createdBuilding)) {
 			return;

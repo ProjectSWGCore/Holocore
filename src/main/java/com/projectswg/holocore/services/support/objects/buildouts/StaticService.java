@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,7 +28,7 @@ package com.projectswg.holocore.services.support.objects.buildouts;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader;
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
@@ -90,7 +90,7 @@ public class StaticService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		SWGObject object = oci.getObject();
+		SWGObject object = oci.getObj();
 		List<SpawnedObject> objects = spawnableObjects.get(object.getTemplate());
 		if (objects == null) {
 			return;
@@ -146,14 +146,14 @@ public class StaticService extends Service {
 			assert parent != null;
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.systemMove(parent, Location.builder().setPosition(x, y, z).setTerrain(parent.getTerrain()).setHeading(heading).build());
-			ObjectCreatedIntent.broadcast(obj);
+			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
 		
 		private SWGObject createObject(Location parentLocation) {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.setLocation(Location.builder().setPosition(x, y, z).setTerrain(parentLocation.getTerrain()).setHeading(heading).translateLocation(parentLocation).build());
-			ObjectCreatedIntent.broadcast(obj);
+			new ObjectCreatedIntent(obj).broadcast();
 			return obj;
 		}
 		

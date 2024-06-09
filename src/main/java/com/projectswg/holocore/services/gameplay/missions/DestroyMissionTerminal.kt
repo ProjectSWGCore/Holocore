@@ -33,7 +33,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DestroyMissionLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
@@ -102,7 +102,7 @@ class DestroyMissionTerminal(private val missionsToGenerate: Int, private val de
 		val egg = ObjectCreator.createObjectFromTemplate(SpawnerType.MISSION_EASY.objectTemplate)
 		egg.containerPermissions = AdminPermissions.getPermissions()
 		egg.moveToContainer(null, location)
-		ObjectCreatedIntent.broadcast(egg)
+		ObjectCreatedIntent(egg).broadcast()
 
 		val dynamicId = missionObject.getServerTextAttribute(ServerAttribute.DYNAMIC_ID)
 		val dynamicSpawnInfo = ServerData.dynamicSpawns.getSpawnInfo(dynamicId)
@@ -136,7 +136,7 @@ class DestroyMissionTerminal(private val missionsToGenerate: Int, private val de
 		}
 		UpdateFactionIntent(lair, lairFaction ?: throw NullPointerException("Invalid mission terminal type $destroyMissionTerminalType")).broadcast()
 		lair.moveToContainer(null, location)
-		ObjectCreatedIntent.broadcast(lair)
+		ObjectCreatedIntent(lair).broadcast()
 		return lair
 	}
 

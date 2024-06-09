@@ -30,7 +30,7 @@ import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.intents.gameplay.world.*
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.awareness.AwarenessType
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -56,8 +56,8 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		val creature: CreatureObject = createCreature()
 		val deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), DEED)
 		deed.systemMove(creature.inventory)
-		ObjectCreatedIntent.broadcast(creature)
-		ObjectCreatedIntent.broadcast(deed)
+		ObjectCreatedIntent(creature).broadcast()
+		ObjectCreatedIntent(deed).broadcast()
 		broadcastAndWait(VehicleDeedGenerateIntent(creature, deed))
 		
 		// PCD [object/intangible/vehicle/shared_speederbike_swoop_pcd.iff] should be in the datapad
@@ -70,12 +70,12 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 	fun testCallStore() {
 		val friend: CreatureObject = createCreature()
 		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())
-		ObjectCreatedIntent.broadcast(friend)
+		ObjectCreatedIntent(friend).broadcast()
 		val creature: CreatureObject = createCreature()
-		ObjectCreatedIntent.broadcast(creature)
+		ObjectCreatedIntent(creature).broadcast()
 		val pcd = ObjectCreator.createObjectFromTemplate(getUniqueId(), PCD) as IntangibleObject
-		ObjectCreatedIntent.broadcast(creature)
-		ObjectCreatedIntent.broadcast(pcd)
+		ObjectCreatedIntent(creature).broadcast()
+		ObjectCreatedIntent(pcd).broadcast()
 		pcd.systemMove(creature.datapad)
 		pcd.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, SWOOP)
 		broadcastAndWait(PetDeviceCallIntent(creature, pcd))
@@ -95,9 +95,9 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 	fun testMountDismount() {
 		val friend = createNPC()
 		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())
-		ObjectCreatedIntent.broadcast(friend)
+		ObjectCreatedIntent(friend).broadcast()
 		val creature: CreatureObject = createCreature()
-		ObjectCreatedIntent.broadcast(creature)
+		ObjectCreatedIntent(creature).broadcast()
 		// Make the deed 
 		val deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), DEED)
 		broadcastAndWait(VehicleDeedGenerateIntent(creature, deed))
@@ -126,9 +126,9 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 	fun testAutoDismountOnTeleport() {
 		val friend = createNPC()
 		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())
-		ObjectCreatedIntent.broadcast(friend)
+		ObjectCreatedIntent(friend).broadcast()
 		val creature: CreatureObject = createCreature()
-		ObjectCreatedIntent.broadcast(creature)
+		ObjectCreatedIntent(creature).broadcast()
 		
 		// Make the deed
 		val deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), DEED)

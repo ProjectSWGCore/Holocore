@@ -36,7 +36,7 @@ import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
-import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
@@ -161,7 +161,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val myLocation = obj.location
 		val targetLocation = target.location
 		val headingTo = myLocation.getHeadingTo(targetLocation.position)
-		MoveObjectIntent.broadcast(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed)
+		MoveObjectIntent(obj, obj.parent, Location.builder(myLocation).setHeading(headingTo).build(), npcRunSpeed).broadcast()
 
 		val x = obj.worldLocation.x.toFloat()
 		val z = obj.worldLocation.z.toFloat()

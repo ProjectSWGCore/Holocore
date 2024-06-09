@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2022 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -32,8 +32,8 @@ import com.projectswg.common.network.packets.swg.zone.structures.EnterStructureP
 import com.projectswg.holocore.intents.gameplay.structures.PlaceStructureIntent
 import com.projectswg.holocore.intents.gameplay.structures.UseStructureDeedIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
@@ -67,7 +67,7 @@ class StructureService : Service() {
 	
 	@IntentHandler
 	private fun handleObjectCreatedIntent(oci: ObjectCreatedIntent) {
-		val building = oci.`object` as? BuildingObject ?: return
+		val building = oci.obj as? BuildingObject ?: return
 		val playerStructureInfo = building.playerStructureInfo ?: return
 		val owner = playerStructureInfo.owner ?: return
 		val structureInfo = ServerData.housing.getStructureInfo(building.template) ?: return
@@ -81,7 +81,7 @@ class StructureService : Service() {
 		val deed = getTemplateForDeed(usdi.deed)
 		if (deed == null) {
 			StandardLog.onPlayerError(this, usdi.creature, "Attempted to use invalid deed: %s", usdi.deed)
-			DestroyObjectIntent.broadcast(usdi.deed)
+			DestroyObjectIntent(usdi.deed).broadcast()
 			return
 		}
 		if (usdi.creature.parent != null) {

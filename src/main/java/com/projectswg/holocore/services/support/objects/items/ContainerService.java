@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,8 +30,8 @@ package com.projectswg.holocore.services.support.objects.items;
 import com.projectswg.common.network.packets.swg.zone.ClientOpenContainerMessage;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.objects.items.CloseContainerIntent;
-import com.projectswg.holocore.intents.support.objects.items.OpenContainerIntent;
+import com.projectswg.holocore.intents.support.objects.CloseContainerIntent;
+import com.projectswg.holocore.intents.support.objects.OpenContainerIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
