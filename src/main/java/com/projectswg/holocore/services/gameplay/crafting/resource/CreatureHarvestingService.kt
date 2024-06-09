@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -56,8 +56,8 @@ class CreatureHarvestingService : Service() {
 		val ai = intent.target
 		val player = intent.player
 
-		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
-		grantResources(npcInfo.hideResourceInfo, player, ai)
+		val npcInfo = ServerData.npcs[ai.creatureId]
+		grantResources(npcInfo?.hideResourceInfo ?: return, player, ai)
 	}
 
 	@IntentHandler
@@ -65,8 +65,8 @@ class CreatureHarvestingService : Service() {
 		val ai = intent.target
 		val player = intent.player
 
-		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
-		grantResources(npcInfo.meatResourceInfo, player, ai)
+		val npcInfo = ServerData.npcs[ai.creatureId]
+		grantResources(npcInfo?.meatResourceInfo ?: return, player, ai)
 	}
 
 	@IntentHandler
@@ -74,8 +74,8 @@ class CreatureHarvestingService : Service() {
 		val ai = intent.target
 		val player = intent.player
 
-		val npcInfo = ServerData.npcs.getNpc(ai.creatureId)
-		grantResources(npcInfo.boneResourceInfo, player, ai)
+		val npcInfo = ServerData.npcs[ai.creatureId]
+		grantResources(npcInfo?.boneResourceInfo ?: return, player, ai)
 	}
 
 	private fun grantResources(resourceInfo: NpcResourceInfo, player: Player, ai: AIObject) {

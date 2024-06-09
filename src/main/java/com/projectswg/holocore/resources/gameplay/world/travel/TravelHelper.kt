@@ -73,11 +73,11 @@ class TravelHelper {
 		pointContainer.addTravelPoint(point)
 	}
 
-	fun isValidRoute(departure: Terrain?, destination: Terrain?): Boolean {
+	fun isValidRoute(departure: Terrain, destination: Terrain): Boolean {
 		return getTravelFee(departure, destination) != 0
 	}
 
-	fun getTravelFee(departure: Terrain?, destination: Terrain?): Int {
+	fun getTravelFee(departure: Terrain, destination: Terrain): Int {
 		return travelCosts().getCost(departure, destination)
 	}
 

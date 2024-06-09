@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,22 +28,21 @@ package com.projectswg.holocore.resources.support.data.server_info.loader
 
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
 import java.io.File
+import java.util.*
 
 class PlanetChatRoomLoader : DataLoader() {
 
-	private val planetNames = mutableSetOf<String>()
-
-	fun getPlanetNames(): Collection<String> {
-		return planetNames
-	}
+	private val _planetNames = mutableSetOf<String>()
+	val planetNames: Collection<String>
+		get() = Collections.unmodifiableSet(_planetNames)
 
 	override fun load() {
 		val set = SdbLoader.load(File("serverdata/chat/planets.sdb"))
-		
+
 		set.use {
 			while (set.next()) {
 				val planetName = set.getText("planet")
-				planetNames += planetName
+				_planetNames += planetName
 			}
 		}
 	}

@@ -155,14 +155,7 @@ class SkillService : Service() {
 		val dependentSkills = target.skills
 			.mapNotNull { skills().getSkillByName(it) }
 			.map { it.skillsRequired }
-			.filter { requiredSkills: Array<String> ->
-				for (requiredSkill in requiredSkills) {
-					if (requiredSkill == surrenderedSkill) {
-						return@filter true
-					}
-				}
-				false
-			}
+			.filter { it.contains(surrenderedSkill) }
 			.flatMap { it.toList() }
 
 		if (dependentSkills.isNotEmpty()) {
@@ -179,7 +172,7 @@ class SkillService : Service() {
 		val oldCombatLevel = getCombatLevel(target)
 
 		target.removeSkill(surrenderedSkill)
-		target.removeCommands(*skillInfo.commands)
+		target.removeCommands(skillInfo.commands)
 		skillInfo.skillMods.forEach { (skillModName: String, skillModValue: Int) -> SkillModIntent(skillModName, 0, -skillModValue, target).broadcast() }
 		val schematicGroups = skillInfo.schematicsGranted
 		for (schematicGroup in schematicGroups) {
@@ -236,7 +229,7 @@ class SkillService : Service() {
 	}
 
 	private fun grantRequiredSkills(skillData: SkillInfo, target: CreatureObject) {
-		val requiredSkills = skillData.skillsRequired ?: return
+		val requiredSkills = skillData.skillsRequired
 
 		val skills = skills()
 		for (requiredSkillName in requiredSkills) {
@@ -251,7 +244,7 @@ class SkillService : Service() {
 			return
 		}
 		if (!target.addSkill(skill.name)) return
-		target.addCommand(*skill.commands)
+		target.addCommand(skill.commands)
 
 		skill.skillMods.forEach { (skillModName, skillModValue) -> SkillModIntent(skillModName, skillModValue, 0, target).broadcast() }
 
@@ -312,7 +305,7 @@ class SkillService : Service() {
 	}
 
 	private fun hasRequiredSkills(skillData: SkillInfo, creatureObject: CreatureObject): Boolean {
-		val requiredSkills = skillData.skillsRequired ?: return true
+		val requiredSkills = skillData.skillsRequired
 
 		for (required in requiredSkills) {
 			if (!creatureObject.hasSkill(required)) return false

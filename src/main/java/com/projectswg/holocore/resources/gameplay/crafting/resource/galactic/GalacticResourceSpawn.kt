@@ -176,7 +176,7 @@ class GalacticResourceSpawn() : MongoPersistable {
 		}
 		run {
 			val location = data.getDocument("location")
-			location.putString("terrain", terrain!!.name)
+			location.putString("terrain", terrain.name)
 			location.putInteger("x", x)
 			location.putInteger("z", z)
 			location.putInteger("radius", radius)

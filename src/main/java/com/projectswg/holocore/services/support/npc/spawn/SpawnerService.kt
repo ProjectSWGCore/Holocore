@@ -192,7 +192,7 @@ class SpawnerService : Service() {
 	private fun spawn(spawn: SpawnInfo) {
 		val npcId = spawn.npcId
 
-		if (ServerData.npcs.getNpc(npcId) == null) {
+		if (ServerData.npcs.get(npcId) == null) {
 			Log.w("Invalid npc %s", npcId)
 			return
 		}

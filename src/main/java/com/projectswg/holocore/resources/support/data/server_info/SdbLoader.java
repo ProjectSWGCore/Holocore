@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,6 +29,7 @@ package com.projectswg.holocore.resources.support.data.server_info;
 import com.projectswg.holocore.resources.support.data.server_info.SdbColumnArraySet.*;
 import me.joshlarson.jlcommon.log.Log;
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -51,14 +52,11 @@ public class SdbLoader {
 	
 	public static SdbResultSet load(File file) throws IOException {
 		String ext = getExtension(file);
-		switch (ext) {
-			case "msdb":
-				return MasterSdbResultSet.load(file);
-			case "sdb":
-				return SingleSdbResultSet.load(file);
-			default:
-				throw new IllegalArgumentException("Invalid file! Expected either msdb or sdb");
-		}
+		return switch (ext) {
+			case "msdb" -> MasterSdbResultSet.load(file);
+			case "sdb" -> SingleSdbResultSet.load(file);
+			default -> throw new IllegalArgumentException("Invalid file! Expected either msdb or sdb");
+		};
 	}
 	
 	private static String getExtension(File file) {
@@ -98,9 +96,9 @@ public class SdbLoader {
 		SdbLongColumnArraySet getLongArrayParser(@Language("RegExp") String regex, long defValue);
 		SdbRealColumnArraySet getRealArrayParser(@Language("RegExp") String regex, double defValue);
 		SdbBooleanColumnArraySet getBooleanArrayParser(@Language("RegExp") String regex, boolean defValue);
-		
-		String getText(int index);
-		String getText(String columnName);
+
+		@NotNull String getText(int index);
+		@NotNull String getText(String columnName);
 		
 		long getInt(int index);
 		long getInt(String columnName);
@@ -206,12 +204,12 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public String getText(int index) {
+		public @NotNull String getText(int index) {
 			return getResultSet().getText(index);
 		}
 		
 		@Override
-		public String getText(String columnName) {
+		public @NotNull String getText(String columnName) {
 			return getResultSet().getText(columnName);
 		}
 		
@@ -376,12 +374,12 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public String getText(int index) {
+		public @NotNull String getText(int index) {
 			return columnValues[index];
 		}
 		
 		@Override
-		public String getText(String columnName) {
+		public @NotNull String getText(String columnName) {
 			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist in sdb " + file;
 			return columnValues[columnIndices.get(columnName)];
 		}
@@ -461,7 +459,7 @@ public class SdbLoader {
 		private final Map<String, Integer> columnIndices;
 		private final AtomicLong lineNumber;
 		private final String [] columnNames;
-		private String [] columnValues;
+		private final String [] columnValues;
 		
 		public ParallelSdbResultSet(File file, Map<String, Integer> columnIndices, String [] columnNames) {
 			this.file = file;
@@ -550,12 +548,12 @@ public class SdbLoader {
 		}
 		
 		@Override
-		public String getText(int index) {
+		public @NotNull String getText(int index) {
 			return columnValues[index];
 		}
 		
 		@Override
-		public String getText(String columnName) {
+		public @NotNull String getText(String columnName) {
 			assert columnIndices.containsKey(columnName) : "column " + columnName + " does not exist";
 			return columnValues[columnIndices.get(columnName)];
 		}

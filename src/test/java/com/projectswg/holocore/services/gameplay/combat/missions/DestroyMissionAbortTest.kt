@@ -129,7 +129,7 @@ class DestroyMissionAbortTest : TestRunnerSimulatedWorld() {
 		val characterCreation = CharacterCreation(player, clientCreateCharacter)
 
 		val mosEisley = DataLoader.zoneInsertions()
-			.getInsertion("tat_moseisley")
+			.get("tat_moseisley")
 		val creatureObject = characterCreation.createCharacter(AccessLevel.PLAYER, mosEisley)
 		creatureObject.owner = player
 

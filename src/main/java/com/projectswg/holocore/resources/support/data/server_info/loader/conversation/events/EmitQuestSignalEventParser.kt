@@ -30,7 +30,7 @@ import com.projectswg.holocore.resources.gameplay.conversation.events.EmitQuestS
 import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.EventParser
 
 class EmitQuestSignalEventParser : EventParser<EmitQuestSignalEvent> {
-	override fun parse(args: MutableMap<String, Any>): EmitQuestSignalEvent {
+	override fun parse(args: Map<String, Any>): EmitQuestSignalEvent {
 		val signalName = args["signal"] as String
 
 		return EmitQuestSignalEvent(signalName)

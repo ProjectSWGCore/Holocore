@@ -40,15 +40,11 @@ import java.util.*
 @Suppress("unused")
 class StaticItemLoader internal constructor() : DataLoader() {
 	
-	private val itemByName: MutableMap<String, StaticItemInfo>
-	
+	private val itemByName: MutableMap<String, StaticItemInfo> = HashMap()
+
 	val items: Collection<StaticItemInfo>
 		get() = Collections.unmodifiableCollection(itemByName.values)
-	
-	init {
-		this.itemByName = HashMap()
-	}
-	
+
 	fun getItemByName(itemName: String): StaticItemInfo? {
 		return itemByName[itemName]
 	}
@@ -203,7 +199,21 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val minDamage: Int = set.getInt("min_damage").toInt()
 		val maxDamage: Int = set.getInt("max_damage").toInt()
 		val weaponCategory: String = set.getText("weapon_category")
-		val weaponType: WeaponType
+		val weaponType: WeaponType = when (set.getText("weapon_type")) {
+			"RIFLE" -> WeaponType.RIFLE
+			"CARBINE" -> WeaponType.CARBINE
+			"PISTOL" -> WeaponType.PISTOL
+			"HEAVY" -> WeaponType.HEAVY
+			"ONE_HANDED_MELEE" -> WeaponType.ONE_HANDED_MELEE
+			"TWO_HANDED_MELEE" -> WeaponType.TWO_HANDED_MELEE
+			"UNARMED" -> WeaponType.UNARMED
+			"POLEARM_MELEE" -> WeaponType.POLEARM_MELEE
+			"THROWN" -> WeaponType.THROWN
+			"ONE_HANDED_SABER" -> WeaponType.ONE_HANDED_SABER
+			"TWO_HANDED_SABER" -> WeaponType.TWO_HANDED_SABER
+			"POLEARM_SABER" -> WeaponType.POLEARM_SABER
+			else -> throw IllegalArgumentException("weapon_type is unrecognized: " + set.getText("weapon_type"))
+		}
 		val damageType: DamageType = requireNotNull(getDamageType(set.getText("damage_type"))) { "damage_type must be defined" }
 		val elementalType: DamageType? = getDamageType(set.getText("elemental_type"))
 		val elementalDamage: Int = set.getInt("elemental_damage").toInt()
@@ -225,25 +235,7 @@ class StaticItemLoader internal constructor() : DataLoader() {
 		val skillMods: Map<String, Int> = Collections.unmodifiableMap(parseSkillMods(set.getText("skill_mods")))
 		val value: Int = set.getInt("value").toInt()
 		val woundChance: Int = set.getInt("wound_chance").toInt()
-		
-		init {
-			weaponType = when (set.getText("weapon_type")) {
-				"RIFLE" -> WeaponType.RIFLE
-				"CARBINE" -> WeaponType.CARBINE
-				"PISTOL" -> WeaponType.PISTOL
-				"HEAVY" -> WeaponType.HEAVY
-				"ONE_HANDED_MELEE" -> WeaponType.ONE_HANDED_MELEE
-				"TWO_HANDED_MELEE" -> WeaponType.TWO_HANDED_MELEE
-				"UNARMED" -> WeaponType.UNARMED
-				"POLEARM_MELEE" -> WeaponType.POLEARM_MELEE
-				"THROWN" -> WeaponType.THROWN
-				"ONE_HANDED_SABER" -> WeaponType.ONE_HANDED_SABER
-				"TWO_HANDED_SABER" -> WeaponType.TWO_HANDED_SABER
-				"POLEARM_SABER" -> WeaponType.POLEARM_SABER
-				else -> throw IllegalArgumentException("weapon_type is unrecognized: " + set.getText("weapon_type"))
-			}
-		}
-		
+
 		private fun getDamageType(str: String): DamageType? {
 			return when (str) {
 				"", "none"		-> null

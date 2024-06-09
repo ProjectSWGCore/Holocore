@@ -593,7 +593,7 @@ public class CreatureObject extends TangibleObject {
 		creo4.addCommand(command);
 	}
 
-	public void addCommand(@NotNull String... commands) {
+	public void addCommand(@NotNull List<String> commands) {
 		creo4.addCommands(commands);
 	}
 
@@ -601,7 +601,7 @@ public class CreatureObject extends TangibleObject {
 		creo4.removeCommand(command);
 	}
 
-	public void removeCommands(@NotNull String... commands) {
+	public void removeCommands(@NotNull List<String> commands) {
 		creo4.removeCommands(commands);
 	}
 

@@ -28,7 +28,6 @@ package com.projectswg.holocore.services.gameplay.player.quest
 
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
-import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.holocore.intents.gameplay.player.quest.QuestRetrieveItemIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.global.player.Player
@@ -37,15 +36,16 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
 class QuestRetrieveItemRadialHandler(private val retrievedItemRepository: RetrievedItemRepository, private val questName: String, private val task: QuestTaskInfo) : RadialHandlerInterface {
 	private val radialItem = RadialItem.SERVER_MENU1
+	private val retriveItemInfo = task.retrieveItemInfo!!  // Precondition for this class
 
 	override fun getOptions(options: MutableCollection<RadialOption>, player: Player, target: SWGObject) {
 		val playerObject = player.playerObject
 		val questActiveTasks = playerObject.getQuestActiveTasks(questName)
 		
 		if (questActiveTasks.contains(task.index)) {
-			if (target.template.equals(ClientFactory.formatToSharedFile(task.serverTemplate))) {
+			if (target.template.equals(retriveItemInfo.serverTemplate)) {
 				if (!retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, target)) {
-					options.add(RadialOption.create(radialItem, task.retrieveMenuText))
+					options.add(RadialOption.create(radialItem, retriveItemInfo.retrieveMenuText))
 				}
 			}
 		}

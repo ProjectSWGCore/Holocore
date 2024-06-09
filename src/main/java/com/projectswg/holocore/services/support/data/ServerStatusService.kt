@@ -81,7 +81,8 @@ class ServerStatusService : Service() {
 
 	@IntentHandler
 	private fun handleInboundPacketIntent(ipi: InboundPacketIntent) {
-		if (ipi.packet is AdminShutdownServer) initiateShutdownSequence((ipi.packet as AdminShutdownServer).shutdownTime.toLong(), TimeUnit.SECONDS)
+		if (ipi.packet is AdminShutdownServer)
+			initiateShutdownSequence(ipi.packet.shutdownTime.toLong(), TimeUnit.SECONDS)
 	}
 
 	private fun initiateShutdownSequence(time: Long, unit: TimeUnit) {

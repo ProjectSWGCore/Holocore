@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,9 +31,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -126,13 +124,13 @@ public class TestQuestLoader {
 		@Test
 		public void canLoadMessageBoxTitle() {
 			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
-			assertEquals("@quest/ground/c_newbie_start:task00_message_box_title", taskListInfos.get(0).getMessageBoxTitle());
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_title", taskListInfos.getFirst().getMessageBoxTitle());
 		}
 		
 		@Test
 		public void canLoadMessageBoxText() {
 			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
-			assertEquals("@quest/ground/c_newbie_start:task00_message_box_text", taskListInfos.get(0).getMessageBoxText());
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_text", taskListInfos.getFirst().getMessageBoxText());
 		}
 		
 		@Test
@@ -153,25 +151,25 @@ public class TestQuestLoader {
 		@Test
 		public void canLoadNextTasksOnCompleteMultipleTasks() {
 			Collection<Integer> nextTasksOnComplete = taskListInfos.get(3).getNextTasksOnComplete();
-			Collection<Integer> expected = Arrays.asList(4, 5, 6);
+			Collection<Integer> expected = List.of(4, 5, 6);
 			
-			assertEquals(expected, nextTasksOnComplete);
+			assertIterableEquals(expected, nextTasksOnComplete);
 		}
 		
 		@Test
 		public void canLoadNextTasksOnCompleteSingleTask() {
 			Collection<Integer> nextTasksOnComplete = taskListInfos.get(1).getNextTasksOnComplete();
-			Collection<Integer> expected = Collections.singletonList(2);
-			
-			assertEquals(expected, nextTasksOnComplete);
+			Collection<Integer> expected = List.of(2);
+
+			assertIterableEquals(expected, nextTasksOnComplete);
 		}
 		
 		@Test
 		public void canLoadNextTasksOnCompleteEmpty() {
 			Collection<Integer> nextTasksOnComplete = taskListInfos.get(6).getNextTasksOnComplete();
-			Collection<Integer> expected = Collections.emptyList();
-			
-			assertEquals(expected, nextTasksOnComplete);
+			Collection<Integer> expected = List.of();
+
+			assertIterableEquals(expected, nextTasksOnComplete);
 		}
 	}
 }

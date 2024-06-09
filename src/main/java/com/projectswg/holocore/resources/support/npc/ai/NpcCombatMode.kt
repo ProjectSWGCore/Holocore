@@ -173,11 +173,11 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		}
 
 		if (target.posture == Posture.INCAPACITATED) {
-			QueueCommandIntent(obj, target, "", ServerData.commands.getCommand("deathblow"), 0).broadcast()
+			QueueCommandIntent(obj, target, "", ServerData.commands.getCommand("deathblow") ?: return, 0).broadcast()
 			return
 		}
 		
-		QueueCommandIntent(obj, target, "", ServerData.commands.getCommand(getWeaponCommand(weapon)), 0).broadcast()
+		QueueCommandIntent(obj, target, "", ServerData.commands.getCommand(getWeaponCommand(weapon)) ?: return, 0).broadcast()
 	}
 	
 	private fun requestAssistance() {

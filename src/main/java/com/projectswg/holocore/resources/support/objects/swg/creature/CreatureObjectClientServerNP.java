@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,6 +38,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.attributes
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -241,7 +242,7 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		commands.sendDeltaMessage(obj);
 	}
 
-	public void addCommands(@NotNull String ... commands) {
+	public void addCommands(@NotNull List<String> commands) {
 		for (String command : commands)
 			this.commands.put(command, this.commands.getOrDefault(command, 0)+1);
 		this.commands.sendDeltaMessage(obj);
@@ -257,7 +258,7 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		commands.sendDeltaMessage(obj);
 	}
 
-	public void removeCommands(@NotNull String... commands) {
+	public void removeCommands(@NotNull List<String> commands) {
 		// TODO: Replace with compute
 		for (String command : commands) {
 			int nVal = this.commands.getOrDefault(command, 0)-1;

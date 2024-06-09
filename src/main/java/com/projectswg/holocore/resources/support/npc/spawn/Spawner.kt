@@ -47,7 +47,7 @@ import java.util.stream.Collectors
 class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	
 	private val spawn: SpawnInfo = Objects.requireNonNull(spawn, "spawn")
-	private val npc: NpcInfo = Objects.requireNonNull(ServerData.npcs.getNpc(spawn.npcId), "Invalid npc id: " + spawn.npcId)
+	private val npc: NpcInfo = checkNotNull(ServerData.npcs[spawn.npcId]) { "Invalid npc id: ${spawn.npcId}" }
 	private val npcsInternal = CopyOnWriteArrayList<AIObject>()
 	
 	val location: Location = Location.builder().setTerrain(spawn.terrain).setPosition(spawn.x, spawn.y, spawn.z).setHeading(spawn.heading.toDouble()).build()
@@ -66,7 +66,7 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 			return if (maxSpawnTime > 0) {
 				ThreadLocalRandom.current().nextInt(maxSpawnTime - minSpawnTime + 1) + minSpawnTime
 			} else {
-				0;
+				0
 			}
 		}
 	
@@ -170,10 +170,18 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 		get() = npc.hue
 	
 	val defaultWeapon: List<String>
-		get() = npc.defaultWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+		get() = npc.defaultWeapon.stream()
+			.map { ServerData.npcWeapons.getWeapons(it) }
+			.filter { Objects.nonNull(it) }
+			.flatMap { it!!.stream() } // Nulls filtered out in the line above
+			.collect(Collectors.toList())
 	
 	val thrownWeapon: List<String>
-		get() = npc.thrownWeapon.stream().map { ServerData.npcWeapons.getWeapons(it) }.filter { Objects.nonNull(it) }.flatMap { it.stream() }.collect(Collectors.toList())
+		get() = npc.thrownWeapon.stream()
+			.map { ServerData.npcWeapons.getWeapons(it) }
+			.filter { Objects.nonNull(it) }
+			.flatMap { it!!.stream() } // Nulls filtered out in the line above
+			.collect(Collectors.toList())
 	
 	val aggressiveRadius: Int
 		get() = npc.aggressiveRadius
@@ -202,13 +210,13 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 	val lootTable3Chance: Int
 		get() = npc.lootTable3Chance
 	
-	val humanoidInfo: HumanoidNpcInfo
+	val humanoidInfo: HumanoidNpcInfo?
 		get() = npc.humanoidInfo
 	
-	val droidInfo: DroidNpcInfo
+	val droidInfo: DroidNpcInfo?
 		get() = npc.droidInfo
 	
-	val creatureInfo: CreatureNpcInfo
+	val creatureInfo: CreatureNpcInfo?
 		get() = npc.creatureInfo
 
 	val socialGroup: String?
@@ -218,7 +226,7 @@ class Spawner(spawn: SpawnInfo, egg: SWGObject) {
 		if (spawn.patrolId.isEmpty() || spawn.patrolId == "0") { // TODO: Replace the latter with empty string
 			this.patrolRoute = null
 		} else {
-			val waypoints = Objects.requireNonNull(ServerData.npcPatrolRoutes.getPatrolRoute(spawn.patrolId), "Invalid patrol route: " + spawn.patrolId)
+			val waypoints = Objects.requireNonNull(ServerData.npcPatrolRoutes[spawn.patrolId], "Invalid patrol route: " + spawn.patrolId)
 			this.patrolRoute = waypoints.stream().map { ResolvedPatrolWaypoint(it) }.collect(Collectors.toList())
 		}
 	}

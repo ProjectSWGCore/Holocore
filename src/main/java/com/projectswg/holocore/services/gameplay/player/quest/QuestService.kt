@@ -80,8 +80,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		var quantity = 0
 		for (questName in allQuestNames) {
 			val tasks = questLoader.getTaskListInfos(questName)
-			val retrieveItemTasks = tasks.filter { it.type == "quest.task.ground.retrieve_item" }.filter { !it.serverTemplate.isNullOrBlank() }
-			retrieveItemTasks.forEach { RadialHandler.INSTANCE.registerHandler(it.serverTemplate, QuestRetrieveItemRadialHandler(retrievedItemRepository, questName, it)) }
+			val retrieveItemTasks = tasks.filter { it.retrieveItemInfo != null }.filter { !it.retrieveItemInfo!!.serverTemplate.isNullOrBlank() }
+			retrieveItemTasks.forEach { RadialHandler.INSTANCE.registerHandler(it.retrieveItemInfo!!.serverTemplate, QuestRetrieveItemRadialHandler(retrievedItemRepository, questName, it)) }
 			quantity += retrieveItemTasks.size
 		}
 		StandardLog.onEndLoad(quantity, what, startTime)
@@ -206,6 +206,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val player = intent.player
 		val item = intent.item
 		val playerObject = player.playerObject
+		val retrieveItem = activeTaskListInfo.retrieveItemInfo ?: return
 
 		if (!playerObject.isQuestInJournal(questName)) {
 			return
@@ -213,27 +214,27 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 		if (retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, item)) {
 			// The SWG client will display the old radial option for a while before the radial menu is refreshed, so this can easily happen
-			StandardLog.onPlayerError(this, player, "already attempted to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
+			StandardLog.onPlayerError(this, player, "already attempted to retrieve '%s' on task %d of quest %s", retrieveItem.itemName, activeTaskListInfo.index, questName)
 			return
 		}
 
 		val roll = retrieveItemDie.roll(1..100)
-		val itemFound = roll <= activeTaskListInfo.dropPercent
+		val itemFound = roll <= retrieveItem.dropPercent
 
 		if (itemFound) {
-			val max = activeTaskListInfo.numRequired
+			val max = retrieveItem.numRequired
 			val counter = playerObject.incrementQuestCounter(questName)
 			val remaining = max - counter
 			val task = activeTaskListInfo.index
-			StandardLog.onPlayerTrace(this, player, "retrieved %d/%d %s on task %d of quest %s", counter, max, activeTaskListInfo.itemName, task, questName)
+			StandardLog.onPlayerTrace(this, player, "retrieved %d/%d %s on task %d of quest %s", counter, max, retrieveItem.itemName, task, questName)
 			player.sendPacket(PlayMusicMessage(0, "sound/ui_received_quest_item.snd", 1, false))
-			incrementRetrieveItemCount(questName, task, player, counter, max, activeTaskListInfo.itemName)
+			incrementRetrieveItemCount(questName, task, player, counter, max, retrieveItem.itemName)
 			if (remaining <= 0) {
 				completeTask(questName, player, activeTaskListInfo)
 			}
 		} else {
-			StandardLog.onPlayerTrace(this, player, "failed to retrieve '%s' on task %d of quest %s", activeTaskListInfo.itemName, activeTaskListInfo.index, questName)
-			SystemMessageIntent.broadcastPersonal(player, ProsePackage(StringId("quest/groundquests", "retrieve_item_fail"), "TO", activeTaskListInfo.itemName))
+			StandardLog.onPlayerTrace(this, player, "failed to retrieve '%s' on task %d of quest %s", retrieveItem.itemName, activeTaskListInfo.index, questName)
+			SystemMessageIntent.broadcastPersonal(player, ProsePackage(StringId("quest/groundquests", "retrieve_item_fail"), "TO", retrieveItem.itemName))
 		}
 
 		retrievedItemRepository.addRetrieveAttempt(questName, playerObject, item)
@@ -246,16 +247,16 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			val questName = incompleteQuest.string
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
-				val type = activeTaskListInfo.type
-				if (type == "quest.task.ground.go_to_location") {
-					val terrain = Terrain.getTerrainFromName(activeTaskListInfo.planetName)
-					val radius = activeTaskListInfo.radius
+				val gotoLocation = activeTaskListInfo.gotoLocationInfo
+				if (gotoLocation != null) {
+					val terrain = Terrain.getTerrainFromName(gotoLocation.planetName)
+					val radius = gotoLocation.radius
 
-					if (newLocation.isWithinDistance(terrain, activeTaskListInfo.locationX, activeTaskListInfo.locationY, activeTaskListInfo.locationZ, radius)) {
+					if (newLocation.isWithinDistance(terrain, gotoLocation.locationX, gotoLocation.locationY, gotoLocation.locationZ, radius)) {
 						StandardLog.onPlayerTrace(this, player, "arrived at location for task %d of quest %s", activeTaskListInfo.index, questName)
 						completeTask(questName, player, activeTaskListInfo)
 						player.sendPacket(PlayMusicMessage(0, "sound/ui_objective_reached.snd", 1, false))
-						playerObject.waypoints.values.find { it.name == activeTaskListInfo.waypointName }?.let {    // if you bothered with renaming the waypoint, you get to keep it
+						playerObject.waypoints.values.find { it.name == gotoLocation.waypointName }?.let {    // if you bothered with renaming the waypoint, you get to keep it
 							playerObject.removeWaypoint(it.objectId)
 							DestroyObjectIntent(it).broadcast()
 						}
@@ -469,7 +470,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	private fun handleRetrieveItem(player: Player, questName: String, currentTask: QuestTaskInfo) {
 		val task = currentTask.index
-		val max = currentTask.numRequired
+		val max = currentTask.retrieveItemInfo?.numRequired ?: return
 		val counter = 0
 		player.sendPacket(
 			QuestTaskCounterMessage(
@@ -479,7 +480,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	}
 
 	private fun handleGoToLocation(player: Player, currentTask: QuestTaskInfo) {
-		if (currentTask.isCreateWaypoint) {
+		if (currentTask.gotoLocationInfo?.isCreateWaypoint == true) {
 			createQuestWaypoint(currentTask, player)
 		}
 	}
@@ -490,10 +491,11 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	}
 
 	private fun createQuestWaypoint(currentTask: QuestTaskInfo, player: Player) {
+		val gotoLocation = currentTask.gotoLocationInfo ?: return
 		val waypoint = ObjectCreator.createObjectFromTemplate("object/waypoint/shared_waypoint.iff") as WaypointObject
-		waypoint.setPosition(Terrain.getTerrainFromName(currentTask.planetName), currentTask.locationX, currentTask.locationY, currentTask.locationZ)
+		waypoint.setPosition(Terrain.getTerrainFromName(gotoLocation.planetName), gotoLocation.locationX, gotoLocation.locationY, gotoLocation.locationZ)
 		waypoint.color = WaypointColor.YELLOW
-		waypoint.name = currentTask.waypointName
+		waypoint.name = gotoLocation.waypointName
 		waypoint.isActive = true
 		player.playerObject.addWaypoint(waypoint)
 		ObjectCreatedIntent(waypoint).broadcast()
@@ -504,11 +506,11 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		playerObject.removeActiveQuestTask(questName, currentTask.index)
 		playerObject.addCompleteQuestTask(questName, currentTask.index)
 		val grantQuestOnComplete = currentTask.grantQuestOnComplete
-		if (grantQuestOnComplete != null && grantQuestOnComplete.isNotBlank()) {
+		if (!grantQuestOnComplete.isNullOrBlank()) {
 			GrantQuestIntent(player, grantQuestOnComplete).broadcast()
 		}
 
-		if (currentTask.musicOnComplete != null && currentTask.musicOnComplete.isNotBlank()) {
+		if (!currentTask.musicOnComplete.isNullOrBlank()) {
 			player.sendPacket(PlayMusicMessage(0, currentTask.musicOnComplete, 1, false))
 		}
 
@@ -518,7 +520,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		nextTasksIdsOnComplete.forEach { activateTask(player, questName, nextTasksOnComplete[it]) }
 
 		if (nextTasksIdsOnComplete.isEmpty()) {
-			if (questLoader.getQuestListInfo(questName).isCompleteWhenTasksComplete) {
+			if (questLoader.getQuestListInfo(questName)?.isCompleteWhenTasksComplete == true) {
 				if (playerObject.getQuestActiveTasks(questName).isEmpty()) {
 					completeQuest(player, questName)
 				}

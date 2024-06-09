@@ -86,7 +86,7 @@ public class NPCCreator {
 			addEquipmentItemsToNpc(object, equipmentId);
 		}
 		
-		NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(combatLevel);
+		NpcStatInfo npcStats = DataLoader.Companion.npcStats().get(combatLevel);
 		DetailNpcStatInfo detailNpcStat = getDetailedNpcStats(npcStats, spawner.getDifficulty());
 		object.setSpawner(spawner);
 		object.systemMove(spawner.getEgg().getParent(), behaviorLocation(spawner));

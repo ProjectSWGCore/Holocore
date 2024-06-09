@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -182,7 +182,7 @@ public class CombatExperienceService extends Service {
 		if (killerLevel - corpseLevel >= 5) {
 			return 1;
 		} else {
-			NpcStatLoader.NpcStatInfo npcStats = DataLoader.Companion.npcStats().getNpcStats(corpseLevel);
+			NpcStatLoader.NpcStatInfo npcStats = DataLoader.Companion.npcStats().get(corpseLevel);
 
 
 			if (npcStats == null) {
