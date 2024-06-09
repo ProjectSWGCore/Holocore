@@ -543,7 +543,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	public void setInstance(InstanceType instanceType, int instanceNumber) {
-		location.setInstance(instanceType, instanceNumber);
+		location.setInstanceType(instanceType);
+		location.setInstanceNumber(instanceNumber);
 	}
 	
 	private void updateChildrenTerrain() {

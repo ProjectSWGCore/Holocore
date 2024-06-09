@@ -107,7 +107,7 @@ public class ObjectStorageService extends Service {
 		List<MongoData> objectDocuments = PswgDatabase.INSTANCE.getObjects().getObjects();
 		Map<Long, SWGObject> objects = new HashMap<>();
 		for (MongoData doc : objectDocuments) {
-			SWGObject obj = SWGObjectFactory.create(doc);
+			SWGObject obj = SWGObjectFactory.INSTANCE.create(doc);
 			objects.put(obj.getObjectId(), obj);
 			if (obj instanceof PlayerObject) {
 				for (WaypointObject waypoint : ((PlayerObject) obj).getWaypoints().values()) {

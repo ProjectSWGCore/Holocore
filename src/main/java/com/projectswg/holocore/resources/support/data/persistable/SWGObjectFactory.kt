@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,67 +24,30 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.namegen;
+package com.projectswg.holocore.resources.support.data.persistable
 
-import java.util.ArrayList;
-import java.util.List;
+import com.projectswg.common.data.encodables.mongo.MongoData
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
-class RaceNameRule {
-	private final List<String> vowels = new ArrayList<>();
-	private final List<String> startConsonants = new ArrayList<>();
-	private final List<String> endConsonants = new ArrayList<>();
-	private final List<String> instructions = new ArrayList<>();
-	private int surnameChance = 0;
-	private int maxLength = 15;
-	
-	public RaceNameRule() { }
-	
-	public void addVowel(String s) {
-		vowels.add(s);
-	}
-	
-	public void addStartConsonant(String s) {
-		startConsonants.add(s);
-	}
-	
-	public void addEndConsant(String s) {
-		endConsonants.add(s);
-	}
-	
-	public void addInstruction(String s) {
-		instructions.add(s);
-	}
-	
-	public void setSurnameChance(int chance) {
-		this.surnameChance = chance;
-	}
-	
-	public void setMaxLength(int maxLength) {
-		this.maxLength = maxLength;
-	}
-	
-	public int getSurnameChance() {
-		return surnameChance;
-	}
-	
-	public int getMaxLength() {
-		return maxLength;
-	}
-	
-	public List<String> getVowels() {
-		return vowels;
-	}
-	
-	public List<String> getStartConsonants() {
-		return startConsonants;
+object SWGObjectFactory {
+	@JvmOverloads
+	fun save(obj: SWGObject, data: MongoData = MongoData()): MongoData {
+		obj.saveMongo(data)
+		assert(data.containsKey("id")) { "serialized MongoData does not contain the objectId" }
+		assert(data.containsKey("parent")) { "serialized MongoData does not contain the parent id" }
+		assert(data.containsKey("parentCell")) { "serialized MongoData does not contain the parent cell number" }
+		assert(data.containsKey("template")) { "serialized MongoData does not contain the template" }
+		return data
 	}
 
-	public List<String> getEndConsonants() {
-		return endConsonants;
+	fun create(data: MongoData): SWGObject {
+		val objectId = data.getLong("id", 0)
+		val template = data.getString("template")
+		assert(objectId != 0L) { "objectId is not defined in MongoData" }
+		checkNotNull(template) { "template is not defined in MongoData" }
+		val obj = ObjectCreator.createObjectFromTemplate(objectId, template)
+		obj.readMongo(data)
+		return obj
 	}
-
-	public List<String> getInstructions() {
-		return instructions;
-	}
-	
 }

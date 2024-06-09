@@ -82,10 +82,10 @@ public class TestSWGPersistence {
 	}
 	
 	private void test(SWGObject obj, Document expected) {
-		Document saved = encode(SWGObjectFactory.save(obj, new MongoData()));
+		Document saved = encode(SWGObjectFactory.INSTANCE.save(obj, new MongoData()));
 		assertContains(expected, saved);
-		SWGObject gen = SWGObjectFactory.create(new MongoData(saved));
-		Document saved2 = SWGObjectFactory.save(gen, new MongoData()).toDocument();
+		SWGObject gen = SWGObjectFactory.INSTANCE.create(new MongoData(saved));
+		Document saved2 = SWGObjectFactory.INSTANCE.save(gen, new MongoData()).toDocument();
 		assertContains(expected, saved2);
 		assertEquals(saved, saved2);
 	}

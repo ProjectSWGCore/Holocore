@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,35 +24,44 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.persistable;
+package com.projectswg.holocore.resources.support.data.location
 
-import com.projectswg.common.data.encodables.mongo.MongoData;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.common.data.location.Location
+import java.util.function.BinaryOperator
 
-public class SWGObjectFactory {
-	
-	public static MongoData save(SWGObject obj) {
-		return save(obj, new MongoData());
+/**
+ * Reducer that determines the Location that is closest to a given base Location.
+ */
+class ClosestLocationReducer(private val baseLocation: Location) : BinaryOperator<Location?> {
+	override fun apply(location1: Location?, location2: Location?): Location? {
+		val terrainBase = baseLocation.terrain
+		val terrain1 = location1?.terrain ?: return null
+		val terrain2 = location2?.terrain ?: return null
+		val terrain1Match = terrainBase == terrain1
+		val terrain2Match = terrainBase == terrain2
+
+		if (!terrain1Match && !terrain2Match) {
+			// Given locations are both located on different planets
+			return null
+		}
+
+		if (terrain1Match && !terrain2Match) {
+			// Location 1 is the best fit since it has the same terrain as the base location while location 2 doesn't
+			return location1
+		} else if (!terrain1Match) {
+			// Location 2 is the best fit since it has the same terrain as the base location while location 1 doesn't
+			return location2
+		}
+
+
+		// location1 and location2 are on same terrain as baseLocation. Let's perform a distance check.
+		val location1Distance = baseLocation.flatDistanceTo(location1)
+		val location2Distance = baseLocation.flatDistanceTo(location2)
+
+		return if (location1Distance > location2Distance) {
+			location2 // Location 2 is closest to the player - return location2
+		} else {
+			location1 // Location 1 is closest to the player or both locations are equally close - return location1
+		}
 	}
-	
-	public static MongoData save(SWGObject obj, MongoData data) {
-		obj.saveMongo(data);
-		assert data.containsKey("id") : "serialized MongoData does not contain the objectId";
-		assert data.containsKey("parent") : "serialized MongoData does not contain the parent id";
-		assert data.containsKey("parentCell") : "serialized MongoData does not contain the parent cell number";
-		assert data.containsKey("template") : "serialized MongoData does not contain the template";
-		return data;
-	}
-	
-	public static SWGObject create(MongoData data) {
-		long objectId = data.getLong("id", 0);
-		String template = data.getString("template");
-		assert objectId != 0 : "objectId is not defined in MongoData";
-		assert template != null : "template is not defined in MongoData";
-		SWGObject obj = ObjectCreator.createObjectFromTemplate(objectId, template);
-		obj.readMongo(data);
-		return obj;
-	}
-	
 }
