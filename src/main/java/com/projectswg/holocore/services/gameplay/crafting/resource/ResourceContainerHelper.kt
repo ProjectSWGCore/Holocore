@@ -52,7 +52,7 @@ object ResourceContainerHelper {
 
 	private fun getOrCreateResourceObject(creature: CreatureObject, resource: GalacticResource, resourceContainerEventHandler: ResourceContainerEventHandler): ResourceContainerObject? {
 		val inventory = creature.inventory
-		val rawResource = rawResources.getResource(resource.rawResourceId)
+		val rawResource = rawResources.getResource(resource.rawResourceId) ?: throw NullPointerException("invalid rawResourceId: ${resource.rawResourceId}")
 		return inventory.containedObjects.stream()
 			.filter { swgObject -> swgObject is ResourceContainerObject }
 			.map { swgObject -> swgObject as ResourceContainerObject }
@@ -64,7 +64,7 @@ object ResourceContainerHelper {
 	private fun createResourceObject(creature: CreatureObject, rawResource: RawResource, resource: GalacticResource, resourceContainerEventHandler: ResourceContainerEventHandler): ResourceContainerObject? {
 		val resourceObject = ObjectCreator.createObjectFromTemplate(rawResource.crateTemplate) as ResourceContainerObject
 		resourceObject.volume = 1
-		resourceObject.parentName = StringId("resource/resource_names", rawResource.parent.name).toString()
+		resourceObject.parentName = StringId("resource/resource_names", rawResource.parent?.name ?: "").toString()
 		resourceObject.resourceType = resource.rawResourceId
 		resourceObject.resourceName = resource.name
 		resourceObject.objectName = resource.name

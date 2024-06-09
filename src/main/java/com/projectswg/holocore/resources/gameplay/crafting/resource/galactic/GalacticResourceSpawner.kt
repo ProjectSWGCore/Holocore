@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -134,7 +134,7 @@ class GalacticResourceSpawner {
 	}
 	
 	private fun createNewSpawn(resource: GalacticResource, terrain: Terrain) {
-		val spawn = GalacticResourceSpawn(resource.id)
+		val spawn = GalacticResourceSpawn(resource.id, terrain)
 		spawn.setRandomValues(terrain)
 		resource.addSpawn(spawn)
 	}
@@ -146,7 +146,7 @@ class GalacticResourceSpawner {
 			if (spawns.isEmpty())
 				continue
 			val expired = spawns.stream().filter { it.isExpired }.collect(toList())
-			expired.forEach(Consumer<GalacticResourceSpawn> { resource.removeSpawn(it) })
+			expired.forEach(Consumer { resource.removeSpawn(it) })
 		}
 	}
 	

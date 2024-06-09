@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2021 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,57 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.conversation.requirements;
+package com.projectswg.holocore.resources.gameplay.conversation.model
 
-import com.projectswg.holocore.resources.gameplay.conversation.model.Requirement;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject;
+import com.projectswg.holocore.resources.support.global.player.Player
+import java.util.function.Predicate
 
-import java.util.Collection;
-
-public class ActiveQuestRequirement implements Requirement {
-	
-	private final String questName;
-	private final boolean active;
-	private final Integer task;
-	
-	public ActiveQuestRequirement(String questName, boolean active, Integer task) {
-		this.questName = questName;
-		this.task = task;
-		this.active = active;
-	}
-	
-	@Override
-	public boolean test(Player player) {
-		PlayerObject playerObject = player.getPlayerObject();
-		
-		if (!playerObject.isQuestInJournal(questName)) {
-			return !active;
-		}
-		
-		if (playerObject.isQuestComplete(questName)) {
-			return !active;
-		}
-		
-		if (task != null) {
-			Collection<Integer> questActiveTasks = playerObject.getQuestActiveTasks(questName);
-			boolean taskActive = questActiveTasks.contains(task);
-			
-			return taskActive == active;
-		}
-
-		return active;
-	}
-	
-	public String getQuestName() {
-		return questName;
-	}
-	
-	public Integer getTask() {
-		return task;
-	}
-	
-	public boolean isActive() {
-		return active;
-	}
-}
+interface Requirement : Predicate<Player>
