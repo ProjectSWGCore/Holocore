@@ -43,7 +43,7 @@ public class TerminalTicketCollectorRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
 		options.add(RadialOption.create(RadialItem.ITEM_USE));
 		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 	}

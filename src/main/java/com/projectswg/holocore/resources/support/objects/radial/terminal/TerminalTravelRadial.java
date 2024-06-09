@@ -32,6 +32,7 @@ import com.projectswg.holocore.intents.gameplay.world.TravelPointSelectionIntent
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -42,13 +43,13 @@ public class TerminalTravelRadial implements RadialHandlerInterface {
 	}
 	
 	@Override
-	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
 		options.add(RadialOption.create(RadialItem.ITEM_USE));
 		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 	}
 	
 	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		switch (selection) {
 			case ITEM_USE:
 				new TravelPointSelectionIntent(player.getCreatureObject()).broadcast();

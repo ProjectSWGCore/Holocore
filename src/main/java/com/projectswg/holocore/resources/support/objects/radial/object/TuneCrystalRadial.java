@@ -34,20 +34,21 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
 public class TuneCrystalRadial extends SWGObjectRadial {
 	
 	@Override
-	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
 		if (isOptionVisible(player, target)) {
 			options.add(RadialOption.create(RadialItem.BIO_LINK, "@jedi_spam:tune_crystal"));
 		}
 	}
 	
 	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		if (isOptionVisible(player, target)) {
 			new RequestTuneCrystalIntent(player.getCreatureObject(), (TangibleObject) target).broadcast();	// Shows the confirmation window
 		}

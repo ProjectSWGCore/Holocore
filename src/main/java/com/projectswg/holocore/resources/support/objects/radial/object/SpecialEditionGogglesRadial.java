@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,6 +33,7 @@ import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiColorPicker;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -45,7 +46,7 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 	}
 	
 	@Override
-	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
 		options.add(RadialOption.createSilent(RadialItem.EXAMINE));
 		
 		if (colorableFrame) {
@@ -56,7 +57,7 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 	}
 	
 	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		switch (selection) {
 			case SERVER_MENU1 -> SystemMessageIntent.broadcastPersonal(player, "@error_message:goggle_submenu");
 			case SERVER_MENU2 -> showColorPicker(player, target, "/private/index_color_1");

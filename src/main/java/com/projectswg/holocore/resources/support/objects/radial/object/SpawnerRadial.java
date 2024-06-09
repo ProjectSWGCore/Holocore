@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -32,27 +32,29 @@ import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
 public class SpawnerRadial implements RadialHandlerInterface {
-    @Override
-    public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
-        if (isAllowedToDestroy(player)) {
-            options.add(RadialOption.create(RadialItem.ITEM_DESTROY));
-        }
-    }
 
-    @Override
-    public void handleSelection(Player player, SWGObject target, RadialItem selection) {
-        // The ITEM_DESTROY radial will cause the generic item destruction flow to be invoked
-    }
+	@Override
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
+		if (isAllowedToDestroy(player)) {
+			options.add(RadialOption.create(RadialItem.ITEM_DESTROY));
+		}
+	}
 
-    private boolean isAllowedToDestroy(Player player) {
-        AccessLevel accessLevel = player.getAccessLevel();
+	@Override
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
+		// The ITEM_DESTROY radial will cause the generic item destruction flow to be invoked
+	}
 
-        // Players have no access
-        return accessLevel != AccessLevel.PLAYER;
-    }
+	private boolean isAllowedToDestroy(Player player) {
+		AccessLevel accessLevel = player.getAccessLevel();
+
+		// Players have no access
+		return accessLevel != AccessLevel.PLAYER;
+	}
 
 }
