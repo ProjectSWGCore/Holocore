@@ -40,6 +40,7 @@ import com.projectswg.common.network.packets.swg.zone.spatial.AttributeList;
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession;
 import com.projectswg.holocore.resources.gameplay.player.group.GroupInviterData;
 import com.projectswg.holocore.resources.support.data.collections.SWGSet;
+import com.projectswg.holocore.resources.support.data.location.InstanceLocation;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.global.player.PlayerState;
@@ -215,6 +216,9 @@ public class CreatureObject extends TangibleObject {
 		SWGObject targetParent = target.getSuperParent();
 		if (myParent != null && myParent == targetParent)
 			return true;
+
+		if (isDifferentInstance(target))
+			return false;
 		
 		return switch (target.getBaselineType()) {
 			case WAYP -> false;
@@ -223,7 +227,16 @@ public class CreatureObject extends TangibleObject {
 			default -> flatDistanceTo(target) <= 400;
 		};
 	}
-	
+
+	private boolean isDifferentInstance(SWGObject target) {
+		InstanceLocation myInstanceLocation = getInstanceLocation();
+		InstanceLocation targetInstanceLocation = target.getInstanceLocation();
+		boolean differentInstanceType = myInstanceLocation.getInstanceType() != targetInstanceLocation.getInstanceType();
+		boolean differentInstanceNumber = myInstanceLocation.getInstanceNumber() != targetInstanceLocation.getInstanceNumber();
+		
+		return differentInstanceType || differentInstanceNumber;
+	}
+
 	@Override
 	public boolean isVisible(CreatureObject target) {
 		return !isLoggedOutPlayer() && super.isVisible(target);
