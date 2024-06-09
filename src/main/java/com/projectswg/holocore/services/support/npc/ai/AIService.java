@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -73,18 +73,16 @@ public class AIService extends Service {
 	
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
-		if (!(oci.getObject() instanceof AIObject))
+		if (!(oci.getObject() instanceof AIObject obj))
 			return;
-		AIObject obj = (AIObject) oci.getObject();
 		if (aiObjects.add(obj) && started.get())
 			obj.start(executor);
 	}
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		if (!(doi.getObject() instanceof AIObject))
+		if (!(doi.getObject() instanceof AIObject obj))
 			return;
-		AIObject obj = (AIObject) doi.getObject();
 		if (aiObjects.remove(obj) && started.get())
 			obj.stop();
 	}
@@ -94,7 +92,7 @@ public class AIService extends Service {
 		if (!(eci.getSource() instanceof AIObject obj))
 			return;
 		if (eci.getTarget() instanceof CreatureObject creatureTarget) {
-			StartNpcCombatIntent.broadcast(obj, List.of(creatureTarget));
+			new StartNpcCombatIntent(obj, List.of(creatureTarget)).broadcast();
 		}
 	}
 	

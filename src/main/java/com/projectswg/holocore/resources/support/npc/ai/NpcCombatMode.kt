@@ -83,7 +83,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
 	override fun onModeStart() {
 		showExclamationMarkAboveNpc()
-		StopNpcMovementIntent.broadcast(ai)
+		StopNpcMovementIntent(ai).broadcast()
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
 		startCombatLocation.set(ai.worldLocation)
 	}
@@ -116,7 +116,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 			performCombatAction()
 			queueNextLoop(500 + ThreadLocalRandom.current().nextLong(-200, 200))
 		} else {
-			ScheduleNpcModeIntent.broadcast(ai, NpcNavigateMode(ai, returnLocation.get()))
+			ScheduleNpcModeIntent(ai, NpcNavigateMode(ai, returnLocation.get())).broadcast()
 		}
 	}
 	
@@ -142,7 +142,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 			val moveX = targetLocation.x + sin(Math.toRadians(targetHeading)) * targetRange
 			val moveZ = targetLocation.z + cos(Math.toRadians(targetHeading)) * targetRange
 			val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
-			StartNpcMovementIntent.broadcast(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed)
+			StartNpcMovementIntent(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed).broadcast()
 		}
 		
 		if (lineOfSight && iteration.get() % 4 == 0L) {
@@ -188,7 +188,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 				.filter { ai -> ai.worldLocation.distanceTo(myLocation) < assistRange } // that can assist
 				.map { AIObject::class.java.cast(it) }
 				.filter { ai -> targets.stream().anyMatch { ai.isAttackable(it) } }
-				.forEach { ai -> StartNpcCombatIntent.broadcast(ai, targets) }
+				.forEach { ai -> StartNpcCombatIntent(ai, targets).broadcast() }
 	}
 	
 	private fun getWeaponCommand(weapon: WeaponObject): String {

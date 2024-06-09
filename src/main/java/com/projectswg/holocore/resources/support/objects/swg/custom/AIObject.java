@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -191,9 +191,9 @@ public class AIObject extends CreatureObject {
 			if (distance <= maxAggroDistance && isLineOfSight(player)) {
 				if (spawner.getBehavior() == AIBehavior.PATROL) {
 					for (AIObject npc : spawner.getNpcs())
-						StartNpcCombatIntent.broadcast(npc, List.of(player));
+						new StartNpcCombatIntent(npc, List.of(player)).broadcast();
 				} else {
-					StartNpcCombatIntent.broadcast(this, List.of(player));
+					new StartNpcCombatIntent(this, List.of(player)).broadcast();
 				}
 			}
 		}
@@ -272,7 +272,7 @@ public class AIObject extends CreatureObject {
 	
 	public void start(ScheduledThreadPool executor) {
 		this.executor = executor;
-		ScheduleNpcModeIntent.broadcast(this, null);
+		new ScheduleNpcModeIntent(this, null).broadcast();
 	}
 	
 	public void stop() {

@@ -35,9 +35,9 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.Intent
 
-class RequestZoneInIntent(val creature: CreatureObject) : Intent()
+data class RequestZoneInIntent(val creature: CreatureObject) : Intent()
 
-class NotifyPlayersPacketIntent(val packet: SWGPacket, val terrain: Terrain?, val condition: ConditionalNotify?, val networkIds: List<Long>?) : Intent() {
+data class NotifyPlayersPacketIntent(val packet: SWGPacket, val terrain: Terrain?, val condition: ConditionalNotify?, val networkIds: List<Long>?) : Intent() {
 	constructor(packet: SWGPacket, condition: ConditionalNotify?, networkIds: List<Long>?) : this(packet, null, condition, networkIds)
 
 	constructor(packet: SWGPacket, terrain: Terrain?) : this(packet, terrain, null, null)
@@ -51,5 +51,5 @@ class NotifyPlayersPacketIntent(val packet: SWGPacket, val terrain: Terrain?, va
 	}
 }
 
-class PlayerEventIntent(val player: Player, val event: PlayerEvent) : Intent()
-class PlayerTransformedIntent(val player: CreatureObject, val oldParent: SWGObject?, val newParent: SWGObject?, val oldLocation: Location, val newLocation: Location) : Intent()
+data class PlayerEventIntent(val player: Player, val event: PlayerEvent) : Intent()
+data class PlayerTransformedIntent(val player: CreatureObject, val oldParent: SWGObject?, val newParent: SWGObject?, val oldLocation: Location, val newLocation: Location) : Intent()

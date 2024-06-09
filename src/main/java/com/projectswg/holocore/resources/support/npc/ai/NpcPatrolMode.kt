@@ -1,29 +1,29 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
- * *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
  * Our goal is to create an emulator which will provide a server for players to    *
  * continue playing a game similar to the one they used to play. We are basing     *
  * it on the final publish of the game prior to end-game events.                   *
- * *
+ *                                                                                 *
  * This file is part of Holocore.                                                  *
- * *
+ *                                                                                 *
  * --------------------------------------------------------------------------------*
- * *
+ *                                                                                 *
  * Holocore is free software: you can redistribute it and/or modify                *
  * it under the terms of the GNU Affero General Public License as                  *
  * published by the Free Software Foundation, either version 3 of the              *
  * License, or (at your option) any later version.                                 *
- * *
+ *                                                                                 *
  * Holocore is distributed in the hope that it will be useful,                     *
  * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
  * GNU Affero General Public License for more details.                             *
- * *
+ *                                                                                 *
  * You should have received a copy of the GNU Affero General Public License        *
- * along with Holocore.  If not, see <http:></http:>//www.gnu.org/licenses/>.               *
- */
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai
 
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent
@@ -77,7 +77,7 @@ class NpcPatrolMode(obj: AIObject, waypoints: MutableList<ResolvedPatrolWaypoint
 				}
 			}
 			if (closestDistance >= 2) {
-				ScheduleNpcModeIntent.broadcast(ai, NpcNavigateMode(ai, waypoints[index]))
+				ScheduleNpcModeIntent(ai, NpcNavigateMode(ai, waypoints[index])).broadcast()
 				return
 			}
 			compiledWaypoints = ArrayList(waypoints.size)
@@ -96,20 +96,20 @@ class NpcPatrolMode(obj: AIObject, waypoints: MutableList<ResolvedPatrolWaypoint
 		assert(position != -1)
 		
 		when (spawner.patrolFormation) {
-			NpcStaticSpawnLoader.PatrolFormation.NONE -> CompileNpcMovementIntent.broadcast(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, null)
+			NpcStaticSpawnLoader.PatrolFormation.NONE -> CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, null).broadcast()
 			NpcStaticSpawnLoader.PatrolFormation.COLUMN -> {
 				val x = if (position % 2 == 0) 0.0 else spacing
 				val z = -(spacing * ceil((position - 1) / 2.0))
-				CompileNpcMovementIntent.broadcast(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z))
+				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z)).broadcast()
 			}
 			NpcStaticSpawnLoader.PatrolFormation.WEDGE -> {
 				val x = spacing * ceil(position / 2.0)
 				val z = -x
-				CompileNpcMovementIntent.broadcast(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, z))
+				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, z)).broadcast()
 			}
 			NpcStaticSpawnLoader.PatrolFormation.LINE -> {
 				val x = spacing * ceil(position / 2.0)
-				CompileNpcMovementIntent.broadcast(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, 0.0))
+				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, 0.0)).broadcast()
 			}
 			NpcStaticSpawnLoader.PatrolFormation.BOX -> {
 				val x = when (position) {
@@ -123,7 +123,7 @@ class NpcPatrolMode(obj: AIObject, waypoints: MutableList<ResolvedPatrolWaypoint
 					3, 4    -> 3.0 // sides of the box
 					else    -> 6.0 // back of the box
 				}
-				CompileNpcMovementIntent.broadcast(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z))
+				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z)).broadcast()
 			}
 		}
 	}

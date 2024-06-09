@@ -24,70 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.npc.ai;
+package com.projectswg.holocore.intents.support.npc.ai
 
-import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent;
-import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent;
-import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
-import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset
+import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
+import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
+import me.joshlarson.jlcommon.control.Intent
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-public class AISchedulingService extends Service {
-	
-	private final Map<AIObject, NpcMode> modes;
-	
-	public AISchedulingService() {
-		this.modes = new ConcurrentHashMap<>();
-	}
-	
-	@IntentHandler
-	private void handleScheduleNpcModeIntent(ScheduleNpcModeIntent snmi) {
-		AIObject obj = snmi.getObj();
-		NpcMode next = snmi.getMode();
-		if (next == null)
-			next = obj.getDefaultMode();
-		
-		NpcMode prev = next == null ? modes.remove(obj) : modes.put(obj, next);
-		if (prev == next)
-			return;
-		
-		stop(obj, prev);
-		start(obj, next);
-	}
-	
-	@IntentHandler
-	private void handleStartNpcCombatIntent(StartNpcCombatIntent snci) {
-		modes.compute(snci.getObj(), (o, prev) -> {
-			if (prev instanceof NpcCombatMode) {
-				((NpcCombatMode) prev).addTargets(snci.getTargets());
-				return prev;
-			}
-			NpcCombatMode mode = new NpcCombatMode(o);
-			mode.addTargets(snci.getTargets());
-			start(o, mode);
-			return mode;
-		});
-	}
-	
-	private void start(@NotNull AIObject obj, @Nullable NpcMode mode) {
-		if (mode == null)
-			return;
-		
-		obj.setActiveMode(mode);
-	}
-	
-	private void stop(@NotNull AIObject obj, @Nullable NpcMode mode) {
-		if (mode == null)
-			return;
-		
-		obj.setActiveMode(null);
-	}
-	
-}
+data class CompileNpcMovementIntent(val obj: AIObject, val points: List<NavigationPoint>, val type: NavigationRouteType, val speed: Double, val offset: NavigationOffset? = null) : Intent()
+data class ScheduleNpcModeIntent(val obj: AIObject, val mode: NpcMode?) : Intent()
+data class StartNpcCombatIntent(val obj: AIObject, val targets: Collection<CreatureObject>) : Intent()
+data class StartNpcMovementIntent(val obj: AIObject, val parent: SWGObject?, val destination: Location, val speed: Double) : Intent()
+data class StopNpcMovementIntent(val obj: AIObject) : Intent()
