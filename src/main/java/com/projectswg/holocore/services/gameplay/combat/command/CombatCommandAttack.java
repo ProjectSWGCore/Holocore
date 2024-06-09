@@ -250,7 +250,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 				new KnockdownIntent(creatureTarget).broadcast();
 			} else {
 				String yourAttackFailedToKnockDownYourOpponent = "@cbt_spam:knockdown_fail";
-				SystemMessageIntent.broadcastPersonal(source.getOwner(), yourAttackFailedToKnockDownYourOpponent);
+				SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), yourAttackFailedToKnockDownYourOpponent);
 			}
 		}
 

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2020 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -58,7 +58,7 @@ class AdminSpawnerService : Service() {
 		if (eci.command.crc == COMMAND_CREATE_SPAWNING_ELEMENT) {
 			val creature = eci.source
 			val location = creature.location
-			val building = creature.superParent?.buildoutTag ?: location.terrain.name.lowercase(Locale.US).substring(0, 3) + "_world"
+			val building = creature.superParent?.buildoutTag ?: (location.terrain.name.lowercase(Locale.US).substring(0, 3) + "_world")
 			val cell = (creature.parent as? CellObject?)?.number ?: 0
 			val args = eci.arguments.split(' ', limit = 2)
 			val type = sanitizeSpawnerType(args.getOrElse(0) { "AREA" }.uppercase(Locale.US))
@@ -81,7 +81,7 @@ class AdminSpawnerService : Service() {
 			})
 			egg.moveToContainer(creature.parent, location)
 			ObjectCreatedIntent.broadcast(egg)
-			SystemChatRoomMessageIntent.broadcast(AdminChatRooms.SPAWNER_LOG, "\\${color}\\The spawner $type ($comment) has been created at your location")
+			SystemChatRoomMessageIntent(AdminChatRooms.SPAWNER_LOG, "\\${color}\\The spawner $type ($comment) has been created at your location").broadcast()
 		}
 	}
 	

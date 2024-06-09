@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,21 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.network;
+package com.projectswg.holocore.intents.support.global.chat
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.common.data.encodables.player.Mail
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class ForceLogoutIntent extends Intent {
-	
-	private final Player player;
-	
-	public ForceLogoutIntent(Player player) {
-		this.player = player;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-}
+data class PersistentMessageIntent(val receiver: SWGObject, val mail: Mail, val galaxy: String) : Intent()

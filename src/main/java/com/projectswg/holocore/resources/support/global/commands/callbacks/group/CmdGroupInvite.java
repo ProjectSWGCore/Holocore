@@ -51,7 +51,7 @@ public final class CmdGroupInvite implements ICmdCallback {
 			if (target instanceof CreatureObject) {
 				new InviteToGroupIntent(player, (CreatureObject) target).broadcast();
 			} else {
-				SystemMessageIntent.broadcastPersonal(player, "@group:invite_no_target_self");
+				SystemMessageIntent.Companion.broadcastPersonal(player, "@group:invite_no_target_self");
 			}
 		}
 	}

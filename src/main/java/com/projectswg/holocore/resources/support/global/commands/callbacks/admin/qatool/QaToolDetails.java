@@ -20,7 +20,7 @@ public final class QaToolDetails {
 			target = player.getCreatureObject();
 		}
 		if (matchesCommand(split, 2, "observers")) {
-			SystemMessageIntent.broadcastPersonal(player, "Observers: " + target.getObservers());
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Observers: " + target.getObservers());
 			return;
 		}
 		if (matchesCommand(split, 3, "aware-of")) {
@@ -28,16 +28,16 @@ public final class QaToolDetails {
 			int count = 0;
 			for (SWGObject obj : aware) {
 				if (obj.getObjectId() == Integer.parseInt(split[2]) || obj.getTemplate().contains(split[2])) {
-					SystemMessageIntent.broadcastPersonal(player, "True: " + obj);
+					SystemMessageIntent.Companion.broadcastPersonal(player, "True: " + obj);
 					return;
 				}
 				count++;
 			}
-			SystemMessageIntent.broadcastPersonal(player, "False. Checked " + count + " in aware");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "False. Checked " + count + " in aware");
 			return;
 		}
 		if (matchesCommand(split, 2, "deathblow")) {
-			SystemMessageIntent.broadcastPersonal(player, "Dealing deathblow");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Dealing deathblow");
 			CreatureObject creo = (CreatureObject) target;
 			IntentChain.broadcastChain(
 					new IncapacitateCreatureIntent(creo, creo),

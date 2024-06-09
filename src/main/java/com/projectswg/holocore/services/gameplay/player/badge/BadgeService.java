@@ -74,7 +74,7 @@ public class BadgeService extends Service {
 			Badges badges = target.getBadges();
 			badges.set(badgeFromKey.getIndex(), explorationBadge, true);
 
-			SystemMessageIntent.broadcastPersonal(target.getOwner(), new ProsePackage(new StringId("badge_n", "prose_grant"), "TO", "@badge_n:" + badgeName));
+			SystemMessageIntent.Companion.broadcastPersonal(target.getOwner(), new ProsePackage(new StringId("badge_n", "prose_grant"), "TO", "@badge_n:" + badgeName));
 			
 			if (playMusic) {
 				playMusicForBadgeReceiver(target, badgeFromKey);

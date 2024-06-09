@@ -58,13 +58,13 @@ public class CmdGoto implements ICmdCallback  {
 		String message = PlayerLookup.doesCharacterExistByFirstName(destination) ? teleportToPlayer(player, teleportee, destination) : teleportToBuilding(player, teleportee, destination, parts);
 		
 		if (message != null)
-			SystemMessageIntent.broadcastPersonal(player, message);
+			SystemMessageIntent.Companion.broadcastPersonal(player, message);
 	}
 	
 	private String teleportToPlayer(Player player, CreatureObject teleportee, String playerName) {
 		CreatureObject destinationPlayer = PlayerLookup.getCharacterByFirstName(playerName);
 		if (destinationPlayer == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Unknown player: " + playerName);
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Unknown player: " + playerName);
 			return null;
 		}
 		
@@ -79,7 +79,7 @@ public class CmdGoto implements ICmdCallback  {
 	private String teleportToBuilding(Player player, CreatureObject teleportee, String buildingName, String [] args) {
 		BuildingObject building = BuildingLookup.getBuildingByTag(buildingName);
 		if (building == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Unknown building: " + buildingName);
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Unknown building: " + buildingName);
 			return null;
 		}
 		int cell = 1;
@@ -87,7 +87,7 @@ public class CmdGoto implements ICmdCallback  {
 			if (args.length >= 2)
 				cell = Integer.parseInt(args[1]);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, "Invalid cell number");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid cell number");
 			return null;
 		}
 		return teleportToGoto(teleportee, building, cell);

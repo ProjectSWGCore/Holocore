@@ -174,7 +174,7 @@ public class FactionFlagService extends Service {
 			// Prevent neutrals OR rebels and imperial that are on leave from entering
 			if (creature.getPvpFaction() == PvpFaction.NEUTRAL || creature.getPvpStatus() == PvpStatus.ONLEAVE) {
 				// Teleport them back
-				SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_not_allowed"));
+				SystemMessageIntent.Companion.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_not_allowed"));
 				creature.moveToContainer(oldParent, oldLocation);
 				return;
 			}
@@ -184,7 +184,7 @@ public class FactionFlagService extends Service {
 
 			if (level < 75) {
 				// Teleport them back
-				SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_level_low"));
+				SystemMessageIntent.Companion.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_level_low"));
 				creature.moveToContainer(oldParent, oldLocation);
 				return;
 			}
@@ -192,7 +192,7 @@ public class FactionFlagService extends Service {
 			// Make the player Special Forces, if they are not already. Also cancels active status changes, e.g. going on leave
 			handleStatusChange(creature, creature.getPvpStatus(), PvpStatus.SPECIALFORCES);
 
-			SystemMessageIntent.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_entered"));
+			SystemMessageIntent.Companion.broadcastPersonal(creature.getOwner(), new ProsePackage("gcw", "pvp_advanced_region_entered"));
 		}
 	}
 
@@ -201,7 +201,7 @@ public class FactionFlagService extends Service {
 		final PvpStatus newStatus;
 
 		if(target.hasPvpFlag(PvpFlag.GOING_COVERT) || target.hasPvpFlag(PvpFlag.GOING_OVERT)) {
-			SystemMessageIntent.broadcastPersonal(target.getOwner(), "@faction_recruiter:pvp_status_changing");
+			SystemMessageIntent.Companion.broadcastPersonal(target.getOwner(), "@faction_recruiter:pvp_status_changing");
 		} else {
 			if(oldStatus == PvpStatus.COMBATANT) {
 				pvpFlag = PvpFlag.GOING_OVERT;
@@ -212,7 +212,7 @@ public class FactionFlagService extends Service {
 			}
 
 			target.setPvpFlags(pvpFlag);
-			SystemMessageIntent.broadcastPersonal(target.getOwner(), getBeginMessage(oldStatus, newStatus));
+			SystemMessageIntent.Companion.broadcastPersonal(target.getOwner(), getBeginMessage(oldStatus, newStatus));
 			statusChangers.put(target, executor.execute(getDelay(oldStatus, newStatus) * 1000, () -> completeChange(target, pvpFlag, oldStatus, newStatus)));
 		}
 	}
@@ -276,7 +276,7 @@ public class FactionFlagService extends Service {
 	private void completeChange(TangibleObject target, PvpFlag pvpFlag, PvpStatus oldStatus, PvpStatus newStatus) {
 		statusChangers.remove(target);
 
-		SystemMessageIntent.broadcastPersonal(target.getOwner(), getCompletionMessage(oldStatus, newStatus));
+		SystemMessageIntent.Companion.broadcastPersonal(target.getOwner(), getCompletionMessage(oldStatus, newStatus));
 		target.clearPvpFlags(pvpFlag);
 		changeStatus(target, newStatus);
 	}

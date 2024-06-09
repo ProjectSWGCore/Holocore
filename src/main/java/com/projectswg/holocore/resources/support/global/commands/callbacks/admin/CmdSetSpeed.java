@@ -17,7 +17,7 @@ public final class CmdSetSpeed implements ICmdCallback {
 		try {
 			creature.setMovementScale(MovementModifierIdentifier.SET_SPEED, Integer.parseInt(args), false);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, args + " is not a valid number!");
+			SystemMessageIntent.Companion.broadcastPersonal(player, args + " is not a valid number!");
 		}
 	}
 	

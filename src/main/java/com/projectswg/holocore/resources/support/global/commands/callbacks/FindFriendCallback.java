@@ -94,7 +94,7 @@ public class FindFriendCallback implements ICmdCallback {
 			waypoint.setColor(WaypointColor.PURPLE);
 			waypoint.setName(friendName);
 			if (!ghost.addWaypoint(waypoint))
-				SystemMessageIntent.broadcastPersonal(player, "@base_player:too_many_waypoints");
+				SystemMessageIntent.Companion.broadcastPersonal(player, "@base_player:too_many_waypoints");
 			new ObjectCreatedIntent(waypoint).broadcast();
 			new SystemMessageIntent(player, new ProsePackage(new StringId("ui_cmnty", "friend_location_create_new_wp"), "TU", friendName)).broadcast();
 		} else {

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2022 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,11 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-
-package com.projectswg.holocore.intents.support.global.login
+package com.projectswg.holocore.intents.support.global.chat
 
 import com.projectswg.holocore.resources.support.global.player.Player
 import me.joshlarson.jlcommon.control.Intent
-import java.net.SocketAddress
 
-class RequestLoginIntent(val player: Player, val username: String, val password: String, val clientVersion: String, val socketAddress: SocketAddress) : Intent()
+data class ChatRoomMessageIntent(val player: Player, val roomPath: String, val message: String) : Intent()

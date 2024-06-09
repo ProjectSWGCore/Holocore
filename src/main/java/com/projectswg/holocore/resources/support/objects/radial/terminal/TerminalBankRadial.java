@@ -115,9 +115,9 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 		creature.setBankBalance(amount + creature.getBankBalance());
 		creature.setCashBalance(0L);
 		if (amount > 0)
-			SystemMessageIntent.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_deposit_success"), "DI", (int) amount));
+			SystemMessageIntent.Companion.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_deposit_success"), "DI", (int) amount));
 		else
-			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_deposit");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "@error_message:bank_deposit");
 	}
 	
 	private static void handleBankWithdraw(Player player, CreatureObject creature) {
@@ -125,15 +125,15 @@ public class TerminalBankRadial implements RadialHandlerInterface {
 		creature.setCashBalance(creature.getCashBalance() + amount);
 		creature.setBankBalance(0L);
 		if (amount > 0)
-			SystemMessageIntent.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_withdraw_success"), "DI", (int) amount));
+			SystemMessageIntent.Companion.broadcastPersonal(player, new ProsePackage(new StringId("@base_player:prose_withdraw_success"), "DI", (int) amount));
 		else
-			SystemMessageIntent.broadcastPersonal(player, "@error_message:bank_withdraw");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "@error_message:bank_withdraw");
 	}
 	
 	private static void handleBankTransfer(Player player, CreatureObject creature, Map<String, String> parameters) {
 		creature.setCashBalance(Long.parseLong(parameters.get("transaction.txtInputFrom.Text")));
 		creature.setBankBalance(Long.parseLong(parameters.get("transaction.txtInputTo.Text")));
-		SystemMessageIntent.broadcastPersonal(player, "@base_player:bank_success");
+		SystemMessageIntent.Companion.broadcastPersonal(player, "@base_player:bank_success");
 	}
 	
 }

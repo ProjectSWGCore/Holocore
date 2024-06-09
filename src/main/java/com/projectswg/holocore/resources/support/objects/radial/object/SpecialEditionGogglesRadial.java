@@ -59,7 +59,7 @@ public class SpecialEditionGogglesRadial extends SWGObjectRadial {
 	@Override
 	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		switch (selection) {
-			case SERVER_MENU1 -> SystemMessageIntent.broadcastPersonal(player, "@error_message:goggle_submenu");
+			case SERVER_MENU1 -> SystemMessageIntent.Companion.broadcastPersonal(player, "@error_message:goggle_submenu");
 			case SERVER_MENU2 -> showColorPicker(player, target, "/private/index_color_1");
 			case SERVER_MENU3 -> showColorPicker(player, target, "/private/index_color_2");
 		}

@@ -41,7 +41,7 @@ public final class CmdGroupUninvite implements ICmdCallback {
 		if (target instanceof CreatureObject creatureTarget) {
 			new CancelInvitationToGroupIntent(player, creatureTarget).broadcast();
 		} else {
-			SystemMessageIntent.broadcastPersonal(player, "@group:uninvite_no_target_self");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "@group:uninvite_no_target_self");
 		}
 	}
 	

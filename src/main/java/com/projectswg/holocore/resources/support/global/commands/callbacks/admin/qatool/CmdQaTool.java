@@ -142,14 +142,14 @@ public class CmdQaTool implements ICmdCallback {
 		args = args.trim();
 		CreatureObject recoveree = PlayerLookup.getCharacterByFirstName(args);
 		if (recoveree == null) {
-			SystemMessageIntent.broadcastPersonal(player, "Could not find player by first name: '" + args + '\'');
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Could not find player by first name: '" + args + '\'');
 			return;
 		}
 		
 		Location loc = new Location(3525, 4, -4807, Terrain.TATOOINE);
 		recoveree.setPosture(Posture.UPRIGHT);
 		recoveree.moveToContainer(null, loc);
-		SystemMessageIntent.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
+		SystemMessageIntent.Companion.broadcastPersonal(player, "Sucessfully teleported " + recoveree.getObjectName() + " to " + loc.getPosition());
 	}
 	
 	private void setInstance(Player player, String args) {
@@ -162,7 +162,7 @@ public class CmdQaTool implements ICmdCallback {
 			new ForceAwarenessUpdateIntent(creature).broadcast();
 		} catch (NumberFormatException e) {
 			Log.e("Invalid instance number with qatool: %s", args);
-			SystemMessageIntent.broadcastPersonal(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid call to qatool: '" + args + "' - invalid instance number");
 		}
 	}
 	

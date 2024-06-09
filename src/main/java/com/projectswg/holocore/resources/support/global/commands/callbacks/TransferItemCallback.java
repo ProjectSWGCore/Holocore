@@ -123,7 +123,7 @@ public class TransferItemCallback implements ICmdCallback {
 					
 					if (lightsaberInventory != null) {
 						if (isMissingColorCrystal(lightsaberInventory)) {
-							SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:lightsaber_no_color");
+							SystemMessageIntent.Companion.broadcastPersonal(player, "@jedi_spam:lightsaber_no_color");
 							return;
 						}
 					}
@@ -162,17 +162,17 @@ public class TransferItemCallback implements ICmdCallback {
 				}
 				
 				if (!isColorCrystal(tangibleTarget) && !isPowerCrystal(tangibleTarget)) {
-					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_not_crystal");
+					SystemMessageIntent.Companion.broadcastPersonal(player, "@jedi_spam:saber_not_crystal");
 					return;
 				}
 				
 				if (!isTuned(tangibleTarget)) {
-					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_tuned");
+					SystemMessageIntent.Companion.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_tuned");
 					return;
 				}
 				
 				if (!isTunedByUs(actor, tangibleTarget)) {
-					SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_owner");
+					SystemMessageIntent.Companion.broadcastPersonal(player, "@jedi_spam:saber_crystal_not_owner");
 					return;
 				}
 				
@@ -196,7 +196,7 @@ public class TransferItemCallback implements ICmdCallback {
 						
 						weaponObject.setElementalValue(baseWeaponMaxDamage * tangibleTarget.getLightsaberColorCrystalDamagePercent() / 100);
 					} else {
-						SystemMessageIntent.broadcastPersonal(player, "@jedi_spam:saber_already_has_color");
+						SystemMessageIntent.Companion.broadcastPersonal(player, "@jedi_spam:saber_already_has_color");
 						return;
 					}
 				}

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,38 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.login;
+package com.projectswg.holocore.intents.support.global.login
 
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
+import java.net.SocketAddress
 
-public class LoginEventIntent extends Intent {
-	
-	private LoginEvent event;
-	private long networkId;
-	
-	public LoginEventIntent(long networkId, LoginEvent event) {
-		setNetworkId(networkId);
-		setEvent(event);
+class LoginEventIntent(val networkId: Long, val event: LoginEvent) : Intent() {
+	enum class LoginEvent {
+		LOGIN_FAIL_INVALID_VERSION_CODE,
+		LOGIN_FAIL_INVALID_USER_PASS,
+		LOGIN_FAIL_SERVER_ERROR,
+		LOGIN_FAIL_BANNED,
+		LOGIN_SUCCESS
 	}
-	
-	public void setNetworkId(long networkId) {
-		this.networkId = networkId;
-	}
-	
-	public void setEvent(LoginEvent event) {
-		this.event = event;
-	}
-	
-	public long getNetworkId() {
-		return networkId;
-	}
-	
-	public LoginEvent getEvent() {
-		return event;
-	}
-	
-	public enum LoginEvent {
-		LOGIN_FAIL_INVALID_VERSION_CODE, LOGIN_FAIL_INVALID_USER_PASS, LOGIN_FAIL_SERVER_ERROR, LOGIN_FAIL_BANNED, LOGIN_SUCCESS
-	}
-	
 }
+
+class RequestLoginIntent(val player: Player, val username: String, val password: String, val clientVersion: String, val socketAddress: SocketAddress) : Intent()

@@ -180,7 +180,7 @@ public class JunkDealerService extends Service {
 		Session session = suiWindowMap.remove(creatureObject);
 		
 		ProsePackage itemSoldProse = new ProsePackage(new StringId("junk_dealer", "prose_sold_junk"), "TT", sellableItem.getObjectName(), "DI", price);
-		SystemMessageIntent.broadcastPersonal(player, itemSoldProse);
+		SystemMessageIntent.Companion.broadcastPersonal(player, itemSoldProse);
 		
 		DestroyObjectIntent destroyObjectIntent = new DestroyObjectIntent((sellableItem));
 		SellItemsIntent sellItemsIntent = new SellItemsIntent(player, session.getNpc());

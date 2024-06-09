@@ -31,7 +31,6 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQ
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandTimer
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
-import com.projectswg.holocore.intents.support.global.network.OutboundPacketIntent
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.weapon.DefaultWeaponFactory
@@ -82,7 +81,7 @@ class AbilityTest : TestRunnerSimulatedWorld() {
 
 	private fun parryRiposte(player: GenericPlayer): Boolean {
 		val crc = CRC.getCrc("parryriposte")
-		InboundPacketIntent.broadcast(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, ""))
+		InboundPacketIntent(player, CommandQueueEnqueue(player.creatureObject.objectId, 0, crc, 0, "")).broadcast()
 
 		val commandTimer = player.waitForNextPacket(CommandTimer::class.java)
 

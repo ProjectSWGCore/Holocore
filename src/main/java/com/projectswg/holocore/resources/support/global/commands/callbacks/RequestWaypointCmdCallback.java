@@ -45,7 +45,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String[] cmd = args.split(" ", 6);
 		if (cmd.length < 5) {
-			SystemMessageIntent.broadcastPersonal(player, "Invalid number of arguments for waypoint! Expected 5 or 6");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid number of arguments for waypoint! Expected 5 or 6");
 			return;
 		}
 		WaypointColor color = WaypointColor.BLUE;
@@ -66,7 +66,7 @@ public class RequestWaypointCmdCallback implements ICmdCallback {
 		waypoint.setName(name);
 		waypoint.setColor(color);
 		if (!player.getPlayerObject().addWaypoint(waypoint))
-			SystemMessageIntent.broadcastPersonal(player, "@base_player:too_many_waypoints");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "@base_player:too_many_waypoints");
 		ObjectCreatedIntent.broadcast(waypoint);
 	}
 }

@@ -154,7 +154,7 @@ public class PlayerMountService extends Service {
 				}
 			}
 		}
-		SystemMessageIntent.broadcastPersonal(psi.getCreature().getOwner(), "Could not find mount to store!");
+		SystemMessageIntent.Companion.broadcastPersonal(psi.getCreature().getOwner(), "Could not find mount to store!");
 	}
 	
 	@IntentHandler
@@ -177,7 +177,7 @@ public class PlayerMountService extends Service {
 	@IntentHandler
 	private void handleVehicleDeedGenerate(VehicleDeedGenerateIntent vdgi) {
 		if (!vdgi.getDeed().getTemplate().startsWith("object/tangible/deed/vehicle_deed/")) {
-			SystemMessageIntent.broadcastPersonal(vdgi.getCreature().getOwner(), "Invalid vehicle deed!");
+			SystemMessageIntent.Companion.broadcastPersonal(vdgi.getCreature().getOwner(), "Invalid vehicle deed!");
 			return;
 		}
 		generateVehicle(vdgi.getCreature(), vdgi.getDeed());
@@ -228,7 +228,7 @@ public class PlayerMountService extends Service {
 		vehicleControlDevice.moveToContainer(creator.getDatapad());
 		ObjectCreatedIntent.broadcast(vehicleControlDevice);
 		
-		SystemMessageIntent.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
+		SystemMessageIntent.Companion.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
 		
 		callMount(creator, vehicleControlDevice);	// Once generated, the vehicle is called
 	}
@@ -239,7 +239,7 @@ public class PlayerMountService extends Service {
 		}
 		if (player.getDatapad() != mountControlDevice.getParent()) {
 			StandardLog.onPlayerError(this, player, "disconnecting - attempted to call another player's mount [%s]", mountControlDevice);
-			CloseConnectionIntent.broadcast(player.getOwner(), DisconnectReason.SUSPECTED_HACK);
+			new CloseConnectionIntent(player.getOwner(), DisconnectReason.SUSPECTED_HACK).broadcast();
 			return;
 		}
 		
@@ -263,7 +263,7 @@ public class PlayerMountService extends Service {
 		if (mounts.size() > getMountLimit()) {
 			mounts.remove(mountRecord);
 			StandardLog.onPlayerTrace(this, player, "hit mount limit of %d", getMountLimit());
-			SystemMessageIntent.broadcastPersonal(player.getOwner(), "@pet/pet_menu:at_max");
+			SystemMessageIntent.Companion.broadcastPersonal(player.getOwner(), "@pet/pet_menu:at_max");
 			return;
 		}
 		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);

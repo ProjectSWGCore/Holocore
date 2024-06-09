@@ -66,7 +66,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), compositeArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject, compositeArmorHelmet.parent)
@@ -82,7 +82,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), compositeArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject.inventory, compositeArmorHelmet.parent)
@@ -99,7 +99,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), paddedArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject, paddedArmorHelmet.parent)
@@ -115,7 +115,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), paddedArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject.inventory, paddedArmorHelmet.parent)
@@ -132,7 +132,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		waitForIntents()
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), ubeseArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject, ubeseArmorHelmet.parent)
@@ -147,7 +147,7 @@ class EquipArmorTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(creatureObject)
 		val transferItemArmorPacket = CommandQueueEnqueue(creatureObject.objectId, 0, CRC.getCrc("transferitemarmor"), ubeseArmorHelmet.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(creatureObject.inventory, ubeseArmorHelmet.parent)

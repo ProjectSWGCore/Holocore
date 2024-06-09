@@ -49,8 +49,8 @@ public class AdminTeleportCallback implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String [] cmd = args.split(" ");
 		if (cmd.length < 2 || cmd.length > 5) {
-			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
-			SystemMessageIntent.broadcastPersonal(player, "For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Wrong Syntax. For teleporting yourself, command has to be: /teleport <planetname> <x> <y> <z>");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "For teleporting another player, command has to be: /teleport <charname> <planetname> <x> <y> <z>");
 			return;
 		}
 		
@@ -73,13 +73,13 @@ public class AdminTeleportCallback implements ICmdCallback {
 			location.setTerrain(creature.getTerrain());
 		} else {
 			if (!parseTerrain(cmd, type, location)) {
-				SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Invalid terrain: " + cmd[0]);
+				SystemMessageIntent.Companion.broadcastPersonal(player, "Wrong Syntax or Value. Invalid terrain: " + cmd[0]);
 				return;
 			}
 		}
 		
 		if (!parseLocation(cmd, type, location)) {
-			SystemMessageIntent.broadcastPersonal(player, "Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Wrong Syntax or Value. Please enter the command like this: /teleport <planetname> <x> <y> <z>");
 			return;
 		}
 		
@@ -88,12 +88,12 @@ public class AdminTeleportCallback implements ICmdCallback {
 			if (currentParent instanceof BuildingObject building) {
 				CellObject cell = building.getCellByName(cmd[0]);
 				if (cell == null) {
-					SystemMessageIntent.broadcastPersonal(player, "Invalid cell name: " + cmd[0]);
+					SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid cell name: " + cmd[0]);
 					return;
 				}
 				newParent = cell;
 			} else {
-				SystemMessageIntent.broadcastPersonal(player, "Invalid terrain or super parent: " + cmd[0]);
+				SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid terrain or super parent: " + cmd[0]);
 				return;
 			}
 		}
@@ -111,7 +111,7 @@ public class AdminTeleportCallback implements ICmdCallback {
 			}
 			teleportObject = PlayerLookup.getCharacterByFirstName(cmd[0]);
 			if (teleportObject == null) {
-				SystemMessageIntent.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+ '\'');
+				SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid character first name: '"+cmd[0]+ '\'');
 				return;
 			}
 		}

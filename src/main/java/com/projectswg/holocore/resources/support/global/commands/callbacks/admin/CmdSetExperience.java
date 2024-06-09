@@ -42,12 +42,12 @@ public class CmdSetExperience implements ICmdCallback {
 		String[] argArray = args.split(" ");
 
 		if (argArray.length != 2) {
-			SystemMessageIntent.broadcastPersonal(player, "Expected format: /setExperience <target> <xpType> <xpGained>");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Expected format: /setExperience <target> <xpType> <xpGained>");
 			return;
 		}
 		
 		if (!(target instanceof CreatureObject)) {
-			SystemMessageIntent.broadcastPersonal(player, "The command must have a creature as a target");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "The command must have a creature as a target");
 			return;
 		}
 		
@@ -62,7 +62,7 @@ public class CmdSetExperience implements ICmdCallback {
 			
 			Log.i("XP command: %s gave %s %d %s XP", player, target, xpGained, xpType);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(player, String.format("XP command: %s is not a number", xpGainedRaw));
+			SystemMessageIntent.Companion.broadcastPersonal(player, String.format("XP command: %s is not a number", xpGainedRaw));
 			
 			Log.e("XP command: %s gave a non-numerical XP gained argument of %s", player.getUsername(), xpGainedRaw);
 		}

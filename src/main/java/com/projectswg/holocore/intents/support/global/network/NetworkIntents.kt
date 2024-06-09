@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,33 +24,19 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.chat;
+package com.projectswg.holocore.intents.support.global.network
 
-import com.projectswg.holocore.resources.support.global.chat.AdminChatRooms;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.common.network.packets.SWGPacket
+import com.projectswg.common.network.packets.swg.holo.HoloConnectionStopped
+import com.projectswg.holocore.resources.support.global.network.DisconnectReason
+import com.projectswg.holocore.resources.support.global.network.NetworkClient
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
 
-public class SystemChatRoomMessageIntent extends Intent {
-
-	private final AdminChatRooms roomPath;
-	private final String message;
-
-	public SystemChatRoomMessageIntent(@NotNull AdminChatRooms roomPath, @NotNull String message) {
-		this.roomPath = roomPath;
-		this.message = message;
-	}
-	
-	@NotNull
-	public AdminChatRooms getRoomPath() {
-		return roomPath;
-	}
-	
-	@NotNull
-	public String getMessage() {
-		return message;
-	}
-	
-	public static void broadcast(@NotNull AdminChatRooms roomPath, @NotNull String message) {
-		new SystemChatRoomMessageIntent(roomPath, message).broadcast();
-	}
-}
+data class OutboundPacketIntent(val player: Player, val packet: SWGPacket) : Intent()
+data class InboundPacketPendingIntent(val client: NetworkClient) : Intent()
+data class InboundPacketIntent(val player: Player, val packet: SWGPacket) : Intent()
+data class ForceLogoutIntent(val player: Player) : Intent()
+data class ConnectionOpenedIntent(val player: Player) : Intent()
+data class ConnectionClosedIntent(val player: Player, val reason: HoloConnectionStopped.ConnectionStoppedReason) : Intent()
+data class CloseConnectionIntent(val player: Player, val disconnectReason: DisconnectReason) : Intent()

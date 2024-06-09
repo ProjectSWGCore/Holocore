@@ -67,7 +67,7 @@ public class ContainerService extends Service {
 		if (!container.isVisible(creature)) {
 			Player player = creature.getOwner();
 			if (player != null)
-				SystemMessageIntent.broadcastPersonal(player, "@container_error_message:container08");
+				SystemMessageIntent.Companion.broadcastPersonal(player, "@container_error_message:container08");
 			return;
 		}
 		if (creature.openContainer(container, slot))

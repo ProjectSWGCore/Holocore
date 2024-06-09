@@ -44,7 +44,7 @@ public class CustomObjectService extends Service {
 		if (!command.getName().equalsIgnoreCase("object"))
 			return;
 		if (!isAuthorized(eci.getSource())) {
-			SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "You are not authorized to use this command");
+			SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "You are not authorized to use this command");
 			return;
 		}
 		
@@ -65,29 +65,29 @@ public class CustomObjectService extends Service {
 				break;
 			case "move":
 				if (parts.length < 3) {
-					SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "move requires direction and amount");
+					SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "move requires direction and amount");
 					break;
 				}
 				handleMove(eci.getSource(), target, parts[1], parts[2]);
 				break;
 			case "rotate":
 				if (parts.length < 2) {
-					SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "no rotation specified");
+					SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "no rotation specified");
 					break;
 				}
 				handleRotate(eci.getSource(), target, parts[1]);
 				break;
 			case "info":
 				if (target == null) {
-					SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "No target");
+					SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "No target");
 					break;
 				}
-				SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "Template: " + target.getTemplate());
-				SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "Location: " + target.getLocation().getPosition());
-				SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "Heading:  " + target.getLocation().getYaw());
+				SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "Template: " + target.getTemplate());
+				SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "Location: " + target.getLocation().getPosition());
+				SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "Heading:  " + target.getLocation().getYaw());
 				break;
 			default:
-				SystemMessageIntent.broadcastPersonal(eci.getSource().getOwner(), "Unknown command: " + parts[0]);
+				SystemMessageIntent.Companion.broadcastPersonal(eci.getSource().getOwner(), "Unknown command: " + parts[0]);
 				break;
 		}
 	}
@@ -143,16 +143,16 @@ public class CustomObjectService extends Service {
 				sdb.writeLine(id, obj.getTerrain(), obj.getTemplate(), "", obj.getX(), obj.getY(), obj.getZ(), obj.getLocation().getYaw(), "", "0", "0", "TRUE", "");
 				id++;
 			}
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Saved "+(id-1)+" objects to file");
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Saved "+(id-1)+" objects to file");
 		} catch (IOException e) {
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Failed to save!");
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Failed to save!");
 			Log.e(e);
 		}
 	}
 	
 	private void handleDelete(CreatureObject source, SWGObject target) {
 		if (target == null || !objects.remove(target)) {
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Can't delete target: " + target);
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Can't delete target: " + target);
 			return;
 		}
 		DestroyObjectIntent.broadcast(target);
@@ -160,14 +160,14 @@ public class CustomObjectService extends Service {
 	
 	private void handleMove(CreatureObject source, SWGObject target, String direction, String amountStr) {
 		if (target == null || !objects.contains(target)) {
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Can't move target: " + target);
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Can't move target: " + target);
 			return;
 		}
 		double amount;
 		try {
 			amount = Double.parseDouble(amountStr);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Invalid amount");
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Invalid amount");
 			return;
 		}
 		Location location;
@@ -191,10 +191,10 @@ public class CustomObjectService extends Service {
 				location = Location.builder(target.getLocation()).translatePosition(-amount, 0, 0).build();
 				break;
 			default:
-				SystemMessageIntent.broadcastPersonal(source.getOwner(), "Unknown direction: " + direction);
+				SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Unknown direction: " + direction);
 				return;
 		}
-		SystemMessageIntent.broadcastPersonal(source.getOwner(), "Moved '"+target.getTemplate()+"' " + amount + "m " + direction);
+		SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Moved '"+target.getTemplate()+"' " + amount + "m " + direction);
 		target.moveToLocation(location);
 	}
 	
@@ -204,9 +204,9 @@ public class CustomObjectService extends Service {
 		try {
 			double heading = Double.parseDouble(headingStr);
 			target.moveToLocation(Location.builder(target.getLocation()).setHeading(heading).build());
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Changed '"+target.getTemplate()+"' heading to " + heading);
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Changed '"+target.getTemplate()+"' heading to " + heading);
 		} catch (NumberFormatException e) {
-			SystemMessageIntent.broadcastPersonal(source.getOwner(), "Invalid heading");
+			SystemMessageIntent.Companion.broadcastPersonal(source.getOwner(), "Invalid heading");
 		}
 	}
 	

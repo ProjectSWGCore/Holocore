@@ -10,7 +10,7 @@ public final class CmdBroadcastGalaxy implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		SystemMessageIntent.broadcastGalaxy(args);
+		SystemMessageIntent.Companion.broadcastGalaxy(args);
 	}
 	
 }

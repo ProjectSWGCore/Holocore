@@ -14,7 +14,7 @@ public final class CmdBroadcast implements ICmdCallback {
 		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
-		SystemMessageIntent.broadcastPlanet(creature.getTerrain(), args);
+		SystemMessageIntent.Companion.broadcastPlanet(creature.getTerrain(), args);
 	}
 	
 }

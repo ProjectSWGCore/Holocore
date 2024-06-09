@@ -23,21 +23,21 @@ public final class CmdDumpZoneInformation implements ICmdCallback {
 			Location worldLocation = creature.getWorldLocation();
 			Location cellLocation = creature.getLocation();
 			SWGObject parent = creature.getParent();
-			SystemMessageIntent.broadcastPersonal(player, "Position: " + worldLocation.getPosition());
-			SystemMessageIntent.broadcastPersonal(player, "Orientation: " + worldLocation.getOrientation());
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Position: " + worldLocation.getPosition());
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Orientation: " + worldLocation.getOrientation());
 			if (parent != null) {
-				SystemMessageIntent.broadcastPersonal(player, "  Cell Position: " + cellLocation.getPosition());
-				SystemMessageIntent.broadcastPersonal(player, "  Cell Orientation: " + cellLocation.getOrientation());
+				SystemMessageIntent.Companion.broadcastPersonal(player, "  Cell Position: " + cellLocation.getPosition());
+				SystemMessageIntent.Companion.broadcastPersonal(player, "  Cell Orientation: " + cellLocation.getOrientation());
 				if (parent instanceof CellObject) {
-					SystemMessageIntent.broadcastPersonal(player, "  Cell ID/Name: " + ((CellObject) parent).getNumber() + " / " + ((CellObject) parent).getCellName());
+					SystemMessageIntent.Companion.broadcastPersonal(player, "  Cell ID/Name: " + ((CellObject) parent).getNumber() + " / " + ((CellObject) parent).getCellName());
 				} else {
-					SystemMessageIntent.broadcastPersonal(player, "  Parent ID/Type: " + parent.getObjectId() + " / " + parent.getClass().getSimpleName());
-					SystemMessageIntent.broadcastPersonal(player, "  Parent Template: " + parent.getTemplate());
+					SystemMessageIntent.Companion.broadcastPersonal(player, "  Parent ID/Type: " + parent.getObjectId() + " / " + parent.getClass().getSimpleName());
+					SystemMessageIntent.Companion.broadcastPersonal(player, "  Parent Template: " + parent.getTemplate());
 				}
 				var grandparent = parent.getParent();
 				if (grandparent != null) {
-					SystemMessageIntent.broadcastPersonal(player, "    Grandparent ID/Type: " + grandparent.getObjectId() + " / " + grandparent.getClass().getSimpleName());
-					SystemMessageIntent.broadcastPersonal(player, "    Grandparent Template: " + grandparent.getTemplate());
+					SystemMessageIntent.Companion.broadcastPersonal(player, "    Grandparent ID/Type: " + grandparent.getObjectId() + " / " + grandparent.getClass().getSimpleName());
+					SystemMessageIntent.Companion.broadcastPersonal(player, "    Grandparent Template: " + grandparent.getTemplate());
 				}
 			}
 		} else if (split[0].equalsIgnoreCase("all_cells")) {
@@ -48,18 +48,18 @@ public final class CmdDumpZoneInformation implements ICmdCallback {
 				if (grandparent != null) {
 					if (grandparent instanceof BuildingObject) {
 						List<CellObject> cells = ((BuildingObject) grandparent).getCells();
-						SystemMessageIntent.broadcastPersonal(player, "Cell Count: " + cells.size());
+						SystemMessageIntent.Companion.broadcastPersonal(player, "Cell Count: " + cells.size());
 						for (CellObject cell : cells) {
-							SystemMessageIntent.broadcastPersonal(player, "    " + cell.getNumber() + " / " + cell.getCellName());
+							SystemMessageIntent.Companion.broadcastPersonal(player, "    " + cell.getNumber() + " / " + cell.getCellName());
 						}
 					} else {
-						SystemMessageIntent.broadcastPersonal(player, "Duuuude, you gotta be in a building");
+						SystemMessageIntent.Companion.broadcastPersonal(player, "Duuuude, you gotta be in a building");
 					}
 				} else {
-					SystemMessageIntent.broadcastPersonal(player, "No grandfather fo u");
+					SystemMessageIntent.Companion.broadcastPersonal(player, "No grandfather fo u");
 				}
 			} else {
-				SystemMessageIntent.broadcastPersonal(player, "Get in a container bro");
+				SystemMessageIntent.Companion.broadcastPersonal(player, "Get in a container bro");
 			}
 		}
 	}

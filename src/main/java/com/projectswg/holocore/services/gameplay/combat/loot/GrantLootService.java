@@ -171,7 +171,7 @@ public final class GrantLootService extends Service {
 			return;
 		}
 		if (!restrictions.canLoot(looter)) {
-			SystemMessageIntent.broadcastPersonal(player, "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
+			SystemMessageIntent.Companion.broadcastPersonal(player, "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
 			return;
 		}
 		
@@ -201,7 +201,7 @@ public final class GrantLootService extends Service {
 			return;
 		}
 		if (!restrictions.canLoot(looter)) {
-			SystemMessageIntent.broadcastPersonal(looter.getOwner(), "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
+			SystemMessageIntent.Companion.broadcastPersonal(looter.getOwner(), "You don't have permission to loot '"+corpse.getObjectName()+ '\'');
 			return;
 		}
 		

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -127,7 +127,7 @@ public class CommandQueueService extends Service {
 			}
 			long targetId = request.getTargetId();
 			SWGObject target = targetId != 0 ? ObjectLookup.getObjectById(targetId) : null;
-			QueueCommandIntent.broadcast(gpi.getPlayer().getCreatureObject(), target, request.getArguments(), command, request.getCounter());
+			new QueueCommandIntent(gpi.getPlayer().getCreatureObject(), target, request.getArguments(), command, request.getCounter()).broadcast();
 		} else if (p instanceof IntendedTarget) {
 			if (((IntendedTarget) p).getTargetId() == 0)
 				combatQueueMap.remove(gpi.getPlayer().getCreatureObject());
@@ -287,9 +287,8 @@ public class CommandQueueService extends Service {
 				activeCooldownGroups.add(GLOBAL_CD_NAME);
 				executor.execute((long) (moddedWeaponAttackSpeedWithCap * 1000), () -> activeCooldownGroups.remove(GLOBAL_CD_NAME));
 			}
-			
-			
-			ExecuteCommandIntent.broadcast(source, command.getTarget(), command.getArguments(), command.getCommand());
+
+			new ExecuteCommandIntent(source, command.getTarget(), command.getArguments(), command.getCommand()).broadcast();
 		}
 		
 		private void sendQueueRemove(EnqueuedCommand command, CheckCommandResult checkCommandResult) {

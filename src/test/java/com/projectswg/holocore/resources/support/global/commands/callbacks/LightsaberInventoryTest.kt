@@ -67,7 +67,7 @@ class LightsaberInventoryTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(container ?: return)
 		val transferItemArmorPacket = CommandQueueEnqueue(player.creatureObject.objectId, 0, CRC.getCrc("transferitemmisc"), item.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 	}
 

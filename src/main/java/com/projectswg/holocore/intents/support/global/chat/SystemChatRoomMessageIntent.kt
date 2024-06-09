@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,44 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.chat;
+package com.projectswg.holocore.intents.support.global.chat
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.global.chat.AdminChatRooms
+import me.joshlarson.jlcommon.control.Intent
 
-public class SpatialChatIntent extends Intent {
-	
-	private Player player;
-	private String message;
-	private int chatType;
-	private int moodId;
-	private int languageId;
-	
-	public SpatialChatIntent(Player player, int chatType, String message, int moodId, int languageId) {
-		this.player = player;
-		this.message = message;
-		this.chatType = chatType;
-		this.moodId = moodId;
-		this.languageId = languageId;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	public int getChatType() {
-		return chatType;
-	}
-	
-	public int getMoodId() {
-		return moodId;
-	}
-	
-	public int getLanguageId() {
-		return languageId;
-	}
-}
+data class SystemChatRoomMessageIntent(val roomPath: AdminChatRooms, val message: String) : Intent()

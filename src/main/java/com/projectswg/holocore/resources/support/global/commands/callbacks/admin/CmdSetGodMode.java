@@ -16,10 +16,10 @@ public final class CmdSetGodMode implements ICmdCallback {
 		
 		if (creatureObject.hasCommand("admin")) {
 			creatureObject.removeCommand("admin");
-			SystemMessageIntent.broadcastPersonal(player, "God Mode Disabled");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "God Mode Disabled");
 		} else {
 			creatureObject.addCommand("admin");
-			SystemMessageIntent.broadcastPersonal(player, "God Mode Enabled");
+			SystemMessageIntent.Companion.broadcastPersonal(player, "God Mode Enabled");
 		}
 		ForceAwarenessUpdateIntent.broadcast(creatureObject);
 	}

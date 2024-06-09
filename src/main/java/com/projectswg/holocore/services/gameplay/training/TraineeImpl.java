@@ -63,7 +63,7 @@ class TraineeImpl implements Trainee {
 		
 		StringId youSuccessfullyTrain = new StringId("skill_teacher", "prose_skill_learned");
 		StringId skillName = new StringId("skl_n", skillKey);
-		SystemMessageIntent.broadcastPersonal(player, new ProsePackage(youSuccessfullyTrain, "TO", skillName));
+		SystemMessageIntent.Companion.broadcastPersonal(player, new ProsePackage(youSuccessfullyTrain, "TO", skillName));
 	}
 	
 	@Override

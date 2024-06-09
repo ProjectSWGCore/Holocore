@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,33 +24,52 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.network;
+package com.projectswg.holocore.intents.support.global.chat
 
-import com.projectswg.holocore.resources.support.global.network.NetworkClient;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.common.data.encodables.chat.ChatAvatar
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
 
-public class InboundPacketPendingIntent extends Intent {
-	
-	private NetworkClient client;
-	
-	public InboundPacketPendingIntent() {
-		this(null);
+class ChatRoomUpdateIntent(val path: String, title: String?, target: String?, val avatar: ChatAvatar, val updateType: UpdateType) : Intent() {
+	var title: String? = null
+	var target: String? = null
+	val message: String? = null
+	var isPublic: Boolean = false
+		private set
+	var player: Player? = null
+		private set
+	var isIgnoreInvitation: Boolean = false
+		private set
+
+	init {
+		when (updateType) {
+			UpdateType.DESTROY -> {}
+			UpdateType.CREATE  -> this.title = title
+			else               -> this.target = target
+		}
 	}
-	
-	public InboundPacketPendingIntent(NetworkClient client) {
-		setClient(client);
+
+	constructor(player: Player?, avatar: ChatAvatar, path: String, title: String?, isPublic: Boolean) : this(path, title, null, avatar, UpdateType.CREATE) {
+		this.player = player
+		this.isPublic = isPublic
 	}
-	
-	public NetworkClient getClient() {
-		return client;
+
+	constructor(avatar: ChatAvatar, path: String, updateType: UpdateType) : this(path, null, null, avatar, updateType)
+
+	constructor(player: Player, path: String, updateType: UpdateType) : this(ChatAvatar(player.characterChatName), path, updateType) {
+		this.player = player
 	}
-	
-	public void setClient(NetworkClient client) {
-		this.client = client;
+
+	enum class UpdateType {
+		CREATE,
+		DESTROY,
+		JOIN,
+		LEAVE,
+		MODERATORS_ADD_TARGET,
+		MODERATORS_REMOVE_TARGET,
+		BANNED_ADD_TARGET,
+		BANNED_REMOVE_TARGET,
+		INVITED_ADD_TARGET,
+		INVITED_REMOVE_TARGET
 	}
-	
-	public static void broadcast(NetworkClient client) {
-		new InboundPacketPendingIntent(client).broadcast();
-	}
-	
 }

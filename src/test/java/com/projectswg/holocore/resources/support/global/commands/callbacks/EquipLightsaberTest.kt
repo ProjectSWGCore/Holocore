@@ -76,7 +76,7 @@ class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(jedi)
 		val transferItemArmorPacket = CommandQueueEnqueue(jedi.objectId, 0, CRC.getCrc("transferitemweapon"), lightsaber.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 		
 		assertEquals(jedi, lightsaber.parent)
@@ -91,7 +91,7 @@ class EquipLightsaberTest : TestRunnerSimulatedWorld() {
 		val args = createArgsForEquippingAnItem(jedi)
 		val transferItemArmorPacket = CommandQueueEnqueue(jedi.objectId, 0, CRC.getCrc("transferitemweapon"), lightsaber.objectId, args)
 
-		InboundPacketIntent.broadcast(player, transferItemArmorPacket)
+		InboundPacketIntent(player, transferItemArmorPacket).broadcast()
 		waitForIntents()
 
 		assertEquals(jedi.inventory, lightsaber.parent)

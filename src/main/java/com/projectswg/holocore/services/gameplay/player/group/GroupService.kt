@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -319,7 +319,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	}
 
 	private fun destroyGroup(group: GroupObject, player: Player) {
-		ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), null, UpdateType.DESTROY).broadcast()
+		ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), UpdateType.DESTROY).broadcast()
 		sendGroupSystemMessage(group, "disbanded")
 		group.disbandGroup()
 		DestroyObjectIntent(group).broadcast()
@@ -369,7 +369,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		}
 	}
 
-	private fun updateChatRoom(player: Player?, group: GroupObject, updateType: UpdateType) {
+	private fun updateChatRoom(player: Player, group: GroupObject, updateType: UpdateType) {
 		ChatRoomUpdateIntent(player, group.chatRoomPath, updateType).broadcast()
 	}
 

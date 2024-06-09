@@ -10,7 +10,7 @@ public final class CmdBroadcastArea implements ICmdCallback {
 	
 	@Override
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
-		SystemMessageIntent.broadcastArea(player, args);
+		SystemMessageIntent.Companion.broadcastArea(player, args);
 	}
 	
 }

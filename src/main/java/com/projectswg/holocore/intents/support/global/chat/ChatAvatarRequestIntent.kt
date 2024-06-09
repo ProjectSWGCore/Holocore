@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,27 +24,19 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.network;
+package com.projectswg.holocore.intents.support.global.chat
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
 
-public class ConnectionOpenedIntent extends Intent {
-	
-	private final Player player;
-	
-	public ConnectionOpenedIntent(@NotNull Player player) {
-		this.player = player;
+data class ChatAvatarRequestIntent(val player: Player, val target: String, val requestType: RequestType) : Intent() {
+	enum class RequestType {
+		FRIEND_LIST,
+		TARGET_STATUS,
+		FRIEND_ADD_TARGET,
+		FRIEND_REMOVE_TARGET,
+		IGNORE_ADD_TARGET,
+		IGNORE_REMOVE_TARGET,
+		IGNORE_LIST
 	}
-	
-	@NotNull
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public static void broadcast(@NotNull Player player) {
-		new ConnectionOpenedIntent(player).broadcast();
-	}
-	
 }

@@ -13,7 +13,7 @@ public final class CmdMoney implements ICmdCallback {
 	public void execute(@NotNull Player player, SWGObject target, @NotNull String args) {
 		String [] argSplit = args.split(" ");
 		if (argSplit.length < 2) {
-			SystemMessageIntent.broadcastPersonal(player, "Invalid Arguments: " + args);
+			SystemMessageIntent.Companion.broadcastPersonal(player, "Invalid Arguments: " + args);
 			return;
 		}
 		CreatureObject creature = player.getCreatureObject();
@@ -25,7 +25,7 @@ public final class CmdMoney implements ICmdCallback {
 				creature.setCashBalance(creature.getCashBalance() + Long.valueOf(argSplit[1]));
 				break;
 			default:
-				SystemMessageIntent.broadcastPersonal(player, "Unknown Destination: " + argSplit[0]);
+				SystemMessageIntent.Companion.broadcastPersonal(player, "Unknown Destination: " + argSplit[0]);
 				break;
 		}
 	}
