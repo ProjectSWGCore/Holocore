@@ -29,9 +29,8 @@ package com.projectswg.holocore.services.support.data
 import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus
 import com.projectswg.common.network.packets.swg.admin.AdminShutdownServer
 import com.projectswg.holocore.ProjectSWG
-import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent
-import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent.ServerManagementEvent
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent
+import com.projectswg.holocore.intents.support.data.control.ShutdownServerIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.resources.support.data.control.ServerStatus
@@ -76,11 +75,8 @@ class ServerStatusService : Service() {
 	}
 
 	@IntentHandler
-	private fun handleServerManagementIntent(smi: ServerManagementIntent) {
-		when (smi.event) {
-			ServerManagementEvent.SHUTDOWN -> initiateShutdownSequence(smi.time, smi.timeUnit)
-			else                           -> {}
-		}
+	private fun handleShutdownServerIntent(ssi: ShutdownServerIntent) {
+		initiateShutdownSequence(ssi.time, ssi.timeUnit)
 	}
 
 	@IntentHandler

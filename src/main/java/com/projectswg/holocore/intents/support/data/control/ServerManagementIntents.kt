@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,60 +24,20 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.data.control;
+package com.projectswg.holocore.intents.support.data.control
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.data.control.ServerStatus
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
+import java.util.concurrent.TimeUnit
 
-import java.util.concurrent.TimeUnit;
+data class LockServerIntent(val player: Player) : Intent()
+data class UnlockServerIntent(val player: Player) : Intent()
+data class ShutdownServerIntent(val time: Long, val timeUnit: TimeUnit) : Intent()
+data class BanPlayerIntent(val player: Player, val target: String) : Intent()
+data class UnbanPlayerIntent(val player: Player, val target: String) : Intent()
+data class KickPlayerIntent(val player: Player, val target: String) : Intent()
 
-public class ServerManagementIntent extends Intent {
-	
-	private Player player;
-	private String target;
-	private ServerManagementEvent event;
-	private long time;
-	private TimeUnit timeUnit;
-	
-	public ServerManagementIntent(Player p, String target, ServerManagementEvent event) {
-		this.player = p;
-		this.target = target;
-		this.event = event;
-	}
-	
-	public ServerManagementIntent(long time, TimeUnit timeUnit, ServerManagementEvent event) {
-		this(null, null, event);
-		this.time = time;
-		this.timeUnit = timeUnit;
-	}
-	
-	public long getTime() {
-		return time;
-	}
-	
-	public TimeUnit getTimeUnit() {
-		return timeUnit;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public String getTarget() {
-		return target;
-	}
-	
-	public ServerManagementEvent getEvent() {
-		return event;
-	}
-	
-	public enum ServerManagementEvent {
-		LOCK,
-		UNLOCK,
-		SHUTDOWN,
-		KICK,
-		BAN,
-		UNBAN
-	}
-	
+data class ServerStatusIntent(val status: ServerStatus, val time: Long, val timeUnit: TimeUnit) : Intent() {
+	constructor(status: ServerStatus) : this(status, 0, TimeUnit.SECONDS)
 }

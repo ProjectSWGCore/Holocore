@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,8 +28,10 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 
 import com.projectswg.common.data.encodables.tangible.PvpFlag;
 import com.projectswg.common.data.swgfile.ClientFactory;
-import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent;
-import com.projectswg.holocore.intents.support.data.control.ServerManagementIntent.ServerManagementEvent;
+import com.projectswg.holocore.intents.support.data.control.BanPlayerIntent;
+import com.projectswg.holocore.intents.support.data.control.KickPlayerIntent;
+import com.projectswg.holocore.intents.support.data.control.ShutdownServerIntent;
+import com.projectswg.holocore.intents.support.data.control.UnbanPlayerIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -90,26 +92,26 @@ public class CmdServer implements ICmdCallback {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Kick Player", "Enter the name of the player that you wish to KICK from the server.");
 		window.addOkButtonCallback("handleKickPlayer", (event, parameters) -> {
 			String name = SuiInputBox.getEnteredText(parameters);
-			new ServerManagementIntent(player, name, ServerManagementEvent.KICK).broadcast();
+			new KickPlayerIntent(player, name).broadcast();
 		});
 		window.display(player);
 	}
 	
 	private static void handleBanPlayer(Player player) {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Ban Player", "Enter the name of the player that you wish to BAN from the server.");
-		window.addOkButtonCallback("handleBanPlayer", (event, parameters) -> new ServerManagementIntent(player, SuiInputBox.getEnteredText(parameters), ServerManagementEvent.BAN).broadcast());
+		window.addOkButtonCallback("handleBanPlayer", (event, parameters) -> new BanPlayerIntent(player, SuiInputBox.getEnteredText(parameters)).broadcast());
 		window.display(player);
 	}
 	
 	private static void handleUnbanPlayer(Player player) {
 		SuiInputBox window = new SuiInputBox(SuiButtons.OK_CANCEL, "Unban Player", "Enter the name of the player that you wish to UNBAN from the server.");
-		window.addOkButtonCallback("handleUnbanPlayer", (event, parameters) -> new ServerManagementIntent(player, SuiInputBox.getEnteredText(parameters), ServerManagementEvent.UNBAN).broadcast());
+		window.addOkButtonCallback("handleUnbanPlayer", (event, parameters) -> new UnbanPlayerIntent(player, SuiInputBox.getEnteredText(parameters)).broadcast());
 		window.display(player);
 	}
 	
 	private static void handleShutdownServer(Player player) {
 		SuiMessageBox window = new SuiMessageBox(SuiButtons.YES_NO, "Shutdown Server", "Are you sure you wish to begin the shutdown sequence?");
-		window.addOkButtonCallback("handleShutdownServer", (event, parameters) -> new ServerManagementIntent(15, TimeUnit.MINUTES, ServerManagementEvent.SHUTDOWN).broadcast());
+		window.addOkButtonCallback("handleShutdownServer", (event, parameters) -> new ShutdownServerIntent(15, TimeUnit.MINUTES).broadcast());
 		window.display(player);
 	}
 	
@@ -135,7 +137,7 @@ public class CmdServer implements ICmdCallback {
 		
 		timeWindow.addOkButtonCallback("handleCustomShutdownCountdown", (event, parameters) -> {
 			long countdown = Long.parseLong(SuiInputBox.getEnteredText(parameters));
-			new ServerManagementIntent(countdown, timeUnitReference.get(), ServerManagementEvent.SHUTDOWN).broadcast();
+			new ShutdownServerIntent(countdown, timeUnitReference.get()).broadcast();
 		});
 		
 		unitWindow.display(player);
