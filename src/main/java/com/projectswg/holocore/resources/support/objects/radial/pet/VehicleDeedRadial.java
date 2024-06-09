@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,40 +29,37 @@ package com.projectswg.holocore.resources.support.objects.radial.pet;
 
 import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.VehicleDeedGenerateIntent;
+import com.projectswg.holocore.intents.gameplay.world.VehicleDeedGenerateIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
 public class VehicleDeedRadial implements RadialHandlerInterface {
-	
+
 	public VehicleDeedRadial() {
-		
+
 	}
-	
+
 	@Override
-	public void getOptions(Collection<RadialOption> options, Player player, SWGObject target) {
+	public void getOptions(@NotNull Collection<RadialOption> options, @NotNull Player player, @NotNull SWGObject target) {
 		options.add(RadialOption.create(RadialItem.VEHICLE_GENERATE, "@pet/pet_menu:menu_generate"));
 		options.add(RadialOption.create(RadialItem.ITEM_DESTROY));
 		options.add(RadialOption.create(RadialItem.EXAMINE));
 	}
-	
+
 	@Override
-	public void handleSelection(Player player, SWGObject target, RadialItem selection) {
+	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
 		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
-		
-		switch (selection) {
-			case VEHICLE_GENERATE:
-				VehicleDeedGenerateIntent.broadcast(creature, target);
-				break;
-			default:
-				break;
+
+		if (selection == RadialItem.VEHICLE_GENERATE) {
+			new VehicleDeedGenerateIntent(creature, target).broadcast();
 		}
 	}
-	
+
 }

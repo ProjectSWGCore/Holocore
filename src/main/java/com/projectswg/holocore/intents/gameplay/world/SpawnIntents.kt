@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,32 +24,9 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.world.travel;
+package com.projectswg.holocore.intents.gameplay.world
 
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.npc.spawn.SpawnInfo
+import me.joshlarson.jlcommon.control.Intent
 
-public class TicketUseIntent extends Intent {
-	
-	private final Player player;
-	private final TangibleObject ticket;
-	
-	public TicketUseIntent(Player player) {
-		this(player, null);
-	}
-	
-	public TicketUseIntent(Player player, TangibleObject ticket) {
-		this.player = player;
-		this.ticket = ticket;
-	}
-	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	public TangibleObject getTicket() {
-		return ticket;
-	}
-	
-}
+class CreateSpawnIntent(val spawnInfo: SpawnInfo) : Intent()

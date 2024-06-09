@@ -29,7 +29,7 @@ package com.projectswg.holocore.intents.gameplay.player.experience
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.Intent
 
-class GrantSkillIntent(val intentType: IntentType, val skillName: String, val target: CreatureObject, val isGrantRequiredSkills: Boolean) : Intent() {
+data class GrantSkillIntent(val intentType: IntentType, val skillName: String, val target: CreatureObject, val isGrantRequiredSkills: Boolean) : Intent() {
 	enum class IntentType {
 		GRANT,
 		GIVEN
@@ -37,4 +37,4 @@ class GrantSkillIntent(val intentType: IntentType, val skillName: String, val ta
 }
 
 class SkillModIntent(val skillModName: String, val adjustBase: Int, val adjustModifier: Int, vararg val affectedCreatures: CreatureObject) : Intent()
-class SurrenderSkillIntent(val target: CreatureObject, val surrenderedSkill: String) : Intent()
+data class SurrenderSkillIntent(val target: CreatureObject, val surrenderedSkill: String) : Intent()

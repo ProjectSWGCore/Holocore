@@ -72,7 +72,7 @@ class SkillService : Service() {
 		val badgeFromKey = badges().getBadgeFromKey(skillName)
 
 		if (badgeFromKey != null) {
-			GrantBadgeIntent.broadcast(target, skillName)
+			GrantBadgeIntent(target, skillName).broadcast()
 		}
 	}
 

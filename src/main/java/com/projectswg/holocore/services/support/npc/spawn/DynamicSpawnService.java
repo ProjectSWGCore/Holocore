@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,8 +28,7 @@ package com.projectswg.holocore.services.support.npc.spawn;
 
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.data.location.Terrain;
-import com.projectswg.common.data.swgiff.parsers.terrain.TerrainTemplate;
-import com.projectswg.holocore.intents.gameplay.world.spawn.CreateSpawnIntent;
+import com.projectswg.holocore.intents.gameplay.world.CreateSpawnIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.resources.support.data.location.ClosestLocationReducer;
@@ -84,8 +83,7 @@ public class DynamicSpawnService extends Service {
 	private void handleDestroyObjectIntent(DestroyObjectIntent intent) {
 		SWGObject object = intent.getObject();
 		
-		if (object instanceof AIObject) {
-			AIObject npc = (AIObject) object;
+		if (object instanceof AIObject npc) {
 			Spawner spawner = npc.getSpawner();
 			SWGObject egg = spawner.getEgg();
 			
@@ -209,7 +207,7 @@ public class DynamicSpawnService extends Service {
 				.withLocation(location)
 				.build();
 		
-		CreateSpawnIntent.broadcast(simpleSpawnInfo);
+		new CreateSpawnIntent(simpleSpawnInfo).broadcast();
 	}
 	
 	@Nullable

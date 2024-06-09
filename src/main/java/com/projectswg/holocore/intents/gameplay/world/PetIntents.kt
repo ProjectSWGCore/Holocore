@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,21 +24,16 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.world.travel;
+package com.projectswg.holocore.intents.gameplay.world
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
+import me.joshlarson.jlcommon.control.Intent
 
-public class TravelPointSelectionIntent extends Intent {
-	
-	private CreatureObject creature;
-
-	public TravelPointSelectionIntent(CreatureObject creature) {
-		this.creature = creature;
-	}
-	
-	public CreatureObject getCreature() {
-		return creature;
-	}
-
-}
+data class DismountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
+data class MountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
+data class PetDeviceCallIntent(val creature: CreatureObject, val controlDevice: IntangibleObject) : Intent()
+data class PetDeviceStoreIntent(val creature: CreatureObject, val controlDevice: IntangibleObject) : Intent()
+data class StoreMountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
+data class VehicleDeedGenerateIntent(val creature: CreatureObject, val deed: SWGObject) : Intent()

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -35,9 +35,9 @@ import com.projectswg.common.network.packets.swg.zone.EnterTicketPurchaseModeMes
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListRequest;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse;
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint;
-import com.projectswg.holocore.intents.gameplay.world.travel.TicketPurchaseIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.TicketUseIntent;
-import com.projectswg.holocore.intents.gameplay.world.travel.TravelPointSelectionIntent;
+import com.projectswg.holocore.intents.gameplay.world.TicketPurchaseIntent;
+import com.projectswg.holocore.intents.gameplay.world.TicketUseIntent;
+import com.projectswg.holocore.intents.gameplay.world.TravelPointSelectionIntent;
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;

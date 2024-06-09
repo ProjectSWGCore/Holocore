@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,14 +27,13 @@
 
 package com.projectswg.holocore.services.support.objects.awareness;
 
-import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform;
 import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransformWithParent;
 import com.projectswg.common.network.packets.swg.zone.object_controller.TeleportAck;
-import com.projectswg.holocore.intents.gameplay.world.travel.pet.DismountIntent;
+import com.projectswg.holocore.intents.gameplay.world.DismountIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.intents.support.objects.swg.MoveObjectIntent;
@@ -164,7 +163,7 @@ public class ClientAwarenessService extends Service {
 			CreatureObject mount = (CreatureObject) creature.getParent();
 			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
 			mount.sendObservers(new DataTransform(mount.getObjectId(), mount.getNextUpdateCount(), mount.getLocation(), 0));
-			DismountIntent.broadcast(creature, mount);
+			new DismountIntent(creature, mount).broadcast();
 		} else {
 			Location requestedLocation = Location.builder(dt.getLocation()).setTerrain(creature.getTerrain()).build();
 			moveObjectWithTransform(creature, parent, requestedLocation, dt.getSpeed());
