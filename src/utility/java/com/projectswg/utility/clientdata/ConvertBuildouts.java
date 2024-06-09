@@ -97,7 +97,7 @@ public class ConvertBuildouts implements Converter{
 	}
 	
 	private void createObjects() throws IOException {
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/buildout/object_tag_map.sdb"))) {
+		try (SdbResultSet set = SdbLoader.INSTANCE.load(new File("serverdata/buildout/object_tag_map.sdb"))) {
 			while (set.next()) {
 				objectTagMap.put(set.getInt(1), set.getText(0));
 			}
@@ -284,10 +284,9 @@ public class ConvertBuildouts implements Converter{
 		
 		@Override
 		public boolean equals(Object o) {
-			if (!(o instanceof GenBuildoutArea))
+			if (!(o instanceof GenBuildoutArea otherArea))
 				return false;
-			GenBuildoutArea area = (GenBuildoutArea) o;
-			return terrain.equals(area.terrain) && x1 == area.x1 && z1 == area.z1;
+			return terrain.equals(otherArea.terrain) && x1 == otherArea.x1 && z1 == otherArea.z1;
 		}
 		
 		@Override

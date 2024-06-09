@@ -62,7 +62,7 @@ public class StaticService extends Service {
 	
 	private void loadSupportingObjects() {
 		long startTime = StandardLog.onStartLoad("static objects");
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/spawns.sdb"))) {
+		try (SdbResultSet set = SdbLoader.INSTANCE.load(new File("serverdata/static/spawns.sdb"))) {
 			Map<String, List<String>> typeToIff = createTypeMap();
 			while (set.next()) {
 				List<String> iffList = typeToIff.get(set.getText("iff_type"));
@@ -73,7 +73,7 @@ public class StaticService extends Service {
 				if (iffList.isEmpty())
 					continue;
 				
-				List<SpawnedObject> objects = spawnableObjects.get(iffList.get(0)); // try to cut down on ArrayList objects
+				List<SpawnedObject> objects = spawnableObjects.get(iffList.getFirst()); // try to cut down on ArrayList objects
 				if (objects == null)
 					objects = new ArrayList<>();
 				
@@ -103,7 +103,7 @@ public class StaticService extends Service {
 	
 	private static Map<String, List<String>> createTypeMap() throws IOException {
 		Map<String, List<String>> typeToIff = new HashMap<>();
-		try (SdbResultSet set = SdbLoader.load(new File("serverdata/static/types.sdb"))) {
+		try (SdbResultSet set = SdbLoader.INSTANCE.load(new File("serverdata/static/types.sdb"))) {
 			while (set.next()) {
 				String iff = ClientFactory.formatToSharedFile(set.getText("iff"));
 				String iffType = set.getText("iff_type");
