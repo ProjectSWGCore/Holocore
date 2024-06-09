@@ -46,11 +46,7 @@ abstract class SdbColumnArraySet private constructor(@Language("RegExp") regex: 
 	}
 
 	class SdbTextColumnArraySet internal constructor(@Language("RegExp") regex: String, private val defValue: String?) : SdbColumnArraySet(regex) {
-		private val cachedArray: ThreadLocal<Array<String>>
-
-		init {
-			this.cachedArray = ThreadLocal()
-		}
+		private val cachedArray = ThreadLocal<Array<String>>()
 
 		fun getArray(set: SdbResultSet?): Array<String> {
 			var cachedArray = cachedArray.get()
@@ -69,11 +65,7 @@ abstract class SdbColumnArraySet private constructor(@Language("RegExp") regex: 
 	}
 
 	class SdbIntegerColumnArraySet internal constructor(@Language("RegExp") regex: String, private val defValue: Int) : SdbColumnArraySet(regex) {
-		private val cachedArray: ThreadLocal<IntArray>
-
-		init {
-			this.cachedArray = ThreadLocal()
-		}
+		private val cachedArray = ThreadLocal<IntArray>()
 
 		fun getArray(set: SdbResultSet?): IntArray {
 			var cachedArray = cachedArray.get()
@@ -92,11 +84,7 @@ abstract class SdbColumnArraySet private constructor(@Language("RegExp") regex: 
 	}
 
 	class SdbLongColumnArraySet internal constructor(@Language("RegExp") regex: String, private val defValue: Long) : SdbColumnArraySet(regex) {
-		private val cachedArray: ThreadLocal<LongArray>
-
-		init {
-			this.cachedArray = ThreadLocal()
-		}
+		private val cachedArray = ThreadLocal<LongArray>()
 
 		fun getArray(set: SdbResultSet?): LongArray {
 			var cachedArray = cachedArray.get()
@@ -115,11 +103,7 @@ abstract class SdbColumnArraySet private constructor(@Language("RegExp") regex: 
 	}
 
 	class SdbRealColumnArraySet internal constructor(@Language("RegExp") regex: String, private val defValue: Double) : SdbColumnArraySet(regex) {
-		private val cachedArray: ThreadLocal<DoubleArray>
-
-		init {
-			this.cachedArray = ThreadLocal()
-		}
+		private val cachedArray = ThreadLocal<DoubleArray>()
 
 		fun getArray(set: SdbResultSet?): DoubleArray {
 			var cachedArray = cachedArray.get()
@@ -138,11 +122,7 @@ abstract class SdbColumnArraySet private constructor(@Language("RegExp") regex: 
 	}
 
 	class SdbBooleanColumnArraySet internal constructor(@Language("RegExp") regex: String, private val defValue: Boolean) : SdbColumnArraySet(regex) {
-		private val cachedArray: ThreadLocal<BooleanArray>
-
-		init {
-			this.cachedArray = ThreadLocal()
-		}
+		private val cachedArray = ThreadLocal<BooleanArray>()
 
 		fun getArray(set: SdbResultSet?): BooleanArray {
 			var cachedArray = cachedArray.get()

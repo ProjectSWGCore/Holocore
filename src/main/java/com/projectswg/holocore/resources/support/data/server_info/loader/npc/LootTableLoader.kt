@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -61,8 +61,8 @@ class LootTableLoader : DataLoader() {
 	
 	class LootTableItem(set: SdbResultSet, itemGroups: SdbColumnArraySet.SdbTextColumnArraySet, chanceGroups: SdbColumnArraySet.SdbIntegerColumnArraySet) {
 		
-		val id  = set.getText("loot_id")!!
-		val difficulty = set.getText("difficulty")!!
+		val id  = set.getText("loot_id")
+		val difficulty = set.getText("difficulty")
 		val minLevel = set.getInt("min_cl").toInt()
 		val maxLevel = set.getInt("max_cl").toInt()
 		val groups: List<LootGroup>
@@ -75,7 +75,7 @@ class LootTableLoader : DataLoader() {
 			val groupList = ArrayList<LootGroup>()
 			var chance = 0
 			for (i in 0 until count) {
-				val group = groups[i] ?: continue
+				val group = groups[i]
 				val itemChance = chances[i]
 				if (itemChance == 0 || itemChance == Integer.MAX_VALUE)
 					continue

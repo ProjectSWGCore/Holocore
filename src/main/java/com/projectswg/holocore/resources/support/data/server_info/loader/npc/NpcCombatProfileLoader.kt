@@ -59,7 +59,7 @@ class NpcCombatProfileLoader : DataLoader() {
 	
 	private class CombatProfile(set: SdbResultSet) {
 		
-		val id  = set.getText("profile_id")!!
+		val id  = set.getText("profile_id")
 		val difficulty = CreatureDifficulty.valueOf(set.getText("difficulty"))
 		val minLevel = set.getInt("min_cl").toInt()
 		val maxLevel = set.getInt("max_cl").toInt()

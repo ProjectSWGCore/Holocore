@@ -54,8 +54,13 @@ class QuestLoader : DataLoader() {
 		var index = 0
 		try {
 			SdbLoader.load(File("serverdata/quests/questtask/$questName.sdb")).use { set ->
-				val columns = HashSet(set.columns)
+				var file = set.file
+				var columns = HashSet(set.columns)
 				while (set.next()) {
+					if (set.file != file) {
+						file = set.file
+						columns = HashSet(set.columns)
+					}
 					questTaskInfos.add(QuestTaskInfo(set, columns, index++))
 				}
 			}
