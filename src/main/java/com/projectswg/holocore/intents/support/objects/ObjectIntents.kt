@@ -31,7 +31,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import me.joshlarson.jlcommon.control.Intent
 
 data class ContainerTransferIntent(val obj: SWGObject, val oldContainer: SWGObject?, val oldArrangement: Int, val container: SWGObject?, val arrangement: Int) : Intent()
-data class DestroyObjectIntent(val `object`: SWGObject) : Intent()
+data class DestroyObjectIntent(val obj: SWGObject) : Intent()
 data class MoveObjectIntent(val obj: SWGObject, val parent: SWGObject?, val newLocation: Location, val speed: Double) : Intent() {
 	constructor(obj: SWGObject, newLocation: Location, speed: Double) : this(obj, null, newLocation, speed)
 }

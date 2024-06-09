@@ -112,7 +112,7 @@ class SpawnerService : Service() {
 	
 	@IntentHandler
 	private fun handleDestroyObjectIntent(doi: DestroyObjectIntent) {
-		val obj = doi.`object`
+		val obj = doi.obj
 
 		if (isNPC(obj)) {
 			handleNPCDestroyed(obj)

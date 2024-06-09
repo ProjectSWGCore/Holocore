@@ -83,7 +83,7 @@ class LairAttackTest : TestRunnerSimulatedWorld() {
 		lair.maxHitPoints = 1
 
 		registerIntentHandler(DestroyObjectIntent::class.java) {
-			if (it.`object` == lair)
+			if (it.obj == lair)
 				destroyedLair.set(true)
 		}
 		meleeHit(player, lair)

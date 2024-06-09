@@ -76,8 +76,8 @@ public class CombatRegenerationService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		if (doi.getObject() instanceof CreatureObject)
-			npcRegen.remove(doi.getObject());
+		if (doi.getObj() instanceof CreatureObject)
+			npcRegen.remove(doi.getObj());
 	}
 	
 	private void periodicRegeneration() {

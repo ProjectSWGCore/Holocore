@@ -132,7 +132,7 @@ public final class GrantLootService extends Service {
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		// For when the corpse is gone
-		SWGObject object = doi.getObject();
+		SWGObject object = doi.getObj();
 		if (object instanceof CreatureObject) {
 			CorpseLootRestrictions restrictions = lootRestrictions.remove(object);
 			if (restrictions != null)

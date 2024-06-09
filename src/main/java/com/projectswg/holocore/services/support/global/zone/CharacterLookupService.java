@@ -137,7 +137,7 @@ public class CharacterLookupService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		SWGObject obj = doi.getObject();
+		SWGObject obj = doi.getObj();
 		if (!(obj instanceof CreatureObject))
 			return;
 		

@@ -59,7 +59,7 @@ public class ObjectSurveyToolRadial extends UsableObjectRadial {
 		if (creature == null)
 			return;
 		
-		List<SurveyToolResolution> resolutions = SurveyToolResolution.getOptions(creature);
+		List<SurveyToolResolution> resolutions = SurveyToolResolution.Companion.getOptions(creature);
 		RadialOption [] toolOptions = getResolutions(resolutions);
 		
 		options.add(RadialOption.create(RadialItem.ITEM_USE));
@@ -76,7 +76,7 @@ public class ObjectSurveyToolRadial extends UsableObjectRadial {
 		CreatureObject creature = player.getCreatureObject();
 		if (creature == null)
 			return;
-		List<SurveyToolResolution> resolutions = SurveyToolResolution.getOptions(creature);
+		List<SurveyToolResolution> resolutions = SurveyToolResolution.Companion.getOptions(creature);
 		if (resolutions.isEmpty()) {
 			creature.sendSelf(new ChatSystemMessage(SystemChatType.PERSONAL, "@error_message:survey_cant"));
 			return;
@@ -136,7 +136,7 @@ public class ObjectSurveyToolRadial extends UsableObjectRadial {
 		if (creature == null)
 			return;
 		
-		List<SurveyToolResolution> resolutions = SurveyToolResolution.getOptions(creature);
+		List<SurveyToolResolution> resolutions = SurveyToolResolution.Companion.getOptions(creature);
 		if (resolutions.isEmpty())
 			return;
 		

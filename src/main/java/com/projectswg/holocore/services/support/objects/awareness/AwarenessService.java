@@ -117,10 +117,10 @@ public class AwarenessService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		@NotNull SWGObject obj = doi.getObject();
+		@NotNull SWGObject obj = doi.getObj();
 		
 		obj.systemMove(null, GONE_LOCATION);
-		awareness.destroyObject(doi.getObject());
+		awareness.destroyObject(doi.getObj());
 	}
 	
 	@IntentHandler

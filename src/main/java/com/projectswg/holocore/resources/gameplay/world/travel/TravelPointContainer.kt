@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,82 +24,69 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.gameplay.world.travel;
+package com.projectswg.holocore.resources.gameplay.world.travel
 
-import com.projectswg.common.data.location.Location;
-import com.projectswg.common.data.location.Terrain;
+import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
+import java.util.concurrent.ConcurrentHashMap
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+class TravelPointContainer {
+	private val shuttlePoints: MutableMap<Terrain, MutableList<TravelPoint>> = ConcurrentHashMap()
+	private val starportPoints: MutableMap<Terrain, MutableList<TravelPoint>> = ConcurrentHashMap()
 
-public class TravelPointContainer {
-	
-	private final Map<Terrain, List<TravelPoint>> shuttlePoints;
-	private final Map<Terrain, List<TravelPoint>> starportPoints;
-	
-	public TravelPointContainer() {
-		this.shuttlePoints = new ConcurrentHashMap<>();
-		this.starportPoints = new ConcurrentHashMap<>();
+	fun addTravelPoint(point: TravelPoint) {
+		val terrain = point.location.terrain
+		getTravelPoints(terrain, point.isStarport).add(point)
 	}
-	
-	public void addTravelPoint(TravelPoint point) {
-		Terrain terrain = point.getLocation().getTerrain();
-		getTravelPoints(terrain, point.isStarport()).add(point);
-	}
-	
-	public List<TravelPoint> getPointsForTerrain(TravelPoint nearest, Terrain to) {
-		List<TravelPoint> points = new ArrayList<>();
-		if (nearest.getLocation().getTerrain() == to) {
-			points.addAll(getTravelPoints(to, false));
-			points.addAll(getTravelPoints(to, true));
-		} else if (nearest.isStarport()) {
-			points.addAll(getTravelPoints(to, true));
+
+	fun getPointsForTerrain(nearest: TravelPoint?, to: Terrain): List<TravelPoint> {
+		val points: MutableList<TravelPoint> = ArrayList()
+		if (nearest!!.location.terrain == to) {
+			points.addAll(getTravelPoints(to, false))
+			points.addAll(getTravelPoints(to, true))
+		} else if (nearest.isStarport) {
+			points.addAll(getTravelPoints(to, true))
 		}
-		return points;
+		return points
 	}
-	
-	public TravelPoint getNearestPoint(Location l) {
-		TravelPoint nearest = null;
-		double dist = Double.MAX_VALUE;
+
+	fun getNearestPoint(l: Location): TravelPoint? {
+		var nearest: TravelPoint? = null
+		var dist = Double.MAX_VALUE
 		// Checks shuttleports
-		for (TravelPoint tp : getTravelPoints(l.getTerrain(), false)) {
-			double tpDistance = tp.getLocation().flatDistanceTo(l);
+		for (tp in getTravelPoints(l.terrain, false)) {
+			val tpDistance = tp.location.flatDistanceTo(l)
 			if (tpDistance < dist) {
-				nearest = tp;
-				dist = tpDistance;
+				nearest = tp
+				dist = tpDistance
 			}
 		}
 		// Checks starports
-		for (TravelPoint tp : getTravelPoints(l.getTerrain(), true)) {
-			double tpDistance = tp.getLocation().flatDistanceTo(l);
+		for (tp in getTravelPoints(l.terrain, true)) {
+			val tpDistance = tp.location.flatDistanceTo(l)
 			if (tpDistance < dist) {
-				nearest = tp;
-				dist = tpDistance;
+				nearest = tp
+				dist = tpDistance
 			}
 		}
-		return nearest;
+		return nearest
 	}
-	
-	public TravelPoint getDestination(Terrain t, String destination) {
+
+	fun getDestination(t: Terrain, destination: String): TravelPoint? {
 		// Check shuttleports
-		for (TravelPoint tp : getTravelPoints(t, false)) {
-			if (tp.getName().equals(destination))
-				return tp;
+		for (tp in getTravelPoints(t, false)) {
+			if (tp.name == destination) return tp
 		}
 		// Check starports
-		for (TravelPoint tp : getTravelPoints(t, true)) {
-			if (tp.getName().equals(destination))
-				return tp;
+		for (tp in getTravelPoints(t, true)) {
+			if (tp.name == destination) return tp
 		}
-		return null;
+		return null
 	}
-	
-	private List<TravelPoint> getTravelPoints(Terrain terrain, boolean starport) {
-		Map<Terrain, List<TravelPoint>> travelPoints = starport ? starportPoints : shuttlePoints;
-		List<TravelPoint> points = travelPoints.computeIfAbsent(terrain, k -> new ArrayList<>());
-		return points;
+
+	private fun getTravelPoints(terrain: Terrain, starport: Boolean): MutableList<TravelPoint> {
+		val travelPoints: MutableMap<Terrain, MutableList<TravelPoint>> = if (starport) starportPoints else shuttlePoints
+		val points = travelPoints.computeIfAbsent(terrain) { _: Terrain? -> ArrayList() }
+		return points
 	}
-	
 }

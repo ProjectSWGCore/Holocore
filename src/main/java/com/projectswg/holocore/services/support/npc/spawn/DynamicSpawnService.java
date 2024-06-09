@@ -81,7 +81,7 @@ public class DynamicSpawnService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent intent) {
-		SWGObject object = intent.getObject();
+		SWGObject object = intent.getObj();
 		
 		if (object instanceof AIObject npc) {
 			Spawner spawner = npc.getSpawner();

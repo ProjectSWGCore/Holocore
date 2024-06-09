@@ -127,7 +127,7 @@ public class CloningService extends Service {
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent i) {
 		synchronized(cloningFacilities) {
-			SWGObject destroyedObject = i.getObject();
+			SWGObject destroyedObject = i.getObj();
 			
 			if(!(destroyedObject instanceof BuildingObject)) {
 				return;

@@ -188,7 +188,7 @@ public class ObjectStorageService extends Service {
 	
 	@IntentHandler
 	private void processDestroyObjectIntent(DestroyObjectIntent doi) {
-		SWGObject obj = doi.getObject();
+		SWGObject obj = doi.getObj();
 		destroyObject(obj);
 	}
 	

@@ -102,7 +102,7 @@ class DestroyMissionService : Service() {
 
 	@IntentHandler
 	private fun handleDestroyObject(destroyObjectIntent: DestroyObjectIntent) {
-		val destroyedObject = destroyObjectIntent.`object`
+		val destroyedObject = destroyObjectIntent.obj
 		val missionObject = lairToMission.remove(destroyedObject)
 		if (missionObject != null) {
 			val owner = missionObject.owner

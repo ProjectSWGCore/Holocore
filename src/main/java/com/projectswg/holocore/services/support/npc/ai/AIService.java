@@ -81,7 +81,7 @@ public class AIService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		if (!(doi.getObject() instanceof AIObject obj))
+		if (!(doi.getObj() instanceof AIObject obj))
 			return;
 		if (aiObjects.remove(obj) && started.get())
 			obj.stop();
