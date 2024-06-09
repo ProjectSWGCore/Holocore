@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,47 +24,16 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.zone.sui;
+package com.projectswg.holocore.intents.support.global.zone
 
-import com.projectswg.common.data.sui.SuiBaseWindow;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import me.joshlarson.jlcommon.control.Intent;
+import com.projectswg.common.data.sui.SuiBaseWindow
+import com.projectswg.holocore.resources.support.global.player.Player
+import me.joshlarson.jlcommon.control.Intent
 
-public class SuiWindowIntent extends Intent {
-	
-	private SuiBaseWindow window;
-	private int windowId;
-	private Player player;
-	private SuiWindowEvent event;
-	
-	public SuiWindowIntent(Player player, SuiBaseWindow window, int windowId, SuiWindowEvent event) {
-		this.player = player;
-		this.window = window;
-		this.windowId = windowId;
-		this.event = event;
-	}
-	
-	public SuiWindowIntent(Player player, SuiBaseWindow window, SuiWindowEvent event) {
-		this(player, window, -1, event);
-	}
-	
-	public SuiBaseWindow getWindow() {
-		return this.window;
-	}
-	
-	public int getWindowId() {
-		return windowId;
-	}
-	
-	public Player getPlayer() {
-		return this.player;
-	}
-	
-	public SuiWindowEvent getEvent() {
-		return event;
-	}
-	
-	public enum SuiWindowEvent {
+data class SuiWindowIntent(val player: Player, val window: SuiBaseWindow, val windowId: Int, val event: SuiWindowEvent) : Intent() {
+	constructor(player: Player, window: SuiBaseWindow, event: SuiWindowEvent) : this(player, window, -1, event)
+
+	enum class SuiWindowEvent {
 		NEW,
 		CLOSE
 	}

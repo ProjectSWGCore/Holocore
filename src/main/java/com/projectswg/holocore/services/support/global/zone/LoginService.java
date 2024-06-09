@@ -44,7 +44,7 @@ import com.projectswg.holocore.intents.support.global.login.LoginEventIntent.Log
 import com.projectswg.holocore.intents.support.global.login.RequestLoginIntent;
 import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.intents.support.global.zone.creation.DeleteCharacterIntent;
+import com.projectswg.holocore.intents.support.global.zone.DeleteCharacterIntent;
 import com.projectswg.holocore.intents.support.objects.swg.DestroyObjectIntent;
 import com.projectswg.holocore.intents.support.objects.swg.ObjectCreatedIntent;
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog;

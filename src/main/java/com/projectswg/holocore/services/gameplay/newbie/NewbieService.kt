@@ -28,7 +28,7 @@ package com.projectswg.holocore.services.gameplay.newbie
 
 import com.projectswg.holocore.intents.gameplay.player.quest.GrantQuestIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
-import com.projectswg.holocore.intents.support.global.zone.creation.CreatedCharacterIntent
+import com.projectswg.holocore.intents.support.global.zone.CreatedCharacterIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
