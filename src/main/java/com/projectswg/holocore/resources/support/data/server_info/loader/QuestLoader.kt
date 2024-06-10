@@ -93,6 +93,7 @@ class QuestLoader : DataLoader() {
 	class QuestListInfo(set: SdbResultSet) {
 		val journalEntryTitle: String = set.getText("journal_entry_title")
 		val journalEntryDescription: String = set.getText("journal_entry_description")
+		val category: String = set.getText("category")
 		val isCompleteWhenTasksComplete: Boolean = set.getBoolean("complete_when_tasks_complete")
 		val isRepeatable: Boolean = set.getBoolean("allow_repeats")
 	}

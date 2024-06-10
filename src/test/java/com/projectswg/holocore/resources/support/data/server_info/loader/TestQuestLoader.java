@@ -62,6 +62,11 @@ public class TestQuestLoader {
 		public void canLoadJournalEntryDescription() {
 			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_description", questInfo.getJournalEntryDescription());
 		}
+
+		@Test
+		public void canLoadCategory() {
+			assertEquals("@quest/ground/c_newbie_quest4:category", questInfo.getCategory());
+		}
 		
 		@Test
 		public void canloadCompleteWhenTasksCompleteFlag() {
