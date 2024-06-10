@@ -24,157 +24,135 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.data.server_info.loader;
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.questLoader
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-public class TestQuestLoader {
-	
+class TestQuestLoader {
 	@Nested
-	public class TestQuestInfo {
-		
-		private static QuestLoader.QuestListInfo questInfo;
-		
-		@BeforeEach
-		public void setup() throws IOException {
-			questInfo = ServerData.INSTANCE.getQuestLoader().getQuestListInfo("quest/c_newbie_quest4");
-		}
-		
+	inner class TestQuestListInfo {
+
+		private val questListInfo = questLoader.getQuestListInfo("quest/c_newbie_quest4") ?: throw IllegalStateException("Quest info not found")
+
 		@Test
-		public void canLoadQuestListInfo() {
-			assertNotNull(questInfo);
-		}
-		
-		@Test
-		public void canLoadJournalEntryTitle() {
-			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_title", questInfo.getJournalEntryTitle());
-		}
-		
-		@Test
-		public void canLoadJournalEntryDescription() {
-			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_description", questInfo.getJournalEntryDescription());
+		fun canLoadJournalEntryTitle() {
+			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_title", questListInfo.journalEntryTitle)
 		}
 
 		@Test
-		public void canLoadCategory() {
-			assertEquals("@quest/ground/c_newbie_quest4:category", questInfo.getCategory());
+		fun canLoadJournalEntryDescription() {
+			assertEquals("@quest/ground/c_newbie_quest4:journal_entry_description", questListInfo.journalEntryDescription)
 		}
-		
+
 		@Test
-		public void canloadCompleteWhenTasksCompleteFlag() {
-			assertTrue(questInfo.isCompleteWhenTasksComplete());
+		fun canLoadCategory() {
+			assertEquals("@quest/ground/c_newbie_quest4:category", questListInfo.category)
 		}
-		
+
 		@Test
-		public void canLoadRepeatableFlag() {
-			assertTrue(questInfo.isRepeatable());
+		fun canloadCompleteWhenTasksCompleteFlag() {
+			assertTrue(questListInfo.isCompleteWhenTasksComplete)
 		}
-	
+
+		@Test
+		fun canLoadRepeatableFlag() {
+			assertTrue(questListInfo.isRepeatable)
+		}
 	}
-	
+
 	@Nested
-	public class TestQuestTask {
-		
-		private static List<QuestLoader.QuestTaskInfo> taskListInfos;
-		
-		@BeforeEach
-		public void setup() throws IOException {
-			taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_syren5");
-		}
-		
-		@Test
-		public void canLoadRightAmountOfTasks() {
-			assertEquals(8, taskListInfos.size());
-		}
-		
-		@Test
-		public void canLoadMinTime() {
-			assertEquals(0, taskListInfos.get(5).getMinTime());
-		}
-		
-		@Test
-		public void canLoadMaxTime() {
-			assertEquals(0, taskListInfos.get(5).getMaxTime());
-		}
-		
-		@Test
-		public void canLoadIndex() {
-			assertEquals(5, taskListInfos.get(5).getIndex());
-		}
-		
-		@Test
-		public void canLoadType() {
-			assertEquals("quest.task.ground.destroy_multi_and_loot", taskListInfos.get(1).getType());
-		}
-		
-		@Test
-		public void canLoadName() {
-			assertEquals("encounterWithCalHandro", taskListInfos.get(3).getName());
-		}
-		
-		@Test
-		public void canLoadTargetServerTemplate() {
-			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/yavin_fallenstar_pt_2");
-			assertEquals("imperial_major", taskListInfos.get(1).getTargetServerTemplate());
-		}
-		
-		@Test
-		public void canLoadMessageBoxTitle() {
-			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
-			assertEquals("@quest/ground/c_newbie_start:task00_message_box_title", taskListInfos.getFirst().getMessageBoxTitle());
-		}
-		
-		@Test
-		public void canLoadMessageBoxText() {
-			List<QuestLoader.QuestTaskInfo> taskListInfos = ServerData.INSTANCE.getQuestLoader().getTaskListInfos("quest/c_newbie_start");
-			assertEquals("@quest/ground/c_newbie_start:task00_message_box_text", taskListInfos.getFirst().getMessageBoxText());
-		}
-		
-		@Test
-		public void canLoadNpcAppearanceServerTemplate() {
-			assertEquals("object/mobile/boba_fett.iff", taskListInfos.get(5).getNpcAppearanceServerTemplate());
-		}
-		
-		@Test
-		public void canLoadCommMessageText() {
-			assertEquals("@quest/ground/c_syren5:task05_comm_message_text", taskListInfos.get(5).getCommMessageText());
-		}
-		
-		@Test
-		public void canLoadCount() {
-			assertEquals(1, taskListInfos.get(4).getCount());
-		}
-		
-		@Test
-		public void canLoadNextTasksOnCompleteMultipleTasks() {
-			Collection<Integer> nextTasksOnComplete = taskListInfos.get(3).getNextTasksOnComplete();
-			Collection<Integer> expected = List.of(4, 5, 6);
-			
-			assertIterableEquals(expected, nextTasksOnComplete);
-		}
-		
-		@Test
-		public void canLoadNextTasksOnCompleteSingleTask() {
-			Collection<Integer> nextTasksOnComplete = taskListInfos.get(1).getNextTasksOnComplete();
-			Collection<Integer> expected = List.of(2);
+	inner class TestQuestTaskInfo {
 
-			assertIterableEquals(expected, nextTasksOnComplete);
-		}
-		
-		@Test
-		public void canLoadNextTasksOnCompleteEmpty() {
-			Collection<Integer> nextTasksOnComplete = taskListInfos.get(6).getNextTasksOnComplete();
-			Collection<Integer> expected = List.of();
+		private val taskListInfos = questLoader.getTaskListInfos("quest/c_syren5")
 
-			assertIterableEquals(expected, nextTasksOnComplete);
+		@Test
+		fun canLoadRightAmountOfTasks() {
+			assertEquals(8, taskListInfos.size)
+		}
+
+		@Test
+		fun canLoadMinTime() {
+			assertEquals(0, taskListInfos[5].minTime)
+		}
+
+		@Test
+		fun canLoadMaxTime() {
+			assertEquals(0, taskListInfos[5].maxTime)
+		}
+
+		@Test
+		fun canLoadIndex() {
+			assertEquals(5, taskListInfos[5].index)
+		}
+
+		@Test
+		fun canLoadType() {
+			assertEquals("quest.task.ground.destroy_multi_and_loot", taskListInfos[1].type)
+		}
+
+		@Test
+		fun canLoadName() {
+			assertEquals("encounterWithCalHandro", taskListInfos[3].name)
+		}
+
+		@Test
+		fun canLoadTargetServerTemplate() {
+			val taskListInfos = questLoader.getTaskListInfos("quest/yavin_fallenstar_pt_2")
+			assertEquals("imperial_major", taskListInfos[1].targetServerTemplate)
+		}
+
+		@Test
+		fun canLoadMessageBoxTitle() {
+			val taskListInfos = questLoader.getTaskListInfos("quest/c_newbie_start")
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_title", taskListInfos.first().messageBoxTitle)
+		}
+
+		@Test
+		fun canLoadMessageBoxText() {
+			val taskListInfos = questLoader.getTaskListInfos("quest/c_newbie_start")
+			assertEquals("@quest/ground/c_newbie_start:task00_message_box_text", taskListInfos.first().messageBoxText)
+		}
+
+		@Test
+		fun canLoadNpcAppearanceServerTemplate() {
+			assertEquals("object/mobile/boba_fett.iff", taskListInfos[5].npcAppearanceServerTemplate)
+		}
+
+		@Test
+		fun canLoadCommMessageText() {
+			assertEquals("@quest/ground/c_syren5:task05_comm_message_text", taskListInfos[5].commMessageText)
+		}
+
+		@Test
+		fun canLoadCount() {
+			assertEquals(1, taskListInfos[4].count)
+		}
+
+		@Test
+		fun canLoadNextTasksOnCompleteMultipleTasks() {
+			val nextTasksOnComplete = taskListInfos[3].nextTasksOnComplete
+			val expected = listOf(4, 5, 6)
+
+			assertIterableEquals(expected, nextTasksOnComplete)
+		}
+
+		@Test
+		fun canLoadNextTasksOnCompleteSingleTask() {
+			val nextTasksOnComplete = taskListInfos[1].nextTasksOnComplete
+			val expected = listOf(2)
+
+			assertIterableEquals(expected, nextTasksOnComplete)
+		}
+
+		@Test
+		fun canLoadNextTasksOnCompleteEmpty() {
+			val nextTasksOnComplete = taskListInfos[6].nextTasksOnComplete
+			val expected = emptyList<Int>()
+
+			assertIterableEquals(expected, nextTasksOnComplete)
 		}
 	}
 }
