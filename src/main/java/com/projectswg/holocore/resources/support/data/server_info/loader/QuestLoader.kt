@@ -37,8 +37,8 @@ class QuestLoader : DataLoader() {
 	private val questListInfoMap: MutableMap<String, QuestListInfo> = Collections.synchronizedMap(HashMap())
 	private val questTaskInfosMap: MutableMap<String, List<QuestTaskInfo>> = Collections.synchronizedMap(HashMap())
 
-	val questNames: Collection<String>
-		get() = questListInfoMap.keys
+	val questListInfos: Collection<QuestListInfo>
+		get() = questListInfoMap.values
 
 	fun getQuestListInfo(questName: String): QuestListInfo? {
 		return questListInfoMap[questName]
@@ -82,15 +82,17 @@ class QuestLoader : DataLoader() {
 	private fun loadQuestListInfos() {
 		SdbLoader.load(File("serverdata/quests/questlist/questlist.msdb")).use { set ->
 			while (set.next()) {
-				val questName = set.getText("quest_name")
+				val questListInfo = QuestListInfo(set)
+				val questName = questListInfo.questName
 				if (questListInfoMap.containsKey(questName)) throw SdbLoaderException(set, RuntimeException("Duplicate quest list info for quest by name $questName"))
 
-				questListInfoMap[questName] = QuestListInfo(set)
+				questListInfoMap[questName] = questListInfo
 			}
 		}
 	}
 
 	class QuestListInfo(set: SdbResultSet) {
+		val questName: String = set.getText("quest_name")
 		val journalEntryTitle: String = set.getText("journal_entry_title")
 		val journalEntryDescription: String = set.getText("journal_entry_description")
 		val category: String = set.getText("category")

@@ -49,6 +49,7 @@ import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.player.Player
@@ -74,14 +75,14 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private val retrievedItemRepository: RetrievedItemRepository = MemoryRetrievedItemRepository()
 
 	override fun initialize(): Boolean {
-		val allQuestNames = questLoader.questNames
 		val what = "quest retrieve_item tasks"
 		val startTime = StandardLog.onStartLoad(what)
+		val questListInfos = questLoader.questListInfos
 		var quantity = 0
-		for (questName in allQuestNames) {
-			val tasks = questLoader.getTaskListInfos(questName)
+		for (questListInfo in questListInfos) {
+			val tasks = questLoader.getTaskListInfos(questListInfo.questName)
 			val retrieveItemTasks = tasks.filter { it.retrieveItemInfo != null }.filter { !it.retrieveItemInfo!!.serverTemplate.isNullOrBlank() }
-			retrieveItemTasks.forEach { RadialHandler.INSTANCE.registerHandler(it.retrieveItemInfo!!.serverTemplate, QuestRetrieveItemRadialHandler(retrievedItemRepository, questName, it)) }
+			retrieveItemTasks.forEach { RadialHandler.INSTANCE.registerHandler(it.retrieveItemInfo!!.serverTemplate, QuestRetrieveItemRadialHandler(retrievedItemRepository, questListInfo, it)) }
 			quantity += retrieveItemTasks.size
 		}
 		StandardLog.onEndLoad(quantity, what, startTime)
@@ -114,7 +115,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		StandardLog.onPlayerTrace(this, player, "received quest %s", questName)
 		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_received"), "TT", questListInfo.category, "TO", questListInfo.journalEntryTitle)
 		SystemMessageIntent.broadcastPersonal(player, prose, ChatSystemMessage.SystemChatType.QUEST)
-		activateTask(player, questName, questLoader.getTaskListInfos(questName)[0])
+		activateTask(player, questListInfo, questLoader.getTaskListInfos(questName)[0])
 	}
 
 	@IntentHandler
@@ -150,21 +151,23 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
 		for (incompleteQuest in incompleteQuests) {
 			val questName = incompleteQuest.string
+			val questListInfo = questLoader.getQuestListInfo(questName) ?: continue
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
 				val type = activeTaskListInfo.type
 				if (type == "quest.task.ground.wait_for_signal") {
 					if (intent.signalName == activeTaskListInfo.signalName) {
-						handleSignal(activeTaskListInfo, questName, player);
+						handleSignal(activeTaskListInfo, questListInfo, player);
 					}
 				}
 			}
 		}
 	}
 
-	private fun handleSignal(activeTaskListInfo: QuestTaskInfo, questName: String, player: Player) {
+	private fun handleSignal(activeTaskListInfo: QuestTaskInfo, questListInfo: QuestLoader.QuestListInfo, player: Player) {
+		val questName = questListInfo.questName
 		StandardLog.onPlayerTrace(this, player, "signal '%s' was received by task %d in quest %s", activeTaskListInfo.signalName, activeTaskListInfo.index, questName)
-		completeTask(questName, player, activeTaskListInfo)
+		completeTask(questListInfo, player, activeTaskListInfo)
 	}
 
 	@IntentHandler
@@ -173,15 +176,15 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val killer = intent.killer
 		val owner = killer.owner ?: return
 		val playerObject = killer.playerObject
-		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
+		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }.mapNotNull { questLoader.getQuestListInfo(it.string) }
 		for (incompleteQuest in incompleteQuests) {
-			val questName = incompleteQuest.string
+			val questName = incompleteQuest.questName
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
 				val type = activeTaskListInfo.type
 				when (type) {
-					"quest.task.ground.destroy_multi"          -> handleKillDestroyMulti(activeTaskListInfo, questName, owner, corpse)
-					"quest.task.ground.destroy_multi_and_loot" -> handleKillDestroyMultiAndLoot(activeTaskListInfo, questName, owner, corpse)
+					"quest.task.ground.destroy_multi"          -> handleKillDestroyMulti(activeTaskListInfo, incompleteQuest, owner, corpse)
+					"quest.task.ground.destroy_multi_and_loot" -> handleKillDestroyMultiAndLoot(activeTaskListInfo, incompleteQuest, owner, corpse)
 				}
 			}
 		}
@@ -201,7 +204,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	@IntentHandler
 	private fun handleQuestRetrieveItemIntent(intent: QuestRetrieveItemIntent) {
-		val questName = intent.questName
+		val questListInfo = intent.questListInfo
+		val questName = questListInfo.questName
 		val activeTaskListInfo = intent.task
 		val player = intent.player
 		val item = intent.item
@@ -230,7 +234,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			player.sendPacket(PlayMusicMessage(0, "sound/ui_received_quest_item.snd", 1, false))
 			incrementRetrieveItemCount(questName, task, player, counter, max, retrieveItem.itemName)
 			if (remaining <= 0) {
-				completeTask(questName, player, activeTaskListInfo)
+				completeTask(questListInfo, player, activeTaskListInfo)
 			}
 		} else {
 			StandardLog.onPlayerTrace(this, player, "failed to retrieve '%s' on task %d of quest %s", retrieveItem.itemName, activeTaskListInfo.index, questName)
@@ -242,9 +246,9 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	private fun handlePlayerChangeLocation(player: Player, newLocation: Location) {
 		val playerObject = player.playerObject
-		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }
+		val incompleteQuests = playerObject.quests.entries.filter { !it.value.isComplete }.map { it.key }.mapNotNull { questLoader.getQuestListInfo(it.string) }
 		for (incompleteQuest in incompleteQuests) {
-			val questName = incompleteQuest.string
+			val questName = incompleteQuest.questName
 			val activeTaskListInfos = getActiveTaskInfos(questName, playerObject)
 			for (activeTaskListInfo in activeTaskListInfos) {
 				val gotoLocation = activeTaskListInfo.gotoLocationInfo
@@ -254,7 +258,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 					if (newLocation.isWithinDistance(terrain, gotoLocation.locationX, gotoLocation.locationY, gotoLocation.locationZ, radius)) {
 						StandardLog.onPlayerTrace(this, player, "arrived at location for task %d of quest %s", activeTaskListInfo.index, questName)
-						completeTask(questName, player, activeTaskListInfo)
+						completeTask(incompleteQuest, player, activeTaskListInfo)
 						player.sendPacket(PlayMusicMessage(0, "sound/ui_objective_reached.snd", 1, false))
 						playerObject.waypoints.values.find { it.name == gotoLocation.waypointName }?.let {    // if you bothered with renaming the waypoint, you get to keep it
 							playerObject.removeWaypoint(it.objectId)
@@ -266,11 +270,12 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 	}
 
-	private fun handleKillDestroyMultiAndLoot(activeTaskListInfo: QuestTaskInfo, questName: String, owner: Player, corpse: AIObject) {
+	private fun handleKillDestroyMultiAndLoot(activeTaskListInfo: QuestTaskInfo, questListInfo: QuestLoader.QuestListInfo, owner: Player, corpse: AIObject) {
 		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
 			return
 		}
 
+		val questName = questListInfo.questName
 		val playerObject = owner.playerObject
 		val roll = destroyMultiAndLootDie.roll(1..100)
 		val itemFound = roll <= activeTaskListInfo.lootDropPercent
@@ -283,7 +288,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 			StandardLog.onPlayerTrace(this, owner, "acquired %d/%d %s on task %d of quest %s", counter, max, activeTaskListInfo.lootItemName, task, questName)
 			incrementKillItemCount(questName, task, owner, counter, max, activeTaskListInfo.lootItemName)
 			if (remaining <= 0) {
-				completeTask(questName, owner, activeTaskListInfo)
+				completeTask(questListInfo, owner, activeTaskListInfo)
 			}
 		} else {
 			StandardLog.onPlayerTrace(this, owner, "failed to acquire '%s' on task %d of quest %s", activeTaskListInfo.lootItemName, activeTaskListInfo.index, questName)
@@ -291,11 +296,12 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 	}
 
-	private fun handleKillDestroyMulti(activeTaskListInfo: QuestTaskInfo, questName: String, owner: Player, corpse: AIObject) {
+	private fun handleKillDestroyMulti(activeTaskListInfo: QuestTaskInfo, questlistInfo: QuestLoader.QuestListInfo, owner: Player, corpse: AIObject) {
 		if (!isKillPartOfTask(activeTaskListInfo, corpse)) {
 			return
 		}
 
+		val questName = questlistInfo.questName
 		val playerObject = owner.playerObject
 		val max = activeTaskListInfo.count
 		val counter = playerObject.incrementQuestCounter(questName)
@@ -304,7 +310,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		StandardLog.onPlayerTrace(this, owner, "acquired %d/%d kills on task %d of quest %s", counter, max, task, questName)
 		incrementKillCount(questName, task, owner, counter, max)
 		if (remaining <= 0) {
-			completeTask(questName, owner, activeTaskListInfo)
+			completeTask(questlistInfo, owner, activeTaskListInfo)
 		}
 	}
 
@@ -356,11 +362,11 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 	}
 
-	private fun handleNothing(player: Player, questName: String, currentTask: QuestTaskInfo) {
-		completeTask(questName, player, currentTask)
+	private fun handleNothing(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		completeTask(questListInfo, player, currentTask)
 	}
 
-	private fun handleReward(player: Player, questName: String, playerObject: PlayerObject, currentTask: QuestTaskInfo) {
+	private fun handleReward(player: Player, questListInfo: QuestLoader.QuestListInfo, playerObject: PlayerObject, currentTask: QuestTaskInfo) {
 		grantXPReward(player, currentTask)
 		grantFactionPointsReward(playerObject, currentTask)
 		grantCreditsReward(player, currentTask)
@@ -369,16 +375,16 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		// weapon stuff: weapon	count_weapon	speed	damage	efficiency	elemental_value
 		// armor stuff: armor	count_armor	quality
 		// speed etc. are percentages, the absolute values we must define somewhere else before we can hand out weapons and armor rewards
-		completeTask(questName, player, currentTask)
+		completeTask(questListInfo, player, currentTask)
 	}
 
-	private fun handleShowMessageBox(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleShowMessageBox(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
 		val messageBoxTitle = currentTask.messageBoxTitle
 		val messageBoxText = currentTask.messageBoxText
 		val messageBoxSound = currentTask.messageBoxSound
 		val sui = SuiMessageBox(SuiButtons.OK, messageBoxTitle, messageBoxText)
-		sui.addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
-		sui.addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questName, player, currentTask) }
+		sui.addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
+		sui.addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
 		sui.setSize(384, 256)
 		sui.setLocation(320, 256)
 		sui.display(player)
@@ -387,16 +393,17 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 	}
 
-	private fun handleCommPlayer(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleCommPlayer(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
 		val commMessageText = currentTask.commMessageText
 		val message = OutOfBandPackage(ProsePackage(StringId(commMessageText)))
 		val objectId = player.creatureObject.objectId
 		val modelCrc = getModelCrc(currentTask)
 		player.sendPacket(CommPlayerMessage(objectId, message, modelCrc, "", 10f))
-		completeTask(questName, player, currentTask)
+		completeTask(questListInfo, player, currentTask)
 	}
 
-	private fun handleTimer(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleTimer(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		val minTime = currentTask.minTime
 		val maxTime = currentTask.maxTime
 		val random = ThreadLocalRandom.current()
@@ -405,7 +412,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		executor.execute(delayMilliseconds.toLong()) {    // TODO if the server is restarted, the timer will be lost and the quest will be stuck
 			if (player.playerObject.isQuestInJournal(questName)) {
 				StandardLog.onPlayerTrace(this, player, "timer for task %d of quest %s expired", currentTask.index, questName)
-				completeTask(questName, player, currentTask)
+				completeTask(questListInfo, player, currentTask)
 			}
 		}
 
@@ -421,54 +428,58 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 	}
 
-	private fun activateTask(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun activateTask(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		StandardLog.onPlayerTrace(this, player, "activating task %d of quest %s", currentTask.index, questName)
 		val playerObject = player.getPlayerObject()
 		playerObject.addActiveQuestTask(questName, currentTask.index)
 		if (currentTask.isVisible) {
 			player.sendPacket(PlayMusicMessage(0, "sound/ui_journal_updated.snd", 1, false))
 
-			if (currentTask.musicOnActivate != null && currentTask.musicOnActivate.isNotBlank()) {
+			if (!currentTask.musicOnActivate.isNullOrBlank()) {
 				player.sendPacket(PlayMusicMessage(0, currentTask.musicOnActivate, 1, false))
 			}
 		}
 
 		when (currentTask.type) {
-			"quest.task.ground.comm_player"            -> handleCommPlayer(player, questName, currentTask)
-			"quest.task.ground.complete_quest"         -> completeQuest(player, questName)
-			"quest.task.ground.timer"                  -> handleTimer(player, questName, currentTask)
-			"quest.task.ground.show_message_box"       -> handleShowMessageBox(player, questName, currentTask)
-			"quest.task.ground.destroy_multi"          -> handleDestroyMulti(player, questName, currentTask)
-			"quest.task.ground.destroy_multi_and_loot" -> handleDestroyMultiAndLoot(player, questName, currentTask)
-			"quest.task.ground.reward"                 -> handleReward(player, questName, playerObject, currentTask)
-			"quest.task.ground.nothing"                -> handleNothing(player, questName, currentTask)
+			"quest.task.ground.comm_player"            -> handleCommPlayer(player, questListInfo, currentTask)
+			"quest.task.ground.complete_quest"         -> completeQuest(player, questListInfo)
+			"quest.task.ground.timer"                  -> handleTimer(player, questListInfo, currentTask)
+			"quest.task.ground.show_message_box"       -> handleShowMessageBox(player, questListInfo, currentTask)
+			"quest.task.ground.destroy_multi"          -> handleDestroyMulti(player, questListInfo, currentTask)
+			"quest.task.ground.destroy_multi_and_loot" -> handleDestroyMultiAndLoot(player, questListInfo, currentTask)
+			"quest.task.ground.reward"                 -> handleReward(player, questListInfo, playerObject, currentTask)
+			"quest.task.ground.nothing"                -> handleNothing(player, questListInfo, currentTask)
 			"quest.task.ground.go_to_location"         -> handleGoToLocation(player, currentTask)
-			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questName, currentTask)
-			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questName)
-			"quest.task.ground.encounter"              -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.escort"                 -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.perform"                -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.perform_action_on_npc"  -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.remote_encounter"       -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.static_escort"          -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.talk_to_npc"            -> handleUnsupportedTaskType(player, questName, currentTask)
-			"quest.task.ground.wait_for_tasks"         -> handleUnsupportedTaskType(player, questName, currentTask)
+			"quest.task.ground.retrieve_item"          -> handleRetrieveItem(player, questListInfo, currentTask)
+			"quest.task.ground.clear_quest"            -> handleClearQuest(player, questListInfo)
+			"quest.task.ground.encounter"              -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.escort"                 -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.perform"                -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.perform_action_on_npc"  -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.remote_encounter"       -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.static_escort"          -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.talk_to_npc"            -> handleUnsupportedTaskType(player, questListInfo, currentTask)
+			"quest.task.ground.wait_for_tasks"         -> handleUnsupportedTaskType(player, questListInfo, currentTask)
 		}
 	}
 
-	private fun handleUnsupportedTaskType(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleUnsupportedTaskType(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		StandardLog.onPlayerTrace(this, player, "skipping unsupported task type %s for task %d of quest %s", currentTask.type, currentTask.index, questName)
 		SystemMessageIntent.broadcastPersonal(player, "Quest task type '${currentTask.type}' is not yet supported. Skipping it so you can continue.")
-		completeTask(questName, player, currentTask)
+		completeTask(questListInfo, player, currentTask)
 	}
 
-	private fun handleClearQuest(player: Player, questName: String) {
+	private fun handleClearQuest(player: Player, questListInfo: QuestLoader.QuestListInfo) {
+		val questName = questListInfo.questName
 		val playerObject = player.getPlayerObject()
 		removeQuest(playerObject, questName)
 		StandardLog.onPlayerTrace(this, player, "cleared quest %s", questName)
 	}
 
-	private fun handleRetrieveItem(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleRetrieveItem(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		val task = currentTask.index
 		val max = currentTask.retrieveItemInfo?.numRequired ?: return
 		val counter = 0
@@ -501,7 +512,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		ObjectCreatedIntent(waypoint).broadcast()
 	}
 
-	private fun completeTask(questName: String, player: Player, currentTask: QuestTaskInfo) {
+	private fun completeTask(questListInfo: QuestLoader.QuestListInfo, player: Player, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		val playerObject = player.getPlayerObject()
 		playerObject.removeActiveQuestTask(questName, currentTask.index)
 		playerObject.addCompleteQuestTask(questName, currentTask.index)
@@ -517,23 +529,26 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val nextTasksIdsOnComplete = currentTask.nextTasksOnComplete
 		val nextTasksOnComplete = questLoader.getTaskListInfos(questName)
 		StandardLog.onPlayerTrace(this, player, "completed task %d of quest %s", currentTask.index, questName)
-		nextTasksIdsOnComplete.forEach { activateTask(player, questName, nextTasksOnComplete[it]) }
+		nextTasksIdsOnComplete.forEach { activateTask(player, questListInfo, nextTasksOnComplete[it]) }
 
 		if (nextTasksIdsOnComplete.isEmpty()) {
 			if (questLoader.getQuestListInfo(questName)?.isCompleteWhenTasksComplete == true) {
 				if (playerObject.getQuestActiveTasks(questName).isEmpty()) {
-					completeQuest(player, questName)
+					completeQuest(player, questListInfo)
 				}
 			}
 		}
 	}
 
-	private fun completeQuest(player: Player, questName: String) {
+	private fun completeQuest(player: Player, questListInfo: QuestLoader.QuestListInfo) {
+		val questName = questListInfo.questName
 		val playerObject = player.getPlayerObject()
 		playerObject.completeQuest(questName)
 		player.sendPacket(QuestCompletedMessage(player.creatureObject.objectId, CRC(questName)))
 		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)
 		StandardLog.onPlayerTrace(this, player, "completed quest %s", questName)
+		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_task_completed"), "TT", questListInfo.category, "TO", questListInfo.journalEntryTitle)
+		SystemMessageIntent.broadcastPersonal(player, prose, ChatSystemMessage.SystemChatType.QUEST)
 	}
 
 	private fun getActiveTaskInfos(questName: String, playerObject: PlayerObject): List<QuestTaskInfo> {
@@ -613,7 +628,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		)
 	}
 
-	private fun handleDestroyMulti(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleDestroyMulti(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		val task = currentTask.index
 		val max = currentTask.count
 		val counter = 0
@@ -624,7 +640,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		)
 	}
 
-	private fun handleDestroyMultiAndLoot(player: Player, questName: String, currentTask: QuestTaskInfo) {
+	private fun handleDestroyMultiAndLoot(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
+		val questName = questListInfo.questName
 		val task = currentTask.index
 		val max = currentTask.lootItemsRequired
 		val counter = 0

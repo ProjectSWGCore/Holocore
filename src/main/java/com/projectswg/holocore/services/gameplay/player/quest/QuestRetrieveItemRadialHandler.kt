@@ -29,22 +29,23 @@ package com.projectswg.holocore.services.gameplay.player.quest
 import com.projectswg.common.data.radial.RadialItem
 import com.projectswg.common.data.radial.RadialOption
 import com.projectswg.holocore.intents.gameplay.player.quest.QuestRetrieveItemIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
-class QuestRetrieveItemRadialHandler(private val retrievedItemRepository: RetrievedItemRepository, private val questName: String, private val task: QuestTaskInfo) : RadialHandlerInterface {
+class QuestRetrieveItemRadialHandler(private val retrievedItemRepository: RetrievedItemRepository, private val questListInfo: QuestLoader.QuestListInfo, private val task: QuestTaskInfo) : RadialHandlerInterface {
 	private val radialItem = RadialItem.SERVER_MENU1
 	private val retriveItemInfo = task.retrieveItemInfo!!  // Precondition for this class
 
 	override fun getOptions(options: MutableCollection<RadialOption>, player: Player, target: SWGObject) {
 		val playerObject = player.playerObject
-		val questActiveTasks = playerObject.getQuestActiveTasks(questName)
+		val questActiveTasks = playerObject.getQuestActiveTasks(questListInfo.questName)
 		
 		if (questActiveTasks.contains(task.index)) {
 			if (target.template.equals(retriveItemInfo.serverTemplate)) {
-				if (!retrievedItemRepository.hasAttemptedPreviously(questName, playerObject, target)) {
+				if (!retrievedItemRepository.hasAttemptedPreviously(questListInfo.questName, playerObject, target)) {
 					options.add(RadialOption.create(radialItem, retriveItemInfo.retrieveMenuText))
 				}
 			}
@@ -55,6 +56,6 @@ class QuestRetrieveItemRadialHandler(private val retrievedItemRepository: Retrie
 		if (selection != radialItem)
 			return
 		
-		QuestRetrieveItemIntent(player, questName, task, target).broadcast()
+		QuestRetrieveItemIntent(player, questListInfo, task, target).broadcast()
 	}
 }
