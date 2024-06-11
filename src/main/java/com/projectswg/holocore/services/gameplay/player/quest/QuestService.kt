@@ -112,7 +112,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		retrievedItemRepository.clearPreviousAttempts(questName, playerObject)    // In case this quest is being repeated
 		playerObject.addQuest(questName)
 		StandardLog.onPlayerTrace(this, player, "received quest %s", questName)
-		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_received"), "TO", questListInfo.journalEntryTitle)
+		val prose = ProsePackage(StringId("quest/ground/system_message", "quest_received"), "TT", questListInfo.category, "TO", questListInfo.journalEntryTitle)
 		SystemMessageIntent.broadcastPersonal(player, prose, ChatSystemMessage.SystemChatType.QUEST)
 		activateTask(player, questName, questLoader.getTaskListInfos(questName)[0])
 	}
