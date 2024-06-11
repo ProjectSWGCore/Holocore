@@ -588,6 +588,8 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		val bankCredits = currentTask.bankCredits
 		if (bankCredits != 0) {
 			player.creatureObject.addToBank(bankCredits.toLong())
+			val prose = ProsePackage(StringId("base_player", "prose_transfer_success"), "DI", bankCredits)
+			SystemMessageIntent.broadcastPersonal(player, prose, ChatSystemMessage.SystemChatType.QUEST)
 		}
 	}
 
