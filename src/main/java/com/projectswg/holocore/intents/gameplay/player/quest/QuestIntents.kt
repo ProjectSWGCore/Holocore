@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.player.quest
 
+import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.QuestLoader.QuestTaskInfo
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -34,5 +35,5 @@ import me.joshlarson.jlcommon.control.Intent
 data class GrantQuestIntent(val player: Player, val questName: String) : Intent()
 data class AbandonQuestIntent(val player: Player, val questName: String) : Intent()
 data class CompleteQuestIntent(val player: Player, val questName: String) : Intent()
-data class QuestRetrieveItemIntent(val player: Player, val questName: String, val task: QuestTaskInfo, val item: SWGObject) : Intent()
+data class QuestRetrieveItemIntent(val player: Player, val questListInfo: QuestLoader.QuestListInfo, val task: QuestTaskInfo, val item: SWGObject) : Intent()
 data class EmitQuestSignalIntent(val player: Player, val signalName: String) : Intent()
