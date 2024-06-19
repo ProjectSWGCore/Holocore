@@ -78,10 +78,12 @@ class CombatCommandAttack implements CombatCommandHitType {
 	private static final String tkaArmorSkillMod = "tka_armor";
 	private final Die toHitDie;
 	private final Die knockdownDie;
+	private final Die woundDie;
 
-	public CombatCommandAttack(Die toHitDie, Die knockdownDie) {
+	public CombatCommandAttack(Die toHitDie, Die knockdownDie, Die woundDie) {
 		this.toHitDie = toHitDie;
 		this.knockdownDie = knockdownDie;
+		this.woundDie = woundDie;
 	}
 
 	@Override
@@ -288,7 +290,7 @@ class CombatCommandAttack implements CombatCommandHitType {
 		}
 
 		// End rolls
-		int targetHealth = creatureTarget.getHealth();
+		int targetHealth = creatureTarget.getHealth() - creatureTarget.getHealthWounds();
 
 		final int finalDamage;
 		if (targetHealth <= info.getFinalDamage()) {
@@ -300,6 +302,14 @@ class CombatCommandAttack implements CombatCommandHitType {
 		}
 
 		info.setFinalDamage(finalDamage);
+
+		float sourceWeaponWoundChance = sourceWeapon.getWoundChance();
+		if (sourceWeaponWoundChance > 0) {
+			if (woundDie.roll(new IntRange(0, 100)) < sourceWeaponWoundChance) {
+				int wounds = 1;
+				applyHealthWounds(creatureTarget, wounds);
+			}
+		}
 
 		for (CreatureObject observerCreature : creatureTarget.getObserverCreatures()) {
 			observerCreature.sendSelf(createCombatSpam(observerCreature, source, creatureTarget, sourceWeapon, info, combatCommand, CombatSpamType.HIT));
@@ -320,6 +330,11 @@ class CombatCommandAttack implements CombatCommandHitType {
 				riposte(source, creatureTarget, rawDamage, percentOfDamageToReflectBackToAttacker);
 			}
 		}
+	}
+
+	private static void applyHealthWounds(CreatureObject creatureTarget, int healthWounds) {
+		int existingHealthWounds = creatureTarget.getHealthWounds();
+		creatureTarget.setHealthWounds(existingHealthWounds + healthWounds);
 	}
 
 	private static int calculateBaseDamage(CombatCommand combatCommand, WeaponObject sourceWeapon, double weaponDamageMod) {

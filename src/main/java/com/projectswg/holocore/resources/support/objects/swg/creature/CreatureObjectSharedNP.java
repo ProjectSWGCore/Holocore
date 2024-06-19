@@ -277,7 +277,7 @@ class CreatureObjectSharedNP implements MongoPersistable {
 	}
 	
 	public void modifyHealth(int mod) {
-		attributes.modifyHealth(mod, maxAttributes.getHealth());
+		attributes.modifyHealth(mod, maxAttributes.getHealth() - obj.getHealthWounds());
 	}
 
 	public void setMaxHealth(int maxHealth) {

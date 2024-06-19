@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -69,7 +69,7 @@ public class TestCombatCommandAttack {
 		double dirX = targetLocation.getX() - attackerLocation.getX();
 		double dirZ = targetLocation.getZ() - attackerLocation.getZ();
 		
-		CombatCommandAttack instance = new CombatCommandAttack(new RandomDie(), new RandomDie());
+		CombatCommandAttack instance = new CombatCommandAttack(new RandomDie(), new RandomDie(), new RandomDie());
 		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone1, 30, dirX, dirZ));
 		assertTrue(instance.isInConeAngle(attackerLocation, collateralInsideCone2, 30, dirX, dirZ));
 		assertFalse(instance.isInConeAngle(attackerLocation, collateralOutsideCone, 30, dirX, dirZ));
