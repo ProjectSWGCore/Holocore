@@ -82,13 +82,13 @@ public class CommandQueueService extends Service {
 	}
 	
 	public CommandQueueService(long delayBetweenCheckingCommandQueue) {
-		this(delayBetweenCheckingCommandQueue, new RandomDie(), new RandomDie());
+		this(delayBetweenCheckingCommandQueue, new RandomDie(), new RandomDie(), new RandomDie());
 	}
 	
-	public CommandQueueService(long delayBetweenCheckingCommandQueue, Die toHitDie, Die knockdownDie) {
+	public CommandQueueService(long delayBetweenCheckingCommandQueue, Die toHitDie, Die knockdownDie, Die woundDie) {
 		this.executor = new ScheduledThreadPool(4, "command-queue-%d");
 		this.combatQueueMap = new ConcurrentHashMap<>();
-		this.combatCommandHandler = new CombatCommandHandler(toHitDie, knockdownDie);
+		this.combatCommandHandler = new CombatCommandHandler(toHitDie, knockdownDie, woundDie);
 		this.delayBetweenCheckingCommandQueue = delayBetweenCheckingCommandQueue;
 	}
 	

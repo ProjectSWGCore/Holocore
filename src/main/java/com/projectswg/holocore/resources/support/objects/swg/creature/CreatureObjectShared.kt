@@ -86,6 +86,9 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 	fun setHealthWounds(healthWounds: Int) {
 		wounds[0] = healthWounds
 		wounds.sendDeltaMessage(obj)
+		if (obj.health > obj.maxHealth - obj.healthWounds) {
+			obj.health -= healthWounds
+		}
 	}
 
 	fun isStatesBitmask(vararg states: CreatureState): Boolean {

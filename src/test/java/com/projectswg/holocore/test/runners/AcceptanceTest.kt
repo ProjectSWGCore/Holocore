@@ -83,7 +83,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(AwarenessService())
 		registerService(LoginService(memoryUserDatabase))
 		registerService(ZoneService())
-		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0)))
+		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0), DeterministicDie(0)))
 		registerService(CommandExecutionService())
 		registerService(CharacterCreationService())
 		registerService(ExperiencePointService())
@@ -125,16 +125,17 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 	 * @param npcId the ID of the NPC to spawn - e.g. "creature_bantha"
 	 * @param location the location to spawn the NPCs at
 	 * @param spawnerFlag the spawner flag to use - defaults to [NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE]
+	 * @param combatLevelRange the range defining the minimum and maximum possible combat level for the creatures - defaults to 1..1
 	 */
-	fun spawnNPC(npcId: String, location: Location, spawnerFlag: NpcStaticSpawnLoader.SpawnerFlag = NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE): AIObject {
+	fun spawnNPC(npcId: String, location: Location, spawnerFlag: NpcStaticSpawnLoader.SpawnerFlag = NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE, combatLevelRange: IntRange = 1..1): AIObject {
 		val egg = ObjectCreator.createObjectFromTemplate("object/tangible/ground_spawning/shared_patrol_spawner.iff")
 		egg.moveToContainer(null, location)
 
 		val spawnInfo = SimpleSpawnInfo.builder()
 			.withNpcId(npcId)
 			.withDifficulty(CreatureDifficulty.NORMAL)
-			.withMinLevel(1)
-			.withMaxLevel(1)
+			.withMinLevel(combatLevelRange.first)
+			.withMaxLevel(combatLevelRange.last)
 			.withLocation(location)
 			.withAmount(1)
 			.withSpawnerFlag(spawnerFlag)
