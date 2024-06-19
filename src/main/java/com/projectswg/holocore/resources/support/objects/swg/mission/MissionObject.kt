@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -58,21 +58,21 @@ class MissionObject(objectId: Long) : IntangibleObject(objectId, Baseline.Baseli
 	var targetName: String by BaselineDelegate(value = "", page = 3, update = 15, stringType = StringType.ASCII)
 	var waypointPackage: WaypointPackage by BaselineDelegate(value = WaypointPackage(), page = 3, update = 16)
 
-	override fun createBaseline3(target: Player, bb: BaselineBuilder) {
-		super.createBaseline3(target, bb)
-		bb.addInt(difficulty)
-		bb.addObject(missionLocation)
-		bb.addUnicode(missionCreator)
-		bb.addInt(reward)
-		bb.addObject(startLocation)
-		bb.addObject(targetAppearance)
-		bb.addObject(description)
-		bb.addObject(title)
-		bb.addInt(tickCount)
-		bb.addObject(missionType)
-		bb.addAscii(targetName)
-		bb.addObject(waypointPackage)
-		bb.incrementOperandCount(12)
+	override fun createBaseline3(target: Player?, data: BaselineBuilder) {
+		super.createBaseline3(target, data)
+		data.addInt(difficulty)
+		data.addObject(missionLocation)
+		data.addUnicode(missionCreator)
+		data.addInt(reward)
+		data.addObject(startLocation)
+		data.addObject(targetAppearance)
+		data.addObject(description)
+		data.addObject(title)
+		data.addInt(tickCount)
+		data.addObject(missionType)
+		data.addAscii(targetName)
+		data.addObject(waypointPackage)
+		data.incrementOperandCount(12)
 	}
 
 	override fun parseBaseline3(buffer: NetBuffer) {

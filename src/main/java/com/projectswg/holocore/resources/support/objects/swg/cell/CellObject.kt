@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -64,20 +64,20 @@ class CellObject(objectId: Long) : SWGObject(objectId, BaselineType.SCLT) {
 		labelZ = z.toDouble()
 	}
 
-	override fun createBaseline3(target: Player, bb: BaselineBuilder) {
-		super.createBaseline3(target, bb)
-		bb.addBoolean(isPublic)
-		bb.addInt(number)
-		bb.incrementOperandCount(2)
+	override fun createBaseline3(target: Player?, data: BaselineBuilder) {
+		super.createBaseline3(target, data)
+		data.addBoolean(isPublic)
+		data.addInt(number)
+		data.incrementOperandCount(2)
 	}
 
-	override fun createBaseline6(target: Player, bb: BaselineBuilder) {
-		super.createBaseline6(target, bb)
-		bb.addUnicode(label)
-		bb.addFloat(labelX.toFloat())
-		bb.addFloat(0f)
-		bb.addFloat(labelZ.toFloat())
-		bb.incrementOperandCount(2)
+	override fun createBaseline6(target: Player?, data: BaselineBuilder) {
+		super.createBaseline6(target, data)
+		data.addUnicode(label)
+		data.addFloat(labelX.toFloat())
+		data.addFloat(0f)
+		data.addFloat(labelZ.toFloat())
+		data.incrementOperandCount(2)
 	}
 
 	override fun parseBaseline3(buffer: NetBuffer) {

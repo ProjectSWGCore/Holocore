@@ -333,24 +333,24 @@ class PlayerObject(objectId: Long) : IntangibleObject(objectId, BaselineType.PLA
 
 	var jediState by play9::jediState
 
-	public override fun createBaseline3(target: Player, bb: BaselineBuilder) {
-		super.createBaseline3(target, bb) // 5 variables
-		play3.createBaseline3(bb)
+	public override fun createBaseline3(target: Player?, data: BaselineBuilder) {
+		super.createBaseline3(target, data) // 5 variables
+		play3.createBaseline3(data)
 	}
 
-	public override fun createBaseline6(target: Player, bb: BaselineBuilder) {
-		super.createBaseline6(target, bb) // 2 variables
-		play6.createBaseline6(bb)
+	public override fun createBaseline6(target: Player?, data: BaselineBuilder) {
+		super.createBaseline6(target, data) // 2 variables
+		play6.createBaseline6(data)
 	}
 
-	public override fun createBaseline8(target: Player, bb: BaselineBuilder) {
-		super.createBaseline8(target, bb) // 0 variables
-		play8.createBaseline8(bb)
+	public override fun createBaseline8(target: Player?, data: BaselineBuilder) {
+		super.createBaseline8(target, data) // 0 variables
+		play8.createBaseline8(data)
 	}
 
-	public override fun createBaseline9(target: Player, bb: BaselineBuilder) {
-		super.createBaseline9(target, bb) // 0 variables
-		play9.createBaseline9(bb)
+	public override fun createBaseline9(target: Player?, data: BaselineBuilder) {
+		super.createBaseline9(target, data) // 0 variables
+		play9.createBaseline9(data)
 	}
 
 	override fun parseBaseline9(buffer: NetBuffer) {

@@ -30,7 +30,7 @@ package com.projectswg.holocore.resources.support.objects.swg
 import com.projectswg.common.encoding.StringType
 import kotlin.reflect.KProperty
 
-class BaselineDelegate<T>(private var value: T, private val page: Int, private val update: Int, private val stringType: StringType? = null) {
+class BaselineDelegate<T : Any>(private var value: T, private val page: Int, private val update: Int, private val stringType: StringType? = null) {
 	
 	operator fun getValue(thisRef: SWGObject, property: KProperty<*>): T {
 		return value
@@ -47,7 +47,7 @@ class BaselineDelegate<T>(private var value: T, private val page: Int, private v
 	
 }
 
-class TransformedBaselineDelegate<T, R>(private var value: T, private val page: Int, private val update: Int, private val transformer: (T) -> R) {
+class TransformedBaselineDelegate<T, R: Any>(private var value: T, private val page: Int, private val update: Int, private val transformer: (T) -> R) {
 
 	operator fun getValue(thisRef: SWGObject, property: KProperty<*>): T {
 		return value

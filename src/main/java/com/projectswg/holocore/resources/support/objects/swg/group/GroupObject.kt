@@ -42,11 +42,7 @@ import com.projectswg.holocore.resources.support.objects.swg.BaselineDelegate
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.TransformedBaselineDelegate
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import me.joshlarson.jlcommon.utilities.Arguments
 import java.util.concurrent.ConcurrentHashMap
-import java.util.concurrent.atomic.AtomicInteger
-import java.util.function.Consumer
-import kotlin.math.max
 
 class GroupObject(objectId: Long) : SWGObject(objectId, Baseline.BaselineType.GRUP) {
 	private val groupMembers = SWGList.createEncodableList(6, 2) { GroupMember() }
@@ -92,18 +88,18 @@ class GroupObject(objectId: Long) : SWGObject(objectId, Baseline.BaselineType.GR
 		setPosition(Terrain.GONE, 0.0, 0.0, 0.0)
 	}
 
-	public override fun createBaseline6(target: Player, bb: BaselineBuilder) {
-		super.createBaseline6(target, bb) // BASE06 -- 2 variables
-		bb.addObject(groupMembers) // 2 -- NOTE: First person is the leader
-		bb.addInt(0) // formationmembers // 3
-		bb.addInt(0) // updateCount
-		bb.addAscii("") // groupName // 4
-		bb.addShort(level.toInt()) // 5
-		bb.addInt(0) // formationNameCrc // 6
-		bb.addLong(lootMaster?.objectId ?: 0) // 7
-		bb.addInt(lootRule.id) // 8
+	public override fun createBaseline6(target: Player?, data: BaselineBuilder) {
+		super.createBaseline6(target, data) // BASE06 -- 2 variables
+		data.addObject(groupMembers) // 2 -- NOTE: First person is the leader
+		data.addInt(0) // formationmembers // 3
+		data.addInt(0) // updateCount
+		data.addAscii("") // groupName // 4
+		data.addShort(level.toInt()) // 5
+		data.addInt(0) // formationNameCrc // 6
+		data.addLong(lootMaster?.objectId ?: 0) // 7
+		data.addInt(lootRule.id) // 8
 
-		bb.incrementOperandCount(7)
+		data.incrementOperandCount(7)
 	}
 
 	fun formGroup(leader: CreatureObject, member: CreatureObject) {

@@ -354,6 +354,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 	private fun removePlayerFromGroup(creature: CreatureObject) {
 		assert(creature.groupId != 0L) { "creature is not within a group" }
+		assert(creature.groupId in groups) { "creature has non-existent group" }
 		val group = getGroup(creature.groupId) ?: return
 		val player = creature.owner ?: return
 
