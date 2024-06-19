@@ -1001,6 +1001,18 @@ public class CreatureObject extends TangibleObject {
 	public int getHealthWounds() {
 		return creo3.getHealthWounds();
 	}
+
+	/**
+	 * Using this method is not recommended. Use {@link CreatureObject#getHealthWounds()} instead.
+	 * <p> 
+	 * The indexes of the wounds are as follows:
+	 * 0: Health
+	 * 
+	 * @return a list of wounds
+	 */
+	public List<Integer> getWounds() {
+		return creo3.getWounds();
+	}
 	
 	@Override
 	public void createBaseline4(Player target, BaselineBuilder bb) {
@@ -1055,7 +1067,7 @@ public class CreatureObject extends TangibleObject {
 		super.readMongo(data);
 		skills.clear();
 
-		creo3.readMongo(data);
+		creo3.readMongo(data.getDocument("base3"));
 		creo4.readMongo(data.getDocument("base4"));
 		creo6.readMongo(data.getDocument("base6"));
 		race = Race.valueOf(data.getString("race", race.name()));

@@ -159,7 +159,8 @@ public class TestSWGPersistence {
 						"battleFatigue", obj.getBattleFatigue(),
 						"ownerId", obj.getOwnerId(),
 						"statesBitmask", obj.getStatesBitmask(),
-						"factionRank", (int) obj.getFactionRank()
+						"factionRank", (int) obj.getFactionRank(),
+						"wounds", obj.getWounds()
 				),
 				"base4", map(
 						"accelPercent", obj.getAccelPercent(),
