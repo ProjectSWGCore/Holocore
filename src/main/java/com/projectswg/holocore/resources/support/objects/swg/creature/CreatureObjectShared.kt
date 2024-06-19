@@ -1,3 +1,29 @@
+/***********************************************************************************
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create an emulator which will provide a server for players to    *
+ * continue playing a game similar to the one they used to play. We are basing     *
+ * it on the final publish of the game prior to end-game events.                   *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.resources.support.objects.swg.creature
 
 import com.projectswg.common.data.encodables.mongo.MongoData
@@ -45,12 +71,11 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 			sendDelta(15, battleFatigue)
 		}
 
-	private val wounds = createWoundsList()
+	val wounds = createWoundsList()
 	
 	private fun createWoundsList(): SWGList<Int> {
 		val wounds = createIntList(3, 17)
-		wounds.add(0, 0) // CU only has health wounds :-)
-		
+		populateWounds(wounds)
 		return wounds
 	}
 
@@ -99,22 +124,23 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 	}
 
 	override fun readMongo(data: MongoData) {
-		val relevantMongoData = getRelevantMongoData(data)
-		posture = Posture.valueOf(relevantMongoData.getString("posture", posture.name))
-		height = relevantMongoData.getDouble("height", height)
-		battleFatigue = relevantMongoData.getInteger("battleFatigue", battleFatigue)
-		ownerId = relevantMongoData.getLong("ownerId", ownerId)
-		statesBitmask = relevantMongoData.getLong("statesBitmask", statesBitmask)
-		factionRank = relevantMongoData.getInteger("factionRank", factionRank.toInt()).toByte()
-	}
-	
-	fun getRelevantMongoData(data: MongoData): MongoData {
-		// To support migrating data from the existing document to the new, dedicated base3 document
-		return if (data.containsKey("height")) {
-			data
-		} else {
-			data.getDocument("base3")
+		wounds.clear()
+
+		posture = Posture.valueOf(data.getString("posture", posture.name))
+		height = data.getDouble("height", height)
+		battleFatigue = data.getInteger("battleFatigue", battleFatigue)
+		ownerId = data.getLong("ownerId", ownerId)
+		statesBitmask = data.getLong("statesBitmask", statesBitmask)
+		factionRank = data.getInteger("factionRank", factionRank.toInt()).toByte()
+		wounds.addAll(data.getArray("wounds", Int::class.java))
+		if (wounds.isEmpty()) {
+			// Can happen with old data, before we started persisting wounds
+			populateWounds(wounds)
 		}
+	}
+
+	private fun populateWounds(wounds: SWGList<Int>) {
+		wounds.add(0, 0)	// CU only has health wounds, so we'll just add that for now
 	}
 
 	override fun saveMongo(data: MongoData) {
@@ -124,6 +150,7 @@ class CreatureObjectShared(private val obj: CreatureObject) : MongoPersistable {
 		data.putLong("ownerId", ownerId)
 		data.putLong("statesBitmask", statesBitmask)
 		data.putInteger("factionRank", factionRank.toInt())
+		data.putArray("wounds", wounds)
 	}
 
 	fun createBaseline3(bb: BaselineBuilder) {
