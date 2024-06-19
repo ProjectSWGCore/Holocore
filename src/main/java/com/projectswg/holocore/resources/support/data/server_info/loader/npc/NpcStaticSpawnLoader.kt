@@ -60,30 +60,30 @@ class NpcStaticSpawnLoader : DataLoader() {
 	}
 
 	class StaticSpawnInfo(set: SdbResultSet) : SpawnInfo {
-		private val id: String = set.getText("spawn_id")
-		private val terrain = Terrain.valueOf(set.getText("terrain"))
-		private val x = set.getReal("x")
-		private val y = set.getReal("y")
-		private val z = set.getReal("z")
-		private val heading = set.getInt("heading").toInt()
-		private val cellId = set.getInt("cell_id").toInt()
-		private var spawnerFlag: SpawnerFlag? = null
-		private var difficulty: CreatureDifficulty? = null
-		private val minLevel: Int
-		private val maxLevel: Int
-		private val spawnerType = set.getText("spawner_type").intern()
-		private val npcId = set.getText("npc_id").intern()
-		private val buildingId: String
-		private val mood: String
-		private val behavior: AIBehavior
-		private val patrolId: String
-		private val patrolFormation: PatrolFormation
-		private val loiterRadius: Int
-		private val minSpawnTime: Int
-		private val maxSpawnTime: Int
-		private val amount: Int
-		private val conversationId: String
-		private val equipmentId: Long?
+		override val id: String = set.getText("spawn_id")
+		override val terrain = Terrain.valueOf(set.getText("terrain"))
+		override val x = set.getReal("x")
+		override val y = set.getReal("y")
+		override val z = set.getReal("z")
+		override val heading = set.getInt("heading").toInt()
+		override val cellId = set.getInt("cell_id").toInt()
+		override var spawnerFlag: SpawnerFlag = SpawnerFlag.INVULNERABLE
+		override var difficulty: CreatureDifficulty = CreatureDifficulty.NORMAL
+		override val minLevel: Int
+		override val maxLevel: Int
+		override val spawnerType = set.getText("spawner_type").intern()
+		override val npcId = set.getText("npc_id").intern()
+		override val buildingId: String
+		override val mood: String
+		override val behavior: AIBehavior
+		override val patrolId: String
+		override val patrolFormation: PatrolFormation
+		override val loiterRadius: Int
+		override val minSpawnTime: Int
+		override val maxSpawnTime: Int
+		override val amount: Int
+		override val conversationId: String
+		override val equipmentId: Long?
 
 		init {
 			run {
@@ -120,102 +120,6 @@ class NpcStaticSpawnLoader : DataLoader() {
 			}
 			this.conversationId = set.getText("conversation_id")
 			this.equipmentId = parseEquipmentId(set)
-		}
-
-		override fun getId(): String {
-			return id
-		}
-
-		override fun getTerrain(): Terrain {
-			return terrain
-		}
-
-		override fun getX(): Double {
-			return x
-		}
-
-		override fun getY(): Double {
-			return y
-		}
-
-		override fun getZ(): Double {
-			return z
-		}
-
-		override fun getHeading(): Int {
-			return heading
-		}
-
-		override fun getCellId(): Int {
-			return cellId
-		}
-
-		override fun getSpawnerType(): String {
-			return spawnerType
-		}
-
-		override fun getNpcId(): String {
-			return npcId
-		}
-
-		override fun getSpawnerFlag(): SpawnerFlag {
-			return spawnerFlag!!
-		}
-
-		override fun getDifficulty(): CreatureDifficulty {
-			return difficulty!!
-		}
-
-		override fun getMinLevel(): Int {
-			return minLevel
-		}
-
-		override fun getMaxLevel(): Int {
-			return maxLevel
-		}
-
-		override fun getBuildingId(): String {
-			return buildingId
-		}
-
-		override fun getMood(): String {
-			return mood
-		}
-
-		override fun getBehavior(): AIBehavior {
-			return behavior
-		}
-
-		override fun getPatrolId(): String {
-			return patrolId
-		}
-
-		override fun getPatrolFormation(): PatrolFormation {
-			return patrolFormation
-		}
-
-		override fun getLoiterRadius(): Int {
-			return loiterRadius
-		}
-
-		override fun getMinSpawnTime(): Int {
-			return minSpawnTime
-		}
-
-		override fun getMaxSpawnTime(): Int {
-			return maxSpawnTime
-		}
-
-		override fun getAmount(): Int {
-			return amount
-		}
-
-		override fun getConversationId(): String {
-			return conversationId
-		}
-
-		override fun getEquipmentId(): Long? {
-			return equipmentId
 		}
 
 		companion object {

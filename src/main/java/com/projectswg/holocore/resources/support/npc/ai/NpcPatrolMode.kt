@@ -39,7 +39,7 @@ import kotlin.math.ceil
 /**
  * AI object that patrols the specified route
  */
-class NpcPatrolMode(obj: AIObject, waypoints: MutableList<ResolvedPatrolWaypoint>) : NpcMode(obj) {
+class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : NpcMode(obj) {
 	
 	private val waypoints: MutableList<NavigationPoint>
 	

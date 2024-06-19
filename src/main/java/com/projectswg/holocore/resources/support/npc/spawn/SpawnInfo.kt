@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -24,62 +24,37 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.npc.spawn;
+package com.projectswg.holocore.resources.support.npc.spawn
 
-import com.projectswg.common.data.location.Terrain;
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty;
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior;
-import org.jetbrains.annotations.Nullable;
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.PatrolFormation
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.SpawnerFlag
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 
-public interface SpawnInfo {
-
-	String getId();
-
-	Terrain getTerrain();
-
-	double getX();
-
-	double getY();
-
-	double getZ();
-
-	int getHeading();
-
-	int getCellId();
-
-	String getSpawnerType();
-
-	String getNpcId();
-
-	NpcStaticSpawnLoader.SpawnerFlag getSpawnerFlag();
-
-	CreatureDifficulty getDifficulty();
-
-	int getMinLevel();
-
-	int getMaxLevel();
-
-	String getBuildingId();
-
-	String getMood();
-
-	AIBehavior getBehavior();
-
-	String getPatrolId();
-
-	NpcStaticSpawnLoader.PatrolFormation getPatrolFormation();
-
-	int getLoiterRadius();
-
-	int getMinSpawnTime();
-
-	int getMaxSpawnTime();
-
-	int getAmount();
-
-	String getConversationId();
-
-	@Nullable Long getEquipmentId();
-
+interface SpawnInfo {
+	val id: String
+	val terrain: Terrain
+	val x: Double
+	val y: Double
+	val z: Double
+	val heading: Int
+	val cellId: Int
+	val spawnerType: String
+	val npcId: String
+	val spawnerFlag: SpawnerFlag
+	val difficulty: CreatureDifficulty
+	val minLevel: Int
+	val maxLevel: Int
+	val buildingId: String
+	val mood: String
+	val behavior: AIBehavior
+	val patrolId: String
+	val patrolFormation: PatrolFormation
+	val loiterRadius: Int
+	val minSpawnTime: Int
+	val maxSpawnTime: Int
+	val amount: Int
+	val conversationId: String
+	val equipmentId: Long?
 }
