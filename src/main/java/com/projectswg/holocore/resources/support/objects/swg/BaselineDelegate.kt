@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -45,4 +45,17 @@ class BaselineDelegate<T>(private var value: T, private val page: Int, private v
 		}
 	}
 	
+}
+
+class TransformedBaselineDelegate<T, R>(private var value: T, private val page: Int, private val update: Int, private val transformer: (T) -> R) {
+
+	operator fun getValue(thisRef: SWGObject, property: KProperty<*>): T {
+		return value
+	}
+
+	operator fun setValue(thisRef: SWGObject, property: KProperty<*>, value: T) {
+		this.value = value
+		thisRef.sendDelta(page, update, transformer(value))
+	}
+
 }

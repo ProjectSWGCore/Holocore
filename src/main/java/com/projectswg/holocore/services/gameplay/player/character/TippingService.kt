@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -78,11 +78,12 @@ class TippingService : Service() {
 			return
 		}
 
-		val suiMessageBox = SuiMessageBox("@base_player:tip_wire_title", "@base_player:tip_wire_prompt")
-		suiMessageBox.addOkButtonCallback("tip") { _, _ ->
-			wire(player, target, amount, amountWithSurcharge)
+		SuiMessageBox().run {
+			title = "@base_player:tip_wire_title"
+			prompt = "@base_player:tip_wire_prompt"
+			addOkButtonCallback("tip") { _, _ -> wire(player, target, amount, amountWithSurcharge) }
+			display(player)
 		}
-		suiMessageBox.display(player)
 	}
 
 	private fun transferCash(player: Player, amount: Int, targetPlayer: Player) {

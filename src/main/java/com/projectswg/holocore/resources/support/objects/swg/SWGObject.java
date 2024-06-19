@@ -840,7 +840,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		return buildoutTag;
 	}
 	
-	public Object getServerAttribute(ServerAttribute key) {
+	public @Nullable Object getServerAttribute(ServerAttribute key) {
 		return serverAttributes.get(key);
 	}
 	

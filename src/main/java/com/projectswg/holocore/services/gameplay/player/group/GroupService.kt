@@ -41,11 +41,11 @@ import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.player.Player.PlayerServer
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
+import com.projectswg.holocore.resources.support.objects.swg.group.LootRule
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
@@ -113,34 +113,38 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	}
 
 	private fun handleGroupLootOptions(groupLeader: Player) {
-		val window = SuiListBox(SuiButtons.OK_CANCEL, "@group:set_loot_type_title", "@group:set_loot_type_text")
-		window.addListItem("Free For All")
-		window.addListItem("Master Looter")
-		window.addListItem("Lottery")
-		window.addListItem("Random")
-		window.addCallback("handleSelectedItem") { event: SuiEvent, parameters: Map<String?, String?>? ->
-			if (event == SuiEvent.OK_PRESSED) {
-				val selectedRow = SuiListBox.getSelectedRow(parameters)
-				val lootRuleMsg: String = when (window.getListItem(selectedRow).name) {
-					"Free For All" -> "selected_free4all"
-					"Master Looter" -> "selected_master"
-					"Lottery" -> "selected_lotto"
-					"Random" -> "selected_random"
-					else -> "selected_free4all"
-				}
+		SuiListBox().run {
+			title = "@group:set_loot_type_title"
+			prompt = "@group:set_loot_type_text"
 
-				val groupObject = ObjectLookup.getObjectById(groupLeader.creatureObject.groupId) as GroupObject?
+			addListItem("Free For All")
+			addListItem("Master Looter")
+			addListItem("Lottery")
+			addListItem("Random")
+			addCallback("handleSelectedItem") { event: SuiEvent, parameters: Map<String, String> ->
+				if (event == SuiEvent.OK_PRESSED) {
+					val selectedRow = SuiListBox.getSelectedRow(parameters)
+					val lootRuleMsg: String = when (getListItem(selectedRow).name) {
+						"Free For All" -> "selected_free4all"
+						"Master Looter" -> "selected_master"
+						"Lottery" -> "selected_lotto"
+						"Random" -> "selected_random"
+						else -> "selected_free4all"
+					}
 
-				if (groupObject != null) {
-					groupObject.setLootRule(selectedRow)
-					groupObject.displayLootRuleChangeBox(lootRuleMsg)
-					sendSystemMessage(groupLeader, lootRuleMsg)
-					StandardLog.onPlayerEvent(this, groupLeader, "changed the loot rule of their group to %s", lootRuleMsg)
+					val groupObject = ObjectLookup.getObjectById(groupLeader.creatureObject.groupId) as GroupObject?
+
+					if (groupObject != null) {
+						groupObject.lootRule = LootRule.fromId(selectedRow)
+						groupObject.displayLootRuleChangeBox(lootRuleMsg)
+						sendSystemMessage(groupLeader, lootRuleMsg)
+						StandardLog.onPlayerEvent(this, groupLeader, "changed the loot rule of their group to %s", lootRuleMsg)
+					}
 				}
 			}
-		}
 
-		window.display(groupLeader)
+			display(groupLeader)
+		}
 	}
 
 	private fun handleMemberRezoned(player: Player) {
@@ -271,7 +275,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 		// Set the group leader to newLeader
 		sendGroupSystemMessage(group, "new_leader", "TU", newLeader.objectName)
-		group.setLeader(newLeader)
+		group.leader = newLeader
 		StandardLog.onPlayerEvent(this, currentLeader, "made %s the new leader of their group", newLeader)
 	}
 
@@ -282,7 +286,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 			return
 		}
 		val group = getGroup(creature.groupId) ?: return
-		group.lootMaster = target.objectId
+		group.lootMaster = target
 		sendGroupSystemMessage(group, "new_master_looter", "TU", target.objectName)
 		StandardLog.onPlayerEvent(this, player, "made %s the master looter of their group", target)
 	}
@@ -318,8 +322,9 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		StandardLog.onPlayerEvent(this, leader, "formed group %s with %s", group, member)
 	}
 
-	private fun destroyGroup(group: GroupObject, player: Player) {
-		ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), UpdateType.DESTROY).broadcast()
+	private fun destroyGroup(group: GroupObject, player: Player?) {
+		if (player != null)
+			ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), UpdateType.DESTROY).broadcast()
 		sendGroupSystemMessage(group, "disbanded")
 		group.disbandGroup()
 		DestroyObjectIntent(group).broadcast()
@@ -353,19 +358,18 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		val player = creature.owner ?: return
 
 		// Check size of the group, if it only has two members, destroy the group
-		if (group.groupMembers.size <= 2) {
+		if (group.size <= 2) {
 			destroyGroup(group, group.leaderPlayer)
 			return
 		}
+		val wasLeader = creature == group.leader
 		sendSystemMessage(player, "removed")
 		group.removeMember(creature)
 		updateChatRoom(player, group, UpdateType.LEAVE)
 
 		// If the leader has left, promote another group member to leader and notify the group of this
-		if (creature.objectId == group.leaderId) {
-			val newLeader = group.groupMemberObjects.iterator().next() // Pick a new leader
-			group.setLeader(newLeader)
-			sendGroupSystemMessage(group, "new_leader", "TU", newLeader.objectName)
+		if (wasLeader) {
+			sendGroupSystemMessage(group, "new_leader", "TU", group.leader!!.objectName)
 		}
 	}
 

@@ -29,8 +29,7 @@ package com.projectswg.holocore.services.support.global.chat;
 import com.projectswg.common.data.encodables.chat.ChatAvatar;
 import com.projectswg.common.data.encodables.oob.ProsePackage;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatFriendsListUpdate;
-import com.projectswg.holocore.intents.support.global.chat.ChatAvatarRequestIntent;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
+import com.projectswg.holocore.intents.support.global.chat.*;
 import com.projectswg.holocore.intents.support.global.zone.NotifyPlayersPacketIntent;
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
@@ -61,32 +60,40 @@ public class ChatFriendService extends Service {
 				break;
 		}
 	}
-	
+
 	@IntentHandler
-	private void handleChatAvatarRequestIntent(ChatAvatarRequestIntent cari) {
-		switch (cari.getRequestType()) {
-			case TARGET_STATUS:
-				sendTargetAvatarStatus(cari.getPlayer(), new ChatAvatar(cari.getTarget()));
-				break;
-			case FRIEND_ADD_TARGET:
-				handleAddFriend(cari.getPlayer(), cari.getTarget());
-				break;
-			case FRIEND_REMOVE_TARGET:
-				handleRemoveFriend(cari.getPlayer(), cari.getTarget());
-				break;
-			case FRIEND_LIST:
-				handleRequestFriendList(cari.getPlayer());
-				break;
-			case IGNORE_ADD_TARGET:
-				handleAddIgnored(cari.getPlayer(), cari.getTarget());
-				break;
-			case IGNORE_REMOVE_TARGET:
-				handleRemoveIgnored(cari.getPlayer(), cari.getTarget());
-				break;
-			case IGNORE_LIST:
-				handleRequestIgnoreList(cari.getPlayer());
-				break;
-		}
+	private void handleChatAvatarGetTargetStatusIntent(ChatAvatarGetTargetStatusIntent cai) {
+		sendTargetAvatarStatus(cai.getPlayer(), new ChatAvatar(cai.getTarget()));
+	}
+
+	@IntentHandler
+	private void handleChatAvatarGetFriendListIntent(ChatAvatarGetFriendListIntent cai) {
+		handleRequestFriendList(cai.getPlayer());
+	}
+
+	@IntentHandler
+	private void handleChatAvatarAddFriendIntent(ChatAvatarAddFriendIntent cai) {
+		handleAddFriend(cai.getPlayer(), cai.getTarget());
+	}
+
+	@IntentHandler
+	private void handleChatAvatarRemoveFriendIntent(ChatAvatarRemoveFriendIntent cai) {
+		handleRemoveFriend(cai.getPlayer(), cai.getTarget());
+	}
+
+	@IntentHandler
+	private void handleChatAvatarGetIgnoreListIntent(ChatAvatarGetIgnoreListIntent cai) {
+		handleRequestIgnoreList(cai.getPlayer());
+	}
+
+	@IntentHandler
+	private void handleChatAvatarAddIgnoreIntent(ChatAvatarAddIgnoreIntent cai) {
+		handleAddIgnored(cai.getPlayer(), cai.getTarget());
+	}
+
+	@IntentHandler
+	private void handleChatAvatarRemoveIgnoreIntent(ChatAvatarRemoveIgnoreIntent cai) {
+		handleRemoveIgnored(cai.getPlayer(), cai.getTarget());
 	}
 	
 	private void updateChatAvatarStatus(Player player, boolean online) {

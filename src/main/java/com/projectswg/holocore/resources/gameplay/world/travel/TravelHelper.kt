@@ -85,7 +85,7 @@ class TravelHelper {
 		return travel[template]
 	}
 
-	fun getAvailableTravelPoints(traveller: SWGObject, terrain: Terrain): List<TravelPoint> {
+	fun getAvailableTravelPoints(traveller: SWGObject, terrain: Terrain): MutableList<TravelPoint> {
 		if (!isValidRoute(traveller.terrain, terrain)) return ArrayList()
 		val nearest = getNearestTravelPoint(traveller)
 		return pointContainer.getPointsForTerrain(nearest, terrain)

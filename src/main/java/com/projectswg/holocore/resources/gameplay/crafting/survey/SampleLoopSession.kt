@@ -41,7 +41,6 @@ import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.Gal
 import com.projectswg.holocore.resources.gameplay.crafting.resource.galactic.RawResourceType
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.rawResources
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow
@@ -66,7 +65,7 @@ class SampleLoopSession(private val creature: CreatureObject, private val survey
 	fun isMatching(creature: CreatureObject, surveyTool: TangibleObject, resource: GalacticResource?, sampleLocation: Location): Boolean {
 		if (this.sampleLocation.distanceTo(sampleLocation) >= 0.5 || this.sampleLocation.terrain != sampleLocation.terrain) return false // Too far away for the same session
 
-		return this.creature == creature && (this.surveyTool == surveyTool) && this.resource.equals(resource)
+		return this.creature == creature && (this.surveyTool == surveyTool) && this.resource == resource
 	}
 
 	@get:Synchronized
@@ -85,7 +84,7 @@ class SampleLoopSession(private val creature: CreatureObject, private val survey
 	 * Attempts to start the sample loop session with the specified executor.  If the loop is unable to start, this function returns false; otherwise this function returns true.
 	 *
 	 * @param executor the executor for the loop to run on
-	 * @return TRUE if the sample loop has begin, FALSE otherwise
+	 * @return TRUE if the sample loop has begun, FALSE otherwise
 	 */
 	@Synchronized
 	fun startSession(executor: ScheduledThreadPool): Boolean {
@@ -166,21 +165,26 @@ class SampleLoopSession(private val creature: CreatureObject, private val survey
 	}
 
 	private fun openConcentrationWindow() {
-		val window = SuiMessageBox(SuiButtons.OK_CANCEL, "@survey:cnode_t", "@survey:cnode_d")
-		window.setProperty("btnOk", "Text", "@survey:cnode_2")
-		window.setProperty("btnCancel", "Text", "@survey:cnode_1")
-		window.addOkButtonCallback("okButton") { _: SuiEvent?, parameters: Map<String?, String?>? ->
-			val index = SuiListBox.getSelectedRow(parameters)
-			this.sampleWindow = null
-			if (index == 0) {
-				createHighestConcentrationWaypoint()
-				stopSession()
+		SuiMessageBox().run {
+			title = "@survey:cnode_t"
+			prompt = "@survey:cnode_d"
+			setProperty("btnOk", "Text", "@survey:cnode_2")
+			setProperty("btnCancel", "Text", "@survey:cnode_1")
+			addOkButtonCallback("okButton") { _: SuiEvent, parameters: Map<String, String> ->
+				val index = SuiListBox.getSelectedRow(parameters)
+				sampleWindow = null
+				if (index == 0) {
+					createHighestConcentrationWaypoint()
+					stopSession()
+				}
 			}
-		}
-		window.addCancelButtonCallback("cancelButton") { _: SuiEvent?, _: Map<String?, String?>? -> this.sampleWindow = null }
-		if (this.sampleWindow == null) {
-			this.sampleWindow = window
-			window.display(creature.owner)
+			addCancelButtonCallback("cancelButton") { _, _ -> sampleWindow = null }
+
+			if (sampleWindow == null) {
+				val player = creature.owner ?: return@run
+				sampleWindow = this@run
+				display(player)
+			}
 		}
 		paused = true
 	}

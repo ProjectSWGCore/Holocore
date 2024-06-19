@@ -157,7 +157,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 				val type = activeTaskListInfo.type
 				if (type == "quest.task.ground.wait_for_signal") {
 					if (intent.signalName == activeTaskListInfo.signalName) {
-						handleSignal(activeTaskListInfo, questListInfo, player);
+						handleSignal(activeTaskListInfo, questListInfo, player)
 					}
 				}
 			}
@@ -379,15 +379,18 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	}
 
 	private fun handleShowMessageBox(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
-		val messageBoxTitle = currentTask.messageBoxTitle
-		val messageBoxText = currentTask.messageBoxText
+		SuiMessageBox().run {
+			title = currentTask.messageBoxTitle
+			prompt = currentTask.messageBoxText
+			buttons = SuiButtons.OK
+			addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
+			addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
+			setSize(384, 256)
+			setLocation(320, 256)
+			display(player)
+		}
+
 		val messageBoxSound = currentTask.messageBoxSound
-		val sui = SuiMessageBox(SuiButtons.OK, messageBoxTitle, messageBoxText)
-		sui.addOkButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
-		sui.addCancelButtonCallback("questMessageBoxCallback") { _, _ -> completeTask(questListInfo, player, currentTask) }
-		sui.setSize(384, 256)
-		sui.setLocation(320, 256)
-		sui.display(player)
 		if (!messageBoxSound.isNullOrBlank()) {
 			player.sendPacket(PlayMusicMessage(0, messageBoxSound, 1, false))
 		}
@@ -598,7 +601,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (lootCount > 0) {
 			for (i in 0 until lootCount) {
 				val lootName = currentTask.lootName
-				if (lootName != null && lootName.isNotBlank()) {
+				if (!lootName.isNullOrBlank()) {
 					val item = createItem(lootName)
 					if (item != null) {
 						transferItemToInventory(player, item)
@@ -613,7 +616,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		if (itemCount > 0) {
 			for (i in 0 until itemCount) {
 				val itemTemplate = currentTask.itemTemplate
-				if (itemTemplate != null && itemTemplate.isNotBlank()) {
+				if (!itemTemplate.isNullOrBlank()) {
 					val item = ObjectCreator.createObjectFromTemplate(itemTemplate)
 					transferItemToInventory(player, item)
 				}
@@ -656,7 +659,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 
 	private fun getModelCrc(currentTask: QuestTaskInfo): CRC {
 		val npcAppearanceServerTemplate = currentTask.npcAppearanceServerTemplate
-		if (npcAppearanceServerTemplate != null && npcAppearanceServerTemplate.isNotBlank()) {
+		if (!npcAppearanceServerTemplate.isNullOrBlank()) {
 			val sharedTemplate = ClientFactory.formatToSharedFile(npcAppearanceServerTemplate)
 			return CRC(sharedTemplate)
 		}

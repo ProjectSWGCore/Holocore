@@ -97,7 +97,7 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 
 		// Within the same group
 		GroupObject group = (GroupObject) ObjectLookup.getObjectById(creature.getGroupId());
-		if (group == null || !group.getGroupMembers().containsValue(mount.getOwnerId())) {
+		if (group == null || !group.isInGroup(mount.getOwnerId())) {
 			return false;
 		}
 

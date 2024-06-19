@@ -46,9 +46,13 @@ class LightsaberCrystalService : Service() {
 			return
 		}
 		val owner = tuner.owner ?: return
-		val suiMessageBox = SuiMessageBox(SuiButtons.YES_NO, "@jedi_spam:confirm_tune_title", "@jedi_spam:confirm_tune_prompt")
-		suiMessageBox.addOkButtonCallback("tune") { _: SuiEvent?, _: Map<String?, String?>? -> TuneCrystalNowIntent(tuner, crystal).broadcast() }
-		suiMessageBox.display(owner)
+		SuiMessageBox().run {
+			title = "@jedi_spam:confirm_tune_title"
+			prompt = "@jedi_spam:confirm_tune_prompt"
+			buttons = SuiButtons.YES_NO
+			addOkButtonCallback("tune") { _: SuiEvent, _: Map<String, String> -> TuneCrystalNowIntent(tuner, crystal).broadcast() }
+			display(owner)
+		}
 	}
 
 	@IntentHandler

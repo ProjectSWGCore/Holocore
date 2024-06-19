@@ -89,8 +89,12 @@ class JediTrialsService : Service() {
 	}
 
 	private fun showPadawanTrialsCompletedSui(player: Player) {
-		val suiMessageBox = SuiMessageBox(SuiButtons.OK, "@jedi_trials:padawan_trials_title", "@jedi_trials:padawan_trials_completed")
-		suiMessageBox.display(player)
+		SuiMessageBox().run {
+			title = "@jedi_trials:padawan_trials_title"
+			prompt = "@jedi_trials:padawan_trials_completed"
+			buttons = SuiButtons.OK
+			display(player)
+		}
 	}
 
 	private fun playElectricEffect(player: Player) {

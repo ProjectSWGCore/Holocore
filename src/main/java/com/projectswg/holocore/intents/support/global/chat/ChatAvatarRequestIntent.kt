@@ -29,14 +29,10 @@ package com.projectswg.holocore.intents.support.global.chat
 import com.projectswg.holocore.resources.support.global.player.Player
 import me.joshlarson.jlcommon.control.Intent
 
-data class ChatAvatarRequestIntent(val player: Player, val target: String, val requestType: RequestType) : Intent() {
-	enum class RequestType {
-		FRIEND_LIST,
-		TARGET_STATUS,
-		FRIEND_ADD_TARGET,
-		FRIEND_REMOVE_TARGET,
-		IGNORE_ADD_TARGET,
-		IGNORE_REMOVE_TARGET,
-		IGNORE_LIST
-	}
-}
+data class ChatAvatarGetTargetStatusIntent(val player: Player, val target: String) : Intent()
+data class ChatAvatarGetFriendListIntent(val player: Player) : Intent()
+data class ChatAvatarAddFriendIntent(val player: Player, val target: String) : Intent()
+data class ChatAvatarRemoveFriendIntent(val player: Player, val target: String) : Intent()
+data class ChatAvatarGetIgnoreListIntent(val player: Player) : Intent()
+data class ChatAvatarAddIgnoreIntent(val player: Player, val target: String) : Intent()
+data class ChatAvatarRemoveIgnoreIntent(val player: Player, val target: String) : Intent()

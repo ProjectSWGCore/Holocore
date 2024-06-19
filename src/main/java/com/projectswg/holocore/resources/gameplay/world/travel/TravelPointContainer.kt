@@ -39,7 +39,7 @@ class TravelPointContainer {
 		getTravelPoints(terrain, point.isStarport).add(point)
 	}
 
-	fun getPointsForTerrain(nearest: TravelPoint?, to: Terrain): List<TravelPoint> {
+	fun getPointsForTerrain(nearest: TravelPoint?, to: Terrain): MutableList<TravelPoint> {
 		val points: MutableList<TravelPoint> = ArrayList()
 		if (nearest!!.location.terrain == to) {
 			points.addAll(getTravelPoints(to, false))

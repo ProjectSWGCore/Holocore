@@ -28,13 +28,11 @@
 package com.projectswg.holocore.services.gameplay.structures.terminals
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ElevatorLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
@@ -127,24 +125,27 @@ class ElevatorService : Service() {
 	}
 	
 	private fun provideFloorSelection(creature: CreatureObject, building: BuildingObject, floors: List<ElevatorLoader.ElevatorInfo>) {
-		val listBox = SuiListBox(SuiButtons.OK_CANCEL, "Elevator", "Select your desired floor.")
-		
-		for (floor in floors) {
-			listBox.addListItem(getFloorString(creature, floor))
+		SuiListBox().run {
+			title = "Elevator"
+			prompt = "Select your desired floor."
+
+			for (floor in floors) {
+				addListItem(getFloorString(creature, floor))
+			}
+
+			addCancelButtonCallback("handleFloorCancel") { _, _ -> removeListBoxFromElevatorMap(creature) }
+			addOkButtonCallback("handleFloorSelection") { _, parameters: Map<String, String> ->
+				val selection = SuiListBox.getSelectedRow(parameters)
+				if (selection < 0 || selection >= floors.size)
+					return@addOkButtonCallback
+
+				teleportToFloor(creature, building, floors, selection)
+				removeListBoxFromElevatorMap(creature)
+			}
+
+			display(creature.owner ?: return)
+			updateElevatorMap(creature, this)
 		}
-		
-		listBox.addCancelButtonCallback("handleFloorCancel") { _, _ -> removeListBoxFromElevatorMap(creature) }
-		listBox.addCallback(SuiEvent.OK_PRESSED, "handleFloorSelection") { _, parameters: Map<String?, String?>? ->
-			val selection = SuiListBox.getSelectedRow(parameters)
-			if (selection < 0 || selection >= floors.size)
-				return@addCallback
-			
-			teleportToFloor(creature, building, floors, selection)
-			removeListBoxFromElevatorMap(creature)
-		}
-		
-		listBox.display(creature.owner ?: return)
-		updateElevatorMap(creature, listBox)
 	}
 	
 	private fun teleportToFloor(creature: CreatureObject, building: BuildingObject, floors: List<ElevatorLoader.ElevatorInfo>, targetFloor: Int) {

@@ -101,13 +101,13 @@ public final class GrantLootService extends Service {
 			assert group != null;
 			switch (group.getLootRule()) {
 				case MASTER_LOOTER:
-					looters.add((CreatureObject) ObjectLookup.getObjectById(group.getLootMaster()));
+					looters.add(group.getLootMaster());
 					break;
 				case FREE_FOR_ALL:
 				case RANDOM:
 				case LOTTERY:
 					// Get all looters within range
-					looters.addAll(group.getGroupMemberObjects().stream().filter(m -> m.getWorldLocation().flatDistanceTo(corpseWorldLocation) <= lootRange).collect(Collectors.toList()));
+					looters.addAll(group.getGroupMemberObjects().stream().filter(m -> m.getWorldLocation().flatDistanceTo(corpseWorldLocation) <= lootRange).toList());
 					break;
 			}
 			if (group.getLootRule() == LootRule.LOTTERY) {
@@ -142,10 +142,9 @@ public final class GrantLootService extends Service {
 	
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent ipi) {
-		if (!(ipi.getPacket() instanceof GroupRequestLotteryItems))
+		if (!(ipi.getPacket() instanceof GroupRequestLotteryItems request))
 			return;
 		Player player = ipi.getPlayer();
-		GroupRequestLotteryItems request = (GroupRequestLotteryItems) ipi.getPacket();
 		SWGObject requestObject = ObjectLookup.getObjectById(request.getInventoryId());
 		if (requestObject == null)
 			return;

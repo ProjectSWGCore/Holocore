@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,7 +36,6 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.gameplay.crafting.trade.TradeSession
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
-import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiMessageBox
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
@@ -161,20 +160,22 @@ class TradeService : Service() {
 	}
 
 	private fun handleTradeSessionRequest(packetSender: Player, initiator: CreatureObject, accepter: CreatureObject) {
-		val requestBox = SuiMessageBox(
-			SuiButtons.OK_CANCEL, "Trade Request", """${initiator.objectName} wants to trade with you. Do you want to accept the request?"""
-		)
-		requestBox.addOkButtonCallback("handleTradeRequest") { _: SuiEvent?, _: Map<String?, String?>? ->
-			val tradeSession = initiator.tradeSession ?: return@addOkButtonCallback
-			accepter.tradeSession = tradeSession
-			tradeSession.beginTrade()
+		val player = accepter.owner ?: return
+		SuiMessageBox().run {
+			title = "Trade Request"
+			prompt = "${initiator.objectName} wants to trade with you. Do you want to accept the request?"
+			addOkButtonCallback("handleTradeRequest") { _: SuiEvent, _: Map<String, String> ->
+				val tradeSession = initiator.tradeSession ?: return@addOkButtonCallback
+				accepter.tradeSession = tradeSession
+				tradeSession.beginTrade()
+			}
+			addCancelButtonCallback("handleTradeRequestDeny") { _: SuiEvent, _: Map<String, String> ->
+				packetSender.sendPacket(
+					DenyTradeMessage(), AbortTradeMessage()
+				)
+			}
+			display(player)
 		}
-		requestBox.addCancelButtonCallback("handleTradeRequestDeny") { _: SuiEvent?, _: Map<String?, String?>? ->
-			packetSender.sendPacket(
-				DenyTradeMessage(), AbortTradeMessage()
-			)
-		}
-		requestBox.display(accepter.owner)
 	}
 
 	private fun verifyTradeSession(session: TradeSession?, creature: CreatureObject): Boolean {

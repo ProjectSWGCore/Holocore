@@ -45,7 +45,6 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 public class CombatExperienceService extends Service {
 
 	private static final float XP_BONUS = 0.05f;
-	private static final float XP_BONUS_LIMIT =1.1f;
 
 	@IntentHandler
 	private void handleCreatureKilledIntent(CreatureKilledIntent i) {
@@ -176,8 +175,7 @@ public class CombatExperienceService extends Service {
 
 		if (isAggressive || isAssisting) bonusFactor += XP_BONUS;
 		if (isDeathblow) bonusFactor += XP_BONUS;
-		if (bonusFactor > XP_BONUS_LIMIT) bonusFactor = XP_BONUS_LIMIT;
-
+		// Maximum bonusFactor should be 10% (1.10)
 
 		if (killerLevel - corpseLevel >= 5) {
 			return 1;

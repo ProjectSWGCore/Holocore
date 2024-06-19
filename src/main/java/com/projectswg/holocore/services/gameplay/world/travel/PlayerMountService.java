@@ -308,7 +308,7 @@ public class PlayerMountService extends Service {
 			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
 		} else if (mount.getSlottedObject("rider") != null) {
 			GroupObject group = (GroupObject) ObjectLookup.getObjectById(player.getGroupId());
-			if (group == null || !group.getGroupMembers().containsValue(mount.getOwnerId())) {
+			if (group == null || !group.isInGroup(mount.getOwnerId())) {
 				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when not in the same group as the owner", mount);
 				return;
 			}
