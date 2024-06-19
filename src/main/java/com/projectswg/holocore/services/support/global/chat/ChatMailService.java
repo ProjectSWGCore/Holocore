@@ -50,7 +50,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChatMailService extends Service {
 	
-	private AtomicInteger maxMailId;
+	private final AtomicInteger maxMailId;
 	
 	public ChatMailService() {
 		this.maxMailId = new AtomicInteger(0);
@@ -59,12 +59,11 @@ public class ChatMailService extends Service {
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject obj = oci.getObj();
-		if (!(obj instanceof PlayerObject))
+		if (!(obj instanceof PlayerObject player))
 			return;
-		
-		PlayerObject player = (PlayerObject) obj;
+
 		int highestMailId = player.getMail().stream().mapToInt(Mail::getId).max().orElse(0);
-		maxMailId.updateAndGet(prevMax -> prevMax >= highestMailId ? prevMax : highestMailId);
+		maxMailId.updateAndGet(prevMax -> Math.max(prevMax, highestMailId));
 	}
 	
 	@IntentHandler
@@ -132,9 +131,8 @@ public class ChatMailService extends Service {
 	
 	@IntentHandler
 	private void handlePersistentMessageIntent(PersistentMessageIntent pmi) {
-		if (pmi.getReceiver() == null)
-			return;
-		
+		pmi.getReceiver();
+
 		Player recipient = pmi.getReceiver().getOwner();
 		
 		if (recipient == null)
@@ -186,17 +184,11 @@ public class ChatMailService extends Service {
 			return;
 		}
 		
-		ChatPersistentMessageToClient packet = null;
-		
-		switch (requestType) {
-			case FULL_MESSAGE:
-				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), false);
-				break;
-			case HEADER_ONLY:
-				packet = new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), true);
-				break;
-		}
-		
+		ChatPersistentMessageToClient packet = switch (requestType) {
+			case FULL_MESSAGE -> new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), false);
+			case HEADER_ONLY -> new ChatPersistentMessageToClient(mail, ProjectSWG.INSTANCE.getGalaxy().getName(), true);
+		};
+
 		receiver.sendPacket(packet);
 	}
 	

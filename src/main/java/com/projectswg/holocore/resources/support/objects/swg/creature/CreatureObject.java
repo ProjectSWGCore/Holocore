@@ -275,14 +275,13 @@ public class CreatureObject extends TangibleObject {
 		return containersOpen.add(new Container(obj, slot));
 	}
 
-	public boolean closeAllContainers() {
+	public void closeAllContainers() {
 		boolean empty = containersOpen.isEmpty();
 		containersOpen.clear();
-		return !empty;
 	}
 
-	public boolean closeContainer(SWGObject obj, String slot) {
-		return containersOpen.remove(new Container(obj, slot));
+	public void closeContainer(SWGObject obj, String slot) {
+		containersOpen.remove(new Container(obj, slot));
 	}
 
 	public void setTeleportDestination(SWGObject parent, Location location) {
@@ -980,7 +979,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline1(Player target, BaselineBuilder bb) {
+	public void createBaseline1(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 2 variables
 		bb.addObject(baseAttributes); // Attributes player has without any gear on -- 2
 		bb.addObject(skills); // 3
@@ -989,7 +988,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	public void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 11 variables - TANO3 (7) + BASE3 (4)
 		creo3.createBaseline3(bb);
 	}
@@ -1015,38 +1014,38 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline4(Player target, BaselineBuilder bb) {
+	public void createBaseline4(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline4(target, bb); // 0 variables
 		creo4.createBaseline4(bb);
 	}
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	public void createBaseline6(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline6(target, bb); // 2 variables - TANO6 (0) + BASE6 (2)
 		creo6.createBaseline6(target, bb);
 	}
 	
 	@Override
-	protected void parseBaseline1(NetBuffer buffer) {
+	protected void parseBaseline1(@NotNull NetBuffer buffer) {
 		super.parseBaseline1(buffer);
 		baseAttributes.decode(buffer);
 		skills = SWGSet.getSwgSet(buffer, 1, 3, StringType.ASCII);
 	}
 	
 	@Override
-	protected void parseBaseline3(NetBuffer buffer) {
+	protected void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		creo3.parseBaseline3(buffer);
 	}
 	
 	@Override
-	protected void parseBaseline4(NetBuffer buffer) {
+	protected void parseBaseline4(@NotNull NetBuffer buffer) {
 		super.parseBaseline4(buffer);
 		creo4.parseBaseline4(buffer);
 	}
 	
 	@Override
-	protected void parseBaseline6(NetBuffer buffer) {
+	protected void parseBaseline6(@NotNull NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		creo6.parseBaseline6(buffer);
 	}

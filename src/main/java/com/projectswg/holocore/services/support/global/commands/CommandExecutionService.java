@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -49,7 +49,6 @@ import com.projectswg.holocore.resources.support.global.commands.callbacks.surve
 import com.projectswg.holocore.resources.support.global.commands.callbacks.survey.CmdRequestSurvey;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
-import me.joshlarson.jlcommon.log.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +80,6 @@ public class CommandExecutionService extends Service {
 	private void registerCppCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
 		List<Command> commands = DataLoader.Companion.commands().getCommandsByCppCallback(callbackName);
 //		assert commands != null;
-		if (commands == null) {
-			Log.e("Invalid CPP command registration: %s", callbackName);
-			return;
-		}
 		for (Command command : commands)
 			callbacks.put(command, callback);
 	}
@@ -92,10 +87,6 @@ public class CommandExecutionService extends Service {
 	private void registerScriptCallback(String callbackName, Supplier<? extends ICmdCallback> callback) {
 		List<Command> commands = DataLoader.Companion.commands().getCommandsByScriptCallback(callbackName);
 //		assert commands != null;
-		if (commands == null) {
-			Log.e("Invalid Script command registration: %s", callbackName);
-			return;
-		}
 		for (Command command : commands)
 			callbacks.put(command, callback);
 	}

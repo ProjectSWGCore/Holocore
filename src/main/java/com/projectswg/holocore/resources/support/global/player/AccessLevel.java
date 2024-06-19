@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,15 +30,15 @@ package com.projectswg.holocore.resources.support.global.player;
  * I believe that the godLevel value in the iffs corresponds to the access level of the command.
  * This might not be correct, since there are at least 69 commands with godLevel 0 that require the "admin" ability,
  * however, the godLevels seem to follow this hierarchy relatively decently.
- *
+ * <p>
  * The way the admin system is currently set up is that each level has access to all levels beneath it.
- *
+ * <p>
  * For example: WARDENSs have access to all PLAYER commands, CSRs have access to all WARDEN commands and PLAYER commands,
  * QAs have access to all CSR commands ... etc.
- *
+ * <p>
  * With that in mind, if we restrict the ability to have the "admin" ability to those with WARDEN+ then the godLevel 0
  * commands with the "admin" ability would effectively just become WARDEN commands.
- *
+ * <p>
  * We can change the names/swap the values of these as needed. This is just a rough estimate on my part.
  */
 public enum AccessLevel {

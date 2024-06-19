@@ -88,7 +88,7 @@ class BuildoutLoader private constructor(events: Collection<String>) {
 	private fun loadStandardBuildout(events: Set<String>, set: SdbResultSet) {
 		// "id", "template_crc", "container_id", "event", "terrain", "x", "y", "z", "orientation_x", "orientation_y", "orientation_z", "orientation_w", "cell_index", "tag"
 		val event = set.getText(3)
-		if (!event.isEmpty() && !events.contains(event)) return
+		if (event.isNotEmpty() && !events.contains(event)) return
 
 		val obj = ObjectCreator.createObjectFromTemplate(set.getInt(0), CRC_DATABASE.getString(set.getInt(1).toInt()))
 		obj.isGenerated = false
@@ -101,7 +101,7 @@ class BuildoutLoader private constructor(events: Collection<String>) {
 		} else if (obj is BuildingObject) {
 			obj.populateCells()
 			for (cell in obj.getContainedObjects()) objectMap[cell.objectId] = cell
-			if (!obj.getBuildoutTag().isEmpty()) buildingMap[obj.getBuildoutTag()] = obj
+			if (obj.getBuildoutTag().isNotEmpty()) buildingMap[obj.getBuildoutTag()] = obj
 		}
 		objectMap[set.getInt(0)] = obj
 	}

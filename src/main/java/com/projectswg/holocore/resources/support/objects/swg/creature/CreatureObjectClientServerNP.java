@@ -60,8 +60,8 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 	
 	/** CREO4-00 */ private float								accelPercent			= 1;
 	/** CREO4-01 */ private float								accelScale				= DEFAULT_ACCELSCALE;
-	/** CREO4-02 */ private AttributesMutable					bonusAttributes;
-	/** CREO4-03 */ private SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3, StringType.ASCII);
+	/** CREO4-02 */ private final AttributesMutable					bonusAttributes;
+	/** CREO4-03 */ private final SWGMap<String, SkillMod>			skillMods				= new SWGMap<>(4, 3, StringType.ASCII);
 	/** CREO4-04 */ private	float								movementPercent			= 1;
 	/** CREO4-05 */ private float								movementScale			= DEFAULT_MOVEMENTSCALE;
 	/** CREO4-06 */ private long								performanceListenTarget	= 0;
@@ -71,8 +71,8 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 	/** CREO4-10 */ private float								turnScale				= DEFAULT_TURNSCALE;
 	/** CREO4-11 */ private float								walkSpeed				= DEFAULT_WALKSPEED;
 	/** CREO4-12 */ private float								waterModPercent			= 0.75f;
-	/** CREO4-13 */ private SWGSet<GroupMissionCriticalObject>	missionCriticalObjects	= new SWGSet<>(4, 13);
-	/** CREO4-14 */ private SWGMap<String, Integer>				commands				= new SWGMap<>(4, 14, StringType.ASCII);
+	/** CREO4-13 */ private final SWGSet<GroupMissionCriticalObject>	missionCriticalObjects	= new SWGSet<>(4, 13);
+	/** CREO4-14 */ private final SWGMap<String, Integer>				commands				= new SWGMap<>(4, 14, StringType.ASCII);
 	
 	public CreatureObjectClientServerNP(@NotNull CreatureObject obj) {
 		this.obj = obj;

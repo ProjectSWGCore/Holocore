@@ -61,9 +61,6 @@ class Command private constructor(builder: CommandBuilder) {
 		assert(name == name.lowercase())
 	}
 
-	val isCombatCommand: Boolean
-		get() = false
-
 	fun getDisallowedLocomotions(): Set<Locomotion> {
 		return disallowedLocomotions
 	}

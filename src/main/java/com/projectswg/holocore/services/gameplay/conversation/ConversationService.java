@@ -94,18 +94,16 @@ public class ConversationService extends Service {
 	private void handleMoveObjectIntent(MoveObjectIntent intent) {
 		SWGObject object = intent.getObj();
 		
-		if (!(object instanceof CreatureObject)) {
+		if (!(object instanceof CreatureObject creatureObject)) {
 			return;
 		}
-		
-		CreatureObject creatureObject = (CreatureObject) object;
-		
+
 		if (!isConversing(creatureObject)) {
 			return;
 		}
 		
 		Session session = sessions.get(creatureObject);
-		AIObject npc = session.getNpc();
+		AIObject npc = session.npc();
 		
 		if (isWithinRange(creatureObject, npc)) {
 			return;
@@ -119,12 +117,10 @@ public class ConversationService extends Service {
 	private void handleObjectCreatedIntent(ObjectCreatedIntent intent) {
 		SWGObject object = intent.getObj();
 		
-		if (!(object instanceof AIObject)) {
+		if (!(object instanceof AIObject npc)) {
 			return;
 		}
-		
-		AIObject npc = (AIObject) object;
-		
+
 		if (!isConversableNpc(npc)) {
 			return;
 		}
@@ -140,11 +136,7 @@ public class ConversationService extends Service {
 		
 		Spawner spawner = npc.getSpawner();
 		String conversationId = spawner.getConversationId();
-		
-		if (conversationId == null) {
-			return;
-		}
-		
+
 		List<Conversation> conversations = conversationLoader.getInitialConversations(conversationId);
 		
 		Conversation conversation = reduce(conversations, starter.getOwner());
@@ -165,8 +157,8 @@ public class ConversationService extends Service {
 		CreatureObject starter = intent.getStarter();
 		
 		Session session = sessions.get(starter);
-		Conversation currentConversation = session.getConversation();
-		AIObject npc = session.getNpc();
+		Conversation currentConversation = session.conversation();
+		AIObject npc = session.npc();
 		
 		List<PlayerResponse> filteredResponses = getFilteredResponses(starter, currentConversation);
 		PlayerResponse selectedResponse = filteredResponses.get(selection);
@@ -190,7 +182,7 @@ public class ConversationService extends Service {
 		if (isConversing(creatureObject)) {
 			Session session = sessions.remove(creatureObject);
 			
-			if (!isWithinRange(creatureObject, session.getNpc())) {
+			if (!isWithinRange(creatureObject, session.npc())) {
 				abortConversation(creatureObject);
 			}
 		}
@@ -200,11 +192,7 @@ public class ConversationService extends Service {
 		ConversationLoader conversationLoader = ServerData.INSTANCE.getConversationLoader();
 		Spawner spawner = npc.getSpawner();
 		String conversationId = spawner.getConversationId();
-		
-		if (conversationId == null) {
-			return false;
-		}
-		
+
 		Collection<String> spawnConversationIds = conversationLoader.getConversationIds(conversationId);
 		
 		return !spawnConversationIds.isEmpty();
@@ -231,11 +219,7 @@ public class ConversationService extends Service {
 		return playerResponses.stream()
 				.filter(playerResponse -> {
 					String nextConversationId = playerResponse.getNext();
-					
-					if (nextConversationId == null) {
-						return false;
-					}
-					
+
 					Conversation nextConversation = conversationLoader.getConversation(nextConversationId);
 					
 					if (nextConversation == null) {
@@ -306,8 +290,8 @@ public class ConversationService extends Service {
 	}
 	
 	private void abortConversation(CreatureObject creatureObject, Session session) {
-		Conversation conversation = session.getConversation();
-		AIObject npc = session.getNpc();
+		Conversation conversation = session.conversation();
+		AIObject npc = session.npc();
 		ProsePackage npcMessage = conversation.getNpcMessage();
 		StringId npcMessageBase = npcMessage.getBase();
 		
@@ -335,22 +319,8 @@ public class ConversationService extends Service {
 		
 		return distance <= ALLOWED_DISTANCE;
 	}
-	
-	private static class Session {
-		private final Conversation conversation;
-		private final AIObject npc;
-		
-		public Session(Conversation conversation, AIObject npc) {
-			this.conversation = conversation;
-			this.npc = npc;
-		}
-		
-		public Conversation getConversation() {
-			return conversation;
-		}
-		
-		public AIObject getNpc() {
-			return npc;
-		}
+
+	private record Session(Conversation conversation, AIObject npc) {
+
 	}
 }

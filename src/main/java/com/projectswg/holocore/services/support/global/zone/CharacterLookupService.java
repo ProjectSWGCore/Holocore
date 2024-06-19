@@ -120,10 +120,9 @@ public class CharacterLookupService extends Service {
 	@IntentHandler
 	private void handleObjectCreatedIntent(ObjectCreatedIntent oci) {
 		SWGObject obj = oci.getObj();
-		if (!(obj instanceof CreatureObject))
+		if (!(obj instanceof CreatureObject creature))
 			return;
-		
-		CreatureObject creature = (CreatureObject) obj;
+
 		if (!creature.isPlayer())
 			return;
 		
@@ -138,10 +137,9 @@ public class CharacterLookupService extends Service {
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
 		SWGObject obj = doi.getObj();
-		if (!(obj instanceof CreatureObject))
+		if (!(obj instanceof CreatureObject creature))
 			return;
-		
-		CreatureObject creature = (CreatureObject) obj;
+
 		if (!creature.isPlayer())
 			return;
 		

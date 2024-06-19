@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -43,14 +43,12 @@ import me.joshlarson.jlcommon.log.Log
 import java.io.IOException
 import java.net.InetAddress
 import java.net.InetSocketAddress
-import java.nio.ByteBuffer
 import java.util.concurrent.ConcurrentHashMap
 
 class NetworkClientService : Service() {
 	
 	private var tcpServer: TCPServer<NetworkClient> = TCPServer()
-	private val clients: MutableMap<Long, NetworkClient>
-	private val inboundBuffer: ByteBuffer
+	private val clients: MutableMap<Long, NetworkClient> = ConcurrentHashMap()
 	private var udpServer: UDPServer
 	@Volatile
 	private var operational: Boolean = false
@@ -59,8 +57,6 @@ class NetworkClientService : Service() {
 		get() = PswgDatabase.config.getInt(this, "bindPort", 44463)
 	
 	init {
-		this.clients = ConcurrentHashMap()
-		this.inboundBuffer = ByteBuffer.allocate(INBOUND_BUFFER_SIZE)
 		this.operational = true
 		
 		val bindPort = bindPort
@@ -137,10 +133,5 @@ class NetworkClientService : Service() {
 	private fun handleConnectionClosedIntent(cci: ConnectionClosedIntent) {
 		disconnect(cci.player.networkId)
 	}
-	
-	companion object {
-		
-		private const val INBOUND_BUFFER_SIZE = 4096
-	}
-	
+
 }

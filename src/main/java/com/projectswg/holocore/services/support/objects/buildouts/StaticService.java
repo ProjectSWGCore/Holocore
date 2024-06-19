@@ -142,19 +142,17 @@ public class StaticService extends Service {
 				Log.e("Parent object with cell specified is not a BuildingObject!");
 		}
 		
-		private SWGObject createObjectInParent(SWGObject parent) {
+		private void createObjectInParent(SWGObject parent) {
 			assert parent != null;
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.systemMove(parent, Location.builder().setPosition(x, y, z).setTerrain(parent.getTerrain()).setHeading(heading).build());
 			new ObjectCreatedIntent(obj).broadcast();
-			return obj;
 		}
 		
-		private SWGObject createObject(Location parentLocation) {
+		private void createObject(Location parentLocation) {
 			SWGObject obj = ObjectCreator.createObjectFromTemplate(iff);
 			obj.setLocation(Location.builder().setPosition(x, y, z).setTerrain(parentLocation.getTerrain()).setHeading(heading).translateLocation(parentLocation).build());
 			new ObjectCreatedIntent(obj).broadcast();
-			return obj;
 		}
 		
 	}

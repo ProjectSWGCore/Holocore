@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,14 +38,11 @@ class AwarenessUtilities {
 	}
 	
 	public static boolean isInAwareness(@NotNull SWGObject obj) {
-		switch (obj.getBaselineType()) {
-			case WAYP:
-				return false;
-			case CREO:
-				return !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer();
-			default:
-				return true;
-		}
+		return switch (obj.getBaselineType()) {
+			case WAYP -> false;
+			case CREO -> !((CreatureObject) obj).isPlayer() || ((CreatureObject) obj).isLoggedInPlayer();
+			default -> true;
+		};
 	}
 	
 }

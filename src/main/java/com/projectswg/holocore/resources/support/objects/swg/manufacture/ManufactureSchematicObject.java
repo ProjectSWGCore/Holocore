@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.support.data.collections.SWGMap;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 public class ManufactureSchematicObject extends IntangibleObject {
 	
@@ -107,7 +108,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	}
 	
 	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	public void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addObject(attributes);
 		bb.addInt(itemsPerContainer);
@@ -115,7 +116,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	}
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	public void createBaseline6(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addArray(appearanceData);
 		bb.addArray(customAppearance);
@@ -125,7 +126,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	}
 	
 	@Override
-	public void parseBaseline3(NetBuffer buffer) {
+	public void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		attributes = SWGMap.getSwgMap(buffer, 3, 5, StringId.class, Float.class);
 		itemsPerContainer = buffer.getInt();
@@ -133,7 +134,7 @@ public class ManufactureSchematicObject extends IntangibleObject {
 	}
 	
 	@Override
-	public void parseBaseline6(NetBuffer buffer) {
+	public void parseBaseline6(@NotNull NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		appearanceData = buffer.getArray();
 		customAppearance = buffer.getArray();

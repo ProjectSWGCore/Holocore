@@ -421,8 +421,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	/**
 	 * Gets the object that occupies the specified slot
-	 * @param slotName
-	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot or it doesn't exist.
+	 * @param slotName The slot name to look up.
+	 * @return The {@link SWGObject} occupying the slot. Returns null if there is nothing in the slot, or it doesn't exist.
 	 */
 	public SWGObject getSlottedObject(String slotName) {
 		return slots.get(slotName);
@@ -980,7 +980,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	/**
 	 * Gets the arrangementId for the {@link SWGObject} for the current instance
-	 * @param child
+	 * @param child The child to calculate the proper slot arrangement for.
 	 * @return Arrangement ID for the object
 	 */
 	public int getArrangementId(SWGObject child) {
@@ -1184,7 +1184,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	public void createBaseline1(Player target, BaselineBuilder bb) {
+	public void createBaseline1(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline1(target, bb); // 0 variables
 //		if (getStringId().toString().equals("@obj_n:unknown_object"))
 //			return;
@@ -1195,7 +1195,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	protected void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addFloat(complexity); // 0
 		bb.addObject(stringId); // 1
@@ -1206,7 +1206,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	protected void createBaseline6(Player target, BaselineBuilder bb) {
+	protected void createBaseline6(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		bb.addInt(ProjectSWG.INSTANCE.getGalaxy().getId()); // 0
 		bb.addObject(detailStringId); // 1
@@ -1215,7 +1215,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	protected void parseBaseline1(NetBuffer buffer) {
+	protected void parseBaseline1(@NotNull NetBuffer buffer) {
 		super.parseBaseline1(buffer);
 //		if (getStringId().toString().equals("@obj_n:unknown_object"))
 //			return;
@@ -1224,7 +1224,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	protected void parseBaseline3(NetBuffer buffer) {
+	protected void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		complexity = buffer.getFloat();
 		stringId = buffer.getEncodable(StringId.class);
@@ -1233,7 +1233,7 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	}
 	
 	@Override
-	protected void parseBaseline6(NetBuffer buffer) {
+	protected void parseBaseline6(@NotNull NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		buffer.getInt(); // Immutable ... can't change the galaxy id
 		detailStringId = buffer.getEncodable(StringId.class);

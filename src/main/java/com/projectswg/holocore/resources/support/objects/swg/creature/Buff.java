@@ -30,6 +30,7 @@ import com.projectswg.common.data.encodables.mongo.MongoData;
 import com.projectswg.common.data.encodables.mongo.MongoPersistable;
 import com.projectswg.common.encoding.Encodable;
 import com.projectswg.common.network.NetBuffer;
+import org.jetbrains.annotations.NotNull;
 
 public class Buff implements Encodable, MongoPersistable {
 
@@ -50,7 +51,7 @@ public class Buff implements Encodable, MongoPersistable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		NetBuffer data = NetBuffer.allocate(getLength());
 		data.addInt(0);
 		data.addInt(endTime);

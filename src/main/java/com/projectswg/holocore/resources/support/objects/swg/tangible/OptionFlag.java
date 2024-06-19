@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -60,7 +60,7 @@ public enum OptionFlag {
 	HOLIDAY_INTERESTING	(0x08000000),
 	LOCKED				(0x10000000);
 
-	int flag;
+	final int flag;
 
 	OptionFlag(int flag) {
 		this.flag = flag;

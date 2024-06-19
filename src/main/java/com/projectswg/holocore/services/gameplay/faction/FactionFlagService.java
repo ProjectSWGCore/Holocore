@@ -242,11 +242,9 @@ public class FactionFlagService extends Service {
 		Player targetOwner = target.getOwner();
 
 		for (SWGObject objectAware : target.getObjectsAware()) {
-			if (!(objectAware instanceof TangibleObject)) {
+			if (!(objectAware instanceof TangibleObject tangibleAware)) {
 				continue;
 			}
-
-			TangibleObject tangibleAware = (TangibleObject) objectAware;
 
 			Player observerOwner = tangibleAware.getOwner();
 
@@ -261,13 +259,13 @@ public class FactionFlagService extends Service {
 	private boolean isInPvpZone(Location location) {
 		return pvpZones.values().stream()
 				.anyMatch(pvpZone -> {
-					Location zoneLocation = pvpZone.getLocation();
+					Location zoneLocation = pvpZone.location();
 
 					if (location.getTerrain() != zoneLocation.getTerrain()) {
 						return false;
 					}
 
-					double radius = pvpZone.getRadius();
+					double radius = pvpZone.radius();
 
 					return location.isWithinFlatDistance(zoneLocation, radius);
 				});
@@ -329,21 +327,7 @@ public class FactionFlagService extends Service {
 		return new UpdatePvpStatusMessage(target.getPvpFaction(), target.getObjectId(), self.getPvpFlagsFor(target));
 	}
 
-	private static class PvpZone {
-		private final Location location;
-		private final double radius;
+	private record PvpZone(Location location, double radius) {
 
-		public PvpZone(Location location, double radius) {
-			this.location = location;
-			this.radius = radius;
-		}
-
-		public Location getLocation() {
-			return location;
-		}
-
-		public double getRadius() {
-			return radius;
-		}
 	}
 }

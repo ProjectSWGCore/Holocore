@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -80,28 +80,18 @@ public enum ServerAttribute {
 	public static ServerAttribute getFromKey(String key) {
 		return KEY_LOOKUP.getEnum(key, null);
 	}
-	
-	private static class Storage<T> {
-		
-		private final Class<T> requiredClass;
-		private final Function<T, String> storeFunction;
-		private final Function<String, T> retrieveFunction;
-		
-		Storage(Class<T> requiredClass, Function<T, String> storeFunction, Function<String, T> retrieveFunction) {
-			this.requiredClass = requiredClass;
-			this.storeFunction = storeFunction;
-			this.retrieveFunction = retrieveFunction;
-		}
-		
+
+	private record Storage<T>(Class<T> requiredClass, Function<T, String> storeFunction, Function<String, T> retrieveFunction) {
+
 		public String store(Object obj) {
-			assert requiredClass.isInstance(obj);
-			return storeFunction.apply(requiredClass.cast(obj));
-		}
-		
+				assert requiredClass.isInstance(obj);
+				return storeFunction.apply(requiredClass.cast(obj));
+			}
+
 		public Object retrieve(String str) {
-			return retrieveFunction.apply(str);
-		}
-		
+				return retrieveFunction.apply(str);
+			}
+
 	}
 	
 	private enum PredefinedDataType {

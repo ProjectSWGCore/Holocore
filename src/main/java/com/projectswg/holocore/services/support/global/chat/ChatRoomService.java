@@ -43,6 +43,7 @@ import com.projectswg.holocore.intents.support.global.zone.DeleteCharacterIntent
 import com.projectswg.holocore.resources.support.global.chat.ChatRoomHandler;
 import com.projectswg.holocore.resources.support.global.player.AccessLevel;
 import com.projectswg.holocore.resources.support.global.player.Player;
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
 import com.projectswg.holocore.utilities.ChatRoomLogWrapper;
@@ -130,12 +131,8 @@ public class ChatRoomService extends Service {
 	
 	@IntentHandler
 	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		switch (pei.getEvent()) {
-			case PE_FIRST_ZONE:
-				chatRoomHandler.enterChatChannels(pei.getPlayer());
-				break;
-			default:
-				break;
+		if (pei.getEvent() == PlayerEvent.PE_FIRST_ZONE) {
+			chatRoomHandler.enterChatChannels(pei.getPlayer());
 		}
 	}
 	

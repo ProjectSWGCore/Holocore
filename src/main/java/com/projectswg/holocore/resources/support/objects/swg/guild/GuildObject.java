@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,6 +33,7 @@ import com.projectswg.holocore.resources.support.data.collections.SWGSet;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import org.jetbrains.annotations.NotNull;
 
 public class GuildObject extends SWGObject {
 
@@ -43,14 +44,14 @@ public class GuildObject extends SWGObject {
 	}
 
 	@Override
-	protected void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		bb.addObject(abbreviations);
 		bb.incrementOperandCount(1);
 	}
 
 	@Override
-	protected void parseBaseline3(NetBuffer buffer) {
+	protected void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		abbreviations = SWGSet.getSwgSet(buffer, 3, 5, StringType.ASCII);
 	}

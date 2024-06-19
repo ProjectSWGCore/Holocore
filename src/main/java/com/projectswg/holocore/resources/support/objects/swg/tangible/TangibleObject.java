@@ -64,7 +64,7 @@ public class TangibleObject extends SWGObject {
 	private int				components		= 0;
 	private boolean			inCombat		= false;
 	private int				conditionDamage	= 0;
-	private Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
+	private final Set<PvpFlag>	pvpFlags		= EnumSet.noneOf(PvpFlag.class);
 	private PvpStatus		pvpStatus 		= PvpStatus.COMBATANT;
 	private Faction			faction			= ServerData.INSTANCE.getFactions().getFaction(PvpFaction.NEUTRAL.name().toLowerCase(Locale.US));
 	private boolean			visibleGmOnly	= true;
@@ -73,7 +73,7 @@ public class TangibleObject extends SWGObject {
 	private int				counter			= 0;
 	private String			currentCity				= "";
 	
-	private Set<Long>	defenders	= new CopyOnWriteArraySet<>();
+	private final Set<Long>	defenders	= new CopyOnWriteArraySet<>();
 	
 	private int requiredCombatLevel;
 	private ArmorCategory armorCategory;
@@ -338,8 +338,9 @@ public class TangibleObject extends SWGObject {
 	}
 
 	/**
+	 * Determines whether this object and otherObject are enemies.
 	 *
-	 * @param otherObject
+	 * @param otherObject The potential enemy to check.
 	 * @return true if this object is an enemy of {@code otherObject}
 	 */
 	public boolean isAttackable(TangibleObject otherObject) {
@@ -593,7 +594,7 @@ public class TangibleObject extends SWGObject {
 	}
 	
 	@Override
-	protected void createBaseline3(Player target, BaselineBuilder bb) {
+	protected void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb); // 4 variables - BASE3 (4)
 		bb.addObject(appearanceData); // - 4
 		bb.addObject(visibleComponents);	// 5
@@ -607,7 +608,7 @@ public class TangibleObject extends SWGObject {
 	}
 
 	@Override
-	protected void parseBaseline3(NetBuffer buffer) {
+	protected void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		appearanceData.decode(buffer);
 		visibleComponents.decode(buffer);
@@ -698,7 +699,7 @@ public class TangibleObject extends SWGObject {
 	/**
 	 * Used for weapons to optionally display barrels, stocks and scopes.
 	 * Not all weapons support all three types.
-	 * 
+	 * <p>
 	 * It's possible it's used for more than just weapons since the variable
 	 * lives on TangibleObject and not WeaponObject.
 	 * 

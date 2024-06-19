@@ -27,7 +27,6 @@
 package com.projectswg.holocore.services.support.npc.spawn
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.location.Point3D
 import com.projectswg.common.network.packets.swg.zone.CreateClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.DestroyClientPathMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.IntendedTarget
@@ -96,7 +95,7 @@ class SpawnerService : Service() {
 					player.sendSelf(CreateClientPathMessage(waypoints.stream()
 							.map { wayp -> if (wayp.parent == null) wayp.location else Location.builder(wayp.location).translateLocation(wayp.parent.worldLocation).build() }
 							.map { it.position }
-							.collect(Collectors.toList<Point3D>())))
+							.collect(Collectors.toList())))
 					adminsWithRoutes.add(player)
 				}
 			}
@@ -192,7 +191,7 @@ class SpawnerService : Service() {
 	private fun spawn(spawn: SpawnInfo) {
 		val npcId = spawn.npcId
 
-		if (ServerData.npcs.get(npcId) == null) {
+		if (ServerData.npcs[npcId] == null) {
 			Log.w("Invalid npc %s", npcId)
 			return
 		}

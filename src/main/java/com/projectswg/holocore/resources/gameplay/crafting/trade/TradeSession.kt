@@ -204,7 +204,7 @@ class TradeSession(initiator: CreatureObject, receiver: CreatureObject) {
 		}
 
 		fun offerItem(item: SWGObject): Boolean {
-			if (item.superParent !== creature) { // gotta have the item on ya
+			if (item.superParent !== creature) { // got to have the item on ya
 				return false
 			}
 			invalidateAcceptance()

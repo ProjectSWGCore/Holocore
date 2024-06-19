@@ -44,7 +44,6 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup
 import me.joshlarson.jlcommon.log.Log
-import java.util.function.BiConsumer
 
 /**
  * Created by Waverunner on 8/19/2015

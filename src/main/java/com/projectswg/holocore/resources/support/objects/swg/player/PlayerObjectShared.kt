@@ -38,7 +38,7 @@ import com.projectswg.holocore.resources.support.objects.swg.IndirectBaselineDel
 /**
  * PLAY 3
  */
-internal class PlayerObjectShared(private val obj: PlayerObject) : MongoPersistable {
+internal class PlayerObjectShared(obj: PlayerObject) : MongoPersistable {
 
 	private val _flags = SWGFlag(3, 5)
 	val flags = _flags.wrapper(obj) { it: PlayerFlags -> it.flag }

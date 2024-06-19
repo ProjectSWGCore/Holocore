@@ -270,16 +270,12 @@ public final class GrantLootService extends Service {
 					new SystemMessageIntent(player, "@container_error_message:container03").broadcast();
 					player.sendPacket(new PlayMusicMessage(0, "sound/ui_danger_message.snd", 1, false));
 					break;
-				case NO_PERMISSION:
+				case NO_PERMISSION, SLOT_OCCUPIED:
 					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
 					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					break;
 				case SLOT_NO_EXIST:
 					new SystemMessageIntent(player, "@container_error_message:container06").broadcast();
-					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
-					break;
-				case SLOT_OCCUPIED:
-					new SystemMessageIntent(player, "@container_error_message:container08").broadcast();
 					player.sendPacket(new PlayMusicMessage(0, "sound/ui_negative.snd", 1, false));
 					break;
 			}

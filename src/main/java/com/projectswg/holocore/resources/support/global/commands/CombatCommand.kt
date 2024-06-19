@@ -36,7 +36,7 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 	val validTarget: ValidTarget = builder.validTarget
 	val isForceCombat: Boolean = builder.forceCombat
 	private val animations: Map<WeaponType, Array<String>> = builder.animations
-	val defaultAnimation: Array<String> = requireNotNull(builder.defaultAnimation)
+	private val defaultAnimation: Array<String> = requireNotNull(builder.defaultAnimation)
 	val attackType: AttackType = builder.attackType
 	val healthCost: Double = builder.healthCost
 	val actionCost: Double = builder.actionCost
@@ -48,9 +48,9 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 	val isBleeding: Boolean = builder.bleeding
 	val isStunning: Boolean = builder.stunning
 	val triggerEffect: String = builder.triggerEffect
-	val triggerEffectHardpoint: String? = builder.triggerEffectHardpoint
+	val triggerEffectHardpoint: String = builder.triggerEffectHardpoint
 	val targetEffect: String = builder.targetEffect
-	val targetEffectHardpoint: String? = builder.targetEffectHardpoint
+	val targetEffectHardpoint: String = builder.targetEffectHardpoint
 	val damageType: DamageType = builder.damageType
 	val elementalType: DamageType = builder.elementalType
 	val isIgnoreDistance: Boolean = builder.ignoreDistance

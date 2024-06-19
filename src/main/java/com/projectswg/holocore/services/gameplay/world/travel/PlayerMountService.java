@@ -120,8 +120,8 @@ public class PlayerMountService extends Service {
 			return;
 		
 		for (Mount m : mounts) {
-			if (!player.getAware().contains(m.getMount()))
-				storeMount(player, m.getMount(), m.getPetControlDevice());
+			if (!player.getAware().contains(m.mount()))
+				storeMount(player, m.mount(), m.getPetControlDevice());
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class PlayerMountService extends Service {
 		Collection<Mount> mounts = calledMounts.get(creature);
 		if (mounts != null) {
 			for (Mount p : mounts) {
-				if (p.getMount() == mount) {
+				if (p.mount() == mount) {
 					storeMount(creature, mount, p.getPetControlDevice());
 					return;
 				}
@@ -166,7 +166,7 @@ public class PlayerMountService extends Service {
 		if (mounts != null) {
 			for (Mount mount : mounts) {
 				if (mount.getPetControlDevice() == pcd) {
-					storeMount(creature, mount.getMount(), pcd);
+					storeMount(creature, mount.mount(), pcd);
 					return;
 				}
 			}
@@ -399,7 +399,7 @@ public class PlayerMountService extends Service {
 			return;
 		
 		for (Mount mount : mounts) {
-			storeMount(player, mount.getMount(), mount.getPetControlDevice());
+			storeMount(player, mount.mount(), mount.getPetControlDevice());
 		}
 	}
 	
@@ -446,35 +446,23 @@ public class PlayerMountService extends Service {
 	private static boolean isMountable(CreatureObject mount) {
 		return mount.hasOptionFlags(OptionFlag.MOUNT);
 	}
-	
-	private static class Mount {
-		
-		private final IntangibleObject mountControlDevice;
-		private final CreatureObject mount;
-		
-		private Mount(IntangibleObject mountControlDevice, CreatureObject mount) {
-			this.mountControlDevice = mountControlDevice;
-			this.mount = mount;
-		}
-		
+
+	private record Mount(IntangibleObject mountControlDevice, CreatureObject mount) {
+
 		public IntangibleObject getPetControlDevice() {
-			return mountControlDevice;
-		}
-		
-		public CreatureObject getMount() {
-			return mount;
-		}
-		
+				return mountControlDevice;
+			}
+
 		@Override
-		public int hashCode() {
-			return mountControlDevice.hashCode();
-		}
-		
+			public int hashCode() {
+				return mountControlDevice.hashCode();
+			}
+
 		@Override
-		public boolean equals(Object o) {
-			return o instanceof Mount && ((Mount) o).mountControlDevice.equals(mountControlDevice);
-		}
-		
+			public boolean equals(Object o) {
+				return o instanceof Mount && ((Mount) o).mountControlDevice.equals(mountControlDevice);
+			}
+
 	}
 	
 }

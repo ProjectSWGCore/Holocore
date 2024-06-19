@@ -76,18 +76,14 @@ public class CombatRegenerationService extends Service {
 	
 	@IntentHandler
 	private void handleDestroyObjectIntent(DestroyObjectIntent doi) {
-		if (doi.getObj() instanceof CreatureObject)
-			npcRegen.remove(doi.getObj());
+		if (doi.getObj() instanceof CreatureObject creature)
+			npcRegen.remove(creature);
 	}
 	
 	private void periodicRegeneration() {
 		PlayerLookup.getLoggedInCharacters().forEach(this::regenerate);
 		npcRegen.forEach(this::regenerate);
-		
-		for (CreatureObject npc : npcRegen) {
-			if (!npc.isInCombat() && npc.getHealth() == npc.getMaxHealth() && npc.getAction() == npc.getMaxAction())
-				npcRegen.remove(npc);
-		}
+		npcRegen.removeIf(npc -> !npc.isInCombat() && npc.getHealth() == npc.getMaxHealth() && npc.getAction() == npc.getMaxAction());
 	}
 	
 	private void regenerate(CreatureObject creature) {

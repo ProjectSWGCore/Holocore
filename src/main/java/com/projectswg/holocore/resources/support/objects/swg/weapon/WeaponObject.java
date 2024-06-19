@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -284,7 +284,7 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	public void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
 		bb.addInt(accuracy); // pre-NGE
@@ -298,7 +298,7 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	public void createBaseline6(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 
 		bb.addInt(type.getNum());
@@ -307,7 +307,7 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	@Override
-	public void parseBaseline3(NetBuffer buffer) {
+	public void parseBaseline3(@NotNull NetBuffer buffer) {
 		super.parseBaseline3(buffer);
 		buffer.getInt(); // accuracy
 		buffer.getFloat(); // minRange
@@ -318,7 +318,7 @@ public class WeaponObject extends TangibleObject {
 	}
 	
 	@Override
-	public void parseBaseline6(NetBuffer buffer) {
+	public void parseBaseline6(@NotNull NetBuffer buffer) {
 		super.parseBaseline6(buffer);
 		type = WeaponType.getWeaponType(buffer.getInt());
 	}

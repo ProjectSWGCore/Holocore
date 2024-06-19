@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,6 +36,7 @@ import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 public class ResourceContainerObject extends TangibleObject {
 	
@@ -120,24 +121,24 @@ public class ResourceContainerObject extends TangibleObject {
 	}
 	
 	@Override
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	public void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		base3.createBaseline3(bb);
 	}
 	
 	@Override
-	public void parseBaseline3(NetBuffer data) {
+	public void parseBaseline3(@NotNull NetBuffer data) {
 		base3.parseBaseline3(data);
 	}
 	
 	@Override
-	public void createBaseline6(Player target, BaselineBuilder bb) {
+	public void createBaseline6(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline6(target, bb);
 		base6.createBaseline6(bb);
 	}
 	
 	@Override
-	public void parseBaseline6(NetBuffer data) {
+	public void parseBaseline6(@NotNull NetBuffer data) {
 		base6.parseBaseline6(data);
 	}
 	

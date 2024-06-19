@@ -179,7 +179,7 @@ internal class SurveyHandler(private val creature: CreatureObject, private val s
 			sendErrorMessage(creature, "error_message", "survey_cant")
 			return false
 		}
-		// No survey tool resolution - could be because the player is not a trader or because the survey tool somehow didn't have it's range set
+		// No survey tool resolution - could be because the player is not a trader or because the survey tool somehow didn't have its range set
 		if (resolution == null) {
 			sendErrorMessage(creature, "error_message", "survey_cant")
 			return false

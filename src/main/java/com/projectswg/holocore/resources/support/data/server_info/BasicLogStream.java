@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -43,8 +43,8 @@ public class BasicLogStream {
 		PrintStream s = null;
 		setupDirectories(file);
 		try {
-			s = new PrintStream(new FileOutputStream(file, false), true, StandardCharsets.US_ASCII.name());
-		} catch (UnsupportedEncodingException | FileNotFoundException e) {
+			s = new PrintStream(new FileOutputStream(file, false), true, StandardCharsets.US_ASCII);
+		} catch (FileNotFoundException e) {
 			Log.e(e);
 		}
 		this.streamMutex = new Object();

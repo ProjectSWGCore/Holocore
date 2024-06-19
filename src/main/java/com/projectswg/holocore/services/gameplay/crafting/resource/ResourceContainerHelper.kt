@@ -45,7 +45,7 @@ object ResourceContainerHelper {
 	fun giveResourcesToPlayer(amount: Int, resource: GalacticResource, player: Player, resourceContainerEventHandler: ResourceContainerEventHandler) {
 		val resourceObject = getOrCreateResourceObject(player.creatureObject, resource, resourceContainerEventHandler)
 		if (resourceObject != null) {
-			resourceObject.quantity = resourceObject.quantity + amount
+			resourceObject.quantity += amount
 			resourceContainerEventHandler.onSuccess()
 		}
 	}

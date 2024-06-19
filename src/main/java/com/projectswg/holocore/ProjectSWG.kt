@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -55,6 +55,7 @@ import java.io.File
 import java.time.OffsetTime
 import java.util.*
 import java.util.function.Consumer
+import kotlin.math.max
 
 object ProjectSWG {
 	val galaxy = Galaxy()
@@ -138,7 +139,7 @@ object ProjectSWG {
 			if (receiverName.indexOf('$') != -1) receiverName = receiverName.substring(0, receiverName.indexOf('$'))
 			receiverName = receiverName.replace("com.projectswg.holocore.services.", "")
 			val intentName = record.intent.simpleName
-			val recordCount = java.lang.Long.toString(record.count)
+			val recordCount = record.count.toString()
 			val recordTime = String.format("%.6fms", record.totalTime / 1E6)
 			val receiverSplit = receiverName.split("#".toRegex(), limit = 2).toTypedArray()
 			Log.i("        %-30s%-60s%-40s%-10s%-20s", intentName, receiverSplit[0], receiverSplit[1], recordCount, recordTime)
@@ -252,8 +253,8 @@ object ProjectSWG {
 		var maxLengthName = 0
 		var maxLengthLongName = 0
 		for (arg in parser.arguments) {
-			maxLengthName = Math.max(maxLengthName, arg.name.length)
-			maxLengthLongName = Math.max(maxLengthLongName, arg.longName.length)
+			maxLengthName = max(maxLengthName, arg.name.length)
+			maxLengthLongName = max(maxLengthLongName, arg.longName.length)
 		}
 		println("Help:")
 		for (arg in parser.arguments) {

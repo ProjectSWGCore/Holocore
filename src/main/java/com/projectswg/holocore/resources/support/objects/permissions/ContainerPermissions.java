@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -48,17 +48,12 @@ public interface ContainerPermissions extends MongoPersistable {
 	
 	static ContainerPermissions create(MongoData data) {
 		ContainerPermissionType type = ContainerPermissionType.valueOf(data.getString("type", ContainerPermissionType.DEFAULT.name()));
-		switch (type) {
-			case DEFAULT:
-			default:
-				return DefaultPermissions.from(data);
-			case ADMIN:
-				return AdminPermissions.from(data);
-			case READ_ONLY:
-				return ReadOnlyPermissions.from(data);
-			case READ_WRITE:
-				return ReadWritePermissions.from(data);
-		}
+		return switch (type) {
+			default -> DefaultPermissions.from(data);
+			case ADMIN -> AdminPermissions.from(data);
+			case READ_ONLY -> ReadOnlyPermissions.from(data);
+			case READ_WRITE -> ReadWritePermissions.from(data);
+		};
 	}
 	
 }

@@ -37,14 +37,9 @@ import java.util.concurrent.ConcurrentHashMap
 
 class CombatStatusService : Service() {
 	
-	private val inCombat: MutableSet<TangibleObject>
-	private val executor: ScheduledThreadPool
-	
-	init {
-		this.inCombat = ConcurrentHashMap.newKeySet()
-		this.executor = ScheduledThreadPool(1, 3, "combat-status-service")
-	}
-	
+	private val inCombat: MutableSet<TangibleObject> = ConcurrentHashMap.newKeySet()
+	private val executor: ScheduledThreadPool = ScheduledThreadPool(1, 3, "combat-status-service")
+
 	override fun start(): Boolean {
 		executor.start()
 		executor.executeWithFixedRate(1000, 1000) { this.periodicCombatStatusChecks() }

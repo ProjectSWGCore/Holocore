@@ -38,10 +38,9 @@ import java.util.*
 
 class CombatCommandHandler(toHitDie: Die, knockdownDie: Die, woundDie: Die) {
 	
-	private val hitTypeMap: MutableMap<HitType, CombatCommandHitType>
-	
+	private val hitTypeMap: MutableMap<HitType, CombatCommandHitType> = EnumMap(HitType::class.java)
+
 	init {
-		this.hitTypeMap = EnumMap(HitType::class.java)
 		val combatCommandAttack = CombatCommandAttack(toHitDie, knockdownDie, woundDie)
 		hitTypeMap[HitType.ATTACK] = combatCommandAttack
 		hitTypeMap[HitType.BUFF] = CombatCommandBuff.INSTANCE

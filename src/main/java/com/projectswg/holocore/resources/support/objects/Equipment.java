@@ -34,6 +34,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 public class Equipment implements Encodable {
 	
@@ -62,7 +63,7 @@ public class Equipment implements Encodable {
 	}
 	
 	@Override
-	public byte [] encode() {
+	public byte @NotNull [] encode() {
 		boolean hasWeapon = weapon != null;
 		byte [] weaponData = hasWeapon ? getWeaponData() : new byte[0];
 		NetBuffer buffer = NetBuffer.allocate(getLength(weaponData.length));

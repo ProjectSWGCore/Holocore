@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -75,12 +75,12 @@ public final class DefaultPermissions implements ContainerPermissions {
 	}
 	
 	@Override
-	public void readMongo(MongoData data) {
+	public void readMongo(@NotNull MongoData data) {
 		
 	}
 	
 	@Override
-	public void saveMongo(MongoData data) {
+	public void saveMongo(@NotNull MongoData data) {
 		
 	}
 	

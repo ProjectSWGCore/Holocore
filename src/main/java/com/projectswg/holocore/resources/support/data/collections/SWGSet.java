@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -32,6 +32,7 @@ import com.projectswg.common.encoding.StringType;
 import com.projectswg.common.network.NetBuffer;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import me.joshlarson.jlcommon.log.Log;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
@@ -127,7 +128,7 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (deltas.size() == 0)
+		if (deltas.isEmpty())
 			return;
 		
 		target.sendDelta(view, updateType, getDeltaData());
@@ -214,7 +215,7 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		ByteBuffer buffer;
 		synchronized (data) {
 			if (dataSize == 0)
@@ -233,7 +234,7 @@ public class SWGSet<E> extends CopyOnWriteArraySet<E> implements Encodable {
 	}
 	
 	@Override
-	public void decode(NetBuffer data) {
+	public void decode(@NotNull NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<E> elementType) instead");
 	}
 	

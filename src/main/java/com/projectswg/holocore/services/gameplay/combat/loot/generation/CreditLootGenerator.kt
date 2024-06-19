@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -35,7 +35,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject
 import java.util.concurrent.ThreadLocalRandom
 
-class CreditLootGenerator() {
+class CreditLootGenerator {
 	
 	fun generate(corpse: CreatureObject, loot: MutableList<SWGObject>) {
 		val random = ThreadLocalRandom.current()

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,11 +27,11 @@
 package com.projectswg.holocore.resources.support.objects.swg.installation;
 
 import com.projectswg.common.network.NetBuffer;
-import com.projectswg.common.network.NetBufferStream;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType;
 import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject;
+import org.jetbrains.annotations.NotNull;
 
 public class InstallationObject extends TangibleObject {
 	
@@ -67,7 +67,7 @@ public class InstallationObject extends TangibleObject {
 		this.powerRate = powerRate;
 	}
 	
-	public void createBaseline3(Player target, BaselineBuilder bb) {
+	public void createBaseline3(Player target, @NotNull BaselineBuilder bb) {
 		super.createBaseline3(target, bb);
 		
 		bb.addBoolean(activated);
@@ -77,7 +77,7 @@ public class InstallationObject extends TangibleObject {
 		bb.incrementOperandCount(3);
 	}
 	
-	public void parseBaseline3(NetBuffer data) {
+	public void parseBaseline3(@NotNull NetBuffer data) {
 		super.parseBaseline3(data);
 		activated = data.getBoolean();
 		power = data.getFloat();
@@ -86,9 +86,8 @@ public class InstallationObject extends TangibleObject {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof InstallationObject))
+		if (!(o instanceof InstallationObject inso))
 			return super.equals(o);
-		InstallationObject inso = (InstallationObject) o;
 		if (!super.equals(o))
 			return false;
 		return activated == inso.activated && Double.compare(power, inso.power) == 0 && Double.compare(powerRate, inso.powerRate) == 0;

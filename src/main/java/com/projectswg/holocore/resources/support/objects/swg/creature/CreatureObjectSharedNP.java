@@ -65,9 +65,9 @@ class CreatureObjectSharedNP implements MongoPersistable {
 	private boolean performing				= false;
 	private CreatureDifficulty	difficulty	= CreatureDifficulty.NORMAL;
 
-	private AttributesMutable	attributes;
-	private AttributesMutable	maxAttributes;
-	private SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
+	private final AttributesMutable	attributes;
+	private final AttributesMutable	maxAttributes;
+	private final SWGList<Equipment>	equipmentList 	= SWGList.Companion.createEncodableList(6, 16, Equipment::new);
 
 	private SWGMap<CRC, Buff>	buffs			= new SWGMap<>(6, 19);
 	

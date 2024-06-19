@@ -62,7 +62,7 @@ class AIObjectRadial : RadialHandlerInterface {
 	}
 
 	private fun appendScoutOptions(ai: AIObject, options: MutableCollection<RadialOption>) {
-		val npcInfo = ServerData.npcs.get(ai.creatureId) ?: return
+		val npcInfo = ServerData.npcs[ai.creatureId] ?: return
 		val harvestCreatureOptions = harvestCreatureOptions(npcInfo)
 		
 		if (harvestCreatureOptions.isNotEmpty()) {

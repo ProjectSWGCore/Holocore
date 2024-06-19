@@ -71,7 +71,7 @@ class SWGNameGenerator {
 			name.setLength(0)
 			do {
 				name.append(generateName(rule))
-			} while (name.length <= 0) // Some reason a name can be empty, I think it has to do with the removeExcessDuplications check.
+			} while (name.isEmpty()) // Some reason a name can be empty, I think it has to do with the removeExcessDuplications check.
 
 			if (surname && shouldGenerateSurname(rule)) name.append(' ').append(generateFilteredName(rule, false))
 
@@ -101,7 +101,7 @@ class SWGNameGenerator {
 
 			instructions = instructions.substring(1)
 		}
-		if (buffer.length == 0) return generateName(rule)
+		if (buffer.isEmpty()) return generateName(rule)
 		return buffer.toString()
 	}
 

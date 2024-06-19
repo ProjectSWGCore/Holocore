@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -128,7 +128,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		ByteBuffer buffer;
 		synchronized (data) {
 			if (dataSize == 0)
@@ -148,7 +148,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public void decode(NetBuffer data) {
+	public void decode(@NotNull NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<K> kType, Class<V> vType) instead");
 	}
 	
@@ -224,7 +224,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	public void sendDeltaMessage(SWGObject target) {
-		if (deltas.size() == 0)
+		if (deltas.isEmpty())
 			return;
 		
 		target.sendDelta(view, updateType, getDeltaData());

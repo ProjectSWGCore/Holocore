@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -71,8 +71,8 @@ public class ConnectionService extends Service {
 				Iterator<DisappearPlayer> iter = disappearPlayers.iterator();
 				while (iter.hasNext()) {
 					DisappearPlayer p = iter.next();
-					if ((System.nanoTime()-p.getTime())/1E6 >= DISAPPEAR_THRESHOLD) {
-						disappear(p.getPlayer());
+					if ((System.nanoTime()-p.time())/1E6 >= DISAPPEAR_THRESHOLD) {
+						disappear(p.player());
 						iter.remove();
 					}
 				}
@@ -186,40 +186,30 @@ public class ConnectionService extends Service {
 			Iterator <DisappearPlayer> disappearIterator = disappearPlayers.iterator();
 			while (disappearIterator.hasNext()) {
 				DisappearPlayer old = disappearIterator.next();
-				Player oldPlayer = old.getPlayer();
-				CreatureObject oldObj = old.getPlayer().getCreatureObject();
-				if (oldObj == null || player.equals(oldPlayer) || player == oldPlayer) {
+				Player oldPlayer = old.player();
+				CreatureObject oldObj = old.player().getCreatureObject();
+				if (oldObj == null || player.equals(oldPlayer)) {
 					disappearIterator.remove();
 				}
 			}
 		}
 	}
-	
-	private static class DisappearPlayer {
-		private final long time;
-		private final Player player;
-		
-		public DisappearPlayer(long time, Player player) {
-			this.time = time;
-			this.player = player;
-		}
-		
-		public long getTime() { return time; }
-		public Player getPlayer() { return player; }
-		
+
+	private record DisappearPlayer(long time, Player player) {
+
 		@Override
-		public boolean equals(Object o) {
-			if (o == null)
-				return false;
-			if (!(o instanceof DisappearPlayer))
-				return false;
-			return ((DisappearPlayer) o).getPlayer().equals(player);
-		}
-		
+			public boolean equals(Object o) {
+				if (o == null)
+					return false;
+				if (!(o instanceof DisappearPlayer))
+					return false;
+				return ((DisappearPlayer) o).player().equals(player);
+			}
+
 		@Override
-		public int hashCode() {
-			return player.hashCode();
+			public int hashCode() {
+				return player.hashCode();
+			}
 		}
-	}
 	
 }

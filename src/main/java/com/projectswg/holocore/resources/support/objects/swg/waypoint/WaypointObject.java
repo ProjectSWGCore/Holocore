@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -146,12 +146,12 @@ public class WaypointObject extends IntangibleObject implements Encodable, Mongo
 	}
 
 	@Override
-	public void decode(NetBuffer data) {
+	public void decode(@NotNull NetBuffer data) {
 		waypoint.decode(data);
 	}
 	
 	@Override
-	public byte[] encode() {
+	public byte @NotNull [] encode() {
 		return waypoint.encode();
 	}
 	
@@ -161,20 +161,19 @@ public class WaypointObject extends IntangibleObject implements Encodable, Mongo
 	}
 	
 	@Override
-	public void saveMongo(MongoData data) {
+	public void saveMongo(@NotNull MongoData data) {
 		waypoint.saveMongo(data);
 	}
 	
 	@Override
-	public void readMongo(MongoData data) {
+	public void readMongo(@NotNull MongoData data) {
 		waypoint.readMongo(data);
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof WaypointObject))
+		if (!(o instanceof WaypointObject wp))
 			return false;
-		WaypointObject wp = (WaypointObject) o;
 		return wp.getObjectId() == getObjectId();
 	}
 	

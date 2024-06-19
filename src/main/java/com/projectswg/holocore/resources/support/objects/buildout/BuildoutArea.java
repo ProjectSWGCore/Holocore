@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2018 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -103,9 +103,8 @@ public class BuildoutArea implements Comparable<BuildoutArea> {
 	
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof BuildoutArea))
+		if (!(o instanceof BuildoutArea area))
 			return false;
-		BuildoutArea area = (BuildoutArea) o;
 		if (!terrain.equals(area.terrain))
 			return false;
 		if (Double.compare(x1, area.x1) != 0)

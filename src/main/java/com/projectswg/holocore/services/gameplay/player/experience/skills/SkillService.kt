@@ -78,7 +78,7 @@ class SkillService : Service() {
 
 	private fun adjustHealth(target: CreatureObject, oldCombatLevel: CombatLevel, newCombatLevel: CombatLevel) {
 		val healthChange = healthAddedCalculator.calculate(oldCombatLevel, newCombatLevel)
-		target.levelHealthGranted = newCombatLevel.healthAdded
+		target.levelHealthGranted = newCombatLevel.healthAdded()
 		target.maxHealth += healthChange
 		target.health = target.maxHealth
 	}
@@ -188,7 +188,7 @@ class SkillService : Service() {
 	}
 
 	private fun changeLevel(target: CreatureObject, oldCombatLevel: CombatLevel, newCombatLevel: CombatLevel) {
-		target.setLevel(newCombatLevel.level)
+		target.setLevel(newCombatLevel.level())
 		adjustHealth(target, oldCombatLevel, newCombatLevel)
 	}
 

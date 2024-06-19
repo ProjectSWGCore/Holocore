@@ -52,7 +52,6 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.gameplay.missions.DestroyMissionTerminalType.*
 import me.joshlarson.jlcommon.log.Log
-import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 

@@ -117,7 +117,7 @@ public class ClientAwarenessService extends Service {
 		double speed = dt.getSpeed();
 		
 		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			// If this is the primary rider, move the mount and all of the riders
+			// If this is the primary rider, move the mount and all the riders
 			CreatureObject mount = (CreatureObject) creature.getParent();
 			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
 			
@@ -159,7 +159,7 @@ public class ClientAwarenessService extends Service {
 			return;
 		
 		if (creature.isStatesBitmask(CreatureState.RIDING_MOUNT)) {
-			// If this is the primary rider, move the mount and all of the riders
+			// If this is the primary rider, move the mount and all the riders
 			CreatureObject mount = (CreatureObject) creature.getParent();
 			assert mount != null && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE) : "invalid parent for riding mount";
 			mount.sendObservers(new DataTransform(mount.getObjectId(), mount.getNextUpdateCount(), mount.getLocation(), 0));

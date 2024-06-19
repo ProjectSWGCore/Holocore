@@ -48,7 +48,7 @@ public class CreditObject extends TangibleObject {
 	 * @return {@link ContainerResult}
 	 */
 	@Override
-	public ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject container) {
+	public @NotNull ContainerResult moveToContainer(@NotNull CreatureObject requester, SWGObject container) {
 		if (!requester.isPlayer())
 			return super.moveToContainer(requester, container);
 		

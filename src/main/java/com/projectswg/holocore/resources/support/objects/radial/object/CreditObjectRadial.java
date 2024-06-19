@@ -52,8 +52,6 @@ public class CreditObjectRadial implements RadialHandlerInterface {
 	
 	@Override
 	public void handleSelection(@NotNull Player player, @NotNull SWGObject target, @NotNull RadialItem selection) {
-		if (target == null)
-			return;
 		assert target instanceof CreditObject;
 		
 		SWGObject lootInventory = target.getParent();

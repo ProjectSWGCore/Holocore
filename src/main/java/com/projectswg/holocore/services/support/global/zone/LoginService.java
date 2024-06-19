@@ -112,16 +112,17 @@ public class LoginService extends Service {
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket p = gpi.getPacket();
-		if (p instanceof HoloLoginRequestPacket) {
-			handleLogin(gpi.getPlayer(), (HoloLoginRequestPacket) p);
-		} else if (p instanceof LoginClientId id) {
-			handleLogin(gpi.getPlayer(), id.getUsername(), id.getPassword(), id.getVersion(), id.getSocketAddress());
-		} else if (p instanceof DeleteCharacterRequest) {
-			handleCharDeletion(gpi.getPlayer(), (DeleteCharacterRequest) p);
-		} else if (p instanceof LagRequest) {
-			Player player = gpi.getPlayer();
-			if (player.getPlayerServer() == PlayerServer.LOGIN)
-				handleLagRequest(player);
+		switch (p) {
+			case HoloLoginRequestPacket holoLoginRequestPacket -> handleLogin(gpi.getPlayer(), holoLoginRequestPacket);
+			case LoginClientId id -> handleLogin(gpi.getPlayer(), id.getUsername(), id.getPassword(), id.getVersion(), id.getSocketAddress());
+			case DeleteCharacterRequest deleteCharacterRequest -> handleCharDeletion(gpi.getPlayer(), deleteCharacterRequest);
+			case LagRequest ignored -> {
+				Player player = gpi.getPlayer();
+				if (player.getPlayerServer() == PlayerServer.LOGIN)
+					handleLagRequest(player);
+			}
+			default -> {
+			}
 		}
 	}
 	
