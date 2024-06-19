@@ -112,7 +112,7 @@ class CombatCommandHealTest : TestRunnerSimulatedWorld() {
         clientCreateCharacter.name = "Testing Character"
         val characterCreation = CharacterCreation(player, clientCreateCharacter)
 
-        val mosEisley = DataLoader.zoneInsertions().get("tat_moseisley")
+        val mosEisley = DataLoader.zoneInsertions()["tat_moseisley"]!!
         val creatureObject = characterCreation.createCharacter(AccessLevel.PLAYER, mosEisley)
         creatureObject.owner = player
         creatureObject.health = currentHealth
