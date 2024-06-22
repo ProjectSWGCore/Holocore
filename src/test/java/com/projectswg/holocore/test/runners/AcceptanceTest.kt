@@ -46,6 +46,7 @@ import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.gameplay.player.group.GroupService
+import com.projectswg.holocore.services.support.global.chat.ChatFriendService
 import com.projectswg.holocore.services.support.global.chat.ChatInstantMessageService
 import com.projectswg.holocore.services.support.global.chat.ChatMailService
 import com.projectswg.holocore.services.support.global.chat.ChatSystemService
@@ -96,6 +97,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(ChatSystemService())
 		registerService(ChatMailService())
 		registerService(ChatInstantMessageService())
+		registerService(ChatFriendService())
 		registerService(SuiService())
 		registerService(RadialService())
 		registerService(TippingService())

@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.support.global.chat
 
 import com.projectswg.common.data.encodables.chat.ChatResult
 import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.addIgnore
 import com.projectswg.holocore.headless.sendTell
 import com.projectswg.holocore.headless.waitForTell
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
@@ -81,10 +82,22 @@ class TellTest : AcceptanceTest() {
 	@Test
 	fun `drop tells to non-existent characters`() {
 		addUser("username", "password", AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
+
+		val chatResult = character.sendTell("chartwo", "Hello")
+
+		assertEquals(ChatResult.TARGET_AVATAR_DOESNT_EXIST, chatResult)
+	}
+
+	@Test
+	fun `drop tells from ignored characters`() {
+		addUser("username", "password", AccessLevel.DEV)
 		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter("username", "password", "chartwo")
+		character2.addIgnore("charone")
 
 		val chatResult = character1.sendTell("chartwo", "Hello")
 
-		assertEquals(ChatResult.TARGET_AVATAR_DOESNT_EXIST, chatResult)
+		assertEquals(ChatResult.IGNORED, chatResult)
 	}
 }
