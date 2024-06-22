@@ -27,7 +27,6 @@
 package com.projectswg.holocore.services.support.global.chat;
 
 import com.projectswg.common.data.encodables.chat.ChatResult;
-import com.projectswg.common.network.packets.PacketType;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
 import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient;
@@ -40,7 +39,6 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.util.Locale;
-import java.util.Objects;
 
 public class ChatInstantMessageService extends Service {
 	
@@ -51,10 +49,8 @@ public class ChatInstantMessageService extends Service {
 	@IntentHandler
 	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
 		SWGPacket packet = gpi.getPacket();
-		if (Objects.requireNonNull(packet.getPacketType()) == PacketType.CHAT_INSTANT_MESSAGE_TO_CHARACTER) {
-			if (packet instanceof ChatInstantMessageToCharacter)
-				handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) packet);
-		}
+		if (packet instanceof ChatInstantMessageToCharacter)
+			handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) packet);
 	}
 	
 	private void handleInstantMessage(Player sender, ChatInstantMessageToCharacter request) {
