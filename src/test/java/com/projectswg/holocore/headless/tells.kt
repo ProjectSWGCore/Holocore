@@ -24,53 +24,36 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.global.chat;
+package com.projectswg.holocore.headless
 
-import com.projectswg.common.data.encodables.chat.ChatResult;
-import com.projectswg.common.network.packets.SWGPacket;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient;
-import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendInstantMessage;
-import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent;
-import com.projectswg.holocore.resources.support.global.player.Player;
-import com.projectswg.holocore.resources.support.global.player.PlayerState;
-import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
+import com.projectswg.common.data.encodables.chat.ChatResult
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendInstantMessage
+import kotlin.random.Random
 
-import java.util.Locale;
-
-public class ChatInstantMessageService extends Service {
-	
-	public ChatInstantMessageService() {
-		
-	}
-	
-	@IntentHandler
-	private void handleInboundPacketIntent(InboundPacketIntent gpi) {
-		SWGPacket packet = gpi.getPacket();
-		if (packet instanceof ChatInstantMessageToCharacter)
-			handleInstantMessage(gpi.getPlayer(), (ChatInstantMessageToCharacter) packet);
-	}
-	
-	private void handleInstantMessage(Player sender, ChatInstantMessageToCharacter request) {
-		String strReceiver = request.getCharacter().toLowerCase(Locale.ENGLISH);
-		String strSender = sender.getCharacterFirstName();
-		
-		Player receiver = PlayerLookup.getPlayerByFirstName(strReceiver);
-		
-		ChatResult result = ChatResult.SUCCESS;
-		if (receiver == null || receiver.getPlayerState() != PlayerState.ZONED_IN)
-			result = ChatResult.TARGET_AVATAR_DOESNT_EXIST;
-		else if (receiver.getPlayerObject().isIgnored(strSender))
-			result = ChatResult.IGNORED;
-		
-		sender.sendPacket(new ChatOnSendInstantMessage(result.getCode(), request.getSequence()));
-		
-		if (result != ChatResult.SUCCESS)
-			return;
-		
-		receiver.sendPacket(new ChatInstantMessageToClient(request.getGalaxy(), strSender, request.getMessage()));
-	}
-	
+/**
+ * Sends a tell to another player.
+ * @param characterName the player to send the tell to
+ * @param message the message to send
+ * @return the result of sending the tell
+ */
+fun ZonedInCharacter.sendTell(characterName: String, message: String): ChatResult {
+	val sequence = Random.nextInt()
+	sendPacket(player, ChatInstantMessageToCharacter("Testcase", characterName, message, sequence))
+	val chatOnSendInstantMessage = player.waitForNextPacket(ChatOnSendInstantMessage::class.java) ?: throw IllegalStateException("No tell receipt received")
+	if (chatOnSendInstantMessage.sequence != sequence) throw IllegalStateException("Invalid sequence. Expected $sequence, got ${chatOnSendInstantMessage.sequence}")
+	return ChatResult.fromInteger(chatOnSendInstantMessage.result)
 }
+
+/**
+ * Waits for a tell to be received. This method will block until a tell is received.
+ * @return the tell that was received
+ * @throws IllegalStateException if no tell is received
+ */
+fun ZonedInCharacter.waitForTell(): ReceivedTell {
+	val chatInstantMessageToClient = player.waitForNextPacket(ChatInstantMessageToClient::class.java) ?: throw IllegalStateException("No tell received")
+	return ReceivedTell(chatInstantMessageToClient.character, chatInstantMessageToClient.message)
+}
+
+data class ReceivedTell(val sender: String, val message: String)
