@@ -74,7 +74,7 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 	fun selectCharacter(characterId: Long): ZonedInCharacter {
 		sendPacket(player, SelectCharacter(characterId))
 		sendPacket(player, ClientIdMsg())
-		player.waitForNextPacket(ClientPermissionsMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive client permissions message in time")
+		player.waitForNextPacket(ClientPermissionsMessage::class.java) ?: throw IllegalStateException("Failed to receive client permissions message in time")
 		sendPacket(player, CmdSceneReady())
 
 		return ZonedInCharacter(player)
