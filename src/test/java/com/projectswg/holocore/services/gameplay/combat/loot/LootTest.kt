@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -37,8 +37,8 @@ class LootTest : AcceptanceTest() {
 	
 	@Test
 	fun itemsAreGenerated() {
-		addUser("player", "pass")
-		val zonedInCharacter = createZonedInCharacter("player", "pass", "tester")
+		val user = generateUser()
+		val zonedInCharacter = createZonedInCharacter(user.username, user.password, "tester")
 		val npc = spawnNPC("creature_kreetle_swarmling", zonedInCharacter.player.creatureObject.location)
 		npc.health = 1
 		zonedInCharacter.attack(npc)

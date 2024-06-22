@@ -29,19 +29,14 @@ package com.projectswg.holocore.services.gameplay.combat
 import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class HealthWoundTest : AcceptanceTest() {
 
-	@BeforeEach
-	fun setUpUser() {
-		addUser("username", "password")
-	}
-
 	@Test
 	fun `weapons with Wound Chance apply health wounds`() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		character.player.creatureObject.equippedWeapon.woundChance = 100F
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 
@@ -52,7 +47,8 @@ class HealthWoundTest : AcceptanceTest() {
 
 	@Test
 	fun `only weapons with Wound Chance apply health wounds`() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		character.player.creatureObject.equippedWeapon.woundChance = 0F
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 
@@ -63,7 +59,8 @@ class HealthWoundTest : AcceptanceTest() {
 
 	@Test
 	fun `health wounds are subtracted from current health`() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 		npc.healthWounds = npc.health - 1    // The NPC should effectively have 1 health left this way
 
