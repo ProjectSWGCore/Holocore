@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.combat
 
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.gameplay.combat.CombatState
@@ -39,6 +40,7 @@ data class CreatureKilledIntent(val killer: CreatureObject, val corpse: Creature
 data class CreatureRevivedIntent(val creature: CreatureObject) : Intent()
 data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent()
 data class ExitCombatIntent(val source: TangibleObject) : Intent()
+data class CloneActivatedIntent(val creature: CreatureObject, val diedOnTerrain: Terrain) : Intent()
 
 /*
  * Combat event requests

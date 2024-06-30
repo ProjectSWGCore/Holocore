@@ -35,6 +35,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
+import com.projectswg.holocore.intents.gameplay.combat.CloneActivatedIntent
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
@@ -210,7 +211,9 @@ class CloningService : Service() {
 		}
 
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.location)
+		val diedOnTerrain = corpse.terrain
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility))
+		CloneActivatedIntent(corpse, diedOnTerrain).broadcast()
 		return CloneResult.SUCCESS
 	}
 
