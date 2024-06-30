@@ -1,8 +1,8 @@
 {
 	"npcMessage": {
 		"file": "conversation/ep3_cheated_gambler",
-		"key": "s_347",
-		"comment": "What do you want?  Just go away."
+		"key": "s_305",
+		"comment": "Well, at least I still have that."
 	},
 	"playerResponses": [],
 	"requirements": [],
