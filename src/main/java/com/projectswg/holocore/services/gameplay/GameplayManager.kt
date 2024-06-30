@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,6 +28,7 @@ package com.projectswg.holocore.services.gameplay
 
 import com.projectswg.holocore.services.gameplay.commodities.BazaarService
 import com.projectswg.holocore.services.gameplay.combat.CombatManager
+import com.projectswg.holocore.services.gameplay.combat.DeathCyberneticService
 import com.projectswg.holocore.services.gameplay.conversation.ConversationService
 import com.projectswg.holocore.services.gameplay.crafting.CraftingManager
 import com.projectswg.holocore.services.gameplay.entertainment.EntertainmentManager
@@ -42,5 +43,5 @@ import com.projectswg.holocore.services.gameplay.world.WorldManager
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [BazaarService::class, CombatManager::class, ConversationService::class, CraftingManager::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
+@ManagerStructure(children = [BazaarService::class, CombatManager::class, ConversationService::class, CraftingManager::class, DeathCyberneticService::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
 class GameplayManager : Manager()
