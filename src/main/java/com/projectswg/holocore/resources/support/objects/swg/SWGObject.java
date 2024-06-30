@@ -344,6 +344,16 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 				Log.w("Unable to add object to container! Container Full. Max Size: %d", container.getMaxContainerSize());
 				return ContainerResult.CONTAINER_FULL;
 			}
+		} else {
+			List<String> requiredSlots = this.getArrangement().get(arrangementId - 4);
+			
+			for (String slot : requiredSlots) {
+				SWGObject slottedObject = container.getSlottedObject(slot);
+				if (slottedObject != null && slottedObject.getTemplate().startsWith("object/tangible/wearables/cybernetic")) {
+					Log.w("Unable to add object to container! Slot %s is occupied with cybernetic", slot);
+					return ContainerResult.SLOT_OCCUPIED;
+				}
+			}
 		}
 		return ContainerResult.SUCCESS;
 	}
