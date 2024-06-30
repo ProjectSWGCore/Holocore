@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test.runners
 
+import com.projectswg.common.data.encodables.galaxy.Galaxy
 import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.headless.MemoryUserDatabase
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -65,6 +66,7 @@ import com.projectswg.holocore.services.support.objects.radials.RadialService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import java.time.ZoneOffset
 import java.util.*
 
 /**
@@ -82,11 +84,15 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 
 	@BeforeEach
 	fun setUpServices() {
+		val galaxy = Galaxy()
+		galaxy.setZoneOffset(ZoneOffset.UTC)
+		val galaxies = setOf(galaxy)
+
 		registerService(ClientAwarenessService())
 		registerService(CharacterLookupService())
 		registerService(SimulatedObjectStorage())
 		registerService(AwarenessService())
-		registerService(LoginService(memoryUserDatabase))
+		registerService(LoginService(galaxies, memoryUserDatabase))
 		registerService(ZoneService())
 		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0), DeterministicDie(0), skipWarmup = true))
 		registerService(CommandExecutionService())

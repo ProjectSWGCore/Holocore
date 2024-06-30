@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,6 +30,7 @@ package com.projectswg.holocore.test.resources;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetworkProtocol;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
@@ -82,6 +83,7 @@ public class GenericPlayer extends Player {
 	public void sendPacket(SWGPacket packet) {
 		packetLock.lock();
 		try {
+			encodeAndDecode(packet);
 			this.packets.add(packet);
 			packetLockCondition.signalAll();
 		} finally {
@@ -89,7 +91,16 @@ public class GenericPlayer extends Player {
 		}
 		handlePacket(packet);
 	}
-	
+
+	private static void encodeAndDecode(SWGPacket packet) {
+		try {
+			// This doesn't actually test the encoding and decoding of the packet, but it does test that the packet can be encoded and decoded without throwing an exception
+			NetworkProtocol.decode(NetworkProtocol.encode(packet));
+		} catch (Throwable t) {
+			throw new RuntimeException("Failed to encode and decode packet", t);
+		}
+	}
+
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
 		sendPacket(packet1);
