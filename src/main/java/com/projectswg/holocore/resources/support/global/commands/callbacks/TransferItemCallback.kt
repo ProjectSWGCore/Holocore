@@ -239,7 +239,7 @@ class TransferItemCallback : ICmdCallback {
 				}
 
 				ContainerResult.SLOT_OCCUPIED  -> {
-					SystemMessageIntent(player, "@container_error_message:container08").broadcast()
+					SystemMessageIntent(player, "@container_error_message:container04").broadcast()
 					player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
 				}
 			}
