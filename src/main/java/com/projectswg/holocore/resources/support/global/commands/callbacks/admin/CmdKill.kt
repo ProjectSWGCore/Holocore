@@ -26,7 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 
-import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent
+import com.projectswg.holocore.intents.gameplay.combat.KillCreatureIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
 import com.projectswg.holocore.resources.support.global.player.Player
@@ -41,7 +41,7 @@ class CmdKill : ICmdCallback {
 		}
 
 		if (player.creatureObject != target) {
-			RequestCreatureDeathIntent(player.creatureObject, target).broadcast()
+			KillCreatureIntent(player.creatureObject, target).broadcast()
 		} else {
 			SystemMessageIntent.broadcastPersonal(player, "You cannot kill yourself!")
 		}
