@@ -24,24 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.headless
+package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification
-import com.projectswg.holocore.test.resources.GenericPlayer
+import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService
+import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
+import com.projectswg.holocore.services.support.objects.ObjectStorageService
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 
-class SuiWindow(private val player: GenericPlayer, private val suiWindowId: Int) {
+class CloningTest : AcceptanceTest() {
 
-	private val suiEventNotification = SuiEventNotification()
-	
-	fun select(index: Int) {
-		suiEventNotification.addSubscribedToProperty(index.toString())
+	@BeforeEach
+	fun setupExtraServices() {
+		registerService(CloningService())
+		registerService(DuelService())
+		registerService(ObjectStorageService())
+		waitForIntents() // ObjectStorageService floods the server with intents during initialization, causing LoginService to not respond to login requests before these intents are processed
 	}
-	
-	/**
-	 * Invokes the "Ok" button on the SUI window.
-	 */
-	fun clickOk() {
-		suiEventNotification.windowId = suiWindowId
-		sendPacket(player, suiEventNotification)
+
+	@Test
+	fun `possible to clone after being deathblown`() {
+		addUser("username", "password", AccessLevel.DEV)
+		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter("username", "password", "chartwo")
+		character1.duel(character2.player.creatureObject)
+		character2.duel(character1.player.creatureObject)
+		character1.adminKill(character2.player.creatureObject)
+		character1.deathblow(character2.player.creatureObject)
+
+		val suiWindow = character2.waitForCloneActivation()
+		suiWindow.select(0)    // The facility we clone at doesn't matter. We just need to make sure that cloning is possible.
+		suiWindow.clickOk()
+
+		assertDoesNotThrow { character2.waitForObjectMove() }
 	}
 }

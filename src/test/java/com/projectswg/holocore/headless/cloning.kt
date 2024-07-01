@@ -26,22 +26,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification
-import com.projectswg.holocore.test.resources.GenericPlayer
+import com.projectswg.common.network.packets.swg.zone.server_ui.SuiCreatePageMessage
+import com.projectswg.holocore.resources.support.global.zone.sui.SuiListBox
+import java.util.concurrent.TimeUnit
 
-class SuiWindow(private val player: GenericPlayer, private val suiWindowId: Int) {
-
-	private val suiEventNotification = SuiEventNotification()
-	
-	fun select(index: Int) {
-		suiEventNotification.addSubscribedToProperty(index.toString())
+fun ZonedInCharacter.waitForCloneActivation(): SuiWindow {
+	val packet = player.waitForNextPacket(SuiCreatePageMessage::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No known packet received")
+	val listBox = packet.window as SuiListBox
+	if (listBox.list.isEmpty()) {
+		throw IllegalStateException("No items in the list box")
 	}
-	
-	/**
-	 * Invokes the "Ok" button on the SUI window.
-	 */
-	fun clickOk() {
-		suiEventNotification.windowId = suiWindowId
-		sendPacket(player, suiEventNotification)
-	}
+	return SuiWindow(player, packet.window.id)
 }

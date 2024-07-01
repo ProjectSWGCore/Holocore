@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -105,4 +105,12 @@ fun ZonedInCharacter.attack(target: CreatureObject, overrideAttackCommand: Strin
 enum class TargetState {
 	DEAD,
 	ALIVE
+}
+
+fun ZonedInCharacter.deathblow(target: CreatureObject) {
+	sendCommand("deathBlow", target)
+}
+
+fun ZonedInCharacter.duel(target: CreatureObject) {
+	sendCommand("duel", target)
 }

@@ -26,22 +26,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.network.packets.swg.zone.server_ui.SuiEventNotification
-import com.projectswg.holocore.test.resources.GenericPlayer
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform
 
-class SuiWindow(private val player: GenericPlayer, private val suiWindowId: Int) {
-
-	private val suiEventNotification = SuiEventNotification()
-	
-	fun select(index: Int) {
-		suiEventNotification.addSubscribedToProperty(index.toString())
-	}
-	
-	/**
-	 * Invokes the "Ok" button on the SUI window.
-	 */
-	fun clickOk() {
-		suiEventNotification.windowId = suiWindowId
-		sendPacket(player, suiEventNotification)
-	}
+fun ZonedInCharacter.waitForObjectMove() {
+	player.waitForNextPacket(DataTransform::class.java) ?: throw IllegalStateException("Did not receive DataTransform packet in time")
 }
