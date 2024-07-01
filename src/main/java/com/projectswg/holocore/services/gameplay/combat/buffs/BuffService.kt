@@ -97,7 +97,7 @@ class BuffService : Service() {
 	}
 
 	private fun removeExpiredBuffs(creatureObject: CreatureObject) {
-		val crcsForExpiredBuffs = creatureObject.buffs.filter { isBuffExpired(creatureObject, it.value) }.map { it.key }
+		val crcsForExpiredBuffs = creatureObject.buffs.map { it.key }.filter { isBuffExpired(creatureObject, it) }
 
 		crcsForExpiredBuffs.forEach { removeBuff(creatureObject, it) }
 	}
@@ -112,7 +112,12 @@ class BuffService : Service() {
 		return ProjectSWG.galacticTime.toInt()
 	}
 
-	private fun isBuffExpired(creature: CreatureObject, buff: Buff): Boolean {
+	private fun isBuffExpired(creature: CreatureObject, buffCrc: CRC): Boolean {
+		val buffData = buffs.getBuff(buffCrc) ?: return true
+		val buff = creature.buffs[buffCrc] ?: return true
+
+		if (isBuffInfinite(buffData)) return false
+
 		return calculatePlayTime(creature) >= buff.endTime
 	}
 
@@ -196,8 +201,8 @@ class BuffService : Service() {
 
 	private fun scheduleBuffExpirationCheck(receiver: CreatureObject, buffData: BuffInfo) {
 		timerCheckThread.execute(1000L) {
-			val buff = receiver.buffs[buffData.crc] ?: return@execute
-			if (isBuffExpired(receiver, buff)) {
+			receiver.buffs[buffData.crc] ?: return@execute
+			if (isBuffExpired(receiver, buffData.crc)) {
 				removeBuff(receiver, buffData.crc)
 			} else {
 				scheduleBuffExpirationCheck(receiver, buffData)
