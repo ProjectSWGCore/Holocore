@@ -148,6 +148,8 @@ class CloningService : Service() {
 		synchronized(reviveTimers) {
 			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER)) { expireCloneTimer(corpse, availableFacilities, cloningWindow) })
 		}
+
+		StandardLog.onPlayerEvent(this, corpse, "has %d minutes to clone", CLONE_TIMER)
 	}
 
 	private fun showSuiWindow(corpse: CreatureObject) {
