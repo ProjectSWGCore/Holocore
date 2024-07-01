@@ -128,7 +128,7 @@ internal enum class CombatCommandHeal : CombatCommandHitType {
 			return 0
 		}
 
-		if (healed.health == healed.maxHealth) {
+		if (healed.health == healed.maxHealth - healed.healthWounds) {
 			return 0
 		}
 
