@@ -1,0 +1,15 @@
+{
+	"npcMessage": {
+		"file": "conversation/cyborg_install_naboo",
+		"key": "s_46",
+		"comment": "I see. What do you need repaired?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_sellable_items",
+			"args": {}
+		}
+	]
+}

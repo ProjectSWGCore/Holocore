@@ -1,0 +1,15 @@
+{
+	"npcMessage": {
+		"file": "conversation/cyborg_install_naboo",
+		"key": "s_195",
+		"comment": "I see. I don't know where you got that, but I suppose I could go ahead and install it for you."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_sellable_items",
+			"args": {}
+		}
+	]
+}

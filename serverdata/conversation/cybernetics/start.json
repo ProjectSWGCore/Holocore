@@ -1,0 +1,42 @@
+{
+	"npcMessage": {
+		"file": "conversation/cyborg_install_naboo",
+		"key": "s_192",
+		"comment": "The Empire has banned the installation of cybernetic enhancements for non-emergency reasons. We don't have any cybernetic enhancements here that I could install."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/cyborg_install_naboo",
+				"key": "s_34",
+				"comment": "Install cybernetics."
+			},
+			"next": "cybernetics/install"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/cyborg_install_naboo",
+				"key": "s_44",
+				"comment": "Repair cybernetics."
+			},
+			"next": "cybernetics/repair"
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/cyborg_install_naboo",
+				"key": "s_40",
+				"comment": "Remove cybernetics."
+			},
+			"next": "cybernetics/remove"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "survey"
+			}
+		}
+	]
+}
