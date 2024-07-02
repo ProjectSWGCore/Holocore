@@ -39,8 +39,8 @@ class KillAdminCommandTest : AcceptanceTest() {
 
 	@Test
 	fun killNpc() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
 
 		character.adminKill(npc)
@@ -50,8 +50,8 @@ class KillAdminCommandTest : AcceptanceTest() {
 
 	@Test
 	fun killInvulnerableNpc() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE)
 
 		character.adminKill(npc)
@@ -64,8 +64,8 @@ class KillAdminCommandTest : AcceptanceTest() {
 
 	@Test
 	fun killSelf() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 
 		character.adminKill(character.player.creatureObject)
 

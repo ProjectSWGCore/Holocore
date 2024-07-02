@@ -65,6 +65,7 @@ import com.projectswg.holocore.services.support.objects.radials.RadialService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import java.util.*
 
 /**
  * Acceptance test runner that sets up all the services required for an acceptance test.
@@ -121,8 +122,14 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		}
 	}
 
-	fun addUser(username: String, password: String, accessLevel: AccessLevel = AccessLevel.PLAYER, banned: Boolean = false) {
+	/**
+	 * Generates a user with a random username and password.
+	 */
+	fun generateUser(accessLevel: AccessLevel = AccessLevel.PLAYER, banned: Boolean = false): UserCredentials {
+		val username = UUID.randomUUID().toString().substringBefore("-")    // UUIDs are a bit long for usernames
+		val password = UUID.randomUUID().toString()
 		memoryUserDatabase.addUser(username, password, accessLevel, banned)
+		return UserCredentials(username, password)
 	}
 
 	/**

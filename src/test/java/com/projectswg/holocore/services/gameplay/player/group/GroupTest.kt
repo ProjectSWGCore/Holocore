@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -35,8 +35,8 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun formGroup() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
@@ -46,8 +46,8 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun makeLeader() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
 
@@ -61,8 +61,8 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun makeLeaderOnlyWorksForCurrentLeader() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
 
@@ -76,9 +76,9 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun memberLeavesGroup() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
-		val zonedInCharacter3 = createZonedInCharacter("Playerthree", "Charthree")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
@@ -96,9 +96,9 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun leaderKicksMember() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
-		val zonedInCharacter3 = createZonedInCharacter("Playerthree", "Charthree")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
@@ -116,9 +116,9 @@ class GroupTest : AcceptanceTest() {
 
 	@Test
 	fun leaderLeavesGroup() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
-		val zonedInCharacter3 = createZonedInCharacter("Playerthree", "Charthree")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
 		zonedInCharacter2.acceptCurrentGroupInvitation()
@@ -134,10 +134,9 @@ class GroupTest : AcceptanceTest() {
 		)
 	}
 
-	private fun createZonedInCharacter(username: String, characterName: String): ZonedInCharacter {
-		val password = "password"
-		addUser(username, password)
-		return HeadlessSWGClient.createZonedInCharacter(username, password, characterName)
+	private fun createZonedInCharacter(characterName: String): ZonedInCharacter {
+		val user = generateUser()
+		return HeadlessSWGClient.createZonedInCharacter(user.username, user.password, characterName)
 	}
 
 }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -39,44 +39,44 @@ class LoginTest : AcceptanceTest() {
 
 	@Test
 	fun validCredentials() {
-		addUser("username", "password")
-		val headlessSWGClient = HeadlessSWGClient("username")
+		val user = generateUser()
+		val headlessSWGClient = HeadlessSWGClient(user.username)
 
-		val characterSelectionScreen = headlessSWGClient.login("password")
+		val characterSelectionScreen = headlessSWGClient.login(user.password)
 
 		assertNotNull(characterSelectionScreen)
 	}
 
 	@Test
 	fun validCredentialsButBanned() {
-		addUser("username", "password", banned = true)
-		val headlessSWGClient = HeadlessSWGClient("username")
+		val user = generateUser(banned = true)
+		val headlessSWGClient = HeadlessSWGClient(user.username)
 
-		assertThrows<AccountBannedException> { headlessSWGClient.login("password") }
+		assertThrows<AccountBannedException> { headlessSWGClient.login(user.password) }
 	}
 
 	@Test
 	fun wrongUsername() {
-		addUser("username", "password")
+		val user = generateUser()
 		val headlessSWGClient = HeadlessSWGClient("wrongusername")
 
-		assertThrows<WrongCredentialsException> { headlessSWGClient.login("password") }
+		assertThrows<WrongCredentialsException> { headlessSWGClient.login(user.password) }
 	}
 
 	@Test
 	fun wrongPassword() {
-		addUser("username", "password")
-		val headlessSWGClient = HeadlessSWGClient("username")
+		val user = generateUser()
+		val headlessSWGClient = HeadlessSWGClient(user.username)
 
 		assertThrows<WrongCredentialsException> { headlessSWGClient.login("wrongpassword") }
 	}
 
 	@Test
 	fun wrongVersion() {
-		addUser("username", "password")
-		val headlessSWGClient = HeadlessSWGClient("username", "20030404-14:00")
+		val user = generateUser()
+		val headlessSWGClient = HeadlessSWGClient(user.username, "20030404-14:00")
 
-		assertThrows<WrongClientVersionException> { headlessSWGClient.login("password") }
+		assertThrows<WrongClientVersionException> { headlessSWGClient.login(user.password) }
 	}
 
 

@@ -31,7 +31,6 @@ import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.addIgnore
 import com.projectswg.holocore.headless.sendTell
 import com.projectswg.holocore.headless.waitForTell
-import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -41,9 +40,9 @@ class TellTest : AcceptanceTest() {
 
 	@Test
 	fun `tell is received by player`() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "Charone")
-		val character2 = HeadlessSWGClient.createZonedInCharacter("username", "password", "Chartwo")
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
 
 		val chatResult = character1.sendTell("Chartwo", "Hello")
 		assertEquals(ChatResult.SUCCESS, chatResult)
@@ -57,9 +56,9 @@ class TellTest : AcceptanceTest() {
 
 	@Test
 	fun `receiving character name is case insensitive`() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "Charone")
-		HeadlessSWGClient.createZonedInCharacter("username", "password", "Chartwo")
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
 
 		val chatResult = character1.sendTell("CHARTWO", "Hello")
 
@@ -68,10 +67,10 @@ class TellTest : AcceptanceTest() {
 
 	@Test
 	fun `tells can only be sent to online players`() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "Charone")
-		val swgClient = HeadlessSWGClient("username")
-		val characterSelectionScreen = swgClient.login("password")
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val swgClient = HeadlessSWGClient(user.username)
+		val characterSelectionScreen = swgClient.login(user.password)
 		characterSelectionScreen.createCharacter("Chartwo")    // Create character but don't zone in
 
 		val chatResult = character1.sendTell("Chartwo", "Hello")
@@ -81,8 +80,8 @@ class TellTest : AcceptanceTest() {
 
 	@Test
 	fun `drop tells to non-existent characters`() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
 
 		val chatResult = character.sendTell("chartwo", "Hello")
 
@@ -91,9 +90,9 @@ class TellTest : AcceptanceTest() {
 
 	@Test
 	fun `drop tells from ignored characters`() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
-		val character2 = HeadlessSWGClient.createZonedInCharacter("username", "password", "chartwo")
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "chartwo")
 		character2.addIgnore("charone")
 
 		val chatResult = character1.sendTell("chartwo", "Hello")

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -32,19 +32,14 @@ import com.projectswg.holocore.headless.surrenderSkill
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class SkillTreeTest : AcceptanceTest() {
 
-	@BeforeEach
-	fun setUp() {
-		addUser("username", "password", accessLevel = AccessLevel.DEV)
-	}
-
 	@Test
 	fun surrenderSkill() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 
 		character.surrenderSkill("outdoors_scout_novice")	// Every character has this skill by default
 
@@ -53,7 +48,8 @@ class SkillTreeTest : AcceptanceTest() {
 
 	@Test
 	fun grantPrerequisiteSkills() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 
 		character.adminGrantSkill("outdoors_scout_master")
 
@@ -62,7 +58,8 @@ class SkillTreeTest : AcceptanceTest() {
 
 	@Test
 	fun socialProfessionsDoNotIncreaseCombatLevel() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val combatLevel = character.player.creatureObject.level
 
 		character.adminGrantSkill("social_entertainer_master")
@@ -72,7 +69,8 @@ class SkillTreeTest : AcceptanceTest() {
 
 	@Test
 	fun combatProfessionsIncreaseCombatLevel() {
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val combatLevel = character.player.creatureObject.level
 
 		character.adminGrantSkill("combat_marksman_master")
