@@ -24,26 +24,10 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
+package com.projectswg.holocore.headless
 
-import com.projectswg.holocore.intents.gameplay.combat.KillCreatureIntent
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
-import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.common.network.packets.swg.zone.object_controller.DataTransform
 
-class CmdKill : ICmdCallback {
-	override fun execute(player: Player, target: SWGObject?, args: String) {
-		if (target !is CreatureObject) {
-			SystemMessageIntent.broadcastPersonal(player, "You must target a creature!")
-			return
-		}
-
-		if (player.creatureObject != target) {
-			KillCreatureIntent(player.creatureObject, target).broadcast()
-		} else {
-			SystemMessageIntent.broadcastPersonal(player, "You cannot kill yourself!")
-		}
-	}
+fun ZonedInCharacter.waitForObjectMove() {
+	player.waitForNextPacket(DataTransform::class.java) ?: throw IllegalStateException("Did not receive DataTransform packet in time")
 }

@@ -24,63 +24,42 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support
+package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.common.data.encodables.tangible.Posture
-import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.adminKill
-import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
+import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService
+import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
+import com.projectswg.holocore.services.support.objects.ObjectStorageService
 import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 
-class KillAdminCommandTest : AcceptanceTest() {
+class CloningTest : AcceptanceTest() {
 
-	@Test
-	fun killNpc() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.ATTACKABLE)
-
-		character.adminKill(npc)
-
-		assertEquals(Posture.DEAD, npc.posture)
+	@BeforeEach
+	fun setupExtraServices() {
+		registerService(CloningService())
+		registerService(DuelService())
+		registerService(ObjectStorageService())
+		waitForIntents() // ObjectStorageService floods the server with intents during initialization, causing LoginService to not respond to login requests before these intents are processed
 	}
 
 	@Test
-	fun killInvulnerableNpc() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, NpcStaticSpawnLoader.SpawnerFlag.INVULNERABLE)
-
-		character.adminKill(npc)
-
-		assertAll(
-			{ assertEquals(Posture.DEAD, npc.posture, "admins should be able to kill invulnerable NPCs with /kill") },
-			{ assertTrue(character.player.playerObject.experience.isEmpty(), "admins should not gain experience from killing invulnerable NPCs") }
-		)
-	}
-
-	@Test
-	fun killSelf() {
-		addUser("username", "password", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("username", "password", "adminchar")
-
-		character.adminKill(character.player.creatureObject)
-
-		assertNotEquals(Posture.DEAD, character.player.creatureObject)
-	}
-
-	@Test
-	fun killPlayer() {
+	fun `possible to clone after being deathblown`() {
 		addUser("username", "password", AccessLevel.DEV)
 		val character1 = HeadlessSWGClient.createZonedInCharacter("username", "password", "charone")
 		val character2 = HeadlessSWGClient.createZonedInCharacter("username", "password", "chartwo")
-
+		character1.duel(character2.player.creatureObject)
+		character2.duel(character1.player.creatureObject)
 		character1.adminKill(character2.player.creatureObject)
+		character1.deathblow(character2.player.creatureObject)
 
-		assertEquals(Posture.DEAD, character2.player.creatureObject.posture)
+		val suiWindow = character2.waitForCloneActivation()
+		suiWindow.select(0)    // The facility we clone at doesn't matter. We just need to make sure that cloning is possible.
+		suiWindow.clickOk()
+
+		assertDoesNotThrow { character2.waitForObjectMove() }
 	}
-
 }

@@ -148,6 +148,8 @@ class CloningService : Service() {
 		synchronized(reviveTimers) {
 			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER)) { expireCloneTimer(corpse, availableFacilities, cloningWindow) })
 		}
+
+		StandardLog.onPlayerEvent(this, corpse, "has %d minutes to clone", CLONE_TIMER)
 	}
 
 	private fun showSuiWindow(corpse: CreatureObject) {
@@ -172,6 +174,7 @@ class CloningService : Service() {
 			title = "@base_player:revive_title"
 			prompt = java.lang.String.join("\n", preDesignated, cashBalance, help)
 			buttons = SuiButtons.OK
+			addListItem("@base_player:revive_closest")
 			addCallback("handleFacilityChoice") { event: SuiEvent, parameters: Map<String, String> ->
 				val selectionIndex = SuiListBox.getSelectedRow(parameters)
 				if (event != SuiEvent.OK_PRESSED || selectionIndex >= availableFacilities.size || selectionIndex < 0) {
