@@ -63,11 +63,7 @@ import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
 
 import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class LoginService extends Service {
@@ -77,12 +73,14 @@ public class LoginService extends Service {
 	
 	private final Map<String, List<CreatureObject>> players;
 	private final PswgUserDatabase userDatabase;
-	
+	private final Collection<Galaxy> galaxies;
+
 	public LoginService() {
-		this(PswgDatabase.INSTANCE.getUsers());
+		this(Collections.singletonList(ProjectSWG.INSTANCE.getGalaxy()), PswgDatabase.INSTANCE.getUsers());
 	}
 
-	public LoginService(PswgUserDatabase pswgUserDatabase) {
+	public LoginService(Collection<Galaxy> galaxy, PswgUserDatabase pswgUserDatabase) {
+		this.galaxies = galaxy;
 		userDatabase = pswgUserDatabase;
 		this.players = Collections.synchronizedMap(new HashMap<>());
 	}
@@ -160,7 +158,7 @@ public class LoginService extends Service {
 		} else if (isPasswordValid(user, loginRequest.getPassword())) {
 			StandardLog.onPlayerEvent(this, player, "logged in from %s", loginRequest.getSocketAddress());
 			onSuccessfulLogin(user, player);
-			player.sendPacket(new HoloLoginResponsePacket(true, "", getGalaxies(), getCharacters(user.getUsername())));
+			player.sendPacket(new HoloLoginResponsePacket(true, "", galaxies, getCharacters(user.getUsername())));
 		} else {
 			StandardLog.onPlayerEvent(this, player, "failed to login [incorrect password] from %s", loginRequest.getSocketAddress());
 			onInvalidUserPass(player);
@@ -263,7 +261,7 @@ public class LoginService extends Service {
 		LoginEnumCluster cluster = new LoginEnumCluster();
 		LoginClusterStatus clusterStatus = new LoginClusterStatus();
 		List<SWGCharacter> characters = getCharacters(player.getAccountId());
-		for (Galaxy g : getGalaxies()) {
+		for (Galaxy g : galaxies) {
 			cluster.addGalaxy(g);
 			clusterStatus.addGalaxy(g);
 		}
@@ -279,13 +277,7 @@ public class LoginService extends Service {
 	private boolean isPasswordValid(UserMetadata user, String password) {
 		return userDatabase.authenticate(user, password);
 	}
-	
-	private List <Galaxy> getGalaxies() {
-		List<Galaxy> galaxies = new ArrayList<>();
-		galaxies.add(ProjectSWG.INSTANCE.getGalaxy());
-		return galaxies;
-	}
-	
+
 	private List<SWGCharacter> getCharacters(String accountId) {
 		List<SWGCharacter> characters = new ArrayList<>();
 		List<CreatureObject> creatures = this.players.get(accountId);
