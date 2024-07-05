@@ -45,6 +45,7 @@ object ServerData {
 	 */
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
+	val movement			by SoftDataLoaderDelegate(::MovementLoader)
 
 	/*
 	 * Skill / Collection
