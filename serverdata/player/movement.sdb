@@ -54,7 +54,6 @@ stop	root	0	TRUE	TRUE	TRUE
 stoppingShot	root	0	TRUE	TRUE	TRUE
 stoppingShot_1	root	0	TRUE	TRUE	TRUE
 stoppingShot_2	root	0	TRUE	TRUE	TRUE
-test_stun	stun	0	TRUE	FALSE	FALSE
 testColdSnare1	snare	7	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
 testColdSnare2	snare	21	TRUE	FALSE	FALSE	TESTING ONLY - Do not use.
 testItemBoost1	permaboost	8	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
