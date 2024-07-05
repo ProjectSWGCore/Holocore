@@ -95,6 +95,10 @@ class SuiMessageBox : SuiWindow() {
 			}
 		}
 
+	init {
+		super.suiScript = "Script.messageBox"
+	}
+
 	private fun setShowRevertButton(shown: Boolean) {
 		val value = shown.toString()
 		setProperty("btnRevert", "Enabled", value)
