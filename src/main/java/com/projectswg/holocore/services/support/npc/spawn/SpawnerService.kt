@@ -56,6 +56,7 @@ import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicReference
 import java.util.stream.Collectors
 
 class SpawnerService : Service() {
@@ -65,6 +66,7 @@ class SpawnerService : Service() {
 	
 	override fun initialize(): Boolean {
 		executor.start()
+		setAuthority(ServerData)
 		if (PswgDatabase.config.getBoolean(this, "spawnEggsEnabled", true))
 			loadSpawners()
 		
@@ -228,7 +230,7 @@ class SpawnerService : Service() {
 		ObjectCreatedIntent(egg).broadcast()
 		return egg
 	}
-	
+
 	private fun getCell(spawnId: String, cellId: Int, buildingTag: String): SWGObject? {
 		if (buildingTag.isEmpty() || buildingTag.endsWith("_world"))
 			return null
@@ -244,5 +246,26 @@ class SpawnerService : Service() {
 		}
 		return cellObject
 	}
-	
+
+
+	companion object {
+		private val AUTHORITY: AtomicReference<ServerData?> = AtomicReference(null)
+
+		fun setAuthority(authority: ServerData) {
+			AUTHORITY.set(authority)
+		}
+
+		fun getSpawnFromId(spawnId: String): SpawnInfo? {
+			val serverData = AUTHORITY.get()
+			if (serverData != null)
+			{
+				return try {
+					serverData.npcStaticSpawns.spawns.first { it.id == spawnId }
+				} catch (e : NoSuchElementException) {
+					null
+				}
+			}
+			return null
+		}
+	}
 }

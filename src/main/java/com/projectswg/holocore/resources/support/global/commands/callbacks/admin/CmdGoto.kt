@@ -36,6 +36,7 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup
+import com.projectswg.holocore.services.support.npc.spawn.SpawnerService
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
 import me.joshlarson.jlcommon.log.Log
 
@@ -46,7 +47,9 @@ class CmdGoto : ICmdCallback {
 		if (parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty()) return
 
 		val destination = parts[0].trim { it <= ' ' }
-		val message = if (PlayerLookup.doesCharacterExistByFirstName(destination)) teleportToPlayer(player, teleportee, destination) else teleportToBuilding(player, teleportee, destination, parts)
+
+		val message = if (PlayerLookup.doesCharacterExistByFirstName(destination)) teleportToPlayer(player, teleportee, destination) else if(BuildingLookup.getBuildingByTag(destination) != null)
+			teleportToBuilding(player, teleportee, destination, parts) else if(SpawnerService.getSpawnFromId(destination) != null)  teleportToSpawnID(player, teleportee, destination) else return
 
 		if (message != null) broadcastPersonal(player, message)
 	}
@@ -80,6 +83,18 @@ class CmdGoto : ICmdCallback {
 		return teleportToGoto(teleportee, building, cell)
 	}
 
+	private fun teleportToSpawnID(player: Player, teleportee: CreatureObject, spawnId: String): String? {
+		val spawnInfo = SpawnerService.getSpawnFromId(spawnId)
+		if (spawnInfo == null)
+		{
+			broadcastPersonal(player, "Spawn ID '$spawnId' did not return a spawn.")
+			return null
+		}
+		val building = BuildingLookup.getBuildingByTag(spawnInfo.buildingId) ?: return null
+
+		return teleportToGoto(teleportee, building, spawnInfo.cellId)
+	}
+
 	private fun teleportToGoto(obj: SWGObject, building: BuildingObject, cellNumber: Int): String {
 		val cell = building.getCellByNumber(cellNumber)
 		if (cell == null) {
@@ -100,4 +115,6 @@ class CmdGoto : ICmdCallback {
 		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.terrain).build())
 		return "Successfully teleported " + obj.objectName + " to " + building.buildoutTag
 	}
+
+
 }
