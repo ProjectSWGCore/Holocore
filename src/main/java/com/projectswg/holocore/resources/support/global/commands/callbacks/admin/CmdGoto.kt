@@ -28,6 +28,7 @@ package com.projectswg.holocore.resources.support.global.commands.callbacks.admi
 
 import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent.Companion.broadcastPersonal
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -36,9 +37,11 @@ import com.projectswg.holocore.resources.support.objects.swg.cell.Portal
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup
-import com.projectswg.holocore.services.support.npc.spawn.SpawnerService
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
 import me.joshlarson.jlcommon.log.Log
+import java.util.*
+import kotlin.Comparator
+import kotlin.NoSuchElementException
 
 class CmdGoto : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
@@ -90,34 +93,34 @@ class CmdGoto : ICmdCallback {
 		return teleportToGoto(teleportee, building, cell)
 	}
 
+
 	private fun teleportToSpawnId(player: Player, teleportee: CreatureObject, spawnId: String): String? {
-		val spawnInfo = SpawnerService.getSpawnFromId(spawnId)
-		if (spawnInfo == null)
-		{
+		val spawnInfo = try {
+			ServerData.npcStaticSpawns.spawns.first { it.id == spawnId }
+		} catch (e: NoSuchElementException) {
 			broadcastPersonal(player, "Spawn ID '$spawnId' did not return a spawn.")
 			return null
 		}
 		val newLocation = Location.builder().setPosition(spawnInfo.x, spawnInfo.y, spawnInfo.z).setTerrain(spawnInfo.terrain).build()
-		if (spawnInfo.buildingId.isEmpty() || spawnInfo.buildingId.endsWith("_world"))
-		{
-			teleportee.moveToLocation(newLocation)
-			return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
+		if (spawnInfo.buildingId.isEmpty() || spawnInfo.buildingId.endsWith("_world")) {
+				teleportee.moveToLocation(newLocation)
+				return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
 		}
 		val newParent = BuildingLookup.getBuildingByTag(spawnInfo.buildingId)?.getCellByNumber(spawnInfo.cellId)
 		teleportee.moveToContainer(newParent, newLocation)
-		return  "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
+		return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
 	}
 
 	private fun teleportToPatrolId(player: Player, teleportee: CreatureObject, patrolId: String): String? {
-		val patrolWaypoint = SpawnerService.getLocationFromPatrolId(patrolId)
-		if (patrolWaypoint == null)
-		{
-			broadcastPersonal(player, "Patrol ID ${patrolId} did not return a value.")
+		val groupIdFromPatrolId = patrolId.dropLast(2) + "00"
+		val patrolWaypoint = try {
+			Objects.requireNonNull(ServerData.npcPatrolRoutes[groupIdFromPatrolId], "Invalid patrol group ID: $groupIdFromPatrolId").first { it.patrolId == patrolId }
+		} catch (e: NoSuchElementException) {
+			broadcastPersonal(player, "Spawn ID '$patrolId' did not return a spawn.")
 			return null
 		}
 		val newLocation = Location.builder().setPosition(patrolWaypoint.x, patrolWaypoint.y, patrolWaypoint.z).setTerrain(patrolWaypoint.terrain).build()
-		if (patrolWaypoint.buildingId.isEmpty() || patrolWaypoint.buildingId.endsWith("_world"))
-		{
+		if (patrolWaypoint.buildingId.isEmpty() || patrolWaypoint.buildingId.endsWith("_world")) {
 			teleportee.moveToLocation(newLocation)
 			return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
 		}

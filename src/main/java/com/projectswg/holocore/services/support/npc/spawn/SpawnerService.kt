@@ -69,7 +69,6 @@ class SpawnerService : Service() {
 	
 	override fun initialize(): Boolean {
 		executor.start()
-		setAuthority(ServerData)
 		if (PswgDatabase.config.getBoolean(this, "spawnEggsEnabled", true))
 			loadSpawners()
 		
@@ -248,45 +247,5 @@ class SpawnerService : Service() {
 			Log.e("Spawner with ID %s - building %s didn't have cell ID %d!", spawnId, buildingTag, cellId)
 		}
 		return cellObject
-	}
-
-
-	companion object {
-		private val AUTHORITY: AtomicReference<ServerData?> = AtomicReference(null)
-
-		private fun getAuthority(): ServerData? {
-			return AUTHORITY.get()
-		}
-
-		fun setAuthority(authority: ServerData) {
-			AUTHORITY.set(authority)
-		}
-
-
-		fun getSpawnFromId(spawnId: String): SpawnInfo? {
-			val serverData = getAuthority()
-			if (serverData != null) {
-				return try {
-					serverData.npcStaticSpawns.spawns.first { it.id == spawnId }
-				} catch (e: NoSuchElementException) {
-					null
-				}
-			}
-			return null
-		}
-
-		fun getLocationFromPatrolId(patrolId: String): NpcPatrolRouteLoader.PatrolRouteWaypoint? {
-			val serverData = getAuthority()
-			if (serverData != null) {
-				val groupIdFromPatrolId = patrolId.dropLast(2) + "00"
-				val waypoints = Objects.requireNonNull(serverData.npcPatrolRoutes[groupIdFromPatrolId], "Invalid patrol group ID: $groupIdFromPatrolId")
-				return try {
-					waypoints.first { it.patrolId == patrolId }
-				} catch (e: NoSuchElementException) {
-					null
-				}
-			}
-			return null
-		}
 	}
 }
