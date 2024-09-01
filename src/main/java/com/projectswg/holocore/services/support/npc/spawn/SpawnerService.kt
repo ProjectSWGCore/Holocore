@@ -277,11 +277,8 @@ class SpawnerService : Service() {
 
 		fun getLocationFromPatrolId(patrolId: String): NpcPatrolRouteLoader.PatrolRouteWaypoint? {
 			val serverData = getAuthority()
-
 			if (serverData != null) {
 				val groupIdFromPatrolId = patrolId.dropLast(2) + "00"
-				Log.e("Group ID from Patrol ID: %s", groupIdFromPatrolId)
-
 				val waypoints = Objects.requireNonNull(serverData.npcPatrolRoutes[groupIdFromPatrolId], "Invalid patrol group ID: $groupIdFromPatrolId")
 				return try {
 					waypoints.first { it.patrolId == patrolId }

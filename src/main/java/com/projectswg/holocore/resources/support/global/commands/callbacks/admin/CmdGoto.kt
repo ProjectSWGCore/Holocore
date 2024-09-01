@@ -48,6 +48,7 @@ class CmdGoto : ICmdCallback {
 
 		val type = parts[0].trim { it <= ' ' }
 		val destination = parts[1].trim { it <= ' ' }
+
 		var message = ""
 		when (type) {
 			"player" -> message = (teleportToPlayer(player, teleportee, destination)) ?: return
@@ -96,9 +97,15 @@ class CmdGoto : ICmdCallback {
 			broadcastPersonal(player, "Spawn ID '$spawnId' did not return a spawn.")
 			return null
 		}
-		val building = BuildingLookup.getBuildingByTag(spawnInfo.buildingId) ?: return null
-
-		return teleportToGoto(teleportee, building, spawnInfo.cellId)
+		val newLocation = Location.builder().setPosition(spawnInfo.x, spawnInfo.y, spawnInfo.z).setTerrain(spawnInfo.terrain).build()
+		if (spawnInfo.buildingId.isEmpty() || spawnInfo.buildingId.endsWith("_world"))
+		{
+			teleportee.moveToLocation(newLocation)
+			return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
+		}
+		val newParent = BuildingLookup.getBuildingByTag(spawnInfo.buildingId)?.getCellByNumber(spawnInfo.cellId)
+		teleportee.moveToContainer(newParent, newLocation)
+		return  "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
 	}
 
 	private fun teleportToPatrolId(player: Player, teleportee: CreatureObject, patrolId: String): String? {
@@ -108,10 +115,14 @@ class CmdGoto : ICmdCallback {
 			broadcastPersonal(player, "Patrol ID ${patrolId} did not return a value.")
 			return null
 		}
-		val newPosition = Location.builder().setPosition(patrolWaypoint.x, patrolWaypoint.y, patrolWaypoint.z).setTerrain(patrolWaypoint.terrain).build()
-
-
-		teleportee.moveToLocation(newPosition)
+		val newLocation = Location.builder().setPosition(patrolWaypoint.x, patrolWaypoint.y, patrolWaypoint.z).setTerrain(patrolWaypoint.terrain).build()
+		if (patrolWaypoint.buildingId.isEmpty() || patrolWaypoint.buildingId.endsWith("_world"))
+		{
+			teleportee.moveToLocation(newLocation)
+			return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
+		}
+		val newParent = BuildingLookup.getBuildingByTag(patrolWaypoint.buildingId)?.getCellByNumber(patrolWaypoint.cellId)
+		teleportee.moveToContainer(newParent, newLocation)
 		return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
 	}
 
