@@ -144,11 +144,6 @@ class CmdGoto : ICmdCallback {
 			z = (portal.frame1.z + portal.frame2.z) / 2
 		}
 		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.terrain).build())
-
-
-
 		return "Successfully teleported " + obj.objectName + " to " + building.buildoutTag
 	}
-
-
 }
