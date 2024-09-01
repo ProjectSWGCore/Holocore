@@ -44,14 +44,20 @@ class CmdGoto : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val teleportee = player.creatureObject ?: return
 		val parts = args.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-		if (parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty()) return
+		if (parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
 
-		val destination = parts[0].trim { it <= ' ' }
+		val type = parts[0].trim { it <= ' ' }
+		val destination = parts[1].trim { it <= ' ' }
+		var message = ""
+		when (type) {
+			"player" -> message = (teleportToPlayer(player, teleportee, destination)) ?: return
+			"building" -> message = teleportToBuilding(player, teleportee, destination, parts) ?: return
+			"spawn" -> message = teleportToSpawnId(player, teleportee, destination) ?: return
+			"patrol" -> message = teleportToPatrolId(player, teleportee, destination) ?: return
+			else -> broadcastPersonal(player, "Invalid goto command")
+		}
 
-		val message = if (PlayerLookup.doesCharacterExistByFirstName(destination)) teleportToPlayer(player, teleportee, destination) else if(BuildingLookup.getBuildingByTag(destination) != null)
-			teleportToBuilding(player, teleportee, destination, parts) else if(SpawnerService.getSpawnFromId(destination) != null)  teleportToSpawnID(player, teleportee, destination) else return
-
-		if (message != null) broadcastPersonal(player, message)
+		broadcastPersonal(player, message)
 	}
 
 	private fun teleportToPlayer(player: Player, teleportee: CreatureObject, playerName: String): String? {
@@ -83,7 +89,7 @@ class CmdGoto : ICmdCallback {
 		return teleportToGoto(teleportee, building, cell)
 	}
 
-	private fun teleportToSpawnID(player: Player, teleportee: CreatureObject, spawnId: String): String? {
+	private fun teleportToSpawnId(player: Player, teleportee: CreatureObject, spawnId: String): String? {
 		val spawnInfo = SpawnerService.getSpawnFromId(spawnId)
 		if (spawnInfo == null)
 		{
@@ -93,6 +99,20 @@ class CmdGoto : ICmdCallback {
 		val building = BuildingLookup.getBuildingByTag(spawnInfo.buildingId) ?: return null
 
 		return teleportToGoto(teleportee, building, spawnInfo.cellId)
+	}
+
+	private fun teleportToPatrolId(player: Player, teleportee: CreatureObject, patrolId: String): String? {
+		val patrolWaypoint = SpawnerService.getLocationFromPatrolId(patrolId)
+		if (patrolWaypoint == null)
+		{
+			broadcastPersonal(player, "Patrol ID ${patrolId} did not return a value.")
+			return null
+		}
+		val newPosition = Location.builder().setPosition(patrolWaypoint.x, patrolWaypoint.y, patrolWaypoint.z).setTerrain(patrolWaypoint.terrain).build()
+
+
+		teleportee.moveToLocation(newPosition)
+		return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
 	}
 
 	private fun teleportToGoto(obj: SWGObject, building: BuildingObject, cellNumber: Int): String {
@@ -113,6 +133,9 @@ class CmdGoto : ICmdCallback {
 			z = (portal.frame1.z + portal.frame2.z) / 2
 		}
 		obj.moveToContainer(cell, Location.builder().setPosition(x, y, z).setTerrain(building.terrain).build())
+
+
+
 		return "Successfully teleported " + obj.objectName + " to " + building.buildoutTag
 	}
 

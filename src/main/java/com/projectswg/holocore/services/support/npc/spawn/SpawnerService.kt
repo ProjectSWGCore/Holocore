@@ -37,6 +37,7 @@ import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
@@ -55,9 +56,11 @@ import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicReference
 import java.util.stream.Collectors
+import kotlin.NoSuchElementException
 
 class SpawnerService : Service() {
 	
@@ -251,17 +254,38 @@ class SpawnerService : Service() {
 	companion object {
 		private val AUTHORITY: AtomicReference<ServerData?> = AtomicReference(null)
 
+		private fun getAuthority(): ServerData? {
+			return AUTHORITY.get()
+		}
+
 		fun setAuthority(authority: ServerData) {
 			AUTHORITY.set(authority)
 		}
 
+
 		fun getSpawnFromId(spawnId: String): SpawnInfo? {
-			val serverData = AUTHORITY.get()
-			if (serverData != null)
-			{
+			val serverData = getAuthority()
+			if (serverData != null) {
 				return try {
 					serverData.npcStaticSpawns.spawns.first { it.id == spawnId }
-				} catch (e : NoSuchElementException) {
+				} catch (e: NoSuchElementException) {
+					null
+				}
+			}
+			return null
+		}
+
+		fun getLocationFromPatrolId(patrolId: String): NpcPatrolRouteLoader.PatrolRouteWaypoint? {
+			val serverData = getAuthority()
+
+			if (serverData != null) {
+				val groupIdFromPatrolId = patrolId.dropLast(2) + "00"
+				Log.e("Group ID from Patrol ID: %s", groupIdFromPatrolId)
+
+				val waypoints = Objects.requireNonNull(serverData.npcPatrolRoutes[groupIdFromPatrolId], "Invalid patrol group ID: $groupIdFromPatrolId")
+				return try {
+					waypoints.first { it.patrolId == patrolId }
+				} catch (e: NoSuchElementException) {
 					null
 				}
 			}
