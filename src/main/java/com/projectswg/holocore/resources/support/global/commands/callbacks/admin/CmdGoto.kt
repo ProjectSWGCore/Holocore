@@ -103,8 +103,8 @@ class CmdGoto : ICmdCallback {
 		}
 		val newLocation = Location.builder().setPosition(spawnInfo.x, spawnInfo.y, spawnInfo.z).setTerrain(spawnInfo.terrain).build()
 		if (spawnInfo.buildingId.isEmpty() || spawnInfo.buildingId.endsWith("_world")) {
-				teleportee.moveToLocation(newLocation)
-				return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
+			teleportee.moveToLocation(newLocation)
+			return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
 		}
 		val newParent = BuildingLookup.getBuildingByTag(spawnInfo.buildingId)?.getCellByNumber(spawnInfo.cellId)
 		teleportee.moveToContainer(newParent, newLocation)
