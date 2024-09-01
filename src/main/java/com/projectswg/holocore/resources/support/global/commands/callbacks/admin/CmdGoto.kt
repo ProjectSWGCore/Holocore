@@ -47,7 +47,7 @@ class CmdGoto : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val teleportee = player.creatureObject ?: return
 		val parts = args.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-		if (parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
+		if (parts.size < 2 ||parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
 
 		val type = parts[0].trim { it <= ' ' }
 		val destination = parts[1].trim { it <= ' ' }
