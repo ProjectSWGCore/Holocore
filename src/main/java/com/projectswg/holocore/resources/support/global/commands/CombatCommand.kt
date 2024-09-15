@@ -44,9 +44,11 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 	val forceCost: Double = builder.forceCost
 	val forceCostModifier: Double = builder.forceCostModifier
 	val knockdownChance: Double = builder.knockdownChance
+	val effectChance: Double = builder.effectChance
 	val isBlinding: Boolean = builder.blinding
 	val isBleeding: Boolean = builder.bleeding
 	val isStunning: Boolean = builder.stunning
+	val isDizzying: Boolean = builder.dizzying
 	val triggerEffect: String = builder.triggerEffect
 	val triggerEffectHardpoint: String = builder.triggerEffectHardpoint
 	val targetEffect: String = builder.targetEffect
@@ -101,9 +103,11 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 		var forceCost: Double = 0.0
 		var forceCostModifier: Double = 0.0
 		var knockdownChance: Double = 0.0
+		var effectChance: Double = 0.0
 		var blinding: Boolean = false
 		var bleeding: Boolean = false
 		var stunning: Boolean = false
+		var dizzying: Boolean = false
 		var triggerEffect: String = ""
 		var triggerEffectHardpoint: String = ""
 		var targetEffect: String = ""
@@ -188,6 +192,11 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 			return this
 		}
 
+		fun withEffectChance(effectChance: Double): CombatCommandBuilder {
+			this.effectChance = effectChance
+			return this
+		}
+
 		fun withBlinding(blinding: Boolean): CombatCommandBuilder {
 			this.blinding = blinding
 			return this
@@ -200,6 +209,11 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 
 		fun withStunning(stunning: Boolean): CombatCommandBuilder {
 			this.stunning = stunning
+			return this
+		}
+
+		fun withDizzying(dizzying: Boolean): CombatCommandBuilder {
+			this.dizzying = dizzying
 			return this
 		}
 

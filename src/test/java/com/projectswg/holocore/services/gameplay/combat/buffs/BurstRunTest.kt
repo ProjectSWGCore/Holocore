@@ -18,7 +18,7 @@ class BurstRunTest {
 		val creatureObject = createCreatureObjectWithBurstRun()
 		val removeBurstRunBuffCallback = RemoveBurstRunBuffCallback()
 
-		removeBurstRunBuffCallback.execute(creatureObject)
+		removeBurstRunBuffCallback.execute(creatureObject, null, null)
 
 		assertEquals(1f, creatureObject.movementScale)
 	}

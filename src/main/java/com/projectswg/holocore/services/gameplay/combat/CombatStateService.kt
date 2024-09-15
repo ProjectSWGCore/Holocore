@@ -6,8 +6,6 @@ import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 
 class CombatStateService : Service() {
-
-	private val stateDurationInMs = 10_000L
 	private val executor: ScheduledThreadPool = ScheduledThreadPool(1, "combat-state-service")
 
 	override fun start(): Boolean {
@@ -27,6 +25,8 @@ class CombatStateService : Service() {
 		val combatState = intent.combatState
 		val victim = intent.victim
 		val attacker = intent.attacker
+		val cancelState = intent.cancelState
+		val runTime: Long = (intent.duration * 1000).toLong()
 
 		if (!combatState.isApplied(victim)) {
 			combatState.apply(attacker, victim)
@@ -37,10 +37,13 @@ class CombatStateService : Service() {
 				}
 			}
 
-			executor.execute(stateDurationInMs) {
+			executor.execute(runTime) {
 				loop.cancel(false)
 				combatState.clear(attacker, victim)
 			}
+		}
+		if (cancelState) {
+			combatState.clear(attacker, victim)
 		}
 	}
 }

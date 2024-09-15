@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,30 +23,15 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat
+package com.projectswg.holocore.services.gameplay.combat.buffs
 
-import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.intents.gameplay.combat.ApplyCombatStateIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
-import com.projectswg.holocore.services.gameplay.combat.CombatState
-import me.joshlarson.jlcommon.control.Intent
+import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState
 
-/*
- * Combat events after the fact
- */
-data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
-data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class CreatureRevivedIntent(val creature: CreatureObject) : Intent()
-data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent()
-data class ExitCombatIntent(val source: TangibleObject) : Intent()
-data class CloneActivatedIntent(val creature: CreatureObject, val diedOnTerrain: Terrain) : Intent()
-
-/*
- * Combat event requests
- */
-data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
-data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class KnockdownIntent(val victim: CreatureObject) : Intent()
-data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState, val duration: Double = 10.0, val cancelState: Boolean = false) : Intent()
+class RemoveStunnedStateCallback: BuffCallback {
+	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo?, source: CreatureObject?) {
+		ApplyCombatStateIntent(CreatureObject(1), target, StunnedCombatState(), 1.0, true).broadcast()
+	}
+}

@@ -56,6 +56,12 @@ class BuffService : Service() {
 
 	private fun registerCallbacks() {
 		callbackMap["removeBurstRun"] = RemoveBurstRunBuffCallback()
+		callbackMap["addStunnedState"] = AddStunnedStateCallback()
+		callbackMap["addBlindedState"] = AddBlindedStateCallback()
+		callbackMap["addDizziedState"] = AddDizziedStateCallback()
+		callbackMap["removeStunnedState"] = RemoveStunnedStateCallback()
+		callbackMap["removeBlindedState"] = RemoveBlindedStateCallback()
+		callbackMap["removeDizziedState"] = RemoveDizziedStateCallback()
 	}
 
 	override fun start(): Boolean {
@@ -179,7 +185,7 @@ class BuffService : Service() {
 		StandardLog.onPlayerTrace(this, creature, "buff '%s' was removed", buffCrc.string)
 
 		checkBuffEffects(buffData, creature, false)
-		checkCallback(buffData, creature)
+		checkRemoveCallback(buffData, creature)
 	}
 
 	private fun applyBuff(receiver: CreatureObject, buffer: CreatureObject, buffData: BuffInfo) {
@@ -197,6 +203,7 @@ class BuffService : Service() {
 		sendParticleEffect(buffData.particle, receiver, "")
 
 		scheduleBuffExpirationCheck(receiver, buffData)
+		checkApplyCallback(buffData, receiver, buffer)
 	}
 
 	private fun scheduleBuffExpirationCheck(receiver: CreatureObject, buffData: BuffInfo) {
@@ -216,10 +223,16 @@ class BuffService : Service() {
 		}
 	}
 
-	private fun checkCallback(buffData: BuffInfo, creature: CreatureObject) {
-		val callback = buffData.callback
+	private fun checkRemoveCallback(buffData: BuffInfo, creature: CreatureObject) {
+		val callback = buffData.removeCallback
 
-		callbackMap[callback]?.execute(creature)
+		callbackMap[callback]?.execute(creature, buffData, null)
+	}
+
+	private fun checkApplyCallback(buffData: BuffInfo, creature: CreatureObject, sender: CreatureObject?) {
+		val callback = buffData.applyCallback
+
+		callbackMap[callback]?.execute(creature, buffData, sender)
 	}
 
 	private fun checkBuffEffects(buffData: BuffInfo, creature: CreatureObject, add: Boolean) {

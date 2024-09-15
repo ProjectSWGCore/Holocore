@@ -52,9 +52,8 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import com.projectswg.holocore.resources.support.random.Die
+import com.projectswg.holocore.resources.support.random.RandomDie
 import com.projectswg.holocore.services.gameplay.combat.BleedingCombatState
-import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState
-import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.calculateBaseWeaponDamage
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.canPerform
@@ -105,9 +104,9 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 		val objectsToCheck = source.objectsAware
 
 		val targets = objectsToCheck.stream().filter { obj: SWGObject? -> TangibleObject::class.java.isInstance(obj) }.map { obj: SWGObject? -> TangibleObject::class.java.cast(obj) }.filter { otherObject: TangibleObject? -> source.isAttackable(otherObject) }.filter { candidate: TangibleObject? -> canPerform(source, candidate, command) === CombatStatus.SUCCESS }.filter { candidate: TangibleObject -> sourceWorldLocation.distanceTo(candidate.location) <= coneLength }.filter { candidate: TangibleObject ->
-				val candidateWorldLocation = candidate.worldLocation
-				isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneWidth, dirX, dirZ)
-			}.collect(Collectors.toSet())
+			val candidateWorldLocation = candidate.worldLocation
+			isInConeAngle(sourceWorldLocation, candidateWorldLocation, coneWidth, dirX, dirZ)
+		}.collect(Collectors.toSet())
 
 		doCombat(source, targets, info, command)
 	}
@@ -199,8 +198,6 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 			}
 		}
 
-		addBuff(source, creatureTarget, combatCommand.buffNameTarget) // Add target buff
-
 		var rawDamage = calculateBaseDamage(combatCommand, sourceWeapon, weaponDamageMod)
 
 		if (creatureTarget.posture == Posture.KNOCKED_DOWN) {
@@ -211,16 +208,40 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 		info.rawDamage = rawDamage
 		info.finalDamage = rawDamage
 
+		// Add the buff if it doesn't have to calculate resistances
+		if(!(combatCommand.isBleeding || combatCommand.isBlinding || combatCommand.isDizzying || combatCommand.isStunning)) {
+			addBuff(source, creatureTarget, combatCommand.buffNameTarget) // Add target buff
+		}
+
 		if (combatCommand.isBlinding) {
-			ApplyCombatStateIntent(source, creatureTarget, BlindedCombatState()).broadcast()
+			val blindChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("blind_defense")
+			val blindRoll: Int = RandomDie().roll(IntRange(0, 100))
+			// all status effect resistances have a maximum value of 95%, so check if it is less than the chance or minimum value.
+			if (blindRoll < blindChance || blindRoll < 5) {
+				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+			}
+		}
+
+		if (combatCommand.isDizzying) {
+			val dizzyChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("dizzy_defense")
+			val dizzyRoll: Int = RandomDie().roll(IntRange(0, 100))
+
+			if (dizzyRoll < dizzyChance || dizzyRoll < 5) {
+				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+			}
 		}
 
 		if (combatCommand.isBleeding) {
 			ApplyCombatStateIntent(source, creatureTarget, BleedingCombatState()).broadcast()
+			addBuff(source, creatureTarget, combatCommand.buffNameTarget)
 		}
 
 		if (combatCommand.isStunning) {
-			ApplyCombatStateIntent(source, creatureTarget, StunnedCombatState()).broadcast()
+			val stunChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("stun_defense")
+			val stunRoll: Int = RandomDie().roll(IntRange(0, 100))
+			if (stunRoll < stunChance || stunRoll < 5) {
+				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+			}
 		}
 
 		// The armor of the target will mitigate some damage
@@ -377,18 +398,52 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 			toHit += (calculateAccMod(source, sourceWeapon) - calculateDefMod(source, target)) / 10
 			toHit += calculateDefPosMod(sourceWeapon, target)
 			toHit += calculateAtkPosMod(source)
-			toHit -= calculateBlindModifier(source) // Blind attackers have a hard time hitting anything
-			toHit += calculateBlindModifier(target) // Blind targets have a hard time avoiding anything
+			toHit -= caclulateHitStateModifiers(source) // Calculate the attacker's state modifiers
+			toHit += calculateDefenseStateModifiers(target) // Calculate the target's defense state modifiers
 
 			return max(32.0, toHit.toDouble())
 		}
 
-		private fun calculateBlindModifier(target: CreatureObject): Int {
-			if (target.isStatesBitmask(CreatureState.BLINDED)) {
-				return 50
+		private fun caclulateHitStateModifiers(target: CreatureObject): Int {
+			when {
+				target.isStatesBitmask(CreatureState.BLINDED) -> {
+					return 50
+				}
+				target.isStatesBitmask(CreatureState.DIZZY) -> {
+					return 40
+				}
+				target.isStatesBitmask(CreatureState.STUNNED) -> {
+					return 50
+				}
+				target.isStatesBitmask(CreatureState.RALLIED) -> {
+					return -20
+				}
 			}
 
-			// TODO Defenders modifiers for being stunned, or intimidated. Example of Defender Modifier would be +50 signifying the defender being easier to hit. Stunned and intimidate factors are unknown but it is estimated that they lower primary (melee and ranged) defenses by -50
+			return 0
+		}
+
+		private fun calculateDefenseStateModifiers(target: CreatureObject): Int {
+			when {
+				target.isStatesBitmask(CreatureState.BLINDED) -> {
+					return 50
+				}
+				target.isStatesBitmask(CreatureState.DIZZY) -> {
+					return 40
+				}
+				target.isStatesBitmask(CreatureState.STUNNED) -> {
+					return 50
+				}
+				target.isStatesBitmask(CreatureState.INTIMIDATED) -> {
+					return 50
+				}
+				target.isStatesBitmask(CreatureState.RALLIED) -> {
+					return -20
+				}
+				target.isStatesBitmask(CreatureState.TUMBLING) -> {
+					return -10
+				}
+			}
 			return 0
 		}
 

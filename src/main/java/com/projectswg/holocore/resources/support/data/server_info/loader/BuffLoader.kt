@@ -53,11 +53,11 @@ class BuffLoader internal constructor() : DataLoader() {
 		}
 	}
 
-	class BuffInfo private constructor(val name: String, val group1: String, val group2: String, val block: String, val priority: Int, val icon: String, val duration: Double, private val effectNames: Array<String>, private val effectValues: DoubleArray, val state: String, val callback: String, val particle: String, val visible: Int, val isDebuff: Boolean) {
+	class BuffInfo private constructor(val name: String, val group1: String, val group2: String, val block: String, val priority: Int, val icon: String, val duration: Double, private val effectNames: Array<String>, private val effectValues: DoubleArray, val state: String, val applyCallback: String, val removeCallback: String, val particle: String, val visible: Int, val isDebuff: Boolean) {
 		val crc: CRC = CRC(CRC.getCrc(name.lowercase()))
 
 		constructor(set: SdbResultSet, effectNames: SdbTextColumnArraySet, effectValues: SdbRealColumnArraySet) : this(
-			set.getText("name"), set.getText("group1"), set.getText("group2"), set.getText("block"), set.getInt("priority").toInt(), set.getText("icon"), set.getReal("duration"), effectNames.getArray(set).clone(), effectValues.getArray(set).clone(), set.getText("state"), set.getText("callback"), set.getText("particle"), set.getInt("visible").toInt(), set.getBoolean("debuff")
+			set.getText("name"), set.getText("group1"), set.getText("group2"), set.getText("block"), set.getInt("priority").toInt(), set.getText("icon"), set.getReal("duration"), effectNames.getArray(set).clone(), effectValues.getArray(set).clone(), set.getText("state"), set.getText("applyCallback"), set.getText("removeCallback"), set.getText("particle"), set.getInt("visible").toInt(), set.getBoolean("debuff")
 		) {
 			assert(this.effectNames.size == this.effectValues.size) { "effect params and effect values differ in size" }
 		}

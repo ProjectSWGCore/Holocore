@@ -116,6 +116,7 @@ class CombatCommandLoader internal constructor() : DataLoader() {
 					.withForceCost(set.getReal("forceCost"))
 					.withForceCostModifier(set.getReal("fcModifier"))
 					.withKnockdownChance(set.getReal("knockdownChance"))
+					.withEffectChance(set.getReal("effectChance"))
 					.withBlinding(set.getBoolean("blinding"))
 					.withBleeding(set.getBoolean("bleeding"))
 					.withStunning(set.getBoolean("stun"))
