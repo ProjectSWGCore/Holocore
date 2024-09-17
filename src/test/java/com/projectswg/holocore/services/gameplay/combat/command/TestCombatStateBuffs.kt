@@ -40,8 +40,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class TestCombatStateBuffs : TestRunnerSynchronousIntents() {
-	private var source: CreatureObject? = null
-	private var target: CreatureObject? = null
+	private lateinit var source: CreatureObject
+	private lateinit var target: CreatureObject
 
 	@BeforeEach
 	fun setup() {
@@ -69,27 +69,27 @@ class TestCombatStateBuffs : TestRunnerSynchronousIntents() {
 	fun `Combat state buffs and recovery acctions apply the appropriate state`() {
 
 		// Attempt to apply blinded state
-		broadcastAndWait(BuffIntent("blindAttack", source!!, target!!, false))
+		broadcastAndWait(BuffIntent("blindAttack", source, target, false))
 		// Check Results
-		Assertions.assertTrue(target!!.isStatesBitmask(CreatureState.BLINDED), "Target should be blinded")
+		Assertions.assertTrue(target.isStatesBitmask(CreatureState.BLINDED), "Target should be blinded")
 		// Test if recovery works
-		broadcastAndWait(BuffIntent("blindRecovery", source!!, target!!, false))
-		Assertions.assertFalse(target!!.isStatesBitmask(CreatureState.BLINDED), "Target should not be blinded")
+		broadcastAndWait(BuffIntent("blindRecovery", source, target, false))
+		Assertions.assertFalse(target.isStatesBitmask(CreatureState.BLINDED), "Target should not be blinded")
 
 		// Do the same for the other states / buffs
 
 		// Stunned
-		broadcastAndWait(BuffIntent("stunningBlow", source!!, target!!, false))
-		Assertions.assertTrue(target!!.isStatesBitmask(CreatureState.STUNNED), "Target should be stunned")
+		broadcastAndWait(BuffIntent("stunningBlow", source, target, false))
+		Assertions.assertTrue(target.isStatesBitmask(CreatureState.STUNNED), "Target should be stunned")
 
-		broadcastAndWait(BuffIntent("stunRecovery", source!!, target!!, false))
-		Assertions.assertFalse(target!!.isStatesBitmask(CreatureState.STUNNED), "Target should be stunned")
+		broadcastAndWait(BuffIntent("stunRecovery", source, target, false))
+		Assertions.assertFalse(target.isStatesBitmask(CreatureState.STUNNED), "Target should be stunned")
 
 		// Dizzy
-		broadcastAndWait(BuffIntent("dizzy", source!!, target!!, false))
-		Assertions.assertTrue(target!!.isStatesBitmask(CreatureState.DIZZY), "Target should be dizzy")
+		broadcastAndWait(BuffIntent("dizzy", source, target, false))
+		Assertions.assertTrue(target.isStatesBitmask(CreatureState.DIZZY), "Target should be dizzy")
 
-		broadcastAndWait(BuffIntent("dizzyRecovery", source!!, target!!, false))
-		Assertions.assertFalse(target!!.isStatesBitmask(CreatureState.DIZZY), "Target should not be dizzy")
+		broadcastAndWait(BuffIntent("dizzyRecovery", source, target, false))
+		Assertions.assertFalse(target.isStatesBitmask(CreatureState.DIZZY), "Target should not be dizzy")
 	}
 }

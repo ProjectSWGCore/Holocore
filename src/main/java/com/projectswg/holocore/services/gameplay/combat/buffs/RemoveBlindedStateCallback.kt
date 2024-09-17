@@ -31,7 +31,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState
 
 class RemoveBlindedStateCallback: BuffCallback {
-	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo?, source: CreatureObject?) {
-		ApplyCombatStateIntent(CreatureObject(1), target, BlindedCombatState(), 1.0, true).broadcast()
+	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo, source: CreatureObject?) {
+		ApplyCombatStateIntent(null, target, BlindedCombatState(), 1.0, true).broadcast()
 	}
 }

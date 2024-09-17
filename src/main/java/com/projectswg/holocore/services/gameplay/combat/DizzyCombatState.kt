@@ -39,7 +39,7 @@ class DizzyCombatState : CombatState {
 		victim.sendObservers(stateDizzyEffect)
 	}
 
-	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
+	override fun clear(attacker: CreatureObject?, victim: CreatureObject) {
 		victim.clearStatesBitmask(CreatureState.DIZZY)
 
 		val victimOwner = victim.owner
@@ -49,7 +49,7 @@ class DizzyCombatState : CombatState {
 
 		val noDizzyFlyText = ShowFlyText(victim.objectId, StringId("combat_effects", "no_dizzy"), ShowFlyText.Scale.MEDIUM, SWGColor.Reds.orangered)
 		victim.sendSelf(noDizzyFlyText)
-		attacker.sendSelf(noDizzyFlyText)
+		attacker?.sendSelf(noDizzyFlyText)
 
 		val stopClientEffectObjectByLabelMessage = StopClientEffectObjectByLabelMessage(victim.objectId, loopEffectLabel, false)
 		victim.sendObservers(stopClientEffectObjectByLabelMessage)

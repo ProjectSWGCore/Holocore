@@ -5,7 +5,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.MovementModifierIdentifier
 
 class RemoveBurstRunBuffCallback : BuffCallback {
-	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo?, source: CreatureObject?) {
+	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo, source: CreatureObject?) {
 		target.removeMovementScale(MovementModifierIdentifier.BURST_RUN)
 	}
 }

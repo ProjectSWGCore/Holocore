@@ -50,4 +50,4 @@ data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureOb
 data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
 data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
 data class KnockdownIntent(val victim: CreatureObject) : Intent()
-data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState, val duration: Double = 10.0, val cancelState: Boolean = false) : Intent()
+data class ApplyCombatStateIntent(val attacker: CreatureObject?, val victim: CreatureObject, val combatState: CombatState, val duration: Double = 10.0, val cancelState: Boolean = false) : Intent()

@@ -39,7 +39,7 @@ class BlindedCombatState : CombatState {
 		victim.sendObservers(stateBlindEffect)
 	}
 
-	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
+	override fun clear(attacker: CreatureObject?, victim: CreatureObject) {
 		victim.clearStatesBitmask(CreatureState.BLINDED)
 
 		val victimOwner = victim.owner
@@ -49,7 +49,7 @@ class BlindedCombatState : CombatState {
 
 		val noBlindedFlytext = ShowFlyText(victim.objectId, StringId("combat_effects", "no_blind"), ShowFlyText.Scale.MEDIUM, SWGColor.Reds.orangered)
 		victim.sendSelf(noBlindedFlytext)
-		attacker.sendSelf(noBlindedFlytext)
+		attacker?.sendSelf(noBlindedFlytext)
 
 		val stopClientEffectObjectByLabelMessage = StopClientEffectObjectByLabelMessage(victim.objectId, loopEffectLabel, false)
 		victim.sendObservers(stopClientEffectObjectByLabelMessage)

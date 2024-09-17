@@ -84,7 +84,7 @@ class BleedingCombatState : CombatState {
 		}
 	}
 
-	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
+	override fun clear(attacker: CreatureObject?, victim: CreatureObject) {
 		victim.clearStatesBitmask(CreatureState.BLEEDING)
 
 		val stopClientEffectObjectByLabelMessage = StopClientEffectObjectByLabelMessage(victim.objectId, loopEffectLabel, false)

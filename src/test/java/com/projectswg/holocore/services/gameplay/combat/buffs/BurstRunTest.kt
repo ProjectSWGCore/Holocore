@@ -1,5 +1,7 @@
 package com.projectswg.holocore.services.gameplay.combat.buffs
 
+import com.projectswg.common.data.CRC
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.callbacks.BurstRunCmdCallback
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import org.junit.jupiter.api.Assertions.*
@@ -18,7 +20,7 @@ class BurstRunTest {
 		val creatureObject = createCreatureObjectWithBurstRun()
 		val removeBurstRunBuffCallback = RemoveBurstRunBuffCallback()
 
-		removeBurstRunBuffCallback.execute(creatureObject, null, null)
+		removeBurstRunBuffCallback.execute(creatureObject, ServerData.buffs.getBuff(CRC("burstRun"))!!, null)
 
 		assertEquals(1f, creatureObject.movementScale)
 	}

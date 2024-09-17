@@ -6,5 +6,5 @@ interface CombatState {
 	fun isApplied(victim: CreatureObject): Boolean
 	fun apply(attacker: CreatureObject, victim: CreatureObject)
 	fun loop(attacker: CreatureObject, victim: CreatureObject)
-	fun clear(attacker: CreatureObject, victim: CreatureObject)
+	fun clear(attacker: CreatureObject?, victim: CreatureObject)
 }

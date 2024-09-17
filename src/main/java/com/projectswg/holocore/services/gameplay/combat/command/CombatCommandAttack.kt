@@ -208,40 +208,35 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 		info.rawDamage = rawDamage
 		info.finalDamage = rawDamage
 
-		// Add the buff if it doesn't have to calculate resistances
-		if(!(combatCommand.isBleeding || combatCommand.isBlinding || combatCommand.isDizzying || combatCommand.isStunning)) {
-			addBuff(source, creatureTarget, combatCommand.buffNameTarget) // Add target buff
-		}
+		when {
+			combatCommand.isBlinding -> {
+				val blindChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("blind_defense")
+				val blindRoll: Int = RandomDie().roll(IntRange(0, 100))
+				// all status effect resistances have a maximum value of 95%, so check if it is less than the chance or minimum value.
+				if (blindRoll < blindChance || blindRoll < 5) {
+					addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+				}
+			}
+			combatCommand.isDizzying -> {
+				val dizzyChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("dizzy_defense")
+				val dizzyRoll: Int = RandomDie().roll(IntRange(0, 100))
 
-		if (combatCommand.isBlinding) {
-			val blindChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("blind_defense")
-			val blindRoll: Int = RandomDie().roll(IntRange(0, 100))
-			// all status effect resistances have a maximum value of 95%, so check if it is less than the chance or minimum value.
-			if (blindRoll < blindChance || blindRoll < 5) {
+				if (dizzyRoll < dizzyChance || dizzyRoll < 5) {
+					addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+				}
+			}
+			combatCommand.isStunning -> {
+				val stunChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("stun_defense")
+				val stunRoll: Int = RandomDie().roll(IntRange(0, 100))
+				if (stunRoll < stunChance || stunRoll < 5) {
+					addBuff(source, creatureTarget, combatCommand.buffNameTarget)
+				}
+			}
+			combatCommand.isBleeding -> {
+				ApplyCombatStateIntent(source, creatureTarget, BleedingCombatState()).broadcast()
 				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
 			}
-		}
-
-		if (combatCommand.isDizzying) {
-			val dizzyChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("dizzy_defense")
-			val dizzyRoll: Int = RandomDie().roll(IntRange(0, 100))
-
-			if (dizzyRoll < dizzyChance || dizzyRoll < 5) {
-				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
-			}
-		}
-
-		if (combatCommand.isBleeding) {
-			ApplyCombatStateIntent(source, creatureTarget, BleedingCombatState()).broadcast()
-			addBuff(source, creatureTarget, combatCommand.buffNameTarget)
-		}
-
-		if (combatCommand.isStunning) {
-			val stunChance = combatCommand.effectChance.toInt() - creatureTarget.getSkillModValue("stun_defense")
-			val stunRoll: Int = RandomDie().roll(IntRange(0, 100))
-			if (stunRoll < stunChance || stunRoll < 5) {
-				addBuff(source, creatureTarget, combatCommand.buffNameTarget)
-			}
+			else -> addBuff(source, creatureTarget, combatCommand.buffNameTarget) // Add the buff if the command has no state effects.
 		}
 
 		// The armor of the target will mitigate some damage
@@ -405,46 +400,26 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 		}
 
 		private fun caclulateHitStateModifiers(target: CreatureObject): Int {
-			when {
-				target.isStatesBitmask(CreatureState.BLINDED) -> {
-					return 50
-				}
-				target.isStatesBitmask(CreatureState.DIZZY) -> {
-					return 40
-				}
-				target.isStatesBitmask(CreatureState.STUNNED) -> {
-					return 50
-				}
-				target.isStatesBitmask(CreatureState.RALLIED) -> {
-					return -20
-				}
+			return when {
+				target.isStatesBitmask(CreatureState.BLINDED) -> 50
+				target.isStatesBitmask(CreatureState.DIZZY) -> 40
+				target.isStatesBitmask(CreatureState.STUNNED) -> 50
+				target.isStatesBitmask(CreatureState.RALLIED) -> -20
+				else -> 0
 			}
 
-			return 0
 		}
 
 		private fun calculateDefenseStateModifiers(target: CreatureObject): Int {
-			when {
-				target.isStatesBitmask(CreatureState.BLINDED) -> {
-					return 50
-				}
-				target.isStatesBitmask(CreatureState.DIZZY) -> {
-					return 40
-				}
-				target.isStatesBitmask(CreatureState.STUNNED) -> {
-					return 50
-				}
-				target.isStatesBitmask(CreatureState.INTIMIDATED) -> {
-					return 50
-				}
-				target.isStatesBitmask(CreatureState.RALLIED) -> {
-					return -20
-				}
-				target.isStatesBitmask(CreatureState.TUMBLING) -> {
-					return -10
-				}
+			return when {
+				target.isStatesBitmask(CreatureState.BLINDED) -> 50
+				target.isStatesBitmask(CreatureState.DIZZY) -> 40
+				target.isStatesBitmask(CreatureState.STUNNED) -> 50
+				target.isStatesBitmask(CreatureState.INTIMIDATED) -> 50
+				target.isStatesBitmask(CreatureState.RALLIED) -> -20
+				target.isStatesBitmask(CreatureState.TUMBLING) -> -10
+				else -> 0
 			}
-			return 0
 		}
 
 		private fun calculateAtkPosMod(source: CreatureObject): Int {

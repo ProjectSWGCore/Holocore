@@ -4,5 +4,5 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoa
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 
 interface BuffCallback {
-	fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo?, source: CreatureObject?)
+	fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo, source: CreatureObject?)
 }

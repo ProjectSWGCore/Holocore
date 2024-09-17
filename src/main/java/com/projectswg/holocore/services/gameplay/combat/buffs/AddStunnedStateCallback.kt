@@ -31,9 +31,9 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState
 
 class AddStunnedStateCallback: BuffCallback {
-	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo?, source: CreatureObject?) {
-		if (source != null && buffData != null) {
+	override fun execute(target: CreatureObject, buffData: BuffLoader.BuffInfo, source: CreatureObject?) {
+		if (source != null) {
 			ApplyCombatStateIntent(source, target, StunnedCombatState(), buffData.duration).broadcast()
-		} else return
+		}
 	}
 }

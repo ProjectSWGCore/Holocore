@@ -39,7 +39,7 @@ class StunnedCombatState : CombatState {
 		victim.sendObservers(stateStunEffect)
 	}
 
-	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
+	override fun clear(attacker: CreatureObject?, victim: CreatureObject) {
 		victim.clearStatesBitmask(CreatureState.STUNNED)
 
 		val victimOwner = victim.owner
@@ -49,7 +49,7 @@ class StunnedCombatState : CombatState {
 
 		val noStunnedFlytext = ShowFlyText(victim.objectId, StringId("combat_effects", "no_stunned"), ShowFlyText.Scale.MEDIUM, SWGColor.Reds.orangered)
 		victim.sendSelf(noStunnedFlytext)
-		attacker.sendSelf(noStunnedFlytext)
+		attacker?.sendSelf(noStunnedFlytext)
 
 		val stopClientEffectObjectByLabelMessage = StopClientEffectObjectByLabelMessage(victim.objectId, loopEffectLabel, false)
 		victim.sendObservers(stopClientEffectObjectByLabelMessage)
