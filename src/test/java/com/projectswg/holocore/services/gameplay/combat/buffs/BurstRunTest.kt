@@ -4,10 +4,11 @@ import com.projectswg.common.data.CRC
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.callbacks.BurstRunCmdCallback
 import com.projectswg.holocore.test.resources.GenericCreatureObject
+import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class BurstRunTest {
+class BurstRunTest: TestRunnerSynchronousIntents() {
 	@Test
 	fun `Burst Run increases movement speed when executed`() {
 		val creatureObject = createCreatureObjectWithBurstRun()
@@ -17,10 +18,11 @@ class BurstRunTest {
 
 	@Test
 	fun `Burst Run decreases movement speed when buff expires`() {
+		registerService(BuffService())
 		val creatureObject = createCreatureObjectWithBurstRun()
 		val removeBurstRunBuffCallback = RemoveBurstRunBuffCallback()
 
-		removeBurstRunBuffCallback.execute(creatureObject, ServerData.buffs.getBuff(CRC("burstRun"))!!, null)
+		removeBurstRunBuffCallback.execute(creatureObject, ServerData.buffs.getBuff(CRC(CRC.getCrc("burstrun")))!!, null)
 
 		assertEquals(1f, creatureObject.movementScale)
 	}
