@@ -29,7 +29,7 @@ class CombatStateService : Service() {
 		val runTime: Long = (intent.duration * 1000).toLong()
 
 		if (!combatState.isApplied(victim)) {
-			combatState.apply(attacker!!, victim)
+			combatState.apply(attacker ?: return, victim)
 
 			val loop = executor.executeWithFixedRate(0, 4_000) {
 				if (combatState.isApplied(victim)) {
@@ -46,4 +46,5 @@ class CombatStateService : Service() {
 			combatState.clear(attacker, victim)
 		}
 	}
+
 }
