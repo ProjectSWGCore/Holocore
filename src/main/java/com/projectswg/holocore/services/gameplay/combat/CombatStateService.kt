@@ -46,5 +46,4 @@ class CombatStateService : Service() {
 			combatState.clear(attacker, victim)
 		}
 	}
-
 }
