@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -37,9 +37,9 @@ class CharacterManagementTest : AcceptanceTest() {
 
 	@Test
 	fun deleteCharacter() {
-		addUser("username", "password")
-		val headlessSWGClient = HeadlessSWGClient("username")
-		val characterSelectionScreen = headlessSWGClient.login("password")
+		val user = generateUser()
+		val headlessSWGClient = HeadlessSWGClient(user.username)
+		val characterSelectionScreen = headlessSWGClient.login(user.password)
 		val characterId = characterSelectionScreen.createCharacter("firstcharacter")
 
 		characterSelectionScreen.deleteCharacter(characterId)
@@ -49,9 +49,9 @@ class CharacterManagementTest : AcceptanceTest() {
 
 	@Test
 	fun characterCreationRateLimit() {
-		addUser("username", "password")
-		val headlessSWGClient = HeadlessSWGClient("username")
-		val characterSelectionScreen = headlessSWGClient.login("password")
+		val user = generateUser()
+		val headlessSWGClient = HeadlessSWGClient(user.username)
+		val characterSelectionScreen = headlessSWGClient.login(user.password)
 		characterSelectionScreen.createCharacter("firstcharacter")
 		characterSelectionScreen.createCharacter("secondcharacter")
 

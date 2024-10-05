@@ -64,7 +64,7 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.function.Consumer
 import java.util.stream.Collectors
 
-class CommandQueueService @JvmOverloads constructor(private val delayBetweenCheckingCommandQueue: Long = 100, toHitDie: Die = RandomDie(), knockdownDie: Die = RandomDie(), woundDie: Die = RandomDie()) : Service() {
+class CommandQueueService @JvmOverloads constructor(private val delayBetweenCheckingCommandQueue: Long = 100, toHitDie: Die = RandomDie(), knockdownDie: Die = RandomDie(), woundDie: Die = RandomDie(), private val skipWarmup: Boolean = false) : Service() {
 	private val executor = ScheduledThreadPool(4, "command-queue-%d")
 	private val combatQueueMap: MutableMap<CreatureObject, CreatureCombatQueue> = ConcurrentHashMap()
 	private val combatCommandHandler: CombatCommandHandler = CombatCommandHandler(toHitDie, knockdownDie, woundDie)
@@ -187,7 +187,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 			val warmupTime = rootCommand.warmupTime
 
-			if (warmupTime > 0) {
+			if (warmupTime > 0 && !skipWarmup) {
 				val warmupTimer = CommandTimer(command.source.objectId)
 				warmupTimer.addFlag(CommandTimer.CommandTimerFlag.WARMUP)
 				warmupTimer.commandNameCrc = rootCommand.crc

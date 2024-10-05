@@ -1,0 +1,15 @@
+{
+	"npcMessage": {
+		"file": "conversation/cyborg_install_naboo",
+		"key": "s_42",
+		"comment": "What would you like for me to remove?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_sellable_items",
+			"args": {}
+		}
+	]
+}

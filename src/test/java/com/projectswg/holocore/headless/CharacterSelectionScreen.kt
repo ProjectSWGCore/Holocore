@@ -29,6 +29,7 @@ package com.projectswg.holocore.headless
 import com.projectswg.common.network.packets.swg.login.ClientIdMsg
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage
 import com.projectswg.common.network.packets.swg.login.creation.*
+import com.projectswg.common.network.packets.swg.zone.CmdSceneReady
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter
 import com.projectswg.holocore.test.resources.GenericPlayer
 import java.lang.RuntimeException
@@ -73,7 +74,9 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 	fun selectCharacter(characterId: Long): ZonedInCharacter {
 		sendPacket(player, SelectCharacter(characterId))
 		sendPacket(player, ClientIdMsg())
-		player.waitForNextPacket(ClientPermissionsMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("Failed to receive client permissions message in time")
+		player.waitForNextPacket(ClientPermissionsMessage::class.java) ?: throw IllegalStateException("Failed to receive client permissions message in time")
+		sendPacket(player, CmdSceneReady())
+		player.waitForNextPacket(CmdSceneReady::class.java) ?: throw IllegalStateException("Expected CmdSceneReady from server but did not receive it in time")
 
 		return ZonedInCharacter(player)
 	}

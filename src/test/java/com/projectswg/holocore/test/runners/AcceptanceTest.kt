@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.test.runners
 
+import com.projectswg.common.data.encodables.galaxy.Galaxy
 import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.headless.MemoryUserDatabase
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -46,6 +47,8 @@ import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.gameplay.player.group.GroupService
+import com.projectswg.holocore.services.support.global.chat.ChatFriendService
+import com.projectswg.holocore.services.support.global.chat.ChatInstantMessageService
 import com.projectswg.holocore.services.support.global.chat.ChatMailService
 import com.projectswg.holocore.services.support.global.chat.ChatSystemService
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
@@ -57,11 +60,14 @@ import com.projectswg.holocore.services.support.global.zone.creation.CharacterCr
 import com.projectswg.holocore.services.support.global.zone.sui.SuiService
 import com.projectswg.holocore.services.support.objects.SimulatedObjectStorage
 import com.projectswg.holocore.services.support.objects.awareness.AwarenessService
+import com.projectswg.holocore.services.support.objects.awareness.ClientAwarenessService
 import com.projectswg.holocore.services.support.objects.items.ContainerService
 import com.projectswg.holocore.services.support.objects.radials.RadialService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
+import java.time.ZoneOffset
+import java.util.*
 
 /**
  * Acceptance test runner that sets up all the services required for an acceptance test.
@@ -78,12 +84,17 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 
 	@BeforeEach
 	fun setUpServices() {
+		val galaxy = Galaxy()
+		galaxy.setZoneOffset(ZoneOffset.UTC)
+		val galaxies = setOf(galaxy)
+
+		registerService(ClientAwarenessService())
 		registerService(CharacterLookupService())
 		registerService(SimulatedObjectStorage())
 		registerService(AwarenessService())
-		registerService(LoginService(memoryUserDatabase))
+		registerService(LoginService(galaxies, memoryUserDatabase))
 		registerService(ZoneService())
-		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0), DeterministicDie(0)))
+		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0), DeterministicDie(0), skipWarmup = true))
 		registerService(CommandExecutionService())
 		registerService(CharacterCreationService())
 		registerService(ExperiencePointService())
@@ -92,6 +103,8 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(SkillService())
 		registerService(ChatSystemService())
 		registerService(ChatMailService())
+		registerService(ChatInstantMessageService())
+		registerService(ChatFriendService())
 		registerService(SuiService())
 		registerService(RadialService())
 		registerService(TippingService())
@@ -115,8 +128,14 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		}
 	}
 
-	fun addUser(username: String, password: String, accessLevel: AccessLevel = AccessLevel.PLAYER, banned: Boolean = false) {
+	/**
+	 * Generates a user with a random username and password.
+	 */
+	fun generateUser(accessLevel: AccessLevel = AccessLevel.PLAYER, banned: Boolean = false): UserCredentials {
+		val username = UUID.randomUUID().toString().substringBefore("-")    // UUIDs are a bit long for usernames
+		val password = UUID.randomUUID().toString()
 		memoryUserDatabase.addUser(username, password, accessLevel, banned)
+		return UserCredentials(username, password)
 	}
 
 	/**

@@ -24,58 +24,79 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience
+package com.projectswg.holocore.services.support.global.chat
 
-import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.common.data.encodables.chat.ChatResult
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.addIgnore
+import com.projectswg.holocore.headless.sendTell
+import com.projectswg.holocore.headless.waitForTell
 import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class TrappingXPTest : AcceptanceTest() {
+class TellTest : AcceptanceTest() {
 
 	@Test
-	fun scoutsGetTrappingXPFromKillingCreatures() {
+	fun `tell is received by player`() {
 		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
 
-		killTarget(character, npc)
+		val chatResult = character1.sendTell("Chartwo", "Hello")
+		assertEquals(ChatResult.SUCCESS, chatResult)
 
-		assertTrue(character.player.playerObject.getExperiencePoints("trapping") > 0)
-	}
-
-	@Test
-	fun onlyScoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		character.surrenderSkill("outdoors_scout_novice")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+		val tell = character2.waitForTell()
+		assertAll(
+			{ assertEquals("Charone", tell.sender) },
+			{ assertEquals("Hello", tell.message) },
+		)
 	}
 
 	@Test
-	fun scoutsGetNoTrappingXPFromKillingNonCreatures() {
+	fun `receiving character name is case insensitive`() {
 		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("humanoid_tusken_commoner", character.player.creatureObject.location)
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
 
-		killTarget(character, npc)
+		val chatResult = character1.sendTell("CHARTWO", "Hello")
 
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+		assertEquals(ChatResult.SUCCESS, chatResult)
 	}
 
-	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {
-		target.health = 1
-		val targetState = character.attack(target)
+	@Test
+	fun `tells can only be sent to online players`() {
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val swgClient = HeadlessSWGClient(user.username)
+		val characterSelectionScreen = swgClient.login(user.password)
+		characterSelectionScreen.createCharacter("Chartwo")    // Create character but don't zone in
 
-		if (targetState != TargetState.DEAD) {
-			throw IllegalStateException("Target is not dead, but is instead $targetState")
-		}
+		val chatResult = character1.sendTell("Chartwo", "Hello")
+
+		assertEquals(ChatResult.TARGET_AVATAR_DOESNT_EXIST, chatResult)
 	}
 
+	@Test
+	fun `drop tells to non-existent characters`() {
+		val user = generateUser()
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+
+		val chatResult = character.sendTell("chartwo", "Hello")
+
+		assertEquals(ChatResult.TARGET_AVATAR_DOESNT_EXIST, chatResult)
+	}
+
+	@Test
+	fun `drop tells from ignored characters`() {
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "chartwo")
+		character2.addIgnore("charone")
+
+		val chatResult = character1.sendTell("chartwo", "Hello")
+
+		assertEquals(ChatResult.IGNORED, chatResult)
+	}
 }

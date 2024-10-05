@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -37,8 +37,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun negativeAmount() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val tipAmount = -50
 
 		assertThrows(TipException::class.java) {
@@ -48,8 +48,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun notEnoughMoneyForSurcharge() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val tipAmount = zonedInCharacter1.player.creatureObject.bankBalance	// Sending all bank balance should never be possible, because of the 5% surcharge
 
 		assertThrows(TipException::class.java) {
@@ -59,7 +59,7 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun npc() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
 		val womprat = spawnNPC("creature_womprat", zonedInCharacter1.player.creatureObject.location)
 		
 		assertThrows(TipException::class.java) {
@@ -69,7 +69,7 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun self() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
 		
 		assertThrows(TipException::class.java) {
 			zonedInCharacter1.tip(zonedInCharacter1.player.creatureObject, 1)
@@ -78,8 +78,8 @@ class TipCreditsTest : AcceptanceTest() {
 	
 	@Test
 	fun sufficientCash() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val char1Before = CreditsSnapshot(zonedInCharacter1)
 		val char2Before = CreditsSnapshot(zonedInCharacter2)
 		val tipAmount = 1
@@ -96,8 +96,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun sufficientBank() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val char1Before = CreditsSnapshot(zonedInCharacter1)
 		val char2Before = CreditsSnapshot(zonedInCharacter2)
 		val tipAmount = 100
@@ -117,8 +117,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun tooFarAway() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter2.adminTeleport(
 			planet = zonedInCharacter1.player.creatureObject.terrain,
 			x = zonedInCharacter1.player.creatureObject.x + 20,
@@ -133,8 +133,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun differentPlanet() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter2.adminTeleport(	// Same coordinates, but different planet
 			planet = Terrain.DANTOOINE,
 			x = zonedInCharacter1.player.creatureObject.x,
@@ -149,8 +149,8 @@ class TipCreditsTest : AcceptanceTest() {
 
 	@Test
 	fun insufficientBank() {
-		val zonedInCharacter1 = createZonedInCharacter("Playerone", "Charone")
-		val zonedInCharacter2 = createZonedInCharacter("Playertwo", "Chartwo")
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val char1Before = CreditsSnapshot(zonedInCharacter1)
 		val tipAmount = char1Before.bank * 2
 
@@ -159,10 +159,9 @@ class TipCreditsTest : AcceptanceTest() {
 		}
 	}
 
-	private fun createZonedInCharacter(username: String, characterName: String): ZonedInCharacter {
-		val password = "password"
-		addUser(username, password, accessLevel = AccessLevel.DEV)
-		return HeadlessSWGClient.createZonedInCharacter(username, password, characterName)
+	private fun createZonedInCharacter(characterName: String): ZonedInCharacter {
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		return HeadlessSWGClient.createZonedInCharacter(user.username, user.password, characterName)
 	}
 
 }

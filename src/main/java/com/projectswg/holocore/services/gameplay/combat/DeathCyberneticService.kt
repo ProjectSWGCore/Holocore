@@ -24,30 +24,65 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.combat
+package com.projectswg.holocore.services.gameplay.combat
 
 import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.intents.gameplay.combat.CloneActivatedIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
-import com.projectswg.holocore.services.gameplay.combat.CombatState
-import me.joshlarson.jlcommon.control.Intent
+import com.projectswg.holocore.resources.support.random.Die
+import com.projectswg.holocore.resources.support.random.RandomDie
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
 
-/*
- * Combat events after the fact
- */
-data class CreatureIncapacitatedIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
-data class CreatureKilledIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class CreatureRevivedIntent(val creature: CreatureObject) : Intent()
-data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent()
-data class ExitCombatIntent(val source: TangibleObject) : Intent()
-data class CloneActivatedIntent(val creature: CreatureObject, val diedOnTerrain: Terrain) : Intent()
+class DeathCyberneticService(private val deathCyberneticDie: Die = RandomDie()) : Service() {
 
-/*
- * Combat event requests
- */
-data class IncapacitateCreatureIntent(val incapper: CreatureObject, val incappee: CreatureObject) : Intent()
-data class KillCreatureIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class DeathblowIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class RequestCreatureDeathIntent(val killer: CreatureObject, val corpse: CreatureObject) : Intent()
-data class KnockdownIntent(val victim: CreatureObject) : Intent()
-data class ApplyCombatStateIntent(val attacker: CreatureObject, val victim: CreatureObject, val combatState: CombatState) : Intent()
+	@IntentHandler
+	private fun handleCloneActivatedIntent(intent: CloneActivatedIntent) {
+		val creature = intent.creature
+		val diedOnTerrain = intent.diedOnTerrain
+
+		if (isSpace(diedOnTerrain)) return
+		if (isEasyPlanet(diedOnTerrain)) return
+		if (isADeathCyberneticAlreadyInstalled(creature)) return
+		if (deathCyberneticDie.roll(1..100) < 5) installDeathCybernetic(creature)
+	}
+
+	private fun installDeathCybernetic(creature: CreatureObject) {
+		val iffTemplate = selectDeathCyberneticLimb()
+
+		val cybernetic = ObjectCreator.createObjectFromTemplate(iffTemplate)
+		cybernetic.moveToContainer(creature)
+
+		StandardLog.onPlayerEvent(this, creature, "has been given a cybernetic limb (%s) upon death", iffTemplate)
+	}
+
+	private fun selectDeathCyberneticLimb(): String {
+		return if (deathCyberneticDie.roll(1..100) < 25) {
+			"object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff"
+		} else {
+			if (deathCyberneticDie.roll(1..100) < 50) {
+				"object/tangible/wearables/cybernetic/s01/shared_cybernetic_s01_arm_r.iff"
+			} else {
+				"object/tangible/wearables/cybernetic/s01/shared_cybernetic_s01_arm_l.iff"
+			}
+		}
+	}
+
+	private fun isADeathCyberneticAlreadyInstalled(creature: CreatureObject): Boolean {
+		val equippedItems = creature.slottedObjects
+
+		return equippedItems.map { it.template }.any { it.startsWith("object/tangible/wearables/cybernetic/s01") }
+	}
+
+	private fun isSpace(diedOnTerrain: Terrain): Boolean {
+		return diedOnTerrain.name.lowercase().startsWith("space_")
+	}
+
+	private fun isEasyPlanet(terrain: Terrain): Boolean {
+		val easyPlanets = setOf(Terrain.RORI, Terrain.NABOO, Terrain.TATOOINE, Terrain.CORELLIA, Terrain.TALUS)
+
+		return terrain in easyPlanets
+	}
+}

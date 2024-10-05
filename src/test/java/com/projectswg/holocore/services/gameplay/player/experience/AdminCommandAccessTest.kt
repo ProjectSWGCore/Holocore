@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -39,16 +39,16 @@ class AdminCommandAccessTest : AcceptanceTest() {
 
 	@Test
 	fun adminsCanUseAdminCommands() {
-		addUser("admin", "password", accessLevel = AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("admin", "password", "adminchar")
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 
 		assertDoesNotThrow { character.adminGrantSkill("outdoors_scout_master") }
 	}
 
 	@Test
 	fun onlyAdminsCanUseAdminCommands() {
-		addUser("player", "password", accessLevel = AccessLevel.PLAYER)
-		val character = HeadlessSWGClient.createZonedInCharacter("player", "password", "playerchar")
+		val user = generateUser(accessLevel = AccessLevel.PLAYER)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "playerchar")
 
 		assertThrows<CommandFailedException> {
 			character.adminGrantSkill("outdoors_scout_master")

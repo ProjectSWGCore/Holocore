@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -31,11 +31,16 @@ import com.projectswg.holocore.test.resources.GenericPlayer
 
 class SuiWindow(private val player: GenericPlayer, private val suiWindowId: Int) {
 
+	private val suiEventNotification = SuiEventNotification()
+	
+	fun select(index: Int) {
+		suiEventNotification.addSubscribedToProperty(index.toString())
+	}
+	
 	/**
 	 * Invokes the "Ok" button on the SUI window.
 	 */
 	fun clickOk() {
-		val suiEventNotification = SuiEventNotification()
 		suiEventNotification.windowId = suiWindowId
 		sendPacket(player, suiEventNotification)
 	}

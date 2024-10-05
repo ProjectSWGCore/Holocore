@@ -24,58 +24,15 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience
+package com.projectswg.holocore.headless
 
-import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
+import java.util.concurrent.TimeUnit
 
-class TrappingXPTest : AcceptanceTest() {
-
-	@Test
-	fun scoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertTrue(character.player.playerObject.getExperiencePoints("trapping") > 0)
-	}
-
-	@Test
-	fun onlyScoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		character.surrenderSkill("outdoors_scout_novice")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
-	}
-
-	@Test
-	fun scoutsGetNoTrappingXPFromKillingNonCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("humanoid_tusken_commoner", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
-	}
-
-	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {
-		target.health = 1
-		val targetState = character.attack(target)
-
-		if (targetState != TargetState.DEAD) {
-			throw IllegalStateException("Target is not dead, but is instead $targetState")
-		}
-	}
-
+/**
+ * Adds a player to the ignore list.
+ * @param characterName the player to ignore
+ */
+fun ZonedInCharacter.addIgnore(characterName: String) {
+	sendCommand("addIgnore", null, characterName)
+	player.waitForNextObjectDelta(player.playerObject.objectId, 9, 8, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
 }

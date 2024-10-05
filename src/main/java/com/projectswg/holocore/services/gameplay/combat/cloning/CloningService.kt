@@ -35,6 +35,7 @@ import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
+import com.projectswg.holocore.intents.gameplay.combat.CloneActivatedIntent
 import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
@@ -147,6 +148,8 @@ class CloningService : Service() {
 		synchronized(reviveTimers) {
 			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER)) { expireCloneTimer(corpse, availableFacilities, cloningWindow) })
 		}
+
+		StandardLog.onPlayerEvent(this, corpse, "has %d minutes to clone", CLONE_TIMER)
 	}
 
 	private fun showSuiWindow(corpse: CreatureObject) {
@@ -171,6 +174,7 @@ class CloningService : Service() {
 			title = "@base_player:revive_title"
 			prompt = java.lang.String.join("\n", preDesignated, cashBalance, help)
 			buttons = SuiButtons.OK
+			addListItem("@base_player:revive_closest")
 			addCallback("handleFacilityChoice") { event: SuiEvent, parameters: Map<String, String> ->
 				val selectionIndex = SuiListBox.getSelectedRow(parameters)
 				if (event != SuiEvent.OK_PRESSED || selectionIndex >= availableFacilities.size || selectionIndex < 0) {
@@ -210,7 +214,9 @@ class CloningService : Service() {
 		}
 
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.location)
+		val diedOnTerrain = corpse.terrain
 		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility))
+		CloneActivatedIntent(corpse, diedOnTerrain).broadcast()
 		return CloneResult.SUCCESS
 	}
 

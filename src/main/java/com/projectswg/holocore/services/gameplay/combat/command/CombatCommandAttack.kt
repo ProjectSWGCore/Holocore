@@ -457,6 +457,8 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 				accMod += source.getSkillModValue(accuracySkillMod)
 			}
 
+			accMod += source.getSkillModValue("private_accuracy_bonus")
+
 			return accMod
 		}
 

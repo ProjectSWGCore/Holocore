@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -30,6 +29,8 @@ package com.projectswg.holocore.test.resources;
 import com.projectswg.common.data.CRC;
 import com.projectswg.common.data.encodables.tangible.Posture;
 import com.projectswg.common.data.location.Location;
+import com.projectswg.common.network.NetBuffer;
+import com.projectswg.common.network.NetworkProtocol;
 import com.projectswg.common.network.packets.SWGPacket;
 import com.projectswg.common.network.packets.swg.zone.*;
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline;
@@ -82,6 +83,7 @@ public class GenericPlayer extends Player {
 	public void sendPacket(SWGPacket packet) {
 		packetLock.lock();
 		try {
+			encodeAndDecode(packet);
 			this.packets.add(packet);
 			packetLockCondition.signalAll();
 		} finally {
@@ -89,7 +91,21 @@ public class GenericPlayer extends Player {
 		}
 		handlePacket(packet);
 	}
-	
+
+	private static void encodeAndDecode(SWGPacket packet) {
+		try {
+			// This doesn't actually test the encoding and decoding of the packet, but it does test that the packet can be encoded and decoded without throwing an exception
+			NetBuffer data = NetworkProtocol.encode(packet);
+			NetworkProtocol.decode(data);
+			int remaining = data.remaining();
+			if (remaining > 0) {
+				throw new RuntimeException("Encoded packet buffer had more data that wasn't read during decoding. Bytes remaining: " + remaining);
+			}
+		} catch (Throwable t) {
+			throw new RuntimeException("Failed to encode and decode packet", t);
+		}
+	}
+
 	@Override
 	public void sendPacket(SWGPacket packet1, SWGPacket packet2) {
 		sendPacket(packet1);

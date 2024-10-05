@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -38,8 +38,8 @@ import org.junit.jupiter.api.Test
 class ExplorationBadgeTest : AcceptanceTest() {
 	@Test
 	fun enteringAreaGrantsBadge() {
-		addUser("Test", "Test", AccessLevel.DEV)
-		val character = HeadlessSWGClient.createZonedInCharacter("Test", "Test", "char")
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "char")
 
 		character.adminTeleport(planet = Terrain.MUSTAFAR, x = 0, y = 0, z = 0)
 

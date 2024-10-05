@@ -1,0 +1,14 @@
+template	comment	hue	protection	condition	procEffect	reacEffect	moveRateBuff	throwRangeMod	rangedRangeMod	healingMod	rangedAccuracyMod	meleeDefMod	meleeAccuracyMod	commandoLegs	specialCommand	installCost	repairCost	removeCost
+TEXT	TEXT	INTEGER	FLOAT	FLOAT	TEXT	TEXT	TEXT	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	INTEGER	TEXT	INTEGER	INTEGER	INTEGER
+object/tangible/wearables/cybernetic/s01/cybernetic_s01_arm_l.iff	death penalty	0	0	40000												0	1	1000
+object/tangible/wearables/cybernetic/s01/cybernetic_s01_arm_r.iff	death penalty	0	0	40000												0	1	1000
+object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff	death penalty	0	0	40000												0	1	1000
+object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_l.iff	lowered melee defense, increased melee accuracy	110	0.8	40000											cyborgStrengthBuff	5000	1	5000
+object/tangible/wearables/cybernetic/s02/cybernetic_s02_arm_r.iff	cyber_shock proc	110	0.8	40000	proc_cyber_shock										cyborgLightning	5000	2	5000
+object/tangible/wearables/cybernetic/s02/cybernetic_s02_legs.iff	runspeed buff, low armor	110	0.8	40000			cyberneticLegs								cyborgBurstRun	5000	3	5000
+object/tangible/wearables/cybernetic/s03/cybernetic_s03_arm_l.iff	increased healing mod, lowered accuracy	22	0.8	40000											cyborgRevive	5000	1	5000
+object/tangible/wearables/cybernetic/s03/cybernetic_s03_arm_r.iff	increased trap throw range, lower Other combat mods	119	0.95	40000												5000	2	5000
+object/tangible/wearables/cybernetic/s04/cybernetic_s04_arm_r.iff	Reverse Engineering Arm	1	0	40000												5000	2	5000
+object/tangible/wearables/cybernetic/s05/cybernetic_s05_arm_l.iff	increase range, increased ranged accuracy, lowered melee defense, lowered melee accuracy	38	0.8	40000											cyborgSureShot	5000	3	5000
+object/tangible/wearables/cybernetic/s05/cybernetic_s05_arm_r.iff	increased range, lowered accuracy	38	0.8	40000											cyborgCriticalSnipe	5000	1	5000
+object/tangible/wearables/cybernetic/s05/cybernetic_s05_legs.iff	fire heavy weapons from standing, lowered throw range, lowered accuracy, lowered defense	38	0.8	40000											cyborgKickDown	5000	2	5000

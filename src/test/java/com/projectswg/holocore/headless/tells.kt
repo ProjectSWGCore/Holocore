@@ -24,58 +24,36 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience
+package com.projectswg.holocore.headless
 
-import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
+import com.projectswg.common.data.encodables.chat.ChatResult
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToCharacter
+import com.projectswg.common.network.packets.swg.zone.chat.ChatInstantMessageToClient
+import com.projectswg.common.network.packets.swg.zone.chat.ChatOnSendInstantMessage
+import kotlin.random.Random
 
-class TrappingXPTest : AcceptanceTest() {
-
-	@Test
-	fun scoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertTrue(character.player.playerObject.getExperiencePoints("trapping") > 0)
-	}
-
-	@Test
-	fun onlyScoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		character.surrenderSkill("outdoors_scout_novice")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
-	}
-
-	@Test
-	fun scoutsGetNoTrappingXPFromKillingNonCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("humanoid_tusken_commoner", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
-	}
-
-	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {
-		target.health = 1
-		val targetState = character.attack(target)
-
-		if (targetState != TargetState.DEAD) {
-			throw IllegalStateException("Target is not dead, but is instead $targetState")
-		}
-	}
-
+/**
+ * Sends a tell to another player.
+ * @param characterName the player to send the tell to
+ * @param message the message to send
+ * @return the result of sending the tell
+ */
+fun ZonedInCharacter.sendTell(characterName: String, message: String): ChatResult {
+	val sequence = Random.nextInt()
+	sendPacket(player, ChatInstantMessageToCharacter("Testcase", characterName, message, sequence))
+	val chatOnSendInstantMessage = player.waitForNextPacket(ChatOnSendInstantMessage::class.java) ?: throw IllegalStateException("No tell receipt received")
+	if (chatOnSendInstantMessage.sequence != sequence) throw IllegalStateException("Invalid sequence. Expected $sequence, got ${chatOnSendInstantMessage.sequence}")
+	return ChatResult.fromInteger(chatOnSendInstantMessage.result)
 }
+
+/**
+ * Waits for a tell to be received. This method will block until a tell is received.
+ * @return the tell that was received
+ * @throws IllegalStateException if no tell is received
+ */
+fun ZonedInCharacter.waitForTell(): ReceivedTell {
+	val chatInstantMessageToClient = player.waitForNextPacket(ChatInstantMessageToClient::class.java) ?: throw IllegalStateException("No tell received")
+	return ReceivedTell(chatInstantMessageToClient.character, chatInstantMessageToClient.message)
+}
+
+data class ReceivedTell(val sender: String, val message: String)

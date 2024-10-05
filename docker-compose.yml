@@ -30,7 +30,7 @@ services:
       ME_CONFIG_BASICAUTH_USERNAME: ""
       ME_CONFIG_BASICAUTH_PASSWORD: ""
     healthcheck:
-      test: "wget -O - localhost:8081"
+      test: "wget -O - 127.0.0.1:8081"
       interval: 5s
       timeout: 5s
       retries: 5

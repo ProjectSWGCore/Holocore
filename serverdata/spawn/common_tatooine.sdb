@@ -710,7 +710,7 @@ spawn_tatooine_707	TATOOINE	tat_world	PATROL	0	3214.1	5.0	-4868.8	77	1	an R3 uni
 spawn_tatooine_708	TATOOINE	tat_world	PATROL	0	3497.9	5.0	-5038.1	-21	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_6100	column	idle			600
 spawn_tatooine_709	TATOOINE	tat_world	PATROL	0	3209.6	5.0	-4518.2	125	1	a highwayman	humanoid_highwayman	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_6200	column	idle			600
 spawn_tatooine_710	TATOOINE	tat_world	PATROL	0	3380.5	5.0	-5018.1	-54	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_8400	column	idle			600
-spawn_tatooine_711	TATOOINE	tat_mosentha_hospital	AREA	10	26.8	7.3	0.2	-91	1	Aboo Aramflahad (Cybernetic Specialist)	humanoid_cybernetic_specialist_tatooine	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+spawn_tatooine_711	TATOOINE	tat_mosentha_hospital	AREA	10	26.8	7.3	0.2	-91	1	Doctor Nssktkslis (Cybernetic Doctor)	humanoid_cybernetic_specialist_tatooine	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		cybernetics	600
 spawn_tatooine_712	TATOOINE	tat_mosentha_hospital	AREA	2	18.0	0.3	1.8	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
 spawn_tatooine_713	TATOOINE	tat_mosentha_hospital	AREA	2	22.0	0.3	-7.2	1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
 spawn_tatooine_714	TATOOINE	tat_mosentha_hospital	AREA	2	17.2	0.3	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
