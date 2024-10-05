@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -399,7 +399,7 @@ public class GenericPlayer extends Player {
 		SWGObject obj = objects.get(p.getObjectId());
 		assertNotNull(obj);
 		assertInstanceOf(CreatureObject.class, obj);
-		Posture posture = Posture.getFromId(p.getPosture());
+		Posture posture = Posture.Companion.getFromId(p.getPosture());
 		assertNotNull(posture);
 		assertNotEquals(Posture.INVALID, posture);
 		((CreatureObject) obj).setPosture(posture);

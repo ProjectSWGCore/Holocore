@@ -101,7 +101,7 @@ public class CharacterCreationService extends Service {
 		RandomNameResponse response = new RandomNameResponse(request.getRace(), "");
 		String randomName;
 		do {
-			randomName = nameGenerator.generateRaceName(Race.getRaceByFile(request.getRace()));
+			randomName = nameGenerator.generateRaceName(Race.Companion.getRaceByFile(request.getRace()));
 		} while (getNameValidity(randomName, player.getAccessLevel() != AccessLevel.PLAYER) != ErrorMessage.NAME_APPROVED);
 		response.setRandomName(randomName);
 		player.sendPacket(response);

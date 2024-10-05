@@ -92,8 +92,8 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	private List <List <String>>		arrangement		= new ArrayList<>();
 	
 	private SWGObject	parent			= null;
-	private StringId 	stringId		= new StringId("", "");
-	private StringId 	detailStringId	= new StringId("", "");
+	private StringId 	stringId		= StringId.Companion.getEMPTY();
+	private StringId 	detailStringId	= StringId.Companion.getEMPTY();
 	private String		template		= "";
 	private int			crc				= 0;
 	private int			cashBalance		= 0;
@@ -1299,14 +1299,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		{
 			MongoData base3 = data.getDocument("base3");
 			complexity = base3.getFloat("complexity", 0);
-			stringId = base3.getDocument("stringId", new StringId());
+			stringId = base3.getDocument("stringId", StringId.Companion.getEMPTY());
 			objectName = base3.getString("objectName", "");
 			volume = base3.getInteger("volume", 0);
 		}
 		{
 			MongoData base6 = data.getDocument("base6");
 			// galaxyId
-			detailStringId = base6.getDocument("detailStringId", new StringId());
+			detailStringId = base6.getDocument("detailStringId", StringId.Companion.getEMPTY());
 		}
 		location.readMongo(data.getDocument("location"));
 		permissions = ContainerPermissions.create(data.getDocument("permissions"));

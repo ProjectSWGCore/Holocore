@@ -200,7 +200,7 @@ public class TestSWGPersistence {
 								"actionRegen", 0,
 								"mind", obj.getMaxMind(),
 								"mindRegen", 0),
-						"buffs", obj.getBuffs().entrySet().stream().map(entry -> new Document(Map.of("key", MongoData.store(entry.getKey()).toDocument(), "val", MongoData.store(entry.getValue()).toDocument()))).collect(Collectors.toList())
+						"buffs", obj.getBuffs().entrySet().stream().map(entry -> new Document(Map.of("key", MongoData.Companion.store(entry.getKey()).toDocument(), "val", MongoData.Companion.store(entry.getValue()).toDocument()))).collect(Collectors.toList())
 				),
 				"race", obj.getRace().name(),
 				"skills", obj.getSkills(),

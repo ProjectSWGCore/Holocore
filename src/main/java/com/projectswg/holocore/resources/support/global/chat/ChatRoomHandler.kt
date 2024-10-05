@@ -55,7 +55,7 @@ class ChatRoomHandler {
 	fun initialize(): Boolean {
 		database.getChatRooms().forEach(Consumer { room: ChatRoom ->
 			if (room.id >= maxChatRoomId.get()) maxChatRoomId.set(room.id)
-			if (room.owner == ChatAvatar.getSystemAvatar()) return@Consumer
+			if (room.owner == ChatAvatar.systemAvatar) return@Consumer
 			rooms.addRoom(room)
 		})
 		createSystemChannels()
@@ -190,7 +190,7 @@ class ChatRoomHandler {
 			room.id = maxChatRoomId.incrementAndGet()
 			room.owner = creator
 			room.creator = creator
-			room.setIsPublic(isPublic)
+			room.isPublic = isPublic
 			room.isModerated = moderated
 			room.path = path
 			room.title = title
@@ -228,7 +228,7 @@ class ChatRoomHandler {
 	}
 
 	fun sendMessageToRoomFromSystem(path: String, message: String, oobPackage: OutOfBandPackage?) {
-		val systemAvatar = ChatAvatar.getSystemAvatar()
+		val systemAvatar = ChatAvatar.systemAvatar
 		val room = rooms.getRoomByPath(path)
 
 		sendMessage(room, systemAvatar, message, oobPackage)
@@ -264,7 +264,7 @@ class ChatRoomHandler {
 		 */
 
 		val galaxy = galaxy.name
-		val systemAvatar = ChatAvatar.getSystemAvatar()
+		val systemAvatar = ChatAvatar.Companion.systemAvatar
 		val basePath = "SWG.$galaxy."
 
 		createDefaultChannels(systemAvatar, basePath)

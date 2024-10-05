@@ -328,7 +328,7 @@ public class PacketCaptureAnalysis {
 		SWGObject obj = getObject(p.getObjectId());
 		assertNotNull(p, obj, "unknown object");
 		assertTrue(p, obj instanceof CreatureObject, "object is not a CreatureObject");
-		Posture posture = Posture.getFromId(p.getPosture());
+		Posture posture = Posture.Companion.getFromId(p.getPosture());
 		assertNotNull(p, posture, "unknown Posture");
 		assertNotEquals(p, Posture.INVALID, posture, "INVALID Posture");
 		((CreatureObject) obj).setPosture(posture);

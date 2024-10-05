@@ -89,7 +89,7 @@ class ObjectDataLoader internal constructor() : DataLoader() {
 
 				ObjectDataAttribute.DETAILED_DESCRIPTION, ObjectDataAttribute.OBJECT_NAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   -> {
 					val stf = set.getText(index)
-					if (stf.isEmpty()) return StringId()
+					if (stf.isEmpty()) return StringId.EMPTY
 					return StringId(stf)
 				}
 

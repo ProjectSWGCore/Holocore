@@ -397,7 +397,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	}
 
 	private fun handleCommPlayer(player: Player, questListInfo: QuestLoader.QuestListInfo, currentTask: QuestTaskInfo) {
-		val commMessageText = currentTask.commMessageText
+		val commMessageText = currentTask.commMessageText ?: ""
 		val message = OutOfBandPackage(ProsePackage(StringId(commMessageText)))
 		val objectId = player.creatureObject.objectId
 		val modelCrc = getModelCrc(currentTask)

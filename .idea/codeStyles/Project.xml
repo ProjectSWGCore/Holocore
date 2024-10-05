@@ -208,6 +208,7 @@
       <option name="EXTENDS_LIST_WRAP" value="0" />
       <option name="METHOD_CALL_CHAIN_WRAP" value="5" />
       <option name="ASSIGNMENT_WRAP" value="0" />
+      <option name="ENUM_CONSTANTS_WRAP" value="2" />
       <indentOptions>
         <option name="USE_TAB_CHARACTER" value="true" />
       </indentOptions>

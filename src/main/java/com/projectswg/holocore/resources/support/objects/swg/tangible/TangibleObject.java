@@ -665,7 +665,7 @@ public class TangibleObject extends SWGObject {
 		maxHitPoints = data.getInteger("maxHitPoints", 1000);
 		components = data.getInteger("components", 0);
 		conditionDamage = data.getInteger("conditionDamage", 0);
-		pvpFlags.addAll(PvpFlag.getFlags(data.getInteger("pvpFlags", 0)));
+		pvpFlags.addAll(PvpFlag.Companion.getFlags(data.getInteger("pvpFlags", 0)));
 		pvpStatus = PvpStatus.valueOf(data.getString("pvpStatus", "COMBATANT"));
 		faction = ServerData.INSTANCE.getFactions().getFaction(data.getString(data.containsKey("pvpFaction") ? "pvpFaction" : "faction", "neutral"));
 		visibleGmOnly = data.getBoolean("visibleGmOnly", false);
