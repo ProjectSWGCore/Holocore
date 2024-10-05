@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -43,7 +42,6 @@ class Quest : Encodable, MongoPersistable {
 		set(value) {
 			field = value
 			completedTasks[0, 16] = value
-			activeTasks[0, 16] = !value
 		}
 	var isRewardReceived = false
 	var counter = 0
@@ -76,8 +74,8 @@ class Quest : Encodable, MongoPersistable {
 	override val length: Int = 17
 
 	override fun readMongo(data: MongoData) {
-		activeTasks = BitSet.valueOf(data.getByteArray("activeSteps"))
-		completedTasks = BitSet.valueOf(data.getByteArray("completedSteps"))
+		activeTasks = BitSet.valueOf(data.getByteArray("activeSteps") ?: ByteArray(0))
+		completedTasks = BitSet.valueOf(data.getByteArray("completedSteps") ?: ByteArray(0))
 		isComplete = data.getBoolean("complete", false)
 		isRewardReceived = data.getBoolean("rewardReceived", false)
 		counter = data.getInteger("counter", 0)

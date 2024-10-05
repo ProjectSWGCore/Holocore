@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -67,6 +66,8 @@ import com.projectswg.holocore.resources.support.random.RandomDie
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
+import me.joshlarson.jlcommon.log.Log
+import java.lang.IndexOutOfBoundsException
 import java.util.concurrent.ThreadLocalRandom
 
 class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), private val retrieveItemDie: Die = RandomDie()) : Service() {
@@ -557,11 +558,17 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private fun getActiveTaskInfos(questName: String, playerObject: PlayerObject): List<QuestTaskInfo> {
 		val taskListInfos = questLoader.getTaskListInfos(questName)
 		val questActiveTasks = playerObject.getQuestActiveTasks(questName)
-		return mapActiveTasks(questActiveTasks, taskListInfos)
-	}
-
-	private fun mapActiveTasks(activeTaskIndices: Collection<Int>, taskListInfos: List<QuestTaskInfo>): List<QuestTaskInfo> {
-		return activeTaskIndices.map { taskListInfos[it] }
+		// TODO: fixes a bug with serialization of quests--can eventually remove this (05 Oct 2024)
+		var resetActiveTasks = false
+		for (activeTask in questActiveTasks) {
+			if (activeTask >= taskListInfos.size || taskListInfos[activeTask].type == "quest.task.ground.clear_quest") {
+				playerObject.removeActiveQuestTask(questName, activeTask)
+				resetActiveTasks = true
+			}
+		}
+		if (resetActiveTasks)
+			return playerObject.getQuestActiveTasks(questName).map { taskListInfos[it] }
+		return questActiveTasks.map { taskListInfos[it] }
 	}
 
 	private fun isMatchingServerTemplate(targetServerTemplate: String?, stfName: String): Boolean {
