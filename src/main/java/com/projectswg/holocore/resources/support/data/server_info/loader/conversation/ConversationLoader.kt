@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -126,9 +125,9 @@ class ConversationLoader : DataLoader() {
 			val playerMessageRaw = playerResponseObj["playerMessage"] as Map<String, Any>? ?: continue
 			val prosePackage = readProsePackage(playerMessageRaw)
 
-			val nextConversationId = playerResponseObj["next"] as String?
+			val nextConversationId = playerResponseObj["next"] as String? ?: continue
 
-			val playerResponse = PlayerResponse(prosePackage, nextConversationId!!)
+			val playerResponse = PlayerResponse(prosePackage, nextConversationId)
 
 			playerResponses.add(playerResponse)
 		}
@@ -141,9 +140,9 @@ class ConversationLoader : DataLoader() {
 
 		for (requirementObj in requirementObjs) {
 			val type = requirementObj["type"] as String?
-			val args = requirementObj["args"] as Map<String, Any>?
+			val args = requirementObj["args"] as Map<String, Any>
 			val requirementParser = requirementParserMap[type]!!
-			val requirement = requirementParser.parse(args!!)
+			val requirement = requirementParser.parse(args)
 
 			requirements.add(requirement)
 		}
@@ -156,9 +155,9 @@ class ConversationLoader : DataLoader() {
 
 		for (eventObj in eventObjs) {
 			val type = eventObj["type"] as String?
-			val args = eventObj["args"] as Map<String, Any>?
+			val args = eventObj["args"] as Map<String, Any>
 			val eventParser = eventParserMap[type]!!
-			val event = eventParser.parse(args!!)
+			val event = eventParser.parse(args)
 
 			events.add(event)
 		}
