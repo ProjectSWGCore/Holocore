@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -29,4 +28,4 @@ package com.projectswg.holocore.intents.support.global.chat
 import com.projectswg.holocore.resources.support.global.player.Player
 import me.joshlarson.jlcommon.control.Intent
 
-data class SpatialChatIntent(val player: Player, val chatType: Int, val message: String, val moodId: Int, val languageId: Int) : Intent()
+data class SpatialChatIntent(val player: Player, val targetId: Long, val chatType: Int, val message: String, val moodId: Int, val languageId: Int) : Intent()
