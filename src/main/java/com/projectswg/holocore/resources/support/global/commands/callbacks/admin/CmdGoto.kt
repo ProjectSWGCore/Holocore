@@ -26,7 +26,6 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent.Companion.broadcastPersonal
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
@@ -46,7 +45,6 @@ import kotlin.NoSuchElementException
 class CmdGoto : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val teleportee = player.creatureObject ?: return
-		Log.d("CmdGoto: $target   '$args'")
 		val parts = args.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 		if (parts.size < 2 || parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
 
