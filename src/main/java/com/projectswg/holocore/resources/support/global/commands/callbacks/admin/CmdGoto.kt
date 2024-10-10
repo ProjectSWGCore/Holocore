@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -27,6 +26,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks.admin
 
 import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent.Companion.broadcastPersonal
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
@@ -46,19 +46,20 @@ import kotlin.NoSuchElementException
 class CmdGoto : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val teleportee = player.creatureObject ?: return
+		Log.d("CmdGoto: $target   '$args'")
 		val parts = args.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-		if (parts.size < 2 ||parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
+		if (parts.size < 2 || parts.isEmpty() || parts[0].trim { it <= ' ' }.isEmpty() || parts[1].trim { it <= ' ' }.isEmpty()) return
 
 		val type = parts[0].trim { it <= ' ' }
 		val destination = parts[1].trim { it <= ' ' }
 
 		var message = ""
 		when (type) {
-			"player" -> message = (teleportToPlayer(player, teleportee, destination)) ?: return
+			"player"   -> message = (teleportToPlayer(player, teleportee, destination)) ?: return
 			"building" -> message = teleportToBuilding(player, teleportee, destination, parts) ?: return
-			"spawn" -> message = teleportToSpawnId(player, teleportee, destination) ?: return
-			"patrol" -> message = teleportToPatrolId(player, teleportee, destination) ?: return
-			else -> broadcastPersonal(player, "Invalid goto command")
+			"spawn"    -> message = teleportToSpawnId(player, teleportee, destination) ?: return
+			"patrol"   -> message = teleportToPatrolId(player, teleportee, destination) ?: return
+			else       -> broadcastPersonal(player, "Invalid goto command: $type")
 		}
 
 		broadcastPersonal(player, message)
@@ -85,7 +86,7 @@ class CmdGoto : ICmdCallback {
 		}
 		var cell = 1
 		try {
-			if (args.size >= 2) cell = args[1].toInt()
+			if (args.size >= 3) cell = args[2].toInt()
 		} catch (e: NumberFormatException) {
 			broadcastPersonal(player, "Invalid cell number")
 			return null
@@ -93,40 +94,41 @@ class CmdGoto : ICmdCallback {
 		return teleportToGoto(teleportee, building, cell)
 	}
 
-
 	private fun teleportToSpawnId(player: Player, teleportee: CreatureObject, spawnId: String): String? {
 		val spawnInfo = try {
 			ServerData.npcStaticSpawns.spawns.first { it.id == spawnId }
 		} catch (e: NoSuchElementException) {
-			broadcastPersonal(player, "Spawn ID '$spawnId' did not return a spawn.")
+			broadcastPersonal(player, "Spawn ID '$spawnId' does not exist.")
 			return null
 		}
 		val newLocation = Location.builder().setPosition(spawnInfo.x, spawnInfo.y, spawnInfo.z).setTerrain(spawnInfo.terrain).build()
-		if (spawnInfo.buildingId.isEmpty() || spawnInfo.buildingId.endsWith("_world")) {
-			teleportee.moveToLocation(newLocation)
-			return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
-		}
-		val newParent = BuildingLookup.getBuildingByTag(spawnInfo.buildingId)?.getCellByNumber(spawnInfo.cellId)
-		teleportee.moveToContainer(newParent, newLocation)
-		return "Succesfully teleported " + teleportee.objectName + " to patrol " + spawnId
+		teleportToPoint(teleportee, spawnInfo.buildingId, spawnInfo.cellId, newLocation)
+		return "Succesfully teleported " + teleportee.objectName + " to spawn " + spawnId
 	}
 
 	private fun teleportToPatrolId(player: Player, teleportee: CreatureObject, patrolId: String): String? {
 		val groupIdFromPatrolId = patrolId.dropLast(2) + "00"
-		val patrolWaypoint = try {
+		val patrolPoint = try {
 			Objects.requireNonNull(ServerData.npcPatrolRoutes[groupIdFromPatrolId], "Invalid patrol group ID: $groupIdFromPatrolId").first { it.patrolId == patrolId }
 		} catch (e: NoSuchElementException) {
-			broadcastPersonal(player, "Spawn ID '$patrolId' did not return a spawn.")
+			broadcastPersonal(player, "Patrol ID '$patrolId' does not exist.")
 			return null
 		}
-		val newLocation = Location.builder().setPosition(patrolWaypoint.x, patrolWaypoint.y, patrolWaypoint.z).setTerrain(patrolWaypoint.terrain).build()
-		if (patrolWaypoint.buildingId.isEmpty() || patrolWaypoint.buildingId.endsWith("_world")) {
-			teleportee.moveToLocation(newLocation)
-			return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
-		}
-		val newParent = BuildingLookup.getBuildingByTag(patrolWaypoint.buildingId)?.getCellByNumber(patrolWaypoint.cellId)
-		teleportee.moveToContainer(newParent, newLocation)
+		val newLocation = Location.builder().setPosition(patrolPoint.x, patrolPoint.y, patrolPoint.z).setTerrain(patrolPoint.terrain).build()
+		teleportToPoint(teleportee, patrolPoint.buildingId, patrolPoint.cellId, newLocation)
 		return "Succesfully teleported " + teleportee.objectName + " to patrol " + patrolId
+	}
+
+	private fun teleportToPoint(teleportee: CreatureObject, buildingId: String, cellId: Int, newLocation: Location) {
+		if (buildingId.isEmpty() || buildingId.endsWith("_world")) {
+			if (teleportee.parent == null)
+				teleportee.moveToLocation(newLocation)
+			else
+				teleportee.moveToContainer(null, newLocation)
+			return
+		}
+		val newParent = BuildingLookup.getBuildingByTag(buildingId)?.getCellByNumber(cellId)
+		teleportee.moveToContainer(newParent, newLocation)
 	}
 
 	private fun teleportToGoto(obj: SWGObject, building: BuildingObject, cellNumber: Int): String {
