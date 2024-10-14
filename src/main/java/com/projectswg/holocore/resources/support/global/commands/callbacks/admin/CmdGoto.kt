@@ -57,7 +57,7 @@ class CmdGoto : ICmdCallback {
 			"building" -> message = teleportToBuilding(player, teleportee, destination, parts) ?: return
 			"spawn"    -> message = teleportToSpawnId(player, teleportee, destination) ?: return
 			"patrol"   -> message = teleportToPatrolId(player, teleportee, destination) ?: return
-			else       -> broadcastPersonal(player, "Invalid goto command: $type")
+			else       -> broadcastPersonal(player, "Invalid goto command: $type. Expected: player, building, spawn, or patrol")
 		}
 
 		broadcastPersonal(player, message)
