@@ -1,23 +1,53 @@
 template	cell	floor	location	comment
 TEXT	REAL	INTEGER	REAL	TEXT
+object/building/general/shared_association_hall_general.iff	9	0	2.7	Association Hall - Elevator
+object/building/general/shared_association_hall_general.iff	9	-1	-8.5	Association Hall - Elevator
 object/building/corellia/shared_association_hall_civilian_corellia.iff	9	0	2.7	Association Hall - Elevator
 object/building/corellia/shared_association_hall_civilian_corellia.iff	9	-1	-8.5	Association Hall - Elevator
+object/building/general/shared_association_hall_civilian_general.iff	9	0	2.7	Association Hall - Elevator
+object/building/general/shared_association_hall_civilian_general.iff	9	-1	-8.5	Association Hall - Elevator
+object/building/general/shared_association_hall_civilian_naboo.iff	9	0	2.7	Association Hall - Elevator
+object/building/general/shared_association_hall_civilian_naboo.iff	9	-1	-8.5	Association Hall - Elevator
+object/building/tatooine/shared_association_hall_civilian_tatooine.iff	9	0	2.7	Association Hall - Elevator
+object/building/tatooine/shared_association_hall_civilian_tatooine.iff	9	-1	-8.5	Association Hall - Elevator
 object/building/corellia/shared_hospital_corellia.iff	13	2	15.3	Corellia Hospital - Elevator 1
 object/building/corellia/shared_hospital_corellia.iff	13	1	7.3	Corellia Hospital - Elevator 1
 object/building/corellia/shared_hospital_corellia.iff	13	0	0.3	Corellia Hospital - Elevator 1
 object/building/corellia/shared_hospital_corellia.iff	14	2	15.3	Corellia Hospital - Elevator 2
 object/building/corellia/shared_hospital_corellia.iff	14	1	7.3	Corellia Hospital - Elevator 2
 object/building/corellia/shared_hospital_corellia.iff	14	0	0.3	Corellia Hospital - Elevator 2
-object/building/general/shared_association_hall_civilian_general.iff	9	0	2.7	Association Hall - Elevator
-object/building/general/shared_association_hall_civilian_general.iff	9	-1	-8.5	Association Hall - Elevator
-object/building/general/shared_association_hall_general.iff	9	0	2.7	Association Hall - Elevator
-object/building/general/shared_association_hall_general.iff	9	-1	-8.5	Association Hall - Elevator
+object/building/naboo/shared_hospital_naboo.iff	13	0	0.3	Naboo Hospital - Elevator 1
+object/building/naboo/shared_hospital_naboo.iff	13	1	7.3	Naboo Hospital - Elevator 1
+object/building/naboo/shared_hospital_naboo.iff	13	2	13.5	Naboo Hospital - Elevator 1
+object/building/naboo/shared_hospital_naboo.iff	14	0	0.3	Naboo Hospital - Elevator 2
+object/building/naboo/shared_hospital_naboo.iff	14	1	7.3	Naboo Hospital - Elevator 2
+object/building/naboo/shared_hospital_naboo.iff	14	2	13.5	Naboo Hospital - Elevator 2
+object/building/tatooine/shared_hospital_tatooine.iff	13	2	15.3	Tatooine Hospital - Elevator 1
+object/building/tatooine/shared_hospital_tatooine.iff	13	1	7.3	Tatooine Hospital - Elevator 1
+object/building/tatooine/shared_hospital_tatooine.iff	13	0	0.3	Tatooine Hospital - Elevator 1
+object/building/tatooine/shared_hospital_tatooine.iff	14	2	15.3	Tatooine Hospital - Elevator 2
+object/building/tatooine/shared_hospital_tatooine.iff	14	1	7.3	Tatooine Hospital - Elevator 2
+object/building/tatooine/shared_hospital_tatooine.iff	14	0	0.3	Tatooine Hospital - Elevator 2
 object/building/general/shared_mun_all_hospital_s01.iff	13	0	0.3	Common Hospital - Elevator 1
 object/building/general/shared_mun_all_hospital_s01.iff	13	1	7.3	Common Hospital - Elevator 1
 object/building/general/shared_mun_all_hospital_s01.iff	13	2	13.5	Common Hospital - Elevator 1
 object/building/general/shared_mun_all_hospital_s01.iff	14	0	0.3	Common Hospital - Elevator 2
 object/building/general/shared_mun_all_hospital_s01.iff	14	1	7.3	Common Hospital - Elevator 2
 object/building/general/shared_mun_all_hospital_s01.iff	14	2	13.5	Common Hospital - Elevator 2
+object/building/player/shared_player_guildhall_corellia_style_01.iff	9	0	2.7	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_corellia_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_generic_style_01.iff	9	0	2.7	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_generic_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_naboo_style_01.iff	9	0	2.7	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_naboo_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_tatooine_style_01.iff	9	0	2.7	Player Association Hall - Elevator
+object/building/player/shared_player_guildhall_tatooine_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
+object/building/player/shared_player_house_mustafar_lg.iff	10	0	0.5	Mustafarian Bunker - Elevator
+object/building/player/shared_player_house_mustafar_lg.iff	10	-1	-26.0	Mustafarian Bunker - Elevator
+object/building/player/shared_player_house_mustafar_lg.iff	10	-2	-33.0	Mustafarian Bunker - Elevator
+object/building/player/shared_player_mustafar_house_lg.iff	10	0	0.5	Mustafarian Bunker - Elevator
+object/building/player/shared_player_mustafar_house_lg.iff	10	-1	-26.0	Mustafarian Bunker - Elevator
+object/building/player/shared_player_mustafar_house_lg.iff	10	-2	-33.0	Mustafarian Bunker - Elevator
 object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	18	1	12.0	Corvette Imperial - Elevator 1
 object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	18	0	0.0	Corvette Imperial - Elevator 1
 object/building/general/shared_space_dungeon_corellian_corvette_imperial.iff	19	0	0.0	Corvette Imperial - Elevator 2
@@ -46,34 +76,6 @@ object/building/naboo/shared_emperors_retreat.iff	14	0	0.2	Emperors Retreat - El
 object/building/naboo/shared_emperors_retreat.iff	14	-1	-9.8	Emperors Retreat - Elevator 2
 object/building/naboo/shared_emperors_retreat.iff	6	0	0.6	Emperors Retreat - Elevator 1
 object/building/naboo/shared_emperors_retreat.iff	6	1	20.0	Emperors Retreat - Elevator 1
-object/building/naboo/shared_hospital_naboo.iff	13	0	0.3	Naboo Hospital - Elevator 1
-object/building/naboo/shared_hospital_naboo.iff	13	1	7.3	Naboo Hospital - Elevator 1
-object/building/naboo/shared_hospital_naboo.iff	13	2	13.5	Naboo Hospital - Elevator 1 
-object/building/naboo/shared_hospital_naboo.iff	14	0	0.3	Naboo Hospital - Elevator 2
-object/building/naboo/shared_hospital_naboo.iff	14	1	7.3	Naboo Hospital - Elevator 2
-object/building/naboo/shared_hospital_naboo.iff	14	2	13.5	Naboo Hospital - Elevator 2
-object/building/player/shared_player_guildhall_corellia_style_01.iff	9	0	2.7	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_corellia_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_generic_style_01.iff	9	0	2.7	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_generic_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_naboo_style_01.iff	9	0	2.7	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_naboo_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_tatooine_style_01.iff	9	0	2.7	Player Association Hall - Elevator
-object/building/player/shared_player_guildhall_tatooine_style_01.iff	9	-1	-8.5	Player Association Hall - Elevator
-object/building/player/shared_player_house_mustafar_lg.iff	10	0	0.5	Mustafarian Bunker - Elevator
-object/building/player/shared_player_house_mustafar_lg.iff	10	-1	-26.0	Mustafarian Bunker - Elevator
-object/building/player/shared_player_house_mustafar_lg.iff	10	-2	-33.0	Mustafarian Bunker - Elevator
-object/building/player/shared_player_mustafar_house_lg.iff	10	0	0.5	Mustafarian Bunker - Elevator
-object/building/player/shared_player_mustafar_house_lg.iff	10	-1	-26.0	Mustafarian Bunker - Elevator
-object/building/player/shared_player_mustafar_house_lg.iff	10	-2	-33.0	Mustafarian Bunker - Elevator
-object/building/tatooine/shared_association_hall_civilian_tatooine.iff	9	0	2.7	Association Hall - Elevator
-object/building/tatooine/shared_association_hall_civilian_tatooine.iff	9	-1	-8.5	Association Hall - Elevator
-object/building/tatooine/shared_hospital_tatooine.iff	13	2	15.3	Tatooine Hospital - Elevator 1
-object/building/tatooine/shared_hospital_tatooine.iff	13	1	7.3	Tatooine Hospital - Elevator 1
-object/building/tatooine/shared_hospital_tatooine.iff	13	0	0.3	Tatooine Hospital - Elevator 1
-object/building/tatooine/shared_hospital_tatooine.iff	14	2	15.3	Tatooine Hospital - Elevator 2
-object/building/tatooine/shared_hospital_tatooine.iff	14	1	7.3	Tatooine Hospital - Elevator 2
-object/building/tatooine/shared_hospital_tatooine.iff	14	0	0.3	Tatooine Hospital - Elevator 2
 object/building/tatooine/shared_lucky_despot.iff	28	1	9.0	Lucky Despot - Elevator 1
 object/building/tatooine/shared_lucky_despot.iff	28	0	0.0	Lucky Despot - Elevator 1
 object/building/tatooine/shared_lucky_despot.iff	29	1	9.0	Lucky Despot - Elevator 2
@@ -82,3 +84,27 @@ object/building/tatooine/shared_lucky_despot.iff	30	1	9.0	Lucky Despot - Elevato
 object/building/tatooine/shared_lucky_despot.iff	30	0	0.0	Lucky Despot - Elevator 3
 object/building/tatooine/shared_lucky_despot.iff	31	1	15.0	Lucky Despot - Elevator 4
 object/building/tatooine/shared_lucky_despot.iff	31	0	7.0	Lucky Despot - Elevator 4
+object/building/general/shared_bunker_rebel_weapons_depot.iff	11	-1	-12.0	Weapons Depot - Elevator 11
+object/building/general/shared_bunker_rebel_weapons_depot.iff	11	-2	-20.0	Weapons Depot - Elevator 11
+object/building/general/shared_bunker_rebel_weapons_depot.iff	36	-2	-20.0	Weapons Depot - Elevator 36
+object/building/general/shared_bunker_rebel_weapons_depot.iff	36	-3	-50.0	Weapons Depot - Elevator 36
+object/building/general/shared_bunker_warren_01.iff	15	-1	-20.0	The Warren - Elevator 15
+object/building/general/shared_bunker_warren_01.iff	15	-2	-28.0	The Warren - Elevator 15
+object/building/general/shared_bunker_warren_01.iff	22	-1	-20.0	The Warren - Elevator 22
+object/building/general/shared_bunker_warren_01.iff	22	-2	-28.0	The Warren - Elevator 22
+object/building/general/shared_bunker_warren_01.iff	35	-2	-28.0	The Warren - Elevator 35
+object/building/general/shared_bunker_warren_01.iff	35	-3	-59.0	The Warren - Elevator 35
+object/building/general/shared_bunker_warren_01.iff	36	-2	-28.0	The Warren - Elevator 36
+object/building/general/shared_bunker_warren_01.iff	36	-3	-52.0	The Warren - Elevator 36
+object/building/general/shared_bunker_warren_01.iff	61	-3	-28.0	The Warren - Elevator 61
+object/building/general/shared_bunker_warren_01.iff	61	-4	-60.0	The Warren - Elevator 61
+object/building/general/shared_bunker_warren_01.iff	79	-3	-59.0	The Warren - Elevator 79
+object/building/general/shared_bunker_warren_01.iff	79	-4	-84.0	The Warren - Elevator 79
+object/building/general/shared_bunker_syren4_boss.iff	11	-1	-12.0	Syren bunker - Elevator 11
+object/building/general/shared_bunker_syren4_boss.iff	11	-2	-20.0	Syren bunker - Elevator 11
+object/building/general/shared_bunker_syren4_boss.iff	36	-2	-20.0	Syren bunker - Elevator 36
+object/building/general/shared_bunker_syren4_boss.iff	36	-3	-50.0	Syren bunker - Elevator 36
+object/building/general/shared_bunker_blacksun_outpost_01.iff	11	-1	-12.0	Blacksun Outpost - Elevator 11
+object/building/general/shared_bunker_blacksun_outpost_01.iff	11	-2	-20.0	Blacksun Outpost - Elevator 11
+object/building/general/shared_bunker_blacksun_outpost_01.iff	36	-2	-20.0	Blacksun Outpost - Elevator 36
+object/building/general/shared_bunker_blacksun_outpost_01.iff	36	-3	-50.0	Blacksun Outpost - Elevator 36

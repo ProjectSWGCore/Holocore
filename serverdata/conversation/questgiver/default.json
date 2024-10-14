@@ -1,34 +1,26 @@
 {
 	"npcMessage": {
-		"file": "conversation/tatooine_bestinejobs_jasha",
-		"key": "s_34",
-		"comment": "I am a very busy person. This rebellion is causing all sorts of disruptions to Imperial operations and I have to help get things under control. What do you want?"
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_303",
+		"comment": "Welcome to Mos Eisley. Watch your back here.  There has never been a more wretched hive of scum and villainy, as you may have heard. You and I have some business to attend to."
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/tatooine_bestinejobs_jasha",
-				"key": "s_44",
-				"comment": "I can help hunting banthas."
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_1067",
+				"comment": "Interesting, please go on."
 			},
-			"next": "questgiver/kill_banthas"
+			"next": "questgiver/offer_quests"
 		},
 		{
 			"playerMessage": {
-				"file": "conversation/tatooine_bestinejobs_jasha",
-				"key": "s_68",
-				"comment": "Sounds like a plan."
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_1011",
+				"comment": "Actually, sounds rather boring. I want something else."
 			},
-			"next": "questgiver/already_active"
+			"next": ""
 		},
-		{
-			"playerMessage": {
-				"file": "conversation/tatooine_bestinejobs_jasha",
-				"key": "s_66",
-				"comment": "On second thought no. "
-			},
-			"next": "questgiver/already_completed"
-		}
 	],
 
 	"requirements": [],
