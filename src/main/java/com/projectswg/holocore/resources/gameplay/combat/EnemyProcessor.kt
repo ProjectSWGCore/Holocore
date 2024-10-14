@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -54,7 +53,8 @@ object EnemyProcessor {
 			if (target is AIObject)
 				return isFactionAttackable(source, target)
 			
-			return ((source.hasOptionFlags(OptionFlag.AGGRESSIVE) || (if (source.spawner?.behavior == AIBehavior.PATROL) source.spawner.npcs.any { it.defenders.contains(target.objectId) } else source.defenders.contains(target.objectId)))
+			val spawner = source.spawner
+			return ((source.hasOptionFlags(OptionFlag.AGGRESSIVE) || (if (spawner?.behavior == AIBehavior.PATROL) spawner.npcs.any { it.defenders.contains(target.objectId) } else source.defenders.contains(target.objectId)))
 					&& (isFactionAttackable(target, source)) || isFactionAttackable(source, target)) // EvP only when aggressive or under attack
 		} else if (target is AIObject) {
 			return isFactionAttackable(source, target) // PvE allowed

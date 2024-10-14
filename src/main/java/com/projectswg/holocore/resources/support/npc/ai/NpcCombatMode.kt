@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -60,14 +59,16 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	private val targets = CopyOnWriteArraySet<CreatureObject>()
 	private val iteration = AtomicLong(0)
 	private val npcRunSpeed = PswgDatabase.config.getDouble(this, "npcRunSpeed", 9.0)
+	private var isMoving = false
 	
 	private val primaryTarget: CreatureObject? // Don't attack if they're already dead
 		get() = targets.stream()
 				.filter { creo -> creo.isAttackable(ai) }
-				.filter { creo -> (creo.posture != Posture.INCAPACITATED || spawner.isDeathblow) && creo.posture != Posture.DEAD }
+				.filter { creo -> (creo.posture != Posture.INCAPACITATED || spawner?.isDeathblow ?: false) && creo.posture != Posture.DEAD }
 				.max(Comparator.comparingInt { ai.hateMap[it] ?: 0 }).orElse(null)
 	
 	override fun onPlayerMoveInAware(player: CreatureObject, distance: Double) {
+		val spawner = this.spawner ?: return
 		if (distance > spawner.aggressiveRadius) {
 			// If out of aggressive range, and not actively in combat
 			if (spawner.behavior == AIBehavior.PATROL && spawner.npcs.none { it.defenders.contains(player.objectId) })
@@ -135,7 +136,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val actionRange = attackRange / 2
 		val lineOfSight = obj.isLineOfSight(target)
 
-		if (ai.walkSpeed > 0 && (targetDistance > actionRange || !lineOfSight)) {
+		if (ai.walkSpeed > 0 && (targetDistance > attackRange || !lineOfSight)) {
 			val targetLocation = target.location
 			val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-75.0, 75.0)
 			val targetRange = actionRange / 2
@@ -143,6 +144,12 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 			val moveZ = targetLocation.z + cos(Math.toRadians(targetHeading)) * targetRange
 			val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
 			StartNpcMovementIntent(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed).broadcast()
+			isMoving = true
+		} else {
+			if (ai.walkSpeed > 0 && isMoving) {
+				StopNpcMovementIntent(obj).broadcast()
+				isMoving = false
+			}
 		}
 		
 		if (lineOfSight && iteration.get() % 4 == 0L) {
@@ -182,7 +189,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
 	private fun requestAssistance() {
 		val myLocation = ai.worldLocation
-		val assistRange = spawner.assistRadius.toDouble()
+		val assistRange = spawner?.assistRadius?.toDouble() ?: return
 		ai.aware.stream()
 				.filter { AIObject::class.java.isInstance(it) } // get nearby AI
 				.filter { ai -> ai.worldLocation.distanceTo(myLocation) < assistRange } // that can assist
