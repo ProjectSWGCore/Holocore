@@ -1110,169 +1110,192 @@ spawn_corellia_1107	CORELLIA	cor_world	AREA	0	-2958.1	20.7	3375.0	0	1	Vuul's gua
 spawn_corellia_1108	CORELLIA	cor_world	AREA	0	-2975.4	28.7	3422.7	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
 spawn_corellia_1109	CORELLIA	cor_world	AREA	0	-2984.7	25.9	3369.3	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
 spawn_corellia_1110	CORELLIA	cor_world	AREA	0	-3008.0	23.3	3412.9	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
-spawn_corellia_1111	CORELLIA	cor_world	AREA	0	1678.3	20.6	4700.0	-80	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Agrilat Swamp	1	IDLE	0	0	-	idle			600
-spawn_corellia_1112	CORELLIA	cor_drall_cave	AREA	1	-16.2	-4.3	-7.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1113	CORELLIA	cor_drall_cave	AREA	1	11.8	-22.1	-6.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1114	CORELLIA	cor_drall_cave	AREA	2	21.6	-41.9	-62.6	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1115	CORELLIA	cor_drall_cave	AREA	2	24.1	-35.5	-22.3	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1116	CORELLIA	cor_drall_cave	AREA	2	47.6	-48.4	-61.9	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1117	CORELLIA	cor_drall_cave	AREA	2	50.1	-48.8	-27.7	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1118	CORELLIA	cor_drall_cave	AREA	2	50.2	-48.6	-65.2	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1119	CORELLIA	cor_drall_cave	AREA	2	53.5	-68.1	-41.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1120	CORELLIA	cor_drall_cave	AREA	3	65.9	-68.8	-36.1	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1121	CORELLIA	cor_drall_cave	AREA	3	90.4	-61.8	-11.8	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1122	CORELLIA	cor_drall_cave	AREA	4	76.4	-76.8	-88.2	0	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1123	CORELLIA	cor_drall_cave	AREA	4	62.8	-75.8	-71.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1124	CORELLIA	cor_drall_cave	AREA	4	78.8	-74.5	-54.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1125	CORELLIA	cor_drall_cave	AREA	4	94.7	-75.7	-68.5	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1126	CORELLIA	cor_drall_cave	AREA	5	71.0	-46.5	-106.0	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1127	CORELLIA	cor_drall_cave	AREA	5	91.8	-46.7	-113.5	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1128	CORELLIA	cor_drall_cave	AREA	5	71.1	-46.8	-109.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1129	CORELLIA	cor_drall_cave	AREA	5	91.1	-66.6	-118.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1130	CORELLIA	cor_drall_cave	AREA	5	94.1	-45.9	-107.1	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1131	CORELLIA	cor_drall_cave	AREA	6	52.4	-75.4	-101.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1132	CORELLIA	cor_drall_cave	AREA	6	63.1	-66.4	-137.5	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1133	CORELLIA	cor_drall_cave	AREA	8	113.1	-66.8	-96.2	179	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
-spawn_corellia_1134	CORELLIA	cor_drall_cave	AREA	8	134.5	-66.8	-93.8	-160	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
-spawn_corellia_1135	CORELLIA	cor_drall_cave	AREA	8	114.2	-66.7	-99.8	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1136	CORELLIA	cor_drall_cave	AREA	8	119.0	-65.7	-124.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1137	CORELLIA	cor_drall_cave	AREA	8	141.0	-67.1	-94.7	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1138	CORELLIA	cor_drall_cave	AREA	8	148.8	-67.2	-120.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1139	CORELLIA	cor_drall_cave	AREA	9	186.6	-66.0	-98.9	-100	1	a Drall chieftain	humanoid_drall_chieftain	ATTACKABLE	B	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
-spawn_corellia_1140	CORELLIA	cor_drall_cave	AREA	9	161.9	-66.9	-97.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1141	CORELLIA	cor_drall_cave	AREA	9	182.1	-65.7	-102.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1142	CORELLIA	cor_drall_cave	AREA	10	49.3	-51.9	-87.7	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1143	CORELLIA	cor_drall_cave	AREA	11	85.4	-46.6	-141.3	40	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
-spawn_corellia_1144	CORELLIA	cor_drall_cave	AREA	11	93.8	-46.1	-141.9	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
-spawn_corellia_1145	CORELLIA	cor_world	AREA	0	4243.3	24.8	-155.3	-170	1	a Drall abbot	humanoid_drall_abbot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
-spawn_corellia_1146	CORELLIA	cor_world	AREA	0	4248.6	25.1	-160.0	0	1	a Drall monk	humanoid_drall_monk	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	LOITER	5	0	-	idle			600
-spawn_corellia_1147	CORELLIA	cor_world	AREA	0	1041.1	33.1	4213.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	LOITER	5	0	-	idle			600
-spawn_corellia_1148	CORELLIA	cor_hidden_reb_base	AREA	2	-0.3	1.0	-14.3	0	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1149	CORELLIA	cor_hidden_reb_base	AREA	2	2.7	2.0	4.6	44	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1150	CORELLIA	cor_hidden_reb_base	AREA	2	0.2	2.0	5.4	0	1	a Rebel Staff Corporal	humanoid_rebel_staff_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_use_terminal_high			600
-spawn_corellia_1151	CORELLIA	cor_hidden_reb_base	PATROL	2	6.4	1.0	2.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2900	column	idle			600
-spawn_corellia_1152	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.8	1.0	-12.0	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3000	column	idle			600
-spawn_corellia_1153	CORELLIA	cor_hidden_reb_base	PATROL	2	19.0	1.0	8.1	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2700	column	idle			600
-spawn_corellia_1154	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.9	1.0	0.0	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2800	column	idle			600
-spawn_corellia_1155	CORELLIA	cor_hidden_reb_base	AREA	2	-2.8	2.0	4.5	141	1	C-3PO	droid_rebel_c3po	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1156	CORELLIA	cor_hidden_reb_base	AREA	2	7.3	1.0	-8.2	-90	1	Falton Molard	humanoid_rebel_falton_molard	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1157	CORELLIA	cor_hidden_reb_base	AREA	2	-4.0	1.0	-0.9	26	1	R2-D2	droid_r2d2	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1158	CORELLIA	cor_hidden_reb_base	AREA	5	15.9	1.0	-1.6	73	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_corellia_1159	CORELLIA	cor_hidden_reb_base	AREA	5	14.0	1.0	-4.9	150	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1160	CORELLIA	cor_hidden_reb_base	AREA	5	15.3	1.0	-1.7	0	1	Battle Astromech	droid_rebel_detain_battle_astromech	AGGRESSIVE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1161	CORELLIA	cor_hidden_reb_base	AREA	5	15.0	1.0	-6.5	-42	1	Major Qual'do Herm	humanoid_rebel_qualdo_herm	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1162	CORELLIA	cor_hidden_reb_base	AREA	7	-4.1	1.0	-20.8	-86	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1163	CORELLIA	cor_hidden_reb_base	AREA	7	0.0	1.0	-21.9	0	1	Wedge Antilles	humanoid_rebel_wedge_antilles	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_corellia_1164	CORELLIA	cor_hidden_reb_base	AREA	10	5.5	7.0	-0.4	4	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1165	CORELLIA	cor_hidden_reb_base	AREA	10	11.6	7.0	-9.0	90	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1166	CORELLIA	cor_hidden_reb_base	AREA	11	-13.1	7.0	9.6	95	1	a Rebel Army Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1167	CORELLIA	cor_hidden_reb_base	AREA	11	-3.3	7.0	12.6	100	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_corellia_1168	CORELLIA	cor_hidden_reb_base	AREA	11	-2.7	7.0	6.1	-92	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1169	CORELLIA	cor_hidden_reb_base	AREA	11	-6.2	7.0	6.1	82	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1170	CORELLIA	cor_hidden_reb_base	AREA	12	5.9	7.0	10.0	87	1	a Rebel Colonel	humanoid_rebel_colonel	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
-spawn_corellia_1171	CORELLIA	cor_world	PATROL	0	-6479.0	398.0	5966.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3100	column	idle		simple_droid_sarcastic_flee_4	600
-spawn_corellia_1172	CORELLIA	cor_world	AREA	0	-6563.6	398.0	5984.9	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1173	CORELLIA	cor_world	AREA	0	-6552.4	398.0	6014.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1174	CORELLIA	cor_world	AREA	0	-6510.1	398.0	6040.9	-148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1175	CORELLIA	cor_world	AREA	0	-6454.7	398.0	6008.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1176	CORELLIA	cor_world	AREA	0	-6486.0	398.0	5970.2	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1177	CORELLIA	cor_world	AREA	0	-6497.1	398.0	5950.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
-spawn_corellia_1178	CORELLIA	cor_world	AREA	0	-6490.7	398.0	6047.5	100	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1179	CORELLIA	cor_world	AREA	0	-6583.8	405.0	5967.6	0	1	a Rebel Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1180	CORELLIA	cor_world	AREA	0	-6555.2	403.3	5944.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1181	CORELLIA	cor_world	AREA	0	-6586.7	405.0	5967.4	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1182	CORELLIA	cor_world	AREA	0	-6584.7	405.0	5963.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1183	CORELLIA	cor_world	AREA	0	-6581.8	405.0	5966.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1184	CORELLIA	cor_world	AREA	0	-6550.9	401.6	5949.8	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1185	CORELLIA	cor_world	PATROL	0	-6521.5	405.0	5908.5	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_100	column	idle			600
-spawn_corellia_1186	CORELLIA	cor_world	PATROL	0	-6571.8	405.0	5946.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_200	column	idle			600
-spawn_corellia_1187	CORELLIA	cor_world	AREA	0	-6430.6	405.0	6033.7	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1188	CORELLIA	cor_world	AREA	0	-6438.4	405.0	6036.3	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1189	CORELLIA	cor_world	AREA	0	-6478.4	405.0	5916.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1190	CORELLIA	cor_world	AREA	0	-6482.1	405.0	5914.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1191	CORELLIA	cor_world	AREA	0	-6529.2	405.0	5910.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1192	CORELLIA	cor_world	AREA	0	-6570.1	405.0	5942.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1193	CORELLIA	cor_world	AREA	0	-6553.3	402.6	5946.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1194	CORELLIA	cor_world	AREA	0	-6559.7	405.0	5920.8	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1195	CORELLIA	cor_world	AREA	0	-6558.9	405.0	5923.4	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1196	CORELLIA	cor_world	AREA	0	-6498.9	398.0	6035.3	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1197	CORELLIA	cor_world	AREA	0	-6482.0	398.0	6024.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1198	CORELLIA	cor_world	AREA	0	-6474.6	398.0	6020.0	0	1	a Rebel Sergeant	humanoid_rebel_sergeant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1199	CORELLIA	cor_world	AREA	0	-6522.8	398.0	5956.5	111	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1200	CORELLIA	cor_world	AREA	0	-6538.5	398.0	5985.6	-86	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1201	CORELLIA	cor_world	AREA	0	-6462.8	398.0	5955.2	-131	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1202	CORELLIA	cor_world	PATROL	0	-6475.4	398.0	5959.0	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3200	column	idle		simple_droid_sarcastic_alert_2	600
-spawn_corellia_1203	CORELLIA	cor_world	AREA	0	-6462.5	398.0	6001.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
-spawn_corellia_1204	CORELLIA	cor_world	AREA	0	-6521.1	398.0	6027.6	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
-spawn_corellia_1205	CORELLIA	cor_world	AREA	0	-6483.6	398.0	6013.1	-134	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1206	CORELLIA	cor_world	AREA	0	-6519.3	398.0	6043.7	149	1	Lt. Lance	humanoid_rebel_lt_lance	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1207	CORELLIA	cor_world	AREA	0	-6485.0	398.0	6017.0	35	1	Teslo Ten'Doora	humanoid_rebel_officer_questgiver	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1208	CORELLIA	cor_nyax_bunker	AREA	2	3.8	0.3	-0.7	0	1	a minion of Lord Nyax	humanoid_lord_nyax_minion	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1209	CORELLIA	cor_nyax_bunker	AREA	3	-3.7	0.3	-4.2	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1210	CORELLIA	cor_nyax_bunker	AREA	5	5.4	-6.8	-8.7	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1211	CORELLIA	cor_nyax_bunker	AREA	5	2.6	-6.8	-0.7	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1212	CORELLIA	cor_nyax_bunker	AREA	7	-1.2	-13.8	4.7	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1213	CORELLIA	cor_nyax_bunker	AREA	7	-1.5	-13.8	-11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1214	CORELLIA	cor_nyax_bunker	AREA	8	-4.7	-13.8	12.1	130	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
-spawn_corellia_1215	CORELLIA	cor_nyax_bunker	AREA	8	6.2	-13.8	11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1216	CORELLIA	cor_nyax_bunker	AREA	9	15.2	-13.8	14.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1217	CORELLIA	cor_nyax_bunker	AREA	9	15.8	-13.8	1.4	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1218	CORELLIA	cor_nyax_bunker	AREA	10	15.6	-13.8	-7.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1219	CORELLIA	cor_nyax_bunker	AREA	10	15.5	-13.8	-13.7	0	1	a visionary of Lord Nyax	humanoid_lord_nyax_visionary	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
-spawn_corellia_1220	CORELLIA	cor_nyax_bunker	AREA	10	18.6	-11.5	-20.9	-10	1	Lord Nyax	humanoid_lord_nyax	AGGRESSIVE	B	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
-spawn_corellia_1221	CORELLIA	cor_world	AREA	0	1346.0	31.0	-335.3	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
-spawn_corellia_1222	CORELLIA	cor_world	AREA	0	1378.4	31.0	-320.8	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
-spawn_corellia_1223	CORELLIA	cor_world	AREA	0	1356.7	31.0	-319.4	150	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
-spawn_corellia_1224	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	8.6	0.2	4.3	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1225	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	0.2	0.2	-1.4	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1226	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	-8.6	0.2	-5.0	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1227	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	2.0	0.2	5.5	178	1	Hiram Bish (a rogue CorSec commander)	humanoid_corsec_rogue_hiram_bish	AGGRESSIVE	B	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1228	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	-3.2	0.2	-6.1	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1229	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	4.0	0.2	6.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1230	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	8.9	0.2	-4.8	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1231	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	-7.7	0.2	4.9	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1232	CORELLIA	cor_rogue_corsec_base_bunker	AREA	3	3.8	0.3	-4.0	-65	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1233	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	5.4	-13.8	8.8	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1234	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	-8.2	-13.8	8.8	136	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1235	CORELLIA	cor_rogue_corsec_base_bunker	AREA	9	1.6	-20.7	7.0	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1236	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	-1.3	-20.8	31.2	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1237	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	4.0	-20.8	30.3	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1238	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	2.3	-20.8	18.6	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
-spawn_corellia_1239	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	1.3	-20.8	27.3	46	1	Mtara Vinram (a rogue CorSec commander)	humanoid_corsec_rogue_trooper	AGGRESSIVE	B	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
-spawn_corellia_1240	CORELLIA	cor_world	AREA	0	5189.9	5.0	1584.9	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1241	CORELLIA	cor_world	AREA	0	5180.0	5.0	1554.0	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1242	CORELLIA	cor_world	AREA	0	5228.8	5.0	1611.2	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1243	CORELLIA	cor_world	AREA	0	5266.5	5.0	1603.7	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1244	CORELLIA	cor_world	AREA	0	-1751.4	1.0	-5594.3	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1245	CORELLIA	cor_world	AREA	0	5224.4	5.0	1589.3	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1246	CORELLIA	cor_world	AREA	0	5230.8	5.0	1563.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1247	CORELLIA	cor_world	AREA	0	5162.4	5.0	1613.7	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1248	CORELLIA	cor_world	AREA	0	5202.7	5.0	1516.8	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1249	CORELLIA	cor_world	AREA	0	5206.9	5.0	1648.8	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1250	CORELLIA	cor_world	AREA	0	5231.0	5.0	1530.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1251	CORELLIA	cor_world	AREA	0	5280.1	5.0	1565.1	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1252	CORELLIA	cor_world	AREA	0	5280.6	5.0	1586.4	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
-spawn_corellia_1253	CORELLIA	cor_stronghold_1	AREA	3	0.0	0.1	-0.9	0	1	an Imperial Sergeant	humanoid_imperial_sergeant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1254	CORELLIA	cor_stronghold_1	AREA	6	-3.9	0.1	-3.8	88	1	a High Colonel	humanoid_imperial_high_colonel	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
-spawn_corellia_1255	CORELLIA	cor_stronghold_2	AREA	3	0.0	0.1	0.9	-73	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
-spawn_corellia_1256	CORELLIA	cor_stronghold_2	AREA	5	3.1	0.1	-4.0	-87	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
-spawn_corellia_1257	CORELLIA	cor_stronghold_3	AREA	3	0.0	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1258	CORELLIA	cor_stronghold_4	AREA	3	0.0	0.1	-3.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1259	CORELLIA	cor_stronghold_5	AREA	3	-0.1	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1260	CORELLIA	cor_stronghold_6	AREA	3	0.0	0.1	-0.8	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1261	CORELLIA	cor_stronghold_7	AREA	3	0.0	0.1	-1.1	0	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1262	CORELLIA	cor_stronghold_7	AREA	6	-3.1	0.1	-3.9	84	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
-spawn_corellia_1263	CORELLIA	cor_stronghold_8	AREA	3	0.0	0.1	-0.8	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
-spawn_corellia_1264	CORELLIA	cor_world	AREA	0	4680.5	25.0	-5750.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1265	CORELLIA	cor_world	AREA	0	4696.0	25.0	-5805.2	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1266	CORELLIA	cor_world	AREA	0	4658.0	25.0	-5762.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1267	CORELLIA	cor_world	AREA	0	4670.0	25.0	-5808.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1268	CORELLIA	cor_world	AREA	0	4680.9	25.0	-5820.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1269	CORELLIA	cor_world	AREA	0	4693.0	25.0	-5762.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1270	CORELLIA	cor_world	PATROL	0	4582.0	25.0	-5771.9	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	11	20	POI	Stronghold	1	PATROL	0	patrol_corellia_3300	column	idle			600
-spawn_corellia_1271	CORELLIA	cor_world	AREA	0	4636.9	25.0	-5778.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1272	CORELLIA	cor_world	AREA	0	4627.2	25.0	-5796.5	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1273	CORELLIA	cor_world	AREA	0	4625.9	25.0	-5770.8	0	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1274	CORELLIA	cor_world	AREA	0	4642.9	25.0	-5811.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1275	CORELLIA	cor_world	AREA	0	4643.4	25.0	-5756.4	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
-spawn_corellia_1276	CORELLIA	cor_world	AREA	0	4705.1	25.0	-5773.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1111	CORELLIA	cor_world	AREA	0	-2489.6	18.1	2920.0			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	5	0	-	idle			600
+spawn_corellia_1112	CORELLIA	cor_world	AREA	0	-2494.0	18.9	2913.6			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	5	0	-	idle			600
+spawn_corellia_1113	CORELLIA	cor_afarathu_cave	AREA	1	-0.6	-13.7	-8.3			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1114	CORELLIA	cor_afarathu_cave	AREA	1	11.3	-14.2	-5.5			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1115	CORELLIA	cor_afarathu_cave	AREA	2	9.7	-23.9	-28.3			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1116	CORELLIA	cor_afarathu_cave	AREA	2	-11.3	-30.7	-27.1			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1117	CORELLIA	cor_afarathu_cave	AREA	3	-1.8	-40.7	-74.1			an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1118	CORELLIA	cor_afarathu_cave	AREA	3	2.6	-40.4	-62.4			an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1119	CORELLIA	cor_afarathu_cave	AREA	3	3.4	-41.0	-72.6			an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1120	CORELLIA	cor_afarathu_cave	AREA	4	49.3	-46.8	-53.7			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1121	CORELLIA	cor_afarathu_cave	AREA	4	43.8	-46.1	-95.1			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1122	CORELLIA	cor_afarathu_cave	AREA	4	23.6	-45.7	-102.8			an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1123	CORELLIA	cor_afarathu_cave	AREA	5	-1.7	-45.8	-147.8			an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1124	CORELLIA	cor_afarathu_cave	AREA	5	-11.0	-44.4	-136.4			an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1125	CORELLIA	cor_afarathu_cave	AREA	7	-4.2	-64.0	-234.2			an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1126	CORELLIA	cor_afarathu_cave	AREA	7	-21.7	-65.4	-244.6			an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1127	CORELLIA	cor_afarathu_cave	AREA	8	-95.3	-73.7	-170.0			an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1128	CORELLIA	cor_afarathu_cave	AREA	8	-83.5	-71.6	-169.2			an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1129	CORELLIA	cor_afarathu_cave	AREA	8	-100.5	-72.9	-159.1			an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1130	CORELLIA	cor_afarathu_cave	AREA	8	-111.7	-69.4	-170.6			an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1131	CORELLIA	cor_afarathu_cave	AREA	11	-85.4	-101.5	-111.2			an Afarathu cult bodyguard	humanoid_afarathu_cult_bodyguard	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1132	CORELLIA	cor_afarathu_cave	AREA	11	-92.8	-101.1	-111.9			an Afarathu cult bodyguard	humanoid_afarathu_cult_bodyguard	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1133	CORELLIA	cor_afarathu_cave	AREA	11	-90.7	-101.1	-104.8			an Afarathu cult leader	humanoid_afarathu_cult_leader	AGGRESSIVE	B	19	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+spawn_corellia_1134	CORELLIA	cor_world	AREA	0	1678.3	20.6	4700.0	-80	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Agrilat Swamp	1	IDLE	0	0	-	idle			600
+spawn_corellia_1135	CORELLIA	cor_drall_cave	AREA	1	-16.2	-4.3	-7.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1136	CORELLIA	cor_drall_cave	AREA	1	11.8	-22.1	-6.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1137	CORELLIA	cor_drall_cave	AREA	2	21.6	-41.9	-62.6	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1138	CORELLIA	cor_drall_cave	AREA	2	24.1	-35.5	-22.3	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1139	CORELLIA	cor_drall_cave	AREA	2	47.6	-48.4	-61.9	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1140	CORELLIA	cor_drall_cave	AREA	2	50.1	-48.8	-27.7	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1141	CORELLIA	cor_drall_cave	AREA	2	50.2	-48.6	-65.2	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1142	CORELLIA	cor_drall_cave	AREA	2	53.5	-68.1	-41.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1143	CORELLIA	cor_drall_cave	AREA	3	65.9	-68.8	-36.1	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1144	CORELLIA	cor_drall_cave	AREA	3	90.4	-61.8	-11.8	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1145	CORELLIA	cor_drall_cave	AREA	4	76.4	-76.8	-88.2	0	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1146	CORELLIA	cor_drall_cave	AREA	4	62.8	-75.8	-71.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1147	CORELLIA	cor_drall_cave	AREA	4	78.8	-74.5	-54.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1148	CORELLIA	cor_drall_cave	AREA	4	94.7	-75.7	-68.5	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1149	CORELLIA	cor_drall_cave	AREA	5	71.0	-46.5	-106.0	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1150	CORELLIA	cor_drall_cave	AREA	5	91.8	-46.7	-113.5	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1151	CORELLIA	cor_drall_cave	AREA	5	71.1	-46.8	-109.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1152	CORELLIA	cor_drall_cave	AREA	5	91.1	-66.6	-118.3	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1153	CORELLIA	cor_drall_cave	AREA	5	94.1	-45.9	-107.1	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1154	CORELLIA	cor_drall_cave	AREA	6	52.4	-75.4	-101.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1155	CORELLIA	cor_drall_cave	AREA	6	63.1	-66.4	-137.5	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1156	CORELLIA	cor_drall_cave	AREA	8	113.1	-66.8	-96.2	179	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
+spawn_corellia_1157	CORELLIA	cor_drall_cave	AREA	8	134.5	-66.8	-93.8	-160	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
+spawn_corellia_1158	CORELLIA	cor_drall_cave	AREA	8	114.2	-66.7	-99.8	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1159	CORELLIA	cor_drall_cave	AREA	8	119.0	-65.7	-124.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1160	CORELLIA	cor_drall_cave	AREA	8	141.0	-67.1	-94.7	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1161	CORELLIA	cor_drall_cave	AREA	8	148.8	-67.2	-120.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1162	CORELLIA	cor_drall_cave	AREA	9	186.6	-66.0	-98.9	-100	1	a Drall chieftain	humanoid_drall_chieftain	ATTACKABLE	B	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
+spawn_corellia_1163	CORELLIA	cor_drall_cave	AREA	9	161.9	-66.9	-97.2	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1164	CORELLIA	cor_drall_cave	AREA	9	182.1	-65.7	-102.4	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1165	CORELLIA	cor_drall_cave	AREA	10	49.3	-51.9	-87.7	0	1	a Drall patriot foot soldier	humanoid_drall_patriot_foot_soldier	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1166	CORELLIA	cor_drall_cave	AREA	11	85.4	-46.6	-141.3	40	1	a Drall patriot conqueror	humanoid_drall_patriot_conqueror	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
+spawn_corellia_1167	CORELLIA	cor_drall_cave	AREA	11	93.8	-46.1	-141.9	0	1	a Drall patriot legionnaire	humanoid_drall_patriot_legionnaire	ATTACKABLE	E	11	20	POI	Drall Patriot's Cave	1	TURN	0	0	-	idle			600
+spawn_corellia_1168	CORELLIA	cor_world	AREA	0	4243.3	24.8	-155.3	-170	1	a Drall abbot	humanoid_drall_abbot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	IDLE	0	0	-	idle			600
+spawn_corellia_1169	CORELLIA	cor_world	AREA	0	4248.6	25.1	-160.0	0	1	a Drall monk	humanoid_drall_monk	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	LOITER	5	0	-	idle			600
+spawn_corellia_1170	CORELLIA	cor_world	AREA	0	1041.1	33.1	4213.0	0	1	a Drall patriot	humanoid_drall_patriot	ATTACKABLE	N	11	20	POI	Drall Patriot's Cave	1	LOITER	5	0	-	idle			600
+spawn_corellia_1171	CORELLIA	cor_hidden_reb_base	AREA	2	-0.3	1.0	-14.3	0	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1172	CORELLIA	cor_hidden_reb_base	AREA	2	2.7	2.0	4.6	44	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1173	CORELLIA	cor_hidden_reb_base	AREA	2	0.2	2.0	5.4	0	1	a Rebel Staff Corporal	humanoid_rebel_staff_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_use_terminal_high			600
+spawn_corellia_1174	CORELLIA	cor_hidden_reb_base	PATROL	2	6.4	1.0	2.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2900	column	idle			600
+spawn_corellia_1175	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.8	1.0	-12.0	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3000	column	idle			600
+spawn_corellia_1176	CORELLIA	cor_hidden_reb_base	PATROL	2	19.0	1.0	8.1	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2700	column	idle			600
+spawn_corellia_1177	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.9	1.0	0.0	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_2800	column	idle			600
+spawn_corellia_1178	CORELLIA	cor_hidden_reb_base	AREA	2	-2.8	2.0	4.5	141	1	C-3PO	droid_rebel_c3po	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1179	CORELLIA	cor_hidden_reb_base	AREA	2	7.3	1.0	-8.2	-90	1	Falton Molard	humanoid_rebel_falton_molard	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1180	CORELLIA	cor_hidden_reb_base	AREA	2	-4.0	1.0	-0.9	26	1	R2-D2	droid_r2d2	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1181	CORELLIA	cor_hidden_reb_base	AREA	5	15.9	1.0	-1.6	73	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_corellia_1182	CORELLIA	cor_hidden_reb_base	AREA	5	14.0	1.0	-4.9	150	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1183	CORELLIA	cor_hidden_reb_base	AREA	5	15.3	1.0	-1.7	0	1	Battle Astromech	droid_rebel_detain_battle_astromech	AGGRESSIVE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1184	CORELLIA	cor_hidden_reb_base	AREA	5	15.0	1.0	-6.5	-42	1	Major Qual'do Herm	humanoid_rebel_qualdo_herm	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1185	CORELLIA	cor_hidden_reb_base	AREA	7	-4.1	1.0	-20.8	-86	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1186	CORELLIA	cor_hidden_reb_base	AREA	7	0.0	1.0	-21.9	0	1	Wedge Antilles	humanoid_rebel_wedge_antilles	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_corellia_1187	CORELLIA	cor_hidden_reb_base	AREA	10	5.5	7.0	-0.4	4	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1188	CORELLIA	cor_hidden_reb_base	AREA	10	11.6	7.0	-9.0	90	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1189	CORELLIA	cor_hidden_reb_base	AREA	11	-13.1	7.0	9.6	95	1	a Rebel Army Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1190	CORELLIA	cor_hidden_reb_base	AREA	11	-3.3	7.0	12.6	100	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_corellia_1191	CORELLIA	cor_hidden_reb_base	AREA	11	-2.7	7.0	6.1	-92	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1192	CORELLIA	cor_hidden_reb_base	AREA	11	-6.2	7.0	6.1	82	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1193	CORELLIA	cor_hidden_reb_base	AREA	12	5.9	7.0	10.0	87	1	a Rebel Colonel	humanoid_rebel_colonel	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	IDLE	0	0	-	npc_sitting_chair			600
+spawn_corellia_1194	CORELLIA	cor_world	PATROL	0	-6479.0	398.0	5966.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3100	column	idle		simple_droid_sarcastic_flee_4	600
+spawn_corellia_1195	CORELLIA	cor_world	AREA	0	-6563.6	398.0	5984.9	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1196	CORELLIA	cor_world	AREA	0	-6552.4	398.0	6014.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1197	CORELLIA	cor_world	AREA	0	-6510.1	398.0	6040.9	-148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1198	CORELLIA	cor_world	AREA	0	-6454.7	398.0	6008.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1199	CORELLIA	cor_world	AREA	0	-6486.0	398.0	5970.2	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1200	CORELLIA	cor_world	AREA	0	-6497.1	398.0	5950.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle		commoner	600
+spawn_corellia_1201	CORELLIA	cor_world	AREA	0	-6490.7	398.0	6047.5	100	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1202	CORELLIA	cor_world	AREA	0	-6583.8	405.0	5967.6	0	1	a Rebel Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1203	CORELLIA	cor_world	AREA	0	-6555.2	403.3	5944.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1204	CORELLIA	cor_world	AREA	0	-6586.7	405.0	5967.4	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1205	CORELLIA	cor_world	AREA	0	-6584.7	405.0	5963.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1206	CORELLIA	cor_world	AREA	0	-6581.8	405.0	5966.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1207	CORELLIA	cor_world	AREA	0	-6550.9	401.6	5949.8	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1208	CORELLIA	cor_world	PATROL	0	-6521.5	405.0	5908.5	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_100	column	idle			600
+spawn_corellia_1209	CORELLIA	cor_world	PATROL	0	-6571.8	405.0	5946.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_200	column	idle			600
+spawn_corellia_1210	CORELLIA	cor_world	AREA	0	-6430.6	405.0	6033.7	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1211	CORELLIA	cor_world	AREA	0	-6438.4	405.0	6036.3	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1212	CORELLIA	cor_world	AREA	0	-6478.4	405.0	5916.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1213	CORELLIA	cor_world	AREA	0	-6482.1	405.0	5914.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1214	CORELLIA	cor_world	AREA	0	-6529.2	405.0	5910.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1215	CORELLIA	cor_world	AREA	0	-6570.1	405.0	5942.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1216	CORELLIA	cor_world	AREA	0	-6553.3	402.6	5946.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1217	CORELLIA	cor_world	AREA	0	-6559.7	405.0	5920.8	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1218	CORELLIA	cor_world	AREA	0	-6558.9	405.0	5923.4	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1219	CORELLIA	cor_world	AREA	0	-6498.9	398.0	6035.3	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1220	CORELLIA	cor_world	AREA	0	-6482.0	398.0	6024.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1221	CORELLIA	cor_world	AREA	0	-6474.6	398.0	6020.0	0	1	a Rebel Sergeant	humanoid_rebel_sergeant	ATTACKABLE	E	11	20	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1222	CORELLIA	cor_world	AREA	0	-6522.8	398.0	5956.5	111	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1223	CORELLIA	cor_world	AREA	0	-6538.5	398.0	5985.6	-86	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1224	CORELLIA	cor_world	AREA	0	-6462.8	398.0	5955.2	-131	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1225	CORELLIA	cor_world	PATROL	0	-6475.4	398.0	5959.0	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	PATROL	0	patrol_corellia_3200	column	idle		simple_droid_sarcastic_alert_2	600
+spawn_corellia_1226	CORELLIA	cor_world	AREA	0	-6462.5	398.0	6001.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+spawn_corellia_1227	CORELLIA	cor_world	AREA	0	-6521.1	398.0	6027.6	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+spawn_corellia_1228	CORELLIA	cor_world	AREA	0	-6483.6	398.0	6013.1	-134	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1229	CORELLIA	cor_world	AREA	0	-6519.3	398.0	6043.7	149	1	Lt. Lance	humanoid_rebel_lt_lance	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1230	CORELLIA	cor_world	AREA	0	-6485.0	398.0	6017.0	35	1	Teslo Ten'Doora	humanoid_rebel_officer_questgiver	INVULNERABLE	N	100	100	POI	Hidden Rebel Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1231	CORELLIA	cor_nyax_bunker	AREA	2	3.8	0.3	-0.7	0	1	a minion of Lord Nyax	humanoid_lord_nyax_minion	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1232	CORELLIA	cor_nyax_bunker	AREA	3	-3.7	0.3	-4.2	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1233	CORELLIA	cor_nyax_bunker	AREA	5	5.4	-6.8	-8.7	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1234	CORELLIA	cor_nyax_bunker	AREA	5	2.6	-6.8	-0.7	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1235	CORELLIA	cor_nyax_bunker	AREA	7	-1.2	-13.8	4.7	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1236	CORELLIA	cor_nyax_bunker	AREA	7	-1.5	-13.8	-11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1237	CORELLIA	cor_nyax_bunker	AREA	8	-4.7	-13.8	12.1	130	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
+spawn_corellia_1238	CORELLIA	cor_nyax_bunker	AREA	8	6.2	-13.8	11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1239	CORELLIA	cor_nyax_bunker	AREA	9	15.2	-13.8	14.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1240	CORELLIA	cor_nyax_bunker	AREA	9	15.8	-13.8	1.4	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1241	CORELLIA	cor_nyax_bunker	AREA	10	15.6	-13.8	-7.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1242	CORELLIA	cor_nyax_bunker	AREA	10	15.5	-13.8	-13.7	0	1	a visionary of Lord Nyax	humanoid_lord_nyax_visionary	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+spawn_corellia_1243	CORELLIA	cor_nyax_bunker	AREA	10	18.6	-11.5	-20.9	-10	1	Lord Nyax	humanoid_lord_nyax	AGGRESSIVE	B	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
+spawn_corellia_1244	CORELLIA	cor_world	AREA	0	1346.0	31.0	-335.3	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
+spawn_corellia_1245	CORELLIA	cor_world	AREA	0	1378.4	31.0	-320.8	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
+spawn_corellia_1246	CORELLIA	cor_world	AREA	0	1356.7	31.0	-319.4	150	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
+spawn_corellia_1247	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	8.6	0.2	4.3	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1248	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	0.2	0.2	-1.4	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1249	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	-8.6	0.2	-5.0	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1250	CORELLIA	cor_rogue_corsec_base_bldg1	AREA	2	2.0	0.2	5.5	178	1	Hiram Bish (a rogue CorSec commander)	humanoid_corsec_rogue_hiram_bish	AGGRESSIVE	B	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1251	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	-3.2	0.2	-6.1	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1252	CORELLIA	cor_rogue_corsec_base_bldg2	AREA	2	4.0	0.2	6.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1253	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	8.9	0.2	-4.8	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1254	CORELLIA	cor_rogue_corsec_base_bldg3	AREA	2	-7.7	0.2	4.9	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1255	CORELLIA	cor_rogue_corsec_base_bunker	AREA	3	3.8	0.3	-4.0	-65	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1256	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	5.4	-13.8	8.8	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1257	CORELLIA	cor_rogue_corsec_base_bunker	AREA	7	-8.2	-13.8	8.8	136	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1258	CORELLIA	cor_rogue_corsec_base_bunker	AREA	9	1.6	-20.7	7.0	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1259	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	-1.3	-20.8	31.2	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1260	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	4.0	-20.8	30.3	0	1	a CorSec traitor	humanoid_corsec_traitor	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1261	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	2.3	-20.8	18.6	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	TURN	0	0	-	idle			600
+spawn_corellia_1262	CORELLIA	cor_rogue_corsec_base_bunker	AREA	10	1.3	-20.8	27.3	46	1	Mtara Vinram (a rogue CorSec commander)	humanoid_corsec_rogue_trooper	AGGRESSIVE	B	11	20	POI	Rogue Corsec Base	1	IDLE	0	0	-	idle			600
+spawn_corellia_1263	CORELLIA	cor_world	AREA	0	5189.9	5.0	1584.9	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1264	CORELLIA	cor_world	AREA	0	5180.0	5.0	1554.0	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1265	CORELLIA	cor_world	AREA	0	5228.8	5.0	1611.2	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1266	CORELLIA	cor_world	AREA	0	5266.5	5.0	1603.7	0	1	a CorSec deserter	humanoid_corsec_deserter	ATTACKABLE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1267	CORELLIA	cor_world	AREA	0	-1751.4	1.0	-5594.3	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1268	CORELLIA	cor_world	AREA	0	5224.4	5.0	1589.3	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1269	CORELLIA	cor_world	AREA	0	5230.8	5.0	1563.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1270	CORELLIA	cor_world	AREA	0	5162.4	5.0	1613.7	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1271	CORELLIA	cor_world	AREA	0	5202.7	5.0	1516.8	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1272	CORELLIA	cor_world	AREA	0	5206.9	5.0	1648.8	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1273	CORELLIA	cor_world	AREA	0	5231.0	5.0	1530.2	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1274	CORELLIA	cor_world	AREA	0	5280.1	5.0	1565.1	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1275	CORELLIA	cor_world	AREA	0	5280.6	5.0	1586.4	0	1	a rogue CorSec trooper	humanoid_corsec_rogue	AGGRESSIVE	N	11	20	POI	Rogue Corsec Base	1	LOITER	5	0	-	idle			600
+spawn_corellia_1276	CORELLIA	cor_stronghold_1	AREA	3	0.0	0.1	-0.9	0	1	an Imperial Sergeant	humanoid_imperial_sergeant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1277	CORELLIA	cor_stronghold_1	AREA	6	-3.9	0.1	-3.8	88	1	a High Colonel	humanoid_imperial_high_colonel	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+spawn_corellia_1278	CORELLIA	cor_stronghold_2	AREA	3	0.0	0.1	0.9	-73	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+spawn_corellia_1279	CORELLIA	cor_stronghold_2	AREA	5	3.1	0.1	-4.0	-87	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+spawn_corellia_1280	CORELLIA	cor_stronghold_3	AREA	3	0.0	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1281	CORELLIA	cor_stronghold_4	AREA	3	0.0	0.1	-3.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1282	CORELLIA	cor_stronghold_5	AREA	3	-0.1	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1283	CORELLIA	cor_stronghold_6	AREA	3	0.0	0.1	-0.8	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1284	CORELLIA	cor_stronghold_7	AREA	3	0.0	0.1	-1.1	0	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1285	CORELLIA	cor_stronghold_7	AREA	6	-3.1	0.1	-3.9	84	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+spawn_corellia_1286	CORELLIA	cor_stronghold_8	AREA	3	0.0	0.1	-0.8	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+spawn_corellia_1287	CORELLIA	cor_world	AREA	0	4680.5	25.0	-5750.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1288	CORELLIA	cor_world	AREA	0	4696.0	25.0	-5805.2	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1289	CORELLIA	cor_world	AREA	0	4658.0	25.0	-5762.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1290	CORELLIA	cor_world	AREA	0	4670.0	25.0	-5808.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1291	CORELLIA	cor_world	AREA	0	4680.9	25.0	-5820.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1292	CORELLIA	cor_world	AREA	0	4693.0	25.0	-5762.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1293	CORELLIA	cor_world	PATROL	0	4582.0	25.0	-5771.9	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	11	20	POI	Stronghold	1	PATROL	0	patrol_corellia_3300	column	idle			600
+spawn_corellia_1294	CORELLIA	cor_world	AREA	0	4636.9	25.0	-5778.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1295	CORELLIA	cor_world	AREA	0	4627.2	25.0	-5796.5	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1296	CORELLIA	cor_world	AREA	0	4625.9	25.0	-5770.8	0	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1297	CORELLIA	cor_world	AREA	0	4642.9	25.0	-5811.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1298	CORELLIA	cor_world	AREA	0	4643.4	25.0	-5756.4	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+spawn_corellia_1299	CORELLIA	cor_world	AREA	0	4705.1	25.0	-5773.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
