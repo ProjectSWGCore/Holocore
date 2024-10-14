@@ -59,7 +59,7 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	private val targets = CopyOnWriteArraySet<CreatureObject>()
 	private val iteration = AtomicLong(0)
 	private val npcRunSpeed = PswgDatabase.config.getDouble(this, "npcRunSpeed", 9.0)
-	private var isMoving = false
+	private val npcMovement = NpcCombatMovement(obj, npcRunSpeed)
 	
 	private val primaryTarget: CreatureObject? // Don't attack if they're already dead
 		get() = targets.stream()
@@ -128,29 +128,10 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
 	private fun performCombatAction() {
 		val target = primaryTarget ?: return
+		val weapon = ai.equippedWeapon
+		val lineOfSight = ai.isLineOfSight(target)
 		
-		val obj = ai
-		val weapon = obj.equippedWeapon
-		val targetDistance = target.worldLocation.distanceTo(obj.worldLocation)
-		val attackRange = weapon.maxRange.toDouble()
-		val actionRange = attackRange / 2
-		val lineOfSight = obj.isLineOfSight(target)
-
-		if (ai.walkSpeed > 0 && (targetDistance > attackRange || !lineOfSight)) {
-			val targetLocation = target.location
-			val targetHeading = target.location.yaw + ThreadLocalRandom.current().nextDouble(-75.0, 75.0)
-			val targetRange = actionRange / 2
-			val moveX = targetLocation.x + sin(Math.toRadians(targetHeading)) * targetRange
-			val moveZ = targetLocation.z + cos(Math.toRadians(targetHeading)) * targetRange
-			val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
-			StartNpcMovementIntent(obj, target.effectiveParent, Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build(), npcRunSpeed).broadcast()
-			isMoving = true
-		} else {
-			if (ai.walkSpeed > 0 && isMoving) {
-				StopNpcMovementIntent(obj).broadcast()
-				isMoving = false
-			}
-		}
+		npcMovement.handleMovement(target, weapon, lineOfSight)
 		
 		if (lineOfSight && iteration.get() % 4 == 0L) {
 			attack(target, weapon)
