@@ -1,0 +1,23 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_1055",
+		"comment": "I'll never argue with someone who wishes to make a well-thought-out choice about their future. What would you like to know about?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_1067",
+				"comment": "Interesting, please go on."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "show_sellable_items",
+			"args": {}
+		}
+	]
+}
