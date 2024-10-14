@@ -318,9 +318,9 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 	private fun isKillPartOfTask(swgQuestTask: QuestTaskInfo, npcCorpse: AIObject): Boolean {
 		val targetServerTemplate = swgQuestTask.targetServerTemplate
 		val spawner = npcCorpse.spawner
-		val stfName = spawner.stfName
+		val stfName = spawner?.stfName
 		val questSocialGroup = swgQuestTask.socialGroup
-		val npcSocialGroup = npcCorpse.spawner.socialGroup
+		val npcSocialGroup = npcCorpse.spawner?.socialGroup
 		return isMatchingSocialGroup(questSocialGroup, npcSocialGroup) || isMatchingServerTemplate(targetServerTemplate, stfName)
 	}
 
@@ -571,7 +571,7 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		return questActiveTasks.map { taskListInfos[it] }
 	}
 
-	private fun isMatchingServerTemplate(targetServerTemplate: String?, stfName: String): Boolean {
+	private fun isMatchingServerTemplate(targetServerTemplate: String?, stfName: String?): Boolean {
 		return targetServerTemplate != null && targetServerTemplate == stfName
 	}
 
