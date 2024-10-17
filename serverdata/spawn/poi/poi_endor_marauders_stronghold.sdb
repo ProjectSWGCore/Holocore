@@ -1,0 +1,19 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_marauders_stronghold_1	ENDOR	end_world	AREA	0	-4696.8	82.0	-2261.6	-163	1	a berserk marauder	humanoid_marauder_berserk	AGGRESSIVE	E	61	70	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
+poi_endor_marauders_stronghold_2	ENDOR	end_world	AREA	0	-4716.7	82.0	-2272.7	6	1	a feral Marauder	humanoid_marauder_feral	AGGRESSIVE	E	61	70	POI	Marauder's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_endor_marauders_stronghold_3	ENDOR	end_world	AREA	0	-4626.3	95.0	-2245.4	0	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	E	61	70	POI	Marauder's Stronghold	1	TURN	0	0	-	idle			600
+poi_endor_marauders_stronghold_4	ENDOR	end_world	AREA	0	-4701.2	82.0	-2285.2	-107	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	E	61	70	POI	Marauder's Stronghold	1	IDLE	0	0	-	npc_sitting_ground			600
+poi_endor_marauders_stronghold_5	ENDOR	end_world	AREA	0	-4704.2	82.0	-2287.2	53	1	a grassland blood Marauder	humanoid_marauder_grassland_blood	AGGRESSIVE	E	61	70	POI	Marauder's Stronghold	1	IDLE	0	0	-	conversation			600
+poi_endor_marauders_stronghold_6	ENDOR	end_world	AREA	0	-4576.7	99.0	-2256.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_7	ENDOR	end_world	AREA	0	-4688.8	82.0	-2280.3	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_8	ENDOR	end_world	AREA	0	-4721.6	82.0	-2262.8	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_9	ENDOR	end_world	AREA	0	-4657.0	82.0	-2295.2	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_10	ENDOR	end_world	AREA	0	-4669.7	98.0	-2173.3	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_11	ENDOR	end_world	AREA	0	-4654.4	94.9	-2140.4	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_12	ENDOR	end_world	AREA	0	-4612.0	73.7	-2184.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Marauder's Stronghold	1	LOITER	5	0	-	idle			600
+poi_endor_marauders_stronghold_13	ENDOR	end_world	AREA	0	-4564.0	99.0	-2297.3	1	1	Charal	humanoid_charal	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
+poi_endor_marauders_stronghold_14	ENDOR	end_world	AREA	0	-4581.6	99.1	-2243.2	-176	1	Fightmaster Jorak	humanoid_fightmaster_jorak	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
+poi_endor_marauders_stronghold_15	ENDOR	end_world	AREA	0	-4570.5	99.0	-2273.0	-84	1	King Terak	humanoid_king_terak	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600
+poi_endor_marauders_stronghold_16	ENDOR	end_world	AREA	0	-4645.0	88.8	-2163.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	TURN	0	0	-	idle			600
+poi_endor_marauders_stronghold_17	ENDOR	end_world	AREA	0	-4618.7	90.0	-2295.1	-44	1	Scholar Zingo	humanoid_scholar_szingo	INVULNERABLE	N	100	100	POI	Marauder's Stronghold	1	IDLE	0	0	-	idle			600

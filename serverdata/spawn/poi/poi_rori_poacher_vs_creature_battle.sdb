@@ -1,0 +1,15 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_rori_poacher_vs_creature_battle_1	RORI	ror_world	AREA	0	748.8	85.5	-2090.7	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_2	RORI	ror_world	AREA	0	752.1	85.7	-2082.8	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_3	RORI	ror_world	AREA	0	765.9	82.7	-2086.3	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_4	RORI	ror_world	AREA	0	770.1	82.3	-2084.4	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_5	RORI	ror_world	AREA	0	772.2	84.1	-2068.5	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_6	RORI	ror_world	AREA	0	781.5	82.6	-2073.7	0	1	a poacher	humanoid_poacher_talus	ATTACKABLE	E	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_7	RORI	ror_world	AREA	0	714.6	93.6	-2063.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_8	RORI	ror_world	AREA	0	722.2	91.2	-2076.5	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_9	RORI	ror_world	AREA	0	735.8	89.2	-2074.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_10	RORI	ror_world	AREA	0	781.8	81.4	-2048.4	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_11	RORI	ror_world	AREA	0	785.7	81.1	-2059.9	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_12	RORI	ror_world	AREA	0	790.6	78.9	-2036.8	0	1	a vrobal	creature_vrobal	ATTACKABLE	N	36	45	POI	Poacher vs. Creature Battle	1	LOITER	5	0	-	idle			120
+poi_rori_poacher_vs_creature_battle_13	RORI	ror_world	AREA	0	773.6	81.9	-2085.0	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Poacher vs. Creature Battle	1	IDLE	0	0	-	idle			600

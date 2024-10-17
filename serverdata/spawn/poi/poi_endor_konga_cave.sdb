@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_konga_cave_1	ENDOR	end_korga_cave	AREA	1	25.2	-27.5	-7.8	0	1	a Korga adept	humanoid_korga_adept	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_2	ENDOR	end_korga_cave	AREA	10	49.9	-48.8	-102.9	0	1	an enraged Korga	humanoid_korga_enraged	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_3	ENDOR	end_korga_cave	AREA	11	83.9	-46.3	-138.6	0	1	a crafty Korga scout	humanoid_konga_crafty_scout	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_4	ENDOR	end_korga_cave	AREA	11	83.6	-46.6	-144.5	0	1	a Korga ancient	humanoid_korga_ancient	AGGRESSIVE	B	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_5	ENDOR	end_korga_cave	AREA	2	47.1	-48.3	-63.5	0	1	a Korga elder	humanoid_korga_elder	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_6	ENDOR	end_korga_cave	AREA	2	53.6	-68.2	-37.6	0	1	a Korga elder	humanoid_korga_elder	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_7	ENDOR	end_korga_cave	AREA	2	23.1	-42.3	-63.6	0	1	a Korga scout	humanoid_korga_scout	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_8	ENDOR	end_korga_cave	AREA	3	87.7	-62.1	-14.3	0	1	a Korga spiritmaster	humanoid_korga_spiritmaster	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_9	ENDOR	end_korga_cave	AREA	5	92.7	-46.2	-104.1	0	1	a frenzied Korga	humanoid_korga_frenzied	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_10	ENDOR	end_korga_cave	AREA	5	96.0	-66.0	-116.3	0	1	a Korga battlelord	humanoid_korga_battlelord	AGGRESSIVE	B	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_11	ENDOR	end_korga_cave	AREA	5	90.0	-46.0	-120.9	0	1	a Korga dark shaman	humanoid_korga_dark_shaman	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_12	ENDOR	end_korga_cave	AREA	8	131.5	-66.2	-116.9	0	1	a tricky Korga scout	humanoid_korga_tricky_scout	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_13	ENDOR	end_korga_cave	AREA	8	131.0	-66.3	-98.0	0	1	an eerie Korga spiritmaster	humanoid_korga_eerie_spiritmaster	AGGRESSIVE	E	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_14	ENDOR	end_korga_cave	AREA	9	188.3	-66.2	-99.5	0	1	a Korga chieftain	humanoid_korga_chieftan	AGGRESSIVE	B	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_15	ENDOR	end_korga_cave	AREA	9	180.9	-66.0	-98.4	0	1	a Korga spiritmaster	humanoid_korga_spiritmaster	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600
+poi_endor_konga_cave_16	ENDOR	end_korga_cave	AREA	9	188.4	-65.8	-106.5	0	1	a spooky Korga spiritmaster	humanoid_korga_spooky_spiritmaster	AGGRESSIVE	N	61	70	POI	Korga Cave	1	TURN	0	0	-	idle			600

@@ -1,0 +1,20 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_rori_garyn_raiders_bunker_1	RORI	ror_garyn_bunker	AREA	2	-3.5	0.3	3.1	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_2	RORI	ror_garyn_bunker	AREA	3	3.1	0.3	-4.1	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_3	RORI	ror_garyn_bunker	AREA	5	-7.1	-6.8	-6.9	0	1	Garyn's mugger	humanoid_garyn_mugger	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_4	RORI	ror_garyn_bunker	AREA	5	-3.5	-6.8	-6.6	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_5	RORI	ror_garyn_bunker	AREA	6	7.7	-6.8	-14.5	0	1	Garyn's mugger	humanoid_garyn_mugger	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_6	RORI	ror_garyn_bunker	AREA	6	3.7	-6.8	-14.0	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_7	RORI	ror_garyn_bunker	AREA	6	-5.6	-6.8	-14.7	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_8	RORI	ror_garyn_bunker	AREA	7	4.9	-6.8	-1.7	0	1	Garyn's mugger	humanoid_garyn_mugger	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_9	RORI	ror_garyn_bunker	AREA	7	6.1	-6.8	-4.9	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_10	RORI	ror_garyn_bunker	AREA	9	-4.0	-13.8	-14.9	0	1	Garyn's marauder	humanoid_garyn_marauder	AGGRESSIVE	E	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_11	RORI	ror_garyn_bunker	AREA	9	-5.7	-13.8	-7.6	0	1	Garyn's mugger	humanoid_garyn_mugger	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_12	RORI	ror_garyn_bunker	AREA	9	-3.1	-13.8	-0.8	0	1	Garyn's pirate	humanoid_garyn_pirate	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			600
+poi_rori_garyn_raiders_bunker_13	RORI	ror_world	AREA	0	-5913.8	78.7	-1879.9	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900
+poi_rori_garyn_raiders_bunker_14	RORI	ror_world	AREA	0	-5956.8	95.4	-1857.7	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900
+poi_rori_garyn_raiders_bunker_15	RORI	ror_world	AREA	0	-5969.8	100.2	-1800.0	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900
+poi_rori_garyn_raiders_bunker_16	RORI	ror_world	AREA	0	-6005.7	116.9	-1848.4	0	1	Garyn's prowler	humanoid_garyn_prowler	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900
+poi_rori_garyn_raiders_bunker_17	RORI	ror_world	AREA	0	-6022.7	118.8	-1818.1	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900
+poi_rori_garyn_raiders_bunker_18	RORI	ror_world	AREA	0	-6023.4	119.1	-1823.8	0	1	Garyn's thief	humanoid_garyn_thief	AGGRESSIVE	N	36	45	POI	Garyn Raider's Bunker	1	TURN	0	0	-	idle			900

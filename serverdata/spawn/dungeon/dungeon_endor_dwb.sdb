@@ -1,0 +1,232 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+dungeon_endor_dwb_1	ENDOR	end_dwb	AREA	1	-32.3	-12.0	-9.0	85	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_2	ENDOR	end_dwb	AREA	1	-32.2	-12.0	-2.6	177	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_3	ENDOR	end_dwb	AREA	10	-124.9	-20.0	-20.3	179	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_4	ENDOR	end_dwb	AREA	10	-127.4	-20.0	-27.2	58	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_5	ENDOR	end_dwb	AREA	10	-128.4	-20.0	-19.5	94	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_6	ENDOR	end_dwb	AREA	11	-132.9	-20.0	-53.3	93	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_7	ENDOR	end_dwb	AREA	11	-128.6	-20.0	-52.6	179	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_8	ENDOR	end_dwb	AREA	11	-125.6	-20.0	-49.8	1	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_9	ENDOR	end_dwb	AREA	12	-92.6	-20.0	-80.3	89	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_10	ENDOR	end_dwb	AREA	12	-82.9	-20.0	-80.0	-90	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_11	ENDOR	end_dwb	AREA	12	-73.6	-20.0	-89.7	-174	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_12	ENDOR	end_dwb	AREA	12	-73.4	-20.0	-100.4	-15	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_13	ENDOR	end_dwb	AREA	12	-93.0	-20.0	-96.3	88	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_14	ENDOR	end_dwb	AREA	12	-59.7	-20.0	-53.1	-88	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_15	ENDOR	end_dwb	AREA	13	-62.8	-20.0	-72.9	103	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_16	ENDOR	end_dwb	AREA	13	-54.5	-20.0	-73.2	-89	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_17	ENDOR	end_dwb	AREA	13	-65.8	-20.0	-77.1	2	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_18	ENDOR	end_dwb	AREA	14	-112.4	-20.0	-100.6	45	1	a WED Treadwell droid	droid_mand_bunker_workshop_wed	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_19	ENDOR	end_dwb	AREA	14	-112.4	-20.0	-89.5	122	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_20	ENDOR	end_dwb	AREA	14	-103.4	-20.0	-100.1	-54	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_21	ENDOR	end_dwb	AREA	14	-113.7	-20.0	-94.7	91	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_22	ENDOR	end_dwb	AREA	15	-80.2	-20.0	-120.7	-37	1	a 2-1B surgical droid	droid_mand_bunker_med	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_23	ENDOR	end_dwb	AREA	15	-88.3	-20.0	-114.8	34	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_24	ENDOR	end_dwb	AREA	15	-83.2	-20.0	-117.2	-40	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_25	ENDOR	end_dwb	AREA	16	-58.8	-20.0	-40.9	-89	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_26	ENDOR	end_dwb	AREA	16	-23.4	-20.0	-40.7	97	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_27	ENDOR	end_dwb	AREA	16	-37.9	-20.0	-46.7	-1	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_28	ENDOR	end_dwb	AREA	16	-3.7	-20.0	-47.5	-1	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_29	ENDOR	end_dwb	AREA	16	-79.8	-20.0	-40.6	85	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_30	ENDOR	end_dwb	AREA	17	-9.6	-32.0	-51.8	-176	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_31	ENDOR	end_dwb	AREA	17	-45.3	-32.0	-102.3	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_32	ENDOR	end_dwb	AREA	17	-10.2	-32.0	-102.2	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_33	ENDOR	end_dwb	AREA	18	6.7	-22.0	-73.5	25	1	a scientist	humanoid_scientist	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_34	ENDOR	end_dwb	AREA	18	12.9	-20.0	-57.3	-169	1	a technician	humanoid_technician	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_35	ENDOR	end_dwb	AREA	18	11.1	-22.0	-73.5	-6	1	a technician	humanoid_technician	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_36	ENDOR	end_dwb	AREA	18	24.2	-20.0	-80.8	-39	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_37	ENDOR	end_dwb	AREA	18	-5.3	-20.0	-57.3	125	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_38	ENDOR	end_dwb	AREA	19	24.9	-20.0	-42.9	0	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_39	ENDOR	end_dwb	AREA	19	20.8	-20.0	-44.2	0	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_40	ENDOR	end_dwb	AREA	19	23.9	-20.0	-29.0	-176	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_41	ENDOR	end_dwb	AREA	2	-15.4	-12.0	9.2	-10	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_42	ENDOR	end_dwb	AREA	2	-15.4	-12.0	11.9	177	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_43	ENDOR	end_dwb	AREA	20	-4.3	-24.0	-113.7	1	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_44	ENDOR	end_dwb	AREA	20	-35.5	-32.0	-112.8	93	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_45	ENDOR	end_dwb	AREA	20	-57.8	-32.0	-118.9	-4	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_46	ENDOR	end_dwb	AREA	21	-2.1	-32.0	-37.5	75	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_47	ENDOR	end_dwb	AREA	21	1.4	-32.0	-32.2	177	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_48	ENDOR	end_dwb	AREA	22	28.2	-20.0	-93.9	-27	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_49	ENDOR	end_dwb	AREA	22	36.3	-28.0	-54.8	166	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_50	ENDOR	end_dwb	AREA	22	35.6	-20.0	-86.5	-175	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_51	ENDOR	end_dwb	AREA	22	5.8	-28.0	-61.9	2	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_52	ENDOR	end_dwb	AREA	23	16.5	-32.0	-96.1	-51	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_53	ENDOR	end_dwb	AREA	23	-1.4	-32.0	-81.9	159	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_54	ENDOR	end_dwb	AREA	23	5.6	-31.9	-91.4	2	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_55	ENDOR	end_dwb	AREA	24	48.8	-32.0	-113.6	169	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_56	ENDOR	end_dwb	AREA	24	42.1	-32.0	-114.6	-88	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_57	ENDOR	end_dwb	AREA	24	43.8	-36.8	-101.0	-88	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_58	ENDOR	end_dwb	AREA	24	32.1	-52.0	-117.2	100	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_59	ENDOR	end_dwb	AREA	24	28.3	-42.0	-113.1	80	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_60	ENDOR	end_dwb	AREA	24	44.1	-32.0	-102.4	-72	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_61	ENDOR	end_dwb	AREA	24	32.2	-42.0	-106.5	77	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_62	ENDOR	end_dwb	AREA	24	47.8	-52.0	-129.1	155	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_63	ENDOR	end_dwb	AREA	25	71.9	-32.0	-101.2	-91	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_64	ENDOR	end_dwb	AREA	26	68.8	-32.0	-62.8	180	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_65	ENDOR	end_dwb	AREA	26	46.6	-32.0	-91.1	0	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_66	ENDOR	end_dwb	AREA	26	65.9	-32.0	-91.1	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_67	ENDOR	end_dwb	AREA	26	48.5	-32.0	-63.2	180	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_68	ENDOR	end_dwb	AREA	27	38.5	-32.0	-51.0	93	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_69	ENDOR	end_dwb	AREA	27	49.4	-32.0	-51.0	-85	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_70	ENDOR	end_dwb	AREA	28	99.2	-32.0	-83.1	-1	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_71	ENDOR	end_dwb	AREA	28	98.4	-32.0	-93.1	-53	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_72	ENDOR	end_dwb	AREA	28	86.9	-32.0	-84.2	174	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_73	ENDOR	end_dwb	AREA	29	90.7	-32.0	-68.1	164	1	Black Sun Guard	humanoid_dwb_guard_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_74	ENDOR	end_dwb	AREA	29	96.0	-32.0	-56.4	-163	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_75	ENDOR	end_dwb	AREA	29	91.9	-32.0	-56.3	178	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_76	ENDOR	end_dwb	AREA	30	112.9	-32.0	-80.6	-88	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_77	ENDOR	end_dwb	AREA	30	110.4	-32.0	-81.3	92	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_78	ENDOR	end_dwb	AREA	30	111.7	-32.0	-71.5	-174	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_79	ENDOR	end_dwb	AREA	31	14.0	-56.0	-160.9	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_80	ENDOR	end_dwb	AREA	31	-7.9	-52.0	-143.9	-4	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_81	ENDOR	end_dwb	AREA	33	40.6	-64.0	-153.9	-94	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_82	ENDOR	end_dwb	AREA	33	39.3	-64.0	-146.2	-129	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_83	ENDOR	end_dwb	AREA	33	49.1	-64.0	-124.3	122	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_84	ENDOR	end_dwb	AREA	33	20.5	-64.0	-111.1	99	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_85	ENDOR	end_dwb	AREA	33	58.8	-64.0	-137.7	80	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_86	ENDOR	end_dwb	AREA	33	21.9	-64.0	-95.7	-88	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_87	ENDOR	end_dwb	AREA	37	114.1	-68.0	-183.2	2	1	a scientist	humanoid_scientist	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_88	ENDOR	end_dwb	AREA	38	-62.2	-60.0	-179.1	-102	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_89	ENDOR	end_dwb	AREA	38	-42.0	-59.6	-174.1	21	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_90	ENDOR	end_dwb	AREA	38	-21.9	-60.1	-185.5	8	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_91	ENDOR	end_dwb	AREA	38	-1.8	-60.0	-171.8	178	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_92	ENDOR	end_dwb	AREA	39	-41.6	-59.8	-205.6	-5	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_93	ENDOR	end_dwb	AREA	4	-1.2	-12.0	34.5	-137	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_94	ENDOR	end_dwb	AREA	4	2.3	-12.0	31.0	-103	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_95	ENDOR	end_dwb	AREA	40	-9.3	-60.1	-277.1	-23	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_96	ENDOR	end_dwb	AREA	40	-7.8	-60.2	-225.4	-24	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_97	ENDOR	end_dwb	AREA	40	-16.4	-60.1	-245.0	17	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_98	ENDOR	end_dwb	AREA	40	-13.1	-60.1	-212.9	13	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_99	ENDOR	end_dwb	AREA	40	-14.5	-60.3	-254.8	-156	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_100	ENDOR	end_dwb	AREA	40	-11.1	-60.1	-207.1	4	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_101	ENDOR	end_dwb	AREA	40	-10.6	-60.0	-205.5	-174	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_102	ENDOR	end_dwb	AREA	40	-12.0	-60.2	-293.3	-1	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_103	ENDOR	end_dwb	AREA	40	-8.6	-60.0	-235.7	-72	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_104	ENDOR	end_dwb	AREA	41	27.7	-61.8	-302.7	-160	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_105	ENDOR	end_dwb	AREA	41	26.7	-61.3	-306.0	35	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_106	ENDOR	end_dwb	AREA	41	24.6	-61.4	-302.7	-31	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_107	ENDOR	end_dwb	AREA	41	28.4	-61.8	-300.2	-159	1	Japer Witter (a mine foreman)	humanoid_dwb_japer_witter	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_108	ENDOR	end_dwb	AREA	42	-46.1	-59.8	-316.4	3	1	a Blastromech	droid_blastromech	AGGRESSIVE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_109	ENDOR	end_dwb	AREA	42	-46.1	-59.8	-317.8	-9	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_110	ENDOR	end_dwb	AREA	42	-43.5	-59.8	-296.8	91	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_111	ENDOR	end_dwb	AREA	43	-97.5	-59.8	-306.1	21	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_112	ENDOR	end_dwb	AREA	43	-90.8	-60.3	-282.3	-18	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_113	ENDOR	end_dwb	AREA	43	-90.5	-60.2	-260.6	-129	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_114	ENDOR	end_dwb	AREA	43	-67.4	-60.1	-314.3	106	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_115	ENDOR	end_dwb	AREA	43	-163.0	-60.2	-315.2	-122	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_116	ENDOR	end_dwb	AREA	43	-147.9	-60.1	-320.5	-67	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_117	ENDOR	end_dwb	AREA	43	-130.4	-60.1	-319.4	9	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_118	ENDOR	end_dwb	AREA	43	-130.0	-60.1	-341.1	132	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_119	ENDOR	end_dwb	AREA	43	-123.2	-60.0	-364.5	-158	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_120	ENDOR	end_dwb	AREA	43	-112.8	-60.1	-319.9	-77	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_121	ENDOR	end_dwb	AREA	43	-110.3	-59.9	-377.4	105	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_122	ENDOR	end_dwb	AREA	43	-98.4	-60.0	-277.7	118	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_123	ENDOR	end_dwb	AREA	43	-88.4	-59.5	-302.1	-58	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_124	ENDOR	end_dwb	AREA	43	-125.9	-60.1	-348.2	1	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_125	ENDOR	end_dwb	AREA	43	-124.9	-59.9	-303.4	-144	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_126	ENDOR	end_dwb	AREA	43	-99.2	-60.3	-342.0	44	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_127	ENDOR	end_dwb	AREA	43	-99.2	-59.7	-357.6	19	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_128	ENDOR	end_dwb	AREA	43	-88.7	-59.6	-333.6	-15	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_129	ENDOR	end_dwb	AREA	43	-100.6	-60.1	-314.8	16	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_130	ENDOR	end_dwb	AREA	43	-97.1	-59.9	-375.1	21	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_131	ENDOR	end_dwb	AREA	43	-89.9	-59.7	-375.4	-12	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_132	ENDOR	end_dwb	AREA	43	-127.3	-59.7	-378.2	11	1	Death Watch Overlord	humanoid_dwb_overlord	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			1800
+dungeon_endor_dwb_133	ENDOR	end_dwb	AREA	43	-127.6	-59.8	-372.3	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_134	ENDOR	end_dwb	AREA	43	-127.4	-59.9	-377.9	13	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_135	ENDOR	end_dwb	AREA	43	-122.0	-60.0	-377.7	45	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_136	ENDOR	end_dwb	AREA	44	-80.0	-59.8	-204.5	-178	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_137	ENDOR	end_dwb	AREA	45	-93.4	-59.8	-218.4	-175	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_138	ENDOR	end_dwb	AREA	46	-124.0	-59.8	-198.2	0	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_139	ENDOR	end_dwb	AREA	47	-128.2	-60.1	-161.9	161	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_140	ENDOR	end_dwb	AREA	47	-125.7	-60.1	-137.5	127	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_141	ENDOR	end_dwb	AREA	47	-124.5	-60.2	-148.4	-179	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_142	ENDOR	end_dwb	AREA	47	-119.1	-59.8	-137.5	127	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_143	ENDOR	end_dwb	AREA	47	-136.0	-59.9	-143.6	126	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_144	ENDOR	end_dwb	AREA	47	-118.3	-59.8	-154.3	-66	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_145	ENDOR	end_dwb	AREA	48	-93.2	-59.8	-149.1	-69	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_146	ENDOR	end_dwb	AREA	48	-78.6	-59.9	-151.2	-37	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_147	ENDOR	end_dwb	AREA	48	-78.3	-59.9	-131.0	72	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_148	ENDOR	end_dwb	AREA	48	-71.2	-59.6	-125.2	-146	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_149	ENDOR	end_dwb	AREA	48	-63.6	-59.6	-151.1	-71	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_150	ENDOR	end_dwb	AREA	48	-57.6	-59.7	-136.3	-143	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_151	ENDOR	end_dwb	AREA	48	-51.8	-59.5	-124.2	148	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_152	ENDOR	end_dwb	AREA	48	-39.9	-60.0	-136.0	-119	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_153	ENDOR	end_dwb	AREA	48	-95.0	-60.1	-140.2	154	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_154	ENDOR	end_dwb	AREA	48	-37.7	-59.6	-146.9	-83	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_155	ENDOR	end_dwb	AREA	48	-70.7	-59.7	-161.3	-8	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_156	ENDOR	end_dwb	AREA	5	-68.8	-20.0	31.4	91	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_157	ENDOR	end_dwb	AREA	5	-56.8	-20.0	34.8	179	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_158	ENDOR	end_dwb	AREA	5	-55.9	-20.0	27.0	-11	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_159	ENDOR	end_dwb	AREA	50	-153.3	-60.0	-184.5	117	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_160	ENDOR	end_dwb	AREA	50	-152.9	-59.9	-209.2	12	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_161	ENDOR	end_dwb	AREA	50	-143.8	-60.4	-200.3	-101	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_162	ENDOR	end_dwb	AREA	50	-143.7	-59.9	-175.5	-86	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_163	ENDOR	end_dwb	AREA	50	-143.3	-60.0	-164.0	-25	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_164	ENDOR	end_dwb	AREA	50	-150.1	-59.9	-162.4	9	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_165	ENDOR	end_dwb	AREA	50	-146.2	-60.2	-187.1	-6	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_166	ENDOR	end_dwb	AREA	51	-157.4	-60.0	-106.9	93	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_167	ENDOR	end_dwb	AREA	51	-148.2	-59.8	-127.2	0	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_168	ENDOR	end_dwb	AREA	52	-178.5	-59.8	-120.4	90	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_169	ENDOR	end_dwb	AREA	53	-222.4	-60.0	-130.5	2	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_170	ENDOR	end_dwb	AREA	53	-206.7	-59.8	-120.8	-89	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_171	ENDOR	end_dwb	AREA	54	-152.1	-60.0	-83.0	-179	1	a crazed scientist	humanoid_dwb_crazed_scientist	AGGRESSIVE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_172	ENDOR	end_dwb	AREA	54	-143.0	-60.0	-74.0	0	1	an R2 unit	droid_r2	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_173	ENDOR	end_dwb	AREA	55	-179.5	-60.0	-138.6	8	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_174	ENDOR	end_dwb	AREA	55	-176.3	-60.0	-150.5	-130	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_175	ENDOR	end_dwb	AREA	55	-171.8	-60.1	-140.8	-38	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_176	ENDOR	end_dwb	AREA	55	-181.4	-60.1	-151.2	24	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_177	ENDOR	end_dwb	AREA	55	-175.8	-60.0	-132.3	-130	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_178	ENDOR	end_dwb	AREA	56	-254.5	-50.0	-88.8	-80	1	a crazed scientist	humanoid_dwb_crazed_scientist	AGGRESSIVE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_179	ENDOR	end_dwb	AREA	56	-247.3	-27.6	-89.5	67	1	a crazed scientist	humanoid_dwb_crazed_scientist	AGGRESSIVE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_180	ENDOR	end_dwb	AREA	56	-266.5	-50.0	-85.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_181	ENDOR	end_dwb	AREA	56	-236.0	-40.0	-84.0	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_182	ENDOR	end_dwb	AREA	57	-282.1	-60.0	-129.8	3	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_183	ENDOR	end_dwb	AREA	57	-281.6	-60.0	-121.0	-177	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_184	ENDOR	end_dwb	AREA	57	-288.6	-60.0	-125.2	89	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_185	ENDOR	end_dwb	AREA	58	-212.5	-59.9	-158.4	23	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_186	ENDOR	end_dwb	AREA	58	-210.7	-60.1	-195.1	164	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_187	ENDOR	end_dwb	AREA	58	-203.5	-60.0	-145.0	-160	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_188	ENDOR	end_dwb	AREA	58	-210.1	-59.9	-205.1	165	1	a technician	humanoid_technician	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_189	ENDOR	end_dwb	AREA	58	-208.0	-60.2	-205.1	165	1	an R3 unit	droid_r3	ATTACKABLE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_190	ENDOR	end_dwb	AREA	58	-207.1	-60.3	-179.2	-175	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_191	ENDOR	end_dwb	AREA	58	-204.2	-60.6	-172.4	-15	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_192	ENDOR	end_dwb	AREA	58	-208.7	-60.1	-139.3	10	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_193	ENDOR	end_dwb	AREA	59	-225.3	-60.0	-218.7	-140	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_194	ENDOR	end_dwb	AREA	6	-79.3	-20.0	51.8	117	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_195	ENDOR	end_dwb	AREA	6	-73.9	-20.0	57.4	-177	1	Death Watch Bloodguard	humanoid_dwb_bloodguard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_196	ENDOR	end_dwb	AREA	6	-70.8	-20.0	50.3	-60	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_197	ENDOR	end_dwb	AREA	60	-246.0	-59.9	-231.4	179	1	a crazed scientist	humanoid_dwb_crazed_scientist	AGGRESSIVE	N	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_198	ENDOR	end_dwb	AREA	60	-246.0	-60.0	-245.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_199	ENDOR	end_dwb	AREA	61	-189.4	-59.8	-217.0	-94	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_200	ENDOR	end_dwb	AREA	61	-181.2	-59.8	-217.6	89	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_201	ENDOR	end_dwb	AREA	62	-185.0	-60.1	-237.9	63	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_202	ENDOR	end_dwb	AREA	62	-179.3	-60.4	-230.9	121	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_203	ENDOR	end_dwb	AREA	62	-177.8	-60.1	-260.8	11	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_204	ENDOR	end_dwb	AREA	62	-172.5	-60.0	-232.2	-9	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_205	ENDOR	end_dwb	AREA	62	-171.4	-60.1	-245.1	-21	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_206	ENDOR	end_dwb	AREA	62	-169.6	-59.9	-265.5	-148	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_207	ENDOR	end_dwb	AREA	62	-168.9	-60.0	-256.1	-66	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_208	ENDOR	end_dwb	AREA	62	-160.9	-59.8	-241.6	-76	1	a mine rat	creature_rat_mine	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_209	ENDOR	end_dwb	AREA	62	-183.8	-60.2	-257.5	-85	1	a miner	humanoid_miner	ATTACKABLE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_210	ENDOR	end_dwb	AREA	62	-158.7	-59.5	-230.7	-125	1	Death Watch Wraith	humanoid_dwb_wraith	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_211	ENDOR	end_dwb	AREA	62	-186.1	-60.0	-243.7	135	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_212	ENDOR	end_dwb	AREA	63	-174.8	-59.8	-316.9	88	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_213	ENDOR	end_dwb	AREA	63	-174.3	-59.8	-276.2	1	1	Death Watch Ghost	humanoid_dwb_ghost	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_214	ENDOR	end_dwb	AREA	63	-173.9	-59.8	-297.7	179	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_215	ENDOR	end_dwb	AREA	64	-19.0	-52.0	-160.7	0	1	a crazed technician	humanoid_dwb_crazed_technician	INVULNERABLE	N	100	100	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_216	ENDOR	end_dwb	AREA	64	-25.3	-52.0	-162.1	54	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_217	ENDOR	end_dwb	AREA	64	-12.5	-52.0	-169.4	178	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_218	ENDOR	end_dwb	AREA	64	-10.2	-52.0	-150.4	89	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_219	ENDOR	end_dwb	AREA	64	-23.3	-52.0	-147.5	-179	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_220	ENDOR	end_dwb	AREA	64	-19.0	-52.0	-152.4	179	1	Super Battle Droid	droid_mand_bunker_sbd	AGGRESSIVE	B	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_221	ENDOR	end_dwb	AREA	7	-77.1	-20.0	12.0	179	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_222	ENDOR	end_dwb	AREA	7	-76.9	-20.0	-10.3	0	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_223	ENDOR	end_dwb	AREA	7	-70.5	-20.0	-10.1	0	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_224	ENDOR	end_dwb	AREA	7	-70.3	-20.0	12.2	179	1	Battle Droid	droid_mand_bunker_battle	AGGRESSIVE	E	61	70	Dungeon	DWB	1	IDLE	0	0	-	idle			600
+dungeon_endor_dwb_225	ENDOR	end_dwb	AREA	8	-81.2	-20.0	-25.7	90	1	Black Sun Guard	humanoid_dwb_guard	AGGRESSIVE	E	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600
+dungeon_endor_dwb_226	ENDOR	end_dwb	AREA	9	-96.8	-22.0	-33.6	90	1	an R2 unit	droid_r2	ATTACKABLE	N	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600
+dungeon_endor_dwb_227	ENDOR	end_dwb	AREA	9	-102.6	-22.0	-41.3	40	1	an R3 unit	droid_r3	ATTACKABLE	N	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600
+dungeon_endor_dwb_228	ENDOR	end_dwb	AREA	9	-90.3	-20.0	-32.3	-106	1	Black Sun Assassin	humanoid_dwb_assassin_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600
+dungeon_endor_dwb_229	ENDOR	end_dwb	AREA	9	-110.1	-20.0	-54.2	0	1	Black Sun Henchman	humanoid_dwb_henchman_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600
+dungeon_endor_dwb_230	ENDOR	end_dwb	AREA	9	-95.6	-20.0	-29.3	177	1	Black Sun Thug	humanoid_dwb_thug_int	AGGRESSIVE	E	61	70	Dungeon	DWB	1	TURN	0	0	-	idle			600

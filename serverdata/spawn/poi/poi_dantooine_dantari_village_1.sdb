@@ -1,0 +1,24 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dantooine_dantari_village_1_1	DANTOOINE	dan_world	AREA	0	-3870.6	2.5	-5690.6	149	1	a Janta clan leader	humanoid_janta_clan_leader	ATTACKABLE	B	51	60	POI	Dantari Village (1)	1	IDLE	0	0	-	idle			600
+poi_dantooine_dantari_village_1_2	DANTOOINE	dan_world	AREA	0	-3792.3	6.2	-5720.9	0	1	a Janta harvester	humanoid_janta_harvester	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_3	DANTOOINE	dan_world	AREA	0	-3866.2	2.4	-5728.6	0	1	a Janta herbalist	humanoid_janta_herbalist	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_4	DANTOOINE	dan_world	AREA	0	-3844.5	8.0	-5751.6	0	1	a Janta herbalist	humanoid_janta_herbalist	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_5	DANTOOINE	dan_world	AREA	0	-3817.9	3.5	-5725.2	0	1	a Janta hunter	humanoid_janta_hunter	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_6	DANTOOINE	dan_world	AREA	0	-3834.9	6.2	-5697.6	0	1	a Janta hunter	humanoid_janta_hunter	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_7	DANTOOINE	dan_world	AREA	0	-3837.6	8.0	-5757.0	0	1	a Janta hunter	humanoid_janta_hunter	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_8	DANTOOINE	dan_world	AREA	0	-3851.8	2.7	-5707.1	0	1	a Janta loreweaver	humanoid_janta_loreweaver	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_9	DANTOOINE	dan_world	AREA	0	-3808.2	3.5	-5724.1	0	1	a Janta loreweaver	humanoid_janta_loreweaver	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_10	DANTOOINE	dan_world	PATROL	0	-3869.3	2.5	-5725.0	0	1	a Janta primalist	humanoid_janta_primalist	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	PATROL	0	patrol_dantooine_2500	column	idle			600
+poi_dantooine_dantari_village_1_11	DANTOOINE	dan_world	AREA	0	-3851.9	2.0	-5727.1	0	1	a Janta primalist	humanoid_janta_primalist	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_12	DANTOOINE	dan_world	AREA	0	-3895.1	2.5	-5706.5	0	1	a Janta rockshaper	humanoid_janta_rockshaper	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_13	DANTOOINE	dan_world	AREA	0	-3918.0	2.7	-5697.5	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_14	DANTOOINE	dan_world	AREA	0	-3825.1	2.4	-5788.0	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_15	DANTOOINE	dan_world	AREA	0	-3824.4	1.2	-5659.0	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_16	DANTOOINE	dan_world	AREA	0	-3756.4	3.4	-5717.9	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_17	DANTOOINE	dan_world	AREA	0	-3897.2	14.2	-5771.2	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_18	DANTOOINE	dan_world	AREA	0	-3878.8	2.5	-5708.2	0	1	a Janta tribesman	humanoid_janta_tribesman	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_19	DANTOOINE	dan_world	AREA	0	-3886.2	2.5	-5724.8	0	1	a Janta tribesman	humanoid_janta_tribesman	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_1_20	DANTOOINE	dan_world	AREA	0	-3850.2	1.9	-5715.3	0	1	a Janta tribesman	humanoid_janta_tribesman	ATTACKABLE	N	51	60	POI	Dantari Village (1)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_1_21	DANTOOINE	dan_world	AREA	0	-3871.7	2.5	-5705.4	149	1	a Janta warrior	humanoid_janta_warrior	AGGRESSIVE	E	51	60	POI	Dantari Village (1)	1	IDLE	0	0	-	idle			600
+poi_dantooine_dantari_village_1_22	DANTOOINE	dan_world	AREA	0	-3865.2	2.5	-5704.1	159	1	a Janta warrior	humanoid_janta_warrior	AGGRESSIVE	E	51	60	POI	Dantari Village (1)	1	IDLE	0	0	-	idle			600

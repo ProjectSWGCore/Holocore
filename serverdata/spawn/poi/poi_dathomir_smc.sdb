@@ -1,0 +1,99 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dathomir_smc_1	DATHOMIR	dat_smc_stronghold	AREA	1	-1.5	2.0	5.6	78	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_2	DATHOMIR	dat_smc_stronghold	AREA	1	-1.4	2.0	10.1	81	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_3	DATHOMIR	dat_smc_stronghold	AREA	1	4.7	2.0	13.3	-21	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_4	DATHOMIR	dat_smc_stronghold	AREA	1	0.6	2.0	23.4	-108	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_5	DATHOMIR	dat_smc_stronghold	AREA	2	-12.0	2.0	14.7	150	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_6	DATHOMIR	dat_smc_stronghold	AREA	2	-12.8	2.3	4.5	0	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_7	DATHOMIR	dat_smc_stronghold	AREA	2	-11.3	2.3	5.4	0	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_8	DATHOMIR	dat_smc_stronghold	AREA	2	-12.7	2.3	6.3	0	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_9	DATHOMIR	dat_smc_stronghold	AREA	3	-28.1	2.0	4.9	63	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_10	DATHOMIR	dat_smc_stronghold	AREA	3	-27.3	2.0	9.0	66	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_11	DATHOMIR	dat_smc_stronghold	AREA	4	-17.8	2.0	-6.1	-97	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_12	DATHOMIR	dat_smc_stronghold	AREA	4	-25.9	2.0	-7.4	-153	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_13	DATHOMIR	dat_smc_stronghold	AREA	6	-1.7	3.0	-5.2	140	1	a Singing Mountain clan councilwoman	humanoid_smtn_councilwoman	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_14	DATHOMIR	dat_smc_stronghold	AREA	6	3.0	2.0	-16.5	-138	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_15	DATHOMIR	dat_smc_stronghold	AREA	6	8.5	2.0	-26.4	-45	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_16	DATHOMIR	dat_smc_stronghold	AREA	6	8.6	2.0	-21.2	-150	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_17	DATHOMIR	dat_smc_stronghold	AREA	7	16.4	2.0	-10.8	-174	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_18	DATHOMIR	dat_smc_stronghold	AREA	7	16.5	2.0	-24.4	-82	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_19	DATHOMIR	dat_smc_stronghold	AREA	8	24.9	2.0	-20.2	49	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_20	DATHOMIR	dat_smc_stronghold	AREA	9	27.0	2.0	-12.4	89	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_21	DATHOMIR	dat_smc_stronghold	AREA	10	26.2	2.0	-3.6	86	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_22	DATHOMIR	dat_smc_stronghold	AREA	11	16.4	2.0	7.4	0	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_23	DATHOMIR	dat_smc_stronghold	AREA	11	16.8	2.0	9.7	-6	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_24	DATHOMIR	dat_world	AREA	0	153.0	430.0	4544.3	0	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_25	DATHOMIR	dat_world	AREA	0	147.5	430.0	4537.5	0	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_26	DATHOMIR	dat_world	AREA	0	158.5	430.0	4537.5	0	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_27	DATHOMIR	dat_world	AREA	0	141.0	430.0	4549.3	90	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_28	DATHOMIR	dat_world	AREA	0	164.6	430.0	4554.5	-90	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_29	DATHOMIR	dat_world	AREA	0	150.1	430.0	4525.8	23	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_30	DATHOMIR	dat_world	AREA	0	162.3	430.0	4528.2	-70	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_31	DATHOMIR	dat_world	AREA	0	195.3	430.0	4593.2	-145	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_32	DATHOMIR	dat_world	AREA	0	199.9	430.0	4580.8	-83	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_33	DATHOMIR	dat_world	AREA	0	185.8	430.0	4571.3	-45	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_34	DATHOMIR	dat_world	AREA	0	162.2	390.7	4637.8	10	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_35	DATHOMIR	dat_world	AREA	0	151.8	429.2	4581.1	10	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_36	DATHOMIR	dat_world	AREA	0	176.7	375.6	4668.3	47	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_37	DATHOMIR	dat_world	AREA	0	87.3	312.1	4684.6	-176	1	a Singing Mountain clan outcast	humanoid_smtn_outcast	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_38	DATHOMIR	dat_world	AREA	0	210.6	369.9	4686.2	-11	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_39	DATHOMIR	dat_world	AREA	0	209.1	371.6	4691.2	38	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_40	DATHOMIR	dat_world	AREA	0	253.9	256.2	4842.8	-66	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_41	DATHOMIR	dat_world	AREA	0	270.3	275.9	4813.3	-125	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_42	DATHOMIR	dat_world	AREA	0	307.7	334.1	4753.5	13	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_43	DATHOMIR	dat_world	AREA	0	388.2	345.6	4751.6	-112	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_44	DATHOMIR	dat_world	AREA	0	513.8	275.1	4739.1	105	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_45	DATHOMIR	dat_world	AREA	0	512.4	275.0	4733.3	105	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_46	DATHOMIR	dat_world	AREA	0	502.6	274.9	4697.2	33	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_47	DATHOMIR	dat_world	AREA	0	530.7	275.0	4690.4	-15	1	a Singing Mountain clan councilwoman	humanoid_smtn_councilwoman	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_48	DATHOMIR	dat_world	AREA	0	521.2	275.0	4714.3	-16	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_49	DATHOMIR	dat_world	AREA	0	517.7	275.0	4718.5	114	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_50	DATHOMIR	dat_world	AREA	0	524.6	275.0	4720.3	-129	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_51	DATHOMIR	dat_world	AREA	0	534.2	27.4	4737.5	-147	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_52	DATHOMIR	dat_world	AREA	0	546.8	275.0	4702.1	75	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_53	DATHOMIR	dat_world	AREA	0	677.5	214.2	4622.4	64	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_54	DATHOMIR	dat_world	AREA	0	693.3	214.1	4590.3	-160	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_55	DATHOMIR	dat_world	AREA	0	601.4	247.5	4612.1	152	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_56	DATHOMIR	dat_world	AREA	0	626.7	257.3	4560.4	-20	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_57	DATHOMIR	dat_world	AREA	0	635.5	256.1	4485.3	-170	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_58	DATHOMIR	dat_world	AREA	0	614.8	260.0	4520.2	-90	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_59	DATHOMIR	dat_world	AREA	0	599.3	260.0	4521.5	172	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_60	DATHOMIR	dat_world	AREA	0	591.5	260.0	4512.8	51	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_61	DATHOMIR	dat_world	AREA	0	571.2	260.0	4520.3	93	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_62	DATHOMIR	dat_world	AREA	0	571.4	260.0	4536.8	117	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_63	DATHOMIR	dat_world	AREA	0	581.5	260.0	4550.6	149	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_64	DATHOMIR	dat_world	AREA	0	601.4	260.0	4542.8	84	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_65	DATHOMIR	dat_world	AREA	0	833.8	190.3	4328.9	-75	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_66	DATHOMIR	dat_world	AREA	0	797.7	190.3	4208.2	175	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_67	DATHOMIR	dat_world	AREA	0	686.0	186.7	4070.5	160	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_68	DATHOMIR	dat_world	AREA	0	528.1	190.0	4029.3	-75	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_69	DATHOMIR	dat_world	AREA	0	374.3	176.1	3979.4	-155	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_70	DATHOMIR	dat_world	AREA	0	608.0	272.3	4325.7	-165	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_71	DATHOMIR	dat_world	AREA	0	629.1	251.6	4281.8	65	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_72	DATHOMIR	dat_world	AREA	0	625.6	240.3	4238.4	135	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_73	DATHOMIR	dat_world	AREA	0	634.3	238.9	4240.2	145	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_74	DATHOMIR	dat_world	AREA	0	602.4	257.7	4246.7	137	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_75	DATHOMIR	dat_world	AREA	0	546.3	229.5	4244.3	170	1	a Singing Mountain clan councilwoman	humanoid_smtn_councilwoman	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_76	DATHOMIR	dat_world	AREA	0	513.3	229.5	4168.1	-3	1	a Singing Mountain clan councilwoman	humanoid_smtn_councilwoman	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_77	DATHOMIR	dat_world	AREA	0	566.1	229.5	4225.9	-105	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_78	DATHOMIR	dat_world	AREA	0	543.7	229.5	4214.4	-7	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_79	DATHOMIR	dat_world	AREA	0	551.8	229.5	4204.4	-110	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_80	DATHOMIR	dat_world	AREA	0	538.3	229.5	4176.0	-175	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_81	DATHOMIR	dat_world	AREA	0	547.3	229.5	4178.5	-175	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_82	DATHOMIR	dat_world	AREA	0	537.9	229.5	4230.9	107	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_83	DATHOMIR	dat_world	AREA	0	535.2	229.5	4207.8	145	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_84	DATHOMIR	dat_world	AREA	0	529.6	229.5	4202.9	145	1	a Singing Mountain clan rancor tamer	humanoid_smtn_rancor_tamer	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_85	DATHOMIR	dat_world	AREA	0	500.0	229.5	4219.1	145	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_86	DATHOMIR	dat_world	AREA	0	505.5	229.5	4202.6	105	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_87	DATHOMIR	dat_world	AREA	0	502.1	229.5	4187.4	2	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_88	DATHOMIR	dat_world	AREA	0	573.4	229.5	4162.6	-109	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_89	DATHOMIR	dat_world	AREA	0	536.4	229.5	4146.8	164	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_90	DATHOMIR	dat_world	AREA	0	476.7	230.2	4125.6	-104	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_91	DATHOMIR	dat_world	AREA	0	363.9	220.5	4109.9	-157	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_92	DATHOMIR	dat_world	AREA	0	175.7	149.7	4032.9	-117	1	a Singing Mountain clan guardian	humanoid_smtn_guardian	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_93	DATHOMIR	dat_world	AREA	0	173.0	150.0	4041.6	-117	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_94	DATHOMIR	dat_world	AREA	0	250.7	385.2	4338.3	147	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_95	DATHOMIR	dat_world	AREA	0	375.0	367.0	4321.0	-4	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_96	DATHOMIR	dat_world	AREA	0	432.6	317.6	4275.9	135	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200
+poi_dathomir_smc_97	DATHOMIR	dat_world	AREA	0	268.7	226.6	4154.1	-151	1	a Singing Mountain clan outcast	humanoid_smtn_outcast	AGGRESSIVE	N	71	80	POI	Singing Mountain Clan	1	IDLE	0	0	-	idle			1200

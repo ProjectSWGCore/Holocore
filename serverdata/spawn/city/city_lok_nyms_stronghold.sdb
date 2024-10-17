@@ -1,0 +1,169 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_lok_nyms_stronghold_1	LOK	lok_nym_cantina	AREA	1	44.0	0.1	2.9	167	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_2	LOK	lok_nym_cantina	AREA	1	44.0	0.1	0.7	-1	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_3	LOK	lok_nym_cantina	AREA	12	-25.0	-0.9	23.8	-45	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_4	LOK	lok_nym_cantina	AREA	12	-26.1	-0.9	25.0	143	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_5	LOK	lok_nym_cantina	AREA	13	-28.5	-0.5	6.0	13	1	Chewbacca	humanoid_rebel_chewbacca	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_6	LOK	lok_nym_cantina	AREA	13	-30.2	-0.5	7.3	29	1	Han Solo	humanoid_clone_rebel_han_solo	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_7	LOK	lok_nym_cantina	AREA	3	-4.1	-0.9	-7.1	-7	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_8	LOK	lok_nym_cantina	AREA	3	-4.2	-0.9	-4.9	176	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_9	LOK	lok_nym_cantina	AREA	3	-7.2	-0.9	9.2	-161	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_10	LOK	lok_nym_cantina	AREA	3	-7.8	-0.9	7.1	-20	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_11	LOK	lok_nym_cantina	AREA	3	-9.3	-0.9	9.0	141	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_12	LOK	lok_nym_cantina	AREA	3	24.1	-0.9	8.4	6	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_13	LOK	lok_nym_cantina	AREA	3	24.3	-0.9	-8.1	51	1	a bodyguard	humanoid_bodyguard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_14	LOK	lok_nym_cantina	AREA	3	24.4	-0.9	11.0	-178	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_15	LOK	lok_nym_cantina	AREA	3	25.9	-0.9	-9.0	165	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_16	LOK	lok_nym_cantina	AREA	3	26.4	-0.9	-10.8	-21	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_17	LOK	lok_nym_cantina	AREA	3	3.7	-0.9	-6.5	114	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_lok_nyms_stronghold_18	LOK	lok_nym_cantina	AREA	3	4.1	-0.9	-8.1	26	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_19	LOK	lok_nym_cantina	AREA	3	5.1	-0.9	-6.4	-148	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_20	LOK	lok_nym_cantina	AREA	3	5.1	-0.9	-7.7	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_21	LOK	lok_nym_cantina	AREA	3	6.6	-0.9	3.0	37	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_22	LOK	lok_nym_cantina	AREA	4	17.8	-0.9	-13.0	-178	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_23	LOK	lok_nym_cantina	AREA	4	18.5	-0.9	-16.4	-47	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_24	LOK	lok_nym_cantina	AREA	4	20.3	-0.9	-19.8	6	1	Commander Ramna (CorSec Pilot Trainer)	humanoid_ramna	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_25	LOK	lok_nym_cantina	AREA	5	16.5	-0.9	21.9	-103	1	Berema	humanoid_berema	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_26	LOK	lok_nym_cantina	AREA	5	18.2	-0.9	20.8	175	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_27	LOK	lok_nym_cantina	AREA	5	18.2	-0.9	18.2	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_28	LOK	lok_nym_cantina	AREA	6	0.5	-0.9	-17.0	3	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_29	LOK	lok_nym_cantina	AREA	6	0.7	-0.9	-14.8	-172	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_30	LOK	lok_nym_cantina	AREA	8	-13.2	-0.9	-20.2	16	1	Vixur Webb (a musician)	humanoid_vixur_webb	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_31	LOK	lok_nym_cantina	AREA	9	-10.4	-0.9	24.4	-179	1	Nien Nunb	humanoid_rebel_nien_nunb	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_32	LOK	lok_nym_cantina	AREA	9	-6.4	-0.9	21.7	-77	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_33	LOK	lok_nym_cantina	AREA	9	-6.8	-0.9	23.0	174	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_34	LOK	lok_nym_cantina	AREA	9	-7.7	-0.9	21.2	58	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_35	LOK	lok_nym_cloning	AREA	1	3.1	0.3	4.9	85	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_36	LOK	lok_nym_cloning	AREA	10	-3.3	-0.4	-5.1	-125	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_37	LOK	lok_nym_cloning	AREA	10	-4.7	-0.4	-5.9	44	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_38	LOK	lok_nym_hospital	AREA	2	10.7	0.3	10.3	122	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_39	LOK	lok_nym_hospital	AREA	2	14.7	0.3	7.3	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_40	LOK	lok_nym_hospital	AREA	2	19.3	0.3	10.2	179	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_41	LOK	lok_nym_hospital	AREA	6	-17.1	0.3	-0.9	-74	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_42	LOK	lok_nym_hospital	AREA	6	-18.2	0.3	-10.6	-71	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_43	LOK	lok_nym_hospital	AREA	6	-18.5	0.3	11.3	179	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_44	LOK	lok_nym_hospital	AREA	6	-19.5	0.3	-1.8	-3	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_45	LOK	lok_nym_hospital	AREA	6	-23.3	0.3	10.3	-85	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_46	LOK	lok_nym_hospital	AREA	6	-24.7	0.3	8.5	36	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_47	LOK	lok_nym_hospital	AREA	6	-25.5	0.3	-3.5	119	1	a 2-1B surgical droid	droid_21b_surgical	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_48	LOK	lok_nym_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	TURN	0	0	-	idle			600
+city_lok_nyms_stronghold_49	LOK	lok_nym_hotel	AREA	4	-6.4	1.0	-4.0	-100	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_50	LOK	lok_nym_hotel	AREA	4	-7.7	1.0	-4.0	88	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_51	LOK	lok_nym_hotel	AREA	4	0.4	1.2	-20.9	178	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_52	LOK	lok_nym_hotel	AREA	4	4.4	1.2	-20.9	-177	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	angry			600
+city_lok_nyms_stronghold_53	LOK	lok_nym_hotel	AREA	5	16.5	1.3	-12.5	4	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_54	LOK	lok_nym_hotel	AREA	5	16.7	1.3	-9.6	-175	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_55	LOK	lok_nym_hotel	AREA	5	20.2	1.3	-2.4	-85	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_56	LOK	lok_nym_hotel	AREA	5	20.7	1.6	13.0	178	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_57	LOK	lok_nym_hotel	AREA	5	22.2	2.0	-16.6	-32	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	themepark_music_1			600
+city_lok_nyms_stronghold_58	LOK	lok_nym_hotel	AREA	5	23.3	2.0	-14.9	-35	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	entertained			600
+city_lok_nyms_stronghold_59	LOK	lok_nym_hotel	AREA	5	24.9	2.0	-13.8	-52	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	themepark_music_1			600
+city_lok_nyms_stronghold_60	LOK	lok_nym_hotel	AREA	9	-12.6	1.6	-16.0	-67	1	Warvog Arkon (Rebel Pilot Trainer)	humanoid_rebel_warvog_arkon	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_61	LOK	lok_nym_stronghold	AREA	3	-26.4	2.3	-4.5	-104	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_62	LOK	lok_nym_stronghold	AREA	10	32.6	2.3	-4.5	64	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_63	LOK	lok_nym_stronghold	AREA	10	38.0	2.3	-2.5	87	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_64	LOK	lok_nym_stronghold	AREA	3	-1.9	8.9	-30.5	0	1	Nym's guard	humanoid_nym_guard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_65	LOK	lok_nym_stronghold	AREA	3	-19.1	2.3	11.2	179	1	Nym's guard	humanoid_nym_guard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_66	LOK	lok_nym_stronghold	AREA	3	-2.0	1.3	4.0	-90	1	Nym's destroyer	humanoid_nym_destroyer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_67	LOK	lok_nym_stronghold	AREA	3	-2.2	4.1	-11.0	-2	1	Lady Viopa (Rebel Pilot Trainer)	humanoid_rebel_viopa	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_68	LOK	lok_nym_stronghold	AREA	3	-20.3	2.3	-18.8	0	1	Nym's destroyer	humanoid_nym_destroyer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_69	LOK	lok_nym_stronghold	AREA	3	-3.3	4.1	-9.5	0	1	Nym's elite guard	humanoid_nym_guard_elite	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_70	LOK	lok_nym_stronghold	AREA	3	-3.5	1.3	4.0	90	1	Nym's bodyguard	humanoid_nym_bodyguard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_71	LOK	lok_nym_stronghold	AREA	3	-3.6	3.3	-25.7	34	1	Scourge	creature_kusak_scourge	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_72	LOK	lok_nym_stronghold	AREA	3	-5.6	2.3	8.6	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_73	LOK	lok_nym_stronghold	AREA	3	-8.1	1.3	-1.0	179	1	Nym's brawler	humanoid_nym_brawler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_74	LOK	lok_nym_stronghold	AREA	3	-8.1	1.3	-2.2	0	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_75	LOK	lok_nym_stronghold	AREA	3	0.0	3.3	-23.0	0	1	Nym	humanoid_nym	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_76	LOK	lok_nym_stronghold	AREA	3	1.9	8.9	-30.5	0	1	Nym's guard	humanoid_nym_guard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_77	LOK	lok_nym_stronghold	AREA	3	19.1	2.3	11.2	179	1	Nym's guard	humanoid_nym_guard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_78	LOK	lok_nym_stronghold	AREA	3	20.3	2.3	-18.8	0	1	Nym's brawler	humanoid_nym_brawler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_79	LOK	lok_nym_stronghold	AREA	3	3.1	3.3	-21.2	-2	1	Jinkins	humanoid_jinkins	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_80	LOK	lok_nym_stronghold	AREA	3	3.3	4.1	-9.5	0	1	Nym's elite guard	humanoid_nym_guard_elite	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_81	LOK	lok_nym_stronghold	AREA	3	3.6	3.3	-25.7	-43	1	Razor	creature_razor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_sitting_chair			600
+city_lok_nyms_stronghold_82	LOK	lok_nym_stronghold	AREA	3	4.4	1.3	-4.1	150	1	Nym's surveyor	humanoid_nym_surveyor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_83	LOK	lok_nym_stronghold	AREA	3	5.7	1.3	-5.3	-88	1	Nym's bodyguard	humanoid_nym_bodyguard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_84	LOK	lok_nym_stronghold	AREA	6	-23.9	4.2	-37.4	7	1	Nym's Fuel Technician	humanoid_nym_fuel_tech_i	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_85	LOK	lok_nym_stronghold	AREA	7	-28.5	2.3	1.4	-90	1	Nym's bodyguard	humanoid_nym_bodyguard	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_86	LOK	lok_world	AREA	0	218.1	17.4	5136.5	35	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_87	LOK	lok_world	AREA	0	219.6	17.3	5138.6	-142	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_88	LOK	lok_world	AREA	0	414.3	11.8	5173.6	123	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_lok_nyms_stronghold_89	LOK	lok_world	AREA	0	448.8	12	4852	88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_90	LOK	lok_world	AREA	0	461.7	8.8	5505.4	-8	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_91	LOK	lok_world	AREA	0	462.7	3	5445.1	51	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_92	LOK	lok_world	AREA	0	463.8	3	5444.1	26	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_93	LOK	lok_world	AREA	0	465.3	13.2	4827	41	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_94	LOK	lok_world	AREA	0	467.1	13.2	4828.8	-138	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_95	LOK	lok_world	AREA	0	476.4	12	5159.5	-55	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_96	LOK	lok_world	AREA	0	488.8	12	4842.4	-165	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_97	LOK	lok_world	AREA	0	540.8	11.9	5087.8	-83	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_98	LOK	lok_world	AREA	0	547.9	11.8	5158.3	-14	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+city_lok_nyms_stronghold_99	LOK	lok_world	AREA	0	610.5	11.9	5061.5	157	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_100	LOK	lok_world	AREA	0	216.1	11.9	4988.3	92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_101	LOK	lok_world	AREA	0	220.2	17.0	5153.8	45	1	Andria E'liyha	humanoid_herald_lok_andria	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_102	LOK	lok_world	AREA	0	242.4	12.0	4968.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_103	LOK	lok_world	AREA	0	251.4	12.0	4998.5	0	1	a commoner	humanoid_commoner	ATTACKABLE	B	31	40	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_104	LOK	lok_world	AREA	0	297.8	11.9	5155.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_105	LOK	lok_world	AREA	0	301.3	12.0	5043.8	9	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_106	LOK	lok_world	PATROL	0	307.6	12.0	4910.8	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_600	column	idle			600
+city_lok_nyms_stronghold_107	LOK	lok_world	AREA	0	329.8	12.1	5063.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_108	LOK	lok_world	AREA	0	334.1	12.0	5118.5	42	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_109	LOK	lok_world	AREA	0	335.7	12.0	4925.5	0	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_110	LOK	lok_world	AREA	0	339.4	12.0	4889.3	0	1	Speedbump	creature_speedbump	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_111	LOK	lok_world	AREA	0	340.7	12.1	4998.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_112	LOK	lok_world	AREA	0	351.2	12.1	4838.1	90	1	Slobbers	creature_slobbers	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_113	LOK	lok_world	AREA	0	351.5	12.1	4862.1	90	1	Bedhead	creature_bedhead	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_114	LOK	lok_world	AREA	0	351.7	11.9	4854.0	90	1	Blinky	creature_kusak_blinky	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_115	LOK	lok_world	AREA	0	351.7	12.1	4846.0	90	1	Scarecrow	creature_kusak_scarecrow	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_116	LOK	lok_world	AREA	0	361.6	12.0	4878.9	-60	1	Runt	creature_runt	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_117	LOK	lok_world	AREA	0	367.0	12.0	5203.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_118	LOK	lok_world	AREA	0	367.4	12.0	5176.9	77	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_119	LOK	lok_world	AREA	0	370.7	12.0	5095.4	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_120	LOK	lok_world	PATROL	0	372.9	12.0	4927.0	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_800	column	idle			600
+city_lok_nyms_stronghold_121	LOK	lok_world	AREA	0	373.3	11.8	5179.2	88	1	Talia v'laenya	humanoid_herald_lok_talia	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_122	LOK	lok_world	AREA	0	373.4	12.0	4985.4	43	1	Nym's Fuel Technician	humanoid_nym_fuel_tech_ii	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_123	LOK	lok_world	AREA	0	375.5	12.0	5129.7	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_124	LOK	lok_world	AREA	0	376.3	11.2	5225.3	0	1	Wart Face	creature_wart_face	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_125	LOK	lok_world	AREA	0	378.4	11.9	5042.9	173	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_126	LOK	lok_world	AREA	0	385.2	12.0	5147.7	176	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_127	LOK	lok_world	AREA	0	393.0	12.0	5010.6	55	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_128	LOK	lok_world	AREA	0	401.0	12.0	5226.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	TURN	0	0	-	idle			600
+city_lok_nyms_stronghold_129	LOK	lok_world	AREA	0	414.4	11.9	4972.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_130	LOK	lok_world	AREA	0	416.7	12.5	5050.3	88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_131	LOK	lok_world	AREA	0	422.0	12.5	5070.9	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_132	LOK	lok_world	AREA	0	427.8	13.0	5136.1	102	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_accusing			600
+city_lok_nyms_stronghold_133	LOK	lok_world	AREA	0	429.9	12.0	4847.5	81	1	Reggi Tirver	humanoid_junk_reggi	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_134	LOK	lok_world	AREA	0	429.9	13.0	5135.7	-78	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	nervous			600
+city_lok_nyms_stronghold_135	LOK	lok_world	AREA	0	436.9	12.0	5127.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_lok_nyms_stronghold_136	LOK	lok_world	AREA	0	437.1	8.7	5503.9	68	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_137	LOK	lok_world	AREA	0	437.6	11.9	5169.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_138	LOK	lok_world	AREA	0	439.1	8.7	5504.8	-123	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_139	LOK	lok_world	PATROL	0	461.6	7.4	5477.0	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_200	column	idle			600
+city_lok_nyms_stronghold_140	LOK	lok_world	AREA	0	461.7	23.0	4981.5	-100	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_141	LOK	lok_world	PATROL	0	463.5	7.2	5474.8	0	1	Nym's guard	humanoid_nym_guard_weak	ATTACKABLE	N	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_300	column	idle			600
+city_lok_nyms_stronghold_142	LOK	lok_world	AREA	0	465.2	3.0	5447.0	-144	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_143	LOK	lok_world	PATROL	0	465.4	7.2	5475.6	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_100	column	idle			600
+city_lok_nyms_stronghold_144	LOK	lok_world	PATROL	0	469.1	8.8	5503.6	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	PATROL	0	patrol_lok_1900	column	idle		simple_droid_slang_threat_15	600
+city_lok_nyms_stronghold_145	LOK	lok_world	AREA	0	470.8	12.1	5089.6	-102	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_146	LOK	lok_world	AREA	0	471.0	11.9	5018.4	-123	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_147	LOK	lok_world	AREA	0	472.8	22.8	4921.0	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	31	40	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_148	LOK	lok_world	AREA	0	480.2	23.0	4961.8	-174	1	Nym's Fuel Technician	humanoid_nym_fuel_tech_iii	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_149	LOK	lok_world	AREA	0	480.9	22.8	4921.2	0	1	Nym's guard	humanoid_nym_guard_strong	ATTACKABLE	E	31	40	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_150	LOK	lok_world	AREA	0	482.9	11.9	5126.2	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_151	LOK	lok_world	AREA	0	488.6	9.5	5499.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_152	LOK	lok_world	AREA	0	493.0	12.0	5146.0	89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_153	LOK	lok_world	AREA	0	506.4	12.1	5011.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_154	LOK	lok_world	AREA	0	517.8	12.0	5100.5	141	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_155	LOK	lok_world	AREA	0	519.3	12.0	5097.9	-29	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600
+city_lok_nyms_stronghold_156	LOK	lok_world	AREA	0	519.9	12.0	5037.1	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle			600
+city_lok_nyms_stronghold_157	LOK	lok_world	AREA	0	527.9	11.9	5184.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	LOITER	5	0	-	idle		commoner	600
+city_lok_nyms_stronghold_158	LOK	lok_world	AREA	0	531.1	12.0	4983.3	-93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_159	LOK	lok_world	AREA	0	537.7	12.0	5100.9	24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_160	LOK	lok_world	PATROL	0	557.1	12.0	5011.3	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_700	column	idle			600
+city_lok_nyms_stronghold_161	LOK	lok_world	AREA	0	560.4	11.9	5141.9	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_162	LOK	lok_world	AREA	0	578.4	11.9	4993.4	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		commoner	600
+city_lok_nyms_stronghold_163	LOK	lok_world	AREA	0	588.3	3.0	5354.7	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_164	LOK	lok_world	AREA	0	610.2	11.9	5105.3	34	1	a pirate	humanoid_pirate	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_165	LOK	lok_world	AREA	0	630.1	12.7	5054.9	-66	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_166	LOK	lok_world	PATROL	0	660.9	11.7	5075.3	0	1	a kusak mauler	creature_kusak_mauler	AGGRESSIVE	N	31	40	City	Nym's Stronghold	1	PATROL	0	patrol_lok_500	column	idle			600
+city_lok_nyms_stronghold_167	LOK	lok_world	AREA	0	684.9	45.7	4987.9	0	1	Troubles	creature_troubles	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	TURN	0	0	-	idle			600

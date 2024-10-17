@@ -1,0 +1,199 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_talus_nashal_1	TALUS	tal_nashal_association_hall	AREA	11	11.0	1.8	-19.6	-62	1	Chief Administrator Slooni Jong	humanoid_slooni_jong	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_2	TALUS	tal_nashal_association_hall	AREA	10	-5	1.2	-1.1	71	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_3	TALUS	tal_nashal_association_hall	AREA	10	-2.9	1.2	-0.3	-110	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_4	TALUS	tal_nashal_cantina	AREA	1	41.7	0.1	1.3	-91	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_5	TALUS	tal_nashal_cantina	AREA	1	38.8	0.1	1.4	92	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_6	TALUS	tal_nashal_cantina	AREA	2	30.2	0.1	-5.4	152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_7	TALUS	tal_nashal_cantina	AREA	2	30.3	0.1	-8.7	48	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_8	TALUS	tal_nashal_cantina	AREA	3	7.2	-0.9	-2.1	118	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_9	TALUS	tal_nashal_cantina	AREA	3	-8.8	-0.9	14.9	-101	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_10	TALUS	tal_nashal_cantina	AREA	3	3.1	-0.9	-4.8	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_11	TALUS	tal_nashal_cantina	AREA	3	26.3	-0.9	-8.9	-42	1	a farmer	humanoid_farmer_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_12	TALUS	tal_nashal_cantina	AREA	3	10.3	-0.9	2.6	-33	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_13	TALUS	tal_nashal_cantina	AREA	3	8.9	-0.9	4.5	149	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_14	TALUS	tal_nashal_cantina	AREA	3	22.9	-0.9	-2.5	-26	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_15	TALUS	tal_nashal_cantina	AREA	3	-0.7	-0.9	5.7	178	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_16	TALUS	tal_nashal_cantina	AREA	3	0.9	-0.9	5.7	-151	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_17	TALUS	tal_nashal_cantina	AREA	3	5.3	-0.9	5.7	-175	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_18	TALUS	tal_nashal_cantina	AREA	3	21.9	-0.9	-0.4	156	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_19	TALUS	tal_nashal_cantina	AREA	3	-10.6	-0.9	14.7	83	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_20	TALUS	tal_nashal_cantina	AREA	3	23.2	-0.9	-8.8	81	1	an informant	humanoid_clone_rebel_wookiee_informant_i	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_21	TALUS	tal_nashal_cantina	AREA	3	0.5	-0.9	-4.8	88	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_22	TALUS	tal_nashal_cantina	AREA	3	-0.5	-0.9	3.4	0	1	Oecax	humanoid_clone_oecax	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_23	TALUS	tal_nashal_cantina	AREA	3	17.7	-0.9	-7.4	61	1	Sigrix Slix	humanoid_sigrix_slix	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_24	TALUS	tal_nashal_cantina	AREA	5	22.8	-0.9	15.7	-90	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_25	TALUS	tal_nashal_cantina	AREA	5	19.6	-0.9	17.5	143	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_26	TALUS	tal_nashal_cantina	AREA	5	20.8	-0.9	14	29	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_27	TALUS	tal_nashal_cantina	AREA	7	9.8	-0.9	19.0	-125	1	Green Laser	humanoid_green_laser	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_28	TALUS	tal_nashal_cantina	AREA	13	-25.2	-0.5	8.5	0	1	Durge	humanoid_clone_durge_01	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_29	TALUS	tal_nashal_cloning	AREA	2	-6	0.1	3.7	90	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_30	TALUS	tal_nashal_cloning	AREA	2	2.5	-0.1	5.5	-126	1	Durgur Pyne	humanoid_durgur_pyne	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_31	TALUS	tal_nashal_cloning	AREA	4	-3.6	-5.5	-12.9	-115	1	a commoner	humanoid_commoner_bith_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_32	TALUS	tal_nashal_cloning	AREA	4	-6	-5.5	-13.9	68	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_33	TALUS	tal_nashal_combat_gh	AREA	4	6.6	1.1	1.8	-90	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_34	TALUS	tal_nashal_combat_gh	AREA	4	2.4	1.1	0.5	-121	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_35	TALUS	tal_nashal_combat_gh	AREA	4	0.4	1.1	0.7	103	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_36	TALUS	tal_nashal_combat_gh	AREA	4	1.1	1.1	-1.3	22	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_37	TALUS	tal_nashal_combat_gh	AREA	5	12	1.1	0.9	34	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_38	TALUS	tal_nashal_combat_gh	AREA	5	13.1	1.1	2.3	-142	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_39	TALUS	tal_nashal_combat_gh	AREA	7	15.3	1.1	-10.1	-95	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_40	TALUS	tal_nashal_combat_gh	AREA	7	14.2	1.1	-9	-175	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_41	TALUS	tal_nashal_combat_gh	AREA	8	-3.5	1.1	-7.9	-180	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_42	TALUS	tal_nashal_combat_gh	AREA	8	-3.5	1.1	-10.3	0	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_43	TALUS	tal_nashal_combat_gh	AREA	8	2.9	1.1	-8.3	-91	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_44	TALUS	tal_nashal_combat_gh	AREA	9	-11.2	1.1	-8.8	-84	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_45	TALUS	tal_nashal_combat_gh	AREA	9	-13.8	1.1	-8.4	84	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_46	TALUS	tal_nashal_commerce_gh	AREA	1	-12.8	2.5	14.1	-92	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_47	TALUS	tal_nashal_commerce_gh	AREA	4	-6.4	1.1	-0.8	90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_48	TALUS	tal_nashal_commerce_gh	AREA	4	-2.7	1.1	-0.6	111	1	a commoner	humanoid_commoner_bothan_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_49	TALUS	tal_nashal_commerce_gh	AREA	4	-0.7	1.1	-1.4	-67	1	a commoner	humanoid_commoner_devaronian	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_50	TALUS	tal_nashal_commerce_gh	AREA	6	-10.7	1.1	5.6	-92	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_51	TALUS	tal_nashal_commerce_gh	AREA	6	-13.6	1.1	3.4	91	1	a commoner	humanoid_commoner_aqualish	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_52	TALUS	tal_nashal_commerce_gh	AREA	7	11	1.1	-10.7	140	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_53	TALUS	tal_nashal_commerce_gh	AREA	7	12.5	1.1	-12.1	-45	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_54	TALUS	tal_nashal_commerce_gh	AREA	8	3	1.1	-9.7	-114	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_55	TALUS	tal_nashal_commerce_gh	AREA	9	-7.1	1.1	-9.7	-43	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_56	TALUS	tal_nashal_commerce_gh	AREA	9	-7	1.1	-8	-132	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_57	TALUS	tal_nashal_hospital	AREA	2	-2.8	0.2	3.1	-180	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_58	TALUS	tal_nashal_hospital	AREA	2	-8.1	0.2	3.3	-178	1	a commoner	humanoid_commoner_twilek_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_59	TALUS	tal_nashal_hospital	AREA	2	7.8	0.2	-3.9	0	1	a criminal	humanoid_forage_criminal	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_60	TALUS	tal_nashal_hospital	AREA	2	-3.1	0.2	1.4	3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_61	TALUS	tal_nashal_hospital	AREA	2	-1.4	0.2	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_62	TALUS	tal_nashal_hotel	AREA	2	4.7	1	23.5	41	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_63	TALUS	tal_nashal_hotel	AREA	4	-7.2	1	-3.2	12	1	a commoner	humanoid_commoner_moncal	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_64	TALUS	tal_nashal_hotel	AREA	4	-6.7	1	-0.9	-168	1	a commoner	humanoid_commoner_moncal	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_65	TALUS	tal_nashal_hotel	AREA	4	8.7	1	5.7	-91	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_66	TALUS	tal_nashal_hotel	AREA	4	0.2	1.2	-21.2	178	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_67	TALUS	tal_nashal_hotel	AREA	4	6	1	-7.3	24	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_68	TALUS	tal_nashal_hotel	AREA	4	7.3	1	-5	-151	1	a scientist	humanoid_scientist_moncal_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_69	TALUS	tal_nashal_hotel	AREA	5	17.5	1.3	-8	152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_70	TALUS	tal_nashal_hotel	AREA	5	16	1.3	-3.1	45	1	a commoner	humanoid_commoner_trandoshan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_71	TALUS	tal_nashal_hotel	AREA	5	18.6	1.3	-9.9	-30	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_72	TALUS	tal_nashal_hotel	AREA	5	15.7	1.3	0	121	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_73	TALUS	tal_nashal_hotel	AREA	5	19.1	1.3	0.1	-126	1	Jusani Zhord	humanoid_jusani_zhord	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_74	TALUS	tal_nashal_hotel	AREA	6	-11.4	1	0	-91	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_75	TALUS	tal_nashal_hotel	AREA	6	-13.2	1	4.2	88	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_76	TALUS	tal_nashal_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_77	TALUS	tal_nashal_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_iii	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_78	TALUS	tal_nashal_starport	AREA	4	6	0.6	62.9	0	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_79	TALUS	tal_nashal_starport	AREA	4	-4.6	0.6	57.8	0	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_80	TALUS	tal_nashal_starport	AREA	4	-6.6	0.6	56.8	180	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_81	TALUS	tal_nashal_starport	AREA	4	6	0.6	56.8	152	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_82	TALUS	tal_nashal_starport	AREA	4	-11.8	0.6	53.3	-147	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_83	TALUS	tal_nashal_starport	AREA	4	5.8	0.6	67.7	0	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_84	TALUS	tal_nashal_starport	AREA	4	5.5	0.6	60	-40	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_85	TALUS	tal_nashal_starport	AREA	4	10.2	0.6	63.2	180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_86	TALUS	tal_nashal_starport	AREA	4	3.9	0.6	62.9	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_87	TALUS	tal_nashal_starport	AREA	4	1.9	0.6	57.8	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_88	TALUS	tal_nashal_starport	AREA	4	-6.7	0.6	61.9	180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_89	TALUS	tal_nashal_starport	AREA	4	4	0.6	62	180	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_90	TALUS	tal_nashal_starport	AREA	4	5.9	0.6	61.9	152	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_91	TALUS	tal_nashal_starport	AREA	6	35	0.6	59.4	-43	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_92	TALUS	tal_nashal_starport	AREA	6	32.9	0.6	61.6	136	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_93	TALUS	tal_nashal_starport	AREA	7	53	-0.5	40.3	137	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_94	TALUS	tal_nashal_starport	AREA	7	48.1	0.6	48.8	-175	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_95	TALUS	tal_nashal_starport	AREA	7	36.1	0.6	35.6	74	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_96	TALUS	tal_nashal_starport	AREA	7	55.4	-0.5	37.7	137	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_97	TALUS	tal_nashal_starport	AREA	7	47.7	0.6	46	4	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_98	TALUS	tal_nashal_starport	AREA	7	40.8	0.6	48.7	114	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_99	TALUS	tal_nashal_starport	AREA	7	54.7	-0.5	34.2	-50	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	41	50	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_100	TALUS	tal_nashal_starport	AREA	7	41.7	0.6	46.5	1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_101	TALUS	tal_nashal_starport	AREA	7	54.6	-0.5	41.7	137	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_102	TALUS	tal_nashal_starport	AREA	9	-33	1.6	50.5	19	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_103	TALUS	tal_nashal_starport	AREA	9	-27.1	1.6	65.2	-88	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_104	TALUS	tal_nashal_starport	AREA	9	-31.9	1.6	53.1	-159	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_105	TALUS	tal_nashal_starport	AREA	9	-33.5	1.6	52.9	164	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_106	TALUS	tal_nashal_starport	AREA	9	-25.8	1.6	51.1	-116	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_107	TALUS	tal_nashal_starport	AREA	9	-27.4	1.6	49.5	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_108	TALUS	tal_nashal_starport	AREA	9	-29.7	1.6	64.2	59	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_109	TALUS	tal_nashal_starport	AREA	9	-29	1.6	66.2	179	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_110	TALUS	tal_nashal_starport	AREA	10	-43.2	1.6	49.9	-85	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_111	TALUS	tal_nashal_starport	AREA	12	-55.8	2.6	42.1	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_112	TALUS	tal_nashal_starport	AREA	14	-53.5	2.7	23.3	-90	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_113	TALUS	tal_nashal_starport	AREA	14	-56.5	1	8.7	47	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_114	TALUS	tal_nashal_starport	AREA	15	-46.6	1	10.8	11	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		commoner	600
+city_talus_nashal_115	TALUS	tal_nashal_university	AREA	4	-5.3	1.1	-0.8	-4	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_116	TALUS	tal_nashal_university	AREA	4	6.2	1.1	2.8	-117	1	a scientist	humanoid_scientist_rodian_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_117	TALUS	tal_nashal_university	AREA	4	4.7	1.1	1.6	52	1	a scientist	humanoid_scientist_twilek_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_118	TALUS	tal_nashal_university	AREA	4	-5.4	1.1	0.9	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_119	TALUS	tal_nashal_university	AREA	5	13.8	1.1	3.3	-9	1	a scientist	humanoid_scientist_zabrak_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_120	TALUS	tal_nashal_university	AREA	5	13.7	1.1	5.5	176	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_121	TALUS	tal_nashal_university	AREA	6	-12.9	1.1	-0.3	-92	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_122	TALUS	tal_nashal_university	AREA	6	-14.9	1.1	-0.3	91	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_123	TALUS	tal_nashal_university	AREA	7	8.4	1.1	-14.9	0	1	a scientist	humanoid_scientist_rodian_female	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_124	TALUS	tal_nashal_university	AREA	7	6.8	1.1	-13	90	1	a scientist	humanoid_scientist_bothan_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_125	TALUS	tal_nashal_university	AREA	8	-0.9	1.1	-9	-77	1	a scientist	humanoid_scientist_moncal_male	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_126	TALUS	tal_nashal_university	AREA	8	-2.8	1.1	-8.5	103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_127	TALUS	tal_world	PATROL	0	4074.1	2.0	5282.9	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_400	column	idle			600
+city_talus_nashal_128	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_500	column	idle			600
+city_talus_nashal_129	TALUS	tal_world	AREA	0	4357	2	5183.8	160	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_130	TALUS	tal_world	AREA	0	4333.8	9.9	5372.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		commoner	600
+city_talus_nashal_131	TALUS	tal_world	PATROL	0	4439.0	2.0	5278.9	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_700	column	idle		commoner	600
+city_talus_nashal_132	TALUS	tal_world	AREA	0	4450.4	2	5278.4	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_133	TALUS	tal_world	AREA	0	4461.1	2	5267.1	-176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_134	TALUS	tal_world	AREA	0	4461.5	2	5245.6	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_135	TALUS	tal_world	AREA	0	4442.3	2	5236.2	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_136	TALUS	tal_world	AREA	0	4414.5	2	5259.5	-17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_137	TALUS	tal_world	AREA	0	4421	2	5280.9	23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_138	TALUS	tal_world	AREA	0	4399.5	2	5267.1	-125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_139	TALUS	tal_world	AREA	0	4455.4	2	5362.7	-30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_140	TALUS	tal_world	AREA	0	4449	2	5380.4	-122	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_141	TALUS	tal_world	AREA	0	4384.5	2	5337.2	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_142	TALUS	tal_world	AREA	0	4340.5	9.9	5385	-7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_143	TALUS	tal_world	AREA	0	4340.7	9.9	5403.3	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_144	TALUS	tal_world	AREA	0	4332.3	9.9	5419	-91	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_145	TALUS	tal_world	AREA	0	4206.5	2	5291	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_146	TALUS	tal_world	AREA	0	4182.1	2	5291.4	-77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_147	TALUS	tal_world	AREA	0	4226.2	2	5308.2	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_148	TALUS	tal_world	AREA	0	4068.2	2	5289.5	-89	1	a commoner	humanoid_commoner_trandoshan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_149	TALUS	tal_world	AREA	0	4066.9	2	5288.1	0	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_150	TALUS	tal_world	AREA	0	4291.6	2	5188.8	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_151	TALUS	tal_world	AREA	0	4266	2	5160.4	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_152	TALUS	tal_world	AREA	0	4348.9	2	5179.4	-94	1	a commoner	humanoid_commoner_devaronian	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_153	TALUS	tal_world	AREA	0	4362.3	2	5085.6	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_154	TALUS	tal_world	AREA	0	4348	2	5203.7	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_155	TALUS	tal_world	AREA	0	4373.6	2	5097.3	-29	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_156	TALUS	tal_world	AREA	0	4464.6	2	5213.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_157	TALUS	tal_world	AREA	0	4507.9	2	5197	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		commoner	600
+city_talus_nashal_158	TALUS	tal_world	AREA	0	4104.3	2	5288.8	67	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_159	TALUS	tal_world	AREA	0	4237.3	0.4	5264.5	-17	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_160	TALUS	tal_world	AREA	0	4346.6	2	5069.5	-144	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+city_talus_nashal_161	TALUS	tal_world	AREA	0	4397.8	2	5282.4	173	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_162	TALUS	tal_world	AREA	0	4442.9	2	5261.2	-159	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_163	TALUS	tal_world	AREA	0	4366	2	5099.7	-36	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_164	TALUS	tal_world	AREA	0	4398	2	5280.3	-8	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_165	TALUS	tal_world	AREA	0	4362.1	10	5396.3	-88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_166	TALUS	tal_world	AREA	0	4357.7	2	5181.7	-20	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_167	TALUS	tal_world	AREA	0	4361.7	2	5139.3	-91	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	happy			600
+city_talus_nashal_168	TALUS	tal_world	AREA	0	4359.8	10	5396.4	91	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_169	TALUS	tal_world	PATROL	0	4317.8	2.0	5287.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_800	column	idle		commoner	600
+city_talus_nashal_170	TALUS	tal_world	PATROL	0	4117.5	2.0	5308.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_900	column	idle			600
+city_talus_nashal_171	TALUS	tal_world	PATROL	0	4098.1	2.0	5297.7	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_1200	column	idle			600
+city_talus_nashal_172	TALUS	tal_world	AREA	0	4389.5	2	5281.5	-1	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+city_talus_nashal_173	TALUS	tal_world	AREA	0	4064.8	2	5291.6	134	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_174	TALUS	tal_world	AREA	0	4492.4	2	5134.3	-103	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_175	TALUS	tal_world	AREA	0	4507.1	2	5089.7	-128	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_176	TALUS	tal_world	AREA	0	4235.1	2	5124.8	-110	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+city_talus_nashal_177	TALUS	tal_world	AREA	0	4379.1	2.0	5283.2	-179	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_178	TALUS	tal_world	AREA	0	4174.9	2.0	5110.5	75	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	41	50	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_179	TALUS	tal_world	AREA	0	4357.4	3	5170.7	-122	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_180	TALUS	tal_world	AREA	0	4490.3	2	5133.8	77	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_181	TALUS	tal_world	AREA	0	4367.5	2	5295.4	-83	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_182	TALUS	tal_world	AREA	0	4372.5	2	5099.3	150	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_183	TALUS	tal_world	AREA	0	4531.4	2	5050.7	129	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_talus_nashal_184	TALUS	tal_world	AREA	0	4366.7	2	5317.8	-58	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_nashal_185	TALUS	tal_world	AREA	0	4446.6	2	5379	58	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_186	TALUS	tal_world	AREA	0	4440.3	2	5262	110	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	conversation			600
+city_talus_nashal_187	TALUS	tal_world	AREA	0	4534.4	2	5041.1	179	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_nashal_188	TALUS	tal_world	AREA	0	4541.4	2.0	5069.1	-166	1	Igbi Freemo	humanoid_igbi_freemo	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_189	TALUS	tal_world	AREA	0	4268.4	0.6	5264.3	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_190	TALUS	tal_world	AREA	0	4098.7	2.0	5314.8	145	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_191	TALUS	tal_world	AREA	0	4196.8	2.0	5284.4	82	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_192	TALUS	tal_world	AREA	0	4376.0	2.0	5177.2	170	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	IDLE	0	0	-	idle			600
+city_talus_nashal_193	TALUS	tal_world	PATROL	0	4564.8	2.0	5483.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_1600	column	idle		simple_droid_geek_bye_nice_13	600
+city_talus_nashal_194	TALUS	tal_world	PATROL	0	4142.1	2.0	5311.1	0	1	a pirate	humanoid_pirate	ATTACKABLE	N	41	50	City	Nashal	1	PATROL	0	patrol_talus_2300	column	idle			600
+city_talus_nashal_195	TALUS	tal_world	PATROL	0	4386.0	2.0	5268.6	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_1800	column	idle			600
+city_talus_nashal_196	TALUS	tal_world	PATROL	0	4501.6	2.0	5266.2	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_2100	column	idle			600
+city_talus_nashal_197	TALUS	tal_world	PATROL	0	4398.5	2.0	5016.8	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Nashal	1	PATROL	0	patrol_talus_2600	column	idle			600

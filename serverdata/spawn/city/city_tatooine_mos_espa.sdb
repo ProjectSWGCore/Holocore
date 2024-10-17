@@ -1,0 +1,108 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_mos_espa_1	TATOOINE	tat_mosespa_barracks	AREA	3	0.0	0.0	-4.0	2	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_2	TATOOINE	tat_mosespa_barracks	AREA	4	4.0	0.0	1.5	-90	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_3	TATOOINE	tat_mosespa_barracks	AREA	6	-4.0	0.0	-3.0	96	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_4	TATOOINE	tat_mosespa_cantina	AREA	13	-29.7	-0.5	8.2	33	1	Commander Da'la Socuna (Rebel Pilot Trainer)	humanoid_rebel_commander_dala_socuna	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_5	TATOOINE	tat_mosespa_cantina	AREA	2	30.0	0.1	-8.3	50	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_6	TATOOINE	tat_mosespa_cantina	AREA	3	8.5	-0.9	-0.1	82	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		bartender	600
+city_tatooine_mos_espa_7	TATOOINE	tat_mosespa_cantina	AREA	3	10.8	-0.9	-10.4	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_8	TATOOINE	tat_mosespa_cantina	AREA	3	26.2	-0.9	-8.3	-43	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_9	TATOOINE	tat_mosespa_cantina	AREA	3	5.2	-0.9	12.6	-27	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_10	TATOOINE	tat_mosespa_cantina	AREA	3	14.8	-0.9	4.9	51	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_11	TATOOINE	tat_mosespa_cantina	AREA	3	15.0	-0.9	7.0	139	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_12	TATOOINE	tat_mosespa_cantina	AREA	3	17.0	-0.9	6.8	-134	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_13	TATOOINE	tat_mosespa_cantina	AREA	3	4.2	-0.9	5.7	179	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_14	TATOOINE	tat_mosespa_cantina	AREA	3	3.6	-0.9	-4.8	85	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_espa_15	TATOOINE	tat_mosespa_cantina	AREA	3	5.4	-0.9	-4.8	-90	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_espa_16	TATOOINE	tat_mosespa_cantina	AREA	3	24.3	-0.9	-8.1	51	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_17	TATOOINE	tat_mosespa_cantina	AREA	3	-5.0	-0.9	-5.4	0	1	Dorn Gestros	humanoid_commoner_dorn_gestros	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_mos_espa_18	TATOOINE	tat_mosespa_cantina	AREA	3	10.4	-0.9	-2.7	-63	1	Jilljoo Jab	humanoid_jilljoo_jab	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_19	TATOOINE	tat_mosespa_cantina	AREA	7	4.5	-0.9	13.6	143	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_20	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	2	0.0	0.0	3.5	4	1	an elite Imperial security guard	humanoid_imperial_command_security_guard_elite	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_21	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	6.5	-6.8	-0.9	74	1	a special missions engineer	humanoid_imperial_special_missions_engineer	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_22	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	5	6.0	-6.8	-10.3	1	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_23	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-6.0	-13.8	-4.0	58	1	an elite Imperial security guard	humanoid_imperial_command_security_guard_elite	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_24	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-1.3	-13.7	-13.8	0	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_25	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	7	-5.0	-13.7	7.5	-178	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_26	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	6.4	-13.8	10.1	-177	1	an Imperial Medic	humanoid_imperial_medic	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_27	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	8	-7.9	-13.8	12.0	89	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_28	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	17.0	-13.8	12.0	-88	1	an elite Imperial security guard	humanoid_imperial_command_security_guard_elite	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_29	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	9	13.0	-13.8	2.0	17	1	an Imperial sand trooper	humanoid_imperial_sand_trooper	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_30	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	10.7	-11.5	-20.7	13	1	an elite Imperial security guard	humanoid_imperial_command_security_guard_elite	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_31	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	20.0	-11.5	-21.0	-20	1	an elite Imperial security guard	humanoid_imperial_command_security_guard_elite	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_32	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	13.0	-13.8	-16.0	18	1	an Imperial Major General	humanoid_imperial_major_general	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_33	TATOOINE	tat_mosespa_imp_detachment_hq	AREA	10	15.0	-11.5	-21.0	-1	1	an Imperial Medic	humanoid_imperial_medic	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_34	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.0	0.0	-4.5	0	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		recruiter_imperial	300
+city_tatooine_mos_espa_35	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	Imperial Pilot	humanoid_imperial_pilot_empretreat	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
+city_tatooine_mos_espa_36	TATOOINE	tat_mosespa_starport	AREA	12	-55.8	2.6	41.7	145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_37	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		chassis_dealer	600
+city_tatooine_mos_espa_38	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
+city_tatooine_mos_espa_39	TATOOINE	tat_mosespa_watto	AREA	2	2.4	0.1	-11.6	46	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+city_tatooine_mos_espa_40	TATOOINE	tat_mosespa_watto	AREA	2	4.2	0.1	-9.9	-136	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_tatooine_mos_espa_41	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+city_tatooine_mos_espa_42	TATOOINE	tat_mosespa_watto	AREA	2	6.4	-0.5	3.6	114	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_espa_43	TATOOINE	tat_mosespa_watto	AREA	2	7.0	-0.5	2.5	-34	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_tatooine_mos_espa_44	TATOOINE	tat_world	PATROL	0	-3524.9	14.0	2049.8	0	1	a Jawa	humanoid_jawa	ATTACKABLE	N	5	10	City	Mos Espa	1	PATROL	0	patrol_tatooine_800	column	idle			600
+city_tatooine_mos_espa_45	TATOOINE	tat_world	PATROL	0	-3392.9	7.4	2477.5	0	1	Jabba's scout	humanoid_jabba_scout	ATTACKABLE	N	5	10	City	Mos Espa	1	PATROL	0	patrol_tatooine_900	column	idle			600
+city_tatooine_mos_espa_46	TATOOINE	tat_world	PATROL	0	-2913.8	5.0	2115.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_2900	column	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_espa_47	TATOOINE	tat_world	PATROL	0	-2922.7	5.0	2430.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_3000	column	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_espa_48	TATOOINE	tat_world	PATROL	0	-2918.4	5.0	2400.6	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_3100	column	idle			600
+city_tatooine_mos_espa_49	TATOOINE	tat_world	PATROL	0	-2729.7	5.0	2243.3	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_3900	column	idle			600
+city_tatooine_mos_espa_50	TATOOINE	tat_world	PATROL	0	-2938.5	5.0	2197.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_4000	column	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_espa_51	TATOOINE	tat_world	PATROL	0	-2915.3	5.0	2450.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mos Espa	1	PATROL	0	patrol_tatooine_4100	column	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_espa_52	TATOOINE	tat_world	AREA	0	-2989.8	5.0	2123.8	-151	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_espa_53	TATOOINE	tat_world	AREA	0	-2778.4	5.0	2010.4	-80	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_accusing			600
+city_tatooine_mos_espa_54	TATOOINE	tat_world	AREA	0	-2709.2	5.0	2180.0	0	1	a commoner	humanoid_commoner_human_male	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_espa_55	TATOOINE	tat_world	AREA	0	-2824.7	5.0	2406.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_espa_56	TATOOINE	tat_world	AREA	0	-2947.0	5.0	2238.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_espa_57	TATOOINE	tat_world	AREA	0	-3042.5	5.0	2442.2	-101	1	a criminal	humanoid_smuggler_patrol_thief_1	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_espa_58	TATOOINE	tat_world	AREA	0	-2929.9	5.0	2116.3	-139	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_espa_59	TATOOINE	tat_world	AREA	0	-3507.4	14.0	2058.1	0	1	a Jawa	humanoid_jawa	ATTACKABLE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_60	TATOOINE	tat_world	AREA	0	-2931.3	5.0	2114.7	37	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_61	TATOOINE	tat_world	AREA	0	-3513.0	14.0	2058.0	0	1	a Jawa Avenger	humanoid_jawa_avenger	ATTACKABLE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_62	TATOOINE	tat_world	AREA	0	-2990.7	5.0	2122.0	31	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_espa_63	TATOOINE	tat_world	AREA	0	-2896.5	5.0	2127.8	-135	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_64	TATOOINE	tat_world	AREA	0	-2780.9	5.0	2010.9	109	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_65	TATOOINE	tat_world	AREA	0	-3163.8	5.0	2154.7	0	1	a slum thief	humanoid_watto_thieves	AGGRESSIVE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_66	TATOOINE	tat_world	AREA	0	-3188.3	5.0	2187.9	0	1	a slum thief	humanoid_watto_thieves	AGGRESSIVE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_67	TATOOINE	tat_world	AREA	0	-3038.1	5.0	2220.7	-156	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_espa_68	TATOOINE	tat_world	AREA	0	-2744.7	5.0	2031.3	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_69	TATOOINE	tat_world	AREA	0	-2801.5	5.0	2325.7	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_70	TATOOINE	tat_world	AREA	0	-2859.0	5.0	2252.7	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_71	TATOOINE	tat_world	AREA	0	-2912.2	5.0	2138.2	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_72	TATOOINE	tat_world	AREA	0	-2925.6	5.0	2014.0	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_73	TATOOINE	tat_world	AREA	0	-2958.0	5.0	2538.5	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_74	TATOOINE	tat_world	AREA	0	-2996.4	5.0	2326.4	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_75	TATOOINE	tat_world	AREA	0	-3065.1	5.0	2142.4	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_76	TATOOINE	tat_world	AREA	0	-2871.1	5.0	2387.8	-35	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_77	TATOOINE	tat_world	AREA	0	-2872.4	5.0	2389.3	131	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_78	TATOOINE	tat_world	AREA	0	-3063.2	5.0	2100.7	-106	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_espa_79	TATOOINE	tat_world	AREA	0	-2867.6	5.0	2387.8	-25	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_espa_80	TATOOINE	tat_world	AREA	0	-2379.5	88.5	1849.9	0	1	an Elite Dune Lizzard	creature_lizard_dune_elite	AGGRESSIVE	E	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_81	TATOOINE	tat_world	AREA	0	-3033.1	5.0	2219.9	0	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	happy			600
+city_tatooine_mos_espa_82	TATOOINE	tat_world	AREA	0	-3028.0	5.0	2248.2	158	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_ground			600
+city_tatooine_mos_espa_83	TATOOINE	tat_world	AREA	0	-2994.9	7.0	1964.4	75	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_84	TATOOINE	tat_world	AREA	0	-3032.5	5.0	1962.5	72	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_espa_85	TATOOINE	tat_world	AREA	0	-2942.9	5.0	2179.1	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_espa_86	TATOOINE	tat_world	AREA	0	-2973.2	5.0	2112.6	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_espa_87	TATOOINE	tat_world	AREA	0	-2911.0	5.0	2126.6	156	1	Anim Kahn (a Valarian pilot)	humanoid_anim_kahn	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_88	TATOOINE	tat_world	AREA	0	-2980.0	5.0	2534.0	-57	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_89	TATOOINE	tat_world	AREA	0	-3085.5	5.0	2050.6	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_90	TATOOINE	tat_world	AREA	0	-3105.0	5.0	2314.0	82	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_91	TATOOINE	tat_world	AREA	0	-2873.4	5.0	2591.4	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_92	TATOOINE	tat_world	AREA	0	-3101.7	5.0	2184.6	118	1	Giaal Itotr	humanoid_giaal_itotr	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_93	TATOOINE	tat_world	AREA	0	-2878.7	5.0	2585.0	-40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_94	TATOOINE	tat_world	AREA	0	-3396.9	7.4	2466.3	0	1	Jabba's thief	humanoid_jabba_thief	ATTACKABLE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_95	TATOOINE	tat_world	AREA	0	-3388.3	7.4	2474.9	0	1	Jabba's thug	humanoid_jabba_thug	ATTACKABLE	N	5	10	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_96	TATOOINE	tat_world	AREA	0	-2814.2	5.0	1939.7	-77	1	Kaeline Ungasan	humanoid_kaeline_ungasan	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_97	TATOOINE	tat_world	AREA	0	-3056.4	7.5	2085.3	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_98	TATOOINE	tat_world	AREA	0	-2886.7	5.0	2493.5	-34	1	Kister Banai	humanoid_kitster_banai	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_99	TATOOINE	tat_world	AREA	0	-2768.1	5.0	2110.4	104	1	Klepa Laeel	humanoid_klepa_laeel	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_espa_100	TATOOINE	tat_world	AREA	0	-2978.0	5.0	2458.5	98	1	Mat Rags	humanoid_mat_rags	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_101	TATOOINE	tat_world	AREA	0	-2975.6	5.0	1910.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_espa_102	TATOOINE	tat_world	AREA	0	-3041.4	5.0	2212.6	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_103	TATOOINE	tat_world	AREA	0	-2910.9	5.0	2124.3	95	1	Prost Roberts (an untrained pilot)	humanoid_prost_roberts	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_104	TATOOINE	tat_world	AREA	0	-2909.9	5.0	2122.4	12	1	Rel Keteris (a Hutt pilot)	humanoid_rel_keteris	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_105	TATOOINE	tat_world	AREA	0	-2866.5	5.0	1856.9	169	1	Syndil Na'Marr	humanoid_watto_leg_syndil	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_espa_106	TATOOINE	tat_world	AREA	0	-2879.0	5.0	2579.7	-43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600

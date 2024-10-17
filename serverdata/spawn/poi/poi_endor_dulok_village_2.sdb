@@ -1,0 +1,11 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_dulok_village_2_1	ENDOR	end_world	AREA	0	6092.3	263.0	-2511.0	0	1	a Dulok outcast	humanoid_dulok_outcast	AGGRESSIVE	N	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_2	ENDOR	end_world	AREA	0	6097.3	265.0	-2461.9	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_3	ENDOR	end_world	AREA	0	6094.2	265.0	-2454.8	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_4	ENDOR	end_world	AREA	0	6092.9	263.0	-2485.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_5	ENDOR	end_world	AREA	0	6068.6	263.0	-2448.4	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_6	ENDOR	end_world	AREA	0	6054.4	262.0	-2508.5	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_7	ENDOR	end_world	AREA	0	6039.2	262.0	-2455.3	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_2_8	ENDOR	end_world	PATROL	0	6085.8	264.2	-2462.2	0	1	a Dulok outcast raider	humanoid_dulok_outcast_raider	AGGRESSIVE	E	61	70	POI	Dulok Village 2	1	PATROL	0	patrol_endor_100	column	idle			600
+poi_endor_dulok_village_2_9	ENDOR	end_world	AREA	0	6107.2	265.0	-2451.6	0	1	the Dulok outcast leader	humanoid_dulok_outcast_leader	AGGRESSIVE	B	61	70	POI	Dulok Village 2	1	LOITER	5	0	-	idle			600

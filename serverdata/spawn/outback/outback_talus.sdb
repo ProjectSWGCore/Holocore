@@ -1,0 +1,102 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_talus_1	TALUS	tal_world	AREA	0	-4460.4	6.4	4064.2	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_2	TALUS	tal_world	AREA	0	-4067.3	36.3	3662.7	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_3	TALUS	tal_world	AREA	0	-4069.0	36.0	3669.6	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_4	TALUS	tal_world	AREA	0	-3332.3	76.4	5170.8	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_5	TALUS	tal_world	AREA	0	1731.6	6.8	777.9	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_6	TALUS	tal_world	AREA	0	-567.1	53.5	1272.8	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_7	TALUS	tal_world	AREA	0	-3365.8	32.2	-3812.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_8	TALUS	tal_world	AREA	0	-3635.0	56.4	6327.3	0	1	a bodyguard	humanoid_bodyguard	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_9	TALUS	tal_world	AREA	0	-1836.1	7.9	1433.4	0	1	a Chadra Fan assassin	humanoid_chadra_fan_assassin	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_10	TALUS	tal_world	AREA	0	4319.9	49.4	4708.3	-119	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
+outback_talus_11	TALUS	tal_world	AREA	0	4258.2	49.4	4719.6	61	1	a CLL-8 binary load lifter	droid_talus_nashal_load_lifter	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
+outback_talus_12	TALUS	tal_world	AREA	0	4096.2	8.3	-55.5	0	1	a comm operator	humanoid_imperial_comm_operator	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_13	TALUS	tal_world	AREA	0	5173.2	32.1	-1738.6	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_14	TALUS	tal_world	AREA	0	1638.1	7.0	5435.9	0	1	a crazed roba	creature_roba_crazed	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_15	TALUS	tal_world	AREA	0	-6682.0	680.5	7267.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_16	TALUS	tal_world	AREA	0	-5808.9	5.1	-6401.2	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_17	TALUS	tal_world	AREA	0	-3165.2	689.7	6827.6	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_18	TALUS	tal_world	AREA	0	-1732.1	18.1	-2883.2	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_19	TALUS	tal_world	AREA	0	3889.6	29.9	3392.4	0	1	a frontiersman	humanoid_frontiersman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_20	TALUS	tal_world	AREA	0	4842.2	94.0	-4729.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_21	TALUS	tal_world	AREA	0	-1727.6	17.7	-2885.6	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_22	TALUS	tal_world	AREA	0	-3491.3	40.0	3701.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_23	TALUS	tal_world	AREA	0	-5679.6	7.1	5285.9	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_24	TALUS	tal_world	AREA	0	-3009.7	0.2	1947.3	0	1	a hermit	humanoid_hermit	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_25	TALUS	tal_world	AREA	0	-127.0	2.6	325.5	0	1	a highwayman	humanoid_highwayman	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_26	TALUS	tal_world	AREA	0	-4597.1	40.4	5701.3	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_27	TALUS	tal_world	AREA	0	5438.1	141.2	5581.1	0	1	a hilltop kima	creature_kima_hilltop	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_28	TALUS	tal_world	AREA	0	-5218.8	48.5	4603.7	0	1	a huf dun	creature_huf_dun	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_29	TALUS	tal_world	AREA	0	-5226.4	48.6	4596.7	0	1	a huf dun bull	creature_huf_dun_bull	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_30	TALUS	tal_world	AREA	0	5965.0	2.2	-1184.9	0	1	a Imperial Warrant Officer I	humanoid_imperial_veteran_warrant_officer_i	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_31	TALUS	tal_world	AREA	0	5407.5	57.3	2662.2	0	1	a kahmurra	creature_kahmurra	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_32	TALUS	tal_world	AREA	0	-4480.2	22.7	64.1	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_33	TALUS	tal_world	AREA	0	-3810.5	2.7	-6486.6	0	1	a kahmurra blanca	creature_murra_blanca	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_34	TALUS	tal_world	AREA	0	-3383.1	38.2	-6016.9	0	1	a Lost Aqualish marksman	humanoid_lost_aqualish_marksman	AGGRESSIVE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_35	TALUS	tal_world	AREA	0	4796.7	637.4	-6236.8	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+outback_talus_36	TALUS	tal_world	AREA	0	4795.9	636.5	-6245.5	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+outback_talus_37	TALUS	tal_world	AREA	0	4788.2	636.8	-6234.3	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+outback_talus_38	TALUS	tal_world	AREA	0	4783.9	637.2	-6245.7	0	1	a Lost Aqualish Marshall	humanoid_lost_aqualish_marshal	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+outback_talus_39	TALUS	tal_world	AREA	0	-2722.4	33.3	-2265.0	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_40	TALUS	tal_world	AREA	0	5350.7	1.1	4544.2	0	1	a Lost Aqualish scout	humanoid_lost_aqualish_scout	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_41	TALUS	tal_world	AREA	0	4791.5	637.9	-6240.6	0	1	a Lost Aqualish warchief	humanoid_lost_aqualish_warchief	AGGRESSIVE	E	41	50	Outback	Talus	1	IDLE	0	0	-	idle			600
+outback_talus_42	TALUS	tal_world	AREA	0	-100.9	73.3	2604.0	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_43	TALUS	tal_world	AREA	0	13.8	6.1	-902.6	0	1	a Lost Aqualish warrior	humanoid_lost_aqualish_warrior	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_44	TALUS	tal_world	AREA	0	-4909.1	4.0	-4497.9	0	1	a mercenary	humanoid_mercenary_aggro	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_45	TALUS	tal_world	AREA	0	-2257.0	5.3	900.7	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_46	TALUS	tal_world	AREA	0	-4475.0	24.3	56.1	0	1	a mutated kahmurra	creature_kahmurra_mutated	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_47	TALUS	tal_world	AREA	0	7541.3	443.4	876.8	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_48	TALUS	tal_world	AREA	0	7539.5	444.7	886.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_49	TALUS	tal_world	AREA	0	7533.4	443.3	879.3	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_50	TALUS	tal_world	AREA	0	2119.4	27.9	1275.2	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_51	TALUS	tal_world	AREA	0	911.5	80.7	4643.6	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_52	TALUS	tal_world	AREA	0	5199.2	30.5	-1739.0	0	1	a painted spat	creature_spat_painted	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_53	TALUS	tal_world	AREA	0	609.9	43.2	1111.5	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_54	TALUS	tal_world	AREA	0	1116.6	26.9	-1771.7	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_55	TALUS	tal_world	AREA	0	-5143.3	19.1	3236.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_56	TALUS	tal_world	AREA	0	-5150.4	13.0	3192.6	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_57	TALUS	tal_world	AREA	0	-5143.3	36.8	3705.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_58	TALUS	tal_world	AREA	0	1113.0	58.3	1488.0	0	1	a puss-covered decay mite soldier	creature_mite_decay_soldier_pusscovered	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_59	TALUS	tal_world	AREA	0	-5117.5	17.6	3205.9	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_60	TALUS	tal_world	AREA	0	-2595.2	47.0	101.3	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_61	TALUS	tal_world	AREA	0	4096.1	8.5	-48.0	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_62	TALUS	tal_world	AREA	0	-3194.3	50.1	4758.0	0	1	a Rebel SpecForce urban guerrilla	humanoid_rebel_specforce_guerrilla	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_63	TALUS	tal_world	AREA	0	-3631.9	56.5	6328.0	0	1	a scientist	humanoid_scientist	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_64	TALUS	tal_world	AREA	0	-5114.3	19.6	3219.2	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_65	TALUS	tal_world	AREA	0	-4989.0	41.9	5755.8	0	1	a sickly decay mite queen	creature_mite_sickly_decay_queen	AGGRESSIVE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_66	TALUS	tal_world	AREA	0	2340.6	38.8	2932.7	0	1	a Sleemo scamp	humanoid_sleemo_scamp	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_67	TALUS	tal_world	AREA	0	-2253.6	5.5	897.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_68	TALUS	tal_world	AREA	0	-1397.2	22.4	2118.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_69	TALUS	tal_world	AREA	0	-3448.9	43.5	6187.3	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_70	TALUS	tal_world	AREA	0	3101.3	65.9	-4063.3	0	1	a SpecForce marine	humanoid_rebel_specforce_marine	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_71	TALUS	tal_world	AREA	0	3089.9	65.9	-4017.9	0	1	a SpecForce wilderness operative	humanoid_rebel_specforce_wilderness_operative	ATTACKABLE	E	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_72	TALUS	tal_world	AREA	0	2381.8	125.0	-4995.1	0	1	a SpecOps trooper	humanoid_rebel_specops_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_73	TALUS	tal_world	AREA	0	5965.8	2.2	-1190.7	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_74	TALUS	tal_world	AREA	0	1725.8	22.9	1626.4	0	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_75	TALUS	tal_world	AREA	0	5981.1	3.5	-1205.6	0	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_76	TALUS	tal_world	AREA	0	-4555.5	140.3	-2903.2	0	1	a Talus Liberation Party patriot	humanoid_liberation_patriot	ATTACKABLE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_77	TALUS	tal_world	AREA	0	-54.3	7.6	979.9	0	1	a thug	humanoid_thug_human_female	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_78	TALUS	tal_world	AREA	0	82.4	11.5	1580.2	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_79	TALUS	tal_world	AREA	0	4971.4	63.9	3847.5	0	1	a tortur bull	creature_tortur_bull	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_80	TALUS	tal_world	AREA	0	-4593.0	0.6	4347.5	0	1	a TTLP Soldier	humanoid_talus_ttlp_soldier	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_81	TALUS	tal_world	AREA	0	-4001.9	1.4	971.4	0	1	a vicious huf dun	creature_huf_dun_vicious	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_82	TALUS	tal_world	AREA	0	618.3	40.9	1087.9	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_83	TALUS	tal_world	AREA	0	3880.9	30.0	3390.1	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_84	TALUS	tal_world	AREA	0	-3151.4	5.4	-926.8	0	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_85	TALUS	tal_world	AREA	0	-4759.9	15.8	3932.9	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_86	TALUS	tal_world	AREA	0	-5097.9	9.3	1266.6	0	1	a wolf kima	creature_kima_wolf	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_87	TALUS	tal_world	AREA	0	5473.7	43.0	1097.5	0	1	a woodland kima	creature_kima_woodland	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_88	TALUS	tal_world	AREA	0	-3677.0	35.0	-554.0	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	Outback	Talus	1	TURN	0	0	-	idle			600
+outback_talus_89	TALUS	tal_world	AREA	0	-3682.3	35.4	-543.3	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_90	TALUS	tal_world	AREA	0	-4021.1	30.1	4621.3	0	1	an Aa'kuan sentinel	humanoid_aakuan_sentinel	ATTACKABLE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_91	TALUS	tal_world	AREA	0	-4915.9	4.5	-4498.3	0	1	an agriculturalist	humanoid_farmer_agriculturist	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_92	TALUS	tal_world	AREA	0	4304.7	49.4	4751.1	96	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+outback_talus_93	TALUS	tal_world	AREA	0	4256.6	49.4	4759.4	18	1	an EG-6 power droid	droid_talus_nashal_power	INVULNERABLE	N	100	100	Outback	Talus	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+outback_talus_94	TALUS	tal_world	AREA	0	3214.8	8.4	1259.7	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_95	TALUS	tal_world	AREA	0	-6024.1	66.6	-1186.0	0	1	an Imperial scout trooper	humanoid_imperial_scout_trooper	ATTACKABLE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_96	TALUS	tal_world	AREA	0	-5120.6	19.5	3223.0	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_97	TALUS	tal_world	AREA	0	-4977.8	42.7	5754.9	0	1	an oozing dung mite guardian	creature_mite_dung_oozing_guardian	AGGRESSIVE	N	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_98	TALUS	tal_world	AREA	0	-2406.0	23.0	2044.0	0	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_99	TALUS	tal_world	AREA	0	-2384.4	24.0	2033.5	0	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600
+outback_talus_100	TALUS	tal_world	AREA	0	-2412.3	27.5	2024.9	0	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	41	50	Outback	Talus	1	LOITER	5	0	-	idle			600

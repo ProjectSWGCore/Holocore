@@ -1,0 +1,39 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_endor_smuggler_outpost_1	ENDOR	end_smuggler_outpost_cantina	AREA	3	0.7	0.7	-0.9	-6	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_2	ENDOR	end_smuggler_outpost_cantina	AREA	3	0.2	0.7	0.6	151	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_endor_smuggler_outpost_3	ENDOR	end_smuggler_outpost_cantina	AREA	3	-2.0	0.7	-3.5	-87	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_endor_smuggler_outpost_4	ENDOR	end_smuggler_outpost_cantina	AREA	3	1.1	0.7	0.4	-152	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_endor_smuggler_outpost_5	ENDOR	end_smuggler_outpost_cloning	AREA	4	4.2	0.1	0.6	-59	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_6	ENDOR	end_smuggler_outpost_cloning	AREA	4	2.6	0.1	1.6	117	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_7	ENDOR	end_smuggler_outpost_cloning	AREA	6	-5.3	0.1	-0.8	133	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_endor_smuggler_outpost_8	ENDOR	end_smuggler_outpost_cloning	AREA	6	-2.6	0.1	-0.9	-136	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_endor_smuggler_outpost_9	ENDOR	end_smuggler_outpost_med_center	AREA	4	3.6	0.1	2.8	-158	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_10	ENDOR	end_smuggler_outpost_med_center	AREA	4	2.9	0.1	1.2	11	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_11	ENDOR	end_smuggler_outpost_med_center	PATROL	5	4.5	0.1	-3.7	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_endor_1000	column	idle			600
+city_endor_smuggler_outpost_12	ENDOR	end_smuggler_outpost_med_center	AREA	6	-4.1	0.1	-3.2	-69	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_13	ENDOR	end_smuggler_outpost_med_center	AREA	6	-5.0	0.1	-5.3	46	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_endor_smuggler_outpost_14	ENDOR	end_smuggler_outpost_starport	AREA	1	-4.7	0.1	-17.5	91	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_endor_smuggler_outpost_15	ENDOR	end_world	PATROL	0	-860.5	87.2	1504.0	0	1	a CLL-8 binary load lifter	droid_binary_load_lifter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	PATROL	0	patrol_endor_900	column	idle		simple_droid_sarcastic_flee_4	600
+city_endor_smuggler_outpost_16	ENDOR	end_world	AREA	0	-915.1	80.2	1605.7	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle		commoner	600
+city_endor_smuggler_outpost_17	ENDOR	end_world	AREA	0	-899.5	78.0	1565.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle		commoner	600
+city_endor_smuggler_outpost_18	ENDOR	end_world	AREA	0	-875.2	76.0	1632.0	112	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_19	ENDOR	end_world	AREA	0	-830.8	76.0	1576.9	-137	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_ground			600
+city_endor_smuggler_outpost_20	ENDOR	end_world	AREA	0	-829.4	76.0	1569.2	-70	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_21	ENDOR	end_world	AREA	0	-831.2	76.0	1569.8	105	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_22	ENDOR	end_world	AREA	0	-836.4	76.0	1582.9	-105	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_23	ENDOR	end_world	AREA	0	-964.4	73.0	1534.0	116	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_24	ENDOR	end_world	AREA	0	-962.7	73.0	1533.1	-65	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_25	ENDOR	end_world	AREA	0	-874.2	80.0	1565.6	-78	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_26	ENDOR	end_world	AREA	0	-872.6	76.0	1632.4	-130	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	conversation			600
+city_endor_smuggler_outpost_27	ENDOR	end_world	AREA	0	-878.8	76.0	1627.9	138	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_28	ENDOR	end_world	AREA	0	-867.7	76.0	1624.2	-142	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_sitting_ground			600
+city_endor_smuggler_outpost_29	ENDOR	end_world	PATROL	0	-922.7	76.0	1565.4	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	61	70	City	Smuggler Outpost	1	PATROL	0	patrol_endor_200	column	idle			600
+city_endor_smuggler_outpost_30	ENDOR	end_world	PATROL	0	-924.2	76.0	1567.2	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	61	70	City	Smuggler Outpost	1	PATROL	0	patrol_endor_300	column	idle			600
+city_endor_smuggler_outpost_31	ENDOR	end_world	AREA	0	-905.8	78.0	1560.8	140	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_endor_smuggler_outpost_32	ENDOR	end_world	AREA	0	-968.6	73.0	1558.2	-1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_33	ENDOR	end_world	AREA	0	-876.5	76.0	1617.7	16	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	5	0	-	idle			600
+city_endor_smuggler_outpost_34	ENDOR	end_world	AREA	0	-886.9	76.0	1589.8	39	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+city_endor_smuggler_outpost_35	ENDOR	end_world	AREA	0	-986.7	73.0	1575.3	-135	1	Eyd Tommsin	humanoid_eyd_tommsin	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_36	ENDOR	end_world	AREA	0	-841.4	79.9	1613.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600
+city_endor_smuggler_outpost_37	ENDOR	end_world	AREA	0	-835.0	80.1	1606.0	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Smuggler Outpost	1	IDLE	0	0	-	idle			600

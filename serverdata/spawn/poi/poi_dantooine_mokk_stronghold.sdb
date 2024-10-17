@@ -1,0 +1,40 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dantooine_mokk_stronghold_1	DANTOOINE	dan_world	AREA	0	-7047.0	2.2	-3329.1	-163	1	a Mokk clan leader	humanoid_mokk_clan_leader	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_2	DANTOOINE	dan_world	AREA	0	-7065.6	2.0	-3340.1	-35	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_3	DANTOOINE	dan_world	AREA	0	-7061.7	2.4	-3359.8	-27	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_4	DANTOOINE	dan_world	AREA	0	-7057.1	2.0	-3307.6	55	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_5	DANTOOINE	dan_world	AREA	0	-7026.0	1.9	-3309.6	59	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_6	DANTOOINE	dan_world	AREA	0	-7021.4	2.3	-3306.2	-143	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_7	DANTOOINE	dan_world	AREA	0	-7072.7	2.2	-3340.6	-127	1	a Mokk loreweaver	humanoid_mokk_loreweaver	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_8	DANTOOINE	dan_world	AREA	0	-7051.9	2.2	-3332.1	114	1	a Mokk loreweaver	humanoid_mokk_loreweaver	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_9	DANTOOINE	dan_world	AREA	0	-7043.4	2.5	-3334.3	-85	1	a Mokk loreweaver	humanoid_mokk_loreweaver	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_10	DANTOOINE	dan_world	AREA	0	-7067.1	1.9	-3337.0	119	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_11	DANTOOINE	dan_world	AREA	0	-7064.7	2.0	-3337.2	-149	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_12	DANTOOINE	dan_world	AREA	0	-7049.3	1.9	-3312.3	95	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_13	DANTOOINE	dan_world	AREA	0	-7034.0	2.7	-3346.3	-158	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_14	DANTOOINE	dan_world	AREA	0	-7032.1	2.8	-3339.1	24	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_15	DANTOOINE	dan_world	AREA	0	-7031.8	2.9	-3352.4	159	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_16	DANTOOINE	dan_world	AREA	0	-7029.4	2.0	-3315.6	25	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_17	DANTOOINE	dan_world	AREA	0	-7060.5	2.5	-3358.1	-89	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_18	DANTOOINE	dan_world	AREA	0	-7055.7	2.0	-3306.6	-130	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_19	DANTOOINE	dan_world	AREA	0	-7044.3	3.1	-3355.5	126	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_20	DANTOOINE	dan_world	AREA	0	-7040.5	3.1	-3355.6	-127	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_21	DANTOOINE	dan_world	AREA	0	-7038.4	2.0	-3315.9	98	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_22	DANTOOINE	dan_world	AREA	0	-7050.6	2.1	-3330.1	147	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_23	DANTOOINE	dan_world	AREA	0	-7043.6	2.4	-3331.7	-117	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_24	DANTOOINE	dan_world	AREA	0	-7051.8	2.3	-3334.7	71	1	a Mokk soothsayer	humanoid_mokk_soothsayer	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_25	DANTOOINE	dan_world	AREA	0	-7045.0	2.6	-3336.9	-46	1	a Mokk tribesman	humanoid_mokk_tribesman	AGGRESSIVE	N	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_26	DANTOOINE	dan_world	AREA	0	-7075.0	2.0	-3332.3	30	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_27	DANTOOINE	dan_world	AREA	0	-7074.3	2.0	-3330.6	-162	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_28	DANTOOINE	dan_world	AREA	0	-7072.5	2.0	-3320.7	-97	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_29	DANTOOINE	dan_world	AREA	0	-7060.9	2.5	-3356.7	135	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_30	DANTOOINE	dan_world	AREA	0	-7059.3	2.2	-3346.1	129	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_31	DANTOOINE	dan_world	AREA	0	-7055.3	2.5	-3346.1	179	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_32	DANTOOINE	dan_world	AREA	0	-7048.8	2.8	-3347.8	179	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_33	DANTOOINE	dan_world	AREA	0	-7046.5	3.0	-3351.8	-146	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_34	DANTOOINE	dan_world	AREA	0	-7039.7	1.1	-3305.0	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_35	DANTOOINE	dan_world	AREA	0	-7039.2	3.1	-3353.4	141	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_36	DANTOOINE	dan_world	AREA	0	-7038.0	1.3	-3305.0	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_37	DANTOOINE	dan_world	AREA	0	-7034.3	2.0	3316.9	-64	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_mokk_stronghold_38	DANTOOINE	dan_world	AREA	0	-7030.5	2.8	-3335.6	-159	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Mokk Stronghold	1	IDLE	0	0	-	idle			900

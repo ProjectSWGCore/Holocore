@@ -1,0 +1,42 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_yavin4_labor_outpost_1	YAVIN4	yav_labor_outpost_cloning	AREA	5	3.6	0.1	-3.8	47	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_labor_outpost_2	YAVIN4	yav_labor_outpost_cloning	AREA	5	4.2	0.1	-2.7	-90	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_3	YAVIN4	yav_labor_outpost_medium_house	AREA	1	9.3	0.6	2.6	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_4	YAVIN4	yav_labor_outpost_medium_house	AREA	3	-0.6	0.6	-8	1	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_5	YAVIN4	yav_labor_outpost_medium_house	AREA	1	1.6	0.6	1.1	39	1	Lt. Col. Aqzow (Rebel Pilot Trainer)	humanoid_rebel_lt_col_aqzow	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_labor_outpost_6	YAVIN4	yav_labor_outpost_medium_house	AREA	4	8.3	0.6	-4.5	90	1	Wuioe Opca	humanoid_clone_wuioe_opca	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_yavin4_labor_outpost_7	YAVIN4	yav_labor_outpost_pirate	AREA	4	3.9	0.1	0.7	-14	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_labor_outpost_8	YAVIN4	yav_labor_outpost_pirate	AREA	4	3.5	0.1	2.3	173	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_labor_outpost_9	YAVIN4	yav_labor_outpost_pirate	AREA	6	-4	0.1	-1.9	-180	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_10	YAVIN4	yav_labor_outpost_small_house	AREA	3	0.5	0.6	-6.3	179	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_yavin4_labor_outpost_11	YAVIN4	yav_labor_outpost_small_house	AREA	3	2.7	0.6	-5.3	0	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_12	YAVIN4	yav_labor_outpost_small_house	AREA	3	-0.6	0.6	-5.3	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_13	YAVIN4	yav_labor_outpost_small_house	AREA	1	-5.6	0.6	5.8	135	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_14	YAVIN4	yav_labor_outpost_small_house	AREA	1	-3.3	0.6	4	175	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_labor_outpost_15	YAVIN4	yav_labor_outpost_small_house	AREA	1	-3.0	0.6	1.0	-4	1	Major Eker (Rebel Pilot Trainer)	humanoid_rebel_major_eker	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_labor_outpost_16	YAVIN4	yav_labor_outpost_starport	AREA	1	-4.7	0.1	-17.6	89	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_yavin4_labor_outpost_17	YAVIN4	yav_world	AREA	0	-6943.7	73	-5707.1	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_labor_outpost_18	YAVIN4	yav_world	AREA	0	-6967.7	73	-5688.8	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_labor_outpost_19	YAVIN4	yav_world	AREA	0	-6984.9	73	-5751.5	31	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_labor_outpost_20	YAVIN4	yav_world	AREA	0	-6983.6	73	-5753.3	31	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_labor_outpost_21	YAVIN4	yav_world	AREA	0	-6872.8	73.0	-5686.3	-54	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_labor_outpost_22	YAVIN4	yav_world	AREA	0	-6904.7	73.0	-5656.3	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_labor_outpost_23	YAVIN4	yav_world	AREA	0	-6981.1	73.0	-5659.5	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle		commoner	600
+city_yavin4_labor_outpost_24	YAVIN4	yav_world	AREA	0	-6966.8	73.0	-5730.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_labor_outpost_25	YAVIN4	yav_world	AREA	0	-6911.3	73.0	-5736.3	-106	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_labor_outpost_26	YAVIN4	yav_world	AREA	0	-6893.0	73.0	-5743.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_labor_outpost_27	YAVIN4	yav_world	PATROL	0	-6883.3	73.0	-5685.0	45	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yavin4_500	column	idle			600
+city_yavin4_labor_outpost_28	YAVIN4	yav_world	PATROL	0	-6929.9	73.0	-5709.8	0	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yavin4_600	column	idle			600
+city_yavin4_labor_outpost_29	YAVIN4	yav_world	AREA	0	-6885.5	73.0	-5697.0	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	6	0	-	npc_use_terminal_high			600
+city_yavin4_labor_outpost_30	YAVIN4	yav_world	AREA	0	-6944.4	73.0	-5656.9	-1	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_yavin4_labor_outpost_31	YAVIN4	yav_world	PATROL	0	-6875.1	73.0	-5716.8	89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yavin4_400	column	idle			600
+city_yavin4_labor_outpost_32	YAVIN4	yav_world	AREA	0	-6967.2	73	-5742.9	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle			600
+city_yavin4_labor_outpost_33	YAVIN4	yav_world	AREA	0	-6955.7	73	-5698.6	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Labor Outpost	1	LOITER	5	0	-	idle			600
+city_yavin4_labor_outpost_34	YAVIN4	yav_world	AREA	0	-6918.7	73.0	-5736.8	89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_yavin4_labor_outpost_35	YAVIN4	yav_world	PATROL	0	-6979.7	73.0	-5714.9	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Labor Outpost	1	PATROL	0	patrol_yavin4_900	column	idle		simple_droid_geek_bye_nice_13	600
+city_yavin4_labor_outpost_36	YAVIN4	yav_world	AREA	0	-7084.1	66.0	-5819.9	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	City	Labor Outpost	1	LOITER	5	0	-	idle			600
+city_yavin4_labor_outpost_37	YAVIN4	yav_world	AREA	0	-7053.1	69.9	-5831.3	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	City	Labor Outpost	1	LOITER	5	0	-	idle			600
+city_yavin4_labor_outpost_38	YAVIN4	yav_world	AREA	0	-7091.3	67.0	-5877.4	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	City	Labor Outpost	1	LOITER	5	0	-	idle			600
+city_yavin4_labor_outpost_39	YAVIN4	yav_world	AREA	0	-6984.5	73.0	-5752.7	18	1	an R5 unit	droid_r5_mix	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_yavin4_labor_outpost_40	YAVIN4	yav_world	AREA	0	-6900.3	73.0	-5655.1	-161	1	Soci	humanoid_yavin4_soci	INVULNERABLE	N	100	100	City	Labor Outpost	1	IDLE	0	0	-	idle			600

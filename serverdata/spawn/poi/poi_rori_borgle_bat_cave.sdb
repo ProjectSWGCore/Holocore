@@ -1,0 +1,17 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_rori_borgle_bat_cave_1	RORI	ror_bat_cave	AREA	10	-20.4	-80.2	-149.3	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_2	RORI	ror_bat_cave	AREA	11	-92.8	-100.9	-97.4	0	1	a borgle matriarch	creature_borgle_matriarch	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_3	RORI	ror_bat_cave	AREA	11	-101.3	-100.7	-123.7	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_4	RORI	ror_bat_cave	AREA	3	0.4	-40.6	-70.4	0	1	a blood thirsty borgle	creature_borgle_blood_thirsty	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_5	RORI	ror_bat_cave	AREA	4	49.2	-46.8	-58.1	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_6	RORI	ror_bat_cave	AREA	5	-7.8	-46.5	-150.6	0	1	a blood thirsty borgle	creature_borgle_blood_thirsty	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_7	RORI	ror_bat_cave	AREA	5	35.1	-49.7	-135.3	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_8	RORI	ror_bat_cave	AREA	6	4.7	-64.0	-181.0	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_9	RORI	ror_bat_cave	AREA	7	-12.8	-64.5	-222.1	0	1	a blood thirsty borgle	creature_borgle_blood_thirsty	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_10	RORI	ror_bat_cave	AREA	8	-73.8	-99.2	-158.8	0	1	a blood thirsty borgle	creature_borgle_blood_thirsty	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_11	RORI	ror_bat_cave	AREA	8	-65.9	-69.1	-185.5	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_12	RORI	ror_bat_cave	AREA	8	-88.5	-70.1	-120.5	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_13	RORI	ror_bat_cave	AREA	8	-92.8	-101.6	-145.7	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_14	RORI	ror_bat_cave	AREA	9	-46.9	-69.4	-96.9	0	1	a borgle protector	creature_borgle_protector	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600
+poi_rori_borgle_bat_cave_15	RORI	ror_world	AREA	0	876.6	85.6	-4907.1	0	1	a borgle harvester	creature_borgle_harvester	AGGRESSIVE	N	36	45	POI	Borgle Bat Cave	1	TURN	0	0	-	idle			600

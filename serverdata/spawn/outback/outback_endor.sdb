@@ -1,0 +1,15 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_endor_1	ENDOR	end_world	AREA	0	-235.9	208.2	3534.8	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_2	ENDOR	end_world	AREA	0	-226.1	208.5	3543.1	0	1	a Dark Adept	humanoid_jedi_dark_adept	AGGRESSIVE	N	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_3	ENDOR	end_world	AREA	0	-2888.5	21.6	-4640.5	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_4	ENDOR	end_world	AREA	0	-2869.7	16.7	-4621.7	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_5	ENDOR	end_world	AREA	0	-2864.3	17.7	-4638.6	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_6	ENDOR	end_world	AREA	0	-222.3	208.0	3517.3	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_7	ENDOR	end_world	AREA	0	-212.1	207.7	3522.8	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_8	ENDOR	end_world	AREA	0	-2872.4	19.4	-4634.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	B	61	70	Outback	Endor	1	TURN	0	0	-	idle			600
+outback_endor_9	ENDOR	end_world	AREA	0	-208.4	207.0	3511.3	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	B	61	70	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_10	ENDOR	end_world	AREA	0	-235.7	208.5	3521.4	0	1	Captured old man	humanoid_captured_old_man	INVULNERABLE	N	100	100	Outback	Endor	1	LOITER	5	0	-	idle			600
+outback_endor_11	ENDOR	end_world	AREA	0	667.0	207.8	4972.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	TURN	0	0	-	idle			600
+outback_endor_12	ENDOR	end_world	AREA	0	6018.0	212.2	6146.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	TURN	0	0	-	idle			600
+outback_endor_13	ENDOR	end_world	AREA	0	6401.7	220.2	-254.8	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Endor	1	IDLE	0	0	-	idle			600

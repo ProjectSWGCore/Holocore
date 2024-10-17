@@ -1,0 +1,42 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_yavin4_mining_outpost_1	YAVIN4	yav_labor_outpost_medium_house	AREA	1	10.6	0.6	3.6	-89	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_2	YAVIN4	yav_labor_outpost_medium_house	AREA	3	-5.0	0.6	-2.0	60	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_3	YAVIN4	yav_labor_outpost_medium_house	AREA	3	-3.1	0.6	-0.9	-119	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_4	YAVIN4	yav_mining_outpost_cloning	AREA	3	0.2	0.1	-3.6	-146	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_mining_outpost_5	YAVIN4	yav_mining_outpost_cloning	AREA	3	-1	0.1	-5.4	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_6	YAVIN4	yav_mining_outpost_medium_house	AREA	1	1.1	0.6	1	-65	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_7	YAVIN4	yav_mining_outpost_medium_house	AREA	1	-1	0.6	1.6	94	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_8	YAVIN4	yav_mining_outpost_medium_house	AREA	1	4.1	0.6	5.9	170	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_mining_outpost_9	YAVIN4	yav_mining_outpost_medium_house	AREA	1	4.3	0.6	4.0	-13	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_yavin4_mining_outpost_10	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-0.8	0.6	-5.0	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_11	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-3.5	0.6	-2.7	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_12	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-7.7	0.6	-5.1	109	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	entertained			600
+city_yavin4_mining_outpost_13	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-2.1	0.6	-4.9	-179	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_14	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-0.8	0.6	-2.8	-179	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_15	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-2.1	0.6	-2.8	-179	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_16	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-4.8	0.6	-4.9	-179	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_17	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-0.3	0.6	-7.6	0	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	dance_1			600
+city_yavin4_mining_outpost_18	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-4.3	0.6	-7.6	0	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	dance_1			600
+city_yavin4_mining_outpost_19	YAVIN4	yav_mining_outpost_medium_house	AREA	3	-2.3	0.6	-7.6	0	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	themepark_music_1			600
+city_yavin4_mining_outpost_20	YAVIN4	yav_mining_outpost_shed	AREA	4	4.9	0.1	3.4	-180	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_21	YAVIN4	yav_mining_outpost_shed	AREA	4	3.6	0.1	-0.3	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_22	YAVIN4	yav_mining_outpost_shed	AREA	6	-3.9	0.1	-3.9	77	1	Gardo Valdell	humanoid_herald_biogenic_gardo	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_mining_outpost_23	YAVIN4	yav_mining_outpost_small_house	AREA	3	-2.5	0.7	-0.6	104	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_mining_outpost_24	YAVIN4	yav_mining_outpost_small_house	AREA	3	-0.3	0.7	-4.1	0	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_25	YAVIN4	yav_mining_outpost_small_house	AREA	3	-1.3	0.7	-1.0	-68	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_mining_outpost_26	YAVIN4	yav_mining_outpost_small_house	AREA	4	1.0	0.7	4.4	-125	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_yavin4_mining_outpost_27	YAVIN4	yav_mining_outpost_small_house	AREA	4	-0.4	0.7	3.5	56	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_28	YAVIN4	yav_mining_outpost_small_house	AREA	4	-1.2	0.7	5.4	180	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_29	YAVIN4	yav_mining_outpost_small_house	AREA	4	3.3	0.7	2.5	-28	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_yavin4_mining_outpost_30	YAVIN4	yav_world	AREA	0	-319.1	35	4842.8	-90	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_mining_outpost_31	YAVIN4	yav_world	AREA	0	-351.1	35.0	4859.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle		commoner	600
+city_yavin4_mining_outpost_32	YAVIN4	yav_world	AREA	0	-284.7	35.0	4873.1	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_mining_outpost_33	YAVIN4	yav_world	AREA	0	-264.8	35.0	4860.8	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle		commoner	600
+city_yavin4_mining_outpost_34	YAVIN4	yav_world	PATROL	0	-349.6	35.0	4853.2	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yavin4_300	column	idle			600
+city_yavin4_mining_outpost_35	YAVIN4	yav_world	PATROL	0	-254.8	35.0	4872.8	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yavin4_200	column	idle			600
+city_yavin4_mining_outpost_36	YAVIN4	yav_world	AREA	0	-312.0	35.0	4855.4	177	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_yavin4_mining_outpost_37	YAVIN4	yav_world	PATROL	0	-290.8	35.0	4889.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_yavin4_100	column	idle		simple_droid_sarcastic_flee_4	600
+city_yavin4_mining_outpost_38	YAVIN4	yav_world	AREA	0	-344.3	35.0	4812.2	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_yavin4_mining_outpost_39	YAVIN4	yav_world	AREA	0	-292.2	35.0	4833.6	0	1	Osae	humanoid_yavin4_osae	INVULNERABLE	N	100	100	City	Mining Outpost	1	TURN	0	0	-	idle			600
+city_yavin4_mining_outpost_40	YAVIN4	yav_world	AREA	0	-247.0	35.0	4877.0	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mining Outpost	1	TURN	0	0	-	idle			600

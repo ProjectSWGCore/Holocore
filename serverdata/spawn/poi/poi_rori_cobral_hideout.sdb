@@ -1,0 +1,13 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_rori_cobral_hideout_1	RORI	ror_cobral_bunker	AREA	10	-1.8	-20.8	26.0	0	1	a Neo-Cobral assassin	humanoid_neo_assassin	AGGRESSIVE	E	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_2	RORI	ror_cobral_bunker	AREA	10	1.6	-20.8	32.0	0	1	a Neo-Cobral boss	humanoid_neo_boss	AGGRESSIVE	B	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			900
+poi_rori_cobral_hideout_3	RORI	ror_cobral_bunker	AREA	10	5.0	-20.8	26.0	0	1	a Neo-Cobral hitman	humanoid_neo_hitman	AGGRESSIVE	E	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_4	RORI	ror_cobral_bunker	AREA	2	0.0	0.3	2.8	0	1	a Neo-Cobral thief	humanoid_neo_thief	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_5	RORI	ror_cobral_bunker	AREA	3	2.7	0.3	-4.0	0	1	a Neo-Cobral runner	humanoid_neo_runner	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_6	RORI	ror_cobral_bunker	AREA	7	-7.9	-13.8	6.9	0	1	a Neo-Cobral bandit	humanoid_neo_bandit	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_7	RORI	ror_cobral_bunker	AREA	7	2.2	-13.8	6.5	0	1	a Neo-Cobral runner	humanoid_neo_runner	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_8	RORI	ror_cobral_bunker	AREA	9	3.6	-20.7	9.9	0	1	a Neo-Cobral assassin	humanoid_neo_assassin	AGGRESSIVE	E	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_9	RORI	ror_cobral_bunker	AREA	9	-1.5	-20.7	5.1	0	1	a Neo-Cobral hitman	humanoid_neo_hitman	AGGRESSIVE	E	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_10	RORI	ror_world	AREA	0	5443.9	87.0	5029.4	0	1	a Neo-Cobral thug	humanoid_neo_thug	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	TURN	0	0	-	idle			600
+poi_rori_cobral_hideout_11	RORI	ror_world	AREA	0	5448.0	87.0	5029.4	90	1	a Neo-Cobral thug	humanoid_neo_thug	AGGRESSIVE	N	36	45	POI	Cobral Hideout	1	IDLE	0	0	-	idle			600

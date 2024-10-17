@@ -1,0 +1,30 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_tatooine_jawa_traders_1	TATOOINE	tat_world	PATROL	0	-6196.3	22.8	1800.1	-55	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	POI	Jawa Traders	2	PATROL	0	patrol_tatooine_4900	line	idle			600
+poi_tatooine_jawa_traders_2	TATOOINE	tat_world	PATROL	0	-6103.2	23.6	1850.2	-100	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5000	column	idle			600
+poi_tatooine_jawa_traders_3	TATOOINE	tat_world	PATROL	0	-6204.2	23.1	1703.3	40	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5100	column	idle			600
+poi_tatooine_jawa_traders_4	TATOOINE	tat_world	PATROL	0	-6196.1	23.3	1802.1	-50	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jawa Traders	1	PATROL	0	patrol_tatooine_5200	column	idle		simple_droid_geek_bye_nice_13	600
+poi_tatooine_jawa_traders_5	TATOOINE	tat_world	PATROL	0	-6078.2	23.8	1800.2	0	1	a Jawa Protector	humanoid_jawa_protector	INVULNERABLE	N	100	100	POI	Jawa Traders	5	PATROL	0	patrol_tatooine_5300	line	idle			600
+poi_tatooine_jawa_traders_6	TATOOINE	tat_world	AREA	0	-6183.7	23.6	1907.5	-50	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	conversation			600
+poi_tatooine_jawa_traders_7	TATOOINE	tat_world	AREA	0	-6002.0	44.2	1852.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_8	TATOOINE	tat_world	AREA	0	-6158.0	51.1	2029.8	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_9	TATOOINE	tat_world	AREA	0	-6249.5	36.7	1961.8	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_10	TATOOINE	tat_world	AREA	0	-6186.5	23.6	1909.7	127	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	conversation			600
+poi_tatooine_jawa_traders_11	TATOOINE	tat_world	AREA	0	-6226.6	23.7	1884.5	79	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_tatooine_jawa_traders_12	TATOOINE	tat_world	AREA	0	-6204.8	23.6	1840.6	125	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_13	TATOOINE	tat_world	AREA	0	-6149.6	23.6	1852.4	-146	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_14	TATOOINE	tat_world	AREA	0	-6159.7	23.5	1875.0	-137	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_15	TATOOINE	tat_world	AREA	0	-6192.7	23.6	1872.5	0	1	a LIN demolition mech	droid_lin_demolition_mech	INVULNERABLE	N	100	100	POI	Jawa Traders	1	LOITER	5	0	-	idle		simple_droid_sarcastic_alert_2	600
+poi_tatooine_jawa_traders_16	TATOOINE	tat_world	AREA	0	-6076.7	52.6	2013.9	0	1	a wild bladeback boar	creature_boar_bladeback_wild	ATTACKABLE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_17	TATOOINE	tat_world	AREA	0	-6411.1	308.5	2155.4	0	1	a wild bladeback boar	creature_boar_bladeback_wild	ATTACKABLE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			1800
+poi_tatooine_jawa_traders_18	TATOOINE	tat_world	AREA	0	-6031.3	42.3	1948.7	0	1	a wild zucca boar	creature_boar_zucca_wild	ATTACKABLE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_19	TATOOINE	tat_world	AREA	0	-6398.0	295.0	2165.6	0	1	a wild zucca boar	creature_boar_zucca_wild	ATTACKABLE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_20	TATOOINE	tat_world	AREA	0	-6423.3	301.2	2157.2	0	1	a wild zucca boar	creature_boar_zucca_wild	ATTACKABLE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600
+poi_tatooine_jawa_traders_21	TATOOINE	tat_world	AREA	0	-6205.5	23.6	1845.8	155	1	Acic Ugadie	humanoid_acic_ugadie	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_22	TATOOINE	tat_world	AREA	0	-6152.1	23.6	1810.5	0	1	C4-ZX	droid_tatooine_watto_jawa_c4zx	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_23	TATOOINE	tat_world	AREA	0	-6153.3	23.6	1918.8	168	1	Jawa Junk Dealer	humanoid_junk_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle		junk_dealer_generic	600
+poi_tatooine_jawa_traders_24	TATOOINE	tat_world	AREA	0	-6152.0	23.6	1812.1	-166	1	Ji'Ni Sil	humanoid_tatooine_watto_jawa	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle			600
+poi_tatooine_jawa_traders_25	TATOOINE	tat_world	AREA	0	-6144.2	23.6	1872.2	-38	1	Opeute	humanoid_opeute	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	npc_use_terminal_high			600
+poi_tatooine_jawa_traders_26	TATOOINE	tat_world	AREA	0	-6158.0	23.6	1836.0	-173	1	Protocol Droid	droid_protocol_jawa_fort	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
+poi_tatooine_jawa_traders_27	TATOOINE	tat_world	AREA	0	-6224.4	23.7	1885.3	-155	1	Smuggler Pilot	humanoid_smuggler_pilot	INVULNERABLE	N	100	100	POI	Jawa Traders	1	IDLE	0	0	-	npc_sitting_table			600
+poi_tatooine_jawa_traders_28	TATOOINE	tat_world	AREA	0	-5998.2	62.9	1806.0	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	5	10	POI	Jawa Traders	1	LOITER	5	0	-	idle			600

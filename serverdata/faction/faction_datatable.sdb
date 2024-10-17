@@ -22,6 +22,8 @@ cor_swoop	TRUE	TRUE	FALSE	-	TRUE	smashball	-	1
 corsec	TRUE	TRUE	FALSE	-	TRUE	afarathu;followers_of_lord_nyax;monumenter;rogue_corsec;lost_aqualish;flail	beldonnas_league	1
 dantari_raiders	TRUE	TRUE	FALSE	-	TRUE	kunga_tribe;mokk_tribe;janta_tribe	-	1
 dark_jedi_kenobi	FALSE	TRUE	FALSE	-	FALSE	-	-	1
+dark_jedi_sentinel	FALSE	TRUE	FALSE	-	TRUE	rebel	imperial	1
+dathomir_scavenger	FALSE	TRUE	FALSE	-	TRUE	-	-	1
 death_watch	FALSE	TRUE	FALSE	-	FALSE	death_watch_special	-	1
 death_watch_special	FALSE	FALSE	FALSE	-	FALSE	-	-	1
 desert_demon	TRUE	TRUE	FALSE	-	TRUE	swoop	-	1
@@ -42,6 +44,7 @@ garyn	TRUE	TRUE	FALSE	-	TRUE	police	-	1
 geonosian_crazed_monster	FALSE	TRUE	FALSE	-	FALSE	-	geonosian_mad_bunker	1
 geonosian_crazy	FALSE	TRUE	FALSE	-	FALSE	geonosian_mad_bunker;geonosian_crazed_monster	-	1
 geonosian_mad_bunker	FALSE	TRUE	FALSE	-	FALSE	-	geonosian_crazed_monster	1
+ghent	FALSE	FALSE	FALSE	-	TRUE	-	-	1
 gondula_tribe	TRUE	TRUE	FALSE	-	TRUE	donkuwah_tribe;korga_tribe;pubam;endor_marauder	panshee_tribe	1
 gorax	FALSE	TRUE	FALSE	-	TRUE	gondula_tribe;panshee_tribe	-	1
 gungan	TRUE	TRUE	FALSE	-	TRUE	plasma_thief;swamp_rat;borvo;Imperial	-	1
@@ -53,12 +56,14 @@ imperialcitizen	FALSE	FALSE	FALSE	-	FALSE	-	-	1
 jabba	TRUE	TRUE	FALSE	-	TRUE	valarian;borvo;police	hutt	1
 janta_tribe	TRUE	TRUE	FALSE	-	TRUE	kunga_tribe;dantari_raiders	-	1
 jawa	TRUE	TRUE	FALSE	-	TRUE	tusken_raider	-	1
+jinda_tribe	FALSE	FALSE	FALSE	-	TRUE	-	-	1
 kashyyyk	TRUE	TRUE	FALSE	-	TRUE	-	-	1
 kashyyyk_resistance	FALSE	TRUE	TRUE	-	FALSE	hsskor	-	1
 kobola	TRUE	TRUE	FALSE	-	TRUE	narmle;spice_collective	-	1
 korga_tribe	TRUE	TRUE	FALSE	-	TRUE	gondula_tribe;panshee_tribe	-	1
 kunga_tribe	TRUE	TRUE	FALSE	-	TRUE	mokk_tribe;dantari_raiders	-	1
 liberation_party	TRUE	TRUE	FALSE	-	TRUE	fed_dub;corsec	-	1
+light_jedi_sentinel	FALSE	FALSE	FALSE	-	TRUE	imperial	rebel	1
 lok_mercenaries	TRUE	TRUE	FALSE	-	TRUE	bloodrazor;canyon_corsair	-	1
 lost_aqualish	TRUE	TRUE	FALSE	-	TRUE	beldonnas_league;fed_dub;corsec	-	1
 marauder	TRUE	TRUE	FALSE	-	TRUE	-	-	1

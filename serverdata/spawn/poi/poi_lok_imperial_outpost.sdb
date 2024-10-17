@@ -1,0 +1,26 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_lok_imperial_outpost_1	LOK	lok_world	PATROL	0	-1828.2	12.0	-3126.6	0	1	an AT-ST	vehicle_imperial_atst	ATTACKABLE	B	31	40	POI	Imperial Outpost	1	PATROL	9	patrol_lok_1800	column	idle			600
+poi_lok_imperial_outpost_2	LOK	lok_world	AREA	0	-1828.2	12.0	-3126.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_3	LOK	lok_world	AREA	0	-1832.5	12.0	-3049.3	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_4	LOK	lok_world	AREA	0	-1841.2	12.0	-3089.8	90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	IDLE	0	0	-	idle			600
+poi_lok_imperial_outpost_5	LOK	lok_world	AREA	0	-1841.2	12.0	-3079.6	90	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	IDLE	0	0	-	idle			600
+poi_lok_imperial_outpost_6	LOK	lok_world	AREA	0	-1844.4	12.0	-3069.1	90	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle		imperial_recruiter	600
+poi_lok_imperial_outpost_7	LOK	lok_world	PATROL	0	-1866.6	12.0	-3114.8	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	PATROL	0	patrol_lok_1600	column	idle			600
+poi_lok_imperial_outpost_8	LOK	lok_world	AREA	0	-1874.2	12.0	-3123.7	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	IDLE	0	0	-	idle		commoner	600
+poi_lok_imperial_outpost_9	LOK	lok_world	AREA	0	-1887.3	12.0	-3175.3	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_10	LOK	lok_world	AREA	0	-1899.3	12.0	-3100.2	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	TURN	0	0	-	idle			600
+poi_lok_imperial_outpost_11	LOK	lok_world	AREA	0	-1900.4	12.0	-2984.4	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_12	LOK	lok_world	AREA	0	-1903.7	12.0	-3058.1	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_13	LOK	lok_world	AREA	0	-1916.4	12.0	-3135.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_14	LOK	lok_world	AREA	0	-1917.3	12.0	-3175.7	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_15	LOK	lok_world	AREA	0	-1936.5	12.1	-3386.8	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_16	LOK	lok_world	AREA	0	-1939.7	12.0	-3101.8	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_17	LOK	lok_world	PATROL	0	-1947.9	12.0	-2975.0	-178	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	PATROL	0	patrol_lok_1700	column	idle			600
+poi_lok_imperial_outpost_18	LOK	lok_world	AREA	0	-1957.7	12.0	-3149.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_19	LOK	lok_world	AREA	0	-1967.0	11.9	-3365.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Imperial Outpost	1	TURN	0	0	-	idle			600
+poi_lok_imperial_outpost_20	LOK	lok_world	AREA	0	-1969.5	12.0	-3001.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_21	LOK	lok_world	AREA	0	-1976.2	12.0	-3030.9	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_22	LOK	lok_world	AREA	0	-1981.5	11.1	-3407.1	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600
+poi_lok_imperial_outpost_23	LOK	lok_world	PATROL	0	-1991.7	11.2	-3345.9	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Imperial Outpost	2	PATROL	0	patrol_lok_400	column	idle			600
+poi_lok_imperial_outpost_24	LOK	lok_world	AREA	0	-2004.0	12.0	-3074.2	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	E	31	40	POI	Imperial Outpost	1	LOITER	5	0	-	idle			600

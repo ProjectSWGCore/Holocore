@@ -1,0 +1,10 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_rori_rebel_outpost_1	RORI	ror_reb_outpost_guard_house1	AREA	1	3.7	0.5	-3.0	0	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_2	RORI	ror_reb_outpost_guard_house1	AREA	2	-1.8	2.0	3.6	0	1	a Rebel Staff Sergeant	humanoid_rebel_staff_sergeant	ATTACKABLE	E	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_3	RORI	ror_reb_outpost_guard_house1	AREA	2	4.0	0.5	3.6	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_4	RORI	ror_reb_outpost_shed1	AREA	3	-0.1	0.1	1.0	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_5	RORI	ror_reb_outpost_shed1	AREA	3	-0.1	0.1	1.0	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_6	RORI	ror_reb_outpost_shed1	AREA	5	3.9	0.1	-4.0	0	1	a senior SpecForce pathfinder	humanoid_rebel_senior_specforce_pathfinder	ATTACKABLE	E	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_7	RORI	ror_reb_outpost_shed2	AREA	5	3.7	0.1	-3.8	0	1	a SpecForce technician	humanoid_rebel_specforce_technician	ATTACKABLE	N	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600
+poi_rori_rebel_outpost_8	RORI	ror_reb_outpost_shed2	AREA	6	-3.0	0.1	-3.9	0	1	a Rebel Brigadier General	humanoid_rebel_brigadier_general	ATTACKABLE	E	36	45	POI	Rebel Outpost	1	TURN	0	0	-	idle			600

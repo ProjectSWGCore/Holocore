@@ -1,0 +1,35 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_rori_rebel_outpost_1	RORI	ror_reb_outpost_cloning	AREA	5	4.2	0.1	-4.9	-90	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_2	RORI	ror_reb_outpost_cloning	AREA	6	-5.2	0.1	-0.7	162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_3	RORI	ror_reb_outpost_medium_house	AREA	1	3.8	0.6	0.7	90	1	a Sullustan male	humanoid_patron_sullustan	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_4	RORI	ror_reb_outpost_medium_house	AREA	1	6	0.6	0.7	-90	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_5	RORI	ror_reb_outpost_medium_house	AREA	1	-1.5	0.6	5.7	112	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_6	RORI	ror_reb_outpost_medium_house	AREA	3	-5	0.6	-5.2	165	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_7	RORI	ror_reb_outpost_medium_house	AREA	3	-4.5	0.6	-6.8	0	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_8	RORI	ror_reb_outpost_medium_house	AREA	2	-9.1	0.6	3.7	92	1	General Ufwol (Rebel Pilot Trainer)	humanoid_rebel_ufwol	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_9	RORI	ror_reb_outpost_shed1	AREA	4	4.3	0.1	3.2	-10	1	Vordin Sildor	humanoid_vordin_sildor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_10	RORI	ror_reb_outpost_shed1	AREA	6	-4.1	0.1	-2.8	111	1	Raxa Binn	humanoid_raxa_binn	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_11	RORI	ror_reb_outpost_small_house	AREA	3	3.7	0.7	1.8	152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_rori_rebel_outpost_12	RORI	ror_reb_outpost_small_house	AREA	4	-0.5	0.7	4	91	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_13	RORI	ror_reb_outpost_small_house	AREA	3	5.7	0.7	0.9	-120	1	Booto Lubble	humanoid_booto_lubble	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_14	RORI	ror_world	AREA	0	3663	96	-6420.6	138	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_rori_rebel_outpost_15	RORI	ror_world	AREA	0	3656.3	96	-6432.4	-31	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+city_rori_rebel_outpost_16	RORI	ror_world	AREA	0	3702.9	96	-6434.3	88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_17	RORI	ror_world	AREA	0	3641.8	96	-6439.5	68	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_18	RORI	ror_world	AREA	0	3701.4	96	-6437.5	-31	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_19	RORI	ror_world	AREA	0	3668.2	96	-6464.8	159	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
+city_rori_rebel_outpost_20	RORI	ror_world	AREA	0	3679.9	96.0	-6420.8	179	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_rori_rebel_outpost_21	RORI	ror_world	PATROL	0	3682.4	96.0	-6462.8	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	PATROL	0	patrol_rori_1000	column	idle		simple_droid_sarcastic_flee_4	600
+city_rori_rebel_outpost_22	RORI	ror_world	AREA	0	3669.4	96.0	-6486.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	36	45	City	Rebel Outpost	1	TURN	0	0	-	idle			600
+city_rori_rebel_outpost_23	RORI	ror_world	AREA	0	3669.8	96.0	-6482.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	36	45	City	Rebel Outpost	1	TURN	0	0	-	idle			600
+city_rori_rebel_outpost_24	RORI	ror_world	AREA	0	3670.1	96.0	-6490.9	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	36	45	City	Rebel Outpost	1	TURN	0	0	-	idle			600
+city_rori_rebel_outpost_25	RORI	ror_world	AREA	0	3656.5	96.0	-6461.2	71	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	36	45	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_26	RORI	ror_world	AREA	0	3660.3	96.0	-6485.9	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	36	45	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+city_rori_rebel_outpost_27	RORI	ror_world	AREA	0	3656.5	96.0	-6460.0	63	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	E	36	45	City	Rebel Outpost	1	IDLE	0	0	-	idle			600
+city_rori_rebel_outpost_28	RORI	ror_world	AREA	0	3684.7	96.0	-6460.8	-92	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Rebel Outpost	1	IDLE	0	0	-	idle		rebel_recruiter	600
+city_rori_rebel_outpost_29	RORI	ror_world	AREA	0	3662.4	96.0	-6485.8	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	36	45	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+city_rori_rebel_outpost_30	RORI	ror_world	AREA	0	3664.6	96.0	-6484.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	36	45	City	Rebel Outpost	1	LOITER	5	0	-	idle			600
+city_rori_rebel_outpost_31	RORI	ror_world	AREA	0	3701.6	96.0	-6476.8	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+city_rori_rebel_outpost_32	RORI	ror_world	AREA	0	3659.1	96.0	-6410.5	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Rebel Outpost	1	LOITER	5	0	-	idle		simple_droid_stupid_death_5	600
+city_rori_rebel_outpost_33	RORI	ror_world	AREA	0	3664.7	96.0	-6427.2	-133	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	36	45	City	Rebel Outpost	1	IDLE	0	0	-	idle			600

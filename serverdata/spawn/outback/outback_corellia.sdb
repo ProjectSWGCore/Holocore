@@ -1,0 +1,105 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_corellia_1	CORELLIA	cor_world	AREA	0	7480.1	1.9	-1775.6	0	1	a bodyguard	humanoid_bodyguard	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_2	CORELLIA	cor_world	AREA	0	-6150.2	4.6	-3380.4	0	1	a bodyguard	humanoid_bodyguard	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_3	CORELLIA	cor_world	AREA	0	-5266.2	12.5	-2016.6	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_4	CORELLIA	cor_world	AREA	0	-5278.2	11.4	-2002.5	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_5	CORELLIA	cor_world	AREA	0	-5280.4	17.9	-2030.7	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_6	CORELLIA	cor_world	AREA	0	-5291.6	15.1	-2017.3	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_7	CORELLIA	cor_world	AREA	0	-5308.0	12.0	-2016.5	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_8	CORELLIA	cor_world	AREA	0	434.6	2.9	-2970.1	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+outback_corellia_9	CORELLIA	cor_world	AREA	0	-4286.9	4.4	-2548.4	0	1	a CorSec agent	humanoid_corsec_agent	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_10	CORELLIA	cor_world	AREA	0	-4293.4	5.3	-2575.6	0	1	a CorSec agent	humanoid_corsec_agent	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_11	CORELLIA	cor_world	AREA	0	6290.8	167.6	-3944.2	0	1	a dung mite worker	creature_mite_dung_worker	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_12	CORELLIA	cor_world	AREA	0	431.7	2.2	-2980.6	0	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_13	CORELLIA	cor_world	AREA	0	6299.8	27.2	4375.6	0	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_14	CORELLIA	cor_world	AREA	0	-7388.1	413.0	7524.3	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_15	CORELLIA	cor_world	AREA	0	-7397.6	413.4	7505.7	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_16	CORELLIA	cor_world	AREA	0	-7399.4	413.0	7522.5	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_17	CORELLIA	cor_world	AREA	0	-7399.5	414.2	7515.5	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_18	CORELLIA	cor_world	AREA	0	-7414.3	414.6	7502.0	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_19	CORELLIA	cor_world	AREA	0	-3586.4	23.8	-361.5	0	1	Greck's assassin	humanoid_greck_assassin	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_20	CORELLIA	cor_world	AREA	0	-3599.1	21.1	-376.2	0	1	Greck's henchman	humanoid_greck_henchman	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_21	CORELLIA	cor_world	AREA	0	-3618.0	20.8	-376.4	0	1	Greck's mugger	humanoid_greck_mugger	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_22	CORELLIA	cor_world	AREA	0	-3632.9	20.7	-382.7	0	1	Greck's smuggler	humanoid_greck_smuggler	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_23	CORELLIA	cor_world	AREA	0	-3633.6	21.9	-359.6	0	1	Olag Greck	humanoid_olag_greck	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_24	CORELLIA	cor_world	AREA	0	3291.0	454.4	5926.5	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_25	CORELLIA	cor_world	AREA	0	3299.8	446.4	5955.1	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_26	CORELLIA	cor_world	AREA	0	3316.9	447.4	5940.8	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_27	CORELLIA	cor_world	AREA	0	3331.7	454.5	5987.9	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_28	CORELLIA	cor_world	AREA	0	3340.4	453.3	5969.4	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_29	CORELLIA	cor_world	AREA	0	3360.2	456.9	6022.7	0	1	a Grey Shroud terrorist	humanoid_grey_shroud_terrorist	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_30	CORELLIA	cor_world	AREA	0	6305.0	27.4	4368.9	0	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_31	CORELLIA	cor_world	AREA	0	159.7	19.4	1725.5	0	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	Outback	Corellia	1	TURN	0	0	-	idle			600
+outback_corellia_32	CORELLIA	cor_world	PATROL	0	3757.9	380.0	-4051.0	0	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	Outback	Corellia	1	PATROL	0	patrol_corellia_900	column	idle			600
+outback_corellia_33	CORELLIA	cor_world	AREA	0	-7144.3	298.6	1151.5	0	1	a mis-guided mercenary	humanoid_fallen_guard	AGGRESSIVE	E	11	20	Outback	Corellia	1	TURN	0	0	-	idle			600
+outback_corellia_34	CORELLIA	cor_world	AREA	0	-7151.1	299.4	1151.4	0	1	a mis-guided mercenary	humanoid_fallen_guard	AGGRESSIVE	E	11	20	Outback	Corellia	1	TURN	0	0	-	idle			600
+outback_corellia_35	CORELLIA	cor_world	AREA	0	-7131.8	296.8	1163.7	0	1	a mis-guided mercenary officer	humanoid_fallen_officer	AGGRESSIVE	E	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_36	CORELLIA	cor_world	AREA	0	2946.2	356.9	5870.0	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_37	CORELLIA	cor_world	AREA	0	2958.4	349.2	5906.6	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_38	CORELLIA	cor_world	AREA	0	2970.7	347.9	5871.5	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_39	CORELLIA	cor_world	AREA	0	2979.0	348.6	5900.1	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_40	CORELLIA	cor_world	AREA	0	2994.4	350.8	5884.3	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_41	CORELLIA	cor_world	AREA	0	2998.9	354.3	5903.7	0	1	a Monumenter poacher	humanoid_monumenter_poacher	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_42	CORELLIA	cor_world	AREA	0	-7532.4	403.5	4642.7	0	1	a mountain murra	creature_murra_mountain	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_43	CORELLIA	cor_world	AREA	0	-6161.8	5.0	-3390.1	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_44	CORELLIA	cor_world	AREA	0	7476.2	1.7	-1779.1	-50	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_45	CORELLIA	cor_world	AREA	0	-1413.3	87.3	1977.3	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_46	CORELLIA	cor_world	AREA	0	-3590.7	16.5	-344.4	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	E	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_47	CORELLIA	cor_world	AREA	0	-3602.2	21.6	-328.2	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	E	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_48	CORELLIA	cor_world	AREA	0	-3615.1	16.5	-321.4	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	E	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_49	CORELLIA	cor_world	AREA	0	1886.4	1.5	-227.8	0	1	a sharnaff	creature_sharnaff	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_50	CORELLIA	cor_world	AREA	0	1897.3	0.9	-228.6	0	1	a sharnaff bull	creature_sharnaff_bull	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_51	CORELLIA	cor_world	AREA	0	6050.4	169.8	6389.3	0	1	a smashball degenerate	humanoid_smashball_degenerate	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_52	CORELLIA	cor_world	AREA	0	6043.8	168.8	6401.7	0	1	a smashball thug	humanoid_smashball_thug	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_53	CORELLIA	cor_world	AREA	0	5667.5	20.1	-1564.8	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_54	CORELLIA	cor_world	PATROL	0	-5453.7	21.0	-2789.1	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	Outback	Corellia	1	PATROL	0	patrol_corellia_400	column	idle			600
+outback_corellia_55	CORELLIA	cor_world	PATROL	0	3808.6	380.0	-4023.6	0	1	a stranded Imperial pilot	humanoid_imperial_stranded_pilot	ATTACKABLE	N	11	20	Outback	Corellia	1	PATROL	0	patrol_corellia_800	column	idle			600
+outback_corellia_56	CORELLIA	cor_world	AREA	0	-30.0	5.9	-5183.7	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_57	CORELLIA	cor_world	AREA	0	-34.5	6.6	-5215.9	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_58	CORELLIA	cor_world	AREA	0	-58.9	15.2	-5223.1	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_59	CORELLIA	cor_world	AREA	0	-64.9	15.4	-5263.4	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_60	CORELLIA	cor_world	AREA	0	-15.3	2.6	-5160.7	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_61	CORELLIA	cor_world	AREA	0	-16.1	1.8	-5207.8	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_62	CORELLIA	cor_world	AREA	0	-29.7	3.9	-5245.3	0	1	a Troeman lackey	humanoid_troeman_lackey	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_63	CORELLIA	cor_world	AREA	0	385.1	30.8	-4968.1	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_64	CORELLIA	cor_world	AREA	0	405.0	37.7	-4963.8	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_65	CORELLIA	cor_world	AREA	0	406.0	34.2	-4941.1	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_66	CORELLIA	cor_world	AREA	0	409.5	35.7	-4989.1	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_67	CORELLIA	cor_world	AREA	0	428.7	42.5	-4945.5	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_68	CORELLIA	cor_world	AREA	0	441.1	33.8	-4979.3	0	1	a vicious thug	humanoid_thug_vicious	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_69	CORELLIA	cor_world	AREA	0	-6831.1	454.3	2211.8	0	1	a visionary of Lord Nyax	humanoid_lord_nyax_visionary	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_70	CORELLIA	cor_world	AREA	0	1881.1	1.7	-226.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_71	CORELLIA	cor_world	AREA	0	-7389.1	413.4	7503.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_72	CORELLIA	cor_world	AREA	0	-7412.7	414.1	7520.1	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_73	CORELLIA	cor_world	AREA	0	-204.3	1.5	-3831.8	0	1	Aldalad	humanoid_borvo_aldalad	ATTACKABLE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_74	CORELLIA	cor_world	AREA	0	-5180.1	190.3	6236.6	0	1	an agrilat rasp	creature_rasp_agrilat_plumed	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_75	CORELLIA	cor_world	AREA	0	427.5	1.6	-2980.6	0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_76	CORELLIA	cor_world	AREA	0	259.4	3.9	-3992.6	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_77	CORELLIA	cor_world	AREA	0	264.1	12.4	-3940.4	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_78	CORELLIA	cor_world	AREA	0	304.0	4.3	-3983.2	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_79	CORELLIA	cor_world	AREA	0	308.1	1.7	-4013.0	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_80	CORELLIA	cor_world	AREA	0	333.1	9.6	-3938.5	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_81	CORELLIA	cor_world	AREA	0	347.5	3.2	-3982.4	0	1	an enraged carrion spat	creature_carrion_spat_enraged	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_82	CORELLIA	cor_world	AREA	0	-1645.2	25.7	-56.7	0	1	an IG assassin droid	droid_ig_assassin	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_83	CORELLIA	cor_world	AREA	0	-3616.5	21.1	-359.8	22	1	an imprisoned Imperial officer	humanoid_imprisoned_imperial_officer	ATTACKABLE	N	11	20	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_84	CORELLIA	cor_world	AREA	0	624.2	26.5	-424.2	0	1	an industrial spy	humanoid_industrial_spy	ATTACKABLE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_85	CORELLIA	cor_world	AREA	0	3354.4	457.6	5998.6	0	1	Ebela Puckett (a Grey Shroud crew leader)	humanoid_grey_shroud_ebela_puckett	AGGRESSIVE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_86	CORELLIA	cor_world	AREA	0	315.4	3.7	-3991.8	0	1	Gravefeather (an enraged carrion spat)	creature_spat_gravefeather	AGGRESSIVE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_87	CORELLIA	cor_world	AREA	0	-3323.8	101.0	3410.5	-109	1	Jaylon Geissler (Vuul Sarlin's right-hand)	humanoid_jaylon_geissler	INVULNERABLE	N	100	100	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_88	CORELLIA	cor_world	AREA	0	-6028.3	13.0	-3250.0	0	1	Jori (a CorSec traitor)	humanoid_jori	AGGRESSIVE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_89	CORELLIA	cor_world	AREA	0	-4697.3	16.5	-1880.2	166	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_90	CORELLIA	cor_world	AREA	0	642.5	0.2	-4439.0	0	1	Maerzen	humanoid_borvo_maerzen	ATTACKABLE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_91	CORELLIA	cor_world	AREA	0	407.1	39.7	-4972.2	0	1	Preens B'oola	humanoid_preens_boola	AGGRESSIVE	B	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_92	CORELLIA	cor_world	AREA	0	-5303.1	18.9	-2078.9	0	1	Sergeant Sola Hus (a CorSec agent)	humanoid_sola_hus	INVULNERABLE	N	100	100	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_93	CORELLIA	cor_world	AREA	0	-2962.6	29.6	3401.4	80	1	Vuul Sarlin (a ryll seller)	humanoid_vuul_sarlin	INVULNERABLE	N	100	100	Outback	Corellia	1	IDLE	0	0	-	idle			600
+outback_corellia_94	CORELLIA	cor_world	AREA	0	-2982.7	28.7	3401.6	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_95	CORELLIA	cor_world	AREA	0	-2903.3	23.7	3406.0	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_96	CORELLIA	cor_world	AREA	0	-2934.2	29.4	3375.7	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_97	CORELLIA	cor_world	AREA	0	-2935.1	29.7	3409.8	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_98	CORELLIA	cor_world	AREA	0	-2948.4	29.7	3456.0	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_99	CORELLIA	cor_world	AREA	0	-2949.8	24.6	3426.6	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_100	CORELLIA	cor_world	AREA	0	-2958.1	20.7	3375.0	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_101	CORELLIA	cor_world	AREA	0	-2975.4	28.7	3422.7	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_102	CORELLIA	cor_world	AREA	0	-2984.7	25.9	3369.3	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600
+outback_corellia_103	CORELLIA	cor_world	AREA	0	-3008.0	23.3	3412.9	0	1	Vuul's guard	humanoid_vuul_guard	AGGRESSIVE	N	11	20	Outback	Corellia	1	LOITER	5	0	-	idle			600

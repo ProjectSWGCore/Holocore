@@ -1,0 +1,102 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_tatooine_1	TATOOINE	tat_world	PATROL	0	-1801.8	7.9	-3913.5	0	1	a dune bantha	creature_bantha_dune	ATTACKABLE	N	5	10	Outback	Tatooine	1	PATROL	0	patrol_tatooine_1400	column	idle			600
+outback_tatooine_2	TATOOINE	tat_world	PATROL	0	998.9	12.6	2499.7	0	1	a black hole Stormtrooper Squad Leader	humanoid_imperial_stormtrooper_black_hole_squad_leader	ATTACKABLE	N	5	10	Outback	Tatooine	1	PATROL	0	patrol_tatooine_1500	column	idle			600
+outback_tatooine_3	TATOOINE	tat_world	PATROL	0	969.8	12.6	2513.4	0	1	a black hole Stormtrooper	humanoid_imperial_stormtrooper_black_hole	ATTACKABLE	N	5	10	Outback	Tatooine	1	PATROL	0	patrol_tatooine_1600	column	idle			600
+outback_tatooine_4	TATOOINE	tat_world	PATROL	0	4270.5	8.8	2485.0	0	1	a Tusken guard	humanoid_tusken_guard	AGGRESSIVE	N	5	10	Outback	Tatooine	1	PATROL	0	patrol_tatooine_2600	column	idle			600
+outback_tatooine_5	TATOOINE	tat_world	PATROL	0	-5136.8	79.8	-6982.2	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	PATROL	0	patrol_tatooine_700	column	idle			600
+outback_tatooine_6	TATOOINE	tat_world	AREA	0	-5146.2	79.8	-6966.1	-16	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	IDLE	0	0	-	npc_sitting_ground			600
+outback_tatooine_7	TATOOINE	tat_world	AREA	0	-5148.2	79.8	-6962.5	131	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	IDLE	0	0	-	npc_sitting_ground			600
+outback_tatooine_8	TATOOINE	tat_world	AREA	0	-5160.0	79.8	-6959.3	-110	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_9	TATOOINE	tat_world	AREA	0	-5144.6	79.8	-6962.1	-135	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	IDLE	0	0	-	conversation			600
+outback_tatooine_10	TATOOINE	tat_world	AREA	0	7033.0	71.0	7052.0	0	1	a bounty hunter	humanoid_bounty_hunter	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_11	TATOOINE	tat_world	AREA	0	-6109.9	191.2	3971.8	0	1	a Desert Demon bodyguard	humanoid_desert_demon_bodyguard	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_12	TATOOINE	tat_world	AREA	0	-6110.2	190.3	3965.2	0	1	a Desert Demon leader	humanoid_desert_demon_leader	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_13	TATOOINE	tat_world	AREA	0	-5725.2	23.5	6484.3	0	1	a dewback	creature_dewback	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_14	TATOOINE	tat_world	AREA	0	-2602.4	9.1	-2299.0	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_15	TATOOINE	tat_world	AREA	0	5453.1	27.1	2144.6	0	1	a Dim-U abbot	humanoid_dimu_abbot	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_16	TATOOINE	tat_world	AREA	0	-1816.3	10.6	-3880.1	0	1	a dune bantha	creature_bantha_dune	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_17	TATOOINE	tat_world	AREA	0	-5417.3	41.6	-6044.5	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_18	TATOOINE	tat_world	AREA	0	-5467.3	30.0	-3885.6	0	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_19	TATOOINE	tat_world	AREA	0	-6206.8	34.5	5060.2	0	1	a giant sand beetle	creature_beetle_sand_giant	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_20	TATOOINE	tat_world	AREA	0	-5135.0	146.5	4432.9	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	78	80	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_21	TATOOINE	tat_world	AREA	0	7070.7	96.9	7140.0	0	1	a grand krayt dragon	creature_krayt_dragon_grand	AGGRESSIVE	B	78	80	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_22	TATOOINE	tat_world	AREA	0	-5812.1	345.0	1538.1	0	1	a greater desert womp rat	creature_womprat_great_desert	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_23	TATOOINE	tat_world	AREA	0	3383.3	6.7	-6588.6	0	1	a grizzled dewback	creature_dewback_grizzled	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_24	TATOOINE	tat_world	AREA	0	744.7	31.6	3076.6	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_25	TATOOINE	tat_world	AREA	0	734.8	31.6	3088.1	0	1	a Hutt assassin	humanoid_hutt_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_26	TATOOINE	tat_world	AREA	0	5768.2	53.7	4008.8	0	1	a Jawa Avenger	humanoid_jawa_avenger	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_27	TATOOINE	tat_world	AREA	0	5944.6	180.0	-3827.8	0	1	a Jawa engineer	humanoid_jawa_engineer	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_28	TATOOINE	tat_world	AREA	0	5760.9	51.0	4000.9	0	1	a Jawa Protector	humanoid_jawa_protector	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_29	TATOOINE	tat_world	AREA	0	7023.8	109.3	2417.1	0	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_30	TATOOINE	tat_world	AREA	0	-4936.6	29.8	-5552.9	0	1	a mountain squill	creature_squill_mountain	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_31	TATOOINE	tat_world	AREA	0	-6893.9	68.8	1514.4	0	1	a pathfinder	humanoid_pathfinder	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_32	TATOOINE	tat_world	AREA	0	-3165.0	9.4	3630.9	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_33	TATOOINE	tat_world	AREA	0	-7171.4	41.2	-2400.3	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_34	TATOOINE	tat_world	AREA	0	2201.1	0.0	-4458.4	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_35	TATOOINE	tat_world	AREA	0	3914.6	83.2	-4304.4	0	1	a scavenger	humanoid_scavenger	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_36	TATOOINE	tat_world	AREA	0	3943.5	85.1	-4333.3	0	1	a scavenger Punk	humanoid_scavenger_punk	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_37	TATOOINE	tat_world	AREA	0	3963.1	83.1	-4315.4	0	1	a scavenger Punk	humanoid_scavenger_punk	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_38	TATOOINE	tat_world	AREA	0	3963.1	82.1	-4327.9	0	1	a scavenger Thief	humanoid_scavenger_thief	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_39	TATOOINE	tat_world	AREA	0	3938.6	79.9	-4297.8	0	1	a scavenger thug	humanoid_scavenger_thug	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_40	TATOOINE	tat_world	AREA	0	3954.4	83.5	-4307.0	0	1	a scavenger thug	humanoid_scavenger_thug	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_41	TATOOINE	tat_world	AREA	0	3943.8	86.0	-4317.0	0	1	a scavenger thug leader	humanoid_scavenger_thug_elite	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_42	TATOOINE	tat_world	AREA	0	-5784.0	27.1	-561.0	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_43	TATOOINE	tat_world	AREA	0	-4880.2	94.8	2950.3	0	1	a spice fiend	humanoid_spice_fiend	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_44	TATOOINE	tat_world	AREA	0	-2129.3	6.6	674.4	0	1	a thief	humanoid_thief	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_45	TATOOINE	tat_world	AREA	0	-4821.3	26.4	6529.9	0	1	a Tusken bantha	creature_bantha_tusken	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_46	TATOOINE	tat_world	AREA	0	-5340.4	40.0	-4452.4	0	1	a Tusken bantha	creature_bantha_tusken	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_47	TATOOINE	tat_world	AREA	0	-5338.0	40.0	-4434.9	0	1	a Tusken captain	humanoid_tusken_captain	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_48	TATOOINE	tat_world	AREA	0	-4825.2	26.7	6529.0	0	1	a Tusken chief	humanoid_tusken_chief	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_49	TATOOINE	tat_world	AREA	0	-4826.3	26.8	6532.4	0	1	a Tusken commoner	humanoid_tusken_commoner	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_50	TATOOINE	tat_world	AREA	0	5778.0	50.8	3982.9	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_51	TATOOINE	tat_world	AREA	0	-5289.5	40.0	-4441.3	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_52	TATOOINE	tat_world	AREA	0	-5323.2	40.0	-4443.6	0	1	a Tusken raider	humanoid_tusken_raider	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_53	TATOOINE	tat_world	AREA	0	-5316.0	40.0	-4444.8	0	1	a Tusken sniper	humanoid_tusken_sniper	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_54	TATOOINE	tat_world	AREA	0	5779.8	50.5	4000.2	0	1	a Tusken warlord	humanoid_tusken_warlord	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_55	TATOOINE	tat_world	AREA	0	7054.4	92.7	2510.3	0	1	a Tusken warlord	humanoid_tusken_warlord	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_56	TATOOINE	tat_world	AREA	0	7016.9	96.2	2510.9	0	1	a Tusken warrior	humanoid_tusken_warrior	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_57	TATOOINE	tat_world	AREA	0	7047.3	98.1	2535.3	0	1	a Tusken warrior	humanoid_tusken_warrior	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_58	TATOOINE	tat_world	AREA	0	7030.0	89.3	2512.4	0	1	a Tusken Witch Doctor	humanoid_tusken_witch_doctor	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_59	TATOOINE	tat_world	AREA	0	-3735.0	8.6	-6812.0	0	1	a Weequay thug	humanoid_weequay_thug	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_60	TATOOINE	tat_world	AREA	0	-5830.5	353.7	1501.7	0	1	a wild bladeback boar	creature_boar_bladeback_wild	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_61	TATOOINE	tat_world	AREA	0	-4466.0	41.9	-4003.2	0	1	a wild zucca boar	creature_boar_zucca_wild	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_62	TATOOINE	tat_world	AREA	0	-5827.4	352.8	1517.9	0	1	a wounded miner	humanoid_watto_body_miner	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_63	TATOOINE	tat_world	AREA	0	7090.2	95.6	7118.5	0	1	an adolescent krayt dragon	creature_krayt_dragon_adolescent	AGGRESSIVE	B	80	90	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_64	TATOOINE	tat_world	AREA	0	-5424.3	44.9	-6138.7	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_65	TATOOINE	tat_world	AREA	0	-5434.3	43.2	-6086.0	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_66	TATOOINE	tat_world	AREA	0	-5445.3	38.3	-6104.6	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_67	TATOOINE	tat_world	AREA	0	-5459.8	38.9	-6105.3	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_68	TATOOINE	tat_world	AREA	0	-5473.9	39.6	-6115.1	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_69	TATOOINE	tat_world	AREA	0	-5481.3	44.1	-6087.7	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_70	TATOOINE	tat_world	AREA	0	-961.3	10.7	-4298.4	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_71	TATOOINE	tat_world	AREA	0	-971.1	13.0	-4257.3	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_72	TATOOINE	tat_world	AREA	0	-4691.0	30.7	5460.4	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_73	TATOOINE	tat_world	AREA	0	-860.1	9.3	-1228.7	0	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_74	TATOOINE	tat_world	AREA	0	-1264.0	10.1	5463.4	87	1	an Alkhara bandit	humanoid_alkhara_bandit	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_75	TATOOINE	tat_world	AREA	0	-3327.0	7.5	-3719.6	0	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_76	TATOOINE	tat_world	AREA	0	6464.7	9.1	-2229.6	0	1	an elder zucca boar	creature_boar_zucca_elder	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			900
+outback_tatooine_77	TATOOINE	tat_world	AREA	0	-4624.0	39.8	-4707.1	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_78	TATOOINE	tat_world	AREA	0	-4674.1	28.3	-4689.2	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_79	TATOOINE	tat_world	AREA	0	-4690.1	39.2	-4772.3	0	1	an Elite Dragonet	creature_dragonet_elite	AGGRESSIVE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_80	TATOOINE	tat_world	AREA	0	3933.9	85.0	-4328.2	0	1	a scavenger thug	humanoid_scavenger_thug	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_81	TATOOINE	tat_world	AREA	0	-4471.6	33.2	5781.6	0	1	an IG assassin droid	droid_ig_assassin	ATTACKABLE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			1800
+outback_tatooine_82	TATOOINE	tat_world	AREA	0	987.3	12.6	2509.3	0	1	an Imperial Brigadier General	humanoid_imperial_brigadier_general	ATTACKABLE	E	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_83	TATOOINE	tat_world	AREA	0	-4331.1	22.9	-5027.1	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_84	TATOOINE	tat_world	AREA	0	-915.3	16.3	-6490.3	148	1	Dera Darklighter	humanoid_dera_darklighter	INVULNERABLE	N	100	100	Outback	Tatooine	1	IDLE	0	0	-	idle			600
+outback_tatooine_85	TATOOINE	tat_world	AREA	0	-7665.2	240.4	-7386.1	22	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Tatooine	1	IDLE	0	0	-	idle			600
+outback_tatooine_86	TATOOINE	tat_world	AREA	0	-5353.0	5.1	2750.0	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_87	TATOOINE	tat_world	AREA	0	-5576.4	322.6	1736.1	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_88	TATOOINE	tat_world	AREA	0	-5583.1	322.6	1728.1	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_89	TATOOINE	tat_world	AREA	0	-4932.4	31.0	-5542.5	-148	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Tatooine	1	IDLE	0	0	-	idle			600
+outback_tatooine_90	TATOOINE	tat_world	AREA	0	-4466.8	33.0	5785.7	0	1	Valarian's assassin	humanoid_valarian_assassin	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_91	TATOOINE	tat_world	AREA	0	-3875.9	23.2	-4299.3	0	1	Valarian's assassin	humanoid_valarian_assassin	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_92	TATOOINE	tat_world	AREA	0	-3885.2	22.3	-4280.1	0	1	Valarian's smuggler	humanoid_tatooine_valarian_smuggler	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_93	TATOOINE	tat_world	AREA	0	-3904.4	19.8	-4268.0	0	1	Valarian's assassin	humanoid_valarian_assassin	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_94	TATOOINE	tat_world	AREA	0	-3917.0	20.1	-4297.4	0	1	Valarian's smuggler	humanoid_tatooine_valarian_smuggler	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_95	TATOOINE	tat_world	AREA	0	-3941.1	21.3	-4297.1	0	1	Valarian's assassin	humanoid_valarian_assassin	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_96	TATOOINE	tat_world	AREA	0	-3946.5	21.4	-4278.9	0	1	Valarian's smuggler	humanoid_tatooine_valarian_smuggler	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_97	TATOOINE	tat_world	AREA	0	-5024.4	39.8	-6109.5	0	1	Valarian's thief	humanoid_valarian_thief	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_98	TATOOINE	tat_world	AREA	0	1002.9	187.7	-3019.4	0	1	a brigand	humanoid_brigand	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_99	TATOOINE	tat_world	AREA	0	-5029.9	39.8	-6122.0	0	1	Valarian's thief	humanoid_valarian_thief	AGGRESSIVE	N	5	10	Outback	Tatooine	1	LOITER	5	0	-	idle			600
+outback_tatooine_100	TATOOINE	tat_world	AREA	0	-3988.1	18.4	-3045.7	-104	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Tatooine	1	IDLE	0	0	-	npc_sitting_ground			600

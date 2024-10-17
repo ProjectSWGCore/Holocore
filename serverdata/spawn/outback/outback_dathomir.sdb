@@ -1,0 +1,66 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_dathomir_1	DATHOMIR	dat_world	AREA	0	-1000.3	116.3	862.4	0	1	a bane back spider	creature_spider_bane_back	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_2	DATHOMIR	dat_world	AREA	0	6864.1	505.2	1174.5	0	1	a bane back spider	creature_spider_bane_back	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_3	DATHOMIR	dat_world	AREA	0	2994.1	80.3	-5142.6	0	1	a bane back spider	creature_spider_bane_back	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_4	DATHOMIR	dat_world	AREA	0	7196.8	490.4	3227.2	0	1	a bull rancor	creature_rancor_bull	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_5	DATHOMIR	dat_world	AREA	0	-4739.0	91.0	-4762.5	0	1	a bull rancor	creature_rancor_bull	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_6	DATHOMIR	dat_world	AREA	0	-2420.2	51.1	-3101.2	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	71	80	Outback	Dathomir	1	TURN	0	0	-	idle			600
+outback_dathomir_7	DATHOMIR	dat_world	AREA	0	-2425.7	50.4	-3102.9	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	71	80	Outback	Dathomir	1	TURN	0	0	-	idle			600
+outback_dathomir_8	DATHOMIR	dat_world	AREA	0	-7012.1	342.3	3942.2	0	1	a Dark Jedi Master	humanoid_jedi_dark_master	AGGRESSIVE	B	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_9	DATHOMIR	dat_world	AREA	0	-7000.6	340.0	3932.0	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_10	DATHOMIR	dat_world	AREA	0	-7011.6	350.5	3956.2	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_11	DATHOMIR	dat_world	AREA	0	-7032.0	341.7	3932.1	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_12	DATHOMIR	dat_world	AREA	0	-2420.2	48.2	-5083.0	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	71	80	Outback	Dathomir	1	TURN	0	0	-	idle			600
+outback_dathomir_13	DATHOMIR	dat_world	AREA	0	-4628.4	121.6	5391.2	0	1	a frenzied graul	creature_graul_frenzied	AGGRESSIVE	N	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_14	DATHOMIR	dat_world	AREA	0	1373.3	101.1	-3188.5	0	1	a gaping spider queen	creature_spider_gaping_queen	AGGRESSIVE	B	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_15	DATHOMIR	dat_world	AREA	0	1379.9	98.5	-3194.7	0	1	a gaping spider recluse	creature_spider_gaping_recluse	AGGRESSIVE	N	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_16	DATHOMIR	dat_world	AREA	0	-6990.8	342.3	3948.4	0	1	a muscle smuggler	humanoid_smuggler_muscle	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_17	DATHOMIR	dat_world	AREA	0	-7000.5	343.8	3914.8	0	1	a muscle smuggler	humanoid_smuggler_muscle	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_18	DATHOMIR	dat_world	AREA	0	-7009.2	351.0	3973.2	0	1	a muscle smuggler	humanoid_smuggler_muscle	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_19	DATHOMIR	dat_world	AREA	0	-7029.5	341.5	3914.4	0	1	a muscle smuggler	humanoid_smuggler_muscle	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_20	DATHOMIR	dat_world	AREA	0	-7038.0	344.5	3947.1	0	1	a muscle smuggler	humanoid_smuggler_muscle	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_21	DATHOMIR	dat_world	AREA	0	-7117.9	461.1	1181.0	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_22	DATHOMIR	dat_world	AREA	0	-6234.6	468.2	-6091.5	0	1	a Nightsister elder	humanoid_nightsister_elder	AGGRESSIVE	B	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_23	DATHOMIR	dat_world	AREA	0	-7117.6	462.1	1174.7	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_24	DATHOMIR	dat_world	AREA	0	-7124.5	461.7	1180.2	0	1	a Nightsister initiate	humanoid_nightsister_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_25	DATHOMIR	dat_world	AREA	0	-2596.6	131.3	4951.9	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_26	DATHOMIR	dat_world	AREA	0	4877.3	112.6	3283.3	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_27	DATHOMIR	dat_world	AREA	0	865.7	132.0	1095.0	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_28	DATHOMIR	dat_world	AREA	0	-3249.2	99.6	-6587.8	0	1	a Nightsister outcast	humanoid_nightsister_outcast	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_29	DATHOMIR	dat_world	AREA	0	-7094.7	446.6	1199.2	0	1	a Nightsister protector	humanoid_nightsister_protector	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_30	DATHOMIR	dat_world	AREA	0	7208.2	533.5	5543.3	0	1	a Nightsister slave	humanoid_nightsister_slave	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_31	DATHOMIR	dat_world	AREA	0	-4188.4	25.1	-860.6	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_32	DATHOMIR	dat_world	AREA	0	-855.6	146.7	2787.4	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_33	DATHOMIR	dat_world	AREA	0	-2615.8	104.7	-4863.6	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_34	DATHOMIR	dat_world	AREA	0	-6216.8	485.5	-6082.0	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_35	DATHOMIR	dat_world	AREA	0	-6224.7	480.5	-6108.5	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_36	DATHOMIR	dat_world	AREA	0	-6230.1	485.1	-6068.4	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_37	DATHOMIR	dat_world	AREA	0	-6248.1	485.7	-6124.5	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_38	DATHOMIR	dat_world	AREA	0	-6249.6	481.9	-6082.6	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_39	DATHOMIR	dat_world	AREA	0	-6262.9	487.5	-6113.2	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_40	DATHOMIR	dat_world	AREA	0	-4166.0	24.2	-846.9	0	1	a Nightsister stalker	humanoid_nightsister_stalker	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_41	DATHOMIR	dat_world	AREA	0	-2930.4	141.9	-1027.5	0	1	a Nightsister stalker	humanoid_nightsister_stalker	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_42	DATHOMIR	dat_world	AREA	0	5204.9	447.0	-6886.7	0	1	a rancor	creature_rancor	AGGRESSIVE	N	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_43	DATHOMIR	dat_world	AREA	0	-3177.4	21.8	3184.1	0	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_44	DATHOMIR	dat_world	AREA	0	-7070.7	388.2	5921.4	0	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_45	DATHOMIR	dat_world	AREA	0	-3185.5	22.9	3185.8	0	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_46	DATHOMIR	dat_world	AREA	0	-7085.1	384.2	5908.7	0	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_47	DATHOMIR	dat_world	AREA	0	-818.9	94.5	-5034.7	0	1	a Singing Mountain clan dragoon	humanoid_smtn_dragoon	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_48	DATHOMIR	dat_world	AREA	0	5200.8	442.4	-6909.9	0	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_49	DATHOMIR	dat_world	AREA	0	5209.5	446.4	-6905.4	0	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_50	DATHOMIR	dat_world	AREA	0	-6564.2	264.6	-742.1	0	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_51	DATHOMIR	dat_world	AREA	0	-7086.5	384.6	5863.2	0	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_52	DATHOMIR	dat_world	AREA	0	5198.0	446.6	-6879.1	0	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_53	DATHOMIR	dat_world	AREA	0	5199.0	444.4	-6896.7	0	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	71	80	Outback	Dathomir	1	IDLE	0	0	-	idle			600
+outback_dathomir_54	DATHOMIR	dat_world	AREA	0	7480.0	362.9	-912.3	0	1	a Singing Mountain clan outcast	humanoid_smtn_outcast	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_55	DATHOMIR	dat_world	AREA	0	-7085.5	385.1	5830.9	0	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_56	DATHOMIR	dat_world	AREA	0	7439.0	548.8	-3043.9	0	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_57	DATHOMIR	dat_world	AREA	0	-6622.0	325.7	-777.7	0	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_58	DATHOMIR	dat_world	AREA	0	5549.2	128.0	-687.8	0	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_59	DATHOMIR	dat_world	AREA	0	7436.3	549.7	-3031.6	0	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_60	DATHOMIR	dat_world	AREA	0	-434.0	121.0	4174.8	0	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_61	DATHOMIR	dat_world	AREA	0	-835.2	121.4	4169.9	0	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_62	DATHOMIR	dat_world	AREA	0	7196.6	537.1	5574.7	0	1	a Singing Mountain clan slave	humanoid_smtn_slave	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600
+outback_dathomir_63	DATHOMIR	dat_world	AREA	0	736.3	197.8	4989.4	0	1	a Sith Shadow outlaw	humanoid_shadow_outlaw	AGGRESSIVE	N	71	80	Outback	Dathomir	1	IDLE	2	0	-	idle			600
+outback_dathomir_64	DATHOMIR	dat_world	AREA	0	-4710.3	89.9	-4775.6	0	1	an ancient bull rancor	creature_rancor_bull_ancient	AGGRESSIVE	E	71	80	Outback	Dathomir	1	LOITER	5	0	-	idle			600

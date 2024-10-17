@@ -1,0 +1,3 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_naboo_gungan_sacred_place_1	NABOO	nab_world	AREA	0	-1992.2	5.2	-5422.2	-115	1	Boss Nass	humanoid_boss_nass	INVULNERABLE	N	100	100	POI	Gungan Sacred Place	1	IDLE	0	0	-	idle			600

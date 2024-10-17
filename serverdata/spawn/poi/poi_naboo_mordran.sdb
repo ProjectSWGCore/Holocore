@@ -1,0 +1,6 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_naboo_mordran_1	NABOO	nab_world	AREA	0	-1992.5	6.1	-5286.1	1	1	a gungan reject	humanoid_mordran_gungan_reject	AGGRESSIVE	E	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+poi_naboo_mordran_2	NABOO	nab_world	AREA	0	-1943.4	7.1	-5280.0	1	1	an exiled gungan	humanoid_mordran_gungan_exile	AGGRESSIVE	N	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+poi_naboo_mordran_3	NABOO	nab_world	AREA	0	-1968.0	6.0	-5283.9	2	1	an outcast gungan	humanoid_mordran_gungan_outcast	AGGRESSIVE	E	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600
+poi_naboo_mordran_4	NABOO	nab_world	AREA	0	-1969.0	6.5	-5298.6	2	1	Mordran	humanoid_mordran	AGGRESSIVE	N	21	30	POI	Mordran	1	IDLE	0	0	-	idle			600

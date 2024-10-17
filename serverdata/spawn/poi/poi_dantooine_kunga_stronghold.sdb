@@ -1,0 +1,79 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dantooine_kunga_stronghold_1	DANTOOINE	dan_kunga_cave	AREA	1	-1.9	-21.5	-16.0	-5	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_2	DANTOOINE	dan_kunga_cave	AREA	1	-1.0	-20.5	-16.2	-5	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_3	DANTOOINE	dan_kunga_cave	AREA	10	-163.3	-49.5	-83.2	-68	1	a Kunga harvester	humanoid_kunga_harvester	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_4	DANTOOINE	dan_kunga_cave	AREA	10	-166.2	-49.6	-91.5	-161	1	a Kunga harvester	humanoid_kunga_harvester	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_5	DANTOOINE	dan_kunga_cave	AREA	10	-167.7	-49.5	-64.6	-94	1	a Kunga hunter	humanoid_kunga_hunter	AGGRESSIVE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_6	DANTOOINE	dan_kunga_cave	AREA	10	-170.2	-49.9	-64.9	87	1	a Kunga scout	humanoid_kunga_scout	AGGRESSIVE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_7	DANTOOINE	dan_kunga_cave	AREA	10	-175.2	-49.7	-73.3	76	1	a Kunga scout	humanoid_kunga_scout	AGGRESSIVE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_8	DANTOOINE	dan_kunga_cave	AREA	10	-167.6	-49.4	-55.8	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_9	DANTOOINE	dan_kunga_cave	AREA	11	-132.2	-53.9	-81.6	165	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_10	DANTOOINE	dan_kunga_cave	AREA	11	-112.3	-38.4	-79.2	-110	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_11	DANTOOINE	dan_kunga_cave	AREA	11	-115.1	-38.6	-80.2	83	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_12	DANTOOINE	dan_kunga_cave	AREA	11	-106.1	-54.4	-84.8	85	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_13	DANTOOINE	dan_kunga_cave	AREA	12	-137.7	-54.3	-97.6	-23	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_14	DANTOOINE	dan_kunga_cave	AREA	12	-144.6	-54.1	-95.1	57	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_15	DANTOOINE	dan_kunga_cave	AREA	12	-154.3	-55.4	-123.5	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_16	DANTOOINE	dan_kunga_cave	AREA	14	-80.1	-61.9	-60.8	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_17	DANTOOINE	dan_kunga_cave	AREA	16	-107.5	-57.7	-25.6	-93	1	a Kunga soothsayer	humanoid_kunga_soothsayer	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_18	DANTOOINE	dan_kunga_cave	AREA	16	-110.4	-57.8	-25.8	106	1	a Kunga soothsayer	humanoid_kunga_soothsayer	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_19	DANTOOINE	dan_kunga_cave	AREA	16	-120.2	-57.8	-33.8	-8	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_20	DANTOOINE	dan_kunga_cave	AREA	17	-104.3	-42.5	-10.9	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_21	DANTOOINE	dan_kunga_cave	AREA	19	13.3	-32.8	-54.4	26	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_22	DANTOOINE	dan_kunga_cave	AREA	19	18.5	-33.3	-55.2	-42	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_23	DANTOOINE	dan_kunga_cave	AREA	2	-39.2	-31.8	-26.5	-9	1	a Kunga harvester	humanoid_kunga_harvester	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_24	DANTOOINE	dan_kunga_cave	AREA	2	-26.6	-28.7	-27.8	60	1	a Kunga herbalist	humanoid_kunga_herbalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_25	DANTOOINE	dan_kunga_cave	AREA	2	-12.5	-30.0	-41.6	155	1	a Kunga hunter	humanoid_kunga_hunter	AGGRESSIVE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_26	DANTOOINE	dan_kunga_cave	AREA	2	-11.6	-30.3	-49.2	21	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_27	DANTOOINE	dan_kunga_cave	AREA	20	-8.6	-34.8	-82.5	11	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_28	DANTOOINE	dan_kunga_cave	AREA	20	18.1	-67.2	-67.3	-103	1	a Kunga shaman	humanoid_kunga_shaman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_29	DANTOOINE	dan_kunga_cave	AREA	22	-12.8	-43.4	-93.8	-166	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_30	DANTOOINE	dan_kunga_cave	AREA	22	-12.8	-43.9	-101.4	-103	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_31	DANTOOINE	dan_kunga_cave	AREA	22	-33.6	-43.5	-91.7	107	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_32	DANTOOINE	dan_kunga_cave	AREA	22	-38.2	-45.0	-103.1	-94	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_33	DANTOOINE	dan_kunga_cave	AREA	22	-39.9	-44.5	-113.5	-19	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_34	DANTOOINE	dan_kunga_cave	AREA	23	-118.2	-53.6	-113.1	91	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_35	DANTOOINE	dan_kunga_cave	AREA	25	-61.4	-65.9	-141.6	-83	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_36	DANTOOINE	dan_kunga_cave	AREA	25	-61.4	-65.9	-137.4	-109	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_37	DANTOOINE	dan_kunga_cave	AREA	26	0.4	-71.1	-104.1	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_38	DANTOOINE	dan_kunga_cave	AREA	26	-15.6	-67.7	-106.0	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_39	DANTOOINE	dan_kunga_cave	AREA	26	-1.0	-67.5	-81.2	54	1	a Kunga soothsayer	humanoid_kunga_soothsayer	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_40	DANTOOINE	dan_kunga_cave	AREA	27	38.9	-69.4	-110.0	-45	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_41	DANTOOINE	dan_kunga_cave	AREA	27	35.3	-69.1	-106.5	131	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_42	DANTOOINE	dan_kunga_cave	AREA	27	53.5	-65.7	-87.5	-85	1	a Kunga soothsayer	humanoid_kunga_soothsayer	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_43	DANTOOINE	dan_kunga_cave	AREA	27	28.3	-66.4	-86.3	76	1	a Kunga soothsayer	humanoid_kunga_soothsayer	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_44	DANTOOINE	dan_kunga_cave	AREA	28	-81.1	-66.3	-186.6	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_45	DANTOOINE	dan_kunga_cave	AREA	28	-44.5	-66.5	-179.7	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_46	DANTOOINE	dan_kunga_cave	AREA	28	-59.0	-65.0	-161.0	-28	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_47	DANTOOINE	dan_kunga_cave	AREA	28	-73.7	-65.5	-160.7	39	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_48	DANTOOINE	dan_kunga_cave	AREA	28	-67.3	-65.2	-181.2	7	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_49	DANTOOINE	dan_kunga_cave	AREA	28	-47.1	-65.6	-190.0	-35	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_50	DANTOOINE	dan_kunga_cave	AREA	29	-59.2	-66.3	-238.0	10	1	a Kunga clan leader	humanoid_kunga_clan_leader	ATTACKABLE	B	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_51	DANTOOINE	dan_kunga_cave	AREA	29	-65.1	-65.4	-232.9	81	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_52	DANTOOINE	dan_kunga_cave	AREA	29	-54.9	-66.2	-236.4	-57	1	a Kunga shaman	humanoid_kunga_shaman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_53	DANTOOINE	dan_kunga_cave	AREA	29	-56.7	-65.6	-221.4	1	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_54	DANTOOINE	dan_kunga_cave	AREA	29	-51.2	-65.4	-221.9	-6	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_55	DANTOOINE	dan_kunga_cave	AREA	3	-40.0	-29.7	-49.9	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_56	DANTOOINE	dan_kunga_cave	AREA	4	-63.2	-44.4	-14.5	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_57	DANTOOINE	dan_kunga_cave	AREA	5	-63.6	-30.7	-51.2	167	1	a Kunga harvester	humanoid_kunga_harvester	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_58	DANTOOINE	dan_kunga_cave	AREA	5	-63.1	-30.2	-71.3	174	1	a Kunga rockshaper	humanoid_kunga_rockshaper	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_59	DANTOOINE	dan_kunga_cave	AREA	5	-68.6	-46.9	-73.8	-50	1	a Kunga shaman	humanoid_kunga_shaman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_60	DANTOOINE	dan_kunga_cave	AREA	5	-65.1	-30.8	-65.5	20	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_61	DANTOOINE	dan_kunga_cave	AREA	5	-62.2	-30.9	-60.5	-134	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_62	DANTOOINE	dan_kunga_cave	AREA	5	-67.3	-31.6	-56.9	-81	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_63	DANTOOINE	dan_kunga_cave	AREA	5	-71.7	-47.0	-67.6	-73	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_64	DANTOOINE	dan_kunga_cave	AREA	6	-138.6	-49.4	-56.5	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_65	DANTOOINE	dan_kunga_cave	AREA	6	-101.9	-36.0	-65.9	71	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_66	DANTOOINE	dan_kunga_cave	AREA	6	-129.2	-34.1	-63.1	-46	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_67	DANTOOINE	dan_kunga_cave	AREA	9	-104.2	-69.5	-104.9	117	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_68	DANTOOINE	dan_kunga_cave	AREA	9	-90.3	-71.0	-121.4	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	TURN	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_69	DANTOOINE	dan_kunga_cave	AREA	9	-75.3	-71.3	-119.9	-94	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_70	DANTOOINE	dan_kunga_cave	AREA	9	-78.3	-71.8	-120.1	90	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_71	DANTOOINE	dan_kunga_cave	AREA	9	-71.3	-37.9	-119.9	-83	1	a Kunga tribe member	humanoid_kunga_tribesman	ATTACKABLE	N	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_72	DANTOOINE	dan_kunga_cave	AREA	9	-101.2	-39.8	-113.1	89	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_73	DANTOOINE	dan_kunga_cave	AREA	9	-99.7	-53.7	-113.0	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_74	DANTOOINE	dan_kunga_cave	AREA	9	-81.4	-52.9	-113.4	88	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_75	DANTOOINE	dan_world	AREA	0	-145.2	7.3	-412.2	-53	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_76	DANTOOINE	dan_world	AREA	0	-147.6	7.2	-410.5	91	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	IDLE	0	0	-	idle			900
+poi_dantooine_kunga_stronghold_77	DANTOOINE	dan_world	AREA	0	-173.5	7.5	-396.8	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	POI	Kunga Stronghold	1	LOITER	5	0	-	idle			900

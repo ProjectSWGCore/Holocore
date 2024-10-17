@@ -1,0 +1,29 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_naboo_narglatch_cave_1	NABOO	nab_world	AREA	0	5860.2	8.1	-4736.0	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
+poi_naboo_narglatch_cave_2	NABOO	nab_narglatch_cave	AREA	1	22.7	-27.4	-7.9	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_3	NABOO	nab_narglatch_cave	AREA	10	63.1	-47.2	-106.9	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_4	NABOO	nab_narglatch_cave	AREA	10	50.2	-51.8	-86.5	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_5	NABOO	nab_narglatch_cave	AREA	11	75.6	-46.5	-141.9	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_6	NABOO	nab_narglatch_cave	AREA	11	90.2	-46.9	-142.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_7	NABOO	nab_narglatch_cave	AREA	2	55.1	-68.4	-38.8	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_8	NABOO	nab_narglatch_cave	AREA	2	23.8	-39.5	-40.9	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_9	NABOO	nab_narglatch_cave	AREA	2	46.6	-48.2	-62.6	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_10	NABOO	nab_narglatch_cave	AREA	2	47.4	-47.3	-15.6	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_11	NABOO	nab_narglatch_cave	AREA	3	87.2	-62.1	-13.3	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_12	NABOO	nab_narglatch_cave	AREA	4	92.2	-76.3	-84.3	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_13	NABOO	nab_narglatch_cave	AREA	4	76.4	-75.4	-62.3	0	1	a narglatch hunter	creature_narglatch_hunter	AGGRESSIVE	E	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_14	NABOO	nab_narglatch_cave	AREA	5	94.0	-45.6	-98.4	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_15	NABOO	nab_narglatch_cave	AREA	5	92.3	-46.7	-110.9	0	1	a narglatch matriarch	creature_narglatch_matriarch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_16	NABOO	nab_narglatch_cave	AREA	5	93.9	-66.4	-110.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_17	NABOO	nab_narglatch_cave	AREA	6	58.0	-76.8	-87.2	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_18	NABOO	nab_narglatch_cave	AREA	6	56.1	-71.0	-117.7	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_19	NABOO	nab_narglatch_cave	AREA	7	78.4	-65.5	14.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_20	NABOO	nab_narglatch_cave	AREA	7	91.4	-67.2	-134.4	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_21	NABOO	nab_narglatch_cave	AREA	8	136.5	-67.1	-91.7	0	1	a narglatch	creature_narglatch	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_22	NABOO	nab_narglatch_cave	AREA	8	147.9	-67.4	-122.6	0	1	a narglatch guardian	creature_narglatch_guardian	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_23	NABOO	nab_narglatch_cave	AREA	8	129.2	-66.7	-108.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_24	NABOO	nab_narglatch_cave	AREA	9	188.6	-65.9	-105.6	0	1	a narglatch cub	creature_narglatch_cub	ATTACKABLE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_25	NABOO	nab_narglatch_cave	AREA	9	188.5	-66.3	-101.5	0	1	a narglatch scavenger	creature_narglatch_scavenger	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	TURN	0	0	-	idle			600
+poi_naboo_narglatch_cave_26	NABOO	nab_world	AREA	0	5875.4	36.0	-4670.8	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600
+poi_naboo_narglatch_cave_27	NABOO	nab_world	AREA	0	5848.5	36.0	-4658.1	0	1	a narglatch protector	creature_narglatch_protector	AGGRESSIVE	N	21	30	POI	Narglatch Cave	1	LOITER	5	0	-	idle			600

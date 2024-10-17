@@ -1,0 +1,32 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+dungeon_naboo_pirate_bunker_1	NABOO	nab_pirate_bunker	PATROL	10	3.4	-12.0	20.3	0	1	an MSE-6 ''Mouse'' droid	droid_imperial_detain_mse6_mouse	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	PATROL	0	patrol_naboo_2400	column	idle			600
+dungeon_naboo_pirate_bunker_2	NABOO	nab_pirate_bunker	AREA	2	-4.6	0.3	-3.5	36	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_3	NABOO	nab_pirate_bunker	AREA	4	3.4	-12.0	31.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_4	NABOO	nab_pirate_bunker	AREA	5	32.5	-12.0	31.0	-90	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_5	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	28.5	37	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_6	NABOO	nab_pirate_bunker	AREA	5	22.2	-12.0	33.4	128	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_7	NABOO	nab_pirate_bunker	AREA	5	35.6	-12.0	34.4	-139	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_8	NABOO	nab_pirate_bunker	AREA	5	34.8	-12.0	27.0	-68	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_9	NABOO	nab_pirate_bunker	AREA	7	3.5	-16.0	78.8	-179	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_10	NABOO	nab_pirate_bunker	AREA	7	26.7	-16.0	81.5	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_11	NABOO	nab_pirate_bunker	AREA	7	26.8	-16.0	76.6	-90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_12	NABOO	nab_pirate_bunker	AREA	7	-19.7	-16.0	81.3	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_13	NABOO	nab_pirate_bunker	AREA	7	-19.8	-16.0	76.6	90	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_14	NABOO	nab_pirate_bunker	AREA	7	18.6	-16.0	80.1	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_15	NABOO	nab_pirate_bunker	AREA	7	-10.0	-16.0	79.7	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_16	NABOO	nab_pirate_bunker	AREA	8	63.2	-16.0	73.3	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_17	NABOO	nab_pirate_bunker	AREA	8	43.8	-16.0	66.4	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	TURN	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_18	NABOO	nab_pirate_bunker	AREA	8	77.6	-16.0	63.0	-71	1	a Naboo pirate lieutenant	humanoid_naboo_pirate_lieutenant	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_19	NABOO	nab_pirate_bunker	AREA	9	-41.3	-14.0	84.1	115	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_20	NABOO	nab_pirate_bunker	AREA	9	-43.4	-14.0	75.3	85	1	a Naboo dread pirate	humanoid_naboo_dread_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_21	NABOO	nab_pirate_bunker	AREA	9	-29.3	-14.0	81.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_22	NABOO	nab_pirate_bunker	AREA	9	-29.1	-14.0	76.6	-90	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_23	NABOO	nab_pirate_bunker	AREA	9	-31.7	-14.0	74.0	-65	1	missing	humanoid_naboo_kidnapped_noble_01	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_24	NABOO	nab_pirate_bunker	AREA	9	-41.0	-14.0	84.1	0	1	missing	humanoid_naboo_kidnapped_noble_02	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_25	NABOO	nab_pirate_bunker	AREA	9	-40.2	-14.0	78.5	0	1	missing	humanoid_naboo_kidnapped_noble_03	ATTACKABLE	N	21	30	Dungeon	Pirate Bunker	1	IDLE	0	0	-	idle			600
+dungeon_naboo_pirate_bunker_26	NABOO	nab_world	AREA	0	-1531.5	278.0	-1741.9	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+dungeon_naboo_pirate_bunker_27	NABOO	nab_world	AREA	0	-1511.0	278.0	-1690.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+dungeon_naboo_pirate_bunker_28	NABOO	nab_world	AREA	0	-1541.9	278.0	-1721.7	0	1	a Naboo pirate	humanoid_naboo_pirate	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+dungeon_naboo_pirate_bunker_29	NABOO	nab_world	AREA	0	-1498.3	278.0	-1721.1	0	1	a Naboo pirate armsman	humanoid_naboo_pirate_armsman	AGGRESSIVE	N	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600
+dungeon_naboo_pirate_bunker_30	NABOO	nab_world	AREA	0	-1501.8	278.0	-1736.3	0	1	a Naboo pirate cutthroat	humanoid_naboo_pirate_cutthroat	AGGRESSIVE	E	21	30	Dungeon	Pirate Bunker	1	LOITER	5	0	-	idle			600

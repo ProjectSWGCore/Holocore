@@ -1,0 +1,25 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_corellia_afarathu_cave_1	CORELLIA	cor_world	AREA	0	-2489.6	18.1	2920.0	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	5	0	-	idle			600
+poi_corellia_afarathu_cave_2	CORELLIA	cor_world	AREA	0	-2494.0	18.9	2913.6	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	5	0	-	idle			600
+poi_corellia_afarathu_cave_3	CORELLIA	cor_afarathu_cave	AREA	1	-0.6	-13.7	-8.3	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_4	CORELLIA	cor_afarathu_cave	AREA	1	11.3	-14.2	-5.5	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_5	CORELLIA	cor_afarathu_cave	AREA	2	9.7	-23.9	-28.3	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_6	CORELLIA	cor_afarathu_cave	AREA	2	-11.3	-30.7	-27.1	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_7	CORELLIA	cor_afarathu_cave	AREA	3	-1.8	-40.7	-74.1	0	1	an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_8	CORELLIA	cor_afarathu_cave	AREA	3	2.6	-40.4	-62.4	0	1	an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_9	CORELLIA	cor_afarathu_cave	AREA	3	3.4	-41.0	-72.6	0	1	an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_10	CORELLIA	cor_afarathu_cave	AREA	4	49.3	-46.8	-53.7	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_11	CORELLIA	cor_afarathu_cave	AREA	4	43.8	-46.1	-95.1	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_12	CORELLIA	cor_afarathu_cave	AREA	4	23.6	-45.7	-102.8	0	1	an Afarathu ruffian	humanoid_afarathu_ruffian	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_13	CORELLIA	cor_afarathu_cave	AREA	5	-1.7	-45.8	-147.8	0	1	an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_14	CORELLIA	cor_afarathu_cave	AREA	5	-11.0	-44.4	-136.4	0	1	an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_15	CORELLIA	cor_afarathu_cave	AREA	7	-4.2	-64.0	-234.2	0	1	an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_16	CORELLIA	cor_afarathu_cave	AREA	7	-21.7	-65.4	-244.6	0	1	an Afarathu savage	humanoid_afarathu_savage	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_17	CORELLIA	cor_afarathu_cave	AREA	8	-95.3	-73.7	-170.0	0	1	an Afarathu cult follower	humanoid_afarathu_cult_follower	ATTACKABLE	N	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_18	CORELLIA	cor_afarathu_cave	AREA	8	-83.5	-71.6	-169.2	0	1	an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_19	CORELLIA	cor_afarathu_cave	AREA	8	-100.5	-72.9	-159.1	0	1	an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_20	CORELLIA	cor_afarathu_cave	AREA	8	-111.7	-69.4	-170.6	0	1	an Afarathu brute	humanoid_afarathu_brute	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_21	CORELLIA	cor_afarathu_cave	AREA	11	-85.4	-101.5	-111.2	0	1	an Afarathu cult bodyguard	humanoid_afarathu_cult_bodyguard	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_22	CORELLIA	cor_afarathu_cave	AREA	11	-92.8	-101.1	-111.9	0	1	an Afarathu cult bodyguard	humanoid_afarathu_cult_bodyguard	AGGRESSIVE	E	15	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600
+poi_corellia_afarathu_cave_23	CORELLIA	cor_afarathu_cave	AREA	11	-90.7	-101.1	-104.8	0	1	an Afarathu cult leader	humanoid_afarathu_cult_leader	AGGRESSIVE	B	19	20	POI	Afarathu Cave	1	LOITER	1	0	-	idle			600

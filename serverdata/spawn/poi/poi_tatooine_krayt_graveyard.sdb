@@ -1,0 +1,5 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_tatooine_krayt_graveyard_1	TATOOINE	tat_world	AREA	0	7358.0	14.6	4486.6	0	1	a juvenile canyon krayt dragon	creature_krayt_dragon_juvenile_canyon	AGGRESSIVE	B	75	78	POI	Krayt Graveyard	1	LOITER	15	0	-	idle			600
+poi_tatooine_krayt_graveyard_2	TATOOINE	tat_world	AREA	0	6985.5	14.6	4368.0	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	78	80	POI	Krayt Graveyard	1	LOITER	20	0	-	idle			1800
+poi_tatooine_krayt_graveyard_3	TATOOINE	tat_world	AREA	0	7484.3	8.1	4483.7	0	1	a krayt dragon ancient	creature_krayt_dragon_ancient	AGGRESSIVE	B	78	80	POI	Krayt Graveyard	1	LOITER	20	0	-	idle			1800

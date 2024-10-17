@@ -1,0 +1,24 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dathomir_ns_vs_smc_battle_1	DATHOMIR	dat_world	AREA	0	-2500.0	125.7	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_2	DATHOMIR	dat_world	AREA	0	-2540.0	126.2	1510.0	0	1	a Nightsister rancor	creature_rancor_nightsister	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_3	DATHOMIR	dat_world	AREA	0	-2520.0	128.6	1500.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_4	DATHOMIR	dat_world	AREA	0	-2520.0	127.0	1510.0	0	1	a Nightsister ranger	humanoid_nightsister_ranger	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_5	DATHOMIR	dat_world	AREA	0	-2510.0	129.5	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_6	DATHOMIR	dat_world	AREA	0	-2530.0	129.1	1490.0	0	1	a Nightsister sentinel	humanoid_nightsister_sentinel	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_7	DATHOMIR	dat_world	AREA	0	-2490.0	122.1	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_8	DATHOMIR	dat_world	AREA	0	-2510.0	124.7	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_9	DATHOMIR	dat_world	AREA	0	-2530.0	125.5	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_10	DATHOMIR	dat_world	AREA	0	-2550.0	125.4	1520.0	0	1	a Nightsister sentry	humanoid_nightsister_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_11	DATHOMIR	dat_world	AREA	0	-2520.0	130.3	1469.5	0	1	a Nightsister spell weaver	humanoid_nightsister_spell_weaver	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_12	DATHOMIR	dat_world	AREA	0	-2520.0	128.5	1598.0	179	1	a Singing Mountain clan arch witch	humanoid_smtn_arch_witch	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_13	DATHOMIR	dat_world	AREA	0	-2510.0	122.8	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_14	DATHOMIR	dat_world	AREA	0	-2530.0	126.6	1570.0	179	1	a Singing Mountain clan huntress	humanoid_smtn_huntress	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_15	DATHOMIR	dat_world	AREA	0	-2519.8	123.3	1556.0	179	1	a Singing Mountain clan initiate	humanoid_smtn_initiate	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_16	DATHOMIR	dat_world	AREA	0	-2500.0	120.6	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_17	DATHOMIR	dat_world	AREA	0	-2540.0	127.0	1560.0	179	1	a Singing Mountain clan rancor	creature_rancor_smc	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_18	DATHOMIR	dat_world	AREA	0	-2520.0	126.4	1580.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_19	DATHOMIR	dat_world	AREA	0	-2520.0	124.5	1570.0	179	1	a Singing Mountain clan scout	humanoid_smtn_scout	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_20	DATHOMIR	dat_world	AREA	0	-2500.0	120.3	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_21	DATHOMIR	dat_world	AREA	0	-2520.0	122.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600
+poi_dathomir_ns_vs_smc_battle_22	DATHOMIR	dat_world	AREA	0	-2540.0	125.8	1550.0	179	1	a Singing Mountain clan sentry	humanoid_smtn_sentry	AGGRESSIVE	E	71	80	POI	NS vs. SMC Battle	1	LOITER	5	0	-	idle			600

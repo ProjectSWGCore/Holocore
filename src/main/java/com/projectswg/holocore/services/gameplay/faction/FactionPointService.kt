@@ -75,7 +75,7 @@ class FactionPointService : Service() {
 		adjustFactionPoints(
 			factionName = factionName,
 			involvedPlayer = involvedPlayer,
-			adjustment = 15,
+			adjustment = 3,
 			changeMessage = youHaveBeenAwardedPoints,
 			capMessage = maxCapReached
 		)
@@ -85,7 +85,7 @@ class FactionPointService : Service() {
 		adjustFactionPoints(
 			factionName = factionName,
 			involvedPlayer = involvedPlayer,
-			adjustment = -22,
+			adjustment = -5,
 			changeMessage = youHaveLostPoints,
 			capMessage = minCapReached
 		)

@@ -1,0 +1,6 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_tatooine_old_mos_espa_arena_track_1	TATOOINE	tat_world	AREA	0	2380.2	2.0	4999.6	-91	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	POI	Old Mos Espa Arena Track	1	IDLE	0	0	-	idle			600
+poi_tatooine_old_mos_espa_arena_track_2	TATOOINE	tat_world	AREA	0	919.9	0.8	3825.4	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	15	POI	Old Mos Espa Arena Track	1	LOITER	5	0	-	idle			600
+poi_tatooine_old_mos_espa_arena_track_3	TATOOINE	tat_world	AREA	0	930.0	0.9	3819.8	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	15	POI	Old Mos Espa Arena Track	1	LOITER	5	0	-	idle			600
+poi_tatooine_old_mos_espa_arena_track_4	TATOOINE	tat_world	AREA	0	938.4	0.9	3828.7	0	1	Tusken Follower	humanoid_tusken_raider	AGGRESSIVE	N	10	15	POI	Old Mos Espa Arena Track	1	LOITER	5	0	-	idle			600

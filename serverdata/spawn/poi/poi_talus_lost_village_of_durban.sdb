@@ -1,0 +1,12 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_lost_village_of_durban_1	TALUS	tal_world	AREA	0	4286.0	35.6	886.6	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_2	TALUS	tal_world	AREA	0	4191.0	6.0	1008.1	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+poi_talus_lost_village_of_durban_3	TALUS	tal_world	AREA	0	4265.3	6.0	1011.8	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+poi_talus_lost_village_of_durban_4	TALUS	tal_world	AREA	0	4145.1	6.0	983.6	0	1	a famished sludge panther	creature_panther_sludge_famished	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	TURN	0	0	-	idle			600
+poi_talus_lost_village_of_durban_5	TALUS	tal_world	AREA	0	4219.4	6.0	1012.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_6	TALUS	tal_world	AREA	0	4300.7	6.0	1029.5	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_7	TALUS	tal_world	AREA	0	4147.2	6.0	943.2	0	1	a greater sludge panther	creature_panther_sludge_greater	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_8	TALUS	tal_world	AREA	0	4199.3	6.0	985.9	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_9	TALUS	tal_world	AREA	0	4288.0	6.0	998.1	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600
+poi_talus_lost_village_of_durban_10	TALUS	tal_world	AREA	0	4122.6	6.0	976.7	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Lost Village of Durbin	1	LOITER	5	0	-	idle			600

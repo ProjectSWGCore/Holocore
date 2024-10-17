@@ -1,0 +1,62 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_corellia_rebel_hideout_1	CORELLIA	cor_hidden_reb_base	AREA	2	-0.3	1.0	-14.3	0	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_2	CORELLIA	cor_hidden_reb_base	AREA	2	2.7	2.0	4.6	44	1	a Rebel Second Lieuteneant	humanoid_rebel_second_lieutenant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_3	CORELLIA	cor_hidden_reb_base	AREA	2	0.2	2.0	5.4	0	1	a Rebel Staff Corporal	humanoid_rebel_staff_corporal	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	npc_use_terminal_high			600
+poi_corellia_rebel_hideout_4	CORELLIA	cor_hidden_reb_base	PATROL	2	6.4	1.0	2.5	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_2900	column	idle			600
+poi_corellia_rebel_hideout_5	CORELLIA	cor_hidden_reb_base	PATROL	2	-14.8	1.0	-12.0	0	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_3000	column	idle			600
+poi_corellia_rebel_hideout_6	CORELLIA	cor_hidden_reb_base	PATROL	2	19.0	1.0	8.1	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_2700	column	idle			600
+poi_corellia_rebel_hideout_7	CORELLIA	cor_hidden_reb_base	PATROL	2	-2.9	1.0	0.0	0	1	an MSE-6 "Mouse" droid	droid_mouse	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_2800	column	idle			600
+poi_corellia_rebel_hideout_8	CORELLIA	cor_hidden_reb_base	AREA	2	-2.8	2.0	4.5	141	1	C-3PO	droid_rebel_c3po	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_9	CORELLIA	cor_hidden_reb_base	AREA	2	7.3	1.0	-8.2	-90	1	Falton Molard	humanoid_rebel_falton_molard	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_10	CORELLIA	cor_hidden_reb_base	AREA	2	-4.0	1.0	-0.9	26	1	R2-D2	droid_r2d2	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_11	CORELLIA	cor_hidden_reb_base	AREA	5	15.9	1.0	-1.6	73	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_corellia_rebel_hideout_12	CORELLIA	cor_hidden_reb_base	AREA	5	14.0	1.0	-4.9	150	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_13	CORELLIA	cor_hidden_reb_base	AREA	5	15.3	1.0	-1.7	0	1	Battle Astromech	droid_rebel_detain_battle_astromech	AGGRESSIVE	E	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_14	CORELLIA	cor_hidden_reb_base	AREA	5	15.0	1.0	-6.5	-42	1	Major Qual'do Herm	humanoid_rebel_qualdo_herm	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_15	CORELLIA	cor_hidden_reb_base	AREA	7	-4.1	1.0	-20.8	-86	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_16	CORELLIA	cor_hidden_reb_base	AREA	7	0.0	1.0	-21.9	0	1	Wedge Antilles	humanoid_rebel_wedge_antilles	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_corellia_rebel_hideout_17	CORELLIA	cor_hidden_reb_base	AREA	10	5.5	7.0	-0.4	4	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_18	CORELLIA	cor_hidden_reb_base	AREA	10	11.6	7.0	-9.0	90	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_19	CORELLIA	cor_hidden_reb_base	AREA	11	-13.1	7.0	9.6	95	1	a Rebel Army Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_20	CORELLIA	cor_hidden_reb_base	AREA	11	-3.3	7.0	12.6	100	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_corellia_rebel_hideout_21	CORELLIA	cor_hidden_reb_base	AREA	11	-2.7	7.0	6.1	-92	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_22	CORELLIA	cor_hidden_reb_base	AREA	11	-6.2	7.0	6.1	82	1	a Rebel trooper	humanoid_rebel_trooper	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_23	CORELLIA	cor_hidden_reb_base	AREA	12	5.9	7.0	10.0	87	1	a Rebel Colonel	humanoid_rebel_colonel	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_corellia_rebel_hideout_24	CORELLIA	cor_world	PATROL	0	-6479.0	398.0	5966.3	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_3100	column	idle		simple_droid_sarcastic_flee_4	600
+poi_corellia_rebel_hideout_25	CORELLIA	cor_world	AREA	0	-6563.6	398.0	5984.9	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_26	CORELLIA	cor_world	AREA	0	-6552.4	398.0	6014.8	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_27	CORELLIA	cor_world	AREA	0	-6510.1	398.0	6040.9	-148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_28	CORELLIA	cor_world	AREA	0	-6454.7	398.0	6008.8	-142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_29	CORELLIA	cor_world	AREA	0	-6486.0	398.0	5970.2	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_30	CORELLIA	cor_world	AREA	0	-6497.1	398.0	5950.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle		commoner	600
+poi_corellia_rebel_hideout_31	CORELLIA	cor_world	AREA	0	-6490.7	398.0	6047.5	100	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_32	CORELLIA	cor_world	AREA	0	-6583.8	405.0	5967.6	0	1	a Rebel Captain	humanoid_rebel_army_captain	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_33	CORELLIA	cor_world	AREA	0	-6555.2	403.3	5944.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_34	CORELLIA	cor_world	AREA	0	-6586.7	405.0	5967.4	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_35	CORELLIA	cor_world	AREA	0	-6584.7	405.0	5963.7	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_36	CORELLIA	cor_world	AREA	0	-6581.8	405.0	5966.1	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_37	CORELLIA	cor_world	AREA	0	-6550.9	401.6	5949.8	0	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_38	CORELLIA	cor_world	PATROL	0	-6521.5	405.0	5908.5	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_100	column	idle			600
+poi_corellia_rebel_hideout_39	CORELLIA	cor_world	PATROL	0	-6571.8	405.0	5946.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_200	column	idle			600
+poi_corellia_rebel_hideout_40	CORELLIA	cor_world	AREA	0	-6430.6	405.0	6033.7	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_41	CORELLIA	cor_world	AREA	0	-6438.4	405.0	6036.3	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_42	CORELLIA	cor_world	AREA	0	-6478.4	405.0	5916.6	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_43	CORELLIA	cor_world	AREA	0	-6482.1	405.0	5914.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_44	CORELLIA	cor_world	AREA	0	-6529.2	405.0	5910.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_45	CORELLIA	cor_world	AREA	0	-6570.1	405.0	5942.9	0	1	a Rebel guard	humanoid_rebel_base_guard	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	TURN	0	0	-	idle			600
+poi_corellia_rebel_hideout_46	CORELLIA	cor_world	AREA	0	-6553.3	402.6	5946.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_47	CORELLIA	cor_world	AREA	0	-6559.7	405.0	5920.8	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_48	CORELLIA	cor_world	AREA	0	-6558.9	405.0	5923.4	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_49	CORELLIA	cor_world	AREA	0	-6498.9	398.0	6035.3	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_50	CORELLIA	cor_world	AREA	0	-6482.0	398.0	6024.9	0	1	a Rebel Major	humanoid_rebel_major	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_51	CORELLIA	cor_world	AREA	0	-6474.6	398.0	6020.0	0	1	a Rebel Sergeant	humanoid_rebel_sergeant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_52	CORELLIA	cor_world	AREA	0	-6522.8	398.0	5956.5	111	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_53	CORELLIA	cor_world	AREA	0	-6538.5	398.0	5985.6	-86	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_54	CORELLIA	cor_world	AREA	0	-6462.8	398.0	5955.2	-131	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_55	CORELLIA	cor_world	PATROL	0	-6475.4	398.0	5959.0	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	PATROL	0	patrol_corellia_3200	column	idle		simple_droid_sarcastic_alert_2	600
+poi_corellia_rebel_hideout_56	CORELLIA	cor_world	AREA	0	-6462.5	398.0	6001.0	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+poi_corellia_rebel_hideout_57	CORELLIA	cor_world	AREA	0	-6521.1	398.0	6027.6	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+poi_corellia_rebel_hideout_58	CORELLIA	cor_world	AREA	0	-6483.6	398.0	6013.1	-134	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_59	CORELLIA	cor_world	AREA	0	-6519.3	398.0	6043.7	149	1	Lt. Lance	humanoid_rebel_lt_lance	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
+poi_corellia_rebel_hideout_60	CORELLIA	cor_world	AREA	0	-6485.0	398.0	6017.0	35	1	Teslo Ten'Doora	humanoid_rebel_officer_questgiver	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600

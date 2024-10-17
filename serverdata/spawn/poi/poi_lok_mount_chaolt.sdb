@@ -1,0 +1,12 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_lok_mount_chaolt_1	LOK	lok_world	AREA	0	2882.8	334.6	-4568.8	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600
+poi_lok_mount_chaolt_2	LOK	lok_world	AREA	0	2890.1	307.4	-4472.5	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600
+poi_lok_mount_chaolt_3	LOK	lok_world	AREA	0	2897.0	328.5	-4533.3	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600
+poi_lok_mount_chaolt_4	LOK	lok_world	AREA	0	2921.4	345.0	-4589.1	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600
+poi_lok_mount_chaolt_5	LOK	lok_world	PATROL	0	2943.0	326.9	-4515.7	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Mount Chaolt	1	PATROL	0	patrol_lok_900	column	idle			600
+poi_lok_mount_chaolt_6	LOK	lok_world	PATROL	0	2955.1	330.4	-4524.3	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Mount Chaolt	1	PATROL	0	patrol_lok_1100	column	idle			600
+poi_lok_mount_chaolt_7	LOK	lok_world	AREA	0	2963.0	325.0	-4500.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Mount Chaolt	1	TURN	0	0	-	idle			600
+poi_lok_mount_chaolt_8	LOK	lok_world	PATROL	0	2970.2	330.4	-4514.0	0	1	Nym's elite enforcer	humanoid_smuggler_patrol_elite_4	ATTACKABLE	E	31	40	POI	Mount Chaolt	1	PATROL	0	patrol_lok_1000	column	idle			600
+poi_lok_mount_chaolt_9	LOK	lok_world	AREA	0	3033.9	337.5	-4545.9	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600
+poi_lok_mount_chaolt_10	LOK	lok_world	AREA	0	3037.4	325.2	-4489.4	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	31	40	POI	Mount Chaolt	1	LOITER	5	0	-	idle			600

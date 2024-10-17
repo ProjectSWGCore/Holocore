@@ -1,0 +1,103 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_naboo_kaadara_1	NABOO	nab_kaadara_association_hall	AREA	10	0.1	1.8	-13.6	0	1	Lt. Barn Sinkko (Imperial Pilot Trainer)	humanoid_imperial_barn_sinkko	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_2	NABOO	nab_kaadara_cantina	AREA	3	8.1	-0.9	2.1	53	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_3	NABOO	nab_kaadara_cantina	AREA	3	10.7	-0.9	0.2	-81	1	Ketter Yaaran	humanoid_herald_naboo_ketter	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_naboo_kaadara_4	NABOO	nab_kaadara_cantina	AREA	3	2.8	-0.9	5.7	159	1	Leb Slesher	humanoid_leb_slesher	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_naboo_kaadara_5	NABOO	nab_kaadara_cloning	AREA	2	-5.9	0.1	-0.2	90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_6	NABOO	nab_kaadara_cloning	AREA	2	1	-0.1	3.9	-177	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_7	NABOO	nab_kaadara_cloning	AREA	4	2.7	-5.5	-8.2	119	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_8	NABOO	nab_kaadara_cloning	AREA	4	5.8	-5.5	-9.9	-64	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_9	NABOO	nab_kaadara_cloning	PATROL	4	1.8	-4.8	0.7	-2	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6000	column	idle			600
+city_naboo_kaadara_10	NABOO	nab_kaadara_hospital	AREA	2	20.1	0.3	7.6	-162	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_11	NABOO	nab_kaadara_hospital	AREA	2	17.2	0.3	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_12	NABOO	nab_kaadara_hospital	AREA	2	17.9	0.3	2.5	-168	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_13	NABOO	nab_kaadara_hospital	AREA	2	19.2	0.3	4.8	-164	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_14	NABOO	nab_kaadara_hospital	AREA	6	-18.6	0.3	-10.4	179	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_15	NABOO	nab_kaadara_hospital	AREA	6	-18.5	0.3	-2.6	-180	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_16	NABOO	nab_kaadara_hospital	AREA	6	-12.9	0.3	-2.6	-179	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_17	NABOO	nab_kaadara_hotel	AREA	4	-1.7	1	3.9	142	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_18	NABOO	nab_kaadara_hotel	AREA	6	-11	1	4.2	-95	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_19	NABOO	nab_kaadara_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_20	NABOO	nab_kaadara_hotel	AREA	5	18.6	1.3	10.4	132	1	Tamvar Senzen	humanoid_tamvar_senzen	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_21	NABOO	nab_kaadara_starport	AREA	4	-6	0.6	67.5	-3	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_22	NABOO	nab_kaadara_starport	AREA	4	-4.4	0.6	56.3	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_23	NABOO	nab_kaadara_starport	AREA	4	-4.2	0.6	60.7	180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_24	NABOO	nab_kaadara_starport	AREA	4	1.8	0.6	58.8	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_25	NABOO	nab_kaadara_starport	AREA	4	-11.7	0.6	53.3	-143	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_26	NABOO	nab_kaadara_starport	AREA	7	55.4	-0.5	32	-28	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_27	NABOO	nab_kaadara_starport	AREA	7	54.4	-0.5	34	160	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_28	NABOO	nab_kaadara_starport	AREA	7	51.2	0.6	45.1	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_29	NABOO	nab_kaadara_starport	AREA	7	49.4	0.6	45.4	135	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_30	NABOO	nab_kaadara_starport	AREA	9	-31.6	1.6	66	-99	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_31	NABOO	nab_kaadara_starport	AREA	9	-26.7	1.6	65.6	-48	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_32	NABOO	nab_kaadara_starport	AREA	9	-42.2	1.6	62.1	-147	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_33	NABOO	nab_kaadara_starport	AREA	9	-42.5	1.6	59.9	-29	1	a Sullustan male	humanoid_patron_sullustan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_34	NABOO	nab_kaadara_starport	AREA	10	-38.8	1.6	49.3	97	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_35	NABOO	nab_kaadara_starport	AREA	14	-55.7	1	8.4	-177	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_36	NABOO	nab_kaadara_starport	PATROL	14	-56	2.7	25	-178	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_5900	column	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_kaadara_37	NABOO	nab_kaadara_starport	AREA	4	5.7	0.6	67.2	147	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_38	NABOO	nab_kaadara_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_39	NABOO	nab_world	AREA	0	5339.3	-192	6595.5	15	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_40	NABOO	nab_world	AREA	0	4979.2	-192	6804.7	83	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_41	NABOO	nab_world	AREA	0	5179	-192	6757.1	-141	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_42	NABOO	nab_world	AREA	0	5176.9	-192	6754.5	41	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_43	NABOO	nab_world	AREA	0	5080.9	-191.7	6713.6	-136	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_44	NABOO	nab_world	AREA	0	5295	-192	6687.2	142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_45	NABOO	nab_world	AREA	0	5308.1	-192	6682	124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_46	NABOO	nab_world	AREA	0	5192.9	-192	6648.1	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_47	NABOO	nab_world	AREA	0	5372.3	-192	6722.4	-76	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_48	NABOO	nab_world	AREA	0	5348.4	-192	6727.1	-84	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_49	NABOO	nab_world	AREA	0	5276.8	-192	6752.1	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_50	NABOO	nab_world	AREA	0	5278.8	-192	6788.2	-9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_51	NABOO	nab_world	AREA	0	5176.5	-192	6756.6	100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_52	NABOO	nab_world	AREA	0	5084.7	-191.7	6700.8	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_53	NABOO	nab_world	AREA	0	5305	-191.4	6765.3	90	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_54	NABOO	nab_world	AREA	0	5293.2	-191.4	6766.8	-174	1	a criminal	humanoid_forage_criminal	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_55	NABOO	nab_world	AREA	0	5292.8	-191.4	6763.5	6	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_56	NABOO	nab_world	AREA	0	5294.9	-191.4	6763.6	-40	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_57	NABOO	nab_world	AREA	0	5180.1	-192	6780.3	-104	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_58	NABOO	nab_world	AREA	0	5177.3	-192	6779.6	70	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_59	NABOO	nab_world	AREA	0	5169.6	-192	6850	-19	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_60	NABOO	nab_world	AREA	0	5120.1	-191.4	6605.8	135	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_61	NABOO	nab_world	AREA	0	5167.8	-192	6849.3	-19	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_62	NABOO	nab_world	AREA	0	5133	-191.4	6617.8	126	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_63	NABOO	nab_world	AREA	0	4977.8	-206.5	6886.5	-20	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_64	NABOO	nab_world	AREA	0	5133.2	-191.7	6619.2	153	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_65	NABOO	nab_world	AREA	0	4952.9	-207.6	6900.8	0	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_66	NABOO	nab_world	AREA	0	4982.9	-192	6804.1	-45	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_67	NABOO	nab_world	AREA	0	4982.8	-192	6806.4	-134	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_68	NABOO	nab_world	AREA	0	5383.7	-192	6637.1	-98	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_69	NABOO	nab_world	AREA	0	5371.2	-192	6656.2	-81	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_70	NABOO	nab_world	AREA	0	5326.1	-192	6603.8	129	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_71	NABOO	nab_world	AREA	0	5068.7	-191.7	6702.1	159	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_72	NABOO	nab_world	AREA	0	5069.9	-191.7	6699.5	-24	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_73	NABOO	nab_world	AREA	0	5060.8	-191.7	6722.7	-40	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_74	NABOO	nab_world	AREA	0	5329.2	-192	6602.8	-75	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_75	NABOO	nab_world	AREA	0	5195	-192	6675.3	-90	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_kaadara_76	NABOO	nab_world	AREA	0	5380.7	-192	6636.5	80	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	conversation			600
+city_naboo_kaadara_77	NABOO	nab_world	AREA	0	5341.2	-192	6597.3	-120	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_kaadara_78	NABOO	nab_world	PATROL	0	5392.6	-191.8	6615	107	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6200	column	idle			600
+city_naboo_kaadara_79	NABOO	nab_world	PATROL	0	5173.7	-191.5	6610.2	-129	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6300	column	idle			600
+city_naboo_kaadara_80	NABOO	nab_world	PATROL	0	5139.8	-192.0	6761.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Kaadara	1	PATROL	0	patrol_naboo_1700	column	idle			600
+city_naboo_kaadara_81	NABOO	nab_world	PATROL	0	5144.5	-192.0	6766.7	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Kaadara	1	PATROL	0	patrol_naboo_1800	column	idle			600
+city_naboo_kaadara_82	NABOO	nab_world	PATROL	0	5155.4	-192	6851.2	-6	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6100	column	idle			600
+city_naboo_kaadara_83	NABOO	nab_world	AREA	0	5037.7	-192.0	6686.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_84	NABOO	nab_world	AREA	0	5159.5	-192.0	6756.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_85	NABOO	nab_world	AREA	0	5180.1	-192.0	6648.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_86	NABOO	nab_world	AREA	0	5296.9	-192.0	6579.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_87	NABOO	nab_world	AREA	0	5383.4	-192.0	6658.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_88	NABOO	nab_world	AREA	0	5366.1	-197.2	6441.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_kaadara_89	NABOO	nab_world	PATROL	0	5290.7	-192	6682.4	5	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_5700	column	idle			600
+city_naboo_kaadara_90	NABOO	nab_world	PATROL	0	5358.9	-192	6590.4	-101	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6400	column	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_kaadara_91	NABOO	nab_world	AREA	0	5184.9	-192.0	6671.2	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
+city_naboo_kaadara_92	NABOO	nab_world	AREA	0	5184.9	-192.0	6669.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+city_naboo_kaadara_93	NABOO	nab_world	AREA	0	5167.6	-192.0	6674.9	116	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_94	NABOO	nab_world	AREA	0	5120.6	-192.0	6788.5	-113	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_95	NABOO	nab_world	AREA	0	5155.5	-192.0	6634.0	31	1	Huff Zinga	humanoid_huff_zinga	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_96	NABOO	nab_world	AREA	0	5094.7	-192.0	6754.1	-151	1	Lt. Harmon Vintollo	humanoid_herald_imperial_harmon_vintollo	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_97	NABOO	nab_world	AREA	0	5206.0	-192.0	6680.0	102	1	missing	humanoid_imperial_space_greeter_kadaara	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_98	NABOO	nab_world	AREA	0	5047.5	-192.0	6787.7	-109	1	Mullud Bombo	humanoid_mullud_bombo	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_99	NABOO	nab_world	AREA	0	5151.0	-192.0	6620.5	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_100	NABOO	nab_world	AREA	0	4938.9	-192.0	6693.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600
+city_naboo_kaadara_101	NABOO	nab_world	AREA	0	5206.5	-192.0	6680.9	140	1	Ta'la Vark	humanoid_tala_vark	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle			600

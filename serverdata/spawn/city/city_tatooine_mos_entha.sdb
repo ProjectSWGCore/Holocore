@@ -1,0 +1,140 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_mos_entha_1	TATOOINE	tat_mosentha_hospital	AREA	10	26.8	7.3	0.2	-91	1	Doctor Nssktkslis (Cybernetic Doctor)	humanoid_cybernetic_specialist_tatooine	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		cybernetics	600
+city_tatooine_mos_entha_2	TATOOINE	tat_mosentha_hospital	AREA	2	18.0	0.3	1.8	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_3	TATOOINE	tat_mosentha_hospital	AREA	2	22.0	0.3	-7.2	1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_4	TATOOINE	tat_mosentha_hospital	AREA	2	17.2	0.3	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_5	TATOOINE	tat_mosentha_hospital	AREA	6	-13.1	0.3	-10.2	2	1	a male zabrak thug	humanoid_male_zabrak_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_6	TATOOINE	tat_mosentha_hospital	AREA	6	-15.1	0.3	10.2	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_7	TATOOINE	tat_mosentha_hospital	AREA	6	-17.0	0.3	9.7	73	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_8	TATOOINE	tat_mosentha_starport	AREA	12	-59.0	2.6	39.8	65	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_9	TATOOINE	tat_mosentha_starport	AREA	12	-57.6	2.6	42.5	-155	1	a myyydril miner	humanoid_kashyyyk_myyydril_miner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_10	TATOOINE	tat_mosentha_starport	AREA	12	-56.0	2.6	39.4	-82	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_11	TATOOINE	tat_mosentha_starport	AREA	16	55.9	1.0	8.5	153	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_12	TATOOINE	tat_mosentha_starport	AREA	16	56.7	1.0	6.8	-32	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_13	TATOOINE	tat_mosentha_starport	AREA	16	58.9	1.0	8.0	-46	1	a Jawa thief	humanoid_jawa_thief	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_14	TATOOINE	tat_mosentha_starport	AREA	4	-3.2	0.6	51.7	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_15	TATOOINE	tat_mosentha_starport	AREA	4	5.0	0.6	62.2	146	1	a dervish	humanoid_dervish	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_16	TATOOINE	tat_mosentha_starport	AREA	4	5.5	0.6	49.9	-3	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	nervous			600
+city_tatooine_mos_entha_17	TATOOINE	tat_mosentha_starport	AREA	4	-4.8	0.6	68.0	-178	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_18	TATOOINE	tat_mosentha_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		chassis_dealer	600
+city_tatooine_mos_entha_19	TATOOINE	tat_mosentha_starport	AREA	7	56.6	-0.5	41.1	-37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_20	TATOOINE	tat_mosentha_starport	AREA	7	55.9	-0.5	44.6	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_21	TATOOINE	tat_mosentha_starport	AREA	7	54.4	-0.5	41.5	27	1	a male rodian thug	humanoid_male_rodian_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_22	TATOOINE	tat_mosentha_starport	AREA	7	41.3	0.6	38.2	110	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_consoling			600
+city_tatooine_mos_entha_23	TATOOINE	tat_mosentha_starport	AREA	9	-31.9	1.6	58.2	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_entha_24	TATOOINE	tat_mosentha_starport	AREA	9	-28.2	1.6	65.8	-24	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_25	TATOOINE	tat_world	AREA	0	1232.2	1.5	3256.2	83	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_26	TATOOINE	tat_world	AREA	0	1561.3	7.0	3025.3	-38	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_entha_27	TATOOINE	tat_world	AREA	0	1421.4	7.6	3264.7	-4	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_28	TATOOINE	tat_world	AREA	0	1790.9	7.0	3158.4	-4	1	a common thief	humanoid_common_thief	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_ground			600
+city_tatooine_mos_entha_29	TATOOINE	tat_world	AREA	0	1187.9	7.0	2996.7	-162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_entha_30	TATOOINE	tat_world	AREA	0	1271.8	7.0	2971.4	-6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_entha_31	TATOOINE	tat_world	AREA	0	1389.4	7.5	3196.4	-13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_32	TATOOINE	tat_world	AREA	0	1490.3	7.0	3049.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_33	TATOOINE	tat_world	AREA	0	1641.0	7.0	2944.6	-29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_34	TATOOINE	tat_world	AREA	0	1303.9	7.0	3114.5	-125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_35	TATOOINE	tat_world	AREA	0	1309.8	7.0	3174.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_36	TATOOINE	tat_world	AREA	0	1306.5	7.0	3088.3	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_37	TATOOINE	tat_world	AREA	0	1492.7	7.0	3010.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_38	TATOOINE	tat_world	AREA	0	1585.0	7.0	3030.5	72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_39	TATOOINE	tat_world	AREA	0	1727.5	7.0	3177.4	113	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_40	TATOOINE	tat_world	AREA	0	1485.2	7.0	3093.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_41	TATOOINE	tat_world	AREA	0	1343.3	7.0	3062.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_42	TATOOINE	tat_world	AREA	0	1296.1	7.0	3007.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_43	TATOOINE	tat_world	AREA	0	1446.9	7.0	2996.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_44	TATOOINE	tat_world	AREA	0	1394.8	7.6	3269.1	10	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_45	TATOOINE	tat_world	AREA	0	1474.3	7.0	3412.5	-51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_46	TATOOINE	tat_world	AREA	0	1436.3	7.0	3342.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_47	TATOOINE	tat_world	AREA	0	1373.4	7.0	3410.1	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_48	TATOOINE	tat_world	AREA	0	1349.2	7.0	3480.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_49	TATOOINE	tat_world	AREA	0	1534.2	7.0	3413.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_50	TATOOINE	tat_world	AREA	0	1497.9	7.0	3398.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_51	TATOOINE	tat_world	AREA	0	1459.0	7.0	3346.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_52	TATOOINE	tat_world	AREA	0	1517.2	7.0	3250.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_53	TATOOINE	tat_world	AREA	0	1453.0	7.0	3203.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_54	TATOOINE	tat_world	AREA	0	1378.6	11.0	3216.7	149	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_55	TATOOINE	tat_world	AREA	0	1234.9	1.5	3255.3	-20	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_56	TATOOINE	tat_world	AREA	0	1150.7	7.0	3085.0	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_57	TATOOINE	tat_world	AREA	0	1550.6	11.0	3295.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_58	TATOOINE	tat_world	AREA	0	1616.2	7.0	3317.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_59	TATOOINE	tat_world	AREA	0	1542.5	7.0	3437.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_60	TATOOINE	tat_world	AREA	0	1503.8	14.9	3465.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_61	TATOOINE	tat_world	AREA	0	1329.2	14.9	3337.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_62	TATOOINE	tat_world	AREA	0	1354.6	7.0	3329.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_63	TATOOINE	tat_world	AREA	0	1376.5	7.0	3364.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_64	TATOOINE	tat_world	AREA	0	1345.0	7.0	3251.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_65	TATOOINE	tat_world	AREA	0	1445.1	7.0	3249.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_66	TATOOINE	tat_world	AREA	0	1405.6	7.0	3039.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_67	TATOOINE	tat_world	AREA	0	1326.2	7.0	3029.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_68	TATOOINE	tat_world	AREA	0	1218.6	7.0	3163.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_69	TATOOINE	tat_world	AREA	0	1247.1	7.0	3162.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_70	TATOOINE	tat_world	AREA	0	1178.2	7.0	2978.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_71	TATOOINE	tat_world	AREA	0	1199.5	7.0	2960.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_mos_entha_72	TATOOINE	tat_world	AREA	0	1367.5	9.5	3004.4	115	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_73	TATOOINE	tat_world	AREA	0	1312.4	7.0	2995.9	-99	1	a criminal	humanoid_criminal	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	nervous			600
+city_tatooine_mos_entha_74	TATOOINE	tat_world	AREA	0	1490.4	7.0	3432.0	-166	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_75	TATOOINE	tat_world	AREA	0	1585.7	7.0	3087.3	-163	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_ground			600
+city_tatooine_mos_entha_76	TATOOINE	tat_world	AREA	0	1153.0	7.0	3085.5	-101	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_77	TATOOINE	tat_world	AREA	0	1472.7	7.6	3330.0	-65	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_78	TATOOINE	tat_world	AREA	0	1469.9	7.6	3331.2	123	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_79	TATOOINE	tat_world	AREA	0	1516.3	7.0	3137.6	-89	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_80	TATOOINE	tat_world	AREA	0	1575.0	7.0	3104.7	-20	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_81	TATOOINE	tat_world	AREA	0	1149.5	7.0	2968.5	-135	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_82	TATOOINE	tat_world	AREA	0	1514.4	7.0	3137.6	89	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_83	TATOOINE	tat_world	AREA	0	1301.8	7.0	3113.0	53	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_84	TATOOINE	tat_world	AREA	0	1380.0	11.0	3214.3	-27	1	a male twilek thug	humanoid_male_twilek_thug_low	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_85	TATOOINE	tat_world	AREA	0	1390.8	13.0	3138.7	-8	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_86	TATOOINE	tat_world	AREA	0	1326.6	7.0	3149.5	-105	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_87	TATOOINE	tat_world	AREA	0	1418.5	7.0	3430.7	0	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_88	TATOOINE	tat_world	AREA	0	1507.5	7.0	3243.2	-44	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_89	TATOOINE	tat_world	AREA	0	1324.6	7.0	3129.6	101	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_90	TATOOINE	tat_world	AREA	0	1389.8	7.5	3199.6	-166	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_91	TATOOINE	tat_world	AREA	0	1467.9	7.0	3126.3	-56	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_92	TATOOINE	tat_world	AREA	0	1738.3	7.6	3189.7	0	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_93	TATOOINE	tat_world	AREA	0	1235.2	1.5	3257.0	-163	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_94	TATOOINE	tat_world	AREA	0	1390.3	7.5	3166.8	132	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_95	TATOOINE	tat_world	AREA	0	1761.5	7.0	3066.7	-59	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	angry			600
+city_tatooine_mos_entha_96	TATOOINE	tat_world	AREA	0	1473.5	7.0	3414.8	-166	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_97	TATOOINE	tat_world	AREA	0	1193.5	4.0	3281.5	178	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_98	TATOOINE	tat_world	AREA	0	1467.8	7.0	3154.3	-95	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_99	TATOOINE	tat_world	AREA	0	1326.7	7.0	3128.5	-82	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_100	TATOOINE	tat_world	AREA	0	1587.3	7.0	3031.5	-112	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_101	TATOOINE	tat_world	AREA	0	1570.4	7.0	3123.3	-143	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_102	TATOOINE	tat_world	AREA	0	1544.1	7.0	3100.7	42	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_103	TATOOINE	tat_world	AREA	0	1210.1	4.0	3274.2	165	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_104	TATOOINE	tat_world	AREA	0	1158.2	7.0	2962.6	-10	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_105	TATOOINE	tat_world	AREA	0	1483.0	7.0	3397.3	178	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_106	TATOOINE	tat_world	AREA	0	1210.0	4.0	3270.9	0	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_107	TATOOINE	tat_world	AREA	0	1468.9	7.0	3141.3	84	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_108	TATOOINE	tat_world	AREA	0	1367.0	7.0	3428.0	-92	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_109	TATOOINE	tat_world	AREA	0	1324.9	7.0	3109.9	-109	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_110	TATOOINE	tat_world	AREA	0	1730.1	7.0	3176.3	-67	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_111	TATOOINE	tat_world	AREA	0	1248.1	4.0	3244.6	179	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_112	TATOOINE	tat_world	AREA	0	1315.5	7.0	3409.9	-91	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_entha_113	TATOOINE	tat_world	AREA	0	1311.4	7.0	3133.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_entha_114	TATOOINE	tat_world	AREA	0	1207.8	4.0	3272.6	112	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_mos_entha_115	TATOOINE	tat_world	AREA	0	1476.8	7.6	3265.0	-3	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	happy			600
+city_tatooine_mos_entha_116	TATOOINE	tat_world	AREA	0	1235.0	1.5	3263.1	178	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_117	TATOOINE	tat_world	AREA	0	1391.7	7.5	3164.1	-18	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_entha_118	TATOOINE	tat_world	AREA	0	1464.5	7.0	3153.8	86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_entha_119	TATOOINE	tat_world	AREA	0	1789.4	7.0	3022.7	-95	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_120	TATOOINE	tat_world	AREA	0	1374.1	7.0	2980.6	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_entha_121	TATOOINE	tat_world	AREA	0	1236.0	1.5	3261.2	-20	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	npc_sitting_table			600
+city_tatooine_mos_entha_122	TATOOINE	tat_world	AREA	0	1147.4	7.0	2967.6	147	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_123	TATOOINE	tat_world	AREA	0	1370.1	11.0	3162.4	-128	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+city_tatooine_mos_entha_124	TATOOINE	tat_world	AREA	0	1426.6	7.0	3478.5	104	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600
+city_tatooine_mos_entha_125	TATOOINE	tat_world	AREA	0	1085.8	7.0	3195.2	-45	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+city_tatooine_mos_entha_126	TATOOINE	tat_world	AREA	0	1351.0	11.0	3108.3	46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_127	TATOOINE	tat_world	AREA	0	1328.7	7.0	3265.4	176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_128	TATOOINE	tat_world	AREA	0	1539.5	7.0	3105.4	39	1	Galuf Cardaan	humanoid_commando_reward	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_129	TATOOINE	tat_world	AREA	0	1521.0	7.0	3259.0	177	1	Kolka Zteht	humanoid_kolka_zteht	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_130	TATOOINE	tat_world	AREA	0	1282.8	7.0	3052.7	-107	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_131	TATOOINE	tat_world	AREA	0	1124.1	7.0	2982.6	71	1	RC-1Z	droid_tatooine_entha_podracers_racedroid1_rc1z	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_132	TATOOINE	tat_world	AREA	0	1353.5	7.0	3051.4	-41	1	RC-2X	droid_tatooine_entha_podracers_racedroid2_rc2x	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_133	TATOOINE	tat_world	AREA	0	1702.9	7.0	3076.5	57	1	RC-3T	droid_tatooine_entha_podracers_racedroid3_rc3t	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_134	TATOOINE	tat_world	AREA	0	1536.9	7.0	3052.0	154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_135	TATOOINE	tat_world	AREA	0	1283.4	7.0	3154.6	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_136	TATOOINE	tat_world	AREA	0	1514.0	7.0	3313.0	-92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Entha	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_entha_137	TATOOINE	tat_world	PATROL	0	1564.2	15.0	3493.9	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Entha	1	PATROL	0	patrol_tatooine_7000	column	idle			600
+city_tatooine_mos_entha_138	TATOOINE	tat_world	PATROL	0	1713.4	7.0	3078.9	0	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Entha	1	PATROL	0	patrol_tatooine_7100	column	idle			600

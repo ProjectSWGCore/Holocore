@@ -1,0 +1,246 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_bestine_1	TATOOINE	tat_bestine_association_hall	AREA	10	4.6	1.2	-4.0	152	1	DS-23-44	humanoid_imperial_ds2344	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_2	TATOOINE	tat_bestine_association_hall	AREA	10	6.3	1.2	-7.2	-30	1	DS-538	humanoid_imperial_ds538	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_3	TATOOINE	tat_bestine_association_hall	AREA	10	-10.8	1.8	-7.3	-90	1	DS-98-08	humanoid_imperial_ds9808	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_4	TATOOINE	tat_bestine_association_hall	AREA	10	-0.1	1.8	-13.3	-1	1	Lt. Akal Colzet (Imperial Pilot Trainer)	humanoid_imperial_lt_akal_colzet	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_5	TATOOINE	tat_bestine_cantina	AREA	1	40.1	0.1	2.2	82	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_6	TATOOINE	tat_bestine_cantina	AREA	1	42.0	0.1	2.2	-91	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_7	TATOOINE	tat_bestine_cantina	AREA	2	32.2	0.1	-7.8	17	1	Okehi Papev	humanoid_victor_questn_cantina	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_bestine_8	TATOOINE	tat_bestine_cantina	AREA	3	0.6	-0.9	11.9	-91	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_9	TATOOINE	tat_bestine_cantina	AREA	3	14.2	-0.9	-4.8	49	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_10	TATOOINE	tat_bestine_cantina	AREA	3	16.5	-0.9	-3.1	-128	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_table			600
+city_tatooine_bestine_11	TATOOINE	tat_bestine_cantina	AREA	3	-0.7	-0.9	10.2	-10	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_12	TATOOINE	tat_bestine_cantina	AREA	3	-2.2	-0.9	11.9	97	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_13	TATOOINE	tat_bestine_cantina	AREA	3	5.9	-0.9	-2.5	175	1	Binna Jode	humanoid_binna_jode	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_14	TATOOINE	tat_bestine_cantina	AREA	3	3.0	-0.9	5.7	176	1	Qakkee	humanoid_clone_qakkee	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_bestine_15	TATOOINE	tat_bestine_cantina	AREA	4	18.4	-0.9	-16.4	-47	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_16	TATOOINE	tat_bestine_capitol	AREA	10	28.8	1.3	-5.9	0	1	Wilhalm Skrim	humanoid_wilhalm_skrim	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_17	TATOOINE	tat_bestine_capitol	AREA	11	25.0	3.2	-30.8	-18	1	Indigo Siyan	humanoid_indigo_siyan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_18	TATOOINE	tat_bestine_capitol	AREA	11	19.7	3.2	-35.6	12	1	Sean Trenwell	humanoid_sean_trenwell	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_19	TATOOINE	tat_bestine_capitol	AREA	3	-22.9	1.3	6.1	178	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_20	TATOOINE	tat_bestine_capitol	AREA	3	18.8	1.3	4.9	89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_21	TATOOINE	tat_bestine_capitol	AREA	3	19.5	1.3	4.1	0	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_22	TATOOINE	tat_bestine_capitol	AREA	3	-2.6	0.3	1.5	0	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_23	TATOOINE	tat_bestine_capitol	AREA	3	-22.9	1.3	5.3	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_24	TATOOINE	tat_bestine_capitol	AREA	3	19.5	1.3	5.9	177	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_25	TATOOINE	tat_bestine_capitol	AREA	3	20.3	1.3	4.7	-90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_26	TATOOINE	tat_bestine_capitol	AREA	3	-2.6	0.3	2.4	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_27	TATOOINE	tat_bestine_capitol	AREA	3	-2.4	3.1	-10.5	-2	1	Prefect Talmont	humanoid_imperial_prefect_talmont	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_28	TATOOINE	tat_bestine_capitol	AREA	3	6.0	0.3	-0.3	-46	1	TH-301	humanoid_victor_questn_capitol	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_29	TATOOINE	tat_bestine_capitol	AREA	7	-37.2	1.3	0.1	107	1	Governor Tour Aryon	humanoid_tour_aryon	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_30	TATOOINE	tat_bestine_capitol	AREA	8	-21.6	3.2	26.7	177	1	Commander Oberhaur (Imperial Pilot Trainer)	humanoid_imperial_oberhaur	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_31	TATOOINE	tat_bestine_capitol	AREA	8	-17.6	3.2	20.6	-95	1	Keanna Li'kyna	humanoid_keanna_likyna	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_32	TATOOINE	tat_bestine_capitol	AREA	8	-26.4	3.2	20.5	95	1	Victor Visalis	humanoid_victor_visalis	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_33	TATOOINE	tat_bestine_combat_gh	AREA	8	3.3	1.1	-8.5	-96	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_34	TATOOINE	tat_bestine_combat_gh	AREA	9	-14.0	1.1	-8.6	90	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_35	TATOOINE	tat_bestine_commerce_gh	AREA	4	1.7	2.5	6.6	17	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_36	TATOOINE	tat_bestine_commerce_gh	AREA	4	2.4	2.5	8.4	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_37	TATOOINE	tat_bestine_commerce_gh	AREA	5	14.7	1.1	0.8	-136	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_38	TATOOINE	tat_bestine_commerce_gh	AREA	5	13.2	1.1	-0.8	41	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_39	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.6	1.1	5.7	-100	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_40	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.6	1.1	5.9	93	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_41	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.7	1.1	3.4	90	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_42	TATOOINE	tat_bestine_commerce_gh	AREA	6	-13.6	1.1	1.2	88	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_43	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.7	1.1	0.9	-82	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_44	TATOOINE	tat_bestine_commerce_gh	AREA	6	-10.6	1.1	3.3	-87	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
+city_tatooine_bestine_45	TATOOINE	tat_bestine_commerce_gh	AREA	8	0.8	1.1	-9.6	86	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_46	TATOOINE	tat_bestine_commerce_gh	AREA	9	-7.0	1.1	-8.0	-132	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_table_eating			600
+city_tatooine_bestine_47	TATOOINE	tat_bestine_commerce_gh	AREA	9	-8.9	1.1	-9.7	45	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_48	TATOOINE	tat_bestine_commerce_gh	AREA	9	-13.1	1.1	-13.0	0	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_49	TATOOINE	tat_bestine_commerce_gh	AREA	9	-13.0	1.1	-10.5	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_50	TATOOINE	tat_bestine_commerce_gh	AREA	4	3.8	1.1	-5.7	-7	1	Ocket Abaot (an ancient Professor of Sean Trenwell)	humanoid_sean_questn_university	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_51	TATOOINE	tat_bestine_commerce_gh	AREA	8	3.2	1.1	-9.6	-89	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_52	TATOOINE	tat_bestine_hospital	AREA	2	-1.0	0.2	-1.9	92	1	a 2-1B surgical droid	droid_21b_surgical	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_53	TATOOINE	tat_bestine_hospital	AREA	2	-1.6	0.2	0.8	54	1	Melios Purl	humanoid_melios_purl	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle	999		600
+city_tatooine_bestine_54	TATOOINE	tat_bestine_hospital	AREA	2	-7.7	0.2	-3.5	5	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_55	TATOOINE	tat_bestine_hospital	AREA	2	1.2	0.2	-1.9	-91	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_56	TATOOINE	tat_bestine_hotel	AREA	10	-23.5	1.6	-17.2	11	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_57	TATOOINE	tat_bestine_hotel	AREA	4	0.7	1.0	2.5	0	1	(Retired) Freelance Pilot	humanoid_freelance_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	angry			600
+city_tatooine_bestine_58	TATOOINE	tat_bestine_hotel	AREA	4	4.5	1.2	-20.5	-179	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	angry			600
+city_tatooine_bestine_59	TATOOINE	tat_bestine_hotel	AREA	4	8.3	1.2	-20.7	179	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	happy			600
+city_tatooine_bestine_60	TATOOINE	tat_bestine_hotel	AREA	4	7.3	1.0	-6.9	0	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle			600
+city_tatooine_bestine_61	TATOOINE	tat_bestine_hotel	AREA	5	19.0	1.6	13.0	175	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		bartender	600
+city_tatooine_bestine_62	TATOOINE	tat_bestine_hotel	AREA	5	23.0	1.3	-7.8	-3	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_63	TATOOINE	tat_bestine_hotel	AREA	5	22.7	1.3	-3.6	-171	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_64	TATOOINE	tat_bestine_hotel	AREA	5	22.4	1.3	10.3	-109	1	Gil Burtin (Pilots' Guild Founder)	humanoid_gil_burtin	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_bestine_65	TATOOINE	tat_bestine_hotel	AREA	5	19.6	1.3	10.2	158	1	Ty'Vila (Former Pilots' Guild Director)	humanoid_ty_vila	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sad			600
+city_tatooine_bestine_66	TATOOINE	tat_bestine_imp_hill_base	AREA	5	4.2	0.1	-4.2	-78	1	Pfilbee Jhorn	humanoid_pfilbee_jhorn	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_67	TATOOINE	tat_bestine_large_house	AREA	2	0.7	0.5	-2.3	-3	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_68	TATOOINE	tat_bestine_large_house	AREA	2	0.7	0.5	-1.1	175	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_69	TATOOINE	tat_bestine_large_house	AREA	5	22.6	0.2	-0.3	-78	1	Lilas Dinhint (a museum curator)	humanoid_lilas_dinhint	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle	40		600
+city_tatooine_bestine_70	TATOOINE	tat_bestine_medium_house1	AREA	2	-7.4	0.4	-6.3	97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_71	TATOOINE	tat_bestine_medium_house1	AREA	2	-10.6	0.4	-1.1	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_72	TATOOINE	tat_bestine_medium_house1	AREA	2	-8.4	0.4	-0.2	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_73	TATOOINE	tat_bestine_medium_house1	AREA	2	9.1	0.4	-6.1	-49	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_74	TATOOINE	tat_bestine_medium_house1	AREA	2	9.4	0.4	-3.5	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_75	TATOOINE	tat_bestine_medium_house2	AREA	2	-0.8	0.4	-5.9	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_76	TATOOINE	tat_bestine_medium_house2	AREA	2	2.9	0.4	-9.1	0	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_77	TATOOINE	tat_bestine_medium_house2	AREA	2	-0.3	0.4	-8.8	48	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_78	TATOOINE	tat_bestine_medium_house2	AREA	2	6.6	0.4	-6.0	-89	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_79	TATOOINE	tat_bestine_medium_house2	AREA	2	3.1	0.4	-5.7	-136	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_80	TATOOINE	tat_bestine_medium_house2	AREA	2	3.5	0.4	-1.3	62	1	Edaekomeu Ossilei	humanoid_sean_questn_university	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_81	TATOOINE	tat_bestine_salon	AREA	1	1.4	0.6	-2.9	165	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_82	TATOOINE	tat_bestine_small_house15	AREA	1	2.8	0.3	3.7	-41	1	Cala Yarfas	humanoid_sean_contact_quest	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_83	TATOOINE	tat_bestine_small_house6	AREA	10	2.0	-0.4	-5.1	-58	1	Farious Gletch	humanoid_farious_gletch	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_84	TATOOINE	tat_bestine_starport	AREA	10	-40.5	1.6	47.2	169	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_85	TATOOINE	tat_bestine_starport	AREA	12	-58.9	2.6	39.7	85	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_86	TATOOINE	tat_bestine_starport	AREA	12	-56.0	2.6	39.4	-82	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_87	TATOOINE	tat_bestine_starport	AREA	12	-58.4	2.6	42.9	157	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_88	TATOOINE	tat_bestine_starport	AREA	12	-56.8	2.6	41.8	-112	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_89	TATOOINE	tat_bestine_starport	AREA	13	49.0	1.0	21.6	73	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_90	TATOOINE	tat_bestine_starport	AREA	13	50.8	1.0	22.2	-98	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_91	TATOOINE	tat_bestine_starport	AREA	4	-1.2	0.6	56.5	-28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_92	TATOOINE	tat_bestine_starport	AREA	4	8.6	0.6	61.8	-117	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_93	TATOOINE	tat_bestine_starport	AREA	4	1.1	0.6	66.4	50	1	Abo	humanoid_abo	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_94	TATOOINE	tat_bestine_starport	AREA	4	2.5	0.6	67.7	-152	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		chassis_dealer	600
+city_tatooine_bestine_95	TATOOINE	tat_bestine_starport	AREA	7	41.5	0.6	37.6	134	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_96	TATOOINE	tat_bestine_starport	AREA	9	-30.2	1.6	48.7	-5	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_97	TATOOINE	tat_bestine_starport	AREA	9	-30.4	1.6	51.2	179	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_98	TATOOINE	tat_bestine_university	AREA	5	14.2	1.1	5.7	144	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_99	TATOOINE	tat_bestine_university	AREA	7	6.7	1.1	-13.0	90	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_100	TATOOINE	tat_bestine_university	AREA	7	8.4	1.1	-15.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_101	TATOOINE	tat_bestine_university	AREA	7	9.8	1.1	-12.2	-132	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_102	TATOOINE	tat_bestine_university	AREA	4	-1.3	2.5	8.9	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_103	TATOOINE	tat_bestine_university	AREA	4	-0.1	2.5	6.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_104	TATOOINE	tat_bestine_university	AREA	4	1.2	2.5	8.9	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_drinking			600
+city_tatooine_bestine_105	TATOOINE	tat_bestine_university	AREA	4	-6.2	1.1	-2.7	40	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_106	TATOOINE	tat_bestine_university	AREA	6	-14.9	1.1	-0.4	88	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_107	TATOOINE	tat_bestine_university	AREA	6	-12.8	1.1	-0.5	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_108	TATOOINE	tat_bestine_university	AREA	8	-3.0	1.1	-8.4	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_109	TATOOINE	tat_world	AREA	0	-1152.3	12.0	-3552.3	44	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_110	TATOOINE	tat_world	AREA	0	-1150.6	12.0	-3551.4	-132	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_111	TATOOINE	tat_world	AREA	0	-1107.1	12.0	-3538.4	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_112	TATOOINE	tat_world	AREA	0	-1089.9	12.0	-3507.1	-93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_113	TATOOINE	tat_world	AREA	0	-982.0	10.0	-3539.4	-138	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_114	TATOOINE	tat_world	AREA	0	-984.7	10.0	-3542.5	39	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_115	TATOOINE	tat_world	AREA	0	-1056.2	12.0	-3692.1	-162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_116	TATOOINE	tat_world	AREA	0	-1009.6	12.0	-3753.0	-162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_117	TATOOINE	tat_world	AREA	0	-780.9	20.9	-4054.2	0	1	a bantha	creature_bantha	ATTACKABLE	N	5	10	City	Bestine	1	LOITER	5	0	-	idle			600
+city_tatooine_bestine_118	TATOOINE	tat_world	AREA	0	-1214.2	12.0	-3597.5	-55	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		bartender	600
+city_tatooine_bestine_119	TATOOINE	tat_world	AREA	0	-1364.4	12.0	-3692.1	93	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_ground			600
+city_tatooine_bestine_120	TATOOINE	tat_world	AREA	0	-1222.4	12.0	-3620.3	155	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_121	TATOOINE	tat_world	AREA	0	-1094.5	12.6	-3573.4	95	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_122	TATOOINE	tat_world	AREA	0	-1037.2	12.0	-3723.2	-91	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_123	TATOOINE	tat_world	AREA	0	-1222.4	12.0	-3622.9	-11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_bestine_124	TATOOINE	tat_world	AREA	0	-1010.3	12.0	-3728.6	51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_125	TATOOINE	tat_world	AREA	0	-1012.6	12.0	-3729.0	-110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_126	TATOOINE	tat_world	AREA	0	-1028.1	12.0	-3681.9	-115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_127	TATOOINE	tat_world	AREA	0	-1029.7	12.0	-3683.9	-3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_128	TATOOINE	tat_world	AREA	0	-1034.0	12.0	-3644.7	-46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_129	TATOOINE	tat_world	AREA	0	-1043.7	12.0	-3700.0	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_130	TATOOINE	tat_world	AREA	0	-1047.5	12.0	-3665.8	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_131	TATOOINE	tat_world	AREA	0	-1075.7	12.0	-3654.3	145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_132	TATOOINE	tat_world	AREA	0	-1077.5	12.0	-3514.0	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_133	TATOOINE	tat_world	AREA	0	-1090.3	12.0	-3713.6	-20	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_134	TATOOINE	tat_world	AREA	0	-1101.9	12.0	-3608.1	78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_135	TATOOINE	tat_world	AREA	0	-1105.1	12.0	-3636.8	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_136	TATOOINE	tat_world	AREA	0	-1106.3	12.0	-3697.6	125	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_137	TATOOINE	tat_world	AREA	0	-1112.7	12.0	-3557.5	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_138	TATOOINE	tat_world	AREA	0	-1132.6	12.0	-3669.6	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_139	TATOOINE	tat_world	AREA	0	-1142.4	12.0	-3672.6	112	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_140	TATOOINE	tat_world	AREA	0	-1145.1	12.0	-3507.7	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_141	TATOOINE	tat_world	AREA	0	-1145.6	12.0	-3656.3	-56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_142	TATOOINE	tat_world	AREA	0	-1157.5	12.0	-3666.6	55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_143	TATOOINE	tat_world	AREA	0	-1170.5	12.0	-3636.2	-155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_144	TATOOINE	tat_world	AREA	0	-1170.9	12.0	-3535.3	-110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_145	TATOOINE	tat_world	AREA	0	-1200.9	12.0	-3553.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_146	TATOOINE	tat_world	AREA	0	-1240.6	14.5	-3569.8	-156	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_147	TATOOINE	tat_world	AREA	0	-1241.6	12.0	-3643.2	-15	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_148	TATOOINE	tat_world	AREA	0	-1253.4	12.0	-3557.2	-50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_149	TATOOINE	tat_world	AREA	0	-1279.5	12.0	-3584.7	-103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_150	TATOOINE	tat_world	AREA	0	-1283.6	12.0	-3559.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_151	TATOOINE	tat_world	AREA	0	-1291.6	12.0	-3618.8	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_152	TATOOINE	tat_world	AREA	0	-1311.6	12.0	-3674.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_153	TATOOINE	tat_world	AREA	0	-1320.4	12.0	-3633.5	76	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_154	TATOOINE	tat_world	AREA	0	-1347.5	12.0	-3695.9	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_155	TATOOINE	tat_world	AREA	0	-1349.8	12.0	-3671.8	81	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_156	TATOOINE	tat_world	AREA	0	-1358.9	12.0	-3504.1	-65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_157	TATOOINE	tat_world	AREA	0	-1396.3	10.0	-3773.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_158	TATOOINE	tat_world	AREA	0	-1404.8	12.0	-3636.6	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_bestine_159	TATOOINE	tat_world	AREA	0	-1453.0	12.0	-3577.0	97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high		commoner	600
+city_tatooine_bestine_160	TATOOINE	tat_world	AREA	0	1099.0	12.0	-3620.1	23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_bestine_161	TATOOINE	tat_world	AREA	0	-1094.0	12.0	-3507.3	79	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_162	TATOOINE	tat_world	AREA	0	-1107.8	12.0	-3691.4	28	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_163	TATOOINE	tat_world	AREA	0	-1221.2	12.0	-3552.2	-14	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_164	TATOOINE	tat_world	AREA	0	-1081.3	12.0	-3695.0	40	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_165	TATOOINE	tat_world	AREA	0	-1115.2	12.0	-3709.3	-5	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_166	TATOOINE	tat_world	AREA	0	-1113.5	12.0	-3707.8	-52	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_167	TATOOINE	tat_world	AREA	0	-1060.8	12.0	-3660.7	-128	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_168	TATOOINE	tat_world	AREA	0	-1061.8	12.0	-3661.3	61	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_169	TATOOINE	tat_world	AREA	0	-1196.6	12.0	-3645.6	-21	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_170	TATOOINE	tat_world	AREA	0	-1072.4	12.0	-3595.8	10	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_171	TATOOINE	tat_world	AREA	0	-1040.7	12.0	-3723.4	87	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_172	TATOOINE	tat_world	AREA	0	-1122.5	12.2	-3629.4	133	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_173	TATOOINE	tat_world	AREA	0	-1221.7	12.0	-3550.1	175	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_174	TATOOINE	tat_world	AREA	0	-1121.2	12.2	-3630.8	-43	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_175	TATOOINE	tat_world	AREA	0	-1058.1	12.0	-3619.9	140	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_176	TATOOINE	tat_world	AREA	0	-1006.7	12.0	-3714.2	57	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_177	TATOOINE	tat_world	AREA	0	-1124.6	12.0	-3685.6	97	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_178	TATOOINE	tat_world	AREA	0	-1149.3	12.0	-3550.1	-24	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_179	TATOOINE	tat_world	AREA	0	-1149.9	12.0	-3548.8	149	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_180	TATOOINE	tat_world	AREA	0	-1127.3	12.0	-3562.1	-102	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_accusing			600
+city_tatooine_bestine_181	TATOOINE	tat_world	AREA	0	-1049.9	12.0	-3730.2	-155	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_182	TATOOINE	tat_world	AREA	0	-1293.2	12.0	-3475.4	130	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_183	TATOOINE	tat_world	AREA	0	-1031.3	12.0	-3681.1	120	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_184	TATOOINE	tat_world	AREA	0	-1006.9	12.0	-3729.2	-116	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_185	TATOOINE	tat_world	AREA	0	-1013.6	12.0	-3733.1	31	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_186	TATOOINE	tat_world	AREA	0	-1129.2	12.0	-3562.5	81	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_187	TATOOINE	tat_world	AREA	0	-1135.5	12.0	-3667.1	123	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_188	TATOOINE	tat_world	AREA	0	-1135.8	12.0	-3691.9	23	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_189	TATOOINE	tat_world	AREA	0	-1241.5	14.5	-3571.9	16	1	an Ankura Gungan	humanoid_gungan_ankura	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	threaten			600
+city_tatooine_bestine_190	TATOOINE	tat_world	AREA	0	-1278.7	12.5	-3665.5	78	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_191	TATOOINE	tat_world	AREA	0	-1278.1	12.5	-3667.5	-21	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_192	TATOOINE	tat_world	AREA	0	-1341.6	12.0	-3705.6	128	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_193	TATOOINE	tat_world	AREA	0	-1117.9	12.0	-3699.6	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Bestine	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_tatooine_bestine_194	TATOOINE	tat_world	AREA	0	-1281.5	12.0	-3633.2	80	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_195	TATOOINE	tat_world	AREA	0	-1134.4	12.0	-3689.6	-147	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_196	TATOOINE	tat_world	AREA	0	-1102.9	12.0	-3646.1	54	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_197	TATOOINE	tat_world	AREA	0	-1307.0	12.0	-3662.0	-111	1	an Imperial Army Captain	humanoid_imperial_army_captain	INVULNERABLE	E	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_198	TATOOINE	tat_world	AREA	0	-1300.4	12.0	-3507.2	106	1	an Imperial Colonel	humanoid_imperial_colonel	ATTACKABLE	E	5	10	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_199	TATOOINE	tat_world	AREA	0	-856.1	7.2	-3312.5	0	1	an Imperial Lance Corporal	humanoid_imperial_lance_corporal	ATTACKABLE	E	5	10	City	Bestine	1	LOITER	5	0	-	idle			600
+city_tatooine_bestine_200	TATOOINE	tat_world	AREA	0	-1072.0	12.0	-3594.0	-145	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		recruiter_imperial	600
+city_tatooine_bestine_201	TATOOINE	tat_world	AREA	0	-1136.2	98.0	-3898.4	-4	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		recruiter_imperial	600
+city_tatooine_bestine_202	TATOOINE	tat_world	AREA	0	-1274.1	12.0	-3594.5	-70	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		recruiter_imperial	600
+city_tatooine_bestine_203	TATOOINE	tat_world	AREA	0	-847.6	7.2	-3320.5	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	5	10	City	Bestine	1	LOITER	5	0	-	idle			600
+city_tatooine_bestine_204	TATOOINE	tat_world	AREA	0	-867.0	7.2	-3316.1	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	5	10	City	Bestine	1	LOITER	5	0	-	idle			600
+city_tatooine_bestine_205	TATOOINE	tat_world	AREA	0	-1049.0	10.0	-3538.0	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_206	TATOOINE	tat_world	AREA	0	-1445.2	10.0	-3750.5	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_207	TATOOINE	tat_world	AREA	0	-1128.7	98.0	-3900.5	-72	1	Captain Jasha	humanoid_captain_jasha	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_208	TATOOINE	tat_world	AREA	0	-1288.3	12.0	-3585.9	-166	1	Col. Gert Talnin (an Imperial officer)	humanoid_imperial_gert_talnin	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_209	TATOOINE	tat_world	AREA	0	-1160.5	12.0	-3525.5	-125	1	Commander D'krn	humanoid_imperial_cmdr_dkrn	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_210	TATOOINE	tat_world	AREA	0	-1124.3	12.2	-3619.1	129	1	Commander Gunham (Imperial Pilot Coordinator)	humanoid_imperial_gunham	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_211	TATOOINE	tat_world	AREA	0	-1252.2	12.0	-3614.4	-142	1	Gerak Vurtimis	humanoid_gerak_vurtimis	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_212	TATOOINE	tat_world	AREA	0	-1356.9	26.0	-3872.1	-111	1	Ileh Adag	humanoid_victor_questp_slums	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_213	TATOOINE	tat_world	AREA	0	-1295.8	12.0	-3491.7	123	1	Izosxisli	humanoid_victor_questp_hospital	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_214	TATOOINE	tat_world	AREA	0	-1391.0	12.0	-3643.0	6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_215	TATOOINE	tat_world	AREA	0	-1043.8	10.0	-3530.4	165	1	Kormund Thrylle	humanoid_kormund_thrylle	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_216	TATOOINE	tat_world	AREA	0	-1292.1	12.0	-3534.7	136	1	Lt. Sabol	humanoid_imperial_sabol	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_217	TATOOINE	tat_world	AREA	0	-1149.4	98.0	-3903.8	71	1	Major Caleb Knolar	humanoid_imperial_major_caleb_knolar	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_218	TATOOINE	tat_world	AREA	0	-1103.2	12.0	-3706.5	-44	1	Orqiti Aneofo	humanoid_sean_questp_market	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_219	TATOOINE	tat_world	AREA	0	-771.8	12.0	-3952.2	-84	1	Palos Kintra (a historian)	humanoid_seans_historian	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_220	TATOOINE	tat_world	AREA	0	-1203.0	12.0	-3612.4	-127	1	Sol Windtide	humanoid_sol_windtide	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_221	TATOOINE	tat_world	AREA	0	-1001.7	10.0	-3547.9	-174	1	Vi'conya T'ili	humanoid_herald_tatooine_viconya	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_222	TATOOINE	tat_world	AREA	0	-1288.9	12.0	-3588.1	7	1	Wlinc Tchrr (a Hutt bookmaker)	humanoid_wlinc_tchrr	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_223	TATOOINE	tat_world	AREA	0	-1157.9	12.0	-3547.5	72	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_224	TATOOINE	tat_world	AREA	0	-1071.6	12.0	-3524.2	86	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_225	TATOOINE	tat_world	AREA	0	-1024.2	10.0	-3561.1	-107	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
+city_tatooine_bestine_226	TATOOINE	tat_world	AREA	0	-1026.6	10.0	-3562.9	50	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_tatooine_bestine_227	TATOOINE	tat_world	AREA	0	-1024.2	10.0	-3557.4	-86	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_228	TATOOINE	tat_world	AREA	0	-1028.7	10.0	-3556.4	143	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_229	TATOOINE	tat_world	AREA	0	-1048.0	12.0	-3729.0	-128	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	happy			600
+city_tatooine_bestine_230	TATOOINE	tat_world	AREA	0	-986.6	12.0	-3717.1	136	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_231	TATOOINE	tat_world	AREA	0	-1116.8	12.0	-3704.9	145	1	a patron	humanoid_patron_human_male_02	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	conversation			600
+city_tatooine_bestine_232	TATOOINE	tat_world	AREA	0	-1273.3	12.0	-3602.9	-143	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	idle			600
+city_tatooine_bestine_233	TATOOINE	tat_world	PATROL	0	-1351.0	12.0	-3678.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_1000	column	idle		commoner	600
+city_tatooine_bestine_234	TATOOINE	tat_world	PATROL	0	-900.6	19.4	-4032.8	0	1	a recon mercenary	humanoid_tatooine_mercenary_recon	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1100	line	idle			600
+city_tatooine_bestine_235	TATOOINE	tat_world	PATROL	0	-898.8	19.3	-4026.5	0	1	a mercenary commando	humanoid_tatooine_mercenary_recon_commando	ATTACKABLE	E	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1200	line	idle			600
+city_tatooine_bestine_236	TATOOINE	tat_world	PATROL	0	-1355.0	12.0	-3659.0	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_1300	line	idle			600
+city_tatooine_bestine_237	TATOOINE	tat_world	AREA	0	-1263.1	12.0	-3563.6	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_238	TATOOINE	tat_world	AREA	0	-1268.6	12.0	-3554.6	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bestine	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_bestine_239	TATOOINE	tat_world	PATROL	0	-1144.5	98.0	-3914.8	0	1	a Sand Trooper	humanoid_imperial_sand_trooper	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2700	line	idle			600
+city_tatooine_bestine_240	TATOOINE	tat_world	PATROL	0	-1147.6	98.0	-3914.4	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	5	10	City	Bestine	3	PATROL	0	patrol_tatooine_2800	line	idle			600
+city_tatooine_bestine_241	TATOOINE	tat_world	PATROL	0	-1441.8	10.0	-3749.8	-97	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6600	column	idle			600
+city_tatooine_bestine_242	TATOOINE	tat_world	PATROL	0	-1108.7	12.0	-3632.2	-137	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6700	column	idle			600
+city_tatooine_bestine_243	TATOOINE	tat_world	PATROL	0	-1387.4	12.0	-3586.2	-11	1	a moisture farmer	humanoid_hero_of_tatooine_farmer	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6800	column	idle			600
+city_tatooine_bestine_244	TATOOINE	tat_world	PATROL	0	-1105.2	12.0	-3704.6	131	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Bestine	1	PATROL	0	patrol_tatooine_6900	column	idle			600

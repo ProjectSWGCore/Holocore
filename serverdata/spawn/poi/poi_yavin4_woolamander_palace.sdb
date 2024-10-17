@@ -1,0 +1,17 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_yavin4_woolamander_palace_1	YAVIN4	yav_woolamander_temple	AREA	10	74.4	2.0	4.8	86	1	a woolamander reaper	creature_woolamander_reaper	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	IDLE	0	0	-	idle			600
+poi_yavin4_woolamander_palace_2	YAVIN4	yav_woolamander_temple	AREA	3	15.4	2.0	-0.5	0	1	a woolamander	creature_woolamander	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_3	YAVIN4	yav_woolamander_temple	AREA	3	-18.5	2.0	-0.4	0	1	a woolamander	creature_woolamander	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_4	YAVIN4	yav_woolamander_temple	AREA	3	-0.8	2.0	6.0	0	1	a woolamander gatherer	creature_woolamander_gatherer	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_5	YAVIN4	yav_woolamander_temple	AREA	7	-59.3	2.0	-11.1	0	1	a woolamander gatherer	creature_woolamander_gatherer	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	IDLE	0	0	-	idle			600
+poi_yavin4_woolamander_palace_6	YAVIN4	yav_woolamander_temple	AREA	7	-84.1	2.0	5.0	89	1	a woolamander harrower	creature_woolamander_harrower	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	IDLE	0	0	-	idle			600
+poi_yavin4_woolamander_palace_7	YAVIN4	yav_woolamander_temple	AREA	7	-59.3	2.1	21.1	178	1	a woolamander harvester	creature_woolamander_harrower	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	IDLE	0	0	-	idle			600
+poi_yavin4_woolamander_palace_8	YAVIN4	yav_woolamander_temple	AREA	9	53.4	2.0	5.0	-90	1	a woolamander harvester	creature_woolamander_harrower	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	IDLE	0	0	-	idle			600
+poi_yavin4_woolamander_palace_9	YAVIN4	yav_world	AREA	0	511.9	81.0	-687.2	0	1	a stranded Rebel soldier	humanoid_rebel_stranded_soldier	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_10	YAVIN4	yav_world	AREA	0	480.7	81.0	-657.2	0	1	a woolamander	creature_woolamander	AGGRESSIVE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_11	YAVIN4	yav_world	AREA	0	638.2	81.0	-657.8	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_12	YAVIN4	yav_world	AREA	0	661.6	83.1	-682.7	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_13	YAVIN4	yav_world	AREA	0	688.3	83.3	-672.6	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_14	YAVIN4	yav_world	AREA	0	693.0	83.2	-613.3	0	1	an enforcer	humanoid_smuggler_patrol_thief_14	ATTACKABLE	N	56	65	POI	Woolamander Palace	1	LOITER	5	0	-	idle			600
+poi_yavin4_woolamander_palace_15	YAVIN4	yav_world	AREA	0	667.0	83.6	-650.0	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	POI	Woolamander Palace	1	TURN	0	0	-	idle			600

@@ -1,0 +1,41 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_wayfar_1	TATOOINE	tat_wayfar_cantina	AREA	1	39.9	0.1	3.1	0	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_wayfar_2	TATOOINE	tat_wayfar_cantina	AREA	2	30.0	0.1	-8.2	50	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_3	TATOOINE	tat_wayfar_cantina	AREA	2	29.4	0.1	-6.1	107	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_4	TATOOINE	tat_wayfar_cantina	AREA	2	31.6	0.1	-6.5	-133	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation			600
+city_tatooine_wayfar_5	TATOOINE	tat_wayfar_cantina	AREA	3	8.4	-0.9	0.7	90	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		bartender	600
+city_tatooine_wayfar_6	TATOOINE	tat_wayfar_cantina	AREA	3	26.2	-0.9	-8.2	-43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_7	TATOOINE	tat_wayfar_cantina	AREA	3	17.0	-0.9	6.7	-134	1	a Devaronian male	humanoid_patron_devaronian_male	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_8	TATOOINE	tat_wayfar_cantina	AREA	3	16.3	-0.9	3.9	-39	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation			600
+city_tatooine_wayfar_9	TATOOINE	tat_wayfar_cantina	AREA	3	11.5	-0.9	0.6	-88	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation			600
+city_tatooine_wayfar_10	TATOOINE	tat_wayfar_cantina	AREA	3	14.8	-0.9	4.9	51	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_11	TATOOINE	tat_wayfar_cantina	AREA	3	13.6	-0.9	-10.6	-77	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_12	TATOOINE	tat_wayfar_cantina	AREA	3	10.8	-0.9	-10.5	82	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_13	TATOOINE	tat_wayfar_cantina	AREA	3	-0.4	-0.9	5.7	-179	1	Walda	humanoid_clone_walda	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_wayfar_14	TATOOINE	tat_wayfar_cantina	AREA	4	20.4	-0.9	-16.1	0	1	Yondalla	humanoid_yondalla	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_15	TATOOINE	tat_world	PATROL	0	-5120.0	75.0	-6594.7	-63	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	PATROL	0	patrol_tatooine_400	column	idle			600
+city_tatooine_wayfar_16	TATOOINE	tat_world	PATROL	0	-5111.7	74.9	-6455.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	PATROL	0	patrol_tatooine_500	column	idle			600
+city_tatooine_wayfar_17	TATOOINE	tat_world	PATROL	0	-5226.0	75.0	-6495.5	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	10	City	Wayfar	1	PATROL	0	patrol_tatooine_600	column	idle			600
+city_tatooine_wayfar_18	TATOOINE	tat_world	AREA	0	-5052.3	75.0	-6629.6	-8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation			600
+city_tatooine_wayfar_19	TATOOINE	tat_world	AREA	0	-5036.7	75.0	-6610.2	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_20	TATOOINE	tat_world	AREA	0	-5095.0	75.0	-6527.8	-149	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_wayfar_21	TATOOINE	tat_world	AREA	0	-5128.7	75.0	-6542.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_22	TATOOINE	tat_world	AREA	0	-5176.3	75.0	-6612.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_23	TATOOINE	tat_world	AREA	0	-5193.5	75.0	-6490.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_24	TATOOINE	tat_world	AREA	0	-5213.6	75.0	-6474.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_25	TATOOINE	tat_world	AREA	0	-5217.0	75.0	-6578.7	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_wayfar_26	TATOOINE	tat_world	AREA	0	-5219.1	75.0	-6537.3	-4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_wayfar_27	TATOOINE	tat_world	AREA	0	-5249.0	75.0	-6516.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_28	TATOOINE	tat_world	AREA	0	-5251.9	75.0	-6499.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_wayfar_29	TATOOINE	tat_world	AREA	0	-5263.3	75.0	-6516.5	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_wayfar_30	TATOOINE	tat_world	AREA	0	-5269.4	75.0	-6562.6	115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_wayfar_31	TATOOINE	tat_world	AREA	0	-5098.2	75.0	-6609.3	19	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_32	TATOOINE	tat_world	AREA	0	-5135.9	75.0	-6584.3	154	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_wayfar_33	TATOOINE	tat_world	AREA	0	-5053.2	75.0	-6626.9	152	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	conversation			600
+city_tatooine_wayfar_34	TATOOINE	tat_world	AREA	0	-5269.4	75.0	-6568.0	-69	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_35	TATOOINE	tat_world	AREA	0	-5046.1	75.0	-6604.4	-150	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_36	TATOOINE	tat_world	AREA	0	-5238.8	75.0	-6568.1	114	1	Boulo Siesi	humanoid_boulo_siesi	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_37	TATOOINE	tat_world	AREA	0	-5185.0	75.0	-6458.0	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_38	TATOOINE	tat_world	AREA	0	-5145.0	75.0	-6617.7	32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
+city_tatooine_wayfar_39	TATOOINE	tat_world	AREA	0	-5224.5	75.0	-6560.4	0	1	Romo Vax	humanoid_romo_vax	INVULNERABLE	N	100	100	City	Wayfar	1	IDLE	0	0	-	idle			600
