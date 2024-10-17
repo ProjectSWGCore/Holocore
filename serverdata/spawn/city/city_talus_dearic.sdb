@@ -1,0 +1,227 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_talus_dearic_1	TALUS	tal_dearic_association_hall	AREA	10	-0.1	1.2	-3.1	165	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_2	TALUS	tal_dearic_association_hall	AREA	10	-10	1.7	-12.7	-12	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_3	TALUS	tal_dearic_association_hall	AREA	10	-10.4	1.8	-10.7	160	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_4	TALUS	tal_dearic_association_hall	AREA	10	-5.1	1.2	-5.2	86	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_5	TALUS	tal_dearic_association_hall	AREA	10	4.1	1.2	-3.8	-136	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_6	TALUS	tal_dearic_association_hall	AREA	10	2.9	1.2	-3.5	-176	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_7	TALUS	tal_dearic_association_hall	AREA	10	0.1	1.2	-7.1	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_8	TALUS	tal_dearic_association_hall	AREA	10	2.8	1.2	-7	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_9	TALUS	tal_dearic_association_hall	AREA	10	4.8	1.2	-5.4	-79	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_10	TALUS	tal_dearic_cantina	AREA	1	40.6	0.1	1.0	93	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_11	TALUS	tal_dearic_cantina	AREA	1	42.5	0.1	0.9	-90	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_12	TALUS	tal_dearic_cantina	AREA	2	30.3	0.1	-8.7	48	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_13	TALUS	tal_dearic_cantina	AREA	3	8.5	-0.9	-0.0	99	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_14	TALUS	tal_dearic_cantina	AREA	3	-4.4	-0.9	3.4	5	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_15	TALUS	tal_dearic_cantina	AREA	3	-7.0	-0.9	-4.8	90	1	a commoner	humanoid_commoner_trandoshan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_16	TALUS	tal_dearic_cantina	AREA	3	-5.4	-0.9	-4.8	-91	1	a commoner	humanoid_commoner_twilek_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_17	TALUS	tal_dearic_cantina	AREA	3	3.0	-0.9	-4.8	-1	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_18	TALUS	tal_dearic_cantina	AREA	3	6.4	-0.9	-4.7	-14	1	a commoner	humanoid_commoner_gran	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_19	TALUS	tal_dearic_cantina	AREA	3	26.4	-0.9	-5.4	-134	1	a commoner	humanoid_commoner_bith_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_20	TALUS	tal_dearic_cantina	AREA	3	23.6	-0.9	-5.7	140	1	a commoner	humanoid_commoner_bothan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_21	TALUS	tal_dearic_cantina	AREA	3	26.3	-0.9	-8.9	-42	1	a commoner	humanoid_commoner_moncal	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_22	TALUS	tal_dearic_cantina	AREA	3	16.6	-0.9	11.1	135	1	a commoner	humanoid_commoner_rodian_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_23	TALUS	tal_dearic_cantina	AREA	3	17.7	-0.9	9.0	-25	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_24	TALUS	tal_dearic_cantina	AREA	3	18.8	-0.9	10.6	-79	1	a commoner	humanoid_commoner_aqualish_female	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_25	TALUS	tal_dearic_cantina	AREA	3	8.1	-0.9	-4.2	-35	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_26	TALUS	tal_dearic_cantina	AREA	3	11.1	-0.9	11.9	-179	1	a noble	humanoid_noble_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_27	TALUS	tal_dearic_cantina	AREA	3	10.1	-0.9	7.9	11	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_28	TALUS	tal_dearic_cantina	AREA	3	12.2	-0.9	8.0	-25	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_29	TALUS	tal_dearic_cantina	AREA	3	-9.0	-0.9	14.4	117	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_30	TALUS	tal_dearic_cantina	AREA	3	-7.5	-0.9	13.6	-64	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_31	TALUS	tal_dearic_cantina	AREA	3	10.8	-0.9	0.4	-93	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_32	TALUS	tal_dearic_cantina	AREA	3	5.0	-0.9	5.7	-91	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_33	TALUS	tal_dearic_cantina	AREA	3	3.2	-0.9	5.7	90	1	Mort	humanoid_clone_mort	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_standing_drinking			600
+city_talus_dearic_34	TALUS	tal_dearic_cantina	AREA	3	-4.3	-0.9	5.7	179	1	Radlee Mathiss	humanoid_radlee_mathiss	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_35	TALUS	tal_dearic_cantina	AREA	4	20.0	-0.9	-19.8	3	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_36	TALUS	tal_dearic_cantina	AREA	6	0.7	-0.9	-18.5	1	1	Thom Steele	humanoid_kashyyyk_thom_steele	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_37	TALUS	tal_dearic_cantina	AREA	7	5.2	-0.9	20.9	-60	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_38	TALUS	tal_dearic_cantina	AREA	7	4.7	-0.9	17.2	-57	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_39	TALUS	tal_dearic_cantina	AREA	7	4.7	-0.9	19.3	-110	1	an Ithorian male	humanoid_patron_ithorian_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_40	TALUS	tal_dearic_cantina	AREA	7	3.1	-0.9	22.4	179	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_41	TALUS	tal_dearic_cantina	AREA	7	0.9	-0.9	18.5	89	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_42	TALUS	tal_dearic_cantina	AREA	8	-7.2	-0.9	-22.0	-85	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_43	TALUS	tal_dearic_cantina	AREA	8	-9.2	-0.9	-19.8	179	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_44	TALUS	tal_dearic_cantina	AREA	8	-11.4	-0.9	-21.2	103	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_45	TALUS	tal_dearic_cantina	AREA	8	-3.8	-0.9	-19.6	-16	1	Nurla Slinthiss	humanoid_nurla_slinthiss	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_46	TALUS	tal_dearic_cantina	AREA	13	-24.8	-0.5	8.4	-25	1	a scientist	humanoid_scientist_zabrak_female	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_47	TALUS	tal_dearic_cantina	AREA	13	-26.8	-0.5	9.3	69	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_48	TALUS	tal_dearic_cantina	AREA	13	-25.5	-0.5	11.2	-179	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_49	TALUS	tal_dearic_cantina	AREA	14	-33.8	0.1	-24.6	178	1	a farmer	humanoid_farmer_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_50	TALUS	tal_dearic_cantina	AREA	15	-45.6	0.1	-24.0	-15	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_51	TALUS	tal_dearic_cantina	AREA	15	-47.8	0.1	-22.7	62	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_52	TALUS	tal_dearic_cantina	AREA	15	-46.1	0.1	-21.7	-170	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_53	TALUS	tal_dearic_capitol	AREA	2	-1.6	3.1	22.9	176	1	Minister Haleen Snowline	humanoid_haleen_snowline	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_54	TALUS	tal_dearic_capitol	AREA	3	25.7	1.3	-4.4	86	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_55	TALUS	tal_dearic_capitol	AREA	7	-35.1	1.3	-2.8	81	1	Prime Minister Hagrin Zeed	humanoid_hagrin_zeed	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_56	TALUS	tal_dearic_capitol	AREA	8	-23.8	3.2	17.7	17	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_57	TALUS	tal_dearic_capitol	AREA	8	-23.5	3.2	20.7	-176	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_58	TALUS	tal_dearic_capitol	AREA	9	22.8	3.2	20.7	-146	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_59	TALUS	tal_dearic_capitol	AREA	9	21.8	3.2	19.2	29	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_60	TALUS	tal_dearic_capitol	AREA	10	32	1.3	-4.2	45	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_61	TALUS	tal_dearic_capitol	AREA	10	32	1.3	-1.1	121	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_62	TALUS	tal_dearic_capitol	AREA	10	35.6	1.3	-2.1	-123	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_63	TALUS	tal_dearic_capitol	AREA	11	15	3.2	-33.6	-90	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_64	TALUS	tal_dearic_combat_gh	AREA	4	-4.4	1.1	-1.4	-95	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_65	TALUS	tal_dearic_combat_gh	AREA	4	-6.6	1.1	-1.5	90	1	an Ithorian male	humanoid_patron_ithorian_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_66	TALUS	tal_dearic_combat_gh	AREA	5	9	1.1	1.1	135	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_67	TALUS	tal_dearic_combat_gh	AREA	5	10	1.1	-0.7	-48	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_68	TALUS	tal_dearic_combat_gh	AREA	5	12.1	1.1	5.6	-2	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_69	TALUS	tal_dearic_combat_gh	AREA	7	6.6	1.1	-10	90	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_70	TALUS	tal_dearic_combat_gh	AREA	7	7.8	1.1	-12.2	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_71	TALUS	tal_dearic_combat_gh	AREA	8	-3.5	1.1	-10.3	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_72	TALUS	tal_dearic_combat_gh	AREA	8	-3.5	1.1	-7.9	-180	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_73	TALUS	tal_dearic_combat_gh	AREA	8	2.9	1.1	-8.2	-90	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_74	TALUS	tal_dearic_combat_gh	AREA	9	-12	1.1	-8.7	-84	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_75	TALUS	tal_dearic_combat_gh	AREA	9	-13.7	1.1	-8.4	79	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_76	TALUS	tal_dearic_commerce_gh	AREA	4	-6.4	1.1	-1	68	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_77	TALUS	tal_dearic_commerce_gh	AREA	6	-12.2	1.1	-0.9	-2	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_78	TALUS	tal_dearic_commerce_gh	AREA	6	-10.8	1.1	1	-82	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_79	TALUS	tal_dearic_commerce_gh	AREA	6	-13.6	1.1	3.4	91	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_80	TALUS	tal_dearic_commerce_gh	AREA	6	-10.7	1.1	5.6	-92	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_81	TALUS	tal_dearic_commerce_gh	AREA	8	0.3	1.1	-10.4	75	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_82	TALUS	tal_dearic_commerce_gh	AREA	8	3	1.1	-9.2	-107	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_83	TALUS	tal_dearic_commerce_gh	AREA	9	-13.3	1.1	-11.1	-92	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_84	TALUS	tal_dearic_commerce_gh	AREA	9	-13.4	1.1	-9.1	-92	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_85	TALUS	tal_dearic_hospital	AREA	2	-7.7	0.2	-3.5	2	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_86	TALUS	tal_dearic_hospital	AREA	2	-1.5	0.2	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_87	TALUS	tal_dearic_hospital	AREA	2	-1	0.2	1.8	-168	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_88	TALUS	tal_dearic_hospital	AREA	2	-8.1	0.2	3.2	-178	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_89	TALUS	tal_dearic_hospital	AREA	2	2.7	0.2	3.9	178	1	Ambassador Champhra Biahin	humanoid_ambassador_champhra_biahin	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_90	TALUS	tal_dearic_hotel	AREA	4	8.3	1	-16.7	74	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_91	TALUS	tal_dearic_hotel	AREA	4	0.5	1.2	-21.3	-176	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_92	TALUS	tal_dearic_hotel	AREA	4	7.5	1	-10.4	-44	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_93	TALUS	tal_dearic_hotel	AREA	4	-8.2	1.0	2.0	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_94	TALUS	tal_dearic_hotel	AREA	4	8.9	1.0	-4.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_95	TALUS	tal_dearic_hotel	AREA	4	5.6	1.0	-14.3	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_96	TALUS	tal_dearic_hotel	AREA	5	18.3	1.3	10.6	0	1	Claw Thug	humanoid_clone_claw_thug	ATTACKABLE	N	41	50	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_97	TALUS	tal_dearic_hotel	AREA	6	-21.6	1.6	10.7	129	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_98	TALUS	tal_dearic_hotel	AREA	6	-25.7	1.6	-1.1	54	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_99	TALUS	tal_dearic_hotel	AREA	6	-23	1.6	3.4	-143	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_100	TALUS	tal_dearic_hotel	AREA	6	-25.5	1.6	1.9	70	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_101	TALUS	tal_dearic_hotel	AREA	7	-19.5	1.6	-6.5	0	1	Claw Bodyguard	humanoid_clone_claw_bodyguard_i	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_102	TALUS	tal_dearic_hotel	AREA	7	-19.5	1.6	-9.7	0	1	Claw Bodyguard	humanoid_clone_claw_bodyguard_ii	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_103	TALUS	tal_dearic_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_104	TALUS	tal_dearic_hotel	AREA	10	-24.8	1.0	-13.7	0	1	Claw Droid	humanoid_clone_claw_droid	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_105	TALUS	tal_dearic_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_iii	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_106	TALUS	tal_dearic_starport	AREA	4	4	0.6	61.9	180	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_107	TALUS	tal_dearic_starport	AREA	4	-2.7	0.6	67.7	2	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_108	TALUS	tal_dearic_starport	AREA	4	-8.8	0.6	62	180	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_109	TALUS	tal_dearic_starport	AREA	4	-4.5	0.6	56.8	180	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_110	TALUS	tal_dearic_starport	AREA	4	2.6	0.6	51.6	-176	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_111	TALUS	tal_dearic_starport	AREA	4	-6.7	0.6	62	180	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_112	TALUS	tal_dearic_starport	AREA	4	6.2	0.6	57.8	0	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_113	TALUS	tal_dearic_starport	AREA	4	2	0.6	56.8	180	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_114	TALUS	tal_dearic_starport	AREA	4	-0.3	0.6	56.6	0	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_115	TALUS	tal_dearic_starport	AREA	4	6.1	0.6	62	180	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_116	TALUS	tal_dearic_starport	AREA	4	8.2	0.6	62	180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_117	TALUS	tal_dearic_starport	AREA	4	10.7	0.6	68.3	163	1	Omkoo	humanoid_talus_omkoo	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_118	TALUS	tal_dearic_starport	AREA	7	52.5	-0.5	34.3	129	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_119	TALUS	tal_dearic_starport	AREA	7	43.4	0.6	47.4	-67	1	a commoner	humanoid_commoner_aqualish	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_120	TALUS	tal_dearic_starport	AREA	7	43.8	-0.5	31.7	137	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_121	TALUS	tal_dearic_starport	AREA	7	54.6	-0.5	41.8	151	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_122	TALUS	tal_dearic_starport	AREA	7	54.7	-0.5	38.4	-43	1	a commoner	humanoid_commoner_trandoshan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_123	TALUS	tal_dearic_starport	AREA	7	40.8	0.6	48.7	114	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_124	TALUS	tal_dearic_starport	AREA	7	54	-0.5	33.3	-55	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_125	TALUS	tal_dearic_starport	AREA	7	36.1	0.6	35.6	74	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_126	TALUS	tal_dearic_starport	AREA	7	47.7	0.6	46	4	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_127	TALUS	tal_dearic_starport	AREA	7	43	-0.5	32.4	-43	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_128	TALUS	tal_dearic_starport	AREA	7	48.1	0.6	48.8	-175	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_129	TALUS	tal_dearic_starport	AREA	9	-33.2	1.6	50.5	6	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_130	TALUS	tal_dearic_starport	AREA	9	-29.2	1.6	66.2	148	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_131	TALUS	tal_dearic_starport	AREA	9	-36.6	1.6	63.8	37	1	a commoner	humanoid_commoner_bothan_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_132	TALUS	tal_dearic_starport	AREA	9	-34.8	1.6	66.1	-140	1	a commoner	humanoid_commoner_devaronian	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_133	TALUS	tal_dearic_starport	AREA	9	-29.7	1.6	64.3	62	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_134	TALUS	tal_dearic_starport	AREA	9	-27.1	1.6	65.4	-117	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_135	TALUS	tal_dearic_starport	AREA	9	-25.8	1.6	50.9	-88	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_136	TALUS	tal_dearic_starport	AREA	9	-27.4	1.6	49.6	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_137	TALUS	tal_dearic_starport	AREA	10	-40.5	1.6	47.3	176	1	a commoner	humanoid_commoner_twilek	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_138	TALUS	tal_dearic_starport	AREA	12	-57.5	2.6	40.5	45	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_139	TALUS	tal_dearic_starport	AREA	12	-57.3	2.6	43.5	-135	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_140	TALUS	tal_dearic_starport	AREA	12	-55.8	2.6	42.1	-135	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_141	TALUS	tal_dearic_starport	AREA	13	51.9	1	20.1	-174	1	a commoner	humanoid_commoner_rodian	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_142	TALUS	tal_dearic_starport	AREA	14	-53.5	2.7	23.3	-90	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_143	TALUS	tal_dearic_starport	AREA	14	-56.4	1	8.7	40	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_144	TALUS	tal_dearic_starport	PATROL	7	44.8	0.6	46.7	0	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Dearic	1	PATROL	0	patrol_talus_2800	column	idle		simple_droid_sarcastic_flee_4	600
+city_talus_dearic_145	TALUS	tal_dearic_theater	AREA	1	-8.3	0.6	-5	88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_146	TALUS	tal_dearic_theater	AREA	1	-5.8	0.6	-4.9	-91	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_147	TALUS	tal_dearic_theater	AREA	1	7.2	0.6	-3.2	178	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_148	TALUS	tal_dearic_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_149	TALUS	tal_dearic_theater	AREA	9	-25.3	2.1	74.2	90	1	Brother Extok Evin (Rebel Pilot Trainer)	humanoid_rebel_brother_extok_evin	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_150	TALUS	tal_dearic_theater	AREA	9	-19.3	2.1	76.2	166	1	Mourno Draver	humanoid_mourno_draver	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_151	TALUS	tal_dearic_university	AREA	4	-3.9	1.1	-5.7	21	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_152	TALUS	tal_dearic_university	AREA	4	-2.1	1.1	-5.8	0	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_153	TALUS	tal_dearic_university	AREA	4	-2.7	1.1	-3.5	-170	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_154	TALUS	tal_dearic_university	AREA	5	13.7	1.1	5.6	180	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_155	TALUS	tal_dearic_university	AREA	5	13.7	1.1	3.1	-4	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_156	TALUS	tal_dearic_university	AREA	6	-15	1.1	-0.6	89	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_157	TALUS	tal_dearic_university	AREA	7	8.4	1.1	-14.9	0	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_158	TALUS	tal_dearic_university	AREA	7	6.8	1.1	-13	90	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_159	TALUS	tal_dearic_university	AREA	8	-0.4	1.1	-9.5	-65	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_160	TALUS	tal_dearic_university	AREA	8	-2.8	1.1	-8.6	123	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_161	TALUS	tal_world	AREA	0	323.3	6.0	-3097.7	85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+city_talus_dearic_162	TALUS	tal_world	AREA	0	378.7	6.0	-2756.5	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+city_talus_dearic_163	TALUS	tal_world	AREA	0	152.7	6.0	-2932.0	84	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle		commoner	600
+city_talus_dearic_164	TALUS	tal_world	AREA	0	525.9	6.5	-2989.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_165	TALUS	tal_world	AREA	0	579.1	6.0	-3030.8	120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_166	TALUS	tal_world	AREA	0	614.7	6.0	-3014.0	30	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_167	TALUS	tal_world	AREA	0	731.6	6	-3001.7	65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_168	TALUS	tal_world	AREA	0	581.9	6	-2962.7	-144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_169	TALUS	tal_world	AREA	0	470.4	6	-2852.8	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_170	TALUS	tal_world	AREA	0	388.6	6	-2878.9	-151	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_171	TALUS	tal_world	AREA	0	379	6	-2963.6	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_172	TALUS	tal_world	AREA	0	409.7	6	-2976.4	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_173	TALUS	tal_world	AREA	0	342.8	6	-2955.3	-92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_174	TALUS	tal_world	AREA	0	325.7	6	-2970.8	-169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_175	TALUS	tal_world	AREA	0	324.6	6	-2988.8	-146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_176	TALUS	tal_world	AREA	0	311	6	-2980.8	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_177	TALUS	tal_world	AREA	0	335.7	6	-2932	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_178	TALUS	tal_world	AREA	0	298.2	6	-2840.3	-53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_179	TALUS	tal_world	AREA	0	161.5	6	-2827	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_180	TALUS	tal_world	AREA	0	161.4	6	-2849.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_181	TALUS	tal_world	AREA	0	157.7	6	-2874.7	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_182	TALUS	tal_world	AREA	0	156.3	6	-2902.1	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_183	TALUS	tal_world	AREA	0	160.4	6	-2928.9	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_184	TALUS	tal_world	AREA	0	159.6	6	-2951.3	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_185	TALUS	tal_world	AREA	0	167.9	6	-3000.3	152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_186	TALUS	tal_world	AREA	0	169.1	6	-3021.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_187	TALUS	tal_world	AREA	0	141.9	6	-2949	-90	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_188	TALUS	tal_world	AREA	0	336.8	6	-3023.8	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_189	TALUS	tal_world	AREA	0	249.2	6	-2956	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_190	TALUS	tal_world	AREA	0	234.6	6	-2943.1	5	1	a commoner	humanoid_commoner_nikto	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_191	TALUS	tal_world	AREA	0	509.5	6	-2943.9	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_192	TALUS	tal_world	AREA	0	539.5	6	-2946.2	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_193	TALUS	tal_world	AREA	0	498	6	-3025.6	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_194	TALUS	tal_world	AREA	0	508.6	6.6	-3104.1	67	1	a commoner	humanoid_commoner_sullustan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_195	TALUS	tal_world	AREA	0	718.8	6	-3036.4	127	1	a commoner	humanoid_commoner_zabrak	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_196	TALUS	tal_world	AREA	0	685.1	6.1	-3130.4	-180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_197	TALUS	tal_world	AREA	0	685.1	6.1	-3122.4	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Dearic	1	LOITER	5	0	-	idle		commoner	600
+city_talus_dearic_198	TALUS	tal_world	AREA	0	691.5	6	-3105.3	-123	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_199	TALUS	tal_world	AREA	0	183.3	6	-3064.2	121	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_200	TALUS	tal_world	AREA	0	182.3	6	-3065.5	95	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_201	TALUS	tal_world	AREA	0	678.3	6	-2883.2	-158	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_202	TALUS	tal_world	AREA	0	677.3	6	-2886.1	22	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_203	TALUS	tal_world	AREA	0	527.6	6.5	-2977.5	-47	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_204	TALUS	tal_world	AREA	0	689.9	6.6	-3046.5	-178	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_205	TALUS	tal_world	AREA	0	185.7	6	-3065.6	-73	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_206	TALUS	tal_world	AREA	0	706.8	6.6	-3046.4	-175	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_207	TALUS	tal_world	AREA	0	670.5	6.2	-3033.7	91	1	a scientist	humanoid_scientist_moncal_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_208	TALUS	tal_world	AREA	0	673.1	6.2	-3033.7	-90	1	a scientist	humanoid_scientist_rodian_female	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_209	TALUS	tal_world	AREA	0	689	6	-3107	59	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_210	TALUS	tal_world	AREA	0	688.3	7	-2993.4	-128	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_211	TALUS	tal_world	AREA	0	546.2	8.5	-2922.8	-101	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_212	TALUS	tal_world	AREA	0	510.9	6.6	-3102.9	-120	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_213	TALUS	tal_world	AREA	0	330.7	6	-2915	101	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_214	TALUS	tal_world	AREA	0	168.8	6	-2945.8	-80	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_215	TALUS	tal_world	AREA	0	167	6	-2908.1	-113	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_216	TALUS	tal_world	AREA	0	599.4	6.0	-3006.5	-0	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_217	TALUS	tal_world	AREA	0	534.9	6.5	-2989.9	90	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_talus_dearic_218	TALUS	tal_world	AREA	0	720.4	6	-3038.8	-29	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_219	TALUS	tal_world	AREA	0	541	6.6	-3176.7	-166	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_220	TALUS	tal_world	AREA	0	544.6	8.5	-2923.1	85	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	conversation			600
+city_talus_dearic_221	TALUS	tal_world	AREA	0	721	6	-3036.7	-135	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	npc_sitting_chair			600
+city_talus_dearic_222	TALUS	tal_world	AREA	0	431.0	6.0	-3014.0	-38	1	Dak Ralter	humanoid_rebel_syren_5_questgiver	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_223	TALUS	tal_world	AREA	0	649.0	6.0	-3190.2	-136	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_224	TALUS	tal_world	AREA	0	731.0	6.0	-3081.0	105	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Dearic	1	IDLE	0	0	-	idle			600
+city_talus_dearic_225	TALUS	tal_world	PATROL	0	540.0	6.5	-2984.9	0	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Dearic	1	PATROL	0	patrol_talus_2700	column	idle			600

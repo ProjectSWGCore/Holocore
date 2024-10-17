@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_corellia_lord_nyax_cult_1	CORELLIA	cor_nyax_bunker	AREA	2	3.8	0.3	-0.7	0	1	a minion of Lord Nyax	humanoid_lord_nyax_minion	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_2	CORELLIA	cor_nyax_bunker	AREA	3	-3.7	0.3	-4.2	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_3	CORELLIA	cor_nyax_bunker	AREA	5	5.4	-6.8	-8.7	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_4	CORELLIA	cor_nyax_bunker	AREA	5	2.6	-6.8	-0.7	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_5	CORELLIA	cor_nyax_bunker	AREA	7	-1.2	-13.8	4.7	0	1	a disciple of Lord Nyax	humanoid_lord_nyax_disciple	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_6	CORELLIA	cor_nyax_bunker	AREA	7	-1.5	-13.8	-11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_7	CORELLIA	cor_nyax_bunker	AREA	8	-4.7	-13.8	12.1	130	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_8	CORELLIA	cor_nyax_bunker	AREA	8	6.2	-13.8	11.8	0	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_9	CORELLIA	cor_nyax_bunker	AREA	9	15.2	-13.8	14.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_10	CORELLIA	cor_nyax_bunker	AREA	9	15.8	-13.8	1.4	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_11	CORELLIA	cor_nyax_bunker	AREA	10	15.6	-13.8	-7.1	0	1	a fiend of Lord Nyax	humanoid_lord_nyax_fiend	AGGRESSIVE	N	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_12	CORELLIA	cor_nyax_bunker	AREA	10	15.5	-13.8	-13.7	0	1	a visionary of Lord Nyax	humanoid_lord_nyax_visionary	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	TURN	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_13	CORELLIA	cor_nyax_bunker	AREA	10	18.6	-11.5	-20.9	-10	1	Lord Nyax	humanoid_lord_nyax	AGGRESSIVE	B	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600
+poi_corellia_lord_nyax_cult_14	CORELLIA	cor_world	AREA	0	1346.0	31.0	-335.3	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
+poi_corellia_lord_nyax_cult_15	CORELLIA	cor_world	AREA	0	1378.4	31.0	-320.8	0	1	a fanatic of Lord Nyax	humanoid_lord_nyax_fanatic	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	LOITER	5	0	-	idle			600
+poi_corellia_lord_nyax_cult_16	CORELLIA	cor_world	AREA	0	1356.7	31.0	-319.4	150	1	a zealot of Lord Nyax	humanoid_lord_nyax_zealot	AGGRESSIVE	E	11	20	POI	Lord Nyax's Cult	1	IDLE	0	0	-	idle			600

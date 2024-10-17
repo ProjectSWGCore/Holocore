@@ -1,0 +1,162 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_naboo_keren_1	NABOO	nab_keren_association_hall	AREA	10	7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_2	NABOO	nab_keren_association_hall	AREA	10	-7.3	2.3	5.9	179	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_3	NABOO	nab_keren_association_hall	AREA	10	-10.6	1.7	-6.6	90	1	an Imperial Corporal	humanoid_imperial_corporal	ATTACKABLE	E	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_4	NABOO	nab_keren_association_hall	AREA	10	-10.6	1.7	-8.9	45	1	Major Raev	humanoid_clone_imperial_major_raev	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_5	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	-1.4	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_6	NABOO	nab_keren_association_hall	AREA	12	-3.5	-9.0	2.9	88	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_7	NABOO	nab_keren_association_hall	AREA	16	-8.3	-9.0	-8.7	0	1	Emperor Palpatine Hologram	humanoid_clone_imperial_palpatine_hologram	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_8	NABOO	nab_keren_cantina	AREA	2	30.4	0.1	-8.8	19	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_9	NABOO	nab_keren_cantina	AREA	2	30.2	0.1	-5.5	151	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_10	NABOO	nab_keren_cantina	AREA	3	20.1	-0.9	-0.1	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_11	NABOO	nab_keren_cantina	AREA	3	5.3	-0.9	11.1	79	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_12	NABOO	nab_keren_cantina	AREA	3	-3.2	-0.9	-10.7	72	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_13	NABOO	nab_keren_cantina	AREA	3	0.7	-0.9	-10.5	-80	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_14	NABOO	nab_keren_cantina	AREA	3	4.9	-0.9	-4.8	-90	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_15	NABOO	nab_keren_cantina	AREA	3	9.5	-0.9	3.8	-122	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_16	NABOO	nab_keren_cantina	AREA	3	7.9	-0.9	11.6	-109	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_17	NABOO	nab_keren_cantina	AREA	3	2.9	-0.9	5.7	175	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_18	NABOO	nab_keren_cantina	AREA	3	-1.2	-0.9	-8.6	-174	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_19	NABOO	nab_keren_cantina	AREA	14	-32.2	0.1	-10	19	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_20	NABOO	nab_keren_cantina	AREA	15	-45.6	0.1	-23.9	-15	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_21	NABOO	nab_keren_cantina	AREA	15	-47.7	0.1	-22.8	34	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_22	NABOO	nab_keren_cantina	AREA	3	3.1	-0.9	3.4	9	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_23	NABOO	nab_keren_cantina	AREA	3	3.2	-0.9	-4.8	83	1	Lergo Brazee	humanoid_lergo_brazee	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_naboo_keren_24	NABOO	nab_keren_commerce_gh	AREA	6	-10.7	1.1	5.8	-121	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_25	NABOO	nab_keren_commerce_gh	AREA	6	-13.5	1.1	1.2	88	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_26	NABOO	nab_keren_commerce_gh	AREA	6	-13.6	1.1	3.4	91	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_27	NABOO	nab_keren_commerce_gh	AREA	7	12.9	1.1	-9.9	-112	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_28	NABOO	nab_keren_commerce_gh	AREA	7	9.9	1.1	-11.2	68	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_29	NABOO	nab_keren_commerce_gh	AREA	8	2.8	1.1	-9.7	-113	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_30	NABOO	nab_keren_commerce_gh	AREA	9	-13.4	1.1	-11.6	-91	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_31	NABOO	nab_keren_commerce_gh	AREA	9	-7	1.1	-8	-132	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_32	NABOO	nab_keren_commerce_gh	AREA	9	-7.1	1.1	-9.7	-43	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_33	NABOO	nab_keren_hospital	AREA	2	11.8	0.3	-1.8	-158	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_34	NABOO	nab_keren_hospital	AREA	2	16.7	0.3	-3.6	2	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_35	NABOO	nab_keren_hospital	AREA	2	17.2	0.3	-0.1	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_36	NABOO	nab_keren_hospital	AREA	2	11	0.3	-3.4	2	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_37	NABOO	nab_keren_hospital	AREA	6	-23	0.3	3.1	-156	1	2-1B (medical droid)	droid_21b_med	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_38	NABOO	nab_keren_hospital	AREA	6	-18.6	0.3	2.5	-2	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_39	NABOO	nab_keren_hospital	AREA	6	-24	0.3	1.1	-179	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_40	NABOO	nab_keren_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_41	NABOO	nab_keren_hotel	AREA	10	-25.3	1.6	-3.6	168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_42	NABOO	nab_keren_hotel	AREA	10	-21.6	1.6	-4.2	-168	1	Droid Bodyguard	droid_bodyguard_sbd_morkov	ATTACKABLE	N	21	30	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_43	NABOO	nab_keren_hotel	AREA	10	-23.5	1.6	-2.8	179	1	Morkov	humanoid_clone_morkov	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_44	NABOO	nab_keren_house2	AREA	2	-5.2	1.1	0.2	66	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_45	NABOO	nab_keren_house2	AREA	2	-4.9	1.1	2.2	136	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_46	NABOO	nab_keren_house2	AREA	2	-2.9	1.1	-0.2	-32	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_47	NABOO	nab_keren_house2	AREA	6	-8.9	-4.9	-8.8	23	1	Kritus Morven	humanoid_kritus_morven	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_48	NABOO	nab_keren_house4	AREA	5	-7.9	6.1	-9.4	71	1	Bardo Klinj	humanoid_bardo_klinj	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_49	NABOO	nab_keren_starport	AREA	4	2.7	0.6	51.6	180	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_50	NABOO	nab_keren_starport	AREA	4	3.7	0.6	55.8	0	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_51	NABOO	nab_keren_starport	AREA	4	3.9	0.6	60.7	180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_52	NABOO	nab_keren_starport	AREA	4	-2.3	0.6	58.6	92	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_53	NABOO	nab_keren_starport	AREA	7	56.6	-0.5	45.2	-30	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_54	NABOO	nab_keren_starport	AREA	7	41.3	0.6	41.4	-40	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_55	NABOO	nab_keren_starport	AREA	7	39.6	0.6	43.5	138	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_56	NABOO	nab_keren_starport	AREA	7	40.9	0.6	35.7	133	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_57	NABOO	nab_keren_starport	AREA	9	-28.8	1.6	58.4	173	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_58	NABOO	nab_keren_starport	AREA	9	-28.5	1.6	55.8	26	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_59	NABOO	nab_keren_starport	AREA	4	8.9	0.6	66.8	47	1	Captain Gavyn Sykes	humanoid_captain_gavyn_sykes	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_60	NABOO	nab_keren_starport	AREA	4	5.7	0.6	67.2	147	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_61	NABOO	nab_keren_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_62	NABOO	nab_world	AREA	0	1577	25.6	2842.8	-2	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_63	NABOO	nab_world	AREA	0	1696.3	24.9	2749.4	164	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_64	NABOO	nab_world	AREA	0	1512.7	25	2777.6	-176	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_65	NABOO	nab_world	AREA	0	1248.3	13	2726.1	10	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_66	NABOO	nab_world	AREA	0	1663.9	12	2442.7	-64	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_67	NABOO	nab_world	AREA	0	1700.6	12	2597.9	134	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_68	NABOO	nab_world	AREA	0	2105.1	30	2461.4	-11	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_69	NABOO	nab_world	AREA	0	1694.3	39.9	2793.1	-20	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_70	NABOO	nab_world	AREA	0	1750.7	37.8	2853.4	177	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_71	NABOO	nab_world	AREA	0	2026.3	19.6	2533.5	63	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_72	NABOO	nab_world	AREA	0	1753.3	38.7	2878.2	-2	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_73	NABOO	nab_world	AREA	0	1358.8	13	2748.3	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_74	NABOO	nab_world	AREA	0	1341.7	13	2747.7	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_75	NABOO	nab_world	AREA	0	1255.6	13	2754.1	163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_76	NABOO	nab_world	AREA	0	1232.6	13	2774	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_77	NABOO	nab_world	AREA	0	1258.3	13	2771.2	107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_78	NABOO	nab_world	AREA	0	1257.9	13	2793.3	-10	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_79	NABOO	nab_world	AREA	0	1243.1	13	2793.1	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_80	NABOO	nab_world	AREA	0	1309.9	13	2832.1	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_81	NABOO	nab_world	AREA	0	1363.7	13	2853.4	18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_82	NABOO	nab_world	AREA	0	1680.7	12.6	2573.7	-145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_83	NABOO	nab_world	AREA	0	1680.9	12	2600.3	-57	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_84	NABOO	nab_world	AREA	0	1684.8	12	2628	72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_85	NABOO	nab_world	AREA	0	1734.3	12	2581.9	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_86	NABOO	nab_world	AREA	0	1786	12.5	2602.3	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_87	NABOO	nab_world	AREA	0	1789.7	12.5	2626.7	-51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_88	NABOO	nab_world	AREA	0	1772.7	12.5	2615	-141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_89	NABOO	nab_world	AREA	0	1839.3	12	2587.8	-33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_90	NABOO	nab_world	AREA	0	1884.1	12	2578.6	5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_91	NABOO	nab_world	AREA	0	1806.1	12	2524.3	-108	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_92	NABOO	nab_world	AREA	0	1765.9	12	2499.5	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_93	NABOO	nab_world	AREA	0	1767.8	12	2524.1	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_94	NABOO	nab_world	AREA	0	1845.3	12	2464.3	147	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_95	NABOO	nab_world	AREA	0	1890.7	12	2380.3	112	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_96	NABOO	nab_world	AREA	0	1939	12	2359.2	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_97	NABOO	nab_world	AREA	0	1949.9	12	2382.4	3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_98	NABOO	nab_world	AREA	0	1952.2	12	2419.4	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_99	NABOO	nab_world	AREA	0	1977.9	12	2497.7	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_100	NABOO	nab_world	AREA	0	1965.4	12	2477.1	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_101	NABOO	nab_world	AREA	0	1884	12	2636.9	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_102	NABOO	nab_world	AREA	0	1890.4	12	2673.2	6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_103	NABOO	nab_world	AREA	0	1854.8	12	2710.9	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_104	NABOO	nab_world	AREA	0	1834.5	12	2728.1	-70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_105	NABOO	nab_world	AREA	0	1811.3	12	2730.7	86	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_106	NABOO	nab_world	AREA	0	1723.5	12	2716.6	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_107	NABOO	nab_world	AREA	0	1713	12	2699.9	-149	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_108	NABOO	nab_world	AREA	0	1730.1	40	2799.9	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_109	NABOO	nab_world	AREA	0	1750.7	40	2815.1	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_110	NABOO	nab_world	AREA	0	2010.8	40	2799.9	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_keren_111	NABOO	nab_world	AREA	0	1993.5	30	2714.8	116	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_112	NABOO	nab_world	AREA	0	1521.7	25.9	2729.1	24	1	a criminal	humanoid_forage_criminal	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_113	NABOO	nab_world	AREA	0	1787.2	12.5	2594.2	-176	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_114	NABOO	nab_world	AREA	0	1986.7	30	2708.6	-112	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_115	NABOO	nab_world	AREA	0	1781.9	12.5	2614.1	87	1	a fixer	humanoid_fixer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_116	NABOO	nab_world	AREA	0	2106.5	30	2463.3	-93	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_117	NABOO	nab_world	AREA	0	1661.2	12	2444	117	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_118	NABOO	nab_world	AREA	0	1833.7	12	2574.4	-93	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_119	NABOO	nab_world	AREA	0	1793.4	12.2	2747.6	-4	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_120	NABOO	nab_world	AREA	0	1788.2	12.2	2748.3	0	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_121	NABOO	nab_world	AREA	0	1791.7	12.2	2747.8	-6	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_122	NABOO	nab_world	AREA	0	1857.1	12	2546.2	-175	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_123	NABOO	nab_world	AREA	0	1856.7	12	2542	3	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_124	NABOO	nab_world	AREA	0	1786.3	12.1	2511.7	88	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_125	NABOO	nab_world	AREA	0	1790.1	12.1	2511.9	-94	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_126	NABOO	nab_world	AREA	0	1276.9	13	2761.1	84	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_127	NABOO	nab_world	AREA	0	1715.1	12	2730.8	167	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_128	NABOO	nab_world	AREA	0	1715.8	12	2727.9	-14	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_129	NABOO	nab_world	AREA	0	2089.2	30	2459.2	17	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_130	NABOO	nab_world	AREA	0	2090	30	2462.6	-138	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_131	NABOO	nab_world	AREA	0	1527	25	2779.7	-5	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_132	NABOO	nab_world	AREA	0	2026.1	19.6	2516.2	85	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_133	NABOO	nab_world	AREA	0	2025.4	19.3	2534.9	148	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_134	NABOO	nab_world	AREA	0	1915.1	12.1	2686.1	100	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_135	NABOO	nab_world	AREA	0	1908	12.2	2680.3	-86	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_136	NABOO	nab_world	AREA	0	1750.8	37.8	2850.4	-10	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_137	NABOO	nab_world	AREA	0	1372.5	13	2706.9	170	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_138	NABOO	nab_world	AREA	0	1919.1	12.1	2685.4	-83	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_139	NABOO	nab_world	AREA	0	1444.1	13	2760.2	-174	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_keren_140	NABOO	nab_world	AREA	0	1250.7	13	2726.9	-41	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_141	NABOO	nab_world	AREA	0	2087.8	30	2461.5	129	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_142	NABOO	nab_world	AREA	0	1755.7	37.8	2853.1	86	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_143	NABOO	nab_world	AREA	0	1873.3	12	2420.7	138	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Keren	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_keren_144	NABOO	nab_world	AREA	0	1751.6	38.7	2874.5	130	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_145	NABOO	nab_world	AREA	0	1511.8	25	2761.8	159	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_146	NABOO	nab_world	AREA	0	1512.4	25	2775.1	5	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_147	NABOO	nab_world	AREA	0	1910.2	12.1	2616.3	93	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_148	NABOO	nab_world	AREA	0	1754.5	38.7	2872.1	-58	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_149	NABOO	nab_world	AREA	0	1911.1	12.1	2614	50	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_150	NABOO	nab_world	AREA	0	1373	13	2702.6	-6	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_151	NABOO	nab_world	AREA	0	1248.4	13	2729.2	167	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_keren_152	NABOO	nab_world	AREA	0	1770.8	40	2826.9	65	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_153	NABOO	nab_world	AREA	0	1913.8	12.1	2616.3	-90	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	conversation			600
+city_naboo_keren_154	NABOO	nab_world	AREA	0	1740.1	12.0	2657.6	114	1	Brennis Doore	humanoid_brennis_doore	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_155	NABOO	nab_world	AREA	0	1774.9	12.5	2623.3	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_156	NABOO	nab_world	AREA	0	1673.9	12.0	2582.7	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_157	NABOO	nab_world	AREA	0	1373.1	13.0	2726.4	-63	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_158	NABOO	nab_world	AREA	0	1277.6	13.0	2746.7	-136	1	Lt. Vana Sage	humanoid_vana_sage	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_159	NABOO	nab_world	AREA	0	1907.0	12.0	2352.0	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600
+city_naboo_keren_160	NABOO	nab_world	AREA	0	1393.7	13.0	2685.8	-5	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Keren	1	IDLE	0	0	-	idle			600

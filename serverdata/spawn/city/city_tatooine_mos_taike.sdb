@@ -1,0 +1,29 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_mos_taike_1	TATOOINE	tat_world	PATROL	0	3922.4	44.4	2316.1	0	1	a criminal	humanoid_smuggler_patrol_thief_1	ATTACKABLE	N	5	10	City	Mos Taike	1	PATROL	0	patrol_tatooine_2400	column	idle			600
+city_tatooine_mos_taike_2	TATOOINE	tat_world	PATROL	0	3831.9	19.9	2357.0	0	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	ATTACKABLE	N	5	10	City	Mos Taike	1	PATROL	0	patrol_tatooine_2500	column	idle			600
+city_tatooine_mos_taike_3	TATOOINE	tat_world	AREA	0	3765.2	7.2	2351.9	-44	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_taike_4	TATOOINE	tat_world	AREA	0	3731.8	5.5	2367.1	98	1	a bounty hunter	humanoid_smuggler_patrol_bh_2	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_5	TATOOINE	tat_world	AREA	0	3950.0	54.0	2280.0	-39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_taike_6	TATOOINE	tat_world	AREA	0	3868.8	28.1	2359.5	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_taike_7	TATOOINE	tat_world	AREA	0	3854.8	28.0	2353.7	-91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_taike_8	TATOOINE	tat_world	AREA	0	3776.4	8.9	2354.0	-82	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_taike_9	TATOOINE	tat_world	AREA	0	3773.3	8.3	2354.5	101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_taike_10	TATOOINE	tat_world	AREA	0	3979.8	7.8	2505.6	33	1	a Hutt assassin	humanoid_hutt_assassin	AGGRESSIVE	B	5	10	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_11	TATOOINE	tat_world	AREA	0	3794.8	8.4	2327.2	21	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_12	TATOOINE	tat_world	AREA	0	3773.2	8.6	2371.6	35	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_taike_13	TATOOINE	tat_world	AREA	0	3817.6	16.1	2339.0	-15	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	bored			600
+city_tatooine_mos_taike_14	TATOOINE	tat_world	AREA	0	3762.6	6.9	2353.1	37	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_taike_15	TATOOINE	tat_world	AREA	0	3762.2	6.7	2355.3	118	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_taike_16	TATOOINE	tat_world	AREA	0	3863.7	27.5	2333.4	115	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_taike_17	TATOOINE	tat_world	AREA	0	3763.3	8.3	2344.1	1	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_18	TATOOINE	tat_world	AREA	0	3867.1	28.0	2361.1	167	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_taike_19	TATOOINE	tat_world	AREA	0	3797.5	12.1	2386.0	0	1	a wary pirate	humanoid_spy_pirate	AGGRESSIVE	N	5	10	City	Mos Taike	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_taike_20	TATOOINE	tat_world	AREA	0	3820.8	16.4	2387.3	0	1	a wary pirate	humanoid_spy_pirate	AGGRESSIVE	N	5	10	City	Mos Taike	1	LOITER	5	0	-	idle			600
+city_tatooine_mos_taike_21	TATOOINE	tat_world	AREA	0	3863.1	28.0	2359.6	1	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_mos_taike_22	TATOOINE	tat_world	AREA	0	3764.4	6.9	2355.7	-146	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_taike_23	TATOOINE	tat_world	AREA	0	3770.0	8.3	2345.0	9	1	Bren Kingal	humanoid_bren_kingal	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_24	TATOOINE	tat_world	AREA	0	3808.4	14.3	2397.3	-33	1	Eyan McDermitt	humanoid_spy_pirate_leader	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_25	TATOOINE	tat_world	AREA	0	3838.0	16.1	2334.6	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_26	TATOOINE	tat_world	AREA	0	3775.0	9.1	2374.0	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_27	TATOOINE	tat_world	AREA	0	3865.9	27.5	2332.3	-53	1	Nathan Blyskipper	humanoid_junk_nathan	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600

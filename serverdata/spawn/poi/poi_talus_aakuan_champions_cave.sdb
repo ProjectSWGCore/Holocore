@@ -1,0 +1,22 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_aakuan_champions_cave_1	TALUS	tal_aakuan_cave	AREA	2	24.4	-39.0	-37.4	0	1	an Aa'kuan defender	humanoid_aakuan_defender	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_2	TALUS	tal_aakuan_cave	AREA	2	43.7	-47.1	-7.7	0	1	an Aa'kuan keeper	humanoid_aakuan_keeper	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_3	TALUS	tal_aakuan_cave	AREA	2	56.3	-68.5	-38.2	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_4	TALUS	tal_aakuan_cave	AREA	3	77.3	-67.4	-34.1	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_5	TALUS	tal_aakuan_cave	AREA	3	69.8	-57.1	-9.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_6	TALUS	tal_aakuan_cave	AREA	3	81.8	-63.4	-19.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_7	TALUS	tal_aakuan_cave	AREA	4	92.3	-76.3	-79.8	0	1	an Aa'kuan follower	humanoid_aakuan_follower	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_8	TALUS	tal_aakuan_cave	AREA	4	85.2	-74.7	-53.6	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_9	TALUS	tal_aakuan_cave	AREA	4	92.1	-76.2	-64.3	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_10	TALUS	tal_aakuan_cave	AREA	5	93.5	-46.5	-120.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_11	TALUS	tal_aakuan_cave	AREA	6	53.3	-76.0	-85.7	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_12	TALUS	tal_aakuan_cave	AREA	7	70.2	-66.4	-138.4	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_13	TALUS	tal_aakuan_cave	AREA	8	154.3	-65.7	-128.2	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_14	TALUS	tal_aakuan_cave	AREA	8	138.9	-67.3	-93.6	0	1	an Aa'kuan spice guard	humanoid_aakuan_spiceguard	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_15	TALUS	tal_aakuan_cave	AREA	8	112.5	-66.9	-94.6	0	1	an Aa'kuan steward	humanoid_aakuan_steward	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_16	TALUS	tal_aakuan_cave	AREA	8	153.0	-65.9	-96.8	0	1	an Aa'kuan warder	humanoid_aakuan_warder	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600
+poi_talus_aakuan_champions_cave_17	TALUS	tal_aakuan_cave	AREA	9	188.7	-66.2	-98.4	0	1	an Aa'kuan anarchist	humanoid_aakuan_anarchist	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+poi_talus_aakuan_champions_cave_18	TALUS	tal_aakuan_cave	AREA	9	186.1	-65.4	-109.8	0	1	an Aa'kuan assassin	humanoid_aakuan_assassin	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+poi_talus_aakuan_champions_cave_19	TALUS	tal_aakuan_cave	AREA	9	180.4	-66.1	-96.8	0	1	an Aa'kuan champion	humanoid_aakuan_champion	ATTACKABLE	E	41	50	POI	Aa'kuan Champion's Cave	1	TURN	0	0	-	idle			600
+poi_talus_aakuan_champions_cave_20	TALUS	tal_world	AREA	0	5933.7	40.1	4649.5	0	1	an Aa'kuan guardian	humanoid_aakuan_guardian	ATTACKABLE	N	41	50	POI	Aa'kuan Champion's Cave	1	LOITER	5	0	-	idle			600

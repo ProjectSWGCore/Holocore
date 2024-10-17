@@ -1,0 +1,55 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_dantooine_mining_outpost_1	DANTOOINE	dan_mining_outpost_cantina	AREA	1	9.3	0.6	1.8	-39	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_2	DANTOOINE	dan_mining_outpost_cantina	AREA	1	1.0	0.6	3.9	-128	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_3	DANTOOINE	dan_mining_outpost_cantina	AREA	1	0.5	0.6	1.6	-22	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_4	DANTOOINE	dan_mining_outpost_cantina	AREA	1	7.1	0.6	1.7	40	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_5	DANTOOINE	dan_mining_outpost_cantina	AREA	1	-1.5	0.6	2.4	61	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_6	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-7.5	0.6	3.5	-97	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_7	DANTOOINE	dan_mining_outpost_cantina	AREA	2	-9.1	0.6	3.4	88	1	Adwan Turoldine (CorSec Pilot Trainer)	humanoid_corsec_adwan_turoldine	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_8	DANTOOINE	dan_mining_outpost_cantina	AREA	3	-3.2	0.6	-4.1	-45	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_9	DANTOOINE	dan_mining_outpost_cantina	AREA	3	-3.1	0.6	-1.9	-134	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_10	DANTOOINE	dan_mining_outpost_cantina	AREA	3	1.4	0.6	-6.7	-80	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_11	DANTOOINE	dan_mining_outpost_cloning	AREA	4	2.4	0.1	2.2	56	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_12	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4.2	0.1	2.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_13	DANTOOINE	dan_mining_outpost_cloning	AREA	4	4.2	0.1	4.0	-90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_14	DANTOOINE	dan_mining_outpost_cloning	AREA	5	3.1	0.1	-5.3	175	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_15	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-2.7	0.1	-5.7	-19	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_16	DANTOOINE	dan_mining_outpost_shed1	AREA	6	-4.5	0.1	-3.2	-90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_17	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4.9	0.1	0.6	-2	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_18	DANTOOINE	dan_mining_outpost_shed2	AREA	4	4.9	0.1	3.7	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_19	DANTOOINE	dan_mining_outpost_shed2	AREA	5	3.3	0.1	-4.6	56	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_20	DANTOOINE	dan_mining_outpost_shed2	AREA	5	5.3	0.1	-3.6	-105	1	Stoos Olko	humanoid_stoos_olko	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_21	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-3.6	0.1	-5.6	-4	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_22	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-5.3	0.1	-4.5	89	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_23	DANTOOINE	dan_mining_outpost_shed2	AREA	6	-4.2	0.1	-3.5	180	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_sitting_chair			600
+city_dantooine_mining_outpost_24	DANTOOINE	dan_mining_outpost_starport	AREA	1	-6.6	0.1	-16.0	92	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_25	DANTOOINE	dan_mining_outpost_starport	AREA	1	-4.5	0.1	-16.1	-86	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_26	DANTOOINE	dan_world	AREA	0	-644.9	3.0	2460.7	23	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_27	DANTOOINE	dan_world	AREA	0	-642.3	3.0	2448.4	-56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle		commoner	600
+city_dantooine_mining_outpost_28	DANTOOINE	dan_world	AREA	0	-647.2	3.0	2441.9	-60	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_29	DANTOOINE	dan_world	AREA	0	-575.7	3.0	2502.3	162	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_30	DANTOOINE	dan_world	AREA	0	-593.8	3.0	2527.3	128	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_31	DANTOOINE	dan_world	AREA	0	-680.0	3.0	2471.5	11	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_32	DANTOOINE	dan_world	AREA	0	-628.3	3.0	2531.7	64	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
+city_dantooine_mining_outpost_33	DANTOOINE	dan_world	AREA	0	-627.5	3.0	2534.2	141	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
+city_dantooine_mining_outpost_34	DANTOOINE	dan_world	AREA	0	-594.9	3.0	2495.3	68	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_35	DANTOOINE	dan_world	AREA	0	-592.3	3.0	2496.4	-112	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_36	DANTOOINE	dan_world	PATROL	0	-540.5	0.1	2514.7	96	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_100	column	idle			600
+city_dantooine_mining_outpost_37	DANTOOINE	dan_world	AREA	0	-657.5	3.0	2502.5	97	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_38	DANTOOINE	dan_world	PATROL	0	-647.4	3.0	2467.5	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1400	column	idle			600
+city_dantooine_mining_outpost_39	DANTOOINE	dan_world	AREA	0	-574.9	3.0	2499.2	64	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_40	DANTOOINE	dan_world	PATROL	0	-601.0	3.0	2482.0	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1700	column	idle			600
+city_dantooine_mining_outpost_41	DANTOOINE	dan_world	AREA	0	-619.6	3.0	2489.8	32	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_42	DANTOOINE	dan_world	AREA	0	-622.3	3.0	2451.7	-51	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_43	DANTOOINE	dan_world	PATROL	0	-619.0	3.0	2449.0	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1500	column	idle			600
+city_dantooine_mining_outpost_44	DANTOOINE	dan_world	AREA	0	-636.3	3.0	2507.8	149	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	bored			600
+city_dantooine_mining_outpost_45	DANTOOINE	dan_world	AREA	0	-601.1	3.0	2529.3	59	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_46	DANTOOINE	dan_world	PATROL	0	-633.30	3	2456.2	-53		an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_3600	column	idle		simple_droid_geek_bye_nice_13	600
+city_dantooine_mining_outpost_47	DANTOOINE	dan_world	AREA	0	-589.2	3.0	2497.9	-55	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_mining_outpost_48	DANTOOINE	dan_world	AREA	0	-635.6	3.0	2473.0	66	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Mining Outpost	1	LOITER	5	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_dantooine_mining_outpost_49	DANTOOINE	dan_world	PATROL	0	-637.5	3.0	2484.3	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Mining Outpost	1	PATROL	0	patrol_dantooine_1600	column	idle		simple_droid_stupid_death_5	600
+city_dantooine_mining_outpost_50	DANTOOINE	dan_world	AREA	0	-625.6	3.0	2481.3	116	1	Fern Yarrow (an Imperial Pilot)	humanoid_imperial_fern_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_51	DANTOOINE	dan_world	AREA	0	-618.7	3.0	2539.3	-45	1	Kelvus Naria	humanoid_kelvus_naria	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_dantooine_mining_outpost_52	DANTOOINE	dan_world	AREA	0	-623.7	3.0	2482.8	-174	1	Kess Yarrow (a Rebel pilot)	humanoid_rebel_kess_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600
+city_dantooine_mining_outpost_53	DANTOOINE	dan_world	AREA	0	-625.8	3.0	2479.0	26	1	Rane Yarrow (a freelance pilot)	humanoid_rane_yarrow	INVULNERABLE	N	100	100	City	Mining Outpost	1	IDLE	0	0	-	conversation			600

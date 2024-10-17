@@ -1,0 +1,135 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_corellia_doaba_guerfel_1	CORELLIA	cor_doaba_cantina	AREA	1	41.5	0.1	1.2	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_2	CORELLIA	cor_doaba_cantina	AREA	1	43.6	0.1	0.3	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_3	CORELLIA	cor_doaba_cantina	AREA	3	7.6	-0.9	1.4	68	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_4	CORELLIA	cor_doaba_cantina	AREA	3	3.9	-0.9	-4.8	1	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_5	CORELLIA	cor_doaba_cantina	AREA	3	14.0	-0.9	-10.7	-76	1	a commoner	humanoid_commoner	ATTACKABLE	N	11	20	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_6	CORELLIA	cor_doaba_cantina	AREA	3	19.8	-0.9	5.8	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	entertained			600
+city_corellia_doaba_guerfel_7	CORELLIA	cor_doaba_cantina	AREA	3	20.6	-0.9	8.0	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	entertained			600
+city_corellia_doaba_guerfel_8	CORELLIA	cor_doaba_cantina	AREA	3	26.1	-0.9	-9.0	-15	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_9	CORELLIA	cor_doaba_cantina	AREA	3	26.3	-0.9	-5.3	-162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_10	CORELLIA	cor_doaba_cantina	AREA	3	11.1	-0.9	12.0	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_11	CORELLIA	cor_doaba_cantina	AREA	3	12.1	-0.9	8.0	-13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_12	CORELLIA	cor_doaba_cantina	AREA	3	10.1	-0.9	7.9	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_13	CORELLIA	cor_doaba_cantina	AREA	3	10.7	-0.9	0.0	-63	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_14	CORELLIA	cor_doaba_cantina	AREA	3	5.8	-0.9	9.4	72	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_doaba_guerfel_15	CORELLIA	cor_doaba_cantina	AREA	3	25.1	-0.9	10.1	-142	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_dance_basic			600
+city_corellia_doaba_guerfel_16	CORELLIA	cor_doaba_cantina	AREA	3	21.6	-0.9	3.4	29	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	entertained	1		600
+city_corellia_doaba_guerfel_17	CORELLIA	cor_doaba_cantina	AREA	3	10.9	-0.9	1.5	-105	1	an Ithorian male	humanoid_patron_ithorian_male	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_doaba_guerfel_18	CORELLIA	cor_doaba_cantina	AREA	6	10.7	-0.9	-14.5	-80	1	Jadam Questrel	humanoid_jadam_questrel	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_19	CORELLIA	cor_doaba_cantina	AREA	7	5.4	-0.9	20.8	168	1	Zakarisz Ghent	humanoid_zakarisz_ghent	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_20	CORELLIA	cor_doaba_cantina	AREA	12	-25.3	-0.9	26.4	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_21	CORELLIA	cor_doaba_cantina	AREA	12	-25.3	-0.9	24.4	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_22	CORELLIA	cor_doaba_cantina	AREA	12	-19.4	-0.9	23.0	-120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_23	CORELLIA	cor_doaba_cantina	AREA	12	-21.1	-0.9	22.0	59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_24	CORELLIA	cor_doaba_cantina	AREA	13	-24.2	-0.5	13.1	-66	1	Coraline Dynes	humanoid_coraline_dynes	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_25	CORELLIA	cor_doaba_cloning	AREA	2	-3.9	0	-3.1	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_26	CORELLIA	cor_doaba_cloning	AREA	2	-5.9	0.1	-2.9	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_27	CORELLIA	cor_doaba_cloning	AREA	2	-5.9	0.1	-0.3	90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_28	CORELLIA	cor_doaba_combat_gh	AREA	1	-3.4	2.5	11.9	36	1	Corran Horn	humanoid_corran_horn	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_29	CORELLIA	cor_doaba_combat_gh	AREA	4	-6.3	1.1	-0.8	89	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_30	CORELLIA	cor_doaba_combat_gh	AREA	4	-3.9	1.1	-0.6	-95	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_31	CORELLIA	cor_doaba_combat_gh	AREA	5	10.1	1.1	-0.6	-71	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_32	CORELLIA	cor_doaba_combat_gh	AREA	5	8.9	1.1	1.0	107	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_33	CORELLIA	cor_doaba_combat_gh	AREA	7	13.9	1.1	-14.1	-19	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_34	CORELLIA	cor_doaba_combat_gh	AREA	8	3.5	1.1	-8.7	42	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_35	CORELLIA	cor_doaba_hospital	AREA	2	-0.9	0.2	-1.6	-176	1	a 2-1B surgical droid	droid_21b_surgical	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_36	CORELLIA	cor_doaba_hospital	AREA	2	7.7	0.2	-3.8	0	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_37	CORELLIA	cor_doaba_hospital	AREA	2	-1.5	0.2	-0.2	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_38	CORELLIA	cor_doaba_hospital	PATROL	2	0.1	0.2	5.6	-176	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_corellia_4600	column	idle			600
+city_corellia_doaba_guerfel_39	CORELLIA	cor_doaba_hospital	AREA	2	3.3	0.2	-7.6	5	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_40	CORELLIA	cor_doaba_hotel	AREA	4	7.4	1.0	-6.9	179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_41	CORELLIA	cor_doaba_hotel	AREA	4	7.4	1.0	-8.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_42	CORELLIA	cor_doaba_hotel	AREA	4	1.4	1.0	3.3	-13	1	Admiral Willham Burke	humanoid_rebel_willham_burke	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_43	CORELLIA	cor_doaba_hotel	AREA	4	2.8	1.0	3.4	-40	1	Commander Zo'ssa	humanoid_rebel_zo_ssa	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_angry			600
+city_corellia_doaba_guerfel_44	CORELLIA	cor_doaba_hotel	AREA	5	24.3	1.3	10.0	-171	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_45	CORELLIA	cor_doaba_hotel	AREA	5	24.3	1.3	8.9	1	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_46	CORELLIA	cor_doaba_hotel	AREA	6	-10.6	1.0	4.2	-90	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_standing_drinking			600
+city_corellia_doaba_guerfel_47	CORELLIA	cor_doaba_hotel	AREA	10	-23.5	1.6	-17.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_48	CORELLIA	cor_doaba_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_49	CORELLIA	cor_doaba_starport	AREA	1	-0.9	0.6	74.5	144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_50	CORELLIA	cor_doaba_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_51	CORELLIA	cor_doaba_starport	AREA	4	43110.0	0.6	57.8	178	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_52	CORELLIA	cor_doaba_starport	AREA	4	-4.6	0.6	57.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_53	CORELLIA	cor_doaba_starport	AREA	4	10.2	0.6	57.7	-180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_54	CORELLIA	cor_doaba_starport	AREA	4	1.9	0.6	57.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_55	CORELLIA	cor_doaba_starport	AREA	4	-9.4	0.6	68.6	-4	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_56	CORELLIA	cor_doaba_starport	AREA	4	4.2	0.6	61.9	-153	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_57	CORELLIA	cor_doaba_starport	AREA	4	1.7	0.6	62.0	153	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_58	CORELLIA	cor_doaba_starport	AREA	5	31.6	0.6	63	31	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_59	CORELLIA	cor_doaba_starport	AREA	7	48.1	0.6	48.8	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_60	CORELLIA	cor_doaba_starport	AREA	7	41.5	0.6	46.6	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_61	CORELLIA	cor_doaba_starport	AREA	7	43.4	0.6	47.4	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_62	CORELLIA	cor_doaba_starport	AREA	7	40.8	0.6	48.7	113	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_63	CORELLIA	cor_doaba_starport	AREA	7	36.1	0.6	35.6	74	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_64	CORELLIA	cor_doaba_starport	AREA	7	47.7	0.6	46	4	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_65	CORELLIA	cor_doaba_starport	AREA	7	42.7	0.6	49.3	-154	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_66	CORELLIA	cor_doaba_starport	AREA	9	-33.0	1.6	50.4	5	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_67	CORELLIA	cor_doaba_starport	AREA	9	-34.8	1.6	66.1	-140	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_68	CORELLIA	cor_doaba_starport	AREA	9	-36.8	1.6	65.9	101	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_69	CORELLIA	cor_doaba_starport	AREA	9	-32.5	1.6	52.7	-170	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_70	CORELLIA	cor_doaba_starport	AREA	9	-31.7	1.6	51.8	-138	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_71	CORELLIA	cor_doaba_starport	AREA	9	-34.6	1.6	64.2	-52	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_72	CORELLIA	cor_doaba_starport	AREA	10	-43.3	1.6	50	-83	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_73	CORELLIA	cor_doaba_starport	AREA	12	-55.8	2.6	42.1	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_74	CORELLIA	cor_doaba_starport	AREA	12	-57.5	2.6	40.6	44	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_75	CORELLIA	cor_doaba_starport	AREA	12	-57.4	2.6	43.6	-163	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_doaba_guerfel_76	CORELLIA	cor_doaba_starport	AREA	13	50.9	1	21.9	-60	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_77	CORELLIA	cor_doaba_starport	AREA	13	49.7	1.0	22.7	2	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_78	CORELLIA	cor_doaba_starport	AREA	14	-57.9	43283.0	43370.0	-90	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_79	CORELLIA	cor_doaba_starport	AREA	14	-56.5	1	8.8	47	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_80	CORELLIA	cor_doaba_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_81	CORELLIA	cor_doaba_university	AREA	4	3.2	1.1	-0.2	-115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_82	CORELLIA	cor_doaba_university	AREA	4	1.1	1.1	-1.3	61	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_83	CORELLIA	cor_doaba_university	AREA	6	-9.3	1.1	5.0	6	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_84	CORELLIA	cor_doaba_university	AREA	8	-2.7	1.1	-8.7	126	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_85	CORELLIA	cor_doaba_university	AREA	9	-8.8	1.1	-13.1	120	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_doaba_guerfel_86	CORELLIA	cor_world	PATROL	0	3308.8	308	5532.7	-59	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_corellia_4400	column	idle			600
+city_corellia_doaba_guerfel_87	CORELLIA	cor_world	AREA	0	3206.0	300.2	5390.4	134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_88	CORELLIA	cor_world	AREA	0	3195.4	300.2	5371.5	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_89	CORELLIA	cor_world	AREA	0	3141.2	300.0	5216.4	-13	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	happy			600
+city_corellia_doaba_guerfel_90	CORELLIA	cor_world	AREA	0	3184.5	295.0	5069.6	-1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	happy			600
+city_corellia_doaba_guerfel_91	CORELLIA	cor_world	AREA	0	3186.2	294.9	5063.2	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_92	CORELLIA	cor_world	AREA	0	3302.3	308.0	5504.5	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	happy			600
+city_corellia_doaba_guerfel_93	CORELLIA	cor_world	AREA	0	3348	308	5602.3	-19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_94	CORELLIA	cor_world	AREA	0	3347.2	308	5604.9	161	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_95	CORELLIA	cor_world	AREA	0	3331.4	324	5693.5	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_96	CORELLIA	cor_world	AREA	0	3174.6	300.0	5355.3	-36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_97	CORELLIA	cor_world	AREA	0	3112.4	300.0	5164.3	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_98	CORELLIA	cor_world	AREA	0	3109.8	300.0	5145.5	-175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_99	CORELLIA	cor_world	AREA	0	3378.8	308.6	5480.1	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_100	CORELLIA	cor_world	AREA	0	3368.5	308.0	5507.3	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_101	CORELLIA	cor_world	AREA	0	3327.8	308.0	5527.0	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_102	CORELLIA	cor_world	AREA	0	3315.1	308.0	5499.4	-164	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_doaba_guerfel_103	CORELLIA	cor_world	PATROL	0	3123.0	300.0	5149.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_corellia_1000	column	idle		commoner	600
+city_corellia_doaba_guerfel_104	CORELLIA	cor_world	PATROL	0	3051.5	300.0	5190.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_corellia_1100	column	idle		commoner	600
+city_corellia_doaba_guerfel_105	CORELLIA	cor_world	AREA	0	3335.4	308.0	5503.8	-57	1	a jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_106	CORELLIA	cor_world	AREA	0	3314.1	308	5527.1	-154	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_107	CORELLIA	cor_world	PATROL	0	3093.5	280.2	5013.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	PATROL	0	patrol_corellia_4500	column	idle			600
+city_corellia_doaba_guerfel_108	CORELLIA	cor_world	AREA	0	3188.9	294.7	5063.1	-89	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_109	CORELLIA	cor_world	AREA	0	3021.9	353.4	5423.1	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_110	CORELLIA	cor_world	AREA	0	3050.6	363.8	5406.4	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_111	CORELLIA	cor_world	AREA	0	3052.7	366.5	5444.1	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_112	CORELLIA	cor_world	AREA	0	3070.8	364.3	5473.4	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_113	CORELLIA	cor_world	AREA	0	3071.8	364.2	5392.4	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_114	CORELLIA	cor_world	AREA	0	3085.9	364.1	5429.6	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_115	CORELLIA	cor_world	AREA	0	3097.5	364.7	5456.1	0	1	a rogue CorSec miscreant	humanoid_corsec_rogue_miscreant	AGGRESSIVE	N	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_116	CORELLIA	cor_world	AREA	0	3160.8	290.0	4974.8	-111	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_117	CORELLIA	cor_world	AREA	0	3333.4	324	5692.6	-63	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	conversation			600
+city_corellia_doaba_guerfel_118	CORELLIA	cor_world	AREA	0	3187.5	300.0	5317.7	-142	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_119	CORELLIA	cor_world	AREA	0	3137.0	300.0	5247.1	143	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_120	CORELLIA	cor_world	AREA	0	3390.9	308.6	5475.2	119	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_121	CORELLIA	cor_world	AREA	0	3200.5	300.0	5319.6	44	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_122	CORELLIA	cor_world	AREA	0	3296.6	308	5573	-88	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_doaba_guerfel_123	CORELLIA	cor_world	AREA	0	3363.3	308.0	5631.2	160	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_124	CORELLIA	cor_world	AREA	0	3178.4	300.0	5371.9	-110	1	Captain Vitala Baize (a CorSec officer)	humanoid_corsec_captain_baize	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_125	CORELLIA	cor_world	AREA	0	3096.3	280.0	5011.3	174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_126	CORELLIA	cor_world	AREA	0	3272.2	365.6	4811.2	72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_127	CORELLIA	cor_world	AREA	0	3276.9	300.0	5385.0	139	1	Gwhirrye Baric (a hospital owner)	humanoid_gwhirrye_baric	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_128	CORELLIA	cor_world	AREA	0	3137.0	300.0	5295.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_129	CORELLIA	cor_world	AREA	0	3084.1	280.0	4979.4	0	1	Lilith Laughlin (a small-time thug)	humanoid_corsec_lilith_laughlin	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_130	CORELLIA	cor_world	AREA	0	3347.7	308.0	5490.5	93	1	Scolex Grath	humanoid_scolex_grath	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_131	CORELLIA	cor_world	AREA	0	3257.6	300.0	5418.3	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600
+city_corellia_doaba_guerfel_132	CORELLIA	cor_world	AREA	0	3061.3	364.7	5427.6	0	1	Xyrias Undea (a rogue CorSec officer)	humanoid_corsec_rogue_xyrias_undea	AGGRESSIVE	B	11	20	City	Doaba Guerfel	1	LOITER	5	0	-	idle			600
+city_corellia_doaba_guerfel_133	CORELLIA	cor_world	AREA	0	3078.0	300.0	5175.8	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Doaba Guerfel	1	IDLE	0	0	-	idle			600

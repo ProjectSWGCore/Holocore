@@ -1,0 +1,15 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_orphaned_marauders_cave_1	ENDOR	end_marauder_orphans_cave	AREA	1	-12.1	-5.8	-7.3	0	1	a feral Marauder	humanoid_marauder_feral	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_2	ENDOR	end_marauder_orphans_cave	AREA	11	78.7	-46.6	-142.3	0	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_3	ENDOR	end_marauder_orphans_cave	AREA	2	48.1	-48.5	-63.9	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_4	ENDOR	end_marauder_orphans_cave	AREA	4	68.3	-75.4	-64.3	0	1	a blood-crazed plains Marauder	humanoid_marauder_blood_crazed_plains	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_5	ENDOR	end_marauder_orphans_cave	AREA	4	91.5	-76.0	-68.1	0	1	a grassland blood Marauder	humanoid_marauder_grassland_blood	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_6	ENDOR	end_marauder_orphans_cave	AREA	5	92.1	-46.6	-110.5	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_7	ENDOR	end_marauder_orphans_cave	AREA	8	130.8	-66.2	-119.1	0	1	a frenzied Marauder	humanoid_marauder_frenzied	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_8	ENDOR	end_marauder_orphans_cave	AREA	8	131.1	-66.3	-97.0	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_9	ENDOR	end_marauder_orphans_cave	AREA	9	181.0	-66.1	-97.1	0	1	a Marauder	humanoid_marauder	AGGRESSIVE	N	61	70	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600
+poi_endor_orphaned_marauders_cave_10	ENDOR	end_world	AREA	0	-6859.6	17.7	607.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
+poi_endor_orphaned_marauders_cave_11	ENDOR	end_world	AREA	0	-6899.2	11.9	649.6	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
+poi_endor_orphaned_marauders_cave_12	ENDOR	end_world	AREA	0	-6865.2	13.0	658.0	0	1	a mercenary	humanoid_smuggler_patrol_thief_8	ATTACKABLE	N	61	70	POI	Orphaned Marauder's Cave	1	LOITER	5	0	-	idle			600
+poi_endor_orphaned_marauders_cave_13	ENDOR	end_world	AREA	0	-6878.0	15.2	618.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Orphaned Marauder's Cave	1	TURN	0	0	-	idle			600

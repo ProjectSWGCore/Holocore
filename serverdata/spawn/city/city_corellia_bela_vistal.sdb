@@ -1,0 +1,146 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_corellia_bela_vistal_1	CORELLIA	cor_bela_asso_hall	AREA	10	-1.0	1.0	-13.0	78	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_accusing			600
+city_corellia_bela_vistal_2	CORELLIA	cor_bela_asso_hall	AREA	10	0.9	1.7	-12.6	-99	1	a Bothan information broker	humanoid_bothan_information_broker	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_3	CORELLIA	cor_bela_asso_hall	AREA	10	-0.1	1.2	-3.1	164	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_4	CORELLIA	cor_bela_asso_hall	AREA	10	0.1	1.2	-7.1	0	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_5	CORELLIA	cor_bela_asso_hall	AREA	10	-2.5	1.2	-7.2	34	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_6	CORELLIA	cor_bela_asso_hall	AREA	6	-14.81	2.25	10.74	-2	1	Luthin Dlunar	humanoid_luthin_dlunar	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_7	CORELLIA	cor_bela_cantina	AREA	1	37.5	0.1	-1.8	8	1	a bodyguard	humanoid_bodyguard_zabrak	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_8	CORELLIA	cor_bela_cantina	AREA	1	38.0	0.1	0.6	-174	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_9	CORELLIA	cor_bela_cantina	AREA	2	30.1	0.1	-5.5	124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_10	CORELLIA	cor_bela_cantina	AREA	2	30.3	0.1	-8.7	48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_11	CORELLIA	cor_bela_cantina	AREA	3	8.6	-0.9	0.4	88	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_12	CORELLIA	cor_bela_cantina	AREA	3	-6.4	-0.9	-13.4	165	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_13	CORELLIA	cor_bela_cantina	AREA	3	14.1	-0.9	4.3	52	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_14	CORELLIA	cor_bela_cantina	AREA	3	10.3	-0.9	-2.0	-67	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_bela_vistal_15	CORELLIA	cor_bela_cantina	AREA	3	19.6	-0.9	9.9	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	entertained			600
+city_corellia_bela_vistal_16	CORELLIA	cor_bela_cantina	AREA	3	23.8	-0.9	3.4	3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	entertained			600
+city_corellia_bela_vistal_17	CORELLIA	cor_bela_cantina	AREA	3	25.6	-0.9	4.4	-27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	entertained			600
+city_corellia_bela_vistal_18	CORELLIA	cor_bela_cantina	AREA	3	21.5	-0.9	6.0	41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	entertained			600
+city_corellia_bela_vistal_19	CORELLIA	cor_bela_cantina	AREA	3	3.1	-0.9	5.8	88	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_20	CORELLIA	cor_bela_cantina	AREA	3	17.1	-0.9	4.3	-42	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_21	CORELLIA	cor_bela_cantina	AREA	3	4.7	-0.9	5.8	-90	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_bela_vistal_22	CORELLIA	cor_bela_cantina	AREA	3	20.0	-0.9	8.1	73	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	entertained			600
+city_corellia_bela_vistal_23	CORELLIA	cor_bela_cantina	AREA	3	5.2	-0.9	-8.4	-105	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	1	0	-	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_bela_vistal_24	CORELLIA	cor_bela_cantina	AREA	3	24.7	-0.9	10.8	-151	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	dance_1			600
+city_corellia_bela_vistal_25	CORELLIA	cor_bela_cantina	AREA	3	23.9	-0.9	8.1	-148	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	themepark_music_1			600
+city_corellia_bela_vistal_26	CORELLIA	cor_bela_cantina	AREA	4	25.9	-0.9	-18.9	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_27	CORELLIA	cor_bela_cantina	AREA	4	24.0	-0.9	-20.8	28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_28	CORELLIA	cor_bela_cantina	AREA	6	3.3	-0.9	-18.4	1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_29	CORELLIA	cor_bela_cantina	AREA	6	0.6	-0.9	-18.5	1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_30	CORELLIA	cor_bela_cantina	AREA	6	-0.0	-0.9	-14.6	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_31	CORELLIA	cor_bela_cantina	AREA	6	2.2	-0.9	-14.8	-126	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_32	CORELLIA	cor_bela_cantina	AREA	6	5.2	-0.9	-16.3	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_33	CORELLIA	cor_bela_cantina	AREA	7	0.9	-0.9	20.9	141	1	Palejo Reshad	humanoid_palejo_reshad	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_34	CORELLIA	cor_bela_cantina	AREA	8	-3.2	-0.9	-18.5	-49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_35	CORELLIA	cor_bela_cantina	AREA	8	-4.9	-0.9	-19.0	-28	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_36	CORELLIA	cor_bela_cantina	AREA	8	-7.0	-0.9	-17.7	88	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_37	CORELLIA	cor_bela_cantina	AREA	8	-7.2	-0.9	-16.0	116	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_38	CORELLIA	cor_bela_cantina	AREA	8	-7.1	-0.9	-14.5	127	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_39	CORELLIA	cor_bela_cantina	AREA	13	-27.0	-0.5	10.2	15	1	Ging Darjeek	humanoid_ging_darjeek	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_40	CORELLIA	cor_bela_cantina	AREA	14	-32.0	0.1	-9.6	17	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_41	CORELLIA	cor_bela_cantina	AREA	15	-47.7	0.1	-22.8	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_42	CORELLIA	cor_bela_cantina	AREA	15	-45.5	0.1	-23.9	-41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_43	CORELLIA	cor_bela_cantina	AREA	15	-46.0	0.1	-20.8	-166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_44	CORELLIA	cor_bela_cloning	AREA	2	-5.9	0.1	-2.9	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_45	CORELLIA	cor_bela_cloning	AREA	2	-2.4	0.1	11.5	1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_46	CORELLIA	cor_bela_cloning	AREA	4	13.1	-5.0	-14.2	-90	1	a common thief	humanoid_common_thief	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_dead_01			600
+city_corellia_bela_vistal_47	CORELLIA	cor_bela_cloning	AREA	4	9.7	-5.5	-14.4	88	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	nervous			600
+city_corellia_bela_vistal_48	CORELLIA	cor_bela_combat_gh	AREA	4	4.0	1.1	-1.6	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_49	CORELLIA	cor_bela_combat_gh	AREA	4	6.5	1.1	-1.7	-90	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_50	CORELLIA	cor_bela_combat_gh	AREA	4	-2.6	1.1	-5.8	0	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_51	CORELLIA	cor_bela_combat_gh	AREA	5	15.2	1.1	1.1	-103	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_52	CORELLIA	cor_bela_combat_gh	AREA	5	11.8	1.1	5.7	2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_53	CORELLIA	cor_bela_combat_gh	AREA	5	14.1	1.1	-0.6	44	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_54	CORELLIA	cor_bela_combat_gh	AREA	6	-13.1	1.1	3.6	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_55	CORELLIA	cor_bela_combat_gh	AREA	6	-12.3	1.1	1.3	-9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_56	CORELLIA	cor_bela_combat_gh	AREA	7	8.0	1.1	-12.2	-28	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_57	CORELLIA	cor_bela_combat_gh	AREA	7	6.7	1.1	-9.8	117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_58	CORELLIA	cor_bela_combat_gh	AREA	8	2.8	1.1	-8.4	-92	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_59	CORELLIA	cor_bela_combat_gh	AREA	9	-11.4	1.1	-13.4	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_bela_vistal_60	CORELLIA	cor_bela_comm_gh	AREA	1	2.5	2.5	11.9	-32	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_61	CORELLIA	cor_bela_comm_gh	AREA	4	-4.5	1.1	-0.6	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_62	CORELLIA	cor_bela_comm_gh	AREA	4	-6.3	1.1	-0.8	89	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_63	CORELLIA	cor_bela_comm_gh	AREA	7	13.9	1.1	-14.1	-19	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_64	CORELLIA	cor_bela_comm_gh	AREA	8	3.5	1.1	-8.7	42	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_65	CORELLIA	cor_bela_hospital	AREA	2	-2.0	0.2	-3.6	2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_66	CORELLIA	cor_bela_hospital	AREA	2	7.5	0.2	2.9	-180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_67	CORELLIA	cor_bela_hospital	AREA	2	-1.5	0.2	-0.2	51	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_68	CORELLIA	cor_bela_hospital	AREA	2	7.5	0.2	1.4	3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_69	CORELLIA	cor_bela_hospital	AREA	2	2.7	0.2	4.6	2	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_70	CORELLIA	cor_bela_hospital	AREA	2	7.7	0.2	-3.8	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_71	CORELLIA	cor_bela_hospital	AREA	2	3.3	0.2	-7.6	5	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_72	CORELLIA	cor_bela_hotel	AREA	4	7.4	1.0	-6.9	179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_73	CORELLIA	cor_bela_hotel	AREA	4	7.4	1.0	-8.0	0	1	a Corellia Times investigator	humanoid_corellia_times_investigator	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_74	CORELLIA	cor_bela_hotel	AREA	4	0.4	1.2	-21.3	-180	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_75	CORELLIA	cor_bela_hotel	AREA	4	1.2	1.0	-8.4	180	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	1	0	-	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_bela_vistal_76	CORELLIA	cor_bela_hotel	AREA	5	24.3	1.3	10.0	-171	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_77	CORELLIA	cor_bela_hotel	AREA	5	20.5	1.3	-6.3	75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_78	CORELLIA	cor_bela_hotel	AREA	5	22.8	1.3	-7.6	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_79	CORELLIA	cor_bela_hotel	AREA	5	25.2	1.3	-5.3	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_80	CORELLIA	cor_bela_hotel	AREA	5	21.0	1.3	6.0	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_81	CORELLIA	cor_bela_hotel	AREA	5	18.7	1.3	3.4	-5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_82	CORELLIA	cor_bela_hotel	AREA	5	24.3	1.3	8.9	1	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_83	CORELLIA	cor_bela_hotel	AREA	6	-22.6	1.6	9.4	128	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_84	CORELLIA	cor_bela_hotel	AREA	6	-21.1	1.6	7.5	-50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_85	CORELLIA	cor_bela_hotel	AREA	6	-19.7	1.6	9.1	-72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_86	CORELLIA	cor_bela_hotel	AREA	6	-10.6	1.0	4.2	-90	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_standing_drinking			600
+city_corellia_bela_vistal_87	CORELLIA	cor_bela_hotel	AREA	6	-11.3	1.0	-0.3	-89	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_88	CORELLIA	cor_bela_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_89	CORELLIA	cor_bela_university	AREA	4	3.0	1.1	-1.1	67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_90	CORELLIA	cor_bela_university	AREA	4	5.0	1.1	-0.2	-116	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_91	CORELLIA	cor_bela_university	AREA	5	12.9	1.1	3.1	5	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_92	CORELLIA	cor_bela_university	AREA	5	13.1	1.1	5.3	-180	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_93	CORELLIA	cor_bela_university	AREA	6	-14.8	1.1	-0.3	100	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_94	CORELLIA	cor_bela_university	AREA	7	14.6	1.1	-13.4	94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_bela_vistal_95	CORELLIA	cor_bela_university	AREA	8	-3.1	1.1	-8.3	129	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_96	CORELLIA	cor_bela_university	AREA	8	-0.3	1.1	-9.7	-71	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_97	CORELLIA	cor_bela_university	AREA	9	-9.1	1.1	-13.0	-177	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_98	CORELLIA	cor_world	AREA	0	6858.4	315.0	-5693.2	46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_99	CORELLIA	cor_world	AREA	0	6639.8	330.6	-5912.8	-85	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_100	CORELLIA	cor_world	AREA	0	6643.9	330.0	-5943.1	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_101	CORELLIA	cor_world	AREA	0	6625.2	330.0	-5942.2	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_102	CORELLIA	cor_world	AREA	0	6627.8	330.0	-5942.2	-88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_103	CORELLIA	cor_world	AREA	0	6726.4	330.0	-5902.0	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	happy			600
+city_corellia_bela_vistal_104	CORELLIA	cor_world	AREA	0	6711.2	315.0	-5576.0	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	happy			600
+city_corellia_bela_vistal_105	CORELLIA	cor_world	AREA	0	6756.9	315.0	-5508.9	-49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_106	CORELLIA	cor_world	AREA	0	6755.7	315.0	-5509.7	-8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_107	CORELLIA	cor_world	AREA	0	6843.5	330.0	-5473.4	146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_108	CORELLIA	cor_world	AREA	0	6844.4	330.0	-5475.7	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_109	CORELLIA	cor_world	AREA	0	6847.1	330.0	-5473.2	-93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_bela_vistal_110	CORELLIA	cor_world	AREA	0	6830.5	330.0	-5459.7	59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	happy			600
+city_corellia_bela_vistal_111	CORELLIA	cor_world	AREA	0	6829.9	330.0	-5457.7	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	happy			600
+city_corellia_bela_vistal_112	CORELLIA	cor_world	AREA	0	6858.0	330.0	-5469.1	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_113	CORELLIA	cor_world	AREA	0	6932.6	330.0	-5533.0	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_114	CORELLIA	cor_world	AREA	0	6931.6	330.0	-5534.7	31	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_115	CORELLIA	cor_world	AREA	0	6760.1	315.0	-5709.9	14	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_116	CORELLIA	cor_world	AREA	0	6747.5	315.0	-5650.3	-4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_117	CORELLIA	cor_world	AREA	0	6824.4	315.0	-5731.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_118	CORELLIA	cor_world	AREA	0	6827.2	315.0	-5758.7	177	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_119	CORELLIA	cor_world	AREA	0	6826.0	315.0	-5795.2	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_120	CORELLIA	cor_world	AREA	0	6729.7	315.0	-5817.9	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_121	CORELLIA	cor_world	AREA	0	6720.5	330.0	-5902.6	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_122	CORELLIA	cor_world	AREA	0	6704.1	330.0	-5908.2	-131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_123	CORELLIA	cor_world	AREA	0	6707.9	315.0	-5590.1	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_124	CORELLIA	cor_world	AREA	0	6758.0	315.0	-5519.5	-157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_125	CORELLIA	cor_world	AREA	0	6906.8	330.0	-5550.0	-156	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_bela_vistal_126	CORELLIA	cor_world	PATROL	0	6757.7	315.2	-5655	92	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Bela Vistal	1	PATROL	0	patrol_corellia_4300	column	idle			600
+city_corellia_bela_vistal_127	CORELLIA	cor_world	AREA	0	6827.2	330.0	-5471.3	10	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_128	CORELLIA	cor_world	AREA	0	6726.2	315.0	-5680.4	-125	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_129	CORELLIA	cor_world	AREA	0	6731.2	315.0	-5696.2	-67	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
+city_corellia_bela_vistal_130	CORELLIA	cor_world	AREA	0	6842.9	315.0	-5604.1	0	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
+city_corellia_bela_vistal_131	CORELLIA	cor_world	AREA	0	6858.7	330.0	-5471.7	-13	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_132	CORELLIA	cor_world	AREA	0	6801.4	315.0	-5621.9	-157	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_133	CORELLIA	cor_world	AREA	0	6754.9	315.0	-5507.3	143	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_134	CORELLIA	cor_world	AREA	0	6754.6	315.0	-5620.8	6	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle			600
+city_corellia_bela_vistal_135	CORELLIA	cor_world	AREA	0	6840.2	330.0	-5467.2	-134	1	an Astromech waiter	droid_astromech_waiter	INVULNERABLE	N	100	100	City	Bela Vistal	1	LOITER	5	0	-	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_bela_vistal_136	CORELLIA	cor_world	AREA	0	6724.2	315.0	-5681.8	57	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600
+city_corellia_bela_vistal_137	CORELLIA	cor_world	AREA	0	6914.3	330.0	-5602.9	102	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_138	CORELLIA	cor_world	PATROL	0	6806.5	315.2	-5625.3	-108	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Bela Vistal	1	PATROL	0	patrol_corellia_4100	column	idle			600
+city_corellia_bela_vistal_139	CORELLIA	cor_world	AREA	0	6800.6	315.0	-5623.7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_140	CORELLIA	cor_world	AREA	0	6836.3	315.0	-5767.1	-91	1	Grondorn Muse	humanoid_grondorn_muse	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_141	CORELLIA	cor_world	AREA	0	6967.2	330.0	-5589.0	88	1	Malik Pendron	humanoid_junk_malik	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_142	CORELLIA	cor_world	AREA	0	6773.4	315.0	-5696.6	-106	1	Pashna	humanoid_rebel_pashna	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_143	CORELLIA	cor_world	AREA	0	6755.4	315.0	-5656.9	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_bela_vistal_144	CORELLIA	cor_world	AREA	0	6859.7	315.0	-5691.7	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600

@@ -1,0 +1,16 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_lok_kimogila_town_1	LOK	lok_world	AREA	0	-10.8	12.0	2712.7	-26	1	Cas Vankoo	humanoid_cas_vankoo	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_2	LOK	lok_world	AREA	0	-126.7	12.1	2641.2	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_3	LOK	lok_world	AREA	0	-129.5	12.0	2774.1	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_4	LOK	lok_world	AREA	0	-130.6	12.1	2647.3	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_5	LOK	lok_world	AREA	0	-136.4	12.0	2658.4	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_6	LOK	lok_world	AREA	0	-136.7	12.0	2764.6	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_7	LOK	lok_world	AREA	0	-144.4	12.0	2753.7	0	1	a kimogila hatchling	creature_kimogila_hatchling	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900
+poi_lok_kimogila_town_8	LOK	lok_world	AREA	0	-43.9	12.0	2725.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_9	LOK	lok_world	AREA	0	-53.0	12.0	2720.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_10	LOK	lok_world	AREA	0	-66.6	12.0	2691.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_11	LOK	lok_world	AREA	0	-83.5	12.0	2702.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_12	LOK	lok_world	AREA	0	-86.3	12.0	2686.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_13	LOK	lok_world	AREA	0	-87.2	12.0	2724.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	POI	Kimogila Town	1	LOITER	5	0	-	idle		commoner	600
+poi_lok_kimogila_town_14	LOK	lok_world	AREA	0	1.2	12.0	2711.8	0	1	a giant dune kimogila	creature_kimogila_giant_dune	AGGRESSIVE	B	31	40	POI	Kimogila Town	1	LOITER	5	0	-	idle			900

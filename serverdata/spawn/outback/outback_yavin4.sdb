@@ -1,0 +1,83 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_yavin4_1	YAVIN4	yav_world	AREA	0	-3177.3	104.6	3350.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_2	YAVIN4	yav_world	AREA	0	-3180.3	105.2	3342.5	0	1	a stranded Imperial officer	humanoid_imperial_stranded_officer	ATTACKABLE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_3	YAVIN4	yav_world	AREA	0	-7374.7	103.8	4399.9	0	1	a bounty hunter	humanoid_bounty_hunter	ATTACKABLE	N	56	65	Outback	Yavin 4	1	IDLE	0	0	-	idle			600
+outback_yavin4_4	YAVIN4	yav_world	AREA	0	-6955.6	8.3	-1587.5	0	1	a crystal snake	creature_snake_crystal	AGGRESSIVE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_5	YAVIN4	yav_world	AREA	0	6080.1	21.9	5435.0	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_6	YAVIN4	yav_world	AREA	0	948.1	86.8	-1459.0	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_7	YAVIN4	yav_world	AREA	0	950.1	86.1	-1471.7	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_8	YAVIN4	yav_world	AREA	0	6069.0	22.4	5440.3	0	1	a Dark Jedi	humanoid_jedi_dark	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_9	YAVIN4	yav_world	AREA	0	-7070.7	122.8	4389.8	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_10	YAVIN4	yav_world	AREA	0	-7098.5	123.1	4394.0	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_11	YAVIN4	yav_world	AREA	0	-7080.8	123.9	4408.0	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_12	YAVIN4	yav_world	AREA	0	-7087.7	122.5	4374.3	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_13	YAVIN4	yav_world	AREA	0	4369.1	93.3	972.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_14	YAVIN4	yav_world	AREA	0	954.4	87.2	-1465.2	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_15	YAVIN4	yav_world	AREA	0	-1582.0	9.1	6764.8	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_16	YAVIN4	yav_world	AREA	0	-1593.1	9.2	6757.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_17	YAVIN4	yav_world	AREA	0	-4334.6	98.9	3972.4	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_18	YAVIN4	yav_world	AREA	0	-4338.1	97.9	3963.5	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_19	YAVIN4	yav_world	AREA	0	-4339.0	98.9	3980.2	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_20	YAVIN4	yav_world	AREA	0	-4342.6	98.2	3971.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_21	YAVIN4	yav_world	AREA	0	-7055.4	27.3	7348.6	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_22	YAVIN4	yav_world	AREA	0	6074.3	22.2	5436.9	0	1	a Dark Jedi Knight	humanoid_jedi_dark_knight	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_23	YAVIN4	yav_world	AREA	0	-7088.4	124.1	4408.0	0	1	a Dark Jedi Master	humanoid_jedi_dark_master	AGGRESSIVE	B	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_24	YAVIN4	yav_world	AREA	0	-7099.2	123.3	4381.7	0	1	a Dark Jedi Master	humanoid_jedi_dark_master	AGGRESSIVE	B	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_25	YAVIN4	yav_world	AREA	0	-7099.3	138.2	4435.9	0	1	a Dark Jedi Master	humanoid_jedi_dark_master	AGGRESSIVE	B	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_26	YAVIN4	yav_world	AREA	0	-7141.6	122.8	4411.4	0	1	a Dark Jedi Master	humanoid_jedi_dark_master	AGGRESSIVE	B	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_27	YAVIN4	yav_world	AREA	0	-7069.0	123.4	4372.0	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_28	YAVIN4	yav_world	AREA	0	-7101.7	124.4	4407.5	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_29	YAVIN4	yav_world	AREA	0	-7110.4	125.0	4426.1	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_30	YAVIN4	yav_world	AREA	0	-7120.3	124.7	4410.8	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_31	YAVIN4	yav_world	AREA	0	-4812.4	592.2	-4732.8	0	1	a Graverobber digger	humanoid_yavin4_graverobber_digger	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_32	YAVIN4	yav_world	AREA	0	-4773.7	566.8	-4769.3	0	1	a Graverobber Leader	humanoid_yavin4_graverobber_leader	AGGRESSIVE	N	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_33	YAVIN4	yav_world	AREA	0	-4775.4	572.0	-4752.3	0	1	a Graverobber Member	humanoid_yavin4_graverobber_member	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_34	YAVIN4	yav_world	AREA	0	-2211.1	87.8	1156.3	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_35	YAVIN4	yav_world	AREA	0	-4149.9	64.7	5333.5	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_36	YAVIN4	yav_world	AREA	0	-4988.8	306.0	-2835.3	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_37	YAVIN4	yav_world	AREA	0	-4989.1	290.0	450.9	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_38	YAVIN4	yav_world	AREA	0	-7107.8	561.1	1569.4	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_39	YAVIN4	yav_world	AREA	0	-7555.6	421.4	2121.2	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_40	YAVIN4	yav_world	AREA	0	-7572.1	227.1	121.2	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_41	YAVIN4	yav_world	AREA	0	2348.2	53.6	4918.7	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_42	YAVIN4	yav_world	AREA	0	322.4	184.6	-3142.2	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_43	YAVIN4	yav_world	AREA	0	6373.3	199.1	-2832.2	0	1	a master thief	humanoid_thief_master	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_44	YAVIN4	yav_world	AREA	0	-6451.3	118.6	-285.0	0	1	a mutant acklay	creature_acklay_mutant	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			1800
+outback_yavin4_45	YAVIN4	yav_world	AREA	0	-5506.2	11.8	-1252.9	0	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_46	YAVIN4	yav_world	AREA	0	1590.5	100.4	1563.8	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_47	YAVIN4	yav_world	AREA	0	1596.4	102.6	1531.2	0	1	a Rebel commando	humanoid_rebel_commando	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_48	YAVIN4	yav_world	AREA	0	-4091.4	219.9	-2963.3	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_49	YAVIN4	yav_world	AREA	0	-5506.8	66.3	5097.5	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_50	YAVIN4	yav_world	AREA	0	-5662.6	124.4	-2241.7	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_51	YAVIN4	yav_world	AREA	0	-6341.8	79.3	-3091.3	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_52	YAVIN4	yav_world	AREA	0	-6942.0	45.7	-908.3	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_53	YAVIN4	yav_world	AREA	0	-6942.3	197.0	-105.7	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_54	YAVIN4	yav_world	AREA	0	-7078.3	48.0	7561.5	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_55	YAVIN4	yav_world	AREA	0	-7458.7	341.7	2929.6	0	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_56	YAVIN4	yav_world	AREA	0	5951.0	123.3	3058.5	0	1	a Scavenger Leader	humanoid_yavin4_scavanger_leader	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	IDLE	0	0	-	idle			600
+outback_yavin4_57	YAVIN4	yav_world	AREA	0	5943.2	123.5	3057.6	0	1	a Scavenger Member	humanoid_yavin4_scavanger_member	ATTACKABLE	N	56	65	Outback	Yavin 4	1	IDLE	0	0	-	idle			600
+outback_yavin4_58	YAVIN4	yav_world	AREA	0	5958.6	122.9	3055.1	0	1	a Scavenger Surveyer	humanoid_yavin4_scavanger_surveyer	ATTACKABLE	N	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_59	YAVIN4	yav_world	AREA	0	-6679.9	28.6	-2261.5	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_60	YAVIN4	yav_world	AREA	0	-5506.7	13.0	-1259.9	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_61	YAVIN4	yav_world	AREA	0	-5527.0	13.2	-1262.8	0	1	a Smuggler	humanoid_yavin4_smuggler_member	AGGRESSIVE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_62	YAVIN4	yav_world	AREA	0	-6673.2	29.1	-2244.6	0	1	a Smuggler	humanoid_yavin4_smuggler_muscle	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_63	YAVIN4	yav_world	AREA	0	-1941.7	8.3	7142.4	0	1	a Smuggler bully	humanoid_yavin4_smuggler_bully_elite	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_64	YAVIN4	yav_world	AREA	0	-1934.3	8.6	7135.5	0	1	a Smuggler henchmen	humanoid_yavin4_smuggler_henchmen_elite	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_65	YAVIN4	yav_world	AREA	0	-6689.1	28.0	-2247.1	0	1	a Smuggler leader	humanoid_yavin4_smuggler_leader	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	IDLE	0	0	-	idle			600
+outback_yavin4_66	YAVIN4	yav_world	AREA	0	-5517.6	12.7	-1259.4	0	1	a Smuggler leader	humanoid_yavin4_smuggler_leader	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_67	YAVIN4	yav_world	AREA	0	-1936.9	8.3	7139.7	0	1	a Smuggler leader	humanoid_yavin4_smuggler_leader_elite	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_68	YAVIN4	yav_world	AREA	0	-2991.3	68.4	-1116.2	0	1	a stranded Rebel officer	humanoid_rebel_stranded_officer	ATTACKABLE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_69	YAVIN4	yav_world	AREA	0	4364.8	93.7	977.2	0	1	a stranded Rebel officer	humanoid_rebel_stranded_officer	ATTACKABLE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_70	YAVIN4	yav_world	AREA	0	64.9	51.3	-679.5	0	1	a stranded Rebel officer	humanoid_rebel_stranded_officer	ATTACKABLE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_71	YAVIN4	yav_world	AREA	0	-4827.5	13.0	-1429.7	0	1	a stranded Rebel officer	humanoid_rebel_stranded_officer	ATTACKABLE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_72	YAVIN4	yav_world	AREA	0	-3140.0	136.8	6829.9	0	1	a stranded Rebel pilot	humanoid_rebel_stranded_pilot	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_73	YAVIN4	yav_world	AREA	0	-2986.7	68.4	-1116.7	0	1	a stranded Rebel soldier	humanoid_rebel_stranded_soldier	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_74	YAVIN4	yav_world	AREA	0	5860.2	32.3	-337.8	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_75	YAVIN4	yav_world	AREA	0	-4690.5	534.3	-3638.3	0	1	a whisper bird hatchling	creature_whisper_bird_hatchling	ATTACKABLE	N	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_76	YAVIN4	yav_world	AREA	0	-7077.0	68.4	-5849.0	0	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_77	YAVIN4	yav_world	AREA	0	1592.0	101.9	1536.2	130	1	Captain Eso	humanoid_rebel_captain_eso	INVULNERABLE	N	100	100	Outback	Yavin 4	1	IDLE	0	0	-	idle			600
+outback_yavin4_78	YAVIN4	yav_world	AREA	0	-2843.1	81.9	-1178.0	0	1	Finned Blaggart	creature_finned_blaggart	AGGRESSIVE	B	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_79	YAVIN4	yav_world	AREA	0	5855.2	32.7	-336.1	0	1	Nagem Dr'lar	humanoid_nagem_drlar	ATTACKABLE	N	56	65	Outback	Yavin 4	1	TURN	0	0	-	idle			600
+outback_yavin4_80	YAVIN4	yav_world	AREA	0	959.2	42.8	4472.9	0	1	Scorpion Kliknik	creature_kliknik_scorpion	AGGRESSIVE	E	56	65	Outback	Yavin 4	1	LOITER	5	0	-	idle			600
+outback_yavin4_81	YAVIN4	yav_world	AREA	0	1591.2	101.9	1535.3	130	1	Seenath	humanoid_yith_seenath	INVULNERABLE	N	100	100	Outback	Yavin 4	1	IDLE	0	0	-	idle			600

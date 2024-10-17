@@ -1,0 +1,9 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dantooine_jedi_temple_ruins_1	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	2	54.4	-68.3	-39.9	0	1	a savage quenker	creature_quenker_savage	AGGRESSIVE	N	51	60	POI	Jedi Temple Ruins	1	TURN	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_2	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	6	56.9	-70.5	-119.8	0	1	a bile-drenched quenker	creature_quenker_bile_dre	AGGRESSIVE	N	51	60	POI	Jedi Temple Ruins	1	TURN	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_3	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	116.9	-66.0	-107.6	0	1	a quenker ravager	creature_quenker_ravager	AGGRESSIVE	N	51	60	POI	Jedi Temple Ruins	1	TURN	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_4	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	136.0	-66.9	-96.2	0	1	a quenker ravager	creature_quenker_ravager	AGGRESSIVE	N	51	60	POI	Jedi Temple Ruins	1	TURN	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_5	DANTOOINE	dan_jedi_temple_ruins_cave	AREA	8	141.5	-66.8	-125.9	0	1	a quenker ravager	creature_quenker_ravager	AGGRESSIVE	N	51	60	POI	Jedi Temple Ruins	1	TURN	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_6	DANTOOINE	dan_world	AREA	0	4194.8	9.0	5202.1	23	1	a force crystal hunter	humanoid_jedi_force_crystal_hunter	AGGRESSIVE	E	51	60	POI	Jedi Temple Ruins	1	IDLE	0	0	-	idle			600
+poi_dantooine_jedi_temple_ruins_7	DANTOOINE	dan_world	AREA	0	4278.0	8.4	5350.8	7	1	Luthik Uwyr	humanoid_luthik_uwyr	INVULNERABLE	N	100	100	POI	Jedi Temple Ruins	1	IDLE	0	0	-	idle			600

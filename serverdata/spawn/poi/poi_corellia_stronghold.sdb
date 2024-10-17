@@ -1,0 +1,26 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_corellia_stronghold_1	CORELLIA	cor_stronghold_1	AREA	3	0.0	0.1	-0.9	0	1	an Imperial Sergeant	humanoid_imperial_sergeant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_2	CORELLIA	cor_stronghold_1	AREA	6	-3.9	0.1	-3.8	88	1	a High Colonel	humanoid_imperial_high_colonel	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+poi_corellia_stronghold_3	CORELLIA	cor_stronghold_2	AREA	3	0.0	0.1	0.9	-73	1	an Assault Trooper	humanoid_imperial_assault_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+poi_corellia_stronghold_4	CORELLIA	cor_stronghold_2	AREA	5	3.1	0.1	-4.0	-87	1	an Imperial surface Marshall	humanoid_imperial_surface_marshall	ATTACKABLE	E	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+poi_corellia_stronghold_5	CORELLIA	cor_stronghold_3	AREA	3	0.0	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_6	CORELLIA	cor_stronghold_4	AREA	3	0.0	0.1	-3.6	0	1	an Imperial noncom	humanoid_imperial_noncom	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_7	CORELLIA	cor_stronghold_5	AREA	3	-0.1	0.1	-1.0	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_8	CORELLIA	cor_stronghold_6	AREA	3	0.0	0.1	-0.8	0	1	an Imperial trooper	humanoid_imperial_trooper	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_9	CORELLIA	cor_stronghold_7	AREA	3	0.0	0.1	-1.1	0	1	a Stormtrooper Medic	humanoid_imperial_stormtrooper_medic	ATTACKABLE	N	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_10	CORELLIA	cor_stronghold_7	AREA	6	-3.1	0.1	-3.9	84	1	an Imperial storm commando	humanoid_imperial_storm_commando	ATTACKABLE	N	11	20	POI	Stronghold	1	IDLE	0	0	-	idle			600
+poi_corellia_stronghold_11	CORELLIA	cor_stronghold_8	AREA	3	0.0	0.1	-0.8	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	TURN	0	0	-	idle			600
+poi_corellia_stronghold_12	CORELLIA	cor_world	AREA	0	4680.5	25.0	-5750.8	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_13	CORELLIA	cor_world	AREA	0	4696.0	25.0	-5805.2	0	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_14	CORELLIA	cor_world	AREA	0	4658.0	25.0	-5762.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_15	CORELLIA	cor_world	AREA	0	4670.0	25.0	-5808.0	0	1	a Novatrooper Squad Leader	humanoid_imperial_stormtrooper_novatrooper_squad_leader	AGGRESSIVE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_16	CORELLIA	cor_world	AREA	0	4680.9	25.0	-5820.6	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_17	CORELLIA	cor_world	AREA	0	4693.0	25.0	-5762.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_18	CORELLIA	cor_world	PATROL	0	4582.0	25.0	-5771.9	0	1	an AT-ST	vehicle_imperial_atst	AGGRESSIVE	B	11	20	POI	Stronghold	1	PATROL	0	patrol_corellia_3300	column	idle			600
+poi_corellia_stronghold_19	CORELLIA	cor_world	AREA	0	4636.9	25.0	-5778.1	0	1	an Imperial First Lieutenant	humanoid_imperial_first_lieutenant	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_20	CORELLIA	cor_world	AREA	0	4627.2	25.0	-5796.5	0	1	an Imperial Lieutenant Colonel	humanoid_imperial_lieutenant_corporal	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_21	CORELLIA	cor_world	AREA	0	4625.9	25.0	-5770.8	0	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_22	CORELLIA	cor_world	AREA	0	4642.9	25.0	-5811.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_23	CORELLIA	cor_world	AREA	0	4643.4	25.0	-5756.4	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600
+poi_corellia_stronghold_24	CORELLIA	cor_world	AREA	0	4705.1	25.0	-5773.7	0	1	Imperial TIE Fighter pilot	humanoid_imperial_pilot_tie	ATTACKABLE	N	11	20	POI	Stronghold	1	LOITER	5	0	-	idle			600

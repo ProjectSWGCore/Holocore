@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_dantooine_dantari_village_3_1	DANTOOINE	dan_world	AREA	0	5574.4	0.3	-634.7	31	1	a Mokk clan leader	humanoid_mokk_clan_leader	AGGRESSIVE	E	51	60	POI	Dantari Village (3)	1	IDLE	0	0	-	idle			600
+poi_dantooine_dantari_village_3_2	DANTOOINE	dan_world	AREA	0	5539.0	0.2	-683.1	0	1	a Mokk clan primalist	humanoid_mokk_primalist	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_3	DANTOOINE	dan_world	AREA	0	5524.6	0.3	-695.6	0	1	a Mokk clan primalist	humanoid_mokk_primalist	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_3_4	DANTOOINE	dan_world	AREA	0	5520.1	9.5	-665.3	0	1	a Mokk clan primalist	humanoid_mokk_primalist	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_3_5	DANTOOINE	dan_world	AREA	0	5548.8	0.1	-653.4	0	1	a Mokk harvester	humanoid_mokk_harvester	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_6	DANTOOINE	dan_world	AREA	0	5562.8	0.1	-654.0	0	1	a Mokk loreweaver	humanoid_mokk_loreweaver	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_7	DANTOOINE	dan_world	AREA	0	5521.3	0.2	-713.7	0	1	a Mokk loreweaver	humanoid_mokk_loreweaver	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_8	DANTOOINE	dan_world	PATROL	0	5541.5	0.2	-688.9	0	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	PATROL	0	patrol_dantooine_3000	column	idle			600
+poi_dantooine_dantari_village_3_9	DANTOOINE	dan_world	AREA	0	5479.6	12.2	-675.3	0	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_10	DANTOOINE	dan_world	AREA	0	5487.6	11.8	-674.0	0	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_3_11	DANTOOINE	dan_world	AREA	0	5590.1	1.5	-616.6	0	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_12	DANTOOINE	dan_world	PATROL	0	5594.6	1.1	-628.3	0	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	PATROL	0	patrol_dantooine_2900	column	idle			600
+poi_dantooine_dantari_village_3_13	DANTOOINE	dan_world	AREA	0	5592.6	1.3	-651.4	0	1	a Mokk tribesman	humanoid_mokk_tribesman	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	LOITER	5	0	-	idle			600
+poi_dantooine_dantari_village_3_14	DANTOOINE	dan_world	AREA	0	5559.5	0.2	-617.2	0	1	a Mokk tribesman	humanoid_mokk_tribesman	AGGRESSIVE	N	51	60	POI	Dantari Village (3)	1	TURN	0	0	-	idle			600
+poi_dantooine_dantari_village_3_15	DANTOOINE	dan_world	AREA	0	5573.7	0.2	-646.8	179	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Dantari Village (3)	1	IDLE	0	0	-	idle			600
+poi_dantooine_dantari_village_3_16	DANTOOINE	dan_world	AREA	0	5566.8	0.2	-644.4	179	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	POI	Dantari Village (3)	1	IDLE	0	0	-	idle			600

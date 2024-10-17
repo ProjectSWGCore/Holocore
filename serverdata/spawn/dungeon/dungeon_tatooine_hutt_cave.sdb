@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+dungeon_tatooine_hutt_cave_1	TATOOINE	tat_hutt_cave	AREA	1	-1.4	-5.3	9.1	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_2	TATOOINE	tat_hutt_cave	AREA	10	-28.2	-79.7	-141.4	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_3	TATOOINE	tat_hutt_cave	AREA	2	-10.4	-30.8	-27.7	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_4	TATOOINE	tat_hutt_cave	AREA	3	13.1	-40.5	-73.7	0	1	Jabba's swooper leader	humanoid_jabba_swooper_leader	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_5	TATOOINE	tat_hutt_cave	AREA	4	41.1	-46.1	-99.7	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_6	TATOOINE	tat_hutt_cave	AREA	4	44.4	-46.1	-94.7	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_7	TATOOINE	tat_hutt_cave	AREA	4	46.1	-47.0	-53.9	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_8	TATOOINE	tat_hutt_cave	AREA	5	61.8	-56.4	-172.0	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_9	TATOOINE	tat_hutt_cave	AREA	5	12.7	-45.0	-122.9	0	1	Jabba's enforcer	humanoid_jabba_enforcer	ATTACKABLE	E	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_10	TATOOINE	tat_hutt_cave	AREA	5	49.9	-49.1	-132.6	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_11	TATOOINE	tat_hutt_cave	AREA	6	-37.3	-66.9	-179.7	0	1	Jabba's assassin	humanoid_jabba_assassin	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_12	TATOOINE	tat_hutt_cave	AREA	7	-14.6	-65.7	-213.6	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_13	TATOOINE	tat_hutt_cave	AREA	7	-6.1	-64.7	-239.0	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_14	TATOOINE	tat_hutt_cave	AREA	8	-90.8	-70.4	-124.4	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_15	TATOOINE	tat_hutt_cave	AREA	9	-59.6	-68.3	-102.7	0	1	Jabba's compound guard	humanoid_jabba_compound_guard	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_hutt_cave_16	TATOOINE	tat_world	AREA	0	5098.4	22.6	595.0	0	1	Jabba's henchman	humanoid_jabba_henchman	ATTACKABLE	N	5	10	Dungeon	Hutt Cave	1	LOITER	5	0	-	idle			600

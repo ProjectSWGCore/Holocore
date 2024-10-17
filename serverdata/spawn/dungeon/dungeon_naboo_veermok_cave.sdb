@@ -1,0 +1,22 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+dungeon_naboo_veermok_cave_1	NABOO	nab_veermok_cave	AREA	1	23.1	-27.7	-8.7	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_2	NABOO	nab_veermok_cave	AREA	11	91.9	-46.7	-141.1	0	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_3	NABOO	nab_veermok_cave	AREA	11	80.4	-46.5	-143.0	0	1	a veermok scavenger	creature_veermok_scavenger	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_4	NABOO	nab_veermok_cave	AREA	2	51.7	-48.9	-62.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_5	NABOO	nab_veermok_cave	AREA	2	43.7	-47.2	-9.4	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_6	NABOO	nab_veermok_cave	AREA	2	53.6	-68.0	-36.5	99	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+dungeon_naboo_veermok_cave_7	NABOO	nab_veermok_cave	AREA	2	24.9	-40.0	-43.3	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_8	NABOO	nab_veermok_cave	AREA	3	89.8	-63.4	-23.8	0	1	a veermok scout	creature_veermok_scout_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_9	NABOO	nab_veermok_cave	AREA	4	76.2	-75.4	-59.8	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_10	NABOO	nab_veermok_cave	AREA	4	94.3	-76.0	-83.5	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_11	NABOO	nab_veermok_cave	AREA	5	87.2	-46.7	-109.2	0	1	a veermok	creature_veermok	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_12	NABOO	nab_veermok_cave	AREA	5	96.7	-66.3	-108.1	0	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_13	NABOO	nab_veermok_cave	AREA	6	52.6	-77.1	-93.0	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_14	NABOO	nab_veermok_cave	AREA	7	77.9	-65.6	-140.2	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_15	NABOO	nab_veermok_cave	AREA	8	153.5	-66.1	-98.1	-98	1	a veermok guard	creature_veermok_guard_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+dungeon_naboo_veermok_cave_16	NABOO	nab_veermok_cave	AREA	8	129.8	-66.7	-106.7	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_17	NABOO	nab_veermok_cave	AREA	8	150.5	-66.9	-120.3	0	1	a veermok ravager	creature_veermok_ravager	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600
+dungeon_naboo_veermok_cave_18	NABOO	nab_veermok_cave	AREA	9	185.4	-65.9	-99.7	-93	1	a giant cave veermok	creature_veermok_giant_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+dungeon_naboo_veermok_cave_19	NABOO	nab_veermok_cave	AREA	9	188.1	-66.0	-103.9	-100	1	an alpha veermok	creature_veermok_alpha	ATTACKABLE	N	21	30	Dungeon	Veermok Cave	1	IDLE	0	0	-	idle			600
+dungeon_naboo_veermok_cave_20	NABOO	nab_world	AREA	0	5718.6	290.0	-1540.3	0	1	a veermok sentry	creature_veermok_sentry_cave	AGGRESSIVE	N	21	30	Dungeon	Veermok Cave	1	TURN	0	0	-	idle			600

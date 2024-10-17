@@ -1,0 +1,40 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_tatooine_anchorhead_1	TATOOINE	tat_anchorhead_medium_house	AREA	2	-9.2	0.4	2.2	126	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_anchorhead_2	TATOOINE	tat_anchorhead_medium_house	AREA	2	8.5	0.4	-9.3	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_anchorhead_3	TATOOINE	tat_anchorhead_medium_house	AREA	2	-3.0	0.4	-9.4	0	1	Nitra Vendallan	humanoid_nitra_vendallan	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle	44		600
+city_tatooine_anchorhead_4	TATOOINE	tat_anchorhead_medium_house	AREA	3	-5.2	1.0	9.2	-179	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_anchorhead_5	TATOOINE	tat_anchorhead_medium_house	AREA	3	-7.5	1.0	4.2	178	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_anchorhead_6	TATOOINE	tat_anchorhead_medium_house	AREA	6	-0.8	-4.0	-4.2	-96	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle		recruiter_rebel	600
+city_tatooine_anchorhead_7	TATOOINE	tat_world	AREA	0	65.5	52.0	-5375.9	87	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation			600
+city_tatooine_anchorhead_8	TATOOINE	tat_world	AREA	0	129.8	52.0	-5401.7	-65	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation			600
+city_tatooine_anchorhead_9	TATOOINE	tat_world	AREA	0	114.0	52.0	-5404.0	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_10	TATOOINE	tat_world	AREA	0	134.0	52.0	-5333.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_11	TATOOINE	tat_world	AREA	0	149.1	52.0	-5338.2	-59	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	TURN	0	0	-	bored			600
+city_tatooine_anchorhead_12	TATOOINE	tat_world	AREA	0	150.0	52.0	-5327.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_13	TATOOINE	tat_world	AREA	0	39.0	52.0	-5345.0	-83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_14	TATOOINE	tat_world	AREA	0	61.0	52.0	-5349.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_angry			600
+city_tatooine_anchorhead_15	TATOOINE	tat_world	AREA	0	70.0	52.0	-5316.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_16	TATOOINE	tat_world	AREA	0	73.0	52.0	-5329.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_17	TATOOINE	tat_world	AREA	0	74.0	52.0	-5382.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle		commoner	600
+city_tatooine_anchorhead_18	TATOOINE	tat_world	AREA	0	79.3	52.0	-5395.8	-134	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_anchorhead_19	TATOOINE	tat_world	AREA	0	68.0	52.0	-5375.6	-98	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation			600
+city_tatooine_anchorhead_20	TATOOINE	tat_world	AREA	0	73.3	52.0	-5310.3	-53	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation			600
+city_tatooine_anchorhead_21	TATOOINE	tat_world	AREA	0	162.9	52.0	-5329.1	0	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Anchorhead	1	LOITER	5	0	-	idle			600
+city_tatooine_anchorhead_22	TATOOINE	tat_world	AREA	0	127.9	52.0	-5401.2	112	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_accusing			600
+city_tatooine_anchorhead_23	TATOOINE	tat_world	AREA	0	67.9	52.0	-5308.2	-142	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_anchorhead_24	TATOOINE	tat_world	AREA	0	151.0	10.0	-5020.6	0	1	a terrorist	humanoid_terrorist	ATTACKABLE	N	5	10	City	Anchorhead	1	LOITER	5	0	-	idle			600
+city_tatooine_anchorhead_25	TATOOINE	tat_world	AREA	0	129.0	52.0	-5339.0	19	1	Aaph Koden	humanoid_aaph_koden	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
+city_tatooine_anchorhead_26	TATOOINE	tat_world	AREA	0	107.2	52.0	-5315.6	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
+city_tatooine_anchorhead_27	TATOOINE	tat_world	AREA	0	78.4	52.0	-5394.7	149	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_consoling			600
+city_tatooine_anchorhead_28	TATOOINE	tat_world	AREA	0	53.4	52.0	-5354.2	-143	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	sad			600
+city_tatooine_anchorhead_29	TATOOINE	tat_world	AREA	0	83.6	52.0	-5324.8	1	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	happy			600
+city_tatooine_anchorhead_30	TATOOINE	tat_world	AREA	0	70.9	52.0	-5308.8	151	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	conversation			600
+city_tatooine_anchorhead_31	TATOOINE	tat_world	AREA	0	66.6	52.0	-5310.4	17	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_anchorhead_32	TATOOINE	tat_world	AREA	0	-170.0	65.0	-5316.6	-35	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_tatooine_anchorhead_33	TATOOINE	tat_world	AREA	0	122.5	52.0	-5369.4	-112	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
+city_tatooine_anchorhead_34	TATOOINE	tat_world	AREA	0	110.2	52.0	-5431.1	39	1	Ordo	humanoid_ordo	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
+city_tatooine_anchorhead_35	TATOOINE	tat_world	AREA	0	-135.8	65.0	-5331.5	62	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Anchorhead	1	IDLE	0	0	-	idle			600
+city_tatooine_anchorhead_36	TATOOINE	tat_world	PATROL	0	82.9	52.1	-5318.9	-88	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tatooine_6300	column	idle			600
+city_tatooine_anchorhead_37	TATOOINE	tat_world	PATROL	0	127.7	52.0	-5393.0	-145	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tatooine_6400	column	idle			600
+city_tatooine_anchorhead_38	TATOOINE	tat_world	PATROL	0	-166.8	65.0	-5313.4	104	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Anchorhead	1	PATROL	0	patrol_tatooine_6500	column	idle		simple_droid_geek_bye_nice_13	600

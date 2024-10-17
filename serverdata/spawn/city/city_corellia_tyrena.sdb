@@ -1,0 +1,206 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_corellia_tyrena_1	CORELLIA	cor_tyrena_asso_hall	AREA	6	-15.0	2.3	10.8	-2	1	Hal Horn	humanoid_hal_horn	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_2	CORELLIA	cor_tyrena_cantina	AREA	1	45.2	0.1	0.0	-135	1	Crev Bombaasa	humanoid_crew_bombaasa	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_3	CORELLIA	cor_tyrena_cantina	AREA	2	31.3	0.1	3.3	143	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_4	CORELLIA	cor_tyrena_cantina	AREA	2	32.7	0.1	1.5	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_5	CORELLIA	cor_tyrena_cantina	AREA	3	8.6	-0.9	0.6	90	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_6	CORELLIA	cor_tyrena_cantina	AREA	3	10.8	-0.9	0.5	-88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_7	CORELLIA	cor_tyrena_cantina	AREA	3	5.2	-0.9	-6.7	0	1	Teslo Ten'Doora	humanoid_rebel_officer_questgiver	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_8	CORELLIA	cor_tyrena_cantina	AREA	4	19.5	-0.9	-18.8	10	1	Acun Solari	humanoid_rebel_acun_solari	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_9	CORELLIA	cor_tyrena_cantina	AREA	9	-1.9	-0.9	18.6	-121	1	Karena Keer	humanoid_karena_keer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_10	CORELLIA	cor_tyrena_cantina	AREA	11	-27.6	-0.9	0.6	89	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		recruiter_rebel	600
+city_corellia_tyrena_11	CORELLIA	cor_tyrena_cantina	AREA	12	-19.2	-0.9	21.9	-104	1	Shalera the Hutt	humanoid_shalera_the_hutt	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_12	CORELLIA	cor_tyrena_cantina	AREA	12	-26.4	-0.9	23.2	170	1	Vrak (a smuggler)	humanoid_lok_vrak_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_13	CORELLIA	cor_tyrena_cantina	AREA	13	-26.5	-0.5	10.9	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_14	CORELLIA	cor_tyrena_cantina	AREA	13	-26.5	-0.5	9.9	0	1	a CorSec Commissioner	humanoid_corsec_comissioner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_15	CORELLIA	cor_tyrena_cantina	AREA	14	-32.1	0.1	-20.5	178	1	a Corellia Times investigator	humanoid_corellia_times_investigator	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_16	CORELLIA	cor_tyrena_cantina	AREA	14	-32.1	0.1	-21.6	2	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_17	CORELLIA	cor_tyrena_hospital	AREA	6	-21.9	0.3	-0.6	-176	1	a 2-1B surgical droid	droid_21b_surgical	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_18	CORELLIA	cor_tyrena_hospital	AREA	6	-21.9	0.3	-0.6	-176	1	a 2-1B surgical droid	droid_21b_surgical	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_19	CORELLIA	cor_tyrena_hotel1	AREA	4	8.7	1	5.7	-91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_20	CORELLIA	cor_tyrena_hotel1	AREA	4	0.4	1.2	-21.2	-179	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_21	CORELLIA	cor_tyrena_hotel1	AREA	5	23.2	1.3	8.4	179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_22	CORELLIA	cor_tyrena_hotel1	AREA	5	17.3	1.3	-7.5	0	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_23	CORELLIA	cor_tyrena_hotel1	AREA	5	23.2	1.3	9.4	0	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_24	CORELLIA	cor_tyrena_hotel1	AREA	6	-22.8	1.6	9.1	124	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_25	CORELLIA	cor_tyrena_hotel1	AREA	6	-14.2	1	-1.6	-134	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_26	CORELLIA	cor_tyrena_hotel1	AREA	6	-15.6	1	-3.1	45	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_27	CORELLIA	cor_tyrena_hotel1	AREA	6	-21.4	1.6	8.1	-40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_28	CORELLIA	cor_tyrena_hotel1	AREA	8	-8.4	1.6	-11.8	-18	1	Didina Lippinoss	humanoid_didina_lippinoss	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_29	CORELLIA	cor_tyrena_hotel1	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_30	CORELLIA	cor_tyrena_hotel2	AREA	5	15.8	1.3	-9.6	-11	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_31	CORELLIA	cor_tyrena_hotel2	AREA	5	15.8	1.3	-8.6	159	1	a CorSec Chief	humanoid_corsec_chief	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_standing_drinking			600
+city_corellia_tyrena_32	CORELLIA	cor_tyrena_hotel2	AREA	5	21.2	1.3	9.7	179	1	Teraeza Furloti	humanoid_herald_rebel_teraeza_furloti	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_standing_drinking			600
+city_corellia_tyrena_33	CORELLIA	cor_tyrena_hotel2	AREA	6	-23.3	1.6	3.9	0	1	a bodyguard	humanoid_bodyguard_zabrak	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_34	CORELLIA	cor_tyrena_hotel2	AREA	6	-23.3	1.6	5.0	-179	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_35	CORELLIA	cor_tyrena_hotel2	AREA	8	-4.8	1.6	-9.6	-152	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_36	CORELLIA	cor_tyrena_hotel2	AREA	9	-12.4	1.6	-16.4	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_37	CORELLIA	cor_tyrena_hotel2	AREA	9	-14.4	1.6	-16.4	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_38	CORELLIA	cor_tyrena_hotel2	AREA	9	-13.4	1.6	-15.4	8	1	an R2 unit	droid_rebel_detain_sentry_roam	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_39	CORELLIA	cor_tyrena_hotel2	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_40	CORELLIA	cor_tyrena_small_house	AREA	3	-4.2	0.6	-3.8	67	1	Captain Kreezo (Rebel Pilot Trainer)	humanoid_rebel_kreezo	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_41	CORELLIA	cor_tyrena_starport	AREA	1	-0.1	0.6	75.1	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_42	CORELLIA	cor_tyrena_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_43	CORELLIA	cor_tyrena_starport	AREA	4	10	0.6	62.8	176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_44	CORELLIA	cor_tyrena_starport	AREA	4	-1.9	0.6	56.3	-179	1	a CorSec Detective	humanoid_corsec_detective	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_45	CORELLIA	cor_tyrena_starport	AREA	4	-1.9	0.6	55.3	0	1	a CorSec Master Sergeant	humanoid_corsec_master_sergeant	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_46	CORELLIA	cor_tyrena_starport	AREA	4	16.0	0.6	56.6	-70	1	Amarent Loren	humanoid_amarent_loren	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_47	CORELLIA	cor_tyrena_starport	AREA	5	26.6	0.6	64.4	-105	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_48	CORELLIA	cor_tyrena_starport	AREA	5	24.7	0.6	63.9	82	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_49	CORELLIA	cor_tyrena_starport	AREA	7	40.9	0.6	48.7	114	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_50	CORELLIA	cor_tyrena_starport	AREA	7	47.6	0.6	46.1	32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_51	CORELLIA	cor_tyrena_starport	AREA	7	42.3	0.6	39.5	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_52	CORELLIA	cor_tyrena_starport	AREA	7	57.2	-0.5	35.1	0	1	a CorSec agent	humanoid_corsec_agent	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_53	CORELLIA	cor_tyrena_starport	AREA	7	57.2	-0.5	36.2	-179	1	a CorSec trooper	humanoid_corsec_trooper	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_54	CORELLIA	cor_tyrena_starport	AREA	7	40.2	0.6	38.8	55	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_55	CORELLIA	cor_tyrena_starport	AREA	7	48.1	0.6	48.8	-175	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_56	CORELLIA	cor_tyrena_starport	AREA	9	-36.5	1.6	63.8	24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_57	CORELLIA	cor_tyrena_starport	AREA	9	-27.2	1.6	65.5	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_58	CORELLIA	cor_tyrena_starport	AREA	9	-27.2	1.6	52.4	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_59	CORELLIA	cor_tyrena_starport	AREA	9	-32.9	1.6	52.7	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_60	CORELLIA	cor_tyrena_starport	AREA	9	-34.7	1.6	66	-112	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_61	CORELLIA	cor_tyrena_starport	AREA	9	-29.7	1.6	64.3	66	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_62	CORELLIA	cor_tyrena_starport	AREA	9	-29.2	1.6	66.2	148	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_63	CORELLIA	cor_tyrena_starport	AREA	9	-27.5	1.6	49.6	27	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_64	CORELLIA	cor_tyrena_starport	AREA	9	-33.2	1.6	50.3	12	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_65	CORELLIA	cor_tyrena_starport	AREA	12	-55.8	2.6	42.1	-135	1	a bodyguard	humanoid_bodyguard_zabrak	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_66	CORELLIA	cor_tyrena_starport	AREA	12	-51.7	2.6	36.2	116	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_67	CORELLIA	cor_tyrena_starport	AREA	12	-49.1	2.6	35.3	-73	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_68	CORELLIA	cor_tyrena_starport	AREA	12	-57.6	2.6	40.5	44	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_69	CORELLIA	cor_tyrena_starport	AREA	13	51.8	1	19.9	173	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_70	CORELLIA	cor_tyrena_starport	AREA	14	-55.8	1	10.7	-168	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_71	CORELLIA	cor_tyrena_starport	AREA	14	-56.4	1	8.6	40	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_72	CORELLIA	cor_tyrena_theater	AREA	1	7.2	0.6	-3.2	178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_73	CORELLIA	cor_tyrena_theater	AREA	6	-14.3	2.5	23.7	5	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_74	CORELLIA	cor_tyrena_theater	AREA	6	-14.3	2.4	24.8	-179	1	a CorSec Detective	humanoid_corsec_detective	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_75	CORELLIA	cor_tyrena_theater	AREA	6	2.7	2.6	4.2	-179	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_76	CORELLIA	cor_tyrena_theater	AREA	6	1.6	2.6	4.2	135	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_77	CORELLIA	cor_tyrena_theater	AREA	7	28.9	2.1	58.2	-47	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_78	CORELLIA	cor_tyrena_theater	AREA	8	26.5	2.1	73.0	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_79	CORELLIA	cor_tyrena_theater	AREA	8	19.3	2.1	56.1	-176	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_80	CORELLIA	cor_tyrena_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_81	CORELLIA	cor_tyrena_theater	AREA	8	18.6	2.1	53.9	-47	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_82	CORELLIA	cor_tyrena_university	AREA	4	-3.9	1.1	-1.8	-108	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_83	CORELLIA	cor_tyrena_university	AREA	4	-6.3	1.1	-2.3	90	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_84	CORELLIA	cor_tyrena_university	AREA	5	13.6	1.1	2.8	-2	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_85	CORELLIA	cor_tyrena_university	AREA	5	14	1.1	5.5	-174	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_86	CORELLIA	cor_tyrena_university	AREA	6	-12.4	1.1	-0.2	-106	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_87	CORELLIA	cor_tyrena_university	AREA	6	-14.9	1.1	-0.3	85	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_88	CORELLIA	cor_tyrena_university	AREA	7	8.6	1.1	-7.8	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_89	CORELLIA	cor_tyrena_university	AREA	7	6.7	1.1	-9.4	90	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_90	CORELLIA	cor_tyrena_university	AREA	8	-3	1.1	-8.4	125	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_91	CORELLIA	cor_tyrena_university	AREA	9	-7.7	1.1	-8.5	26	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_92	CORELLIA	cor_world	AREA	0	-5173.5	21.0	-2545.3	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_93	CORELLIA	cor_world	AREA	0	-5096.2	21.0	-2445.3	-135	1	Edbr Yamagh (aide to Lt. Col. Quelsh)	humanoid_edbr_yamagh	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_94	CORELLIA	cor_world	AREA	0	-5192.9	21.0	-2545.6	66	1	Excited Journalist	humanoid_excited_journalist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_95	CORELLIA	cor_world	AREA	0	-5289.6	21.0	-2523.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_96	CORELLIA	cor_world	AREA	0	-5069.0	21.0	-2345.9	170	1	J'pai Brek (Rebel Pilot Coordinator)	humanoid_rebel_j_pai_brek	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_97	CORELLIA	cor_world	AREA	0	-5520.0	21.3	-2631.0	-111	1	Jom Irimore	humanoid_rebel_jom_irimore	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_98	CORELLIA	cor_world	AREA	0	-5416.6	21.0	-2792.7	-89	1	Lock Vlash	humanoid_herald_corellia_lock	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_99	CORELLIA	cor_world	AREA	0	-5132.0	21.0	-2633.0	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_100	CORELLIA	cor_world	AREA	0	-5150.5	21.0	-2361.4	104	1	Major Alana Walden (a CorSec officer)	humanoid_corsec_major_alana_walden	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_101	CORELLIA	cor_world	AREA	0	-5523.4	21.0	-2644.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_102	CORELLIA	cor_world	AREA	0	-5203.4	21.0	-2486.9	153	1	Noren Krast	humanoid_noren_krast	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_103	CORELLIA	cor_world	AREA	0	-5210.4	21.0	-2578.1	127	1	Osto Grissom (a starship captain)	humanoid_osto_grissom	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_104	CORELLIA	cor_world	AREA	0	-5469.5	27.9	-2981.8	165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_105	CORELLIA	cor_world	AREA	0	-5445.2	21.0	-2738.0	97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_106	CORELLIA	cor_world	AREA	0	-5010.0	21.0	-2468.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_107	CORELLIA	cor_world	AREA	0	-5197.0	21.0	-2273.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_108	CORELLIA	cor_world	AREA	0	-5289.2	0.4	-2942.6	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_109	CORELLIA	cor_world	AREA	0	-5290.4	21.0	-2345.6	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_110	CORELLIA	cor_world	AREA	0	-5217.4	21.0	-2334.6	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_111	CORELLIA	cor_world	AREA	0	-5225.1	21.0	-2381.1	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_112	CORELLIA	cor_world	AREA	0	-5240.0	21.0	-2397.9	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_113	CORELLIA	cor_world	AREA	0	-5260.4	21.0	-2319.4	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_114	CORELLIA	cor_world	AREA	0	-5267.1	21.0	-2419.6	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_115	CORELLIA	cor_world	AREA	0	-5275.5	21.0	-2379.4	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_116	CORELLIA	cor_world	AREA	0	-5145.0	21.0	-2291.9	0	1	a Braggan's Fist thug	humanoid_braggans_fist_thug	AGGRESSIVE	N	11	20	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_117	CORELLIA	cor_world	AREA	0	-5464.8	21.0	-2683.2	-40	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_118	CORELLIA	cor_world	AREA	0	-5481	21	-2680.5	175	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_119	CORELLIA	cor_world	AREA	0	-5208.0	21.0	-2333.9	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_120	CORELLIA	cor_world	AREA	0	-5633.7	21.0	-2757.5	93	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_121	CORELLIA	cor_world	AREA	0	-5583.8	21.0	-2764.8	-145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_122	CORELLIA	cor_world	AREA	0	-5500.8	21.0	-2778.3	175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_123	CORELLIA	cor_world	AREA	0	-5409.4	21.0	-2700.5	-170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_124	CORELLIA	cor_world	AREA	0	-5464.9	21.0	-2680.3	-158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_125	CORELLIA	cor_world	AREA	0	-5466.9	21.0	-2680.8	135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_126	CORELLIA	cor_world	AREA	0	-5162.9	21.0	-2277.6	119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_127	CORELLIA	cor_world	AREA	0	-5112.5	21.0	-2504.8	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_128	CORELLIA	cor_world	AREA	0	-5089.7	21.0	-2344.8	-123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_129	CORELLIA	cor_world	AREA	0	-5004.4	21.0	-2342.6	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_130	CORELLIA	cor_world	AREA	0	-5110.6	21.0	-2504.7	-96	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_131	CORELLIA	cor_world	AREA	0	-5322.0	21.0	-2455.1	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_132	CORELLIA	cor_world	AREA	0	-5225.1	21.0	-2491.1	160	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_133	CORELLIA	cor_world	AREA	0	-5064.6	21.0	-2392.4	56	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_134	CORELLIA	cor_world	AREA	0	-5199.2	21.0	-2434.4	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle		commoner	600
+city_corellia_tyrena_135	CORELLIA	cor_world	AREA	0	-5110.2	21.3	-2387.5	47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_136	CORELLIA	cor_world	AREA	0	-4995.7	21.6	-2382.6	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_137	CORELLIA	cor_world	AREA	0	-4976.1	21	-2214.9	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_138	CORELLIA	cor_world	AREA	0	-5407.9	21	-2680.3	-174	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_139	CORELLIA	cor_world	AREA	0	-5454.8	21	-2693.2	-70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_140	CORELLIA	cor_world	AREA	0	-5472.1	21	-2699.2	131	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_141	CORELLIA	cor_world	AREA	0	-5556.9	21.6	-2626.1	-65	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_142	CORELLIA	cor_world	AREA	0	-5520.1	21	-2775.9	-89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_143	CORELLIA	cor_world	AREA	0	-5581.1	21	-2751.4	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_144	CORELLIA	cor_world	AREA	0	-5596.7	21	-2786.6	-127	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_145	CORELLIA	cor_world	AREA	0	-5592.6	21	-2801.1	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_146	CORELLIA	cor_world	AREA	0	-5666.2	21	-2699.4	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_147	CORELLIA	cor_world	AREA	0	-5637.3	21.6	-2661.2	-27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_148	CORELLIA	cor_world	AREA	0	-5283.1	21	-2549.6	-12	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_149	CORELLIA	cor_world	AREA	0	-5181.3	21	-2567.5	20	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_150	CORELLIA	cor_world	AREA	0	-5193.4	21	-2497.7	-143	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_151	CORELLIA	cor_world	AREA	0	-5109.3	21	-2427.3	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_152	CORELLIA	cor_world	AREA	0	-5037.9	21	-2353.6	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_153	CORELLIA	cor_world	AREA	0	-5039.6	21	-2294.8	11	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_154	CORELLIA	cor_world	AREA	0	-5096.8	21	-2328.2	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_155	CORELLIA	cor_world	AREA	0	-4986.5	21	-2216.2	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_tyrena_156	CORELLIA	cor_world	AREA	0	-5538.9	21.0	-2600.6	4	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_157	CORELLIA	cor_world	AREA	0	-5200.6	21.0	-2506.2	-53	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_158	CORELLIA	cor_world	AREA	0	-5090.4	21.0	-2580.9	21	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_159	CORELLIA	cor_world	AREA	0	-5278.9	21.0	-2390.4	-140	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_160	CORELLIA	cor_world	AREA	0	-5242.4	21.0	-2585.7	29	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_161	CORELLIA	cor_world	AREA	0	-5492.7	21.0	-2796.2	-97	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_162	CORELLIA	cor_world	AREA	0	-5205.9	21.0	-2586.3	-115	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_163	CORELLIA	cor_world	AREA	0	-4961.5	21.0	-2412.7	178	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_164	CORELLIA	cor_world	AREA	0	-5396.6	21.0	-2675.0	-124	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_165	CORELLIA	cor_world	AREA	0	-5411.8	21.0	-2655.4	7	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_166	CORELLIA	cor_world	AREA	0	-5470.3	23.5	-2719.9	-130	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_167	CORELLIA	cor_world	AREA	0	-5163.9	21.0	-2555.7	40	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_168	CORELLIA	cor_world	AREA	0	-4961.4	21.0	-2415.4	8	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_169	CORELLIA	cor_world	AREA	0	-5291.0	21.0	-2480.1	95	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_170	CORELLIA	cor_world	AREA	0	-5062.8	21.0	-2596.6	-19	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_171	CORELLIA	cor_world	AREA	0	-5070.9	21.0	-2461.6	-46	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_172	CORELLIA	cor_world	AREA	0	-5466.9	21.0	-2682.9	39	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_173	CORELLIA	cor_world	AREA	0	-5072.5	21.0	-2460.0	135	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_174	CORELLIA	cor_world	AREA	0	-5274.6	21.0	-2574.1	-36	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_175	CORELLIA	cor_world	AREA	0	-5091.9	21.3	-2398.6	129	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_176	CORELLIA	cor_world	AREA	0	-5259.3	21.0	-2447.2	-79	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_177	CORELLIA	cor_world	AREA	0	-5166.2	21.0	-2640.3	-142	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_178	CORELLIA	cor_world	AREA	0	-5431.4	21.0	-2685.8	106	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_179	CORELLIA	cor_world	AREA	0	-5162.6	21.0	-2553.7	-131	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_180	CORELLIA	cor_world	AREA	0	-5013.2	21.0	-2465.0	105	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_tyrena_181	CORELLIA	cor_world	AREA	0	-5008.7	21.0	-2544.4	174	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_182	CORELLIA	cor_world	AREA	0	-5497.6	23.5	-2667.6	-152	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_183	CORELLIA	cor_world	AREA	0	-5336.1	24.9	-2584	62	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_184	CORELLIA	cor_world	AREA	0	-5487.6	21	-2785.3	109	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_185	CORELLIA	cor_world	AREA	0	-5181	21	-2438.5	57	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_186	CORELLIA	cor_world	AREA	0	-5498.7	23.5	-2668.6	55	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_187	CORELLIA	cor_world	AREA	0	-5567.3	21.6	-2631.9	166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_188	CORELLIA	cor_world	AREA	0	-4965.7	21.0	-2357.4	-166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_189	CORELLIA	cor_world	AREA	0	-5448.0	21.0	-2674.9	160	1	Adar Tallon	humanoid_rebel_adar_tallon	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_190	CORELLIA	cor_world	AREA	0	-5202.0	21.0	-2505.1	131	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_191	CORELLIA	cor_world	AREA	0	-5032.1	21	-2303.8	41	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	happy			600
+city_corellia_tyrena_192	CORELLIA	cor_world	AREA	0	-5212.6	21	-2590.8	84	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Tyrena	1	LOITER	5	0	-	idle			600
+city_corellia_tyrena_193	CORELLIA	cor_world	AREA	0	-5567.3	21.6	-2633.5	-7	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_194	CORELLIA	cor_world	AREA	0	-4976.7	21.0	-2386.9	-49	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_195	CORELLIA	cor_world	AREA	0	-5436.2	21.0	-2781.2	-37	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_196	CORELLIA	cor_world	AREA	0	-5333.9	24.9	-2582.8	-121	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_197	CORELLIA	cor_world	PATROL	0	-5439.0	21.0	-2721.0	0	1	an EG-6 power droid	droid_eg6_power	ATTACKABLE	N	11	20	City	Tyrena	1	PATROL	0	patrol_corellia_2400	column	idle		simple_droid_sarcastic_alert_2	600
+city_corellia_tyrena_198	CORELLIA	cor_world	AREA	0	-5471.4	23.5	-2720.8	47	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	conversation			600
+city_corellia_tyrena_199	CORELLIA	cor_world	AREA	0	-5217.3	21	-2603.5	155	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_200	CORELLIA	cor_world	AREA	0	-5193.6	21	-2559.8	-84	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_tyrena_201	CORELLIA	cor_world	AREA	0	-5158.8	21.0	-2405.1	43	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_202	CORELLIA	cor_world	AREA	0	-5495.2	21.0	-2796.7	88	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_203	CORELLIA	cor_world	AREA	0	-5322.0	21.0	-2456.8	-4	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600
+city_corellia_tyrena_204	CORELLIA	cor_world	AREA	0	-5315.0	21.0	-2397.0	90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Tyrena	1	IDLE	0	0	-	idle			600

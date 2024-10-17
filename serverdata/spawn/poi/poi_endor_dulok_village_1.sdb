@@ -1,0 +1,12 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_dulok_village_1_1	ENDOR	end_world	AREA	0	-1198.8	25.0	2981.3	0	1	a Donkuwah battlelord	humanoid_donkuwah_battlelord	AGGRESSIVE	E	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_2	ENDOR	end_world	AREA	0	-1156.9	17.0	2953.3	0	1	a Donkuwah chieftain	humanoid_donkuwah_chieftain	AGGRESSIVE	B	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_3	ENDOR	end_world	AREA	0	-1239.4	18.0	2984.6	0	1	a Donkuwah cub	humanoid_donkuwah_cub	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_4	ENDOR	end_world	AREA	0	-1271.3	12.0	2970.4	0	1	a Donkuwah laborer	humanoid_donkuwah_laborer	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_5	ENDOR	end_world	AREA	0	-1228.4	12.0	2936.0	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_6	ENDOR	end_world	AREA	0	-1215.1	12.0	2932.1	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_7	ENDOR	end_world	AREA	0	-1174.5	12.0	2942.8	0	1	a Donkuwah scout	humanoid_donkuwah_scout	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_8	ENDOR	end_world	AREA	0	-1253.6	12.0	2973.1	0	1	a Donkuwah shaman	humanoid_donkuwah_shaman	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_9	ENDOR	end_world	AREA	0	-1207.4	9.0	2966.0	0	1	a Donkuwah spiritmaster	humanoid_donkuwah_spiritmaster	AGGRESSIVE	N	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600
+poi_endor_dulok_village_1_10	ENDOR	end_world	AREA	0	-1220.4	9.0	2968.4	0	1	a Donkuwah tribesman	humanoid_donkuwah_tribesman	AGGRESSIVE	E	61	70	POI	Dulok Village 1	1	LOITER	5	0	-	idle			600

@@ -1,0 +1,19 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_corsec_vs_flail_battle_1	TALUS	tal_world	AREA	0	2968.5	16.9	6038.5	0	1	a CorSec Captain	humanoid_corsec_captain	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_2	TALUS	tal_world	AREA	0	3014.6	19.2	6061.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_3	TALUS	tal_world	AREA	0	2991.2	31.8	6087.8	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_4	TALUS	tal_world	AREA	0	3041.3	30.8	6055.3	0	1	a CorSec Sergeant	humanoid_corsec_sergeant	ATTACKABLE	E	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_5	TALUS	tal_world	AREA	0	2964.7	17.5	6044.8	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_6	TALUS	tal_world	AREA	0	3009.7	19.8	6064.6	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_7	TALUS	tal_world	AREA	0	2992.8	30.5	6085.0	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_8	TALUS	tal_world	AREA	0	3045.0	31.5	6056.3	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_9	TALUS	tal_world	AREA	0	3006.1	20.8	6071.4	0	1	a CorSec trooper	humanoid_corsec_trooper	ATTACKABLE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_10	TALUS	tal_world	AREA	0	3077.9	35.0	6140.2	0	1	a Flail butcher	humanoid_flail_butcher	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_11	TALUS	tal_world	AREA	0	3073.6	35.0	6141.7	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_12	TALUS	tal_world	AREA	0	3072.0	42.6	6093.8	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_13	TALUS	tal_world	AREA	0	3040.3	34.2	6121.3	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_14	TALUS	tal_world	AREA	0	3063.0	32.2	6109.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_15	TALUS	tal_world	AREA	0	3057.3	32.4	6111.6	0	1	a Flail cutthroat	humanoid_flail_cutthroat	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	LOITER	5	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_16	TALUS	tal_world	AREA	0	3044.2	33.8	6117.8	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600
+poi_talus_corsec_vs_flail_battle_17	TALUS	tal_world	AREA	0	3063.7	31.8	6104.5	0	1	a Flail enforcer	humanoid_flail_enforcer	AGGRESSIVE	N	41	50	POI	CorSec vs. Flail Battle	1	TURN	0	0	-	idle			600

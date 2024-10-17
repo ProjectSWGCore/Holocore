@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_erran_sif_1	TALUS	tal_traitor_erran	AREA	2	-3.7	0.3	-1.0	-90	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+poi_talus_erran_sif_2	TALUS	tal_traitor_erran	AREA	4	3.8	-3.3	5.1	-179	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+poi_talus_erran_sif_3	TALUS	tal_traitor_erran	AREA	5	-7.5	-6.8	-6.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_4	TALUS	tal_traitor_erran	AREA	5	-2.4	-6.8	-6.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_5	TALUS	tal_traitor_erran	AREA	6	-4.3	-6.8	-15.2	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_6	TALUS	tal_traitor_erran	AREA	6	6.6	-6.8	-16.0	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_7	TALUS	tal_traitor_erran	AREA	7	5.2	-6.8	-2.1	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_8	TALUS	tal_traitor_erran	AREA	7	5.3	-6.8	-7.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_9	TALUS	tal_traitor_erran	AREA	9	-5.5	-13.8	0.5	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	LOITER	5	0	-	idle			600
+poi_talus_erran_sif_10	TALUS	tal_traitor_erran	AREA	9	0.3	-13.8	0.8	0	1	a Sif mercenary	humanoid_trandoshan_sif_02	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_11	TALUS	tal_traitor_erran	AREA	9	1.4	-13.8	-14.8	0	1	Doak Sif	humanoid_doak_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+poi_talus_erran_sif_12	TALUS	tal_traitor_erran	AREA	9	-4.0	-13.8	-16.6	0	1	Erran Sif	humanoid_erran_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+poi_talus_erran_sif_13	TALUS	tal_traitor_erran	AREA	9	-6.9	-13.8	-13.1	0	1	Hirsch Sif	humanoid_hirsch_sif	AGGRESSIVE	B	41	50	POI	Erran Sif	1	IDLE	0	0	-	idle			600
+poi_talus_erran_sif_14	TALUS	tal_world	AREA	0	2143.4	122.0	-5609.6	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_15	TALUS	tal_world	AREA	0	2151.5	122.0	-5612.8	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600
+poi_talus_erran_sif_16	TALUS	tal_world	AREA	0	2166.5	122.0	-5629.0	0	1	a Sif mercenary	humanoid_trandoshan_sif	AGGRESSIVE	N	41	50	POI	Erran Sif	1	TURN	0	0	-	idle			600

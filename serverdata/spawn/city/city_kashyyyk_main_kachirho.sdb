@@ -1,0 +1,77 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_kashyyyk_main_kachirho_1	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.2	-20.8	30.5	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_2	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.6	-20.8	30.5	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_3	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	3.6	-20.8	28.0	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_4	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	-0.5	-20.8	28.0	179	1	a Dark Novatrooper	humanoid_imperial_dark_trooper_nova	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_5	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	10	1.6	-20.8	32.7	179	1	Darth Vader	humanoid_clone_imperial_darth_vader	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_6	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-1.2	-13.8	9.5	163	1	a comm operator	humanoid_mission_imperial_comm_operator	INVULNERABLE	N	46	55	City	Kachirho	1	IDLE	0	0	-	npc_sitting_chair			600
+city_kashyyyk_main_kachirho_7	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	4.9	-13.8	4.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	INVULNERABLE	N	46	55	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_8	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	2.1	-13.8	4.5	0	1	a Stormtrooper	humanoid_imperial_stormtrooper	INVULNERABLE	N	46	55	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_9	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-6.4	-13.8	6.2	0	1	Admiral Krieg	humanoid_clone_imperial_admiral_krieg	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_10	KASHYYYK_MAIN	kas_main_kachirho_imp_bunker	AREA	7	-8.0	-13.8	6.9	106	1	an Imperial 1st lieutenant	humanoid_imperial_1st_lieutenant	INVULNERABLE	E	46	55	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_11	KASHYYYK_MAIN	kas_world	AREA	0	-510.3	18.8	-28.7	0	1	a corpse	humanoid_kashyyyk_rodian_corpse	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_dead_01			600
+city_kashyyyk_main_kachirho_12	KASHYYYK_MAIN	kas_world	AREA	0	-610.9	18.6	-96.0	0	1	a corpse	humanoid_kashyyyk_rodian_corpse	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_dead_01			600
+city_kashyyyk_main_kachirho_13	KASHYYYK_MAIN	kas_world	AREA	0	-512.5	17.8	-70.0	-177	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle		junk_dealer_wookiee	600
+city_kashyyyk_main_kachirho_14	KASHYYYK_MAIN	kas_world	AREA	0	-548.0	19.3	-108.3	0	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_03	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle		junk_dealer_wookiee	600
+city_kashyyyk_main_kachirho_15	KASHYYYK_MAIN	kas_world	AREA	0	-682.2	18.8	-160.9	0	1	Ace Fendo (a chassis broker)	humanoid_kashyyyk_ace_fendo	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle		chassis_dealer	600
+city_kashyyyk_main_kachirho_16	KASHYYYK_MAIN	kas_world	AREA	0	-441.4	158.5	-63.8	-113	1	Belga Daeri	humanoid_kashyyyk_belga_daeri	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_17	KASHYYYK_MAIN	kas_world	AREA	0	-441.4	211.2	-75.8	-143	1	Captain Koh	humanoid_kashyyyk_captain_koh	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_18	KASHYYYK_MAIN	kas_world	AREA	0	-448.4	158.5	-102.9	-38	1	Chatook	humanoid_kashyyyk_kachirho_chatook	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_19	KASHYYYK_MAIN	kas_world	AREA	0	-587.3	18.6	-104.2	0	1	Chewbacca	humanoid_clone_rebel_chewbacca	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_20	KASHYYYK_MAIN	kas_world	AREA	0	-701.1	17.1	11.2	40	1	Chrilooc	humanoid_kashyyyk_chrilooc	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_21	KASHYYYK_MAIN	kas_world	AREA	0	-458.0	158.4	-27.2	-25	1	Colonel Gurnst	humanoid_kashyyyk_colonel_gurnst	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_kashyyyk_main_kachirho_22	KASHYYYK_MAIN	kas_world	AREA	0	-636.0	22.8	-119.6	73	1	Commander Richards	humanoid_kashyyyk_commander_richards	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_23	KASHYYYK_MAIN	kas_world	AREA	0	-432.4	179.6	-96.6	-33	1	Dr. Cheyerooto	humanoid_kashyyyk_dr_cheyerooto	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_24	KASHYYYK_MAIN	kas_world	AREA	0	-495.5	17.9	-109.9	-35	1	Dr. Criss Ne`Pomi	humanoid_kashyyyk_dr_criss_nepomi	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_25	KASHYYYK_MAIN	kas_world	AREA	0	-504.3	17.9	-98.9	-52	1	Dr. Farnsworth	humanoid_kashyyyk_dr_farnsworth	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_26	KASHYYYK_MAIN	kas_world	AREA	0	-660.9	25.8	-111.9	-63	1	Dr. Price	humanoid_kashyyyk_dr_price	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_27	KASHYYYK_MAIN	kas_world	AREA	0	-549.6	19.0	-132.4	-28	1	Eyma	humanoid_kashyyyk_eyma	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_28	KASHYYYK_MAIN	kas_world	AREA	0	-442.8	211.2	-74.6	-142	1	Fezrik Bendledon	humanoid_kashyyyk_fezrik_bendledon	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_29	KASHYYYK_MAIN	kas_world	AREA	0	-453.6	158.4	-20.0	-81	1	Flash Harrison	humanoid_kashyyyk_flash_harrison	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_kashyyyk_main_kachirho_30	KASHYYYK_MAIN	kas_world	AREA	0	-556.0	19.8	-71.2	-155	1	Gursan Bryes	humanoid_kashyyyk_gursan_bryes	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_31	KASHYYYK_MAIN	kas_world	AREA	0	-419.1	179.6	-88.8	-95	1	Harwakokok the Mighty	humanoid_kashyyyk_avatar_harwakokok	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_32	KASHYYYK_MAIN	kas_world	AREA	0	-513.1	19.3	-108.7	0	1	Ikvizi	humanoid_kashyyyk_ikvizi	INVULNERABLE	N	100	100	City	Kachirho	1	TURN	0	0	-	scared			600
+city_kashyyyk_main_kachirho_33	KASHYYYK_MAIN	kas_world	AREA	0	-578.9	18.8	-68.1	-159	1	Kiaanta (Patrol Squad)	humanoid_kashyyyk_marium_valmont	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_34	KASHYYYK_MAIN	kas_world	AREA	0	-478.4	211.3	-92.7	95	1	Mada Johnson	humanoid_kashyyyk_mada_johnson	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_35	KASHYYYK_MAIN	kas_world	AREA	0	-425.9	179.6	-85.2	-126	1	Ovarra	humanoid_kashyyyk_ovarra	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_36	KASHYYYK_MAIN	kas_world	AREA	0	-501.8	17.9	-113.0	4	1	Rroow	humanoid_kashyyyk_rroow	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_37	KASHYYYK_MAIN	kas_world	AREA	0	-667.7	18.8	-116.1	-177	1	Stren Colo	humanoid_kashyyyk_stren_colo	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_38	KASHYYYK_MAIN	kas_world	AREA	0	-465.4	158.1	-19.5	-174	1	Unluto	humanoid_kashyyyk_unluto_bartender	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_39	KASHYYYK_MAIN	kas_world	AREA	0	-589.2	18.5	-103.3	0	1	Vryyyr (Master Hunter)	humanoid_kashyyyk_wke_vryyyr	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_40	KASHYYYK_MAIN	kas_world	AREA	0	-507.8	19.3	-111.9	-126	1	Wrelaac	humanoid_kashyyyk_wrelaac	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_41	KASHYYYK_MAIN	kas_world	AREA	0	-502.2	18.8	-74.1	-123	1	Kymayrr	humanoid_kashyyyk_kymayrr	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_42	KASHYYYK_MAIN	kas_world	AREA	0	-508.8	18.3	-66.3	-160	1	Tien Wallub	humanoid_kashyyyk_tien_wallub	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_43	KASHYYYK_MAIN	kas_world	AREA	0	-691.3	18.8	-136.3	99	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_44	KASHYYYK_MAIN	kas_world	AREA	0	-688.1	18.8	-136.9	-85	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_45	KASHYYYK_MAIN	kas_world	AREA	0	-689.3	18.8	-133.7	-164	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_46	KASHYYYK_MAIN	kas_world	AREA	0	-675.1	18.8	-140.2	170	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_47	KASHYYYK_MAIN	kas_world	AREA	0	-584.8	18.7	-140.3	78	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	5	0	-	idle			600
+city_kashyyyk_main_kachirho_48	KASHYYYK_MAIN	kas_world	AREA	0	-581.0	18.5	-97.1	168	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_49	KASHYYYK_MAIN	kas_world	AREA	0	-580.5	18.3	-99.9	-14	1	Trandoshan Researcher	humanoid_clone_trandoshan_researcher	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_50	KASHYYYK_MAIN	kas_world	AREA	0	-640.2	18.8	-19.3	-47	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_51	KASHYYYK_MAIN	kas_world	AREA	0	-545.9	17.8	-86.6	-61	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_52	KASHYYYK_MAIN	kas_world	AREA	0	-559.6	19.8	-69.2	-147	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_sitting_chair			600
+city_kashyyyk_main_kachirho_53	KASHYYYK_MAIN	kas_world	AREA	0	-590.9	18.2	-71.8	148	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_54	KASHYYYK_MAIN	kas_world	AREA	0	-588.9	17.9	-74.4	-42	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_55	KASHYYYK_MAIN	kas_world	AREA	0	-590.9	17.9	-76.3	3	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_56	KASHYYYK_MAIN	kas_world	AREA	0	-603.9	18.8	-103.6	-33	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_sitting_ground			600
+city_kashyyyk_main_kachirho_57	KASHYYYK_MAIN	kas_world	AREA	0	-491.0	29.9	-53.3	-65	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_58	KASHYYYK_MAIN	kas_world	AREA	0	-493.8	29.9	-52.0	113	1	a smuggler	humanoid_summon_smuggler_buddy_1	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_59	KASHYYYK_MAIN	kas_world	AREA	0	-509.7	24.5	-56.4	-138	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_60	KASHYYYK_MAIN	kas_world	AREA	0	-550.9	19.0	-129.4	160	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_61	KASHYYYK_MAIN	kas_world	AREA	0	-552.7	19.0	-130.1	126	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_62	KASHYYYK_MAIN	kas_world	AREA	0	-551.7	19.3	-106.4	61	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_63	KASHYYYK_MAIN	kas_world	AREA	0	-549.8	19.3	-105.2	-119	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_64	KASHYYYK_MAIN	kas_world	AREA	0	-540.0	17.8	-86.0	-169	1	a Wookiee brawler	humanoid_wookiee_brawler	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_sitting_ground			600
+city_kashyyyk_main_kachirho_65	KASHYYYK_MAIN	kas_world	AREA	0	-539.3	17.9	-90.6	-40	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_66	KASHYYYK_MAIN	kas_world	AREA	0	-556.6	18.8	-80.4	-110	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle			600
+city_kashyyyk_main_kachirho_67	KASHYYYK_MAIN	kas_world	AREA	0	-518.2	18.5	-87.0	63	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_kashyyyk_main_kachirho_68	KASHYYYK_MAIN	kas_world	AREA	0	-487.4	18.3	-106.5	89	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	5	0	-	idle			600
+city_kashyyyk_main_kachirho_69	KASHYYYK_MAIN	kas_world	PATROL	0	-556.7	19.8	-72.7	0	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kachirho	1	PATROL	0	patrol_kashyyyk_main_1500	column	idle			600
+city_kashyyyk_main_kachirho_70	KASHYYYK_MAIN	kas_world	PATROL	0	-473.1	29.90	-10.2	0	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	PATROL	0	patrol_kashyyyk_main_1400	column	idle			600
+city_kashyyyk_main_kachirho_71	KASHYYYK_MAIN	kas_world	PATROL	0	-744.1	18.6	257.4	0	1	a Wookiee villager	humanoid_kashyyyk_qst_wookiee_civilians	INVULNERABLE	N	100	100	City	Kachirho	1	PATROL	0	patrol_kashyyyk_main_1600	column	idle			600
+city_kashyyyk_main_kachirho_72	KASHYYYK_MAIN	kas_world	AREA	0	-666.8	18.8	-115.5	-5	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_kashyyyk_main_kachirho_73	KASHYYYK_MAIN	kas_world	AREA	0	-646.5	19.6	-133.1	-71	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_74	KASHYYYK_MAIN	kas_world	AREA	0	-649.4	19.4	-132.2	107	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
+city_kashyyyk_main_kachirho_75	KASHYYYK_MAIN	kas_world	AREA	0	-663.6	18.5	-132.3	-104	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600

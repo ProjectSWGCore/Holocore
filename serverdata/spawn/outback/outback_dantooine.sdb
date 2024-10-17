@@ -1,0 +1,100 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+outback_dantooine_1	DANTOOINE	dan_world	AREA	0	-2175.4	7.9	-2226.5	0	1	a bile-drenched quenker	creature_quenker_bile_dre	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_2	DANTOOINE	dan_world	AREA	0	-255.0	2.1	5944.7	0	1	a bile-drenched quenker	creature_quenker_bile_dre	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_3	DANTOOINE	dan_world	AREA	0	-2999.1	1.4	6669.4	0	1	a bile-drenched quenker	creature_quenker_bile_dre	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_4	DANTOOINE	dan_world	AREA	0	-4433.4	2.2	5300.0	0	1	a Dantari battlelord	humanoid_dantari_battlelord	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_5	DANTOOINE	dan_world	AREA	0	3215.2	1.0	5998.1	0	1	a Dantari battlelord	humanoid_dantari_battlelord	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_6	DANTOOINE	dan_world	AREA	0	-4440.3	3.3	5290.9	0	1	a Dantari raider	humanoid_dantari_raider	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_7	DANTOOINE	dan_world	AREA	0	3208.9	1.4	5992.4	0	1	a Dantari raider	humanoid_dantari_raider	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_8	DANTOOINE	dan_world	AREA	0	2911.9	2.2	4517.3	0	1	a Dark Jedi Sentinel	humanoid_jedi_dark_sentinel	AGGRESSIVE	B	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_9	DANTOOINE	dan_world	AREA	0	-7074.8	0.3	-6148.4	0	1	a dark side savage	humanoid_jedi_dark_savage	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_10	DANTOOINE	dan_world	AREA	0	-1953.4	1.2	839.7	0	1	a dark side savage	humanoid_jedi_dark_savage	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_11	DANTOOINE	dan_world	AREA	0	1559.3	7.1	1743.0	0	1	a domestic bol mount	creature_bol_mount_domestic	INVULNERABLE	N	100	100	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_12	DANTOOINE	dan_world	AREA	0	4891.8	23.3	4511.5	0	1	a feral Force wielder	humanoid_jedi_force_wielder_feral	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_13	DANTOOINE	dan_world	AREA	0	-739.1	1.6	2103.3	0	1	a feral Force wielder	humanoid_jedi_force_wielder_feral	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_14	DANTOOINE	dan_world	AREA	0	-3117.5	0.5	3415.7	0	1	a feral Force wielder	humanoid_jedi_force_wielder_feral	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_15	DANTOOINE	dan_world	AREA	0	899.4	21.0	1394.8	0	1	a force crystal hunter	humanoid_jedi_force_crystal_hunter	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_16	DANTOOINE	dan_world	AREA	0	1920.9	1.4	-4745.8	0	1	a Force-sensitive crypt crawler	humanoid_jedi_force_sensitive_crypt_crawler	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_17	DANTOOINE	dan_world	AREA	0	5020.9	16.9	6873.8	0	1	a Force-sensitive crypt crawler	humanoid_jedi_force_sensitive_crypt_crawler	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_18	DANTOOINE	dan_world	AREA	0	2529.5	56.6	-2857.7	0	1	a Force-sensitive renegade	humanoid_jedi_force_sensitive_renegade	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_19	DANTOOINE	dan_world	AREA	0	-922.5	7.9	6916.0	0	1	a Force-sensitive renegade	humanoid_jedi_force_sensitive_renegade	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_20	DANTOOINE	dan_world	AREA	0	-2083.3	2.6	-322.3	0	1	a forsaken force drifter	humanoid_jedi_forsaken_force_drifter	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_21	DANTOOINE	dan_world	AREA	0	-4218.5	33.0	4259.7	0	1	a forsaken force drifter	humanoid_jedi_forsaken_force_drifter	ATTACKABLE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_22	DANTOOINE	dan_world	AREA	0	1360.1	24.3	5196.3	0	1	a Janta harvester	humanoid_janta_harvester	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_23	DANTOOINE	dan_world	AREA	0	-3387.2	10.9	-4728.4	0	1	a Janta loreweaver	humanoid_janta_loreweaver	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_24	DANTOOINE	dan_world	AREA	0	-6187.0	35.5	2696.4	0	1	a Janta primalist	humanoid_janta_primalist	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_25	DANTOOINE	dan_world	AREA	0	5458.1	2.0	5837.4	0	1	a Janta rockshaper	humanoid_janta_rockshaper	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_26	DANTOOINE	dan_world	AREA	0	-4558.0	3.5	2742.5	0	1	a Janta rockshaper	humanoid_janta_rockshaper	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_27	DANTOOINE	dan_world	AREA	0	-7276.5	2.5	4324.1	0	1	a Janta rockshaper	humanoid_janta_rockshaper	ATTACKABLE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_28	DANTOOINE	dan_world	AREA	0	4616.4	3.0	3644.5	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_29	DANTOOINE	dan_world	AREA	0	-478.6	8.1	6560.4	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_30	DANTOOINE	dan_world	AREA	0	973.0	14.5	2419.0	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_31	DANTOOINE	dan_world	AREA	0	-1186.9	22.5	4101.4	0	1	a Janta scout	humanoid_janta_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_32	DANTOOINE	dan_world	AREA	0	-1117.5	1.4	-3397.9	0	1	a Janta shaman	humanoid_janta_shaman	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_33	DANTOOINE	dan_world	AREA	0	-2779.7	13.6	5665.8	0	1	a Janta shaman	humanoid_janta_shaman	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_34	DANTOOINE	dan_world	AREA	0	2740.3	20.7	3358.8	0	1	a Janta soothsayer	humanoid_janta_soothsayer	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_35	DANTOOINE	dan_world	AREA	0	-7271.4	3.4	4327.4	0	1	a Janta tribesman	humanoid_janta_tribesman	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_36	DANTOOINE	dan_world	AREA	0	-2993.9	23.2	132.2	0	1	a Janta warrior	humanoid_janta_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_37	DANTOOINE	dan_world	AREA	0	-6195.4	35.0	2702.8	0	1	a Janta warrior	humanoid_janta_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_38	DANTOOINE	dan_world	AREA	0	-3991.4	18.3	2137.5	0	1	a Kunga clan leader	humanoid_kunga_clan_leader	ATTACKABLE	B	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_39	DANTOOINE	dan_world	AREA	0	-4058.0	2.1	-737.4	0	1	a Kunga clan primalist	humanoid_kunga_clan_primalist	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_40	DANTOOINE	dan_world	AREA	0	-1562.1	7.0	5463.5	0	1	a Kunga herbalist	humanoid_kunga_herbalist	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_41	DANTOOINE	dan_world	AREA	0	1048.1	0.2	3624.2	0	1	a Kunga hunter	humanoid_kunga_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_42	DANTOOINE	dan_world	AREA	0	-3996.3	18.2	2120.3	0	1	a Kunga hunter	humanoid_kunga_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_43	DANTOOINE	dan_world	AREA	0	-206.5	12.4	4866.0	0	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_44	DANTOOINE	dan_world	AREA	0	373.3	2.0	7234.0	0	1	a Kunga loreweaver	humanoid_kunga_loreweaver	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_45	DANTOOINE	dan_world	AREA	0	-2495.4	26.1	1858.3	0	1	a Kunga rockshaper	humanoid_kunga_rockshaper	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_46	DANTOOINE	dan_world	AREA	0	-2459.2	6.4	4580.8	0	1	a Kunga rockshaper	humanoid_kunga_rockshaper	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_47	DANTOOINE	dan_world	AREA	0	-201.1	12.3	4861.4	0	1	a Kunga scout	humanoid_kunga_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_48	DANTOOINE	dan_world	AREA	0	334.3	16.5	5551.1	0	1	a Kunga scout	humanoid_kunga_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_49	DANTOOINE	dan_world	AREA	0	-4657.4	7.6	-451.8	0	1	a Kunga shaman	humanoid_kunga_shaman	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_50	DANTOOINE	dan_world	AREA	0	-504.6	8.1	2063.6	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_51	DANTOOINE	dan_world	AREA	0	-3972.7	17.2	2142.9	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_52	DANTOOINE	dan_world	AREA	0	-3379.5	11.1	-4724.6	0	1	a Kunga warrior	humanoid_kunga_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_53	DANTOOINE	dan_world	AREA	0	4326.7	25.1	3908.3	0	1	a Mokk clan leader	humanoid_mokk_clan_leader	AGGRESSIVE	E	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_54	DANTOOINE	dan_world	AREA	0	-3763.3	1.2	2544.3	0	1	a Mokk clan leader	humanoid_mokk_clan_leader	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_55	DANTOOINE	dan_world	AREA	0	-3756.1	1.5	2548.2	0	1	a Mokk harvester	humanoid_mokk_harvester	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_56	DANTOOINE	dan_world	AREA	0	4335.9	25.6	3911.1	0	1	a Mokk herbalist	humanoid_mokk_herbalist	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_57	DANTOOINE	dan_world	AREA	0	1179.1	13.0	7049.4	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_58	DANTOOINE	dan_world	AREA	0	-2567.8	15.4	2602.6	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_59	DANTOOINE	dan_world	AREA	0	1512.2	1.1	4657.6	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_60	DANTOOINE	dan_world	AREA	0	-6847.0	35.6	4254.3	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_61	DANTOOINE	dan_world	AREA	0	4517.9	3.0	-6494.3	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_62	DANTOOINE	dan_world	AREA	0	4501.8	2.0	-6496.5	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_63	DANTOOINE	dan_world	AREA	0	4491.9	3.7	-6481.6	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_64	DANTOOINE	dan_world	AREA	0	-5750.2	35.5	1939.8	0	1	a Mokk hunter	humanoid_mokk_hunter	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_65	DANTOOINE	dan_world	AREA	0	-6055.4	2.2	1133.1	0	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_66	DANTOOINE	dan_world	AREA	0	-1927.7	7.0	4615.6	0	1	a Mokk rockshaper	humanoid_mokk_rockshaper	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_67	DANTOOINE	dan_world	AREA	0	-1817.0	2.8	2831.3	0	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_68	DANTOOINE	dan_world	AREA	0	-1823.4	9.3	3796.8	0	1	a Mokk scout	humanoid_mokk_scout	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_69	DANTOOINE	dan_world	AREA	0	6063.2	2.1	1898.7	0	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_70	DANTOOINE	dan_world	AREA	0	-4977.4	63.4	6368.0	0	1	a Mokk shaman	humanoid_mokk_shaman	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_71	DANTOOINE	dan_world	AREA	0	-5791.8	15.0	3444.9	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_72	DANTOOINE	dan_world	AREA	0	-5744.5	35.5	1918.6	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_73	DANTOOINE	dan_world	AREA	0	1554.3	7.2	1762.8	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_74	DANTOOINE	dan_world	AREA	0	4330.2	24.7	3913.6	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_75	DANTOOINE	dan_world	AREA	0	-3762.8	1.1	2536.3	0	1	a Mokk warrior	humanoid_mokk_warrior	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_76	DANTOOINE	dan_world	AREA	0	1929.4	10.5	1461.2	0	1	a novice force mystic	humanoid_jedi_novice_force_mystic	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_77	DANTOOINE	dan_world	AREA	0	-4506.4	69.1	1614.9	0	1	a novice force mystic	humanoid_jedi_novice_force_mystic	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_78	DANTOOINE	dan_world	AREA	0	-5170.6	35.3	2699.2	0	1	a novice force mystic	humanoid_jedi_novice_force_mystic	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_79	DANTOOINE	dan_world	AREA	0	-2488.2	2.8	3421.8	0	1	a novice force mystic	humanoid_jedi_novice_force_mystic	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_80	DANTOOINE	dan_world	AREA	0	288.5	2.0	3523.2	0	1	a quenker ravager	creature_quenker_ravager	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_81	DANTOOINE	dan_world	AREA	0	-2993.8	1.4	6670.5	0	1	a savage quenker	creature_quenker_savage	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_82	DANTOOINE	dan_world	AREA	0	285.7	2.5	3528.6	0	1	a savage quenker	creature_quenker_savage	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_83	DANTOOINE	dan_world	AREA	0	5472.4	1.9	5847.5	72	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Dantooine	1	IDLE	0	0	-	idle			600
+outback_dantooine_84	DANTOOINE	dan_world	AREA	0	2150.6	23.6	292.9	0	1	a stranded Rebel scout	humanoid_rebel_stranded_scout	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_85	DANTOOINE	dan_world	AREA	0	1788.1	1.3	3201.2	0	1	a stranded Rebel scout	humanoid_rebel_stranded_scout	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_86	DANTOOINE	dan_world	AREA	0	1940.6	16.0	2171.5	0	1	a stranded Rebel scout	humanoid_rebel_stranded_scout	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_87	DANTOOINE	dan_world	AREA	0	-5965.0	2.7	-4571.8	0	1	a thug	humanoid_thug	INVULNERABLE	N	100	100	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_88	DANTOOINE	dan_world	AREA	0	6562.4	5.0	-164.3	0	1	a thune grassland guardian	creature_thune_grassland_guardian	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_89	DANTOOINE	dan_world	AREA	0	-5655.4	24.0	7077.1	0	1	a thune grassland guardian	creature_thune_grassland_guardian	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_90	DANTOOINE	dan_world	AREA	0	6555.2	5.0	-162.1	0	1	a thune herd leader	creature_thune_herd_leader	ATTACKABLE	E	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_91	DANTOOINE	dan_world	AREA	0	-5661.2	23.2	7069.7	0	1	a thune herd leader	creature_thune_herd_leader	ATTACKABLE	E	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_92	DANTOOINE	dan_world	AREA	0	1630.7	22.6	5937.0	0	1	a vexed voritor lizard	creature_voritor_lizard_vexed	AGGRESSIVE	N	51	60	Outback	Dantooine	1	TURN	0	0	-	idle			600
+outback_dantooine_93	DANTOOINE	dan_world	AREA	0	1635.6	22.4	5929.8	0	1	a voritor lizard	creature_voritor_lizard	AGGRESSIVE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_94	DANTOOINE	dan_world	AREA	0	1931.2	15.7	2169.1	0	1	an abandoned Rebel private	humanoid_rebel_abandonded_private	ATTACKABLE	N	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_95	DANTOOINE	dan_world	AREA	0	5474.2	1.4	5841.0	-17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Dantooine	1	IDLE	0	0	-	idle			600
+outback_dantooine_96	DANTOOINE	dan_world	AREA	0	-1884.4	2.7	500.7	0	1	an untrained wielder of the Dark Side	humanoid_jedi_dark_untrained_wielder	AGGRESSIVE	E	51	60	Outback	Dantooine	1	LOITER	5	0	-	idle			600
+outback_dantooine_97	DANTOOINE	dan_world	AREA	0	2099.4	80.8	7435.5	167	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	Outback	Dantooine	1	IDLE	0	0	-	idle			600
+outback_dantooine_98	DANTOOINE	dan_world	AREA	0	-6806.4	126.0	6025.1	173	1	Mol Ni'mai	humanoid_ris_inventor	INVULNERABLE	N	100	100	Outback	Dantooine	1	IDLE	0	0	-	idle			600

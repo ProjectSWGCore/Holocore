@@ -1,0 +1,70 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_corellia_vreni_island_1	CORELLIA	cor_vreni_cantina	AREA	1	43.2	0.1	-0.1	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_2	CORELLIA	cor_vreni_cantina	AREA	1	45.2	0.1	0.9	-117	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_3	CORELLIA	cor_vreni_cantina	AREA	3	-1.1	-0.9	-2.5	157	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_4	CORELLIA	cor_vreni_cantina	AREA	3	3.6	-0.9	-8.7	135	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_5	CORELLIA	cor_vreni_cantina	AREA	3	-7.9	-0.9	-4.9	179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_6	CORELLIA	cor_vreni_cantina	AREA	3	21.9	-0.9	3.2	-25	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_7	CORELLIA	cor_vreni_cantina	AREA	3	-0.7	-0.9	-4.8	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_8	CORELLIA	cor_vreni_cantina	AREA	3	23.3	-0.9	-9	53	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_9	CORELLIA	cor_vreni_cantina	AREA	3	-7.9	-0.9	-5.9	0	1	a Corellia Times reporter	humanoid_corellia_times_reporter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_10	CORELLIA	cor_vreni_cantina	AREA	3	26.4	-0.9	-8.7	-69	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_11	CORELLIA	cor_vreni_cantina	AREA	3	21.1	-0.9	4.9	154	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_12	CORELLIA	cor_vreni_cantina	AREA	3	4.7	-0.9	-9.8	-1	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_vreni_island_13	CORELLIA	cor_vreni_cantina	AREA	3	2.8	-0.9	9.6	-1	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_14	CORELLIA	cor_vreni_cantina	AREA	3	2.8	-0.9	10.7	-179	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_vreni_island_15	CORELLIA	cor_vreni_cantina	AREA	3	4.7	-0.9	-8.7	-179	1	an Ithorian male	humanoid_patron_ithorian_male	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_16	CORELLIA	cor_vreni_cantina	AREA	7	1.0	-0.9	21.5	150	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_vreni_island_17	CORELLIA	cor_vreni_cantina	AREA	8	-7.1	-0.9	-22.1	-85	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_18	CORELLIA	cor_vreni_cantina	AREA	8	-5.0	-0.9	-21.7	-29	1	Venthan Chassu	humanoid_venthan_chassu	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_19	CORELLIA	cor_vreni_cantina	AREA	11	-28.4	-0.9	0.3	90	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle		recruiter_rebel	600
+city_corellia_vreni_island_20	CORELLIA	cor_vreni_cantina	AREA	13	-30.0	-0.5	10.6	40	1	Vinya Maysor	humanoid_vinya_maysor	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_21	CORELLIA	cor_vreni_hotel	AREA	8	-6.2	1.6	-7.2	-154	1	Karrek Flim	humanoid_karrek_flim	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_22	CORELLIA	cor_vreni_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_23	CORELLIA	cor_vreni_salon	AREA	1	-6.5	0.6	-1.1	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_24	CORELLIA	cor_vreni_salon	AREA	1	-6.5	0.6	-7.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_25	CORELLIA	cor_vreni_salon	AREA	1	-5.5	0.6	-3	-23	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_26	CORELLIA	cor_vreni_small_house	AREA	3	4.8	0.7	2.9	19	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	conversation			600
+city_corellia_vreni_island_27	CORELLIA	cor_vreni_small_house	AREA	3	5.5	0.7	4.6	-175	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_28	CORELLIA	cor_vreni_small_house	AREA	3	2.7	0.7	4.6	169	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_29	CORELLIA	cor_world	AREA	0	-5664.4	14.6	-6179.2	90	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	11	20	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_30	CORELLIA	cor_world	AREA	0	-5534.9	23.4	-6203.8	35	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	11	20	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_31	CORELLIA	cor_world	AREA	0	-5502.5	23.4	-6184.1	-90	1	a battle ready Rebel soldier	humanoid_rebel_soldier_battle_ready	ATTACKABLE	E	11	20	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_32	CORELLIA	cor_world	AREA	0	-5517.7	23.4	-6203.2	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
+city_corellia_vreni_island_33	CORELLIA	cor_world	AREA	0	-5295	4	-6427.1	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
+city_corellia_vreni_island_34	CORELLIA	cor_world	AREA	0	-5161	4.8	-6443.6	27	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_35	CORELLIA	cor_world	AREA	0	-5518.6	23.4	-6190.7	50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_36	CORELLIA	cor_world	AREA	0	-5451.6	23.6	-6208.9	124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_37	CORELLIA	cor_world	AREA	0	-5452.1	23.9	-6238.4	115	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_38	CORELLIA	cor_world	AREA	0	-5500.4	23.4	-6221.5	-40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_39	CORELLIA	cor_world	AREA	0	-5513.3	23.4	-6222.5	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_40	CORELLIA	cor_world	AREA	0	-5369.1	23.9	-6239.9	100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_41	CORELLIA	cor_world	AREA	0	-5273.5	4	-6429.4	162	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_42	CORELLIA	cor_world	AREA	0	-5298.8	4	-6418.1	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_43	CORELLIA	cor_world	AREA	0	-5299	4	-6433.9	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_44	CORELLIA	cor_world	AREA	0	-5155.9	4.1	-6423.5	-32	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_vreni_island_45	CORELLIA	cor_world	AREA	0	-5551.5	23.4	-6174.3	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_46	CORELLIA	cor_world	AREA	0	-5554.1	23.4	-6178.2	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_47	CORELLIA	cor_world	AREA	0	-5558.3	23.4	-6126.1	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_48	CORELLIA	cor_world	AREA	0	-5551.9	23.4	-6117.2	0	1	a Corsec inspector	humanoid_smuggler_patrol_thief_5	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_49	CORELLIA	cor_world	AREA	0	-5501.7	23.4	-6230.8	0	1	a crack Rebel rifleman	humanoid_rebel_rifleman_crack	ATTACKABLE	E	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_50	CORELLIA	cor_world	AREA	0	-5159	4.7	-6441.9	-90	1	a Quarren	humanoid_patron_quarren	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_vreni_island_51	CORELLIA	cor_world	AREA	0	-5500.5	23.5	-6238.6	0	1	a Rebel liberator	humanoid_rebel_liberator	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_52	CORELLIA	cor_world	AREA	0	-5498.2	23.5	-6237.1	0	1	a Rebel liberator	humanoid_rebel_liberator	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_53	CORELLIA	cor_world	AREA	0	-5166.7	4.0	-6422.0	90	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle		recruiter_rebel	600
+city_corellia_vreni_island_54	CORELLIA	cor_world	AREA	0	-5528.7	23.0	-6184.0	90	1	a Rebel recruiter	humanoid_rebel_recruiter	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle		recruiter_rebel	600
+city_corellia_vreni_island_55	CORELLIA	cor_world	AREA	0	-5481.1	23.4	-6212.0	0	1	a Rebel security officer	humanoid_rebel_security_officer	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_56	CORELLIA	cor_world	AREA	0	-5554.0	15.1	-6064.6	0	1	a Rebel security officer	humanoid_rebel_security_officer	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_57	CORELLIA	cor_world	AREA	0	-5504.5	23.4	-6230.9	0	1	a Rebel soldier	humanoid_rebel_soldier	ATTACKABLE	N	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_58	CORELLIA	cor_world	AREA	0	-5294.8	4	-6425.5	106	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
+city_corellia_vreni_island_59	CORELLIA	cor_world	AREA	0	-5538.9	16.5	-6054.6	-179	1	a watchful Rebel guard	humanoid_rebel_guard_watchful	ATTACKABLE	E	11	20	City	Vreni Island	1	IDLE	0	0	-	idle			600
+city_corellia_vreni_island_60	CORELLIA	cor_world	AREA	0	-5412.2	24.9	-6219.4	0	1	a watchful Rebel guard	humanoid_rebel_guard_watchful	ATTACKABLE	E	11	20	City	Vreni Island	1	TURN	0	0	-	idle			600
+city_corellia_vreni_island_61	CORELLIA	cor_world	AREA	0	-5429.0	24.0	-6219.4	0	1	a watchful Rebel guard	humanoid_rebel_guard_watchful	ATTACKABLE	E	11	20	City	Vreni Island	1	TURN	0	0	-	idle			600
+city_corellia_vreni_island_62	CORELLIA	cor_world	AREA	0	-5502.9	23.4	-6229.4	0	1	a watchful Rebel guard captain	humanoid_rebel_guard_captain_watchful	ATTACKABLE	E	11	20	City	Vreni Island	1	LOITER	5	0	-	idle			600
+city_corellia_vreni_island_63	CORELLIA	cor_world	PATROL	0	-5282.7	4.0	-6427.9	0	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Vreni Island	1	PATROL	0	patrol_corellia_2500	column	idle		simple_droid_sarcastic_alert_2	600
+city_corellia_vreni_island_64	CORELLIA	cor_world	AREA	0	-5485.6	23.4	-6178.6	-96	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	happy			600
+city_corellia_vreni_island_65	CORELLIA	cor_world	AREA	0	-5539.5	23.4	-6210	-88	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_vreni_island_66	CORELLIA	cor_world	PATROL	0	-5530.1	23.4	-6190.8	0	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Vreni Island	1	PATROL	0	patrol_corellia_300	column	idle			600
+city_corellia_vreni_island_67	CORELLIA	cor_world	PATROL	0	-5159.9	4.0	-6394.6	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Vreni Island	1	PATROL	0	patrol_corellia_2600	column	idle			600
+city_corellia_vreni_island_68	CORELLIA	cor_world	AREA	0	-5544.9	23.4	-6161.9	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Vreni Island	1	IDLE	0	0	-	idle			600

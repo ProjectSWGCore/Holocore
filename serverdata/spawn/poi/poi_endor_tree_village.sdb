@@ -1,0 +1,18 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_tree_village_1	ENDOR	end_world	AREA	0	85.4	9.0	31.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	LOITER	5	0	-	idle			600
+poi_endor_tree_village_2	ENDOR	end_world	AREA	0	89.8	9.0	53.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	LOITER	5	0	-	idle			600
+poi_endor_tree_village_3	ENDOR	end_world	AREA	0	74.2	19.0	9.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_4	ENDOR	end_world	AREA	0	91.6	19.0	69.2	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_5	ENDOR	end_world	AREA	0	104.8	29.0	56.5	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_6	ENDOR	end_world	AREA	0	51.4	29.3	40.6	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_7	ENDOR	end_world	AREA	0	82.6	29.3	22.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_8	ENDOR	end_world	AREA	0	1529.9	5.4	-3155.8	-173	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation			600
+poi_endor_tree_village_9	ENDOR	end_world	AREA	0	1529.6	5.4	-3158.4	10	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation			600
+poi_endor_tree_village_10	ENDOR	end_world	AREA	0	1413.9	2.0	-3214.2	124	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	IDLE	0	0	-	idle			600
+poi_endor_tree_village_11	ENDOR	end_world	AREA	0	1424.3	1.0	-3225.3	-20	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation			600
+poi_endor_tree_village_12	ENDOR	end_world	AREA	0	1423.3	1.0	-3223.3	152	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	IDLE	0	0	-	conversation			600
+poi_endor_tree_village_13	ENDOR	end_world	AREA	0	1422.8	1.0	-3279.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_14	ENDOR	end_world	AREA	0	1476.4	1.0	-3272.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_15	ENDOR	end_world	AREA	0	1394.4	1.0	-3319.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600
+poi_endor_tree_village_16	ENDOR	end_world	AREA	0	1463.9	1.8	-3359.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Tree Village	1	TURN	0	0	-	idle			600

@@ -1,0 +1,33 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_giant_fynock_cave_1	TALUS	tal_giant_fynock_cave	AREA	4	49.5	-38.1	-97.0	0	1	a decay mite	creature_mite_decay	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_2	TALUS	tal_giant_fynock_cave	AREA	4	40.0	-38.1	-70.2	0	1	a putrid decay mite hatchling	creature_mite_decay_hatchling_putrid	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_3	TALUS	tal_giant_fynock_cave	AREA	4	40.8	-38.0	-98.6	0	1	a rot mite	creature_mite_rot	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_4	TALUS	tal_giant_fynock_cave	AREA	5	65.0	-50.2	-166.0	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_5	TALUS	tal_giant_fynock_cave	AREA	5	56.7	-46.2	-146.3	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_6	TALUS	tal_giant_fynock_cave	AREA	5	30.2	-52.0	-179.0	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_7	TALUS	tal_giant_fynock_cave	AREA	5	35.7	-49.6	-164.3	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_8	TALUS	tal_giant_fynock_cave	AREA	5	-7.8	-36.8	-139.2	0	1	a minor sludge panther	creature_panther_sludge_minor	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_9	TALUS	tal_giant_fynock_cave	AREA	5	-2.1	-37.4	-144.2	0	1	a sludge panther	creature_panther_sludge	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_10	TALUS	tal_giant_fynock_cave	AREA	5	46.4	-48.3	-180.8	0	1	a thug	humanoid_thug_trandoshan_male	INVULNERABLE	N	100	100	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_11	TALUS	tal_giant_fynock_cave	AREA	7	-8.6	-56.1	-231.8	0	1	a guf drolg	creature_guf_drolg	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_12	TALUS	tal_giant_fynock_cave	AREA	7	-22.3	-55.4	-258.4	0	1	a guf drolg female	creature_guf_drolg_female	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_13	TALUS	tal_giant_fynock_cave	AREA	7	-13.6	-57.7	-216.3	0	1	a minor guf drolg	creature_guf_drolg_minor	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_14	TALUS	tal_giant_fynock_cave	AREA	8	-92.4	-94.4	-136.3	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_15	TALUS	tal_giant_fynock_cave	AREA	8	-85.2	-93.1	-142.4	0	1	a Chunker punk	humanoid_chunker_punk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_16	TALUS	tal_giant_fynock_cave	AREA	8	-116.1	-61.7	-200.2	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_17	TALUS	tal_giant_fynock_cave	AREA	8	-67.0	-61.9	-196.6	0	1	a feared fynock youth	creature_fynock_youth_feared	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_18	TALUS	tal_giant_fynock_cave	AREA	8	-100.4	-62.2	-127.7	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_19	TALUS	tal_giant_fynock_cave	AREA	8	-63.3	-62.0	-171.6	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_20	TALUS	tal_giant_fynock_cave	AREA	8	-121.1	-61.4	-171.4	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_21	TALUS	tal_giant_fynock_cave	AREA	8	-97.4	-62.1	-105.4	0	1	a glutted fynock queen	creature_fynock_glutted_queen	AGGRESSIVE	B	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_22	TALUS	tal_giant_fynock_cave	AREA	9	-44.4	-61.9	-84.3	0	1	a clipped fynock	creature_fynock_clipped	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_23	TALUS	tal_giant_fynock_cave	AREA	9	-8.0	-60.3	-96.6	0	1	a frenzied fynock guardian	creature_fynock_frenzied_guardian	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_24	TALUS	tal_giant_fynock_cave	AREA	9	-45.9	-61.3	-111.5	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_25	TALUS	tal_giant_fynock_cave	AREA	9	-52.7	-60.7	-97.9	0	1	a giant fynock	creature_fynock_giant	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_26	TALUS	tal_giant_fynock_cave	AREA	11	-83.5	-93.6	-112.7	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_27	TALUS	tal_giant_fynock_cave	AREA	11	-101.9	-91.1	-111.0	0	1	a berserk kahmurra	creature_kahmurra_berserk	AGGRESSIVE	N	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_28	TALUS	tal_giant_fynock_cave	AREA	11	-91.2	-92.7	-95.9	0	1	a rabid mutant kahmurra	creature_kahmurra_mutant_rabid	AGGRESSIVE	E	41	50	POI	Giant Fynock Cave	1	TURN	0	0	-	idle			600
+poi_talus_giant_fynock_cave_29	TALUS	tal_world	AREA	0	1542.7	43.3	-878.9	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_30	TALUS	tal_world	AREA	0	1542.6	41.2	-847.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600
+poi_talus_giant_fynock_cave_31	TALUS	tal_world	AREA	0	1547.4	40.0	-894.8	0	1	a fynock	creature_fynock	ATTACKABLE	N	41	50	POI	Giant Fynock Cave	1	LOITER	5	0	-	idle			600

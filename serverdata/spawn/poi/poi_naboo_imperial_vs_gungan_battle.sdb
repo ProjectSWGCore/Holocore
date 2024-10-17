@@ -1,0 +1,14 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_naboo_imperial_vs_gungan_battle_1	NABOO	nab_world	AREA	0	4724.8	12.8	-3902.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_2	NABOO	nab_world	AREA	0	4738.1	12.7	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_3	NABOO	nab_world	AREA	0	4761.2	13.4	-3886.2	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_4	NABOO	nab_world	AREA	0	4775.1	14.0	-3891.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_5	NABOO	nab_world	AREA	0	4795.9	14.2	-3883.0	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_6	NABOO	nab_world	AREA	0	4809.8	13.6	-3872.1	0	1	a Gungan Soldier	humanoid_gungan_soldier	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_7	NABOO	nab_world	AREA	0	4736.7	10.6	-3847.9	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_8	NABOO	nab_world	AREA	0	4761.3	8.6	-3862.4	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_9	NABOO	nab_world	AREA	0	4779.8	11.8	-3839.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_10	NABOO	nab_world	AREA	0	4797.1	12.0	-3838.1	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_11	NABOO	nab_world	AREA	0	4787.2	9.6	-3855.0	179	1	a Swamp Trooper	humanoid_imperial_swamp_trooper	ATTACKABLE	E	21	30	POI	Imperial vs Gungan Battle	1	LOITER	5	0	-	idle			600
+poi_naboo_imperial_vs_gungan_battle_12	NABOO	nab_world	AREA	0	4750.3	13.6	-3903.7	0	1	Montrus	humanoid_borvo_montrus	ATTACKABLE	B	21	30	POI	Imperial vs Gungun Battle	1	LOITER	5	0	-	idle			600

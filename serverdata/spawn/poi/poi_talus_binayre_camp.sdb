@@ -1,0 +1,6 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_talus_binayre_camp_1	TALUS	tal_world	AREA	0	-1619.7	23.6	622.5	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	POI	Binayre Camp	1	TURN	0	0	-	idle			600
+poi_talus_binayre_camp_2	TALUS	tal_world	AREA	0	-1640.7	22.4	626.0	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
+poi_talus_binayre_camp_3	TALUS	tal_world	AREA	0	-1626.0	22.7	605.0	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600
+poi_talus_binayre_camp_4	TALUS	tal_world	AREA	0	-1619.4	24.9	649.0	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Camp	1	LOITER	5	0	-	idle			600

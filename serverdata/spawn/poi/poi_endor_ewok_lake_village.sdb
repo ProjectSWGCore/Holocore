@@ -1,0 +1,16 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+poi_endor_ewok_lake_village_1	ENDOR	end_world	AREA	0	4599.8	10.0	-2399.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_2	ENDOR	end_world	AREA	0	4607.6	30.3	-2413.1	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_3	ENDOR	end_world	AREA	0	4544.2	30.0	-2387.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_4	ENDOR	end_world	AREA	0	4543.8	40.3	-2349.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_5	ENDOR	end_world	AREA	0	4555.6	40.3	-2465.9	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_6	ENDOR	end_world	AREA	0	4545.5	40.0	-2404.7	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_7	ENDOR	end_world	AREA	0	4543.9	50.3	-2453.4	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_8	ENDOR	end_world	AREA	0	-666.4	1.0	-5082.8	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_9	ENDOR	end_world	AREA	0	-660.3	1.0	-5109.2	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_10	ENDOR	end_world	AREA	0	-614.0	1.9	-5098.5	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_11	ENDOR	end_world	AREA	0	-564.0	1.0	-5072.6	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	LOITER	5	0	-	idle			600
+poi_endor_ewok_lake_village_12	ENDOR	end_world	AREA	0	-496.2	0.5	-5014.8	0	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	TURN	0	0	-	idle			600
+poi_endor_ewok_lake_village_13	ENDOR	end_world	AREA	0	-473.4	2.1	-5052.6	147	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	IDLE	0	0	-	idle			600
+poi_endor_ewok_lake_village_14	ENDOR	end_world	AREA	0	-512.8	1.0	-5067.7	-58	1	an Ewok villager	humanoid_ewok_villager	ATTACKABLE	N	61	70	POI	Ewok Lake Village	1	IDLE	0	0	-	idle			600
