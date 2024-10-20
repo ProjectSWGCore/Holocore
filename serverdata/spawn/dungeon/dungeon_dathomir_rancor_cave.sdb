@@ -1,17 +1,17 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-dungeon_dathomir_rancor_cave_1	DATHOMIR	dat_cave	AREA	2	-48.5	-47.3	-13.1	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_2	DATHOMIR	dat_cave	AREA	2	-53.7	-68.2	-40.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_3	DATHOMIR	dat_cave	AREA	2	-45.6	-47.7	-59.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_4	DATHOMIR	dat_cave	AREA	3	-90.2	-63.2	-22.8	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_5	DATHOMIR	dat_cave	AREA	4	-79.6	-75.9	-61.4	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_6	DATHOMIR	dat_cave	AREA	5	-86.3	-46.8	-109.0	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_7	DATHOMIR	dat_cave	AREA	7	-89.8	-67.1	-136.9	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_8	DATHOMIR	dat_cave	AREA	8	-139.8	-66.9	-88.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_9	DATHOMIR	dat_cave	AREA	8	-145.2	-67.1	-124.1	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_10	DATHOMIR	dat_cave	AREA	8	-130.6	-66.7	-107.4	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_11	DATHOMIR	dat_cave	AREA	9	-187.1	-66.1	-101.2	0	1	an enraged bull rancor	creature_rancor_bull_enraged	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_12	DATHOMIR	dat_cave	AREA	11	-90.5	-46.8	-143.4	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_13	DATHOMIR	dat_cave	AREA	11	-76.6	-46.3	-138.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_14	DATHOMIR	dat_cave	AREA	11	-79.1	-46.0	-145.9	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
-dungeon_dathomir_rancor_cave_15	DATHOMIR	dat_world	AREA	0	-4223.4	25.9	-2089.1	0	1	an ancient bull rancor	creature_rancor_bull_ancient	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	LOITER	5	0	-	idle			600
+dungeon_dathomir_rancor_cave_1	DATHOMIR	dat_cave	AREA	2	-48.5	-47.3	-13.1	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_2	DATHOMIR	dat_cave	AREA	2	-53.7	-68.2	-40.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_3	DATHOMIR	dat_cave	AREA	2	-45.6	-47.7	-59.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_4	DATHOMIR	dat_cave	AREA	3	-90.2	-63.2	-22.8	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_5	DATHOMIR	dat_cave	AREA	4	-79.6	-75.9	-61.4	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_6	DATHOMIR	dat_cave	AREA	5	-86.3	-46.8	-109.0	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_7	DATHOMIR	dat_cave	AREA	7	-89.8	-67.1	-136.9	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_8	DATHOMIR	dat_cave	AREA	8	-139.8	-66.9	-88.5	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_9	DATHOMIR	dat_cave	AREA	8	-145.2	-67.1	-124.1	0	1	a mutant rancor	creature_rancor_mutant	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_10	DATHOMIR	dat_cave	AREA	8	-130.6	-66.7	-107.4	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_11	DATHOMIR	dat_cave	AREA	9	-187.1	-66.1	-101.2	0	1	an enraged bull rancor	creature_rancor_bull_enraged	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_12	DATHOMIR	dat_cave	AREA	11	-90.5	-46.8	-143.4	0	1	a gnarled rancor	creature_rancor_gnarled	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_13	DATHOMIR	dat_cave	AREA	11	-76.6	-46.3	-138.7	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_14	DATHOMIR	dat_cave	AREA	11	-79.1	-46.0	-145.9	0	1	a rancor youth	creature_rancor_youth	AGGRESSIVE	N	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600
+dungeon_dathomir_rancor_cave_15	DATHOMIR	dat_world	AREA	0	-4223.4	25.9	-2089.1	0	1	an ancient bull rancor	creature_rancor_bull_ancient	AGGRESSIVE	E	71	80	Dungeon	Rancor Cave	1	TURN	0	0	-	idle			600

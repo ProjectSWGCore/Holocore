@@ -1,0 +1,28 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+dungeon_rori_black_sun_outpost_bunker_1	RORI	ror_world	AREA	0	4838.6	76.1	-1084.6	-130	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_2	RORI	ror_world	AREA	0	4842.2	76.2	-1090.2	-130	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_3	RORI	rori_outpost	AREA	2	0.0	0.3	2.6	177	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_4	RORI	rori_outpost	AREA	2	-3.7	0.3	-4.5	-2	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_5	RORI	rori_outpost	AREA	3	-3.9	0.3	-4.0	-91	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_6	RORI	rori_outpost	AREA	7	19.0	-12.0	28.7	-94	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_7	RORI	rori_outpost	AREA	7	22.9	-12.0	35.9	-16	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_8	RORI	rori_outpost	AREA	9	17.5	-12.0	60.2	-174	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_9	RORI	rori_outpost	AREA	11	-3.5	-12.0	75.6	-101	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_10	RORI	rori_outpost	AREA	11	3.6	-12.0	79.3	178	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_11	RORI	rori_outpost	AREA	12	-7.3	-12.0	59.0	79	1	a blood thirsty borgle	creature_borgle_blood_thirsty	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_12	RORI	rori_outpost	AREA	18	34.7	-12.0	73.7	-47	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_13	RORI	rori_outpost	AREA	19	33.5	-20.0	111.7	175	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_14	RORI	rori_outpost	AREA	20	45.8	-20.0	112.5	173	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_15	RORI	rori_outpost	AREA	20	46.0	-20.0	108.6	-4	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_16	RORI	rori_outpost	AREA	20	50.9	-20.0	106.6	-52	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_17	RORI	rori_outpost	AREA	20	50.7	-20.0	115.1	-132	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_18	RORI	rori_outpost	AREA	40	47.6	-20.0	126.3	179	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_19	RORI	rori_outpost	AREA	40	44.3	-20.0	150.0	-94	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_20	RORI	rori_outpost	AREA	40	44.6	-20.0	157.6	-9	1	a technician	humanoid_technician	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_21	RORI	rori_outpost	AREA	41	48.8	-20.0	133.4	-94	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_22	RORI	rori_outpost	AREA	41	55.7	-20.0	135.1	-100	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_23	RORI	rori_outpost	AREA	41	39.3	-20.0	135.1	82	1	Black Sun Initiate	humanoid_black_sun_initiate	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_24	RORI	rori_outpost	AREA	41	47.8	-20.0	146.2	-179	1	Black Sun Minion	humanoid_black_sun_minion	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_25	RORI	rori_outpost	AREA	41	47.6	-20.0	151.4	177	1	Black Sun Smuggler	humanoid_black_sun_smuggler	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600
+dungeon_rori_black_sun_outpost_bunker_26	RORI	rori_outpost	AREA	45	105.7	-20.0	110.6	85	1	a miner	humanoid_miner	AGGRESSIVE	E	31	40	Dungeon	Nym Pirate Cave	1	IDLE	0	0	-	idle			600

@@ -119,7 +119,7 @@ city_tatooine_mos_eisley_116	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-13.8	7.
 city_tatooine_mos_eisley_117	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-17.2	8.0	-2.2	66	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_3			600
 city_tatooine_mos_eisley_118	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-15.5	8.0	0.2	82	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_oola	17		600
 city_tatooine_mos_eisley_119	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-4.0	7.0	-8.7	0	1	Otwi Opawl	humanoid_brawler_quest_otwi_opawl	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_120	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-1.6	7.0	7.4	-159	1	Sneg the Hand	humanoid_junk_sneg	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_120	TATOOINE	tat_moseisley_lucky_despot	AREA	2	-1.6	7.0	7.4	-159	1	Sneg the Hand (a junk dealer)	humanoid_junk_sneg	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_tatooine_mos_eisley_121	TATOOINE	tat_moseisley_lucky_despot	PATROL	2	-4.0	7.0	0.5	-91	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_4500	column	idle			600
 city_tatooine_mos_eisley_122	TATOOINE	tat_moseisley_lucky_despot	AREA	3	-24.6	9.0	-8.0	111	1	Ind	humanoid_ind	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_eisley_123	TATOOINE	tat_moseisley_lucky_despot	AREA	4	-23.8	9.0	0.6	-177	1	Lady Valarian	humanoid_lady_valarian	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600

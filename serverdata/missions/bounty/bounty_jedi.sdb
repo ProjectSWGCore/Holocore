@@ -1,0 +1,8 @@
+terrain	destroy_type	difficulty	string_file	title_key	description_key	creator	target	npc_id
+TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m1t	m1d	Jake the Fixer	Jedi	humanoid_jedi_dark
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m2t	m2d		Jedi	humanoid_jedi_dark
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m3t	m3d	Anonymous	Jedi	humanoid_jedi_dark
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m4t	m4d		Jedi	humanoid_jedi_dark
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m5t	m5d		Jedi	humanoid_jedi_dark
+TATOOINE	jedi	BOSS	mission/mission_bounty_jedi.stf	m6t	m6d		Jedi	humanoid_jedi_dark

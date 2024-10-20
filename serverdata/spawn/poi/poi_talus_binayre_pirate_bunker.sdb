@@ -1,14 +1,14 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
 poi_talus_binayre_pirate_bunker_1	TALUS	tal_binayre_bunker	AREA	2	3.7	0.3	-4.0	0	1	a Binayre hooligan	humanoid_binayre_hooligan	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-poi_talus_binayre_pirate_bunker_2	TALUS	tal_binayre_bunker	AREA	4	-3.4	-3.3	4.8	179	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
-poi_talus_binayre_pirate_bunker_3	TALUS	tal_binayre_bunker	AREA	5	4.6	-6.8	-4.7	0	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
-poi_talus_binayre_pirate_bunker_4	TALUS	tal_binayre_bunker	AREA	6	4.5	-10.3	-18.4	-90	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	IDLE	0	0	-	idle			600
+poi_talus_binayre_pirate_bunker_2	TALUS	tal_binayre_bunker	AREA	4	-3.4	-3.3	4.8	179	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+poi_talus_binayre_pirate_bunker_3	TALUS	tal_binayre_bunker	AREA	5	4.6	-6.8	-4.7	0	1	a Binayre scalawag	humanoid_binayre_scalawag	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
+poi_talus_binayre_pirate_bunker_4	TALUS	tal_binayre_bunker	AREA	6	4.5	-10.3	-18.4	-90	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_5	TALUS	tal_binayre_bunker	AREA	7	-5.8	-13.7	3.5	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_6	TALUS	tal_binayre_bunker	AREA	7	-2.5	-13.7	-6.4	0	1	a Binayre ruffian	humanoid_binayre_ruffian	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-poi_talus_binayre_pirate_bunker_7	TALUS	tal_binayre_bunker	AREA	8	3.2	-13.8	11.7	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+poi_talus_binayre_pirate_bunker_7	TALUS	tal_binayre_bunker	AREA	8	3.2	-13.8	11.7	0	1	a Binayre pirate	humanoid_binayre_pirate	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_8	TALUS	tal_binayre_bunker	AREA	9	15.7	-13.8	9.1	0	1	a Binayre smuggler	humanoid_binayre_smuggler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
-poi_talus_binayre_pirate_bunker_9	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	LOITER	5	0	-	idle			600
+poi_talus_binayre_pirate_bunker_9	TALUS	tal_binayre_bunker	AREA	9	13.9	-13.8	0.3	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_10	TALUS	tal_binayre_bunker	AREA	10	13.7	-11.5	-20.9	0	1	a Binayre chief	humanoid_binayre_chief	AGGRESSIVE	E	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_11	TALUS	tal_binayre_bunker	AREA	10	15.5	-13.8	-10.7	0	1	a Binayre swindler	humanoid_binayre_swindler	AGGRESSIVE	N	41	50	POI	Binayre Pirate Bunker	1	TURN	0	0	-	idle			600
 poi_talus_binayre_pirate_bunker_12	TALUS	tal_world	PATROL	0	5653.6	105.0	-4105.7	0	1	a pirate	humanoid_smuggler_patrol_thief_13	ATTACKABLE	N	41	50	POI	Binayre Pirate Bunker	2	PATROL	0	patrol_talus_600	column	idle			600

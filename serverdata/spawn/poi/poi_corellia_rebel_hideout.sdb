@@ -12,7 +12,7 @@ poi_corellia_rebel_hideout_9	CORELLIA	cor_hidden_reb_base	AREA	2	7.3	1.0	-8.2	-9
 poi_corellia_rebel_hideout_10	CORELLIA	cor_hidden_reb_base	AREA	2	-4.0	1.0	-0.9	26	1	R2-D2	droid_r2d2	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
 poi_corellia_rebel_hideout_11	CORELLIA	cor_hidden_reb_base	AREA	5	15.9	1.0	-1.6	73	1	a Rebel First Lieutenant	humanoid_rebel_first_lieutenant	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
 poi_corellia_rebel_hideout_12	CORELLIA	cor_hidden_reb_base	AREA	5	14.0	1.0	-4.9	150	1	a Rebel scout	humanoid_rebel_scout	ATTACKABLE	N	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
-poi_corellia_rebel_hideout_13	CORELLIA	cor_hidden_reb_base	AREA	5	15.3	1.0	-1.7	0	1	Battle Astromech	droid_rebel_detain_battle_astromech	AGGRESSIVE	E	11	20	POI	Rebel Hideout	1	LOITER	5	0	-	idle			600
+poi_corellia_rebel_hideout_13	CORELLIA	cor_hidden_reb_base	AREA	5	15.3	1.0	-1.7	0	1	Battle Astromech	droid_rebel_detain_battle_astromech	AGGRESSIVE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
 poi_corellia_rebel_hideout_14	CORELLIA	cor_hidden_reb_base	AREA	5	15.0	1.0	-6.5	-42	1	Major Qual'do Herm	humanoid_rebel_qualdo_herm	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
 poi_corellia_rebel_hideout_15	CORELLIA	cor_hidden_reb_base	AREA	7	-4.1	1.0	-20.8	-86	1	a Rebel Corporal	humanoid_rebel_corporal	ATTACKABLE	E	11	20	POI	Rebel Hideout	1	IDLE	0	0	-	idle			600
 poi_corellia_rebel_hideout_16	CORELLIA	cor_hidden_reb_base	AREA	7	0.0	1.0	-21.9	0	1	Wedge Antilles	humanoid_rebel_wedge_antilles	INVULNERABLE	N	100	100	POI	Rebel Hideout	1	IDLE	0	0	-	npc_sitting_chair			600
