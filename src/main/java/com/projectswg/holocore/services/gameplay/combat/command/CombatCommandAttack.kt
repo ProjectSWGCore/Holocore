@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -199,6 +198,7 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 			}
 		}
 
+		addBuff(source, source, combatCommand.buffNameSelf) // Add self buff
 		addBuff(source, creatureTarget, combatCommand.buffNameTarget) // Add target buff
 
 		var rawDamage = calculateBaseDamage(combatCommand, sourceWeapon, weaponDamageMod)
@@ -393,59 +393,23 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 		}
 
 		private fun calculateAtkPosMod(source: CreatureObject): Int {
-			if (Locomotion.RUNNING.isActive(source)) {
-				return -50
+			return when {
+				Locomotion.RUNNING.isActive(source) -> -50
+				Locomotion.STANDING.isActive(source) -> 0
+				Locomotion.KNEELING.isActive(source) -> 16
+				Locomotion.PRONE.isActive(source) -> 50
+				else -> 0
 			}
-
-			if (Locomotion.STANDING.isActive(source)) {
-				return 0
-			}
-
-			if (Locomotion.KNEELING.isActive(source)) {
-				return 16
-			}
-
-			if (Locomotion.PRONE.isActive(source)) {
-				return 50
-			}
-
-			return 0
 		}
 
 		private fun calculateDefPosMod(sourceWeapon: WeaponObject, target: CreatureObject): Int {
-			if (Locomotion.RUNNING.isActive(target)) {
-				return -25
+			return when {
+				Locomotion.RUNNING.isActive(target) -> -25
+				Locomotion.STANDING.isActive(target) -> 0
+				Locomotion.KNEELING.isActive(target) -> if (sourceWeapon.type.isRanged) -16 else 16
+				Locomotion.PRONE.isActive(target) -> if (sourceWeapon.type.isRanged) -25 else 25
+				else -> 0
 			}
-
-			if (Locomotion.STANDING.isActive(target)) {
-				return 0
-			}
-
-			if (Locomotion.KNEELING.isActive(target)) {
-				val sourceWeaponType = sourceWeapon.type
-
-				if (sourceWeaponType.isRanged) {
-					return -16
-				}
-
-				if (sourceWeaponType.isMelee) {
-					return 16
-				}
-			}
-
-			if (Locomotion.PRONE.isActive(target)) {
-				val sourceWeaponType = sourceWeapon.type
-
-				if (sourceWeaponType.isRanged) {
-					return -25
-				}
-
-				if (sourceWeaponType.isMelee) {
-					return 25
-				}
-			}
-
-			return 0
 		}
 
 		private fun calculateAccMod(source: CreatureObject, sourceWeapon: WeaponObject): Int {
