@@ -61,5 +61,5 @@ city_dantooine_pirate_outpost_58	DANTOOINE	dan_world	AREA	0	1629.2	4.0	-6414.9	-
 city_dantooine_pirate_outpost_59	DANTOOINE	dan_world	PATROL	0	1591.9	4.0	-6400.3	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dantooine_2100	column	idle		simple_droid_sarcastic_alert_2	600
 city_dantooine_pirate_outpost_60	DANTOOINE	dan_world	PATROL	0	1588.9	4.0	-6399.2	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Pirate Outpost	1	PATROL	0	patrol_dantooine_2200	column	idle		simple_droid_stupid_death_5	600
 city_dantooine_pirate_outpost_61	DANTOOINE	dan_world	AREA	0	1602.0	4.0	-6434.5	74	1	Daiv Dekven	humanoid_daiv_dekven	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
-city_dantooine_pirate_outpost_62	DANTOOINE	dan_world	AREA	0	1578.0	4.0	-6373.1	170	1	Quich Marae	humanoid_junk_quich	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600
+city_dantooine_pirate_outpost_62	DANTOOINE	dan_world	AREA	0	1578.0	4.0	-6373.1	170	1	Quich Marae (a junk dealer)	humanoid_junk_quich	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_dantooine_pirate_outpost_63	DANTOOINE	dan_world	AREA	0	1571.6	4.0	-6418.7	-1	1	Yras Shen-jen (a self-employed pilot)	humanoid_yras_shen_jen	INVULNERABLE	N	100	100	City	Pirate Outpost	1	IDLE	0	0	-	idle			600

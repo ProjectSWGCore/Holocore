@@ -7,8 +7,8 @@ city_tatooine_mos_taike_4	TATOOINE	tat_world	AREA	0	3731.8	5.5	2367.1	98	1	a bou
 city_tatooine_mos_taike_5	TATOOINE	tat_world	AREA	0	3950.0	54.0	2280.0	-39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
 city_tatooine_mos_taike_6	TATOOINE	tat_world	AREA	0	3868.8	28.1	2359.5	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
 city_tatooine_mos_taike_7	TATOOINE	tat_world	AREA	0	3854.8	28.0	2353.7	-91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
-city_tatooine_mos_taike_8	TATOOINE	tat_world	AREA	0	3776.4	8.9	2354.0	-82	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
-city_tatooine_mos_taike_9	TATOOINE	tat_world	AREA	0	3773.3	8.3	2354.5	101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		commoner	600
+city_tatooine_mos_taike_8	TATOOINE	tat_world	AREA	0	3776.4	8.9	2354.0	-82	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_sitting_chair		commoner	600
+city_tatooine_mos_taike_9	TATOOINE	tat_world	AREA	0	3773.3	8.3	2354.5	101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	npc_sitting_chair		commoner	600
 city_tatooine_mos_taike_10	TATOOINE	tat_world	AREA	0	3979.8	7.8	2505.6	33	1	a Hutt assassin	humanoid_hutt_assassin	AGGRESSIVE	B	5	10	City	Mos Taike	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_taike_11	TATOOINE	tat_world	AREA	0	3794.8	8.4	2327.2	21	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_taike_12	TATOOINE	tat_world	AREA	0	3773.2	8.6	2371.6	35	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	conversation			600
@@ -26,4 +26,4 @@ city_tatooine_mos_taike_23	TATOOINE	tat_world	AREA	0	3770.0	8.3	2345.0	9	1	Bren 
 city_tatooine_mos_taike_24	TATOOINE	tat_world	AREA	0	3808.4	14.3	2397.3	-33	1	Eyan McDermitt	humanoid_spy_pirate_leader	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_taike_25	TATOOINE	tat_world	AREA	0	3838.0	16.1	2334.6	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_taike_26	TATOOINE	tat_world	AREA	0	3775.0	9.1	2374.0	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_taike_27	TATOOINE	tat_world	AREA	0	3865.9	27.5	2332.3	-53	1	Nathan Blyskipper	humanoid_junk_nathan	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_taike_27	TATOOINE	tat_world	AREA	0	3865.9	27.5	2332.3	-53	1	Nathan Blyskipper (a junk dealer)	humanoid_junk_nathan	INVULNERABLE	N	100	100	City	Mos Taike	1	IDLE	0	0	-	idle		junk_dealer_generic	600

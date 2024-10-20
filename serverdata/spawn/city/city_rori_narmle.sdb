@@ -84,12 +84,11 @@ city_rori_narmle_81	RORI	ror_world	PATROL	0	-4850.2	79.8	-2266.4	0	1	a thief	hum
 city_rori_narmle_82	RORI	ror_world	AREA	0	-4812.0	76.2	-2270.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
 city_rori_narmle_83	RORI	ror_world	AREA	0	-5257.0	80.0	-2255.1	-90	1	an Imperial coordinator	humanoid_coa2_imperial_coordinator	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
 city_rori_narmle_84	RORI	ror_world	AREA	0	-5272.7	80.1	-2234.2	-94	1	an Imperial Major	humanoid_imperial_major	ATTACKABLE	E	36	45	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_85	RORI	ror_world	AREA	0	-5296.2	80.2	-2240.4	-36	1	Dender	humanoid_junk_dender	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_86	RORI	ror_world	AREA	0	-5126.3	80.0	-2249.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_87	RORI	ror_world	AREA	0	-5120.2	80.0	-2514.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_88	RORI	ror_world	AREA	0	-5143.8	80.0	-2541.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
-city_rori_narmle_89	RORI	ror_world	AREA	0	-5165.2	80.0	-2534.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
-city_rori_narmle_90	RORI	ror_world	AREA	0	-5163.3	79.3	-2562.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
-city_rori_narmle_91	RORI	ror_world	AREA	0	-4975.0	79.9	-2227.0	19	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_92	RORI	ror_world	AREA	0	-5154.0	80.0	-2268.0	-75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
-city_rori_narmle_93	RORI	ror_world	AREA	0	-5219.6	80.0	-2313.6	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+city_rori_narmle_85	RORI	ror_world	AREA	0	-5126.3	80.0	-2249.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+city_rori_narmle_86	RORI	ror_world	AREA	0	-5120.2	80.0	-2514.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+city_rori_narmle_87	RORI	ror_world	AREA	0	-5143.8	80.0	-2541.7	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
+city_rori_narmle_88	RORI	ror_world	AREA	0	-5165.2	80.0	-2534.3	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
+city_rori_narmle_89	RORI	ror_world	AREA	0	-5163.3	79.3	-2562.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	TURN	0	0	-	idle			600
+city_rori_narmle_90	RORI	ror_world	AREA	0	-4975.0	79.9	-2227.0	19	1	Race Coordinator	droid_race_coordinator_protocol	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+city_rori_narmle_91	RORI	ror_world	AREA	0	-5154.0	80.0	-2268.0	-75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600
+city_rori_narmle_92	RORI	ror_world	AREA	0	-5219.6	80.0	-2313.6	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Narmle	1	IDLE	0	0	-	idle			600

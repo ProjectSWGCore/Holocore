@@ -132,7 +132,7 @@ city_lok_nyms_stronghold_129	LOK	lok_world	AREA	0	414.4	11.9	4972.1	-114	1	a com
 city_lok_nyms_stronghold_130	LOK	lok_world	AREA	0	416.7	12.5	5050.3	88	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 city_lok_nyms_stronghold_131	LOK	lok_world	AREA	0	422.0	12.5	5070.9	0	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 city_lok_nyms_stronghold_132	LOK	lok_world	AREA	0	427.8	13.0	5136.1	102	1	a bounty hunter	humanoid_bounty_hunter	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_accusing			600
-city_lok_nyms_stronghold_133	LOK	lok_world	AREA	0	429.9	12.0	4847.5	81	1	Reggi Tirver	humanoid_junk_reggi	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle			600
+city_lok_nyms_stronghold_133	LOK	lok_world	AREA	0	429.9	12.0	4847.5	81	1	Reggi Tirver (a junk dealer)	humanoid_junk_reggi	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_lok_nyms_stronghold_134	LOK	lok_world	AREA	0	429.9	13.0	5135.7	-78	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	nervous			600
 city_lok_nyms_stronghold_135	LOK	lok_world	AREA	0	436.9	12.0	5127.8	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	npc_use_terminal_high			600
 city_lok_nyms_stronghold_136	LOK	lok_world	AREA	0	437.1	8.7	5503.9	68	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Nym's Stronghold	1	IDLE	0	0	-	conversation			600

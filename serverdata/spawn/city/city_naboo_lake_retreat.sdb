@@ -4,7 +4,7 @@ city_naboo_lake_retreat_1	NABOO	nab_world	AREA	0	-5521.7	-150.0	3.2	-153	1	a bus
 city_naboo_lake_retreat_2	NABOO	nab_world	AREA	0	-5503.0	-150.0	-21.0	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
 city_naboo_lake_retreat_3	NABOO	nab_world	AREA	0	-5539.4	-149.7	-103.6	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
 city_naboo_lake_retreat_4	NABOO	nab_world	AREA	0	-5470.3	-150.0	0.9	-117	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_5	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	ATTACKABLE	N	21	30	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+city_naboo_lake_retreat_5	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
 city_naboo_lake_retreat_6	NABOO	nab_world	PATROL	0	-5491.1	-149.5	-72.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	3	PATROL	0	patrol_naboo_1500	column	idle			600
 city_naboo_lake_retreat_7	NABOO	nab_world	AREA	0	-5490.6	-150.0	-93.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	1	LOITER	5	0	-	idle			600
 city_naboo_lake_retreat_8	NABOO	nab_world	AREA	0	-5483.1	-150.0	-53.5	-113	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
@@ -19,4 +19,4 @@ city_naboo_lake_retreat_16	NABOO	nab_world	AREA	0	-5500.4	-150.0	-5.3	86	1	Laree
 city_naboo_lake_retreat_17	NABOO	nab_world	AREA	0	-5476.6	-150.0	-77.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 city_naboo_lake_retreat_18	NABOO	nab_world	AREA	0	-5563.0	-150.0	-43.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
 city_naboo_lake_retreat_19	NABOO	nab_world	AREA	0	-5551.9	-150.0	-52.2	-43	1	Rovim Minnoni	humanoid_rovim_minnoni	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_20	NABOO	nab_world	AREA	0	-5497.5	-150.0	-72.6	13	1	Sheani	humanoid_junk_sheani	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_20	NABOO	nab_world	AREA	0	-5497.5	-150.0	-72.6	13	1	Sheani (a junk dealer)	humanoid_junk_sheani	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		junk_dealer_generic	600

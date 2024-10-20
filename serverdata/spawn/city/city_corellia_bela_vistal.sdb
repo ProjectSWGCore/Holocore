@@ -140,7 +140,7 @@ city_corellia_bela_vistal_137	CORELLIA	cor_world	AREA	0	6914.3	330.0	-5602.9	102
 city_corellia_bela_vistal_138	CORELLIA	cor_world	PATROL	0	6806.5	315.2	-5625.3	-108	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Bela Vistal	1	PATROL	0	patrol_corellia_4100	column	idle			600
 city_corellia_bela_vistal_139	CORELLIA	cor_world	AREA	0	6800.6	315.0	-5623.7	16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
 city_corellia_bela_vistal_140	CORELLIA	cor_world	AREA	0	6836.3	315.0	-5767.1	-91	1	Grondorn Muse	humanoid_grondorn_muse	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
-city_corellia_bela_vistal_141	CORELLIA	cor_world	AREA	0	6967.2	330.0	-5589.0	88	1	Malik Pendron	humanoid_junk_malik	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
+city_corellia_bela_vistal_141	CORELLIA	cor_world	AREA	0	6967.2	330.0	-5589.0	88	1	Malik Pendron (a junk dealer)	humanoid_junk_malik	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_corellia_bela_vistal_142	CORELLIA	cor_world	AREA	0	6773.4	315.0	-5696.6	-106	1	Pashna	humanoid_rebel_pashna	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	idle			600
 city_corellia_bela_vistal_143	CORELLIA	cor_world	AREA	0	6755.4	315.0	-5656.9	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	npc_use_terminal_high			600
 city_corellia_bela_vistal_144	CORELLIA	cor_world	AREA	0	6859.7	315.0	-5691.7	-138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Bela Vistal	1	IDLE	0	0	-	conversation			600

@@ -42,8 +42,7 @@ city_rori_restuss_39	RORI	ror_world	AREA	0	5125.1	80.2	5542.4	145	1	a First Brig
 city_rori_restuss_40	RORI	ror_world	AREA	0	5349.0	80.0	5617.6	0	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		recruiter_imperial	600
 city_rori_restuss_41	RORI	ror_world	AREA	0	5401.0	80.0	5857.0	45	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
 city_rori_restuss_42	RORI	ror_world	AREA	0	5102.0	80.0	5652.0	30	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
-city_rori_restuss_43	RORI	ror_world	AREA	0	5353.8	80.0	5665.9	180	1	a Junk Dealer	humanoid_junk_dealer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		junk_dealer	600
-city_rori_restuss_44	RORI	ror_world	AREA	0	5350.2	81.3	5484.8	-50	1	a Junk Dealer	humanoid_junk_dealer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		junk_dealer	600
+city_rori_restuss_43	RORI	ror_world	AREA	0	5353.8	80.0	5665.9	180	1	Nado (a junk dealer)	humanoid_junk_nado	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_rori_restuss_45	RORI	ror_restuss_hotel	AREA	2	2.3	1.0	23.2	-75	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
 city_rori_restuss_46	RORI	ror_restuss_hotel	AREA	4	5.2	1.0	7.9	140	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
 city_rori_restuss_47	RORI	ror_restuss_hotel	AREA	4	6.4	1.0	6.4	-50	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600

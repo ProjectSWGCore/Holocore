@@ -1,31 +1,31 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-poi_lok_droid_engineers_cave_1	LOK	lok_evil_droid_eng_cave	AREA	10	-171.1	-49.7	-67.7	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_2	LOK	lok_evil_droid_eng_cave	AREA	11	-102.5	-38.9	-88.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_3	LOK	lok_evil_droid_eng_cave	AREA	11	-111.2	-54.5	-84.5	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_4	LOK	lok_evil_droid_eng_cave	AREA	11	-125.0	-53.8	-82.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_5	LOK	lok_evil_droid_eng_cave	AREA	16	-114.9	-58.4	-29.9	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_6	LOK	lok_evil_droid_eng_cave	AREA	2	-12.0	-30.4	-46.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_7	LOK	lok_evil_droid_eng_cave	AREA	22	-20.9	-43.1	-91.2	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_8	LOK	lok_evil_droid_eng_cave	AREA	22	-30.6	-43.3	-91.3	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_9	LOK	lok_evil_droid_eng_cave	AREA	23	-121.3	-53.6	-112.7	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_10	LOK	lok_evil_droid_eng_cave	AREA	25	-63.5	-66.0	-139.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_11	LOK	lok_evil_droid_eng_cave	AREA	26	3.2	-71.9	-113.1	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_12	LOK	lok_evil_droid_eng_cave	AREA	27	29.0	-67.3	-91.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_13	LOK	lok_evil_droid_eng_cave	AREA	27	39.2	-67.0	-69.8	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_14	LOK	lok_evil_droid_eng_cave	AREA	27	43.7	-65.7	-85.6	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_15	LOK	lok_evil_droid_eng_cave	AREA	28	-42.0	-66.1	-183.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_16	LOK	lok_evil_droid_eng_cave	AREA	28	-52.7	-65.9	-175.0	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_17	LOK	lok_evil_droid_eng_cave	AREA	28	-62.6	-65.8	-195.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_18	LOK	lok_evil_droid_eng_cave	AREA	28	-75.2	-65.7	-175.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_19	LOK	lok_evil_droid_eng_cave	AREA	28	-86.7	-65.9	-167.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_20	LOK	lok_evil_droid_eng_cave	AREA	28	-87.0	-65.5	-187.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_21	LOK	lok_evil_droid_eng_cave	AREA	29	-51.7	-65.4	-225.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_22	LOK	lok_evil_droid_eng_cave	AREA	29	-60.2	-65.2	-226.8	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_23	LOK	lok_evil_droid_eng_cave	AREA	5	-67.5	-30.6	-62.4	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_24	LOK	lok_evil_droid_eng_cave	AREA	5	-73.7	-47.1	-66.2	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_25	LOK	lok_evil_droid_eng_cave	AREA	5	-77.0	-46.5	-57.0	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_26	LOK	lok_evil_droid_eng_cave	AREA	6	-141.0	-49.5	-55.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_27	LOK	lok_evil_droid_eng_cave	AREA	9	-107.5	-69.6	-110.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_28	LOK	lok_evil_droid_eng_cave	AREA	9	-83.1	-72.3	-107.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
-poi_lok_droid_engineers_cave_29	LOK	lok_evil_droid_eng_cave	AREA	9	-97.1	-70.6	-107.5	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	LOITER	5	0	-	idle			600
+poi_lok_droid_engineers_cave_1	LOK	lok_evil_droid_eng_cave	AREA	10	-171.1	-49.7	-67.7	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_2	LOK	lok_evil_droid_eng_cave	AREA	11	-102.5	-38.9	-88.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_3	LOK	lok_evil_droid_eng_cave	AREA	11	-111.2	-54.5	-84.5	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_4	LOK	lok_evil_droid_eng_cave	AREA	11	-125.0	-53.8	-82.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_5	LOK	lok_evil_droid_eng_cave	AREA	16	-114.9	-58.4	-29.9	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_6	LOK	lok_evil_droid_eng_cave	AREA	2	-12.0	-30.4	-46.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_7	LOK	lok_evil_droid_eng_cave	AREA	22	-20.9	-43.1	-91.2	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_8	LOK	lok_evil_droid_eng_cave	AREA	22	-30.6	-43.3	-91.3	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_9	LOK	lok_evil_droid_eng_cave	AREA	23	-121.3	-53.6	-112.7	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_10	LOK	lok_evil_droid_eng_cave	AREA	25	-63.5	-66.0	-139.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_11	LOK	lok_evil_droid_eng_cave	AREA	26	3.2	-71.9	-113.1	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_12	LOK	lok_evil_droid_eng_cave	AREA	27	29.0	-67.3	-91.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_13	LOK	lok_evil_droid_eng_cave	AREA	27	39.2	-67.0	-69.8	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_14	LOK	lok_evil_droid_eng_cave	AREA	27	43.7	-65.7	-85.6	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_15	LOK	lok_evil_droid_eng_cave	AREA	28	-42.0	-66.1	-183.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_16	LOK	lok_evil_droid_eng_cave	AREA	28	-52.7	-65.9	-175.0	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_17	LOK	lok_evil_droid_eng_cave	AREA	28	-62.6	-65.8	-195.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_18	LOK	lok_evil_droid_eng_cave	AREA	28	-75.2	-65.7	-175.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_19	LOK	lok_evil_droid_eng_cave	AREA	28	-86.7	-65.9	-167.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_20	LOK	lok_evil_droid_eng_cave	AREA	28	-87.0	-65.5	-187.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_21	LOK	lok_evil_droid_eng_cave	AREA	29	-51.7	-65.4	-225.9	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_22	LOK	lok_evil_droid_eng_cave	AREA	29	-60.2	-65.2	-226.8	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_23	LOK	lok_evil_droid_eng_cave	AREA	5	-67.5	-30.6	-62.4	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_24	LOK	lok_evil_droid_eng_cave	AREA	5	-73.7	-47.1	-66.2	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_25	LOK	lok_evil_droid_eng_cave	AREA	5	-77.0	-46.5	-57.0	0	1	an IG assassin droid	droid_ig_assassin	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_26	LOK	lok_evil_droid_eng_cave	AREA	6	-141.0	-49.5	-55.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_27	LOK	lok_evil_droid_eng_cave	AREA	9	-107.5	-69.6	-110.5	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_28	LOK	lok_evil_droid_eng_cave	AREA	9	-83.1	-72.3	-107.6	0	1	a droideka	droid_droideka	AGGRESSIVE	N	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600
+poi_lok_droid_engineers_cave_29	LOK	lok_evil_droid_eng_cave	AREA	9	-97.1	-70.6	-107.5	0	1	a droideka	droid_droideka	AGGRESSIVE	E	31	40	POI	Droid Engineers Cave	1	TURN	0	0	-	idle			600

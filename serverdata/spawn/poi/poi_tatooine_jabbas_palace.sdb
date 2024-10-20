@@ -25,16 +25,16 @@ poi_tatooine_jabbas_palace_22	TATOOINE	tat_jabbas_palace	AREA	10	-27.7	0.2	84.8	
 poi_tatooine_jabbas_palace_23	TATOOINE	tat_jabbas_palace	AREA	12	-43.0	3.0	64.2	91	1	Porcellus	humanoid_porcellus	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_use_terminal_high			600
 poi_tatooine_jabbas_palace_24	TATOOINE	tat_jabbas_palace	PATROL	14	20.7	0.2	86.5	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3800	column	idle		simple_droid_geek_bye_nice_13	600
 poi_tatooine_jabbas_palace_25	TATOOINE	tat_jabbas_palace	AREA	14	18.1	0.2	90.8	125	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
-poi_tatooine_jabbas_palace_26	TATOOINE	tat_jabbas_palace	AREA	14	10.7	0.2	84.2	26	1	a 3PO protocol droid	droid_protocol_3po_red	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle			600
+poi_tatooine_jabbas_palace_26	TATOOINE	tat_jabbas_palace	AREA	14	10.7	0.2	84.2	26	1	a 3PO protocol droid	droid_protocol_3po_red	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_27	TATOOINE	tat_jabbas_palace	AREA	14	23.8	0.2	76.8	-64	1	an LE repair droid	droid_le_repair	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 poi_tatooine_jabbas_palace_28	TATOOINE	tat_jabbas_palace	AREA	14	13.4	0.2	88.7	138	1	an RA-7 "Bug" droid	droid_ra7_bug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_29	TATOOINE	tat_jabbas_palace	AREA	14	23.9	0.2	87.9	-120	1	EV-9D9	droid_ev9d9	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-poi_tatooine_jabbas_palace_30	TATOOINE	tat_jabbas_palace	AREA	14	18.8	0.2	85.1	0	1	R2-P1	droid_r2p1_r2	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
+poi_tatooine_jabbas_palace_30	TATOOINE	tat_jabbas_palace	AREA	14	18.8	0.2	85.1	0	1	R2-P1	droid_r2p1_r2	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	TURN	0	0	-	idle		simple_droid_geek_alert_5	600
 poi_tatooine_jabbas_palace_31	TATOOINE	tat_jabbas_palace	PATROL	15	-49.7	0.2	82.5	0	1	Artogg	humanoid_artogg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3700	column	idle			600
 poi_tatooine_jabbas_palace_32	TATOOINE	tat_jabbas_palace	AREA	15	-10.6	0.2	81.1	174	1	Urgott	humanoid_urgott	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_accusing			600
 poi_tatooine_jabbas_palace_33	TATOOINE	tat_jabbas_palace	PATROL	16	-32.3	3.0	55.8	0	1	Rautog	humanoid_rautog	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3600	column	idle			600
 poi_tatooine_jabbas_palace_34	TATOOINE	tat_jabbas_palace	AREA	16	-51.6	3.0	38.8	-33	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-poi_tatooine_jabbas_palace_35	TATOOINE	tat_jabbas_palace	AREA	19	14.4	0.2	-0.9	0	1	a Bomarr monk	droid_bomarr_monk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		simple_droid_prissy_hi_mean_14	600
+poi_tatooine_jabbas_palace_35	TATOOINE	tat_jabbas_palace	AREA	19	14.4	0.2	-0.9	0	1	a Bomarr monk	droid_bomarr_monk	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	TURN	0	0	-	idle		simple_droid_prissy_hi_mean_14	600
 poi_tatooine_jabbas_palace_36	TATOOINE	tat_jabbas_palace	AREA	2	-1.8	0.2	103.9	21	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_37	TATOOINE	tat_jabbas_palace	PATROL	22	-1.8	2.0	47.3	0	1	Gurgot	humanoid_gurgot	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3300	column	idle			600
 poi_tatooine_jabbas_palace_38	TATOOINE	tat_jabbas_palace	PATROL	22	-23.3	3.6	46.1	0	1	Agtor	humanoid_agtor	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3500	column	idle			600
@@ -81,7 +81,7 @@ poi_tatooine_jabbas_palace_78	TATOOINE	tat_jabbas_palace	AREA	30	-10.1	0.1	77.2	
 poi_tatooine_jabbas_palace_79	TATOOINE	tat_jabbas_palace	AREA	31	-14.7	0.1	76.9	25	1	a Neo-Cobral bandit	humanoid_mission_bounty_cobral_bandit	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
 poi_tatooine_jabbas_palace_80	TATOOINE	tat_jabbas_palace	AREA	32	-10.4	0.1	88.1	-178	1	a prisoner	humanoid_kashyyyk_prisoner	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	npc_sitting_ground			600
 poi_tatooine_jabbas_palace_81	TATOOINE	tat_jabbas_palace	AREA	33	-17.2	0.1	87.9	114	1	a Gungan hermit	humanoid_mission_gungan_hermit	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	sad			600
-poi_tatooine_jabbas_palace_82	TATOOINE	tat_jabbas_palace	AREA	34	37.5	0.2	-4.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+poi_tatooine_jabbas_palace_82	TATOOINE	tat_jabbas_palace	AREA	34	37.5	0.2	-4.4	0	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	TURN	0	0	-	idle		simple_droid_geek_bye_nice_13	600
 poi_tatooine_jabbas_palace_83	TATOOINE	tat_jabbas_palace	AREA	34	30.6	0.2	-1.0	96	1	Barada	humanoid_barada	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle		tatooine_jabbas_palace_barada	600
 poi_tatooine_jabbas_palace_84	TATOOINE	tat_jabbas_palace	AREA	36	-18.0	3.0	9.0	37	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_85	TATOOINE	tat_jabbas_palace	AREA	36	3.2	3.0	15.4	-90	1	a Gamorrean guard	humanoid_gamorrean_guard	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
@@ -92,7 +92,7 @@ poi_tatooine_jabbas_palace_89	TATOOINE	tat_jabbas_palace	AREA	37	19.3	-11.0	48.0
 poi_tatooine_jabbas_palace_90	TATOOINE	tat_jabbas_palace	AREA	38	-0.7	-10.9	44.4	90	1	a rancor	creature_rancor	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_91	TATOOINE	tat_jabbas_palace	PATROL	4	-11.2	5.8	87.5	0	1	Gartogg	humanoid_gartogg	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	PATROL	0	patrol_tatooine_3400	column	idle			600
 poi_tatooine_jabbas_palace_92	TATOOINE	tat_jabbas_palace	AREA	4	-6.7	5.8	97.9	179	1	Bronell	humanoid_bronell	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
-poi_tatooine_jabbas_palace_93	TATOOINE	tat_jabbas_palace	AREA	4	-6.0	5.8	84.5	0	1	Ephant Mon	humanoid_ephant_mon	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	LOITER	5	0	-	idle		tatooine_jabbas_palace_ephant_mon	600
+poi_tatooine_jabbas_palace_93	TATOOINE	tat_jabbas_palace	AREA	4	-6.0	5.8	84.5	0	1	Ephant Mon	humanoid_ephant_mon	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	TURN	0	0	-	idle		tatooine_jabbas_palace_ephant_mon	600
 poi_tatooine_jabbas_palace_94	TATOOINE	tat_jabbas_palace	AREA	19	24.1	0.2	-10.1	-1	1	Rogua	humanoid_rogua	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_95	TATOOINE	tat_jabbas_palace	AREA	4	-0.6	5.8	98.0	-162	1	Torrug	humanoid_torrug	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
 poi_tatooine_jabbas_palace_96	TATOOINE	tat_jabbas_palace	AREA	5	8.9	5.8	62.1	-158	1	a Jawa	humanoid_jawa	INVULNERABLE	N	100	100	POI	Jabbas Palace	1	IDLE	0	0	-	idle			600
