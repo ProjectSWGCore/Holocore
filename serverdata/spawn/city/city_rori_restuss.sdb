@@ -1,0 +1,81 @@
+spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
+STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
+city_rori_restuss_1	RORI	ror_restuss_starport	AREA	4	6.3	0.6	67.3	-90	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	conversation			600
+city_rori_restuss_2	RORI	ror_restuss_starport	AREA	4	4.3	0.6	66.9	80	1	Chassis Dealer	humanoid_chassis_dealer_iv	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	conversation			600
+city_rori_restuss_3	RORI	ror_restuss_starport	AREA	9	-27.0	1.6	53.2	128	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	npc_standing_drinking			600
+city_rori_restuss_4	RORI	ror_restuss_starport	AREA	9	-27.6	1.6	52.3	29	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	npc_accusing			600
+city_rori_restuss_5	RORI	ror_restuss_starport	AREA	12	-69.1	2.6	38.5	70	1	a shadowy figure	humanoid_shadowy_figure	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	angry			600
+city_rori_restuss_6	RORI	ror_world	AREA	0	5459.9	80.1	5856.5	90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_7	RORI	ror_world	AREA	0	5459.9	80.1	5861.5	90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_8	RORI	ror_world	AREA	0	5381.5	80.0	5881.5	-135	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_9	RORI	ror_world	AREA	0	5383.8	80.0	5877.1	-135	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_10	RORI	ror_world	AREA	0	5373.6	83.7	5848.2	-50	1	a First Brigade officer	humanoid_brigade_officer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_11	RORI	ror_world	AREA	0	5361.3	87.2	5848.8	-90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_12	RORI	ror_world	AREA	0	5357.3	87.2	5848.8	-90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_13	RORI	ror_world	AREA	0	5345.7	80.0	5839.6	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_14	RORI	ror_world	AREA	0	5340.7	80.0	5839.6	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_15	RORI	ror_world	AREA	0	5447.9	80.0	5837.7	0	1	a First Brigade general	humanoid_brigade_general	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_16	RORI	ror_world	AREA	0	5445.4	80.0	5840.2	90	1	a First Brigade captain	humanoid_brigade_captain	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_17	RORI	ror_world	AREA	0	5450.4	80.0	5840.2	-90	1	a First Brigade captain	humanoid_brigade_captain	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_18	RORI	ror_world	AREA	0	5445.4	80.0	5844.2	90	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_19	RORI	ror_world	AREA	0	5450.4	80.0	5844.2	-90	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_20	RORI	ror_world	AREA	0	5445.4	80.0	5848.2	90	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_21	RORI	ror_world	AREA	0	5450.4	80.0	5848.2	-90	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_22	RORI	ror_world	AREA	0	5419.4	80.0	5845.2	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_23	RORI	ror_world	AREA	0	5414.4	80.0	5845.2	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_24	RORI	ror_world	AREA	0	5292.2	80.0	5854.8	180	1	a First Brigade sergeant	humanoid_brigade_sergeant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_25	RORI	ror_world	AREA	0	5283.2	80.0	5854.8	180	1	a First Brigade gunner	humanoid_brigade_gunner	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_26	RORI	ror_world	AREA	0	5212.4	80.0	5778.7	0	1	a First Brigade sergeant	humanoid_brigade_sergeant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_27	RORI	ror_world	AREA	0	5199.2	80.0	5778.7	0	1	a First Brigade gunner	humanoid_brigade_gunner	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_28	RORI	ror_world	AREA	0	5212.4	80.0	5764.4	180	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_29	RORI	ror_world	AREA	0	5199.2	80.0	5764.4	180	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_30	RORI	ror_world	AREA	0	5318.2	80.2	5523.5	180	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_31	RORI	ror_world	AREA	0	5315.2	80.2	5523.5	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_32	RORI	ror_world	AREA	0	5339.0	80.2	5523.5	180	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_33	RORI	ror_world	AREA	0	5342.0	80.2	5523.5	180	1	a First Brigade trooper	humanoid_brigade_trooper	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_34	RORI	ror_world	AREA	0	5206.5	80.2	5603.2	0	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_35	RORI	ror_world	AREA	0	5199.5	80.2	5609.3	90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_36	RORI	ror_world	AREA	0	5154.5	80.2	5603.2	0	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_37	RORI	ror_world	AREA	0	5161.5	80.2	5609.3	-90	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_38	RORI	ror_world	AREA	0	5128.7	80.0	5535.5	-75	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_39	RORI	ror_world	AREA	0	5125.1	80.2	5542.4	145	1	a First Brigade marine	humanoid_brigade_marine	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_40	RORI	ror_world	AREA	0	5349.0	80.0	5617.6	0	1	an Imperial recruiter	humanoid_imperial_recruiter	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		recruiter_imperial	600
+city_rori_restuss_41	RORI	ror_world	AREA	0	5401.0	80.0	5857.0	45	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_42	RORI	ror_world	AREA	0	5102.0	80.0	5652.0	30	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_43	RORI	ror_world	AREA	0	5353.8	80.0	5665.9	180	1	a Junk Dealer	humanoid_junk_dealer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		junk_dealer	600
+city_rori_restuss_44	RORI	ror_world	AREA	0	5350.2	81.3	5484.8	-50	1	a Junk Dealer	humanoid_junk_dealer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		junk_dealer	600
+city_rori_restuss_45	RORI	ror_restuss_hotel	AREA	2	2.3	1.0	23.2	-75	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_46	RORI	ror_restuss_hotel	AREA	4	5.2	1.0	7.9	140	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_47	RORI	ror_restuss_hotel	AREA	4	6.4	1.0	6.4	-50	1	an Ishitib male	humanoid_patron_ishitib_male	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_48	RORI	ror_restuss_hotel	AREA	5	20.1	1.6	12.3	180	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_49	RORI	ror_restuss_hotel	AREA	5	25.2	2.0	-16.7	-50	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_50	RORI	ror_restuss_hotel	AREA	5	24.3	2.0	-14.2	-45	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_51	RORI	ror_restuss_hotel	AREA	5	22.7	2.0	-16.5	-55	1	an entertainer	humanoid_entertainer_devaronian	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_52	RORI	ror_world	AREA	0	5510.0	80.0	5663.0	-34	1	an Architect trainer	humanoid_trainer_architect	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_architect	600
+city_rori_restuss_53	RORI	ror_restuss_university	AREA	6	-15.4	1.1	-0.3	92	1	an Armorsmith trainer	humanoid_trainer_armorsmith	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_armorsmith	600
+city_rori_restuss_54	RORI	ror_world	AREA	0	5256.0	80.0	5600.0	13	1	an Artisan trainer	humanoid_trainer_artisan	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_artisan	600
+city_rori_restuss_55	RORI	ror_world	AREA	0	5335.3	80.0	5530.5	0	1	a Brawler trainer	humanoid_trainer_brawler	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_combat_brawler	600
+city_rori_restuss_56	RORI	ror_world	AREA	0	5181.0	80.0	5668.0	180	1	a Chef trainer	humanoid_trainer_chef	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_chef	600
+city_rori_restuss_57	RORI	ror_restuss_hospital	AREA	2	26.6	0.3	5.5	84	1	a Combat Medic trainer	humanoid_trainer_combatmedic	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_science_combatmedic	600
+city_rori_restuss_58	RORI	ror_restuss_combat_gh	AREA	5	9.5	1.1	-10.4	39	1	a Commando trainer	humanoid_trainer_commando	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_combat_commando	600
+city_rori_restuss_59	RORI	ror_world	AREA	0	5134.0	80.0	5749.0	180	1	a Creature Handler trainer	humanoid_trainer_creaturehandler	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_outdoors_creaturehandler	600
+city_rori_restuss_60	RORI	ror_world	AREA	0	5437.0	80.6	5564.0	-90	1	a Dancer trainer	humanoid_trainer_dancer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_social_dancer	600
+city_rori_restuss_61	RORI	ror_world	AREA	0	5373.0	80.0	5589.0	180	1	a Doctor trainer	humanoid_trainer_doctor	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_droidengineer	600
+city_rori_restuss_62	RORI	ror_world	AREA	0	5186.0	80.0	5719.0	90	1	a Droid Engineer trainer	humanoid_trainer_droidengineer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_droidengineer	600
+city_rori_restuss_63	RORI	ror_world	AREA	0	5433.0	80.6	5558.0	-90	1	an Entertainer trainer	humanoid_trainer_entertainer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_social_entertainer	600
+city_rori_restuss_64	RORI	ror_world	AREA	0	5255.0	80.0	5850.0	180	1	an Image Designer trainer	humanoid_trainer_imagedesigner	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_combat_marksman	600
+city_rori_restuss_65	RORI	ror_world	AREA	0	5528.0	80.7	5641.0	91	1	a Marksman trainer	humanoid_trainer_marksman	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_combat_marksman	600
+city_rori_restuss_66	RORI	ror_world	AREA	0	5388.0	80.0	5673.0	110	1	a Merchant trainer	humanoid_trainer_merchant	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_merchant	600
+city_rori_restuss_67	RORI	ror_restuss_theater	AREA	8	21.7	2.1	63.9	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		commoner	600
+city_rori_restuss_68	RORI	ror_world	AREA	0	5432.9	80.6	5569.1	-90	1	a Musician trainer	humanoid_trainer_musician	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_social_musician	600
+city_rori_restuss_69	RORI	ror_restuss_combat_gh	AREA	9	-8.9	1.1	-13.1	-100	1	a Pikeman trainer	humanoid_trainer_polearm	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_combat_polearm	600
+city_rori_restuss_70	RORI	ror_world	AREA	0	5371.0	80.0	5539.0	180	1	a Scout trainer	humanoid_trainer_scout	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_outdoors_scout	600
+city_rori_restuss_71	RORI	ror_world	AREA	0	5209.0	80.0	5729.0	180	1	a Tailor trainer	humanoid_trainer_tailor	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_tailor	600
+city_rori_restuss_72	RORI	ror_restuss_university	AREA	8	-3.2	1.1	-8.4	127	1	a Weaponsmith trainer	humanoid_trainer_weaponsmith	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle		trainer_crafting_weaponsmith	600
+city_rori_restuss_73	RORI	ror_world	AREA	0	5399.5	80.0	5676.8	161	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_74	RORI	ror_world	AREA	0	5520.3	80.0	5535.2	130	1	a Gundark ruffian	humanoid_gundark_ruffian	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_75	RORI	ror_world	AREA	0	5521.7	80.0	5529.0	80	1	a Gundark ruffian	humanoid_gundark_ruffian	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_76	RORI	ror_world	AREA	0	5525.3	80.0	5533.2	-50	1	a Gundark ruffian	humanoid_gundark_ruffian	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_77	RORI	ror_world	AREA	0	5313.2	80.0	5795.4	95	1	a Gundark desperado	humanoid_gundark_desperado	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_78	RORI	ror_world	AREA	0	5313.2	80.0	5791.2	50	1	a Gundark desperado	humanoid_gundark_desperado	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600
+city_rori_restuss_79	RORI	ror_world	AREA	0	5269.9	80.0	5815.0	77	1	Garyn's prowler	humanoid_garyn_prowler	INVULNERABLE	N	100	100	City	Restuss	1	IDLE	0	0	-	idle			600

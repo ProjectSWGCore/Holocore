@@ -1,0 +1,132 @@
+terrain	destroy_type	difficulty	string_file	title_key	description_key	creator	target	npc_id
+TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m1t	m1d	Bounty Hunters' Guild	NPCs	humanoid_rebel_recruiter
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m2t	m2d	Bounty Hunters' Guild	NPCs	humanoid_technician
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m3t	m3d	Bounty Hunters' Guild	NPCs	humanoid_technician
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m4t	m4d	Bounty Hunters' Guild	NPCs	humanoid_kashyyyk_wke_merchant_01
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m5t	m5d	Bounty Hunters' Guild	NPCs	humanoid_businessman
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m6t	m6d	Bounty Hunters' Guild	NPCs	humanoid_businessman
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m7t	m7d	Bounty Hunters' Guild	NPCs	humanoid_pilot
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m8t	m8d	Bounty Hunters' Guild	NPCs	humanoid_rebel_dead_eye
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m9t	m9d	Bounty Hunters' Guild	NPCs	humanoid_pilot
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m10t	m10d	Bounty Hunters' Guild	NPCs	humanoid_rebel_scout
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m11t	m11d	Bounty Hunters' Guild	NPCs	humanoid_nym_fuel_tech_i
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m12t	m12d	Bounty Hunters' Guild	NPCs	humanoid_jabba_swooper
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m13t	m13d	Bounty Hunters' Guild	NPCs	humanoid_evil_nomad
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m14t	m14d	Bounty Hunters' Guild	NPCs	humanoid_rebel_scout
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m15t	m15d	Bounty Hunters' Guild	NPCs	humanoid_rebel_scout
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m16t	m16d	Bounty Hunters' Guild	NPCs	humanoid_thief
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m17t	m17d	Bounty Hunters' Guild	NPCs	humanoid_rebel_specops_alliance_free_agent
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m18t	m18d	Bounty Hunters' Guild	NPCs	humanoid_rebel_weapons_master
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m19t	m19d	Bounty Hunters' Guild	NPCs	humanoid_rebel_sharpshooter
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m20t	m20d	Bounty Hunters' Guild	NPCs	humanoid_rebel_network_leader
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m21t	m21d	Bounty Hunters' Guild	NPCs	humanoid_rebel_scout
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m22t	m22d	Bounty Hunters' Guild	NPCs	humanoid_rebel_detain_officer
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m23t	m23d	Bounty Hunters' Guild	NPCs	humanoid_rebel_comm_officer
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m24t	m24d	Bounty Hunters' Guild	NPCs	humanoid_rebel_munitions_expert
+TATOOINE	imperial	NORMAL	mission/mission_bounty_imperial_easy.stf	m25t	m25d	Bounty Hunters' Guild	NPCs	humanoid_rebel_network_leader
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m1t	m1d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m2t	m2d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m3t	m3d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m4t	m4d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m5t	m5d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m6t	m6d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m7t	m7d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m8t	m8d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m9t	m9d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m10t	m10d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m11t	m11d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m12t	m12d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m13t	m13d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m14t	m14d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m15t	m15d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m16t	m16d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m17t	m17d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m18t	m18d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m19t	m19d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m20t	m20d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m21t	m21d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m22t	m22d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m23t	m23d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m24t	m24d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m25t	m25d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m26t	m26d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m27t	m27d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m28t	m28d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m29t	m29d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m30t	m30d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m31t	m31d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m32t	m32d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m33t	m33d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m34t	m34d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m35t	m35d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m36t	m36d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m37t	m37d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m38t	m38d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m39t	m39d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m40t	m40d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m41t	m41d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m42t	m42d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m43t	m43d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m44t	m44d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m45t	m45d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m46t	m46d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m47t	m47d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m48t	m48d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m49t	m49d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	ELITE	mission/mission_bounty_imperial_medium.stf	m50t	m50d	Bounty Hunters' Guild	NPCs	humanoid_rebel_trooper
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m1t	m1d	Imperial Ubiqtorate	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m2t	m2d	Imperial Ubiqtorate	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m3t	m3d	Moff Krewe of Droma Sector	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m4t	m4d	Moff Krewe of Droma Sector	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m5t	m5d	Vice Admiral Thrawn	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m6t	m6d	Lord Vader	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m7t	m7d	Captain Nob Finial	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m8t	m8d	Lord Vader	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m9t	m9d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m10t	m10d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m11t	m11d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m12t	m12d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m13t	m13d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m14t	m14d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m15t	m15d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m16t	m16d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m17t	m17d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m18t	m18d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m19t	m19d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m20t	m20d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m21t	m21d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m22t	m22d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m23t	m23d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m24t	m24d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard.stf	m25t	m25d	Bounty Hunters' Guild	NPCs	humanoid_rebel_commando
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m1t	m1d	High Inquisitor Mal Sikander	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m2t	m2d	High Inquisitor Mal Sikander	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m3t	m3d	High Inquisitor Mal Sikander	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m4t	m4d	High Inquisitor Mal Sikander	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m5t	m5d	High Inquisitor Mal Sikander	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m6t	m6d	Vice Admiral Thrawn	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m7t	m7d	Imperial Customs	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m8t	m8d	Imperial Security Bureau, Planetary Headquarters	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m9t	m9d	Imperial Intelligence, Planetary Headquarters	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m10t	m10d	Imperial Army, Planetary Headquarters	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m11t	m11d	Imperial Intelligence Ubiqtorate	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m12t	m12d	Imperial Intelligence Ubiqtorate	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m13t	m13d	Imperial Naval Command	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m14t	m14d	Imperial Naval Command	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m15t	m15d	Imperial Security Bureau, Central Operations	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m16t	m16d	Imperial Security Bureau, Central Operations	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m17t	m17d	Imperial Information Center	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m18t	m18d	COMPNOR Central Office	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m19t	m19d	COMPNOR Central Office	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m20t	m20d	Imperial Royal Guard	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m21t	m21d	Imperial Intelligence Ubiqtorate	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m22t	m22d	Lord Vader	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m23t	m23d	Imperial Intelligence Ubiqtorate	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m24t	m24d	Moff Haille	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m25t	m25d	Lord Vader	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m26t	m26d	The Inquisitorius	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m27t	m27d	The Inquisitorius	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m28t	m28d	Lord Vader	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m29t	m29d	Lord Vader	NPCs	humanoid_rebel_luke_skywalker
+TATOOINE	imperial	BOSS	mission/mission_bounty_imperial_hard_jedi.stf	m30t	m30d	Lord Vader	NPCs	humanoid_rebel_luke_skywalker

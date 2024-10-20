@@ -23,6 +23,7 @@ TEXT	BOOLEAN
 /city/city_naboo_theed.sdb	TRUE
 /city/city_rori_narmle.sdb	TRUE
 /city/city_rori_rebel_outpost.sdb	TRUE
+/city/city_rori_restuss.sdb	TRUE
 /city/city_talus_dearic.sdb	TRUE
 /city/city_talus_imperial_outpost.sdb	TRUE
 /city/city_talus_nashal.sdb	TRUE
@@ -81,7 +82,7 @@ TEXT	BOOLEAN
 /instance/instance_mustafar_jedi_easy.sdb	TRUE
 /instance/instance_mustafar_jedi_hard.sdb	TRUE
 /instance/instance_mustafar_jedi_medium.sdb	TRUE
-/instance/instance_mustafar_orf.sdb	TRUE
+/instance/instance_mustafar_orf.sdb	FALSE
 /invasion/invasion_droid_army.sdb	TRUE
 /invasion/invasion_gcw_bestine.sdb	FALSE
 /outback/outback_corellia.sdb	TRUE
