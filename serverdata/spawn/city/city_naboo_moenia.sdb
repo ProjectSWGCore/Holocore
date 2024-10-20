@@ -20,7 +20,7 @@ city_naboo_moenia_17	NABOO	nab_moenia_cantina	AREA	13	-30.0	-0.5	8.2	36	1	Borvo 
 city_naboo_moenia_18	NABOO	nab_moenia_cantina	AREA	13	-23.7	-0.5	13.7	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 city_naboo_moenia_19	NABOO	nab_moenia_cantina	AREA	3	-6.0	-0.9	3.4	4	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 city_naboo_moenia_20	NABOO	nab_moenia_cantina	AREA	3	11.0	-0.9	3.2	-114	1	Arrek von Sarko	humanoid_arrek_von_sarko	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
-city_naboo_moenia_21	NABOO	nab_moenia_cantina	AREA	3	26.3	-0.9	11.4	-171	1	Lila Rawlkiss	humanoid_junk_lila	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
+city_naboo_moenia_21	NABOO	nab_moenia_cantina	AREA	3	26.3	-0.9	11.4	-171	1	Lila Rawlkiss (a junk dealer)	humanoid_junk_lila	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_naboo_moenia_22	NABOO	nab_moenia_combat_gh	AREA	8	3.3	1.1	-8.0	-90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600
 city_naboo_moenia_23	NABOO	nab_moenia_combat_gh	PATROL	9	-11.9	1.1	-8.5	-106	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Moenia	1	PATROL	0	patrol_naboo_7400	column	idle			600
 city_naboo_moenia_24	NABOO	nab_moenia_combat_gh	AREA	9	-14.3	1.1	-8.6	85	1	a hunter	humanoid_hunter	INVULNERABLE	N	100	100	City	Moenia	1	IDLE	0	0	-	idle			600

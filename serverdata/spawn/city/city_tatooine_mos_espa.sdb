@@ -37,7 +37,7 @@ city_tatooine_mos_espa_34	TATOOINE	tat_mosespa_officer_shed	AREA	3	0.0	0.0	-4.5	
 city_tatooine_mos_espa_35	TATOOINE	tat_mosespa_officer_shed	AREA	5	4.0	0.0	-2.0	-108	1	Imperial Pilot	humanoid_imperial_pilot_empretreat	ATTACKABLE	E	10	15	City	Mos Espa	1	IDLE	0	0	-	idle			300
 city_tatooine_mos_espa_36	TATOOINE	tat_mosespa_starport	AREA	12	-55.8	2.6	41.7	145	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_espa_37	TATOOINE	tat_mosespa_starport	AREA	4	2.5	0.6	67.7	119	1	Chassis Dealer	humanoid_chassis_dealer_i	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		chassis_dealer	600
-city_tatooine_mos_espa_38	TATOOINE	tat_mosespa_watto	AREA	2	1.7	-0.5	6.1	-133	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
+city_tatooine_mos_espa_38	TATOOINE	tat_mosespa_watto	AREA	2	4.0	-0.5	2.0	-99	1	Ollobo	humanoid_junk_ollobo	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		junk_dealer_generic	600
 city_tatooine_mos_espa_39	TATOOINE	tat_mosespa_watto	AREA	2	2.4	0.1	-11.6	46	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600
 city_tatooine_mos_espa_40	TATOOINE	tat_mosespa_watto	AREA	2	4.2	0.1	-9.9	-136	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 city_tatooine_mos_espa_41	TATOOINE	tat_mosespa_watto	AREA	2	-4.4	-0.5	4.5	-12	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Mos Espa	1	IDLE	0	0	-	idle		simple_droid_slang_flee_15	600

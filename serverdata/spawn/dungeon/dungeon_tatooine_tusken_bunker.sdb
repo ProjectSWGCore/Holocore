@@ -1,13 +1,13 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-dungeon_tatooine_tusken_bunker_1	TATOOINE	tat_tusken_bunker	AREA	10	0.8	-20.8	17.2	0	1	a Tusken elite guard	humanoid_tusken_elite_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_2	TATOOINE	tat_tusken_bunker	AREA	10	6.1	-20.8	29.8	0	1	a Tusken elite guard	humanoid_tusken_elite_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_3	TATOOINE	tat_tusken_bunker	AREA	10	1.6	-20.8	32.0	0	1	a Tusken king	humanoid_tusken_king	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			900
-dungeon_tatooine_tusken_bunker_4	TATOOINE	tat_tusken_bunker	AREA	2	-3.5	0.3	3.2	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_5	TATOOINE	tat_tusken_bunker	AREA	3	3.7	0.3	-4.1	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_6	TATOOINE	tat_tusken_bunker	AREA	4	-4.3	-6.8	4.8	0	1	a Tusken guard	humanoid_tusken_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_7	TATOOINE	tat_tusken_bunker	AREA	7	5.4	-13.8	8.3	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
-dungeon_tatooine_tusken_bunker_8	TATOOINE	tat_tusken_bunker	AREA	9	2.2	-20.7	4.5	0	1	a Tusken guard	humanoid_tusken_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
+dungeon_tatooine_tusken_bunker_1	TATOOINE	tat_tusken_bunker	AREA	10	0.8	-20.8	17.2	0	1	a Tusken elite guard	humanoid_tusken_elite_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_2	TATOOINE	tat_tusken_bunker	AREA	10	6.1	-20.8	29.8	0	1	a Tusken elite guard	humanoid_tusken_elite_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_3	TATOOINE	tat_tusken_bunker	AREA	10	1.6	-20.8	32.0	0	1	a Tusken king	humanoid_tusken_king	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			900
+dungeon_tatooine_tusken_bunker_4	TATOOINE	tat_tusken_bunker	AREA	2	-3.5	0.3	3.2	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_5	TATOOINE	tat_tusken_bunker	AREA	3	3.7	0.3	-4.1	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_6	TATOOINE	tat_tusken_bunker	AREA	4	-4.3	-6.8	4.8	0	1	a Tusken guard	humanoid_tusken_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_7	TATOOINE	tat_tusken_bunker	AREA	7	5.4	-13.8	8.3	0	1	a Tusken savage	humanoid_tusken_savage	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
+dungeon_tatooine_tusken_bunker_8	TATOOINE	tat_tusken_bunker	AREA	9	2.2	-20.7	4.5	0	1	a Tusken guard	humanoid_tusken_guard	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	TURN	0	0	-	idle			600
 dungeon_tatooine_tusken_bunker_9	TATOOINE	tat_world	AREA	0	-1487.7	41.0	-186.6	0	1	a Tusken sniper	humanoid_tusken_sniper	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
 dungeon_tatooine_tusken_bunker_10	TATOOINE	tat_world	AREA	0	-1472.5	41.0	-192.4	0	1	a Tusken warrior	humanoid_tusken_warrior	AGGRESSIVE	N	10	15	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			600
 dungeon_tatooine_tusken_bunker_11	TATOOINE	tat_world	AREA	0	-1289.3	8.3	-316.0	0	1	an adolescent krayt dragon	creature_krayt_dragon_adolescent	AGGRESSIVE	B	75	78	Dungeon	Tusken Bunker	1	LOITER	5	0	-	idle			900
