@@ -148,17 +148,18 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	}
 	
 	private fun checkAwareAttack(player: CreatureObject) {
+		val spawner = this.spawner ?: return
 		val incapSafetyTimerExpired = incapSafetyTimer.isExpired(System.currentTimeMillis(), player.lastIncapTime)
 		
 		if (isAttackable(player) && incapSafetyTimerExpired) {
 			val distance = location.flatDistanceTo(player.location)
-			val maxAggroDistance = if (player.isLoggedInPlayer) spawner!!.aggressiveRadius.toDouble()
+			val maxAggroDistance = if (player.isLoggedInPlayer) spawner.aggressiveRadius.toDouble()
 			else if (!player.isPlayer) 30.0
 			else -1.0 // Ensures the following if-statement will fail and remove the player from the list
 			
 			if (distance <= maxAggroDistance && isLineOfSight(player)) {
-				if (spawner!!.behavior == AIBehavior.PATROL) {
-					for (npc in spawner!!.npcs) StartNpcCombatIntent(npc, listOf(player)).broadcast()
+				if (spawner.behavior == AIBehavior.PATROL) {
+					for (npc in spawner.npcs) StartNpcCombatIntent(npc, listOf(player)).broadcast()
 				} else {
 					StartNpcCombatIntent(this, listOf(player)).broadcast()
 				}
@@ -208,7 +209,7 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	fun queueNextLoop(delay: Long) {
 		val prev = this.previousScheduled
 		prev?.cancel(false)
-		previousScheduled = executor!!.execute(delay) { this.loop() }
+		previousScheduled = executor?.execute(delay) { this.loop() }
 	}
 	
 	val nearbyPlayers: Set<CreatureObject>
