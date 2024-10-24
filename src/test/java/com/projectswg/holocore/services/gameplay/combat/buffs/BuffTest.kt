@@ -51,7 +51,7 @@ class BuffTest : TestRunnerSynchronousIntents() {
 		val creatureObject = GenericCreatureObject(0)
 		creatureObject.objectName = "Buffee"
 		
-		// Apply le buff (1s)
+		// Apply the buff (2s)
 		val startTime = System.nanoTime()
 		PlayerEventIntent(creatureObject.owner!!, PlayerEvent.PE_FIRST_ZONE).broadcast()
 		BuffIntent("suppressionFire", creatureObject, creatureObject, false).broadcast()
