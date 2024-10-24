@@ -23,19 +23,32 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player
+package com.projectswg.holocore.services.gameplay.player.character
 
-import com.projectswg.holocore.services.gameplay.newbie.NewbieService
-import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
-import com.projectswg.holocore.services.gameplay.player.character.PlayerCharacterSheetService
-import com.projectswg.holocore.services.gameplay.player.character.PlayerPlayTimeService
-import com.projectswg.holocore.services.gameplay.player.character.TippingService
-import com.projectswg.holocore.services.gameplay.player.experience.ExperienceManager
-import com.projectswg.holocore.services.gameplay.player.group.GroupManager
-import com.projectswg.holocore.services.gameplay.player.guild.GuildService
-import com.projectswg.holocore.services.gameplay.player.quest.QuestService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup
+import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import me.joshlarson.jlcommon.control.Service
 
-@ManagerStructure(children = [BadgeManager::class, ExperienceManager::class, GroupManager::class, GuildService::class, NewbieService::class, QuestService::class, PlayerCharacterSheetService::class, TippingService::class, PlayerPlayTimeService::class])
-class PlayerManager : Manager()
+class PlayerPlayTimeService : Service() {
+	
+	private val timerCheckThread = ScheduledThreadPool(1, "player-play-time-updater")
+	
+	override fun start(): Boolean {
+		timerCheckThread.start()
+		timerCheckThread.executeWithFixedRate(1000L, 1000L, ::updatePlayerPlayTime)
+		return super.start()
+	}
+	
+	override fun stop(): Boolean {
+		timerCheckThread.stop()
+		val stopped = timerCheckThread.awaitTermination(1000L)
+		return super.stop() && stopped
+	}
+	
+	private fun updatePlayerPlayTime() {
+		for (player in PlayerLookup.getLoggedInPlayers()) {
+			player.playerObject?.incrementPlayTime(1)
+		}
+	}
+	
+}

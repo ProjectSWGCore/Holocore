@@ -23,19 +23,50 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player
+package com.projectswg.holocore.services.gameplay.combat.buffs
 
-import com.projectswg.holocore.services.gameplay.newbie.NewbieService
-import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
-import com.projectswg.holocore.services.gameplay.player.character.PlayerCharacterSheetService
+import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.services.gameplay.player.character.PlayerPlayTimeService
-import com.projectswg.holocore.services.gameplay.player.character.TippingService
-import com.projectswg.holocore.services.gameplay.player.experience.ExperienceManager
-import com.projectswg.holocore.services.gameplay.player.group.GroupManager
-import com.projectswg.holocore.services.gameplay.player.guild.GuildService
-import com.projectswg.holocore.services.gameplay.player.quest.QuestService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.services.support.global.zone.CharacterLookupService
+import com.projectswg.holocore.test.resources.GenericCreatureObject
+import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
-@ManagerStructure(children = [BadgeManager::class, ExperienceManager::class, GroupManager::class, GuildService::class, NewbieService::class, QuestService::class, PlayerCharacterSheetService::class, TippingService::class, PlayerPlayTimeService::class])
-class PlayerManager : Manager()
+class BuffTest : TestRunnerSynchronousIntents() {
+	
+	@BeforeEach
+	fun setup() {
+		registerService(BuffService())
+		registerService(CharacterLookupService())
+		registerService(PlayerPlayTimeService())
+	}
+	
+	@Test
+	fun `Buff removed when expires`() {
+		val creatureObject = GenericCreatureObject(0)
+		creatureObject.objectName = "Buffee"
+		
+		// Apply le buff (1s)
+		val startTime = System.nanoTime()
+		PlayerEventIntent(creatureObject.owner!!, PlayerEvent.PE_FIRST_ZONE).broadcast()
+		BuffIntent("suppressionFire", creatureObject, creatureObject, false).broadcast()
+		waitForIntents()
+		
+		while (System.nanoTime() - startTime < 2200e6) {
+			if (!creatureObject.hasBuff("suppressionFire"))
+				break
+			Thread.sleep(50)
+		}
+		
+		val endTime = System.nanoTime()
+		assertTrue(endTime - startTime >= 2000e6)
+		assertTrue(endTime - startTime < 2200e6)
+		assertFalse(creatureObject.hasBuff("suppressionFire"))
+	}
+	
+}

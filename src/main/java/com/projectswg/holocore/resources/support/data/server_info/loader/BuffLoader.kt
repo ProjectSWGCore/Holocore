@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -54,7 +53,7 @@ class BuffLoader internal constructor() : DataLoader() {
 	}
 
 	class BuffInfo private constructor(val name: String, val group1: String, val group2: String, val block: String, val priority: Int, val icon: String, val duration: Double, private val effectNames: Array<String>, private val effectValues: DoubleArray, val state: String, val callback: String, val particle: String, val visible: Int, val isDebuff: Boolean) {
-		val crc: CRC = CRC(CRC.getCrc(name.lowercase()))
+		val crc: CRC = CRC(name.lowercase())
 
 		constructor(set: SdbResultSet, effectNames: SdbTextColumnArraySet, effectValues: SdbRealColumnArraySet) : this(
 			set.getText("name"), set.getText("group1"), set.getText("group2"), set.getText("block"), set.getInt("priority").toInt(), set.getText("icon"), set.getReal("duration"), effectNames.getArray(set).clone(), effectValues.getArray(set).clone(), set.getText("state"), set.getText("callback"), set.getText("particle"), set.getInt("visible").toInt(), set.getBoolean("debuff")

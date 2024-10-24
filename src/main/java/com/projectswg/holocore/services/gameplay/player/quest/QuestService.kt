@@ -421,7 +421,6 @@ class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), privat
 		}
 
 		if (currentTask.isVisible) {
-			player.playerObject.updatePlayTime()    // So the client can calculate the correct time remaining after we send QuestTaskTimerData
 			val task = currentTask.index
 			val timerPacket = QuestTaskTimerData(player.creatureObject.objectId)
 			timerPacket.questName = questName
