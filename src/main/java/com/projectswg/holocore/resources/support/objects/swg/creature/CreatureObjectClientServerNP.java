@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -37,9 +36,7 @@ import com.projectswg.holocore.resources.support.global.network.BaselineBuilder;
 import com.projectswg.holocore.resources.support.objects.swg.creature.attributes.AttributesMutable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -120,6 +117,18 @@ class CreatureObjectClientServerNP implements MongoPersistable {
 		} finally {
 			skillModLock.unlock();
 		}
+	}
+	
+	public Map<String, Integer> getSkillMods() {
+		Map<String, Integer> skillMods = new HashMap<>(this.skillMods.size());
+		skillModLock.lock();
+		try {
+			for (Map.Entry<String, SkillMod> entry : this.skillMods.entrySet())
+				skillMods.put(entry.getKey(), entry.getValue().getValue());
+		} finally {
+			skillModLock.unlock();
+		}
+		return skillMods;
 	}
 	
 	public int getSkillModValue(@NotNull String skillModName) {

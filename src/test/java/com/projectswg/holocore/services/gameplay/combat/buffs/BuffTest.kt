@@ -29,11 +29,11 @@ import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.services.gameplay.player.character.PlayerPlayTimeService
+import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSynchronousIntents
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -42,14 +42,27 @@ class BuffTest : TestRunnerSynchronousIntents() {
 	@BeforeEach
 	fun setup() {
 		registerService(BuffService())
+		registerService(SkillModService())
 		registerService(CharacterLookupService())
 		registerService(PlayerPlayTimeService())
+	}
+	
+	@Test
+	fun `Buff modifies new skillmod`() {
+		val creatureObject = GenericCreatureObject(0)
+		creatureObject.objectName = "Buffee"
+		val suppressionBefore = creatureObject.skillMods["suppression"] ?: 0
+		
+		BuffIntent("suppressionFire", creatureObject, creatureObject, false).broadcast()
+		waitForIntents()
+		assertEquals(suppressionBefore + 45, creatureObject.skillMods["suppression"])
 	}
 	
 	@Test
 	fun `Buff removed when expires`() {
 		val creatureObject = GenericCreatureObject(0)
 		creatureObject.objectName = "Buffee"
+		val suppressionBefore = creatureObject.skillMods["suppression"] ?: 0
 		
 		// Apply the buff (2s)
 		val startTime = System.nanoTime()
@@ -67,6 +80,7 @@ class BuffTest : TestRunnerSynchronousIntents() {
 		assertTrue(endTime - startTime >= 2000e6)
 		assertTrue(endTime - startTime < 2200e6)
 		assertFalse(creatureObject.hasBuff("suppressionFire"))
+		assertEquals(suppressionBefore, creatureObject.skillMods["suppression"])  // Removes skillMod at the end
 	}
 	
 }
