@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,76 +23,61 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat
+package com.projectswg.holocore.services.gameplay.combat.states
 
-import com.projectswg.common.data.combat.CombatSpamType
-import com.projectswg.common.data.encodables.oob.OutOfBandPackage
-import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage
-import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatSpam
-import com.projectswg.holocore.intents.gameplay.combat.RequestCreatureDeathIntent
+import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
+import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 
-class BleedingCombatState : CombatState {
-
-	private val loopEffectLabel = "bleed"
-
+class DizzyCombatState : CombatState {
+	
+	private val loopEffectLabel = "dizzy"
+	
 	override fun isApplied(victim: CreatureObject): Boolean {
-		return victim.isStatesBitmask(CreatureState.BLEEDING)
+		return victim.isStatesBitmask(CreatureState.DIZZY)
 	}
-
+	
 	override fun apply(attacker: CreatureObject, victim: CreatureObject) {
-		victim.setStatesBitmask(CreatureState.BLEEDING)
-
-		val dotBleedingEffect = PlayClientEffectObjectMessage("clienteffect/dot_bleeding.cef", "", victim.objectId, "")
-		victim.sendObservers(dotBleedingEffect)
-
+		victim.setStatesBitmask(CreatureState.DIZZY)
+		
+		val dizzyEffect = PlayClientEffectObjectMessage("clienteffect/combat_special_defender_dizzy.cef", "", victim.objectId, "")
+		victim.sendObservers(dizzyEffect)
+		
+		val dizzyFlytext = ShowFlyText(victim.objectId, StringId("combat_effects", "go_dizzy"), ShowFlyText.Scale.MEDIUM, SWGColor.Greens.lawngreen)
+		victim.sendSelf(dizzyFlytext)
+		attacker.sendSelf(dizzyFlytext)
+		
+		val victimOwner = victim.owner
+		
+		if (victimOwner != null) {
+			SystemMessageIntent.broadcastPersonal(victimOwner, "@cbt_spam:go_dizzy_single")
+		}
+	}
+	
+	override fun loop(attacker: CreatureObject, victim: CreatureObject) {
+		val stateDizzyEffect = PlayClientEffectObjectMessage("appearance/pt_state_dizzy.prt", "rbrow2", victim.objectId, loopEffectLabel)
+		victim.sendObservers(stateDizzyEffect)
+	}
+	
+	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
+		victim.clearStatesBitmask(CreatureState.DIZZY)
+		
 		val victimOwner = victim.owner
 		if (victimOwner != null) {
-			SystemMessageIntent.broadcastPersonal(victimOwner, "@dot_message:start_bleeding")
+			SystemMessageIntent.broadcastPersonal(victimOwner, "@cbt_spam:no_dizzy_single")
 		}
-	}
-
-	override fun loop(attacker: CreatureObject, victim: CreatureObject) {
-		val dotBleedingEffect = PlayClientEffectObjectMessage("appearance/pt_state_bleeding.prt", "root", victim.objectId, loopEffectLabel)
-		victim.sendObservers(dotBleedingEffect)
-
-		val damage = 75
-		if (damage > victim.health) {
-			RequestCreatureDeathIntent(attacker, victim).broadcast()
-		} else {
-			victim.modifyHealth(-damage)
-			val victimObservers = victim.observerCreatures
-			val spamMessage = OutOfBandPackage(ProsePackage(StringId("dot_message", "bleed_dmg_atkr"), "TO", attacker.objectName, "TT", victim.objectName, "DI", damage))
-
-			victimObservers.forEach { observer ->
-				val combatSpam = CombatSpam(observer.objectId)
-				combatSpam.spamType = CombatSpamType.HIT
-				combatSpam.defender = victim.objectId
-				combatSpam.attacker = attacker.objectId
-				combatSpam.weapon = attacker.equippedWeapon.objectId
-				combatSpam.dataType = 2
-				combatSpam.spamMessage = spamMessage
-
-				observer.sendSelf(combatSpam)
-			}
-		}
-	}
-
-	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
-		victim.clearStatesBitmask(CreatureState.BLEEDING)
-
+		
+		val noDizzyFlytext = ShowFlyText(victim.objectId, StringId("combat_effects", "no_dizzy"), ShowFlyText.Scale.MEDIUM, SWGColor.Reds.orangered)
+		victim.sendSelf(noDizzyFlytext)
+		attacker.sendSelf(noDizzyFlytext)
+		
 		val stopClientEffectObjectByLabelMessage = StopClientEffectObjectByLabelMessage(victim.objectId, loopEffectLabel, false)
 		victim.sendObservers(stopClientEffectObjectByLabelMessage)
-
-		val victimOwner = victim.owner
-		if (victimOwner != null) {
-			SystemMessageIntent.broadcastPersonal(victimOwner, "@dot_message:stop_bleeding")
-		}
 	}
-
+	
 }

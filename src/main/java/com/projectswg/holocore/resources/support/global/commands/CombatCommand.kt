@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -46,6 +45,7 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 	val knockdownChance: Double = builder.knockdownChance
 	val isBlinding: Boolean = builder.blinding
 	val isBleeding: Boolean = builder.bleeding
+	val isDizzying: Boolean = builder.dizzying
 	val isStunning: Boolean = builder.stunning
 	val triggerEffect: String = builder.triggerEffect
 	val triggerEffectHardpoint: String = builder.triggerEffectHardpoint
@@ -103,6 +103,7 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 		var knockdownChance: Double = 0.0
 		var blinding: Boolean = false
 		var bleeding: Boolean = false
+		var dizzying: Boolean = false
 		var stunning: Boolean = false
 		var triggerEffect: String = ""
 		var triggerEffectHardpoint: String = ""
@@ -195,6 +196,11 @@ class CombatCommand private constructor(builder: CombatCommandBuilder) {
 
 		fun withBleeding(bleeding: Boolean): CombatCommandBuilder {
 			this.bleeding = bleeding
+			return this
+		}
+
+		fun withDizzying(dizzying: Boolean): CombatCommandBuilder {
+			this.dizzying = dizzying
 			return this
 		}
 

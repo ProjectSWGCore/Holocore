@@ -51,14 +51,15 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import com.projectswg.holocore.resources.support.random.Die
-import com.projectswg.holocore.services.gameplay.combat.BleedingCombatState
-import com.projectswg.holocore.services.gameplay.combat.BlindedCombatState
-import com.projectswg.holocore.services.gameplay.combat.StunnedCombatState
+import com.projectswg.holocore.services.gameplay.combat.states.BleedingCombatState
+import com.projectswg.holocore.services.gameplay.combat.states.BlindedCombatState
+import com.projectswg.holocore.services.gameplay.combat.states.StunnedCombatState
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.addBuff
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.calculateBaseWeaponDamage
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.canPerform
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatAction
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.createCombatSpam
+import com.projectswg.holocore.services.gameplay.combat.states.DizzyCombatState
 import java.util.stream.Collectors
 import kotlin.math.abs
 import kotlin.math.atan2
@@ -217,6 +218,10 @@ internal class CombatCommandAttack(private val toHitDie: Die, private val knockd
 
 		if (combatCommand.isBleeding) {
 			ApplyCombatStateIntent(source, creatureTarget, BleedingCombatState()).broadcast()
+		}
+
+		if (combatCommand.isDizzying) {
+			ApplyCombatStateIntent(source, creatureTarget, DizzyCombatState()).broadcast()
 		}
 
 		if (combatCommand.isStunning) {

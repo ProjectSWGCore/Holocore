@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -40,8 +39,12 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDi
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.gameplay.combat.CombatDeathblowService
 import com.projectswg.holocore.services.gameplay.combat.CombatExperienceService
+import com.projectswg.holocore.services.gameplay.combat.CombatStateService
+import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
+import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
 import com.projectswg.holocore.services.gameplay.combat.loot.GrantLootService
 import com.projectswg.holocore.services.gameplay.combat.loot.LootGenerationService
+import com.projectswg.holocore.services.gameplay.faction.FactionFlagService
 import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
 import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
@@ -100,6 +103,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(ExperiencePointService())
 		registerService(CombatExperienceService())
 		registerService(CombatDeathblowService())
+		registerService(CombatStateService())
 		registerService(SkillService())
 		registerService(ChatSystemService())
 		registerService(ChatMailService())
@@ -113,6 +117,9 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(GrantLootService())
 		registerService(ContainerService())
 		registerService(BadgeManager())
+		registerService(BuffService())
+		registerService(DuelService())
+		registerService(FactionFlagService())
 	}
 
 	@AfterEach
