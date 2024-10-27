@@ -39,7 +39,6 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.ServerD
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader.SpawnerFlag
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
 import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
-import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty

@@ -66,8 +66,6 @@ import com.projectswg.holocore.resources.support.random.RandomDie
 import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import me.joshlarson.jlcommon.log.Log
-import java.lang.IndexOutOfBoundsException
 import java.util.concurrent.ThreadLocalRandom
 
 class QuestService(private val destroyMultiAndLootDie: Die = RandomDie(), private val retrieveItemDie: Die = RandomDie()) : Service() {

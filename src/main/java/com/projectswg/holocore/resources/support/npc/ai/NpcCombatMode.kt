@@ -28,12 +28,10 @@ package com.projectswg.holocore.resources.support.npc.ai
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.location.Point3D
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
 import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
-import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
@@ -44,13 +42,10 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
-import kotlin.math.cos
-import kotlin.math.sin
 
 class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 	
