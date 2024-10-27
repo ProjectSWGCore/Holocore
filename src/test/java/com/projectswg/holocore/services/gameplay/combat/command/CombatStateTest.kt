@@ -30,7 +30,7 @@ import com.projectswg.holocore.headless.HeadlessSWGClient
 import com.projectswg.holocore.headless.ZonedInCharacter
 import com.projectswg.holocore.headless.attack
 import com.projectswg.holocore.headless.duel
-import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
+import com.projectswg.holocore.headless.grantSkill
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -71,7 +71,7 @@ class CombatStateTest : AcceptanceTest() {
 	
 	@Test
 	fun `apply and recover from dizzy`() {
-		grantSkill(attacker, "combat_unarmed_master")
+		attackerPlayer.grantSkill("combat_unarmed_master")
 		
 		// Try and fail to perform dizzyRecovery, expect @cbt_spam:not_req_state_14
 		
@@ -86,7 +86,7 @@ class CombatStateTest : AcceptanceTest() {
 	
 	@Test
 	fun `apply and recover from stun`() {
-		grantSkill(attacker, "combat_polearm_master")
+		attackerPlayer.grantSkill("combat_polearm_master")
 		
 		// Try and fail to perform stunRecovery, expect @cbt_spam:not_req_state_12
 		
@@ -100,7 +100,7 @@ class CombatStateTest : AcceptanceTest() {
 	
 	@Test
 	fun `apply and recover from blind`() {
-		grantSkill(attacker, "combat_1hsword_master")
+		attackerPlayer.grantSkill("combat_1hsword_master")
 		
 		// Try and fail to perform blindRecovery, expect @cbt_spam:not_req_state_13
 		
@@ -110,10 +110,6 @@ class CombatStateTest : AcceptanceTest() {
 		assertTrue(defender.isStatesBitmask(CreatureState.BLINDED))
 		
 		// Execute blindRecovery, expect @cbt_spam:no_blind_single
-	}
-	
-	private fun grantSkill(creature: CreatureObject, skill: String) {
-		GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, skill, creature, isGrantRequiredSkills = true).broadcast()
 	}
 	
 }
