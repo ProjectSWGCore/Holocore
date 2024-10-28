@@ -29,6 +29,7 @@ import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.StopClientEffectObjectByLabelMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
+import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -66,6 +67,7 @@ class BlindedCombatState : CombatState {
 
 	override fun clear(attacker: CreatureObject, victim: CreatureObject) {
 		victim.clearStatesBitmask(CreatureState.BLINDED)
+		BuffIntent("blind", victim, victim, isRemove = true).broadcast()
 
 		val victimOwner = victim.owner
 		if (victimOwner != null) {

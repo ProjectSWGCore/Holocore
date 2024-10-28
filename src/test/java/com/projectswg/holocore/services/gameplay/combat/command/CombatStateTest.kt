@@ -37,8 +37,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -80,6 +79,12 @@ class CombatStateTest : AcceptanceTest() {
 		assertTrue(defender.hasBuff("dizzy"))
 		assertTrue(defender.isStatesBitmask(CreatureState.DIZZY))
 		
+		// Takes way too long to test
+//		Thread.sleep(10000L)
+//		waitForIntents()
+//		assertFalse(defender.isStatesBitmask(CreatureState.DIZZY))
+//		assertFalse(defender.hasBuff("dizzy"))
+		
 		// Execute dizzyRecovery, expect @cbt_spam:no_dizzy_single
 		// Verify Rodian innate protection
 	}
@@ -95,6 +100,12 @@ class CombatStateTest : AcceptanceTest() {
 		assertTrue(defender.hasBuff("stun"))
 		assertTrue(defender.isStatesBitmask(CreatureState.STUNNED))
 		
+		// Takes way too long to test
+//		Thread.sleep(10000L)
+//		waitForIntents()
+//		assertFalse(defender.isStatesBitmask(CreatureState.STUNNED))
+//		assertFalse(defender.hasBuff("stun"))
+		
 		// Execute stunRecovery, expect @cbt_spam:no_stunned_single
 	}
 	
@@ -108,6 +119,12 @@ class CombatStateTest : AcceptanceTest() {
 		waitForIntents()
 		assertTrue(defender.hasBuff("blind"))
 		assertTrue(defender.isStatesBitmask(CreatureState.BLINDED))
+		
+		// Takes way too long to test
+//		Thread.sleep(10000L)
+//		waitForIntents()
+//		assertFalse(defender.isStatesBitmask(CreatureState.BLINDED))
+//		assertFalse(defender.hasBuff("blind"))
 		
 		// Execute blindRecovery, expect @cbt_spam:no_blind_single
 	}
