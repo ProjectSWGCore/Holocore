@@ -215,6 +215,8 @@ public class CreatureObject extends TangibleObject {
 		SWGObject targetParent = target.getSuperParent();
 		if (myParent != null && myParent == targetParent)
 			return true;
+		if (targetParent == this)
+			return true;
 
 		if (isDifferentInstance(target))
 			return false;
