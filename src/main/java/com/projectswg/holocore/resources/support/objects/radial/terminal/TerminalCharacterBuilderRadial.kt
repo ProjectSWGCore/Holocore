@@ -405,7 +405,7 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 
 		private fun handleReconArmorStandard(player: Player) {
 			spawnItems(
-				player, "armor_recon_agi_lvl50_bicep_l_02_01", "armor_recon_agi_lvl50_bicep_r_02_01", "armor_recon_agi_lvl50_boots_02_01", "armor_recon_agi_lvl50_bracer_l_02_01", "armor_recon_agi_lvl50_bracer_r_02_01", "armor_recon_agi_lvl50_chest_02_01", "armor_recon_agi_lvl50_gloves_02_01", "armor_recon_agi_lvl50_helmet_02_01", "armor_recon_agi_lvl50_leggings_02_01"
+				player, "armor_recon_agi_lvl50_boots_02_01", "armor_recon_agi_lvl50_bracer_l_02_01", "armor_recon_agi_lvl50_bracer_r_02_01", "armor_recon_agi_lvl50_chest_02_01", "armor_recon_agi_lvl50_gloves_02_01", "armor_recon_agi_lvl50_helmet_02_01", "armor_recon_agi_lvl50_leggings_02_01"
 			)
 		}
 
