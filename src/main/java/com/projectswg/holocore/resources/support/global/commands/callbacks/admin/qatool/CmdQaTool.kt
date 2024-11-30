@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -45,13 +44,13 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService.PlayerLookup
 import me.joshlarson.jlcommon.log.Log
 
-/**
- * Created by Waverunner on 8/19/2015
- */
 class CmdQaTool : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
-		val command = args.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-		val commandName = command[0]
+		if (args.indexOf(" ") == -1) {
+			broadcastPersonal(player, "Invalid call to qatool: no command provided")
+			return
+		}
+		val commandName = args.substring(0, args.indexOf(" "))
 
 		when (commandName) {
 			"help"         -> displayHelp(player)
@@ -129,16 +128,35 @@ class CmdQaTool : ICmdCallback {
 	}
 
 	private fun setInstance(player: Player, args: String) {
-		try {
-			val creature = player.creatureObject
-			if (creature.parent != null) {
-				MoveObjectIntent(creature, creature.worldLocation, 0.0).broadcast()
+		val target: CreatureObject
+		val instanceString: String
+		if (args.contains(' ', ignoreCase = false)) {
+			val commandArguments = args.trim { it <= ' ' }.split(' ')
+			if (commandArguments.size != 2) {
+				broadcastPersonal(player, "Invalid setinstance command. Expected two arguments: <playername> <instance>")
+				return
 			}
-			creature.setInstance(creature.instanceLocation.instanceType, args.toInt())
-			ForceAwarenessUpdateIntent(creature).broadcast()
+			val playerSearch = PlayerLookup.getCharacterByFirstName(commandArguments[0])
+			if (playerSearch == null) {
+				broadcastPersonal(player, "Could not find player by first name: '${commandArguments[0]}'")
+				return
+			}
+			target = playerSearch
+			instanceString = commandArguments[1]
+		} else {
+			target = player.creatureObject
+			instanceString = args
+		}
+		
+		try {
+			if (target.parent != null) {
+				MoveObjectIntent(target, target.worldLocation, 0.0).broadcast()
+			}
+			target.setInstance(target.instanceLocation.instanceType, instanceString.toInt())
+			ForceAwarenessUpdateIntent(target).broadcast()
 		} catch (e: NumberFormatException) {
-			Log.e("Invalid instance number with qatool: %s", args)
-			broadcastPersonal(player, "Invalid call to qatool: '$args' - invalid instance number")
+			Log.e("Invalid instance number with qatool: %s", instanceString)
+			broadcastPersonal(player, "Invalid call to qatool: '$instanceString' - invalid instance number")
 		}
 	}
 
