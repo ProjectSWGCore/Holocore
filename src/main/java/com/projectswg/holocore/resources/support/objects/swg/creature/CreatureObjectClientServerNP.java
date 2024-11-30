@@ -46,8 +46,8 @@ import java.util.concurrent.locks.ReentrantLock;
 @SuppressWarnings("ClassWithTooManyFields") // Required by SWG
 class CreatureObjectClientServerNP implements MongoPersistable {
 	
-	private static final float DEFAULT_RUNSPEED = 5.376f;
-	private static final float DEFAULT_WALKSPEED = 1.00625f;
+	private static final float DEFAULT_RUNSPEED = 7.3f; // Originally: 5.376f
+	private static final float DEFAULT_WALKSPEED = 1.549f; // Originally: 1.00625f
 	private static final int DEFAULT_ACCELSCALE = 1;
 	private static final int DEFAULT_TURNSCALE = 1;
 	private static final int DEFAULT_MOVEMENTSCALE = 1;
