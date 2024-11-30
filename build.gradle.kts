@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /***********************************************************************************
  * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
@@ -32,20 +33,18 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "1.9.21"
-	id("org.beryx.jlink") version "3.0.1"
+	kotlin("jvm") version "2.1.0"
+	id("org.beryx.jlink") version "3.1.1"
 }
 
-val javaVersion = "21.0.1"
-val javaMajorVersion = "21"
-val kotlinTargetJdk = "21"
+val javaVersion = JavaVersion.current()
+val kotlinTargetJdk = JvmTarget.fromTarget(javaVersion.majorVersion)
+val junit5Version = "5.11.3"
 val holocoreLogLevel: String? by project
 
 subprojects {
 	ext {
-		set("javaVersion", javaVersion)
-		set("javaMajorVersion", javaMajorVersion)
-		set("kotlinTargetJdk", kotlinTargetJdk)
+		set("junit5Version", junit5Version)
 	}
 }
 
@@ -71,7 +70,7 @@ dependencies {
 	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(group="org.mongodb", name="mongodb-driver-sync", version="4.11.1")
+	implementation(group="org.mongodb", name="mongodb-driver-sync", version="5.2.1")
 	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
 	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
@@ -82,18 +81,16 @@ dependencies {
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
 	
-	val junit5Version = "5.10.3"
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version=junit5Version)
 	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version=junit5Version)
-	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.10.1")
+	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.11.3")
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version=junit5Version)
-	testImplementation(group="org.testcontainers", name="mongodb", version="1.19.3")
+	testImplementation(group="org.testcontainers", name="mongodb", version="1.20.4")
 
-	testImplementation("com.tngtech.archunit:archunit-junit5:1.2.1")
+	testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
 }
 
 idea {
-	targetVersion = javaMajorVersion
     module {
         inheritOutputDirs = true
 		excludeDirs.add(project.file("log"))
@@ -120,8 +117,8 @@ tasks.withType<Jar> {
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
-	kotlinOptions {
-		jvmTarget = kotlinTargetJdk
+	compilerOptions {
+		jvmTarget.set(kotlinTargetJdk)
 	}
 	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }

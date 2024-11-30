@@ -14,7 +14,7 @@
           <option value="--args=&quot;--print-colors&quot;" />
         </list>
       </option>
-      <option name="vmOptions" />
+      <option name="vmOptions" value="-ea" />
     </ExternalSystemSettings>
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
