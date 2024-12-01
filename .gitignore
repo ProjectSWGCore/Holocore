@@ -7,6 +7,7 @@ out
 classes/
 .classpath
 .project
+.kotlin
 # IntelliJ-User Specific
 .idea/**/workspace.xml
 .idea/**/tasks.xml
