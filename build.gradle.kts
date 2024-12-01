@@ -70,6 +70,7 @@ dependencies {
 	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
+	implementation(group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version="1.9.0")
 	implementation(group="org.mongodb", name="mongodb-driver-sync", version="5.2.1")
 	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")

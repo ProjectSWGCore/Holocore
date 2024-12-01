@@ -14,6 +14,6 @@ open module holocore {
 	
 	requires com.projectswg.common;
 	requires fast.json;
-	requires kotlin.stdlib;
 	requires kotlin.reflect;
+	requires kotlinx.coroutines.core;
 }

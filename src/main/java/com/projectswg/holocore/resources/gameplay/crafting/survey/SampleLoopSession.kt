@@ -50,14 +50,13 @@ import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleOb
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
 import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceContainerEventHandler
 import com.projectswg.holocore.services.gameplay.crafting.resource.ResourceContainerHelper.giveResourcesToPlayer
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.log.Log
-import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.ThreadLocalRandom
 
 class SampleLoopSession(private val creature: CreatureObject, private val surveyTool: TangibleObject, private val resource: GalacticResource, private val sampleLocation: Location) {
 	private var sampleWindow: SuiWindow? = null
-	private var loopFuture: ScheduledFuture<*>? = null
+	private var surveyJob: Job? = null
 	private var paused = false
 	private var sampleMultiplier = 1
 
@@ -69,7 +68,7 @@ class SampleLoopSession(private val creature: CreatureObject, private val survey
 
 	@get:Synchronized
 	val isSampling: Boolean
-		get() = loopFuture != null && !loopFuture!!.isDone
+		get() = surveyJob?.isActive ?: false
 
 	@Synchronized
 	fun onPlayerMoved() {
@@ -79,38 +78,45 @@ class SampleLoopSession(private val creature: CreatureObject, private val survey
 		if (oldLocation.distanceTo(newLocation) >= 0.5 || oldLocation.terrain != newLocation.terrain) stopSession()
 	}
 
-	/**
-	 * Attempts to start the sample loop session with the specified executor.  If the loop is unable to start, this function returns false; otherwise this function returns true.
-	 *
-	 * @param executor the executor for the loop to run on
-	 * @return TRUE if the sample loop has begun, FALSE otherwise
-	 */
 	@Synchronized
-	fun startSession(executor: ScheduledThreadPool): Boolean {
-		if (loopFuture != null) {
-			loopFuture!!.cancel(false)
-		}
+	fun startSession(surveyScope: CoroutineScope): Boolean {
+		surveyJob?.cancel()
 		val concentration = concentration
 		if (!isAllowedToSample(concentration)) return false
 
-		loopFuture = executor.executeWithFixedRate(15000, 15000) { this.sample() }
-		creature.posture = Posture.CROUCHED
-		creature.setMovementPercent(0.0)
-		creature.setTurnScale(0.0)
-		creature.sendSelf(ChatSystemMessage(SystemChatType.PERSONAL, ProsePackage(StringId("@survey:start_sampling"), "TO", resource.name)))
-		StandardLog.onPlayerTrace(this, creature, "started a sample session with %s and concentration %.1f", resource.name, concentration)
+		surveyJob = surveyScope.launch {
+			try {
+				sendStartSurvey()
+				while (surveyScope.isActive) {
+					delay(15000L)
+					sample()
+				}
+			} finally {
+				sendStopSurvey()
+			}
+		}
 		return true
 	}
 
 	@Synchronized
 	fun stopSession() {
-		if (loopFuture != null) loopFuture!!.cancel(false)
-		else return
-		loopFuture = null
-		if (sampleWindow != null) {
-			val owner = creature.owner
-			if (owner != null) sampleWindow!!.close(owner)
-		}
+		surveyJob?.cancel() ?: return
+		surveyJob = null
+	}
+	
+	private fun sendStartSurvey() {
+		// Start the surveying
+		creature.posture = Posture.CROUCHED
+		creature.setMovementPercent(0.0)
+		creature.setTurnScale(0.0)
+		creature.sendSelf(ChatSystemMessage(SystemChatType.PERSONAL, ProsePackage(StringId("@survey:start_sampling"), "TO", resource.name)))
+		StandardLog.onPlayerTrace(this, creature, "started a sample session with %s and concentration %.1f", resource.name, concentration)
+	}
+	
+	private fun sendStopSurvey() {
+		// Stop surveying
+		val owner = creature.owner
+		if (owner != null) sampleWindow?.close(owner)
 		sampleWindow = null
 
 		creature.posture = Posture.UPRIGHT

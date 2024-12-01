@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -49,13 +48,15 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.waypoint.WaypointObject
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.log.Log
-import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.atomic.AtomicReference
 
-internal class SurveyHandler(private val creature: CreatureObject, private val surveyTool: TangibleObject, private val executor: ScheduledThreadPool) {
-	private val surveyRequest = AtomicReference<ScheduledFuture<*>?>(null)
+internal class SurveyHandler(private val creature: CreatureObject, private val surveyTool: TangibleObject, private val surveyScope: CoroutineScope) {
+	private val surveyRequest = AtomicReference<Job?>(null)
 	private val lastSurveyCompleted = AtomicReference<GalacticResource?>(null)
 
 	fun startSession() {
@@ -63,13 +64,12 @@ internal class SurveyHandler(private val creature: CreatureObject, private val s
 
 	fun stopSession() {
 		val surveyRequest = surveyRequest.get()
-		surveyRequest?.cancel(false)
+		surveyRequest?.cancel()
 	}
 
 	val isSurveying: Boolean
 		get() {
-			val prev = surveyRequest.get()
-			return prev != null && !prev.isDone
+			return surveyRequest.get()?.isActive ?: false
 		}
 
 	val lastResourceSurveyed: GalacticResource?
@@ -83,7 +83,10 @@ internal class SurveyHandler(private val creature: CreatureObject, private val s
 		checkNotNull(resolution) { "verified in isAllowedToSurvey" }
 
 		creature.modifyAction((-creature.maxAction / 10.0 * resolution.counter).toInt())
-		surveyRequest.set(executor.execute(4000) { sendSurveyMessage(resolution, location, resource) })
+		surveyRequest.set(surveyScope.launch {
+			delay(4000L)
+			sendSurveyMessage(resolution, location, resource)
+		})
 		creature.sendSelf(ChatSystemMessage(SystemChatType.PERSONAL, ProsePackage(StringId("survey", "start_survey"), "TO", resource.name)))
 		creature.sendSelf(PlayMusicMessage(0, getMusicFile(resource), 1, false))
 		creature.sendObservers(PlayClientEffectObjectMessage(getEffectFile(resource), "", creature.objectId, ""))
