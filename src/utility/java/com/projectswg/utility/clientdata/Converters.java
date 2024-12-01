@@ -22,6 +22,7 @@ public enum Converters {
 	QUESTLIST					(ConvertQuestLists::new),
 	QUESTTASK					(ConvertQuestTasks::new),
 	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
+	STRINGS						(ConvertStrings::new),
 	TERRAINS					(ConvertTerrain::new);
 	
 	private final Supplier<Converter> converter;

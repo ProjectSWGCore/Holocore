@@ -42,7 +42,7 @@ build
 gradle.properties
 
 # Holocore
-/clientdata/
+/clientdata
 /log/
 /cfg/
 /odb/
