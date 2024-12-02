@@ -1,5 +1,5 @@
 open module holocore {
-	requires java.sql;
+	requires java.logging;
 	requires java.management;
 	requires jdk.management;
 	
