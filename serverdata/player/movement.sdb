@@ -1,60 +1,59 @@
 movement_id	type	strength	affects_onfoot	affects_vehicle	affects_mount	comments
 TEXT	TEXT	FLOAT	BOOLEAN	BOOLEAN	BOOLEAN	TEXT
 armorHinderanceMove	permasnare	0	TRUE	FALSE	FALSE	Movement penalty for wearing uncertified armor
-avoidIncapacitation	snare	80	TRUE	TRUE	TRUE
-avoidIncapacitation_1	snare	80	TRUE	TRUE	TRUE
-avoidIncapacitation_2	snare	80	TRUE	TRUE	TRUE
-avoidIncapacitation_3	snare	80	TRUE	TRUE	TRUE
-avoidIncapacitation_4	snare	80	TRUE	TRUE	TRUE
-avoidIncapacitation_5	snare	80	TRUE	TRUE	TRUE
+avoidIncapacitation	snare	80	TRUE	TRUE	TRUE	
+avoidIncapacitation_1	snare	80	TRUE	TRUE	TRUE	
+avoidIncapacitation_2	snare	80	TRUE	TRUE	TRUE	
+avoidIncapacitation_3	snare	80	TRUE	TRUE	TRUE	
+avoidIncapacitation_4	snare	80	TRUE	TRUE	TRUE	
+avoidIncapacitation_5	snare	80	TRUE	TRUE	TRUE	
 burstRun	boost	75	TRUE	FALSE	FALSE	Burst run ability
 caltropSnare	snare	50	TRUE	FALSE	TRUE	caltrop trap snare
-concussionShot	root	0	TRUE	TRUE	TRUE
-concussionShot_1	root	0	TRUE	TRUE	TRUE
-crippleAttack	snare	25	TRUE	FALSE	FALSE
-crippleAttack_1	snare	45	TRUE	FALSE	FALSE
-cripplingShot	snare	25	TRUE	FALSE	FALSE
-cripplingShot_1	snare	45	TRUE	FALSE	FALSE
+concussionShot	root	0	TRUE	TRUE	TRUE	
+concussionShot_1	root	0	TRUE	TRUE	TRUE	
+crippleAttack	snare	25	TRUE	FALSE	FALSE	
+crippleAttack_1	snare	45	TRUE	FALSE	FALSE	
+cripplingShot	snare	25	TRUE	FALSE	FALSE	
+cripplingShot_1	snare	45	TRUE	FALSE	FALSE	
 cryobanSnare	snare	80	TRUE	FALSE	FALSE	A snare applied to targets within the radius of a cryoban grenade.
 cyberneticLegs	permaboost	40	TRUE	FALSE	FALSE	granted by cybernetic legs
 cyborgBurstRun	boost	90	TRUE	FALSE	FALSE	Cybernetic Burst run ability
-drink_accarragm	boost	27	TRUE	FALSE	FALSE
-drink_rancoraid	boost	5	TRUE	FALSE	FALSE
-electrolyteDrain	snare	20	TRUE	FALSE	FALSE
-electrolyteDrain_1	snare	40	TRUE	FALSE	FALSE
-enfeeble	root	0	TRUE	FALSE	FALSE
-forceRun_1	boost	100	TRUE	FALSE	FALSE
-forceRun_2	boost	150	TRUE	FALSE	FALSE
-forceSuppression	root	0	TRUE	TRUE	TRUE
-forceSuppression_1	root	0	TRUE	TRUE	TRUE
+drink_accarragm	boost	27	TRUE	FALSE	FALSE	
+drink_rancoraid	boost	5	TRUE	FALSE	FALSE	
+electrolyteDrain	snare	20	TRUE	FALSE	FALSE	
+electrolyteDrain_1	snare	40	TRUE	FALSE	FALSE	
+enfeeble	root	0	TRUE	FALSE	FALSE	
+forceRun_1	boost	100	TRUE	FALSE	FALSE	
+forceRun_2	boost	150	TRUE	FALSE	FALSE	
+forceSuppression	root	0	TRUE	TRUE	TRUE	
+forceSuppression_1	root	0	TRUE	TRUE	TRUE	
 forceThrow	snare	50	TRUE	FALSE	TRUE	caltrop trap snare
-forceWave	snare	25	TRUE	FALSE	FALSE
-forceWave_1	snare	45	TRUE	FALSE	FALSE
-forceWeaken	snare	15	TRUE	FALSE	FALSE
-forceWeaken_1	snare	25	TRUE	FALSE	FALSE
+forceWave	snare	25	TRUE	FALSE	FALSE	
+forceWave_1	snare	45	TRUE	FALSE	FALSE	
+forceWeaken	snare	15	TRUE	FALSE	FALSE	
+forceWeaken_1	snare	25	TRUE	FALSE	FALSE	
 invis_forceCloak	snare	50	TRUE	FALSE	FALSE	stealth sneak
 invis_urbanStealth	snare	50	TRUE	FALSE	FALSE	stealth sneak
 invis_wildernessStealth	snare	50	TRUE	FALSE	FALSE	stealth sneak
-kneecapShot	snare	15	TRUE	FALSE	FALSE
-kneecapShot_1	snare	25	TRUE	FALSE	FALSE
-paralyze	root	0	TRUE	FALSE	FALSE
-paralyze_1	root	0	TRUE	FALSE	FALSE
-petPinAttack	root	0	TRUE	FALSE	FALSE
-petPinAttack_1	root	0	TRUE	FALSE	FALSE
-petRunSpeed_1	permaboost	25	TRUE	FALSE	FALSE
-petRunSpeed_2	permaboost	50	TRUE	FALSE	FALSE
-petRunSpeed_3	permaboost	75	TRUE	FALSE	FALSE
-petSnareAttack	snare	25	TRUE	FALSE	FALSE
-petSnareAttack_1	snare	45	TRUE	FALSE	FALSE
-restrainingShot	snare	15	TRUE	FALSE	FALSE
-restrainingShot_1	snare	25	TRUE	FALSE	FALSE
-startled	snare	30	TRUE	TRUE	TRUE
-stasis	root	0	TRUE	TRUE	TRUE
-stop	root	0	TRUE	TRUE	TRUE
-stoppingShot	root	0	TRUE	TRUE	TRUE
-stoppingShot_1	root	0	TRUE	TRUE	TRUE
-stoppingShot_2	root	0	TRUE	TRUE	TRUE
-test_stun	stun	0	TRUE	FALSE	FALSE
+kneecapShot	snare	15	TRUE	FALSE	FALSE	
+kneecapShot_1	snare	25	TRUE	FALSE	FALSE	
+paralyze	root	0	TRUE	FALSE	FALSE	
+paralyze_1	root	0	TRUE	FALSE	FALSE	
+petPinAttack	root	0	TRUE	FALSE	FALSE	
+petPinAttack_1	root	0	TRUE	FALSE	FALSE	
+petRunSpeed_1	permaboost	25	TRUE	FALSE	FALSE	
+petRunSpeed_2	permaboost	50	TRUE	FALSE	FALSE	
+petRunSpeed_3	permaboost	75	TRUE	FALSE	FALSE	
+petSnareAttack	snare	25	TRUE	FALSE	FALSE	
+petSnareAttack_1	snare	45	TRUE	FALSE	FALSE	
+restrainingShot	snare	15	TRUE	FALSE	FALSE	
+restrainingShot_1	snare	25	TRUE	FALSE	FALSE	
+startled	snare	30	TRUE	TRUE	TRUE	
+stasis	root	0	TRUE	TRUE	TRUE	
+stop	root	0	TRUE	TRUE	TRUE	
+stoppingShot	root	0	TRUE	TRUE	TRUE	
+stoppingShot_1	root	0	TRUE	TRUE	TRUE	
+stoppingShot_2	root	0	TRUE	TRUE	TRUE	
 testColdSnare1	snare	7	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
 testColdSnare2	snare	21	TRUE	FALSE	FALSE	TESTING ONLY - Do not use.
 testItemBoost1	permaboost	8	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
@@ -74,7 +73,7 @@ testVehicleBoost	boost	300	TRUE	TRUE	FALSE	TESTING ONLY - Do not use
 testVehicleSnare	snare	75	TRUE	TRUE	FALSE	TESTING ONLY - Do not use
 testWebSnare1	snare	14	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
 testWebSnare2	snare	28	TRUE	FALSE	FALSE	TESTING ONLY - Do not use
-towForemanBurstRun	boost	30	TRUE	FALSE	FALSE
+towForemanBurstRun	boost	30	TRUE	FALSE	FALSE	
 tranqDart	snare	66	TRUE	FALSE	FALSE	Scout tranquilizer dart
-wavering	snare	80	TRUE	FALSE	FALSE
+wavering	snare	80	TRUE	FALSE	FALSE	
 weaponHinderance	permasnare	0	TRUE	FALSE	FALSE	Movement penalty for using a ranged weapon
