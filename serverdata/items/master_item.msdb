@@ -3,6 +3,5 @@ TEXT	BOOLEAN
 items_armor.sdb	TRUE
 items_crystal.sdb	TRUE
 items_item.sdb	TRUE
-items_weapon.sdb	FALSE
 items_weapon_cu.sdb	TRUE
 items_wearable.sdb	TRUE
