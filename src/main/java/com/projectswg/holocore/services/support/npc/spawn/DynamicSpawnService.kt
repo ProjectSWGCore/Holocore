@@ -55,8 +55,8 @@ class DynamicSpawnService : Service() {
 	private val dynamicSpawnLoader = dynamicSpawns
 	private val noSpawnZoneLoader = noSpawnZones
 	private val terrainLevelLoader = terrainLevels
-	private val npcSpawnChance = config.getLong(this, "npcSpawnChance", 7) // Chance in % that a NPC is dynamically spawned when a player moves
-	private val maxObservedNpcs = config.getLong(this, "maxObservedNpcs", 10) // A player should never see more than this amount of alive NPCs
+	private val npcSpawnChance = config.getLong(this, "npcSpawnChance", 5) // Chance in % that a NPC is dynamically spawned when a player moves
+	private val maxObservedNpcs = config.getLong(this, "maxObservedNpcs", 12) // A player should never see more than this amount of alive NPCs
 
 	@IntentHandler
 	private fun handlePlayerTransformed(intent: PlayerTransformedIntent) {
@@ -163,12 +163,12 @@ class DynamicSpawnService : Service() {
 
 		StandardLog.onPlayerEvent(this, player, "Spawning %s", spawnInfo.dynamicId)
 
-		spawn(randomNpc(spawnInfo.npcBoss), CreatureDifficulty.BOSS, spawnerFlag, minLevel, maxLevel, eggLocation)
 		spawn(randomNpc(spawnInfo.npcElite), CreatureDifficulty.ELITE, spawnerFlag, minLevel, maxLevel, eggLocation)
 		spawn(randomNpc(spawnInfo.npcNormal1), CreatureDifficulty.NORMAL, spawnerFlag, minLevel, maxLevel, eggLocation)
 		spawn(randomNpc(spawnInfo.npcNormal2), CreatureDifficulty.NORMAL, spawnerFlag, minLevel, maxLevel, eggLocation)
 		spawn(randomNpc(spawnInfo.npcNormal3), CreatureDifficulty.NORMAL, spawnerFlag, minLevel, maxLevel, eggLocation)
 		spawn(randomNpc(spawnInfo.npcNormal4), CreatureDifficulty.NORMAL, spawnerFlag, minLevel, maxLevel, eggLocation)
+
 	}
 
 	private fun spawn(npcId: String?, difficulty: CreatureDifficulty, spawnerFlag: SpawnerFlag, minLevel: Int, maxLevel: Int, location: Location) {

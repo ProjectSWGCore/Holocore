@@ -1,0 +1,68 @@
+Following admin commands are enabled when you have a staff rank ingame (DEV, QA, CSR)
+You also have to enable the checkbox in your launcher settings about admin commands
+
+===================================================================================
+
+/broadcast
+broadcasts a message to all players
+
+/createStaticItem item_name
+creates an item into your inventory from the .sdbs stored in /serverdata/items/
+
+/dumpzoneinformation
+shows additional information about the building and cell you are in right now
+
+/dumpzoneinformation all_cells
+lists up ALL cells of the current building with their cell id and cell names
+
+/goto player player_name
+teleports you to a player
+
+/goto building building_id
+teleports you into the first cell of the building
+
+/goto building building_id cell_id
+teleports you into the first cell of the building
+
+/goto spawn spawn_id
+teleports you to the spawner
+
+/goto patrol patrol_id
+teleports you to the patrol spawner or waypoint
+
+/qatool recover player_name
+will teleport the named character to the front of Mos Eisley Starport. also the best way to recover a bugged character that can not be logged in anymore
+
+/server
+opens the basic server management tool. this is not fully functional yet and will be enhanced in future
+
+/setgodmode
+enables/disables god mode. the god mode is needed to perform admin commands
+
+/setSpeed value
+changes the player movement speed
+
+/teleport terrain x y z
+teleports you to the given coordinate. y in this case is the height. x and z are the usual coordinates
+
+/setExperience player_name xp_type value
+will give your character a certain amount of XP.
+
+	bountyhunter
+	crafting
+	crafting_medicine_general
+	creaturehandler
+	combat_general
+	combat_meleespecialize_unarmed
+	combat_meleespecialize_onehand
+	combat_meleespecialize_twohand
+	combat_meleespecialize_polearm
+	combat_rangedspecialize_rifle
+	combat_rangedspecialize_pistol
+	combat_rangedspecialize_carbine
+	combat_rangedspecialize_heavy
+	entertainer
+	jedi_general
+	medical
+	scout
+	trapping
