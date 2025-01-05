@@ -446,12 +446,8 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 				title = "Character Builder Terminal"
 				prompt = "Select a weapon category to receive a weapon of that type."
 
-				addListItem("CL  1 - Melee/Ranged")
-				addListItem("CL 10 - Melee/Ranged")
-				addListItem("CL 20 - Melee/Ranged")
-				addListItem("CL 30 - Melee/Ranged")
-				addListItem("CL 40 - Melee/Ranged")
-				addListItem("CL 50 - Melee/Ranged")
+				addListItem("Melee weapons")
+				addListItem("Ranged weapons")
 
 				addCallback(SuiEvent.OK_PRESSED, "handleWeaponSelection") { _: SuiEvent, parameters: Map<String, String> -> handleWeaponSelection(player, parameters) }
 				display(player)
@@ -462,51 +458,24 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 			val selection = SuiListBox.getSelectedRow(parameters)
 
 			when (selection) {
-				0 -> handlecl1(player)
-				1 -> handlecl10(player)
-				2 -> handlecl20(player)
-				3 -> handlecl30(player)
-				4 -> handlecl40(player)
-				5 -> handlecl50(player)
+				0 -> handleMeleeWeapons(player)
+				1 -> handleRangedWeapons(player)
+
 			}
 		}
 
-
-		private fun handlecl1(player: Player) {
+		private fun handleMeleeWeapons(player: Player) {
 			spawnItems(
-				player, "weapon_cl1_1h", "weapon_cl1_2h", "weapon_cl1_carbine", "weapon_cl1_heavy", "weapon_cl1_pistol", "weapon_cl1_polearm", "weapon_cl1_rifle", "weapon_cl1_unarmed"
+				player, "weapon_cl1_unarmed", "weapon_cl10_unarmed", "weapon_cl20_unarmed", "weapon_cl30_unarmed", "weapon_cl40_unarmed", "weapon_cl50_unarmed", "weapon_cl1_1h", "weapon_cl10_1h", "weapon_cl20_1h", "weapon_cl30_1h", "weapon_cl40_1h", "weapon_cl50_1h", "weapon_cl1_2h", "weapon_cl10_2h", "weapon_cl20_2h", "weapon_cl30_2h", "weapon_cl40_2h", "weapon_cl50_2h", "weapon_cl1_polearm", "weapon_cl10_polearm", "weapon_cl20_polearm", "weapon_cl30_polearm", "weapon_cl40_polearm", "weapon_cl50_polearm"
 			)
 		}
 
-		private fun handlecl10(player: Player) {
+		private fun handleRangedWeapons(player: Player) {
 			spawnItems(
-				player, "weapon_cl10_1h", "weapon_cl10_2h", "weapon_cl10_carbine", "weapon_cl10_heavy", "weapon_cl10_pistol", "weapon_cl10_polearm", "weapon_cl10_rifle", "weapon_cl10_unarmed"
+				player, "weapon_cl1_pistol", "weapon_cl10_pistol", "weapon_cl20_pistol", "weapon_cl30_pistol", "weapon_cl40_pistol", "weapon_cl50_pistol", "weapon_cl1_carbine", "weapon_cl10_carbine", "weapon_cl20_carbine", "weapon_cl30_carbine", "weapon_cl40_carbine", "weapon_cl50_carbine", "weapon_cl1_rifle", "weapon_cl10_rifle", "weapon_cl20_rifle", "weapon_cl30_rifle", "weapon_cl40_rifle", "weapon_cl50_rifle", "weapon_cl1_heavy", "weapon_cl10_heavy", "weapon_cl20_heavy", "weapon_cl30_heavy", "weapon_cl40_heavy", "weapon_cl50_heavy"
 			)
 		}
 
-		private fun handlecl20(player: Player) {
-			spawnItems(
-				player, "weapon_cl20_1h", "weapon_cl20_2h", "weapon_cl20_carbine", "weapon_cl20_heavy", "weapon_cl20_pistol", "weapon_cl20_polearm", "weapon_cl20_rifle", "weapon_cl20_unarmed"
-			)
-		}
-
-		private fun handlecl30(player: Player) {
-			spawnItems(
-				player, "weapon_cl30_1h", "weapon_cl30_2h", "weapon_cl30_carbine", "weapon_cl30_heavy", "weapon_cl30_pistol", "weapon_cl30_polearm", "weapon_cl30_rifle", "weapon_cl30_unarmed"
-			)
-		}
-
-		private fun handlecl40(player: Player) {
-			spawnItems(
-				player, "weapon_cl40_1h", "weapon_cl40_2h", "weapon_cl40_carbine", "weapon_cl40_heavy", "weapon_cl40_pistol", "weapon_cl40_polearm", "weapon_cl40_rifle", "weapon_cl40_unarmed"
-			)
-		}
-
-		private fun handlecl50(player: Player) {
-			spawnItems(
-				player, "weapon_cl50_1h", "weapon_cl50_2h", "weapon_cl50_carbine", "weapon_cl50_heavy", "weapon_cl50_pistol", "weapon_cl50_polearm", "weapon_cl50_rifle", "weapon_cl50_unarmed"
-			)
-		}
 
 		private fun handleWearables(player: Player) {
 			SuiListBox().run {

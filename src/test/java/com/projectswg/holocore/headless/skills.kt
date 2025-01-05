@@ -26,18 +26,7 @@
 package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
-import com.projectswg.common.network.packets.swg.zone.object_controller.combat.CombatAction
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import java.util.concurrent.TimeUnit
-
-/**
- * Combat command /grantskill
- * @param skill the skill to grant
- */
-fun ZonedInCharacter.grantSkill(skill: String) {
-	sendCommand("grantSkill", args = skill)
-	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
-}
 
 /**
  * Combat command /surrenderSkill
