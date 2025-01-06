@@ -23,54 +23,18 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.support.global.chat
+package com.projectswg.holocore.headless
 
-import com.projectswg.common.data.encodables.chat.ChatAvatar
-import com.projectswg.holocore.resources.support.global.player.Player
-import me.joshlarson.jlcommon.control.Intent
+import com.projectswg.common.data.encodables.oob.OutOfBandPackage
+import java.util.concurrent.TimeUnit
 
-class ChatRoomUpdateIntent(val path: String, title: String?, target: String?, val avatar: ChatAvatar, val updateType: UpdateType) : Intent() {
-	var title: String? = null
-	var target: String? = null
-	val message: String? = null
-	var isPublic: Boolean = false
-		private set
-	var player: Player? = null
-		private set
-	var isIgnoreInvitation: Boolean = false
-		private set
+data class ChatRoomMessage(val sender: String, val message: String, val outOfBandPackage: OutOfBandPackage)
 
-	init {
-		when (updateType) {
-			UpdateType.DESTROY -> {}
-			UpdateType.CREATE  -> this.title = title
-			else               -> this.target = target
-		}
-	}
+fun ZonedInCharacter.getChatName(): String {
+	return getCharacterName().lowercase()
+}
 
-	constructor(player: Player?, avatar: ChatAvatar, path: String, title: String?, isPublic: Boolean) : this(path, title, null, avatar, UpdateType.CREATE) {
-		this.player = player
-		this.isPublic = isPublic
-	}
-
-	constructor(avatar: ChatAvatar, path: String, updateType: UpdateType, isIgnoreInvitation: Boolean) : this(path, null, null, avatar, updateType) {
-		this.isIgnoreInvitation = isIgnoreInvitation
-	}
-
-	constructor(player: Player, path: String, updateType: UpdateType, isIgnoreInvitation: Boolean) : this(ChatAvatar(player.characterChatName), path, updateType, isIgnoreInvitation) {
-		this.player = player
-	}
-
-	enum class UpdateType {
-		CREATE,
-		DESTROY,
-		JOIN,
-		LEAVE,
-		MODERATORS_ADD_TARGET,
-		MODERATORS_REMOVE_TARGET,
-		BANNED_ADD_TARGET,
-		BANNED_REMOVE_TARGET,
-		INVITED_ADD_TARGET,
-		INVITED_REMOVE_TARGET
-	}
+fun ZonedInCharacter.getNextChat(): ChatRoomMessage {
+	val packet = player.waitForNextPacket(com.projectswg.common.network.packets.swg.zone.chat.ChatRoomMessage::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("${getCharacterName()} did not receive a chat")
+	return ChatRoomMessage(packet.avatar.name, packet.message, packet.outOfBandPackage)
 }

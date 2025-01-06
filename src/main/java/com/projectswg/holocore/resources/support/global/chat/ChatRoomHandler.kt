@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -202,15 +201,15 @@ class ChatRoomHandler {
 		}
 	}
 
-	fun sendMessageToRoom(player: Player, roomId: Int, sequence: Int, message: String, oobPackage: OutOfBandPackage?) {
+	fun sendMessageToRoom(player: Player, roomId: Int, sequence: Int, message: String, oobPackage: OutOfBandPackage) {
 		sendMessageToRoom(player, rooms.getRoomById(roomId), sequence, message, oobPackage)
 	}
 
-	fun sendMessageToRoom(player: Player, path: String, sequence: Int, message: String, oobPackage: OutOfBandPackage?) {
+	fun sendMessageToRoom(player: Player, path: String, sequence: Int, message: String, oobPackage: OutOfBandPackage) {
 		sendMessageToRoom(player, rooms.getRoomByPath(path), sequence, message, oobPackage)
 	}
 
-	fun sendMessageToRoom(player: Player, room: ChatRoom?, sequence: Int, message: String, oobPackage: OutOfBandPackage?) {
+	fun sendMessageToRoom(player: Player, room: ChatRoom?, sequence: Int, message: String, oobPackage: OutOfBandPackage) {
 		if (room == null) {
 			player.sendPacket(ChatOnSendRoomMessage(ChatResult.ROOM_INVALID_ID.code, sequence))
 			return
@@ -227,7 +226,7 @@ class ChatRoomHandler {
 		}
 	}
 
-	fun sendMessageToRoomFromSystem(path: String, message: String, oobPackage: OutOfBandPackage?) {
+	fun sendMessageToRoomFromSystem(path: String, message: String, oobPackage: OutOfBandPackage) {
 		val systemAvatar = ChatAvatar.systemAvatar
 		val room = rooms.getRoomByPath(path)
 
@@ -312,7 +311,7 @@ class ChatRoomHandler {
 	}
 
 	companion object {
-		private fun sendMessage(room: ChatRoom?, sender: ChatAvatar, message: String, oob: OutOfBandPackage?) {
+		private fun sendMessage(room: ChatRoom?, sender: ChatAvatar, message: String, oob: OutOfBandPackage) {
 			var message = message
 			if (message.startsWith("\\#")) message = " $message"
 			val chatRoomMessage = ChatRoomMessage(sender, room!!.id, message, oob)
