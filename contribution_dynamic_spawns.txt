@@ -1,0 +1,59 @@
+=====================================================================================================
+IMPORTANT NOTES
+=====================================================================================================
+
+	- For better readability it is best to use Google Sheets or Excel Tables to work on the data.
+	- The existing dynamic spawns (groups) give you a good idea/hint how it works
+	- Dynamic spawns get stored in
+			serverdata/spawn/dynamic/dynamic_spawns.sdb
+	- All changes to the database require a server reboot to take effect
+
+=====================================================================================================
+STEP 1: Set up
+=====================================================================================================
+
+- Open the NPC database
+		serverdata/npc/npc_1.sdb	creatures
+		serverdata/npc/npc_2.sdb	creatures / droids
+		serverdata/npc/npc_3.sdb	humanoid
+		serverdata/npc/npc_4.sdb	humanoid
+		serverdata/npc/npc_5.sdb	humanoid
+
+- Pick a set of NPCs you want to "merge" into a new dynamic spawn group
+
+- Optional:		Copy/paste the selected npc_ids into a txt file
+
+=====================================================================================================
+STEP 2: Create a dynamic spawn group
+=====================================================================================================
+
+- Create a new line in the table
+		serverdata/spawn/dynamic/dynamic_spawns.sdb
+
+- "dynamic_id":	choose a name for it. Avoid using existing dynamic_id names!
+
+- "lair_id": 	pick a lair
+		serverdata/spawn/dynamic/dynamic_lairs.sdb
+
+- "type":		npc or creature
+
+- "attackable":	ATTACKABLE or AGGRESSIVE
+
+- "planets":	enter all the planets where they should spawn in. Be sure to use a semicolon for more than 1 planet ! Kashyyyk is not allowed !
+
+- "npc_boss":	1 BOSS NPC will be spawned in
+
+- "npc_elite":	1 ELITE NPC will be spawned in
+
+- "npc_normal_1 to _9":	These NPCs will have normal healthbar and stats.
+
+=====================================================================================================
+STEP 3: Testing ingame
+=====================================================================================================
+
+- You have to reboot the server to see the changes ingame
+- Depending on the terrain you assigned to the dynamic spawn group it can take some time until they randomly show up near you.
+- Planets like Tatooine or Corellia have a lot of assigned groups. Moons or smaller planets work much better.
+
+
+For questions or assistance please contact Undercova in Discord!

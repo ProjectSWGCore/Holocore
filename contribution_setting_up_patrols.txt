@@ -1,0 +1,100 @@
+=====================================================================================================
+IMPORTANT NOTES
+=====================================================================================================
+
+	- For better readability it is best to use Google Sheets or Excel Tables to work on the data.
+	- Try to work out your route you want to create. Think in straight lines!
+	- Do you want to create a FLIP (1,2,3,4,5,4,3,2,1) or LOOP (1,2,3,4,5,1,2,3,4,5) route ?
+	- The existing patrol files give you a good idea/hint how it works
+	- Patrols get stored in 2 places
+			Main patrol spawner /spawn/city/city_tatooine_mos_eisley.sdb
+			Patrol waypoints /serverdata/patrol/patrol_tatooine.sdb
+	- Be sure to change the commas to dots in the coordinates!!
+	- All spawners and waypoints you place with the commands get deleted with a server reboot. They are just a visual aid to show where you have placed new patrol spawners and waypoints
+
+=====================================================================================================
+STEP 1: Set up
+=====================================================================================================
+
+- Boot up the local server
+
+- Enter god mode
+		Command		/setg
+
+=====================================================================================================
+STEP 2: Collect data
+=====================================================================================================
+
+- Place the main patrol spawner (black)
+		Command		/createstaticelement PATROL COMMENT
+		COMMENT: 1 word to add to easily recognize your entry in log later on
+		Holocore will write following data into /log/spawners.txt
+		TATOOINE	tat_world	PATROL	0	3214,1	5,0	-4868,8	168	COMMENT
+
+- Walk to the first/next waypoint (red) you want to add
+		Command		/createstaticelement WAYPOINT
+		Holocore will write following data into /log/spawners.txt
+		TATOOINE	tat_world	WAYPOINT	0	3214,1	5,0	-4868,8	168
+
+- Repeat this until you are done with the patrol route
+
+- Open the txt file and copy the content
+
+=====================================================================================================
+STEP 3: Transfer data into patrol database
+=====================================================================================================
+
+- Open the patrol file for the terrain
+		Folder	/serverdata/patrol/patrol_tatooine.sdb
+
+- Paste the content into new lines.
+		Adjust the data
+		Replace the comma (,) in the coordinates with a dot (.) or Holocore will throw errors during bootup
+		Check the existing patrol entries if you need ideas/examples
+		The value 168 in the example above is originally the direction the player was facing to. In the patrol service we do not need this.
+		Be sure to set that value to 0 if the NPC should be walking all the time because it is auto put into the pause column.
+
+- patrol_id is the ID we use for the assignment to the NPC later on (Step 4). The coordinates should be the same we use for the main spawner too.
+
+- patrol_group shows a group of waypoints. Increase the value in steps of hundreds
+
+- patrol_type has to be FLIP or LOOP !
+
+- The first entry in your route is the main spawner.
+
+- This main spawner has to be put into the static spawner sdb too!
+
+=====================================================================================================
+STEP 4: Assign patrol route to NPC
+=====================================================================================================
+
+- Open the static spawn file in /serverdata/spawn/ subfolder you want to add it. For Mos Eisley it is /spawn/city/city_tatooine_mos_eisley.sdb
+
+- If you want to assign the route to an existing NPC
+		Change the values as recommended
+		Spawn: PATROL
+		Behaviour: PATROL
+		Patrol_id: patrol_tatooine_5700
+		Patrol_formation: column / wedge / line / box
+		Mood: idle
+
+- If you want to assign the route to a new NPC
+		Create a new line for a new NPC
+		Change values as above shown or needed
+
+=====================================================================================================
+STEP 5: Check data and values
+=====================================================================================================
+
+- Remember to replace the comma (,) in the coordinates with a dot (.) or Holocore will throw errors during bootup !!!
+- Are the coordinates realistic and correct ?
+- Is the pause set to 0 ? 10-60 seconds pause in front of a terminal, crafting station or door are always a good choice :)
+- Try to keep the distances between the waypoints relatively short to avoid clipping NPCs !
+- Does the NPC spawning database have the correct patrol route set ?
+- You have to reboot the server to see the changes ingame
+- Wrong values in the NPC spawner or patrol database can result in an abort of spawner loading. Check the console log. It should print out the ID of the spawner or patrol that causes the problem
+- You can use the following command to teleport straight to that/any spawner/waypoint
+		Command		/goto patrol patrol_tatooine_5700
+
+
+For questions or assistance please contact Undercova in Discord!

@@ -201,7 +201,7 @@ class DestroyMissionTerminal(private val missionsToGenerate: Int, private val de
 	}
 
 	private fun randomReward(difficulty: Int): Int {
-		val base = difficulty * 100.0
+		val base = difficulty * 50.0
 		val multiplier = (-5 until 5).random().div(100.0).plus(1.0)
 
 		return (base * multiplier).toInt()

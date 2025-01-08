@@ -1,0 +1,72 @@
+=====================================================================================================
+IMPORTANT NOTES
+=====================================================================================================
+
+	- For better readability it is best to use Google Sheets or Excel Tables to work on the data.
+	- The existing spawner database entries give you a good idea/hint how it works
+	- NPC spawners get stored in
+			NPC spawner /spawn/city/city_tatooine_mos_eisley.sdb
+	- Be sure to change the commas to dots in the coordinates!!
+	- All spawners you place with the commands get deleted with a server reboot. They are just a visual aid to show where you have placed new spawners
+
+=====================================================================================================
+STEP 1: Set up
+=====================================================================================================
+
+- Boot up the local server
+
+- Enter god mode
+		Command		/setg
+
+=====================================================================================================
+STEP 2: Collect data
+=====================================================================================================
+
+- Place the spawner (yellow)
+		Command		/createstaticelement AREA COMMENT
+		COMMENT: 1 word to add to easily recognize your entry in log later on
+					leave empty if not needed
+					OR
+					use it like "conversationArtisan" to define which NPC and what mood he should be in (serverdata/npc/npc_mood.txt)
+		Holocore will write following data into /log/spawners.txt
+		TATOOINE	tat_world	PATROL	0	3214,1	5,0	-4868,8	168	COMMENT
+
+- Repeat this until you are done with the NPC placement
+
+- Open the txt file and copy the content
+
+=====================================================================================================
+STEP 3: Transfer data into Spawner database
+=====================================================================================================
+
+- Open the spawner file for the terrain/area
+		Folder	serverdata/spawn/city/city_tatooine_mos_eisley.sdb
+
+- Paste the content into new lines.
+		Adjust the data
+		Replace the comma (,) in the coordinates with a dot (.) or Holocore will throw errors during bootup
+		Check the existing spawner entries if you need ideas/examples
+		The value 168 in the example above is the direction the player was facing to.
+
+- "attackable" defines if the NPC is INVULNERABLE (grey), ATTACKABLE (yellow) or AGGRESSIVE (red)
+
+- "difficulty":	N(ormal), E(lite), B(oss)
+
+- "behaviour":	IDLE (static), TURN (static and random rotating), LOITER (moves in radius around spawner)
+
+- "respawn": seconds => 600 = 10 minutes
+
+
+=====================================================================================================
+STEP 4: Check data and values
+=====================================================================================================
+
+- Remember to replace the comma (,) in the coordinates with a dot (.) or Holocore will throw errors during bootup !!!
+- Are the coordinates realistic and correct ?
+- You have to reboot the server to see the changes ingame
+- Wrong values in the NPC spawner database can result in an abort of spawner loading. Check the console log. It should print out the ID of the specific spawner or column that causes the problem
+- You can use the following command to teleport straight to that/any spawner
+		Command		/goto spawn city_tatooine_mos_eisley_195
+
+
+For questions or assistance please contact Undercova in Discord!
