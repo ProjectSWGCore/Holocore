@@ -57,7 +57,7 @@ import me.joshlarson.jlcommon.control.Service
 class DestroyMissionService : Service() {
 
 	private val maxAcceptedMissions = 2
-	private val missionsToGenerate = 15
+	private val missionsToGenerate = 5
 	private val lairToMission = mutableMapOf<TangibleObject, MissionObject>()
 	private val missionComplete = StringId("mission/mission_generic", "success_w_amount")
 
