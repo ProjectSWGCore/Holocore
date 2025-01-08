@@ -433,3 +433,23 @@ city_tatooine_mos_eisley_430	TATOOINE	tat_world	AREA	0	3522.6	5.0	-4477.3	0	1	a 
 city_tatooine_mos_eisley_431	TATOOINE	tat_world	AREA	0	3832.7	5.0	-4875.2	0	1	a slicer	humanoid_slicer	ATTACKABLE	N	1	3	City	Mos Eisley	5	LOITER	15	0	-	idle			600
 city_tatooine_mos_eisley_432	TATOOINE	tat_world	AREA	0	3730.8	19.4	-5210.6	0	1	a thief	humanoid_thief	ATTACKABLE	N	1	3	City	Mos Eisley	4	LOITER	5	0	-	idle			600
 city_tatooine_mos_eisley_433	TATOOINE	tat_world	AREA	0	3180.6	5.0	-4684.4	0	1	a recon mercenary	humanoid_tatooine_mercenary_recon	ATTACKABLE	N	1	3	City	Mos Eisley	4	LOITER	8	0	-	idle			600
+city_tatooine_mos_eisley_434	TATOOINE	tat_world	AREA	0	3530.0	5.0	-4778.8	38		a medic	humanoid_medic	medic	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_435	TATOOINE	tat_world	AREA	0	3531.3	5.0	-4780.0	-40		4-LOM	droid_4lom	meddroid	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_436	TATOOINE	tat_world	AREA	0	3487.2	7.5	-4677.5	-12		a mercenary	humanoid_mercenary	adventurer	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_437	TATOOINE	tat_world	AREA	0	3537.2	5.0	-4694.3	33		an artisan	humanoid_artisan	artisan	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_438	TATOOINE	tat_world	AREA	0	3369.6	5.0	-4518.9	154		an artisan	humanoid_artisan	sitArtisan	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_439	TATOOINE	tat_world	AREA	0	3318.0	5.0	-4511.4	-46		a commoner	humanoid_commoner	convCommoner	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_440	TATOOINE	tat_world	AREA	0	3315.5	5.0	-4510.8	104		a businessman	humanoid_businessman	convCommoner	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_441	TATOOINE	tat_world	AREA	0	3316.7	5.0	-4509.2	168		a commoner	humanoid_commoner	Commoner	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_442	TATOOINE	tat_world	AREA	0	3285.7	5.0	-4501.9	126		a scoundrel	humanoid_scoundrel	sitNomad	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_443	TATOOINE	tat_world	AREA	0	3303.8	5.0	-4545.8	123		a slicer	humanoid_slicer	noble	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_444	TATOOINE	tat_world	AREA	0	3270.7	5.6	-4708.5	62		an artisan	humanoid_artisan	convArtisan	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_445	TATOOINE	tat_world	AREA	0	3273.6	5.6	-4707.5	-124		a settler	humanoid_settler	convPatron	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_446	TATOOINE	tat_world	AREA	0	3401.6	5.0	-4840.7	85		a spacer	humanoid_spacer	sitPatron	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_447	TATOOINE	tat_moseisley_starport	AREA	4	1.4	0.6	57.9	57		a technician	humanoid_technician	sitPatron	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_448	TATOOINE	tat_moseisley_starport	AREA	4	5.0	0.6	58.4	-58		a noble	humanoid_noble	sitNoble	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_449	TATOOINE	tat_moseisley_starport	AREA	4	-0.0	0.6	67.9	-179		a commoner	humanoid_commoner	sitCommoner	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_450	TATOOINE	tat_moseisley_starport	AREA	12	-48.1	2.6	36.0	129		a commoner	humanoid_commoner	holdGlass	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_mos_eisley_451	TATOOINE	tat_moseisley_starport	AREA	12	-57.6	2.6	41.9	142		a commoner	humanoid_commoner	holdGlass	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_mos_eisley_452	TATOOINE	tat_moseisley_starport	AREA	7	49.0	0.6	50.7	-170		a noble	humanoid_noble	sitNoble	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_453	TATOOINE	tat_world	AREA	0	3632.9	5.0	-4781.4	-154		a businessman	humanoid_businessman	convNoble	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
