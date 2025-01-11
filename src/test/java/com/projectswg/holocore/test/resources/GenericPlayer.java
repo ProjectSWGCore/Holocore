@@ -55,7 +55,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -177,7 +177,7 @@ public class GenericPlayer extends Player {
 	}
 	
 	@Nullable
-	public <T extends SWGPacket> T waitForNextPacket(Class<T> type, long timeout, TimeUnit unit, Function<T, Boolean> filter) {
+	public <T extends SWGPacket> T waitForNextPacket(Class<T> type, long timeout, TimeUnit unit, Predicate<T> filter) {
 		packetLock.lock();
 		try {
 			long startTime = System.nanoTime();
@@ -187,8 +187,7 @@ public class GenericPlayer extends Player {
 					if (type.isInstance(next)) {
 						it.remove();
 						T packet = type.cast(next);
-						Boolean match = filter.apply(packet);
-						if (match) {
+						if (filter.test(packet)) {
 							return packet;
 						}
 					}
@@ -207,7 +206,7 @@ public class GenericPlayer extends Player {
 	}
 	@Nullable
 	public DeltasMessage waitForNextObjectDelta(long objectId, int num, int update, long timeout, TimeUnit unit) {
-		Function<DeltasMessage, Boolean> deltaPacketFilter = p -> p.getObjectId() == objectId && p.getNum() == num && p.getUpdate() == update;
+		Predicate<DeltasMessage> deltaPacketFilter = p -> p.getObjectId() == objectId && p.getNum() == num && p.getUpdate() == update;
 		return waitForNextPacket(DeltasMessage.class, timeout, unit, deltaPacketFilter);
 	}
 
