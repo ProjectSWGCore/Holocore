@@ -25,7 +25,6 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.network.packets.swg.zone.SceneCreateObjectByCrc
 import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject
 import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
@@ -37,10 +36,21 @@ fun ZonedInCharacter.invitePlayerToGroup(other: ZonedInCharacter) {
 	player.waitForNextPacket(ChatSystemMessage::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No chat system message received")
 }
 
-fun ZonedInCharacter.acceptCurrentGroupInvitation() {
+fun ZonedInCharacter.acceptCurrentGroupInvitation(from: ZonedInCharacter) {
 	sendCommand("join")
-	// GroupObject is created
-	player.waitForNextPacket(SceneCreateObjectByCrc::class.java, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
+	// GroupId is set away from 0
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 6, 7, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
+	if (player.creatureObject.groupId == 0L) {
+		throw IllegalStateException("Group ID for $player should not still be 0")
+	}
+
+	if (from.player.creatureObject.groupId == 0L) {
+		// If the group has to be created, we need to pop the DeltasMessage for changing the GroupId of the leader.
+		from.player.waitForNextObjectDelta(from.player.creatureObject.objectId, 6, 7, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Packet not received")
+		if (from.player.creatureObject.groupId == 0L) {
+			throw IllegalStateException("Group ID for ${from.player} should not still be 0")
+		}
+	}
 }
 
 fun ZonedInCharacter.leaveCurrentGroup() {
