@@ -38,7 +38,7 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter2))
 	}
@@ -48,7 +48,7 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter1 = createZonedInCharacter("Charone")
 		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		zonedInCharacter1.makeGroupLeader(zonedInCharacter2)
 
@@ -63,7 +63,7 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter1 = createZonedInCharacter("Charone")
 		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		zonedInCharacter2.makeGroupLeader(zonedInCharacter2)
 
@@ -80,9 +80,9 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter3)
-		zonedInCharacter3.acceptCurrentGroupInvitation()
+		zonedInCharacter3.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		zonedInCharacter2.leaveCurrentGroup()
 
@@ -100,9 +100,9 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter3)
-		zonedInCharacter3.acceptCurrentGroupInvitation()
+		zonedInCharacter3.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		zonedInCharacter1.kickFromGroup(zonedInCharacter2)
 
@@ -120,9 +120,9 @@ class GroupTest : AcceptanceTest() {
 		val zonedInCharacter3 = createZonedInCharacter("Charthree")
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter3)
-		zonedInCharacter3.acceptCurrentGroupInvitation()
+		zonedInCharacter3.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		zonedInCharacter1.leaveCurrentGroup()
 
@@ -141,9 +141,9 @@ class GroupTest : AcceptanceTest() {
 		val characters = listOf(zonedInCharacter1, zonedInCharacter2, zonedInCharacter3)
 
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
-		zonedInCharacter2.acceptCurrentGroupInvitation()
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
 		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter3)
-		zonedInCharacter3.acceptCurrentGroupInvitation()
+		zonedInCharacter3.acceptCurrentGroupInvitation(zonedInCharacter1)
 
 		assertAll(
 			{ assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter2)) },
