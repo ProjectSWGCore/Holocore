@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -30,6 +29,7 @@ import com.projectswg.common.network.packets.swg.login.ClientIdMsg
 import com.projectswg.common.network.packets.swg.login.ClientPermissionsMessage
 import com.projectswg.common.network.packets.swg.login.creation.*
 import com.projectswg.common.network.packets.swg.zone.CmdSceneReady
+import com.projectswg.common.network.packets.swg.zone.SceneEndBaselines
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter
 import com.projectswg.holocore.test.resources.GenericPlayer
 import java.lang.RuntimeException
@@ -75,6 +75,10 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 		sendPacket(player, SelectCharacter(characterId))
 		sendPacket(player, ClientIdMsg())
 		player.waitForNextPacket(ClientPermissionsMessage::class.java) ?: throw IllegalStateException("Failed to receive client permissions message in time")
+		var waitForMoreObjects = true
+		while (waitForMoreObjects) {
+			waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 50, TimeUnit.MILLISECONDS) != null
+		}
 		sendPacket(player, CmdSceneReady())
 		player.waitForNextPacket(CmdSceneReady::class.java) ?: throw IllegalStateException("Expected CmdSceneReady from server but did not receive it in time")
 
