@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -55,6 +55,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -172,6 +173,11 @@ public class GenericPlayer extends Player {
 	
 	@Nullable
 	public <T extends SWGPacket> T waitForNextPacket(Class<T> type, long timeout, TimeUnit unit) {
+		return waitForNextPacket(type, timeout, unit, p -> true);
+	}
+	
+	@Nullable
+	public <T extends SWGPacket> T waitForNextPacket(Class<T> type, long timeout, TimeUnit unit, Function<T, Boolean> filter) {
 		packetLock.lock();
 		try {
 			long startTime = System.nanoTime();
@@ -180,7 +186,11 @@ public class GenericPlayer extends Player {
 					SWGPacket next = it.next();
 					if (type.isInstance(next)) {
 						it.remove();
-						return type.cast(next);
+						T packet = type.cast(next);
+						Boolean match = filter.apply(packet);
+						if (match) {
+							return packet;
+						}
 					}
 				}
 				try {
@@ -197,33 +207,8 @@ public class GenericPlayer extends Player {
 	}
 	@Nullable
 	public DeltasMessage waitForNextObjectDelta(long objectId, int num, int update, long timeout, TimeUnit unit) {
-		Class<? extends SWGPacket> type = DeltasMessage.class;
-		packetLock.lock();
-		try {
-			long startTime = System.nanoTime();
-			while (System.nanoTime() - startTime < unit.toNanos(timeout)) {
-				for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
-					SWGPacket next = it.next();
-					if (type.isInstance(next)) {
-						it.remove();
-						DeltasMessage deltasMessage = (DeltasMessage) next;
-						
-						if (deltasMessage.getObjectId() == objectId && deltasMessage.getNum() == num && deltasMessage.getUpdate() == update) {
-							return deltasMessage;
-						}
-					}
-				}
-				try {
-					//noinspection ResultOfMethodCallIgnored
-					packetLockCondition.awaitNanos(unit.toNanos(timeout) - (System.nanoTime() - startTime));
-				} catch (InterruptedException e) {
-					return null;
-				}
-			}
-		} finally {
-			packetLock.unlock();
-		}
-		return null;
+		Function<DeltasMessage, Boolean> deltaPacketFilter = p -> p.getObjectId() == objectId && p.getNum() == num && p.getUpdate() == update;
+		return waitForNextPacket(DeltasMessage.class, timeout, unit, deltaPacketFilter);
 	}
 
 	@Nullable
