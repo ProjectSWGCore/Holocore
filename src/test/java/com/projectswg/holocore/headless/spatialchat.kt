@@ -23,21 +23,27 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.global.commands.callbacks.chat
+package com.projectswg.holocore.headless
 
-import com.projectswg.holocore.intents.support.global.chat.SpatialChatIntent
-import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
-import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.common.network.packets.swg.zone.object_controller.SpatialChat
 
-class CmdSpatialChatInternal : ICmdCallback {
-	override fun execute(player: Player, target: SWGObject?, args: String) {
-		val cmdArgs = args.split(" ".toRegex(), limit = 6).toTypedArray()
-		val targetId = cmdArgs[0].toLong()
-		val chatType = cmdArgs[1].toInt()
-		val moodId = cmdArgs[2].toInt()
-		val languageId = cmdArgs[4].toInt()
-		val message = cmdArgs[5]
-		SpatialChatIntent(player, targetId, chatType, message, moodId, languageId).broadcast()
-	}
+/**
+ * Sends a spatial chat message.
+ * @param message the message to send
+ * @param targetId the target that the message is optionally directed at
+ * @param chatType the type of chat message
+ * @param moodId the mood of the chat message, like saying something angrily
+ * @param languageId the language of the chat message - Basic, Shyriiwook, etc.
+ */
+fun ZonedInCharacter.sendSpatialChat(message: String, targetId: Long = 0, chatType: Int = 0, moodId: Int = 0, languageId: Int = 0) {
+	sendCommand("spatialChatInternal", null, "$targetId $chatType $moodId unknown $languageId $message")
 }
+
+fun ZonedInCharacter.waitForSpatialChat(): ReceivedSpatialChat {
+	val spatialChat = player.waitForNextPacket(SpatialChat::class.java) ?: throw NoSpatialChatReceivedException()
+	return ReceivedSpatialChat(spatialChat.sourceId, spatialChat.text)
+}
+
+data class ReceivedSpatialChat(val sourceId: Long, val message: String)
+
+class NoSpatialChatReceivedException : IllegalStateException("No spatial chat received")

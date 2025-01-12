@@ -23,21 +23,43 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.resources.support.global.commands.callbacks.chat
+package com.projectswg.holocore.services.support.global.chat
 
-import com.projectswg.holocore.intents.support.global.chat.SpatialChatIntent
-import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
-import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertAll
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
-class CmdSpatialChatInternal : ICmdCallback {
-	override fun execute(player: Player, target: SWGObject?, args: String) {
-		val cmdArgs = args.split(" ".toRegex(), limit = 6).toTypedArray()
-		val targetId = cmdArgs[0].toLong()
-		val chatType = cmdArgs[1].toInt()
-		val moodId = cmdArgs[2].toInt()
-		val languageId = cmdArgs[4].toInt()
-		val message = cmdArgs[5]
-		SpatialChatIntent(player, targetId, chatType, message, moodId, languageId).broadcast()
+class SpatialChatTest : AcceptanceTest() {
+
+	@Test
+	fun `spatial chat is received by nearby player`() {
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
+		val message = "Hello there!"
+
+		character1.sendSpatialChat(message)
+
+		val spatialChat = character2.waitForSpatialChat()
+		assertAll(
+			{ assertEquals(character1.player.creatureObject.objectId, spatialChat.sourceId) },
+			{ assertEquals(message, spatialChat.message) },
+		)
+	}
+
+	@Test
+	fun `no spatial chat from ignored players`() {
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Chartwo")
+		val message = "Hello there!"
+
+		character2.addIgnore(character1.player.characterFirstName)
+		character1.sendSpatialChat(message)
+
+		assertThrows<NoSpatialChatReceivedException> { character2.waitForSpatialChat() }
 	}
 }
