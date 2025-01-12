@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,7 +33,11 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 class CmdSpatialChatInternal : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val cmdArgs = args.split(" ".toRegex(), limit = 6).toTypedArray()
-
-		SpatialChatIntent(player, cmdArgs[0].toLong(), cmdArgs[1].toInt(), cmdArgs[5], cmdArgs[2].toInt(), cmdArgs[4].toInt()).broadcast()
+		val targetId = cmdArgs[0].toLong()
+		val chatType = cmdArgs[1].toInt()
+		val moodId = cmdArgs[2].toInt()
+		val languageId = cmdArgs[4].toInt()
+		val message = cmdArgs[5]
+		SpatialChatIntent(player, targetId, chatType, message, moodId, languageId).broadcast()
 	}
 }
