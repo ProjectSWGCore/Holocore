@@ -46,12 +46,15 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.group.LootRule
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
+import me.joshlarson.jlcommon.control.IntentChain
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
 
 class GroupService(private val groups: MutableMap<Long, GroupObject> = ConcurrentHashMap()) : Service() {
 
+	private val chatIntentChain = IntentChain()
+	
 	@IntentHandler
 	private fun handleGroupEventInvite(intent: InviteToGroupIntent) {
 		handleGroupInvite(intent.player, intent.target)
@@ -315,7 +318,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 		groups[group.objectId] = group
 		group.formGroup(leader.creatureObject, member.creatureObject)
 		ObjectCreatedIntent(group).broadcast()
-		ChatRoomUpdateIntent(leader, ChatAvatar(leader.characterChatName), group.chatRoomPath, group.objectId.toString(), false).broadcast()
+		chatIntentChain.broadcastAfter(ChatRoomUpdateIntent(leader, ChatAvatar(leader.characterChatName), group.chatRoomPath, group.objectId.toString(), false))
 		sendSystemMessage(leader, "formed_self", "TT", leader.creatureObject.objectId)
 		onJoinGroup(member, group)
 		StandardLog.onPlayerEvent(this, leader, "formed group %s with %s", group, member)
@@ -323,7 +326,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 
 	private fun destroyGroup(group: GroupObject, player: Player?) {
 		if (player != null)
-			ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), UpdateType.DESTROY).broadcast()
+			chatIntentChain.broadcastAfter(ChatRoomUpdateIntent(group.chatRoomPath, group.objectId.toString(), null, ChatAvatar(player.characterChatName), UpdateType.DESTROY))
 		sendGroupSystemMessage(group, "disbanded")
 		group.disbandGroup()
 		DestroyObjectIntent(group).broadcast()
@@ -374,7 +377,7 @@ class GroupService(private val groups: MutableMap<Long, GroupObject> = Concurren
 	}
 
 	private fun updateChatRoom(player: Player, group: GroupObject, updateType: UpdateType) {
-		ChatRoomUpdateIntent(player, group.chatRoomPath, updateType, isIgnoreInvitation = true).broadcast()
+		chatIntentChain.broadcastAfter(ChatRoomUpdateIntent(player, group.chatRoomPath, updateType, isIgnoreInvitation = true))
 	}
 
 	private fun clearInviteData(creature: CreatureObject) {

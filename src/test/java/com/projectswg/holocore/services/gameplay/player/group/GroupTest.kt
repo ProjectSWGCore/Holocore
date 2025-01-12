@@ -134,7 +134,31 @@ class GroupTest : AcceptanceTest() {
 	}
 
 	@Test
-	fun groupChat() {
+	fun `group chat with two people`() {
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val characters = listOf(zonedInCharacter1, zonedInCharacter2)
+
+		zonedInCharacter1.invitePlayerToGroup(zonedInCharacter2)
+		zonedInCharacter2.acceptCurrentGroupInvitation(zonedInCharacter1)
+
+		assertTrue(zonedInCharacter1.isInGroupWith(zonedInCharacter2))
+		
+		for (sender in characters) {
+			val message = "hello world from ${sender.getChatName()}"
+			zonedInCharacter1.groupChat(message)
+			for (character in characters) {
+				val chat = character.getNextChat()
+				assertAll(
+					{ assertEquals(message, chat.message, "incorrect message provided to ${character.getCharacterName()}") },
+					{ assertEquals(zonedInCharacter1.getChatName(), chat.sender, "incorrect chat name provided to ${character.getCharacterName()}") },
+				)
+			}
+		}
+	}
+
+	@Test
+	fun `group chat with three people`() {
 		val zonedInCharacter1 = createZonedInCharacter("Charone")
 		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		val zonedInCharacter3 = createZonedInCharacter("Charthree")
