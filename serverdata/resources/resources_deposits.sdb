@@ -1,0 +1,11 @@
+resources	poor	fair	good	great	premium
+variants_amount	30	30	25	10	5
+deposit_chance_size_16	0	0	10	20	60
+deposit_chance_size_32	0	5	10	30	25
+deposit_chance_size_64	15	15	30	35	15
+deposit_chance_size_128	20	35	35	10	0
+deposit_chance_size_256	40	25	10	5	0
+deposit_chance_size_512	25	20	5	0	0
+deposit_volume_each	200000	120000	75000	25000	10000
+deposit_amount	15;25	15;20	10;15	5;10	5;10
+attrib_range	1;35	36;59	60;84	85;94	95;100
