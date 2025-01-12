@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,9 +28,9 @@ package com.projectswg.holocore.resources.support.objects.swg.custom
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
-import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
-import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
 import com.projectswg.holocore.resources.support.color.SWGColor.Reds.red
+import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode
+import com.projectswg.holocore.resources.support.npc.ai.NpcIdleMode
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
@@ -38,12 +38,12 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
-import me.joshlarson.jlcommon.log.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
-import java.util.concurrent.ScheduledFuture
 
 class AIObject(objectId: Long) : CreatureObject(objectId) {
 	private val playersNearby: MutableSet<CreatureObject> = CopyOnWriteArraySet()
@@ -51,8 +51,8 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	private val _thrownWeapons: MutableList<WeaponObject> = ArrayList()
 	private val hiddenInventory = ObjectCreator.createObjectFromTemplate("object/tangible/inventory/shared_character_inventory.iff")
 	private val incapSafetyTimer: IncapSafetyTimer = IncapSafetyTimer(45000)
-	private var executor: ScheduledThreadPool? = null
-	private var previousScheduled: ScheduledFuture<*>? = null
+	private var coroutineScope: CoroutineScope? = null
+	private var previousScheduled: Job? = null
 	private var questionMarkBlockedUntil: Instant = Instant.now()
 	
 	val defaultWeapons: List<WeaponObject>
@@ -64,13 +64,11 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 			return _thrownWeapons
 		}
 	
-	var defaultMode: NpcMode? = null
+	var defaultMode: NpcMode = NpcIdleMode(this)
 	var activeMode: NpcMode? = null
 		set(value) {
-			field?.onModeEnd()
 			field = value
-			value?.onModeStart()
-			queueNextLoop(0)
+			startMode(value ?: defaultMode)
 		}
 	
 	var spawner: Spawner? = null
@@ -159,9 +157,9 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 			
 			if (distance <= maxAggroDistance && isLineOfSight(player)) {
 				if (spawner.behavior == AIBehavior.PATROL) {
-					for (npc in spawner.npcs) StartNpcCombatIntent(npc, listOf(player)).broadcast()
+					for (npc in spawner.npcs) npc.startCombat(listOf(player))
 				} else {
-					StartNpcCombatIntent(this, listOf(player)).broadcast()
+					startCombat(listOf(player))
 				}
 			}
 		}
@@ -195,33 +193,34 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 		super.setEquippedWeapon(weapon)
 	}
 	
-	fun start(executor: ScheduledThreadPool?) {
-		this.executor = executor
-		ScheduleNpcModeIntent(this, null).broadcast()
+	fun startCombat(targets: Collection<CreatureObject>) {
+		val mode = activeMode
+		if (mode !is NpcCombatMode) {
+			val newMode = NpcCombatMode(this, coroutineScope ?: return) // No coroutine? No AI
+			newMode.addTargets(targets)
+			activeMode = newMode
+		} else {
+			mode.addTargets(targets)
+		}
+	}
+	
+	fun start(coroutineScope: CoroutineScope) {
+		this.coroutineScope = CoroutineScope(coroutineScope.coroutineContext + Job())
+		startMode(activeMode ?: defaultMode)
 	}
 	
 	fun stop() {
-		val prev = this.previousScheduled
-		prev?.cancel(false)
-		this.executor = null
-	}
-	
-	fun queueNextLoop(delay: Long) {
-		val prev = this.previousScheduled
-		prev?.cancel(false)
-		previousScheduled = executor?.execute(delay) { this.loop() }
+		this.activeMode = null
+		this.coroutineScope?.cancel()
+		this.coroutineScope = null
 	}
 	
 	val nearbyPlayers: Set<CreatureObject>
 		get() = Collections.unmodifiableSet(playersNearby)
 	
-	private fun loop() {
-		try {
-			val mode = activeMode
-			mode?.act()
-		} catch (t: Throwable) {
-			Log.w(t)
-			queueNextLoop(1000)
-		}
+	private fun startMode(mode: NpcMode) {
+		previousScheduled?.cancel()
+		previousScheduled = coroutineScope?.let { mode.act(it) }
 	}
+	
 }

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,12 +27,14 @@ package com.projectswg.holocore.resources.support.npc.ai
 
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Point3D
-import com.projectswg.holocore.intents.support.npc.ai.StartNpcMovementIntent
-import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.cos
 import kotlin.math.max
@@ -40,9 +42,14 @@ import kotlin.math.min
 import kotlin.math.sin
 import kotlin.random.Random
 
-class NpcCombatMovement(private val obj: AIObject, private val npcRunSpeed: Double) {
+class NpcCombatMovement(private val obj: AIObject, private val coroutineScope: CoroutineScope, private val npcRunSpeed: Double) {
 	
-	private var isMoving = false
+	private var movingJob: Job? = null
+	
+	fun stopMovement() {
+		movingJob?.cancel()
+		movingJob = null
+	}
 	
 	fun handleMovement(target: TangibleObject, weapon: WeaponObject, lineOfSight: Boolean) {
 		if (obj.walkSpeed <= 0 || npcRunSpeed <= 0) return // Not really applicable in this case
@@ -57,13 +64,12 @@ class NpcCombatMovement(private val obj: AIObject, private val npcRunSpeed: Doub
 		
 		if (targetDistance < 2 || targetDistance > attackRange || !lineOfSight) {
 			val intendedDistance = min(attackRange - 1, max(comfortableDistance, reasonableDistance))
-			moveIntoRange(target, intendedDistance)
-		} else {
-			// Stop moving
-			if (isMoving) {
-				StopNpcMovementIntent(obj).broadcast()
-				isMoving = false
+			if (movingJob == null) {
+				moveIntoRange(target, intendedDistance)
 			}
+		} else {
+			movingJob?.cancel()
+			movingJob = null
 		}
 	}
 	
@@ -74,8 +80,14 @@ class NpcCombatMovement(private val obj: AIObject, private val npcRunSpeed: Doub
 		val moveZ = targetLocation.z + cos(Math.toRadians(targetHeading)) * intendedDistance
 		val moveHeading = targetLocation.getHeadingTo(Point3D(moveX, targetLocation.y, moveZ)) + 180
 		val moveLocation = Location.builder(targetLocation).setX(moveX).setZ(moveZ).setHeading(moveHeading).build()
-		StartNpcMovementIntent(obj, target.effectiveParent, moveLocation, npcRunSpeed).broadcast()
-		isMoving = true
+		movingJob?.cancel()
+		movingJob = coroutineScope.launch {
+			val route = NavigationPoint.from(obj.parent, obj.location, target.effectiveParent, moveLocation, npcRunSpeed)
+			for (point in route) {
+				delay(1000L)
+				point.move(obj)
+			}
+		}
 	}
 	
 }

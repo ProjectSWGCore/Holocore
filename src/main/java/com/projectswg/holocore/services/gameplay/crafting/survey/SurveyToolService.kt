@@ -38,7 +38,6 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap

@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -26,8 +25,8 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.loot
 
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.CorpseLootedIntent
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.LootGeneratedIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -41,33 +40,20 @@ import com.projectswg.holocore.resources.support.random.RandomDie
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.CreditLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.ItemLootGenerator
 import com.projectswg.holocore.services.gameplay.combat.loot.generation.NPCLootTable
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
-import java.util.*
 
 class LootGenerationService(tableDie: Die = RandomDie(), groupDie: Die = RandomDie()) : Service() {
 	
 	private val npcLoot: MutableMap<String, NPCLoot> = HashMap()    // K: npc_id, V: possible loot
 	private val creditGenerator = CreditLootGenerator()
 	private val itemGenerator = ItemLootGenerator(tableDie, groupDie)
-	private val lootGenerationThread = ScheduledThreadPool(1, "loot-generation-service")
 	
 	override fun initialize(): Boolean {
 		loadNPCLoot()
 		
 		return true
-	}
-	
-	override fun start(): Boolean {
-		lootGenerationThread.start()
-		return true
-	}
-	
-	override fun stop(): Boolean {
-		lootGenerationThread.stop()
-		return lootGenerationThread.awaitTermination(1000)
 	}
 	
 	@IntentHandler

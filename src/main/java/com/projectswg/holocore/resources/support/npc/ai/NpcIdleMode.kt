@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -23,10 +23,16 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.npc.ai
+package com.projectswg.holocore.resources.support.npc.ai
 
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
+import kotlin.coroutines.cancellation.CancellationException
 
-@ManagerStructure(children = [AIService::class, AIMovementService::class])
-class AIManager : Manager()
+class NpcIdleMode(obj: AIObject) : NpcMode(obj) {
+
+	override suspend fun onModeLoop() {
+		throw CancellationException()
+	}
+
+}

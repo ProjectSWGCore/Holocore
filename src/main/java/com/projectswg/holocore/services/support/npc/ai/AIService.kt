@@ -25,8 +25,60 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.npc.ai
 
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
+import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import java.util.concurrent.ConcurrentHashMap
 
-@ManagerStructure(children = [AIService::class, AIMovementService::class])
-class AIManager : Manager()
+class AIService : Service() {
+	private val coroutineScope = CoroutineScope(context = SupervisorJob() + Dispatchers.Default)
+	private val aiObjects: MutableCollection<AIObject> = ConcurrentHashMap.newKeySet()
+
+	override fun start(): Boolean {
+		for (obj in aiObjects) {
+			obj.start(coroutineScope)
+		}
+		return true
+	}
+
+	override fun stop(): Boolean {
+		coroutineScope.cancel()
+		aiObjects.clear()
+		return super.stop()
+	}
+
+	@IntentHandler
+	private fun handleObjectCreatedIntent(oci: ObjectCreatedIntent) {
+		val obj = oci.obj as? AIObject ?: return
+		if (aiObjects.add(obj)) obj.start(coroutineScope)
+	}
+
+	@IntentHandler
+	private fun handleDestroyObjectIntent(doi: DestroyObjectIntent) {
+		val obj = doi.obj as? AIObject ?: return
+		if (aiObjects.remove(obj)) obj.stop()
+	}
+
+	@IntentHandler
+	private fun handleCreatureKilledIntent(cki: CreatureKilledIntent) {
+		val corpse = cki.corpse
+		if (corpse is AIObject)
+			corpse.stop()
+	}
+
+	@IntentHandler
+	private fun handleEnterCombatIntent(eci: EnterCombatIntent) {
+		val obj = eci.source as? AIObject ?: return
+		val target = eci.target as? CreatureObject ?: return
+		obj.startCombat(listOf(target))
+	}
+}

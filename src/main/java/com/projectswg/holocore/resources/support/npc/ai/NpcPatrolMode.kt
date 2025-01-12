@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,13 +26,12 @@
 package com.projectswg.holocore.resources.support.npc.ai
 
 import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent
-import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
-import java.util.*
+import kotlinx.coroutines.CancellationException
 import kotlin.math.ceil
 
 /**
@@ -60,7 +59,7 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 		}
 	}
 	
-	override fun onModeStart() {
+	override suspend fun onModeStart() {
 		val compiledWaypoints: MutableList<NavigationPoint>
 		if (waypoints.isNotEmpty()) {
 			var index = 0
@@ -76,8 +75,8 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 				}
 			}
 			if (closestDistance >= 2) {
-				ScheduleNpcModeIntent(ai, NpcNavigateMode(ai, waypoints[index])).broadcast()
-				return
+				ai.activeMode = NpcNavigateMode(ai, waypoints[index])
+				throw CancellationException()
 			}
 			compiledWaypoints = ArrayList(waypoints.size)
 			for (i in index until waypoints.size) {
@@ -89,7 +88,7 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 		} else {
 			compiledWaypoints = waypoints
 		}
-		val spawner = spawner ?: return
+		val spawner = spawner ?: throw CancellationException()
 		val spacing = 3.0
 		val position = spawner.npcs.indexOf(ai)
 		assert(position != -1)
@@ -127,8 +126,8 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 		}
 	}
 	
-	override fun act() {
-		
+	override suspend fun onModeLoop() {
+		throw CancellationException() // No loop necessary
 	}
 	
 }

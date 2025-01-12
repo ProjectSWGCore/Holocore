@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -35,10 +34,9 @@ import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
 import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.cos
@@ -47,17 +45,24 @@ import kotlin.math.sin
 class AIMovementService : Service() {
 	
 	private val routes = ConcurrentHashMap<AIObject, NavigationRoute>()
-	private val movementThreads = ScheduledThreadPool(Runtime.getRuntime().availableProcessors(), "ai-movement-service-%d")
+	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
 	
 	override fun start(): Boolean {
-		movementThreads.start()
-		movementThreads.executeWithFixedRate(1000, 1000) { this.executeRoutes() }
+		coroutineScope.launch {
+			val anchorTime = System.nanoTime() / 1_000_000L
+			val updateRateSleep = 1_000L
+			while (isActive) {
+				val sleepTime = updateRateSleep - ((System.nanoTime() / 1_000_000L + updateRateSleep - anchorTime) % updateRateSleep)
+				delay(sleepTime)
+				routes.values.forEach { it.execute() } // TODO: put each route in its own coroutine
+			}
+		}
 		return true
 	}
 	
 	override fun stop(): Boolean {
-		movementThreads.stop()
-		return movementThreads.awaitTermination(1000)
+		coroutineScope.cancel()
+		return super.stop()
 	}
 	
 	@IntentHandler
@@ -97,10 +102,6 @@ class AIMovementService : Service() {
 		val corpse = cki.corpse
 		if (corpse is AIObject)
 			routes.remove(corpse)
-	}
-	
-	private fun executeRoutes() {
-		routes.values.forEach { it.execute() }
 	}
 	
 	private fun appendRoutePoint(waypoints: MutableList<NavigationPoint>, waypoint: NavigationPoint, speed: Double) {

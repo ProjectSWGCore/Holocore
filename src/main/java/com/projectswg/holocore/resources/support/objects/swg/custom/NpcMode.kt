@@ -34,9 +34,30 @@ import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import me.joshlarson.jlcommon.log.Log
 
 abstract class NpcMode(val ai: AIObject) {
-	abstract fun act()
+	
+	fun act(coroutineScope: CoroutineScope): Job {
+		return coroutineScope.launch {
+			onModeStart()
+			try {
+				while (isActive) {
+					val start = System.nanoTime()
+					onModeLoop()
+					val time = (System.nanoTime() - start) / 1e6
+					if (time < 50)
+						Log.w("Possible NpcMode fault with AI $ai  and mode ${this@NpcMode}")
+				}
+			} finally {
+				onModeEnd()
+			}
+		}
+	}
 
 	fun onPlayerEnterAware(player: CreatureObject, distance: Double) {
 	}
@@ -47,10 +68,13 @@ abstract class NpcMode(val ai: AIObject) {
 	open fun onPlayerExitAware(player: CreatureObject) {
 	}
 
-	open fun onModeStart() {
+	open suspend fun onModeStart() {
+	}
+	
+	open suspend fun onModeLoop() {
 	}
 
-	open fun onModeEnd() {
+	open suspend fun onModeEnd() {
 	}
 
 	val nearbyPlayers: Collection<CreatureObject>
@@ -67,10 +91,6 @@ abstract class NpcMode(val ai: AIObject) {
 
 	val spawner: Spawner?
 		get() = ai.spawner
-
-	fun queueNextLoop(delay: Long) {
-		ai.queueNextLoop(delay)
-	}
 
 	val walkSpeed: Double
 		get() = (ai.movementPercent * ai.movementScale * ai.walkSpeed).toDouble()

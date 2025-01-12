@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,8 +30,6 @@ import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
-import com.projectswg.holocore.intents.support.npc.ai.ScheduleNpcModeIntent
-import com.projectswg.holocore.intents.support.npc.ai.StartNpcCombatIntent
 import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
@@ -42,19 +40,22 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.resources.support.objects.swg.custom.NpcMode
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.atomic.AtomicLong
 import java.util.concurrent.atomic.AtomicReference
 
-class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
+class NpcCombatMode(obj: AIObject, coroutineScope: CoroutineScope) : NpcMode(obj) {
 	
 	private val returnLocation = AtomicReference<NavigationPoint>(null)
 	private val startCombatLocation = AtomicReference<Location>(null)
 	private val targets = CopyOnWriteArraySet<CreatureObject>()
 	private val iteration = AtomicLong(0)
 	private val npcRunSpeed = PswgDatabase.config.getDouble(this, "npcRunSpeed", 9.0)
-	private val npcMovement = NpcCombatMovement(obj, npcRunSpeed)
+	private val npcMovement = NpcCombatMovement(obj, coroutineScope, npcRunSpeed)
 	
 	private val primaryTarget: CreatureObject? // Don't attack if they're already dead
 		get() = targets.stream()
@@ -77,42 +78,43 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		targets.remove(player)
 	}
 	
-	override fun onModeStart() {
+	override suspend fun onModeStart() {
 		showExclamationMarkAboveNpc()
 		StopNpcMovementIntent(ai).broadcast()
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
 		startCombatLocation.set(ai.worldLocation)
 	}
-	
+
+	override suspend fun onModeEnd() {
+		val obj = ai
+		obj.lookAtTargetId = 0
+		npcMovement.stopMovement()
+	}
+
 	private fun showExclamationMarkAboveNpc() {
 		ai.sendObservers(ShowFlyText(ai.objectId, StringId("npc_reaction/flytext", "threaten"), ShowFlyText.Scale.SMALL, SWGColor.Reds.red))
 	}
-
-	override fun onModeEnd() {
-		val obj = ai
-		obj.lookAtTargetId = 0
-	}
 	
-	override fun act() {
-		if (ai.posture == Posture.DEAD) {
-			return	// Don't waste CPU cycles if the NPC is dead
-		}
-		
+	override suspend fun onModeLoop() {
+		// Don't waste CPU cycles if the NPC is dead
+		if (ai.posture == Posture.DEAD) throw CancellationException()
+
 		if (isRooted) {
-			queueNextLoop(500)
+			delay(500L)
 			return
 		}
-		
+
 		if (ai.worldLocation.flatDistanceTo(startCombatLocation.get()) > 100) {
 			targets.clear() // We're too far away from home, no longer interested in combat
 		}
-		
+
 		targets.removeIf { creo -> creo.posture == Posture.INCAPACITATED || creo.posture == Posture.DEAD }
 		if (!targets.isEmpty()) {
 			performCombatAction()
-			queueNextLoop(500 + ThreadLocalRandom.current().nextLong(-200, 200))
+			delay(500 + ThreadLocalRandom.current().nextLong(-200, 200))
 		} else {
-			ScheduleNpcModeIntent(ai, NpcNavigateMode(ai, returnLocation.get())).broadcast()
+			ai.activeMode = NpcNavigateMode(ai, returnLocation.get())
+			throw CancellationException()
 		}
 	}
 	
@@ -168,10 +170,11 @@ class NpcCombatMode(obj: AIObject) : NpcMode(obj) {
 		val assistRange = spawner?.assistRadius?.toDouble() ?: return
 		ai.aware.stream()
 				.filter { AIObject::class.java.isInstance(it) } // get nearby AI
+				.filter { it != ai } // excluding us
 				.filter { ai -> ai.worldLocation.distanceTo(myLocation) < assistRange } // that can assist
 				.map { AIObject::class.java.cast(it) }
 				.filter { ai -> targets.stream().anyMatch { ai.isAttackable(it) } }
-				.forEach { ai -> StartNpcCombatIntent(ai, targets).broadcast() }
+				.forEach { ai -> ai.startCombat(targets) }
 	}
 	
 	private fun getWeaponCommand(weapon: WeaponObject): String {

@@ -39,13 +39,13 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.ServerD
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.*
 
 class BuffService : Service() {
-	private val timerCheckThread = ScheduledThreadPool(1, "buff-timer-check")
+	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
 	private val callbackMap: MutableMap<String, BuffCallback> = HashMap()
 	private val buffs = ServerData.buffs
 
@@ -57,13 +57,8 @@ class BuffService : Service() {
 		callbackMap["removeBurstRun"] = RemoveBurstRunBuffCallback()
 	}
 
-	override fun start(): Boolean {
-		timerCheckThread.start()
-		return super.start()
-	}
-
 	override fun stop(): Boolean {
-		timerCheckThread.stop()
+		coroutineScope.cancel()
 		return super.stop()
 	}
 
@@ -198,9 +193,10 @@ class BuffService : Service() {
 	}
 
 	private fun scheduleBuffExpirationCheck(receiver: CreatureObject, buffData: BuffInfo) {
-		timerCheckThread.execute(1000L) {
+		coroutineScope.launch {
+			delay(1000L)
 			if (!receiver.buffs.containsKey(buffData.crc))
-				return@execute
+				return@launch
 			if (isBuffExpired(receiver, buffData.crc)) {
 				removeBuff(receiver, buffData.crc)
 			} else {

@@ -1,11 +1,10 @@
 /***********************************************************************************
  * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -54,29 +53,22 @@ import com.projectswg.holocore.resources.support.objects.swg.building.BuildingOb
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import kotlinx.coroutines.*
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
-import java.util.concurrent.Future
 import java.util.concurrent.ThreadLocalRandom
 import java.util.concurrent.TimeUnit
 import java.util.stream.Collectors
 
 class CloningService : Service() {
-	private val reviveTimers: MutableMap<CreatureObject, Future<*>?> = HashMap()
+	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val reviveTimers: MutableMap<CreatureObject, Job> = HashMap()
 	private val cloningFacilities: MutableList<BuildingObject> = ArrayList()
-	private val executor = ScheduledThreadPool(1, "combat-cloning-service")
-
-	override fun start(): Boolean {
-		executor.start()
-		return true
-	}
 
 	override fun stop(): Boolean {
-		executor.stop()
-		executor.awaitTermination(1000)
-		return true
+		coroutineScope.cancel()
+		return super.stop()
 	}
 
 	@IntentHandler
@@ -118,12 +110,7 @@ class CloningService : Service() {
 	private fun handlePlayerEventIntent(i: PlayerEventIntent) {
 		val creature = i.player.creatureObject
 		when (i.event) {
-			PlayerEvent.PE_DISAPPEAR  -> {
-				val reviveTimer = reviveTimers.remove(creature)
-
-				reviveTimer?.cancel(false)
-			}
-
+			PlayerEvent.PE_DISAPPEAR  -> reviveTimers.remove(creature)?.cancel()
 			PlayerEvent.PE_FIRST_ZONE -> if (creature.posture == Posture.DEAD) {
 				// They're dead, but they have no active revive timer.
 				// In this case, they didn't clone before the application was shut down and started back up.
@@ -146,7 +133,10 @@ class CloningService : Service() {
 
 		cloningWindow.display(corpse.owner!!)
 		synchronized(reviveTimers) {
-			reviveTimers.put(corpse, executor.execute(TimeUnit.MINUTES.toMillis(CLONE_TIMER)) { expireCloneTimer(corpse, availableFacilities, cloningWindow) })
+			reviveTimers[corpse] = coroutineScope.launch {
+				delay(TimeUnit.MINUTES.toMillis(CLONE_TIMER))
+				expireCloneTimer(corpse, availableFacilities, cloningWindow)
+			}
 		}
 
 		StandardLog.onPlayerEvent(this, corpse, "has %d minutes to clone", CLONE_TIMER)
@@ -209,8 +199,7 @@ class CloningService : Service() {
 
 		// Cancel the forced cloning timer
 		synchronized(reviveTimers) {
-			val timer = reviveTimers.remove(corpse)
-			timer?.cancel(false)
+			reviveTimers.remove(corpse)?.cancel()
 		}
 
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.location)
