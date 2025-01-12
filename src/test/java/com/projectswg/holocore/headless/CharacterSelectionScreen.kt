@@ -77,7 +77,7 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 		player.waitForNextPacket(ClientPermissionsMessage::class.java) ?: throw IllegalStateException("Failed to receive client permissions message in time")
 		var waitForMoreObjects = true
 		while (waitForMoreObjects) {
-			waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 50, TimeUnit.MILLISECONDS) != null
+			waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 100, TimeUnit.MILLISECONDS) != null
 		}
 		sendPacket(player, CmdSceneReady())
 		player.waitForNextPacket(CmdSceneReady::class.java) ?: throw IllegalStateException("Expected CmdSceneReady from server but did not receive it in time")
