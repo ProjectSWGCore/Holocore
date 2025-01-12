@@ -234,18 +234,17 @@ class ChatRoomHandler {
 	}
 
 	fun notifyDestroyRoom(destroyer: ChatAvatar, roomPath: String, sequence: Int): Boolean {
-		var room: ChatRoom?
+		val room: ChatRoom
 
 		synchronized(roomCreationMutex) {
-			room = rooms.getRoomByPath(roomPath)
-			if (room == null) return false
-			rooms.destroyRoom(room!!)
+			room = rooms.getRoomByPath(roomPath) ?: return false
+			rooms.destroyRoom(room)
 		}
 
 		// Send the ChatOnDestroyRoom SWGPacket to every else in the room besides the person destroying the SWGPacket
-		val packet = ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.code, room!!.id, 0)
-		room!!.members.forEach(Consumer { member: ChatAvatar ->
-			if (destroyer != member) getPlayer(member)!!.sendPacket(packet)
+		val packet = ChatOnDestroyRoom(destroyer, ChatResult.SUCCESS.code, room.id, 0)
+		room.members.forEach(Consumer { member: ChatAvatar ->
+			if (destroyer != member) getPlayer(member)?.sendPacket(packet)
 		})
 
 		return true
