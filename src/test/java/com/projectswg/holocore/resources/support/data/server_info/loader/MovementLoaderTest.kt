@@ -36,7 +36,7 @@ class MovementLoaderTest {
 		val movement = ServerData.movements.getMovement("testItemBoost2")!!
 
 		assertAll(
-			{ assertEquals("testItemBoost2", movement.movementId) },
+			{ assertEquals("testitemboost2", movement.movementId) },
 			{ assertEquals(MovementLoader.MovementType.PERMABOOST, movement.type)},
 			{ assertEquals(16, movement.strength) },
 			{ assertTrue(movement.affectsOnfoot) },
