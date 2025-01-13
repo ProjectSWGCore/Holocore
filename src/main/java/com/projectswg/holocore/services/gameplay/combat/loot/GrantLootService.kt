@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -49,7 +49,10 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.group.LootRule
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.utilities.Arguments
@@ -60,11 +63,11 @@ import java.util.stream.Collectors
 
 class GrantLootService : Service() {
 	private val lootRestrictions: MutableMap<CreatureObject, CorpseLootRestrictions> = ConcurrentHashMap()
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 	private val lootRange: Int = config.getInt(this, "lootRange", 16)
 
 	override fun stop(): Boolean {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 		return super.stop()
 	}
 

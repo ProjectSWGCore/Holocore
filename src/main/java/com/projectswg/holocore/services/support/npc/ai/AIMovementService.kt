@@ -34,7 +34,11 @@ import com.projectswg.holocore.resources.support.npc.ai.NavigationOffset
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
 import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
@@ -45,7 +49,7 @@ import kotlin.math.sin
 class AIMovementService : Service() {
 	
 	private val routes = ConcurrentHashMap<AIObject, NavigationRoute>()
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 	
 	override fun start(): Boolean {
 		coroutineScope.launch {
@@ -61,7 +65,7 @@ class AIMovementService : Service() {
 	}
 	
 	override fun stop(): Boolean {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 		return super.stop()
 	}
 	

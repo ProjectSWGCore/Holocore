@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -26,6 +25,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
+import com.mongodb.client.MongoClient
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoCollection
 import com.projectswg.holocore.resources.support.data.server_info.database.*
@@ -39,6 +39,7 @@ import java.util.logging.Logger
 
 object PswgDatabase {
 	
+	private var mongoClient: MongoClient? = null
 	private var configImpl = PswgConfigDatabase.createDefault()
 	private var usersImpl = PswgUserDatabase.createDefault()
 	private var objectsImpl = PswgObjectDatabase.createDefault()
@@ -76,6 +77,7 @@ object PswgDatabase {
 		val bazaarAvailableItems = initTable(databaseConfig.bazaarAvailableItems, defaultCreator = {PswgBazaarAvailableItemsDatabase.createDefault()}, mongoInitializer = ::PswgBazaarAvailableItemsDatabaseMongo)
 		val chatRooms = initTable(databaseConfig.chatRooms, defaultCreator = {PswgChatRoomDatabase.createDefault()}, mongoInitializer = ::PswgChatRoomDatabaseMongo)
 		
+		this.mongoClient = client
 		this.configImpl = config
 		this.usersImpl = users
 		this.objectsImpl = objects
@@ -83,6 +85,10 @@ object PswgDatabase {
 		this.bazaarInstantSalesImpl = bazaarInstantSales
 		this.bazaarAvailableItemsImpl = bazaarAvailableItems
 		this.chatRoomsImpl = chatRooms
+	}
+	
+	fun close() {
+		mongoClient?.close()
 	}
 	
 	private fun <T> initTable(table: DatabaseTable, defaultCreator: () -> T, mariaInitializer: (DatabaseTable) -> T = {defaultCreator()}, mongoInitializer: (MongoCollection<Document>) -> T = {defaultCreator()}): T {

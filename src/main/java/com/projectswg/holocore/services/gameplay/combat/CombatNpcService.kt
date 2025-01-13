@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -30,7 +30,10 @@ import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.LootLotteryStartedIntent
 import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
@@ -40,10 +43,10 @@ import kotlin.math.max
 
 class CombatNpcService : Service() {
 	private val deleteCorpseTasks = ConcurrentHashMap<Long, DeleteCorpseLaterJob>()
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 
 	override fun stop(): Boolean {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 		return super.stop()
 	}
 

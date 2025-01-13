@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -35,9 +35,8 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
 import com.projectswg.holocore.resources.gameplay.crafting.survey.SurveyToolSession
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
@@ -47,14 +46,14 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class SurveyToolService : Service() {
 	private val surveySessions: MutableMap<CreatureObject, SurveyToolSession> = ConcurrentHashMap()
-	private val surveySessionScope = CoroutineScope(context = Dispatchers.Default)
+	private val surveySessionScope = HolocoreCoroutine.childScope()
 
 	override fun start(): Boolean {
 		return true
 	}
 
 	override fun stop(): Boolean {
-		surveySessionScope.cancel()
+		surveySessionScope.cancelAndWait()
 		return super.stop()
 	}
 

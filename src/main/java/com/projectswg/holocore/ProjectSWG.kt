@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -32,10 +31,11 @@ import com.projectswg.common.data.encodables.galaxy.Galaxy.GalaxyStatus
 import com.projectswg.common.data.swgiff.parsers.SWGParser
 import com.projectswg.holocore.intents.support.data.control.ServerStatusIntent
 import com.projectswg.holocore.resources.support.data.control.ServerStatus
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.initialize
 import com.projectswg.holocore.services.gameplay.GameplayManager
 import com.projectswg.holocore.services.support.SupportManager
+import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.ScheduledUtilities
 import me.joshlarson.jlcommon.argparse.Argument
 import me.joshlarson.jlcommon.argparse.ArgumentParser
@@ -53,7 +53,6 @@ import me.joshlarson.jlcommon.log.log_wrapper.FileLogWrapper
 import me.joshlarson.jlcommon.utilities.ThreadUtilities
 import java.io.File
 import java.time.OffsetTime
-import java.util.*
 import java.util.function.Consumer
 import kotlin.math.max
 
@@ -97,22 +96,26 @@ object ProjectSWG {
 		initializeSWGParser()
 		setupGalaxy(arguments)
 		IntentManager(false, Runtime.getRuntime().availableProcessors(), 8).use { intentManager ->
-			IntentManager.setInstance(intentManager)
-			val managers = listOf<ServiceBase>(
-				// Must be in this order to ensure Gameplay sees Support intents
-				GameplayManager(),
-				SupportManager()
-			)
-			managers.forEach(Consumer { m: ServiceBase -> m.setIntentManager(intentManager) })
-			setStatus(ServerStatus.INITIALIZING)
-			if (Manager.start(managers)) {
-				setStatus(ServerStatus.OPEN)
-				Manager.run(managers, 50)
+			HolocoreCoroutine().use { coroutineManager ->
+				IntentManager.setInstance(intentManager)
+				HolocoreCoroutine.INSTANCE.set(coroutineManager)
+				val managers = listOf<ServiceBase>(
+					// Must be in this order to ensure Gameplay sees Support intents
+					GameplayManager(),
+					SupportManager()
+				)
+				managers.forEach(Consumer { m: ServiceBase -> m.setIntentManager(intentManager) })
+				setStatus(ServerStatus.INITIALIZING)
+				if (Manager.start(managers)) {
+					setStatus(ServerStatus.OPEN)
+					Manager.run(managers, 50)
+				}
+				Delay.clearInterrupted()
+				setStatus(ServerStatus.TERMINATING)
+				Manager.stop(managers)
 			}
-			Delay.clearInterrupted()
-			setStatus(ServerStatus.TERMINATING)
-			Manager.stop(managers)
 		}
+		shutdownDatabase()
 		shutdownStaticClasses()
 		printFinalPswgState()
 		return 0
@@ -174,7 +177,11 @@ object ProjectSWG {
 	private fun setupDatabase(arguments: Map<String, Any>) {
 		val dbStr = (arguments["database"] ?: "mongodb://localhost") as String
 		val db = (arguments["dbName"] ?: "cu") as String
-		initialize(dbStr, db)
+		PswgDatabase.initialize(dbStr, db)
+	}
+	
+	private fun shutdownDatabase() {
+		PswgDatabase.close()
 	}
 
 	private fun setupLogging(arguments: Map<String, Any>) {

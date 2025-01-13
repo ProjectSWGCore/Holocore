@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,14 +36,17 @@ import com.projectswg.holocore.resources.support.global.commands.Command
 import com.projectswg.holocore.resources.support.objects.ObjectCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.log.Log
 
 internal class CombatCommandDelayAttack(private val combatCommandAttack: CombatCommandAttack) : CombatCommandHitType {
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 
 	override fun terminate() {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 	}
 
 	override fun handle(source: CreatureObject, target: SWGObject?, command: Command, combatCommand: CombatCommand, arguments: String): CombatStatus {

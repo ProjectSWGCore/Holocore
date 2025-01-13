@@ -23,60 +23,54 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.npc.ai
+package com.projectswg.holocore.utilities
 
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
-import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent
-import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
-import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import com.projectswg.holocore.utilities.HolocoreCoroutine
-import com.projectswg.holocore.utilities.cancelAndWait
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
-import java.util.concurrent.ConcurrentHashMap
+import com.projectswg.common.utilities.ThreadUtilities
+import kotlinx.coroutines.*
+import me.joshlarson.jlcommon.log.Log
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicReference
 
-class AIService : Service() {
-	private val coroutineScope = HolocoreCoroutine.childScope()
-	private val aiObjects: MutableCollection<AIObject> = ConcurrentHashMap.newKeySet()
-
-	override fun start(): Boolean {
-		for (obj in aiObjects) {
-			obj.start(coroutineScope)
+fun CoroutineScope.cancelAndWait() {
+	val scope = this
+	runBlocking(HolocoreCoroutine.INSTANCE.get()!!.dispatcher) {
+		try {
+			scope.coroutineContext[Job]?.cancelAndJoin()
+		} catch (e: Throwable) {
+			Log.w(e)
 		}
-		return true
+	}
+}
+
+class HolocoreCoroutine : AutoCloseable {
+
+	private val threadPool = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("coroutine-%d"))
+	val dispatcher = threadPool.asCoroutineDispatcher()
+	private val supervisor = SupervisorJob()
+	private val scope = supervisor + dispatcher
+
+	fun childScope(): CoroutineScope {
+		return CoroutineScope(SupervisorJob() + scope)
 	}
 
-	override fun stop(): Boolean {
-		coroutineScope.cancelAndWait()
-		aiObjects.clear()
-		return super.stop()
+	fun terminate(): Boolean {
+		scope.cancel()
+		runBlocking(dispatcher) {
+			supervisor.join()
+		}
+		threadPool.shutdown()
+		return threadPool.awaitTermination(3000L, TimeUnit.MILLISECONDS)
 	}
 
-	@IntentHandler
-	private fun handleObjectCreatedIntent(oci: ObjectCreatedIntent) {
-		val obj = oci.obj as? AIObject ?: return
-		if (aiObjects.add(obj)) obj.start(coroutineScope)
+	override fun close() {
+		terminate()
 	}
 
-	@IntentHandler
-	private fun handleDestroyObjectIntent(doi: DestroyObjectIntent) {
-		val obj = doi.obj as? AIObject ?: return
-		if (aiObjects.remove(obj)) obj.stop()
-	}
+	companion object {
 
-	@IntentHandler
-	private fun handleCreatureKilledIntent(cki: CreatureKilledIntent) {
-		val corpse = cki.corpse
-		if (corpse is AIObject)
-			corpse.stop()
-	}
+		val INSTANCE = AtomicReference<HolocoreCoroutine?>(null)
 
-	@IntentHandler
-	private fun handleEnterCombatIntent(eci: EnterCombatIntent) {
-		val obj = eci.source as? AIObject ?: return
-		val target = eci.target as? CreatureObject ?: return
-		obj.startCombat(listOf(target))
+		fun childScope(): CoroutineScope = INSTANCE.get()?.childScope() ?: throw RuntimeException("CoroutineManager not created")
 	}
 }

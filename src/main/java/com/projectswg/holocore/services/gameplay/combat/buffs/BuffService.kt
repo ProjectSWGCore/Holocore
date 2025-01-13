@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -28,8 +28,8 @@ package com.projectswg.holocore.services.gameplay.combat.buffs
 import com.projectswg.common.data.CRC
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.holocore.ProjectSWG
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
 import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -39,13 +39,16 @@ import com.projectswg.holocore.resources.support.data.server_info.loader.ServerD
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.*
 
 class BuffService : Service() {
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 	private val callbackMap: MutableMap<String, BuffCallback> = HashMap()
 	private val buffs = ServerData.buffs
 
@@ -58,7 +61,7 @@ class BuffService : Service() {
 	}
 
 	override fun stop(): Boolean {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 		return super.stop()
 	}
 

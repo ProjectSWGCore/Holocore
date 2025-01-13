@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,12 @@
 package com.projectswg.holocore.services.gameplay.combat
 
 import com.projectswg.holocore.intents.gameplay.combat.ApplyCombatStateIntent
-import kotlinx.coroutines.*
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 
@@ -34,23 +39,23 @@ class CombatStateService : Service() {
 
 	private val stateDurationInMs = 10_000L
 	private val stateLoopDurationInMs = 4_000L
-	private val coroutineScope = CoroutineScope(context = Dispatchers.Default)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 
 	override fun stop(): Boolean {
-		coroutineScope.cancel()
+		coroutineScope.cancelAndWait()
 		return super.stop()
 	}
 
 	@IntentHandler
 	private fun handleApplyCombatStateIntent(intent: ApplyCombatStateIntent) {
+		val combatState = intent.combatState
+		val victim = intent.victim
+		val attacker = intent.attacker
+
+		if (combatState.isApplied(victim))return
+		combatState.apply(attacker, victim)
+
 		coroutineScope.launch {
-			val combatState = intent.combatState
-			val victim = intent.victim
-			val attacker = intent.attacker
-
-			if (combatState.isApplied(victim)) return@launch
-			combatState.apply(attacker, victim)
-
 			withTimeout(stateDurationInMs) {
 				try {
 					while (isActive) {

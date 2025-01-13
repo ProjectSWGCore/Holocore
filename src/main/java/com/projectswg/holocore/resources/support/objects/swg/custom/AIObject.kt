@@ -38,9 +38,10 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
+import com.projectswg.holocore.utilities.cancelAndWait
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.SupervisorJob
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
@@ -205,13 +206,13 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	}
 	
 	fun start(coroutineScope: CoroutineScope) {
-		this.coroutineScope = CoroutineScope(coroutineScope.coroutineContext + Job())
+		this.coroutineScope = CoroutineScope(SupervisorJob() + coroutineScope.coroutineContext)
 		startMode(activeMode ?: defaultMode)
 	}
 	
 	fun stop() {
 		this.activeMode = null
-		this.coroutineScope?.cancel()
+		this.coroutineScope?.cancelAndWait()
 		this.coroutineScope = null
 	}
 	
