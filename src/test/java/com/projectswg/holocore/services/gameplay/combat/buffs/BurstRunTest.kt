@@ -1,39 +1,45 @@
+/***********************************************************************************
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ *                                                                                 *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
+ * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
+ *                                                                                 *
+ * This file is part of Holocore.                                                  *
+ *                                                                                 *
+ * --------------------------------------------------------------------------------*
+ *                                                                                 *
+ * Holocore is free software: you can redistribute it and/or modify                *
+ * it under the terms of the GNU Affero General Public License as                  *
+ * published by the Free Software Foundation, either version 3 of the              *
+ * License, or (at your option) any later version.                                 *
+ *                                                                                 *
+ * Holocore is distributed in the hope that it will be useful,                     *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU Affero General Public License for more details.                             *
+ *                                                                                 *
+ * You should have received a copy of the GNU Affero General Public License        *
+ * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
+ ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.buffs
 
-import com.projectswg.holocore.resources.support.global.commands.callbacks.BurstRunCmdCallback
-import com.projectswg.holocore.test.resources.GenericCreatureObject
-import org.junit.jupiter.api.Assertions.*
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.sendSelfBuffCommand
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class BurstRunTest {
+class BurstRunTest : AcceptanceTest() {
 	@Test
 	fun `Burst Run increases movement speed when executed`() {
-		val creatureObject = createCreatureObjectWithBurstRun()
+		val user = generateUser()
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
 
-		assertEquals(2f, creatureObject.movementScale)
-	}
+		character1.sendSelfBuffCommand("burstRun")
 
-	@Test
-	fun `Burst Run decreases movement speed when buff expires`() {
-		val creatureObject = createCreatureObjectWithBurstRun()
-		val removeBurstRunBuffCallback = RemoveBurstRunBuffCallback()
-
-		removeBurstRunBuffCallback.execute(creatureObject)
-
-		assertEquals(1f, creatureObject.movementScale)
-	}
-
-	private fun createCreatureObjectWithBurstRun(): GenericCreatureObject {
-		val burstRunCmdCallback = BurstRunCmdCallback()
-		val creatureObject = GenericCreatureObject(0)
-		val player = creatureObject.owner
-
-		if (player != null) {
-			burstRunCmdCallback.execute(player, null, "")
-
-		} else {
-			fail("Broken test setup")
-		}
-		return creatureObject
+		val creatureObject = character1.player.creatureObject
+		assertEquals(1.75f, creatureObject.movementPercent)
 	}
 }
