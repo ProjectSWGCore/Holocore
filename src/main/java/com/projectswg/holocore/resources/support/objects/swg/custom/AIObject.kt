@@ -211,7 +211,6 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	}
 	
 	fun stop() {
-		this.activeMode = null
 		this.coroutineScope?.cancelAndWait()
 		this.coroutineScope = null
 	}
