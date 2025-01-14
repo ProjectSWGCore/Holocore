@@ -302,7 +302,7 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 			GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank_01", creatureObject, true).broadcast()
 			GrantSkillIntent(GrantSkillIntent.IntentType.GRANT, "force_title_jedi_rank_02", creatureObject, true).broadcast()
 			spawnItems(
-				player, "item_color_crystal_02_28", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_color_crystal_02_00", "item_color_crystal_02_01", "item_color_crystal_02_02", "item_color_crystal_02_03", "item_color_crystal_02_04", "item_color_crystal_02_05", "item_color_crystal_02_06", "item_color_crystal_02_07", "item_color_crystal_02_08", "item_color_crystal_02_09", "item_color_crystal_02_10", "item_color_crystal_02_11", "weapon_cl30_1h_ls", "weapon_cl40_1h_ls", "weapon_cl50_1h_ls", "weapon_cl60_1h_ls", "weapon_cl70_1h_ls", "weapon_cl80_1h_ls", "weapon_cl30_2h_ls", "weapon_cl40_2h_ls", "weapon_cl50_2h_ls", "weapon_cl60_2h_ls", "weapon_cl70_2h_ls", "weapon_cl80_2h_ls", "weapon_cl30_polearm_ls", "weapon_cl40_polearm_ls", "weapon_cl50_polearm_ls", "weapon_cl60_polearm_ls", "weapon_cl70_polearm_ls", "weapon_cl80_polearm_ls"
+				player, "item_color_crystal_02_28", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_power_crystal_04_19", "item_color_crystal_02_00", "item_color_crystal_02_01", "item_color_crystal_02_02", "item_color_crystal_02_03", "item_color_crystal_02_04", "item_color_crystal_02_05", "item_color_crystal_02_06", "item_color_crystal_02_07", "item_color_crystal_02_08", "item_color_crystal_02_09", "item_color_crystal_02_10", "item_color_crystal_02_11"
 			)
 		}
 
@@ -466,13 +466,13 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 
 		private fun handleMeleeWeapons(player: Player) {
 			spawnItems(
-				player, "weapon_cl1_unarmed", "weapon_cl10_unarmed", "weapon_cl20_unarmed", "weapon_cl30_unarmed", "weapon_cl40_unarmed", "weapon_cl50_unarmed", "weapon_cl1_1h", "weapon_cl10_1h", "weapon_cl20_1h", "weapon_cl30_1h", "weapon_cl40_1h", "weapon_cl50_1h", "weapon_cl1_2h", "weapon_cl10_2h", "weapon_cl20_2h", "weapon_cl30_2h", "weapon_cl40_2h", "weapon_cl50_2h", "weapon_cl1_polearm", "weapon_cl10_polearm", "weapon_cl20_polearm", "weapon_cl30_polearm", "weapon_cl40_polearm", "weapon_cl50_polearm"
+				player, "weapon_cl1_unarmed", "vibroknuckler", "ep3_loot_heartstriker", "knuckler_blasterfist", "wookiee_knuckler", "knife_dagger", "baton_gaderiffi", "sword_blade_rantok", "sword_marauder", "sword_rsf", "sword_acid", "axe_heavy_duty", "sword_2h_katana", "sword_2h_kashyyk", "sword_2h_blacksun_hack", "ep3_loot_sickle", "sword_som_2h_obsidian", "lance_staff_wood_s1", "lance_staff_metal", "lance_controllerfp", "lance_trando", "lance_electric_polearm", "lance_shock"
 			)
 		}
 
 		private fun handleRangedWeapons(player: Player) {
 			spawnItems(
-				player, "weapon_cl1_pistol", "weapon_cl10_pistol", "weapon_cl20_pistol", "weapon_cl30_pistol", "weapon_cl40_pistol", "weapon_cl50_pistol", "weapon_cl1_carbine", "weapon_cl10_carbine", "weapon_cl20_carbine", "weapon_cl30_carbine", "weapon_cl40_carbine", "weapon_cl50_carbine", "weapon_cl1_rifle", "weapon_cl10_rifle", "weapon_cl20_rifle", "weapon_cl30_rifle", "weapon_cl40_rifle", "weapon_cl50_rifle", "weapon_cl1_heavy", "weapon_cl10_heavy", "weapon_cl20_heavy", "weapon_cl30_heavy", "weapon_cl40_heavy", "weapon_cl50_heavy"
+				player, "pistol_cdef", "pistol_striker", "pistol_dh17", "pistol_jawa", "pistol_power5", "pistol_de_10", "carbine_cdef", "carbine_e11", "carbine_ee3", "carbine_alliance_needler", "carbine_dxr6", "carbine_dc15", "rifle_cdef", "rifle_sg82", "rifle_e11", "rifle_massassi_ink", "rifle_odararissl", "som_rifle_dp23", "pistol_launcher", "rifle_acid_beam", "ep3_loot_corellian", "ep3_loot_void"
 			)
 		}
 
