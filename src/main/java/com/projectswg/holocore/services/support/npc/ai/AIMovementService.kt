@@ -36,12 +36,11 @@ import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.cancelAndWait
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import com.projectswg.holocore.utilities.launchWithFixedRate
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.math.cos
 import kotlin.math.sin
@@ -52,14 +51,8 @@ class AIMovementService : Service() {
 	private val coroutineScope = HolocoreCoroutine.childScope()
 	
 	override fun start(): Boolean {
-		coroutineScope.launch {
-			val anchorTime = System.nanoTime() / 1_000_000L
-			val updateRateSleep = 1_000L
-			while (isActive) {
-				val sleepTime = updateRateSleep - ((System.nanoTime() / 1_000_000L + updateRateSleep - anchorTime) % updateRateSleep)
-				delay(sleepTime)
-				routes.values.forEach { it.execute() } // TODO: put each route in its own coroutine
-			}
+		coroutineScope.launchWithFixedRate(1, TimeUnit.SECONDS) {
+			routes.values.forEach { it.execute() } // TODO: put each route in its own coroutine
 		}
 		return true
 	}

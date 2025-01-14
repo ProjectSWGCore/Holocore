@@ -43,6 +43,41 @@ fun CoroutineScope.cancelAndWait() {
 	}
 }
 
+fun CoroutineScope.launchAfter(periodMilliseconds: Long, block: suspend () -> Unit) = launchAfter(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+
+fun CoroutineScope.launchAfter(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
+	launch {
+		delay(unit.toMillis(period))
+		block()
+	}
+}
+
+fun CoroutineScope.launchWithFixedRate(periodMilliseconds: Long, block: suspend () -> Unit) = launchWithFixedRate(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+
+fun CoroutineScope.launchWithFixedRate(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
+	val updateRateSleep = unit.toMillis(period)
+	launch {
+		val anchorTime = System.nanoTime() / 1_000_000L
+		while (isActive) {
+			val sleepTime = updateRateSleep - ((System.nanoTime() / 1_000_000L + updateRateSleep - anchorTime) % updateRateSleep)
+			delay(sleepTime)
+			block()
+		}
+	}
+}
+
+fun CoroutineScope.launchWithFixedDelay(periodMilliseconds: Long, block: suspend () -> Unit) = launchWithFixedDelay(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+
+fun CoroutineScope.launchWithFixedDelay(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
+	launch {
+		val sleepTime = unit.toMillis(period)
+		while (isActive) {
+			delay(sleepTime)
+			block()
+		}
+	}
+}
+
 class HolocoreCoroutine : AutoCloseable {
 
 	private val threadPool = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors(), ThreadUtilities.newThreadFactory("coroutine-%d"))

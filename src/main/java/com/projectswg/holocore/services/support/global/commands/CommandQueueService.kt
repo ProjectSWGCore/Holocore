@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -55,7 +54,10 @@ import com.projectswg.holocore.resources.support.random.RandomDie
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandCommon.handleStatus
 import com.projectswg.holocore.services.gameplay.combat.command.CombatCommandHandler
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import com.projectswg.holocore.utilities.launchAfter
+import com.projectswg.holocore.utilities.launchWithFixedRate
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
@@ -65,19 +67,18 @@ import java.util.function.Consumer
 import java.util.stream.Collectors
 
 class CommandQueueService @JvmOverloads constructor(private val delayBetweenCheckingCommandQueue: Long = 100, toHitDie: Die = RandomDie(), knockdownDie: Die = RandomDie(), woundDie: Die = RandomDie(), private val skipWarmup: Boolean = false) : Service() {
-	private val executor = ScheduledThreadPool(4, "command-queue-%d")
 	private val combatQueueMap: MutableMap<CreatureObject, CreatureCombatQueue> = ConcurrentHashMap()
 	private val combatCommandHandler: CombatCommandHandler = CombatCommandHandler(toHitDie, knockdownDie, woundDie)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 
 	override fun initialize(): Boolean {
-		executor.start()
-		executor.executeWithFixedRate(0, delayBetweenCheckingCommandQueue) { this.executeQueuedCommands() }
+		coroutineScope.launchWithFixedRate(delayBetweenCheckingCommandQueue) { executeQueuedCommands() }
 		return true
 	}
 
 	override fun terminate(): Boolean {
-		executor.stop()
-		return executor.awaitTermination(1000)
+		coroutineScope.cancelAndWait()
+		return super.terminate()
 	}
 
 	override fun start(): Boolean {
@@ -196,7 +197,10 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 				command.source.sendSelf(warmupTimer)
 
-				executor.execute((warmupTime * 1000).toLong()) { executeCommandNow(command) }
+				coroutineScope.launchAfter((warmupTime * 1000).toLong()) {
+					Log.d("executeCommandNow(%s)", command.toString())
+					executeCommandNow(command)
+				}
 			} else {
 				executeCommandNow(command)
 			}
@@ -243,7 +247,9 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 			if (cd1 || cd2) {
 				activeCooldownGroups.add(Companion.GLOBAL_CD_NAME)
-				executor.execute((moddedWeaponAttackSpeedWithCap * 1000).toLong()) { activeCooldownGroups.remove(Companion.GLOBAL_CD_NAME) }
+				coroutineScope.launchAfter((moddedWeaponAttackSpeedWithCap * 1000).toLong()) {
+					activeCooldownGroups.remove(Companion.GLOBAL_CD_NAME)
+				}
 			}
 
 			ExecuteCommandIntent(source, command.target, command.arguments, command.command).broadcast()
@@ -280,7 +286,9 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			commandTimer.addFlag(CommandTimer.CommandTimerFlag.EXECUTE)
 			creature.sendSelf(commandTimer)
 
-			executor.execute(((cooldownTime + globalCooldownTime) * 1000).toLong()) { activeCooldownGroups.remove(group) }
+			coroutineScope.launchAfter(((cooldownTime + globalCooldownTime) * 1000).toLong()) {
+				activeCooldownGroups.remove(group)
+			}
 		}
 
 		private fun checkCommand(command: EnqueuedCommand, combatCommand: CombatCommand?): CheckCommandResult {

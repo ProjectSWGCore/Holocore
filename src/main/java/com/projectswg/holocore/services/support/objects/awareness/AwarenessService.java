@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -47,7 +46,6 @@ import com.projectswg.holocore.resources.support.global.player.PlayerState;
 import com.projectswg.holocore.resources.support.objects.awareness.ObjectAwareness;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import me.joshlarson.jlcommon.concurrency.ScheduledThreadPool;
 import me.joshlarson.jlcommon.control.Intent;
 import me.joshlarson.jlcommon.control.IntentHandler;
 import me.joshlarson.jlcommon.control.Service;
@@ -61,29 +59,21 @@ public class AwarenessService extends Service {
 	private static final Location GONE_LOCATION = Location.builder().setTerrain(Terrain.GONE).setPosition(0, 0, 0).build();
 	
 	private final ObjectAwareness awareness;
-	private final ScheduledThreadPool chunkUpdater;
 	
 	public AwarenessService() {
 		this.awareness = new ObjectAwareness();
-		this.chunkUpdater = new ScheduledThreadPool(1, 8, "awareness-chunk-updater");
 	}
 	
 	@Override
 	public boolean start() {
 		awareness.startThreadPool();
-		chunkUpdater.start();
-		chunkUpdater.executeWithFixedDelay(0, 100, this::update);
-		return true;
+		return super.start();
 	}
 	
 	@Override
 	public boolean stop() {
-		chunkUpdater.stop();
-		return awareness.stopThreadPool() && chunkUpdater.awaitTermination(1000);
-	}
-	
-	public void update() {
-//		PlayerLookup.getLoggedInCharacters().forEach(CreatureObject::flush);
+		awareness.stopThreadPool();
+		return super.stop();
 	}
 	
 	public void updateChunks() {
