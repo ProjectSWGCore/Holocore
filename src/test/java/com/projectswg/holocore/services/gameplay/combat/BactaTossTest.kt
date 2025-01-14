@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -23,60 +23,51 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience
+package com.projectswg.holocore.services.gameplay.combat
 
 import com.projectswg.holocore.headless.*
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class TrappingXPTest : AcceptanceTest() {
+class BactaTossTest : AcceptanceTest() {
 
 	@Test
-	fun scoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
+	fun healSelf() {
+		val zonedInCharacter1 = createMasterMedic()
+		zonedInCharacter1.player.creatureObject.modifyHealth(-500)
+		val char1OriginalHealth = zonedInCharacter1.player.creatureObject.health
 
-		killTarget(character, npc)
+		zonedInCharacter1.heal(null, "bactaToss")
 
-		// There are three types of XP we receive from this kill: combat_meleespecialize_unarmed, trapping, and combat_general
-		character.waitForExperiencePoints("trapping")
-		assertTrue(character.player.playerObject.getExperiencePoints("trapping") > 0)
+		val char1NewHealth = zonedInCharacter1.player.creatureObject.health
+		assertTrue(char1NewHealth > char1OriginalHealth)
 	}
 
 	@Test
-	fun onlyScoutsGetTrappingXPFromKillingCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		character.surrenderSkill("outdoors_scout_novice")
-		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
+	fun healFriendlyTarget() {
+		val zonedInCharacter1 = createMasterMedic()
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		zonedInCharacter2.player.creatureObject.modifyHealth(-500)
+		val char2OriginalHealth = zonedInCharacter2.player.creatureObject.health
+		
+		zonedInCharacter1.heal(zonedInCharacter2.player.creatureObject, "bactaToss")
 
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+		val char2NewHealth = zonedInCharacter2.player.creatureObject.health
+		assertTrue(char2NewHealth > char2OriginalHealth)
 	}
 
-	@Test
-	fun scoutsGetNoTrappingXPFromKillingNonCreatures() {
-		val user = generateUser()
-		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
-		val npc = spawnNPC("humanoid_tusken_commoner", character.player.creatureObject.location)
-
-		killTarget(character, npc)
-
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+	private fun createMasterMedic(): ZonedInCharacter {
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		zonedInCharacter1.adminGrantSkill("science_medic_master")
+		return zonedInCharacter1
 	}
 
-	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {
-		target.health = 1
-		val targetState = character.attack(target)
-
-		if (targetState != TargetState.DEAD) {
-			throw IllegalStateException("Target is not dead, but is instead $targetState")
-		}
+	private fun createZonedInCharacter(characterName: String): ZonedInCharacter {
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		return HeadlessSWGClient.createZonedInCharacter(user.username, user.password, characterName)
 	}
 
 }
+
