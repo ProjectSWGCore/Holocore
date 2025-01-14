@@ -206,7 +206,7 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	}
 	
 	fun start(coroutineScope: CoroutineScope) {
-		this.coroutineScope = CoroutineScope(SupervisorJob() + coroutineScope.coroutineContext)
+		this.coroutineScope = CoroutineScope(coroutineScope.coroutineContext + SupervisorJob())
 		startMode(activeMode ?: defaultMode)
 	}
 	

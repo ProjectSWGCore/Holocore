@@ -51,7 +51,7 @@ class HolocoreCoroutine : AutoCloseable {
 	private val scope = supervisor + dispatcher
 
 	fun childScope(): CoroutineScope {
-		return CoroutineScope(SupervisorJob() + scope)
+		return CoroutineScope(scope + SupervisorJob())
 	}
 
 	fun terminate(): Boolean {
