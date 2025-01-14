@@ -198,7 +198,6 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 				command.source.sendSelf(warmupTimer)
 
 				coroutineScope.launchAfter((warmupTime * 1000).toLong()) {
-					Log.d("executeCommandNow(%s)", command.toString())
 					executeCommandNow(command)
 				}
 			} else {
