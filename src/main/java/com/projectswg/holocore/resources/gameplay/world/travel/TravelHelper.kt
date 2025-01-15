@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -44,7 +43,8 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TicketInformation
-import me.joshlarson.jlcommon.concurrency.ThreadPool
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
 import me.joshlarson.jlcommon.log.Log
 import java.io.File
 import java.io.IOException
@@ -52,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 class TravelHelper {
 	private val travel: MutableMap<String, TravelGroup> = ConcurrentHashMap()
-	private val travelExecutor = ThreadPool(3, "travel-shuttles-%d")
+	private val coroutineScope = HolocoreCoroutine.childScope()
 	private val pointContainer = TravelPointContainer()
 
 	init {
@@ -61,12 +61,11 @@ class TravelHelper {
 	}
 
 	fun start() {
-		travelExecutor.start()
-		for (gt in travel.values) travelExecutor.execute(gt)
+		for (group in travel.values) group.launch(coroutineScope)
 	}
 
 	fun stop() {
-		travelExecutor.stop(true)
+		coroutineScope.cancelAndWait()
 	}
 
 	fun addTravelPoint(point: TravelPoint) {
@@ -185,7 +184,7 @@ class TravelHelper {
 	}
 
 	private fun createGalaxyTravel(template: String, landTime: Long, groundTime: Long, airTime: Long) {
-		travel[template] = TravelGroup(landTime * 1000 + 10000, groundTime * 1000, airTime * 1000)
+		travel[template] = TravelGroup(landTime + 10, groundTime, airTime)
 	}
 
 	private fun loadTravelPoints() {

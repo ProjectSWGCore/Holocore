@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -28,12 +27,14 @@ package com.projectswg.holocore.resources.gameplay.world.travel
 
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
-import me.joshlarson.jlcommon.concurrency.Delay
-import me.joshlarson.jlcommon.log.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicLong
 
-class TravelGroup(private val landTime: Long, private val groundTime: Long, private val airTime: Long) : Runnable {
+class TravelGroup(private val landTime: Long, private val groundTime: Long, private val airTime: Long) {
 	private val points: MutableList<TravelPoint> = CopyOnWriteArrayList()
 	private val timeRemaining: AtomicLong = AtomicLong(airTime / 1000)
 	var status: ShuttleStatus
@@ -51,9 +52,9 @@ class TravelGroup(private val landTime: Long, private val groundTime: Long, priv
 		return timeRemaining.toInt()
 	}
 	
-	override fun run() {
-		try {
-			while (!Delay.isInterrupted()) {
+	fun launch(scope: CoroutineScope) {
+		scope.launch {
+			while (isActive) {
 				// GROUNDED
 				handleStatusGrounded()
 				// LEAVING
@@ -63,35 +64,37 @@ class TravelGroup(private val landTime: Long, private val groundTime: Long, priv
 				// LANDING
 				handleStatusLanding()
 			}
-		} catch (e: Exception) {
-			Log.e(e)
 		}
 	}
 	
-	private fun handleStatusGrounded() {
+	private suspend fun handleStatusGrounded() {
 		status = ShuttleStatus.GROUNDED
-		Delay.sleepMilli(groundTime)
+		delay(groundTime * 1000L)
 	}
 	
-	private fun handleStatusLeaving() {
+	private suspend fun handleStatusLeaving() {
 		status = ShuttleStatus.LEAVING
 		updateShuttlePostures(false)
-		Delay.sleepMilli(landTime)
+		delay(landTime * 1000L)
 	}
 	
-	private fun handleStatusAway() {
+	private suspend fun handleStatusAway() {
 		status = ShuttleStatus.AWAY
-		for (timeElapsed in 0 until airTime / 1000) {
-			if (Delay.sleepSeconds(1)) break
+		timeRemaining.set(airTime + landTime) // Reset the timer
+		for (timeElapsed in 0 until airTime) {
+			delay(1000L)
 			timeRemaining.decrementAndGet()
 		}
-		timeRemaining.set(airTime / 1000) // Reset the timer
 	}
 	
-	private fun handleStatusLanding() {
+	private suspend fun handleStatusLanding() {
 		status = ShuttleStatus.LANDING
 		updateShuttlePostures(true)
-		Delay.sleepMilli(landTime)
+		timeRemaining.set(landTime) // Reset the timer
+		for (timeElapsed in 0 until landTime) {
+			delay(1000L)
+			timeRemaining.decrementAndGet()
+		}
 	}
 	
 	private fun updateShuttlePostures(landed: Boolean) {

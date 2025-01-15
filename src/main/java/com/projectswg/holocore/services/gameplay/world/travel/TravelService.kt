@@ -143,12 +143,11 @@ class TravelService : Service() {
 		}
 
 		when (nearestPoint.group!!.status) {
-			ShuttleStatus.GROUNDED -> if (tui.ticket == null) handleTicketUseSui(tui.player)
+			ShuttleStatus.GROUNDED                    -> if (tui.ticket == null) handleTicketUseSui(tui.player)
 			else travel.handleTicketUse(tui.player, tui.ticket, travel.getNearestTravelPoint(tui.ticket)!!, travel.getDestinationPoint(tui.ticket)!!)
 
-			ShuttleStatus.LANDING  -> sendTravelMessage(creature, "@travel/travel:shuttle_begin_boarding")
-			ShuttleStatus.LEAVING  -> sendTravelMessage(creature, "@travel:shuttle_not_available")
-			ShuttleStatus.AWAY     -> sendTravelMessage(creature, "@travel/travel:shuttle_board_delay", "DI", nearestPoint.group.getTimeRemaining())
+			ShuttleStatus.LEAVING                     -> sendTravelMessage(creature, "@travel:shuttle_not_available")
+			ShuttleStatus.LANDING, ShuttleStatus.AWAY -> sendTravelMessage(creature, "@travel/travel:shuttle_board_delay", "DI", nearestPoint.group.getTimeRemaining())
 		}
 	}
 
