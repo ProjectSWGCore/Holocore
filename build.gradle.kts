@@ -177,9 +177,8 @@ tasks.register("createRunScript") {
 	dependsOn("compileJava", "compileKotlin", "processResources")
 
 	doLast {
-		// Get the Java executable from JAVA_HOME environment variable
-		val javaHome = System.getenv("JAVA_HOME") ?: throw IllegalStateException("JAVA_HOME is not set")
-		val javaExecutable = "$javaHome/bin/java"
+		// Use the Java executable that Gradle is using
+		val javaExecutable = "${System.getProperty("java.home")}/bin/java"
 
 		// Collect runtime classpath elements into a single string with path separator
 		val runtimeClasspath = configurations["runtimeClasspath"].files.joinToString(File.pathSeparator) {
