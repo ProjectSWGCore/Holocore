@@ -59,8 +59,15 @@ application {
 }
 
 sourceSets {
+	main {
+		java {
+			output.setResourcesDir(destinationDirectory.get())
+		}
+	}
 	create("utility")
 }
+
+tasks.named("processResources").configure { dependsOn("compileJava") }
 
 val utilityImplementation by configurations.getting {
 	extendsFrom(configurations.implementation.get())
@@ -159,5 +166,38 @@ tasks.withType<Test>().configureEach {
 	testLogging {
 		events = setOf(TestLogEvent.FAILED, TestLogEvent.SKIPPED)
 		exceptionFormat = TestExceptionFormat.FULL
+	}
+}
+
+tasks.named("classes") {
+	dependsOn("createRunScript")
+}
+
+tasks.register("createRunScript") {
+	dependsOn("compileJava", "compileKotlin", "processResources")
+
+	doLast {
+		// Get the Java executable from JAVA_HOME environment variable
+		val javaHome = System.getenv("JAVA_HOME") ?: throw IllegalStateException("JAVA_HOME is not set")
+		val javaExecutable = "$javaHome/bin/java"
+
+		// Collect runtime classpath elements into a single string with path separator
+		val runtimeClasspath = configurations["runtimeClasspath"].files.joinToString(File.pathSeparator) {
+			it.absolutePath
+		}
+
+		// Get the output directory for the main/java source set
+		val mainJavaOutputDir = project.sourceSets["main"].java.destinationDirectory.get().asFile.absolutePath
+
+		// Assemble the module-path to include both the runtime classpath and the main/java output directory
+		val modulePath = "$runtimeClasspath${File.pathSeparator}$mainJavaOutputDir"
+
+		// Assemble the command
+		val command = "clear; $javaExecutable -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
+
+		// File to write the run command
+		val outputFile = file("${layout.buildDirectory.asFile.get().absolutePath}/run")
+		outputFile.writeText(command)
+		outputFile.setExecutable(true)
 	}
 }
