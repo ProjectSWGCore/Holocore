@@ -23,23 +23,43 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.buffs
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.sendSelfBuffCommand
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet
+import java.io.File
 
-class BurstRunTest : AcceptanceTest() {
-	@Test
-	fun `Burst Run increases movement speed when executed`() {
-		val user = generateUser()
-		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+class MovementLoader : DataLoader() {
 
-		character1.sendSelfBuffCommand("burstRun")
+	private val movements: MutableMap<String, MovementInfo> = mutableMapOf()
 
-		val creatureObject = character1.player.creatureObject
-		assertEquals(1.75f, creatureObject.movementPercent)
+	fun getMovement(movementId: String): MovementInfo? {
+		return movements[movementId.lowercase()]
+	}
+
+	override fun load() {
+		SdbLoader.load(File("serverdata/player/movement.sdb")).use { set ->
+			while (set.next()) {
+				val movementInfo = MovementInfo(set)
+				movements[movementInfo.movementId] = movementInfo
+			}
+		}
+	}
+
+	class MovementInfo(set: SdbResultSet) {
+		val movementId = set.getText("movement_id").lowercase()
+		val type = MovementType.valueOf(set.getText("type").uppercase())
+		val strength = set.getInt("strength").toInt()
+		val affectsOnfoot = set.getBoolean("affects_onfoot")
+		val affectsVehicle = set.getBoolean("affects_vehicle")
+		val affectsMount = set.getBoolean("affects_mount")
+	}
+
+	enum class MovementType {
+		PERMASNARE,
+		SNARE,
+		BOOST,
+		PERMABOOST,
+		ROOT,
 	}
 }

@@ -23,23 +23,25 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.buffs
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.sendSelfBuffCommand
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class BurstRunTest : AcceptanceTest() {
+import org.junit.jupiter.api.Assertions.*
+
+class MovementLoaderTest {
+
 	@Test
-	fun `Burst Run increases movement speed when executed`() {
-		val user = generateUser()
-		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
+	fun load() {
+		val movement = ServerData.movements.getMovement("testItemBoost2")!!
 
-		character1.sendSelfBuffCommand("burstRun")
-
-		val creatureObject = character1.player.creatureObject
-		assertEquals(1.75f, creatureObject.movementPercent)
+		assertAll(
+			{ assertEquals("testitemboost2", movement.movementId) },
+			{ assertEquals(MovementLoader.MovementType.PERMABOOST, movement.type)},
+			{ assertEquals(16, movement.strength) },
+			{ assertTrue(movement.affectsOnfoot) },
+			{ assertFalse(movement.affectsVehicle) },
+			{ assertFalse(movement.affectsMount) }
+		)
 	}
 }

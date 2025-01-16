@@ -23,23 +23,11 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat.buffs
+package com.projectswg.holocore.headless
 
-import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.sendSelfBuffCommand
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import java.util.concurrent.TimeUnit
 
-class BurstRunTest : AcceptanceTest() {
-	@Test
-	fun `Burst Run increases movement speed when executed`() {
-		val user = generateUser()
-		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
-
-		character1.sendSelfBuffCommand("burstRun")
-
-		val creatureObject = character1.player.creatureObject
-		assertEquals(1.75f, creatureObject.movementPercent)
-	}
+fun ZonedInCharacter.sendSelfBuffCommand(buffCommand: String) {
+	sendCommand(buffCommand)
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 4, 4, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
 }

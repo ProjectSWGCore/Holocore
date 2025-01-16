@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -25,21 +25,32 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat.buffs
 
-import com.projectswg.holocore.headless.HeadlessSWGClient
-import com.projectswg.holocore.headless.sendSelfBuffCommand
-import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import com.projectswg.holocore.resources.support.data.server_info.loader.MovementLoader
 
-class BurstRunTest : AcceptanceTest() {
-	@Test
-	fun `Burst Run increases movement speed when executed`() {
-		val user = generateUser()
-		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "Charone")
 
-		character1.sendSelfBuffCommand("burstRun")
-
-		val creatureObject = character1.player.creatureObject
-		assertEquals(1.75f, creatureObject.movementPercent)
+/**
+ * In Publish 24 (final publish of the Combat Upgrade), the movement modifiers from buffs were changed for balance reasons.
+ * Movement modifiers no longer stack, and only the strongest modifier is applied.
+ * Negative effects (roots and snares) also take priority over positive effects (speed boosts).
+ */
+object Publish24MovementSystem {
+	fun selectMovementModifier(modifiers: List<MovementLoader.MovementInfo>): MovementLoader.MovementInfo? {
+		val roots = modifiers.filter { it.type == MovementLoader.MovementType.ROOT }
+		if (roots.isNotEmpty())
+			return roots.first()
+		
+		val snares = modifiers.filter { it.type == MovementLoader.MovementType.SNARE || it.type == MovementLoader.MovementType.PERMASNARE }
+		if (snares.isNotEmpty())
+			return snares.strongest()
+		
+		val boosts = modifiers.filter { it.type == MovementLoader.MovementType.BOOST || it.type == MovementLoader.MovementType.PERMABOOST }
+		if (boosts.isNotEmpty())
+			return boosts.strongest()
+		
+		return null
 	}
+}
+
+private fun List<MovementLoader.MovementInfo>.strongest(): MovementLoader.MovementInfo {
+	return this.maxBy { it.strength }
 }

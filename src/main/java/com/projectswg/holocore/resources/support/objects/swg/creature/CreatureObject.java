@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -494,7 +494,7 @@ public class CreatureObject extends TangibleObject {
 	}
 
 	/**
-	 * Use this for snares and roots. Do not use it for something like /setSpeed or Burst Run.
+	 * Overrides the movementScale of the creature. Useful for temporary effects, such as snares, roots and speed boost buffs.
 	 * @param movementPercent 1 for full speed, 0.5 for half etc
 	 */
 	public void setMovementPercent(double movementPercent) {

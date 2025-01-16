@@ -35,6 +35,7 @@ import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.loader.BuffLoader.BuffInfo
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.commands
+import com.projectswg.holocore.resources.support.data.server_info.loader.MovementLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.objects.swg.creature.Buff
@@ -51,14 +52,7 @@ class BuffService : Service() {
 	private val coroutineScope = HolocoreCoroutine.childScope()
 	private val callbackMap: MutableMap<String, BuffCallback> = HashMap()
 	private val buffs = ServerData.buffs
-
-	init {
-		registerCallbacks()
-	}
-
-	private fun registerCallbacks() {
-		callbackMap["removeBurstRun"] = RemoveBurstRunBuffCallback()
-	}
+	private val movements = ServerData.movements
 
 	override fun stop(): Boolean {
 		coroutineScope.cancelAndWait()
@@ -187,8 +181,8 @@ class BuffService : Service() {
 		val bufferUsername = if (bufferPlayer == null) "NULL" else bufferPlayer.username
 		StandardLog.onPlayerTrace(this, receiver, "received buff '%s' from %s/%s; applyTime: %d, buffDuration: %d", buffData.name, bufferUsername, buffer.objectName, applyTime, buffDuration)
 
-		checkBuffEffects(buffData, receiver, true)
 		receiver.addBuff(buffData.crc, Buff(endTime))
+		checkBuffEffects(buffData, receiver, true)
 
 		sendParticleEffect(buffData.particle, receiver, "")
 
@@ -221,10 +215,10 @@ class BuffService : Service() {
 	}
 
 	private fun checkBuffEffects(buffData: BuffInfo, creature: CreatureObject, add: Boolean) {
-		for (i in 0..4) checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), add)
+		for (i in 0..4) checkBuffEffect(creature, buffData.getEffectName(i), buffData.getEffectValue(i), buffData.name, add)
 	}
 
-	private fun checkBuffEffect(creature: CreatureObject, effectName: String?, effectValue: Double, add: Boolean) {
+	private fun checkBuffEffect(creature: CreatureObject, effectName: String?, effectValue: Double, buffName: String, add: Boolean) {
 		if (effectName.isNullOrEmpty()) {
 			return
 		}
@@ -236,6 +230,11 @@ class BuffService : Service() {
 		} else {
 			checkSkillMod(add, effectName, effectValue, creature)
 		}
+		
+		if (effectName == "movement" && movements.getMovement(buffName) != null) {
+			checkMovementMod(creature)
+		}
+		
 	}
 
 	private fun checkSkillMod(add: Boolean, effectName: String, effectValue: Double, creature: CreatureObject) {
@@ -251,6 +250,31 @@ class BuffService : Service() {
 			creature.addCommand(effectName)
 		} else {
 			creature.removeCommand(effectName)
+		}
+	}
+	
+	private fun checkMovementMod(creature: CreatureObject) {
+		val movementMods = creature.buffs.keys.map { it.string }.mapNotNull { movements.getMovement(it) }
+		val selectMovementModifier = Publish24MovementSystem.selectMovementModifier(movementMods)
+		
+		if (selectMovementModifier == null) {
+			creature.setMovementPercent(1.0)
+			return
+		}
+
+		val type = selectMovementModifier.type
+		val strength = selectMovementModifier.strength.toDouble() / 100.0
+
+		when (type) {
+			MovementLoader.MovementType.ROOT                                          -> {
+				creature.setMovementPercent(0.0)
+			}
+			MovementLoader.MovementType.SNARE, MovementLoader.MovementType.PERMASNARE -> {
+				creature.setMovementPercent(strength)
+			}
+			MovementLoader.MovementType.BOOST, MovementLoader.MovementType.PERMABOOST -> {
+				creature.setMovementPercent(1.0 + strength)
+			}
 		}
 	}
 }
