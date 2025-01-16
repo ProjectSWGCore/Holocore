@@ -42,7 +42,6 @@ import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelGroup.ShuttleStatus
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelHelper
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
@@ -87,7 +86,6 @@ class TravelService : Service() {
 		if (p is PlanetTravelPointListRequest) {
 			val planetName = p.planetName
 			val player = ipi.player
-			StandardLog.onPlayerTrace(this, ipi.player, "Requested travel points for $planetName")
 			val to = Terrain.getTerrainFromName(planetName)
 			if (to == null) {
 				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", planetName)
