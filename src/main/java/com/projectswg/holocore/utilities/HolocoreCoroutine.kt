@@ -89,13 +89,12 @@ class HolocoreCoroutine : AutoCloseable {
 		return CoroutineScope(scope + SupervisorJob())
 	}
 
-	fun terminate(): Boolean {
+	fun terminate() {
 		scope.cancel()
 		runBlocking(dispatcher) {
 			supervisor.join()
 		}
-		threadPool.shutdown()
-		return threadPool.awaitTermination(3000L, TimeUnit.MILLISECONDS)
+		threadPool.shutdownNow()
 	}
 
 	override fun close() {
