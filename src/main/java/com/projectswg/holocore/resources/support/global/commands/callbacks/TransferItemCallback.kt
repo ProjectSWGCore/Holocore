@@ -52,7 +52,7 @@ class TransferItemCallback : ICmdCallback {
 		// There must always be a target for transfer
 		if (target == null) {
 			SystemMessageIntent(player, "@container_error_message:container29").broadcast()
-			player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+			player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 			return
 		}
 
@@ -61,7 +61,7 @@ class TransferItemCallback : ICmdCallback {
 		// You can't transfer your own creature
 		if (actor == target) {
 			SystemMessageIntent(player, "@container_error_message:container17").broadcast()
-			player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+			player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 			return
 		}
 
@@ -74,28 +74,28 @@ class TransferItemCallback : ICmdCallback {
 			// Lookup failed, their client gave us an object ID that isn't mapped to an object
 			if (newContainer == null || oldContainer == null) {
 				SystemMessageIntent(player, "@container_error_message:container15").broadcast()
-				player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+				player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				return
 			}
 
 			// You can't add something to itself
 			if (target == newContainer) {
 				SystemMessageIntent(player, "@container_error_message:container02").broadcast()
-				player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+				player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				return
 			}
 
 			// You can't move an object to a container that it's already inside
 			if (oldContainer === newContainer) {
 				SystemMessageIntent(player, "@container_error_message:container11").broadcast()
-				player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+				player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				return
 			}
 
 			// A container can only be the child of another container if the other container has a larger volume
 			if (newContainer.containerType == 2 && target.containerType == 2 && target.maxContainerSize >= newContainer.maxContainerSize) {
 				SystemMessageIntent(player, "@container_error_message:container12").broadcast()
-				player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+				player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				return
 			}
 
@@ -107,7 +107,7 @@ class TransferItemCallback : ICmdCallback {
 
 				if (specificSkillIsRequired && !actor.hasSkill(reqSkill)) {
 					SystemMessageIntent(player, "@error_message:insufficient_skill").broadcast()
-					player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 					return
 				}
 			}
@@ -122,6 +122,7 @@ class TransferItemCallback : ICmdCallback {
 					if (lightsaberInventory != null) {
 						if (isMissingColorCrystal(lightsaberInventory)) {
 							broadcastPersonal(player, "@jedi_spam:lightsaber_no_color")
+							player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 							return
 						}
 					}
@@ -134,14 +135,14 @@ class TransferItemCallback : ICmdCallback {
 						val requiredCommand = armorCategory.requiredCommand
 						if (!actor.hasCommand(requiredCommand)) {
 							SystemMessageIntent(player, "@error_message:insufficient_skill").broadcast()
-							player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+							player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 							return
 						}
 					}
 					// Check the players level, if they're too low of a level, don't allow them to wear it
 					if (actor.level < target.requiredCombatLevel) {
 						SystemMessageIntent(player, "@base_player:level_too_low").broadcast()
-						player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+						player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 						return
 					}
 
@@ -161,16 +162,19 @@ class TransferItemCallback : ICmdCallback {
 
 				if (!isColorCrystal(target) && !isPowerCrystal(target)) {
 					broadcastPersonal(player, "@jedi_spam:saber_not_crystal")
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 					return
 				}
 
 				if (!isTuned(target)) {
 					broadcastPersonal(player, "@jedi_spam:saber_crystal_not_tuned")
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 					return
 				}
 
 				if (!isTunedByUs(actor, target)) {
 					broadcastPersonal(player, "@jedi_spam:saber_crystal_not_owner")
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 					return
 				}
 
@@ -188,6 +192,7 @@ class TransferItemCallback : ICmdCallback {
 						newContainerParent.elementalValue = baseWeaponMaxDamage * target.lightsaberColorCrystalDamagePercent / 100
 					} else {
 						broadcastPersonal(player, "@jedi_spam:saber_already_has_color")
+						player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 						return
 					}
 				}
@@ -225,28 +230,28 @@ class TransferItemCallback : ICmdCallback {
 
 				ContainerResult.CONTAINER_FULL -> {
 					SystemMessageIntent(player, "@container_error_message:container03").broadcast()
-					player.sendPacket(PlayMusicMessage(0, "sound/ui_danger_message.snd", 1, false))
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				}
 
 				ContainerResult.NO_PERMISSION  -> {
 					SystemMessageIntent(player, "@container_error_message:container08").broadcast()
-					player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				}
 
 				ContainerResult.SLOT_NO_EXIST  -> {
 					SystemMessageIntent(player, "@container_error_message:container06").broadcast()
-					player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				}
 
 				ContainerResult.SLOT_OCCUPIED  -> {
 					SystemMessageIntent(player, "@container_error_message:container04").broadcast()
-					player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+					player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 				}
 			}
 		} catch (e: NumberFormatException) {
 			// Lookup failed, their client gave us an object ID that couldn't be parsed to a long
 			SystemMessageIntent(player, "@container_error_message:container15").broadcast()
-			player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+			player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 		}
 	}
 
@@ -363,7 +368,7 @@ class TransferItemCallback : ICmdCallback {
 	companion object {
 		private fun sendNotEquippable(player: Player) {
 			SystemMessageIntent(player, "@base_player:cannot_use_item").broadcast()
-			player.sendPacket(PlayMusicMessage(0, "sound/ui_negative.snd", 1, false))
+			player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
 		}
 
 		private fun isSpeciesAllowedToWearItem(actor: CreatureObject, tangibleTarget: TangibleObject): Boolean {
@@ -394,7 +399,6 @@ class TransferItemCallback : ICmdCallback {
 				// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 				actor.equippedWeapon = null
 			}
-			actor.sendSelf(PlayMusicMessage(0, "sound/pl_all_draw_item.snd", 1, false))
 		}
 	}
 }
