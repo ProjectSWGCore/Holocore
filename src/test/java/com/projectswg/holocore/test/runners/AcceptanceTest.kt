@@ -50,7 +50,7 @@ import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
 import com.projectswg.holocore.services.gameplay.player.group.GroupService
-import com.projectswg.holocore.services.support.global.chat.*
+import com.projectswg.holocore.services.support.global.chat.ChatManager
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
 import com.projectswg.holocore.services.support.global.commands.CommandQueueService
 import com.projectswg.holocore.services.support.global.zone.CharacterLookupService
@@ -91,7 +91,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(ClientAwarenessService())
 		registerService(CharacterLookupService())
 		registerService(SimulatedObjectStorage())
-		registerService(AwarenessService())
+		registerService(AwarenessService(5L))
 		registerService(LoginService(galaxies, memoryUserDatabase))
 		registerService(ZoneService())
 		registerService(CommandQueueService(5, DeterministicDie(0), DeterministicDie(0), DeterministicDie(0), skipWarmup = true))

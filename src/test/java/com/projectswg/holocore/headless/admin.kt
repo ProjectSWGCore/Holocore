@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -30,8 +29,7 @@ import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.network.packets.swg.zone.UpdateContainmentMessage
 import com.projectswg.common.network.packets.swg.zone.UpdateTransformMessage
 import com.projectswg.common.network.packets.swg.zone.UpdateTransformWithParentMessage
-import com.projectswg.common.network.packets.swg.zone.chat.ChatSystemMessage
-import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
+import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import java.util.concurrent.TimeUnit
 
@@ -41,7 +39,7 @@ import java.util.concurrent.TimeUnit
  */
 fun ZonedInCharacter.adminKill(target: SWGObject?) {
 	sendCommand("kill", target)
-	player.waitForNextPacket(setOf(ChatSystemMessage::class.java, DeltasMessage::class.java), 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
+	player.waitForNextPacket(PostureUpdate::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
 }
 
 /**
@@ -50,7 +48,7 @@ fun ZonedInCharacter.adminKill(target: SWGObject?) {
  */
 fun ZonedInCharacter.adminGrantSkill(skill: String) {
 	sendCommand("grantSkill", args = skill)
-	player.waitForNextPacket(DeltasMessage::class.java, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 4, 14, 50, TimeUnit.MILLISECONDS) ?: java.lang.IllegalStateException("No known packet received")
 }
 
 /**

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -36,7 +36,9 @@ class BactaTossTest : AcceptanceTest() {
 	@Test
 	fun healSelf() {
 		val zonedInCharacter1 = createMasterMedic()
+		zonedInCharacter1.waitForHealthChange() // Wait for health update for becoming a master medic
 		zonedInCharacter1.player.creatureObject.modifyHealth(-500)
+		zonedInCharacter1.waitForHealthChange()
 		val char1OriginalHealth = zonedInCharacter1.player.creatureObject.health
 
 		zonedInCharacter1.heal(null, "bactaToss")
@@ -50,8 +52,10 @@ class BactaTossTest : AcceptanceTest() {
 		val zonedInCharacter1 = createMasterMedic()
 		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
 		zonedInCharacter2.player.creatureObject.modifyHealth(-500)
+		zonedInCharacter2.waitForHealthChange()
 		val char2OriginalHealth = zonedInCharacter2.player.creatureObject.health
 		
+		zonedInCharacter1.waitUntilAwareOf(zonedInCharacter2.player.creatureObject)
 		zonedInCharacter1.heal(zonedInCharacter2.player.creatureObject, "bactaToss")
 
 		val char2NewHealth = zonedInCharacter2.player.creatureObject.health

@@ -25,9 +25,34 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
+import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject
+import com.projectswg.common.network.packets.swg.zone.SceneEndBaselines
+import com.projectswg.common.network.packets.swg.zone.object_controller.PostureUpdate
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import me.joshlarson.jlcommon.log.Log
 import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.waitUntilObjectDestroyed(objectId: Long) {
 	player.waitForNextPacket(SceneDestroyObject::class.java, 1, TimeUnit.SECONDS) { it.objectId == objectId }
+}
+
+fun ZonedInCharacter.isAwareOf(target: SWGObject): Boolean {
+	return player.creatureObject.isAwareOf(target)
+}
+
+fun ZonedInCharacter.waitUntilAwareOf(target: SWGObject) {
+	if (isAwareOf(target))
+		return
+	player.waitForNextPacket(SceneEndBaselines::class.java, 1, TimeUnit.SECONDS) { it.objectId == target.objectId }
+}
+
+fun ZonedInCharacter.waitUntilPostureUpdate(target: CreatureObject): Posture {
+	while (true) { // Naturally ends with an exception due to timeout in the waitForNextPacket line
+		val postureUpdate = player.waitForNextPacket(PostureUpdate::class.java, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No posture update received")
+		Log.d("Received PostureUpdate for target %d  and posture %s", postureUpdate.objectId, postureUpdate.posture)
+		if (postureUpdate.objectId == target.objectId)
+			return postureUpdate.posture
+	}
 }

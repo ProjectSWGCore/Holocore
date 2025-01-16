@@ -32,7 +32,6 @@ import com.projectswg.common.network.packets.swg.zone.CmdSceneReady
 import com.projectswg.common.network.packets.swg.zone.SceneEndBaselines
 import com.projectswg.common.network.packets.swg.zone.insertion.SelectCharacter
 import com.projectswg.holocore.test.resources.GenericPlayer
-import java.lang.RuntimeException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -75,10 +74,11 @@ class CharacterSelectionScreen internal constructor(val player: GenericPlayer) {
 		sendPacket(player, SelectCharacter(characterId))
 		sendPacket(player, ClientIdMsg())
 		player.waitForNextPacket(ClientPermissionsMessage::class.java) ?: throw IllegalStateException("Failed to receive client permissions message in time")
-		var waitForMoreObjects = true
+		var waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 100, TimeUnit.MILLISECONDS) != null
 		while (waitForMoreObjects) {
-			waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 100, TimeUnit.MILLISECONDS) != null
+			waitForMoreObjects = player.waitForNextPacket(SceneEndBaselines::class.java, 5, TimeUnit.MILLISECONDS) != null
 		}
+		player.clearPacketList()
 		sendPacket(player, CmdSceneReady())
 		player.waitForNextPacket(CmdSceneReady::class.java) ?: throw IllegalStateException("Expected CmdSceneReady from server but did not receive it in time")
 

@@ -25,6 +25,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience
 
+import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.test.runners.AcceptanceTest
@@ -40,6 +41,7 @@ class TrappingXPTest : AcceptanceTest() {
 		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
 
+		character.waitUntilAwareOf(npc)
 		killTarget(character, npc)
 
 		// There are three types of XP we receive from this kill: combat_meleespecialize_unarmed, trapping, and combat_general
@@ -54,6 +56,7 @@ class TrappingXPTest : AcceptanceTest() {
 		character.surrenderSkill("outdoors_scout_novice")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
 
+		character.waitUntilAwareOf(npc)
 		killTarget(character, npc)
 
 		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
@@ -65,6 +68,7 @@ class TrappingXPTest : AcceptanceTest() {
 		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("humanoid_tusken_commoner", character.player.creatureObject.location)
 
+		character.waitUntilAwareOf(npc)
 		killTarget(character, npc)
 
 		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
@@ -72,9 +76,10 @@ class TrappingXPTest : AcceptanceTest() {
 
 	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {
 		target.health = 1
-		val targetState = character.attack(target)
+		character.attack(target)
+		val targetState = character.waitUntilPostureUpdate(target)
 
-		if (targetState != TargetState.DEAD) {
+		if (targetState != Posture.DEAD) {
 			throw IllegalStateException("Target is not dead, but is instead $targetState")
 		}
 	}

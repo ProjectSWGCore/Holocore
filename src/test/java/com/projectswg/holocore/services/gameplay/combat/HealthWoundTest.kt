@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -26,9 +25,14 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.holocore.headless.*
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.holocore.headless.HeadlessSWGClient
+import com.projectswg.holocore.headless.attack
+import com.projectswg.holocore.headless.waitUntilAwareOf
+import com.projectswg.holocore.headless.waitUntilPostureUpdate
 import com.projectswg.holocore.test.runners.AcceptanceTest
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class HealthWoundTest : AcceptanceTest() {
@@ -64,9 +68,11 @@ class HealthWoundTest : AcceptanceTest() {
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 		npc.healthWounds = npc.health - 1    // The NPC should effectively have 1 health left this way
 
-		val targetState = character.attack(npc)
+		character.waitUntilAwareOf(npc)
+		character.attack(npc)
+		val targetState = character.waitUntilPostureUpdate(npc)
 
-		assertEquals(TargetState.DEAD, targetState)
+		assertEquals(Posture.DEAD, targetState)
 	}
 
 }

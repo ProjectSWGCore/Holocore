@@ -64,6 +64,10 @@ public class AwarenessService extends Service {
 		this.awareness = new ObjectAwareness();
 	}
 	
+	public AwarenessService(long updateRateMilliseconds) {
+		this.awareness = new ObjectAwareness(updateRateMilliseconds);
+	}
+	
 	@Override
 	public boolean start() {
 		awareness.startThreadPool();

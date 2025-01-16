@@ -149,6 +149,15 @@ public class GenericPlayer extends Player {
 		}
 	}
 	
+	public void clearPacketList() {
+		packetLock.lock();
+		try {
+			packets.clear();
+		} finally {
+			packetLock.unlock();
+		}
+	}
+	
 	@Nullable
 	public <T extends SWGPacket> T getNextPacket(Class<T> type) {
 		packetLock.lock();

@@ -32,14 +32,14 @@ import com.projectswg.holocore.utilities.cancelAndWait
 import com.projectswg.holocore.utilities.launchWithFixedRate
 import kotlinx.coroutines.CoroutineScope
 
-class ObjectAwareness {
+class ObjectAwareness(private val updateRateMilliseconds: Long = 100L) {
 	private val terrains: Array<TerrainMap> = Array(Terrain.entries.size) { TerrainMap() }
 	private var coroutineScope: CoroutineScope? = null
 
 	fun startThreadPool() {
 		coroutineScope = HolocoreCoroutine.childScope().let { scope ->
 			for (terrain in terrains) {
-				scope.launchWithFixedRate(100L) { terrain.updateChunks() }
+				scope.launchWithFixedRate(updateRateMilliseconds) { terrain.updateChunks() }
 			}
 			return@let scope
 		}

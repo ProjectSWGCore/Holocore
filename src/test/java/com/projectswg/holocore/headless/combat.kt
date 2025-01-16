@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,7 +26,6 @@
 package com.projectswg.holocore.headless
 
 import com.projectswg.common.data.CRC
-import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject
 import com.projectswg.common.network.packets.swg.zone.deltas.DeltasMessage
 import com.projectswg.common.network.packets.swg.zone.object_controller.CommandQueueEnqueue
@@ -35,6 +34,7 @@ import com.projectswg.common.network.packets.swg.zone.object_controller.combat.C
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
+import me.joshlarson.jlcommon.log.Log
 import java.util.concurrent.TimeUnit
 
 private fun ZonedInCharacter.sendAttackCommand(target: SWGObject, attackCommand: String) {
@@ -59,9 +59,9 @@ private fun ZonedInCharacter.sendAttackCommand(target: SWGObject, attackCommand:
  * @param target The object to attack
  * @param overrideAttackCommand Override which attack to use - defaults to the default attack of the equipped weapon
  */
-fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: String? = null): TargetState {
+fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: String? = null) {
 	if (target is CreatureObject) {
-		return attack(target, overrideAttackCommand)
+		attack(target, overrideAttackCommand)
 	}
 
 	val attackCommand = overrideAttackCommand ?: player.creatureObject.equippedWeapon.type.defaultAttack
@@ -72,14 +72,10 @@ fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: Strin
 		if (packet.objectId != target.objectId) {
 			throw IllegalStateException("SceneDestroyObject packet received, but the object ID did not match the target")
 		}
-
-		return TargetState.DEAD
 	} else if (packet is DeltasMessage) {
 		if (packet.objectId != target.objectId) {
 			throw IllegalStateException("DeltasMessage packet received, but the object ID did not match the target")
 		}
-
-		return TargetState.ALIVE
 	}
 
 	throw IllegalStateException("Unhandled packet received: $packet")
@@ -90,20 +86,10 @@ fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: Strin
  * @param target The object to attack
  * @param overrideAttackCommand Override which attack to use - defaults to the default attack of the equipped weapon
  */
-fun ZonedInCharacter.attack(target: CreatureObject, overrideAttackCommand: String? = null): TargetState {
+fun ZonedInCharacter.attack(target: CreatureObject, overrideAttackCommand: String? = null) {
 	val attackCommand = overrideAttackCommand ?: player.creatureObject.equippedWeapon.type.defaultAttack
+	player.clearPacketList()
 	sendAttackCommand(target, attackCommand)
-
-	return if (target.posture == Posture.DEAD) {
-		TargetState.DEAD
-	} else {
-		TargetState.ALIVE
-	}
-}
-
-enum class TargetState {
-	DEAD,
-	ALIVE
 }
 
 fun ZonedInCharacter.deathblow(target: CreatureObject) {
@@ -116,9 +102,12 @@ fun ZonedInCharacter.duel(target: CreatureObject) {
 
 fun ZonedInCharacter.heal(target: CreatureObject? = null, healCommand: String) {
 	sendCommand(healCommand, target)
-	if (target != null) {
-		player.waitForNextObjectDelta(target.objectId, 6, 14, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No object delta received")
-	} else {
-		player.waitForNextObjectDelta(player.creatureObject.objectId, 6, 14, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No object delta received")
-	}
+	waitForHealthChange(target ?: player.creatureObject)
+}
+
+fun ZonedInCharacter.waitForHealthChange(target: CreatureObject = player.creatureObject) {
+	val before = target.health
+	player.waitForNextObjectDelta(target.objectId, 6, 14, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No object delta received")
+	val after = target.health
+	Log.d("Before/After: $before / $after")
 }
