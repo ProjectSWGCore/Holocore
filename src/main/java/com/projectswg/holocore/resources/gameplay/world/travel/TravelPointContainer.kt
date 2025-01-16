@@ -63,7 +63,7 @@ class TravelPointContainer {
 		// Checks starports
 		for (tp in getTravelPoints(l.terrain, true)) {
 			val tpDistance = tp.location.flatDistanceTo(l)
-			if (tpDistance < dist && tpDistance < 75) {
+			if (tpDistance < dist && tpDistance < 150) {
 				nearest = tp
 				dist = tpDistance
 			}
