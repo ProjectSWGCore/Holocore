@@ -33,7 +33,6 @@ import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.EnterTicketPurchaseModeMessage
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListRequest
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse
-import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint
 import com.projectswg.holocore.intents.gameplay.world.TicketPurchaseIntent
 import com.projectswg.holocore.intents.gameplay.world.TicketUseIntent
 import com.projectswg.holocore.intents.gameplay.world.TravelPointSelectionIntent
@@ -43,6 +42,7 @@ import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelGroup.ShuttleStatus
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelHelper
 import com.projectswg.holocore.resources.gameplay.world.travel.TravelPoint
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.global.zone.sui.SuiButtons
@@ -59,6 +59,9 @@ import me.joshlarson.jlcommon.log.Log
 
 class TravelService : Service() {
 	private val travel = TravelHelper()
+
+	private val ticketPriceFactor: Double
+		get() = config.getDouble(this, "ticketPriceFactor", 1.0)
 
 	override fun start(): Boolean {
 		travel.start()
@@ -84,25 +87,13 @@ class TravelService : Service() {
 		if (p is PlanetTravelPointListRequest) {
 			val planetName = p.planetName
 			val player = ipi.player
+			StandardLog.onPlayerTrace(this, ipi.player, "Requested travel points for $planetName")
 			val to = Terrain.getTerrainFromName(planetName)
 			if (to == null) {
 				Log.e("Unknown terrain in PlanetTravelPointListRequest: %s", planetName)
 				return
 			}
-			val pointsForPlanet = travel.getAvailableTravelPoints(player.creatureObject, to)
-			pointsForPlanet.sort()
-
-			val nearest = travel.getNearestTravelPoint(player.creatureObject)
-			if (nearest != null && pointsForPlanet.remove(nearest))
-				pointsForPlanet.add(0, nearest) // Yes ... adding it to the beginning of the list because I hate the client
-
-			val additionalCosts = getAdditionalCosts(nearest, pointsForPlanet)
-			val pointList: MutableList<PlanetTravelPoint> = ArrayList()
-			for (i in pointsForPlanet.indices) {
-				val tp = pointsForPlanet[i]
-				val cost = additionalCosts[i]
-				pointList.add(PlanetTravelPoint(tp.name, tp.location.position, cost, tp.isReachable))
-			}
+			val pointList = travel.getTravelPoints(player.creatureObject, to, ticketPriceFactor)
 			player.sendPacket(PlanetTravelPointListResponse(planetName, pointList))
 		}
 	}
@@ -188,25 +179,6 @@ class TravelService : Service() {
 		}
 	}
 
-	private fun getAdditionalCosts(departure: TravelPoint?, points: Collection<TravelPoint?>): List<Int> {
-		val additionalCosts: MutableList<Int> = ArrayList()
-
-		for (point in points) {
-			if (point === departure) additionalCosts.add(-getClientCost(departure!!.terrain, point!!.terrain))
-			else additionalCosts.add(-getClientCost(departure!!.terrain, point!!.terrain) + getTravelCost(departure.terrain, point.terrain))
-		}
-
-		return additionalCosts
-	}
-
-	private fun getClientCost(departure: Terrain, destination: Terrain): Int {
-		return travel.getTravelFee(departure, destination) - 50
-	}
-
-	private fun getTravelCost(departure: Terrain, destination: Terrain): Int {
-		return (travel.getTravelFee(departure, destination) * ticketPriceFactor).toInt()
-	}
-
 	private fun handleTicketUseSui(player: Player) {
 		val usableTickets = travel.getTickets(player.creatureObject)
 
@@ -246,15 +218,12 @@ class TravelService : Service() {
 	}
 
 	private fun getTotalTicketPrice(departurePlanet: Terrain, arrivalPlanet: Terrain, roundTrip: Boolean): Int {
-		var totalPrice = getTravelCost(departurePlanet, arrivalPlanet)
+		var totalPrice = travel.getTravelCost(departurePlanet, arrivalPlanet, ticketPriceFactor)
 
-		if (roundTrip) totalPrice += getTravelCost(arrivalPlanet, departurePlanet)
+		if (roundTrip) totalPrice += travel.getTravelCost(arrivalPlanet, departurePlanet, ticketPriceFactor)
 
 		return totalPrice
 	}
-
-	private val ticketPriceFactor: Double
-		get() = config.getDouble(this, "ticketPriceFactor", 1.0)
 
 	private fun sendTravelMessage(creature: CreatureObject, message: String) {
 		SystemMessageIntent(creature.owner!!, message).broadcast()

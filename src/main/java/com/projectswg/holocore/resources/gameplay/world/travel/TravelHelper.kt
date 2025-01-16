@@ -29,6 +29,7 @@ import com.projectswg.common.data.encodables.oob.ProsePackage
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
+import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
@@ -66,6 +67,29 @@ class TravelHelper {
 
 	fun stop() {
 		coroutineScope.cancelAndWait()
+	}
+
+	fun getTravelCost(departure: Terrain, destination: Terrain, ticketPriceFactor: Double): Int {
+		return (getTravelFee(departure, destination) * ticketPriceFactor).toInt()
+	}
+
+	fun getTravelPoints(creature: CreatureObject, terrain: Terrain, ticketPriceFactor: Double): List<PlanetTravelPoint> {
+		val pointsForPlanet = getAvailableTravelPoints(creature, terrain)
+		pointsForPlanet.sort()
+
+		val nearest = getNearestTravelPoint(creature)
+		if (nearest != null)
+			pointsForPlanet.remove(nearest)
+
+		val additionalCosts = getAdditionalCosts(nearest, pointsForPlanet, ticketPriceFactor)
+		val pointList: MutableList<PlanetTravelPoint> = ArrayList()
+		for (i in pointsForPlanet.indices) {
+			val tp = pointsForPlanet[i]
+			val cost = additionalCosts[i]
+			pointList.add(PlanetTravelPoint(tp.name, tp.location.position, cost, tp.isReachable))
+		}
+		
+		return pointList
 	}
 
 	fun addTravelPoint(point: TravelPoint) {
@@ -115,7 +139,6 @@ class TravelHelper {
 		ticketInformation.departurePlanet = departure.terrain
 		ticketInformation.departurePoint = departure.name
 
-
 		// Arrival attributes
 		ticketInformation.arrivalPlanet = destination.terrain
 		ticketInformation.arrivalPoint = destination.name
@@ -131,47 +154,62 @@ class TravelHelper {
 
 		for (ticket in tickets) {
 			if (ticket is TangibleObject) {
-				if (isTicket(ticket) && isTicketUsable(ticket, getNearestTravelPoint(ticket))) usableTickets.add(ticket)
+				if (ticket.isTicket() && ticket.isTicketUsable(getNearestTravelPoint(ticket))) usableTickets.add(ticket)
 			}
 		}
 		return usableTickets
 	}
 
-	fun isTicket(obj: TangibleObject): Boolean {
-		return obj.ticketInformation != null
-	}
-
-	fun isTicketUsable(ticket: TangibleObject, nearest: TravelPoint?): Boolean {
-		val ticketInformation = ticket.ticketInformation
-		val departurePoint = ticketInformation.departurePoint
-		val departureTerrain = ticketInformation.departurePlanet
-		val currentTerrain = ticket.terrain
-
-		return departureTerrain == currentTerrain && departurePoint == nearest!!.name
-	}
-
 	fun handleTicketUse(player: Player, ticket: TangibleObject, nearestPoint: TravelPoint, destinationPoint: TravelPoint) {
 		val traveler = player.creatureObject
-		if (!isTicket(ticket)) {
+		if (!ticket.isTicket()) {
 			Log.e("%s attempted to use an object that isn't a ticket!", player)
 		} else if (nearestPoint.group!!.status != ShuttleStatus.GROUNDED) {
 			val time = nearestPoint.group.getTimeRemaining()
 			SystemMessageIntent(player, ProsePackage(StringId("travel/travel", "shuttle_board_delay"), "DI", time)).broadcast()
-		} else if (!isTicketUsable(ticket, nearestPoint)) {
+		} else if (!ticket.isTicketUsable(nearestPoint)) {
 			// This ticket isn't valid for this point
 			SystemMessageIntent(player, "@travel:wrong_shuttle").broadcast()
-		} else if (nearestPoint.isWithinRange(player.creatureObject)) {
-			// They can use their ticket if they're within range.
+		} else if (!nearestPoint.isWithinRange(player.creatureObject)) {
+			// Too far away to use ticket
+			SystemMessageIntent(player, "@travel:boarding_too_far").broadcast()
+		} else {
 			Log.i("%s/%s is traveling from %s to %s", player.username, traveler.objectName, nearestPoint.name, destinationPoint)
 			teleportAndDestroyTicket(destinationPoint, ticket, traveler)
-		} else {
-			SystemMessageIntent(player, "@travel:boarding_too_far").broadcast()
 		}
+	}
+
+	private fun getAdditionalCosts(departure: TravelPoint?, points: Collection<TravelPoint?>, ticketPriceFactor: Double): List<Int> {
+		val additionalCosts: MutableList<Int> = ArrayList()
+
+		for (point in points) {
+			if (point === departure) additionalCosts.add(-getClientCost(departure!!.terrain, point!!.terrain))
+			else additionalCosts.add(-getClientCost(departure!!.terrain, point!!.terrain) + getTravelCost(departure.terrain, point.terrain, ticketPriceFactor))
+		}
+
+		return additionalCosts
+	}
+
+	private fun getClientCost(departure: Terrain, destination: Terrain): Int {
+		return getTravelFee(departure, destination) - 50
 	}
 
 	private fun teleportAndDestroyTicket(destination: TravelPoint, ticket: SWGObject, traveler: CreatureObject) {
 		DestroyObjectIntent(ticket).broadcast()
 		traveler.moveToContainer(destination.collector!!.parent, destination.location)
+	}
+
+	private fun TangibleObject.isTicket(): Boolean {
+		return ticketInformation != null
+	}
+
+	private fun TangibleObject.isTicketUsable(nearest: TravelPoint?): Boolean {
+		val ticketInformation = ticketInformation
+		val departurePoint = ticketInformation.departurePoint
+		val departureTerrain = ticketInformation.departurePlanet
+		val currentTerrain = terrain
+
+		return departureTerrain == currentTerrain && departurePoint == nearest!!.name
 	}
 
 	private fun createGalaxyTravels() {
