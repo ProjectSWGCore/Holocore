@@ -178,7 +178,8 @@ tasks.register("createRunScript") {
 
 	doLast {
 		// Use the Java executable that Gradle is using
-		val javaExecutable = "${System.getProperty("java.home")}/bin/java"
+		val javaHome = System.getProperty("java.home")
+		val javaExecutable = "$javaHome/bin/java"
 
 		// Collect runtime classpath elements into a single string with path separator
 		val runtimeClasspath = configurations["runtimeClasspath"].files.joinToString(File.pathSeparator) {
@@ -192,7 +193,7 @@ tasks.register("createRunScript") {
 		val modulePath = "$runtimeClasspath${File.pathSeparator}$mainJavaOutputDir"
 
 		// Assemble the command
-		val command = "clear; $javaExecutable -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
+		val command = "clear; JAVA_HOME=$javaHome ./gradlew classes && $javaExecutable -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
 
 		// File to write the run command
 		val outputFile = file("${layout.buildDirectory.asFile.get().absolutePath}/run")
