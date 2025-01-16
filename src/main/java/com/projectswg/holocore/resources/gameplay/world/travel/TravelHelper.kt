@@ -30,6 +30,8 @@ import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.data.location.Terrain
 import com.projectswg.common.network.packets.swg.zone.PlanetTravelPointListResponse.PlanetTravelPoint
+import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
+import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
@@ -176,6 +178,7 @@ class TravelHelper {
 		} else {
 			Log.i("%s/%s is traveling from %s to %s", player.username, traveler.objectName, nearestPoint.name, destinationPoint)
 			teleportAndDestroyTicket(destinationPoint, ticket, traveler)
+			player.sendPacket(PlayMusicMessage(0, "sound/shp_capitol_hyperspace_2d.snd", 1, false))
 		}
 	}
 
