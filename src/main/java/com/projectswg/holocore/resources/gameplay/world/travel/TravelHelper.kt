@@ -178,7 +178,8 @@ class TravelHelper {
 		} else {
 			Log.i("%s/%s is traveling from %s to %s", player.username, traveler.objectName, nearestPoint.name, destinationPoint)
 			teleportAndDestroyTicket(destinationPoint, ticket, traveler)
-			player.sendPacket(PlayMusicMessage(0, "sound/shp_capitol_hyperspace_2d.snd", 1, false))
+			val playClientEffectObjectMessage = PlayClientEffectObjectMessage("clienteffect/transport_hitground.cef", "", player.creatureObject.objectId, "")
+			player.creatureObject.sendObservers(playClientEffectObjectMessage)
 		}
 	}
 
