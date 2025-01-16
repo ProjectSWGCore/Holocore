@@ -44,6 +44,7 @@ class HealthWoundTest : AcceptanceTest() {
 		character.player.creatureObject.equippedWeapon.woundChance = 100F
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 
+		character.waitUntilAwareOf(npc)
 		character.attack(npc)
 
 		assertTrue(npc.healthWounds > 0)
@@ -56,6 +57,7 @@ class HealthWoundTest : AcceptanceTest() {
 		character.player.creatureObject.equippedWeapon.woundChance = 0F
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location, combatLevelRange = 80..80)
 
+		character.waitUntilAwareOf(npc)
 		character.attack(npc)
 
 		assertTrue(npc.healthWounds == 0)
