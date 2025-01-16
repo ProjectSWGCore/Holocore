@@ -194,9 +194,9 @@ public class GenericPlayer extends Player {
 				for (Iterator<SWGPacket> it = packets.iterator(); it.hasNext(); ) {
 					SWGPacket next = it.next();
 					if (type.isInstance(next)) {
-						it.remove();
 						T packet = type.cast(next);
 						if (filter.test(packet)) {
+							it.remove();
 							return packet;
 						}
 					}
