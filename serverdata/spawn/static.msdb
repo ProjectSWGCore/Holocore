@@ -136,6 +136,7 @@ TEXT	BOOLEAN
 /poi/poi_endor_orphaned_marauders_cave.sdb	TRUE
 /poi/poi_endor_tree_village.sdb	TRUE
 /poi/poi_kashyyyk_dead_forest_shadowweave_cavern.sdb	TRUE
+/poi/poi_kashyyyk_dead_forest_kerritamba_village.sdb	TRUE
 /poi/poi_kashyyyk_hunting_arcona_compound.sdb	TRUE
 /poi/poi_kashyyyk_hunting_etyyy_rodian_hunting_camp.sdb	TRUE
 /poi/poi_kashyyyk_hunting_hracca_glade_gate_camp.sdb	TRUE

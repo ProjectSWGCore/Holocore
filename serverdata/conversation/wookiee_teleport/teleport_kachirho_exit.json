@@ -1,0 +1,20 @@
+{
+	"npcMessage": {
+		"file": "conversation/station_kashyyyk",
+		"key": "s_408",
+		"comment": "Oh. You want to visit Kachirho? Well - maybe that's different. Most of the mercs around here stay clear of the planet surface... for a variety of reasons. You sure you want to land?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "teleport",
+			"args": {
+				"terrain": "tatooine",
+				"x": 3532.8,
+				"y": 5.0,
+				"z": -4806.9
+			}
+		}
+	]
+}

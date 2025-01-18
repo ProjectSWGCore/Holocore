@@ -1,0 +1,23 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_melee_combat",
+		"key": "s_192",
+		"comment": "Very well. Good luck out there!"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "snap_finger1"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "tap_head"
+			}
+		}
+	]
+}

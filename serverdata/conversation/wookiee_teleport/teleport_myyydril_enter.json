@@ -1,0 +1,23 @@
+{
+	"npcMessage": {
+		"file": "conversation/wookiee_sidequest",
+		"key": "s_226ffd3d",
+		"comment": "(in Shyriiwook) Be safe, my young friend."
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "teleport",
+			"args": {
+				"building": "kas_pob_myyydril_1",
+				"cell": 1,
+				"terrain": "kashyyyk_pob_dungeons",
+				"x": -3.9,
+				"y": -1.1,
+				"z": -4.7,
+				"radius": 1.0
+			}
+		}
+	]
+}

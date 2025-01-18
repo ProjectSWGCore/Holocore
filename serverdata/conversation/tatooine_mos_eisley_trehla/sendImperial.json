@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_766",
+		"comment": "All right, the person that you want to speak with is Lt. Akal Colzet of Storm Squadron. He's a stickler for protocol, so be on your best behavior. He resides in Bestine. Is this what you want?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_931",
+				"comment": "Yes, that sounds good."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute"
+			}
+		}
+	]
+}

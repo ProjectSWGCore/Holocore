@@ -1,15 +1,15 @@
 {
 	"npcMessage": {
-		"file": "conversation/ep3_trandoshan_unluto_bartender",
-		"key": "s_80",
-		"comment": "I ain't got time to deal with anyone who ain't drinkin'. If you change your mind I will be here."
+		"file": "conversation/ep3_clone_relics_boba_fett_yavin_bartender_1",
+		"key": "s_261",
+		"comment": "What can I get you?"
 	},
 	"playerResponses": [
 		{
 			"playerMessage": {
-				"file": "conversation/ep3_trandoshan_unluto_bartender",
-				"key": "s_1423",
-				"comment": "Good, let's keep it that way."
+				"file": "conversation/ep3_clone_relics_boba_fett_yavin_bartender_1",
+				"key": "s_263",
+				"comment": "Nothing right now."
 			}
 		}
 	],
@@ -19,6 +19,12 @@
 			"type": "npc_animation",
 			"args": {
 				"animation": "feed_creature_medium"
+			}
+		},
+		{
+			"type": "grant_buff",
+			"args": {
+				"buffs": ["drink_mandalorian_wine", "drink_warrl_surprise"]
 			}
 		}
 	]

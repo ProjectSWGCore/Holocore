@@ -76,7 +76,7 @@ public class DeveloperService extends Service {
 
 			// Planet: Kashyyyk
 			new Location(275, 48.1, 503, Terrain.KASHYYYK_HUNTING),
-			new Location(146, 19.1, 162, Terrain.KASHYYYK_MAIN),
+			new Location(-607.5, 18.8, -127.6, Terrain.KASHYYYK_MAIN),
 			new Location(-164, 16.5, -262, Terrain.KASHYYYK_DEAD_FOREST),
 			new Location(534, 173.5, 82, Terrain.KASHYYYK_RRYATT_TRAIL),
 			new Location(1422, 70.2, 722, Terrain.KASHYYYK_RRYATT_TRAIL),

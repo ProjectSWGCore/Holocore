@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_871",
+		"comment": "Commander Scuna is holed up in the back room of Mos Espa's cantina. I'll put a waypoint into your datapad. Is there something else I can help you with?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_931",
+				"comment": "Yes, that sounds good."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute"
+			}
+		}
+	]
+}

@@ -75,3 +75,4 @@ city_kashyyyk_main_kachirho_72	KASHYYYK_MAIN	kas_world	AREA	0	-666.8	18.8	-115.5
 city_kashyyyk_main_kachirho_73	KASHYYYK_MAIN	kas_world	AREA	0	-646.5	19.6	-133.1	-71	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
 city_kashyyyk_main_kachirho_74	KASHYYYK_MAIN	kas_world	AREA	0	-649.4	19.4	-132.2	107	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kachirho	1	IDLE	0	0	-	conversation			600
 city_kashyyyk_main_kachirho_75	KASHYYYK_MAIN	kas_world	AREA	0	-663.6	18.5	-132.3	-104	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kachirho	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
+city_kashyyyk_main_kachirho_76	KASHYYYK_MAIN	kas_world	AREA	0	-665.2	18.8	-146.5	-45	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	QUEST	N	100	100	City	Kachirho	1	IDLE	0	0	-	idle		teleport_kachirho_exit	600
