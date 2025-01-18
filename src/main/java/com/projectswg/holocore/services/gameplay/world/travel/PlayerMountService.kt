@@ -51,17 +51,25 @@ import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import com.projectswg.holocore.utilities.launchAfter
+import com.projectswg.holocore.utilities.launchWithFixedDelay
+import kotlinx.coroutines.Job
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArraySet
+import java.util.concurrent.TimeUnit
 import java.util.function.Consumer
 
 class PlayerMountService : Service() {
-	// TODO no-vehicle zones (does not affect creature mounts)
+	private val coroutineScope = HolocoreCoroutine.childScope()
 	private val calledMounts: MutableMap<CreatureObject, MutableSet<Mount>> = ConcurrentHashMap()
+	private val vehicleDecayJobs: MutableMap<CreatureObject, Job> = ConcurrentHashMap()
 
 	override fun stop(): Boolean {
+		coroutineScope.cancelAndWait()
 		globallyStorePets() // Don't want mounts out and about when server starts up again
 
 		return true
@@ -217,6 +225,11 @@ class PlayerMountService : Service() {
 		}
 
 		val template = checkNotNull(mountControlDevice.getServerTextAttribute(ServerAttribute.PCD_PET_TEMPLATE)) { "mount control device doesn't have mount template attribute" }
+		val vehicleInfo = vehicles().getVehicleFromIff(template)
+		if (vehicleInfo == null) {
+			StandardLog.onPlayerError(this, player, "unknown vehicle template '%s', unable to proceed", template)
+			return
+		}
 		val mount = ObjectCreator.createObjectFromTemplate(template) as CreatureObject
 		mount.systemMove(null, player.location)
 		mount.addOptionFlags(OptionFlag.MOUNT) // The mount won't appear properly if this isn't set
@@ -238,32 +251,50 @@ class PlayerMountService : Service() {
 			return
 		}
 		mountControlDevice.count = IntangibleObject.COUNT_PCD_CALLED
-		val vehicleInfo = vehicles().getVehicleFromIff(mount.template)
-		if (vehicleInfo != null) {
-			mount.setRunSpeed(vehicleInfo.speed)
-			mount.setWalkSpeed(vehicleInfo.minSpeed)
-			mount.setTurnScale(vehicleInfo.turnRateMax.toDouble())
-			mount.setAccelScale(vehicleInfo.accelMax)
-			mount.putCustomization("/private/index_speed_max", (vehicleInfo.speed * 10.0).toInt())
-			mount.putCustomization("/private/index_speed_min", (vehicleInfo.minSpeed * 10.0).toInt())
-			mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.turnRate)
-			mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.turnRateMax)
-			mount.putCustomization("/private/index_accel_min", (vehicleInfo.accelMin * 10.0).toInt())
-			mount.putCustomization("/private/index_accel_max", (vehicleInfo.accelMax * 10.0).toInt())
-			mount.putCustomization("/private/index_decel", (vehicleInfo.decel * 10.0).toInt())
-			mount.putCustomization("/private/index_damp_roll", (vehicleInfo.dampingRoll * 10.0).toInt())
-			mount.putCustomization("/private/index_damp_pitch", (vehicleInfo.dampingPitch * 10.0).toInt())
-			mount.putCustomization("/private/index_damp_height", (vehicleInfo.dampingHeight * 10.0).toInt())
-			mount.putCustomization("/private/index_glide", (vehicleInfo.glide * 10.0).toInt())
-			mount.putCustomization("/private/index_banking", vehicleInfo.bankingAngle.toInt())
-			mount.putCustomization("/private/index_hover_height", (vehicleInfo.hoverHeight * 10.0).toInt())
-			mount.putCustomization("/private/index_auto_level", (vehicleInfo.autoLevel * 100.0).toInt())
-			mount.putCustomization("/private/index_strafe", if (vehicleInfo.isStrafe) 1 else 0)
-		}
+		mount.setRunSpeed(vehicleInfo.speed)
+		mount.setWalkSpeed(vehicleInfo.minSpeed)
+		mount.setTurnScale(vehicleInfo.turnRateMax.toDouble())
+		mount.setAccelScale(vehicleInfo.accelMax)
+		mount.putCustomization("/private/index_speed_max", (vehicleInfo.speed * 10.0).toInt())
+		mount.putCustomization("/private/index_speed_min", (vehicleInfo.minSpeed * 10.0).toInt())
+		mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.turnRate)
+		mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.turnRateMax)
+		mount.putCustomization("/private/index_accel_min", (vehicleInfo.accelMin * 10.0).toInt())
+		mount.putCustomization("/private/index_accel_max", (vehicleInfo.accelMax * 10.0).toInt())
+		mount.putCustomization("/private/index_decel", (vehicleInfo.decel * 10.0).toInt())
+		mount.putCustomization("/private/index_damp_roll", (vehicleInfo.dampingRoll * 10.0).toInt())
+		mount.putCustomization("/private/index_damp_pitch", (vehicleInfo.dampingPitch * 10.0).toInt())
+		mount.putCustomization("/private/index_damp_height", (vehicleInfo.dampingHeight * 10.0).toInt())
+		mount.putCustomization("/private/index_glide", (vehicleInfo.glide * 10.0).toInt())
+		mount.putCustomization("/private/index_banking", vehicleInfo.bankingAngle.toInt())
+		mount.putCustomization("/private/index_hover_height", (vehicleInfo.hoverHeight * 10.0).toInt())
+		mount.putCustomization("/private/index_auto_level", (vehicleInfo.autoLevel * 100.0).toInt())
+		mount.putCustomization("/private/index_strafe", if (vehicleInfo.isStrafe) 1 else 0)
 
 		ObjectCreatedIntent(mount).broadcast()
 		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.terrain, mount.location.position)
 		cleanupCalledMounts()
+
+		// Vehicle loses condition shortly after being called
+		coroutineScope.launchAfter(2, TimeUnit.SECONDS) {
+			decayVehicle(player, mount, vehicleInfo.decayRate)
+		}
+
+		// Vehicle slowly loses condition over time, as long as it's called out
+		vehicleDecayJobs[mount] = coroutineScope.launchWithFixedDelay(10, TimeUnit.MINUTES) {
+			decayVehicle(player, mount, vehicleInfo.decayRate / 2)
+		}
+	}
+
+	private fun decayVehicle(player: CreatureObject, mount: CreatureObject, conditionDamage: Int) {
+		val sanitizedConditionDamage = conditionDamage.coerceAtMost(remainingHitPoints(mount))
+		mount.conditionDamage += sanitizedConditionDamage
+
+		StandardLog.onPlayerTrace(this, player, "mount %s condition decayed by %d points, condition is now %d/%d", mount, sanitizedConditionDamage, remainingHitPoints(mount), mount.maxHitPoints)
+	}
+
+	private fun remainingHitPoints(mount: CreatureObject): Int {
+		return mount.maxHitPoints - mount.conditionDamage
 	}
 
 	private fun enterMount(player: CreatureObject, mount: CreatureObject) {
@@ -349,6 +380,8 @@ class PlayerMountService : Service() {
 			val mounts: MutableCollection<Mount>? = calledMounts[player]
 			mounts?.remove(Mount(mountControlDevice, mount))
 
+			// Cancel the periodic decay job
+			vehicleDecayJobs[mount]?.cancel()
 
 			// Destroy the mount
 			mountControlDevice.count = IntangibleObject.COUNT_PCD_STORED
