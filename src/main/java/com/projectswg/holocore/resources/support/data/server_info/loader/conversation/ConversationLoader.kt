@@ -182,6 +182,7 @@ class ConversationLoader : DataLoader() {
 		eventParserMap["player_animation"] = PlayerAnimationEventParser()
 		eventParserMap["npc_animation"] = NpcAnimationEventParser()
 		eventParserMap["show_sellable_items"] = ShowSellableItemsEventParser()
+		eventParserMap["grant_buff"] = GrantBuffEventParser()
 		eventParserMap["grant_quest"] = GrantQuestEventParser()
 		eventParserMap["show_available_skills"] = ShowAvailableSkillsEventParser()
 		eventParserMap["emit_quest_signal"] = EmitQuestSignalEventParser()
