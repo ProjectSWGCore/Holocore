@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,445 +23,401 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.world.travel;
+package com.projectswg.holocore.services.gameplay.world.travel
 
-import com.projectswg.common.data.encodables.tangible.Posture;
-import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent;
-import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent;
-import com.projectswg.holocore.intents.gameplay.world.*;
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent;
-import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
-import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent;
-import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent;
-import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent;
-import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent;
-import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent;
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog;
-import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
-import com.projectswg.holocore.resources.support.data.server_info.loader.VehicleLoader.VehicleInfo;
-import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase;
-import com.projectswg.holocore.resources.support.global.network.DisconnectReason;
-import com.projectswg.holocore.resources.support.objects.ObjectCreator;
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
-import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
-import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
-import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject;
-import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag;
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
-import me.joshlarson.jlcommon.control.IntentHandler;
-import me.joshlarson.jlcommon.control.Service;
-import org.jetbrains.annotations.NotNull;
+import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.holocore.intents.gameplay.combat.CreatureIncapacitatedIntent
+import com.projectswg.holocore.intents.gameplay.combat.CreatureKilledIntent
+import com.projectswg.holocore.intents.gameplay.world.*
+import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent.Companion.broadcastPersonal
+import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
+import com.projectswg.holocore.intents.support.global.network.CloseConnectionIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
+import com.projectswg.holocore.intents.support.global.zone.PlayerTransformedIntent
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
+import com.projectswg.holocore.intents.support.objects.ObjectTeleportIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.vehicles
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
+import com.projectswg.holocore.resources.support.global.network.DisconnectReason
+import com.projectswg.holocore.resources.support.global.player.PlayerEvent
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.ServerAttribute
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState
+import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject
+import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
+import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.CopyOnWriteArraySet
+import java.util.function.Consumer
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-public class PlayerMountService extends Service {
-	
+class PlayerMountService : Service() {
 	// TODO no-vehicle zones (does not affect creature mounts)
-	
-	private final Map<CreatureObject, Set<Mount>> calledMounts;
-	
-	public PlayerMountService() {
-		this.calledMounts = new ConcurrentHashMap<>();
+	private val calledMounts: MutableMap<CreatureObject, MutableSet<Mount>> = ConcurrentHashMap()
+
+	override fun stop(): Boolean {
+		globallyStorePets() // Don't want mounts out and about when server starts up again
+
+		return true
 	}
-	
-	@Override
-	public boolean stop() {
-		globallyStorePets();	// Don't want mounts out and about when server starts up again
-		
-		return true;
+
+	fun pcdForVehicleDeed(deedTemplate: String): String {
+		assert(deedTemplate.startsWith("object/tangible/deed/")) { "invalid vehicle deed" }
+		return deedTemplate.replace("tangible/deed/vehicle_deed", "intangible/vehicle").replace("deed", "pcd")
 	}
-	
-	String pcdForVehicleDeed(String deedTemplate) {
-		assert deedTemplate.startsWith("object/tangible/deed/") : "invalid vehicle deed";
-		return deedTemplate.replace("tangible/deed/vehicle_deed", "intangible/vehicle").replace("deed", "pcd");
-	}
-	
+
 	@IntentHandler
-	private void handleCreatureIncapacitatedIntent(CreatureIncapacitatedIntent cii) {
-		CreatureObject player = cii.getIncappee();
-		if (player.isPlayer())
-			exitMount(player);
+	private fun handleCreatureIncapacitatedIntent(cii: CreatureIncapacitatedIntent) {
+		val player = cii.incappee
+		if (player.isPlayer) exitMount(player)
 	}
-	
+
 	@IntentHandler
-	private void handleCreatureKilledIntent(CreatureKilledIntent cki) {
-		CreatureObject player = cki.getCorpse();
-		if (player.isPlayer())
-			exitMount(player);
+	private fun handleCreatureKilledIntent(cki: CreatureKilledIntent) {
+		val player = cki.corpse
+		if (player.isPlayer) exitMount(player)
 	}
-	
+
 	@IntentHandler
-	private void handleExecuteCommandIntent(ExecuteCommandIntent eci) {
-		String cmdName = eci.getCommand().getName();
-		SWGObject target = eci.getTarget();
-		
-		if (!(target instanceof CreatureObject))
-			return;
-		
-		if (cmdName.equals("mount"))
-			enterMount(eci.getSource(), (CreatureObject) target);
-		else if (cmdName.equals("dismount"))
-			exitMount(eci.getSource(), (CreatureObject) target);
+	private fun handleExecuteCommandIntent(eci: ExecuteCommandIntent) {
+		val cmdName = eci.command.name
+		val target = eci.target as? CreatureObject ?: return
+
+		if (cmdName == "mount") enterMount(eci.source, target)
+		else if (cmdName == "dismount") exitMount(eci.source, target)
 	}
-	
+
 	@IntentHandler
-	private void handlePlayerTransformedIntent(PlayerTransformedIntent pti) {
-		CreatureObject player = pti.getPlayer();
-		Set<Mount> mounts = calledMounts.get(player);
-		if (mounts == null)
-			return;
-		
-		for (Mount m : mounts) {
-			if (!player.getAware().contains(m.mount()))
-				storeMount(player, m.mount(), m.getPetControlDevice());
+	private fun handlePlayerTransformedIntent(pti: PlayerTransformedIntent) {
+		val player = pti.player
+		val mounts = calledMounts[player] ?: return
+
+		for (m in mounts) {
+			if (!player.aware.contains(m.mount)) storeMount(player, m.mount, m.petControlDevice)
 		}
 	}
-	
+
 	@IntentHandler
-	private void handleMount(MountIntent pmi) {
-		enterMount(pmi.getCreature(), pmi.getPet());
+	private fun handleMount(pmi: MountIntent) {
+		enterMount(pmi.creature, pmi.pet)
 	}
-	
+
 	@IntentHandler
-	private void handleDismount(DismountIntent pmi) {
-		exitMount(pmi.getCreature(), pmi.getPet());
+	private fun handleDismount(pmi: DismountIntent) {
+		exitMount(pmi.creature, pmi.pet)
 	}
-	
+
 	@IntentHandler
-	private void handlePetDeviceCall(PetDeviceCallIntent pci) {
-		callMount(pci.getCreature(), pci.getControlDevice());
+	private fun handlePetDeviceCall(pci: PetDeviceCallIntent) {
+		callMount(pci.creature, pci.controlDevice)
 	}
-	
+
 	@IntentHandler
-	private void handlePetStore(StoreMountIntent psi) {
-		CreatureObject creature = psi.getCreature();
-		CreatureObject mount = psi.getPet();
-		
-		Collection<Mount> mounts = calledMounts.get(creature);
+	private fun handlePetStore(psi: StoreMountIntent) {
+		val creature = psi.creature
+		val mount = psi.pet
+
+		val mounts = calledMounts[creature]
 		if (mounts != null) {
-			for (Mount p : mounts) {
-				if (p.mount() == mount) {
-					storeMount(creature, mount, p.getPetControlDevice());
-					return;
+			for (p in mounts) {
+				if (p.mount === mount) {
+					storeMount(creature, mount, p.petControlDevice)
+					return
 				}
 			}
 		}
-		SystemMessageIntent.Companion.broadcastPersonal(psi.getCreature().getOwner(), "Could not find mount to store!");
+		broadcastPersonal(psi.creature.owner!!, "Could not find mount to store!")
 	}
-	
+
 	@IntentHandler
-	private void handlePetDeviceStore(PetDeviceStoreIntent psi) {
-		CreatureObject creature = psi.getCreature();
-		IntangibleObject pcd = psi.getControlDevice();
-		
-		Collection<Mount> mounts = calledMounts.get(creature);
+	private fun handlePetDeviceStore(psi: PetDeviceStoreIntent) {
+		val creature = psi.creature
+		val pcd = psi.controlDevice
+
+		val mounts = calledMounts[creature]
 		if (mounts != null) {
-			for (Mount mount : mounts) {
-				if (mount.getPetControlDevice() == pcd) {
-					storeMount(creature, mount.mount(), pcd);
-					return;
+			for (mount in mounts) {
+				if (mount.petControlDevice === pcd) {
+					storeMount(creature, mount.mount, pcd)
+					return
 				}
 			}
 		}
-		pcd.setCount(IntangibleObject.COUNT_PCD_STORED);
+		pcd.count = IntangibleObject.COUNT_PCD_STORED
 	}
-	
+
 	@IntentHandler
-	private void handleVehicleDeedGenerate(VehicleDeedGenerateIntent vdgi) {
-		if (!vdgi.getDeed().getTemplate().startsWith("object/tangible/deed/vehicle_deed/")) {
-			SystemMessageIntent.Companion.broadcastPersonal(vdgi.getCreature().getOwner(), "Invalid vehicle deed!");
-			return;
+	private fun handleVehicleDeedGenerate(vdgi: VehicleDeedGenerateIntent) {
+		if (!vdgi.deed.template.startsWith("object/tangible/deed/vehicle_deed/")) {
+			broadcastPersonal(vdgi.creature.owner!!, "Invalid vehicle deed!")
+			return
 		}
-		generateVehicle(vdgi.getCreature(), vdgi.getDeed());
+		generateVehicle(vdgi.creature, vdgi.deed)
 	}
-	
+
 	@IntentHandler
-	private void handlePlayerEventIntent(PlayerEventIntent pei) {
-		CreatureObject creature = pei.getPlayer().getCreatureObject();
-		if (creature == null)
-			return;
-		switch (pei.getEvent()) {
-			case PE_LOGGED_OUT, PE_DISAPPEAR, PE_DESTROYED, PE_SERVER_KICKED -> storeMounts(creature);
+	private fun handlePlayerEventIntent(pei: PlayerEventIntent) {
+		val creature = pei.player.creatureObject ?: return
+		when (pei.event) {
+			PlayerEvent.PE_LOGGED_OUT, PlayerEvent.PE_DISAPPEAR, PlayerEvent.PE_DESTROYED, PlayerEvent.PE_SERVER_KICKED -> storeMounts(creature)
+			else                                                                                                        -> {}
 		}
 	}
-	
+
 	@IntentHandler
-	private void handleObjectTeleportIntent(ObjectTeleportIntent oti) {
-		SWGObject obj = oti.getObj();
-		if (oti.getOldParent() == oti.getNewParent())
-			return;
-		if (!(obj instanceof CreatureObject player))
-			return;
-		
-		SWGObject oldParent = oti.getOldParent();
-		if (!(oldParent instanceof CreatureObject mount))
-			return;
-		
-		if (player.isStatesBitmask(CreatureState.RIDING_MOUNT) && isMountable(mount) && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
+	private fun handleObjectTeleportIntent(oti: ObjectTeleportIntent) {
+		val obj = oti.obj
+		if (oti.oldParent === oti.newParent) return
+		if (obj !is CreatureObject) return
+
+		val oldParent = oti.oldParent as? CreatureObject ?: return
+
+		if (obj.isStatesBitmask(CreatureState.RIDING_MOUNT) && isMountable(oldParent) && oldParent.isStatesBitmask(CreatureState.MOUNTED_CREATURE)) {
 			// Need to do this manually because most of the standard checks don't work in this case
-			emergencyDismount(player, mount);
-			new StoreMountIntent(player, mount).broadcast();
+			emergencyDismount(obj, oldParent)
+			StoreMountIntent(obj, oldParent).broadcast()
 		}
 	}
-	
-	private void generateVehicle(CreatureObject creator, SWGObject deed) {
-		String pcdTemplate = pcdForVehicleDeed(deed.getTemplate());
-		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromPcdIff(pcdTemplate);
+
+	private fun generateVehicle(creator: CreatureObject, deed: SWGObject) {
+		val pcdTemplate = pcdForVehicleDeed(deed.template)
+		val vehicleInfo = vehicles().getVehicleFromPcdIff(pcdTemplate)
 		if (vehicleInfo == null) {
-			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.getTemplate());
-			return;
+			StandardLog.onPlayerError(this, creator, "Unknown vehicle created from deed: %s", deed.template)
+			return
 		}
-		IntangibleObject vehicleControlDevice = (IntangibleObject) ObjectCreator.createObjectFromTemplate(pcdTemplate);
-		
-		new DestroyObjectIntent(deed).broadcast();
-		
-		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, vehicleInfo.getObjectTemplate());
-		vehicleControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-		vehicleControlDevice.moveToContainer(creator.getDatapad());
-		new ObjectCreatedIntent(vehicleControlDevice).broadcast();
-		
-		SystemMessageIntent.Companion.broadcastPersonal(creator.getOwner(), "@pet/pet_menu:device_added");
-		
-		callMount(creator, vehicleControlDevice);	// Once generated, the vehicle is called
+		val vehicleControlDevice = ObjectCreator.createObjectFromTemplate(pcdTemplate) as IntangibleObject
+
+		DestroyObjectIntent(deed).broadcast()
+
+		vehicleControlDevice.setServerAttribute(ServerAttribute.PCD_PET_TEMPLATE, vehicleInfo.objectTemplate)
+		vehicleControlDevice.count = IntangibleObject.COUNT_PCD_STORED
+		vehicleControlDevice.moveToContainer(creator.datapad)
+		ObjectCreatedIntent(vehicleControlDevice).broadcast()
+
+		broadcastPersonal(creator.owner!!, "@pet/pet_menu:device_added")
+
+		callMount(creator, vehicleControlDevice) // Once generated, the vehicle is called
 	}
-	
-	private void callMount(CreatureObject player, IntangibleObject mountControlDevice) {
-		if (player.getParent() != null || player.isInCombat()) {
-			return;
+
+	private fun callMount(player: CreatureObject, mountControlDevice: IntangibleObject) {
+		if (player.parent != null || player.isInCombat) {
+			return
 		}
-		if (player.getDatapad() != mountControlDevice.getParent()) {
-			StandardLog.onPlayerError(this, player, "disconnecting - attempted to call another player's mount [%s]", mountControlDevice);
-			new CloseConnectionIntent(player.getOwner(), DisconnectReason.SUSPECTED_HACK).broadcast();
-			return;
+		if (player.datapad !== mountControlDevice.parent) {
+			StandardLog.onPlayerError(this, player, "disconnecting - attempted to call another player's mount [%s]", mountControlDevice)
+			CloseConnectionIntent(player.owner!!, DisconnectReason.SUSPECTED_HACK).broadcast()
+			return
 		}
-		
-		String template = mountControlDevice.getServerTextAttribute(ServerAttribute.PCD_PET_TEMPLATE);
-		assert template != null : "mount control device doesn't have mount template attribute";
-		CreatureObject mount = (CreatureObject) ObjectCreator.createObjectFromTemplate(template);
-		mount.systemMove(null, player.getLocation());
-		mount.addOptionFlags(OptionFlag.MOUNT);	// The mount won't appear properly if this isn't set
-		mount.setFaction(player.getFaction());
-		mount.setOwnerId(player.getObjectId());	// Client crash if this isn't set before making anyone aware
+
+		val template = checkNotNull(mountControlDevice.getServerTextAttribute(ServerAttribute.PCD_PET_TEMPLATE)) { "mount control device doesn't have mount template attribute" }
+		val mount = ObjectCreator.createObjectFromTemplate(template) as CreatureObject
+		mount.systemMove(null, player.location)
+		mount.addOptionFlags(OptionFlag.MOUNT) // The mount won't appear properly if this isn't set
+		mount.faction = player.faction
+		mount.ownerId = player.objectId // Client crash if this isn't set before making anyone aware
 
 		// TODO after combat there's a delay
 		// TODO update faction status on mount if necessary
-		
-		Mount mountRecord = new Mount(mountControlDevice, mount);
-		Set<Mount> mounts = calledMounts.computeIfAbsent(player, c -> new CopyOnWriteArraySet<>());
-		if (mountControlDevice.getCount() == IntangibleObject.COUNT_PCD_CALLED || !mounts.add(mountRecord)) {
-			StandardLog.onPlayerTrace(this, player, "already called mount %s", mount);
-			return;
+		val mountRecord = Mount(mountControlDevice, mount)
+		val mounts = calledMounts.computeIfAbsent(player) { c: CreatureObject? -> CopyOnWriteArraySet() }
+		if (mountControlDevice.count == IntangibleObject.COUNT_PCD_CALLED || !mounts.add(mountRecord)) {
+			StandardLog.onPlayerTrace(this, player, "already called mount %s", mount)
+			return
 		}
-		if (mounts.size() > getMountLimit()) {
-			mounts.remove(mountRecord);
-			StandardLog.onPlayerTrace(this, player, "hit mount limit of %d", getMountLimit());
-			SystemMessageIntent.Companion.broadcastPersonal(player.getOwner(), "@pet/pet_menu:at_max");
-			return;
+		if (mounts.size > mountLimit) {
+			mounts.remove(mountRecord)
+			StandardLog.onPlayerTrace(this, player, "hit mount limit of %d", mountLimit)
+			broadcastPersonal(player.owner!!, "@pet/pet_menu:at_max")
+			return
 		}
-		mountControlDevice.setCount(IntangibleObject.COUNT_PCD_CALLED);
-		VehicleInfo vehicleInfo = DataLoader.Companion.vehicles().getVehicleFromIff(mount.getTemplate());
+		mountControlDevice.count = IntangibleObject.COUNT_PCD_CALLED
+		val vehicleInfo = vehicles().getVehicleFromIff(mount.template)
 		if (vehicleInfo != null) {
-			mount.setRunSpeed(vehicleInfo.getSpeed());
-			mount.setWalkSpeed(vehicleInfo.getMinSpeed());
-			mount.setTurnScale(vehicleInfo.getTurnRateMax());
-			mount.setAccelScale(vehicleInfo.getAccelMax());
-			mount.putCustomization("/private/index_speed_max", (int) (vehicleInfo.getSpeed() * 10d));
-			mount.putCustomization("/private/index_speed_min", (int) (vehicleInfo.getMinSpeed() * 10d));
-			mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.getTurnRate());
-			mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.getTurnRateMax());
-			mount.putCustomization("/private/index_accel_min", (int) (vehicleInfo.getAccelMin() * 10d));
-			mount.putCustomization("/private/index_accel_max", (int) (vehicleInfo.getAccelMax() * 10d));
-			mount.putCustomization("/private/index_decel", (int) (vehicleInfo.getDecel() * 10d));
-			mount.putCustomization("/private/index_damp_roll", (int) (vehicleInfo.getDampingRoll() * 10d));
-			mount.putCustomization("/private/index_damp_pitch", (int) (vehicleInfo.getDampingPitch() * 10d));
-			mount.putCustomization("/private/index_damp_height", (int) (vehicleInfo.getDampingHeight() * 10d));
-			mount.putCustomization("/private/index_glide", (int) (vehicleInfo.getGlide() * 10d));
-			mount.putCustomization("/private/index_banking", (int) vehicleInfo.getBankingAngle());
-			mount.putCustomization("/private/index_hover_height", (int) (vehicleInfo.getHoverHeight() * 10d));
-			mount.putCustomization("/private/index_auto_level", (int) (vehicleInfo.getAutoLevel() * 100d));
-			mount.putCustomization("/private/index_strafe", vehicleInfo.isStrafe() ? 1 : 0);
+			mount.setRunSpeed(vehicleInfo.speed)
+			mount.setWalkSpeed(vehicleInfo.minSpeed)
+			mount.setTurnScale(vehicleInfo.turnRateMax.toDouble())
+			mount.setAccelScale(vehicleInfo.accelMax)
+			mount.putCustomization("/private/index_speed_max", (vehicleInfo.speed * 10.0).toInt())
+			mount.putCustomization("/private/index_speed_min", (vehicleInfo.minSpeed * 10.0).toInt())
+			mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.turnRate)
+			mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.turnRateMax)
+			mount.putCustomization("/private/index_accel_min", (vehicleInfo.accelMin * 10.0).toInt())
+			mount.putCustomization("/private/index_accel_max", (vehicleInfo.accelMax * 10.0).toInt())
+			mount.putCustomization("/private/index_decel", (vehicleInfo.decel * 10.0).toInt())
+			mount.putCustomization("/private/index_damp_roll", (vehicleInfo.dampingRoll * 10.0).toInt())
+			mount.putCustomization("/private/index_damp_pitch", (vehicleInfo.dampingPitch * 10.0).toInt())
+			mount.putCustomization("/private/index_damp_height", (vehicleInfo.dampingHeight * 10.0).toInt())
+			mount.putCustomization("/private/index_glide", (vehicleInfo.glide * 10.0).toInt())
+			mount.putCustomization("/private/index_banking", vehicleInfo.bankingAngle.toInt())
+			mount.putCustomization("/private/index_hover_height", (vehicleInfo.hoverHeight * 10.0).toInt())
+			mount.putCustomization("/private/index_auto_level", (vehicleInfo.autoLevel * 100.0).toInt())
+			mount.putCustomization("/private/index_strafe", if (vehicleInfo.isStrafe) 1 else 0)
 		}
-		
-		new ObjectCreatedIntent(mount).broadcast();
-		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
-		cleanupCalledMounts();
+
+		ObjectCreatedIntent(mount).broadcast()
+		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.terrain, mount.location.position)
+		cleanupCalledMounts()
 	}
-	
-	private void enterMount(CreatureObject player, CreatureObject mount) {
-		if (!isMountable(mount) || mount.getParent() != null) {
-			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when it's not mountable", mount);
-			return;
+
+	private fun enterMount(player: CreatureObject, mount: CreatureObject) {
+		if (!isMountable(mount) || mount.parent != null) {
+			StandardLog.onPlayerTrace(this, player, "attempted to mount %s when it's not mountable", mount)
+			return
 		}
-		
-		if (player.getParent() != null || player.getPosture() != Posture.UPRIGHT)
-			return;
-		
-		if (player.getObjectId() == mount.getOwnerId()) {
-			player.moveToSlot(mount, "rider", mount.getArrangementId(player));
+
+		if (player.parent != null || player.posture != Posture.UPRIGHT) return
+
+		if (player.objectId == mount.ownerId) {
+			player.moveToSlot(mount, "rider", mount.getArrangementId(player))
 		} else if (mount.getSlottedObject("rider") != null) {
-			GroupObject group = (GroupObject) ObjectLookup.getObjectById(player.getGroupId());
-			if (group == null || !group.isInGroup(mount.getOwnerId())) {
-				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when not in the same group as the owner", mount);
-				return;
+			val group = ObjectLookup.getObjectById(player.groupId) as GroupObject?
+			if (group == null || !group.isInGroup(mount.ownerId)) {
+				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when not in the same group as the owner", mount)
+				return
 			}
-			boolean added = false;
-			for (int i = 1; i <= 7; i++) {
-				if (!mount.hasSlot("rider" + i)) {
-					StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
-					return;
+			var added = false
+			for (i in 1..7) {
+				if (!mount.hasSlot("rider$i")) {
+					StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount)
+					return
 				}
-				if (mount.getSlottedObject("rider" + i) == null) {
-					player.moveToSlot(mount, "rider" + i, mount.getArrangementId(player));
-					added = true;
-					break;
+				if (mount.getSlottedObject("rider$i") == null) {
+					player.moveToSlot(mount, "rider$i", mount.getArrangementId(player))
+					added = true
+					break
 				}
 			}
 			if (!added) {
-				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount);
-				return;
+				StandardLog.onPlayerTrace(this, player, "attempted to mount %s when no slots remain", mount)
+				return
 			}
 		} else {
-			return;
+			return
 		}
-		
-		player.setStatesBitmask(CreatureState.RIDING_MOUNT);
-		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE);
-		mount.setPosture(Posture.DRIVING_VEHICLE);
-		player.inheritMovement(mount);
-		StandardLog.onPlayerEvent(this, player, "mounted %s", mount);
+
+		player.setStatesBitmask(CreatureState.RIDING_MOUNT)
+		mount.setStatesBitmask(CreatureState.MOUNTED_CREATURE)
+		mount.posture = Posture.DRIVING_VEHICLE
+		player.inheritMovement(mount)
+		StandardLog.onPlayerEvent(this, player, "mounted %s", mount)
 	}
-	
-	private void exitMount(CreatureObject player) {
-		if (!player.isStatesBitmask(CreatureState.RIDING_MOUNT))
-			return;
-		SWGObject parent = player.getParent();
-		if (!(parent instanceof CreatureObject mount))
-			return;
-		if (isMountable(mount) && mount.isStatesBitmask(CreatureState.MOUNTED_CREATURE))
-			exitMount(player, mount);
+
+	private fun exitMount(player: CreatureObject) {
+		if (!player.isStatesBitmask(CreatureState.RIDING_MOUNT)) return
+		val parent = player.parent as? CreatureObject ?: return
+		if (isMountable(parent) && parent.isStatesBitmask(CreatureState.MOUNTED_CREATURE)) exitMount(player, parent)
 	}
-	
-	private void exitMount(CreatureObject player, CreatureObject mount) {
+
+	private fun exitMount(player: CreatureObject, mount: CreatureObject) {
 		if (!isMountable(mount)) {
-			StandardLog.onPlayerTrace(this, player, "attempted to dismount %s when it's not mountable", mount);
-			return;
+			StandardLog.onPlayerTrace(this, player, "attempted to dismount %s when it's not mountable", mount)
+			return
 		}
-		
-		if (player.getParent() == mount)
-			dismount(player, mount);
-		
+
+		if (player.parent === mount) dismount(player, mount)
+
 		if (mount.getSlottedObject("rider") == null) {
-			for (SWGObject child : mount.getSlottedObjects()) {
-				assert child instanceof CreatureObject;
-				dismount((CreatureObject) child, mount);
+			for (child in mount.slottedObjects) {
+				assert(child is CreatureObject)
+				dismount(child as CreatureObject, mount)
 			}
-			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
-			mount.setPosture(Posture.UPRIGHT);
+			mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE)
+			mount.posture = Posture.UPRIGHT
 		}
 	}
-	
-	private void storeMount(@NotNull CreatureObject player, @NotNull CreatureObject mount, @NotNull IntangibleObject mountControlDevice) {
-		if (player.isInCombat())
-			return;
-		
-		if (isMountable(mount) && mount.getOwnerId() == player.getObjectId()) {
+
+	private fun storeMount(player: CreatureObject, mount: CreatureObject, mountControlDevice: IntangibleObject) {
+		if (player.isInCombat) return
+
+		if (isMountable(mount) && mount.ownerId == player.objectId) {
 			// Dismount anyone riding the mount about to be stored
-			for (SWGObject rider : mount.getSlottedObjects()) {
-				assert rider instanceof CreatureObject;
-				exitMount((CreatureObject) rider, mount);
+			for (rider in mount.slottedObjects) {
+				assert(rider is CreatureObject)
+				exitMount(rider as CreatureObject, mount)
 			}
-			assert mount.getSlottedObjects().isEmpty();
-			
+			assert(mount.slottedObjects.isEmpty())
+
+
 			// Remove the record of the mount
-			Collection<Mount> mounts = calledMounts.get(player);
-			if (mounts != null)
-				mounts.remove(new Mount(mountControlDevice, mount));
-			
+			val mounts: MutableCollection<Mount>? = calledMounts[player]
+			mounts?.remove(Mount(mountControlDevice, mount))
+
+
 			// Destroy the mount
-			mountControlDevice.setCount(IntangibleObject.COUNT_PCD_STORED);
-			player.broadcast(new DestroyObjectIntent(mount));
-			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.getTerrain(), mount.getLocation().getPosition());
+			mountControlDevice.count = IntangibleObject.COUNT_PCD_STORED
+			player.broadcast(DestroyObjectIntent(mount))
+			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.terrain, mount.location.position)
 		}
-		cleanupCalledMounts();
+		cleanupCalledMounts()
 	}
-	
-	private void storeMounts(CreatureObject player) {
-		Collection<Mount> mounts = calledMounts.remove(player);
-		if (mounts == null)
-			return;
-		
-		for (Mount mount : mounts) {
-			storeMount(player, mount.mount(), mount.getPetControlDevice());
+
+	private fun storeMounts(player: CreatureObject) {
+		val mounts = calledMounts.remove(player) ?: return
+
+		for (mount in mounts) {
+			storeMount(player, mount.mount, mount.petControlDevice)
 		}
 	}
-	
+
 	/**
 	 * Stores all called mounts by all players
 	 */
-	private void globallyStorePets() {
-		calledMounts.keySet().forEach(this::storeMounts);
+	private fun globallyStorePets() {
+		calledMounts.keys.forEach(Consumer { player: CreatureObject -> this.storeMounts(player) })
 	}
-	
+
 	/**
 	 * Removes mount records where there are no mounts called
 	 */
-	private void cleanupCalledMounts() {
-		calledMounts.entrySet().removeIf(e -> e.getValue().isEmpty());
+	private fun cleanupCalledMounts() {
+		calledMounts.entries.removeIf { e: Map.Entry<CreatureObject, Set<Mount>> -> e.value.isEmpty() }
 	}
-	
-	private void dismount(CreatureObject player, CreatureObject mount) {
-		assert player.getParent() == mount;
-		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		player.moveToContainer(null, mount.getLocation());
-		player.resetMovement();
-		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
+
+	private fun dismount(player: CreatureObject, mount: CreatureObject) {
+		assert(player.parent === mount)
+		player.clearStatesBitmask(CreatureState.RIDING_MOUNT)
+		player.moveToContainer(null, mount.location)
+		player.resetMovement()
+		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount)
 	}
-	
-	private void emergencyDismount(CreatureObject player, CreatureObject mount) {
-		player.clearStatesBitmask(CreatureState.RIDING_MOUNT);
-		player.resetMovement();
+
+	private fun emergencyDismount(player: CreatureObject, mount: CreatureObject) {
+		player.clearStatesBitmask(CreatureState.RIDING_MOUNT)
+		player.resetMovement()
 		if (mount.getSlottedObject("rider") == null) {
-			for (SWGObject child : mount.getSlottedObjects()) {
-				assert child instanceof CreatureObject;
-				dismount((CreatureObject) child, mount);
+			for (child in mount.slottedObjects) {
+				assert(child is CreatureObject)
+				dismount(child as CreatureObject, mount)
 			}
 		}
-		mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE);
-		mount.setPosture(Posture.UPRIGHT);
-		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount);
-	}
-	
-	private int getMountLimit() {
-		return PswgDatabase.INSTANCE.getConfig().getInt(this, "mountLimit", 1);
-	}
-	
-	private static boolean isMountable(CreatureObject mount) {
-		return mount.hasOptionFlags(OptionFlag.MOUNT);
+		mount.clearStatesBitmask(CreatureState.MOUNTED_CREATURE)
+		mount.posture = Posture.UPRIGHT
+		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount)
 	}
 
-	private record Mount(IntangibleObject mountControlDevice, CreatureObject mount) {
+	private val mountLimit: Int
+		get() = config.getInt(this, "mountLimit", 1)
 
-		public IntangibleObject getPetControlDevice() {
-				return mountControlDevice;
-			}
+	private class Mount(val petControlDevice: IntangibleObject, val mount: CreatureObject) {
+		override fun hashCode(): Int {
+			return petControlDevice.hashCode()
+		}
 
-		@Override
-			public int hashCode() {
-				return mountControlDevice.hashCode();
-			}
-
-		@Override
-			public boolean equals(Object o) {
-				return o instanceof Mount && ((Mount) o).mountControlDevice.equals(mountControlDevice);
-			}
-
+		override fun equals(o: Any?): Boolean {
+			return (o is Mount) && o.petControlDevice == petControlDevice
+		}
 	}
-	
+
+	companion object {
+		private fun isMountable(mount: CreatureObject): Boolean {
+			return mount.hasOptionFlags(OptionFlag.MOUNT)
+		}
+	}
 }
