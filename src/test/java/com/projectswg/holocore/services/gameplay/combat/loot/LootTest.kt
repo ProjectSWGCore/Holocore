@@ -29,6 +29,7 @@ import com.projectswg.holocore.headless.HeadlessSWGClient.Companion.createZonedI
 import com.projectswg.holocore.headless.attack
 import com.projectswg.holocore.headless.loot
 import com.projectswg.holocore.headless.waitUntilAwareOf
+import com.projectswg.holocore.headless.waitUntilPostureUpdate
 import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -44,6 +45,7 @@ class LootTest : AcceptanceTest() {
 		
 		zonedInCharacter.waitUntilAwareOf(npc)
 		zonedInCharacter.attack(npc)
+		zonedInCharacter.waitUntilPostureUpdate(npc)
 		
 		val availableItems = zonedInCharacter.loot(npc)
 		
