@@ -23,17 +23,51 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.headless
+package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import java.util.concurrent.TimeUnit
+import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
-fun ZonedInCharacter.sendSelfBuffCommand(buffCommand: String) {
-	sendCommand(buffCommand)
-	player.waitForNextObjectDelta(player.creatureObject.objectId, 6, 19, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
+class NutrientInjectionTest : AcceptanceTest() {
+
+	@Test
+	fun buffSelf() {
+		val zonedInCharacter1 = createMasterMedic()
+		zonedInCharacter1.waitForHealthChange() // Wait for health update for becoming a master medic
+		val char1OriginalMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
+
+		zonedInCharacter1.sendSelfBuffCommand("nutrientInjection")
+
+		val char1NewMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
+		assertTrue(char1NewMaxHealth > char1OriginalMaxHealth)
+	}
+
+	@Test
+	fun buffFriendlyTarget() {
+		val zonedInCharacter1 = createMasterMedic()
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val char2OriginalMaxHealth = zonedInCharacter2.player.creatureObject.maxHealth
+		
+		zonedInCharacter1.waitUntilAwareOf(zonedInCharacter2.player.creatureObject)
+		zonedInCharacter1.sendTargetBuffCommand("nutrientInjection", zonedInCharacter2.player.creatureObject)
+
+		val char2NewMaxHealth = zonedInCharacter2.player.creatureObject.maxHealth
+		assertTrue(char2NewMaxHealth > char2OriginalMaxHealth)
+	}
+
+	private fun createMasterMedic(): ZonedInCharacter {
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		zonedInCharacter1.adminGrantSkill("science_medic_master")
+		return zonedInCharacter1
+	}
+
+	private fun createZonedInCharacter(characterName: String): ZonedInCharacter {
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		return HeadlessSWGClient.createZonedInCharacter(user.username, user.password, characterName)
+	}
+
 }
 
-fun ZonedInCharacter.sendTargetBuffCommand(buffCommand: String, target: CreatureObject) {
-	sendCommand(buffCommand, target)
-	player.waitForNextObjectDelta(target.objectId, 6, 19, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
-}
