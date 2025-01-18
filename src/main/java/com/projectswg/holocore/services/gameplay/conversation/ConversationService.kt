@@ -194,7 +194,10 @@ class ConversationService : Service() {
 		val npcMessageProse = conversation.npcMessage
 
 		val filteredResponses = getFilteredResponses(starter, conversation)
-		val replies = filteredResponses.stream().map(PlayerResponse::prosePackage).map { outOfBandData: ProsePackage? -> OutOfBandPackage(outOfBandData!!) }.peek { outOfBandPackage: OutOfBandPackage -> outOfBandPackage.isConversation = true }.collect(Collectors.toList())
+		val replies = filteredResponses.stream().map(PlayerResponse::prosePackage)
+			.map { outOfBandData: ProsePackage? -> OutOfBandPackage(outOfBandData!!) }
+			.peek { outOfBandPackage: OutOfBandPackage -> outOfBandPackage.isConversation = true }
+			.collect(Collectors.toList())
 
 		if (!sessions.containsKey(starter)) {
 			starter.sendSelf(StartNpcConversation(npc.objectId, starter.objectId))
