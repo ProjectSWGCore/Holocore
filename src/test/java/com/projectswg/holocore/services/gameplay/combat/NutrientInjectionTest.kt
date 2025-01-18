@@ -23,12 +23,51 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience.skills
+package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.HamSkillModService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.headless.*
+import com.projectswg.holocore.resources.support.global.player.AccessLevel
+import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
-@ManagerStructure(children = [HamSkillModService::class, SkillModService::class, SkillService::class])
-class SkillManager : Manager()
+class NutrientInjectionTest : AcceptanceTest() {
+
+	@Test
+	fun buffSelf() {
+		val zonedInCharacter1 = createMasterMedic()
+		zonedInCharacter1.waitForHealthChange() // Wait for health update for becoming a master medic
+		val char1OriginalMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
+
+		zonedInCharacter1.sendSelfBuffCommand("nutrientInjection")
+
+		val char1NewMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
+		assertTrue(char1NewMaxHealth > char1OriginalMaxHealth)
+	}
+
+	@Test
+	fun buffFriendlyTarget() {
+		val zonedInCharacter1 = createMasterMedic()
+		val zonedInCharacter2 = createZonedInCharacter("Chartwo")
+		val char2OriginalMaxHealth = zonedInCharacter2.player.creatureObject.maxHealth
+		
+		zonedInCharacter1.waitUntilAwareOf(zonedInCharacter2.player.creatureObject)
+		zonedInCharacter1.sendTargetBuffCommand("nutrientInjection", zonedInCharacter2.player.creatureObject)
+
+		val char2NewMaxHealth = zonedInCharacter2.player.creatureObject.maxHealth
+		assertTrue(char2NewMaxHealth > char2OriginalMaxHealth)
+	}
+
+	private fun createMasterMedic(): ZonedInCharacter {
+		val zonedInCharacter1 = createZonedInCharacter("Charone")
+		zonedInCharacter1.adminGrantSkill("science_medic_master")
+		return zonedInCharacter1
+	}
+
+	private fun createZonedInCharacter(characterName: String): ZonedInCharacter {
+		val user = generateUser(accessLevel = AccessLevel.DEV)
+		return HeadlessSWGClient.createZonedInCharacter(user.username, user.password, characterName)
+	}
+
+}
+

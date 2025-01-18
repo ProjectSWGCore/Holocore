@@ -49,6 +49,7 @@ import com.projectswg.holocore.services.gameplay.player.badge.BadgeManager
 import com.projectswg.holocore.services.gameplay.player.character.TippingService
 import com.projectswg.holocore.services.gameplay.player.experience.ExperiencePointService
 import com.projectswg.holocore.services.gameplay.player.experience.skills.SkillService
+import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.HamSkillModService
 import com.projectswg.holocore.services.gameplay.player.group.GroupService
 import com.projectswg.holocore.services.support.global.chat.ChatManager
 import com.projectswg.holocore.services.support.global.commands.CommandExecutionService
@@ -114,6 +115,7 @@ abstract class AcceptanceTest : TestRunnerSynchronousIntents() {
 		registerService(BuffService())
 		registerService(DuelService())
 		registerService(FactionFlagService())
+		registerService(HamSkillModService())
 	}
 
 	@AfterEach

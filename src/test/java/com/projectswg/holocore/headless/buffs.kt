@@ -25,9 +25,15 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.sendSelfBuffCommand(buffCommand: String) {
 	sendCommand(buffCommand)
-	player.waitForNextObjectDelta(player.creatureObject.objectId, 4, 4, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 6, 19, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
+}
+
+fun ZonedInCharacter.sendTargetBuffCommand(buffCommand: String, target: CreatureObject) {
+	sendCommand(buffCommand, target)
+	player.waitForNextObjectDelta(target.objectId, 6, 19, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
 }

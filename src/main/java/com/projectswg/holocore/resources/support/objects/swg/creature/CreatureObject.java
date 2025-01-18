@@ -884,6 +884,12 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public void setMaxHealth(int maxHealth) {
+		int currentHealth = getHealth();
+		if (currentHealth > maxHealth) {
+			// Ensure it's not possible to have more health than the max health
+			setHealth(maxHealth);
+		}
+		
 		creo6.setMaxHealth(maxHealth);
 	}
 	
