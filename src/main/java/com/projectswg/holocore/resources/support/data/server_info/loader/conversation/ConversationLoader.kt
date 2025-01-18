@@ -180,6 +180,7 @@ class ConversationLoader : DataLoader() {
 	private fun initEventParsers() {
 		eventParserMap["faction_change"] = ChangePlayerFactionEventParser()
 		eventParserMap["player_animation"] = PlayerAnimationEventParser()
+		eventParserMap["system_message"] = SystemMessageEventParser()
 		eventParserMap["npc_animation"] = NpcAnimationEventParser()
 		eventParserMap["show_sellable_items"] = ShowSellableItemsEventParser()
 		eventParserMap["grant_buff"] = GrantBuffEventParser()
