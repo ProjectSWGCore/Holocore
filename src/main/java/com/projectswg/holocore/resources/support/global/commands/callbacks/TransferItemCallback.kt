@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -27,6 +26,7 @@
 package com.projectswg.holocore.resources.support.global.commands.callbacks
 
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
+import com.projectswg.holocore.intents.gameplay.combat.BuffIntent
 import com.projectswg.holocore.intents.gameplay.combat.LootItemIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent.Companion.broadcastPersonal
@@ -392,12 +392,16 @@ class TransferItemCallback : ICmdCallback {
 		}
 
 		private fun changeWeapon(actor: CreatureObject, target: SWGObject, equip: Boolean) {
+			val weaponHinderanceBuffName = "weaponHinderance"	// CU permasnare buff. It doesn't reduce speed, but it prevents speed buffs from making the player run faster.
+			
 			if (equip) {
 				// The equipped weapon must now be set to the target object
 				actor.equippedWeapon = target as WeaponObject
+				BuffIntent(weaponHinderanceBuffName, actor, actor, false).broadcast()
 			} else {
 				// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 				actor.equippedWeapon = null
+				BuffIntent(weaponHinderanceBuffName, actor, actor, true).broadcast()
 			}
 		}
 	}
