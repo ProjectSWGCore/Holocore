@@ -30,8 +30,8 @@ import com.projectswg.holocore.resources.gameplay.conversation.model.Event
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 
-class GrantBuffEvent(private val buffName: String) : Event {
+class GrantBuffEvent(private val buffs: List<String>) : Event {
 	override fun trigger(player: Player, npc: AIObject) {
-		BuffIntent(buffName, npc, player.creatureObject, false).broadcast()
+		for (buff in buffs) BuffIntent(buff, npc, player.creatureObject, false).broadcast()
 	}
 }

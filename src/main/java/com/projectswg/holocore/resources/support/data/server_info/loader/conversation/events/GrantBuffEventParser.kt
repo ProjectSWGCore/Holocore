@@ -29,9 +29,16 @@ import com.projectswg.holocore.resources.gameplay.conversation.events.GrantBuffE
 import com.projectswg.holocore.resources.support.data.server_info.loader.conversation.EventParser
 
 class GrantBuffEventParser : EventParser<GrantBuffEvent> {
+	@Suppress("UNCHECKED_CAST")
 	override fun parse(args: Map<String, Any>): GrantBuffEvent {
-		val buffName = args["buff"] as String? ?: throw IllegalArgumentException("Buff name not specified")
-
-		return GrantBuffEvent(buffName)
+		if (args.containsKey("buff")) {
+			val buffName = args["buff"] as String
+			return GrantBuffEvent(listOf(buffName))
+		} else if (args.containsKey("buffs")) {
+			val buffs = args["buffs"] as List<String>
+			return GrantBuffEvent(buffs)
+		} else {
+			throw IllegalArgumentException("Args must contain either a buff or buffs key")
+		}
 	}
 }
