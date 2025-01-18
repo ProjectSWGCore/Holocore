@@ -88,6 +88,7 @@ fun ZonedInCharacter.attack(target: TangibleObject, overrideAttackCommand: Strin
  */
 fun ZonedInCharacter.attack(target: CreatureObject, overrideAttackCommand: String? = null) {
 	val attackCommand = overrideAttackCommand ?: player.creatureObject.equippedWeapon.type.defaultAttack
+	waitUntilAwareOf(target)
 	player.clearPacketList()
 	sendAttackCommand(target, attackCommand)
 }
