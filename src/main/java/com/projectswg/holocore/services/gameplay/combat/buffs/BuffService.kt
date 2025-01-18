@@ -270,7 +270,7 @@ class BuffService : Service() {
 				creature.setMovementPercent(0.0)
 			}
 			MovementLoader.MovementType.SNARE, MovementLoader.MovementType.PERMASNARE -> {
-				creature.setMovementPercent(strength)
+				creature.setMovementPercent(1.0 - strength)
 			}
 			MovementLoader.MovementType.BOOST, MovementLoader.MovementType.PERMABOOST -> {
 				creature.setMovementPercent(1.0 + strength)
