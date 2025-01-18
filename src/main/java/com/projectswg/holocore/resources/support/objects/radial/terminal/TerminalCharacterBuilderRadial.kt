@@ -737,7 +737,7 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 				addListItem("Endor - DWB")
 				addListItem("Endor - Jinda Cave")
 				addListItem("Kashyyyk - Etyyy, The Hunting Grounds")
-				addListItem("Kashyyyk - Kachirho, Slaver Camp")
+				addListItem("Kashyyyk - Kachirho Starport")
 				addListItem("Kashyyyk - Kkowir, The Dead Forest")
 				addListItem("Kashyyyk - Rryatt Trail, 1")
 				addListItem("Kashyyyk - Rryatt Trail, 2")
@@ -879,7 +879,7 @@ class TerminalCharacterBuilderRadial : RadialHandlerInterface {
 		}
 
 		private fun handleKasKachirho(player: Player) {
-			teleportTo(player, 146.0, 19.0, 162.0, Terrain.KASHYYYK_MAIN)
+			teleportTo(player, -607.5, 18.0, -127.6, Terrain.KASHYYYK_MAIN)
 		}
 
 		private fun handleKasKkowir(player: Player) {

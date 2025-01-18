@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/mos_eisley_mayor",
+		"key": "s_97",
+		"comment": "Dangerous?  No, I don't think so.  I mean it can be a little scary sometimes, but what city isn't?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/mos_eisley_mayor",
+				"key": "s_222",
+				"comment": "I think I've heard enough."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "whisper"
+			}
+		}
+	]
+}

@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_1152",
+		"comment": "Very well.  I will put the information into your journal.  Fare well and be safe."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_1154",
+				"comment": "I'm all set. Thank you."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/c_newbie_quest6",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/c_newbie_quest6"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_forward"
+			}
+		}
+	]
+}

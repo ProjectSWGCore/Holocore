@@ -1,0 +1,37 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_melee_combat",
+		"key": "s_202",
+		"comment": "< Peawp laughs > Well good luck to you then my friend and be careful out there!"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_melee_combat",
+				"key": "s_144",
+				"comment": "The pleasure has been all mine. See you around Peawp."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		},
+		{
+			"type": "player_animation",
+			"args": {
+				"animation": "wave1"
+			}
+		},
+		{
+			"type": "grant_buff",
+			"args": {
+				"buffs": ["high_morale", "general_inspiration", "nutrientInjection_2", "endorphineInjection_1", "serotoninInjection_1", "dish_vegeparsine"]
+			}
+		}
+	]
+}
