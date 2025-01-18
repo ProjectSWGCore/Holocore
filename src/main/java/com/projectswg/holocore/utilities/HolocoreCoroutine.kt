@@ -43,20 +43,20 @@ fun CoroutineScope.cancelAndWait() {
 	}
 }
 
-fun CoroutineScope.launchAfter(periodMilliseconds: Long, block: suspend () -> Unit) = launchAfter(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+fun CoroutineScope.launchAfter(periodMilliseconds: Long, block: suspend () -> Unit): Job = launchAfter(periodMilliseconds, TimeUnit.MILLISECONDS, block)
 
-fun CoroutineScope.launchAfter(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
-	launch {
+fun CoroutineScope.launchAfter(period: Long, unit: TimeUnit, block: suspend () -> Unit): Job {
+	return launch {
 		delay(unit.toMillis(period))
 		block()
 	}
 }
 
-fun CoroutineScope.launchWithFixedRate(periodMilliseconds: Long, block: suspend () -> Unit) = launchWithFixedRate(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+fun CoroutineScope.launchWithFixedRate(periodMilliseconds: Long, block: suspend () -> Unit): Job = launchWithFixedRate(periodMilliseconds, TimeUnit.MILLISECONDS, block)
 
-fun CoroutineScope.launchWithFixedRate(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
+fun CoroutineScope.launchWithFixedRate(period: Long, unit: TimeUnit, block: suspend () -> Unit): Job {
 	val updateRateSleep = unit.toMillis(period)
-	launch {
+	return launch {
 		val anchorTime = System.nanoTime() / 1_000_000L
 		while (isActive) {
 			val sleepTime = updateRateSleep - ((System.nanoTime() / 1_000_000L + updateRateSleep - anchorTime) % updateRateSleep)
@@ -66,10 +66,10 @@ fun CoroutineScope.launchWithFixedRate(period: Long, unit: TimeUnit, block: susp
 	}
 }
 
-fun CoroutineScope.launchWithFixedDelay(periodMilliseconds: Long, block: suspend () -> Unit) = launchWithFixedDelay(periodMilliseconds, TimeUnit.MILLISECONDS, block)
+fun CoroutineScope.launchWithFixedDelay(periodMilliseconds: Long, block: suspend () -> Unit): Job = launchWithFixedDelay(periodMilliseconds, TimeUnit.MILLISECONDS, block)
 
-fun CoroutineScope.launchWithFixedDelay(period: Long, unit: TimeUnit, block: suspend () -> Unit) {
-	launch {
+fun CoroutineScope.launchWithFixedDelay(period: Long, unit: TimeUnit, block: suspend () -> Unit): Job {
+	return launch {
 		val sleepTime = unit.toMillis(period)
 		while (isActive) {
 			delay(sleepTime)
