@@ -23,12 +23,35 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.player.experience.skills
+package com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod
 
-import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.HamSkillModService
-import com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod.SkillModService
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import me.joshlarson.jlcommon.control.IntentHandler
+import me.joshlarson.jlcommon.control.Service
 
-@ManagerStructure(children = [HamSkillModService::class, SkillModService::class, SkillService::class])
-class SkillManager : Manager()
+/**
+ * This service is responsible for modifying the health, action, and mind (HAM) of creatures based on skill mods.
+ * An example of a skill mod is a health mod that increases the health of a creature by a percentage (like healthPercent).
+ */
+class HamSkillModService : Service() {
+	@IntentHandler
+	private fun handleSkillModIntent(intent: SkillModIntent) {
+		val skillModName = intent.skillModName
+		val adjustModifier = intent.adjustModifier
+
+		when (skillModName) {
+			"healthPercent" -> handleHealthPercent(intent, adjustModifier)
+		}
+	}
+
+	private fun handleHealthPercent(intent: SkillModIntent, adjustModifier: Int) {
+		for (creature in intent.affectedCreatures) {
+			val originalMaxHealth = creature.maxHealth
+			val extraMaxHealth = ((adjustModifier / 100.0) * creature.maxHealth).toInt()    // If healthPercent is 10, then mod is 1.1. A creature with 1000 health will then have 1100 health.
+			creature.maxHealth += extraMaxHealth
+			
+			StandardLog.onPlayerTrace(this, creature, "max health increased by $adjustModifier%% $originalMaxHealth -> ${creature.maxHealth}")	// %% is used to escape the % character
+		}
+	}
+}
