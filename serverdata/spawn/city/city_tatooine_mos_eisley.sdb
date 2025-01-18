@@ -75,7 +75,7 @@ city_tatooine_mos_eisley_72	TATOOINE	tat_moseisley_cantina	AREA	3	22.3	-0.9	3.0	
 city_tatooine_mos_eisley_73	TATOOINE	tat_moseisley_cantina	AREA	3	15.0	-0.9	2.3	53	1	an Ithorian male	humanoid_patron_ithorian_male	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	nervous			600
 city_tatooine_mos_eisley_74	TATOOINE	tat_moseisley_cantina	AREA	3	-9.3	-0.9	5.7	179	1	Marco Vahn (a booking agent)	humanoid_marco_vahn	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
 city_tatooine_mos_eisley_75	TATOOINE	tat_moseisley_cantina	AREA	3	20.5	-0.9	4.1	72	1	Muftak	humanoid_muftak	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_76	TATOOINE	tat_moseisley_cantina	AREA	3	8.5	-0.9	0.3	47	1	Wuher	humanoid_wuher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	happy			600
+city_tatooine_mos_eisley_76	TATOOINE	tat_moseisley_cantina	AREA	3	8.5	-0.9	0.3	47	1	Wuher	humanoid_wuher	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	happy		bartender	600
 city_tatooine_mos_eisley_77	TATOOINE	tat_moseisley_cantina	AREA	4	19.1	-0.9	-19.9	16	1	Anetia Kah'ryn	humanoid_prof_quest_entertainer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle	17		600
 city_tatooine_mos_eisley_78	TATOOINE	tat_moseisley_cantina	AREA	6	4.1	-0.9	-17.1	48	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_2			600
 city_tatooine_mos_eisley_79	TATOOINE	tat_moseisley_cantina	AREA	6	1.3	-0.9	-15.2	55	1	a Bith musician	humanoid_bith_musician	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	themepark_music_3	2		600
@@ -85,7 +85,7 @@ city_tatooine_mos_eisley_82	TATOOINE	tat_moseisley_cantina	AREA	6	3.7	-0.9	-14.4
 city_tatooine_mos_eisley_83	TATOOINE	tat_moseisley_cantina	AREA	8	-6.7	-0.9	-20.9	-24	1	Cheated Gambler	humanoid_kashyyyk_cheated_gambler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sad		tatooine_mos_eisley_cheated_gambler	600
 city_tatooine_mos_eisley_84	TATOOINE	tat_moseisley_combat_gh	PATROL	5	12.0	1.1	5.3	-2	1	a Rifleman trainer	humanoid_trainer_rifleman	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_8700	column	idle		trainer_combat_rifleman	600
 city_tatooine_mos_eisley_85	TATOOINE	tat_moseisley_combat_gh	PATROL	6	-12.3	1.1	5.3	8	1	a Scout trainer	humanoid_trainer_scout	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_8800	column	idle		trainer_outdoors_scout	600
-city_tatooine_mos_eisley_86	TATOOINE	tat_moseisley_combat_gh	AREA	6	-12.1	1.1	4.6	179	1	Peawp R'dawc	humanoid_brawler_quest_peawp_rdawc	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_86	TATOOINE	tat_moseisley_combat_gh	AREA	6	-12.1	1.1	4.6	179	1	Peawp R'dawc	humanoid_brawler_quest_peawp_rdawc	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_peawp	600
 city_tatooine_mos_eisley_87	TATOOINE	tat_moseisley_combat_gh	PATROL	7	12.3	1.1	-14.2	-54	1	a Swordsman trainer	humanoid_trainer_2hsword	INVULNERABLE	N	100	100	City	Mos Eisley	1	PATROL	0	patrol_tatooine_8900	column	idle		trainer_combat_2hsword	600
 city_tatooine_mos_eisley_88	TATOOINE	tat_moseisley_combat_gh	AREA	4	2.6	2.5	8.4	-92	1	a Commando trainer	humanoid_trainer_commando	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation		trainer_combat_commando	600
 city_tatooine_mos_eisley_89	TATOOINE	tat_moseisley_combat_gh	AREA	4	-1.6	2.5	8.2	87	1	a Fencer trainer	humanoid_trainer_1hsword	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation		trainer_combat_1hsword	600
@@ -351,7 +351,7 @@ city_tatooine_mos_eisley_348	TATOOINE	tat_world	AREA	0	4068.7	5.0	-4757.7	0	1	a 
 city_tatooine_mos_eisley_349	TATOOINE	tat_world	AREA	0	3123.5	6.5	-4786.3	0	1	a vicious Rill	creature_rill_vicious	ATTACKABLE	N	5	10	City	Mos Eisley	1	LOITER	2	0	-	idle			600
 city_tatooine_mos_eisley_350	TATOOINE	tat_world	AREA	0	3408.2	5.0	-4912.0	47	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
 city_tatooine_mos_eisley_351	TATOOINE	tat_world	AREA	0	3535.0	5.0	-4733.4	13	1	Administrator Nillika	humanoid_administrator_nillika	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_352	TATOOINE	tat_world	AREA	0	3513.1	5.0	-4814.5	36	1	Alduq Besene	humanoid_prof_quest_artisan	QUEST	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		questgiver	600
+city_tatooine_mos_eisley_352	TATOOINE	tat_world	AREA	0	3513.1	5.0	-4814.5	36	1	Alduq Besene	humanoid_prof_quest_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
 city_tatooine_mos_eisley_353	TATOOINE	tat_world	AREA	0	3493.1	5.0	-4708.0	67	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 city_tatooine_mos_eisley_354	TATOOINE	tat_world	AREA	0	3500.0	5.0	-4806.7	-139	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
 city_tatooine_mos_eisley_355	TATOOINE	tat_world	AREA	0	3400.7	5.0	-4708.2	30	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_use_terminal_high			600
@@ -433,23 +433,25 @@ city_tatooine_mos_eisley_430	TATOOINE	tat_world	AREA	0	3522.6	5.0	-4477.3	0	1	a 
 city_tatooine_mos_eisley_431	TATOOINE	tat_world	AREA	0	3832.7	5.0	-4875.2	0	1	a slicer	humanoid_slicer	ATTACKABLE	N	1	3	City	Mos Eisley	5	LOITER	10	0	-	idle			600
 city_tatooine_mos_eisley_432	TATOOINE	tat_world	AREA	0	3730.8	19.4	-5210.6	0	1	a thief	humanoid_thief	ATTACKABLE	N	1	3	City	Mos Eisley	4	LOITER	5	0	-	idle			600
 city_tatooine_mos_eisley_433	TATOOINE	tat_world	AREA	0	3180.6	5.0	-4684.4	0	1	a recon mercenary	humanoid_tatooine_mercenary_recon	ATTACKABLE	N	1	3	City	Mos Eisley	4	LOITER	8	0	-	idle			600
-city_tatooine_mos_eisley_434	TATOOINE	tat_world	AREA	0	3530.0	5.0	-4778.8	38		a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_435	TATOOINE	tat_world	AREA	0	3531.3	5.0	-4780.0	-40		4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_436	TATOOINE	tat_world	AREA	0	3487.2	7.5	-4677.5	-12		a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_437	TATOOINE	tat_world	AREA	0	3537.2	5.0	-4694.3	33		an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_438	TATOOINE	tat_world	AREA	0	3369.6	5.0	-4518.9	154		an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_439	TATOOINE	tat_world	AREA	0	3318.0	5.0	-4511.4	-46		a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-city_tatooine_mos_eisley_440	TATOOINE	tat_world	AREA	0	3315.5	5.0	-4510.8	104		a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-city_tatooine_mos_eisley_441	TATOOINE	tat_world	AREA	0	3316.7	5.0	-4509.2	168		a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_442	TATOOINE	tat_world	AREA	0	3285.7	5.0	-4501.9	126		a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_ground			600
-city_tatooine_mos_eisley_443	TATOOINE	tat_world	AREA	0	3303.8	5.0	-4545.8	123		a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
-city_tatooine_mos_eisley_444	TATOOINE	tat_world	AREA	0	3270.7	5.6	-4708.5	62		an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-city_tatooine_mos_eisley_445	TATOOINE	tat_world	AREA	0	3273.6	5.6	-4707.5	-124		a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
-city_tatooine_mos_eisley_446	TATOOINE	tat_world	AREA	0	3401.6	5.0	-4840.7	85		a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_447	TATOOINE	tat_moseisley_starport	AREA	4	1.4	0.6	57.9	57		a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_448	TATOOINE	tat_moseisley_starport	AREA	4	5.0	0.6	58.4	-58		a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_449	TATOOINE	tat_moseisley_starport	AREA	4	-0.0	0.6	67.9	-179		a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_450	TATOOINE	tat_moseisley_starport	AREA	12	-48.1	2.6	36.0	129		a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
-city_tatooine_mos_eisley_451	TATOOINE	tat_moseisley_starport	AREA	12	-57.6	2.6	41.9	142		a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
-city_tatooine_mos_eisley_452	TATOOINE	tat_moseisley_starport	AREA	7	49.0	0.6	50.7	-170		a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
-city_tatooine_mos_eisley_453	TATOOINE	tat_world	AREA	0	3632.9	5.0	-4781.4	-154		a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_434	TATOOINE	tat_world	AREA	0	3530.0	5.0	-4778.8	38	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_435	TATOOINE	tat_world	AREA	0	3531.3	5.0	-4780.0	-40	1	4-LOM	droid_4lom	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_436	TATOOINE	tat_world	AREA	0	3487.2	7.5	-4677.5	-12	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_437	TATOOINE	tat_world	AREA	0	3537.2	5.0	-4694.3	33	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_438	TATOOINE	tat_world	AREA	0	3369.6	5.0	-4518.9	154	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_439	TATOOINE	tat_world	AREA	0	3318.0	5.0	-4511.4	-46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_440	TATOOINE	tat_world	AREA	0	3315.5	5.0	-4510.8	104	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_441	TATOOINE	tat_world	AREA	0	3316.7	5.0	-4509.2	168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_442	TATOOINE	tat_world	AREA	0	3285.7	5.0	-4501.9	126	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_ground			600
+city_tatooine_mos_eisley_443	TATOOINE	tat_world	AREA	0	3303.8	5.0	-4545.8	123	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle			600
+city_tatooine_mos_eisley_444	TATOOINE	tat_world	AREA	0	3270.7	5.6	-4708.5	62	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_445	TATOOINE	tat_world	AREA	0	3273.6	5.6	-4707.5	-124	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_446	TATOOINE	tat_world	AREA	0	3401.6	5.0	-4840.7	85	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_447	TATOOINE	tat_moseisley_starport	AREA	4	1.4	0.6	57.9	57	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_448	TATOOINE	tat_moseisley_starport	AREA	4	5.0	0.6	58.4	-58	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_449	TATOOINE	tat_moseisley_starport	AREA	4	-0.0	0.6	67.9	-179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_450	TATOOINE	tat_moseisley_starport	AREA	12	-48.1	2.6	36.0	129	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_mos_eisley_451	TATOOINE	tat_moseisley_starport	AREA	12	-57.6	2.6	41.9	142	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_tatooine_mos_eisley_452	TATOOINE	tat_moseisley_starport	AREA	7	49.0	0.6	50.7	-170	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	npc_sitting_chair			600
+city_tatooine_mos_eisley_453	TATOOINE	tat_world	AREA	0	3632.9	5.0	-4781.4	-154	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
+city_tatooine_mos_eisley_454	TATOOINE	tat_world	AREA	0	3534.0	5.0	-4807.9	-68	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	QUEST	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		teleport_kachirho_enter	600
+city_tatooine_mos_eisley_455	TATOOINE	tat_moseisley_commerce_gh	AREA	8	0	1.1	-14.6	-2	1	Mayor Mikdanyell Guh'rantt	humanoid_mos_eisley_mayor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_mayor	600

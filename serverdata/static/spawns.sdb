@@ -29,10 +29,7 @@ faction_reb_4	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
 faction_reb_4_pvp	object/tangible/terminal/terminal_hq_rebel.iff	hall1	0	0.25	1.86	0
 faction_reb_5	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	1	12.5	180
 faction_reb_5_pvp	object/tangible/terminal/terminal_hq_rebel.iff	mainhall	0	1	12.5	180
-kashyyyk_starport	object/creature/npc/theme_park/shared_player_transport.iff		0.0	7.0	0.0	-90
 kashyyyk_starport	object/static/particle/shared_pt_airport_race_light_group.iff		0.0	7.0	0.0	-90
-kashyyyk_starport	object/tangible/terminal/shared_terminal_travel.iff	r1	-3.1	0.0	-17.6	-90
-kashyyyk_starport	object/tangible/travel/ticket_collector/shared_ticket_collector.iff		-3.0	0.0	-10.0	315
 military_cloning_imp_sml	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
 military_cloning_imp_sml_2	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0
 military_cloning_outpost	object/tangible/terminal/shared_terminal_cloning.iff	mainhall	0.0	0.1	-5.9	0

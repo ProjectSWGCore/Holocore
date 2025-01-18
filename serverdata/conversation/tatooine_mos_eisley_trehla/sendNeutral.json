@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/c_newbie_mentor",
+		"key": "s_975",
+		"comment": "Very well. Talk to Dravis in the back of the Mos Eisley Cantina. I know that you have been there, but here is a waypoint for you. Is there something else I can help you with?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/c_newbie_mentor",
+				"key": "s_931",
+				"comment": "Yes, that sounds good."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "salute"
+			}
+		}
+	]
+}

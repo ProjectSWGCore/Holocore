@@ -1,0 +1,39 @@
+{
+	"npcMessage": {
+		"file": "conversation/mos_eisley_mayor",
+		"key": "s_120",
+		"comment": "There's Peawp R'dawc, you can find her right here in Mos Eisley at the Combat Guild Hall. Wonderful teacher. For melee combat, there's no one quite like Peawp. That's who you should be studying with. I'll give you the location of the Combat Guild Hall."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/mos_eisley_mayor",
+				"key": "s_202",
+				"comment": "That's amazing."
+			}
+		}
+	],
+	"requirements": [
+		{
+			"type": "active_quest",
+			"args": {
+				"quest": "quest/c_melee_combat_trainer",
+				"active": false
+			}
+		}
+	],
+	"events": [
+		{
+			"type": "grant_quest",
+			"args": {
+				"quest": "quest/c_melee_combat_trainer"
+			}
+		},
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "point_away"
+			}
+		}
+	]
+}

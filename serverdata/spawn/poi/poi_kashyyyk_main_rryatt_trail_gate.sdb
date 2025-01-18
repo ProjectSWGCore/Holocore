@@ -5,3 +5,4 @@ poi_kashyyyk_main_rryatt_trail_gate_2	KASHYYYK_MAIN	kas_world	AREA	0	-55.0	19.8	
 poi_kashyyyk_main_rryatt_trail_gate_3	KASHYYYK_MAIN	kas_world	AREA	0	-69.8	19.6	835.4	-177	1	a Rryatt Ceremonial Guard	humanoid_kashyyyk_ceremonial_guard	ATTACKABLE	E	46	55	POI	Rryatt Trail Gate	1	IDLE	0	0	-	idle			600
 poi_kashyyyk_main_rryatt_trail_gate_4	KASHYYYK_MAIN	kas_world	AREA	0	-74.4	19.9	778.3	0	1	a Rryatt Ceremonial Guard	humanoid_kashyyyk_ceremonial_guard	ATTACKABLE	E	46	55	POI	Rryatt Trail Gate	1	TURN	0	0	-	idle			600
 poi_kashyyyk_main_rryatt_trail_gate_5	KASHYYYK_MAIN	kas_world	AREA	0	-84.4	19.2	784.8	0	1	a Rryatt Ceremonial Guard	humanoid_kashyyyk_ceremonial_guard	ATTACKABLE	E	46	55	POI	Rryatt Trail Gate	1	TURN	0	0	-	idle			600
+poi_kashyyyk_main_rryatt_trail_gate_6	KASHYYYK_MAIN	kas_world	AREA	0	-60.4	19.8	836.8	-161	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	QUEST	N	100	100	POI	Rryatt Trail Gate	1	IDLE	0	0	-	idle		teleport_rryatt_enter	600

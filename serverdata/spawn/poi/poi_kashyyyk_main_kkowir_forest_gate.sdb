@@ -6,3 +6,4 @@ poi_kashyyyk_main_kkowir_forest_gate_3	KASHYYYK_MAIN	kas_world	AREA	0	-757.5	19.
 poi_kashyyyk_main_kkowir_forest_gate_4	KASHYYYK_MAIN	kas_world	AREA	0	-773.4	19.5	249.5	-158	1	a Dead Guard	humanoid_kashyyyk_dead_guard	ATTACKABLE	N	46	55	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle			600
 poi_kashyyyk_main_kkowir_forest_gate_5	KASHYYYK_MAIN	kas_world	AREA	0	-799.3	19.3	182.2	-148	1	a Dead Guard	humanoid_kashyyyk_dead_guard	ATTACKABLE	N	46	55	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle			600
 poi_kashyyyk_main_kkowir_forest_gate_6	KASHYYYK_MAIN	kas_world	AREA	0	-815.7	19.3	188.8	159	1	a Dead Guard	humanoid_kashyyyk_dead_guard	ATTACKABLE	N	46	55	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle			600
+poi_kashyyyk_main_kkowir_forest_gate_7	KASHYYYK_MAIN	kas_world	AREA	0	-744.2	18.6	257.5	-135	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	QUEST	N	100	100	POI	Kkowir Forest Gate	1	IDLE	0	0	-	idle		teleport_kkowir_enter	600
