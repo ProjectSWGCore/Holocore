@@ -29,5 +29,5 @@ import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.sendSelfBuffCommand(buffCommand: String) {
 	sendCommand(buffCommand)
-	player.waitForNextObjectDelta(player.creatureObject.objectId, 4, 4, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
+	player.waitForNextObjectDelta(player.creatureObject.objectId, 6, 19, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("Failed to receive buff object delta for player")
 }
