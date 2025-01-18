@@ -41,6 +41,7 @@ class TrappingXPTest : AcceptanceTest() {
 		val character = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "adminchar")
 		val npc = spawnNPC("creature_bantha", character.player.creatureObject.location)
 
+		waitForIntents()
 		killTarget(character, npc)
 
 		// There are three types of XP we receive from this kill: combat_meleespecialize_unarmed, trapping, and combat_general
