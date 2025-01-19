@@ -1,4 +1,4 @@
 conversation_id	conversation_file
 TEXT	TEXT
-junk_dealer_generic	junk_dealer_generic/start
-junk_dealer_wookiee	junk_dealer_wookiee/start
+junk_dealer_generic	junk_dealer/jd_generic_start
+junk_dealer_wookiee	junk_dealer/jd_wookiee_start

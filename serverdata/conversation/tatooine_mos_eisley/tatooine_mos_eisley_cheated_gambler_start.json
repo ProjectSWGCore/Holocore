@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/ep3_cheated_gambler",
+		"key": "s_301",
+		"comment": "Yes, what do you want?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/ep3_cheated_gambler",
+				"key": "s_307",
+				"comment": "I hear you had some gambling trouble."
+			},
+			"next": "tatooine_mos_eisley/tatooine_mos_eisley_cheated_gambler_hear"
+		},
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "pound_fist_palm"
+			}
+		}
+	]
+}

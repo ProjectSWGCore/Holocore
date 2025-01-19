@@ -1,0 +1,31 @@
+{
+	"npcMessage": {
+		"file": "conversation/biogenic_scientist_human",
+		"key": "s_d080da0e",
+		"comment": "Thank you. Oh, wait a minute. Before you go I have something maybe that you can use. Just a moment and let me find it..."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/biogenic_scientist_human",
+				"key": "s_ba27cb12",
+				"comment": "Oh, thank you so much! Thank you for saving my life. I just want to get out of here. I want to get away."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "heal_other"
+			}
+		},
+		{
+			"type": "grant_buff",
+			"args": {
+				"buffs": ["frogBuff", "high_morale"]
+			}
+		}
+	]
+}

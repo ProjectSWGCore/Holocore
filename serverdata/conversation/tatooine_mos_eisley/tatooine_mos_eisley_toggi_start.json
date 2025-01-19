@@ -1,0 +1,18 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_toggi",
+		"key": "s_10",
+		"comment": "If you have more cargo, you're out of luck. The last transport just left. Should be breaking the atmosphere as we speak."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_toggi",
+				"key": "s_12",
+				"comment": "What cargo? What are you doing here?"
+			}
+		}
+	],
+	"requirements": [],
+	"events": []
+}
