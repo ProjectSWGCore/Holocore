@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/mos_eisley_mayor",
+		"key": "s_93",
+		"comment": "Yes, yes, I know what they say about Mos Eisley, something about a 'wretched hive of scum and villainy' or the like. Don't get me wrong - we have our fair share of criminals and shady dealings, but don't let that scare you off."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/mos_eisley_mayor",
+				"key": "s_95",
+				"comment": "Is the city dangerous?"
+			},
+			"next": "tatooine_mos_eisley/tatooine_mos_eisley_mayor_cityHistory2"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "shake_head_disgust"
+			}
+		}
+	]
+}

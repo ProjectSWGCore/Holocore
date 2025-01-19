@@ -455,3 +455,4 @@ city_tatooine_mos_eisley_452	TATOOINE	tat_moseisley_starport	AREA	7	49.0	0.6	50.
 city_tatooine_mos_eisley_453	TATOOINE	tat_world	AREA	0	3632.9	5.0	-4781.4	-154	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	conversation			600
 city_tatooine_mos_eisley_454	TATOOINE	tat_world	AREA	0	3534.0	5.0	-4807.9	-68	1	a Wookiee Trading Co. Employee	humanoid_kashyyyk_wke_merchant_01	QUEST	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		teleport_kachirho_enter	600
 city_tatooine_mos_eisley_455	TATOOINE	tat_moseisley_commerce_gh	AREA	8	0	1.1	-14.6	-2	1	Mayor Mikdanyell Guh'rantt	humanoid_mos_eisley_mayor	INVULNERABLE	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		tatooine_mos_eisley_mayor	600
+city_tatooine_mos_eisley_455	TATOOINE	tat_world	AREA	0	3533.0	5.0	-4789.5	-93	1	Doctor Lu	humanoid_som_doctor_lu	QUEST	N	100	100	City	Mos Eisley	1	IDLE	0	0	-	idle		buffs_medic	600

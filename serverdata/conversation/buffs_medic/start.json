@@ -1,0 +1,26 @@
+{
+	"npcMessage": {
+		"file": "conversation/biogenic_scientist_generic_01",
+		"key": "s_cc366e42",
+		"comment": "Relax, I'm here to help."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/biogenic_scientist_human",
+				"key": "s_a2a14f83",
+				"comment": "We'll see if I get a chance."
+			},
+			"next": "buffs_medic/apply"
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "nod"
+			}
+		}
+	]
+}
