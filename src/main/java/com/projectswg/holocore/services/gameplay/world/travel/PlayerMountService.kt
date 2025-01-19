@@ -256,7 +256,6 @@ class PlayerMountService : Service() {
 		mount.setTurnScale(vehicleInfo.turnRateMax.toDouble())
 		mount.setAccelScale(vehicleInfo.accelMax)
 		mount.putCustomization("/private/index_speed_max", (vehicleInfo.speed * 10.0).toInt())
-		mount.putCustomization("/private/index_speed_min", (vehicleInfo.minSpeed * 10.0).toInt())
 		mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.turnRate)
 		mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.turnRateMax)
 		mount.putCustomization("/private/index_accel_min", (vehicleInfo.accelMin * 10.0).toInt())
@@ -269,7 +268,6 @@ class PlayerMountService : Service() {
 		mount.putCustomization("/private/index_banking", vehicleInfo.bankingAngle.toInt())
 		mount.putCustomization("/private/index_hover_height", (vehicleInfo.hoverHeight * 10.0).toInt())
 		mount.putCustomization("/private/index_auto_level", (vehicleInfo.autoLevel * 100.0).toInt())
-		mount.putCustomization("/private/index_strafe", if (vehicleInfo.isStrafe) 1 else 0)
 
 		ObjectCreatedIntent(mount).broadcast()
 		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.terrain, mount.location.position)
