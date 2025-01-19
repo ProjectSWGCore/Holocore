@@ -213,6 +213,7 @@ public class GenericPlayer extends Player {
 		}
 		return null;
 	}
+	
 	@Nullable
 	public DeltasMessage waitForNextObjectDelta(long objectId, int num, int update, long timeout, TimeUnit unit) {
 		Predicate<DeltasMessage> deltaPacketFilter = p -> p.getObjectId() == objectId && p.getNum() == num && p.getUpdate() == update;

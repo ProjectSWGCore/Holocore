@@ -25,17 +25,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
+import com.projectswg.common.network.NetBuffer
 import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.waitForExperiencePoints(xpType: String) {
-	val originalXP = getXP(xpType)
-	player.waitForNextObjectDelta(player.playerObject.objectId, 8, 0, 1, TimeUnit.SECONDS) ?: throw IllegalStateException("No XP delta received")
-	val newXP = getXP(xpType)
-	
-	if (newXP == originalXP) {
-		// We may have received a delta for a different XP type. Try again.
-		// The exception above will be thrown if we never get the delta we're waiting for, preventing an infinite loop.
-		waitForExperiencePoints(xpType) 
+	while (true) { // Quits naturally when the packet timeout is exceeded
+		val experienceDelta = player.waitForNextObjectDelta(player.playerObject.objectId, 8, 0, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No XP delta received")
+		// TODO: Add a proper parser for SWGMap deltas
+		val deltasData = NetBuffer.wrap(experienceDelta.deltaData)
+		deltasData.seek(9)
+		val deltaXpType = deltasData.ascii
+		if (deltaXpType == xpType)
+			return
 	}
 }
 
