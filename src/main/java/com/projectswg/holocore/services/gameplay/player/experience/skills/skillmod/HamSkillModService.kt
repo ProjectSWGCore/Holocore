@@ -48,10 +48,10 @@ class HamSkillModService : Service() {
 	private fun handleHealthPercent(intent: SkillModIntent, adjustModifier: Int) {
 		for (creature in intent.affectedCreatures) {
 			val originalMaxHealth = creature.maxHealth
-			val extraMaxHealth = ((adjustModifier / 100.0) * creature.maxHealth).toInt()    // If healthPercent is 10, then mod is 1.1. A creature with 1000 health will then have 1100 health.
-			creature.maxHealth += extraMaxHealth
-			
-			StandardLog.onPlayerTrace(this, creature, "max health increased by $adjustModifier%% $originalMaxHealth -> ${creature.maxHealth}")	// %% is used to escape the % character
+			val newMaxHealth = HealthPercentCalculator.calculateNewMaxHealth(originalMaxHealth, adjustModifier)
+			creature.maxHealth = newMaxHealth
+
+			StandardLog.onPlayerTrace(this, creature, "max health increased by $adjustModifier%% $originalMaxHealth -> $newMaxHealth")	// %% is used to escape the % character
 		}
 	}
 }

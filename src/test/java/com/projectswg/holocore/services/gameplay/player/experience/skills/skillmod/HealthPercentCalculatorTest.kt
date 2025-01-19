@@ -25,53 +25,23 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.player.experience.skills.skillmod
 
-import com.projectswg.holocore.intents.gameplay.player.experience.SkillModIntent
-import com.projectswg.holocore.intents.support.objects.ContainerTransferIntent
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
-class SkillModService : Service() {
+class HealthPercentCalculatorTest {
 
-	@IntentHandler
-	private fun handlehandleContainerTransferIntent(cti: ContainerTransferIntent) {
-		val owner = cti.obj.owner ?: return
-		val creature = owner.creatureObject
-
-		val obj = cti.obj
-		if (obj is TangibleObject) {
-			val skillMods: Map<String, Int> = obj.skillMods
-
-			for (skillMod in skillMods) {
-				val modName = skillMod.key
-				val modValue = skillMod.value
-
-				if (isEquippingItem(cti.container, creature)) {
-					SkillModIntent(modName, 0, modValue, creature).broadcast()
-				} else if (isUnequippingItem(cti.oldContainer, creature)) {
-					SkillModIntent(modName, 0, -modValue, creature).broadcast()
-				}
-			}
-		}
+	@Test
+	fun testAdd() {
+		assertEquals(3300, HealthPercentCalculator.calculateNewMaxHealth(3000, 10))
 	}
 
-	private fun isEquippingItem(container: SWGObject?, creature: CreatureObject): Boolean {
-		return container != null && container.objectId == creature.objectId
-	}
+	@Test
+	fun testAddThenRemove() {
+		val originalMaxHealth = 2487
+		
+		val buffedMaxHealth = HealthPercentCalculator.calculateNewMaxHealth(originalMaxHealth, 10)
+		val unbuffedMaxHealth = HealthPercentCalculator.calculateNewMaxHealth(buffedMaxHealth, -10)
 
-	private fun isUnequippingItem(oldContainer: SWGObject?, creature: CreatureObject): Boolean {
-		return oldContainer != null && oldContainer.objectId == creature.objectId
-	}
-
-	@IntentHandler
-	private fun handleSkillModIntent(smi: SkillModIntent) {
-		for (creature in smi.affectedCreatures) {
-			val skillModName = smi.skillModName
-			val adjustBase = smi.adjustBase
-			val adjustModifier = smi.adjustModifier
-			creature.adjustSkillmod(skillModName, adjustBase, adjustModifier)
-		}
+		assertEquals(originalMaxHealth, unbuffedMaxHealth, "We should have the same health as we started with")
 	}
 }
