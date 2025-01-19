@@ -25,19 +25,21 @@
  ***********************************************************************************/
 package com.projectswg.holocore.headless
 
-import com.projectswg.common.network.NetBuffer
+import com.projectswg.common.encoding.StringType
+import com.projectswg.holocore.resources.support.data.collections.SWGMap
+import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.waitForExperiencePoints(xpType: String) {
+	@Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") // We want a Java boxed int for now
+	val experienceMap = SWGMap<String, Integer>(8, 0, StringType.ASCII)
 	while (true) { // Quits naturally when the packet timeout is exceeded
 		val experienceDelta = player.waitForNextObjectDelta(player.playerObject.objectId, 8, 0, 50, TimeUnit.MILLISECONDS) ?: throw IllegalStateException("No XP delta received")
-		// TODO: Add a proper parser for SWGMap deltas
-		val deltasData = NetBuffer.wrap(experienceDelta.deltaData)
-		deltasData.seek(9)
-		val deltaXpType = deltasData.ascii
-		if (deltaXpType == xpType)
-			return
+		experienceMap.decode(ByteBuffer.wrap(experienceDelta.deltaData).order(ByteOrder.LITTLE_ENDIAN), StringType.ASCII, Integer::class.java)
+		if (experienceMap.containsKey(xpType))
+			break
 	}
 }
 
-private fun ZonedInCharacter.getXP(xpType: String) = player.playerObject.getExperiencePoints(xpType)
+fun ZonedInCharacter.getXP(xpType: String) = player.playerObject.getExperiencePoints(xpType)

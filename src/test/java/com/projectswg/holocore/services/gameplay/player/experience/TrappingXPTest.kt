@@ -45,7 +45,7 @@ class TrappingXPTest : AcceptanceTest() {
 
 		// There are three types of XP we receive from this kill: combat_meleespecialize_unarmed, trapping, and combat_general
 		character.waitForExperiencePoints("trapping")
-		assertTrue(character.player.playerObject.getExperiencePoints("trapping") > 0)
+		assertTrue(character.getXP("trapping") > 0)
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class TrappingXPTest : AcceptanceTest() {
 
 		killTarget(character, npc)
 
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+		assertEquals(0, character.getXP("trapping"))
 	}
 
 	@Test
@@ -68,7 +68,7 @@ class TrappingXPTest : AcceptanceTest() {
 
 		killTarget(character, npc)
 
-		assertEquals(0, character.player.playerObject.getExperiencePoints("trapping"))
+		assertEquals(0, character.getXP("trapping"))
 	}
 
 	private fun killTarget(character: ZonedInCharacter, target: CreatureObject) {

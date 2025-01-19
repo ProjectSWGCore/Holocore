@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -182,13 +181,17 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		NetBuffer buffer = NetBuffer.wrap(data);
 		try {
 			for (int i = 0; i < size; i++) {
-				buffer.getByte();
+				byte updateType = buffer.getByte();
 				String key = buffer.getString(keyType);
 				Object value = buffer.getGeneric(vType);
-				if (value != null && vType.isAssignableFrom(value.getClass()))
-					put((K) key, (V) value);
-				else
-					Log.e("Unable to parse: key=%s  value=%s", key, value);
+				if (updateType == 0 || updateType == 2) {
+					if (value != null && vType.isAssignableFrom(value.getClass()))
+						put((K) key, (V) value);
+					else
+						Log.e("Unable to parse: key=%s  value=%s", key, value);
+				} else if (updateType == 1) {
+					remove(key);
+				}
 			}
 		} catch (ClassCastException e) {
 			Log.e(e);
@@ -204,7 +207,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 		
 		NetBuffer buffer = NetBuffer.wrap(data);
 		for (int i = 0; i < size; i++) {
-			buffer.getByte();
+			byte updateType = buffer.getByte();
 			Object key = buffer.getGeneric(kType);
 			if (key == null) {
 				Log.e("Failed to decode: " + kType.getSimpleName());
@@ -215,10 +218,14 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 				Log.e("Failed to decode: " + vType.getSimpleName());
 				break;
 			}
-			if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
-				put((K) key, (V) value);
-			else
-				Log.e("Failed to insert key=" + key + "  value=" + value);
+			if (updateType == 0 || updateType == 2) {
+				if (kType.isAssignableFrom(key.getClass()) && vType.isAssignableFrom(value.getClass()))
+					put((K) key, (V) value);
+				else
+					Log.e("Failed to insert key=" + key + "  value=" + value);
+			} else if (updateType == 1) {
+				remove(key);
+			}
 		}
 		clearDeltaQueue();
 	}
