@@ -284,6 +284,20 @@ class PlayerMountService : Service() {
 		vehicleDecayJobs[mount] = coroutineScope.launchWithFixedDelay(10, TimeUnit.MINUTES) {
 			decayVehicle(player, mount, vehicleInfo.decayRate / 2)
 		}
+
+		if (isJetpack(mount)) {
+			automaticallyMountJetpack(player, mount)
+		}
+	}
+
+	private fun automaticallyMountJetpack(player: CreatureObject, mount: CreatureObject) {
+		coroutineScope.launchAfter(1, TimeUnit.SECONDS) {
+			enterMount(player, mount)
+		}
+	}
+
+	private fun isJetpack(mount: CreatureObject): Boolean {
+		return "object/mobile/vehicle/shared_jetpack.iff" == mount.template
 	}
 
 	private fun decayVehicle(player: CreatureObject, mount: CreatureObject, conditionDamage: Int) {
@@ -419,6 +433,23 @@ class PlayerMountService : Service() {
 		player.moveToContainer(null, mount.location)
 		player.resetMovement()
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount)
+
+		if (isJetpack(mount)) {
+			automaticallyStoreJetpack(player, mount)
+		}
+	}
+
+	private fun automaticallyStoreJetpack(player: CreatureObject, mount: CreatureObject) {
+		coroutineScope.launchAfter(1, TimeUnit.SECONDS) {
+			val mounts = calledMounts[player]
+			if (mounts != null) {
+				for (p in mounts) {
+					if (p.mount === mount) {
+						storeMount(player, mount, p.petControlDevice)
+					}
+				}
+			}
+		}
 	}
 
 	private fun emergencyDismount(player: CreatureObject, mount: CreatureObject) {
