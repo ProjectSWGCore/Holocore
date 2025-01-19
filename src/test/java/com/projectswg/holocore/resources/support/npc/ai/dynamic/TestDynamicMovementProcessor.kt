@@ -23,10 +23,34 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.npc.ai
+package com.projectswg.holocore.resources.support.npc.ai.dynamic
 
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.mongodb.assertions.Assertions
+import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents
+import org.junit.jupiter.api.Test
 
-@ManagerStructure(children = [AIService::class, AIDynamicMovementService::class, AIMovementService::class])
-class AIManager : Manager()
+class TestDynamicMovementProcessor : TestRunnerNoIntents() {
+
+	@Test
+	fun testNoBuildZoneCheck() {
+		// No intersections
+		Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(-559, -1197)))
+		Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(5710, -5478)))
+		Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(4433, -4013)))
+		Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(3577, -1067), tatooine(-2141, 4485)))
+		Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(3577, -1067), tatooine(5812, 5580)))
+		
+		// Intersections
+		Assertions.assertTrue(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(5812, 5580)))
+		Assertions.assertTrue(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(3505, -4811)))
+		Assertions.assertTrue(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(2503, -5798)))
+		Assertions.assertTrue(DynamicMovementProcessor.isIntersectingProtectedZone(tatooine(5391, -3185), tatooine(-5246, -3984)))
+	}
+	
+	private fun tatooine(x: Int, z: Int): Location {
+		return Location.builder().setTerrain(Terrain.TATOOINE).setX(x.toDouble()).setZ(z.toDouble()).build()
+	}
+
+}

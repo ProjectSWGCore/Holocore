@@ -23,10 +23,33 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.npc.ai
+package com.projectswg.holocore.resources.support.npc.ai.dynamic
 
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.mongodb.assertions.Assertions
+import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.test.runners.TestRunnerNoIntents
+import org.junit.jupiter.api.Test
 
-@ManagerStructure(children = [AIService::class, AIDynamicMovementService::class, AIMovementService::class])
-class AIManager : Manager()
+class TestDynamicMovement : TestRunnerNoIntents() {
+
+	@Test
+	fun testWanderNoCollide() {
+		val obj = DynamicMovementObject(Location.builder()
+			.setTerrain(Terrain.TATOOINE)
+			.setX(1024.toDouble())
+			.setY(ServerData.terrains.getHeight(Terrain.TATOOINE, 1024.toDouble(), 1024.toDouble()))
+			.setZ(1024.toDouble())
+			.build())
+		
+		var previousLocation = obj.location
+		for (i in 0 until 1000) {
+			obj.move()
+			val newLocation = obj.location
+			Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(previousLocation, newLocation))
+			previousLocation = newLocation
+		}
+	}
+	
+}
