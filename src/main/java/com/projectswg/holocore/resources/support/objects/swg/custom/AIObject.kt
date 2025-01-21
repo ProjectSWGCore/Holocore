@@ -26,9 +26,11 @@
 package com.projectswg.holocore.resources.support.objects.swg.custom
 
 import com.projectswg.common.data.encodables.oob.StringId
+import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.baselines.Baseline.BaselineType
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.resources.support.color.SWGColor.Reds.red
+import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
 import com.projectswg.holocore.resources.support.npc.ai.NpcCombatMode
 import com.projectswg.holocore.resources.support.npc.ai.NpcIdleMode
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
@@ -39,12 +41,11 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureSt
 import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.utilities.cancelAndWait
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
 import java.time.Instant
 import java.util.*
 import java.util.concurrent.CopyOnWriteArraySet
+import java.util.concurrent.atomic.AtomicReference
 
 class AIObject(objectId: Long) : CreatureObject(objectId) {
 	private val playersNearby: MutableSet<CreatureObject> = CopyOnWriteArraySet()
@@ -55,6 +56,7 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 	private var coroutineScope: CoroutineScope? = null
 	private var previousScheduled: Job? = null
 	private var questionMarkBlockedUntil: Instant = Instant.now()
+	private var movementJob = AtomicReference<Job?>(null)
 	
 	val defaultWeapons: List<WeaponObject>
 		get() {
@@ -203,6 +205,17 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 		} else {
 			mode.addTargets(targets)
 		}
+	}
+	
+	fun moveTo(newParent: SWGObject?, location: Location, speed: Double) {
+		val newMovementTask = coroutineScope?.launch {
+			val route = NavigationPoint.from(this@AIObject.parent, this@AIObject.location, newParent, location, speed)
+			for (point in route) {
+				point.move(this@AIObject)
+				delay(1000L)
+			}
+		} ?: return
+		movementJob.getAndSet(newMovementTask)?.cancel()
 	}
 	
 	fun start(coroutineScope: CoroutineScope) {

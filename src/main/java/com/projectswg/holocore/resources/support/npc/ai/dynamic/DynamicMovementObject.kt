@@ -26,30 +26,96 @@
 package com.projectswg.holocore.resources.support.npc.ai.dynamic
 
 import com.projectswg.common.data.location.Location
+import com.projectswg.holocore.intents.support.objects.DestroyObjectIntent
+import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
+import com.projectswg.holocore.resources.support.npc.spawn.NPCCreator
+import com.projectswg.holocore.resources.support.npc.spawn.SimpleSpawnInfo
+import com.projectswg.holocore.resources.support.npc.spawn.Spawner
+import com.projectswg.holocore.resources.support.npc.spawn.SpawnerType
+import com.projectswg.holocore.resources.support.objects.ObjectCreator
+import com.projectswg.holocore.resources.support.objects.permissions.AdminPermissions
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
+import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.cos
 import kotlin.math.sin
 
-class DynamicMovementObject(var location: Location) {
+class DynamicMovementObject(var location: Location, val name: String, val baseSpeed: Double = 0.0) {
 	
 	var heading = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI
+	private val groupMarker = ObjectCreator.createObjectFromTemplate("object/path_waypoint/shared_path_waypoint_droid.iff")
+	private val npcs = ArrayList<AIObject>()
+	private var lastUpdate = System.nanoTime()
 	
-	fun move() {
-		assert(!isOutOfBounds(location))
-		assert(heading in 0.0..Math.TAU)
-		moveNextPosition()
+	init {
+		groupMarker.location = location
+		groupMarker.objectName = name
+		groupMarker.containerPermissions = AdminPermissions.getPermissions()
 	}
 	
-	private fun moveNextPosition() {
-		val firstProposed = calculateNextPosition(heading)
+	fun launch() {
+		ObjectCreatedIntent(groupMarker).broadcast()
+		val simpleSpawnInfo = SimpleSpawnInfo.builder()
+			.withNpcId("humanoid_tusken_soldier")
+			.withDifficulty(CreatureDifficulty.NORMAL)
+			.withSpawnerType(SpawnerType.WAYPOINT_AUTO_SPAWN)
+			.withMinLevel(10)
+			.withMaxLevel(30)
+			.withSpawnerFlag(NpcStaticSpawnLoader.SpawnerFlag.AGGRESSIVE)
+			.withBehavior(AIBehavior.IDLE)
+			.withLocation(location)
+		val bossSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.BOSS).build(), groupMarker)
+		val eliteSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.ELITE).build(), groupMarker)
+		val normalSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.NORMAL).build(), groupMarker)
+		val random = ThreadLocalRandom.current()
+		if (random.nextDouble() < 0.25)
+			npcs.add(NPCCreator.createSingleNpc(bossSpawner))
+		npcs.add(NPCCreator.createSingleNpc(eliteSpawner))
+		repeat(15) {
+			npcs.add(NPCCreator.createSingleNpc(normalSpawner))
+		}
+	}
+	
+	fun destroy() {
+		DestroyObjectIntent(groupMarker).broadcast()
+	}
+	
+	fun act() {
+		assert(!isOutOfBounds(location))
+		assert(heading in 0.0..Math.TAU)
+		val currentTime = System.nanoTime()
+		val npcSpeed = if (baseSpeed != 0.0) baseSpeed else npcs[0].walkSpeed.toDouble()
+		val elapsedTime = (currentTime - lastUpdate) / 1E9
+		val distance = elapsedTime * npcSpeed // TODO: scale based on terrain, somewhat
+		lastUpdate = currentTime
+		moveNextPosition(distance)
+		groupMarker.moveToLocation(location)
+		npcs.forEachIndexed { i, it ->
+			// Spiral shape for now
+			val radius = 1 + i * 0.5
+			val angle = i * (Math.PI * 0.61)
+			val newLocationBuilder = Location.builder(location)
+				.setX(location.x + radius * cos(angle))
+				.setZ(location.z + radius * sin(angle))
+			newLocationBuilder.setY(ServerData.terrains.getHeight(newLocationBuilder))
+			val newLocation = newLocationBuilder.build()
+			val speed = it.worldLocation.distanceTo(newLocation) / elapsedTime
+			it.moveTo(null, newLocationBuilder.build(), speed)
+		}
+	}
+	
+	private fun moveNextPosition(distance: Double) {
+		val firstProposed = calculateNextPosition(heading, distance)
 		if (isValidNextPosition(firstProposed)) {
 			location = firstProposed
 			return
 		}
 
 		val newHeading = heading + Math.PI * (1 + ThreadLocalRandom.current().nextDouble() - 0.5)
-		val secondProposed = calculateNextPosition(newHeading)
+		val secondProposed = calculateNextPosition(newHeading, distance)
 		if (isValidNextPosition(secondProposed)) {
 			location = secondProposed
 			heading = if (newHeading >= Math.TAU) newHeading - Math.TAU else newHeading
@@ -60,7 +126,7 @@ class DynamicMovementObject(var location: Location) {
 		val randomRotationFromNorth = ThreadLocalRandom.current().nextDouble() * Math.TAU
 		for (clockwiseRotation in 0..35) {
 			val bruteForceHeading = (clockwiseRotation * 10) * Math.PI / 180.0 + randomRotationFromNorth
-			val proposed = calculateNextPosition(bruteForceHeading)
+			val proposed = calculateNextPosition(bruteForceHeading, distance)
 			if (isValidNextPosition(proposed)) {
 				location = proposed
 				heading = if (bruteForceHeading >= Math.TAU) bruteForceHeading - Math.TAU else bruteForceHeading
@@ -80,10 +146,10 @@ class DynamicMovementObject(var location: Location) {
 		return location.x < -7000 || location.x > 7000 || location.z < -7000 || location.z > 7000
 	}
 	
-	private fun calculateNextPosition(heading: Double): Location {
+	private fun calculateNextPosition(heading: Double, distance: Double): Location {
 		val nextLocationBuilder = Location.builder(location)
-			.setX(location.x + 50 * cos(heading))
-			.setZ(location.z + 50 * sin(heading))
+			.setX(location.x + distance * cos(heading))
+			.setZ(location.z + distance * sin(heading))
 			.setHeading(heading)
 		nextLocationBuilder.setY(ServerData.terrains.getHeight(nextLocationBuilder))
 		return nextLocationBuilder.build()

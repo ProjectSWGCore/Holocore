@@ -41,11 +41,11 @@ class TestDynamicMovement : TestRunnerNoIntents() {
 			.setX(1024.toDouble())
 			.setY(ServerData.terrains.getHeight(Terrain.TATOOINE, 1024.toDouble(), 1024.toDouble()))
 			.setZ(1024.toDouble())
-			.build())
+			.build(), "devtest", 100.0)
 		
 		var previousLocation = obj.location
-		for (i in 0 until 1000) {
-			obj.move()
+		repeat(1000) {
+			obj.act()
 			val newLocation = obj.location
 			Assertions.assertFalse(DynamicMovementProcessor.isIntersectingProtectedZone(previousLocation, newLocation))
 			previousLocation = newLocation

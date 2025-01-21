@@ -25,10 +25,82 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.support.npc.ai
 
+import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase.config
+import com.projectswg.holocore.resources.support.npc.ai.dynamic.DynamicMovementObject
+import com.projectswg.holocore.resources.support.npc.ai.dynamic.DynamicMovementProcessor
+import com.projectswg.holocore.utilities.HolocoreCoroutine
+import com.projectswg.holocore.utilities.cancelAndWait
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.Service
+import me.joshlarson.jlcommon.log.Log
+import java.util.*
+import java.util.concurrent.CopyOnWriteArrayList
 
 class AIDynamicMovementService : Service() {
+
+	private val coroutineScope = HolocoreCoroutine.childScope()
+	private val dynamicObjects = EnumMap<Terrain, CopyOnWriteArrayList<DynamicMovementObject>>(Terrain::class.java)
 	
+	init {
+		// Guarantee all terrains are set so that we don't have to worry about concurrent access later
+		for (terrain in Terrain.entries) {
+			dynamicObjects[terrain] = CopyOnWriteArrayList()
+		}
+	}
 	
+	override fun start(): Boolean {
+		val spawnsPerPlanet = config.getInt(this, "spawnsPerPlanet", 10)
+		for (terrain in listOf(Terrain.TATOOINE)) {
+			launchDynamicMovementObjectHandler(terrain, "DynamicObject-${terrain.name}-dev")
+			repeat(spawnsPerPlanet) {
+				launchDynamicMovementObjectHandler(terrain, "DynamicObject-${terrain.name}-$it")
+			}
+		}
+		return super.start()
+	}
+
+	override fun stop(): Boolean {
+		coroutineScope.cancelAndWait()
+		return super.stop()
+	}
 	
+	private fun launchDynamicMovementObjectHandler(terrain: Terrain, objectName: String) {
+		coroutineScope.launch {
+			try {
+				while (isActive) {
+					delay(5_000L)
+					val spawnLocation = if (objectName.endsWith("-dev"))
+						Location.builder().setTerrain(terrain).setX(1024.0).setZ(1024.0).setY(ServerData.terrains.getHeight(terrain, 1024.0, 1024.0)).build()
+					else
+						DynamicMovementProcessor.createSpawnLocation(terrain) ?: continue
+					Log.d("Created dynamic movement object: %s", spawnLocation)
+					val dynamicObject = DynamicMovementObject(spawnLocation, objectName)
+					dynamicObject.launch()
+					dynamicObjects[terrain]!!.add(dynamicObject)
+					try {
+						handleObjectLoop(dynamicObject)
+					} finally {
+						dynamicObject.destroy()
+						dynamicObjects[terrain]!!.remove(dynamicObject)
+					}
+				}
+			} finally {
+
+			}
+		}
+	}
+	
+	private suspend fun CoroutineScope.handleObjectLoop(dynamicObject: DynamicMovementObject) {
+		while (isActive) {
+			dynamicObject.act()
+			delay(10_000L)
+		}
+	}
+
 }
