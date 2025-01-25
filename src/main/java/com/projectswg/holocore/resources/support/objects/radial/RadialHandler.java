@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -40,6 +39,7 @@ import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleDevic
 import com.projectswg.holocore.resources.support.objects.radial.pet.VehicleMountRadial;
 import com.projectswg.holocore.resources.support.objects.radial.terminal.*;
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
+import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject;
 import com.projectswg.holocore.resources.support.objects.swg.tangible.CreditObject;
 import org.jetbrains.annotations.NotNull;
@@ -71,6 +71,7 @@ public enum RadialHandler {
 		
 		classHandlers.put(AIObject.class, aiHandler);
 		classHandlers.put(CreditObject.class, new CreditObjectRadial());
+		classHandlers.put(CreatureObject.class, new CreatureObjectRadial());
 	}
 	
 	private void initializeMeleeWeaponRadials() {
