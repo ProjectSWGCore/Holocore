@@ -23,7 +23,7 @@ carbine_ee3	EE3 Carbine	object/weapon/ranged/carbine/carbine_ee3.iff	weapon	1	10
 carbine_elite	Elite Carbine	object/weapon/ranged/carbine/carbine_elite.iff	weapon	1	1000	ranged_weapon	CARBINE	202	925	energy		0	2.75	130	0	50		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 carbine_geo	Kalranoos Carbine	object/weapon/ranged/carbine/carbine_geo.iff	weapon	1	1000	ranged_weapon	CARBINE	117	590	energy		0	2.75	130	0	50		0		50			0	100	0	0	0	0	0	0	500	0	0	-
 carbine_laser	Laser Carbine	object/weapon/ranged/carbine/carbine_laser.iff	weapon	1	1000	ranged_weapon	CARBINE	157	745	energy	heat	70	2.75	130	0	50		0		50			0	100	0	0	0	0	0	0	500	0	0	-
-carbine_nym_slugthrower	Nym’s Slug-thrower Carbine	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff	weapon	1	1000	ranged_weapon	CARBINE	134	655	kinetic	acid	160	2.75	130	0	50		0		50			0	100	0	0	0	0	0	0	500	0	0	-
+carbine_nym_slugthrower	Nym's Slug-thrower Carbine	object/weapon/ranged/carbine/carbine_nym_slugthrower.iff	weapon	1	1000	ranged_weapon	CARBINE	134	655	kinetic	acid	160	2.75	130	0	50		0		50			0	100	0	0	0	0	0	0	500	0	0	-
 carbine_proton	Proton Carbine	object/weapon/ranged/carbine/carbine_proton.iff	weapon	1	1000	ranged_weapon	CARBINE	184	855	energy	cold	90	2.75	130	0	50		0		54	combat_bountyhunter_master		0	100	0	0	0	0	0	0	540	0	0	-
 carbine_republic_sfor	Sfor Republic Carbine	object/weapon/ranged/carbine/som_carbine_republic_sfor.iff	weapon	1	1000	ranged_weapon	CARBINE	202	925	energy		0	2.75	130	0	50		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 carbine_underslung	Underslung Carbine	object/weapon/ranged/carbine/carbine_underslung.iff	weapon	1	1000	ranged_weapon	CARBINE	144	695	kinetic		0	2.75	130	0	50		0		40			0	100	0	0	0	0	0	0	400	0	0	-
@@ -45,7 +45,7 @@ ep3_loot_heartstriker	Sayormi Heartstriker	object/weapon/melee/special/ep3_loot_
 ep3_loot_hydra	Red Hydra Z-5	object/weapon/ranged/pistol/ep3_loot_hydra.iff	weapon	1	1000	ranged_weapon	PISTOL	105	542	energy		0	2.5	120	0	25		0		30	outdoors_squadleader_novice		0	100	0	0	0	0	0	0	300	0	0	-
 ep3_loot_lifeblood	Lifeblood Cleaver	object/weapon/melee/2h_sword/ep3_loot_lifeblood.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	153	670	kinetic		0	3	140	0	5		0		30	combat_2hsword_novice		0	100	0	0	0	0	0	0	300	0	0	-
 ep3_loot_liquidsilver	Liquidsilver L7	object/weapon/ranged/pistol/ep3_loot_liquidsilver.iff	weapon	1	1000	ranged_weapon	PISTOL	106	541	energy		0	2.5	120	0	25		0		30	combat_smuggler_novice		0	100	0	0	0	0	0	0	300	0	0	-
-ep3_loot_mark	Exemplar’s Mark	object/weapon/ranged/carbine/ep3_loot_mark.iff	weapon	1	1000	ranged_weapon	CARBINE	150	720	energy		0	2.75	130	0	35		0		40	outdoors_squadleader_offense_03		0	100	0	0	0	0	0	0	400	0	0	-
+ep3_loot_mark	Exemplar's Mark	object/weapon/ranged/carbine/ep3_loot_mark.iff	weapon	1	1000	ranged_weapon	CARBINE	150	720	energy		0	2.75	130	0	35		0		40	outdoors_squadleader_offense_03		0	100	0	0	0	0	0	0	400	0	0	-
 ep3_loot_necrosis	Necrosis Nightblade	object/weapon/melee/special/ep3_loot_necrosis.iff	weapon	1	1000	melee_weapon	UNARMED	182	850	kinetic		0	2.5	120	0	25		0		54	combat_unarmed_master		0	100	0	0	0	0	0	0	540	0	0	-
 ep3_loot_nullifier	Nullifier X	object/weapon/ranged/rifle/ep3_loot_nullifier.iff	weapon	1	1000	ranged_weapon	RIFLE	260	1160	energy		0	3.25	150	0	55		0		54	combat_rifleman_master		0	100	0	0	0	0	0	0	540	0	0	-
 ep3_loot_pestilence	Pestilence	object/weapon/melee/polearm/ep3_loot_pestilence.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	166	720	kinetic		0	2.75	130	0	5		0		40	combat_polearm_accuracy_03		0	100	0	0	0	0	0	0	400	0	0	-
@@ -57,7 +57,7 @@ ep3_loot_rhiss	Rhiss Mark-20	object/weapon/ranged/pistol/ep3_loot_rhiss.iff	weap
 ep3_loot_rilctur	Rilctur Carbine	object/weapon/ranged/carbine/ep3_loot_rilctur.iff	weapon	1	1000	ranged_weapon	CARBINE	122	610	energy		0	2.75	130	0	35		0		30	combat_carbine_novice		0	100	0	0	0	0	0	0	300	0	0	-
 ep3_loot_ripper	Bloodshot Ripper	object/weapon/melee/sword/ep3_loot_ripper.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	250	1055	kinetic		0	2.5	140	0	5		0		54	combat_2hsword_master		0	100	0	0	0	0	0	0	540	0	0	-
 ep3_loot_sharpshooter	Vershyi Sharpshooter	object/weapon/ranged/rifle/ep3_loot_sharpshooter.iff	weapon	1	1000	ranged_weapon	RIFLE	137	670	energy		0	3	140	0	60		0		30	combat_rifleman_novice		0	100	0	0	0	0	0	0	300	0	0	-
-ep3_loot_sickle	Darstai’is Sickle	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	186	800	kinetic		0	3	140	0	5		0		40	combat_2hsword_ability_03		0	100	0	0	0	0	0	0	400	0	0	-
+ep3_loot_sickle	Darstai'is Sickle	object/weapon/melee/2h_sword/ep3_loot_sickle.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	186	800	kinetic		0	3	140	0	5		0		40	combat_2hsword_ability_03		0	100	0	0	0	0	0	0	400	0	0	-
 ep3_loot_silencer	The Silencer	object/weapon/ranged/pistol/ep3_loot_silencer.iff	weapon	1	1000	ranged_weapon	PISTOL	132	645	kinetic		0	2.5	120	0	25		0		40	combat_pistol_support_03		0	100	0	0	0	0	0	0	400	0	0	-
 ep3_loot_soulstinger	Sayormi Soulstinger	object/weapon/melee/special/ep3_loot_soulstinger.iff	weapon	1	1000	melee_weapon	UNARMED	132	645	energy		0	2.5	120	0	25		0		40	combat_unarmed_speed_03		0	100	0	0	0	0	0	0	400	0	0	-
 ep3_loot_strike	Strike Assault Lance	object/weapon/melee/polearm/ep3_loot_strike.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	138	605	kinetic		0	2.75	130	0	5		0		30	combat_polearm_master		0	100	0	0	0	0	0	0	300	0	0	-
@@ -76,7 +76,7 @@ heavy_particle_beam	Heavy Particle Beam Cannon	object/weapon/ranged/heavy/heavy_
 knife_dagger	Dagger	object/weapon/melee/knife/knife_dagger.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	17	68	kinetic		0	2.5	120	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
 knife_donkuwah	Donkuwah Knife	object/weapon/melee/knife/knife_donkuwah.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	17	68	kinetic		0	2.5	120	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
 knife_janta	Janta Knife	object/weapon/melee/knife/knife_janta.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	17	67	kinetic		0	2.5	120	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
-knife_naktra_crystal	Nak’tra Crystal Knife	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	166	722	kinetic		0	2.5	120	0	5		0		40			0	100	0	0	0	0	0	0	400	0	0	-
+knife_naktra_crystal	Nak'tra Crystal Knife	object/weapon/melee/knife/ep3/knife_naktra_crystal.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	166	722	kinetic		0	2.5	120	0	5		0		40			0	100	0	0	0	0	0	0	400	0	0	-
 knife_stone	Stone Knife	object/weapon/melee/knife/knife_stone.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	17	68	kinetic		0	2.5	120	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
 knife_survival	Survival Knife	object/weapon/melee/knife/knife_survival.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	17	68	kinetic		0	2.5	120	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
 knife_trando_skinner	Sinew Wrapped Knife	object/weapon/melee/knife/ep3/knife_trando_skinner.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	143	625	kinetic		0	2.5	120	0	5		0		40			0	100	0	0	0	0	0	0	400	0	0	-
@@ -100,7 +100,7 @@ lance_staff_janta	Janta Staff	object/weapon/melee/polearm/lance_staff_janta.iff	
 lance_staff_metal	Metal Staff	object/weapon/melee/polearm/lance_staff_metal.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	27	140	kinetic		0	2.75	130	0	5		0		7			0	100	0	0	0	0	0	0	70	0	0	-
 lance_staff_wood_s1	Wood Staff	object/weapon/melee/polearm/lance_staff_wood_s1.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	19	75	kinetic		0	2.75	130	0	5		0		1			0	100	0	0	0	0	0	0	10	0	0	-
 lance_staff_wood_s2	Reinforced Combat Staff	object/weapon/melee/polearm/lance_staff_wood_s2.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	24	98	kinetic		0	2.75	130	0	5		0		6			0	100	0	0	0	0	0	0	60	0	0	-
-lance_trando	Trandoshan Hunter’s Lance	object/weapon/melee/polearm/ep3/lance_trando.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	133	590	kinetic		0	2.75	130	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
+lance_trando	Trandoshan Hunter's Lance	object/weapon/melee/polearm/ep3/lance_trando.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	133	590	kinetic		0	2.75	130	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
 lance_vibro_axe	Long Vibro Axe	object/weapon/melee/axe/axe_vibroaxe.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	144	695	kinetic		0	2.75	130	0	5		0		40			0	100	0	0	0	0	0	0	400	0	0	-
 lance_vibrolance	Vibro Lance	object/weapon/melee/polearm/lance_vibrolance.iff	weapon	1	1000	melee_weapon	POLEARM_MELEE	202	925	kinetic		0	2.75	130	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 pistol_ad	Alliance Disruptor	object/weapon/ranged/pistol/pistol_alliance_disruptor.iff	weapon	1	1000	ranged_weapon	PISTOL	177	825	energy		0	2.5	120	0	35		0		54	science_combatmedic_master		0	100	0	0	0	0	0	0	540	0	0	-
@@ -159,10 +159,10 @@ rifle_ld1	LD-1 Rifle	object/weapon/ranged/rifle/rifle_ld1.iff	weapon	1	1000	rang
 rifle_lightning	Light Lightning Cannon	object/weapon/ranged/rifle/rifle_lightning.iff	weapon	1	1000	ranged_weapon	RIFLE	107	545	energy	electricity	100	3	140	0	65		0		30	combat_bountyhunter_novice		0	100	0	0	0	0	0	0	300	0	0	-
 rifle_lightning_light	Lightning Rifle	object/weapon/ranged/rifle/rifle_lightning_light.iff	weapon	1	1000	ranged_weapon	RIFLE	40	280	energy	electricity	110	3	140	0	65		0		14	combat_bountyhunter_novice		0	100	0	0	0	0	0	0	140	0	0	-
 rifle_massassi_ink	Massassi Ink Rifle	object/weapon/ranged/rifle/rifle_massassi_ink.iff	weapon	1	1000	ranged_weapon	RIFLE	134	655	energy		0	3	140	0	65		0		30			0	100	0	0	0	0	0	0	300	0	0	-
-rifle_naktra_crystal	Nak’tra Crystal Rifle	object/weapon/ranged/rifle/ep3/rifle_naktra_crystal.iff	weapon	1	1000	ranged_weapon	RIFLE	230	1040	energy		0	3	140	0	65		0		40	combat_rifleman_speed_03		0	100	0	0	0	0	0	0	400	0	0	-
-rifle_odararissl	Odara’rissl Rifle	object/weapon/ranged/rifle/rifle_odararissl.iff	weapon	1	1000	ranged_weapon	RIFLE	167	785	kinetic		0	3	140	0	65		0		40			0	100	0	0	0	0	0	0	400	0	0	-
+rifle_naktra_crystal	Nak'tra Crystal Rifle	object/weapon/ranged/rifle/ep3/rifle_naktra_crystal.iff	weapon	1	1000	ranged_weapon	RIFLE	230	1040	energy		0	3	140	0	65		0		40	combat_rifleman_speed_03		0	100	0	0	0	0	0	0	400	0	0	-
+rifle_odararissl	Odara'rissl Rifle	object/weapon/ranged/rifle/rifle_odararissl.iff	weapon	1	1000	ranged_weapon	RIFLE	167	785	kinetic		0	3	140	0	65		0		40			0	100	0	0	0	0	0	0	400	0	0	-
 rifle_proton	Proton Rifle	object/weapon/ranged/rifle/rifle_proton.iff	weapon	1	1000	ranged_weapon	RIFLE	257	1150	energy		0	3	140	0	65		0		54	combat_commando_master		0	100	0	0	0	0	0	0	540	0	0	-
-rifle_quest_tusken	Tusken King’s Rifle	object/weapon/ranged/rifle/event_rifle_tusken_berserker.iff	weapon	1	1000	ranged_weapon	RIFLE	167	785	kinetic		0	3	140	0	65		0		40			0	100	0	0	0	0	0	0	400	0	0	-
+rifle_quest_tusken	Tusken King's Rifle	object/weapon/ranged/rifle/event_rifle_tusken_berserker.iff	weapon	1	1000	ranged_weapon	RIFLE	167	785	kinetic		0	3	140	0	65		0		40			0	100	0	0	0	0	0	0	400	0	0	-
 rifle_sg82	SG82 Rifle	object/weapon/ranged/rifle/rifle_sg82.iff	weapon	1	1000	ranged_weapon	RIFLE	38	208	energy		0	3	140	0	40		0		10			0	100	0	0	0	0	0	0	100	0	0	-
 rifle_spraystick	Spraystick	object/weapon/ranged/rifle/rifle_spraystick.iff	weapon	1	1000	ranged_weapon	RIFLE	40	280	kinetic	heat	110	3	140	0	65		0		14	combat_rifleman_novice		0	100	0	0	0	0	0	0	140	0	0	-
 rifle_t21	T21 Rifle	object/weapon/ranged/rifle/rifle_t21.iff	weapon	1	1000	ranged_weapon	RIFLE	227	1030	energy		0	3	140	0	65		0		54	combat_rifleman_master		0	100	0	0	0	0	0	0	540	0	0	-
@@ -181,7 +181,7 @@ sword_01	Sword	object/weapon/melee/sword/sword_01.iff	weapon	1	1000	melee_weapon
 sword_02	Curved Sword	object/weapon/melee/sword/sword_02.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	63	310	kinetic		0	2.5	120	0	5		0		14			0	100	0	0	0	0	0	0	140	0	0	-
 sword_2h_axe	Two-handed Axe	object/weapon/melee/2h_sword/2h_sword_battleaxe.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	27	105	kinetic		0	3	140	0	5		0		6			0	100	0	0	0	0	0	0	60	0	0	-
 sword_2h_axe_quest	Gamorrean Battleaxe	object/weapon/melee/2h_sword/2h_sword_battleaxe_quest.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	27	110	kinetic		0	3	140	0	5		0		6			0	100	0	0	0	0	0	0	60	0	0	-
-sword_2h_blacksun_hack	Black Sun Executioner’s Hack	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	148	645	kinetic		0	3	140	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
+sword_2h_blacksun_hack	Black Sun Executioner's Hack	object/weapon/melee/2h_sword/2h_sword_blacksun_hack.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	148	645	kinetic		0	3	140	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
 sword_2h_cleaver	Two-handed Cleaver	object/weapon/melee/2h_sword/2h_sword_cleaver.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	44	205	kinetic		0	3	140	0	5		0		10			0	100	0	0	0	0	0	0	100	0	0	-
 sword_2h_kashyyk	Two-handed Kashyyyk Sword	object/weapon/melee/2h_sword/2h_sword_kashyyk.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	115	515	kinetic		0	3	140	0	5		0		22			0	100	0	0	0	0	0	0	220	0	0	-
 sword_2h_katana	Two-handed Curved Sword	object/weapon/melee/2h_sword/2h_sword_katana.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	69	310	kinetic		0	2.5	120	0	5		0		12			0	100	0	0	0	0	0	0	120	0	0	-
@@ -197,15 +197,15 @@ sword_junti_mace	Junti Mace	object/weapon/melee/sword/sword_mace_junti.iff	weapo
 sword_lightsaber	Lightsaber	object/weapon/melee/sword/crafted_saber/sword_lightsaber_one_handed_s1.iff	weapon	1	1000	melee_weapon	ONE_HANDED_SABER	226	960	energy	heat	110	2.5	120	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 sword_lightsaber_2h	Two-Handed Lightsaber	object/weapon/melee/2h_sword/crafted_saber/sword_lightsaber_two_handed_s1.iff	weapon	1	1000	melee_weapon	TWO_HANDED_SABER	226	960	energy	heat	110	3	140	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 sword_lightsaber_training	A Training Lightsaber	object/weapon/melee/sword/crafted_saber/sword_lightsaber_training.iff	weapon	1	1000	melee_weapon	ONE_HANDED_SABER	226	960	energy	heat	110	2.5	120	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
-sword_marauder	Champion’s Sword	object/weapon/melee/sword/sword_marauder.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	115	515	kinetic		0	2.5	120	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
-sword_massassi	Urnsor’is Soulleecher	object/weapon/melee/sword/sword_massassi.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	211	900	kinetic		0	2.5	140	0	5		0		50			0	100	0	0	0	0	0	0	500	0	0	-
+sword_marauder	Champion's Sword	object/weapon/melee/sword/sword_marauder.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	115	515	kinetic		0	2.5	120	0	5		0		30			0	100	0	0	0	0	0	0	300	0	0	-
+sword_massassi	Urnsor'is Soulleecher	object/weapon/melee/sword/sword_massassi.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	211	900	kinetic		0	2.5	140	0	5		0		50			0	100	0	0	0	0	0	0	500	0	0	-
 sword_nyax	Nyax Sword	object/weapon/melee/sword/sword_nyax.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	115	515	kinetic		0	2.5	140	0	5		0		22			0	100	0	0	0	0	0	0	220	0	0	-
 sword_rsf	RSF Sword	object/weapon/melee/sword/sword_rsf.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	141	620	kinetic		0	2.5	120	0	5		0		40			0	100	0	0	0	0	0	0	400	0	0	-
 sword_som_2h_obsidian	Two-Handed Obsidian Sword	object/weapon/melee/2h_sword/som_2h_sword_obsidian.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	226	960	energy		0	3	140	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 sword_som_2h_tulrus	Two-Handed Tulrus Sword	object/weapon/melee/2h_sword/som_2h_sword_tulrus.iff	weapon	1	1000	melee_weapon	TWO_HANDED_MELEE	226	960	energy		0	3	140	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 sword_som_mustafar_bandit	Mustafar Bandit Sword	object/weapon/melee/sword/som_sword_mustafar_bandit.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	250	1055	energy		0	2.5	120	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 sword_som_obsidian	Obsidian Sword	object/weapon/melee/sword/som_sword_obsidian.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	250	1055	energy		0	2.5	120	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
-sword_wookiee	Blade of Nyenthi’oris	object/weapon/melee/sword/ep3/sword_wookiee.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	246	1040	kinetic		0	2.5	140	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
+sword_wookiee	Blade of Nyenthi'oris	object/weapon/melee/sword/ep3/sword_wookiee.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	246	1040	kinetic		0	2.5	140	0	5		0		54			0	100	0	0	0	0	0	0	540	0	0	-
 vibroknuckler	Vibro Knuckler	object/weapon/melee/special/vibroknuckler.iff	weapon	1	1000	melee_weapon	UNARMED	77	425	energy		0	2.5	120	0	5		0		14			0	100	0	0	0	0	0	0	140	0	0	-
 victor_baton_gaderiffi	Black Metal Gaderiffi Baton	object/weapon/melee/baton/victor_baton_gaderiffi.iff	weapon	1	1000	melee_weapon	ONE_HANDED_MELEE	63	310	kinetic		0	2.5	120	0	5		0		14			0	100	0	0	0	0	0	0	140	0	0	-
 wookiee_knuckler	Knuckles of the Katarn	object/weapon/melee/special/ep3/wookiee_knuckler.iff	weapon	1	1000	melee_weapon	UNARMED	149	715	kinetic	cold	120	2.5	120	0	5		0		54	combat_unarmed_master		0	100	0	0	0	0	0	0	540	0	0	-
