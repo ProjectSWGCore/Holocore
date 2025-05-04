@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -29,12 +28,12 @@ package com.projectswg.holocore.services.support.objects.items
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.intents.support.objects.CreateStaticItemIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.data.server_info.StandardLog
 import com.projectswg.holocore.resources.support.objects.StaticItemCreator
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
-import me.joshlarson.jlcommon.log.Log
 import java.util.*
 
 class StaticItemService : Service() {
@@ -50,6 +49,7 @@ class StaticItemService : Service() {
 			objectCreationHandler.containerFull()
 			return
 		}
+		val requesterOwner = csii.requester.owner ?: return
 		
 		val objects = ArrayList<SWGObject>()
 		for (itemName in itemNames) {
@@ -59,10 +59,8 @@ class StaticItemService : Service() {
 				obj.moveToContainer(container)
 				ObjectCreatedIntent(obj).broadcast()
 			} else {
-				Log.d("%s could not be spawned because the item name is unknown", itemName)
-				val requesterOwner = csii.requester.owner
-				if (requesterOwner != null)
-					SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName))
+				StandardLog.onPlayerError(this, requesterOwner, "unknown static item %s", itemName)
+				SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName))
 			}
 		}
 
