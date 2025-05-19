@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -27,10 +27,7 @@ package com.projectswg.holocore.resources.support.objects.swg.custom
 
 import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
-import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
-import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
-import com.projectswg.holocore.resources.support.npc.ai.NavigationRouteType
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -106,19 +103,19 @@ abstract class NpcMode(val ai: AIObject) {
 		MoveObjectIntent(ai, location!!, walkSpeed).broadcast()
 	}
 
-	fun walkTo(parent: SWGObject?, location: Location?) {
-		CompileNpcMovementIntent(ai, NavigationPoint.from(ai.parent, ai.location, parent, location!!, walkSpeed), NavigationRouteType.TERMINATE, walkSpeed, null).broadcast()
+	fun walkTo(parent: SWGObject?, location: Location) {
+		ai.moveTo(parent, location, walkSpeed)
 	}
 
-	fun walkTo(location: Location?) {
-		CompileNpcMovementIntent(ai, NavigationPoint.from(ai.parent, ai.location, location!!, walkSpeed), NavigationRouteType.TERMINATE, walkSpeed, null).broadcast()
+	fun walkTo(location: Location) {
+		ai.moveTo(null, location, walkSpeed)
 	}
 
-	fun runTo(parent: SWGObject?, location: Location?) {
-		CompileNpcMovementIntent(ai, NavigationPoint.from(ai.parent, ai.location, parent, location!!, runSpeed), NavigationRouteType.TERMINATE, runSpeed, null).broadcast()
+	fun runTo(parent: SWGObject?, location: Location) {
+		ai.moveTo(parent, location, runSpeed)
 	}
 
-	fun runTo(location: Location?) {
-		CompileNpcMovementIntent(ai, NavigationPoint.from(ai.parent, ai.location, location!!, runSpeed), NavigationRouteType.TERMINATE, runSpeed, null).broadcast()
+	fun runTo(location: Location) {
+		ai.moveTo(null, location, runSpeed)
 	}
 }

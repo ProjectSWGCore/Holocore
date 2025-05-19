@@ -30,7 +30,6 @@ import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.location.Location
 import com.projectswg.common.network.packets.swg.zone.object_controller.ShowFlyText
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
-import com.projectswg.holocore.intents.support.npc.ai.StopNpcMovementIntent
 import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
@@ -80,7 +79,7 @@ class NpcCombatMode(obj: AIObject, coroutineScope: CoroutineScope) : NpcMode(obj
 	
 	override suspend fun onModeStart() {
 		showExclamationMarkAboveNpc()
-		StopNpcMovementIntent(ai).broadcast()
+		ai.stopMovement()
 		returnLocation.set(NavigationPoint.at(ai.parent, ai.location, npcRunSpeed))
 		startCombatLocation.set(ai.worldLocation)
 	}

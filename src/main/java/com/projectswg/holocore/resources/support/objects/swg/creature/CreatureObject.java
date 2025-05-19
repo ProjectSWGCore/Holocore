@@ -373,7 +373,7 @@ public class CreatureObject extends TangibleObject {
 	}
 	
 	public boolean isPlayer() {
-		return getSlottedObject("ghost") != null;
+		return isSlotPopulated("ghost");
 	}
 	
 	public SWGObject getMissionBag() {
@@ -403,8 +403,7 @@ public class CreatureObject extends TangibleObject {
 	public void setRace(Race race) {
 		this.race = race;
 	}
-
-
+	
 	public void inheritMovement(CreatureObject vehicle) {
 		setWalkSpeed(vehicle.getRunSpeed() / 2);
 		setRunSpeed(vehicle.getRunSpeed());

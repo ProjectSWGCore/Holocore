@@ -25,7 +25,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.npc.ai
 
-import com.projectswg.holocore.intents.support.npc.ai.CompileNpcMovementIntent
+import com.projectswg.common.data.location.Location
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader.PatrolType
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcStaticSpawnLoader
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner.ResolvedPatrolWaypoint
@@ -51,15 +51,28 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 			waypointBuilder.add(waypointBuilder[0])
 		}
 		
-		this.waypoints = ArrayList(waypointBuilder.size)
-		for (waypoint in waypointBuilder) {
-			val point = NavigationPoint.at(waypoint.parent, waypoint.location, walkSpeed)
-			this.waypoints.add(point)
-			this.waypoints.addAll(NavigationPoint.nop(point, waypoint.delay.toInt()))
+		this.waypoints = ArrayList<NavigationPoint>(128)
+		for (i in 1 until waypointBuilder.size) {
+			val source = waypointBuilder[i - 1]
+			val destination = waypointBuilder[i]
+			this.waypoints.addAll(NavigationPoint.from(source.parent, source.location, destination.parent, destination.location, walkSpeed))
+			if (destination.delay > 0)
+				this.waypoints.addAll(NavigationPoint.nop(this.waypoints[this.waypoints.size - 1], destination.delay.toInt() - 1))
 		}
+		this.waypoints.addAll(NavigationPoint.from(waypointBuilder[waypointBuilder.size - 1].parent, waypointBuilder[waypointBuilder.size - 1].location, waypointBuilder[0].parent, waypointBuilder[0].location, walkSpeed))
 	}
 	
 	override suspend fun onModeStart() {
+		val route = calculateRouteOffset(calculateInitialRoutePoints())
+		
+		ai.moveVia(route, loop = true)
+	}
+	
+	override suspend fun onModeLoop() {
+		throw CancellationException() // No loop necessary
+	}
+	
+	private fun calculateInitialRoutePoints(): List<NavigationPoint> {
 		val compiledWaypoints: MutableList<NavigationPoint>
 		if (waypoints.isNotEmpty()) {
 			var index = 0
@@ -67,7 +80,7 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 			for (i in 1 until waypoints.size) {
 				if (waypoints[i].isNoOperation)
 					continue
-				
+
 				val distance = waypoints[i].distanceTo(ai)
 				if (distance < closestDistance) {
 					closestDistance = distance
@@ -88,46 +101,49 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 		} else {
 			compiledWaypoints = waypoints
 		}
+		return compiledWaypoints
+	}
+	
+	private fun calculateRouteOffset(compiledWaypoints: List<NavigationPoint>): List<NavigationPoint> {
 		val spawner = spawner ?: throw CancellationException()
 		val spacing = 3.0
 		val position = spawner.npcs.indexOf(ai)
+		var offsetX = 0.0
+		var offsetZ = 0.0
 		assert(position != -1)
 		
 		when (spawner.patrolFormation) {
-			NpcStaticSpawnLoader.PatrolFormation.NONE -> CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, null).broadcast()
+			NpcStaticSpawnLoader.PatrolFormation.NONE -> {}
 			NpcStaticSpawnLoader.PatrolFormation.COLUMN -> {
-				val x = if (position % 2 == 0) 0.0 else spacing
-				val z = -(spacing * ceil((position - 1) / 2.0))
-				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z)).broadcast()
+				offsetX = if (position % 2 == 0) 0.0 else spacing
+				offsetZ = -(spacing * ceil((position - 1) / 2.0))
 			}
 			NpcStaticSpawnLoader.PatrolFormation.WEDGE -> {
-				val x = spacing * ceil(position / 2.0)
-				val z = -x
-				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, z)).broadcast()
+				offsetX = spacing * ceil(position / 2.0) * (if (position % 2 == 0) -1 else 1)
+				offsetZ = -offsetX
 			}
 			NpcStaticSpawnLoader.PatrolFormation.LINE -> {
-				val x = spacing * ceil(position / 2.0)
-				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(if (position % 2 == 0) -x else x, 0.0)).broadcast()
+				offsetX = spacing * ceil(position / 2.0) * (if (position % 2 == 0) -1 else 1)
 			}
 			NpcStaticSpawnLoader.PatrolFormation.BOX -> {
-				val x = when (position) {
+				offsetX = when (position) {
 					0, 1, 2 -> position * 3.0
 					3       -> 0.0
 					4       -> 6.0
 					else    -> (position - 5) * 3.0
 				}
-				val z = when (position) {
+				offsetZ = when (position) {
 					0, 1, 2 -> 0.0 // front of the box
 					3, 4    -> 3.0 // sides of the box
 					else    -> 6.0 // back of the box
 				}
-				CompileNpcMovementIntent(ai, compiledWaypoints, NavigationRouteType.LOOP, walkSpeed, NavigationOffset(x, z)).broadcast()
 			}
 		}
-	}
-	
-	override suspend fun onModeLoop() {
-		throw CancellationException() // No loop necessary
+		
+		val offsetWaypoints = ArrayList<NavigationPoint>(compiledWaypoints.size)
+		for (wp in compiledWaypoints)
+			offsetWaypoints.add(NavigationPoint(wp.parent, Location.builder(wp.location).translatePosition(offsetX, 0.0, offsetZ).build(), wp.speed))
+		return offsetWaypoints
 	}
 	
 }

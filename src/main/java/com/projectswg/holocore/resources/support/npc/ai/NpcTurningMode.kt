@@ -42,13 +42,11 @@ class NpcTurningMode(obj: AIObject) : NpcMode(obj) {
 	
 	override suspend fun onModeStart() {
 		val currentLocation = ai.location
-		if (mainLocation == null)
-			mainLocation = currentLocation
-		if (mainParent == null)
-			mainParent = ai.parent
-		
-		if (mainLocation!!.distanceTo(currentLocation) >= 1)
-			runTo(mainLocation)
+		var startingLocation = mainLocation
+		if (startingLocation == null) startingLocation = currentLocation
+		if (mainParent == null) mainParent = ai.parent
+		if (startingLocation.distanceTo(currentLocation) >= 1) runTo(startingLocation)
+		mainLocation = startingLocation
 	}
 	
 	override suspend fun onModeLoop() {

@@ -207,15 +207,25 @@ class AIObject(objectId: Long) : CreatureObject(objectId) {
 		}
 	}
 	
-	fun moveTo(newParent: SWGObject?, location: Location, speed: Double) {
-		val newMovementTask = coroutineScope?.launch {
-			val route = NavigationPoint.from(this@AIObject.parent, this@AIObject.location, newParent, location, speed)
-			for (point in route) {
-				point.move(this@AIObject)
-				delay(1000L)
-			}
-		} ?: return
+	fun moveTo(newParent: SWGObject?, location: Location, speed: Double, loop: Boolean = false) {
+		moveVia(NavigationPoint.from(this@AIObject.parent, this@AIObject.location, newParent, location, speed), loop)
+	}
+	
+	fun moveVia(route: List<NavigationPoint>, loop: Boolean) {
+		val newMovementTask = (coroutineScope ?: return).launch {
+			if (route.isEmpty()) return@launch
+			do {
+				for (point in route) {
+					point.move(this@AIObject)
+					delay(1000L)
+				}
+			} while (loop)
+		}
 		movementJob.getAndSet(newMovementTask)?.cancel()
+	}
+	
+	fun stopMovement() {
+		movementJob.getAndSet(null)?.cancel()
 	}
 	
 	fun start(coroutineScope: CoroutineScope) {

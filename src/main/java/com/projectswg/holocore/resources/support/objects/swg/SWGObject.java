@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -437,6 +436,15 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public SWGObject getSlottedObject(String slotName) {
 		return slots.get(slotName);
 	}
+
+	/**
+	 * Determines whether an object is stored in the specified slot.
+	 * @param slotName The slot name to look up.
+	 * @return TRUE if the slot has an object in it, FALSE otherwise.
+	 */
+	public boolean isSlotPopulated(String slotName) {
+		return slots.containsKey(slotName);
+	}
 	
 	public Collection<SWGObject> getChildObjects() {
 		Set<SWGObject> ret = new HashSet<>(containedObjects.size() + slots.size());
@@ -520,8 +528,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setLocation(Location location) {
 		if (parent != null && location.getTerrain() != parent.getTerrain())
 			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
+		Terrain previousTerrain = this.location.getTerrain();
 		this.location.setLocation(location);
-		updateChildrenTerrain();
+		if (previousTerrain != location.getTerrain())
+			updateChildrenTerrain();
 	}
 	
 	public void setTerrain(@NotNull Terrain terrain) {
@@ -536,8 +546,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void setPosition(@NotNull Terrain terrain, double x, double y, double z) {
 		if (parent != null && terrain != parent.getTerrain())
 			throw new IllegalArgumentException("Attempted to set different terrain from parent!");
+		Terrain previousTerrain = this.location.getTerrain();
 		location.setPosition(terrain, x, y, z);
-		updateChildrenTerrain();
+		if (previousTerrain != location.getTerrain())
+			updateChildrenTerrain();
 	}
 	
 	public void setPosition(double x, double y, double z) {
@@ -1060,13 +1072,13 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public void onObjectMoved() {
 		if (!isGenerated())
 			return;
-		for (SWGObject a : getAware()) {
+		forEachAware(a -> {
 			try {
 				a.onObjectMoveInAware(this);
 			} catch (Throwable t) {
 				Log.e(t);
 			}
-		}
+		});
 	}
 	
 	/**
@@ -1079,6 +1091,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public Set<CreatureObject> getObserverCreatures() {
 		return Collections.unmodifiableSet(observers);
+	}
+	
+	public int getObserverCreatureCount() {
+		return observers.size();
 	}
 	
 	public Set<Player> getObservers() {
@@ -1095,6 +1111,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	
 	public Set<SWGObject> getAware() {
 		return awareness.getAware();
+	}
+	
+	public void forEachAware(Consumer<SWGObject> handler) {
+		awareness.forEachAware(handler);
 	}
 	
 	public Set<SWGObject> getAware(AwarenessType type) {

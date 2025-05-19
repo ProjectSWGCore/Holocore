@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -174,14 +174,13 @@ class SpawnerService : Service() {
 		val startTime = StandardLog.onStartLoad("spawners")
 		
 		var count = 0
-		for (spawn in ServerData.npcStaticSpawns.spawns) {
+		ServerData.npcStaticSpawns.spawns.parallelStream().forEach { spawn ->
 			try {
 				spawn(spawn)
 				count++
 			} catch (t: Throwable) {
 				Log.e("Failed to load spawner[%s]/npc[%s]. %s: %s", spawn.id, spawn.npcId, t.javaClass.name, t.message)
 			}
-			
 		}
 		
 		StandardLog.onEndLoad(count, "spawners", startTime)

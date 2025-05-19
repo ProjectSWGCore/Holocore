@@ -232,7 +232,7 @@ public class AwarenessService extends Service {
 	private static void onObjectMoved(@NotNull SWGObject obj, @Nullable SWGObject oldParent, @Nullable SWGObject newParent, @NotNull Location oldLocation, @NotNull Location newLocation, double speed) {
 		if (obj instanceof CreatureObject && ((CreatureObject) obj).isLoggedInPlayer())
 			new PlayerTransformedIntent((CreatureObject) obj, oldParent, newParent, oldLocation, newLocation).broadcast();
-		else if (obj.getObserverCreatures().isEmpty())
+		else if (obj.getObserverCreatureCount() == 0)
 			return; // If a tree falls in the forest and nobody is there to hear it...
 		
 		if (newParent != null) {

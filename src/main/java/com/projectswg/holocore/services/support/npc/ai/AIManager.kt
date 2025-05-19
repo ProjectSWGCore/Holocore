@@ -28,5 +28,5 @@ package com.projectswg.holocore.services.support.npc.ai
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [AIService::class, AIDynamicMovementService::class, AIMovementService::class])
+@ManagerStructure(children = [AIService::class, AIDynamicMovementService::class])
 class AIManager : Manager()
