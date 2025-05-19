@@ -33,13 +33,13 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "2.1.0"
+	kotlin("jvm") version "2.1.21"
 	id("org.beryx.jlink") version "3.1.1"
 }
 
 val javaVersion = JavaVersion.current()
 val kotlinTargetJdk = JvmTarget.fromTarget(javaVersion.majorVersion)
-val junit5Version = "5.11.3"
+val junit5Version = "5.12.2"
 val holocoreLogLevel: String? by project
 
 subprojects {
@@ -77,23 +77,23 @@ dependencies {
 	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version="1.9.0")
-	implementation(group="org.mongodb", name="mongodb-driver-sync", version="5.2.1")
+	implementation(group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version="1.10.2")
+	implementation(group="org.mongodb", name="mongodb-driver-sync", version="5.5.0")
 	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
 	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
 	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
 	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
 	val slf4jVersion = "1.7.36"
-	runtimeOnly(group="org.slf4j", name="slf4j-jdk14", version= slf4jVersion)
+	runtimeOnly(group="org.slf4j", name="slf4j-jdk14", version=slf4jVersion)
 
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
-	
+
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version=junit5Version)
 	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version=junit5Version)
-	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.11.3")
+	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.12.2")
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version=junit5Version)
-	testImplementation(group="org.testcontainers", name="mongodb", version="1.20.4")
+	testImplementation(group="org.testcontainers", name="mongodb", version="1.21.0")
 
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
 }
@@ -193,7 +193,7 @@ tasks.register("createRunScript") {
 		val modulePath = "$runtimeClasspath${File.pathSeparator}$mainJavaOutputDir"
 
 		// Assemble the command
-		val command = "clear; JAVA_HOME=$javaHome ./gradlew classes && $javaExecutable -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
+		val command = "clear; JAVA_HOME=$javaHome ./gradlew classes && $javaExecutable -Xms1G -Xmx2G -XX:+UseZGC -XX:+ZGenerational -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
 
 		// File to write the run command
 		val outputFile = file("${layout.buildDirectory.asFile.get().absolutePath}/run")
