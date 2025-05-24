@@ -1,348 +1,338 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-city_naboo_theed_1	NABOO	nab_amidala_hotel	AREA	4	-1.6	1	3.9	150	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_2	NABOO	nab_amidala_hotel	AREA	5	22.1	1.3	10.6	-4	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_3	NABOO	nab_amidala_hotel	AREA	5	20.2	1.3	-6.7	100	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_4	NABOO	nab_amidala_hotel	AREA	5	22.3	1.3	-7	-81	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_5	NABOO	nab_amidala_hotel	AREA	6	-16.8	1	3.1	28	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_6	NABOO	nab_amidala_hotel	AREA	6	-15.2	1	5.3	-144	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_7	NABOO	nab_amidala_hotel	AREA	6	-17.1	1	5.1	125	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_8	NABOO	nab_amidala_hotel	AREA	6	-13.4	1	0.1	89	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_9	NABOO	nab_keren_commerce_gh	PATROL	8	0.9	31.12	1899.12	60	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5500	column	idle			600
-city_naboo_theed_10	NABOO	nab_keren_hotel	PATROL	4	0.4	31.12	1899.12	-180	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5400	column	idle			600
-city_naboo_theed_11	NABOO	nab_theed_cantina	AREA	1	40.3	0.1	1.3	90	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_12	NABOO	nab_theed_cantina	AREA	1	42.8	0.1	1.3	-92	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_13	NABOO	nab_theed_cantina	AREA	14	-33.7	0.1	-24.4	179	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_14	NABOO	nab_theed_cantina	AREA	15	-47.7	0.1	-22.8	34	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_15	NABOO	nab_theed_cantina	AREA	2	36.1	0.1	0.8	-25	1	a Jawa	humanoid_jawa	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_16	NABOO	nab_theed_cantina	AREA	2	35.8	0.1	3.1	-167	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_17	NABOO	nab_theed_cantina	AREA	3	2.3	-0.9	-2.5	149	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_18	NABOO	nab_theed_cantina	AREA	3	-9.9	-0.9	-8.6	-57	1	a bounty hunter	humanoid_spynet_operative	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_19	NABOO	nab_theed_cantina	AREA	3	12.1	-0.9	7.9	-12	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_20	NABOO	nab_theed_cantina	AREA	3	10.1	-0.9	7.9	6	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_21	NABOO	nab_theed_cantina	AREA	3	-10.9	-0.9	-5.7	-171	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_22	NABOO	nab_theed_cantina	AREA	3	16.6	-0.9	-2.3	-126	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_23	NABOO	nab_theed_cantina	AREA	3	13.7	-0.9	-2.4	137	1	a patron	humanoid_patron_human_male_01	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_24	NABOO	nab_theed_cantina	AREA	3	-3.2	-0.9	5.7	147	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_standing_drinking	1		600
-city_naboo_theed_25	NABOO	nab_theed_cantina	AREA	3	11.1	-0.9	12.0	-179	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_26	NABOO	nab_theed_cantina	AREA	3	24.3	-0.9	11.8	-87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_27	NABOO	nab_theed_cantina	AREA	3	22.2	-0.9	11.9	88	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_28	NABOO	nab_theed_cantina	AREA	3	0.7	-0.9	-10.6	-79	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_29	NABOO	nab_theed_cantina	AREA	3	4.0	-0.9	-4.8	3	1	Tyla Jinn	humanoid_tyla_jinn	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_30	NABOO	nab_theed_cantina	AREA	4	17.1	-0.9	-19.9	59	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_31	NABOO	nab_theed_cantina	AREA	4	18.5	-0.9	-19.1	-119	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_32	NABOO	nab_theed_cantina	AREA	9	-6.8	-0.9	20.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_33	NABOO	nab_theed_cloning1	AREA	2	-3.7	-0.1	1.6	-131	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_34	NABOO	nab_theed_cloning1	AREA	2	3	0.1	11.5	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_35	NABOO	nab_theed_cloning1	AREA	2	-5.9	0.1	-0.4	62	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_36	NABOO	nab_theed_cloning1	AREA	2	-6.1	0.1	6.4	90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_37	NABOO	nab_theed_cloning1	AREA	4	-3.8	-5.5	-14.1	50	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_38	NABOO	nab_theed_cloning1	AREA	4	-1.2	-5.5	-12.1	-128	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_39	NABOO	nab_theed_cloning1	AREA	4	-0.9	-5.5	-14.2	-57	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_40	NABOO	nab_theed_cloning2	PATROL	4	1.9	-4.8	0.9	-1	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4700	column	idle			600
-city_naboo_theed_41	NABOO	nab_theed_hangar	AREA	2	7.9	0.7	-65	-90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_42	NABOO	nab_theed_hangar	AREA	2	1.1	0.7	-71.3	-17	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_43	NABOO	nab_theed_hangar	AREA	2	3.2	0.7	-60.2	-150	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_44	NABOO	nab_theed_hangar	AREA	2	-3	0.7	-60.1	-180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_45	NABOO	nab_theed_hangar	AREA	3	-16.5	0.7	-69.6	-2	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_46	NABOO	nab_theed_hangar	AREA	3	-39.9	0.7	-72.2	-89	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_47	NABOO	nab_theed_hangar	AREA	3	-28.6	0.7	-75.8	-61	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_48	NABOO	nab_theed_hangar	AREA	3	-30.6	0.7	-74.7	112	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_49	NABOO	nab_theed_hangar	AREA	3	-15.7	8	-54.2	-166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_50	NABOO	nab_theed_hangar	AREA	4	7.9	8	-53.5	-180	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_51	NABOO	nab_theed_hangar	AREA	4	8	8	-55.2	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_52	NABOO	nab_theed_hangar	AREA	5	-41.6	7.9	-25.3	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_53	NABOO	nab_theed_hangar	AREA	5	-28.5	7.9	-25.4	92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_54	NABOO	nab_theed_hangar	PATROL	5	-8.6	7.9	31.1	-175	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3400	column	idle			600
-city_naboo_theed_55	NABOO	nab_theed_hangar	AREA	5	-28	7.9	28	178	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_56	NABOO	nab_theed_hangar	AREA	5	-27.9	7.9	26	-4	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_57	NABOO	nab_theed_hangar	AREA	5	17.3	7.9	-35	137	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_58	NABOO	nab_theed_hangar	AREA	5	-11.9	7.9	28.6	17	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_59	NABOO	nab_theed_hangar	AREA	5	20.3	7.9	-38	-53	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_60	NABOO	nab_theed_hangar	AREA	5	16.4	7.9	-36.7	109	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
-city_naboo_theed_61	NABOO	nab_theed_hangar	AREA	5	-10.6	7.9	32.6	24	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_62	NABOO	nab_theed_hangar	AREA	5	-11.4	7.9	30.6	3	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
-city_naboo_theed_63	NABOO	nab_theed_hangar	AREA	3	-20.6	0.7	-76.9	-26	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_64	NABOO	nab_theed_hangar	AREA	3	-21.1	0.8	-75.7	155	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_65	NABOO	nab_theed_hangar	AREA	4	28.5	0.8	-67.7	90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_66	NABOO	nab_theed_hangar	AREA	4	30.1	0.8	-67.7	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_67	NABOO	nab_theed_hangar	AREA	4	16.0	8.0	-54.3	-3	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_68	NABOO	nab_theed_hospital	AREA	2	21.4	0.3	4.5	3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_69	NABOO	nab_theed_hospital	AREA	2	20.5	0.3	1.8	100	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_70	NABOO	nab_theed_hospital	AREA	2	11	0.3	-3.4	2	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_71	NABOO	nab_theed_hospital	AREA	2	22.8	0.3	1.4	-80	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_72	NABOO	nab_theed_hospital	AREA	6	-18.5	0.3	-10.4	179	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_73	NABOO	nab_theed_hospital	AREA	6	-12.3	0.3	-4.3	-14	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_74	NABOO	nab_theed_hospital	AREA	6	-12.9	0.3	-2.6	-179	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_75	NABOO	nab_theed_hospital	AREA	6	-18.3	0.3	-2.6	-151	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_76	NABOO	nab_theed_hospital	AREA	6	-25.6	0.3	9.8	180	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_77	NABOO	nab_theed_hospital	AREA	6	-20.5	0.3	9.8	-178	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_78	NABOO	nab_theed_hospital	AREA	10	26.8	7.3	0.2	0	1	Mindt F'abul (Cybernetic Specialist)	humanoid_cybernetic_specialist_naboo	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		cybernetics	600
-city_naboo_theed_79	NABOO	nab_theed_hotel1	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_80	NABOO	nab_theed_hotel2	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_81	NABOO	nab_theed_palace	PATROL	3	9	12	69.6	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3900	column	idle			600
-city_naboo_theed_82	NABOO	nab_theed_palace	PATROL	8	34.1	12	45	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3800	column	idle			600
-city_naboo_theed_83	NABOO	nab_theed_palace	AREA	10	-2.7	12	22.1	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_84	NABOO	nab_theed_palace	AREA	10	7.2	12	21.6	75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_85	NABOO	nab_theed_palace	PATROL	10	46.4	19	29.4	-173	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3700	column	idle			600
-city_naboo_theed_86	NABOO	nab_theed_palace	AREA	16	0.7	27	-101.4	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_87	NABOO	nab_theed_palace	AREA	16	-6	27	-113.5	151	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_88	NABOO	nab_theed_palace	AREA	16	-4.4	27	-115.9	-31	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_89	NABOO	nab_theed_palace	AREA	16	0.1	27	-138.8	179	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
-city_naboo_theed_90	NABOO	nab_theed_palace	PATROL	16	5.8	27	-151.5	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3500	column	idle			600
-city_naboo_theed_91	NABOO	nab_theed_palace	PATROL	22	42.8	33	-147.6	-90	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3600	column	idle			600
-city_naboo_theed_92	NABOO	nab_theed_palace	AREA	10	-28.0	19.0	3.1	110	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_93	NABOO	nab_theed_palace	AREA	10	-24.3	19.0	1.7	-68	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_94	NABOO	nab_theed_palace	AREA	10	42.7	19.0	23.7	15	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_95	NABOO	nab_theed_palace	AREA	10	-20.8	12.0	20.7	-90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_96	NABOO	nab_theed_palace	AREA	10	-23.2	12.0	20.7	90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_97	NABOO	nab_theed_palace	AREA	10	43.7	19.0	27.3	-164	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_98	NABOO	nab_theed_palace	AREA	10	20.4	12.0	19.9	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_99	NABOO	nab_theed_palace	AREA	10	0.5	12.0	4.6	0	1	Captain Dinge (RSF Pilot Trainer)	humanoid_captain_dinge	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_100	NABOO	nab_theed_palace	AREA	11	1.5	21.0	-44.0	-11	1	Captain Kaydine (RSF Pilot Trainer)	humanoid_kaydine	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_101	NABOO	nab_theed_palace	AREA	12	30.6	23.0	-32.3	-89	1	Grand Admiral Nial Declann	humanoid_imperial_nial_declann	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_102	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-30.5	-92	1	TK-8H2	humanoid_imperial_tk8h2	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_103	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-34.2	-86	1	TK-9H4	humanoid_imperial_tk9h4	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_104	NABOO	nab_theed_palace	AREA	13	-31.4	27.0	-31.5	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_105	NABOO	nab_theed_palace	AREA	13	-33.5	27.0	-31.3	95	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_106	NABOO	nab_theed_palace	AREA	13	-32.1	27.0	-41.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_107	NABOO	nab_theed_palace	AREA	18	40.4	33.0	-93.8	-90	1	Commander Dulios (RSF Pilot Trainer)	humanoid_commander_dulios	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_108	NABOO	nab_theed_palace	AREA	18	39.7	33.0	-96.8	-69	1	Librarian	humanoid_trivia_librarian	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_109	NABOO	nab_theed_palace	AREA	2	0.0	8.0	92.7	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_110	NABOO	nab_theed_palace	AREA	24	-45.7	33.0	-93.9	88	1	Diness Imler (RSF Pilot Trainer)	humanoid_diness_imler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_111	NABOO	nab_theed_palace	AREA	3	8.9	12.0	82.4	-171	1	Captain Heff (an Imperial Captain)	humanoid_imperial_cpt_heff	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_112	NABOO	nab_theed_palace	AREA	30	3.2	27.0	-169.6	-108	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_113	NABOO	nab_theed_palace	AREA	30	3.1	27.0	-175.4	-22	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_114	NABOO	nab_theed_palace	AREA	31	36.7	27.0	-175.6	-84	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_115	NABOO	nab_theed_palace	AREA	31	36.5	27.0	-169.5	-83	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_116	NABOO	nab_theed_palace	AREA	32	36.5	27.0	-192.9	-13	1	Queen Kylantha	humanoid_clone_queen_kylantha	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_117	NABOO	nab_theed_palace	AREA	4	20.8	12.0	77.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_118	NABOO	nab_theed_palace	AREA	5	-21.6	12.0	77.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_119	NABOO	nab_theed_palace	AREA	7	1.3	12.0	45.1	-51	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_120	NABOO	nab_theed_palace	AREA	7	0.0	12.0	47.2	179	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_121	NABOO	nab_theed_palace	AREA	7	-1.1	12.0	45.9	46	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_122	NABOO	nab_theed_palace	AREA	9	-39.2	12.0	44.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
-city_naboo_theed_123	NABOO	nab_theed_salon	AREA	1	-9.4	0.6	-2.1	52	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_124	NABOO	nab_theed_salon	AREA	1	-8	0.6	-1.1	-122	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
-city_naboo_theed_125	NABOO	nab_theed_salon	AREA	1	-7.2	0.6	-2.9	-55	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_126	NABOO	nab_theed_salon	PATROL	1	-7.6	0.6	-5.5	-110	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4600	column	idle			600
-city_naboo_theed_127	NABOO	nab_theed_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_128	NABOO	nab_world	PATROL	0	-5769.4	6.5	4313.5	9	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4900	column	idle			600
-city_naboo_theed_129	NABOO	nab_world	AREA	0	-4917.1	6	4116.9	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_130	NABOO	nab_world	AREA	0	-4982.8	6	4230.5	-103	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_131	NABOO	nab_world	AREA	0	-5503.7	6	4374.5	-58	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_132	NABOO	nab_world	AREA	0	-5510.4	14	4463.4	121	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_133	NABOO	nab_world	AREA	0	-5765.5	6	4130	84	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_134	NABOO	nab_world	AREA	0	-5679.4	6	4110.5	-147	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_135	NABOO	nab_world	AREA	0	-5496.5	6	4386.4	108	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_136	NABOO	nab_world	PATROL	0	-5552.1	6.5	4234.2	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4300	column	idle			600
-city_naboo_theed_137	NABOO	nab_world	PATROL	0	-5247.9	6.9	4619.9	12	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4800	column	idle			600
-city_naboo_theed_138	NABOO	nab_world	AREA	0	-5581.3	-149.1	-65.9	-94	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_139	NABOO	nab_world	AREA	0	-5493.9	-150	0.7	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_140	NABOO	nab_world	AREA	0	-5496.5	-150	-54.1	101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_141	NABOO	nab_world	AREA	0	-5527.4	-150	-92.9	-73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_142	NABOO	nab_world	AREA	0	-5513.5	-150	-92.6	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_143	NABOO	nab_world	AREA	0	-5570.1	-150	-51.3	-36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_144	NABOO	nab_world	AREA	0	-5560.9	-150	-64.7	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_145	NABOO	nab_world	AREA	0	-4945	6	4108.2	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_146	NABOO	nab_world	AREA	0	-4924.9	6	4130.2	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_147	NABOO	nab_world	AREA	0	-4899.3	6	4119.1	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_148	NABOO	nab_world	AREA	0	-4857.7	6	4113	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_149	NABOO	nab_world	AREA	0	-4826.1	6	4114.9	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_150	NABOO	nab_world	AREA	0	-4814.8	6	4099.1	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_151	NABOO	nab_world	AREA	0	-4841.7	6	4107.2	-104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_152	NABOO	nab_world	AREA	0	-4867.9	6	4101	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_153	NABOO	nab_world	AREA	0	-4882.2	6	4123.7	-23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_154	NABOO	nab_world	AREA	0	-4882.9	6	4152.1	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_155	NABOO	nab_world	AREA	0	-4986.3	6	4124.7	168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_156	NABOO	nab_world	AREA	0	-4940.1	6	4073.2	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_157	NABOO	nab_world	AREA	0	-4981.3	6	4030	19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_158	NABOO	nab_world	AREA	0	-5010.9	6	4054.2	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_159	NABOO	nab_world	AREA	0	-5021.8	6	4080.4	29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_160	NABOO	nab_world	AREA	0	-5044.2	6	4133.1	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_161	NABOO	nab_world	AREA	0	-4935.1	6	4193.7	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_162	NABOO	nab_world	AREA	0	-4958.3	6	4205.4	-50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_163	NABOO	nab_world	AREA	0	-5007.2	6	4217.1	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_164	NABOO	nab_world	AREA	0	-5029.6	6	4227.8	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_165	NABOO	nab_world	AREA	0	-5067.8	6	4217.5	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_166	NABOO	nab_world	AREA	0	-5104.1	6	4205.5	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_167	NABOO	nab_world	AREA	0	-5102.7	6	4243.7	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_168	NABOO	nab_world	AREA	0	-5103.8	6	4273.7	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_169	NABOO	nab_world	AREA	0	-5132.5	6	4297.4	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_170	NABOO	nab_world	AREA	0	-5162.2	6	4318.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_171	NABOO	nab_world	AREA	0	-5199.8	6	4316.3	-111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_172	NABOO	nab_world	AREA	0	-5150.6	6	4305.1	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_173	NABOO	nab_world	AREA	0	-5127.8	6	4279.3	139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_174	NABOO	nab_world	AREA	0	-5074	6	4249	136	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_175	NABOO	nab_world	AREA	0	-5092.3	6	4230.5	-132	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_176	NABOO	nab_world	AREA	0	-5127.9	6	4221.2	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_177	NABOO	nab_world	AREA	0	-5121.2	6.5	4157.1	-175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_178	NABOO	nab_world	AREA	0	-5123.1	6.5	4172.3	-3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_179	NABOO	nab_world	AREA	0	-5137.9	6.5	4169.5	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_180	NABOO	nab_world	AREA	0	-5261.5	6	4216.9	144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_181	NABOO	nab_world	AREA	0	-5234.3	6	4194	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_182	NABOO	nab_world	AREA	0	-5200.1	6	4150.9	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_183	NABOO	nab_world	AREA	0	-5182.5	6	4143.8	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_184	NABOO	nab_world	AREA	0	-5218.7	6	4169.3	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_185	NABOO	nab_world	AREA	0	-5472.4	6	4384.1	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_186	NABOO	nab_world	AREA	0	-5520	6	4390.3	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_187	NABOO	nab_world	AREA	0	-5519	6	4358.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_188	NABOO	nab_world	AREA	0	-5492.1	6	4344.7	118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_189	NABOO	nab_world	AREA	0	-5475.6	6	4330.5	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_190	NABOO	nab_world	AREA	0	-5495.9	6	4322.1	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_191	NABOO	nab_world	AREA	0	-5500.1	6	4289	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_192	NABOO	nab_world	AREA	0	-5524.6	6	4268.4	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_193	NABOO	nab_world	AREA	0	-5501.3	6	4252.2	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_194	NABOO	nab_world	AREA	0	-5472.9	6	4266.4	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_195	NABOO	nab_world	AREA	0	-5482.8	6	4243.4	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_196	NABOO	nab_world	AREA	0	-5509.6	6	4230.8	-116	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_197	NABOO	nab_world	AREA	0	-5518.4	6	4208	-88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_198	NABOO	nab_world	AREA	0	-5495.2	6	4191.1	146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_199	NABOO	nab_world	AREA	0	-5481.4	6	4218.3	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_200	NABOO	nab_world	AREA	0	-5483	6	4163.3	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_201	NABOO	nab_world	AREA	0	-5501	6	4046.9	-166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_202	NABOO	nab_world	AREA	0	-5510.7	6	4022.3	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_203	NABOO	nab_world	AREA	0	-5513.8	6	4057.7	-25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_204	NABOO	nab_world	AREA	0	-5486.4	6	4067.1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_205	NABOO	nab_world	AREA	0	-5499.6	6	4097.7	-22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_206	NABOO	nab_world	AREA	0	-5490.5	6	4118.6	1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_207	NABOO	nab_world	AREA	0	-5658.6	6	4479.2	-73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_208	NABOO	nab_world	AREA	0	-5618.4	6	4486.9	41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_209	NABOO	nab_world	AREA	0	-5760.2	6	4384.8	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_210	NABOO	nab_world	AREA	0	-5730.6	6	4286.8	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_211	NABOO	nab_world	AREA	0	-5698.9	6	4284.6	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_212	NABOO	nab_world	AREA	0	-5815.6	6	4290	-76	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_213	NABOO	nab_world	AREA	0	-5839.7	6	4263.8	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_214	NABOO	nab_world	AREA	0	-5883.9	6	4263.7	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_215	NABOO	nab_world	AREA	0	-5918.8	6	4238	-97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_216	NABOO	nab_world	AREA	0	-5951.9	6	4241.9	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_217	NABOO	nab_world	AREA	0	-5890.2	6	4239.6	70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_218	NABOO	nab_world	AREA	0	-5859.2	6	4259.6	123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_219	NABOO	nab_world	AREA	0	-5863.8	6	4215.2	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_220	NABOO	nab_world	AREA	0	-5847.7	6	4181.2	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_221	NABOO	nab_world	AREA	0	-5842.8	6	4153.3	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_222	NABOO	nab_world	AREA	0	-5809.2	6	4131.1	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_223	NABOO	nab_world	AREA	0	-5749.6	6	4150.1	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_224	NABOO	nab_world	AREA	0	-5725.4	6	4129	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_225	NABOO	nab_world	AREA	0	-5695	6	4128	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_226	NABOO	nab_world	AREA	0	-5624.9	6	4135.4	6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_227	NABOO	nab_world	AREA	0	-5704	6.5	4183.2	-41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_228	NABOO	nab_world	AREA	0	-5657.5	6	4229.1	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_229	NABOO	nab_world	AREA	0	-5674.4	6	4275.7	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_230	NABOO	nab_world	AREA	0	-5686.3	6	4299.2	-51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_231	NABOO	nab_world	AREA	0	-5710.1	6	4299.8	-105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_232	NABOO	nab_world	AREA	0	-5662.9	6	4249.8	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_233	NABOO	nab_world	AREA	0	-5617.2	6	4168.6	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_234	NABOO	nab_world	AREA	0	-5633.1	6	4146.1	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_235	NABOO	nab_world	AREA	0	-5611.9	6	4149.3	91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_236	NABOO	nab_world	AREA	0	-5625.4	6	4105.2	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_237	NABOO	nab_world	AREA	0	-5638.9	6	4082.6	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_238	NABOO	nab_world	AREA	0	-5595.7	6	4067	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_239	NABOO	nab_world	AREA	0	-5551.5	6.5	4062.7	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_240	NABOO	nab_world	AREA	0	-5510.9	6	4083.3	35	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_241	NABOO	nab_world	AREA	0	-5891.9	6	4350.5	-124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_242	NABOO	nab_world	AREA	0	-5860	6	4340	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_243	NABOO	nab_world	AREA	0	-5831.9	6	4313.2	135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_244	NABOO	nab_world	AREA	0	-5933.9	6	4325	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_245	NABOO	nab_world	AREA	0	-5948.4	6	4310.4	-110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_246	NABOO	nab_world	AREA	0	-5979.2	6	4308.5	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_247	NABOO	nab_world	AREA	0	-5973.7	6	4264.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_248	NABOO	nab_world	AREA	0	-5967.1	6	4223.9	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_249	NABOO	nab_world	AREA	0	-5985.3	6	4291.2	17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_250	NABOO	nab_world	AREA	0	-5876.3	6	4344.5	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_251	NABOO	nab_world	AREA	0	-5841.6	6	4295.3	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_252	NABOO	nab_world	AREA	0	-5838.3	6	4209.7	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_253	NABOO	nab_world	AREA	0	-5834.1	6	4175.7	176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_254	NABOO	nab_world	AREA	0	-5750.2	6	4268.9	-8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_255	NABOO	nab_world	AREA	0	-5716.9	6	4276.9	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_256	NABOO	nab_world	AREA	0	-5673.5	6	4261.9	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_257	NABOO	nab_world	AREA	0	-5485.1	6	4368.1	172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_258	NABOO	nab_world	AREA	0	-5505.7	6	4352.8	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_259	NABOO	nab_world	AREA	0	-5513.9	6	4340.5	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_260	NABOO	nab_world	AREA	0	-5472	6	4361.5	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_261	NABOO	nab_world	PATROL	0	-5456.4	6.3	4387.6	88	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4200	column	idle			600
-city_naboo_theed_262	NABOO	nab_world	AREA	0	-5006.9	6.3	4085.3	64	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_263	NABOO	nab_world	AREA	0	-4992.2	6.6	4073.5	42	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_264	NABOO	nab_world	AREA	0	-5005.8	6.6	4084.9	40	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_265	NABOO	nab_world	AREA	0	-4954.4	6	4124.8	-50	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_266	NABOO	nab_world	AREA	0	-5483.7	14	4460.7	-82	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_267	NABOO	nab_world	AREA	0	-5221.7	6	4218.7	-147	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_268	NABOO	nab_world	AREA	0	-5219.6	6	4216	-139	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_269	NABOO	nab_world	PATROL	0	-5525	6	4434.2	-3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4100	column	idle			600
-city_naboo_theed_270	NABOO	nab_world	AREA	0	-5575.7	-149.1	-67.2	141	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_271	NABOO	nab_world	AREA	0	-5431.5	6	4166.6	-3	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_272	NABOO	nab_world	AREA	0	-5573.6	-149.1	-70.1	-36	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_273	NABOO	nab_world	AREA	0	-5861	6.6	4183.9	-163	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_274	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
-city_naboo_theed_275	NABOO	nab_world	AREA	0	-5488.4	-150	-4.5	176	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_276	NABOO	nab_world	AREA	0	-5861.2	6.6	4181.6	-95	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_277	NABOO	nab_world	AREA	0	-5638.6	-157.4	-37.2	-84	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_278	NABOO	nab_world	AREA	0	-5638.1	6	4121	44	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_279	NABOO	nab_world	AREA	0	-5636.6	6	4122.5	-132	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_280	NABOO	nab_world	AREA	0	-5638.6	-157.4	-47.1	-95	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_281	NABOO	nab_world	AREA	0	-5727	6.2	4455.4	-47	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_282	NABOO	nab_world	AREA	0	-5638.6	-157.4	-39.6	-106	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_283	NABOO	nab_world	AREA	0	-5722	6.2	4443.2	-126	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_284	NABOO	nab_world	AREA	0	-5621.2	-157.3	-28.5	48	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_285	NABOO	nab_world	AREA	0	-5725.4	6.2	4440.8	58	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_286	NABOO	nab_world	AREA	0	-5619.4	-157.6	-26.1	-147	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_287	NABOO	nab_world	AREA	0	-5726.3	6.2	4442.4	78	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_288	NABOO	nab_world	AREA	0	-5223.6	6	4212.8	27	1	a Sullustan male	humanoid_patron_sullustan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_289	NABOO	nab_world	AREA	0	-5115.3	6.5	4146.6	130	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_290	NABOO	nab_world	AREA	0	-5127.9	6.5	4163.8	-141	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_291	NABOO	nab_world	AREA	0	-5638.7	-159.1	167.2	-160	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_292	NABOO	nab_world	AREA	0	-5705.7	6.5	4166	-2	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_293	NABOO	nab_world	PATROL	0	-5841	6	4119.4	-179	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4400	column	idle		simple_droid_sarcastic_alert_2	600
-city_naboo_theed_294	NABOO	nab_world	AREA	0	-5630.7	-159.1	185.9	172	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_295	NABOO	nab_world	AREA	0	-5573.7	-150	-32.1	-177	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_296	NABOO	nab_world	AREA	0	-5573.8	-150	-34.4	5	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_297	NABOO	nab_world	AREA	0	-5585.6	-150	-52.6	-92	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_298	NABOO	nab_world	AREA	0	-5497.7	6	4138	-169	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
-city_naboo_theed_299	NABOO	nab_world	AREA	0	-5630.4	-159.3	183.6	-12	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_300	NABOO	nab_world	AREA	0	-5628.2	-159	185	-92	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_301	NABOO	nab_world	AREA	0	-5486.8	14	4461.2	99	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
-city_naboo_theed_302	NABOO	nab_world	AREA	0	-5726.4	6.5	4171.1	-90	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_naboo_theed_303	NABOO	nab_world	AREA	0	-5182.4	6	4117.3	140	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
-city_naboo_theed_304	NABOO	nab_world	AREA	0	-5777.3	6	4280.8	-92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
-city_naboo_theed_305	NABOO	nab_world	PATROL	0	-5182.9	6.6	4204	128	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4500	column	idle		simple_droid_geek_alert_5	600
-city_naboo_theed_306	NABOO	nab_world	PATROL	0	-5495.9	14	4475.6	-1	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_4000	column	idle			600
-city_naboo_theed_307	NABOO	nab_world	PATROL	0	-4921.6	6.0	4151.9	-152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3100	column	idle			600
-city_naboo_theed_308	NABOO	nab_world	AREA	0	-5023.9	6.0	4040.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_309	NABOO	nab_world	AREA	0	-5004.8	6.0	4067.5	46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_310	NABOO	nab_world	AREA	0	-4970.4	6.0	4069.8	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_311	NABOO	nab_world	AREA	0	-4933.6	6.0	4090.2	-60	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_312	NABOO	nab_world	AREA	0	-4924.8	6.0	4034.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_313	NABOO	nab_world	AREA	0	-4921.1	6.0	4061.5	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_314	NABOO	nab_world	AREA	0	-4902.7	6.0	4106.8	40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_315	NABOO	nab_world	AREA	0	-4897.7	6.0	4193.3	-122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_316	NABOO	nab_world	AREA	0	-4896.2	6.0	4167.9	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_317	NABOO	nab_world	AREA	0	-4892.2	6.0	4083.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_318	NABOO	nab_world	AREA	0	-4866.7	6.0	4160.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_theed_319	NABOO	nab_world	PATROL	0	1854	11.1	2695.0	180	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5300	column	idle			600
-city_naboo_theed_320	NABOO	nab_world	PATROL	0	2089.4	29.1	2575.1	147	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5200	column	idle			600
-city_naboo_theed_321	NABOO	nab_world	PATROL	0	-5355.3	6.0	4347.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_500	column	idle			600
-city_naboo_theed_322	NABOO	nab_world	PATROL	0	-5323.3	6.0	4431.5	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_700	column	idle			600
-city_naboo_theed_323	NABOO	nab_world	AREA	0	-5344.0	6.0	4395.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_324	NABOO	nab_world	AREA	0	-5344.0	6.0	4364.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
-city_naboo_theed_325	NABOO	nab_world	PATROL	0	-4931.7	6.5	3995.1	-138	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3200	column	idle			600
-city_naboo_theed_326	NABOO	nab_world	AREA	0	-5538.7	6.0	4365.5	93	1	a patron	humanoid_patron_human_male_03	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_327	NABOO	nab_world	PATROL	0	1987.3	11.1	2465.6	131	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5100	column	idle			600
-city_naboo_theed_328	NABOO	nab_world	PATROL	0	-4704.9	6.0	4017.0	130	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3300	column	idle			600
-city_naboo_theed_329	NABOO	nab_world	PATROL	0	1362.3	12.1	2753.0	-165	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5000	column	idle			600
-city_naboo_theed_330	NABOO	nab_world	PATROL	0	1576.5	24.1	2842.8	23	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5600	column	idle			600
-city_naboo_theed_331	NABOO	nab_world	AREA	0	-5112.5	4.8	4597.1	159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_332	NABOO	nab_world	PATROL	0	-4899.9	6.0	4181.1	-50	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3000	column	idle			600
-city_naboo_theed_333	NABOO	nab_world	PATROL	0	1439.9	12.1	2783.9	-8	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5800	column	idle		simple_droid_geek_bye_nice_13	600
-city_naboo_theed_334	NABOO	nab_world	AREA	0	-5033.2	6.0	4092.3	118	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_335	NABOO	nab_world	AREA	0	-5019.0	6.0	4012.0	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_336	NABOO	nab_world	AREA	0	-5832.2	6.0	4121.0	-17	1	Broma Lak	humanoid_naboo_captain_broma_lak	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_337	NABOO	nab_world	AREA	0	-4805.9	6.0	4130.6	-141	1	C-3P0	droid_rebel_quest_u10_c3po	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_338	NABOO	nab_world	AREA	0	-5312.1	6.0	4415.6	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_339	NABOO	nab_world	AREA	0	-5515.8	6.0	4408.1	170	1	Commander Landau (Imperial Pilot Coordinator)	humanoid_imperial_landau	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_340	NABOO	nab_world	AREA	0	-4912.6	6.0	4089.0	144	1	Galuf Cardaan	humanoid_galuf_cardaan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_341	NABOO	nab_world	AREA	0	-5480.0	6.0	4398.2	-173	1	Hanna S'kiyah	humanoid_herald_naboo_hanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_342	NABOO	nab_world	AREA	0	-5156.1	6.2	4129.9	-136	1	Hunter Javeezo	humanoid_hunter_javeezo	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_343	NABOO	nab_world	AREA	0	-4856.0	6.0	4158.0	-22	1	J1-P0 (a protocol droid)	droid_j1p0_protocol	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_stupid_hi_mean_4	600
-city_naboo_theed_344	NABOO	nab_world	AREA	0	-4857.4	6.0	4158.8	29	1	Kulton Woodle (a retired freighter captain)	humanoid_kultin_woodle	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_345	NABOO	nab_world	AREA	0	-5479.4	14.0	4467.2	-178	1	Pooja Naberrie	humanoid_pooja_naberrie	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
-city_naboo_theed_346	NABOO	nab_world	AREA	0	-5487.0	10.0	4424.9	177	1	Vaik'anna Silverlight	humanoid_herald_naboo_vaikanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_1	NABOO	nab_theed_cantina	AREA	1	40.3	0.1	1.3	90	1	a mountain villager	humanoid_mountain_villager	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_2	NABOO	nab_theed_cantina	AREA	1	42.8	0.1	1.3	-92	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_3	NABOO	nab_theed_cantina	AREA	14	-33.7	0.1	-24.4	179	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_4	NABOO	nab_theed_cantina	AREA	15	-47.7	0.1	-22.8	34	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_5	NABOO	nab_theed_cantina	AREA	2	36.1	0.1	0.8	-25	1	a Jawa	humanoid_jawa	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_6	NABOO	nab_theed_cantina	AREA	2	35.8	0.1	3.1	-167	1	a scavenger	humanoid_scavenger	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_7	NABOO	nab_theed_cantina	AREA	3	2.3	-0.9	-2.5	149	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_8	NABOO	nab_theed_cantina	AREA	3	-9.9	-0.9	-8.6	-57	1	a bounty hunter	humanoid_spynet_operative	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_9	NABOO	nab_theed_cantina	AREA	3	12.1	-0.9	7.9	-12	1	a hermit	humanoid_hermit	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_10	NABOO	nab_theed_cantina	AREA	3	10.1	-0.9	7.9	6	1	a moisture farmer	humanoid_farmer_moisture	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_11	NABOO	nab_theed_cantina	AREA	3	-10.9	-0.9	-5.7	-171	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_12	NABOO	nab_theed_cantina	AREA	3	16.6	-0.9	-2.3	-126	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_13	NABOO	nab_theed_cantina	AREA	3	13.7	-0.9	-2.4	137	1	a patron	humanoid_patron_human_male_01	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_14	NABOO	nab_theed_cantina	AREA	3	-3.2	-0.9	5.7	147	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_naboo_theed_15	NABOO	nab_theed_cantina	AREA	3	11.1	-0.9	12.0	-179	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_16	NABOO	nab_theed_cantina	AREA	3	24.3	-0.9	11.8	-87	1	a Stormtrooper Rifleman	humanoid_imperial_stormtrooper_rifleman	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_17	NABOO	nab_theed_cantina	AREA	3	22.2	-0.9	11.9	88	1	a Stormtrooper Sniper	humanoid_imperial_stormtrooper_sniper	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_18	NABOO	nab_theed_cantina	AREA	3	0.7	-0.9	-10.6	-79	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_19	NABOO	nab_theed_cantina	AREA	3	4.0	-0.9	-4.8	3	1	Tyla Jinn	humanoid_tyla_jinn	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_20	NABOO	nab_theed_cantina	AREA	4	17.1	-0.9	-19.9	59	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_21	NABOO	nab_theed_cantina	AREA	4	18.5	-0.9	-19.1	-119	1	a spacer	humanoid_spacer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_22	NABOO	nab_theed_cantina	AREA	9	-6.8	-0.9	20.5	179	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_23	NABOO	nab_theed_cloning1	AREA	2	-3.7	-0.1	1.6	-131	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_24	NABOO	nab_theed_cloning1	AREA	2	3	0.1	11.5	-1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_25	NABOO	nab_theed_cloning1	AREA	2	-5.9	0.1	-0.4	62	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_26	NABOO	nab_theed_cloning1	AREA	2	-6.1	0.1	6.4	90	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_27	NABOO	nab_theed_cloning1	AREA	4	-3.8	-5.5	-14.1	50	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_28	NABOO	nab_theed_cloning1	AREA	4	-1.2	-5.5	-12.1	-128	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_29	NABOO	nab_theed_cloning1	AREA	4	-0.9	-5.5	-14.2	-57	1	an outlaw	humanoid_outlaw	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_30	NABOO	nab_theed_cloning2	PATROL	4	1.9	-4.8	0.9	-1	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4700	column	idle			600
+city_naboo_theed_31	NABOO	nab_theed_hangar	AREA	2	7.9	0.7	-65	-90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_32	NABOO	nab_theed_hangar	AREA	2	1.1	0.7	-71.3	-17	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_33	NABOO	nab_theed_hangar	AREA	2	3.2	0.7	-60.2	-150	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_34	NABOO	nab_theed_hangar	AREA	2	-3	0.7	-60.1	-180	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_35	NABOO	nab_theed_hangar	AREA	3	-16.5	0.7	-69.6	-2	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_36	NABOO	nab_theed_hangar	AREA	3	-39.9	0.7	-72.2	-89	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_37	NABOO	nab_theed_hangar	AREA	3	-28.6	0.7	-75.8	-61	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_38	NABOO	nab_theed_hangar	AREA	3	-30.6	0.7	-74.7	112	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_39	NABOO	nab_theed_hangar	AREA	3	-15.7	8	-54.2	-166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_40	NABOO	nab_theed_hangar	AREA	4	7.9	8	-53.5	-180	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_41	NABOO	nab_theed_hangar	AREA	4	8	8	-55.2	0	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_42	NABOO	nab_theed_hangar	AREA	5	-41.6	7.9	-25.3	-67	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_43	NABOO	nab_theed_hangar	AREA	5	-28.5	7.9	-25.4	92	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_44	NABOO	nab_theed_hangar	PATROL	5	-8.6	7.9	31.1	-175	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3400	column	idle			600
+city_naboo_theed_45	NABOO	nab_theed_hangar	AREA	5	-28	7.9	28	178	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_46	NABOO	nab_theed_hangar	AREA	5	-27.9	7.9	26	-4	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_47	NABOO	nab_theed_hangar	AREA	5	17.3	7.9	-35	137	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_48	NABOO	nab_theed_hangar	AREA	5	-11.9	7.9	28.6	17	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_49	NABOO	nab_theed_hangar	AREA	5	20.3	7.9	-38	-53	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_50	NABOO	nab_theed_hangar	AREA	5	16.4	7.9	-36.7	109	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_sarcastic_alert_2	600
+city_naboo_theed_51	NABOO	nab_theed_hangar	AREA	5	-10.6	7.9	32.6	24	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_52	NABOO	nab_theed_hangar	AREA	5	-11.4	7.9	30.6	3	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_theed_53	NABOO	nab_theed_hangar	AREA	3	-20.6	0.7	-76.9	-26	1	a miner	humanoid_miner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_54	NABOO	nab_theed_hangar	AREA	3	-21.1	0.8	-75.7	155	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_55	NABOO	nab_theed_hangar	AREA	4	28.5	0.8	-67.7	90	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_56	NABOO	nab_theed_hangar	AREA	4	30.1	0.8	-67.7	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_57	NABOO	nab_theed_hangar	AREA	4	16.0	8.0	-54.3	-3	1	Chassis Dealer	humanoid_chassis_dealer_v	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_58	NABOO	nab_theed_hospital	AREA	2	21.4	0.3	4.5	3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_59	NABOO	nab_theed_hospital	AREA	2	20.5	0.3	1.8	100	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_60	NABOO	nab_theed_hospital	AREA	2	11	0.3	-3.4	2	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_61	NABOO	nab_theed_hospital	AREA	2	22.8	0.3	1.4	-80	1	an Ithorian musician	humanoid_ithorian_musician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_62	NABOO	nab_theed_hospital	AREA	6	-18.5	0.3	-10.4	179	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_63	NABOO	nab_theed_hospital	AREA	6	-12.3	0.3	-4.3	-14	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_64	NABOO	nab_theed_hospital	AREA	6	-12.9	0.3	-2.6	-179	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_65	NABOO	nab_theed_hospital	AREA	6	-18.3	0.3	-2.6	-151	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_66	NABOO	nab_theed_hospital	AREA	6	-25.6	0.3	9.8	180	1	an assassin	humanoid_assassin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_67	NABOO	nab_theed_hospital	AREA	6	-20.5	0.3	9.8	-178	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_68	NABOO	nab_theed_hospital	AREA	10	26.8	7.3	0.2	0	1	Mindt F'abul (Cybernetic Specialist)	humanoid_cybernetic_specialist_naboo	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		cybernetics	600
+city_naboo_theed_69	NABOO	nab_theed_hotel1	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_70	NABOO	nab_theed_hotel2	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_71	NABOO	nab_theed_palace	PATROL	3	9	12	69.6	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3900	column	idle			600
+city_naboo_theed_72	NABOO	nab_theed_palace	PATROL	8	34.1	12	45	92	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3800	column	idle			600
+city_naboo_theed_73	NABOO	nab_theed_palace	AREA	10	-2.7	12	22.1	-118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_74	NABOO	nab_theed_palace	AREA	10	7.2	12	21.6	75	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_75	NABOO	nab_theed_palace	PATROL	10	46.4	19	29.4	-173	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3700	column	idle			600
+city_naboo_theed_76	NABOO	nab_theed_palace	AREA	16	0.7	27	-101.4	42	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_77	NABOO	nab_theed_palace	AREA	16	-6	27	-113.5	151	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_78	NABOO	nab_theed_palace	AREA	16	-4.4	27	-115.9	-31	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_79	NABOO	nab_theed_palace	AREA	16	0.1	27	-138.8	179	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_alert_5	600
+city_naboo_theed_80	NABOO	nab_theed_palace	PATROL	16	5.8	27	-151.5	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3500	column	idle			600
+city_naboo_theed_81	NABOO	nab_theed_palace	PATROL	22	42.8	33	-147.6	-90	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_3600	column	idle			600
+city_naboo_theed_82	NABOO	nab_theed_palace	AREA	10	-28.0	19.0	3.1	110	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_83	NABOO	nab_theed_palace	AREA	10	-24.3	19.0	1.7	-68	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_84	NABOO	nab_theed_palace	AREA	10	42.7	19.0	23.7	15	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_85	NABOO	nab_theed_palace	AREA	10	-20.8	12.0	20.7	-90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_86	NABOO	nab_theed_palace	AREA	10	-23.2	12.0	20.7	90	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_87	NABOO	nab_theed_palace	AREA	10	43.7	19.0	27.3	-164	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_88	NABOO	nab_theed_palace	AREA	10	20.4	12.0	19.9	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_89	NABOO	nab_theed_palace	AREA	10	0.5	12.0	4.6	0	1	Captain Dinge (RSF Pilot Trainer)	humanoid_captain_dinge	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_90	NABOO	nab_theed_palace	AREA	11	1.5	21.0	-44.0	-11	1	Captain Kaydine (RSF Pilot Trainer)	humanoid_kaydine	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_91	NABOO	nab_theed_palace	AREA	12	30.6	23.0	-32.3	-89	1	Grand Admiral Nial Declann	humanoid_imperial_nial_declann	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_92	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-30.5	-92	1	TK-8H2	humanoid_imperial_tk8h2	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_93	NABOO	nab_theed_palace	AREA	12	29.4	23.0	-34.2	-86	1	TK-9H4	humanoid_imperial_tk9h4	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_94	NABOO	nab_theed_palace	AREA	13	-31.4	27.0	-31.5	-89	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_95	NABOO	nab_theed_palace	AREA	13	-33.5	27.0	-31.3	95	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_96	NABOO	nab_theed_palace	AREA	13	-32.1	27.0	-41.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_97	NABOO	nab_theed_palace	AREA	18	40.4	33.0	-93.8	-90	1	Commander Dulios (RSF Pilot Trainer)	humanoid_commander_dulios	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_98	NABOO	nab_theed_palace	AREA	18	39.7	33.0	-96.8	-69	1	Librarian	humanoid_trivia_librarian	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_99	NABOO	nab_theed_palace	AREA	2	0.0	8.0	92.7	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_100	NABOO	nab_theed_palace	AREA	24	-45.7	33.0	-93.9	88	1	Diness Imler (RSF Pilot Trainer)	humanoid_diness_imler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_101	NABOO	nab_theed_palace	AREA	3	8.9	12.0	82.4	-171	1	Captain Heff (an Imperial Captain)	humanoid_imperial_cpt_heff	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_102	NABOO	nab_theed_palace	AREA	30	3.2	27.0	-169.6	-108	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_103	NABOO	nab_theed_palace	AREA	30	3.1	27.0	-175.4	-22	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_104	NABOO	nab_theed_palace	AREA	31	36.7	27.0	-175.6	-84	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_105	NABOO	nab_theed_palace	AREA	31	36.5	27.0	-169.5	-83	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_106	NABOO	nab_theed_palace	AREA	32	36.5	27.0	-192.9	-13	1	Queen Kylantha	humanoid_clone_queen_kylantha	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_107	NABOO	nab_theed_palace	AREA	4	20.8	12.0	77.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_108	NABOO	nab_theed_palace	AREA	5	-21.6	12.0	77.3	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_109	NABOO	nab_theed_palace	AREA	7	1.3	12.0	45.1	-51	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_110	NABOO	nab_theed_palace	AREA	7	0.0	12.0	47.2	179	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_111	NABOO	nab_theed_palace	AREA	7	-1.1	12.0	45.9	46	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_112	NABOO	nab_theed_palace	AREA	9	-39.2	12.0	44.8	0	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	TURN	0	0	-	idle			600
+city_naboo_theed_113	NABOO	nab_theed_salon	AREA	1	-9.4	0.6	-2.1	52	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_114	NABOO	nab_theed_salon	AREA	1	-8	0.6	-1.1	-122	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_sitting_chair			600
+city_naboo_theed_115	NABOO	nab_theed_salon	AREA	1	-7.2	0.6	-2.9	-55	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_116	NABOO	nab_theed_salon	PATROL	1	-7.6	0.6	-5.5	-110	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4600	column	idle			600
+city_naboo_theed_117	NABOO	nab_theed_theater	AREA	8	22.1	2.1	63.7	0	1	a theater manager	humanoid_quest_crowd_pleaser_theater_manager	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_118	NABOO	nab_world	PATROL	0	-5769.4	6.5	4313.5	9	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4900	column	idle			600
+city_naboo_theed_119	NABOO	nab_world	AREA	0	-4917.1	6	4116.9	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_120	NABOO	nab_world	AREA	0	-4982.8	6	4230.5	-103	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_121	NABOO	nab_world	AREA	0	-5503.7	6	4374.5	-58	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_122	NABOO	nab_world	AREA	0	-5510.4	14	4463.4	121	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_123	NABOO	nab_world	AREA	0	-5765.5	6	4130	84	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_124	NABOO	nab_world	AREA	0	-5679.4	6	4110.5	-147	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_125	NABOO	nab_world	AREA	0	-5496.5	6	4386.4	108	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_126	NABOO	nab_world	PATROL	0	-5552.1	6.5	4234.2	-135	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4300	column	idle			600
+city_naboo_theed_127	NABOO	nab_world	PATROL	0	-5247.9	6.9	4619.9	12	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4800	column	idle			600
+city_naboo_theed_128	NABOO	nab_world	AREA	0	-5581.3	-149.1	-65.9	-94	1	a Chiss poacher smuggler	humanoid_kashyyyk_chiss_poacher_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_129	NABOO	nab_world	AREA	0	-5493.9	-150	0.7	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_130	NABOO	nab_world	AREA	0	-5496.5	-150	-54.1	101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_131	NABOO	nab_world	AREA	0	-5527.4	-150	-92.9	-73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_132	NABOO	nab_world	AREA	0	-5513.5	-150	-92.6	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_133	NABOO	nab_world	AREA	0	-5570.1	-150	-51.3	-36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_134	NABOO	nab_world	AREA	0	-5560.9	-150	-64.7	141	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_135	NABOO	nab_world	AREA	0	-4945	6	4108.2	-101	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_136	NABOO	nab_world	AREA	0	-4924.9	6	4130.2	77	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_137	NABOO	nab_world	AREA	0	-4899.3	6	4119.1	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_138	NABOO	nab_world	AREA	0	-4857.7	6	4113	87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_139	NABOO	nab_world	AREA	0	-4826.1	6	4114.9	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_140	NABOO	nab_world	AREA	0	-4814.8	6	4099.1	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_141	NABOO	nab_world	AREA	0	-4841.7	6	4107.2	-104	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_142	NABOO	nab_world	AREA	0	-4867.9	6	4101	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_143	NABOO	nab_world	AREA	0	-4882.2	6	4123.7	-23	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_144	NABOO	nab_world	AREA	0	-4882.9	6	4152.1	-24	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_145	NABOO	nab_world	AREA	0	-4986.3	6	4124.7	168	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_146	NABOO	nab_world	AREA	0	-4940.1	6	4073.2	114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_147	NABOO	nab_world	AREA	0	-4981.3	6	4030	19	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_148	NABOO	nab_world	AREA	0	-5010.9	6	4054.2	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_149	NABOO	nab_world	AREA	0	-5021.8	6	4080.4	29	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_150	NABOO	nab_world	AREA	0	-5044.2	6	4133.1	-55	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_151	NABOO	nab_world	AREA	0	-4935.1	6	4193.7	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_152	NABOO	nab_world	AREA	0	-4958.3	6	4205.4	-50	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_153	NABOO	nab_world	AREA	0	-5007.2	6	4217.1	-87	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_154	NABOO	nab_world	AREA	0	-5029.6	6	4227.8	-78	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_155	NABOO	nab_world	AREA	0	-5067.8	6	4217.5	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_156	NABOO	nab_world	AREA	0	-5104.1	6	4205.5	-100	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_157	NABOO	nab_world	AREA	0	-5102.7	6	4243.7	33	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_158	NABOO	nab_world	AREA	0	-5103.8	6	4273.7	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_159	NABOO	nab_world	AREA	0	-5132.5	6	4297.4	-47	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_160	NABOO	nab_world	AREA	0	-5162.2	6	4318.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_161	NABOO	nab_world	AREA	0	-5199.8	6	4316.3	-111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_162	NABOO	nab_world	AREA	0	-5150.6	6	4305.1	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_163	NABOO	nab_world	AREA	0	-5127.8	6	4279.3	139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_164	NABOO	nab_world	AREA	0	-5074	6	4249	136	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_165	NABOO	nab_world	AREA	0	-5092.3	6	4230.5	-132	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_166	NABOO	nab_world	AREA	0	-5127.9	6	4221.2	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_167	NABOO	nab_world	AREA	0	-5121.2	6.5	4157.1	-175	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_168	NABOO	nab_world	AREA	0	-5123.1	6.5	4172.3	-3	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_169	NABOO	nab_world	AREA	0	-5137.9	6.5	4169.5	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_170	NABOO	nab_world	AREA	0	-5261.5	6	4216.9	144	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_171	NABOO	nab_world	AREA	0	-5234.3	6	4194	130	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_172	NABOO	nab_world	AREA	0	-5200.1	6	4150.9	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_173	NABOO	nab_world	AREA	0	-5182.5	6	4143.8	52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_174	NABOO	nab_world	AREA	0	-5218.7	6	4169.3	-45	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_175	NABOO	nab_world	AREA	0	-5472.4	6	4384.1	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_176	NABOO	nab_world	AREA	0	-5520	6	4390.3	-48	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_177	NABOO	nab_world	AREA	0	-5519	6	4358.9	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_178	NABOO	nab_world	AREA	0	-5492.1	6	4344.7	118	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_179	NABOO	nab_world	AREA	0	-5475.6	6	4330.5	111	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_180	NABOO	nab_world	AREA	0	-5495.9	6	4322.1	-165	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_181	NABOO	nab_world	AREA	0	-5500.1	6	4289	-173	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_182	NABOO	nab_world	AREA	0	-5524.6	6	4268.4	-150	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_183	NABOO	nab_world	AREA	0	-5501.3	6	4252.2	83	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_184	NABOO	nab_world	AREA	0	-5472.9	6	4266.4	68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_185	NABOO	nab_world	AREA	0	-5482.8	6	4243.4	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_186	NABOO	nab_world	AREA	0	-5509.6	6	4230.8	-116	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_187	NABOO	nab_world	AREA	0	-5518.4	6	4208	-88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_188	NABOO	nab_world	AREA	0	-5495.2	6	4191.1	146	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_189	NABOO	nab_world	AREA	0	-5481.4	6	4218.3	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_190	NABOO	nab_world	AREA	0	-5483	6	4163.3	155	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_191	NABOO	nab_world	AREA	0	-5501	6	4046.9	-166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_192	NABOO	nab_world	AREA	0	-5510.7	6	4022.3	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_193	NABOO	nab_world	AREA	0	-5513.8	6	4057.7	-25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_194	NABOO	nab_world	AREA	0	-5486.4	6	4067.1	69	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_195	NABOO	nab_world	AREA	0	-5499.6	6	4097.7	-22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_196	NABOO	nab_world	AREA	0	-5490.5	6	4118.6	1	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_197	NABOO	nab_world	AREA	0	-5658.6	6	4479.2	-73	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_198	NABOO	nab_world	AREA	0	-5618.4	6	4486.9	41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_199	NABOO	nab_world	AREA	0	-5760.2	6	4384.8	-95	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_200	NABOO	nab_world	AREA	0	-5730.6	6	4286.8	-119	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_201	NABOO	nab_world	AREA	0	-5698.9	6	4284.6	138	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_202	NABOO	nab_world	AREA	0	-5815.6	6	4290	-76	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_203	NABOO	nab_world	AREA	0	-5839.7	6	4263.8	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_204	NABOO	nab_world	AREA	0	-5883.9	6	4263.7	-98	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_205	NABOO	nab_world	AREA	0	-5918.8	6	4238	-97	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_206	NABOO	nab_world	AREA	0	-5951.9	6	4241.9	-107	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_207	NABOO	nab_world	AREA	0	-5890.2	6	4239.6	70	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_208	NABOO	nab_world	AREA	0	-5859.2	6	4259.6	123	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_209	NABOO	nab_world	AREA	0	-5863.8	6	4215.2	158	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_210	NABOO	nab_world	AREA	0	-5847.7	6	4181.2	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_211	NABOO	nab_world	AREA	0	-5842.8	6	4153.3	-171	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_212	NABOO	nab_world	AREA	0	-5809.2	6	4131.1	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_213	NABOO	nab_world	AREA	0	-5749.6	6	4150.1	9	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_214	NABOO	nab_world	AREA	0	-5725.4	6	4129	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_215	NABOO	nab_world	AREA	0	-5695	6	4128	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_216	NABOO	nab_world	AREA	0	-5624.9	6	4135.4	6	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_217	NABOO	nab_world	AREA	0	-5704	6.5	4183.2	-41	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_218	NABOO	nab_world	AREA	0	-5657.5	6	4229.1	-18	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_219	NABOO	nab_world	AREA	0	-5674.4	6	4275.7	-21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_220	NABOO	nab_world	AREA	0	-5686.3	6	4299.2	-51	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_221	NABOO	nab_world	AREA	0	-5710.1	6	4299.8	-105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_222	NABOO	nab_world	AREA	0	-5662.9	6	4249.8	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_223	NABOO	nab_world	AREA	0	-5617.2	6	4168.6	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_224	NABOO	nab_world	AREA	0	-5633.1	6	4146.1	-154	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_225	NABOO	nab_world	AREA	0	-5611.9	6	4149.3	91	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_226	NABOO	nab_world	AREA	0	-5625.4	6	4105.2	-163	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_227	NABOO	nab_world	AREA	0	-5638.9	6	4082.6	110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_228	NABOO	nab_world	AREA	0	-5595.7	6	4067	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_229	NABOO	nab_world	AREA	0	-5551.5	6.5	4062.7	89	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_230	NABOO	nab_world	AREA	0	-5510.9	6	4083.3	35	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_231	NABOO	nab_world	AREA	0	-5891.9	6	4350.5	-124	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_232	NABOO	nab_world	AREA	0	-5860	6	4340	133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_233	NABOO	nab_world	AREA	0	-5831.9	6	4313.2	135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_234	NABOO	nab_world	AREA	0	-5933.9	6	4325	-139	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_235	NABOO	nab_world	AREA	0	-5948.4	6	4310.4	-110	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_236	NABOO	nab_world	AREA	0	-5979.2	6	4308.5	-99	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_237	NABOO	nab_world	AREA	0	-5973.7	6	4264.9	166	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_238	NABOO	nab_world	AREA	0	-5967.1	6	4223.9	-159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_239	NABOO	nab_world	AREA	0	-5985.3	6	4291.2	17	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_240	NABOO	nab_world	AREA	0	-5876.3	6	4344.5	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_241	NABOO	nab_world	AREA	0	-5841.6	6	4295.3	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_242	NABOO	nab_world	AREA	0	-5838.3	6	4209.7	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_243	NABOO	nab_world	AREA	0	-5834.1	6	4175.7	176	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_244	NABOO	nab_world	AREA	0	-5750.2	6	4268.9	-8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_245	NABOO	nab_world	AREA	0	-5716.9	6	4276.9	88	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_246	NABOO	nab_world	AREA	0	-5673.5	6	4261.9	137	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_247	NABOO	nab_world	AREA	0	-5485.1	6	4368.1	172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_248	NABOO	nab_world	AREA	0	-5505.7	6	4352.8	-135	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_249	NABOO	nab_world	AREA	0	-5513.9	6	4340.5	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_250	NABOO	nab_world	AREA	0	-5472	6	4361.5	36	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_251	NABOO	nab_world	PATROL	0	-5456.4	6.3	4387.6	88	1	a commoner	humanoid_commoner_bith	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4200	column	idle			600
+city_naboo_theed_252	NABOO	nab_world	AREA	0	-5006.9	6.3	4085.3	64	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_253	NABOO	nab_world	AREA	0	-4992.2	6.6	4073.5	42	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_254	NABOO	nab_world	AREA	0	-5005.8	6.6	4084.9	40	1	a fugitive	humanoid_fugitive	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_255	NABOO	nab_world	AREA	0	-4954.4	6	4124.8	-50	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_256	NABOO	nab_world	AREA	0	-5483.7	14	4460.7	-82	1	a government informant	humanoid_government_informant	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_257	NABOO	nab_world	AREA	0	-5221.7	6	4218.7	-147	1	a Jawa engineer	humanoid_jawa_engineer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_258	NABOO	nab_world	AREA	0	-5219.6	6	4216	-139	1	a Jawa smuggler	humanoid_jawa_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_259	NABOO	nab_world	PATROL	0	-5525	6	4434.2	-3	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4100	column	idle			600
+city_naboo_theed_260	NABOO	nab_world	AREA	0	-5575.7	-149.1	-67.2	141	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_261	NABOO	nab_world	AREA	0	-5431.5	6	4166.6	-3	1	a pathfinder	humanoid_pathfinder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_262	NABOO	nab_world	AREA	0	-5573.6	-149.1	-70.1	-36	1	a patron	humanoid_patron	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_263	NABOO	nab_world	AREA	0	-5861	6.6	4183.9	-163	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_264	NABOO	nab_world	AREA	0	-5939.3	6	4312	58	1	a Pit Droid	droid_crafted_pit	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_flee_15	600
+city_naboo_theed_265	NABOO	nab_world	AREA	0	-5488.4	-150	-4.5	176	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_266	NABOO	nab_world	AREA	0	-5861.2	6.6	4181.6	-95	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_267	NABOO	nab_world	AREA	0	-5638.6	-157.4	-37.2	-84	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_268	NABOO	nab_world	AREA	0	-5638.1	6	4121	44	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_269	NABOO	nab_world	AREA	0	-5636.6	6	4122.5	-132	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_270	NABOO	nab_world	AREA	0	-5638.6	-157.4	-47.1	-95	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_271	NABOO	nab_world	AREA	0	-5727	6.2	4455.4	-47	1	a scoundrel	humanoid_scoundrel	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_272	NABOO	nab_world	AREA	0	-5638.6	-157.4	-39.6	-106	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_273	NABOO	nab_world	AREA	0	-5722	6.2	4443.2	-126	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_274	NABOO	nab_world	AREA	0	-5621.2	-157.3	-28.5	48	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_275	NABOO	nab_world	AREA	0	-5725.4	6.2	4440.8	58	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_276	NABOO	nab_world	AREA	0	-5619.4	-157.6	-26.1	-147	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_277	NABOO	nab_world	AREA	0	-5726.3	6.2	4442.4	78	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_278	NABOO	nab_world	AREA	0	-5223.6	6	4212.8	27	1	a Sullustan male	humanoid_patron_sullustan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_279	NABOO	nab_world	AREA	0	-5115.3	6.5	4146.6	130	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_280	NABOO	nab_world	AREA	0	-5127.9	6.5	4163.8	-141	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_281	NABOO	nab_world	AREA	0	-5638.7	-159.1	167.2	-160	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_282	NABOO	nab_world	AREA	0	-5705.7	6.5	4166	-2	1	a warder	humanoid_warder	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_283	NABOO	nab_world	PATROL	0	-5841	6	4119.4	-179	1	a WED Treadwell droid	droid_wed_treadwell	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4400	column	idle		simple_droid_sarcastic_alert_2	600
+city_naboo_theed_284	NABOO	nab_world	AREA	0	-5630.7	-159.1	185.9	172	1	an administrator	humanoid_medic_admin	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_285	NABOO	nab_world	AREA	0	-5573.7	-150	-32.1	-177	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_286	NABOO	nab_world	AREA	0	-5573.8	-150	-34.4	5	1	an armor thief	humanoid_thief_armor	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_287	NABOO	nab_world	AREA	0	-5585.6	-150	-52.6	-92	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_288	NABOO	nab_world	AREA	0	-5497.7	6	4138	-169	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_theed_289	NABOO	nab_world	AREA	0	-5630.4	-159.3	183.6	-12	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_290	NABOO	nab_world	AREA	0	-5628.2	-159	185	-92	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_291	NABOO	nab_world	AREA	0	-5486.8	14	4461.2	99	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	conversation			600
+city_naboo_theed_292	NABOO	nab_world	AREA	0	-5726.4	6.5	4171.1	-90	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_theed_293	NABOO	nab_world	AREA	0	-5182.4	6	4117.3	140	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
+city_naboo_theed_294	NABOO	nab_world	AREA	0	-5777.3	6	4280.8	-92	1	an MSE-6 "Mouse" droid	droid_mouse	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		simple_droid_slang_threat_15	600
+city_naboo_theed_295	NABOO	nab_world	PATROL	0	-5182.9	6.6	4204	128	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_4500	column	idle		simple_droid_geek_alert_5	600
+city_naboo_theed_296	NABOO	nab_world	PATROL	0	-5495.9	14	4475.6	-1	1	an RSF Palace guard	humanoid_rsf_palace_guard	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_4000	column	idle			600
+city_naboo_theed_297	NABOO	nab_world	PATROL	0	-4921.6	6.0	4151.9	-152	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3100	column	idle			600
+city_naboo_theed_298	NABOO	nab_world	AREA	0	-5023.9	6.0	4040.1	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_299	NABOO	nab_world	AREA	0	-5004.8	6.0	4067.5	46	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_300	NABOO	nab_world	AREA	0	-4970.4	6.0	4069.8	66	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_301	NABOO	nab_world	AREA	0	-4933.6	6.0	4090.2	-60	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_302	NABOO	nab_world	AREA	0	-4924.8	6.0	4034.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_303	NABOO	nab_world	AREA	0	-4921.1	6.0	4061.5	34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_304	NABOO	nab_world	AREA	0	-4902.7	6.0	4106.8	40	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_305	NABOO	nab_world	AREA	0	-4897.7	6.0	4193.3	-122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_306	NABOO	nab_world	AREA	0	-4896.2	6.0	4167.9	169	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_307	NABOO	nab_world	AREA	0	-4892.2	6.0	4083.0	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_308	NABOO	nab_world	AREA	0	-4866.7	6.0	4160.5	-80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	LOITER	5	0	-	idle		commoner	600
+city_naboo_theed_309	NABOO	nab_world	PATROL	0	1854	11.1	2695.0	180	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5300	column	idle			600
+city_naboo_theed_310	NABOO	nab_world	PATROL	0	2089.4	29.1	2575.1	147	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5200	column	idle			600
+city_naboo_theed_311	NABOO	nab_world	PATROL	0	-5355.3	6.0	4347.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_500	column	idle			600
+city_naboo_theed_312	NABOO	nab_world	PATROL	0	-5323.3	6.0	4431.5	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	PATROL	0	patrol_naboo_700	column	idle			600
+city_naboo_theed_313	NABOO	nab_world	AREA	0	-5344.0	6.0	4395.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_314	NABOO	nab_world	AREA	0	-5344.0	6.0	4364.0	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Theed	1	LOITER	5	0	-	idle			600
+city_naboo_theed_315	NABOO	nab_world	PATROL	0	-4931.7	6.5	3995.1	-138	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3200	column	idle			600
+city_naboo_theed_316	NABOO	nab_world	AREA	0	-5538.7	6.0	4365.5	93	1	a patron	humanoid_patron_human_male_03	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_317	NABOO	nab_world	PATROL	0	1987.3	11.1	2465.6	131	1	a philosopher	humanoid_philosopher	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5100	column	idle			600
+city_naboo_theed_318	NABOO	nab_world	PATROL	0	-4704.9	6.0	4017.0	130	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3300	column	idle			600
+city_naboo_theed_319	NABOO	nab_world	PATROL	0	1362.3	12.1	2753.0	-165	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5000	column	idle			600
+city_naboo_theed_320	NABOO	nab_world	PATROL	0	1576.5	24.1	2842.8	23	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5600	column	idle			600
+city_naboo_theed_321	NABOO	nab_world	AREA	0	-5112.5	4.8	4597.1	159	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_322	NABOO	nab_world	PATROL	0	-4899.9	6.0	4181.1	-50	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_3000	column	idle			600
+city_naboo_theed_323	NABOO	nab_world	PATROL	0	1439.9	12.1	2783.9	-8	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Theed	1	PATROL	0	patrol_naboo_5700	column	idle		simple_droid_geek_bye_nice_13	600
+city_naboo_theed_324	NABOO	nab_world	AREA	0	-5033.2	6.0	4092.3	118	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_325	NABOO	nab_world	AREA	0	-5019.0	6.0	4012.0	39	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_326	NABOO	nab_world	AREA	0	-5832.2	6.0	4121.0	-17	1	Broma Lak	humanoid_naboo_captain_broma_lak	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_327	NABOO	nab_world	AREA	0	-4805.9	6.0	4130.6	-141	1	C-3P0	droid_rebel_quest_u10_c3po	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_328	NABOO	nab_world	AREA	0	-5312.1	6.0	4415.6	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_329	NABOO	nab_world	AREA	0	-5515.8	6.0	4408.1	170	1	Commander Landau (Imperial Pilot Coordinator)	humanoid_imperial_landau	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_330	NABOO	nab_world	AREA	0	-4912.6	6.0	4089.0	144	1	Galuf Cardaan	humanoid_galuf_cardaan	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_331	NABOO	nab_world	AREA	0	-5480.0	6.0	4398.2	-173	1	Hanna S'kiyah	humanoid_herald_naboo_hanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_332	NABOO	nab_world	AREA	0	-5156.1	6.2	4129.9	-136	1	Hunter Javeezo	humanoid_hunter_javeezo	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_333	NABOO	nab_world	AREA	0	-4856.0	6.0	4158.0	-22	1	J1-P0 (a protocol droid)	droid_j1p0_protocol	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle		simple_droid_stupid_hi_mean_4	600
+city_naboo_theed_334	NABOO	nab_world	AREA	0	-4857.4	6.0	4158.8	29	1	Kulton Woodle (a retired freighter captain)	humanoid_kultin_woodle	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_335	NABOO	nab_world	AREA	0	-5479.4	14.0	4467.2	-178	1	Pooja Naberrie	humanoid_pooja_naberrie	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600
+city_naboo_theed_336	NABOO	nab_world	AREA	0	-5487.0	10.0	4424.9	177	1	Vaik'anna Silverlight	humanoid_herald_naboo_vaikanna	INVULNERABLE	N	100	100	City	Theed	1	IDLE	0	0	-	idle			600

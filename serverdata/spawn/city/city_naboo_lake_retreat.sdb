@@ -1,22 +1,30 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-city_naboo_lake_retreat_1	NABOO	nab_world	AREA	0	-5521.7	-150.0	3.2	-153	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_2	NABOO	nab_world	AREA	0	-5503.0	-150.0	-21.0	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
-city_naboo_lake_retreat_3	NABOO	nab_world	AREA	0	-5539.4	-149.7	-103.6	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
-city_naboo_lake_retreat_4	NABOO	nab_world	AREA	0	-5470.3	-150.0	0.9	-117	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_5	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
-city_naboo_lake_retreat_6	NABOO	nab_world	PATROL	0	-5491.1	-149.5	-72.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	3	PATROL	0	patrol_naboo_1500	column	idle			600
-city_naboo_lake_retreat_7	NABOO	nab_world	AREA	0	-5490.6	-150.0	-93.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	1	LOITER	5	0	-	idle			600
-city_naboo_lake_retreat_8	NABOO	nab_world	AREA	0	-5483.1	-150.0	-53.5	-113	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_9	NABOO	nab_world	AREA	0	-5540.1	-150.0	-92.3	79	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_10	NABOO	nab_world	AREA	0	-5564.2	-150.0	-20.0	45	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
-city_naboo_lake_retreat_11	NABOO	nab_world	AREA	0	-5547.8	-150.0	-66.4	-97	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_12	NABOO	nab_world	PATROL	0	-5533.0	-149.8	-72.0	-89	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_1400	column	idle			600
-city_naboo_lake_retreat_13	NABOO	nab_world	PATROL	0	-5497.5	-150.0	-101.1	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_200	column	idle			600
-city_naboo_lake_retreat_14	NABOO	nab_world	PATROL	0	-5503.8	-150.0	-41.8	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_100	column	idle			600
-city_naboo_lake_retreat_15	NABOO	nab_world	AREA	0	-5629.4	-156.2	-3.4	-82	1	Brass Marshoo	humanoid_brass_marshoo	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_16	NABOO	nab_world	AREA	0	-5500.4	-150.0	-5.3	86	1	Lareen Dantara	humanoid_lareen_dantara	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_17	NABOO	nab_world	AREA	0	-5476.6	-150.0	-77.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_18	NABOO	nab_world	AREA	0	-5563.0	-150.0	-43.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_19	NABOO	nab_world	AREA	0	-5551.9	-150.0	-52.2	-43	1	Rovim Minnoni	humanoid_rovim_minnoni	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
-city_naboo_lake_retreat_20	NABOO	nab_world	AREA	0	-5497.5	-150.0	-72.6	13	1	Sheani (a junk dealer)	humanoid_junk_sheani	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		junk_dealer_generic	600
+city_naboo_lake_retreat_1	NABOO	nab_amidala_hotel	AREA	4	-1.6	1	3.9	150	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_2	NABOO	nab_amidala_hotel	AREA	5	22.1	1.3	10.6	-4	1	a Bothan diplomat	humanoid_bothan_diplomat	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_3	NABOO	nab_amidala_hotel	AREA	5	20.2	1.3	-6.7	100	1	a Chiss female	humanoid_patron_chiss_female	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+city_naboo_lake_retreat_4	NABOO	nab_amidala_hotel	AREA	5	22.3	1.3	-7	-81	1	a Chiss male	humanoid_patron_chiss_male	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+city_naboo_lake_retreat_5	NABOO	nab_amidala_hotel	AREA	6	-16.8	1	3.1	28	1	a Klaatu	humanoid_patron_klaatu	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_6	NABOO	nab_amidala_hotel	AREA	6	-15.2	1	5.3	-144	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_7	NABOO	nab_amidala_hotel	AREA	6	-17.1	1	5.1	125	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_8	NABOO	nab_amidala_hotel	AREA	6	-13.4	1	0.1	89	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_naboo_lake_retreat_9	NABOO	nab_world	AREA	0	-5521.7	-150.0	3.2	-153	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_10	NABOO	nab_world	AREA	0	-5503.0	-150.0	-21.0	80	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
+city_naboo_lake_retreat_11	NABOO	nab_world	AREA	0	-5539.4	-149.7	-103.6	-94	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		commoner	600
+city_naboo_lake_retreat_12	NABOO	nab_world	AREA	0	-5470.3	-150.0	0.9	-117	1	a governor	humanoid_governor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_13	NABOO	nab_world	AREA	0	-5563.0	-150.0	-18.9	-136	1	a mayor	humanoid_mayor	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+city_naboo_lake_retreat_14	NABOO	nab_world	PATROL	0	-5491.1	-149.5	-72.8	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	3	PATROL	0	patrol_naboo_1500	column	idle			600
+city_naboo_lake_retreat_15	NABOO	nab_world	AREA	0	-5490.6	-150.0	-93.9	0	1	a Naboo security inspector	humanoid_smuggler_patrol_thief_3	ATTACKABLE	N	21	30	City	Lake Retreat	1	LOITER	5	0	-	idle			600
+city_naboo_lake_retreat_16	NABOO	nab_world	AREA	0	-5483.1	-150.0	-53.5	-113	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_17	NABOO	nab_world	AREA	0	-5540.1	-150.0	-92.3	79	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_18	NABOO	nab_world	AREA	0	-5564.2	-150.0	-20.0	45	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	conversation			600
+city_naboo_lake_retreat_19	NABOO	nab_world	AREA	0	-5547.8	-150.0	-66.4	-97	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_20	NABOO	nab_world	PATROL	0	-5533.0	-149.8	-72.0	-89	1	an RSF security guard	humanoid_rsf_security_guard	ATTACKABLE	N	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_1400	column	idle			600
+city_naboo_lake_retreat_21	NABOO	nab_world	PATROL	0	-5497.5	-150.0	-101.1	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_200	column	idle			600
+city_naboo_lake_retreat_22	NABOO	nab_world	PATROL	0	-5503.8	-150.0	-41.8	0	1	an RSF security officer	humanoid_rsf_security_officer	ATTACKABLE	E	21	30	City	Lake Retreat	1	PATROL	0	patrol_naboo_100	column	idle			600
+city_naboo_lake_retreat_23	NABOO	nab_world	AREA	0	-5629.4	-156.2	-3.4	-82	1	Brass Marshoo	humanoid_brass_marshoo	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_24	NABOO	nab_world	AREA	0	-5500.4	-150.0	-5.3	86	1	Lareen Dantara	humanoid_lareen_dantara	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_25	NABOO	nab_world	AREA	0	-5476.6	-150.0	-77.8	-68	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_26	NABOO	nab_world	AREA	0	-5563.0	-150.0	-43.2	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_27	NABOO	nab_world	AREA	0	-5551.9	-150.0	-52.2	-43	1	Rovim Minnoni	humanoid_rovim_minnoni	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle			600
+city_naboo_lake_retreat_28	NABOO	nab_world	AREA	0	-5497.5	-150.0	-72.6	13	1	Sheani (a junk dealer)	humanoid_junk_sheani	INVULNERABLE	N	100	100	City	Lake Retreat	1	IDLE	0	0	-	idle		junk_dealer_generic	600
