@@ -23,74 +23,43 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.support.objects.items
+package com.projectswg.holocore.resources.support.objects.radial.`object`
 
-import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
-import com.projectswg.holocore.intents.support.objects.CreateStaticItemIntent
-import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
-import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.objects.StaticItemCreator
+import com.projectswg.common.data.radial.RadialItem
+import com.projectswg.common.data.radial.RadialOption
+import com.projectswg.holocore.intents.gameplay.entertainment.WatchIntent
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import me.joshlarson.jlcommon.control.IntentHandler
-import me.joshlarson.jlcommon.control.Service
-import java.util.*
 
-class StaticItemService : Service() {
-	
-	@IntentHandler
-	private fun handleCreateStaticItemIntent(csii: CreateStaticItemIntent) {
-		val container = csii.container
-		val itemNames = csii.itemNames
-		val objectCreationHandler = csii.objectCreationHandler
+class CreatureObjectRadial : RadialHandlerInterface {
+	override fun getOptions(options: MutableCollection<RadialOption>, player: Player, target: SWGObject) {
+		if (target !is CreatureObject) return
 		
-		// If adding these items to the container would exceed the max capacity...
-		if (!objectCreationHandler.isIgnoreVolume && container.containedObjects.size + itemNames.size > container.maxContainerSize) {
-			objectCreationHandler.containerFull()
-			return
-		}
-		val requesterOwner = csii.requester.owner ?: return
-		
-		val objects = ArrayList<SWGObject>()
-		for (itemName in itemNames) {
-			val obj = StaticItemCreator.createItem(itemName)
-			if (obj != null) {
-				objects.add(obj)
-				obj.moveToContainer(container)
-				ObjectCreatedIntent(obj).broadcast()
-			} else {
-				StandardLog.onPlayerError(this, requesterOwner, "unknown static item %s", itemName)
-				SystemMessageIntent.broadcastPersonal(requesterOwner, String.format("%s could not be spawned because the item name is unknown", itemName))
-			}
-		}
-
-		objectCreationHandler.success(objects)
+		watch(options, player, target)
 	}
 
-	interface ObjectCreationHandler {
-		val isIgnoreVolume: Boolean
-		fun success(createdObjects: List<SWGObject>)
-		
-		fun containerFull() {
-			
+	override fun handleSelection(player: Player, target: SWGObject, selection: RadialItem) {
+		when (selection) {
+			RadialItem.SERVER_PERFORMANCE_WATCH      -> WatchIntent(player, target, true).broadcast()
+			RadialItem.SERVER_PERFORMANCE_WATCH_STOP -> WatchIntent(player, target, false).broadcast()
+			else                                     -> {}
 		}
 	}
-	
-	class SystemMessageHandler(private val receiver: CreatureObject) : ObjectCreationHandler {
-		
-		override val isIgnoreVolume: Boolean
-			get() = true
-		
-		override fun success(createdObjects: List<SWGObject>) {
-			for (createdObject in createdObjects) {
-				val owner = receiver.owner
 
-				if (owner != null) {
-					SystemMessageIntent.broadcastPersonal(owner, "${createdObject.stringId} has been placed in your inventory.")
-				}
-			}
-		}
+	private fun watch(options: MutableCollection<RadialOption>, player: Player, target: CreatureObject) {
+		if (!target.isPlayer) return
+		if (!target.isPerforming) return
+		val dancing = target.performanceId == 0
+		if (!dancing) return
 		
+		val currentlyWatching = player.creatureObject.performanceListenTarget == target.objectId
+
+		if (currentlyWatching) {
+			options.add(RadialOption.create(RadialItem.SERVER_PERFORMANCE_WATCH_STOP, "@radial_performance:watch_stop"))
+		} else {
+			options.add(RadialOption.create(RadialItem.SERVER_PERFORMANCE_WATCH, "@radial_performance:watch"))
+		}
 	}
-	
 }

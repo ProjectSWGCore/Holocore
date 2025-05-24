@@ -88,7 +88,7 @@ city_naboo_kaadara_85	NABOO	nab_world	AREA	0	5180.1	-192.0	6648.6	0	1	a commoner
 city_naboo_kaadara_86	NABOO	nab_world	AREA	0	5296.9	-192.0	6579.9	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
 city_naboo_kaadara_87	NABOO	nab_world	AREA	0	5383.4	-192.0	6658.8	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
 city_naboo_kaadara_88	NABOO	nab_world	AREA	0	5366.1	-197.2	6441.5	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kaadara	1	LOITER	5	0	-	idle		commoner	600
-city_naboo_kaadara_89	NABOO	nab_world	PATROL	0	5290.7	-192	6682.4	5	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_5700	column	idle			600
+city_naboo_kaadara_89	NABOO	nab_world	PATROL	0	5290.7	-192	6682.4	5	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_5800	column	idle			600
 city_naboo_kaadara_90	NABOO	nab_world	PATROL	0	5358.9	-192	6590.4	-101	1	an EG-6 power droid	droid_eg6_power	INVULNERABLE	N	100	100	City	Kaadara	1	PATROL	0	patrol_naboo_6400	column	idle		simple_droid_geek_bye_nice_13	600
 city_naboo_kaadara_91	NABOO	nab_world	AREA	0	5184.9	-192.0	6671.2	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_geek_alert_5	600
 city_naboo_kaadara_92	NABOO	nab_world	AREA	0	5184.9	-192.0	6669.0	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kaadara	1	IDLE	0	0	-	idle		simple_droid_stupid_death_5	600

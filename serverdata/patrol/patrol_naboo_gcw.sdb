@@ -1,114 +1,114 @@
 patrol_id	patrol_group	patrol_type	terrain	building_id	cell_id	x	y	z	pause	comment
 TEXT PRIMARY KEY	TEXT	TEXT	TEXT NOT NULL	TEXT REFERENCES buildings	INTEGER	REAL	REAL	REAL	REAL	TEXT
-patrol_naboo_100	patrol_naboo_100	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - presence spawner
-patrol_naboo_101	patrol_naboo_100		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	-
-patrol_naboo_102	patrol_naboo_100		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	-
-patrol_naboo_103	patrol_naboo_100		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	-
-patrol_naboo_104	patrol_naboo_100		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	-
-patrol_naboo_105	patrol_naboo_100		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	-
-patrol_naboo_106	patrol_naboo_100		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	-
-patrol_naboo_107	patrol_naboo_100		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	-
-patrol_naboo_108	patrol_naboo_100		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	-
-patrol_naboo_109	patrol_naboo_100		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	-
-patrol_naboo_200	patrol_naboo_200	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - presence spawner
-patrol_naboo_201	patrol_naboo_200		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	-
-patrol_naboo_202	patrol_naboo_200		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	-
-patrol_naboo_203	patrol_naboo_200		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	-
-patrol_naboo_204	patrol_naboo_200		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	-
-patrol_naboo_205	patrol_naboo_200		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	-
-patrol_naboo_300	patrol_naboo_300	FLIP	NABOO	nab_world	0	-5645.8	6.0	4229.4	0	Theed - presence spawner
-patrol_naboo_301	patrol_naboo_300		NABOO	nab_world	0	-5623.2	6.0	4177.7	0	-
-patrol_naboo_302	patrol_naboo_300		NABOO	nab_world	0	-5625.6	6.0	4092.5	0	-
-patrol_naboo_303	patrol_naboo_300		NABOO	nab_world	0	-5677.5	6.0	4092.8	0	-
-patrol_naboo_304	patrol_naboo_300		NABOO	nab_world	0	-5681.1	6.0	4130.2	0	-
-patrol_naboo_305	patrol_naboo_300		NABOO	nab_world	0	-5671.2	6.0	4146.8	0	-
-patrol_naboo_306	patrol_naboo_300		NABOO	nab_world	0	-5670.7	6.0	4194.6	0	-
-patrol_naboo_400	patrol_naboo_400	FLIP	NABOO	nab_world	0	-4913.4	6.0	4154.8	0	Theed - presence spawner
-patrol_naboo_401	patrol_naboo_400		NABOO	nab_world	0	-4919.1	6.0	4180.7	0	-
-patrol_naboo_402	patrol_naboo_400		NABOO	nab_world	0	-4979.1	6.0	4233.5	0	-
-patrol_naboo_403	patrol_naboo_400		NABOO	nab_world	0	-5029.4	6.0	4236.9	0	-
-patrol_naboo_404	patrol_naboo_400		NABOO	nab_world	0	-5156.7	6.0	4334.4	0	-
-patrol_naboo_405	patrol_naboo_400		NABOO	nab_world	0	-5212.1	6.0	4304.7	0	-
-patrol_naboo_406	patrol_naboo_400		NABOO	nab_world	0	-5265.2	6.0	4223.3	0	-
-patrol_naboo_407	patrol_naboo_400		NABOO	nab_world	0	-5204.8	6.0	4190.9	0	-
-patrol_naboo_500	patrol_naboo_500	FLIP	NABOO	nab_world	0	-5459.1	6.0	4443.6	0	Theed - presence spawner
-patrol_naboo_501	patrol_naboo_500		NABOO	nab_world	0	-5460.9	6.0	4370.4	0	-
-patrol_naboo_502	patrol_naboo_500		NABOO	nab_world	0	-5408.2	6.0	4369.8	0	-
-patrol_naboo_503	patrol_naboo_500		NABOO	nab_world	0	-5409.8	6.0	4327.1	0	-
-patrol_naboo_504	patrol_naboo_500		NABOO	nab_world	0	-5391.6	6.0	4319.9	0	-
-patrol_naboo_505	patrol_naboo_500		NABOO	nab_world	0	-5394.1	6.0	4252.0	0	-
-patrol_naboo_506	patrol_naboo_500		NABOO	nab_world	0	-5407.4	6.0	4231.9	0	-
-patrol_naboo_507	patrol_naboo_500		NABOO	nab_world	0	-5408.9	6.0	4163.5	0	-
-patrol_naboo_508	patrol_naboo_500		NABOO	nab_world	0	-5330.5	6.0	4174.5	0	-
-patrol_naboo_509	patrol_naboo_500		NABOO	nab_world	0	-5344.6	6.0	4096.6	0	-
-patrol_naboo_510	patrol_naboo_500		NABOO	nab_world	0	-5445.3	6.0	6087.6	0	-
-patrol_naboo_511	patrol_naboo_500		NABOO	nab_world	0	-5426.1	6.0	4138.3	0	-
-patrol_naboo_512	patrol_naboo_500		NABOO	nab_world	0	-5455.1	6.0	4147.9	0	-
-patrol_naboo_600	patrol_naboo_600	FLIP	NABOO	nab_world	0	-5586.6	7.0	4763.4	0	Theed - presence spawner
-patrol_naboo_601	patrol_naboo_600		NABOO	nab_world	0	-5608.3	7.0	4698.6	0	-
-patrol_naboo_602	patrol_naboo_600		NABOO	nab_world	0	-5626.0	6.0	4601.1	0	-
-patrol_naboo_603	patrol_naboo_600		NABOO	nab_world	0	-5612.1	6.0	4521.1	0	-
-patrol_naboo_604	patrol_naboo_600		NABOO	nab_world	0	-5574.5	6.0	4469.9	0	-
-patrol_naboo_605	patrol_naboo_600		NABOO	nab_world	0	-5538.7	6.0	4465.2	0	-
-patrol_naboo_606	patrol_naboo_600		NABOO	nab_world	0	-5536.4	6.0	4406.1	0	-
-patrol_naboo_607	patrol_naboo_600		NABOO	nab_world	0	-5517.9	6.0	4405.6	0	-
-patrol_naboo_700	patrol_naboo_700	FLIP	NABOO	nab_world	0	-5708.8	6.0	4310.9	0	Theed - presence spawner
-patrol_naboo_701	patrol_naboo_700		NABOO	nab_world	0	-5737.8	6.0	4287.9	0	-
-patrol_naboo_702	patrol_naboo_700		NABOO	nab_world	0	-5827.0	6.0	4294.2	0	-
-patrol_naboo_703	patrol_naboo_700		NABOO	nab_world	0	-5872.1	6.0	4347.6	0	-
-patrol_naboo_704	patrol_naboo_700		NABOO	nab_world	0	-5930.1	6.0	4333.5	0	-
-patrol_naboo_705	patrol_naboo_700		NABOO	nab_world	0	-5974.8	6.0	4289.7	0	-
-patrol_naboo_706	patrol_naboo_700		NABOO	nab_world	0	-5969.8	6.0	4246.8	0	-
-patrol_naboo_707	patrol_naboo_700		NABOO	nab_world	0	-5841.4	6.0	4268.5	0	-
-patrol_naboo_708	patrol_naboo_700		NABOO	nab_world	0	-5714.1	6.0	4271.3	0	-
-patrol_naboo_709	patrol_naboo_700		NABOO	nab_world	0	-5711.3	6.0	4294.5	0	-
-patrol_naboo_800	patrol_naboo_800	FLIP	NABOO	nab_world	0	-5728.0	6.0	4125.7	0	Theed - presence spawner
-patrol_naboo_801	patrol_naboo_800		NABOO	nab_world	0	-5803.2	6.0	4129.5	0	-
-patrol_naboo_802	patrol_naboo_800		NABOO	nab_world	0	-5850.4	6.0	4152.6	0	-
-patrol_naboo_803	patrol_naboo_800		NABOO	nab_world	0	-5850.7	6.0	4212.8	0	-
-patrol_naboo_804	patrol_naboo_800		NABOO	nab_world	0	-5832.2	6.0	4265.4	0	-
-patrol_naboo_805	patrol_naboo_800		NABOO	nab_world	0	-5761.0	6.0	4268.6	0	-
-patrol_naboo_806	patrol_naboo_800		NABOO	nab_world	0	-5751.0	6.0	4203.5	0	-
-patrol_naboo_807	patrol_naboo_800		NABOO	nab_world	0	-5745.2	6.0	4149.4	0	-
-patrol_naboo_900	patrol_naboo_900	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - presence spawner
-patrol_naboo_901	patrol_naboo_900		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	-
-patrol_naboo_902	patrol_naboo_900		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	-
-patrol_naboo_903	patrol_naboo_900		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	-
-patrol_naboo_904	patrol_naboo_900		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	-
-patrol_naboo_905	patrol_naboo_900		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	-
-patrol_naboo_906	patrol_naboo_900		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	-
-patrol_naboo_907	patrol_naboo_900		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	-
-patrol_naboo_908	patrol_naboo_900		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	-
-patrol_naboo_909	patrol_naboo_900		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	-
-patrol_naboo_1000	patrol_naboo_1000	FLIP	NABOO	nab_world	0	-5283.9	6.0	4336.2	0	Theed - presence spawner
-patrol_naboo_1001	patrol_naboo_1000		NABOO	nab_world	0	-5286.4	6.0	4385.3	0	-
-patrol_naboo_1002	patrol_naboo_1000		NABOO	nab_world	0	-5288.7	6.0	4427.9	0	-
-patrol_naboo_1003	patrol_naboo_1000		NABOO	nab_world	0	-5286.6	6.0	4444.9	0	-
-patrol_naboo_1004	patrol_naboo_1000		NABOO	nab_world	0	-5320.8	6.0	4490.1	0	-
-patrol_naboo_1005	patrol_naboo_1000		NABOO	nab_world	0	-5315.6	6.0	4543.6	0	-
-patrol_naboo_1006	patrol_naboo_1000		NABOO	nab_world	0	-5352.6	6.0	4702.3	0	-
-patrol_naboo_1007	patrol_naboo_1000		NABOO	nab_world	0	-5421.7	6.0	4824.4	0	-
-patrol_naboo_1008	patrol_naboo_1000		NABOO	nab_world	0	-5492.5	6.0	4849.2	0	-
-patrol_naboo_1009	patrol_naboo_1000		NABOO	nab_world	0	-5566.0	6.0	4816.8	0	-
-patrol_naboo_1010	patrol_naboo_1000		NABOO	nab_world	0	-5587.6	6.0	4787.3	0	-
-patrol_naboo_1100	patrol_naboo_1100	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - presence spawner
-patrol_naboo_1101	patrol_naboo_1100		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	-
-patrol_naboo_1102	patrol_naboo_1100		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	-
-patrol_naboo_1103	patrol_naboo_1100		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	-
-patrol_naboo_1104	patrol_naboo_1100		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	-
-patrol_naboo_1105	patrol_naboo_1100		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	-
-patrol_naboo_1200	patrol_naboo_1200	FLIP	NABOO	nab_world	0	-5167.7	6.0	4235.7	0	Theed - presence spawner
-patrol_naboo_1201	patrol_naboo_1200		NABOO	nab_world	0	-5140.3	6.0	4213.7	0	-
-patrol_naboo_1202	patrol_naboo_1200		NABOO	nab_world	0	-5111.2	6.0	4251.6	0	-
-patrol_naboo_1203	patrol_naboo_1200		NABOO	nab_world	0	-5149.4	6.0	4292.3	0	-
-patrol_naboo_1204	patrol_naboo_1200		NABOO	nab_world	0	-5142.0	6.0	4266.5	0	-
-patrol_naboo_1300	patrol_naboo_1300	FLIP	NABOO	nab_world	0	4737.3	329.7	-1415.5	0	Deeja Peak - presence spawner
-patrol_naboo_1301	patrol_naboo_1300		NABOO	nab_world	0	4738.2	328.8	-1441.5	0	-
-patrol_naboo_1302	patrol_naboo_1300		NABOO	nab_world	0	4737.2	326.0	-1451.7	0	-
-patrol_naboo_1303	patrol_naboo_1300		NABOO	nab_world	0	4733.8	306.6	-1497.2	0	-
-patrol_naboo_1304	patrol_naboo_1300		NABOO	nab_world	0	4732.3	301.6	-1527.7	0	-
-patrol_naboo_1305	patrol_naboo_1300		NABOO	nab_world	0	4746.2	295.8	-1567.6	0	-
-patrol_naboo_1306	patrol_naboo_1300		NABOO	nab_world	0	4721.3	297.4	-1605.2	0	-
-patrol_naboo_1307	patrol_naboo_1300		NABOO	nab_world	0	4696.0	295.8	-1632.2	0	-
-patrol_naboo_1308	patrol_naboo_1300		NABOO	nab_world	0	4694.1	296.1	-1659.7	0	-
-patrol_naboo_1309	patrol_naboo_1300		NABOO	nab_world	0	4691.9	293.5	-1708.5	0	-
+patrol_naboo_gcw_100	patrol_naboo_gcw_100	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - presence spawner
+patrol_naboo_gcw_101	patrol_naboo_gcw_100		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	-
+patrol_naboo_gcw_102	patrol_naboo_gcw_100		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	-
+patrol_naboo_gcw_103	patrol_naboo_gcw_100		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	-
+patrol_naboo_gcw_104	patrol_naboo_gcw_100		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	-
+patrol_naboo_gcw_105	patrol_naboo_gcw_100		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	-
+patrol_naboo_gcw_106	patrol_naboo_gcw_100		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	-
+patrol_naboo_gcw_107	patrol_naboo_gcw_100		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	-
+patrol_naboo_gcw_108	patrol_naboo_gcw_100		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	-
+patrol_naboo_gcw_109	patrol_naboo_gcw_100		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	-
+patrol_naboo_gcw_200	patrol_naboo_gcw_200	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - presence spawner
+patrol_naboo_gcw_201	patrol_naboo_gcw_200		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	-
+patrol_naboo_gcw_202	patrol_naboo_gcw_200		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	-
+patrol_naboo_gcw_203	patrol_naboo_gcw_200		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	-
+patrol_naboo_gcw_204	patrol_naboo_gcw_200		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	-
+patrol_naboo_gcw_205	patrol_naboo_gcw_200		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	-
+patrol_naboo_gcw_300	patrol_naboo_gcw_300	FLIP	NABOO	nab_world	0	-5645.8	6.0	4229.4	0	Theed - presence spawner
+patrol_naboo_gcw_301	patrol_naboo_gcw_300		NABOO	nab_world	0	-5623.2	6.0	4177.7	0	-
+patrol_naboo_gcw_302	patrol_naboo_gcw_300		NABOO	nab_world	0	-5625.6	6.0	4092.5	0	-
+patrol_naboo_gcw_303	patrol_naboo_gcw_300		NABOO	nab_world	0	-5677.5	6.0	4092.8	0	-
+patrol_naboo_gcw_304	patrol_naboo_gcw_300		NABOO	nab_world	0	-5681.1	6.0	4130.2	0	-
+patrol_naboo_gcw_305	patrol_naboo_gcw_300		NABOO	nab_world	0	-5671.2	6.0	4146.8	0	-
+patrol_naboo_gcw_306	patrol_naboo_gcw_300		NABOO	nab_world	0	-5670.7	6.0	4194.6	0	-
+patrol_naboo_gcw_400	patrol_naboo_gcw_400	FLIP	NABOO	nab_world	0	-4913.4	6.0	4154.8	0	Theed - presence spawner
+patrol_naboo_gcw_401	patrol_naboo_gcw_400		NABOO	nab_world	0	-4919.1	6.0	4180.7	0	-
+patrol_naboo_gcw_402	patrol_naboo_gcw_400		NABOO	nab_world	0	-4979.1	6.0	4233.5	0	-
+patrol_naboo_gcw_403	patrol_naboo_gcw_400		NABOO	nab_world	0	-5029.4	6.0	4236.9	0	-
+patrol_naboo_gcw_404	patrol_naboo_gcw_400		NABOO	nab_world	0	-5156.7	6.0	4334.4	0	-
+patrol_naboo_gcw_405	patrol_naboo_gcw_400		NABOO	nab_world	0	-5212.1	6.0	4304.7	0	-
+patrol_naboo_gcw_406	patrol_naboo_gcw_400		NABOO	nab_world	0	-5265.2	6.0	4223.3	0	-
+patrol_naboo_gcw_407	patrol_naboo_gcw_400		NABOO	nab_world	0	-5204.8	6.0	4190.9	0	-
+patrol_naboo_gcw_500	patrol_naboo_gcw_500	FLIP	NABOO	nab_world	0	-5459.1	6.0	4443.6	0	Theed - presence spawner
+patrol_naboo_gcw_501	patrol_naboo_gcw_500		NABOO	nab_world	0	-5460.9	6.0	4370.4	0	-
+patrol_naboo_gcw_502	patrol_naboo_gcw_500		NABOO	nab_world	0	-5408.2	6.0	4369.8	0	-
+patrol_naboo_gcw_503	patrol_naboo_gcw_500		NABOO	nab_world	0	-5409.8	6.0	4327.1	0	-
+patrol_naboo_gcw_504	patrol_naboo_gcw_500		NABOO	nab_world	0	-5391.6	6.0	4319.9	0	-
+patrol_naboo_gcw_505	patrol_naboo_gcw_500		NABOO	nab_world	0	-5394.1	6.0	4252.0	0	-
+patrol_naboo_gcw_506	patrol_naboo_gcw_500		NABOO	nab_world	0	-5407.4	6.0	4231.9	0	-
+patrol_naboo_gcw_507	patrol_naboo_gcw_500		NABOO	nab_world	0	-5408.9	6.0	4163.5	0	-
+patrol_naboo_gcw_508	patrol_naboo_gcw_500		NABOO	nab_world	0	-5330.5	6.0	4174.5	0	-
+patrol_naboo_gcw_509	patrol_naboo_gcw_500		NABOO	nab_world	0	-5344.6	6.0	4096.6	0	-
+patrol_naboo_gcw_510	patrol_naboo_gcw_500		NABOO	nab_world	0	-5445.3	6.0	4087.6	0	-
+patrol_naboo_gcw_511	patrol_naboo_gcw_500		NABOO	nab_world	0	-5426.1	6.0	4138.3	0	-
+patrol_naboo_gcw_512	patrol_naboo_gcw_500		NABOO	nab_world	0	-5455.1	6.0	4147.9	0	-
+patrol_naboo_gcw_600	patrol_naboo_gcw_600	FLIP	NABOO	nab_world	0	-5586.6	7.0	4763.4	0	Theed - presence spawner
+patrol_naboo_gcw_601	patrol_naboo_gcw_600		NABOO	nab_world	0	-5608.3	7.0	4698.6	0	-
+patrol_naboo_gcw_602	patrol_naboo_gcw_600		NABOO	nab_world	0	-5626.0	6.0	4601.1	0	-
+patrol_naboo_gcw_603	patrol_naboo_gcw_600		NABOO	nab_world	0	-5612.1	6.0	4521.1	0	-
+patrol_naboo_gcw_604	patrol_naboo_gcw_600		NABOO	nab_world	0	-5574.5	6.0	4469.9	0	-
+patrol_naboo_gcw_605	patrol_naboo_gcw_600		NABOO	nab_world	0	-5538.7	6.0	4465.2	0	-
+patrol_naboo_gcw_606	patrol_naboo_gcw_600		NABOO	nab_world	0	-5536.4	6.0	4406.1	0	-
+patrol_naboo_gcw_607	patrol_naboo_gcw_600		NABOO	nab_world	0	-5517.9	6.0	4405.6	0	-
+patrol_naboo_gcw_700	patrol_naboo_gcw_700	FLIP	NABOO	nab_world	0	-5708.8	6.0	4310.9	0	Theed - presence spawner
+patrol_naboo_gcw_701	patrol_naboo_gcw_700		NABOO	nab_world	0	-5737.8	6.0	4287.9	0	-
+patrol_naboo_gcw_702	patrol_naboo_gcw_700		NABOO	nab_world	0	-5827.0	6.0	4294.2	0	-
+patrol_naboo_gcw_703	patrol_naboo_gcw_700		NABOO	nab_world	0	-5872.1	6.0	4347.6	0	-
+patrol_naboo_gcw_704	patrol_naboo_gcw_700		NABOO	nab_world	0	-5930.1	6.0	4333.5	0	-
+patrol_naboo_gcw_705	patrol_naboo_gcw_700		NABOO	nab_world	0	-5974.8	6.0	4289.7	0	-
+patrol_naboo_gcw_706	patrol_naboo_gcw_700		NABOO	nab_world	0	-5969.8	6.0	4246.8	0	-
+patrol_naboo_gcw_707	patrol_naboo_gcw_700		NABOO	nab_world	0	-5841.4	6.0	4268.5	0	-
+patrol_naboo_gcw_708	patrol_naboo_gcw_700		NABOO	nab_world	0	-5714.1	6.0	4271.3	0	-
+patrol_naboo_gcw_709	patrol_naboo_gcw_700		NABOO	nab_world	0	-5711.3	6.0	4294.5	0	-
+patrol_naboo_gcw_800	patrol_naboo_gcw_800	FLIP	NABOO	nab_world	0	-5728.0	6.0	4125.7	0	Theed - presence spawner
+patrol_naboo_gcw_801	patrol_naboo_gcw_800		NABOO	nab_world	0	-5803.2	6.0	4129.5	0	-
+patrol_naboo_gcw_802	patrol_naboo_gcw_800		NABOO	nab_world	0	-5850.4	6.0	4152.6	0	-
+patrol_naboo_gcw_803	patrol_naboo_gcw_800		NABOO	nab_world	0	-5850.7	6.0	4212.8	0	-
+patrol_naboo_gcw_804	patrol_naboo_gcw_800		NABOO	nab_world	0	-5832.2	6.0	4265.4	0	-
+patrol_naboo_gcw_805	patrol_naboo_gcw_800		NABOO	nab_world	0	-5761.0	6.0	4268.6	0	-
+patrol_naboo_gcw_806	patrol_naboo_gcw_800		NABOO	nab_world	0	-5751.0	6.0	4203.5	0	-
+patrol_naboo_gcw_807	patrol_naboo_gcw_800		NABOO	nab_world	0	-5745.2	6.0	4149.4	0	-
+patrol_naboo_gcw_900	patrol_naboo_gcw_900	FLIP	NABOO	nab_world	0	-5484.9	6.0	4409.0	0	Theed - presence spawner
+patrol_naboo_gcw_901	patrol_naboo_gcw_900		NABOO	nab_world	0	-5484.9	6.0	4348.1	0	-
+patrol_naboo_gcw_902	patrol_naboo_gcw_900		NABOO	nab_world	0	-5485.2	6.0	4295.3	0	-
+patrol_naboo_gcw_903	patrol_naboo_gcw_900		NABOO	nab_world	0	-5485.5	6.0	4231.9	0	-
+patrol_naboo_gcw_904	patrol_naboo_gcw_900		NABOO	nab_world	0	-5486.5	6.0	4022.0	0	-
+patrol_naboo_gcw_905	patrol_naboo_gcw_900		NABOO	nab_world	0	-5503.8	6.0	3998.8	0	-
+patrol_naboo_gcw_906	patrol_naboo_gcw_900		NABOO	nab_world	0	-5529.2	6.0	4054.7	0	-
+patrol_naboo_gcw_907	patrol_naboo_gcw_900		NABOO	nab_world	0	-5507.8	6.0	4108.7	0	-
+patrol_naboo_gcw_908	patrol_naboo_gcw_900		NABOO	nab_world	0	-5504.0	6.0	4215.4	0	-
+patrol_naboo_gcw_909	patrol_naboo_gcw_900		NABOO	nab_world	0	-5504.0	6.0	4407.8	0	-
+patrol_naboo_gcw_1000	patrol_naboo_gcw_1000	FLIP	NABOO	nab_world	0	-5283.9	6.0	4336.2	0	Theed - presence spawner
+patrol_naboo_gcw_1001	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5286.4	6.0	4385.3	0	-
+patrol_naboo_gcw_1002	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5288.7	6.0	4427.9	0	-
+patrol_naboo_gcw_1003	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5286.6	6.0	4444.9	0	-
+patrol_naboo_gcw_1004	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5320.8	6.0	4490.1	0	-
+patrol_naboo_gcw_1005	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5315.6	6.0	4543.6	0	-
+patrol_naboo_gcw_1006	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5352.6	6.0	4702.3	0	-
+patrol_naboo_gcw_1007	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5421.7	6.0	4824.4	0	-
+patrol_naboo_gcw_1008	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5492.5	6.0	4849.2	0	-
+patrol_naboo_gcw_1009	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5566.0	6.0	4816.8	0	-
+patrol_naboo_gcw_1010	patrol_naboo_gcw_1000		NABOO	nab_world	0	-5587.6	6.0	4787.3	0	-
+patrol_naboo_gcw_1100	patrol_naboo_gcw_1100	FLIP	NABOO	nab_world	0	-4800.1	6.0	4105.2	0	Theed - presence spawner
+patrol_naboo_gcw_1101	patrol_naboo_gcw_1100		NABOO	nab_world	0	-4862.4	6.0	4092.9	0	-
+patrol_naboo_gcw_1102	patrol_naboo_gcw_1100		NABOO	nab_world	0	-4924.4	6.0	4033.6	0	-
+patrol_naboo_gcw_1103	patrol_naboo_gcw_1100		NABOO	nab_world	0	-4967.1	6.0	4028.3	0	-
+patrol_naboo_gcw_1104	patrol_naboo_gcw_1100		NABOO	nab_world	0	-4974.6	6.0	4066.2	0	-
+patrol_naboo_gcw_1105	patrol_naboo_gcw_1100		NABOO	nab_world	0	-4958.3	6.0	4096.4	0	-
+patrol_naboo_gcw_1200	patrol_naboo_gcw_1200	FLIP	NABOO	nab_world	0	-5167.7	6.0	4235.7	0	Theed - presence spawner
+patrol_naboo_gcw_1201	patrol_naboo_gcw_1200		NABOO	nab_world	0	-5140.3	6.0	4213.7	0	-
+patrol_naboo_gcw_1202	patrol_naboo_gcw_1200		NABOO	nab_world	0	-5111.2	6.0	4251.6	0	-
+patrol_naboo_gcw_1203	patrol_naboo_gcw_1200		NABOO	nab_world	0	-5149.4	6.0	4292.3	0	-
+patrol_naboo_gcw_1204	patrol_naboo_gcw_1200		NABOO	nab_world	0	-5142.0	6.0	4266.5	0	-
+patrol_naboo_gcw_1300	patrol_naboo_gcw_1300	FLIP	NABOO	nab_world	0	4737.3	329.7	-1415.5	0	Deeja Peak - presence spawner
+patrol_naboo_gcw_1301	patrol_naboo_gcw_1300		NABOO	nab_world	0	4738.2	328.8	-1441.5	0	-
+patrol_naboo_gcw_1302	patrol_naboo_gcw_1300		NABOO	nab_world	0	4737.2	326.0	-1451.7	0	-
+patrol_naboo_gcw_1303	patrol_naboo_gcw_1300		NABOO	nab_world	0	4733.8	306.6	-1497.2	0	-
+patrol_naboo_gcw_1304	patrol_naboo_gcw_1300		NABOO	nab_world	0	4732.3	301.6	-1527.7	0	-
+patrol_naboo_gcw_1305	patrol_naboo_gcw_1300		NABOO	nab_world	0	4746.2	295.8	-1567.6	0	-
+patrol_naboo_gcw_1306	patrol_naboo_gcw_1300		NABOO	nab_world	0	4721.3	297.4	-1605.2	0	-
+patrol_naboo_gcw_1307	patrol_naboo_gcw_1300		NABOO	nab_world	0	4696.0	295.8	-1632.2	0	-
+patrol_naboo_gcw_1308	patrol_naboo_gcw_1300		NABOO	nab_world	0	4694.1	296.1	-1659.7	0	-
+patrol_naboo_gcw_1309	patrol_naboo_gcw_1300		NABOO	nab_world	0	4691.9	293.5	-1708.5	0	-

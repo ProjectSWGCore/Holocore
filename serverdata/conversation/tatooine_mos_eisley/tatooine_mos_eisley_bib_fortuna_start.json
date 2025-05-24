@@ -1,0 +1,17 @@
+{
+	"npcMessage": {
+		"file": "conversation/bib_fortuna",
+		"key": "s_68",
+		"comment": "Do not ask questions when the answers could mean the end of your life. Do you understand what I'm saying?"
+	},
+	"playerResponses": [],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "explain"
+			}
+		}
+	]
+}

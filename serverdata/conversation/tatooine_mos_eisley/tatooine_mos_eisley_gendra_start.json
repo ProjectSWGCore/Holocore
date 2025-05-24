@@ -1,0 +1,58 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_gendra",
+		"key": "s_149",
+		"comment": "Well, hello! Han Solo said you might be coming along. You're interested in things other than combat. Is that right?"
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_151",
+				"comment": "I like crafting."
+			},
+			"next": ""
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_215",
+				"comment": "I'm an entertainer."
+			},
+			"next": ""
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_180",
+				"comment": "I need general information."
+			},
+			"next": ""
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_208",
+				"comment": "How do I become a pilot?"
+			},
+			"next": ""
+		},
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_gendra",
+				"key": "s_249",
+				"comment": "I would like to have a vehicle..."
+			},
+			"next": ""
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "greet"
+			}
+		}
+	]
+}

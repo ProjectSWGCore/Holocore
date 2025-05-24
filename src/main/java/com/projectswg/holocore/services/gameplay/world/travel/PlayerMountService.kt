@@ -256,7 +256,6 @@ class PlayerMountService : Service() {
 		mount.setTurnScale(vehicleInfo.turnRateMax.toDouble())
 		mount.setAccelScale(vehicleInfo.accelMax)
 		mount.putCustomization("/private/index_speed_max", (vehicleInfo.speed * 10.0).toInt())
-		mount.putCustomization("/private/index_speed_min", (vehicleInfo.minSpeed * 10.0).toInt())
 		mount.putCustomization("/private/index_turn_rate_min", vehicleInfo.turnRate)
 		mount.putCustomization("/private/index_turn_rate_max", vehicleInfo.turnRateMax)
 		mount.putCustomization("/private/index_accel_min", (vehicleInfo.accelMin * 10.0).toInt())
@@ -269,7 +268,6 @@ class PlayerMountService : Service() {
 		mount.putCustomization("/private/index_banking", vehicleInfo.bankingAngle.toInt())
 		mount.putCustomization("/private/index_hover_height", (vehicleInfo.hoverHeight * 10.0).toInt())
 		mount.putCustomization("/private/index_auto_level", (vehicleInfo.autoLevel * 100.0).toInt())
-		mount.putCustomization("/private/index_strafe", if (vehicleInfo.isStrafe) 1 else 0)
 
 		ObjectCreatedIntent(mount).broadcast()
 		StandardLog.onPlayerTrace(this, player, "called mount %s at %s %s", mount, mount.terrain, mount.location.position)
@@ -284,6 +282,20 @@ class PlayerMountService : Service() {
 		vehicleDecayJobs[mount] = coroutineScope.launchWithFixedDelay(10, TimeUnit.MINUTES) {
 			decayVehicle(player, mount, vehicleInfo.decayRate / 2)
 		}
+
+		if (isJetpack(mount)) {
+			automaticallyMountJetpack(player, mount)
+		}
+	}
+
+	private fun automaticallyMountJetpack(player: CreatureObject, mount: CreatureObject) {
+		coroutineScope.launchAfter(1, TimeUnit.SECONDS) {
+			enterMount(player, mount)
+		}
+	}
+
+	private fun isJetpack(mount: CreatureObject): Boolean {
+		return "object/mobile/vehicle/shared_jetpack.iff" == mount.template
 	}
 
 	private fun decayVehicle(player: CreatureObject, mount: CreatureObject, conditionDamage: Int) {
@@ -419,6 +431,23 @@ class PlayerMountService : Service() {
 		player.moveToContainer(null, mount.location)
 		player.resetMovement()
 		StandardLog.onPlayerEvent(this, player, "dismounted %s", mount)
+
+		if (isJetpack(mount)) {
+			automaticallyStoreJetpack(player, mount)
+		}
+	}
+
+	private fun automaticallyStoreJetpack(player: CreatureObject, mount: CreatureObject) {
+		coroutineScope.launchAfter(1, TimeUnit.SECONDS) {
+			val mounts = calledMounts[player]
+			if (mounts != null) {
+				for (p in mounts) {
+					if (p.mount === mount) {
+						storeMount(player, mount, p.petControlDevice)
+					}
+				}
+			}
+		}
 	}
 
 	private fun emergencyDismount(player: CreatureObject, mount: CreatureObject) {

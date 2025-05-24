@@ -225,7 +225,7 @@ class TransferItemCallback : ICmdCallback {
 
 			when (target.moveToContainer(actor, newContainer)) {
 				ContainerResult.SUCCESS        -> if (weapon) {
-					changeWeapon(actor, target, equip)
+					changeWeapon(actor, target as WeaponObject, equip)
 				}
 
 				ContainerResult.CONTAINER_FULL -> {
@@ -391,17 +391,25 @@ class TransferItemCallback : ICmdCallback {
 			return tangibleTarget.template.contains("/instrument/")
 		}
 
-		private fun changeWeapon(actor: CreatureObject, target: SWGObject, equip: Boolean) {
+		private fun changeWeapon(actor: CreatureObject, target: WeaponObject, equip: Boolean) {
 			val weaponHinderanceBuffName = "weaponHinderance"	// CU permasnare buff. It doesn't reduce speed, but it prevents speed buffs from making the player run faster.
 			
 			if (equip) {
 				// The equipped weapon must now be set to the target object
-				actor.equippedWeapon = target as WeaponObject
-				BuffIntent(weaponHinderanceBuffName, actor, actor, false).broadcast()
+				actor.equippedWeapon = target
+				
+				if (target.type.isRanged) {
+					BuffIntent(weaponHinderanceBuffName, actor, actor, false).broadcast()
+				} else {
+					BuffIntent(weaponHinderanceBuffName, actor, actor, true).broadcast()
+				}
 			} else {
 				// The equipped weapon must now be set to the default weapon, which happens inside CreatureObject.setEquippedWeapon()
 				actor.equippedWeapon = null
-				BuffIntent(weaponHinderanceBuffName, actor, actor, true).broadcast()
+
+				if (actor.hasBuff(weaponHinderanceBuffName)) {
+					BuffIntent(weaponHinderanceBuffName, actor, actor, true).broadcast()
+				}
 			}
 		}
 	}

@@ -252,7 +252,7 @@ patrol_tatooine_3801	patrol_tatooine_3800		TATOOINE	tat_jabbas_palace	14	20.0	0.
 patrol_tatooine_3802	patrol_tatooine_3800		TATOOINE	tat_jabbas_palace	14	15.9	0.2	80.4	5	-
 patrol_tatooine_3803	patrol_tatooine_3800		TATOOINE	tat_jabbas_palace	14	20.7	0.2	86.4	5	-
 patrol_tatooine_3900	patrol_tatooine_3900	LOOP	TATOOINE	tat_world	0	-2729.7	5.0	2243.3	0	Mos Espa - a thug
-patrol_tatooine_3901	patrol_tatooine_3900		TATOOINE	tat_world	0	-2272.0	5.0	2201.0	0	-
+patrol_tatooine_3901	patrol_tatooine_3900		TATOOINE	tat_world	0	-2772.0	5.0	2201.0	0	-
 patrol_tatooine_3902	patrol_tatooine_3900		TATOOINE	tat_world	0	-2795.0	5.0	2206.0	0	-
 patrol_tatooine_3903	patrol_tatooine_3900		TATOOINE	tat_world	0	-2812.0	5.0	2231.0	0	-
 patrol_tatooine_3904	patrol_tatooine_3900		TATOOINE	tat_world	0	-2802.0	5.0	2245.0	0	-
@@ -567,7 +567,7 @@ patrol_tatooine_6704	patrol_tatooine_6700		TATOOINE	tat_world	0	-1222.7	12.0	-36
 patrol_tatooine_6705	patrol_tatooine_6700		TATOOINE	tat_world	0	-1231.3	12.0	-3606.2	0	-
 patrol_tatooine_6706	patrol_tatooine_6700		TATOOINE	tat_world	0	-1249.8	12.0	-3623.3	0	-
 patrol_tatooine_6707	patrol_tatooine_6700		TATOOINE	tat_world	0	-1280.4	12.0	-3626.1	0	-
-patrol_tatooine_6708	patrol_tatooine_6700		TATOOINE	tat_world	0	-1281.2	12.0	3628.9	60	-
+patrol_tatooine_6708	patrol_tatooine_6700		TATOOINE	tat_world	0	-1281.2	12.0	-3628.9	60	-
 patrol_tatooine_6800	patrol_tatooine_6800	FLIP	TATOOINE	tat_world	0	-1387.5	12.0	-3586.0	15	City - Bestine - a moisture farmer
 patrol_tatooine_6801	patrol_tatooine_6800		TATOOINE	tat_world	0	-1375.3	12.0	-3627.0	0	-
 patrol_tatooine_6802	patrol_tatooine_6800		TATOOINE	tat_bestine_starport	16	52.7	1.0	11.0	0	-

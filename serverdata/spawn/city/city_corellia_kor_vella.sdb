@@ -1,124 +1,124 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	1	42.2	0.1	1	37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	1	43.5	0.1	3.7	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	1	39.6	0.1	-0.1	152	1	Lasha Bindari	humanoid_lasha_bindari	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	2	31.1	0.1	3.8	-119	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	0.8	-0.9	-2.5	161	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	11.1	-0.9	12	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	10.1	-0.9	7.9	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	5.8	-0.9	-4.8	-91	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	0.8	-0.9	-4.8	-2	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	3.6	-0.9	-4.8	82	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	-5.1	-0.9	6	-102	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	-6.2	-0.9	7.6	-156	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	13.6	-0.9	-2.5	138	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	13.5	-0.9	-6	20	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	-8.2	-0.9	5.7	93	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	16.2	-0.9	-5.6	-40	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	26.3	-0.9	-8.7	-69	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	23.2	-0.9	-8.8	80	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	3	12	-0.9	8	15	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	7	9.1	-0.9	22.0	-152	1	Skinkner	humanoid_skinkner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	8	-2.9	-0.9	-16.1	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	8	-7.3	-0.9	-16.2	86	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	8	-5.2	-0.9	-18.9	28	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_cantina	AREA	8	-7.2	-0.9	-14.6	111	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hospital	AREA	2	2.7	0.2	4.5	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hospital	AREA	2	-4.8	0.2	2.8	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hospital	AREA	2	-2.9	0.2	1.6	1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hospital	AREA	2	-2.8	0.2	3.1	-180	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hospital	AREA	2	-8.1	0.2	3.3	-178	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hotel	AREA	4	0.8	1.0	5.5	2	1	Commander Zhanks (Imperial Pilot Coordinator)	humanoid_imperial_zhanks	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hotel	AREA	4	2.4	1.0	5.5	-33	1	TA-667	humanoid_imperial_ta667	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hotel	AREA	8	-8.6	1.6	-12.6	62	1	Chertyl Ruluwoor	humanoid_chertyl_ruluwoor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_ii	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	-2.5	0.6	61.9	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	6.3	0.6	61.9	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	10	0.6	57.9	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	7.3	0.6	66.4	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	4.1	0.6	57.8	0	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	6.6	0.6	50.6	173	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	-2.7	0.6	67.7	-3	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	8.4	0.6	61.9	-152	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	5.3	0.6	65.6	69	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	4	-4.6	0.6	61.9	179	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	36.1	0.6	35.6	74	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	41.5	0.6	46.6	34	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	54.5	-0.5	38.3	-16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	54.6	-0.5	41.8	137	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	53	-0.5	40.3	137	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	40.8	0.6	48.7	114	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	50.3	0.6	45.9	139	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	7	43.4	0.6	47.6	-92	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-33.0	1.6	50.4	5	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-30.9	1.6	52.6	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-27.2	1.6	65.4	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-27.4	1.6	49.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-38.8	1.6	56.1	70	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-34.9	1.6	66.2	-153	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-27.2	1.6	52.4	176	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-32.7	1.6	52.6	-174	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_standing_drinking	1		600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-36.6	1.6	63.8	37	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-29.7	1.6	64.2	57	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	9	-29.2	1.6	66.2	152	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	10	-43.3	1.6	50.1	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	12	-48.2	2.6	34	-166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	12	-48.9	2.6	31.7	15	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	12	-50.7	2.6	44.2	44	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	13	51.9	1.0	20.4	-177	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	14	-58.3	2.7	27.8	-95	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_korvella_starport	AREA	14	-56.6	1	8.6	54	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3366.3	86.0	3143.8	-63	1	(Retired) CorSec Pilot	humanoid_corsec_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	PATROL	0	-3367.7	86.0	3276.9	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2000	column	idle		simple_droid_sarcastic_flee_4	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3817.8	86	3106.3	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	happy			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3782.7	86.6	3239.1	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3146.5	31	2970.8	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3176.7	31	2881.8	62	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3174.3	31	2883.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3774.1	86	3166	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3747.6	86	3216.5	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3645.6	85.9	3115.7	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3585.4	86	3150	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3612.6	86	3213.8	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3448.5	86	3142.4	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3433.1	86	3113.3	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3425.2	86	3084.5	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3411.7	86	3107.6	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3391.5	86	3143.5	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3375.1	86	3165.2	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3363.8	86	3260.4	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3326.8	86	3304	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3366.8	86	3285.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3386.1	86	2981	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3393.1	86	3005.6	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3122.7	31	2995.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3108.9	31	2805.5	-120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3164.3	31	2777.4	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3162.6	31	2909.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3152	31	2784.5	93	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3321.1	86	3220.7	146	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3132.1	31	2800.3	-88	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	PATROL	0	-3295.0	86.0	3261.0	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_500	column	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3416.4	86	3040.8	-164	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3664.6	86	3099.7	-28	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3501.9	86	3169.1	76	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3790.2	86	3177.6	-18	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3375.3	86	3281.5	91	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3166.3	31	2786.5	0	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3359.8	86.0	3272.9	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	PATROL	0	-3689.4	86.0	3118.7	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2100	column	idle		simple_droid_sarcastic_flee_4	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	PATROL	0	-3120.0	31.0	2800.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2200	column	idle		simple_droid_sarcastic_flee_4	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	PATROL	0	-3181.0	31.0	2778.0	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2300	column	idle		simple_droid_sarcastic_flee_4	600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3669.5	86.0	3111.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3142.7	31.0	2801.6	-108	1	Colonel Dac Axfow (an Imperial officer)	humanoid_imperial_colonel_dac_axfow	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3415.1	74.0	3336.5	46	1	Denell Kelvannon	humanoid_denell_kelvannon	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3335.4	72.2	2925.5	-130	1	Gilker Budz	humanoid_gilker_budz	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3118.3	31.0	2790.6	15	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3143.5	31.0	2802.6	175	1	Lt. Logro Elsin (an Imperial pilot)	humanoid_imperial_logro_elsin	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3101.8	26.7	2799.8	0	1	Lt. Lon Cope (a CorSec officer)	humanoid_corsec_lt_lon_cope	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3404.5	86.0	3092.4	-45	1	Master Sergeant Crowley	humanoid_rebel_master_sergeant_crowley	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3468.5	24.8	3023.0	21	1	Menchi Lerann (a ryll addict)	humanoid_menchi_lerann	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3144.7	31.0	2801.6	98	1	Sgt. Eryk Chinn (an Imperial bodyguard)	humanoid_imperial_sgt_eryk_chinn	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
-city_corellia_kor_vella.sdb	CORELLIA	cor_world	AREA	0	-3301.0	86.0	3243.0	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_1	CORELLIA	cor_korvella_cantina	AREA	1	42.2	0.1	1	37	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_2	CORELLIA	cor_korvella_cantina	AREA	1	43.5	0.1	3.7	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_3	CORELLIA	cor_korvella_cantina	AREA	1	39.6	0.1	-0.1	152	1	Lasha Bindari	humanoid_lasha_bindari	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_4	CORELLIA	cor_korvella_cantina	AREA	2	31.1	0.1	3.8	-119	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_5	CORELLIA	cor_korvella_cantina	AREA	3	0.8	-0.9	-2.5	161	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_6	CORELLIA	cor_korvella_cantina	AREA	3	11.1	-0.9	12	-179	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_7	CORELLIA	cor_korvella_cantina	AREA	3	10.1	-0.9	7.9	7	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_8	CORELLIA	cor_korvella_cantina	AREA	3	5.8	-0.9	-4.8	-91	1	a nomad	humanoid_nomad	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_9	CORELLIA	cor_korvella_cantina	AREA	3	0.8	-0.9	-4.8	-2	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_10	CORELLIA	cor_korvella_cantina	AREA	3	3.6	-0.9	-4.8	82	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_11	CORELLIA	cor_korvella_cantina	AREA	3	-5.1	-0.9	6	-102	1	a patron	humanoid_patron_human_female_03	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_12	CORELLIA	cor_korvella_cantina	AREA	3	-6.2	-0.9	7.6	-156	1	a patron	humanoid_patron_human_female_04	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_13	CORELLIA	cor_korvella_cantina	AREA	3	13.6	-0.9	-2.5	138	1	a rancher	humanoid_farmer_rancher	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_14	CORELLIA	cor_korvella_cantina	AREA	3	13.5	-0.9	-6	20	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_15	CORELLIA	cor_korvella_cantina	AREA	3	-8.2	-0.9	5.7	93	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_16	CORELLIA	cor_korvella_cantina	AREA	3	16.2	-0.9	-5.6	-40	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_17	CORELLIA	cor_korvella_cantina	AREA	3	26.3	-0.9	-8.7	-69	1	an artisan	humanoid_artisan	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_18	CORELLIA	cor_korvella_cantina	AREA	3	23.2	-0.9	-8.8	80	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_19	CORELLIA	cor_korvella_cantina	AREA	3	12	-0.9	8	15	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_20	CORELLIA	cor_korvella_cantina	AREA	7	9.1	-0.9	22.0	-152	1	Skinkner	humanoid_skinkner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_21	CORELLIA	cor_korvella_cantina	AREA	8	-2.9	-0.9	-16.1	-90	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_22	CORELLIA	cor_korvella_cantina	AREA	8	-7.3	-0.9	-16.2	86	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_23	CORELLIA	cor_korvella_cantina	AREA	8	-5.2	-0.9	-18.9	28	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_24	CORELLIA	cor_korvella_cantina	AREA	8	-7.2	-0.9	-14.6	111	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_25	CORELLIA	cor_korvella_hospital	AREA	2	2.7	0.2	4.5	4	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_26	CORELLIA	cor_korvella_hospital	AREA	2	-4.8	0.2	2.8	121	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_27	CORELLIA	cor_korvella_hospital	AREA	2	-2.9	0.2	1.6	1	1	a medic	humanoid_medic	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_28	CORELLIA	cor_korvella_hospital	AREA	2	-2.8	0.2	3.1	-180	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_29	CORELLIA	cor_korvella_hospital	AREA	2	-8.1	0.2	3.3	-178	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_30	CORELLIA	cor_korvella_hotel	AREA	4	0.8	1.0	5.5	2	1	Commander Zhanks (Imperial Pilot Coordinator)	humanoid_imperial_zhanks	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_31	CORELLIA	cor_korvella_hotel	AREA	4	2.4	1.0	5.5	-33	1	TA-667	humanoid_imperial_ta667	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_32	CORELLIA	cor_korvella_hotel	AREA	8	-8.6	1.6	-12.6	62	1	Chertyl Ruluwoor	humanoid_chertyl_ruluwoor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_33	CORELLIA	cor_korvella_hotel	AREA	10	-23.5	1.6	-17.2	0	1	an Event Promoter	humanoid_event_promoter	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_34	CORELLIA	cor_korvella_starport	AREA	1	0.0	0.6	73.0	0	1	Chassis Dealer	humanoid_chassis_dealer_ii	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_35	CORELLIA	cor_korvella_starport	AREA	4	-2.5	0.6	61.9	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_36	CORELLIA	cor_korvella_starport	AREA	4	6.3	0.6	61.9	-152	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_37	CORELLIA	cor_korvella_starport	AREA	4	10	0.6	57.9	180	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_38	CORELLIA	cor_korvella_starport	AREA	4	7.3	0.6	66.4	-109	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_39	CORELLIA	cor_korvella_starport	AREA	4	4.1	0.6	57.8	0	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_40	CORELLIA	cor_korvella_starport	AREA	4	6.6	0.6	50.6	173	1	a patron	humanoid_patron_human_female_01	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_41	CORELLIA	cor_korvella_starport	AREA	4	-2.7	0.6	67.7	-3	1	a patron	humanoid_patron_human_female_02	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_42	CORELLIA	cor_korvella_starport	AREA	4	8.4	0.6	61.9	-152	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_43	CORELLIA	cor_korvella_starport	AREA	4	5.3	0.6	65.6	69	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_44	CORELLIA	cor_korvella_starport	AREA	4	-4.6	0.6	61.9	179	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_45	CORELLIA	cor_korvella_starport	AREA	7	36.1	0.6	35.6	74	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_46	CORELLIA	cor_korvella_starport	AREA	7	41.5	0.6	46.6	34	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_47	CORELLIA	cor_korvella_starport	AREA	7	54.5	-0.5	38.3	-16	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_48	CORELLIA	cor_korvella_starport	AREA	7	54.6	-0.5	41.8	137	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_49	CORELLIA	cor_korvella_starport	AREA	7	53	-0.5	40.3	137	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_50	CORELLIA	cor_korvella_starport	AREA	7	40.8	0.6	48.7	114	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_51	CORELLIA	cor_korvella_starport	AREA	7	50.3	0.6	45.9	139	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_52	CORELLIA	cor_korvella_starport	AREA	7	43.4	0.6	47.6	-92	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_53	CORELLIA	cor_korvella_starport	AREA	9	-33.0	1.6	50.4	5	1	a bartender	humanoid_bartender	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_54	CORELLIA	cor_korvella_starport	AREA	9	-30.9	1.6	52.6	-128	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_55	CORELLIA	cor_korvella_starport	AREA	9	-27.2	1.6	65.4	-117	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_56	CORELLIA	cor_korvella_starport	AREA	9	-27.4	1.6	49.6	0	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_57	CORELLIA	cor_korvella_starport	AREA	9	-38.8	1.6	56.1	70	1	a contractor	humanoid_contractor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_58	CORELLIA	cor_korvella_starport	AREA	9	-34.9	1.6	66.2	-153	1	a fringer	humanoid_fringer	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_59	CORELLIA	cor_korvella_starport	AREA	9	-27.2	1.6	52.4	176	1	a Nikto	humanoid_patron_nikto	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_60	CORELLIA	cor_korvella_starport	AREA	9	-32.7	1.6	52.6	-174	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_standing_drinking	1		600
+city_corellia_kor_vella_61	CORELLIA	cor_korvella_starport	AREA	9	-36.6	1.6	63.8	37	1	a pilot	humanoid_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_62	CORELLIA	cor_korvella_starport	AREA	9	-29.7	1.6	64.2	57	1	a scientist	humanoid_scientist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_63	CORELLIA	cor_korvella_starport	AREA	9	-29.2	1.6	66.2	152	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_sitting_chair			600
+city_corellia_kor_vella_64	CORELLIA	cor_korvella_starport	AREA	10	-43.3	1.6	50.1	-79	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_65	CORELLIA	cor_korvella_starport	AREA	12	-48.2	2.6	34	-166	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_66	CORELLIA	cor_korvella_starport	AREA	12	-48.9	2.6	31.7	15	1	an agriculturalist	humanoid_farmer_agriculturist	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_67	CORELLIA	cor_korvella_starport	AREA	12	-50.7	2.6	44.2	44	1	an industrial spy	humanoid_industrial_spy	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_68	CORELLIA	cor_korvella_starport	AREA	13	51.9	1.0	20.4	-177	1	a businessman	humanoid_businessman	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_69	CORELLIA	cor_korvella_starport	AREA	14	-58.3	2.7	27.8	-95	1	a traveller	humanoid_traveller	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_70	CORELLIA	cor_korvella_starport	AREA	14	-56.6	1	8.6	54	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_71	CORELLIA	cor_world	AREA	0	-3366.3	86.0	3143.8	-63	1	(Retired) CorSec Pilot	humanoid_corsec_pilot	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_72	CORELLIA	cor_world	PATROL	0	-3367.7	86.0	3276.9	0	1	a CLL-8 binary load lifter	droid_cll8_load_lifter	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2000	column	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_kor_vella_73	CORELLIA	cor_world	AREA	0	-3817.8	86	3106.3	-133	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	happy			600
+city_corellia_kor_vella_74	CORELLIA	cor_world	AREA	0	-3782.7	86.6	3239.1	-2	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_75	CORELLIA	cor_world	AREA	0	-3146.5	31	2970.8	-178	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_76	CORELLIA	cor_world	AREA	0	-3176.7	31	2881.8	62	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_77	CORELLIA	cor_world	AREA	0	-3174.3	31	2883.1	-114	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	conversation			600
+city_corellia_kor_vella_78	CORELLIA	cor_world	AREA	0	-3774.1	86	3166	21	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_79	CORELLIA	cor_world	AREA	0	-3747.6	86	3216.5	22	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_80	CORELLIA	cor_world	AREA	0	-3645.6	85.9	3115.7	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_81	CORELLIA	cor_world	AREA	0	-3585.4	86	3150	49	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_82	CORELLIA	cor_world	AREA	0	-3612.6	86	3213.8	-52	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_83	CORELLIA	cor_world	AREA	0	-3448.5	86	3142.4	122	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_84	CORELLIA	cor_world	AREA	0	-3433.1	86	3113.3	157	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_85	CORELLIA	cor_world	AREA	0	-3425.2	86	3084.5	170	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_86	CORELLIA	cor_world	AREA	0	-3411.7	86	3107.6	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_87	CORELLIA	cor_world	AREA	0	-3391.5	86	3143.5	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_88	CORELLIA	cor_world	AREA	0	-3375.1	86	3165.2	8	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_89	CORELLIA	cor_world	AREA	0	-3363.8	86	3260.4	54	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_90	CORELLIA	cor_world	AREA	0	-3326.8	86	3304	-38	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_91	CORELLIA	cor_world	AREA	0	-3366.8	86	3285.8	-172	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_92	CORELLIA	cor_world	AREA	0	-3386.1	86	2981	148	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_93	CORELLIA	cor_world	AREA	0	-3393.1	86	3005.6	-34	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_94	CORELLIA	cor_world	AREA	0	-3122.7	31	2995.4	25	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_95	CORELLIA	cor_world	AREA	0	-3108.9	31	2805.5	-120	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_96	CORELLIA	cor_world	AREA	0	-3164.3	31	2777.4	-44	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_97	CORELLIA	cor_world	AREA	0	-3162.6	31	2909.8	105	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle		commoner	600
+city_corellia_kor_vella_98	CORELLIA	cor_world	AREA	0	-3152	31	2784.5	93	1	a mercenary	humanoid_mercenary	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_99	CORELLIA	cor_world	AREA	0	-3321.1	86	3220.7	146	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_100	CORELLIA	cor_world	AREA	0	-3132.1	31	2800.3	-88	1	a Rodian Trader	humanoid_kashyyyk_rodian_trader	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_101	CORELLIA	cor_world	PATROL	0	-3295.0	86.0	3261.0	0	1	a settler	humanoid_settler	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_500	column	idle			600
+city_corellia_kor_vella_102	CORELLIA	cor_world	AREA	0	-3416.4	86	3040.8	-164	1	a slicer	humanoid_slicer	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_103	CORELLIA	cor_world	AREA	0	-3664.6	86	3099.7	-28	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_104	CORELLIA	cor_world	AREA	0	-3501.9	86	3169.1	76	1	a smuggler	humanoid_smuggler	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_105	CORELLIA	cor_world	AREA	0	-3790.2	86	3177.6	-18	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_106	CORELLIA	cor_world	AREA	0	-3375.3	86	3281.5	91	1	a vendor	humanoid_vendor	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_107	CORELLIA	cor_world	AREA	0	-3166.3	31	2786.5	0	1	an information broker	humanoid_info_broker	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	npc_use_terminal_high			600
+city_corellia_kor_vella_108	CORELLIA	cor_world	AREA	0	-3359.8	86.0	3272.9	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_109	CORELLIA	cor_world	PATROL	0	-3689.4	86.0	3118.7	0	1	an R3 unit	droid_r3	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2100	column	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_kor_vella_110	CORELLIA	cor_world	PATROL	0	-3120.0	31.0	2800.9	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2200	column	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_kor_vella_111	CORELLIA	cor_world	PATROL	0	-3181.0	31.0	2778.0	0	1	an R4 unit	droid_r4	INVULNERABLE	N	100	100	City	Kor Vella	1	PATROL	0	patrol_corellia_2300	column	idle		simple_droid_sarcastic_flee_4	600
+city_corellia_kor_vella_112	CORELLIA	cor_world	AREA	0	-3669.5	86.0	3111.7	0	1	an R5 unit	droid_r5	INVULNERABLE	N	100	100	City	Kor Vella	1	LOITER	5	0	-	idle			600
+city_corellia_kor_vella_113	CORELLIA	cor_world	AREA	0	-3142.7	31.0	2801.6	-108	1	Colonel Dac Axfow (an Imperial officer)	humanoid_imperial_colonel_dac_axfow	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_114	CORELLIA	cor_world	AREA	0	-3415.1	74.0	3336.5	46	1	Denell Kelvannon	humanoid_denell_kelvannon	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_115	CORELLIA	cor_world	AREA	0	-3335.4	72.2	2925.5	-130	1	Gilker Budz	humanoid_gilker_budz	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_116	CORELLIA	cor_world	AREA	0	-3118.3	31.0	2790.6	15	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_117	CORELLIA	cor_world	AREA	0	-3143.5	31.0	2802.6	175	1	Lt. Logro Elsin (an Imperial pilot)	humanoid_imperial_logro_elsin	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_118	CORELLIA	cor_world	AREA	0	-3101.8	26.7	2799.8	0	1	Lt. Lon Cope (a CorSec officer)	humanoid_corsec_lt_lon_cope	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_119	CORELLIA	cor_world	AREA	0	-3404.5	86.0	3092.4	-45	1	Master Sergeant Crowley	humanoid_rebel_master_sergeant_crowley	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_120	CORELLIA	cor_world	AREA	0	-3468.5	24.8	3023.0	21	1	Menchi Lerann (a ryll addict)	humanoid_menchi_lerann	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_121	CORELLIA	cor_world	AREA	0	-3144.7	31.0	2801.6	98	1	Sgt. Eryk Chinn (an Imperial bodyguard)	humanoid_imperial_sgt_eryk_chinn	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600
+city_corellia_kor_vella_122	CORELLIA	cor_world	AREA	0	-3301.0	86.0	3243.0	43	1	a commoner	humanoid_commoner	INVULNERABLE	N	100	100	City	Kor Vella	1	IDLE	0	0	-	idle			600

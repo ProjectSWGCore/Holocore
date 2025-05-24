@@ -1,0 +1,25 @@
+{
+	"npcMessage": {
+		"file": "conversation/tatooine_eisley_purvis",
+		"key": "s_252",
+		"comment": "Don't fool yourself, we are at war. The Tusken Raiders are ready to take this city, and I won't let that happen. I won't let you let that happen either."
+	},
+	"playerResponses": [
+		{
+			"playerMessage": {
+				"file": "conversation/tatooine_eisley_purvis",
+				"key": "s_44",
+				"comment": "You have me confused with someone else."
+			}
+		}
+	],
+	"requirements": [],
+	"events": [
+		{
+			"type": "npc_animation",
+			"args": {
+				"animation": "pound_fist_palm"
+			}
+		}
+	]
+}

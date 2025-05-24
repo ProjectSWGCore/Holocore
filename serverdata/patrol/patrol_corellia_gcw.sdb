@@ -16,7 +16,7 @@ patrol_corellia_gcw_201	patrol_corellia_gcw_200		CORELLIA	cor_world	0	6745.4	315
 patrol_corellia_gcw_202	patrol_corellia_gcw_200		CORELLIA	cor_world	0	6745.0	315.0	-5626.2	0	-
 patrol_corellia_gcw_300	patrol_corellia_gcw_300	FLIP	CORELLIA	cor_world	0	6761.7	315.0	-5724.1	0	Bela Vistal - an exogen class dark trooper
 patrol_corellia_gcw_301	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6771.9	315.0	-5731.7	0	-
-patrol_corellia_gcw_302	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6824.0	315.0	5731.9	0	-
+patrol_corellia_gcw_302	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6824.0	315.0	-5731.9	0	-
 patrol_corellia_gcw_303	patrol_corellia_gcw_300		CORELLIA	cor_world	0	6824.0	315.0	-5808.3	0	-
 patrol_corellia_gcw_400	patrol_corellia_gcw_400	FLIP	CORELLIA	cor_world	0	6769.5	315.0	-5777.9	0	Bela Vistal - a victory class dark trooper
 patrol_corellia_gcw_401	patrol_corellia_gcw_400		CORELLIA	cor_world	0	6761.3	315.0	-5779.1	0	-
