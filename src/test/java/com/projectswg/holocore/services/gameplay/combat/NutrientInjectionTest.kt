@@ -40,6 +40,7 @@ class NutrientInjectionTest : AcceptanceTest() {
 		val char1OriginalMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
 
 		zonedInCharacter1.sendSelfBuffCommand("nutrientInjection")
+		waitForIntents()
 
 		val char1NewMaxHealth = zonedInCharacter1.player.creatureObject.maxHealth
 		assertTrue(char1NewMaxHealth > char1OriginalMaxHealth)
@@ -53,6 +54,7 @@ class NutrientInjectionTest : AcceptanceTest() {
 		
 		zonedInCharacter1.waitUntilAwareOf(zonedInCharacter2.player.creatureObject)
 		zonedInCharacter1.sendTargetBuffCommand("nutrientInjection", zonedInCharacter2.player.creatureObject)
+		waitForIntents()
 
 		val char2NewMaxHealth = zonedInCharacter2.player.creatureObject.maxHealth
 		assertTrue(char2NewMaxHealth > char2OriginalMaxHealth)
