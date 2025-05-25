@@ -8,6 +8,7 @@ classes/
 .classpath
 .project
 .kotlin
+/.idea/AndroidProjectSystem.xml
 # IntelliJ-User Specific
 .idea/**/workspace.xml
 .idea/**/tasks.xml

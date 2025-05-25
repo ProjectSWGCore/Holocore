@@ -796,17 +796,62 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 	public Location getWorldLocation() {
 		return location.getWorldLocation(this);
 	}
-	
+
 	public double distanceTo(@NotNull SWGObject obj) {
-		if (parent == obj.getParent())
-			return getLocation().distanceTo(obj.getLocation());
-		return getWorldLocation().distanceTo(obj.getWorldLocation());
+		SWGObject tmp = this;
+		double selfX = 0.0;
+		double selfY = 0.0;
+		double selfZ = 0.0;
+		while (tmp != null) {
+			Location loc = tmp.getLocation();
+			selfX += loc.getX();
+			selfY += loc.getY();
+			selfZ += loc.getZ();
+			tmp = tmp.getParent();
+		}
+
+		tmp = obj;
+		double otherX = 0.0;
+		double otherY = 0.0;
+		double otherZ = 0.0;
+		while (tmp != null) {
+			Location loc = tmp.getLocation();
+			otherX += loc.getX();
+			otherY += loc.getY();
+			otherZ += loc.getZ();
+			tmp = tmp.getParent();
+		}
+
+		selfX -= otherX;
+		selfY -= otherY;
+		selfZ -= otherZ;
+		return Math.sqrt(selfX * selfX + selfY * selfY + selfZ * selfZ);
 	}
-	
+
 	public double flatDistanceTo(@NotNull SWGObject obj) {
-		if (parent == obj.getParent())
-			return getLocation().flatDistanceTo(obj.getLocation());
-		return getWorldLocation().flatDistanceTo(obj.getWorldLocation());
+		SWGObject tmp = this;
+		double selfX = 0.0;
+		double selfZ = 0.0;
+		while (tmp != null) {
+			Location loc = tmp.getLocation();
+			selfX += loc.getX();
+			selfZ += loc.getZ();
+			tmp = tmp.getParent();
+		}
+
+		tmp = obj;
+		double otherX = 0.0;
+		double otherZ = 0.0;
+		while (tmp != null) {
+			Location loc = tmp.getLocation();
+			otherX += loc.getX();
+			otherZ += loc.getZ();
+			tmp = tmp.getParent();
+		}
+
+		selfX -= otherX;
+		selfZ -= otherZ;
+		return Math.sqrt(selfX * selfX + selfZ * selfZ);
 	}
 	
 	public double getX() {

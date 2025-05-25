@@ -39,13 +39,16 @@ import com.projectswg.holocore.resources.support.objects.permissions.AdminPermis
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureDifficulty
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIBehavior
 import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
-import java.util.concurrent.ThreadLocalRandom
 import kotlin.math.cos
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.sin
+import kotlin.random.Random
 
 class DynamicMovementObject(var location: Location, val name: String, val baseSpeed: Double = 0.0) {
-	
-	var heading = ThreadLocalRandom.current().nextDouble() * 2 * Math.PI
+
+	private val random = Random(System.currentTimeMillis())
+	var heading = random.nextDouble() * 2 * Math.PI
 	private val groupMarker = ObjectCreator.createObjectFromTemplate("object/path_waypoint/shared_path_waypoint_droid.iff")
 	private val npcs = ArrayList<AIObject>()
 	private var lastUpdate = System.nanoTime()
@@ -70,7 +73,6 @@ class DynamicMovementObject(var location: Location, val name: String, val baseSp
 		val bossSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.BOSS).build(), groupMarker)
 		val eliteSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.ELITE).build(), groupMarker)
 		val normalSpawner = Spawner(simpleSpawnInfo.withDifficulty(CreatureDifficulty.NORMAL).build(), groupMarker)
-		val random = ThreadLocalRandom.current()
 		if (random.nextDouble() < 0.25)
 			npcs.add(NPCCreator.createSingleNpc(bossSpawner))
 		npcs.add(NPCCreator.createSingleNpc(eliteSpawner))
@@ -102,7 +104,7 @@ class DynamicMovementObject(var location: Location, val name: String, val baseSp
 				.setZ(location.z + radius * sin(angle))
 			newLocationBuilder.setY(ServerData.terrains.getHeight(newLocationBuilder))
 			val newLocation = newLocationBuilder.build()
-			val speed = it.worldLocation.distanceTo(newLocation) / elapsedTime
+			val speed = min(30.0, max(1.0, it.worldLocation.distanceTo(newLocation) / elapsedTime))
 			it.moveTo(null, newLocationBuilder.build(), speed)
 		}
 	}
@@ -114,7 +116,7 @@ class DynamicMovementObject(var location: Location, val name: String, val baseSp
 			return
 		}
 
-		val newHeading = heading + Math.PI * (1 + ThreadLocalRandom.current().nextDouble() - 0.5)
+		val newHeading = heading + Math.PI * (1 + random.nextDouble() - 0.5)
 		val secondProposed = calculateNextPosition(newHeading, distance)
 		if (isValidNextPosition(secondProposed)) {
 			location = secondProposed
@@ -123,7 +125,7 @@ class DynamicMovementObject(var location: Location, val name: String, val baseSp
 		}
 		
 		// Brute Force Escape
-		val randomRotationFromNorth = ThreadLocalRandom.current().nextDouble() * Math.TAU
+		val randomRotationFromNorth = random.nextDouble() * Math.TAU
 		for (clockwiseRotation in 0..35) {
 			val bruteForceHeading = (clockwiseRotation * 10) * Math.PI / 180.0 + randomRotationFromNorth
 			val proposed = calculateNextPosition(bruteForceHeading, distance)
@@ -135,6 +137,7 @@ class DynamicMovementObject(var location: Location, val name: String, val baseSp
 		}
 		
 		// TODO: destroy this object, we got stuck
+		location = firstProposed
 		assert(false)
 	}
 	

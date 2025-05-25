@@ -51,15 +51,19 @@ class NpcPatrolMode(obj: AIObject, waypoints: List<ResolvedPatrolWaypoint>) : Np
 			waypointBuilder.add(waypointBuilder[0])
 		}
 		
-		this.waypoints = ArrayList<NavigationPoint>(128)
-		for (i in 1 until waypointBuilder.size) {
-			val source = waypointBuilder[i - 1]
-			val destination = waypointBuilder[i]
-			this.waypoints.addAll(NavigationPoint.from(source.parent, source.location, destination.parent, destination.location, walkSpeed))
-			if (destination.delay > 0)
-				this.waypoints.addAll(NavigationPoint.nop(this.waypoints[this.waypoints.size - 1], destination.delay.toInt() - 1))
+		if (waypointBuilder.isEmpty()) {
+			this.waypoints = ArrayList<NavigationPoint>(128)
+		} else {
+			this.waypoints = ArrayList<NavigationPoint>(128)
+			for (i in 1 until waypointBuilder.size) {
+				val source = waypointBuilder[i - 1]
+				val destination = waypointBuilder[i]
+				this.waypoints.addAll(NavigationPoint.from(source.parent, source.location, destination.parent, destination.location, walkSpeed))
+				if (destination.delay > 0)
+					this.waypoints.addAll(NavigationPoint.nop(this.waypoints[this.waypoints.size - 1], destination.delay.toInt() - 1))
+			}
+			this.waypoints.addAll(NavigationPoint.from(waypointBuilder[waypointBuilder.size - 1].parent, waypointBuilder[waypointBuilder.size - 1].location, waypointBuilder[0].parent, waypointBuilder[0].location, walkSpeed))
 		}
-		this.waypoints.addAll(NavigationPoint.from(waypointBuilder[waypointBuilder.size - 1].parent, waypointBuilder[waypointBuilder.size - 1].location, waypointBuilder[0].parent, waypointBuilder[0].location, walkSpeed))
 	}
 	
 	override suspend fun onModeStart() {

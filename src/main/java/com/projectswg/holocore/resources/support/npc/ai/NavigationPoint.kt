@@ -120,9 +120,13 @@ class NavigationPoint(val parent: SWGObject?, val location: Location, val speed:
 		}
 
 		fun from(sourceParent: SWGObject?, source: Location, destinationParent: SWGObject?, destination: Location, speed: Double): List<NavigationPoint> {
+			assert(sourceParent == null || sourceParent is CellObject) { "invalid source parent" }
+			assert(destinationParent == null || destinationParent is CellObject) { "invalid destination parent" }
+			assert(speed > 0) { "speed must be greater than zero, was $speed" }
+
+			if (sourceParent == destinationParent) return from(sourceParent, source, destination, speed)
+
 			var source = source
-			assert(sourceParent == null || sourceParent is CellObject)
-			assert(destinationParent == null || destinationParent is CellObject)
 			val route = getBuildingRoute(sourceParent as CellObject?, destinationParent as CellObject?, source, destination) ?: return ArrayList()
 			val points = createIntraBuildingRoute(route, sourceParent, source, speed)
 			if (route.isNotEmpty()) source = if (destinationParent == null) buildWorldPortalLocation(route[route.size - 1]) else buildPortalLocation(route[route.size - 1])
@@ -145,10 +149,14 @@ class NavigationPoint(val parent: SWGObject?, val location: Location, val speed:
 			val totalDistance = source.distanceTo(destination)
 			val path: MutableList<NavigationPoint> = ArrayList()
 
+			assert(speed > 0) { "speed must be greater than zero, was $speed" }
+			assert(totalDistance < 5_000) { "distance between waypoints is too large ($totalDistance)" }
+
 			var currentDistance = speed
 			while (currentDistance < totalDistance) {
 				path.add(interpolate(parent, source, destination, speed, currentDistance / totalDistance))
 				currentDistance += speed
+				assert(path.size < 10_000) { "path length growing too large" }
 			}
 			path.add(interpolate(parent, source, destination, speed, 1.0))
 			return path
@@ -229,7 +237,7 @@ class NavigationPoint(val parent: SWGObject?, val location: Location, val speed:
 
 		private fun buildWorldPortalLocation(portal: Portal): Location {
 			val building = portal.cell1!!.parent
-			assert(building is BuildingObject)
+			assert(building is BuildingObject) { "cell parent wasn't a building" }
 			return Location.builder(buildPortalLocation(portal)).translateLocation(building!!.location).build()
 		}
 
