@@ -23,7 +23,7 @@ STEP 2: Collect data
 =====================================================================================================
 
 - Place the spawner (yellow)
-		Command		/createstaticelement AREA COMMENT
+		Command		/createSpawningElement AREA COMMENT
 		COMMENT: 1 word to add to easily recognize your entry in log later on
 					leave empty if not needed
 					OR
