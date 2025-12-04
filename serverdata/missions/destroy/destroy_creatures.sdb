@@ -1,5 +1,73 @@
 terrain	destroy_type	string_file	title_key	description_key	creator	target	dynamic_id
 TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT	TEXT
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	bageraset_bruiser
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	bageraset_domestic
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	bageraset_rogue
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	baz_nitch
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	canoid
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	canoid_hunter
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	carrion_spat
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	carrion_spat_giant
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	cat_dire
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	cat_razor
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	corellian_butterfly
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	corellian_butterfly_monarch
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	corellian_sand_panther_flamished
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	corellian_sand_panther_greater
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	corellian_slice_hound
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	corellian_slice_hound_forest
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	corellian_slice_hound_grassland
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	dalyrake
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	dalyrake_giant
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	deflarian
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	durni
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	durni_crazed
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	durni_fiendish
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	durni_sedated
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	durni_warrior_vehement
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	greck
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	gronda
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	gronda_elder
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m15t	m15d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	gronda_juggernaut
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m15t	m15d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	gronda_patriarch
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m16t	m16d	Corellian Horticultural Digest	Creatures	gronda_war
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m16t	m16d	Corellian Horticultural Digest	Creatures	gubbur
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m17t	m17d	Corellian Merchants' Guild	Creatures	gubbur_bloated
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m18t	m18d	Corellian Sector Newsfeed	Creatures	gubbur_giant
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m18t	m18d	Corellian Sector Newsfeed	Creatures	gulginaw
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m19t	m19d	Corellian Defense Force	Creatures	gulginaw_devil
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m19t	m19d	Corellian Defense Force	Creatures	gulginaw_greater
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m20t	m20d	Lieutenant Moss Shelby, CorSec Regiment Twelve	Creatures	gurrcat
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m20t	m20d	Lieutenant Moss Shelby, CorSec Regiment Twelve	Creatures	gurrcat_swamp
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	humbaba
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	humbaba_savage
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	humbaba_swamp
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	kahmurra_beserk
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	kahmurra_mutated
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	krahbu
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	krahbu_violent
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	krevol_horned
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	krevol_horned_desert
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	krevol_mountain
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	murra
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	murra_forest
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	murra_mountain
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	nerf
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	paralope_wooded
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	rasp_horned
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	rasp_plumed
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	rat_scavenger
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	razor_cat_pride
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	roughneck
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	sharnaff
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	slice_hound
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	slice_hound_forest
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	smashball
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	tabage
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	vrelt_diseased
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	vynock_foaming
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	wrix_deranged
+CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	wrix_grand
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	bol
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	bol_bolle
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	bol_lesser
@@ -12,39 +80,21 @@ DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m9t	m9d	Imperial
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerned Citizen's Group	Creatures	huurton_huntress
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	huurton_matron
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m12t	m12d	A New Homeowner	Creatures	huurton_stalker
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	bageraset_bruiser
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	bageraset_domestic
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	bageraset_rogue
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m1t	m1d	Holocore	Creatures	bantha
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m2t	m2d	Holocore	Creatures	bantha_bull
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m3t	m3d	Tatooine Business Bureau	Creatures	bantha_dune
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	bantha_dwarf
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	bantha_feral
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m5t	m5d	Tatooine Scientific Union	Creatures	bantha_matriarch
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m6t	m6d	Bestine Hospital Medical Chief	Creatures	bantha_rogue
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m13t	m13d	A Retired Mercenary	Creatures	nerf
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	piket_longhorn
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	baz_nitch
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	piket_plains_walker
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	quenker_bile_drenched
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	quenker_ravager
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	quenker_relic_reaper
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	quenker_savage
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m1t	m1d	Interplanetary Embalmers' Guild	Creatures	beachcomber
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	ronto
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	roughneck
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	thune
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	thune_guardian
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	voritor_dasher
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	voritor_hunter
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_cave
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	voritor_lizard
 DANTOOINE	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	voritor_vexed
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_dune
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_rock
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_rock_large
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_sand_giant
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_sand_large
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	baz_nitch
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	baz_nitch_giant
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	baz_nitch_kinad
@@ -70,19 +120,10 @@ DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Is
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	malkloc_plainswalker
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	malkloc_plainswalker_elder
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	malkloc_plainswalker_stalker
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	boar_wild_dune
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	mite_decay_queen
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	mite_gnarled_queen
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	mite_shear_hunter
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	mite_shear_lurking
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	boar_zucca
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m8t	m8d	Bestine Transportation Safety Commission	Creatures	boar_zucca_elder
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m9t	m9d	Moisture Farmers of Tatooine #253	Creatures	boar_zucca_razorclaw
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m10t	m10d	Bib Fortuna, on behalf of Jabba the Hutt	Creatures	boar_zucca_savage
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	boar_zucca_wild
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt_diseased
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt_tormented
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	mite_shear_queen
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	mite_shear_reclusive
 DATHOMIR	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	nerf
@@ -110,79 +151,27 @@ ENDOR	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerne
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	arachne_warrior
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m12t	m12d	A New Homeowner	Creatures	arachne_webmaster
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m13t	m13d	A Retired Mercenary	Creatures	blurrg
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	canoid
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	canoid_hunter
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	carrion_spat
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	carrion_spat_giant
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	cat_dire
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	cat_razor
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	cat_tusk_domestic
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	blurrg_crimson
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	cat_tusk_mountain
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	blurrg_diseased
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	cat_tusk_plains
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	blurrg_domesticated
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	cat_tusk_swamp_elder
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	blurrg_hunter
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	blurrg_pup
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	blurrg_raptor
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	blurrg_sand_crawler
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	chuba
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	blurrg_tracker
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	chuba_flesh_eating
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	boar_roba
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	boar_wolf
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	corellian_butterfly
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	corellian_butterfly_monarch
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	corellian_sand_panther_flamished
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	corellian_sand_panther_greater
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	corellian_slice_hound
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	corellian_slice_hound_forest
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	corellian_slice_hound_grassland
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	boar_wolf_bloodfrenzied
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	boar_wolf_cub
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	boar_wolf_ravager
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	cu_pa
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m12t	m12d	Holocore	Creatures	cu_pa_wasteland
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m13t	m13d	Gartogg	Creatures	cu_pa_wonderous
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	dalyrake
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	bol_bolle_bark_biter
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	dalyrake_giant
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	bol_bolle_colt
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	deflarian
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_cannibal
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_cannibal_elite
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_grizzled
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_lesser
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_mountain
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_swarming_lesser
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m14t	m14d	Prefect Talmont	Creatures	dragonet_armodragon
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m15t	m15d	Holocore	Creatures	dragonet_elite
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	durni
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	durni_crazed
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	durni_fiendish
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	durni_sedated
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	durni_warrior_vehement
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	eopie
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m1t	m1d	Holocore	Creatures	eopie_desert
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m2t	m2d	Holocore	Creatures	eopie_dune
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m3t	m3d	Tatooine Business Bureau	Creatures	eopie_dwarf
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	eopie_farm_domestic
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	falumpaset_gungan
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	falumpaset_plodding
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m6t	m6d	Bab Esrus, Biosculptor for Select Clients	Creatures	falumpaset_rogue
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m7t	m7d	Lady Dera Mikkel of Theed	Creatures	fambaa_gungan
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m8t	m8d	Perfecton Greysor Purebreds	Creatures	fambaa_rogue
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m9t	m9d	Dr. Henro Torrth, Theed University Bio Department	Creatures	fambaa_wildeyed
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	bol_bolle_leader
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	bol_bolle_male_female
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	bol_bolle_stomper
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	bordok_ancient
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	bordok_master
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	bordok_stud_mare
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m10t	m10d	Shaak-wrangler on the Great Grass Plains	Creatures	flewt_forest
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m11t	m11d	Highscouter Twirrl Cove	Creatures	flewt_grassland
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	borgle_desert
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	borgle_fierce
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	borgle_life_sapper
@@ -191,37 +180,21 @@ ENDOR	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Far
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	gurreck_cowardly
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	gurreck_crazed
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	gurreck_desert_charger
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m12t	m12d	Dr. Henro Torrth, Theed University Bio Department	Creatures	gnort
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m8t	m8d	Imperial Environmental Preservation & Refocusing Authority	Creatures	gurreck_hilltop
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m9t	m9d	Imperial Environmental Preservation & Refocusing Authority	Creatures	gurreck_prowler
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerned Citizen's Group	Creatures	hanadak
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	hanadak_ancient
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	greck
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	gronda
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	gronda_elder
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m15t	m15d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	gronda_juggernaut
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m15t	m15d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	gronda_patriarch
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m16t	m16d	Corellian Horticultural Digest	Creatures	gronda_war
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m13t	m13d	Naboo Family Planning to Relocate	Creatures	gualama
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m12t	m12d	A New Homeowner	Creatures	hanadak_drifter
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m13t	m13d	A Retired Mercenary	Creatures	hanadak_matriarch
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m16t	m16d	Corellian Horticultural Digest	Creatures	gubbur
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m17t	m17d	Corellian Merchants' Guild	Creatures	gubbur_bloated
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m18t	m18d	Corellian Sector Newsfeed	Creatures	gubbur_giant
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	hanadak_mature
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	hanadak_rock_smasher
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	hanadak_stoneskin
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	hanadak_young_rock_crusher
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m18t	m18d	Corellian Sector Newsfeed	Creatures	gulginaw
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	jax_bearded
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m19t	m19d	Corellian Defense Force	Creatures	gulginaw_devil
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	jax_blooming
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m19t	m19d	Corellian Defense Force	Creatures	gulginaw_greater
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	jax_blushing
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	jax_bounding
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	jax_pouncing
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m20t	m20d	Lieutenant Moss Shelby, CorSec Regiment Twelve	Creatures	gurrcat
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m20t	m20d	Lieutenant Moss Shelby, CorSec Regiment Twelve	Creatures	gurrcat_swamp
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	lantern_bird_aged
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	lantern_bird_gleaming
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	lantern_bird_radiant
@@ -236,18 +209,13 @@ ENDOR	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial M
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	mite_bark_burrower_drone
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	mite_bark_burrower_queen
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	mite_bark_burrower_swarmling
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	humbaba
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	mite_bark_burrower_worker
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m1t	m1d	A Corellian Entrepreneur	Creatures	humbaba_savage
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	mite_bloodseeker
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	humbaba_swamp
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	mite_bloodseeker_drone
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	mite_bloodseeker_hunter
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	mite_bloodseeker_queen
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	nerf
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m14t	m14d	Kirkhorn Guarlara Stable	Creatures	ikopi
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m8t	m8d	Imperial Environmental Preservation & Refocusing Authority	Creatures	pubam_beguiling_scout
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	ikopi_mountain_naboo
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m9t	m9d	Imperial Environmental Preservation & Refocusing Authority	Creatures	pubam_dark_shaman
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerned Citizen's Group	Creatures	pubam_vicious_battlelord
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	remmer_dune_scavenger
@@ -260,11 +228,7 @@ ENDOR	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	roba_stalker
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	roughneck
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	squall_endor
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	kaadu
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m16t	m16d	Office of the Chief Architect of Naboo	Creatures	kaadu_gungan
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m2t	m2d	Corellian with Unfortunately Short Temper	Creatures	kahmurra_beserk
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	squall_rabid
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	kahmurra_mutated
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	squill_festering
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	swirl_prong_erratic
 ENDOR	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	swirl_prong_impaler
@@ -279,29 +243,11 @@ LOK	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Dip
 LOK	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	kimogila_dwarf
 LOK	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	kimogila_enraged
 LOK	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	kimogila_giant
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	kitonak_insane
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m5t	m5d	Tatooine Scientific Union	Creatures	kitonak_wandering
 LOK	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	kimogila_hatchling
 LOK	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	kusak
 LOK	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	kusak_wasteland
 LOK	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	langlatch
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m3t	m3d	On Our Way to the Corellian Dream	Creatures	krahbu
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	krahbu_violent
-TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m2t	m2d	SoroSuub Silicate Mining Crew 76	Creatures	krayt_dragon_adolescent
-TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_krayt_tatooine	m2t	m2d	Malakili	Creatures	krayt_dragon_canyon
-TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m5t	m5d	Putten Beatus, Mos Eisley Customs Inspector	Creatures	krayt_dragon_canyon_giant
-TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m5t	m5d	Tatooine Civilian Defense League	Creatures	krayt_dragon_canyon_juvenile
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over_death
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over_swarming
 LOK	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	langlatch_forest
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m17t	m17d	Lady Prua Nala Bitterbon of Theed	Creatures	krevol_click
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m4t	m4d	Corellian Just Trying to Do a Job	Creatures	krevol_horned
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	krevol_horned_desert
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m18t	m18d	Office of the Educational Regent of Naboo	Creatures	krevol_knotted
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m5t	m5d	A Corellian Businessperson	Creatures	krevol_mountain
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m19t	m19d	Torba Keels of Otoh Gunga	Creatures	krevol_mountain
 LOK	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	langlatch_mountain
 LOK	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	langlatch_wasteland
 LOK	general	mission/mission_destroy_neutral_easy_creature	m8t	m8d	Imperial Environmental Preservation & Refocusing Authority	Creatures	mynock
@@ -317,8 +263,6 @@ LOK	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. 
 LOK	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	vesp_desert
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	beetle_berkens_flow_lava
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	beetle_berkens_flow_lava_queen
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	lizard_dune
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	lizard_dune_elite
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	beetle_berkens_flow_lava_soldier
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	beetle_burning_plains_lava
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	beetle_burning_plains_lava_queen
@@ -333,7 +277,6 @@ MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperia
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	blistmok_burning_plains_raptor
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	blistmok_burning_plains_stalker
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	blistmok_burning_plains_terroraptor
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	mite_bark
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	blistmok_crystal_flats
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	blistmok_crystal_flats_raptor
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	blistmok_crystal_flats_stalker
@@ -358,44 +301,74 @@ MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert 
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	tanray_burning_plains
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	tanray_burning_plains_crowned
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	tanray_burning_plains_leader
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	mott
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	murra
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m6t	m6d	Corellian in Need of Quick Emotional Lift	Creatures	murra_forest
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	murra_mountain
 MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	tanray_burning_plains_prowler
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	mynock
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	tanray_burning_plains_ripper
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	tanray_burning_plains_stalker
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	tulrus_berkens_flow
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	tulrus_berkens_flow_bull
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	tulrus_berkens_flow_matriarch
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	tulrus_nesting_grounds
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	tulrus_nesting_grounds_ancient
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	tulrus_nesting_grounds_bull
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	tulrus_nesting_grounds_matriarch
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	xandank_berkens_flow
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	xandank_berkens_flow_leader
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	xandank_berkens_flow_prowler
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	xandank_berkens_flow_stalker
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	xandank_smoking_forest
+MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	xandank_smoking_forest_prowler
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m1t	m1d	Interplanetary Embalmers' Guild	Creatures	beachcomber
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	cat_tusk_domestic
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	cat_tusk_mountain
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	cat_tusk_plains
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	cat_tusk_swamp_elder
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	chuba
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	chuba_flesh_eating
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	falumpaset_gungan
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	falumpaset_plodding
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m6t	m6d	Bab Esrus, Biosculptor for Select Clients	Creatures	falumpaset_rogue
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m7t	m7d	Lady Dera Mikkel of Theed	Creatures	fambaa_gungan
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m8t	m8d	Perfecton Greysor Purebreds	Creatures	fambaa_rogue
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m9t	m9d	Dr. Henro Torrth, Theed University Bio Department	Creatures	fambaa_wildeyed
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m10t	m10d	Shaak-wrangler on the Great Grass Plains	Creatures	flewt_forest
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m11t	m11d	Highscouter Twirrl Cove	Creatures	flewt_grassland
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m12t	m12d	Dr. Henro Torrth, Theed University Bio Department	Creatures	gnort
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m13t	m13d	Naboo Family Planning to Relocate	Creatures	gualama
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m14t	m14d	Kirkhorn Guarlara Stable	Creatures	ikopi
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	ikopi_mountain_naboo
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	kaadu
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m16t	m16d	Office of the Chief Architect of Naboo	Creatures	kaadu_gungan
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m17t	m17d	Lady Prua Nala Bitterbon of Theed	Creatures	krevol_click
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m18t	m18d	Office of the Educational Regent of Naboo	Creatures	krevol_knotted
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m19t	m19d	Torba Keels of Otoh Gunga	Creatures	krevol_mountain
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	mite_bark
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	mott
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m1t	m1d	Interplanetary Embalmers' Guild	Creatures	narglatch
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	narglatch_cracktooth
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m2t	m2d	Imperial Civilian Accounting Office	Creatures	narglatch_female
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	narglatch_grizzlefur
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m3t	m3d	Imbecile, a C-9P0 Protocol Droid	Creatures	narglatch_hunter
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m7t	m7d	A Corellian Wanderer	Creatures	nerf
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	tanray_burning_plains_ripper
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	tanray_burning_plains_stalker
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	tulrus_berkens_flow
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	tulrus_berkens_flow_bull
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	nerf
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	tulrus_berkens_flow_matriarch
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	tulrus_nesting_grounds
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m6t	m6d	Bestine Hospital Medical Chief	Creatures	nerf
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	tulrus_nesting_grounds_ancient
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m4t	m4d	Radanthus Mandelatara, Playwright	Creatures	nightspider
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	tulrus_nesting_grounds_bull
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	nightspider_vineripper
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	tulrus_nesting_grounds_matriarch
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m5t	m5d	Chef Jamien Varcos	Creatures	nuna_carnivor_event
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m6t	m6d	Bab Esrus, Biosculptor for Select Clients	Creatures	nuna_diseased
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m7t	m7d	Lady Dera Mikkel of Theed	Creatures	nuna_dwarf
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	nuna_dwarf
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	xandank_berkens_flow
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	paralope_wooded
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	xandank_berkens_flow_leader
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m8t	m8d	Perfecton Greysor Purebreds	Creatures	peko_peko
 NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m9t	m9d	Dr. Henro Torrth, Theed University Bio Department	Creatures	peko_peko_albatross
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	xandank_berkens_flow_prowler
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	xandank_berkens_flow_stalker
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	xandank_smoking_forest
-MUSTAFAR	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	xandank_smoking_forest_prowler
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m10t	m10d	Shaak-wrangler on the Great Grass Plains	Creatures	rat_swamp
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m11t	m11d	Highscouter Twirrl Cove	Creatures	rawl_fanned
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m12t	m12d	Dr. Henro Torrth, Theed University Bio Department	Creatures	rawl_spitting
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m13t	m13d	Naboo Family Planning to Relocate	Creatures	rawl_vine
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m14t	m14d	Kirkhorn Guarlara Stable	Creatures	roughneck
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	shaupaut_elder
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	shaupaut_greater
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m16t	m16d	Office of the Chief Architect of Naboo	Creatures	shaupaut_hunter
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m17t	m17d	Lady Prua Nala Bitterbon of Theed	Creatures	spineflap_capper
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m18t	m18d	Office of the Educational Regent of Naboo	Creatures	strehkforce
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m19t	m19d	Torba Keels of Otoh Gunga	Creatures	veermok_alpha
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	veermok_scavenger
+NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	veermok_scout
 RORI	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	borgle_frightened
 RORI	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	borgle_gruntling
 RORI	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	borgle_young
@@ -416,28 +389,17 @@ RORI	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Exec
 RORI	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	krevol_chared
 RORI	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	mite_bark
 RORI	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	mite_forest
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m8t	m8d	Itinerant Corellian Transactional Specialist	Creatures	rasp_horned
 RORI	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	mite_forest_swarm
 RORI	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	mite_wood
 RORI	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	mite_wood_swarm
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	rasp_plumed
 RORI	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	nerf
 RORI	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	nightspider
 RORI	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	nudfuh
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m9t	m9d	Corellian Specializing in Discreet Transport 	Creatures	rat_scavenger
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m10t	m10d	Shaak-wrangler on the Great Grass Plains	Creatures	rat_swamp
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m11t	m11d	Highscouter Twirrl Cove	Creatures	rawl_fanned
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m12t	m12d	Dr. Henro Torrth, Theed University Bio Department	Creatures	rawl_spitting
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m13t	m13d	Naboo Family Planning to Relocate	Creatures	rawl_vine
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	razor_cat_pride
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	razorback_desert
 RORI	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	pugoriss_elder
 RORI	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	pugoriss_savage
 RORI	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	rasp_horned
 RORI	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	rasp_sickle
 RORI	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	roughneck
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	rill
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	rill_vicious
 RORI	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	spineflap_capper
 RORI	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	spineflap_capper_gatherer
 RORI	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	spineflap_capper_queen
@@ -445,40 +407,21 @@ RORI	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farm
 RORI	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	squall_deranged
 RORI	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	squall_meek_avenger
 RORI	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	squall_rori
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m8t	m8d	Bestine Transportation Safety Commission	Creatures	ronto
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m9t	m9d	Moisture Farmers of Tatooine #253	Creatures	ronto_elite
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m10t	m10d	Corellian Urgently Seeks Waste Disposal	Creatures	roughneck
 RORI	general	mission/mission_destroy_neutral_easy_creature	m8t	m8d	Imperial Environmental Preservation & Refocusing Authority	Creatures	torton
 RORI	general	mission/mission_destroy_neutral_easy_creature	m9t	m9d	Imperial Environmental Preservation & Refocusing Authority	Creatures	torton_mountain
 RORI	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerned Citizen's Group	Creatures	torton_ravenous
 RORI	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	torton_shallow
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m14t	m14d	Kirkhorn Guarlara Stable	Creatures	roughneck
 RORI	general	mission/mission_destroy_neutral_easy_creature	m12t	m12d	A New Homeowner	Creatures	torton_tattered
 RORI	general	mission/mission_destroy_neutral_easy_creature	m13t	m13d	A Retired Mercenary	Creatures	vir_vur_dashing
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m10t	m10d	Bib Fortuna, on behalf of Jabba the Hutt	Creatures	roughneck
 RORI	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	vir_vur_dreaded
 RORI	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	vir_vur_midnight
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	salt_mynock_tatoonian
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	scyk
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	sevorrt
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	sevorrt_elite
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	sharnaff
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	shaupaut_elder
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m15t	m15d	Nath Matua Nurtry, Aaltok Household Composer	Creatures	shaupaut_greater
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m16t	m16d	Office of the Chief Architect of Naboo	Creatures	shaupaut_hunter
 RORI	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	vrobal_bull
 RORI	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	vrobal_wormed
-TALUS	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	chunker_bruiser
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m11t	m11d	Corellian Breaking Emotional Attachment	Creatures	slice_hound
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	slice_hound_forest
-TALUS	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	chunker_goon
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	dalyrake
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m12t	m12d	Corellian Fireworks Transport	Creatures	smashball
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	dalyrake_giant
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	fynock_feared
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m23t	m23d	A Visitor from Wild Space	Creatures	fynock_forest
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m24t	m24d	A Dilligent Cryptozoologist	Creatures	fynock_jungle
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m17t	m17d	Lady Prua Nala Bitterbon of Theed	Creatures	spineflap_capper
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m25t	m25d	A Nervous Breeder	Creatures	gubbur_giant
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m26t	m26d	A Distraught Zoo Ship Captain	Creatures	guf_drolg
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoyed Droid Owner	Creatures	guf_drolg_minor
@@ -488,17 +431,11 @@ TALUS	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	humbaba
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	humbaba_savage
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	kahmurra_beserk
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	squill
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m12t	m12d	Holocore	Creatures	squill_desert
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m34t	m34d	Imperial Zoological Agency	Creatures	kahmurra_mutated
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m13t	m13d	Gartogg	Creatures	squill_malignant
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m14t	m14d	Prefect Talmont	Creatures	squill_mountain
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m35t	m35d	Mrs. Doaten Dodder	Creatures	kima_hilltop
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m1t	m1d	A Perturbed Citizen	Creatures	kima_wolf
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m18t	m18d	Office of the Educational Regent of Naboo	Creatures	strehkforce
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m2t	m2d	An Angry Greysor Breeder	Creatures	kima_woodland
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens for a Clean Tomorrow	Creatures	kittle
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	tabage
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	mite_dung
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	mite_rot
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	nerf
@@ -515,6 +452,80 @@ TALUS	general	mission/mission_destroy_neutral_easy_creature	m16t	m16d	Lady Issha
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m17t	m17d	Asst. Prof. Herian Reborran Naxx	Creatures	tortur
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m18t	m18d	Asst. Prof. Herian Reborran Naxx	Creatures	vynock_foaming
 TALUS	general	mission/mission_destroy_neutral_easy_creature	m19t	m19d	Teaching Asst. Morbitt Horn Rotundi	Creatures	wrix_grand
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m1t	m1d	Holocore	Creatures	bantha
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m2t	m2d	Holocore	Creatures	bantha_bull
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m3t	m3d	Tatooine Business Bureau	Creatures	bantha_dune
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	bantha_dwarf
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	bantha_feral
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m5t	m5d	Tatooine Scientific Union	Creatures	bantha_matriarch
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m6t	m6d	Bestine Hospital Medical Chief	Creatures	bantha_rogue
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_cave
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_dune
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_rock
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_rock_large
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_sand_giant
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	beetle_sand_large
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	boar_wild_dune
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	boar_zucca
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m8t	m8d	Bestine Transportation Safety Commission	Creatures	boar_zucca_elder
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m9t	m9d	Moisture Farmers of Tatooine #253	Creatures	boar_zucca_razorclaw
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m10t	m10d	Bib Fortuna, on behalf of Jabba the Hutt	Creatures	boar_zucca_savage
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	boar_zucca_wild
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt_diseased
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	bocatt_tormented
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	cu_pa
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m12t	m12d	Holocore	Creatures	cu_pa_wasteland
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m13t	m13d	Gartogg	Creatures	cu_pa_wonderous
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_cannibal
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_cannibal_elite
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_grizzled
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_lesser
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_mountain
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	dewback_swarming_lesser
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m14t	m14d	Prefect Talmont	Creatures	dragonet_armodragon
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m15t	m15d	Holocore	Creatures	dragonet_elite
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	eopie
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m1t	m1d	Holocore	Creatures	eopie_desert
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m2t	m2d	Holocore	Creatures	eopie_dune
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m3t	m3d	Tatooine Business Bureau	Creatures	eopie_dwarf
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	eopie_farm_domestic
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m4t	m4d	Holocore	Creatures	kitonak_insane
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m5t	m5d	Tatooine Scientific Union	Creatures	kitonak_wandering
+TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m2t	m2d	SoroSuub Silicate Mining Crew 76	Creatures	krayt_dragon_adolescent
+TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_krayt_tatooine	m2t	m2d	Malakili	Creatures	krayt_dragon_canyon
+TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m5t	m5d	Putten Beatus, Mos Eisley Customs Inspector	Creatures	krayt_dragon_canyon_giant
+TATOOINE	general	mission/special/mission_destroy_neutral_hard_creature_giant_tatooine	m5t	m5d	Tatooine Civilian Defense League	Creatures	krayt_dragon_canyon_juvenile
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over_death
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	kreetle_over_swarming
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	lizard_dune
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	lizard_dune_elite
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	mynock
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m6t	m6d	Bestine Hospital Medical Chief	Creatures	nerf
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	nuna_dwarf
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m7t	m7d	Holocore	Creatures	razorback_desert
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	rill
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	rill_vicious
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m8t	m8d	Bestine Transportation Safety Commission	Creatures	ronto
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m9t	m9d	Moisture Farmers of Tatooine #253	Creatures	ronto_elite
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m10t	m10d	Bib Fortuna, on behalf of Jabba the Hutt	Creatures	roughneck
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	salt_mynock_tatoonian
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	scyk
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	sevorrt
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	sevorrt_elite
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m11t	m11d	Camie	Creatures	squill
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m12t	m12d	Holocore	Creatures	squill_desert
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m13t	m13d	Gartogg	Creatures	squill_malignant
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m14t	m14d	Prefect Talmont	Creatures	squill_mountain
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_desert_lesser
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_greater_desert
+TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_mutant
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m15t	m15d	Holocore	Creatures	worrt_giant
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	worrt_minor
+TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	worrt_mountain
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m20t	m20d	Kebert Lomanna	Creatures	acklay
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m21t	m21d	A Busy Executive	Creatures	angler
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m22t	m22d	Radanthus Mandelatara, Playwright	Creatures	angler_giant
@@ -526,9 +537,6 @@ YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m27t	m27d	An Annoye
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m28t	m28d	An Irked Neighbor	Creatures	choku_frenzied
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m29t	m29d	A Concerned Citizen	Creatures	choku_packmaster
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m30t	m30d	A Protocol Droid	Creatures	crystal_snake
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m19t	m19d	Torba Keels of Otoh Gunga	Creatures	veermok_alpha
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	veermok_scavenger
-NABOO	general	mission/mission_destroy_neutral_easy_creature_naboo	m20t	m20d	Taneb Magnex of Theed	Creatures	veermok_scout
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m31t	m31d	Imperial Customs	Creatures	crystal_snake_giant
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m32t	m32d	Imperial Diplomatic Corps	Creatures	crystal_snake_hooded
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m33t	m33d	Imperial Ministry of Energy	Creatures	kliknik
@@ -540,22 +548,12 @@ YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m3t	m3d	Citizens fo
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m4t	m4d	Galactic Farmer's League: Local Chapter	Creatures	mamien_male
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m5t	m5d	A Protective Father	Creatures	mawgax_male
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m6t	m6d	Imperial Environmental Preservation & Refocusing Authority	Creatures	mite_tanc_warrior
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m13t	m13d	Interplanetary Embalmers' Guild	Creatures	vrelt_diseased
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m7t	m7d	Merchant's Guild: Local Chapter	Creatures	nerf
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m8t	m8d	Imperial Environmental Preservation & Refocusing Authority	Creatures	roughneck
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	vynock_foaming
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m9t	m9d	Imperial Environmental Preservation & Refocusing Authority	Creatures	skreeg_hunter
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m10t	m10d	A Concerned Citizen's Group	Creatures	skreeg_ominous
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_desert_lesser
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_greater_desert
-TATOOINE	general	mission/special/mission_destroy_neutral_medium_creature_infestation_tatooine	m1t	m1d	Tatooine Civilian Defense League	Creatures	womprat_mutant
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m11t	m11d	Imperial Environmental Preservation & Refocusing Authority	Creatures	skreeg_warrior
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m12t	m12d	A New Homeowner	Creatures	spined_puc_giant
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m15t	m15d	Holocore	Creatures	worrt_giant
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	worrt_minor
-TATOOINE	general	mission/mission_destroy_neutral_hard_creature_tatooine	m16t	m16d	Holocore	Creatures	worrt_mountain
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Imperial Civilian Accounting Office	Creatures	wrix_deranged
-CORELLIA	general	mission/mission_destroy_neutral_easy_creature_corellia	m14t	m14d	Dr. Tennet Sionaro, Coronet University Archaeology Dept.	Creatures	wrix_grand
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m13t	m13d	A Retired Mercenary	Creatures	stintaril_giant
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m14t	m14d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	stintaril_prowler
 YAVIN4	general	mission/mission_destroy_neutral_easy_creature	m15t	m15d	Lady Isshala Deprovan, late of the Naboo countryside	Creatures	tybis
