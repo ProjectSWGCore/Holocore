@@ -1,3 +1,14 @@
 spawn_id	terrain	building_id	spawner_type	cell_id	x	y	z	heading	active	npc_name	npc_id	attackable	difficulty	min_cl	max_cl	spawn_category	spawn_area	amount	behaviour	loiter_radius	patrol_id	patrol_formation	mood	equipment_id	conversation_id	respawn
 STRING PRIMARY KEY	TEXT	TEXT REFERENCES buildings	TEXT	INTEGER	REAL	REAL	REAL	INTEGER	INTEGER	TEXT	TEXT	TEXT	TEXT	INTEGER	INTEGER	TEXT	TEXT	INTEGER	TEXT	INTEGER	TEXT	TEXT	TEXT	INTEGER	TEXT	INTEGER NOT NULL
-poi_tatooine_darklighters_estate_1	TATOOINE	tat_world	AREA	0	-591.1	6.5	-6746.2	0	1	a Rodian hunter	humanoid_kashyyyk_rodian_lesser_hunter	AGGRESSIVE	B	40	45	POI	Darklighter's Estate	1	IDLE	0	0	-	idle			600
+poi_tatooine_darklighters_estate_1	TATOOINE	tat_world	AREA	0	-704.9	8.0	-6739.0	0	1	a Darklighter guard	humanoid_darklighter_guard	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	idle			600
+poi_tatooine_darklighters_estate_2	TATOOINE	tat_world	AREA	0	-691.8	8.0	-6739.2	1	1	a Darklighter guard	humanoid_darklighter_guard	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	idle			600
+poi_tatooine_darklighters_estate_3	TATOOINE	tat_world	AREA	0	-647.0	6.4	-6760.2	2	1	a Darklighter guard	humanoid_darklighter_guard	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	idle			600
+poi_tatooine_darklighters_estate_4	TATOOINE	tat_world	AREA	0	-704.8	5.8	-6650.3	-146	1	a Darklighter guard	humanoid_darklighter_guard	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	bored			600
+poi_tatooine_darklighters_estate_5	TATOOINE	tat_world	AREA	0	-588.7	6.5	-6741.1	23	1	a technician	humanoid_technician	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	npc_use_terminal_high			600
+poi_tatooine_darklighters_estate_6	TATOOINE	tat_world	AREA	0	-701.2	8.0	-6720.4	65	1	an entertainer	humanoid_entertainer	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	themepark_music_3	2		600
+poi_tatooine_darklighters_estate_7	TATOOINE	tat_world	AREA	0	-699.5	8.0	-6717.4	-152	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	entertained			600
+poi_tatooine_darklighters_estate_8	TATOOINE	tat_world	AREA	0	-697.9	8.0	-6718.4	-119	1	a noble	humanoid_noble	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	entertained			600
+poi_tatooine_darklighters_estate_9	TATOOINE	tat_mosentha_large_house3	AREA	2	3.5	0.5	-5.4	-90	1	a scientist	humanoid_geo_scientist_human_female	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	npc_sitting_chair			600
+poi_tatooine_darklighters_estate_10	TATOOINE	tat_mosentha_large_house3	AREA	2	-9.0	1.0	9.4	91	1	a gambler	humanoid_gambler	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	npc_use_terminal_high			600
+poi_tatooine_darklighters_estate_11	TATOOINE	tat_world	AREA	0	-657.0	11.5	-6834.8	-132	1	an explorer	humanoid_explorer	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	conversation			600
+poi_tatooine_darklighters_estate_12	TATOOINE	tat_world	AREA	0	-658.8	11.4	-6836.4	48	1	a farmer	humanoid_farmer	INVULNERABLE	N	100	100	POI	Darklighter's Estate	1	IDLE	0	0	-	conversation			600
