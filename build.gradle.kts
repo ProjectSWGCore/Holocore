@@ -33,8 +33,8 @@ plugins {
 	application
 	idea
 	java
-	kotlin("jvm") version "2.1.21"
-	id("org.beryx.jlink") version "3.1.1"
+	kotlin("jvm") version "2.4.10"
+	id("org.beryx.jlink") version "4.1.1"
 }
 
 val javaVersion = JavaVersion.current()
@@ -93,9 +93,9 @@ dependencies {
 	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version=junit5Version)
 	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.12.2")
 	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version=junit5Version)
-	testImplementation(group="org.testcontainers", name="mongodb", version="1.21.0")
+	testImplementation(group="org.testcontainers", name="mongodb", version="1.21.4")
 
-	testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
+	testImplementation("com.tngtech.archunit:archunit-junit5:1.5.0")
 }
 
 idea {
