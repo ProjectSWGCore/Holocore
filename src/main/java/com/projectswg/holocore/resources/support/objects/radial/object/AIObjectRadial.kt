@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -42,21 +42,38 @@ import com.projectswg.holocore.resources.support.objects.swg.custom.AIObject
 import com.projectswg.holocore.services.gameplay.crafting.resource.HarvestBoneIntent
 import com.projectswg.holocore.services.gameplay.crafting.resource.HarvestHideIntent
 import com.projectswg.holocore.services.gameplay.crafting.resource.HarvestMeatIntent
+import com.projectswg.holocore.services.gameplay.crafting.resource.MilkCreatureIntent
 
 class AIObjectRadial : RadialHandlerInterface {
 	override fun getOptions(options: MutableCollection<RadialOption>, player: Player, target: SWGObject) {
 		val ai = target as AIObject
-		if (ai.posture != Posture.DEAD) {
-			return
-		}
 		val creatureObject = player.creatureObject
 		if (Locomotion.DEAD.isActive(creatureObject) || Locomotion.INCAPACITATED.isActive(creatureObject)) {
 			return
 		}
+		if (ai.posture == Posture.DEAD) {
+			appendDeadCreatureOptions(ai, creatureObject, options)
+		} else {
+			appendLivingCreatureOptions(ai, options)
+		}
+	}
+
+	private fun appendDeadCreatureOptions(ai: AIObject, creatureObject: CreatureObject, options: MutableCollection<RadialOption>) {
 		options.add(RadialOption.create(RadialItem.LOOT_ALL, RadialOption.create(RadialItem.LOOT)))
 
 		if (isScout(creatureObject)) {
 			appendScoutOptions(ai, options)
+		}
+	}
+
+	private fun appendLivingCreatureOptions(ai: AIObject, options: MutableCollection<RadialOption>) {
+		if (ai.isMilked || ai.ownerId > 0) {
+			return
+		}
+		val npcInfo = ServerData.npcs[ai.creatureId ?: return] ?: return
+
+		if (npcInfo.milkResourceInfo.amount > 0) {
+			options.add(RadialOption.create(RadialItem.SERVER_MENU4, "@pet/pet_menu:milk_me"))
 		}
 	}
 
@@ -94,19 +111,31 @@ class AIObjectRadial : RadialHandlerInterface {
 
 	override fun handleSelection(player: Player, target: SWGObject, selection: RadialItem) {
 		val ai = target as AIObject
-		if (ai.posture != Posture.DEAD) {
-			return
-		}
 		val creatureObject = player.creatureObject
 		if (Locomotion.DEAD.isActive(creatureObject) || Locomotion.INCAPACITATED.isActive(creatureObject)) {
 			return
 		}
+		if (ai.posture == Posture.DEAD) {
+			handleDeadCreatureSelection(player, ai, selection)
+		} else {
+			handleLivingCreatureSelection(player, ai, selection)
+		}
+	}
+
+	private fun handleDeadCreatureSelection(player: Player, ai: AIObject, selection: RadialItem) {
 		when (selection) {
 			RadialItem.LOOT         -> LootRequestIntent(player, ai, LootType.LOOT).broadcast()
 			RadialItem.LOOT_ALL     -> LootRequestIntent(player, ai, LootType.LOOT_ALL).broadcast()
 			RadialItem.SERVER_MENU1 -> HarvestBoneIntent(player, ai).broadcast()
 			RadialItem.SERVER_MENU2 -> HarvestHideIntent(player, ai).broadcast()
 			RadialItem.SERVER_MENU3 -> HarvestMeatIntent(player, ai).broadcast()
+			else                    -> StandardLog.onPlayerError(this, player, "radial option without handling selected: %s", selection)
+		}
+	}
+
+	private fun handleLivingCreatureSelection(player: Player, ai: AIObject, selection: RadialItem) {
+		when (selection) {
+			RadialItem.SERVER_MENU4 -> MilkCreatureIntent(player, ai).broadcast()
 			else                    -> StandardLog.onPlayerError(this, player, "radial option without handling selected: %s", selection)
 		}
 	}

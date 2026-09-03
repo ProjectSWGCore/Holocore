@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -33,3 +33,4 @@ import me.joshlarson.jlcommon.control.Intent
 data class HarvestBoneIntent(val player: Player, val target: AIObject): Intent()
 data class HarvestHideIntent(val player: Player, val target: AIObject): Intent()
 data class HarvestMeatIntent(val player: Player, val target: AIObject): Intent()
+data class MilkCreatureIntent(val player: Player, val target: AIObject): Intent()
