@@ -46,7 +46,7 @@ class DeathCyberneticService(private val deathCyberneticDie: Die = RandomDie()) 
 		if (isSpace(diedOnTerrain)) return
 		if (isEasyPlanet(diedOnTerrain)) return
 		if (isADeathCyberneticAlreadyInstalled(creature)) return
-		if (deathCyberneticDie.roll(1..100) < 5) installDeathCybernetic(creature)
+		if (deathCyberneticDie.roll(1..100) <= 5) installDeathCybernetic(creature)
 	}
 
 	private fun installDeathCybernetic(creature: CreatureObject) {
@@ -59,10 +59,10 @@ class DeathCyberneticService(private val deathCyberneticDie: Die = RandomDie()) 
 	}
 
 	private fun selectDeathCyberneticLimb(): String {
-		return if (deathCyberneticDie.roll(1..100) < 25) {
+		return if (deathCyberneticDie.roll(1..100) <= 25) {
 			"object/tangible/wearables/cybernetic/s01/cybernetic_s01_legs.iff"
 		} else {
-			if (deathCyberneticDie.roll(1..100) < 50) {
+			if (deathCyberneticDie.roll(1..100) <= 50) {
 				"object/tangible/wearables/cybernetic/s01/shared_cybernetic_s01_arm_r.iff"
 			} else {
 				"object/tangible/wearables/cybernetic/s01/shared_cybernetic_s01_arm_l.iff"
