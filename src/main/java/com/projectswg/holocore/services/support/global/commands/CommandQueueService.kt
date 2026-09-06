@@ -36,6 +36,7 @@ import com.projectswg.holocore.intents.support.global.command.ExecuteCommandInte
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.global.network.InboundPacketIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
+import com.projectswg.holocore.intents.support.objects.MoveObjectIntent
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.holocore.resources.support.color.SWGColor.Whites.white
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -58,6 +59,7 @@ import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.cancelAndWait
 import com.projectswg.holocore.utilities.launchAfter
 import com.projectswg.holocore.utilities.launchWithFixedRate
+import kotlinx.coroutines.Job
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import me.joshlarson.jlcommon.log.Log
@@ -122,6 +124,15 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 	}
 
 	@IntentHandler
+	private fun handleMoveObjectIntent(moi: MoveObjectIntent) {
+		// A speed of zero means the creature is turning in place, which should not interrupt a warmup
+		if (moi.speed <= 0) return
+		val creature = moi.obj as? CreatureObject ?: return
+
+		combatQueueMap[creature]?.cancelWarmup()
+	}
+
+	@IntentHandler
 	private fun handleExitCombatIntent(eci: ExitCombatIntent) {
 		if (eci.source is CreatureObject) {
 			combatQueueMap.remove(eci.source)
@@ -139,6 +150,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 	private inner class CreatureCombatQueue {
 		private val commandQueue: Queue<EnqueuedCommand> = PriorityQueue()
 		private val activeCooldownGroups: MutableSet<String> = ConcurrentHashMap.newKeySet()
+		private var warmup: Warmup? = null
 
 		@Synchronized
 		fun executeNextCommand() {
@@ -197,12 +209,32 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 				command.source.sendSelf(warmupTimer)
 
-				coroutineScope.launchAfter((warmupTime * 1000).toLong()) {
-					executeCommandNow(command)
+				val job = coroutineScope.launchAfter((warmupTime * 1000).toLong()) {
+					finishWarmup(command)
 				}
+				warmup = Warmup(command, job)
 			} else {
 				executeCommandNow(command)
 			}
+		}
+
+		@Synchronized
+		private fun finishWarmup(command: EnqueuedCommand) {
+			// The warmup can be cancelled while this coroutine waits for the lock
+			if (warmup?.command !== command) return
+			warmup = null
+
+			executeCommandNow(command)
+		}
+
+		@Synchronized
+		fun cancelWarmup() {
+			val cancelled = warmup ?: return
+			warmup = null
+			cancelled.job.cancel()
+
+			sendQueueRemove(cancelled.command, CheckCommandResult(CommandQueueDequeue.ErrorCode.CANCELLED, 0))
+			sendCommandFailed(cancelled.command)
 		}
 
 		private fun executeCommandNow(command: EnqueuedCommand) {
@@ -393,6 +425,8 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			source.sendSelf(ShowFlyText(source.objectId, StringId("cbt_spam", "invalid_weapon"), ShowFlyText.Scale.MEDIUM, white))
 		}
 	}
+
+	private class Warmup(val command: EnqueuedCommand, val job: Job)
 
 	private class EnqueuedCommand(val source: CreatureObject, val command: Command, val target: SWGObject?, val arguments: String, val counter: Int) : Comparable<EnqueuedCommand> {
 		override fun compareTo(other: EnqueuedCommand): Int {
