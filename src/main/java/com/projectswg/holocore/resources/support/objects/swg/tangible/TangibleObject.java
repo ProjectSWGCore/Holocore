@@ -86,6 +86,7 @@ public class TangibleObject extends SWGObject {
 	private String requiredSkill;
 	private DamageType lightsaberColorCrystalElementalType;
 	private int lightsaberColorCrystalDamagePercent;
+	private boolean bioLinkRequired;
 	
 	private Map<String, Integer> skillMods = new LinkedHashMap<>();
 	private long lastCombat = 0;
@@ -376,6 +377,31 @@ public class TangibleObject extends SWGObject {
 		this.requiredCombatLevel = requiredCombatLevel;
 	}
 	
+	/**
+	 * @return {@code true} if this item must be bio-linked before it can be equipped or used
+	 */
+	public boolean isBioLinkRequired() {
+		return bioLinkRequired;
+	}
+
+	public void setBioLinkRequired(boolean bioLinkRequired) {
+		this.bioLinkRequired = bioLinkRequired;
+	}
+
+	/**
+	 * @return object ID of the character this item is bio-linked to, or {@code null} if it isn't linked yet
+	 */
+	@Nullable
+	public Long getBioLinkedTo() {
+		if (!bioLinkRequired)
+			return null;
+		return (Long) getServerAttribute(ServerAttribute.LINK_OBJECT_ID);
+	}
+
+	public void setBioLinkedTo(long bioLinkedTo) {
+		setServerAttribute(ServerAttribute.LINK_OBJECT_ID, bioLinkedTo);
+	}
+
 	public Faction getRequiredFaction() {
 		return requiredFaction;
 	}
@@ -467,8 +493,10 @@ public class TangibleObject extends SWGObject {
 			attributeList.putNumber("cat_skill_mod_bonus.@stat_n:" + skillMod, value);
 		}
 		
-		// TODO bio-link would go here, if this item is bio-link
-		
+		if (bioLinkRequired) {
+			attributeList.putText("bio_link", getBioLinkAttributeValue());
+		}
+
 		if (getGameObjectType() == GameObjectType.GOT_COMPONENT_SABER_CRYSTAL) {
 			displayLightsaberCrystalAttributes(attributeList);
 		}
@@ -511,6 +539,22 @@ public class TangibleObject extends SWGObject {
 		return attributeList;
 	}
 	
+	private String getBioLinkAttributeValue() {
+		Long bioLinkedTo = getBioLinkedTo();
+
+		if (bioLinkedTo == null) {
+			return "@obj_attr_n:bio_link_pending";
+		}
+
+		SWGObject owner = ObjectStorageService.ObjectLookup.getObjectById(bioLinkedTo);
+
+		if (owner == null) {
+			return "@obj_attr_n:bio_link_unknown";
+		}
+
+		return owner.getObjectName();
+	}
+
 	private boolean isOnlyWearableBySome(Set<Race> speciesRestrictions) {
 		return speciesRestrictions.size() != Race.values().length;
 	}
@@ -656,6 +700,7 @@ public class TangibleObject extends SWGObject {
 			data.putString("lightsaberColorCrystalElementalType", lightsaberColorCrystalElementalType.name());
 		}
 		data.putInteger("lightsaberColorCrystalDamagePercent", lightsaberColorCrystalDamagePercent);
+		data.putBoolean("bioLinkRequired", bioLinkRequired);
 	}
 
 	@Override
@@ -694,6 +739,7 @@ public class TangibleObject extends SWGObject {
 			lightsaberColorCrystalElementalType = DamageType.valueOf(data.getString("lightsaberColorCrystalElementalType"));
 		}
 		lightsaberColorCrystalDamagePercent = data.getInteger("lightsaberColorCrystalDamagePercent", 0);
+		bioLinkRequired = data.getBoolean("bioLinkRequired", false);
 	}
 	
 	/**

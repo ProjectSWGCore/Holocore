@@ -88,6 +88,7 @@ object StaticItemCreator {
 			}
 		}
 		obj.armorCategory = info.armorCategory
+		obj.isBioLinkRequired = info.isBioLink
 
 		val protection = Protection(
 			kineticMax,
@@ -112,6 +113,7 @@ object StaticItemCreator {
 		applySkillMods(obj, info.skillMods)
 		obj.requiredCombatLevel = info.requiredLevel
 		obj.requiredFaction = ServerData.factions.getFaction(info.requiredFaction)
+		obj.isBioLinkRequired = info.isBioLink
 		applyColors(obj, info.color)
 		applyItemValue(info.value, obj)
 	}
@@ -120,6 +122,7 @@ object StaticItemCreator {
 		if (info == null)
 			return
 		obj.requiredCombatLevel = info.requiredLevel
+		obj.isBioLinkRequired = info.isBioLink
 
 		val weapon = obj as WeaponObject
 		weapon.type = info.weaponType
@@ -151,6 +154,7 @@ object StaticItemCreator {
 			obj.counter = info.charges
 		}
 
+		obj.isBioLinkRequired = info.bioLink
 		applyItemValue(info.value, obj)
 	}
 

@@ -254,6 +254,16 @@ class BazaarService : Service() {
 			return
 		}
 
+		if (objectById is TangibleObject && objectById.bioLinkedTo != null) {
+			player.sendPacket(
+				CreateAuctionResponseMessage(
+					objectId = objectId, vendorId = packet.vendorId, status = 26
+				)
+			)
+
+			return
+		}
+
 		if (objectById.owner != player) {
 			player.sendPacket(
 				CreateAuctionResponseMessage(

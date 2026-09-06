@@ -56,7 +56,7 @@ public enum RadialHandler {
 	private final Map<String, RadialHandlerInterface> handlers = new HashMap<>();
 	private final Map<GameObjectType, RadialHandlerInterface> gotHandlers = new EnumMap<>(GameObjectType.class);
 	private final Map<Class<? extends SWGObject>, RadialHandlerInterface> classHandlers = new HashMap<>();
-	
+
 	RadialHandler() {
 		initializeTerminalRadials();
 		initializeSurveyRadials();
@@ -66,7 +66,8 @@ public enum RadialHandler {
 		initializeSpecialEditionGoggleRadials();
 		initializeMeleeWeaponRadials();
 		initializeDeedRadials();
-		
+		initializeBioLinkRadials();
+
 		RadialHandlerInterface aiHandler = new AIObjectRadial();
 		
 		classHandlers.put(AIObject.class, aiHandler);
@@ -139,6 +140,13 @@ public enum RadialHandler {
 		registerHandler(GameObjectType.GOT_VEHICLE_HOVER, new VehicleMountRadial());
 	}
 	
+	private void initializeBioLinkRadials() {
+		RadialHandlerInterface bioLinkHandler = new BioLinkRadial();
+
+		registerHandler(GameObjectType.GOT_ARMOR, bioLinkHandler);
+		registerHandler(GameObjectType.GOT_WEAPON, bioLinkHandler);
+	}
+
 	private void initializeMiscRadials() {
 		registerHandler(GameObjectType.GOT_COMPONENT_SABER_CRYSTAL, new TuneCrystalRadial());
 		registerHandler("object/tangible/spawning/shared_spawn_egg.iff", new SpawnerRadial());
