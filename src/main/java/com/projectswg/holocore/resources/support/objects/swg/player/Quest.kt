@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,9 +29,7 @@ import com.projectswg.common.data.encodables.mongo.MongoData
 import com.projectswg.common.data.encodables.mongo.MongoPersistable
 import com.projectswg.common.encoding.Encodable
 import com.projectswg.common.network.NetBuffer
-import java.util.Arrays
-import java.util.BitSet
-import kotlin.collections.ArrayList
+import java.util.*
 
 class Quest : Encodable, MongoPersistable {
 
@@ -47,7 +45,7 @@ class Quest : Encodable, MongoPersistable {
 	var counter = 0
 	var ownerId: Long = 0
 
-	override fun decode(data: NetBuffer) {
+	override fun decode(data: NetBuffer): Boolean {
 		ownerId = data.long
 		val newActiveTasks = BitSet.valueOf(data.getArray(java.lang.Short.BYTES))
 		val newCompletedTasks = BitSet.valueOf(data.getArray(java.lang.Short.BYTES))
@@ -59,6 +57,7 @@ class Quest : Encodable, MongoPersistable {
 		activeTasks.or(newActiveTasks)
 		completedTasks.clear()
 		completedTasks.or(newCompletedTasks)
+		return true
 	}
 
 	override fun encode(): ByteArray {

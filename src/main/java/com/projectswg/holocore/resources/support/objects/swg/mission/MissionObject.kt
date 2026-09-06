@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -78,15 +77,15 @@ class MissionObject(objectId: Long) : IntangibleObject(objectId, Baseline.Baseli
 	override fun parseBaseline3(buffer: NetBuffer) {
 		super.parseBaseline3(buffer)
 		difficulty = buffer.int
-		missionLocation = buffer.getEncodable(MissionLocation::class.java)
+		missionLocation = buffer.getEncodable(MissionLocation::class.java) ?: return
 		missionCreator = buffer.unicode
 		reward = buffer.int
-		startLocation = buffer.getEncodable(MissionLocation::class.java)
-		targetAppearance = buffer.getEncodable(CRC::class.java)
-		description = buffer.getEncodable(StringId::class.java)
-		title = buffer.getEncodable(StringId::class.java)
+		startLocation = buffer.getEncodable(MissionLocation::class.java) ?: return
+		targetAppearance = buffer.getEncodable(CRC::class.java) ?: return
+		description = buffer.getEncodable(StringId::class.java) ?: return
+		title = buffer.getEncodable(StringId::class.java) ?: return
 		tickCount = buffer.int
-		missionType = buffer.getEncodable(CRC::class.java)
+		missionType = buffer.getEncodable(CRC::class.java) ?: return
 		targetName = buffer.ascii
 		val pos = buffer.position()
 		buffer.seek(24)
@@ -146,10 +145,11 @@ class MissionObject(objectId: Long) : IntangibleObject(objectId, Baseline.Baseli
 			return data.array()
 		}
 
-		override fun decode(data: NetBuffer) {
-			location = data.getEncodable(Point3D::class.java)
+		override fun decode(data: NetBuffer): Boolean {
+			location = data.getEncodable(Point3D::class.java) ?: return false
 			objectId = data.long
 			terrain = Terrain.getTerrainFromCrc(data.int)
+			return true
 		}
 
 		override val length: Int

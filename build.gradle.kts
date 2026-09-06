@@ -37,14 +37,20 @@ plugins {
 	id("org.beryx.jlink") version "4.1.1"
 }
 
+group = "com.projectswg"
+version = "1.0.0"
+description = "ProjectSWG's SWG Emulator"
+
 val javaVersion = JavaVersion.current()
-val kotlinTargetJdk = JvmTarget.fromTarget(javaVersion.majorVersion)
+val kotlinTargetJdk: JvmTarget = JvmTarget.fromTarget(javaVersion.majorVersion)
 val junit5Version = "5.12.2"
 val holocoreLogLevel: String? by project
 
 subprojects {
 	ext {
+		set("javaVersion", javaVersion)
 		set("junit5Version", junit5Version)
+		set("kotlinTargetJdk", kotlinTargetJdk)
 	}
 }
 
@@ -63,8 +69,14 @@ sourceSets {
 		java {
 			output.setResourcesDir(destinationDirectory.get())
 		}
+		kotlin.destinationDirectory = java.destinationDirectory
 	}
-	create("utility")
+	test {
+		kotlin.destinationDirectory = java.destinationDirectory
+	}
+	create("utility") {
+		kotlin.destinationDirectory = java.destinationDirectory
+	}
 }
 
 tasks.named("processResources").configure { dependsOn("compileJava") }
@@ -74,17 +86,17 @@ val utilityImplementation by configurations.getting {
 }
 
 dependencies {
-	implementation(project(":pswgcommon"))
+	implementation("com.projectswg:pswgcommon")
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
-	implementation(group="org.jetbrains.kotlinx", name="kotlinx-coroutines-core", version="1.10.2")
-	implementation(group="org.mongodb", name="mongodb-driver-sync", version="5.5.0")
-	implementation(group="me.joshlarson", name="fast-json", version="3.0.1")
-	implementation(group="me.joshlarson", name="jlcommon-network", version="1.1.0")
-	implementation(group="me.joshlarson", name="jlcommon-argparse", version="0.9.6")
-	implementation(group="me.joshlarson", name="websocket", version="0.9.4")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+	implementation("org.mongodb:mongodb-driver-sync:5.5.0")
+	implementation("me.joshlarson:fast-json:3.0.1")
+	implementation("me.joshlarson:jlcommon-network:1.1.0")
+	implementation("me.joshlarson:jlcommon-argparse:0.9.6")
+	implementation("me.joshlarson:websocket:0.9.4")
 	val slf4jVersion = "1.7.36"
-	runtimeOnly(group="org.slf4j", name="slf4j-jdk14", version=slf4jVersion)
+	runtimeOnly("org.slf4j:slf4j-jdk14:$slf4jVersion")
 
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
@@ -131,7 +143,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }
 
-tasks.create<JavaExec>("runDevelopment") {
+tasks.register<JavaExec>("runDevelopment") {
 	dependsOn(tasks.getByName("test"))
 
 	enableAssertions = true
@@ -142,7 +154,7 @@ tasks.create<JavaExec>("runDevelopment") {
 		args = listOf("--log-level", holocoreLogLevel!!)
 }
 
-tasks.create<JavaExec>("runProduction") {
+tasks.register<JavaExec>("runProduction") {
 	classpath = sourceSets.main.get().runtimeClasspath
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 	
@@ -154,7 +166,7 @@ tasks.replace("run", JavaExec::class).apply {
 	dependsOn(tasks.getByName("runDevelopment"))
 }
 
-tasks.create<JavaExec>("runClientdataConversion") {
+tasks.register<JavaExec>("runClientdataConversion") {
 	enableAssertions = true
 	classpath = sourceSets["utility"].runtimeClasspath
 	mainClass.set("com.projectswg.utility.ClientdataConvertAll")

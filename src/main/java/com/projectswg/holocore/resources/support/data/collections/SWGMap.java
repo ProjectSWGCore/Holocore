@@ -147,7 +147,7 @@ public class SWGMap<K, V> extends ConcurrentHashMap<K, V> implements Encodable {
 	}
 	
 	@Override
-	public void decode(@NotNull NetBuffer data) {
+	public boolean decode(@NotNull NetBuffer data) {
 		throw new UnsupportedOperationException("Use decode(ByteBuffer data, Class<K> kType, Class<V> vType) instead");
 	}
 	

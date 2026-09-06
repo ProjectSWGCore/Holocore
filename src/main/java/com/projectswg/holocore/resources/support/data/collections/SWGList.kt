@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2019 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -176,14 +175,15 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 		}
 	}
 	
-	override fun decode(data: NetBuffer) {
+	override fun decode(data: NetBuffer): Boolean {
+		val size = data.int
+		updateCount = data.int
 		lock.withLock {
-			val size = data.int
-			updateCount = data.int
-			for (index in 0 until size) {
+			for (i in 0 until size) {
 				list.add(decoder(data))
 			}
 		}
+		return true
 	}
 
 	override val length: Int
@@ -231,7 +231,7 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	}
 	
 	fun sendRefreshedListData(obj: SWGObject) {
-		lock.withLock {
+		val deltaData = lock.withLock {
 			deltaQueue.clear()
 			deltaQueueCount = 0
 			
@@ -242,23 +242,28 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 				addByte(3)
 				addShort(list.size)
 				list.forEach { encoder(this, it) }
-				obj.sendDelta(page, update, array())
+				array()
 			}
 		}
+		obj.sendDelta(page, update, deltaData)
 	}
 	
 	fun sendDeltaMessage(obj: SWGObject) {
-		lock.withLock {
-			with(NetBuffer.allocate(8 + deltaQueue.size)) {
+		val deltaData = lock.withLock {
+			if (deltaQueueCount == 0)
+				return
+			val ret = with(NetBuffer.allocate(8 + deltaQueue.size)) {
 				addInt(deltaQueueCount)
 				addInt(updateCount)
 				addRawArray(deltaQueue.toByteArray())
-				obj.sendDelta(page, update, array())
+				array()
 			}
 			
 			deltaQueue.clear()
 			deltaQueueCount = 0
+			ret
 		}
+		obj.sendDelta(page, update, deltaData)
 	}
 	
 	override fun equals(other: Any?): Boolean = other is SWGList<*> && page == other.page && update == other.update && list == other.list
@@ -309,15 +314,15 @@ class SWGList<T: Any>: AbstractMutableList<T>, Encodable {
 	
 	companion object {
 		
-		fun createByteList(page: Int, update: Int): SWGList<Byte> = SWGList(page, update, NetBuffer::getByte, { buf, b -> buf.addByte(b.toInt())}, {1})
-		fun createShortList(page: Int, update: Int): SWGList<Short> = SWGList(page, update, NetBuffer::getShort, { buf, s -> buf.addShort(s.toInt())}, {2})
-		fun createIntList(page: Int, update: Int): SWGList<Int> = SWGList(page, update, NetBuffer::getInt, NetBuffer::addInt) {4}
-		fun createLongList(page: Int, update: Int): SWGList<Long> = SWGList(page, update, NetBuffer::getLong, NetBuffer::addLong) {8}
-		fun createFloatList(page: Int, update: Int): SWGList<Float> = SWGList(page, update, NetBuffer::getFloat, NetBuffer::addFloat) {4}
+		fun createByteList(page: Int, update: Int): SWGList<Byte> = SWGList(page, update, NetBuffer::byte, { buf, b -> buf.addByte(b.toInt())}, {1})
+		fun createShortList(page: Int, update: Int): SWGList<Short> = SWGList(page, update, NetBuffer::short, { buf, s -> buf.addShort(s.toInt())}, {2})
+		fun createIntList(page: Int, update: Int): SWGList<Int> = SWGList(page, update, NetBuffer::int, NetBuffer::addInt) {4}
+		fun createLongList(page: Int, update: Int): SWGList<Long> = SWGList(page, update, NetBuffer::long, NetBuffer::addLong) {8}
+		fun createFloatList(page: Int, update: Int): SWGList<Float> = SWGList(page, update, NetBuffer::float, NetBuffer::addFloat) {4}
 		fun createDoubleList(page: Int, update: Int): SWGList<Double> = SWGList(page, update, {buf -> buf.float.toDouble()}, {buf, d -> buf.addFloat(d.toFloat())}, {8})
 		fun <T: Encodable> createEncodableList(page: Int, update: Int, supplier: () -> T): SWGList<T> = SWGList(page, update, supplier, NetBuffer::addEncodable, Encodable::length)
-		fun createAsciiList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getAscii, NetBuffer::addAscii) {2+it.length}
-		fun createUnicodeList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::getUnicode, NetBuffer::addUnicode) {4+it.length*2}
+		fun createAsciiList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::ascii, NetBuffer::addAscii) {2+it.length}
+		fun createUnicodeList(page: Int, update: Int): SWGList<String> = SWGList(page, update, NetBuffer::unicode, NetBuffer::addUnicode) {4+it.length*2}
 		
 		private fun <T: Any> createDefaultEncoder(stringType: StringType): (NetBuffer, T) -> Unit = 
 				{ buffer: NetBuffer, obj: T -> 

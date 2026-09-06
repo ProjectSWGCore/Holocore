@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -29,7 +28,7 @@ package com.projectswg.holocore.resources.support.data.collections
 import com.projectswg.common.encoding.Encodable
 import com.projectswg.common.network.NetBuffer
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import java.util.BitSet
+import java.util.*
 
 class SWGBitSet(private var view: Int, private var updateType: Int) : BitSet(128), Encodable {
 
@@ -46,12 +45,13 @@ class SWGBitSet(private var view: Int, private var updateType: Int) : BitSet(128
 		return buffer.array()
 	}
 
-	override fun decode(data: NetBuffer) {
+	override fun decode(data: NetBuffer): Boolean {
 		val len = data.int
 		data.int
 		val bytes = data.getArray(len)
 		clear()
 		or(valueOf(bytes))
+		return true
 	}
 
 	override val length: Int

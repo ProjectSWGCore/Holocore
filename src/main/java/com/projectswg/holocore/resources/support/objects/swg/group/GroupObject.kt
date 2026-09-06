@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -54,10 +54,10 @@ class GroupObject(objectId: Long) : SWGObject(objectId, Baseline.BaselineType.GR
 			synchronized(groupMembers) {
 				val swapIndex = groupMembers.indexOfFirst { it.creature.objectId == value.objectId }
 				assert(swapIndex != -1) { "proposed leader is not within group" }
-				val tmp = groupMembers[0].creature
-				groupMembers[0].creature = value
-				groupMembers[swapIndex].creature = tmp
-				groupMembers.sendDeltaMessage(this)
+				val tmp = groupMembers[0]
+				groupMembers[0] = groupMembers[swapIndex]
+				groupMembers[swapIndex] = tmp
+				sendGroupMemberUpdate()
 			}
 		}
 	var level by BaselineDelegate<Short>(0, 6, 5)
@@ -192,7 +192,8 @@ class GroupObject(objectId: Long) : SWGObject(objectId, Baseline.BaselineType.GR
 			return data.array()
 		}
 
-		override fun decode(data: NetBuffer) {
+		override fun decode(data: NetBuffer): Boolean {
+			return false
 		}
 
 		override val length: Int
