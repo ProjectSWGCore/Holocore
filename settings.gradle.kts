@@ -1,2 +1,2 @@
 rootProject.name = "holocore"
-includeBuild("pswgcommon")
+include("pswgcommon")

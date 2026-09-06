@@ -1,7 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 /***********************************************************************************
  * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
@@ -29,6 +25,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
 
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
 	application
 	idea
@@ -42,9 +42,9 @@ version = "1.0.0"
 description = "ProjectSWG's SWG Emulator"
 
 val javaVersion = JavaVersion.current()
-val kotlinTargetJdk: JvmTarget = JvmTarget.fromTarget(javaVersion.majorVersion)
+val kotlinTargetJdk = JvmTarget.JVM_26
 val junit5Version = "5.12.2"
-val holocoreLogLevel: String? by project
+val holocoreLogLevel = project.findProperty("holocoreLogLevel") as String?
 
 subprojects {
 	ext {
@@ -81,12 +81,12 @@ sourceSets {
 
 tasks.named("processResources").configure { dependsOn("compileJava") }
 
-val utilityImplementation by configurations.getting {
+val utilityImplementation = configurations.getByName("utilityImplementation") {
 	extendsFrom(configurations.implementation.get())
 }
 
 dependencies {
-	implementation("com.projectswg:pswgcommon")
+	implementation(project(":pswgcommon"))
 	implementation(kotlin("stdlib"))
 	implementation(kotlin("reflect"))
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
@@ -101,11 +101,11 @@ dependencies {
 	utilityImplementation(project(":"))
 	utilityImplementation(project(":pswgcommon"))
 
-	testImplementation(group="org.junit.jupiter", name="junit-jupiter-api", version=junit5Version)
-	testRuntimeOnly(group="org.junit.jupiter", name="junit-jupiter-engine", version=junit5Version)
-	testRuntimeOnly(group="org.junit.platform", name="junit-platform-launcher", version="1.12.2")
-	testImplementation(group="org.junit.jupiter", name="junit-jupiter-params", version=junit5Version)
-	testImplementation(group="org.testcontainers", name="mongodb", version="1.21.4")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.12.2")
+	testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
+	testImplementation("org.testcontainers:mongodb:1.21.4")
 
 	testImplementation("com.tngtech.archunit:archunit-junit5:1.5.0")
 }
@@ -151,7 +151,7 @@ tasks.register<JavaExec>("runDevelopment") {
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 
 	if (holocoreLogLevel != null)
-		args = listOf("--log-level", holocoreLogLevel!!)
+		args = listOf("--log-level", holocoreLogLevel)
 }
 
 tasks.register<JavaExec>("runProduction") {
@@ -159,7 +159,7 @@ tasks.register<JavaExec>("runProduction") {
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 	
 	if (holocoreLogLevel != null)
-		args = listOf("--log-level", holocoreLogLevel!!)
+		args = listOf("--log-level", holocoreLogLevel)
 }
 
 tasks.replace("run", JavaExec::class).apply {
