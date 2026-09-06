@@ -26,6 +26,8 @@
 package com.projectswg.holocore.intents.gameplay.combat
 
 import com.projectswg.common.data.location.Terrain
+import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
+import com.projectswg.holocore.resources.support.global.commands.Command
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.gameplay.combat.states.CombatState
@@ -40,6 +42,12 @@ data class CreatureRevivedIntent(val creature: CreatureObject) : Intent()
 data class EnterCombatIntent(val source: TangibleObject, val target: TangibleObject) : Intent()
 data class ExitCombatIntent(val source: TangibleObject) : Intent()
 data class CloneActivatedIntent(val creature: CreatureObject, val diedOnTerrain: Terrain) : Intent()
+data class CombatCommandFailedIntent(val source: CreatureObject, val status: CombatStatus) : Intent()
+
+/*
+ * The command the client picked as its default attack, or null when it cleared the choice
+ */
+data class DefaultActionIntent(val creature: CreatureObject, val command: Command?) : Intent()
 
 /*
  * Combat event requests

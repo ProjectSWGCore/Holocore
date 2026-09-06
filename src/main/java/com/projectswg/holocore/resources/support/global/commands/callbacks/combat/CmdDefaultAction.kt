@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,14 +23,31 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.services.gameplay.combat
+package com.projectswg.holocore.resources.support.global.commands.callbacks.combat
 
-import com.projectswg.holocore.services.gameplay.combat.buffs.BuffService
-import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService
-import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
-import com.projectswg.holocore.services.gameplay.combat.loot.LootManager
-import me.joshlarson.jlcommon.control.Manager
-import me.joshlarson.jlcommon.control.ManagerStructure
+import com.projectswg.holocore.intents.gameplay.combat.DefaultActionIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
+import com.projectswg.holocore.resources.support.global.commands.ICmdCallback
+import com.projectswg.holocore.resources.support.global.player.Player
+import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 
-@ManagerStructure(children = [BuffService::class, CloningService::class, DuelService::class, LootManager::class, CombatDeathblowService::class, CombatExperienceService::class, CombatNpcService::class, CombatRegenerationService::class, CombatStatusService::class, CombatKnockdownService::class, CombatStateService::class, AutoAttackService::class])
-class CombatManager : Manager()
+class CmdDefaultAction : ICmdCallback {
+	override fun execute(player: Player, target: SWGObject?, args: String) {
+		val creature = player.creatureObject
+		val commandName = args.trim().lowercase()
+
+		if (commandName.isEmpty()) {
+			DefaultActionIntent(creature, null).broadcast()
+			return
+		}
+
+		val command = ServerData.commands.getCommand(commandName) ?: return
+		val grantedCommands = creature.commands.map { it.lowercase() }.toSet()
+
+		if (!grantedCommands.contains(commandName)) {
+			return
+		}
+
+		DefaultActionIntent(creature, command).broadcast()
+	}
+}

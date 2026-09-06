@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.HitType
 import com.projectswg.common.data.combat.TargetType
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.network.packets.swg.zone.object_controller.*
+import com.projectswg.holocore.intents.gameplay.combat.CombatCommandFailedIntent
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
@@ -68,6 +69,7 @@ import java.util.stream.Collectors
 
 class CommandQueueService @JvmOverloads constructor(private val delayBetweenCheckingCommandQueue: Long = 100, toHitDie: Die = RandomDie(), knockdownDie: Die = RandomDie(), woundDie: Die = RandomDie(), private val skipWarmup: Boolean = false) : Service() {
 	private val combatQueueMap: MutableMap<CreatureObject, CreatureCombatQueue> = ConcurrentHashMap()
+	private val lastClientCounters: MutableMap<CreatureObject, Int> = ConcurrentHashMap()
 	private val combatCommandHandler: CombatCommandHandler = CombatCommandHandler(toHitDie, knockdownDie, woundDie)
 	private val coroutineScope = HolocoreCoroutine.childScope()
 
@@ -100,6 +102,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			}
 			val targetId: Long = p.targetId
 			val target = if (targetId != 0L) ObjectLookup.getObjectById(targetId) else null
+			lastClientCounters[gpi.player.creatureObject] = p.counter
 			QueueCommandIntent(gpi.player.creatureObject, target, p.arguments, command, p.counter).broadcast()
 		} else if (p is IntendedTarget) {
 			if (p.targetId == 0L) combatQueueMap.remove(gpi.player.creatureObject)
@@ -112,13 +115,28 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 		if (pei.event == PlayerEvent.PE_LOGGED_OUT) {
 			// No reason to keep their combat queue in the map if they log out
 			// This also prevents queued commands from executing after the player logs out
-			if (creature != null) combatQueueMap.remove(creature)
+			if (creature != null) {
+				combatQueueMap.remove(creature)
+				lastClientCounters.remove(creature)
+			}
 		}
 	}
 
 	@IntentHandler
 	private fun handleQueueCommandIntent(qci: QueueCommandIntent) {
-		getQueue(qci.source).queueCommand(EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, qci.counter))
+		getQueue(qci.source).queueCommand(EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, counterFor(qci)))
+	}
+
+	/**
+	 * The client discards a command timer whose sequence id is zero, so a command the server
+	 * started on its own continues the client's own sequence instead.
+	 */
+	private fun counterFor(qci: QueueCommandIntent): Int {
+		if (qci.counter != 0 || qci.source.owner == null) {
+			return qci.counter
+		}
+
+		return lastClientCounters.merge(qci.source, 1) { previous, _ -> previous + 1 } ?: 1
 	}
 
 	@IntentHandler
@@ -225,6 +243,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 				handleStatus(source, combatCommand, combatStatus)
 				if (combatStatus != CombatStatus.SUCCESS) {
+					CombatCommandFailedIntent(source, combatStatus).broadcast()
 					sendCommandFailed(command)
 					return
 				}

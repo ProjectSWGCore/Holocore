@@ -73,6 +73,7 @@ public class CreatureObject extends TangibleObject {
 	private Race	race					= Race.HUMAN_MALE;
 	private long	lastIncapTime			= 0;
 	private TradeSession tradeSession		= null;
+	private String	defaultAttack			= null;
 	
 	private SWGSet<String> skills					= new SWGSet<>(1, 3, StringType.ASCII);
 	private final AttributesMutable baseAttributes;
@@ -394,6 +395,18 @@ public class CreatureObject extends TangibleObject {
 
 	public void setTradeSession(TradeSession tradeSession) {
 		this.tradeSession = tradeSession;
+	}
+
+	/**
+	 * @return name of the command to repeat while in combat, or {@code null} if no default attack is chosen
+	 */
+	@Nullable
+	public String getDefaultAttack() {
+		return defaultAttack;
+	}
+
+	public void setDefaultAttack(@Nullable String defaultAttack) {
+		this.defaultAttack = defaultAttack;
 	}
 
 	public void setPosture(Posture posture) {
@@ -1069,6 +1082,7 @@ public class CreatureObject extends TangibleObject {
 		data.putString("race", race.name());
 		data.putArray("skills", skills);
 		data.putDocument("baseAttributes", baseAttributes);
+		data.putString("defaultAttack", defaultAttack);
 	}
 
 	@Override
@@ -1082,6 +1096,7 @@ public class CreatureObject extends TangibleObject {
 		race = Race.valueOf(data.getString("race", race.name()));
 		skills.addAll(data.getArray("skills", String.class));
 		data.getDocument("baseAttributes", baseAttributes);
+		defaultAttack = data.getString("defaultAttack");
 	}
 
 	private static class Container {
