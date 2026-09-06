@@ -26,17 +26,29 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.loader.npc
 
+import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
 import com.projectswg.holocore.resources.support.data.server_info.loader.*
+import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponType
 import java.io.File
 import java.io.IOException
 import java.util.function.Consumer
 
 class NpcWeaponLoader : DataLoader() {
 	private val weapons: MutableMap<String, List<String>> = HashMap()
+	private val weaponTypes: MutableMap<String, WeaponType> = HashMap()
 
 	fun getWeapons(weaponId: String): List<String>? {
 		return weapons[weaponId]
+	}
+
+	/**
+	 * Gets the type of the specified weapon. Returns `null` if no weapon with that IFF is found
+	 * @param weaponIff the weapon IFF
+	 * @return the type of the specified weapon, or `null` on error
+	 */
+	fun getWeaponType(weaponIff: String?): WeaponType? {
+		return weaponTypes[ClientFactory.formatToSharedFile(weaponIff)]
 	}
 
 	fun forEach(c: Consumer<List<String>>?) {
@@ -47,7 +59,13 @@ class NpcWeaponLoader : DataLoader() {
 	override fun load() {
 		SdbLoader.load(File("serverdata/npc/npc_weapon.sdb")).use { set ->
 			while (set.next()) {
-				weapons[set.getText("weapon_id")] = listOf(*set.getText("weapons").split(";".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray())
+				val templates = set.getText("weapons").split(";".toRegex()).dropLastWhile { it.isEmpty() }
+				weapons[set.getText("weapon_id")] = templates
+
+				val weaponType = WeaponType.valueOf(set.getText("weapon_type"))
+				for (template in templates) {
+					weaponTypes[ClientFactory.formatToSharedFile(template)] = weaponType
+				}
 			}
 		}
 	}

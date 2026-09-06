@@ -28,12 +28,12 @@ package com.projectswg.holocore.resources.support.npc.spawn
 import com.projectswg.common.data.encodables.tangible.PvpFlag
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.common.data.location.Location
-import com.projectswg.common.data.objects.GameObjectType
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionIntent
 import com.projectswg.holocore.intents.gameplay.gcw.UpdateFactionStatusIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.npcStats
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.npcWeaponRanges
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.npcWeapons
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.terrains
 import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData.npcEquipment
 import com.projectswg.holocore.resources.support.data.server_info.loader.combat.FactionLoader.Faction
@@ -249,7 +249,6 @@ object NPCCreator {
 	private fun createWeapon(detailNpcStat: DetailNpcStatInfo, template: String): WeaponObject? {
 		try {
 			val weapon = ObjectCreator.createObjectFromTemplate(template) as WeaponObject
-			val weaponType = getWeaponType(weapon.gameObjectType)
 
 			weapon.minDamage = (detailNpcStat.damagePerSecond * 2 * 0.90).toInt()
 			weapon.maxDamage = detailNpcStat.damagePerSecond * 2
@@ -257,7 +256,9 @@ object NPCCreator {
 			if (range == -1) Log.w("Failed to load weapon range for: %s", template)
 			weapon.minRange = range.toFloat()
 			weapon.maxRange = range.toFloat()
-			weapon.type = weaponType
+			val weaponType = npcWeapons().getWeaponType(template)
+			if (weaponType == null) Log.w("Failed to load weapon type for: %s", template)
+			weapon.type = weaponType ?: WeaponType.UNARMED
 			// TODO set damage type, since all NPC weapons shouldn't deal kinetic damage
 			return weapon
 		} catch (e: ObjectCreationException) {
@@ -266,27 +267,4 @@ object NPCCreator {
 		}
 	}
 
-	/**
-	 * Somewhat accurate way of determining a WeaponType based on a GameObjectType.
-	 * Problem is that GOT_WEAPON_RANGED_RIFLE can be both a rifle and a heavy weapon, but we assume it's a rifle since NPCs don't use heavy weapons.
-	 *
-	 * @param weaponObjectType to determine a WeaponType based on
-	 * @return `WeaponType` that was determined from the given `weaponObjectType` param
-	 */
-	private fun getWeaponType(weaponObjectType: GameObjectType): WeaponType {
-		return when (weaponObjectType) {
-			GameObjectType.GOT_WEAPON_HEAVY_MINE     -> WeaponType.HEAVY
-			GameObjectType.GOT_WEAPON_HEAVY_MISC     -> WeaponType.HEAVY
-			GameObjectType.GOT_WEAPON_HEAVY_SPECIAL  -> WeaponType.HEAVY
-			GameObjectType.GOT_WEAPON_MELEE_1H       -> WeaponType.ONE_HANDED_MELEE
-			GameObjectType.GOT_WEAPON_MELEE_2H       -> WeaponType.TWO_HANDED_MELEE
-			GameObjectType.GOT_WEAPON_MELEE_MISC     -> WeaponType.ONE_HANDED_MELEE
-			GameObjectType.GOT_WEAPON_MELEE_POLEARM  -> WeaponType.POLEARM_MELEE
-			GameObjectType.GOT_WEAPON_RANGED_CARBINE -> WeaponType.CARBINE
-			GameObjectType.GOT_WEAPON_RANGED_PISTOL  -> WeaponType.PISTOL
-			GameObjectType.GOT_WEAPON_RANGED_RIFLE   -> WeaponType.RIFLE
-			GameObjectType.GOT_WEAPON_RANGED_THROWN  -> WeaponType.THROWN
-			else                                     -> WeaponType.UNARMED
-		}
-	}
 }
