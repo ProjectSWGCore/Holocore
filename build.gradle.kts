@@ -59,6 +59,14 @@ repositories {
 	mavenCentral()
 }
 
+java {
+	modularity.inferModulePath.set(true)
+
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(javaVersion.majorVersion))
+	}
+}
+
 application {
 	mainClass.set("com.projectswg.holocore.ProjectSWG")
 	mainModule.set("holocore")
@@ -143,6 +151,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 	destinationDirectory.set(File(destinationDirectory.get().asFile.path.replace("kotlin", "java")))
 }
 
+tasks.withType<JavaCompile>().configureEach {
+	options.release.set(javaVersion.majorVersion.toInt())
+}
+
 tasks.register<JavaExec>("runDevelopment") {
 	dependsOn(tasks.getByName("test"))
 
@@ -188,6 +200,9 @@ tasks.named("classes") {
 tasks.register("createRunScript") {
 	dependsOn("compileJava", "compileKotlin", "processResources")
 
+	val mainJavaDestinationDirectory = sourceSets["main"].java.destinationDirectory
+	val runScriptOutputFile = layout.buildDirectory.file("run")
+
 	doLast {
 		// Use the Java executable that Gradle is using
 		val javaHome = System.getProperty("java.home")
@@ -199,7 +214,7 @@ tasks.register("createRunScript") {
 		}
 
 		// Get the output directory for the main/java source set
-		val mainJavaOutputDir = project.sourceSets["main"].java.destinationDirectory.get().asFile.absolutePath
+		val mainJavaOutputDir = mainJavaDestinationDirectory.get().asFile.absolutePath
 
 		// Assemble the module-path to include both the runtime classpath and the main/java output directory
 		val modulePath = "$runtimeClasspath${File.pathSeparator}$mainJavaOutputDir"
@@ -208,7 +223,7 @@ tasks.register("createRunScript") {
 		val command = "clear; JAVA_HOME=$javaHome ./gradlew classes && $javaExecutable -Xms1G -Xmx2G -XX:+UseZGC -XX:+ZGenerational -ea -p $modulePath -m holocore/com.projectswg.holocore.ProjectSWG --print-colors"
 
 		// File to write the run command
-		val outputFile = file("${layout.buildDirectory.asFile.get().absolutePath}/run")
+		val outputFile = runScriptOutputFile.get().asFile
 		outputFile.writeText(command)
 		outputFile.setExecutable(true)
 	}

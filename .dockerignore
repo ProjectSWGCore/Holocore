@@ -1,6 +1,9 @@
 .git
 .gradle
 build
+classes
 log
 mongo_data
+out
 pswgcommon/build
+pswgcommon/.gradle
