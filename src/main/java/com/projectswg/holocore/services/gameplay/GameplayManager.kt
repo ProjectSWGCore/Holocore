@@ -33,6 +33,7 @@ import com.projectswg.holocore.services.gameplay.conversation.ConversationServic
 import com.projectswg.holocore.services.gameplay.crafting.CraftingManager
 import com.projectswg.holocore.services.gameplay.entertainment.EntertainmentManager
 import com.projectswg.holocore.services.gameplay.faction.FactionManager
+import com.projectswg.holocore.services.gameplay.items.BioLinkService
 import com.projectswg.holocore.services.gameplay.jedi.JediManager
 import com.projectswg.holocore.services.gameplay.junkdealer.JunkDealerService
 import com.projectswg.holocore.services.gameplay.missions.DestroyMissionService
@@ -43,5 +44,5 @@ import com.projectswg.holocore.services.gameplay.world.WorldManager
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [BazaarService::class, CombatManager::class, ConversationService::class, CraftingManager::class, DeathCyberneticService::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
+@ManagerStructure(children = [BazaarService::class, BioLinkService::class, CombatManager::class, ConversationService::class, CraftingManager::class, DeathCyberneticService::class, DestroyMissionService::class, EntertainmentManager::class, FactionManager::class, JediManager::class, JunkDealerService::class, PlayerManager::class, StructuresManager::class, TradeService::class, WorldManager::class])
 class GameplayManager : Manager()

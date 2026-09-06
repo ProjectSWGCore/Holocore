@@ -129,6 +129,22 @@ class TransferItemCallback : ICmdCallback {
 				}
 
 				if (target is TangibleObject) {
+					if (target.isBioLinkRequired) {
+						val bioLinkedTo = target.bioLinkedTo
+
+						if (bioLinkedTo == null) {
+							SystemMessageIntent(player, "@base_player:not_linked").broadcast()
+							player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
+							return
+						}
+
+						if (bioLinkedTo != actor.objectId) {
+							SystemMessageIntent(player, "@container_error_message:container31").broadcast()
+							player.sendPacket(PlayMusicMessage(0, "sound/ui_dialog_warning.snd", 1, false))
+							return
+						}
+					}
+
 					val armorCategory: ArmorCategory? = target.armorCategory
 
 					if (armorCategory != null) {
