@@ -101,7 +101,6 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			}
 			val targetId: Long = p.targetId
 			val target = if (targetId != 0L) ObjectLookup.getObjectById(targetId) else null
-			getQueue(gpi.player.creatureObject).lastClientCounter = p.counter
 			QueueCommandIntent(gpi.player.creatureObject, target, p.arguments, command, p.counter).broadcast()
 		} else if (p is IntendedTarget) {
 			if (p.targetId == 0L) combatQueueMap.remove(gpi.player.creatureObject)
@@ -114,27 +113,13 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 		if (pei.event == PlayerEvent.PE_LOGGED_OUT) {
 			// No reason to keep their combat queue in the map if they log out
 			// This also prevents queued commands from executing after the player logs out
-			if (creature != null) {
-				combatQueueMap.remove(creature)
-			}
+			if (creature != null) combatQueueMap.remove(creature)
 		}
 	}
 
 	@IntentHandler
 	private fun handleQueueCommandIntent(qci: QueueCommandIntent) {
-		getQueue(qci.source).queueCommand(EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, counterFor(qci)))
-	}
-
-	/**
-	 * The client discards a command timer whose sequence id is zero, so a command the server
-	 * started on its own continues the client's own sequence instead.
-	 */
-	private fun counterFor(qci: QueueCommandIntent): Int {
-		if (qci.counter != 0 || qci.source.owner == null) {
-			return qci.counter
-		}
-
-		return getQueue(qci.source).nextServerCounter()
+		getQueue(qci.source).queueCommand(qci)
 	}
 
 	@IntentHandler
@@ -156,13 +141,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 		private val commandQueue: Queue<EnqueuedCommand> = PriorityQueue()
 		private val activeCooldownGroups: MutableSet<String> = ConcurrentHashMap.newKeySet()
 
-		/** Sequence id of the command the client sent most recently, which server-started commands continue from. */
-		var lastClientCounter: Int = 0
-
-		@Synchronized
-		fun nextServerCounter(): Int {
-			return ++lastClientCounter
-		}
+		private var counter: Int = 0
 
 		@Synchronized
 		fun executeNextCommand() {
@@ -186,7 +165,10 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 		}
 
 		@Synchronized
-		fun queueCommand(command: EnqueuedCommand) {
+		fun queueCommand(qci: QueueCommandIntent) {
+			counter = if (qci.counter != 0) qci.counter else counter + 1
+
+			val command = EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, counter)
 			val rootCommand: Command = command.command
 
 			if (rootCommand.cooldownGroup.isBlank()) {
