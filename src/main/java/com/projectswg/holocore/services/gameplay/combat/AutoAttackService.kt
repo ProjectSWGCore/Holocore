@@ -54,7 +54,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Service() {
 
-	/** Creatures currently auto-attacking, mapped to the time their next attack is due. */
+	/** Creatures currently auto-attacking, mapped to the [System.nanoTime] their next attack is due. */
 	private val nextAttackTimes: MutableMap<CreatureObject, Long> = ConcurrentHashMap()
 	private val coroutineScope = HolocoreCoroutine.childScope()
 
@@ -117,7 +117,7 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 			return
 		}
 
-		nextAttackTimes.putIfAbsent(creature, 0)
+		nextAttackTimes.putIfAbsent(creature, System.nanoTime())
 	}
 
 	private fun stopAttacking(creature: CreatureObject?) {
@@ -129,7 +129,7 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 	}
 
 	private fun attemptAttacks() {
-		val now = System.currentTimeMillis()
+		val now = System.nanoTime()
 
 		for ((creature, nextAttackTime) in nextAttackTimes) {
 			if (!creature.isInCombat || now < nextAttackTime) {
@@ -146,7 +146,7 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 	}
 
 	private fun attackDelay(creature: CreatureObject, weapon: WeaponObject): Long {
-		return (weapon.getModdedWeaponAttackSpeedWithCap(creature) * 1000).toLong()
+		return (weapon.getModdedWeaponAttackSpeedWithCap(creature) * 1E9).toLong()
 	}
 
 	private fun findTarget(creature: CreatureObject): CreatureObject? {
