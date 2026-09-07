@@ -69,7 +69,6 @@ import java.util.stream.Collectors
 
 class CommandQueueService @JvmOverloads constructor(private val delayBetweenCheckingCommandQueue: Long = 100, toHitDie: Die = RandomDie(), knockdownDie: Die = RandomDie(), woundDie: Die = RandomDie(), private val skipWarmup: Boolean = false) : Service() {
 	private val combatQueueMap: MutableMap<CreatureObject, CreatureCombatQueue> = ConcurrentHashMap()
-	private val lastClientCounters: MutableMap<CreatureObject, Int> = ConcurrentHashMap()
 	private val combatCommandHandler: CombatCommandHandler = CombatCommandHandler(toHitDie, knockdownDie, woundDie)
 	private val coroutineScope = HolocoreCoroutine.childScope()
 
@@ -102,7 +101,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			}
 			val targetId: Long = p.targetId
 			val target = if (targetId != 0L) ObjectLookup.getObjectById(targetId) else null
-			lastClientCounters[gpi.player.creatureObject] = p.counter
+			getQueue(gpi.player.creatureObject).lastClientCounter = p.counter
 			QueueCommandIntent(gpi.player.creatureObject, target, p.arguments, command, p.counter).broadcast()
 		} else if (p is IntendedTarget) {
 			if (p.targetId == 0L) combatQueueMap.remove(gpi.player.creatureObject)
@@ -117,7 +116,6 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			// This also prevents queued commands from executing after the player logs out
 			if (creature != null) {
 				combatQueueMap.remove(creature)
-				lastClientCounters.remove(creature)
 			}
 		}
 	}
@@ -136,7 +134,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 			return qci.counter
 		}
 
-		return lastClientCounters.merge(qci.source, 1) { previous, _ -> previous + 1 } ?: 1
+		return getQueue(qci.source).nextServerCounter()
 	}
 
 	@IntentHandler
@@ -157,6 +155,14 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 	private inner class CreatureCombatQueue {
 		private val commandQueue: Queue<EnqueuedCommand> = PriorityQueue()
 		private val activeCooldownGroups: MutableSet<String> = ConcurrentHashMap.newKeySet()
+
+		/** Sequence id of the command the client sent most recently, which server-started commands continue from. */
+		var lastClientCounter: Int = 0
+
+		@Synchronized
+		fun nextServerCounter(): Int {
+			return ++lastClientCounter
+		}
 
 		@Synchronized
 		fun executeNextCommand() {
