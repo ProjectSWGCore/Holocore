@@ -31,6 +31,7 @@ import com.projectswg.common.data.combat.HitType
 import com.projectswg.common.data.combat.TargetType
 import com.projectswg.common.data.encodables.oob.StringId
 import com.projectswg.common.network.packets.swg.zone.object_controller.*
+import com.projectswg.holocore.intents.gameplay.combat.CombatCommandFailedIntent
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
 import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
@@ -257,6 +258,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 				handleStatus(source, combatCommand, combatStatus)
 				if (combatStatus != CombatStatus.SUCCESS) {
+					CombatCommandFailedIntent(source, combatStatus).broadcast()
 					sendCommandFailed(command)
 					return
 				}
