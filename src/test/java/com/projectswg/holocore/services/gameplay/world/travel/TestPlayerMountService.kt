@@ -91,6 +91,22 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 	}
 	
 	@Test
+	fun testConditionSurvivesStoring() {
+		val creature: CreatureObject = createCreature()
+		ObjectCreatedIntent(creature).broadcast()
+		val deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), DEED)
+		broadcastAndWait(VehicleDeedGenerateIntent(creature, deed))
+		updateAwareness()
+		val pcd = creature.findAware(PCD) as IntangibleObject
+		(creature.findAware(SWOOP) as CreatureObject).conditionDamage = 500
+		broadcastAndWait(PetDeviceStoreIntent(creature, pcd))
+		broadcastAndWait(PetDeviceCallIntent(creature, pcd))
+		updateAwareness()
+
+		Assertions.assertEquals(500, (creature.findAware(SWOOP) as CreatureObject).conditionDamage)
+	}
+
+	@Test
 	fun testMountDismount() {
 		val friend = createNPC()
 		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())

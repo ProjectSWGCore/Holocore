@@ -34,6 +34,7 @@ import java.util.function.Function;
 
 public enum ServerAttribute {
 	PCD_PET_TEMPLATE	("pcd.pet.template",				PredefinedDataType.STRING),
+	PCD_PET_CONDITION_DAMAGE("pcd.pet.condition_damage",	PredefinedDataType.INT),
 	EGG_SPAWNER			("egg.spawner",						Spawner.class, s -> null, s -> null),
 	GALACTIC_RESOURCE_ID("resources.galactic_resource_id",	PredefinedDataType.LONG),
 	SURVEY_TOOL_RANGE	("survey_tool.range",				PredefinedDataType.INT),
