@@ -45,6 +45,7 @@ object ServerData {
 	 */
 	val buffs				by SoftDataLoaderDelegate(::BuffLoader)
 	val factions			by SoftDataLoaderDelegate(::FactionLoader)
+	val factionRanks		by SoftDataLoaderDelegate(::FactionRankLoader)
 	val movements			by SoftDataLoaderDelegate(::MovementLoader)
 
 	/*
