@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -804,9 +804,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		double selfZ = 0.0;
 		while (tmp != null) {
 			Location loc = tmp.getLocation();
-			selfX += loc.getX();
-			selfY += loc.getY();
-			selfZ += loc.getZ();
+			if (tmp.slotArrangement == -1) {
+				selfX += loc.getX();
+				selfY += loc.getY();
+				selfZ += loc.getZ();
+			}
 			tmp = tmp.getParent();
 		}
 
@@ -816,9 +818,11 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		double otherZ = 0.0;
 		while (tmp != null) {
 			Location loc = tmp.getLocation();
-			otherX += loc.getX();
-			otherY += loc.getY();
-			otherZ += loc.getZ();
+			if (tmp.slotArrangement == -1) {
+				otherX += loc.getX();
+				otherY += loc.getY();
+				otherZ += loc.getZ();
+			}
 			tmp = tmp.getParent();
 		}
 
@@ -834,8 +838,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		double selfZ = 0.0;
 		while (tmp != null) {
 			Location loc = tmp.getLocation();
-			selfX += loc.getX();
-			selfZ += loc.getZ();
+			if (tmp.slotArrangement == -1) {
+				selfX += loc.getX();
+				selfZ += loc.getZ();
+			}
 			tmp = tmp.getParent();
 		}
 
@@ -844,8 +850,10 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		double otherZ = 0.0;
 		while (tmp != null) {
 			Location loc = tmp.getLocation();
-			otherX += loc.getX();
-			otherZ += loc.getZ();
+			if (tmp.slotArrangement == -1) {
+				otherX += loc.getX();
+				otherZ += loc.getZ();
+			}
 			tmp = tmp.getParent();
 		}
 

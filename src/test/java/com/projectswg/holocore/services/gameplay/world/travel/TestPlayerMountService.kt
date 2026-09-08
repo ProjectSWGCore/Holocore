@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -39,6 +39,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureSt
 import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
 import com.projectswg.holocore.test.resources.GenericCreatureObject
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
+import me.joshlarson.jlcommon.concurrency.Delay
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -136,6 +137,29 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		updateAwareness()
 		assertCorrectDismount(creature, vehicle, friend)
 	}
+
+	@Test
+	fun testMountDistance() {
+		val friend = createNPC()
+		friend.systemMove(null, Location.builder(friend.location).setPosition(110.0, 110.0, 110.0).build())
+		ObjectCreatedIntent(friend).broadcast()
+		val creature: CreatureObject = createCreature()
+		ObjectCreatedIntent(creature).broadcast()
+		// Make the deed
+		val deed = ObjectCreator.createObjectFromTemplate(getUniqueId(), DEED)
+		broadcastAndWait(VehicleDeedGenerateIntent(creature, deed))
+		updateAwareness()
+		val vehicle = creature.findAware(SWOOP) as CreatureObject
+
+		broadcastAndWait(MountIntent(creature, vehicle))
+		updateAwareness()
+		assertCorrectMount(creature, vehicle, friend)
+		Assertions.assertEquals(0.0, creature.location.distanceTo(vehicle.location), 1e-5)
+		Assertions.assertEquals(0.0, creature.distanceTo(vehicle), 0.1)
+		Assertions.assertEquals(0.0, creature.flatDistanceTo(vehicle), 0.1)
+		Assertions.assertEquals(0.0, creature.worldLocation.distanceTo(vehicle.worldLocation), 0.1)
+		Assertions.assertEquals(0.0, creature.worldLocation.flatDistanceTo(vehicle.worldLocation), 0.1)
+	}
 	
 	@Test
 	fun testAutoDismountOnTeleport() {
@@ -223,6 +247,11 @@ class TestPlayerMountService : TestRunnerSimulatedWorld() {
 		}
 		
 		private fun SWGObject.findAware(template: String): SWGObject {
+			(0..10).forEach { _ ->
+				val ret = aware.stream().filter { obj: SWGObject -> obj.template == template }.findFirst().orElse(null)
+				if (ret != null) return ret;
+				Delay.sleepMilli(10)
+			}
 			return aware.stream().filter { obj: SWGObject -> obj.template == template }.findFirst().orElseThrow()
 		}
 		
