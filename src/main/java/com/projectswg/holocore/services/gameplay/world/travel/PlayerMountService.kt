@@ -235,6 +235,7 @@ class PlayerMountService : Service() {
 		mount.addOptionFlags(OptionFlag.MOUNT) // The mount won't appear properly if this isn't set
 		mount.faction = player.faction
 		mount.ownerId = player.objectId // Client crash if this isn't set before making anyone aware
+		mount.conditionDamage = mountControlDevice.getServerAttribute(ServerAttribute.PCD_PET_CONDITION_DAMAGE) as Int? ?: 0
 
 		// TODO after combat there's a delay
 		// TODO update faction status on mount if necessary
@@ -396,6 +397,7 @@ class PlayerMountService : Service() {
 			vehicleDecayJobs[mount]?.cancel()
 
 			// Destroy the mount
+			mountControlDevice.setServerAttribute(ServerAttribute.PCD_PET_CONDITION_DAMAGE, mount.conditionDamage)
 			mountControlDevice.count = IntangibleObject.COUNT_PCD_STORED
 			player.broadcast(DestroyObjectIntent(mount))
 			StandardLog.onPlayerTrace(this, player, "stored mount %s at %s %s", mount, mount.terrain, mount.location.position)
