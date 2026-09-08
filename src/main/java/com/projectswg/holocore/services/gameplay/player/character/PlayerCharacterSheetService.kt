@@ -30,6 +30,7 @@ package com.projectswg.holocore.services.gameplay.player.character
 import com.projectswg.common.network.packets.swg.zone.CharacterSheetResponseMessage
 import com.projectswg.common.network.packets.swg.zone.FactionResponseMessage
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.player.PlayerObject
 import me.joshlarson.jlcommon.control.IntentHandler
@@ -61,13 +62,19 @@ class PlayerCharacterSheetService : Service() {
 		val factionPointList = factionNameList.map { factionPoints.getOrDefault(it, 0) }.map { it.toFloat() }
 		creature.sendSelf(
 			FactionResponseMessage(
-				factionRank = "recruit",    // From datatables/faction/rank.iff, should be dynamic once we implement faction ranks
+				factionRank = factionRank(creature),
 				rebelPoints = factionPoints.getOrDefault("rebel", 0),
 				imperialPoints = factionPoints.getOrDefault("imperial", 0),
 				factionNames = factionNameList,
 				factionPoints = factionPointList
 			)
 		)
+	}
+
+	private fun factionRank(creature: CreatureObject): String {
+		val rank = ServerData.factionRanks.getRank(creature.factionRank.toInt())
+
+		return rank?.name ?: ""
 	}
 
 }
