@@ -28,8 +28,8 @@ package com.projectswg.holocore.services.gameplay.combat
 import com.projectswg.common.network.packets.swg.zone.ExecuteConsoleCommand
 import com.projectswg.holocore.intents.gameplay.combat.CombatCommandFailedIntent
 import com.projectswg.holocore.intents.gameplay.combat.DefaultActionIntent
+import com.projectswg.holocore.intents.gameplay.combat.EnterCombatIntent
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent
-import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
@@ -38,7 +38,9 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
 import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.cancelAndWait
-import com.projectswg.holocore.utilities.launchWithFixedRate
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import me.joshlarson.jlcommon.control.IntentHandler
 import me.joshlarson.jlcommon.control.Service
 import java.util.concurrent.ConcurrentHashMap
@@ -50,16 +52,11 @@ import java.util.concurrent.ConcurrentHashMap
  * The choice itself lives on the [CreatureObject], because the client only sends it when a toolbar
  * slot is ctrl-clicked or when it starts up.
  */
-class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Service() {
+class AutoAttackService : Service() {
 
-	/** Creatures currently auto-attacking, mapped to the [System.nanoTime] their next attack is due. */
-	private val nextAttackTimes: MutableMap<CreatureObject, Long> = ConcurrentHashMap()
+	/** The job repeating the attack, for each creature currently auto-attacking. */
+	private val attackJobs: MutableMap<CreatureObject, Job> = ConcurrentHashMap()
 	private val coroutineScope = HolocoreCoroutine.childScope()
-
-	override fun initialize(): Boolean {
-		coroutineScope.launchWithFixedRate(delayBetweenAttackChecks) { attemptAttacks() }
-		return true
-	}
 
 	override fun terminate(): Boolean {
 		coroutineScope.cancelAndWait()
@@ -74,11 +71,11 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 		if (command == null) {
 			StandardLog.onPlayerTrace(this, creature, "cleared their default action")
 			creature.defaultAttack = null
-			stopAttacking(creature)
+			cancelAttackJob(creature)
 		} else {
 			StandardLog.onPlayerTrace(this, creature, "set their default action to %s", command.name)
 			creature.defaultAttack = command.name
-			startAttacking(creature)
+			startAttackJob(creature)
 		}
 	}
 
@@ -86,67 +83,65 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 	private fun handleCombatCommandFailedIntent(ccfi: CombatCommandFailedIntent) {
 		if (ccfi.status == CombatStatus.TOO_TIRED) {
 			StandardLog.onPlayerTrace(this, ccfi.source, "stopped their default action, too tired")
-			stopAttacking(ccfi.source)
+			cancelAttackJob(ccfi.source)
 		}
 	}
 
 	@IntentHandler
-	private fun handleQueueCommandIntent(qci: QueueCommandIntent) {
-		if (qci.counter != 0) {
-			startAttacking(qci.source)
-		}
+	private fun handleEnterCombatIntent(eci: EnterCombatIntent) {
+		startAttackJob(eci.source as? CreatureObject)
 	}
 
 	@IntentHandler
 	private fun handleExitCombatIntent(eci: ExitCombatIntent) {
-		stopAttacking(eci.source as? CreatureObject)
+		cancelAttackJob(eci.source as? CreatureObject)
 	}
 
 	@IntentHandler
 	private fun handlePlayerEventIntent(pei: PlayerEventIntent) {
 		when (pei.event) {
-			PlayerEvent.PE_LOGGED_OUT, PlayerEvent.PE_DESTROYED -> stopAttacking(pei.player.creatureObject)
+			PlayerEvent.PE_LOGGED_OUT, PlayerEvent.PE_DESTROYED -> cancelAttackJob(pei.player.creatureObject)
 			else                                                -> {}
 		}
 	}
 
-	private fun startAttacking(creature: CreatureObject?) {
+	private fun startAttackJob(creature: CreatureObject?) {
 		if (creature?.defaultAttack == null) {
 			return
 		}
 
-		nextAttackTimes.putIfAbsent(creature, System.nanoTime())
+		synchronized(attackJobs) {
+			if (attackJobs[creature]?.isActive == true) {
+				return
+			}
+
+			attackJobs[creature] = coroutineScope.launch { requestAttacksWhileInCombat(creature) }
+		}
 	}
 
-	private fun stopAttacking(creature: CreatureObject?) {
+	private fun cancelAttackJob(creature: CreatureObject?) {
 		if (creature == null) {
 			return
 		}
 
-		nextAttackTimes.remove(creature)
+		attackJobs.remove(creature)?.cancel()
 	}
 
-	private fun attemptAttacks() {
-		val now = System.nanoTime()
-
-		for ((creature, nextAttackTime) in nextAttackTimes) {
-			if (!creature.isInCombat || now < nextAttackTime) {
-				continue
-			}
-
-			val defaultAttack = creature.defaultAttack ?: continue
-			val weapon = creature.equippedWeapon ?: continue
-			val owner = creature.owner ?: continue
-
-			nextAttackTimes[creature] = now + attackDelay(creature, weapon)
+	private suspend fun requestAttacksWhileInCombat(creature: CreatureObject) {
+		while (creature.isInCombat) {
+			val defaultAttack = creature.defaultAttack ?: break
+			val weapon = creature.equippedWeapon ?: break
+			val owner = creature.owner ?: break
 
 			val executeConsoleCommand = ExecuteConsoleCommand()
 			executeConsoleCommand.addCommand(defaultAttack)
 			owner.sendPacket(executeConsoleCommand)
+
+			delay(attackDelay(creature, weapon))
 		}
 	}
 
 	private fun attackDelay(creature: CreatureObject, weapon: WeaponObject): Long {
-		return (weapon.getModdedWeaponAttackSpeedWithCap(creature) * 1E9).toLong()
+		return (weapon.getModdedWeaponAttackSpeedWithCap(creature) * 1000).toLong()
 	}
 }
