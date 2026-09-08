@@ -239,12 +239,19 @@ class CloningService : Service() {
 		corpse.posture = Posture.UPRIGHT
 		corpse.setTurnScale(1.0)
 		corpse.setMovementPercent(1.0)
-		corpse.health = corpse.maxHealth
+		applyCloneWounds(corpse)
+		corpse.health = corpse.maxHealth - corpse.healthWounds
 		corpse.sendObservers(PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.objectId, ""))
 		corpse.sendSelf(PlayMusicMessage(0, "sound/item_repairobj.snd", 1, false))
 		if (corpse.pvpFaction != PvpFaction.NEUTRAL) {
 			corpse.broadcast(UpdateFactionStatusIntent(corpse, PvpStatus.ONLEAVE))
 		}
+	}
+
+	// Pre-designating a facility isn't supported yet, so every clone is away from the players clone data and costs the full wounds
+	private fun applyCloneWounds(corpse: CreatureObject) {
+		val woundCeiling = (corpse.maxHealth * MAX_WOUND_PERCENTAGE).toInt()
+		corpse.healthWounds = (corpse.healthWounds + CLONE_WOUNDS).coerceAtMost(woundCeiling)
 	}
 
 	/**
@@ -318,6 +325,8 @@ class CloningService : Service() {
 
 	companion object {
 		private const val CLONE_TIMER: Long = 30 // Amount of minutes before a player is forced to clone
+		private const val CLONE_WOUNDS = 100 // Health wounds received when cloning away from your clone data
+		private const val MAX_WOUND_PERCENTAGE = 0.7 // Wounds can never take more than this share of unmodified maximum health
 		private val defaultCloner: BuildingObject?
 			get() {
 				val defaultCloner = BuildingLookup.getBuildingByTag("tat_moseisley_cloning1")
