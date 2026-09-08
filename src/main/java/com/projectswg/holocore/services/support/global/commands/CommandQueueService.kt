@@ -119,7 +119,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 
 	@IntentHandler
 	private fun handleQueueCommandIntent(qci: QueueCommandIntent) {
-		getQueue(qci.source).queueCommand(qci)
+		getQueue(qci.source).queueCommand(EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, qci.counter))
 	}
 
 	@IntentHandler
@@ -140,8 +140,6 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 	private inner class CreatureCombatQueue {
 		private val commandQueue: Queue<EnqueuedCommand> = PriorityQueue()
 		private val activeCooldownGroups: MutableSet<String> = ConcurrentHashMap.newKeySet()
-
-		private var counter: Int = 0
 
 		@Synchronized
 		fun executeNextCommand() {
@@ -165,10 +163,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 		}
 
 		@Synchronized
-		fun queueCommand(qci: QueueCommandIntent) {
-			counter = if (qci.counter != 0) qci.counter else counter + 1
-
-			val command = EnqueuedCommand(qci.source, qci.command, qci.target, qci.arguments, counter)
+		fun queueCommand(command: EnqueuedCommand) {
 			val rootCommand: Command = command.command
 
 			if (rootCommand.cooldownGroup.isBlank()) {

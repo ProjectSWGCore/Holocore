@@ -25,7 +25,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.services.gameplay.combat
 
-import com.projectswg.common.data.encodables.tangible.Posture
+import com.projectswg.common.network.packets.swg.zone.ExecuteConsoleCommand
 import com.projectswg.holocore.intents.gameplay.combat.CombatCommandFailedIntent
 import com.projectswg.holocore.intents.gameplay.combat.DefaultActionIntent
 import com.projectswg.holocore.intents.gameplay.combat.ExitCombatIntent
@@ -33,11 +33,9 @@ import com.projectswg.holocore.intents.support.global.command.QueueCommandIntent
 import com.projectswg.holocore.intents.support.global.zone.PlayerEventIntent
 import com.projectswg.holocore.resources.gameplay.combat.CombatStatus
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
-import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.global.player.PlayerEvent
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
 import com.projectswg.holocore.resources.support.objects.swg.weapon.WeaponObject
-import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup
 import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.cancelAndWait
 import com.projectswg.holocore.utilities.launchWithFixedRate
@@ -87,7 +85,7 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 	@IntentHandler
 	private fun handleCombatCommandFailedIntent(ccfi: CombatCommandFailedIntent) {
 		if (ccfi.status == CombatStatus.TOO_TIRED) {
-			StandardLog.onPlayerTrace(this, ccfi.source, "paused their default action")
+			StandardLog.onPlayerTrace(this, ccfi.source, "stopped their default action, too tired")
 			stopAttacking(ccfi.source)
 		}
 	}
@@ -95,7 +93,7 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 	@IntentHandler
 	private fun handleQueueCommandIntent(qci: QueueCommandIntent) {
 		if (qci.counter != 0) {
-			startAttacking(qci.source)    // a command the client sent itself means the player is attacking again
+			startAttacking(qci.source)
 		}
 	}
 
@@ -136,30 +134,19 @@ class AutoAttackService(private val delayBetweenAttackChecks: Long = 100) : Serv
 				continue
 			}
 
-			val command = ServerData.commands.getCommand(creature.defaultAttack ?: continue) ?: continue
+			val defaultAttack = creature.defaultAttack ?: continue
 			val weapon = creature.equippedWeapon ?: continue
-			val target = findTarget(creature) ?: continue
+			val owner = creature.owner ?: continue
 
 			nextAttackTimes[creature] = now + attackDelay(creature, weapon)
-			QueueCommandIntent(creature, target, "", command, 0).broadcast()
+
+			val executeConsoleCommand = ExecuteConsoleCommand()
+			executeConsoleCommand.addCommand(defaultAttack)
+			owner.sendPacket(executeConsoleCommand)
 		}
 	}
 
 	private fun attackDelay(creature: CreatureObject, weapon: WeaponObject): Long {
 		return (weapon.getModdedWeaponAttackSpeedWithCap(creature) * 1E9).toLong()
-	}
-
-	private fun findTarget(creature: CreatureObject): CreatureObject? {
-		val lookAtTarget = ObjectLookup.getObjectById(creature.lookAtTargetId) as? CreatureObject ?: return null
-
-		return if (isValidTarget(creature, lookAtTarget)) lookAtTarget else null
-	}
-
-	private fun isValidTarget(creature: CreatureObject, target: CreatureObject): Boolean {
-		if (target.posture == Posture.INCAPACITATED || target.posture == Posture.DEAD) {
-			return false
-		}
-
-		return target.isAttackable(creature)
 	}
 }
