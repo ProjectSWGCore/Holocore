@@ -31,6 +31,7 @@ import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService
 import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
 import com.projectswg.holocore.services.support.objects.ObjectStorageService
 import com.projectswg.holocore.test.runners.AcceptanceTest
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -60,5 +61,25 @@ class CloningTest : AcceptanceTest() {
 		suiWindow.clickOk()
 
 		assertDoesNotThrow { character2.waitForObjectMove() }
+	}
+
+	@Test
+	fun `cloning applies health wounds`() {
+		val user = generateUser(AccessLevel.DEV)
+		val character1 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "charone")
+		val character2 = HeadlessSWGClient.createZonedInCharacter(user.username, user.password, "chartwo")
+		character1.duel(character2.player.creatureObject)
+		character2.duel(character1.player.creatureObject)
+		character1.adminKill(character2.player.creatureObject)
+		character1.deathblow(character2.player.creatureObject)
+
+		val suiWindow = character2.waitForCloneActivation()
+		suiWindow.select(0)
+		suiWindow.clickOk()
+		character2.waitForObjectMove()
+
+		val clone = character2.player.creatureObject
+		assertEquals(100, clone.healthWounds)
+		assertEquals(clone.maxHealth - clone.healthWounds, clone.health)
 	}
 }
