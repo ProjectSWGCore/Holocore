@@ -1,0 +1,24 @@
+index	name	cost	delegate_ratio_from	delegate_ratio_to
+
+0	recruit	10	20	2
+1	private	10	20	3
+2	lance_corporal	400	20	4
+3	corporal	800	20	5
+4	staff_corporal	1200	20	6
+5	sergeant	1600	20	7
+6	staff_sergeant	2000	20	8
+7	master_sergeant	2500	20	9
+8	warrant_officer_2	3000	20	10
+9	warrant_officer_1	3500	20	11
+10	second_lieutenant	4000	20	12
+11	lieutenant	5000	20	13
+12	captain	5000	20	14
+13	major	5500	20	15
+14	lieutenant_colonel	5500	20	16
+15	colonel	6000	20	17
+16	brigadier_general	6500	20	18
+17	major_general	6500	20	18
+18	lieutenant_general	7000	20	18
+19	general	7000	20	18
+20	high_general	7500	20	18
+21	surface_marshal	7500	20	18

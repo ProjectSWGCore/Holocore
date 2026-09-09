@@ -28,6 +28,7 @@ public class ClientdataConvertAll {
 		Converters.QUESTLIST.load();
 		Converters.QUESTTASK.load();
 		Converters.SCHEMATIC_GROUP.load();
+		Converters.FACTION_RANK.load();
 	}
 	
 }
