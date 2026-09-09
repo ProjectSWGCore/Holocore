@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -25,39 +25,18 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.client.MongoDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgUserDatabase
 import org.bson.Document
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class PswgUserDatabaseMongoTest {
-
-	private lateinit var database: MongoDatabase
-
-	@BeforeEach
-	fun setUp() {
-		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
-	}
-
-	@AfterEach
-	fun tearDown() {
-		database.drop()
-	}
-
-	private val users: PswgUserDatabase
-		get() {
-			return PswgUserDatabaseMongo(database.getCollection("users"))
-		}
-
+class PswgUserDatabaseMongoTest : PswgDatabaseTestHarness<PswgUserDatabase>("users", ::PswgUserDatabaseMongo) {
 
 	@Test
 	fun `unknown user is null`() {
 		val username = "deathbringer7"
 
-		val userMetadata = users.getUser(username)
+		val userMetadata = items.getUser(username)
 
 		assertNull(userMetadata)
 	}
@@ -68,7 +47,7 @@ class PswgUserDatabaseMongoTest {
 		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
 		insertUser(username, hashedPassword)
 
-		val userMetadata = users.getUser(username)
+		val userMetadata = items.getUser(username)
 
 		assertNotNull(userMetadata)
 	}
@@ -78,9 +57,9 @@ class PswgUserDatabaseMongoTest {
 		val username = "laxguy6"
 		val password = "plaintext_password"
 		insertUser(username, password)
-		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+		val userMetadata = items.getUser(username) ?: fail("Unable to retrieve test user")
 
-		val authenticated = users.authenticate(userMetadata, password)
+		val authenticated = items.authenticate(userMetadata, password)
 
 		assertTrue(authenticated)
 	}
@@ -91,9 +70,9 @@ class PswgUserDatabaseMongoTest {
 		val password = "thebestpassword"
 		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
 		insertUser(username, hashedPassword)
-		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+		val userMetadata = items.getUser(username) ?: fail("Unable to retrieve test user")
 
-		val authenticated = users.authenticate(userMetadata, password)
+		val authenticated = items.authenticate(userMetadata, password)
 
 		assertTrue(authenticated)
 	}
@@ -103,15 +82,14 @@ class PswgUserDatabaseMongoTest {
 		val username = "deathbringer7"
 		val hashedPassword = "\$2a\$10\$DpHgnWS6iBL3hAZIo/Cbmev8pkB3sERtl8MTAZniYG3lG9mZoSlQS"
 		insertUser(username, hashedPassword)
-		val userMetadata = users.getUser(username) ?: fail("Unable to retrieve test user")
+		val userMetadata = items.getUser(username) ?: fail("Unable to retrieve test user")
 
-		val authenticated = users.authenticate(userMetadata, "wrong_password")
+		val authenticated = items.authenticate(userMetadata, "wrong_password")
 
 		assertFalse(authenticated)
 	}
 
 	private fun insertUser(username: String, password: String) {
-		val collection = database.getCollection("users")
 		val document = Document()
 		document["username"] = username
 		document["accessLevel"] = "player"

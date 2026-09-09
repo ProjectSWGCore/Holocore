@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -26,6 +26,7 @@
 package com.projectswg.holocore.headless
 
 import com.projectswg.common.network.packets.swg.zone.object_controller.SpatialChat
+import java.util.concurrent.TimeUnit
 
 /**
  * Sends a spatial chat message.
@@ -40,7 +41,7 @@ fun ZonedInCharacter.sendSpatialChat(message: String, targetId: Long = 0, chatTy
 }
 
 fun ZonedInCharacter.waitForSpatialChat(): ReceivedSpatialChat {
-	val spatialChat = player.waitForNextPacket(SpatialChat::class.java) ?: throw NoSpatialChatReceivedException()
+	val spatialChat = player.waitForNextPacket(SpatialChat::class.java, 10, TimeUnit.MILLISECONDS) ?: throw NoSpatialChatReceivedException()
 	return ReceivedSpatialChat(spatialChat.sourceId, spatialChat.text)
 }
 

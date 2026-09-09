@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -34,7 +34,7 @@ import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureOb
 import java.util.concurrent.TimeUnit
 
 fun ZonedInCharacter.waitUntilObjectDestroyed(objectId: Long) {
-	player.waitForNextPacket(SceneDestroyObject::class.java, 1, TimeUnit.SECONDS) { it.objectId == objectId }
+	player.waitForNextPacket(SceneDestroyObject::class.java, 1, TimeUnit.SECONDS) { it.objectId == objectId } ?: throw IllegalStateException("object was not destroyed")
 }
 
 fun ZonedInCharacter.isAwareOf(target: SWGObject): Boolean {
@@ -44,7 +44,7 @@ fun ZonedInCharacter.isAwareOf(target: SWGObject): Boolean {
 fun ZonedInCharacter.waitUntilAwareOf(target: SWGObject) {
 	if (isAwareOf(target))
 		return
-	player.waitForNextPacket(SceneEndBaselines::class.java, 1, TimeUnit.SECONDS) { it.objectId == target.objectId }
+	player.waitForNextPacket(SceneEndBaselines::class.java, 1, TimeUnit.SECONDS) { it.objectId == target.objectId } ?: throw IllegalStateException("object is not aware")
 }
 
 fun ZonedInCharacter.waitUntilPostureUpdate(target: CreatureObject): Posture {

@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2025 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -43,6 +43,7 @@ class SpatialChatTest : AcceptanceTest() {
 
 		character1.sendSpatialChat(message)
 
+		waitForIntents()
 		val spatialChat = character2.waitForSpatialChat()
 		assertAll(
 			{ assertEquals(character1.player.creatureObject.objectId, spatialChat.sourceId) },
@@ -60,6 +61,7 @@ class SpatialChatTest : AcceptanceTest() {
 		character2.addIgnore(character1.player.characterFirstName)
 		character1.sendSpatialChat(message)
 
+		waitForIntents()
 		assertThrows<NoSpatialChatReceivedException> { character2.waitForSpatialChat() }
 	}
 }

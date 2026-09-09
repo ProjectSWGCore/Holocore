@@ -1,5 +1,5 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
  * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
@@ -29,7 +29,7 @@ import com.projectswg.holocore.headless.*
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
 import com.projectswg.holocore.services.gameplay.combat.cloning.CloningService
 import com.projectswg.holocore.services.gameplay.combat.duel.DuelService
-import com.projectswg.holocore.services.support.objects.ObjectStorageService
+import com.projectswg.holocore.services.support.objects.BuildoutObjectStorage
 import com.projectswg.holocore.test.runners.AcceptanceTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -42,8 +42,8 @@ class CloningTest : AcceptanceTest() {
 	fun setupExtraServices() {
 		registerService(CloningService())
 		registerService(DuelService())
-		registerService(ObjectStorageService())
-		waitForIntents() // ObjectStorageService floods the server with intents during initialization, causing LoginService to not respond to login requests before these intents are processed
+		registerService(BuildoutObjectStorage())
+		waitForIntents()
 	}
 
 	@Test

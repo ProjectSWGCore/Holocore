@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -27,7 +26,6 @@
 package com.projectswg.holocore.services.gameplay.combat.missions
 
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
-import com.projectswg.common.network.packets.swg.zone.SceneDestroyObject
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptRequest
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionAcceptResponse
 import com.projectswg.common.network.packets.swg.zone.object_controller.MissionListRequest
@@ -44,7 +42,8 @@ import com.projectswg.holocore.resources.support.objects.swg.mission.MissionObje
 import com.projectswg.holocore.services.gameplay.missions.DestroyMissionService
 import com.projectswg.holocore.test.resources.GenericPlayer
 import com.projectswg.holocore.test.runners.TestRunnerSimulatedWorld
-import org.junit.jupiter.api.Assertions.*
+import me.joshlarson.jlcommon.concurrency.Delay
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -126,7 +125,11 @@ class DestroyMissionListTest : TestRunnerSimulatedWorld() {
 
         sendMissionListRequest(player, missionTerminal)
 
-        (player as GenericPlayer).waitForNextPacket(SceneDestroyObject::class.java)
+		(0..100).forEach { _ ->
+			if (missionBag.containedObjects.size <= 5)
+				return@forEach
+			Delay.sleepMilli(10)
+		}
         val containedObjects = missionBag.containedObjects
         assertEquals(5, containedObjects.size)
     }

@@ -25,45 +25,35 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.projectswg.common.data.encodables.chat.ChatAvatar
-import com.projectswg.common.data.encodables.chat.ChatRoom
-import com.projectswg.holocore.resources.support.data.server_info.database.PswgChatRoomDatabase
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.MongoDatabase
+import org.bson.Document
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.TestInstance
 
-class PswgChatRoomDatabaseMongoTest : PswgDatabaseTestHarness<PswgChatRoomDatabase>("chatRooms", ::PswgChatRoomDatabaseMongo) {
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+open class PswgDatabaseTestHarness<T : Any>(private val collectionName: String, private val collectionCreator: (MongoCollection<Document>) -> T) {
+	private lateinit var database: MongoDatabase
+	lateinit var collection: MongoCollection<Document>
+	lateinit var items: T
 
-	@Test
-	fun `chat rooms can be added`() {
-		items.addChatRoom(exampleChatRoom())
-
-		val countDocuments = collection.countDocuments()
-
-		assertEquals(1, countDocuments)
-	}
-	
-	@Test
-	fun `chat rooms can be retrieved`() {
-		val added = exampleChatRoom()
-		items.addChatRoom(added)
-
-		val retrieved = items.getChatRooms().first()
-
-		assertEquals(added, retrieved)
+	@BeforeAll
+	fun beforeAll() {
+		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
+		collection = database.getCollection(collectionName)
+		items = collectionCreator(collection)
 	}
 
-	private fun exampleChatRoom(): ChatRoom {
-		val chatRoom = ChatRoom()
-		chatRoom.id = 3
-		chatRoom.type = 1
-		chatRoom.isModerated = true
-		chatRoom.path = "SWG.Holocore.BestChatRoom"
-		chatRoom.owner = ChatAvatar("Test User 1")
-		chatRoom.creator = ChatAvatar("Test User 2")
-		chatRoom.title = "BestChatRoom"
-		chatRoom.addModerator(ChatAvatar("Test User 3"))
-		chatRoom.addInvited(ChatAvatar("Test User 4"))
-		chatRoom.addBanned(ChatAvatar("Test User 5"))
-		return chatRoom
+	@BeforeEach
+	fun beforeEach() {
+		collection.deleteMany(Document())
 	}
+
+	@AfterEach
+	fun afterEach() {
+		collection.deleteMany(Document())
+	}
+
 }

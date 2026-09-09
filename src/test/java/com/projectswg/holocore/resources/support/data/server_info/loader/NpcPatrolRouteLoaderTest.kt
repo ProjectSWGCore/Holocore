@@ -30,7 +30,7 @@ import com.projectswg.common.data.swgiff.parsers.SWGParser
 import com.projectswg.holocore.resources.support.data.server_info.loader.npc.NpcPatrolRouteLoader
 import com.projectswg.holocore.resources.support.npc.ai.NavigationPoint
 import com.projectswg.holocore.resources.support.npc.spawn.Spawner
-import com.projectswg.holocore.services.support.objects.ObjectStorageService
+import com.projectswg.holocore.services.support.objects.BuildoutObjectStorage
 import com.projectswg.holocore.test.runners.TestRunnerNoIntents
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions
@@ -89,7 +89,7 @@ class NpcPatrolRouteLoaderTest : TestRunnerNoIntents() {
 
 	companion object {
 
-		private var objectStorageService = ObjectStorageService()
+		private var objectStorageService = BuildoutObjectStorage()
 
 		@BeforeAll
 		@JvmStatic

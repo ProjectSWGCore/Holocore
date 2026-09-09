@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2023 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -26,38 +25,19 @@
  ***********************************************************************************/
 package com.projectswg.holocore.resources.support.data.server_info.mongodb
 
-import com.mongodb.client.MongoDatabase
 import com.projectswg.holocore.resources.support.data.server_info.database.PswgBazaarInstantSalesDatabase
-import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 import java.time.Month
 
-class PswgBazaarInstantSalesDatabaseMongoTest {
-
-	private lateinit var database: MongoDatabase
-
-	@BeforeEach
-	fun setUp() {
-		database = MongoDBTestContainer.mongoClient.getDatabase("cu")
-	}
-
-	@AfterEach
-	fun tearDown() {
-		database.drop()
-	}
-
-	private val bazaarItems: PswgBazaarInstantSalesDatabase
-		get() {
-			return PswgBazaarInstantSalesDatabaseMongo(database.getCollection("bazaarInstantSales"))
-		}
+class PswgBazaarInstantSalesDatabaseMongoTest : PswgDatabaseTestHarness<PswgBazaarInstantSalesDatabase>("bazaarInstantSales", ::PswgBazaarInstantSalesDatabaseMongo) {
 
 	@Test
 	fun `items can be added`() {
-		bazaarItems.addInstantSaleItem(exampleItem())
+		items.addInstantSaleItem(exampleItem())
 
-		val collection = database.getCollection("bazaarInstantSales")
 		val countDocuments = collection.countDocuments()
 
 		assertEquals(1, countDocuments)
@@ -66,9 +46,9 @@ class PswgBazaarInstantSalesDatabaseMongoTest {
 	@Test
 	fun `items can be retrieved`() {
 		val added = exampleItem()
-		bazaarItems.addInstantSaleItem(added)
+		items.addInstantSaleItem(added)
 
-		val retrieved = bazaarItems.getInstantSaleItems().first()
+		val retrieved = items.getInstantSaleItems().first()
 
 		assertEquals(added, retrieved)
 	}
@@ -76,18 +56,18 @@ class PswgBazaarInstantSalesDatabaseMongoTest {
 	@Test
 	fun `specific item can be retrieved`() {
 		val added = exampleItem()
-		bazaarItems.addInstantSaleItem(added)
+		items.addInstantSaleItem(added)
 
-		val retrieved = bazaarItems.getInstantSaleItem(1L)
+		val retrieved = items.getInstantSaleItem(1L)
 
 		assertEquals(added, retrieved)
 	}
 
 	@Test
 	fun `specific item is null if it doesn't exist`() {
-		bazaarItems.addInstantSaleItem(exampleItem())
+		items.addInstantSaleItem(exampleItem())
 
-		val retrieved = bazaarItems.getInstantSaleItem(2L)
+		val retrieved = items.getInstantSaleItem(2L)
 
 		assertNull(retrieved)
 	}
@@ -95,18 +75,18 @@ class PswgBazaarInstantSalesDatabaseMongoTest {
 	@Test
 	fun `items belonging to a specific owner can be retrieved`() {
 		val added = exampleItem()
-		bazaarItems.addInstantSaleItem(added)
+		items.addInstantSaleItem(added)
 
-		val retrieved = bazaarItems.getMyInstantSaleItems(3L).first()
+		val retrieved = items.getMyInstantSaleItems(3L).first()
 
 		assertEquals(added, retrieved)
 	}
 
 	@Test
 	fun `items belonging to a specific owner is an empty collection if there are no items`() {
-		bazaarItems.addInstantSaleItem(exampleItem())
+		items.addInstantSaleItem(exampleItem())
 
-		val retrieved = bazaarItems.getMyInstantSaleItems(4L).size
+		val retrieved = items.getMyInstantSaleItems(4L).size
 
 		assertEquals(0, retrieved)
 	}
@@ -114,11 +94,10 @@ class PswgBazaarInstantSalesDatabaseMongoTest {
 	@Test
 	fun `items can be removed`() {
 		val instantSaleItemMetadata = exampleItem()
-		bazaarItems.addInstantSaleItem(instantSaleItemMetadata)
+		items.addInstantSaleItem(instantSaleItemMetadata)
 
-		bazaarItems.removeInstantSaleItem(instantSaleItemMetadata)
+		items.removeInstantSaleItem(instantSaleItemMetadata)
 
-		val collection = database.getCollection("bazaarInstantSales")
 		val countDocuments = collection.countDocuments()
 		assertEquals(0, countDocuments)
 	}
