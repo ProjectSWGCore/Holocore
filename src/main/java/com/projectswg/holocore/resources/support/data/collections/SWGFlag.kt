@@ -77,6 +77,13 @@ class SWGFlag(private val view: Int, private val updateType: Int) : BitSet(128),
 		return toList().contentHashCode()
 	}
 
+	fun read(bytes: ByteArray?) {
+		clear()
+		if (bytes != null) {
+			xor(valueOf(bytes))
+		}
+	}
+
 	fun sendDeltaMessage(target: SWGObject) {
 		target.sendDelta(view, updateType, encode())
 	}

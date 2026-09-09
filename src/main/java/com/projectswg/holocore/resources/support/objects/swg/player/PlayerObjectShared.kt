@@ -75,6 +75,8 @@ internal class PlayerObjectShared(obj: PlayerObject) : MongoPersistable {
 	}
 
 	override fun saveMongo(data: MongoData) {
+		data.putByteArray("flags", _flags.toByteArray())
+		data.putByteArray("profileFlags", _profileFlags.toByteArray())
 		data.putString("title", title)
 		data.putInteger("bornDate", bornDate)
 		data.putInteger("playTime", playTime)
@@ -82,6 +84,8 @@ internal class PlayerObjectShared(obj: PlayerObject) : MongoPersistable {
 	}
 
 	override fun readMongo(data: MongoData) {
+		_flags.read(data.getByteArray("flags"))
+		_profileFlags.read(data.getByteArray("profileFlags"))
 		title = data.getString("title", title)
 		bornDate = data.getInteger("bornDate", bornDate)
 		playTime = data.getInteger("playTime", playTime)
