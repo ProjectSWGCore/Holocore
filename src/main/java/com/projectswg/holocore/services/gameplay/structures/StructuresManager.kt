@@ -8,6 +8,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure
 @ManagerStructure(children = [
 	HousingManager::class,
 	StructureService::class,
-	ElevatorService::class
+	ElevatorService::class,
+	MedicalCenterService::class
 ])
 class StructuresManager : Manager()
