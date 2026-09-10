@@ -23,6 +23,7 @@ public enum Converters {
 	QUESTTASK					(ConvertQuestTasks::new),
 	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
 	FACTION_RANK				(() -> new ConvertDatatable("datatables/faction/rank.iff", "serverdata/faction/rank.sdb", true)),
+	XP_LIMITS					(() -> new ConvertDatatable("datatables/skill/xp_limits.iff", "serverdata/skill/xp_limits.sdb", true)),
 	STRINGS						(ConvertStrings::new),
 	TERRAINS					(ConvertTerrain::new);
 	

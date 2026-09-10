@@ -52,6 +52,15 @@ fun ZonedInCharacter.adminGrantSkill(skill: String) {
 }
 
 /**
+ * Admin command /setExperience
+ * @param xpType the type of XP to award
+ * @param xpGained the amount of XP to award
+ */
+fun ZonedInCharacter.adminSetExperience(xpType: String, xpGained: Int) {
+	sendCommand("setExperience", player.creatureObject, "$xpType $xpGained")
+}
+
+/**
  * Admin command /teleport
  * @param target The object to teleport. If null, the player executing the command will be teleported.
  * @param planet The planet to teleport to
