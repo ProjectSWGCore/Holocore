@@ -213,7 +213,8 @@ class CloningService : Service() {
 
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.location)
 		val diedOnTerrain = corpse.terrain
-		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility), reviveTimer?.pvpDeath ?: false)
+		if (reviveTimer?.pvpDeath != true) decayItems(corpse)
+		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility))
 		CloneActivatedIntent(corpse, diedOnTerrain).broadcast()
 		return CloneResult.SUCCESS
 	}
@@ -239,13 +240,12 @@ class CloningService : Service() {
 		return cloneLocation.build()
 	}
 
-	private fun teleport(corpse: CreatureObject, cellObject: CellObject, cloneLocation: Location, pvpDeath: Boolean) {
+	private fun teleport(corpse: CreatureObject, cellObject: CellObject, cloneLocation: Location) {
 		corpse.moveToContainer(cellObject, cloneLocation)
 		corpse.posture = Posture.UPRIGHT
 		corpse.setTurnScale(1.0)
 		corpse.setMovementPercent(1.0)
 		applyCloneWounds(corpse)
-		if (!pvpDeath) decayItems(corpse)
 		corpse.health = corpse.maxHealth - corpse.healthWounds
 		corpse.sendObservers(PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.objectId, ""))
 		corpse.sendSelf(PlayMusicMessage(0, "sound/item_repairobj.snd", 1, false))
