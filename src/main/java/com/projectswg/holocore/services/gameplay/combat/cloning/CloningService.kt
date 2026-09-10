@@ -31,6 +31,7 @@ import com.projectswg.common.data.encodables.tangible.Posture
 import com.projectswg.common.data.encodables.tangible.PvpFaction
 import com.projectswg.common.data.encodables.tangible.PvpStatus
 import com.projectswg.common.data.location.Location
+import com.projectswg.common.data.objects.GameObjectType
 import com.projectswg.common.data.sui.SuiEvent
 import com.projectswg.common.network.packets.swg.zone.PlayClientEffectObjectMessage
 import com.projectswg.common.network.packets.swg.zone.PlayMusicMessage
@@ -52,6 +53,8 @@ import com.projectswg.holocore.resources.support.global.zone.sui.SuiWindow
 import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.cell.CellObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
+import com.projectswg.holocore.resources.support.objects.swg.tangible.OptionFlag
+import com.projectswg.holocore.resources.support.objects.swg.tangible.TangibleObject
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.BuildingLookup
 import com.projectswg.holocore.utilities.HolocoreCoroutine
 import com.projectswg.holocore.utilities.cancelAndWait
@@ -67,7 +70,7 @@ import java.util.stream.Collectors
 
 class CloningService : Service() {
 	private val coroutineScope = HolocoreCoroutine.childScope()
-	private val reviveTimers: MutableMap<CreatureObject, Job> = HashMap()
+	private val reviveTimers: MutableMap<CreatureObject, ReviveTimer> = HashMap()
 	private val cloningFacilities: MutableList<BuildingObject> = ArrayList()
 
 	override fun stop(): Boolean {
@@ -86,7 +89,7 @@ class CloningService : Service() {
 			SystemMessageIntent(corpseOwner, ProsePackage(StringId("base_player", "revive_exp_msg"), "TT", "$CLONE_TIMER minutes.")).broadcast()
 		}
 
-		scheduleCloneTimer(corpse)
+		scheduleCloneTimer(corpse, i.killer.isPlayer)
 	}
 
 	@IntentHandler
@@ -114,7 +117,7 @@ class CloningService : Service() {
 	private fun handlePlayerEventIntent(i: PlayerEventIntent) {
 		val creature = i.player.creatureObject
 		when (i.event) {
-			PlayerEvent.PE_DISAPPEAR  -> reviveTimers.remove(creature)?.cancel()
+			PlayerEvent.PE_DISAPPEAR  -> reviveTimers.remove(creature)?.job?.cancel()
 			PlayerEvent.PE_FIRST_ZONE -> if (creature.posture == Posture.DEAD) {
 				// They're dead, but they have no active revive timer.
 				// In this case, they didn't clone before the application was shut down and started back up.
@@ -126,7 +129,7 @@ class CloningService : Service() {
 		}
 	}
 
-	private fun scheduleCloneTimer(corpse: CreatureObject) {
+	private fun scheduleCloneTimer(corpse: CreatureObject, pvpDeath: Boolean = false) {
 		val availableFacilities = getAvailableFacilities(corpse)
 		if (availableFacilities.isEmpty()) {
 			val defaultCloner = defaultCloner
@@ -137,10 +140,11 @@ class CloningService : Service() {
 
 		cloningWindow.display(corpse.owner!!)
 		synchronized(reviveTimers) {
-			reviveTimers[corpse] = coroutineScope.launch {
+			val job = coroutineScope.launch {
 				delay(TimeUnit.MINUTES.toMillis(CLONE_TIMER))
 				expireCloneTimer(corpse, availableFacilities, cloningWindow)
 			}
+			reviveTimers[corpse] = ReviveTimer(job, pvpDeath)
 		}
 
 		StandardLog.onPlayerEvent(this, corpse, "has %d minutes to clone", CLONE_TIMER)
@@ -202,13 +206,14 @@ class CloningService : Service() {
 
 
 		// Cancel the forced cloning timer
-		synchronized(reviveTimers) {
-			reviveTimers.remove(corpse)?.cancel()
+		val reviveTimer = synchronized(reviveTimers) {
+			reviveTimers.remove(corpse)
 		}
+		reviveTimer?.job?.cancel()
 
 		StandardLog.onPlayerEvent(this, corpse, "cloned to %s @ %s", selectedFacility, selectedFacility.location)
 		val diedOnTerrain = corpse.terrain
-		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility))
+		teleport(corpse, cellObject, getCloneLocation(facilityData, selectedFacility), reviveTimer?.pvpDeath ?: false)
 		CloneActivatedIntent(corpse, diedOnTerrain).broadcast()
 		return CloneResult.SUCCESS
 	}
@@ -234,12 +239,13 @@ class CloningService : Service() {
 		return cloneLocation.build()
 	}
 
-	private fun teleport(corpse: CreatureObject, cellObject: CellObject, cloneLocation: Location) {
+	private fun teleport(corpse: CreatureObject, cellObject: CellObject, cloneLocation: Location, pvpDeath: Boolean) {
 		corpse.moveToContainer(cellObject, cloneLocation)
 		corpse.posture = Posture.UPRIGHT
 		corpse.setTurnScale(1.0)
 		corpse.setMovementPercent(1.0)
 		applyCloneWounds(corpse)
+		if (!pvpDeath) decayItems(corpse)
 		corpse.health = corpse.maxHealth - corpse.healthWounds
 		corpse.sendObservers(PlayClientEffectObjectMessage("clienteffect/player_clone_compile.cef", "", corpse.objectId, ""))
 		corpse.sendSelf(PlayMusicMessage(0, "sound/item_repairobj.snd", 1, false))
@@ -252,6 +258,26 @@ class CloningService : Service() {
 	private fun applyCloneWounds(corpse: CreatureObject) {
 		val woundCeiling = (corpse.maxHealth * MAX_WOUND_PERCENTAGE).toInt()
 		corpse.healthWounds = (corpse.healthWounds + CLONE_WOUNDS).coerceAtMost(woundCeiling)
+	}
+
+	private fun decayItems(corpse: CreatureObject) {
+		getDecayableItems(corpse).filterNot { it.hasOptionFlags(OptionFlag.INSURED, OptionFlag.UNINSURABLE) }.forEach { decayItem(it) }
+	}
+
+	private fun decayItem(item: TangibleObject) {
+		val insured = item.hasOptionFlags(OptionFlag.INSURED)
+		val decay = (item.maxHitPoints * if (insured) INSURED_DECAY_PERCENTAGE else UNINSURED_DECAY_PERCENTAGE).toInt()
+
+		item.conditionDamage = (item.conditionDamage + decay).coerceAtMost(item.maxHitPoints)
+
+		if (insured) item.removeOptionFlags(OptionFlag.INSURED)
+	}
+
+	private fun getDecayableItems(corpse: CreatureObject): List<TangibleObject> {
+		val equipped = corpse.slottedObjects
+		val carried = corpse.inventory.childObjectsRecursively
+
+		return (equipped + carried).filterIsInstance<TangibleObject>().filter { it.gameObjectType.mask in DECAYABLE_TYPES }
 	}
 
 	/**
@@ -276,7 +302,7 @@ class CloningService : Service() {
 	}
 
 	private fun expireCloneTimer(corpse: CreatureObject, facilitiesInTerrain: List<BuildingObject>, suiWindow: SuiWindow) {
-		if (reviveTimers.remove(corpse) != null) {
+		if (reviveTimers.containsKey(corpse)) {
 			val corpseOwner = corpse.owner
 
 			if (corpseOwner != null) {
@@ -316,6 +342,8 @@ class CloningService : Service() {
 		return factionRestriction == null || factionRestriction == corpse.pvpFaction
 	}
 
+	private data class ReviveTimer(val job: Job, val pvpDeath: Boolean)
+
 	private enum class CloneResult {
 		INVALID_SELECTION,
 		TEMPLATE_MISSING,
@@ -327,6 +355,9 @@ class CloningService : Service() {
 		private const val CLONE_TIMER: Long = 30 // Amount of minutes before a player is forced to clone
 		private const val CLONE_WOUNDS = 100 // Health wounds received when cloning away from your clone data
 		private const val MAX_WOUND_PERCENTAGE = 0.7 // Wounds can never take more than this share of unmodified maximum health
+		private const val INSURED_DECAY_PERCENTAGE = 0.01
+		private const val UNINSURED_DECAY_PERCENTAGE = 0.05
+		private val DECAYABLE_TYPES = setOf(GameObjectType.GOT_ARMOR, GameObjectType.GOT_CLOTHING, GameObjectType.GOT_JEWELRY, GameObjectType.GOT_TOOL)
 		private val defaultCloner: BuildingObject?
 			get() {
 				val defaultCloner = BuildingLookup.getBuildingByTag("tat_moseisley_cloning1")
