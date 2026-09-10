@@ -35,6 +35,7 @@ import com.projectswg.holocore.intents.gameplay.player.experience.ExperienceInte
 import com.projectswg.holocore.intents.support.global.chat.SystemMessageIntent
 import com.projectswg.holocore.resources.support.color.SWGColor
 import com.projectswg.holocore.resources.support.data.server_info.StandardLog
+import com.projectswg.holocore.resources.support.data.server_info.loader.ServerData
 import com.projectswg.holocore.resources.support.data.server_info.mongodb.PswgDatabase
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
@@ -62,15 +63,40 @@ class ExperiencePointService : Service() {
 
 	private fun awardExperience(creatureObject: CreatureObject, flytextTarget: SWGObject?, playerObject: PlayerObject, xpType: String, xpGained: Int) {
 		val currentXp = playerObject.getExperiencePoints(xpType)
-		val newXpTotal = currentXp + xpGained
+		val xpLimit = getXpLimit(creatureObject, xpType)
+
+		if (xpGained > 0 && currentXp >= xpLimit) {
+			StandardLog.onPlayerTrace(this, creatureObject, "gained no %s XP, already at the limit of %d", xpType, xpLimit)
+			return
+		}
+
+		val newXpTotal = minOf(currentXp + xpGained, xpLimit)
+		val actualXpGained = newXpTotal - currentXp
 
 		playerObject.setExperiencePoints(xpType, newXpTotal)
-		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", xpGained, xpType)
+		StandardLog.onPlayerTrace(this, creatureObject, "gained %d %s XP", actualXpGained, xpType)
+
+		if (newXpTotal == xpLimit && xpGained > 0) {
+			StandardLog.onPlayerTrace(this, creatureObject, "reached the %s XP limit of %d", xpType, xpLimit)
+		}
 
 		if (xpType != "combat_general") {
-			showFlytext(creatureObject, flytextTarget, xpGained)
+			showFlytext(creatureObject, flytextTarget, actualXpGained)
 			showSystemMessage(creatureObject, xpType)
 		}
+	}
+
+	/**
+	 * The limit is the largest cap among the skills the player has for this XP type. Players without any such skill are
+	 * held to the default limit from the client datatable, or [UNKNOWN_XP_TYPE_LIMIT] if the XP type has no default.
+	 */
+	private fun getXpLimit(creatureObject: CreatureObject, xpType: String): Int {
+		val skillLimit = creatureObject.skills
+			.mapNotNull { ServerData.skills.getSkillByName(it) }
+			.filter { it.xpType == xpType && it.xpCap > 0 }
+			.maxOfOrNull { it.xpCap }
+
+		return skillLimit ?: ServerData.xpLimits.getLimit(xpType) ?: UNKNOWN_XP_TYPE_LIMIT
 	}
 
 	private fun showSystemMessage(creatureObject: CreatureObject, xpType: String) {
@@ -89,5 +115,9 @@ class ExperiencePointService : Service() {
 		val message = OutOfBandPackage(ProsePackage(StringId("base_player", "prose_flytext_xp"), "DI", xpGained))
 		val packet = ShowFlyText(flytextTarget.objectId, message, ShowFlyText.Scale.MEDIUM, SWGColor.Violets.magenta)
 		creatureObject.sendSelf(packet)
+	}
+
+	private companion object {
+		private const val UNKNOWN_XP_TYPE_LIMIT = 2000
 	}
 }
