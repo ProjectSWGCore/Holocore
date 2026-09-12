@@ -31,6 +31,7 @@ import com.projectswg.common.data.radial.RadialItem;
 import com.projectswg.common.data.radial.RadialOption;
 import com.projectswg.holocore.intents.gameplay.world.DismountIntent;
 import com.projectswg.holocore.intents.gameplay.world.MountIntent;
+import com.projectswg.holocore.intents.gameplay.world.RepairVehicleIntent;
 import com.projectswg.holocore.intents.gameplay.world.StoreMountIntent;
 import com.projectswg.holocore.resources.support.global.player.Player;
 import com.projectswg.holocore.resources.support.objects.radial.RadialHandlerInterface;
@@ -38,6 +39,7 @@ import com.projectswg.holocore.resources.support.objects.swg.SWGObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject;
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureState;
 import com.projectswg.holocore.resources.support.objects.swg.group.GroupObject;
+import com.projectswg.holocore.resources.gameplay.structures.VehicleGarages;
 import com.projectswg.holocore.services.support.objects.ObjectStorageService.ObjectLookup;
 import org.jetbrains.annotations.NotNull;
 
@@ -61,8 +63,12 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 		else
 			options.add(RadialOption.create(RadialItem.ITEM_USE, "@cmd_n:mount"));
 
-		if (creature.getObjectId() == mount.getOwnerId())
+		if (creature.getObjectId() == mount.getOwnerId()) {
 			options.add(RadialOption.create(RadialItem.PET_STORE));
+
+			if (VehicleGarages.nearestGarage(creature) != null)
+				options.add(RadialOption.create(RadialItem.SERVER_MENU1, "@pet/pet_menu:menu_repair_vehicle"));
+		}
 	}
 
 	@Override
@@ -80,6 +86,9 @@ public class VehicleMountRadial implements RadialHandlerInterface {
 				break;
 			case PET_STORE:
 				new StoreMountIntent(creature, (CreatureObject) target).broadcast();
+				break;
+			case SERVER_MENU1:
+				new RepairVehicleIntent(creature, (CreatureObject) target).broadcast();
 				break;
 			default:
 				break;

@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,17 +23,33 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.world
+package com.projectswg.holocore.resources.gameplay.structures
 
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
+import com.projectswg.holocore.resources.support.objects.swg.building.BuildingObject
 import com.projectswg.holocore.resources.support.objects.swg.creature.CreatureObject
-import com.projectswg.holocore.resources.support.objects.swg.intangible.IntangibleObject
-import me.joshlarson.jlcommon.control.Intent
 
-data class DismountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
-data class MountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
-data class PetDeviceCallIntent(val creature: CreatureObject, val controlDevice: IntangibleObject) : Intent()
-data class PetDeviceStoreIntent(val creature: CreatureObject, val controlDevice: IntangibleObject) : Intent()
-data class RepairVehicleIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
-data class StoreMountIntent(val creature: CreatureObject, val pet: CreatureObject) : Intent()
-data class VehicleDeedGenerateIntent(val creature: CreatureObject, val deed: SWGObject) : Intent()
+object VehicleGarages {
+
+	private const val RANGE = 64.0
+
+	private val TEMPLATES = setOf(
+		"object/building/base/shared_base_parking_garage.iff",
+		"object/building/tatooine/shared_parking_garage_tatooine_style_1.iff",
+		"object/building/naboo/shared_parking_garage_naboo_style_1.iff",
+		"object/building/general/shared_parking_garage_general.iff",
+		"object/building/corellia/shared_garage_corellia.iff",
+		"object/building/player/shared_player_garage_tatooine_style_01.iff",
+		"object/building/player/shared_player_garage_naboo_style_01.iff",
+		"object/building/player/shared_player_garage_corellia_style_01.iff",
+	)
+
+	@JvmStatic
+	fun nearestGarage(player: CreatureObject): BuildingObject? {
+		val playerLocation = player.worldLocation
+		return player.aware.asSequence()
+			.filterIsInstance<BuildingObject>()
+			.filter { it.template in TEMPLATES }
+			.minByOrNull { it.worldLocation.flatDistanceTo(playerLocation) }
+			?.takeIf { it.worldLocation.flatDistanceTo(playerLocation) <= RANGE }
+	}
+}
