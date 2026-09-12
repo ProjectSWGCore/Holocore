@@ -9,6 +9,7 @@ import me.joshlarson.jlcommon.control.ManagerStructure
 	HousingManager::class,
 	StructureService::class,
 	ElevatorService::class,
-	MedicalCenterService::class
+	MedicalCenterService::class,
+	VehicleGarageService::class
 ])
 class StructuresManager : Manager()
