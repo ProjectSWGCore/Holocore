@@ -26,6 +26,7 @@
  ***********************************************************************************/
 package com.projectswg.holocore.intents.gameplay.entertainment
 
+import com.projectswg.holocore.resources.gameplay.entertainment.PerformEffect
 import com.projectswg.holocore.resources.support.global.player.Player
 import com.projectswg.holocore.resources.support.objects.swg.SWGObject
 import me.joshlarson.jlcommon.control.Intent
@@ -34,3 +35,4 @@ data class StartDanceIntent(val danceName: String, val player: Player, val isCha
 data class StopDanceIntent(val player: Player): Intent()
 data class FlourishIntent(val performer: Player, val flourishName: String) : Intent()
 data class WatchIntent(val actor: Player, val target: SWGObject, val isStartWatch: Boolean) : Intent()
+data class PerformEffectIntent(val performer: Player, val effect: PerformEffect, val level: Int?) : Intent()
