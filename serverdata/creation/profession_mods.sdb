@@ -1,0 +1,9 @@
+profession	health	strength	constitution	action	quickness	stamina	mind	focus	willpower
+
+crafting_artisan	1000	0	1000	1000	0	1000	1000	0	1000
+combat_brawler	1000	0	1000	1000	0	1000	1000	0	1000
+social_entertainer	1000	0	1000	1000	0	1000	1000	0	1000
+combat_marksman	1000	0	1000	1000	0	1000	1000	0	1000
+science_medic	1000	0	1000	1000	0	1000	1000	0	1000
+outdoors_scout	1000	0	1000	1000	0	1000	1000	0	1000
+jedi	1000	0	1000	1000	0	1000	1000	0	1000

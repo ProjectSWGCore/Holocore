@@ -921,6 +921,10 @@ public class CreatureObject extends TangibleObject {
 		creo6.setMaxAction(maxAction);
 	}
 	
+	public void setBaseMind(int baseMind) {
+		baseAttributes.setMind(baseMind);
+	}
+	
 	public void setMind(int mind) {
 		creo6.setMind(mind);
 	}
@@ -931,6 +935,78 @@ public class CreatureObject extends TangibleObject {
 	
 	public void setMaxMind(int maxMind) {
 		creo6.setMaxMind(maxMind);
+	}
+	
+	public int getConstitution() {
+		return creo6.getConstitution();
+	}
+	
+	public int getBaseConstitution() {
+		return baseAttributes.getHealthRegen();
+	}
+	
+	public void setBaseConstitution(int baseConstitution) {
+		baseAttributes.setHealthRegen(baseConstitution);
+	}
+	
+	public void setConstitution(int constitution) {
+		creo6.setConstitution(constitution);
+	}
+	
+	public int getMaxConstitution() {
+		return creo6.getMaxConstitution();
+	}
+	
+	public void setMaxConstitution(int maxConstitution) {
+		creo6.setMaxConstitution(maxConstitution);
+	}
+	
+	public int getStamina() {
+		return creo6.getStamina();
+	}
+	
+	public int getBaseStamina() {
+		return baseAttributes.getActionRegen();
+	}
+	
+	public void setBaseStamina(int baseStamina) {
+		baseAttributes.setActionRegen(baseStamina);
+	}
+	
+	public void setStamina(int stamina) {
+		creo6.setStamina(stamina);
+	}
+	
+	public int getMaxStamina() {
+		return creo6.getMaxStamina();
+	}
+	
+	public void setMaxStamina(int maxStamina) {
+		creo6.setMaxStamina(maxStamina);
+	}
+	
+	public int getWillpower() {
+		return creo6.getWillpower();
+	}
+	
+	public int getBaseWillpower() {
+		return baseAttributes.getMindRegen();
+	}
+	
+	public void setBaseWillpower(int baseWillpower) {
+		baseAttributes.setMindRegen(baseWillpower);
+	}
+	
+	public void setWillpower(int willpower) {
+		creo6.setWillpower(willpower);
+	}
+	
+	public int getMaxWillpower() {
+		return creo6.getMaxWillpower();
+	}
+	
+	public void setMaxWillpower(int maxWillpower) {
+		creo6.setMaxWillpower(maxWillpower);
 	}
 	
 	private void initBaseAttributes() {

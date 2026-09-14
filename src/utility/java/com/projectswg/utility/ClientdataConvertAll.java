@@ -29,6 +29,9 @@ public class ClientdataConvertAll {
 		Converters.QUESTTASK.load();
 		Converters.SCHEMATIC_GROUP.load();
 		Converters.FACTION_RANK.load();
+		Converters.CREATION_ATTRIBUTE_LIMITS.load();
+		Converters.CREATION_PROFESSION_MODS.load();
+		Converters.CREATION_RACIAL_MODS.load();
 	}
 	
 }
