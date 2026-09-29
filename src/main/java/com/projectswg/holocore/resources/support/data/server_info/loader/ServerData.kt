@@ -52,6 +52,7 @@ object ServerData {
 	 * Skill / Collection
 	 */
 	val skills				by SoftDataLoaderDelegate(::SkillLoader)
+	val xpLimits				by SoftDataLoaderDelegate(::XpLimitLoader)
 
 	/*
 	 * Player

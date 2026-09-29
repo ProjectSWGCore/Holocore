@@ -32,6 +32,7 @@ public class ClientdataConvertAll {
 		Converters.CREATION_ATTRIBUTE_LIMITS.load();
 		Converters.CREATION_PROFESSION_MODS.load();
 		Converters.CREATION_RACIAL_MODS.load();
+		Converters.XP_LIMITS.load();
 	}
 	
 }
