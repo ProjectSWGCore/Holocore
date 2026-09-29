@@ -274,7 +274,7 @@ class CloningService : Service() {
 	}
 
 	private fun getDecayableItems(corpse: CreatureObject): List<TangibleObject> {
-		val equipped = corpse.slottedObjects
+		val equipped = corpse.slottedObjects.distinct()
 		val carried = corpse.inventory.childObjectsRecursively
 
 		return (equipped + carried).filterIsInstance<TangibleObject>().filter { it.gameObjectType.mask in DECAYABLE_TYPES }
