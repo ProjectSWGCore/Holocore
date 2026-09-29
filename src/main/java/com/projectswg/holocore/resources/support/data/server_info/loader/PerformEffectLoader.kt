@@ -1,11 +1,10 @@
 /***********************************************************************************
- * Copyright (c) 2024 /// Project SWG /// www.projectswg.com                       *
+ * Copyright (c) 2026 /// Project SWG /// www.projectswg.com                       *
  *                                                                                 *
- * ProjectSWG is the first NGE emulator for Star Wars Galaxies founded on          *
+ * ProjectSWG is an emulation project for Star Wars Galaxies founded on            *
  * July 7th, 2011 after SOE announced the official shutdown of Star Wars Galaxies. *
- * Our goal is to create an emulator which will provide a server for players to    *
- * continue playing a game similar to the one they used to play. We are basing     *
- * it on the final publish of the game prior to end-game events.                   *
+ * Our goal is to create one or more emulators which will provide servers for      *
+ * players to continue playing a game similar to the one they used to play.        *
  *                                                                                 *
  * This file is part of Holocore.                                                  *
  *                                                                                 *
@@ -24,15 +23,38 @@
  * You should have received a copy of the GNU Affero General Public License        *
  * along with Holocore.  If not, see <http://www.gnu.org/licenses/>.               *
  ***********************************************************************************/
-package com.projectswg.holocore.intents.gameplay.entertainment
+package com.projectswg.holocore.resources.support.data.server_info.loader
 
-import com.projectswg.holocore.resources.gameplay.entertainment.PerformEffect
-import com.projectswg.holocore.resources.support.global.player.Player
-import com.projectswg.holocore.resources.support.objects.swg.SWGObject
-import me.joshlarson.jlcommon.control.Intent
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader
+import com.projectswg.holocore.resources.support.data.server_info.SdbLoader.SdbResultSet
+import java.io.File
+import java.io.IOException
+import java.util.*
 
-data class StartDanceIntent(val danceName: String, val player: Player, val isChangeDance: Boolean) : Intent()
-data class StopDanceIntent(val player: Player): Intent()
-data class FlourishIntent(val performer: Player, val flourishName: String) : Intent()
-data class WatchIntent(val actor: Player, val target: SWGObject, val isStartWatch: Boolean) : Intent()
-data class PerformEffectIntent(val performer: Player, val effect: PerformEffect, val level: Int) : Intent()
+class PerformEffectLoader internal constructor() : DataLoader() {
+	private val _effects: MutableMap<String, PerformEffectInfo> = HashMap()
+	val effects: Map<String, PerformEffectInfo>
+		get() = Collections.unmodifiableMap(_effects)
+
+	fun getEffect(effectName: String): PerformEffectInfo? = _effects[effectName]
+
+	@Throws(IOException::class)
+	override fun load() {
+		SdbLoader.load(File("serverdata/performance/perform_effect.sdb")).use { set ->
+			while (set.next()) {
+				val effect = PerformEffectInfo(set)
+				_effects[effect.effectName] = effect
+			}
+		}
+	}
+
+	class PerformEffectInfo(set: SdbResultSet) {
+		val effectName: String = set.getText("effectname")
+		val performanceTypes: List<String> = set.getText("performancetype").split(",").filter { it.isNotEmpty() }
+		val requiredSkillModValue: Int = set.getInt("requiredskillmodvalue").toInt()
+		val requiredPerforming: Boolean = set.getBoolean("requiredperforming")
+		val targetType: Int = set.getInt("targettype").toInt()
+		val effectDuration: Double = set.getReal("effectduration")
+		val effectActionCost: Int = set.getInt("effectactioncost").toInt()
+	}
+}

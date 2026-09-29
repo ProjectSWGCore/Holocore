@@ -26,6 +26,7 @@
 package com.projectswg.holocore.services.support.global.commands;
 
 import com.projectswg.holocore.intents.support.global.command.ExecuteCommandIntent;
+import com.projectswg.holocore.resources.gameplay.entertainment.PerformEffect;
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader;
 import com.projectswg.holocore.resources.support.global.commands.Command;
 import com.projectswg.holocore.resources.support.global.commands.ICmdCallback;
@@ -135,6 +136,19 @@ public class CommandExecutionService extends Service {
 		registerScriptCallback("cmdFlourish", FlourishCmdCallback::new);
 		registerScriptCallback("cmdWatch", CmdWatch::new);
 		registerScriptCallback("cmdStopWatching", CmdStopWatching::new);
+		registerScriptCallback("cmdDazzle", () -> new PerformEffectCallback(PerformEffect.DAZZLE));
+		registerScriptCallback("cmdSpotLight", () -> new PerformEffectCallback(PerformEffect.SPOT_LIGHT));
+		registerScriptCallback("cmdColorLight", () -> new PerformEffectCallback(PerformEffect.COLOR_LIGHTS));
+		registerScriptCallback("cmdDistract", () -> new PerformEffectCallback(PerformEffect.DISTRACT));
+		registerScriptCallback("cmdSmokeBomb", () -> new PerformEffectCallback(PerformEffect.SMOKE_BOMB));
+		registerScriptCallback("cmdFireJet", () -> new PerformEffectCallback(PerformEffect.FIRE_JETS));
+		registerScriptCallback("cmdVentriloquism", () -> new PerformEffectCallback(PerformEffect.VENTRILOQUISM));
+		registerScriptCallback("cmdColorSwirl", () -> new PerformEffectCallback(PerformEffect.COLOR_SWIRL));
+		registerScriptCallback("cmdCenterStage", () -> new PerformEffectCallback(PerformEffect.CENTER_STAGE));
+		registerScriptCallback("cmdDanceFloor", () -> new PerformEffectCallback(PerformEffect.DANCE_FLOOR));
+		registerScriptCallback("cmdLaserShow", () -> new PerformEffectCallback(PerformEffect.LASER_SHOW));
+		registerScriptCallback("cmdFireJet2", () -> new PerformEffectCallback(PerformEffect.FIRE_JETS_2));
+		registerScriptCallback("cmdFeaturedSolo", () -> new PerformEffectCallback(PerformEffect.FEATURED_SOLO));
 	}
 	
 	private void addAdminScripts() {

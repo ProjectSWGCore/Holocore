@@ -23,6 +23,7 @@ public enum Converters {
 	QUESTTASK					(ConvertQuestTasks::new),
 	SCHEMATIC_GROUP				(() -> new ConvertDatatable("datatables/crafting/schematic_group.iff", "serverdata/crafting/schematic_group.sdb", true)),
 	FACTION_RANK				(() -> new ConvertDatatable("datatables/faction/rank.iff", "serverdata/faction/rank.sdb", true)),
+	PERFORM_EFFECT				(() -> new ConvertDatatable("datatables/performance/perform_effect.iff", "serverdata/performance/perform_effect.sdb", true)),
 	CREATION_ATTRIBUTE_LIMITS	(() -> new ConvertDatatable("datatables/creation/attribute_limits.iff", "serverdata/creation/attribute_limits.sdb", true)),
 	CREATION_PROFESSION_MODS	(() -> new ConvertDatatable("datatables/creation/profession_mods.iff", "serverdata/creation/profession_mods.sdb", true)),
 	CREATION_RACIAL_MODS		(() -> new ConvertDatatable("datatables/creation/racial_mods.iff", "serverdata/creation/racial_mods.sdb", true)),
