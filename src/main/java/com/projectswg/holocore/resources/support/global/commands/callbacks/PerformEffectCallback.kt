@@ -35,7 +35,7 @@ class PerformEffectCallback(private val effect: PerformEffect) : ICmdCallback {
 	override fun execute(player: Player, target: SWGObject?, args: String) {
 		val firstArgument = args.trim().substringBefore(' ')
 		val requestedLevel = firstArgument.toIntOrNull()
-		val level = requestedLevel?.coerceIn(MIN_LEVEL, MAX_LEVEL)
+		val level = requestedLevel?.coerceIn(MIN_LEVEL, MAX_LEVEL) ?: MAX_LEVEL    // The client asks for the highest level when none was given
 
 		PerformEffectIntent(player, effect, level).broadcast()
 	}

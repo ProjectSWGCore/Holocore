@@ -66,9 +66,8 @@ class PerformanceEffectService : Service() {
 			return
 		}
 
-		val requestedLevel = pei.level ?: MAX_LEVEL    // The client asks for the highest level when none was given
-		val level = highestAllowedLevel(performer, effect, requestedLevel)
-		if (effect.levelled && pei.level != null && level < pei.level) {
+		val level = highestAllowedLevel(performer, effect, pei.level)
+		if (effect.levelled && level < pei.level) {
 			SystemMessageIntent(player, "@performance:effect_level_too_high").broadcast()
 		}
 
@@ -167,6 +166,5 @@ class PerformanceEffectService : Service() {
 		private const val TARGET_TYPE_LOCATION = 1
 		private const val TARGET_TYPE_TARGET = 2
 		private const val ACTION_COST_DIVISOR = 10
-		private const val MAX_LEVEL = 3
 	}
 }
