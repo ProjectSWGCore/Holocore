@@ -34,6 +34,9 @@ import com.projectswg.common.data.swgfile.ClientFactory
 import com.projectswg.common.network.packets.swg.login.creation.ClientCreateCharacter
 import com.projectswg.holocore.intents.gameplay.player.experience.GrantSkillIntent
 import com.projectswg.holocore.intents.support.objects.ObjectCreatedIntent
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.creationAttributeLimits
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.creationProfessionMods
+import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.creationRacialMods
 import com.projectswg.holocore.resources.support.data.server_info.loader.DataLoader.Companion.playerStartClothing
 import com.projectswg.holocore.resources.support.data.server_info.loader.TerrainZoneInsertionLoader.ZoneInsertion
 import com.projectswg.holocore.resources.support.global.player.AccessLevel
@@ -55,6 +58,7 @@ class CharacterCreation(private val player: Player, private val create: ClientCr
 		val creatureObj = createCreature(race.filename, info)
 		val playerObj = createPlayer(creatureObj)
 
+		setCreationAttributes(creatureObj, race)
 		setCreatureObjectValues(creatureObj, race)
 		setPlayerObjectValues(playerObj, race)
 		createHair(creatureObj, create.hair, create.hairCustomization)
@@ -156,6 +160,39 @@ class CharacterCreation(private val player: Player, private val create: ClientCr
 		createInventoryObject(creatureObj, "object/tangible/bank/shared_character_bank.iff")
 		createInventoryObject(creatureObj, "object/tangible/mission_bag/shared_mission_bag.iff")
 		createItem(creatureObj.inventory, "object/tangible/instrument/shared_slitherhorn.iff")
+	}
+
+	private fun setCreationAttributes(creatureObj: CreatureObject, race: Race) {
+		val professionMods = creationProfessionMods().getMods(create.clothes) ?: return
+		val racialMods = creationRacialMods().getMods(race) ?: return
+		val limits = creationAttributeLimits().getLimits(race) ?: return
+
+		val health = (professionMods.health + racialMods.health).coerceIn(limits.minHealth, limits.maxHealth)
+		val constitution = (professionMods.constitution + racialMods.constitution).coerceIn(limits.minConstitution, limits.maxConstitution)
+		val action = (professionMods.action + racialMods.action).coerceIn(limits.minAction, limits.maxAction)
+		val stamina = (professionMods.stamina + racialMods.stamina).coerceIn(limits.minStamina, limits.maxStamina)
+		val mind = (professionMods.mind + racialMods.mind).coerceIn(limits.minMind, limits.maxMind)
+		val willpower = (professionMods.willpower + racialMods.willpower).coerceIn(limits.minWillpower, limits.maxWillpower)
+
+		creatureObj.setBaseHealth(health)
+		creatureObj.maxHealth = health
+		creatureObj.health = health
+		creatureObj.setBaseAction(action)
+		creatureObj.maxAction = action
+		creatureObj.action = action
+		creatureObj.setBaseMind(mind)
+		creatureObj.maxMind = mind
+		creatureObj.mind = mind
+
+		creatureObj.setBaseConstitution(constitution)
+		creatureObj.maxConstitution = constitution
+		creatureObj.constitution = constitution
+		creatureObj.setBaseStamina(stamina)
+		creatureObj.maxStamina = stamina
+		creatureObj.stamina = stamina
+		creatureObj.setBaseWillpower(willpower)
+		creatureObj.maxWillpower = willpower
+		creatureObj.willpower = willpower
 	}
 
 	private fun createDefaultWeapon(creatureObj: CreatureObject): WeaponObject {

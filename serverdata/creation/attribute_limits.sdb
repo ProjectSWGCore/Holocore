@@ -1,0 +1,12 @@
+male_template	female_template	min_health	max_health	min_strength	max_strength	min_constitution	max_constitution	min_action	max_action	min_quickness	max_quickness	min_stamina	max_stamina	min_mind	max_mind	min_focus	max_focus	min_willpower	max_willpower	total
+
+bothan_male	bothan_female	900	900	0	0	850	850	1000	1000	0	0	1200	1200	1000	1000	0	0	950	950	5900
+human_male	human_female	1000	1000	0	0	1000	1000	1000	1000	0	0	1000	1000	1000	1000	0	0	1000	1000	6000
+moncal_male	moncal_female	900	900	0	0	850	850	1000	1000	0	0	950	950	1000	1000	0	0	1200	1200	5900
+rodian_male	rodian_female	900	900	0	0	850	850	1000	1000	0	0	1300	1300	1000	1000	0	0	850	850	5900
+trandoshan_male	trandoshan_female	1150	1150	0	0	1500	1500	1000	1000	0	0	850	850	1000	1000	0	0	900	900	6400
+twilek_male	twilek_female	900	900	0	0	1050	1050	1000	1000	0	0	1100	1100	1000	1000	0	0	900	900	5950
+wookiee_male	wookiee_female	1250	1250	0	0	1300	1300	1000	1000	0	0	950	950	1000	1000	0	0	1000	1000	6500
+zabrak_male	zabrak_female	1100	1100	0	0	900	900	1000	1000	0	0	1000	1000	1000	1000	0	0	1100	1100	6100
+sullustan_male	sullustan_female	1050	1050	0	0	900	900	1000	1000	0	0	1050	1050	1000	1000	0	0	1100	1100	6100
+ithorian_male	ithorian_female	1300	1300	0	0	1200	1200	1000	1000	0	0	900	900	1000	1000	0	0	950	950	6350

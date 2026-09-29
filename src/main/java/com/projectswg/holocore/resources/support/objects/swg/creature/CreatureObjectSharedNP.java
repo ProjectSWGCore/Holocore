@@ -308,6 +308,54 @@ class CreatureObjectSharedNP implements MongoPersistable {
 		maxAttributes.setMind(maxMind);
 	}
 	
+	public int getConstitution() {
+		return attributes.getHealthRegen();
+	}
+	
+	public int getMaxConstitution() {
+		return maxAttributes.getHealthRegen();
+	}
+	
+	public void setConstitution(int constitution) {
+		attributes.setHealthRegen(constitution);
+	}
+	
+	public void setMaxConstitution(int maxConstitution) {
+		maxAttributes.setHealthRegen(maxConstitution);
+	}
+	
+	public int getStamina() {
+		return attributes.getActionRegen();
+	}
+	
+	public int getMaxStamina() {
+		return maxAttributes.getActionRegen();
+	}
+	
+	public void setStamina(int stamina) {
+		attributes.setActionRegen(stamina);
+	}
+	
+	public void setMaxStamina(int maxStamina) {
+		maxAttributes.setActionRegen(maxStamina);
+	}
+	
+	public int getWillpower() {
+		return attributes.getMindRegen();
+	}
+	
+	public int getMaxWillpower() {
+		return maxAttributes.getMindRegen();
+	}
+	
+	public void setWillpower(int willpower) {
+		attributes.setMindRegen(willpower);
+	}
+	
+	public void setMaxWillpower(int maxWillpower) {
+		maxAttributes.setMindRegen(maxWillpower);
+	}
+	
 	public void putBuff(CRC buffCrc, Buff buff) {
 		synchronized (buffs) {
 			assert !buffs.containsKey(buffCrc) : "Cannot add a buff twice!";
