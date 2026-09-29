@@ -1,0 +1,12 @@
+male_template	female_template	health	strength	constitution	action	quickness	stamina	mind	focus	willpower
+
+bothan_male	bothan_female	-100	0	-150	0	0	200	0	0	-50
+human_male	human_female	0	0	0	0	0	0	0	0	0
+moncal_male	moncal_female	-100	0	-150	0	0	-50	0	0	200
+rodian_male	rodian_female	-100	0	-150	0	0	300	0	0	-150
+trandoshan_male	trandoshan_female	150	0	500	0	0	-150	0	0	-100
+twilek_male	twilek_female	-100	0	50	0	0	100	0	0	-100
+wookiee_male	wookiee_female	250	0	300	0	0	-50	0	0	0
+zabrak_male	zabrak_female	100	0	-100	0	0	0	0	0	100
+sullustan_male	sullustan_female	50	0	-100	0	0	50	0	0	100
+ithorian_male	ithorian_female	300	0	200	0	0	-100	0	0	-50

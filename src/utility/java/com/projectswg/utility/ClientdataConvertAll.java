@@ -30,6 +30,10 @@ public class ClientdataConvertAll {
 		Converters.SCHEMATIC_GROUP.load();
 		Converters.FACTION_RANK.load();
 		Converters.PERFORM_EFFECT.load();
+		Converters.CREATION_ATTRIBUTE_LIMITS.load();
+		Converters.CREATION_PROFESSION_MODS.load();
+		Converters.CREATION_RACIAL_MODS.load();
+		Converters.XP_LIMITS.load();
 	}
 	
 }

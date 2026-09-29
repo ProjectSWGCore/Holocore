@@ -205,6 +205,7 @@ class CommandQueueService @JvmOverloads constructor(private val delayBetweenChec
 				val warmupTimer = CommandTimer(command.source.objectId)
 				warmupTimer.addFlag(CommandTimer.CommandTimerFlag.WARMUP)
 				warmupTimer.commandNameCrc = rootCommand.crc
+				warmupTimer.sequenceId = command.counter
 				warmupTimer.cooldownGroupCrc = 0
 				warmupTimer.warmupTime = warmupTime.toFloat()
 
