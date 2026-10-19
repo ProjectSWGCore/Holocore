@@ -664,7 +664,14 @@ public abstract class SWGObject extends BaselineObject implements Comparable<SWG
 		}
 		return true;
 	}
-	
+
+	public boolean removeFromBank(long amount) {
+		if (bankBalance < amount)
+			return false;
+		setBankBalance(bankBalance - amount);
+		return true;
+	}
+
 	/**
 	 * Adds amount to cash balance.
 	 * @param amount the amount to add
