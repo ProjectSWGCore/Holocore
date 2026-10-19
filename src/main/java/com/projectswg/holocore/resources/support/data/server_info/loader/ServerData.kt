@@ -65,6 +65,7 @@ object ServerData {
 	val creationRacialMods		by SoftDataLoaderDelegate(::CreationRacialModsLoader)
 	val staticItems			by SoftDataLoaderDelegate(::StaticItemLoader)
 	val performances		by SoftDataLoaderDelegate(::PerformanceLoader)
+	val performEffects		by SoftDataLoaderDelegate(::PerformEffectLoader)
 	val combatXpMultipliers	by SoftDataLoaderDelegate(::CombatXpMultiplierLoader)
 
 	/*

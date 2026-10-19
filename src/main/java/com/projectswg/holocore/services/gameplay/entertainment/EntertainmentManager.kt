@@ -29,5 +29,5 @@ package com.projectswg.holocore.services.gameplay.entertainment
 import me.joshlarson.jlcommon.control.Manager
 import me.joshlarson.jlcommon.control.ManagerStructure
 
-@ManagerStructure(children = [EntertainmentService::class])
+@ManagerStructure(children = [EntertainmentService::class, PerformanceEffectService::class])
 class EntertainmentManager : Manager()
