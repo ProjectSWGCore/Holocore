@@ -153,6 +153,8 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configure
 
 tasks.withType<JavaCompile>().configureEach {
 	options.release.set(javaVersion.majorVersion.toInt())
+	// Incremental javac loses Kotlin-generated classes from the classpath and breaks the build
+	options.isIncremental = false
 }
 
 tasks.register<JavaExec>("runDevelopment") {
